@@ -1,0 +1,5 @@
+.github/
+node_modules/
+test-results.xml
+.env
+/test
