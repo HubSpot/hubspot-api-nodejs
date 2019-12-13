@@ -7,7 +7,7 @@
   "description": "hubspot-node client sample applications",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "./node_modules/.bin/nodemon --delay 3 index.js"
   },
   "keywords": [
     "hubspot",

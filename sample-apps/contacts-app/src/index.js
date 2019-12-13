@@ -4,10 +4,11 @@ require('csv-express')
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
-const HubspotNew = require('../..')
+const HubspotNew = require('../../../index')
 const HubspotOld = require('hubspot')
 const bodyParser = require('body-parser')
 const Promise = require('bluebird')
+
 
 const PORT = 3000
 const CONTACTS_LIMIT = 30

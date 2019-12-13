@@ -1,0 +1,18 @@
+FROM node:10
+
+WORKDIR /contacts-sample-app
+COPY sample-apps/contacts-app/src/public ./sample-apps/contacts-app/src/public
+COPY sample-apps/contacts-app/src/views ./sample-apps/contacts-app/src/views
+COPY sample-apps/contacts-app/src/.env ./sample-apps/contacts-app/src/
+COPY sample-apps/contacts-app/src/config.js ./sample-apps/contacts-app/src/
+COPY sample-apps/contacts-app/src/package.json ./sample-apps/contacts-app/src/
+COPY sample-apps/contacts-app/src/index.js ./sample-apps/contacts-app/src/
+COPY package.json ./
+COPY index.js ./
+COPY client.js ./
+COPY codegen ./codegen
+RUN npm install
+WORKDIR /contacts-sample-app/sample-apps/contacts-app/src
+RUN npm install
+
+EXPOSE 3000

@@ -32,6 +32,6 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose up 
+docker-compose -f  ../../../docker-compose-contacts.yml up
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
