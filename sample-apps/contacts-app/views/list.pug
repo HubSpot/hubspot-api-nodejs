@@ -1,0 +1,41 @@
+extends includes/layout
+block content
+  .container
+    .row
+      .column
+        h3 Properties
+        form(method='post' action=action)
+          fieldset
+            each item, key in items
+              label(for=key) #{item.label}
+
+              if (key === 'hubspot_owner_id')
+                select(name=key id=key)
+                  option(value='') Not assigned
+                  each owner in owners
+                    -let selected = '' + owner.ownerId === '' + item.value
+                    option(value=owner.ownerId selected=selected) #{owner.firstName} #{owner.lastName}
+              else
+                input(name=key id=key type='text' value=`${item.value || ''}`)
+
+            input(class='button-primary' type='submit' value='Save')
+
+      if (engagements)
+        .column
+          h3 Engagements
+          table
+            thead
+              tr
+                th ID
+                th Type
+                th Title
+            tbody
+              each engagement in engagements
+                tr
+                  td #{engagement.id}
+                  td #{engagement.type}
+                  td #{engagement.title}
+
+          div
+            a(href=engagementAction)
+              input(class='button-primary' type='button' value='Add Engagement')

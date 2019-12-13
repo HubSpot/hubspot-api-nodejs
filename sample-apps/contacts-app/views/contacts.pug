@@ -1,0 +1,26 @@
+extends includes/layout
+block content
+  .container
+    table
+      thead
+        tr
+          th ID
+          th Name
+          th Company
+      tbody
+        form(action='/contacts')
+          fieldset
+            input(type='text' name='search' placeholder='Search..' id='search' value=query)
+
+        each contact in contacts
+          tr
+            td
+              a(href=`/contacts/${contact.id}`) #{contact.id}
+            td #{contact.name}
+            td #{contact.companyName}
+    .row
+      a(href='/contacts/new')
+        input(class='button-primary' type='button' value='New Contact')
+      span &nbsp;
+      a(href='/export')
+        input(class='button-primary' type='button' value='Export To CSV')
