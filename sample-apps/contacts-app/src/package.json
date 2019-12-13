@@ -1,5 +1,5 @@
 {
-  "name": "hubspot-contacts",
+  "name": "hubspot-contacts-vnext",
   "version": "1.0.0",
   "engines": {
     "node": ">= 10.13.0"
@@ -7,7 +7,7 @@
   "description": "hubspot-node client sample applications",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon --delay 3 index.js"
+    "start": "./node_modules/.bin/if-env NODE_ENV=development && nodemon --delay 3 index.js || node index.js"
   },
   "keywords": [
     "hubspot",
@@ -28,6 +28,7 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "if-env": "^1.0.4"
   }
 }

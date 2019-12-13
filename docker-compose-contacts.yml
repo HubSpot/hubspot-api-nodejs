@@ -10,7 +10,6 @@ services:
     volumes:
       - ./sample-apps/contacts-app/src:/contacts-sample-app/sample-apps/contacts-app/src
       - /contacts-sample-app/sample-apps/contacts-app/src/node_modules
-      - ./codegen:/contacts-sample-app/codegen
     ports:
       - 3000:3000
     command: npm run start
