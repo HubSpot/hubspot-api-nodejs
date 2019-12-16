@@ -1,0 +1,22 @@
+extends includes/layout
+block content
+  .container
+    .row
+      .column(class='column-50')
+        form(method='post' action=`/contacts/${id}/engagement`)
+          fieldset
+            label(for='type') Type
+            select(name='engagement[type]' id='type')
+              option(value='MEETING') Meeting
+
+            label(for='title') Title
+            input(type='text' name='metadata[title]' id='title')
+            label(for='body') Body
+            textarea(name='metadata[body]' id='body')
+            label(for='startTime') Start time
+            input(type='datetime-local' id='startTime' name='metadata[startTime]')
+            label(for='endTime') End time
+            input(type='datetime-local' id='endTime' name='metadata[endTime]')
+            input(type='hidden' name='associations[contactIds][]' value=id)
+            div
+              input(class='button-primary' type='submit' value='Save')

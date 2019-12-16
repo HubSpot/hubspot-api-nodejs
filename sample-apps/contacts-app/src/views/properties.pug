@@ -1,0 +1,21 @@
+extends includes/layout
+block content
+  .container
+    table
+      thead
+        tr
+          th Name
+          th Label
+          th Description
+          th Type
+      tbody
+        each property in properties
+          tr
+            td
+              a(href=`/properties/${property.name}`) #{property.name}
+            td #{property.label}
+            td #{property.description}
+            td #{property.type}
+    div
+      a(href='/properties/new')
+        input(class='button-primary' type='button' value='New Property')

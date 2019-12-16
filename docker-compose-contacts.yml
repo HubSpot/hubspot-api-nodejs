@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  web:
+    env_file:
+      - sample-apps/contacts-app/src/.env
+    build:
+      context: .
+      dockerfile: Dockerfile-contacts
+    volumes:
+      - ./sample-apps/contacts-app/src:/contacts-sample-app/sample-apps/contacts-app/src
+      - /contacts-sample-app/sample-apps/contacts-app/src/node_modules
+    ports:
+      - 3000:3000
+    command: npm run start
