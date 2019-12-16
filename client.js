@@ -139,7 +139,6 @@ const getAccessToken = (newData) => {
     redirect_uri: redirectUri,
   }
   const form = Object.assign({}, initialData, newData)
-
   return apiRequest({
     method: 'POST',
     path: '/oauth/v1/token',
