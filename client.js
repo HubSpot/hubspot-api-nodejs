@@ -89,7 +89,7 @@ const setOAuth = (options = {}) => {
   refreshToken = options.refreshToken
 }
 
-const getDefaultOptions = () => {
+const getOptions = () => {
   return {
     timeout: apiTimeout,
     basePath,
@@ -239,7 +239,7 @@ module.exports = (opts = {}) => {
     setEnableCookies,
     setAgent,
     setRequestAgent,
-    getDefaultOptions,
+    getOptions,
     oauth: {
       getAuthorizationUrl,
       getAccessToken,
