@@ -23,7 +23,7 @@ module.exports = (opts = {}) => {
   let basePath
 
   const setPropertyForApiClients = (path, value) => {
-    const setFunction = _.partialRight(_.set, path, value)
+    const setFunction = _.partial(_.set, _, path, value)
     _.map(API_CLIENTS, setFunction)
   }
 
@@ -68,7 +68,7 @@ module.exports = (opts = {}) => {
 
   const setAccessToken = (accessTokenToSet) => {
     accessToken = accessTokenToSet
-    setPropertyForApiClients('authentications.accessToken', accessToken)
+    setPropertyForApiClients('authentications.oauth2.accessToken', accessToken)
   }
 
   const setDefaultHeaders = (defaultHeadersToSet) => {
