@@ -244,16 +244,16 @@ app.get('/contacts/new', async (req, res) => {
     console.log('Response from API', hubspotProperties)
 
     // Get List of Owners
-    // GET /owners/v2/owners/
-    // https://developers.hubspot.com/docs/methods/owners/get_owners
-    console.log('Calling hubspot.owners.get API method. Retrieve all contacts owners')
-    const owners = await hubspotOld.owners.get()
-    console.log('Response from API', owners)
+    // GET /crm/v3/owners/
+    // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fowners-preview
+    console.log('Calling crm.owners.getPage API method. Retrieve all contacts owners')
+    const ownersResponse = await hubspotNew.crm.owners.getPage()
+    console.log('Response from API', ownersResponse)
 
     const editableProperties = getEditableProperties(hubspotProperties)
     const properties = getContactEditableProperties({}, editableProperties)
 
-    res.render('list', { items: properties, owners, action: '/contacts' })
+    res.render('list', { items: properties, owners: ownersResponse.results, action: '/contacts' })
   } catch (e) {
     console.error(e)
     res.redirect(`/error?msg=${e.message}`)
@@ -282,11 +282,11 @@ app.get('/contacts/:id', async (req, res) => {
     console.log('Response from API', contact)
 
     // Get List of Owners
-    // GET /owners/v2/owners/
-    // https://developers.hubspot.com/docs/methods/owners/get_owners
-    console.log('Calling hubspot.owners.get API method. Retrieve all contacts owners')
-    const owners = await hubspotOld.owners.get()
-    console.log('Response from API', owners)
+    // GET /crm/v3/owners/
+    // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fowners-preview
+    console.log('Calling crm.owners.getPage API method. Retrieve all contacts owners')
+    const ownersResponse = await hubspotNew.crm.owners.getPage()
+    console.log('Response from API', ownersResponse)
 
     // Get Associated Engagements
     // GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType
@@ -308,7 +308,7 @@ app.get('/contacts/:id', async (req, res) => {
     res.render('list', {
       items: properties,
       engagements,
-      owners,
+      owners: ownersResponse.results,
       action: `/contacts/${id}`,
       engagementAction: `/contacts/${id}/engagement`,
     })

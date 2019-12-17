@@ -1,5 +1,6 @@
 const objectClientFactory = require('./codegen/crm/objects')
 const pipelinesClientFactory = require('./codegen/crm/pipelines')
+const ownersClientFactory = require('./codegen/crm/owners')
 const pjson = require('./package.json')
 const request = require('request-promise')
 const _ = require('lodash')
@@ -11,8 +12,9 @@ const API_TIMEOUT = 60000
 module.exports = (opts = {}) => {
   const objectsApiClient = new objectClientFactory.ApiClient()
   const pipelinesApiClient = new pipelinesClientFactory.ApiClient()
+  const ownersApiClient = new ownersClientFactory.ApiClient()
 
-  const API_CLIENTS = [objectsApiClient, pipelinesApiClient];
+  const API_CLIENTS = [objectsApiClient, pipelinesApiClient, ownersApiClient]
 
   let accessToken
   let clientId
@@ -193,6 +195,7 @@ module.exports = (opts = {}) => {
   const associationsClient = new objectClientFactory.AssociationsApi(objectsApiClient)
   const pipelinesClient = new pipelinesClientFactory.PipelinesApi(pipelinesApiClient)
   const pipelineStagesClient = new pipelinesClientFactory.PipelineStagesApi(pipelinesApiClient)
+  const ownersClient = new ownersClientFactory.DefaultApi(ownersApiClient)
 
   return {
     crm: {
@@ -224,6 +227,10 @@ module.exports = (opts = {}) => {
         deleteStage: pipelineStagesClient.archive.bind(pipelineStagesClient),
         replaceStage: pipelineStagesClient.replace.bind(pipelineStagesClient),
         updateStage: pipelineStagesClient.update.bind(pipelineStagesClient),
+      },
+      owners: {
+        getPage: ownersClient.getPage.bind(ownersClient),
+        getById: ownersClient.getById.bind(ownersClient),
       },
     },
     apiRequest,
