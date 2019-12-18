@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 10000 --exit"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
+    "directory-tree": "^2.2.4",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
+    "fs-sync": "^1.0.6",
     "lodash": "^4.17.15",
+    "mocha": "^6.2.2",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",

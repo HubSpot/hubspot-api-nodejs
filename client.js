@@ -1,20 +1,38 @@
-const objectClientFactory = require('./codegen/crm/objects')
-const pipelinesClientFactory = require('./codegen/crm/pipelines')
-const ownersClientFactory = require('./codegen/crm/owners')
 const pjson = require('./package.json')
 const request = require('request-promise')
 const _ = require('lodash')
 const qs = require('querystring')
+const dirTree = require('directory-tree')
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pjson.name}_${pjson.version}` }
 const API_TIMEOUT = 60000
 
-module.exports = (opts = {}) => {
-  const objectsApiClient = new objectClientFactory.ApiClient()
-  const pipelinesApiClient = new pipelinesClientFactory.ApiClient()
-  const ownersApiClient = new ownersClientFactory.ApiClient()
+const codegenCrmDirTree = dirTree('codegen/crm', { exclude: [/model/, /ApiClient/, /index/] })
 
-  const API_CLIENTS = [objectsApiClient, pipelinesApiClient, ownersApiClient]
+const clientFactories = _.reduce(
+  codegenCrmDirTree.children,
+  (factories, factory) => {
+    if (_.isEqual(factory.type, 'directory')) {
+      _.set(factories, `${factory.name}ClientFactory`, require(`./${factory.path}`))
+    }
+    return factories
+  },
+  {}
+)
+
+console.log('_.keys(clientFactories)', _.keys(clientFactories))
+
+module.exports = (opts = {}) => {
+  const apiClients = _.reduce(
+    clientFactories,
+    (apiClients, clientFactory, factoryName) => {
+      const name = factoryName.replace('ClientFactory', 'ApiClient')
+      _.set(apiClients, name, new clientFactory.ApiClient())
+      return apiClients
+    },
+    {}
+  )
+  console.log(_.keys(apiClients))
 
   let accessToken
   let clientId
@@ -26,7 +44,7 @@ module.exports = (opts = {}) => {
 
   const setPropertyForApiClients = (path, value) => {
     const setFunction = _.partial(_.set, _, path, value)
-    _.map(API_CLIENTS, setFunction)
+    _.map(apiClients, setFunction)
   }
 
   const setApiKey = (apiKey) => {
@@ -40,8 +58,8 @@ module.exports = (opts = {}) => {
 
   const setBasePath = (basePathToSet) => {
     basePath = basePathToSet || 'https://api.hubapi.com'
-    objectsApiClient.basePath = `${basePath}/crm/v3/objects`.replace(/\/+$/, '')
-    pipelinesApiClient.basePath = `${basePath}crm/v3/pipelines`.replace(/\/+$/, '')
+    // objectsApiClient.basePath = `${basePath}/crm/v3/objects`.replace(/\/+$/, '')
+    // pipelinesApiClient.basePath = `${basePath}crm/v3/pipelines`.replace(/\/+$/, '')
   }
 
   const setCache = (cache) => {
@@ -189,69 +207,94 @@ module.exports = (opts = {}) => {
     setRequestAgent(options.requestAgent)
   }
   setOptions(opts)
-  const basicClient = new objectClientFactory.BasicApi(objectsApiClient)
-  const batchClient = new objectClientFactory.BatchApi(objectsApiClient)
-  const searchClient = new objectClientFactory.SearchApi(objectsApiClient)
-  const associationsClient = new objectClientFactory.AssociationsApi(objectsApiClient)
-  const pipelinesClient = new pipelinesClientFactory.PipelinesApi(pipelinesApiClient)
-  const pipelineStagesClient = new pipelinesClientFactory.PipelineStagesApi(pipelinesApiClient)
-  const ownersClient = new ownersClientFactory.DefaultApi(ownersApiClient)
 
-  return {
-    crm: {
-      objects: {
-        getPage: basicClient.getPage.bind(basicClient),
-        getById: basicClient.getById.bind(basicClient),
-        create: basicClient.create.bind(basicClient),
-        update: basicClient.update.bind(basicClient),
-        delete: basicClient.archive.bind(basicClient),
-        archiveBatch: batchClient.archiveBatch.bind(batchClient),
-        createBatch: batchClient.createBatch.bind(batchClient),
-        readBatch: batchClient.readBatch.bind(batchClient),
-        updateBatch: batchClient.updateBatch.bind(batchClient),
-        doSearch: searchClient.doSearch.bind(searchClient),
-        createAssociation: associationsClient.createAssociation.bind(associationsClient),
-        getAssociations: associationsClient.getAssociations.bind(associationsClient),
-        deleteAssociation: associationsClient.archiveAssociation.bind(associationsClient),
-      },
-      pipelines: {
-        getPipelines: pipelinesClient.getPage.bind(pipelinesClient),
-        getById: pipelinesClient.getById.bind(pipelinesClient),
-        create: pipelinesClient.create.bind(pipelinesClient),
-        replace: pipelinesClient.replace.bind(pipelinesClient),
-        update: pipelinesClient.update.bind(pipelinesClient),
-        delete: pipelinesClient.archive.bind(pipelinesClient),
-        getStage: pipelineStagesClient.getById.bind(pipelineStagesClient),
-        getStages: pipelineStagesClient.getPage.bind(pipelineStagesClient),
-        createStage: pipelineStagesClient.create.bind(pipelineStagesClient),
-        deleteStage: pipelineStagesClient.archive.bind(pipelineStagesClient),
-        replaceStage: pipelineStagesClient.replace.bind(pipelineStagesClient),
-        updateStage: pipelineStagesClient.update.bind(pipelineStagesClient),
-      },
-      owners: {
-        getPage: ownersClient.getPage.bind(ownersClient),
-        getById: ownersClient.getById.bind(ownersClient),
-      },
+  const api = _.reduce(
+    codegenCrmDirTree.children,
+    (api, crmFolder) => {
+      if (_.isEqual(crmFolder.type, 'directory')) {
+        const crmApiFolder = _.find(crmFolder.children, { name: 'api', type: 'directory' })
+        const apiClient = _.get(apiClients, `${crmFolder.name}ApiClient`)
+        const clientFactory = _.get(clientFactories, `${crmFolder.name}ClientFactory`)
+        if (!_.isNil(crmApiFolder)) {
+          const clientFiles = _.filter(crmApiFolder.children, { type: 'file' })
+          _.each(clientFiles, (clientFile) => {
+            const clientName = clientFile.name.replace('.js', '')
+            const propertyName = clientName.charAt(0).toLowerCase() + clientName.slice(1)
+            _.set(api, `crm.${crmFolder.name}.${propertyName}`, new clientFactory[clientName](apiClient))
+          })
+        }
+        return api
+      }
     },
-    apiRequest,
-    setAccessToken,
-    refreshAccessToken,
-    setOAuth,
-    setAuth,
-    setOptions,
-    setTimeout,
-    setBasePath,
-    setDefaultHeaders,
-    setCache,
-    setEnableCookies,
-    setAgent,
-    setRequestAgent,
-    getOptions,
-    oauth: {
-      getAuthorizationUrl,
-      getAccessToken,
-      refreshAccessToken,
-      getPortalInfo,
-    },
-  }
+    {}
+  )
+
+  console.log(api)
+  return api
+  // const basicClient = new objectClientFactory.BasicApi(objectsApiClient)
+  // const batchClient = new objectClientFactory.BatchApi(objectsApiClient)
+  // const searchClient = new objectClientFactory.SearchApi(objectsApiClient)
+  // const associationsClient = new objectClientFactory.AssociationsApi(objectsApiClient)
+  // const pipelinesClient = new pipelinesClientFactory.PipelinesApi(pipelinesApiClient)
+  // const pipelineStagesClient = new pipelinesClientFactory.PipelineStagesApi(pipelinesApiClient)
+  // const ownersClient = new ownersClientFactory.DefaultApi(ownersApiClient)
+
+  // return {
+  //   crm: {
+  //     objects: {
+  //       getPage: basicClient.getPage.bind(basicClient),
+  //       getById: basicClient.getById.bind(basicClient),
+  //       create: basicClient.create.bind(basicClient),
+  //       update: basicClient.update.bind(basicClient),
+  //       delete: basicClient.archive.bind(basicClient),
+  //       archiveBatch: batchClient.archiveBatch.bind(batchClient),
+  //       createBatch: batchClient.createBatch.bind(batchClient),
+  //       readBatch: batchClient.readBatch.bind(batchClient),
+  //       updateBatch: batchClient.updateBatch.bind(batchClient),
+  //       doSearch: searchClient.doSearch.bind(searchClient),
+  //       createAssociation: associationsClient.createAssociation.bind(associationsClient),
+  //       getAssociations: associationsClient.getAssociations.bind(associationsClient),
+  //       deleteAssociation: associationsClient.archiveAssociation.bind(associationsClient),
+  //       basicClient,
+  //     },
+  //     pipelines: {
+  //       getPipelines: pipelinesClient.getPage.bind(pipelinesClient),
+  //       getById: pipelinesClient.getById.bind(pipelinesClient),
+  //       create: pipelinesClient.create.bind(pipelinesClient),
+  //       replace: pipelinesClient.replace.bind(pipelinesClient),
+  //       update: pipelinesClient.update.bind(pipelinesClient),
+  //       delete: pipelinesClient.archive.bind(pipelinesClient),
+  //       getStage: pipelineStagesClient.getById.bind(pipelineStagesClient),
+  //       getStages: pipelineStagesClient.getPage.bind(pipelineStagesClient),
+  //       createStage: pipelineStagesClient.create.bind(pipelineStagesClient),
+  //       deleteStage: pipelineStagesClient.archive.bind(pipelineStagesClient),
+  //       replaceStage: pipelineStagesClient.replace.bind(pipelineStagesClient),
+  //       updateStage: pipelineStagesClient.update.bind(pipelineStagesClient),
+  //     },
+  //     owners: {
+  //       getPage: ownersClient.getPage.bind(ownersClient),
+  //       getById: ownersClient.getById.bind(ownersClient),
+  //     },
+  //   },
+  //   apiRequest,
+  //   setAccessToken,
+  //   refreshAccessToken,
+  //   setOAuth,
+  //   setAuth,
+  //   setOptions,
+  //   setTimeout,
+  //   setBasePath,
+  //   setDefaultHeaders,
+  //   setCache,
+  //   setEnableCookies,
+  //   setAgent,
+  //   setRequestAgent,
+  //   getOptions,
+  //   oauth: {
+  //     getAuthorizationUrl,
+  //     getAccessToken,
+  //     refreshAccessToken,
+  //     getPortalInfo,
+  //   },
+  // }
 }
