@@ -28,7 +28,7 @@ const prepareConfig = (directory) => {
   const config = {}
   config.name = directory.name
   config.clientFactoryName = `${config.name}ClientFactory`
-  config.clientFactoryPath = `./${directory.path}`
+  config.clientFactoryPath = `${directory.path}`
   config.apiClientName = `${config.name}ApiClient`
   config.basePathSufix = `/crm/v3/${config.name}`
   const apiDirectory = getChildrenDirectory(directory, 'api')
@@ -39,7 +39,7 @@ const prepareConfig = (directory) => {
 }
 
 exports.getClientsConfig = () => {
-  const codegenCrmDirTree = dirTree('codegen/crm', { exclude: [/model/, /ApiClient/, /index/] })
+  const codegenCrmDirTree = dirTree(`${__dirname}/../codegen/crm`, { exclude: [/model/, /ApiClient/, /index/] })
   const codegenCrmDirectories = getChildrenDirectories(codegenCrmDirTree)
   const clientsConfig = _.map(codegenCrmDirectories, prepareConfig)
 
