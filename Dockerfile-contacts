@@ -6,6 +6,7 @@ COPY package.json ./
 COPY index.js ./
 COPY client.js ./
 COPY codegen ./codegen
+COPY helpers ./helpers
 RUN npm install
 WORKDIR /contacts-sample-app/sample-apps/contacts-app/src
 RUN npm install

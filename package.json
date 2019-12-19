@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 10000 --exit"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "directory-tree": "^2.2.4",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
     "lodash": "^4.17.15",
@@ -16,6 +19,7 @@
     "superagent": "^5.1.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-config-standard": "14.1.0",
@@ -25,6 +29,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.1",
     "prettier": "^1.18.2"
   }
