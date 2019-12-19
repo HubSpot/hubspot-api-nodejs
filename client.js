@@ -2,37 +2,41 @@ const pjson = require('./package.json')
 const request = require('request-promise')
 const _ = require('lodash')
 const qs = require('querystring')
-const dirTree = require('directory-tree')
+const clientConfigHelper = require('./helpers/clients-config')
+
+const clientsConfig = clientConfigHelper.getClientsConfig()
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pjson.name}_${pjson.version}` }
 const API_TIMEOUT = 60000
 
-const codegenCrmDirTree = dirTree('codegen/crm', { exclude: [/model/, /ApiClient/, /index/] })
+const getClientFactories = () => {
+  return _.reduce(
+    clientsConfig,
+    (factories, clientConfig) => {
+      _.set(factories, clientConfig.clientFactoryName, require(clientConfig.clientFactoryPath))
 
-const clientFactories = _.reduce(
-  codegenCrmDirTree.children,
-  (factories, factory) => {
-    if (_.isEqual(factory.type, 'directory')) {
-      _.set(factories, `${factory.name}ClientFactory`, require(`./${factory.path}`))
-    }
-    return factories
-  },
-  {}
-)
+      return factories
+    },
+    {}
+  )
+}
 
-console.log('_.keys(clientFactories)', _.keys(clientFactories))
+const clientFactories = getClientFactories()
 
-module.exports = (opts = {}) => {
-  const apiClients = _.reduce(
-    clientFactories,
-    (apiClients, clientFactory, factoryName) => {
-      const name = factoryName.replace('ClientFactory', 'ApiClient')
-      _.set(apiClients, name, new clientFactory.ApiClient())
+const getApiClients = () => {
+  return _.reduce(
+    clientsConfig,
+    (apiClients, clientConfig) => {
+      _.set(apiClients, clientConfig.apiClientName, new clientFactories[clientConfig.clientFactoryName].ApiClient())
+
       return apiClients
     },
     {}
   )
-  console.log(_.keys(apiClients))
+}
+
+module.exports = (opts = {}) => {
+  const apiClients = getApiClients()
 
   let accessToken
   let clientId
@@ -41,14 +45,19 @@ module.exports = (opts = {}) => {
   let refreshToken
   let apiTimeout
   let basePath
+  let defaultHeaders
+  let cache = true
+  let enableCookies = false
+  let apiKey
 
   const setPropertyForApiClients = (path, value) => {
     const setFunction = _.partial(_.set, _, path, value)
     _.map(apiClients, setFunction)
   }
 
-  const setApiKey = (apiKey) => {
-    setPropertyForApiClients('authentications.hapikey.apiKey', apiKey)
+  const setApiKey = (apiKeyToSet) => {
+    apiKey = apiKeyToSet
+    setPropertyForApiClients('authentications.hapikey.apiKey', apiKeyToSet)
   }
 
   const setTimeout = (timeout) => {
@@ -58,19 +67,23 @@ module.exports = (opts = {}) => {
 
   const setBasePath = (basePathToSet) => {
     basePath = basePathToSet || 'https://api.hubapi.com'
-    // objectsApiClient.basePath = `${basePath}/crm/v3/objects`.replace(/\/+$/, '')
-    // pipelinesApiClient.basePath = `${basePath}crm/v3/pipelines`.replace(/\/+$/, '')
+    _.each(clientsConfig, (clientConfig) => {
+      const pathValue = `${basePath}${clientConfig.basePathSufix}`.replace(/\/+$/, '')
+      _.set(apiClients[clientConfig.apiClientName], 'basePath', pathValue)
+    })
   }
 
-  const setCache = (cache) => {
-    if (!_.isNil(cache)) {
-      setPropertyForApiClients('cache', cache)
+  const setCache = (cacheToSet) => {
+    if (!_.isNil(cacheToSet)) {
+      cache = cacheToSet
+      setPropertyForApiClients('cache', cacheToSet)
     }
   }
 
-  const setEnableCookies = (enableCookies) => {
-    if (!_.isNil(enableCookies)) {
-      setPropertyForApiClients('enableCookies', enableCookies)
+  const setEnableCookies = (enableCookiesToSet) => {
+    if (!_.isNil(enableCookiesToSet)) {
+      enableCookies = enableCookiesToSet
+      setPropertyForApiClients('enableCookies', enableCookiesToSet)
     }
   }
 
@@ -92,7 +105,7 @@ module.exports = (opts = {}) => {
   }
 
   const setDefaultHeaders = (defaultHeadersToSet) => {
-    const defaultHeaders = _.assign({}, defaultHeadersToSet, DEFAULT_HEADERS)
+    defaultHeaders = _.assign({}, defaultHeadersToSet, DEFAULT_HEADERS)
     setPropertyForApiClients('defaultHeaders', defaultHeaders)
   }
 
@@ -115,9 +128,15 @@ module.exports = (opts = {}) => {
     return {
       timeout: apiTimeout,
       basePath,
-      defaultHeaders: objectsApiClient.defaultHeaders,
-      cache: objectsApiClient.cache,
-      enableCookies: objectsApiClient.enableCookies,
+      defaultHeaders,
+      cache,
+      enableCookies,
+      clientId,
+      clientSecret,
+      redirectUri,
+      refreshToken,
+      apiKey,
+      accessToken,
     }
   }
 
@@ -206,95 +225,49 @@ module.exports = (opts = {}) => {
     setAgent(options.agent)
     setRequestAgent(options.requestAgent)
   }
+
+  const getApi = () => {
+    const api = _.reduce(
+      clientsConfig,
+      (api, clientConfig) => {
+        _.each(clientConfig.apiClientFilesConfig, (apiClientFileConfig) => {
+          const client = new clientFactories[clientConfig.clientFactoryName][apiClientFileConfig.factoryMethodName](
+            apiClients[clientConfig.apiClientName]
+          )
+          _.set(api, apiClientFileConfig.apiPath, client)
+        })
+
+        return api
+      },
+      {}
+    )
+    const basicApi = {
+      apiRequest,
+      setAccessToken,
+      refreshAccessToken,
+      setOAuth,
+      setAuth,
+      setOptions,
+      setTimeout,
+      setBasePath,
+      setDefaultHeaders,
+      setCache,
+      setEnableCookies,
+      setAgent,
+      setRequestAgent,
+      getOptions,
+      oauth: {
+        getAuthorizationUrl,
+        getAccessToken,
+        refreshAccessToken,
+        getPortalInfo,
+      },
+    }
+
+    return _.assign({}, basicApi, api)
+  }
+
   setOptions(opts)
 
-  const api = _.reduce(
-    codegenCrmDirTree.children,
-    (api, crmFolder) => {
-      if (_.isEqual(crmFolder.type, 'directory')) {
-        const crmApiFolder = _.find(crmFolder.children, { name: 'api', type: 'directory' })
-        const apiClient = _.get(apiClients, `${crmFolder.name}ApiClient`)
-        const clientFactory = _.get(clientFactories, `${crmFolder.name}ClientFactory`)
-        if (!_.isNil(crmApiFolder)) {
-          const clientFiles = _.filter(crmApiFolder.children, { type: 'file' })
-          _.each(clientFiles, (clientFile) => {
-            const clientName = clientFile.name.replace('.js', '')
-            const propertyName = clientName.charAt(0).toLowerCase() + clientName.slice(1)
-            _.set(api, `crm.${crmFolder.name}.${propertyName}`, new clientFactory[clientName](apiClient))
-          })
-        }
-        return api
-      }
-    },
-    {}
-  )
-
-  console.log(api)
-  return api
-  // const basicClient = new objectClientFactory.BasicApi(objectsApiClient)
-  // const batchClient = new objectClientFactory.BatchApi(objectsApiClient)
-  // const searchClient = new objectClientFactory.SearchApi(objectsApiClient)
-  // const associationsClient = new objectClientFactory.AssociationsApi(objectsApiClient)
-  // const pipelinesClient = new pipelinesClientFactory.PipelinesApi(pipelinesApiClient)
-  // const pipelineStagesClient = new pipelinesClientFactory.PipelineStagesApi(pipelinesApiClient)
-  // const ownersClient = new ownersClientFactory.DefaultApi(ownersApiClient)
-
-  // return {
-  //   crm: {
-  //     objects: {
-  //       getPage: basicClient.getPage.bind(basicClient),
-  //       getById: basicClient.getById.bind(basicClient),
-  //       create: basicClient.create.bind(basicClient),
-  //       update: basicClient.update.bind(basicClient),
-  //       delete: basicClient.archive.bind(basicClient),
-  //       archiveBatch: batchClient.archiveBatch.bind(batchClient),
-  //       createBatch: batchClient.createBatch.bind(batchClient),
-  //       readBatch: batchClient.readBatch.bind(batchClient),
-  //       updateBatch: batchClient.updateBatch.bind(batchClient),
-  //       doSearch: searchClient.doSearch.bind(searchClient),
-  //       createAssociation: associationsClient.createAssociation.bind(associationsClient),
-  //       getAssociations: associationsClient.getAssociations.bind(associationsClient),
-  //       deleteAssociation: associationsClient.archiveAssociation.bind(associationsClient),
-  //       basicClient,
-  //     },
-  //     pipelines: {
-  //       getPipelines: pipelinesClient.getPage.bind(pipelinesClient),
-  //       getById: pipelinesClient.getById.bind(pipelinesClient),
-  //       create: pipelinesClient.create.bind(pipelinesClient),
-  //       replace: pipelinesClient.replace.bind(pipelinesClient),
-  //       update: pipelinesClient.update.bind(pipelinesClient),
-  //       delete: pipelinesClient.archive.bind(pipelinesClient),
-  //       getStage: pipelineStagesClient.getById.bind(pipelineStagesClient),
-  //       getStages: pipelineStagesClient.getPage.bind(pipelineStagesClient),
-  //       createStage: pipelineStagesClient.create.bind(pipelineStagesClient),
-  //       deleteStage: pipelineStagesClient.archive.bind(pipelineStagesClient),
-  //       replaceStage: pipelineStagesClient.replace.bind(pipelineStagesClient),
-  //       updateStage: pipelineStagesClient.update.bind(pipelineStagesClient),
-  //     },
-  //     owners: {
-  //       getPage: ownersClient.getPage.bind(ownersClient),
-  //       getById: ownersClient.getById.bind(ownersClient),
-  //     },
-  //   },
-  //   apiRequest,
-  //   setAccessToken,
-  //   refreshAccessToken,
-  //   setOAuth,
-  //   setAuth,
-  //   setOptions,
-  //   setTimeout,
-  //   setBasePath,
-  //   setDefaultHeaders,
-  //   setCache,
-  //   setEnableCookies,
-  //   setAgent,
-  //   setRequestAgent,
-  //   getOptions,
-  //   oauth: {
-  //     getAuthorizationUrl,
-  //     getAccessToken,
-  //     refreshAccessToken,
-  //     getPortalInfo,
-  //   },
-  // }
+  return getApi()
 }

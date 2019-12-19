@@ -13,7 +13,6 @@
     "directory-tree": "^2.2.4",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",
-    "fs-sync": "^1.0.6",
     "lodash": "^4.17.15",
     "mocha": "^6.2.2",
     "querystring": "^0.2.0",
