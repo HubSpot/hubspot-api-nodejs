@@ -2,23 +2,26 @@
   "name": "node-hubspot-3",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 10000 --exit"
+    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 10000 --exit",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directory-tree": "^2.2.4",
-    "dotenv": "^8.1.0",
-    "esm": "^3.2.25",
+    "@types/bluebird": "^3.5.29",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.21",
+    "@types/request": "^2.48.4",
+    "@types/request-promise": "^4.1.45",
+    "bluebird": "^3.7.2",
     "lodash": "^4.17.15",
-    "querystring": "^0.2.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "superagent": "^5.1.0"
+    "request-promise": "^4.2.5"
   },
   "devDependencies": {
+    "typescript": "^3.7.3",
     "chai": "^4.2.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
@@ -30,7 +33,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.1",
     "prettier": "^1.18.2"
   }
 }
