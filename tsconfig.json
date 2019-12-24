@@ -9,5 +9,6 @@
     "esModuleInterop": true,
     "moduleResolution": "node"
   },
-  "exclude": ["node_modules", "./test", "./lib"]
+  "include": ["index.ts"],
+  "exclude": ["node_modules", "./test", "./lib", "./package.json"]
 }

@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "lib",
+      "codegen/**/*"
+    ]
+  },
+  "rules": {
+    "max-classes-per-file": false,
+    "object-literal-sort-keys": false,
+    "variable-name": {
+      "options": [
+        "allow-leading-underscore"
+      ]
+    }
+  }
+}
