@@ -1,0 +1,11 @@
+export * from './associationsApi';
+import { AssociationsApi } from './associationsApi';
+export * from './basicApi';
+import { BasicApi } from './basicApi';
+export * from './batchApi';
+import { BatchApi } from './batchApi';
+export * from './createNativeObjectsApi';
+import { CreateNativeObjectsApi } from './createNativeObjectsApi';
+export * from './searchApi';
+import { SearchApi } from './searchApi';
+export const APIS = [AssociationsApi, BasicApi, BatchApi, CreateNativeObjectsApi, SearchApi];
