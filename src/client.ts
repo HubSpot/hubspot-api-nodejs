@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import * as qs from 'querystring'
-import request from 'request-promise'
+import requestPromise from 'request-promise'
 // @ts-ignore
 import * as pJson from '../../package.json'
 import {
@@ -13,26 +13,107 @@ import {
 import { DefaultApi } from '../codegen/crm/owners/api'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
 import { BatchApi, CoreApi } from '../codegen/crm/properties/api'
+import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../codegen/oauth/api'
+import { ApiKeyAuthCustom } from './custom-authentications/apiKeyAuthCustom'
+import { OAuthCustom } from './custom-authentications/oAuthCustom'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
 
-class AssociationsApiInternal extends AssociationsApi {}
-class BasicApiInternal extends BasicApi {}
-class BatchObjectsApiInternal extends BatchObjectsApi {}
-class CreateNativeObjectsApiInternal extends CreateNativeObjectsApi {}
-class SearchApiInternal extends SearchApi {}
-class DefaultApiInternal extends DefaultApi {}
-class PipelinesApiInternal extends PipelinesApi {}
-class PipelineStagesApiInternal extends PipelineStagesApi {}
-class BatchApiInternal extends BatchApi {}
-class CoreApiInternal extends CoreApi {}
+class AssociationsApiInternal extends AssociationsApi {
+    constructor() {
+        super();
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class BasicApiInternal extends BasicApi {
+    constructor() {
+        super();
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class BatchObjectsApiInternal extends BatchObjectsApi {
+    constructor() {
+        super();
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class CreateNativeObjectsApiInternal extends CreateNativeObjectsApi {
+    constructor() {
+        super();
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class SearchApiInternal extends SearchApi {
+    constructor() {
+        super();
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class DefaultApiInternal extends DefaultApi {
+    constructor() {
+        super();
+        // @ts-ignore
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class PipelinesApiInternal extends PipelinesApi {
+    constructor() {
+        super();
+        // @ts-ignore
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class PipelineStagesApiInternal extends PipelineStagesApi {
+    constructor() {
+        super();
+        // @ts-ignore
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class BatchApiInternal extends BatchApi {
+    constructor() {
+        super();
+        // @ts-ignore
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class CoreApiInternal extends CoreApi {
+    constructor() {
+        super();
+        // @ts-ignore
+        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
+        this.authentications.oauth2 = new OAuthCustom()
+
+    }
+}
+class AccessTokensApiInternal extends AccessTokensApi {}
+class RefreshTokensApiInternal extends RefreshTokensApi {}
+class TokensApiInternal extends TokensApi {}
 
 export class Client {
-    public oauth = {
-        getAccessToken: this._getAccessToken,
-        getAuthorizationUrl: this._getAuthorizationUrl,
-        getPortalInfo: this._getPortalInfo,
-        refreshAccessToken: this._refreshAccessToken,
+    public oauth: {
+        accessTokensApi: AccessTokensApiInternal,
+        refreshTokensApiI: RefreshTokensApiInternal,
+        tokensApi: TokensApiInternal,
+        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
     }
     public crm: {
         objects: {
@@ -64,14 +145,14 @@ export class Client {
     protected _pipelineStagesApi: PipelineStagesApiInternal
     protected _batchApi: BatchApiInternal
     protected _coreApi: CoreApiInternal
+    protected _accessTokensApi: AccessTokensApiInternal
+    protected _refreshTokensApi: RefreshTokensApiInternal
+    protected _tokensApi: TokensApiInternal
     protected _apiClients: any[]
     protected _apiKey: string | undefined
-    protected _basePath: string | undefined
+    protected _basePath = 'https://api.hubapi.com'
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
-    protected _clientId: string | undefined
-    protected _clientSecret: string | undefined
-    protected _redirectUri: string | undefined
     protected _refreshToken: string | undefined
 
     constructor(
@@ -96,6 +177,9 @@ export class Client {
         this._pipelineStagesApi = new PipelineStagesApiInternal()
         this._batchApi = new BatchApiInternal()
         this._coreApi = new CoreApiInternal()
+        this._accessTokensApi = new AccessTokensApiInternal()
+        this._refreshTokensApi = new RefreshTokensApiInternal()
+        this._tokensApi = new TokensApiInternal()
         this._apiClients = [
             this._associationsApi,
             this._basicApi,
@@ -107,6 +191,9 @@ export class Client {
             this._pipelineStagesApi,
             this._batchApi,
             this._coreApi,
+            this._accessTokensApi,
+            this._refreshTokensApi,
+            this._tokensApi
         ]
         this._setOptions(options)
         this.crm = {
@@ -129,6 +216,12 @@ export class Client {
                 coreApi: this._coreApi,
             },
         }
+        this.oauth = {
+            accessTokensApi: this._accessTokensApi,
+            refreshTokensApiI: this._refreshTokensApi,
+            tokensApi: this._tokensApi,
+            getAuthorizationUrl: this._getAuthorizationUrl.bind(this)
+        }
     }
 
     public setApiKey(apiKeyToSet: string) {
@@ -148,6 +241,7 @@ export class Client {
         const ownersBasePath = `${basePathToSet}/crm/v3/owners`.replace(/\/+$/, '')
         const pipelinesBasePath = `${basePathToSet}/crm/v3/pipelines`.replace(/\/+$/, '')
         const propertiesBasePath = `${basePathToSet}/crm/v3/properties`.replace(/\/+$/, '')
+        const oauthBasePath = `${basePathToSet}/oauth`.replace(/\/+$/, '')
         this._associationsApi.basePath = objectsBasePath
         this._basicApi.basePath = objectsBasePath
         this._batchObjectsApi.basePath = objectsBasePath
@@ -158,19 +252,23 @@ export class Client {
         this._pipelineStagesApi.basePath = pipelinesBasePath
         this._batchApi.basePath = propertiesBasePath
         this._coreApi.basePath = propertiesBasePath
+        this._accessTokensApi.basePath = oauthBasePath
+        this._refreshTokensApi.basePath = oauthBasePath
+        this._tokensApi.basePath = oauthBasePath
+
     }
 
     public setAccessToken(accessTokenToSet: string) {
         this._accessToken = accessTokenToSet
         _.each(this._apiClients, (apiClient) => {
-            apiClient._accessToken = accessTokenToSet
+            apiClient.accessToken = accessTokenToSet
         })
     }
 
     public setDefaultHeaders(defaultHeadersToSet?: object) {
         this._defaultHeaders = _.assign({}, defaultHeadersToSet, DEFAULT_HEADERS)
         _.each(this._apiClients, (apiClient) => {
-            apiClient._defaultHeaders = this._defaultHeaders
+            apiClient.defaultHeaders = this._defaultHeaders
         })
     }
 
@@ -182,21 +280,9 @@ export class Client {
         }
     }
 
-    public setOAuth(
-        options: { clientId?: string; clientSecret?: string; redirectUri?: string; refreshToken?: string } = {},
-    ) {
-        this._clientId = options.clientId
-        this._clientSecret = options.clientSecret
-        this._redirectUri = options.redirectUri
-        this._refreshToken = options.refreshToken
-    }
-
     public getOptions(): {
         basePath: string | undefined
         defaultHeaders: object | undefined
-        clientId: string | undefined
-        clientSecret: string | undefined
-        redirectUri: string | undefined
         refreshToken: string | undefined
         apiKey: string | undefined
         accessToken: string | undefined
@@ -205,10 +291,7 @@ export class Client {
             accessToken: this._accessToken,
             apiKey: this._apiKey,
             basePath: this._basePath,
-            clientId: this._clientId,
-            clientSecret: this._clientSecret,
             defaultHeaders: this._defaultHeaders,
-            redirectUri: this._redirectUri,
             refreshToken: this._refreshToken,
         }
     }
@@ -225,77 +308,26 @@ export class Client {
             arrayFormat: 'repeat',
         }
 
-        return request(params).then((res) => res.body)
+        return requestPromise(params)
     }
 
-    protected _getAuthorizationUrl(newData: any): string {
-        const initialParams: any = {}
-        if (this._clientId) {
-            initialParams.client_id = this._clientId
+    protected _getAuthorizationUrl(clientId: string, redirectUri: string, scopes: string): string {
+        const params = {
+            client_id: clientId,
+            redirect_uri: redirectUri,
+            scopes
         }
-        if (this._redirectUri) {
-            initialParams.redirect_uri = this._redirectUri
-        }
-
-        const params = Object.assign({}, initialParams, newData)
-        return `${this._basePath}/oauth/authorize?${qs.stringify(params)}`
-    }
-
-    protected _getAccessToken(newData: any) {
-        const initialData = {
-            grant_type: 'authorization_code',
-            client_id: this._clientId,
-            client_secret: this._clientSecret,
-            redirect_uri: this._redirectUri,
-        }
-        const form = Object.assign({}, initialData, newData)
-
-        return this.apiRequest({
-            method: 'POST',
-            path: '/oauth/v1/token',
-            form,
-        })
-    }
-
-    protected _refreshAccessToken(newData: any) {
-        const initialData = {
-            grant_type: 'refresh_token',
-            client_id: this._clientId,
-            client_secret: this._clientSecret,
-            redirect_uri: this._redirectUri,
-            refresh_token: this._refreshToken,
-        }
-        const form = Object.assign({}, initialData, newData)
-
-        return this.apiRequest({
-            method: 'POST',
-            path: '/oauth/v1/token',
-            form,
-        }).then((results) => {
-            this.setAccessToken(results.access_token) // refresh the new access_token on the client
-            return results
-        })
-    }
-
-    protected _getPortalInfo() {
-        return this.apiRequest({
-            method: 'GET',
-            path: `/oauth/v1/access-tokens/${this._accessToken}`,
-        })
+        return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
     }
 
     private _setOptions(options: {
         apiKey?: string
         accessToken?: string
-        clientId?: string
-        clientSecret?: string
-        redirectUri?: string
         refreshToken?: string
         basePath?: string
         defaultHeaders?: object
     }) {
         this.setAuth(options)
-        this.setOAuth(options)
         this.setBasePath(options.basePath)
         this.setDefaultHeaders(options.defaultHeaders)
     }
