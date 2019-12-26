@@ -24,7 +24,6 @@ class AssociationsApiInternal extends AssociationsApi {
         super();
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class BasicApiInternal extends BasicApi {
@@ -32,7 +31,6 @@ class BasicApiInternal extends BasicApi {
         super();
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class BatchObjectsApiInternal extends BatchObjectsApi {
@@ -48,7 +46,6 @@ class CreateNativeObjectsApiInternal extends CreateNativeObjectsApi {
         super();
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class SearchApiInternal extends SearchApi {
@@ -56,7 +53,6 @@ class SearchApiInternal extends SearchApi {
         super();
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class DefaultApiInternal extends DefaultApi {
@@ -65,7 +61,6 @@ class DefaultApiInternal extends DefaultApi {
         // @ts-ignore
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class PipelinesApiInternal extends PipelinesApi {
@@ -74,7 +69,6 @@ class PipelinesApiInternal extends PipelinesApi {
         // @ts-ignore
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class PipelineStagesApiInternal extends PipelineStagesApi {
@@ -83,7 +77,6 @@ class PipelineStagesApiInternal extends PipelineStagesApi {
         // @ts-ignore
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class BatchApiInternal extends BatchApi {
@@ -92,7 +85,6 @@ class BatchApiInternal extends BatchApi {
         // @ts-ignore
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class CoreApiInternal extends CoreApi {
@@ -101,7 +93,6 @@ class CoreApiInternal extends CoreApi {
         // @ts-ignore
         this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
         this.authentications.oauth2 = new OAuthCustom()
-
     }
 }
 class AccessTokensApiInternal extends AccessTokensApi {}
@@ -195,6 +186,7 @@ export class Client {
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._accessTokensApi, this._refreshTokensApi, this._tokensApi)
+        this._setUseQuerystring(true)
         this._setOptions(options)
         this.crm = {
             objects: {
@@ -330,5 +322,9 @@ export class Client {
         this.setAuth(options)
         this.setBasePath(options.basePath)
         this.setDefaultHeaders(options.defaultHeaders)
+    }
+
+    private _setUseQuerystring(useQuerystring: boolean) {
+        _.each(this._apiClients, (apiClient) => apiClient._useQuerystring = useQuerystring)
     }
 }
