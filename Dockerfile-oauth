@@ -1,0 +1,16 @@
+FROM node:12
+
+WORKDIR /oauth-sample-app
+COPY sample-apps/oauth-app/package.json ./sample-apps/oauth-app/
+COPY codegen ./codegen
+COPY src ./src
+COPY .prettierrc ./
+COPY index.ts ./
+COPY package.json ./
+COPY tsconfig.json ./
+COPY tslint.json ./
+RUN npm install --unsafe-perm
+WORKDIR /oauth-sample-app/sample-apps/oauth-app/
+RUN npm install
+
+EXPOSE 3000
