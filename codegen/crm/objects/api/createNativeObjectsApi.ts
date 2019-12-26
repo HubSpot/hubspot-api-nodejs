@@ -86,7 +86,7 @@ export class CreateNativeObjectsApi {
      * @summary Create a company
      * @param companyInput 
      */
-    public postcrmv3objectscompanies (companyInput?: CompanyInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public createCompany (companyInput?: CompanyInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/companies';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -138,7 +138,7 @@ export class CreateNativeObjectsApi {
      * @summary Create a contact
      * @param contactInput 
      */
-    public postcrmv3objectscontacts (contactInput?: ContactInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public createContact (contactInput?: ContactInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/contacts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -190,7 +190,7 @@ export class CreateNativeObjectsApi {
      * @summary Create a deal
      * @param dealInput 
      */
-    public postcrmv3objectsdeals (dealInput?: DealInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public createDeal (dealInput?: DealInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/deals';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -242,7 +242,7 @@ export class CreateNativeObjectsApi {
      * @summary Create a product
      * @param productInput 
      */
-    public postcrmv3objectsproducts (productInput?: ProductInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public createProduct (productInput?: ProductInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/products';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -294,7 +294,7 @@ export class CreateNativeObjectsApi {
      * @summary Create a ticket
      * @param ticketInput 
      */
-    public postcrmv3objectstickets (ticketInput?: TicketInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public createTicket (ticketInput?: TicketInput) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/tickets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);

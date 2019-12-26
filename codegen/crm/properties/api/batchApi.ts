@@ -85,7 +85,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyName 
      */
-    public postcrmv3propertiesobjectTypebatcharchive (objectType: string, batchInputPropertyName?: BatchInputPropertyName) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public archiveBatch (objectType: string, batchInputPropertyName?: BatchInputPropertyName) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/{objectType}/batch/archive'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -94,7 +94,7 @@ export class BatchApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling postcrmv3propertiesobjectTypebatcharchive.');
+            throw new Error('Required parameter objectType was null or undefined when calling archiveBatch.');
         }
 
 
@@ -143,7 +143,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-    public postcrmv3propertiesobjectTypebatchcreate (objectType: string, batchInputPropertyCreate?: BatchInputPropertyCreate) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+    public createBatch (objectType: string, batchInputPropertyCreate?: BatchInputPropertyCreate) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/{objectType}/batch/create'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -152,7 +152,7 @@ export class BatchApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling postcrmv3propertiesobjectTypebatchcreate.');
+            throw new Error('Required parameter objectType was null or undefined when calling createBatch.');
         }
 
 
@@ -202,7 +202,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-    public postcrmv3propertiesobjectTypebatchread (objectType: string, batchReadInputPropertyName?: BatchReadInputPropertyName) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+    public readBatch (objectType: string, batchReadInputPropertyName?: BatchReadInputPropertyName) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/{objectType}/batch/read'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -211,7 +211,7 @@ export class BatchApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling postcrmv3propertiesobjectTypebatchread.');
+            throw new Error('Required parameter objectType was null or undefined when calling readBatch.');
         }
 
 

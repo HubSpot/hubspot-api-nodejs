@@ -85,7 +85,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyName 
      */
-    public deletecrmv3propertiesobjectTypepropertyName (objectType: string, propertyName: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public archive (objectType: string, propertyName: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -95,12 +95,12 @@ export class CoreApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling deletecrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter objectType was null or undefined when calling archive.');
         }
 
         // verify required parameter 'propertyName' is not null or undefined
         if (propertyName === null || propertyName === undefined) {
-            throw new Error('Required parameter propertyName was null or undefined when calling deletecrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter propertyName was null or undefined when calling archive.');
         }
 
 
@@ -148,7 +148,7 @@ export class CoreApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-    public getcrmv3propertiesobjectType (objectType: string, archived?: boolean) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
+    public getAll (objectType: string, archived?: boolean) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
         const localVarPath = this.basePath + '/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -157,7 +157,7 @@ export class CoreApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling getcrmv3propertiesobjectType.');
+            throw new Error('Required parameter objectType was null or undefined when calling getAll.');
         }
 
         if (archived !== undefined) {
@@ -211,7 +211,7 @@ export class CoreApi {
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
      */
-    public getcrmv3propertiesobjectTypepropertyName (objectType: string, propertyName: string, archived?: boolean) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public getByName (objectType: string, propertyName: string, archived?: boolean) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -221,12 +221,12 @@ export class CoreApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling getcrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter objectType was null or undefined when calling getByName.');
         }
 
         // verify required parameter 'propertyName' is not null or undefined
         if (propertyName === null || propertyName === undefined) {
-            throw new Error('Required parameter propertyName was null or undefined when calling getcrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter propertyName was null or undefined when calling getByName.');
         }
 
         if (archived !== undefined) {
@@ -280,7 +280,7 @@ export class CoreApi {
      * @param propertyName 
      * @param propertyUpdate 
      */
-    public patchcrmv3propertiesobjectTypepropertyName (objectType: string, propertyName: string, propertyUpdate?: PropertyUpdate) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public update (objectType: string, propertyName: string, propertyUpdate?: PropertyUpdate) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -290,12 +290,12 @@ export class CoreApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling patchcrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter objectType was null or undefined when calling update.');
         }
 
         // verify required parameter 'propertyName' is not null or undefined
         if (propertyName === null || propertyName === undefined) {
-            throw new Error('Required parameter propertyName was null or undefined when calling patchcrmv3propertiesobjectTypepropertyName.');
+            throw new Error('Required parameter propertyName was null or undefined when calling update.');
         }
 
 
@@ -345,7 +345,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyCreate 
      */
-    public postcrmv3propertiesobjectType (objectType: string, propertyCreate?: PropertyCreate) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public create (objectType: string, propertyCreate?: PropertyCreate) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -354,7 +354,7 @@ export class CoreApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling postcrmv3propertiesobjectType.');
+            throw new Error('Required parameter objectType was null or undefined when calling create.');
         }
 
 
