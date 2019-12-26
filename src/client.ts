@@ -148,6 +148,7 @@ export class Client {
     protected _accessTokensApi: AccessTokensApiInternal
     protected _refreshTokensApi: RefreshTokensApiInternal
     protected _tokensApi: TokensApiInternal
+    protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
     protected _basePath = 'https://api.hubapi.com'
@@ -180,7 +181,7 @@ export class Client {
         this._accessTokensApi = new AccessTokensApiInternal()
         this._refreshTokensApi = new RefreshTokensApiInternal()
         this._tokensApi = new TokensApiInternal()
-        this._apiClients = [
+        this._apiClientsWithAuth = [
             this._associationsApi,
             this._basicApi,
             this._batchObjectsApi,
@@ -190,11 +191,10 @@ export class Client {
             this._pipelinesApi,
             this._pipelineStagesApi,
             this._batchApi,
-            this._coreApi,
-            this._accessTokensApi,
-            this._refreshTokensApi,
-            this._tokensApi
+            this._coreApi
         ]
+        this._apiClients = this._apiClientsWithAuth.slice()
+        this._apiClients.push(this._accessTokensApi, this._refreshTokensApi, this._tokensApi)
         this._setOptions(options)
         this.crm = {
             objects: {
@@ -226,7 +226,7 @@ export class Client {
 
     public setApiKey(apiKeyToSet: string) {
         this._apiKey = apiKeyToSet
-        _.each(this._apiClients, (apiClient) => {
+        _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.setApiKey(0, apiKeyToSet)
         })
     }
@@ -260,7 +260,7 @@ export class Client {
 
     public setAccessToken(accessTokenToSet: string) {
         this._accessToken = accessTokenToSet
-        _.each(this._apiClients, (apiClient) => {
+        _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.accessToken = accessTokenToSet
         })
     }
