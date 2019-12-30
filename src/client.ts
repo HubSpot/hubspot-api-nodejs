@@ -1,6 +1,8 @@
+import http = require('http');
 import * as _ from 'lodash'
 import * as qs from 'querystring'
-import requestPromise from 'request-promise'
+import request = require('request');
+import { Response } from 'request'
 // @ts-ignore
 import * as pJson from '../../package.json'
 import {
@@ -146,7 +148,10 @@ export class Client {
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
     protected _refreshToken: string | undefined
-
+    protected authentications = {
+        'hapikey': new ApiKeyAuthCustom('query', 'hapikey'),
+        'oauth2': new OAuthCustom(),
+    }
     constructor(
         options: {
             apiKey?: string
@@ -218,6 +223,7 @@ export class Client {
 
     public setApiKey(apiKeyToSet: string) {
         this._apiKey = apiKeyToSet
+        this.authentications.hapikey.apiKey = apiKeyToSet;
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.setApiKey(0, apiKeyToSet)
         })
@@ -252,6 +258,7 @@ export class Client {
 
     public setAccessToken(accessTokenToSet: string) {
         this._accessToken = accessTokenToSet
+        this.authentications.oauth2.accessToken = accessTokenToSet;
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.accessToken = accessTokenToSet
         })
@@ -288,7 +295,7 @@ export class Client {
         }
     }
 
-    public apiRequest(opts: any) {
+    public apiRequest(opts: any): Promise<{ response: http.IncomingMessage; body?: any;}> {
         const params = _.cloneDeep(opts)
         params.method = params.method || 'GET'
         params.json = true
@@ -299,8 +306,24 @@ export class Client {
         params.qsStringifyOptions = {
             arrayFormat: 'repeat',
         }
+        params.qs = Object.assign({}, params.qs)
 
-        return requestPromise(params)
+        this.authentications.hapikey.applyToRequest(params);
+        this.authentications.oauth2.applyToRequest(params);
+
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+            request(params, (error: any, response: Response, body: any) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                        resolve({ response, body });
+                    } else {
+                        reject({ response, body });
+                    }
+                }
+            });
+        });
     }
 
     protected _getAuthorizationUrl(clientId: string, redirectUri: string, scopes: string): string {

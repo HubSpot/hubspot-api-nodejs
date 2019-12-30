@@ -6,16 +6,15 @@ Please see the documentation on [How do I create an app in HubSpot?](https://dev
 
 ### HubSpot Public API links used in this application
 
-  - [Create or update a contact](https://developers.hubspot.com/docs/methods/contacts/create_or_update)
-  - [Get a contact record by its vid](https://developers.hubspot.com/docs/methods/contacts/get_contact)
-  - [Get all contacts](https://developers.hubspot.com/docs/methods/contacts/get_contacts)
-  - [Get All Contacts Properties](https://developers.hubspot.com/docs/methods/contacts/v2/get_contacts_properties)
-  - [Get List of Owners](https://developers.hubspot.com/docs/methods/owners/get_owners)
-  - [Update a contact property](https://developers.hubspot.com/docs/methods/contacts/v2/update_contact_property)
-  - [Create a contact property](https://developers.hubspot.com/docs/methods/contacts/v2/create_contacts_property)
-  - [Search for contacts by email, name, or company name](https://developers.hubspot.com/docs/methods/contacts/search_contacts)
+  - [Create contact_object](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
+  - [Get a contact object_record by its id](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
+  - [Get all contacts_objects](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
+  - [Get all contacts _objects_properties](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public)
+  - [Get list of owners](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fowners-preview)
+  - [Update a contact object_property](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public)
+  - [Create a contact object_property](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public)
+  - [Search for contacts _objects_by email, name, or company name](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
 
-  Application also demonstrates [contacts pagination](https://git.hubteam.com/HubSpot/hubspot-integration-samples-js/blob/master/contacts-app/index.js) by saving first 10 pages of contacts into a csv file
 
 ### Setup App
 
