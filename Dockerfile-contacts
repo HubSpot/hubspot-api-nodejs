@@ -2,12 +2,14 @@ FROM node:10
 
 WORKDIR /contacts-sample-app
 COPY sample-apps/contacts-app/src/package.json ./sample-apps/contacts-app/src/
-COPY package.json ./
-COPY index.js ./
-COPY client.js ./
 COPY codegen ./codegen
-COPY helpers ./helpers
-RUN npm install
+COPY src ./src
+COPY .prettierrc ./
+COPY index.ts ./
+COPY package.json ./
+COPY tsconfig.json ./
+COPY tslint.json ./
+RUN npm install --unsafe-perm
 WORKDIR /contacts-sample-app/sample-apps/contacts-app/src
 RUN npm install
 

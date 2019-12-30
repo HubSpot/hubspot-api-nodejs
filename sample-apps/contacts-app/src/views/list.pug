@@ -7,16 +7,25 @@ block content
         form(method='post' action=action)
           fieldset
             each item, key in items
-              label(for=key) #{item.label}
+              - var isRequired = key === 'email';
+
+              label(for=key) #{item.label} #{isRequired ? '*' : ''}
 
               if (key === 'hubspot_owner_id')
                 select(name=key id=key)
                   option(value='') Not assigned
                   each owner in owners
-                    -let selected = '' + owner.id === '' + item.value
-                    option(value=owner.id selected=selected) #{owner.firstName} #{owner.lastName}
+                    -let selected = '' + owner.ownerId === '' + item.value
+                    option(value=owner.ownerId selected=selected) #{owner.firstName} #{owner.lastName}
+              else if (key === 'groupName')
+                select(name=key id=key)
+                  option(value='') Not assigned
+                    each group in groups
+                      -let selected = '' + group.name === '' + item.value
+                      option(value=group.name selected=selected) #{group.displayName}
               else
-                input(name=key id=key type='text' value=`${item.value || ''}`)
+                input(name=key id=key type='text' value=`${item.value || ''}` required=isRequired)
+
 
             input(class='button-primary' type='submit' value='Save')
 
