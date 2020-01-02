@@ -12,135 +12,53 @@ import {
     CreateNativeObjectsApi,
     SearchApi,
 } from '../codegen/crm/objects/api'
-import { DefaultApi } from '../codegen/crm/owners/api'
+import { ApiKeyAuth, DefaultApi, OAuth } from '../codegen/crm/owners/api'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
 import { BatchApi, CoreApi } from '../codegen/crm/properties/api'
 import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../codegen/oauth/api'
-import { ApiKeyAuthCustom } from './custom-authentications/apiKeyAuthCustom'
-import { OAuthCustom } from './custom-authentications/oAuthCustom'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
 
-class AssociationsApiInternal extends AssociationsApi {
-    constructor() {
-        super();
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class BasicApiInternal extends BasicApi {
-    constructor() {
-        super();
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class BatchObjectsApiInternal extends BatchObjectsApi {
-    constructor() {
-        super();
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-
-    }
-}
-class CreateNativeObjectsApiInternal extends CreateNativeObjectsApi {
-    constructor() {
-        super();
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class SearchApiInternal extends SearchApi {
-    constructor() {
-        super();
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class DefaultApiInternal extends DefaultApi {
-    constructor() {
-        super();
-        // @ts-ignore
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class PipelinesApiInternal extends PipelinesApi {
-    constructor() {
-        super();
-        // @ts-ignore
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class PipelineStagesApiInternal extends PipelineStagesApi {
-    constructor() {
-        super();
-        // @ts-ignore
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class BatchApiInternal extends BatchApi {
-    constructor() {
-        super();
-        // @ts-ignore
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class CoreApiInternal extends CoreApi {
-    constructor() {
-        super();
-        // @ts-ignore
-        this.authentications.hapikey = new ApiKeyAuthCustom('query', 'hapikey')
-        this.authentications.oauth2 = new OAuthCustom()
-    }
-}
-class AccessTokensApiInternal extends AccessTokensApi {}
-class RefreshTokensApiInternal extends RefreshTokensApi {}
-class TokensApiInternal extends TokensApi {}
-
 export class Client {
     public oauth: {
-        accessTokensApi: AccessTokensApiInternal,
-        refreshTokensApiI: RefreshTokensApiInternal,
-        tokensApi: TokensApiInternal,
+        accessTokensApi: AccessTokensApi,
+        refreshTokensApiI: RefreshTokensApi,
+        tokensApi: TokensApi,
         getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
     }
     public crm: {
         objects: {
-            associationsApi: AssociationsApiInternal
-            basicApi: BasicApiInternal
-            batchApi: BatchObjectsApiInternal
-            createNativeObjectsApi: CreateNativeObjectsApiInternal
-            searchApi: SearchApiInternal
+            associationsApi: AssociationsApi
+            basicApi: BasicApi
+            batchApi: BatchObjectsApi
+            createNativeObjectsApi: CreateNativeObjectsApi
+            searchApi: SearchApi
         }
         owners: {
-            defaultApi: DefaultApiInternal
+            defaultApi: DefaultApi
         }
         pipelines: {
-            pipelinesApi: PipelinesApiInternal
-            pipelineStagesApi: PipelineStagesApiInternal
+            pipelinesApi: PipelinesApi
+            pipelineStagesApi: PipelineStagesApi
         }
         properties: {
-            batchApi: BatchApiInternal
-            coreApi: CoreApiInternal
+            batchApi: BatchApi
+            coreApi: CoreApi
         }
     }
-    protected _associationsApi: AssociationsApiInternal
-    protected _basicApi: BasicApiInternal
-    protected _batchObjectsApi: BatchObjectsApiInternal
-    protected _createNativeObjectsApi: CreateNativeObjectsApiInternal
-    protected _searchApi: SearchApiInternal
-    protected _defaultApi: DefaultApiInternal
-    protected _pipelinesApi: PipelinesApiInternal
-    protected _pipelineStagesApi: PipelineStagesApiInternal
-    protected _batchApi: BatchApiInternal
-    protected _coreApi: CoreApiInternal
-    protected _accessTokensApi: AccessTokensApiInternal
-    protected _refreshTokensApi: RefreshTokensApiInternal
-    protected _tokensApi: TokensApiInternal
+    protected _associationsApi: AssociationsApi
+    protected _basicApi: BasicApi
+    protected _batchObjectsApi: BatchObjectsApi
+    protected _createNativeObjectsApi: CreateNativeObjectsApi
+    protected _searchApi: SearchApi
+    protected _defaultApi: DefaultApi
+    protected _pipelinesApi: PipelinesApi
+    protected _pipelineStagesApi: PipelineStagesApi
+    protected _batchApi: BatchApi
+    protected _coreApi: CoreApi
+    protected _accessTokensApi: AccessTokensApi
+    protected _refreshTokensApi: RefreshTokensApi
+    protected _tokensApi: TokensApi
     protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
@@ -149,8 +67,8 @@ export class Client {
     protected _defaultHeaders: object | undefined
     protected _refreshToken: string | undefined
     protected authentications = {
-        'hapikey': new ApiKeyAuthCustom('query', 'hapikey'),
-        'oauth2': new OAuthCustom(),
+        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'oauth2': new OAuth(),
     }
     constructor(
         options: {
@@ -164,19 +82,19 @@ export class Client {
             defaultHeaders?: object
         } = {},
     ) {
-        this._associationsApi = new AssociationsApiInternal()
-        this._basicApi = new BasicApiInternal()
-        this._batchObjectsApi = new BatchObjectsApiInternal()
-        this._createNativeObjectsApi = new CreateNativeObjectsApiInternal()
-        this._searchApi = new SearchApiInternal()
-        this._defaultApi = new DefaultApiInternal()
-        this._pipelinesApi = new PipelinesApiInternal()
-        this._pipelineStagesApi = new PipelineStagesApiInternal()
-        this._batchApi = new BatchApiInternal()
-        this._coreApi = new CoreApiInternal()
-        this._accessTokensApi = new AccessTokensApiInternal()
-        this._refreshTokensApi = new RefreshTokensApiInternal()
-        this._tokensApi = new TokensApiInternal()
+        this._associationsApi = new AssociationsApi()
+        this._basicApi = new BasicApi()
+        this._batchObjectsApi = new BatchObjectsApi()
+        this._createNativeObjectsApi = new CreateNativeObjectsApi()
+        this._searchApi = new SearchApi()
+        this._defaultApi = new DefaultApi()
+        this._pipelinesApi = new PipelinesApi()
+        this._pipelineStagesApi = new PipelineStagesApi()
+        this._batchApi = new BatchApi()
+        this._coreApi = new CoreApi()
+        this._accessTokensApi = new AccessTokensApi()
+        this._refreshTokensApi = new RefreshTokensApi()
+        this._tokensApi = new TokensApi()
         this._apiClientsWithAuth = [
             this._associationsApi,
             this._basicApi,
@@ -308,8 +226,14 @@ export class Client {
         }
         params.qs = Object.assign({}, params.qs)
 
-        this.authentications.hapikey.applyToRequest(params);
-        this.authentications.oauth2.applyToRequest(params);
+        params.headers = _.assign({}, opts.headers, this._defaultHeaders)
+
+        if (this.authentications.hapikey.apiKey) {
+            this.authentications.hapikey.applyToRequest(params);
+        }
+        if (this.authentications.hapikey.apiKey) {
+            this.authentications.oauth2.applyToRequest(params);
+        }
 
         return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(params, (error: any, response: Response, body: any) => {
