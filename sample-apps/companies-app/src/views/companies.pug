@@ -1,0 +1,28 @@
+extends includes/layout
+block content
+  - const getCompaniesApiDetails = ' Get all companies\n GET /crm/v3/objects/:objectType\n crm.objects.basicApi.getPage';
+  - const searchCompaniesApiDetails = ' Search for companies by domain\n POST /companies/v2/domains/:domain/companies\n apiRequest';
+
+  section(class='container')
+
+    pre #{getCompaniesApiDetails}
+    form(action='/companies')
+      fieldset
+        input(type='text' name='search' placeholder='Search by domain..' id='search' value=search)
+
+    pre #{getCompaniesApiDetails}
+    table
+      thead
+        tr
+          th ID
+          th Name
+          th Domain
+      tbody
+        each company in companies
+          tr
+            td
+              a(class='navigation-link' href=`/companies/${company.id}`)= company.id
+            td= company.name
+            td= company.domain
+    a(href='/companies/new')
+     input(class='button-primary' type='button' value='New Company')
