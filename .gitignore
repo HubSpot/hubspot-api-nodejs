@@ -3,3 +3,4 @@ node_modules/
 test-results.xml
 .env
 /test
+/sample-apps/companies-app/src/node_modules/

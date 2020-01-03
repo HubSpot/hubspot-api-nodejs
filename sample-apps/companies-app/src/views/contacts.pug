@@ -1,0 +1,35 @@
+extends includes/layout
+block content
+  -const searchDetails = ' Search for contacts by email, name, or company name\n POST /crm/v3/objects/:objectType/search\n crm.objects.searchApi.doSearch'
+  -const createCRMAssociateAPIDetails = ' Create an association between company and contact\n PUT /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId\n crm.objects.associationsApi.createAssociation'
+  -const deleteCRMAssociateAPIDetails = ' Remove an association between company and contact\n DELETE /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId\n crm.objects.associationsApi.archiveAssociation'
+  .container
+    pre #{searchDetails}
+    form
+      fieldset
+        input(type='text' name='search' placeholder='Search..' id='search')
+        input(type='hidden' name='companyId')
+
+    form(method='post')
+      fieldset
+        table
+          thead
+            tr
+              th ID
+              th Name
+              th Selected
+          tbody
+          each contact in contacts
+            tr
+              td #{contact.id}
+              td #{contact.name}
+              td
+                input(type='checkbox' name=`contactsIds[${contact.id}]` value=`${contact.id}`)
+
+        .row
+          .column
+            pre #{createCRMAssociateAPIDetails}
+            input(type='submit' name='action' value='Add selected to company')
+          .column-offset-50
+            pre #{deleteCRMAssociateAPIDetails}
+            input(type='submit' name='action' value='Delete selected from Company')

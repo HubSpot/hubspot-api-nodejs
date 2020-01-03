@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  web:
+    env_file:
+      - sample-apps/companies-app/src/.env
+    build:
+      context: .
+      dockerfile: Dockerfile-companies
+    volumes:
+      - ./sample-apps/companies-app/src:/companies-sample-app/sample-apps/companies-app/src
+      - /companies-sample-app/sample-apps/companies-app/src/node_modules
+    ports:
+      - 3000:3000
+    command: npm run start

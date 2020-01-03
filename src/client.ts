@@ -231,7 +231,7 @@ export class Client {
         if (this.authentications.hapikey.apiKey) {
             this.authentications.hapikey.applyToRequest(params);
         }
-        if (this.authentications.hapikey.apiKey) {
+        if (this.authentications.oauth2.accessToken) {
             this.authentications.oauth2.applyToRequest(params);
         }
 
