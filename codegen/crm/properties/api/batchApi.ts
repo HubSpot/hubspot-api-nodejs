@@ -102,7 +102,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyName 
      */
-    public async postCrmV3PropertiesObjectTypeBatchArchive (objectType: string, batchInputPropertyName?: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archiveBatch (objectType: string, batchInputPropertyName?: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/{objectType}/batch/archive'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -118,7 +118,7 @@ export class BatchApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling postCrmV3PropertiesObjectTypeBatchArchive.');
+            throw new Error('Required parameter objectType was null or undefined when calling archiveBatch.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

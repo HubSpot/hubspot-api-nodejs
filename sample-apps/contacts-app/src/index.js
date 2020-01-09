@@ -72,7 +72,7 @@ const getMutableProperties = (properties) => {
 }
 
 const isMutable = (property) => {
-    return property.mutability.readOnlyDefinition
+    return property.modificationMetadata.readOnlyDefinition
 }
 
 const getContactEditableProperties = (contactProperties, editableProperties) => {
@@ -96,7 +96,7 @@ const getFullName = (contactProperties) => {
 }
 
 const isReadOnly = (property) => {
-    return property.mutability.readOnlyValue || property.calculated
+    return property.modificationMetadata.readOnlyValue || property.calculated
 }
 
 const getPropertyDetails = (property = {}) => {

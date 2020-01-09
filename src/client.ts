@@ -14,7 +14,7 @@ import {
 } from '../codegen/crm/objects/api'
 import { ApiKeyAuth, DefaultApi, OAuth } from '../codegen/crm/owners/api'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
-import { BatchApi, CoreApi } from '../codegen/crm/properties/api'
+import { BatchApi, CoreApi, GroupsApi } from '../codegen/crm/properties/api'
 import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../codegen/oauth/api'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
@@ -44,6 +44,7 @@ export class Client {
         properties: {
             batchApi: BatchApi
             coreApi: CoreApi
+            groupsApi: GroupsApi
         }
     }
     protected _associationsApi: AssociationsApi
@@ -56,6 +57,7 @@ export class Client {
     protected _pipelineStagesApi: PipelineStagesApi
     protected _batchApi: BatchApi
     protected _coreApi: CoreApi
+    protected _groupsApi: GroupsApi
     protected _accessTokensApi: AccessTokensApi
     protected _refreshTokensApi: RefreshTokensApi
     protected _tokensApi: TokensApi
@@ -92,6 +94,7 @@ export class Client {
         this._pipelineStagesApi = new PipelineStagesApi()
         this._batchApi = new BatchApi()
         this._coreApi = new CoreApi()
+        this._groupsApi = new GroupsApi()
         this._accessTokensApi = new AccessTokensApi()
         this._refreshTokensApi = new RefreshTokensApi()
         this._tokensApi = new TokensApi()
@@ -105,7 +108,8 @@ export class Client {
             this._pipelinesApi,
             this._pipelineStagesApi,
             this._batchApi,
-            this._coreApi
+            this._coreApi,
+            this._groupsApi
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._accessTokensApi, this._refreshTokensApi, this._tokensApi)
@@ -129,6 +133,7 @@ export class Client {
             properties: {
                 batchApi: this._batchApi,
                 coreApi: this._coreApi,
+                groupsApi: this._groupsApi
             },
         }
         this.oauth = {

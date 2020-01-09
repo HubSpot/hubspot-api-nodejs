@@ -3,6 +3,7 @@ export * from './batchInputPropertyName';
 export * from './batchReadInputPropertyName';
 export * from './batchResponseProperty';
 export * from './collectionResponseProperty';
+export * from './collectionResponsePropertyGroup';
 export * from './errorDetail';
 export * from './modelError';
 export * from './nextPage';
@@ -11,7 +12,10 @@ export * from './optionInput';
 export * from './paging';
 export * from './property';
 export * from './propertyCreate';
-export * from './propertyMutability';
+export * from './propertyGroup';
+export * from './propertyGroupCreate';
+export * from './propertyGroupUpdate';
+export * from './propertyModificationMetadata';
 export * from './propertyName';
 export * from './propertyUpdate';
 
@@ -22,6 +26,7 @@ import { BatchInputPropertyName } from './batchInputPropertyName';
 import { BatchReadInputPropertyName } from './batchReadInputPropertyName';
 import { BatchResponseProperty } from './batchResponseProperty';
 import { CollectionResponseProperty } from './collectionResponseProperty';
+import { CollectionResponsePropertyGroup } from './collectionResponsePropertyGroup';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
@@ -30,7 +35,10 @@ import { OptionInput } from './optionInput';
 import { Paging } from './paging';
 import { Property } from './property';
 import { PropertyCreate } from './propertyCreate';
-import { PropertyMutability } from './propertyMutability';
+import { PropertyGroup } from './propertyGroup';
+import { PropertyGroupCreate } from './propertyGroupCreate';
+import { PropertyGroupUpdate } from './propertyGroupUpdate';
+import { PropertyModificationMetadata } from './propertyModificationMetadata';
 import { PropertyName } from './propertyName';
 import { PropertyUpdate } from './propertyUpdate';
 
@@ -61,6 +69,7 @@ let typeMap: {[index: string]: any} = {
     "BatchReadInputPropertyName": BatchReadInputPropertyName,
     "BatchResponseProperty": BatchResponseProperty,
     "CollectionResponseProperty": CollectionResponseProperty,
+    "CollectionResponsePropertyGroup": CollectionResponsePropertyGroup,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
@@ -69,7 +78,10 @@ let typeMap: {[index: string]: any} = {
     "Paging": Paging,
     "Property": Property,
     "PropertyCreate": PropertyCreate,
-    "PropertyMutability": PropertyMutability,
+    "PropertyGroup": PropertyGroup,
+    "PropertyGroupCreate": PropertyGroupCreate,
+    "PropertyGroupUpdate": PropertyGroupUpdate,
+    "PropertyModificationMetadata": PropertyModificationMetadata,
     "PropertyName": PropertyName,
     "PropertyUpdate": PropertyUpdate,
 }
@@ -137,7 +149,7 @@ export class ObjectSerializer {
             // Get the actual type of this object
             type = this.findCorrectType(data, type);
 
-            // get the map for the correct type.
+            // getAll the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
             for (let index in attributeTypes) {
