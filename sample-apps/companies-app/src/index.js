@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' })
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
-const HubspotNew = require('../../..')
+const hubspot = require('../../..')
 const bodyParser = require('body-parser')
 const Promise = require('bluebird')
 
@@ -94,7 +94,7 @@ const logResponse = (response) => {
 
 const app = express()
 
-const hubspotNew = HubspotNew({
+const hubspotClient = new hubspot.Client({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
     redirectUri: REDIRECT_URI,
@@ -106,7 +106,7 @@ const getAllCompanies = async () => {
     // GET /crm/v3/objects/:objectType
     // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
     console.log('Calling crm.objects.basicApi.getPage API method. Retrieve all companies.')
-    const companiesResponse = await hubspotNew.crm.objects.basicApi.getPage(COMPANY_OBJECT_TYPE, OBJECTS_LIMIT)
+    const companiesResponse = await hubspotClient.crm.objects.basicApi.getPage(COMPANY_OBJECT_TYPE, OBJECTS_LIMIT)
     logResponse(companiesResponse)
 
     return companiesResponse.body.results
@@ -131,7 +131,7 @@ const getCompaniesByDomain = async (domain) => {
         },
     }
 
-    const companiesResponse = await hubspotNew.apiRequest(options)
+    const companiesResponse = await hubspotClient.apiRequest(options)
     logResponse(companiesResponse)
 
     return companiesResponse.body.results
@@ -142,7 +142,7 @@ const createCompany = async (properties) => {
     // POST /crm/v3/objects/:objectType/
     // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
     console.log('Calling crm.objects.basicApi.create API method. Create company.')
-    return hubspotNew.crm.objects.basicApi.create(COMPANY_OBJECT_TYPE, { properties })
+    return hubspotClient.crm.objects.basicApi.create(COMPANY_OBJECT_TYPE, { properties })
 }
 
 const updateCompany = (id, properties) => {
@@ -150,14 +150,14 @@ const updateCompany = (id, properties) => {
     // PATCH /crm/v3/objects/:objectType/:objectId/
     // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
     console.log('Calling crm.objects.basicApi.update API method. Update company.')
-    return hubspotNew.crm.objects.basicApi.update(COMPANY_OBJECT_TYPE, id, { properties })
+    return hubspotClient.crm.objects.basicApi.update(COMPANY_OBJECT_TYPE, id, { properties })
 }
 
 const deleteCompanyContactAssociation = async (companyId, contactId) => {
     // Remove an association between company and contact
     // DELETE /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId
     // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
-    const deleteAssociationResponse = await hubspotNew.crm.objects.associationsApi.archiveAssociation(
+    const deleteAssociationResponse = await hubspotClient.crm.objects.associationsApi.archiveAssociation(
         COMPANY_OBJECT_TYPE,
         companyId,
         CONTACT_OBJECT_TYPE,
@@ -175,7 +175,7 @@ const createCompanyContactAssociation = async (companyId, contactId) => {
     // Associate company and contact
     // PUT /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId
     // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
-    const createAssociationResponse = await hubspotNew.crm.objects.associationsApi.createAssociation(
+    const createAssociationResponse = await hubspotClient.crm.objects.associationsApi.createAssociation(
         COMPANY_OBJECT_TYPE,
         companyId,
         CONTACT_OBJECT_TYPE,
@@ -240,7 +240,7 @@ app.get('/companies/new', checkAuthorization, async (req, res) => {
         // GET /crm/v3/properties/:objectType/
         // https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public?branch=master&swaggerVersion=2
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve company properties.')
-        const propertiesResponse = await hubspotNew.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
+        const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
         logResponse(propertiesResponse)
         const properties = preparePropertiesForView({}, propertiesResponse.body.results)
 
@@ -259,7 +259,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // GET /crm/v3/properties/:objectType/
         // https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public?branch=master&swaggerVersion=2
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve company properties.')
-        const propertiesResponse = await hubspotNew.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
+        const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
         logResponse(propertiesResponse)
 
         const companyPropertiesNames = _.map(propertiesResponse.body.results, 'name')
@@ -268,7 +268,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // GET /crm/v3/objects/:objectType/:objectId
         // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
         console.log('Calling crm.objects.getById API method. Retrieve a company by id:', companyId)
-        const companyResponse = await hubspotNew.crm.objects.basicApi.getById(
+        const companyResponse = await hubspotClient.crm.objects.basicApi.getById(
             COMPANY_OBJECT_TYPE,
             companyId,
             companyPropertiesNames,
@@ -281,7 +281,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         console.log(
             `Calling crm.objects.associationsApi.getAssociations API method. Retrieve list of contacts id's associated with the company ${companyId}.`,
         )
-        const companyAssociatedContactsResponse = await hubspotNew.crm.objects.associationsApi.getAssociations(
+        const companyAssociatedContactsResponse = await hubspotClient.crm.objects.associationsApi.getAssociations(
             COMPANY_OBJECT_TYPE,
             companyId,
             CONTACT_OBJECT_TYPE,
@@ -296,7 +296,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // Read a list of contacts objects given a collection of IDs
         // POST /crm/v3/objects/:objectType/batch/read
         // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview
-        const contactsReadBatchResponse = await hubspotNew.crm.objects.batchApi.readBatch(
+        const contactsReadBatchResponse = await hubspotClient.crm.objects.batchApi.readBatch(
             CONTACT_OBJECT_TYPE,
             undefined,
             contactsReadBatchBody,
@@ -323,7 +323,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
             // GET /crm/v3/objects/:objectType
             // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
             console.log('Calling crm.objects.basicApi.getPage API method. Retrieve contacts')
-            contactsResponse = await hubspotNew.crm.objects.basicApi.getPage(CONTACT_OBJECT_TYPE, OBJECTS_LIMIT)
+            contactsResponse = await hubspotClient.crm.objects.basicApi.getPage(CONTACT_OBJECT_TYPE, OBJECTS_LIMIT)
         } else {
             // Search for contacts by email, name, or company name
             // POST /crm/v3/objects/:objectType/search
@@ -332,7 +332,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
                 'Calling crm.objects.searchApi.doSearch API method. Retrieve contacts with search query:',
                 query,
             )
-            contactsResponse = await hubspotNew.crm.objects.searchApi.doSearch(CONTACT_OBJECT_TYPE, {
+            contactsResponse = await hubspotClient.crm.objects.searchApi.doSearch(CONTACT_OBJECT_TYPE, {
                 query,
                 limit: OBJECTS_LIMIT,
             })
@@ -401,7 +401,7 @@ app.get('/oauth', async (req, res) => {
     // Use the client to get authorization Url
     // https://www.npmjs.com/package/hubspot
     console.log('Creating authorization Url')
-    const authorizationUrl = hubspotNew.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
+    const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
     console.log('Authorization Url', authorizationUrl)
 
     res.redirect(authorizationUrl)
@@ -414,7 +414,7 @@ app.get('/oauth-callback', async (req, res) => {
     // POST /oauth/v1/token
     // https://developers.hubspot.com/docs/methods/oauth2/get-access-and-refresh-tokens
     console.log('Retrieving access token by code:', code)
-    const tokenStoreResult = await hubspotNew.oauth.tokensApi.getTokens(
+    const tokenStoreResult = await hubspotClient.oauth.tokensApi.getTokens(
         'authorization_code',
         code,
         REDIRECT_URI,
@@ -427,7 +427,7 @@ app.get('/oauth-callback', async (req, res) => {
 
     // Set token for the
     // https://www.npmjs.com/package/hubspot
-    hubspotNew.setAccessToken(tokenStore.access_token)
+    hubspotClient.setAccessToken(tokenStore.access_token)
     res.redirect('/')
 })
 

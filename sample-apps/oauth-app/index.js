@@ -2,7 +2,7 @@ require('dotenv').config({ path: '.env' })
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
-const Hubspot = require(`${__dirname}/../..`)
+const hubspot = require(`${__dirname}/../..`)
 const bodyParser = require('body-parser')
 
 const PORT = 3000
@@ -56,9 +56,7 @@ const getFullName = (contactProperties) => {
 }
 
 const refreshToken = async () => {
-    hubspot = Hubspot()
-
-    const result = await hubspot.oauth.tokensApi.getTokens(
+    const result = await hubspotClient.oauth.tokensApi.getTokens(
         GRANT_TYPES.REFRESH_TOKEN,
         undefined,
         REDIRECT_URI,
@@ -70,12 +68,12 @@ const refreshToken = async () => {
     tokenStore.updated_at = Date.now()
     console.log('Updated tokens', tokenStore)
 
-    hubspot.setAccessToken(tokenStore.access_token)
+    hubspotClient.setAccessToken(tokenStore.access_token)
 }
 
 const app = express()
 
-let hubspot = Hubspot()
+const hubspotClient = new hubspot.Client()
 
 app.use(express.static('public'))
 app.set('view engine', 'pug')
@@ -108,7 +106,7 @@ app.get('/', async (req, res) => {
         // GET /crm/v3/objects/:objectType
         // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
         console.log('Calling .crm.objects.basicApi.getPage. Retrieve contacts.')
-        const contactsResponse = await hubspot.crm.objects.basicApi.getPage(
+        const contactsResponse = await hubspotClient.crm.objects.basicApi.getPage(
             CONTACT_OBJECT_TYPE,
             undefined,
             undefined,
@@ -127,7 +125,7 @@ app.use('/oauth', async (req, res) => {
     // Use the client to get authorization Url
     // https://www.npmjs.com/package/hubspot
     console.log('Creating authorization Url')
-    const authorizationUrl = hubspot.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
+    const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
     console.log('Authorization Url', authorizationUrl)
 
     res.redirect(authorizationUrl)
@@ -140,7 +138,7 @@ app.use('/oauth-callback', async (req, res) => {
     // POST /oauth/v1/token
     // https://tools.hubteam.com/api-catalog/services/OAuthService/v1/spec/public?branch=master&swaggerVersion=3
     console.log('Retrieving access token by code:', code)
-    const getTokensResponse = await hubspot.oauth.tokensApi.getTokens(
+    const getTokensResponse = await hubspotClient.oauth.tokensApi.getTokens(
         GRANT_TYPES.AUTHORIZATION_CODE,
         code,
         REDIRECT_URI,
@@ -154,7 +152,7 @@ app.use('/oauth-callback', async (req, res) => {
 
     // Set token for the
     // https://www.npmjs.com/package/hubspot
-    hubspot.setAccessToken(tokenStore.access_token)
+    hubspotClient.setAccessToken(tokenStore.access_token)
     res.redirect('/')
 })
 
