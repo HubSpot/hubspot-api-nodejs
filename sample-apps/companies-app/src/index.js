@@ -44,7 +44,7 @@ const checkAuthorization = (req, res, next) => {
 }
 
 const isPropertyEditable = (property) => {
-    return !property.mutability.readOnlyValue && !property.calculated
+    return !property.modificationMetadata.readOnlyValue && !property.calculated
 }
 
 const preparePropertiesForView = (companyProperties, allProperties) => {
@@ -398,7 +398,7 @@ app.get('/login', async (req, res) => {
 })
 
 app.get('/oauth', async (req, res) => {
-    // Use the client to get authorization Url
+    // Use the client to getAll authorization Url
     // https://www.npmjs.com/package/hubspot
     console.log('Creating authorization Url')
     const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
