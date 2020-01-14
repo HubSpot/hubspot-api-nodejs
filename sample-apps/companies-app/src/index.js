@@ -70,20 +70,11 @@ const prepareAllContactsForView = (contacts) => {
     })
 }
 
-const prepareCompaniesForViewVNext = (companies) => {
+const prepareCompaniesForView = (companies) => {
     return _.map(companies, (company) => {
         const id = _.get(company, 'id')
         const name = _.get(company, 'properties.name')
         const domain = _.get(company, 'properties.domain')
-        return { id, name, domain }
-    })
-}
-
-const prepareCompaniesForViewVNow = (companies) => {
-    return _.map(companies, (company) => {
-        const id = _.get(company, 'companyId')
-        const name = _.get(company, 'properties.name.value')
-        const domain = _.get(company, 'properties.domain.value')
         return { id, name, domain }
     })
 }
@@ -113,25 +104,24 @@ const getAllCompanies = async () => {
 }
 
 const getCompaniesByDomain = async (domain) => {
-    // Search for companies by domain
-    // POST /companies/v2/domains/:domain/companies
-    // https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain
-    console.log('Calling apiRequest API method. Retrieve companies by domain.')
-    const options = {
-        path: `/companies/v2/domains/${domain}/companies`,
-        method: 'POST',
-        body: {
-            requestOptions: {
-                properties: ['domain', 'name'],
+    const searchBody = {
+        filters: [
+            {
+                propertyName: 'domain',
+                operator: 'EQ',
+                value: domain,
             },
-            offset: {
-                isPrimary: true,
-                companyId: 0,
-            },
-        },
+        ],
+        sorts: [],
+        limit: 30,
+        after: 0,
+        properties: [],
     }
-
-    const companiesResponse = await hubspotClient.apiRequest(options)
+    // Search for companies by domain
+    // POST /crm/v3/objects/:objectType/search
+    // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
+    console.log('Calling crm.objects.searchApi.doSearch API method. Retrieve companies by domain.')
+    const companiesResponse = await hubspotClient.crm.objects.searchApi.doSearch(COMPANY_OBJECT_TYPE, searchBody)
     logResponse(companiesResponse)
 
     return companiesResponse.body.results
@@ -217,15 +207,14 @@ app.get('/companies', checkAuthorization, async (req, res) => {
     try {
         const search = _.get(req, 'query.search') || ''
         let companiesResponse
-        let companies
 
         if (_.isNil(search) || _.isEmpty(search)) {
             companiesResponse = await getAllCompanies()
-            companies = prepareCompaniesForViewVNext(companiesResponse)
         } else {
             companiesResponse = await getCompaniesByDomain(search)
-            companies = prepareCompaniesForViewVNow(companiesResponse)
         }
+
+        const companies = prepareCompaniesForView(companiesResponse)
 
         res.render('companies', { companies, search })
     } catch (e) {

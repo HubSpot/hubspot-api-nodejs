@@ -48,8 +48,9 @@ describe('companies-sample', () => {
     let driver
 
     before(async () => {
+        await environmentHelper.initializeEnvironment()
+        await authorizationHelper.tryToAuthorize()
         driver = driverHelper.getDriver()
-        await Promise.all([await authorizationHelper.tryToAuthorize(), await environmentHelper.initializeEnvironment()])
     })
 
     after(async () => {

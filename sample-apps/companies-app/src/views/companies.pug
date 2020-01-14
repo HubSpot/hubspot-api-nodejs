@@ -1,7 +1,7 @@
 extends includes/layout
 block content
   - const getCompaniesApiDetails = ' Get all companies\n GET /crm/v3/objects/:objectType\n crm.objects.basicApi.getPage';
-  - const searchCompaniesApiDetails = ' Search for companies by domain\n POST /companies/v2/domains/:domain/companies\n apiRequest';
+  - const searchCompaniesApiDetails = ' Search for companies by domain\n POST /crm/v3/objects/:objectType/search\n crm.objects.searchApi.doSearch';
 
   section(class='container')
 
@@ -10,7 +10,7 @@ block content
       fieldset
         input(type='text' name='search' placeholder='Search by domain..' id='search-companies-by-domain' value=search)
 
-    pre #{getCompaniesApiDetails}
+    pre #{searchCompaniesApiDetails}
     table
       thead
         tr
