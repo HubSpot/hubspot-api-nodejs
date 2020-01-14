@@ -7,7 +7,8 @@
   "description": "hubspot-node client sample applications",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "./node_modules/.bin/mocha \"test/test-companies-app.js\" --timeout 50000 --exit"
   },
   "keywords": [
     "hubspot",
@@ -26,6 +27,10 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "chromedriver": "^79.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   }
 }

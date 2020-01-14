@@ -315,8 +315,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
 app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) => {
     try {
-        const query = _.get(req, 'query.search')
-        const companyId = _.get(req, 'params.companyId')
+        const query = _.get(req, 'query.search') || ''
         let contactsResponse
         if (_.isNil(query) || _.isEmpty(query)) {
             // Get all contacts
@@ -340,7 +339,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
         logResponse(contactsResponse)
 
         const contacts = prepareAllContactsForView(contactsResponse.body.results)
-        res.render('contacts', { companyId, contacts })
+        res.render('contacts', { contacts, search: query })
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)

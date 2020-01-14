@@ -8,7 +8,7 @@ block content
     pre #{getCompaniesApiDetails}
     form(action='/companies')
       fieldset
-        input(type='text' name='search' placeholder='Search by domain..' id='search' value=search)
+        input(type='text' name='search' placeholder='Search by domain..' id='search-companies-by-domain' value=search)
 
     pre #{getCompaniesApiDetails}
     table
@@ -25,4 +25,4 @@ block content
             td= company.name
             td= company.domain
     a(href='/companies/new')
-     input(class='button-primary' type='button' value='New Company')
+     input(class='button-primary' type='button' value='New Company' id='create-new-company-button')
