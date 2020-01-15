@@ -18,6 +18,7 @@ const DELETE_ACTION = 'Delete selected from Company'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const CONTACT_OBJECT_TYPE = 'contacts'
 const COMPANY_OBJECT_TYPE = 'companies'
+const REFRESH_TOKEN = 'refresh_token'
 
 let tokenStore = {}
 
@@ -32,13 +33,35 @@ const checkEnv = (req, res, next) => {
 }
 
 const isAuthorized = () => {
+    console.log(tokenStore)
     return !_.isEmpty(tokenStore.refresh_token)
 }
 
-const checkAuthorization = (req, res, next) => {
+const isTokenExpired = () => {
+    return Date.now() >= tokenStore.updated_at + tokenStore.expires_in * 1000
+}
+
+const refreshToken = async () => {
+    const result = await hubspotClient.oauth.tokensApi.getTokens(
+        REFRESH_TOKEN,
+        undefined,
+        undefined,
+        CLIENT_ID,
+        CLIENT_SECRET,
+        tokenStore.refresh_token,
+    )
+    tokenStore = result.body
+    tokenStore.updated_at = Date.now()
+    console.log('Updated tokens', tokenStore)
+
+    hubspotClient.setAccessToken(tokenStore.access_token)
+}
+
+const checkAuthorization = async (req, res, next) => {
     if (_.startsWith(req.url, '/error')) return next()
     if (_.startsWith(req.url, '/login')) return next()
     if (!isAuthorized()) return res.redirect('/login')
+    if (isTokenExpired()) await refreshToken()
 
     next()
 }
@@ -70,20 +93,11 @@ const prepareAllContactsForView = (contacts) => {
     })
 }
 
-const prepareCompaniesForViewVNext = (companies) => {
+const prepareCompaniesForView = (companies) => {
     return _.map(companies, (company) => {
         const id = _.get(company, 'id')
         const name = _.get(company, 'properties.name')
         const domain = _.get(company, 'properties.domain')
-        return { id, name, domain }
-    })
-}
-
-const prepareCompaniesForViewVNow = (companies) => {
-    return _.map(companies, (company) => {
-        const id = _.get(company, 'companyId')
-        const name = _.get(company, 'properties.name.value')
-        const domain = _.get(company, 'properties.domain.value')
         return { id, name, domain }
     })
 }
@@ -113,25 +127,24 @@ const getAllCompanies = async () => {
 }
 
 const getCompaniesByDomain = async (domain) => {
-    // Search for companies by domain
-    // POST /companies/v2/domains/:domain/companies
-    // https://developers.hubspot.com/docs/methods/companies/search_companies_by_domain
-    console.log('Calling apiRequest API method. Retrieve companies by domain.')
-    const options = {
-        path: `/companies/v2/domains/${domain}/companies`,
-        method: 'POST',
-        body: {
-            requestOptions: {
-                properties: ['domain', 'name'],
+    const searchBody = {
+        filters: [
+            {
+                propertyName: 'domain',
+                operator: 'EQ',
+                value: domain,
             },
-            offset: {
-                isPrimary: true,
-                companyId: 0,
-            },
-        },
+        ],
+        sorts: [],
+        limit: OBJECTS_LIMIT,
+        after: 0,
+        properties: [],
     }
-
-    const companiesResponse = await hubspotClient.apiRequest(options)
+    // Search for companies by domain
+    // POST /crm/v3/objects/:objectType/search
+    // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
+    console.log('Calling crm.objects.searchApi.doSearch API method. Retrieve companies by domain.')
+    const companiesResponse = await hubspotClient.crm.objects.searchApi.doSearch(COMPANY_OBJECT_TYPE, searchBody)
     logResponse(companiesResponse)
 
     return companiesResponse.body.results
@@ -217,15 +230,14 @@ app.get('/companies', checkAuthorization, async (req, res) => {
     try {
         const search = _.get(req, 'query.search') || ''
         let companiesResponse
-        let companies
 
         if (_.isNil(search) || _.isEmpty(search)) {
             companiesResponse = await getAllCompanies()
-            companies = prepareCompaniesForViewVNext(companiesResponse)
         } else {
             companiesResponse = await getCompaniesByDomain(search)
-            companies = prepareCompaniesForViewVNow(companiesResponse)
         }
+
+        const companies = prepareCompaniesForView(companiesResponse)
 
         res.render('companies', { companies, search })
     } catch (e) {
@@ -315,8 +327,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
 app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) => {
     try {
-        const query = _.get(req, 'query.search')
-        const companyId = _.get(req, 'params.companyId')
+        const query = _.get(req, 'query.search') || ''
         let contactsResponse
         if (_.isNil(query) || _.isEmpty(query)) {
             // Get all contacts
@@ -340,7 +351,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
         logResponse(contactsResponse)
 
         const contacts = prepareAllContactsForView(contactsResponse.body.results)
-        res.render('contacts', { companyId, contacts })
+        res.render('contacts', { contacts, search: query })
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
@@ -424,6 +435,7 @@ app.get('/oauth-callback', async (req, res) => {
     logResponse(tokenStoreResult)
 
     tokenStore = tokenStoreResult.response.body
+    tokenStore.updated_at = Date.now()
 
     // Set token for the
     // https://www.npmjs.com/package/hubspot

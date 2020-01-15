@@ -11,7 +11,7 @@
  */
 
 import { Option } from './option';
-import { PropertyMutability } from './propertyMutability';
+import { PropertyModificationMetadata } from './propertyModificationMetadata';
 
 export class Property {
     'updatedAt'?: string;
@@ -92,7 +92,7 @@ export class Property {
     * Whether or not the property will display the currency symbol set in the account settings.
     */
     'showCurrencySymbol'?: boolean;
-    'mutability'?: PropertyMutability;
+    'modificationMetadata'?: PropertyModificationMetadata;
     /**
     * Whether or not the property can be used in a HubSpot form.
     */
@@ -207,9 +207,9 @@ export class Property {
             "type": "boolean"
         },
         {
-            "name": "mutability",
-            "baseName": "mutability",
-            "type": "PropertyMutability"
+            "name": "modificationMetadata",
+            "baseName": "modificationMetadata",
+            "type": "PropertyModificationMetadata"
         },
         {
             "name": "formField",

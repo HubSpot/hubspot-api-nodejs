@@ -11,33 +11,18 @@
  */
 
 
-/**
-* An object containing information about how the property can be modified.
-*/
-export class PropertyMutability {
-    /**
-    * Whether or not the property\'s value is read-only.
-    */
-    'readOnlyValue': boolean;
-    /**
-    * Whether or not the property\'s definition is read-only.
-    */
-    'readOnlyDefinition': boolean;
-    /**
-    * Whether or not the property can be archived.
-    */
+export class PropertyModificationMetadata {
     'archivable': boolean;
-    /**
-    * Whether or not the property\'s options can be modified.
-    */
-    'mutableOptions'?: boolean;
+    'readOnlyDefinition': boolean;
+    'readOnlyOptions'?: boolean;
+    'readOnlyValue': boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "readOnlyValue",
-            "baseName": "readOnlyValue",
+            "name": "archivable",
+            "baseName": "archivable",
             "type": "boolean"
         },
         {
@@ -46,18 +31,18 @@ export class PropertyMutability {
             "type": "boolean"
         },
         {
-            "name": "archivable",
-            "baseName": "archivable",
+            "name": "readOnlyOptions",
+            "baseName": "readOnlyOptions",
             "type": "boolean"
         },
         {
-            "name": "mutableOptions",
-            "baseName": "mutableOptions",
+            "name": "readOnlyValue",
+            "baseName": "readOnlyValue",
             "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
-        return PropertyMutability.attributeTypeMap;
+        return PropertyModificationMetadata.attributeTypeMap;
     }
 }
 

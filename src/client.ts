@@ -22,7 +22,7 @@ const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
 export class Client {
     public oauth: {
         accessTokensApi: AccessTokensApi,
-        refreshTokensApiI: RefreshTokensApi,
+        refreshTokensApi: RefreshTokensApi,
         tokensApi: TokensApi,
         getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
     }
@@ -138,7 +138,7 @@ export class Client {
         }
         this.oauth = {
             accessTokensApi: this._accessTokensApi,
-            refreshTokensApiI: this._refreshTokensApi,
+            refreshTokensApi: this._refreshTokensApi,
             tokensApi: this._tokensApi,
             getAuthorizationUrl: this._getAuthorizationUrl.bind(this)
         }

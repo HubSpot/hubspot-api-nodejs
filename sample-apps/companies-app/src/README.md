@@ -37,3 +37,12 @@ The best way to run this project (with the least configuration), is using docker
 docker-compose -f  ../../../docker-compose-companies.yml up
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
+
+### Testing
+1. Add HUBSPOT_API_KEY, BASE_PATH, HUBSPOT_AUTHORIZATION_EMAIL, HUBSPOT_AUTHORIZATION_PASSWORD & HUBSPOT_ACCOUNT_NAME to .env
+
+```bash
+npm i
+npm test
+```
+
