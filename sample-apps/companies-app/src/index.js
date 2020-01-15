@@ -18,6 +18,7 @@ const DELETE_ACTION = 'Delete selected from Company'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const CONTACT_OBJECT_TYPE = 'contacts'
 const COMPANY_OBJECT_TYPE = 'companies'
+const REFRESH_TOKEN = 'refresh_token'
 
 let tokenStore = {}
 
@@ -32,13 +33,35 @@ const checkEnv = (req, res, next) => {
 }
 
 const isAuthorized = () => {
+    console.log(tokenStore)
     return !_.isEmpty(tokenStore.refresh_token)
 }
 
-const checkAuthorization = (req, res, next) => {
+const isTokenExpired = () => {
+    return Date.now() >= tokenStore.updated_at + tokenStore.expires_in * 1000
+}
+
+const refreshToken = async () => {
+    const result = await hubspotClient.oauth.tokensApi.getTokens(
+        REFRESH_TOKEN,
+        undefined,
+        undefined,
+        CLIENT_ID,
+        CLIENT_SECRET,
+        tokenStore.refresh_token,
+    )
+    tokenStore = result.body
+    tokenStore.updated_at = Date.now()
+    console.log('Updated tokens', tokenStore)
+
+    hubspotClient.setAccessToken(tokenStore.access_token)
+}
+
+const checkAuthorization = async (req, res, next) => {
     if (_.startsWith(req.url, '/error')) return next()
     if (_.startsWith(req.url, '/login')) return next()
     if (!isAuthorized()) return res.redirect('/login')
+    if (isTokenExpired()) await refreshToken()
 
     next()
 }
@@ -113,7 +136,7 @@ const getCompaniesByDomain = async (domain) => {
             },
         ],
         sorts: [],
-        limit: 30,
+        limit: OBJECTS_LIMIT,
         after: 0,
         properties: [],
     }
@@ -412,6 +435,7 @@ app.get('/oauth-callback', async (req, res) => {
     logResponse(tokenStoreResult)
 
     tokenStore = tokenStoreResult.response.body
+    tokenStore.updated_at = Date.now()
 
     // Set token for the
     // https://www.npmjs.com/package/hubspot
