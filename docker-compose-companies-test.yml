@@ -1,15 +1,14 @@
-version: '2'
-
+version: "3"
 services:
   web:
+    environment:
+      - USE_SELENIUM_SERVER=true
     env_file:
-      - sample-apps/companies-app/src/.env
+      - sample-apps/companies-app/src/.env-test
     build:
       context: .
-      dockerfile: Dockerfile-companies
+      dockerfile: Dockerfile-companies-test
     volumes:
       - ./sample-apps/companies-app/src:/companies-sample-app/sample-apps/companies-app/src
       - /companies-sample-app/sample-apps/companies-app/src/node_modules
-    ports:
-      - 3000:3000
-    command: npm run dev
+    command: bash ./start-tests.sh

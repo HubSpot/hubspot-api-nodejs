@@ -80,60 +80,50 @@ const createAssociation = async (companyId, contactId) => {
 }
 
 const restoreEnvironment = async () => {
-    try {
-        console.log('Archiving companies created for tests')
-        const companiesIdsToArchive = await getObjectsIdsCreatedForTests(
-            COMPANY_OBJECT_TYPE,
-            'companies.sample.test.com',
-            COMPANIES_TO_CREATE[0].properties.description,
-        )
-        await hubspotClient.crm.objects.batchApi.archiveBatch(COMPANY_OBJECT_TYPE, { inputs: companiesIdsToArchive })
+    console.log('Archiving companies created for tests')
+    const companiesIdsToArchive = await getObjectsIdsCreatedForTests(
+        COMPANY_OBJECT_TYPE,
+        'companies.sample.test.com',
+        COMPANIES_TO_CREATE[0].properties.description,
+    )
+    await hubspotClient.crm.objects.batchApi.archiveBatch(COMPANY_OBJECT_TYPE, { inputs: companiesIdsToArchive })
 
-        console.log('Archiving contacts created for tests')
-        const contactsIdsToArchive = await getObjectsIdsCreatedForTests(
-            CONTACT_OBJECT_TYPE,
-            CONTACTS_TO_CREATE[0].properties.firstname,
-        )
-        await hubspotClient.crm.objects.batchApi.archiveBatch(CONTACT_OBJECT_TYPE, { inputs: contactsIdsToArchive })
-    } catch (e) {
-        console.log(e)
-        throw e
-    }
+    console.log('Archiving contacts created for tests')
+    const contactsIdsToArchive = await getObjectsIdsCreatedForTests(
+        CONTACT_OBJECT_TYPE,
+        CONTACTS_TO_CREATE[0].properties.firstname,
+    )
+    await hubspotClient.crm.objects.batchApi.archiveBatch(CONTACT_OBJECT_TYPE, { inputs: contactsIdsToArchive })
 }
 
 exports.initializeEnvironment = async () => {
-    try {
-        await restoreEnvironment()
+    await restoreEnvironment()
 
-        console.log('Creating contacts for tests')
-        const createContactsResponse = await hubspotClient.crm.objects.batchApi.createBatch(CONTACT_OBJECT_TYPE, {
-            inputs: CONTACTS_TO_CREATE,
-        })
+    console.log('Creating contacts for tests')
+    const createContactsResponse = await hubspotClient.crm.objects.batchApi.createBatch(CONTACT_OBJECT_TYPE, {
+        inputs: CONTACTS_TO_CREATE,
+    })
 
-        console.log('Creating companies for tests')
-        const createCompaniesResponse = await hubspotClient.crm.objects.batchApi.createBatch(COMPANY_OBJECT_TYPE, {
-            inputs: COMPANIES_TO_CREATE,
-        })
+    console.log('Creating companies for tests')
+    const createCompaniesResponse = await hubspotClient.crm.objects.batchApi.createBatch(COMPANY_OBJECT_TYPE, {
+        inputs: COMPANIES_TO_CREATE,
+    })
 
-        console.log(
-            `Creating association between company [${COMPANIES_TO_CREATE[0].properties.name}] and contact [${CONTACTS_TO_CREATE[0].properties.email}]`,
-        )
+    console.log(
+        `Creating association between company [${COMPANIES_TO_CREATE[0].properties.name}] and contact [${CONTACTS_TO_CREATE[0].properties.email}]`,
+    )
 
-        const companyId = _.chain(createCompaniesResponse.body.results)
-            .find({ properties: { name: COMPANIES_TO_CREATE[0].properties.name } })
-            .get('id')
-            .value()
+    const companyId = _.chain(createCompaniesResponse.body.results)
+        .find({ properties: { name: COMPANIES_TO_CREATE[0].properties.name } })
+        .get('id')
+        .value()
 
-        const contactId = _.chain(createContactsResponse.body.results)
-            .find({ properties: { lastname: CONTACTS_TO_CREATE[0].properties.lastname } })
-            .get('id')
-            .value()
+    const contactId = _.chain(createContactsResponse.body.results)
+        .find({ properties: { lastname: CONTACTS_TO_CREATE[0].properties.lastname } })
+        .get('id')
+        .value()
 
-        await createAssociation(companyId, contactId)
-    } catch (e) {
-        console.log(e)
-        throw e
-    }
+    await createAssociation(companyId, contactId)
 }
 
 exports.restoreEnvironment = restoreEnvironment

@@ -6,7 +6,7 @@ const expect = chai.expect
 const driverHelper = require('./helpers/driver-helper')
 const authorizationHelper = require('./helpers/authorization-helper')
 const environmentHelper = require('./helpers/environment-helper')
-const BASE_PATH = process.env.BASE_PATH
+const BASE_PATH = `http://localhost:3000`
 const companiesListFactory = require('./pages-factories/companies-list')
 const companyFactory = require('./pages-factories/company')
 const manageContactsFactory = require('./pages-factories/manage-contacts')
@@ -48,9 +48,14 @@ describe('companies-sample', () => {
     let driver
 
     before(async () => {
-        await environmentHelper.initializeEnvironment()
-        await authorizationHelper.tryToAuthorize()
-        driver = driverHelper.getDriver()
+        try {
+            await environmentHelper.initializeEnvironment()
+            driver = driverHelper.getDriver()
+            await authorizationHelper.tryToAuthorize(BASE_PATH)
+        } catch (e) {
+            console.log('Error received on test initialization:', e)
+            throw e
+        }
     })
 
     after(async () => {

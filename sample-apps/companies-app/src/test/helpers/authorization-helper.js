@@ -13,9 +13,9 @@ const verifyTitle = async (driver) => {
     }
 }
 
-exports.tryToAuthorize = async () => {
+exports.tryToAuthorize = async (basePath) => {
     const driver = driverHelper.getDriver()
-    await driver.get(`${process.env.BASE_PATH}/login`)
+    await driver.get(`${basePath}/login`)
     await verifyTitle(driver)
     let loginPage
 

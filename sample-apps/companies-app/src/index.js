@@ -1,5 +1,4 @@
-require('dotenv').config({ path: '.env' })
-
+require('./config')
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
