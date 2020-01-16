@@ -1,1 +1,1 @@
---require ./config.js
+--require ./config-test.js

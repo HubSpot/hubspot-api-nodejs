@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "./node_modules/.bin/mocha \"test/test-companies-app.js\" --timeout 50000 --exit"
   },
   "keywords": [
