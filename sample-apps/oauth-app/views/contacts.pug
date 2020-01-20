@@ -10,16 +10,16 @@ block content
       tbody
         tr
           td Access Token
-          td #{tokenStore.access_token || ''}
+          td #{tokenStore.accessToken || ''}
         tr
           td Refresh Token
-          td #{tokenStore.refresh_token || ''}
+          td #{tokenStore.refreshToken || ''}
         tr
           td Expires In
-          td #{tokenStore.expires_in || ''}
+          td #{tokenStore.expiresIn || ''}
         tr
           td Updated At
-          td #{tokenStore.updated_at ? new Date(tokenStore.updated_at) : ''}
+          td #{tokenStore.updatedAt ? new Date(tokenStore.updatedAt) : ''}
 
     h3 Contacts
     table

@@ -15,7 +15,6 @@ const GRANT_TYPES = {
     AUTHORIZATION_CODE: 'authorization_code',
     REFRESH_TOKEN: 'refresh_token',
 }
-const CONTACT_OBJECT_TYPE = 'contacts'
 
 let tokenStore = {}
 
@@ -34,11 +33,11 @@ const checkEnv = (req, res, next) => {
 }
 
 const isAuthorized = () => {
-    return !_.isEmpty(tokenStore.refresh_token)
+    return !_.isEmpty(tokenStore.refreshToken)
 }
 
 const isTokenExpired = () => {
-    return Date.now() >= tokenStore.updated_at + tokenStore.expires_in * 1000
+    return Date.now() >= tokenStore.updatedAt + tokenStore.expiresIn * 1000
 }
 
 const prepareContactsContent = (contacts) => {
@@ -56,19 +55,19 @@ const getFullName = (contactProperties) => {
 }
 
 const refreshToken = async () => {
-    const result = await hubspotClient.oauth.tokensApi.getTokens(
+    const result = await hubspotClient.oauth.defaultApi.createToken(
         GRANT_TYPES.REFRESH_TOKEN,
         undefined,
-        REDIRECT_URI,
+        undefined,
         CLIENT_ID,
         CLIENT_SECRET,
-        tokenStore.refresh_token,
+        tokenStore.refreshToken,
     )
     tokenStore = result.body
-    tokenStore.updated_at = Date.now()
+    tokenStore.updatedAt = Date.now()
     console.log('Updated tokens', tokenStore)
 
-    hubspotClient.setAccessToken(tokenStore.access_token)
+    hubspotClient.setAccessToken(tokenStore.accessToken)
 }
 
 const app = express()
@@ -103,15 +102,10 @@ app.get('/', async (req, res) => {
         const properties = ['firstname', 'lastname', 'company']
 
         // Get all contacts
-        // GET /crm/v3/objects/:objectType
+        // GET /crm/v3/objects/contacts
         // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-        console.log('Calling .crm.objects.basicApi.getPage. Retrieve contacts.')
-        const contactsResponse = await hubspotClient.crm.objects.basicApi.getPage(
-            CONTACT_OBJECT_TYPE,
-            undefined,
-            undefined,
-            properties,
-        )
+        console.log('Calling crm.contacts.basicApi.getPage. Retrieve contacts.')
+        const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(undefined, undefined, properties)
         logResponse('Response from API', contactsResponse)
 
         res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.body.results) })
@@ -138,7 +132,7 @@ app.use('/oauth-callback', async (req, res) => {
     // POST /oauth/v1/token
     // https://tools.hubteam.com/api-catalog/services/OAuthService/v1/spec/public?branch=master&swaggerVersion=3
     console.log('Retrieving access token by code:', code)
-    const getTokensResponse = await hubspotClient.oauth.tokensApi.getTokens(
+    const getTokensResponse = await hubspotClient.oauth.defaultApi.createToken(
         GRANT_TYPES.AUTHORIZATION_CODE,
         code,
         REDIRECT_URI,
@@ -148,11 +142,11 @@ app.use('/oauth-callback', async (req, res) => {
     logResponse('Retrieving access token result:', getTokensResponse)
 
     tokenStore = getTokensResponse.body
-    tokenStore.updated_at = Date.now()
+    tokenStore.updatedAt = Date.now()
 
     // Set token for the
     // https://www.npmjs.com/package/hubspot
-    hubspotClient.setAccessToken(tokenStore.access_token)
+    hubspotClient.setAccessToken(tokenStore.accessToken)
     res.redirect('/')
 })
 
