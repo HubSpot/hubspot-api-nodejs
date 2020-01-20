@@ -35,7 +35,7 @@ export class Property {
     /**
     * Controls how the property appears in HubSpot.
     */
-    'fieldType': Property.FieldTypeEnum;
+    'fieldType': string;
     /**
     * A description of the property that will be shown as help text in HubSpot.
     */
@@ -134,7 +134,7 @@ export class Property {
         {
             "name": "fieldType",
             "baseName": "fieldType",
-            "type": "Property.FieldTypeEnum"
+            "type": "string"
         },
         {
             "name": "description",
@@ -222,16 +222,3 @@ export class Property {
     }
 }
 
-export namespace Property {
-    export enum FieldTypeEnum {
-        Textarea = <any> 'textarea',
-        Text = <any> 'text',
-        Date = <any> 'date',
-        File = <any> 'file',
-        Number = <any> 'number',
-        Select = <any> 'select',
-        Radio = <any> 'radio',
-        Checkbox = <any> 'checkbox',
-        Booleancheckbox = <any> 'booleancheckbox'
-    }
-}

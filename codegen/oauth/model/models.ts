@@ -1,18 +1,16 @@
 export * from './accessTokenInfoResponse';
 export * from './errorDetail';
-export * from './jsonNode';
 export * from './modelError';
-export * from './refreshToken';
 export * from './refreshTokenInfoResponse';
+export * from './tokenResponseIF';
 
 import localVarRequest = require('request');
 
 import { AccessTokenInfoResponse } from './accessTokenInfoResponse';
 import { ErrorDetail } from './errorDetail';
-import { JsonNode } from './jsonNode';
 import { ModelError } from './modelError';
-import { RefreshToken } from './refreshToken';
 import { RefreshTokenInfoResponse } from './refreshTokenInfoResponse';
+import { TokenResponseIF } from './tokenResponseIF';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -27,16 +25,14 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
-        "JsonNode.NodeTypeEnum": JsonNode.NodeTypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
     "AccessTokenInfoResponse": AccessTokenInfoResponse,
     "ErrorDetail": ErrorDetail,
-    "JsonNode": JsonNode,
     "ModelError": ModelError,
-    "RefreshToken": RefreshToken,
     "RefreshTokenInfoResponse": RefreshTokenInfoResponse,
+    "TokenResponseIF": TokenResponseIF,
 }
 
 export class ObjectSerializer {

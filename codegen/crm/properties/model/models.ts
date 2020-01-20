@@ -56,7 +56,6 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "BatchResponseProperty.StatusEnum": BatchResponseProperty.StatusEnum,
-        "Property.FieldTypeEnum": Property.FieldTypeEnum,
         "PropertyCreate.TypeEnum": PropertyCreate.TypeEnum,
         "PropertyCreate.FieldTypeEnum": PropertyCreate.FieldTypeEnum,
         "PropertyUpdate.TypeEnum": PropertyUpdate.TypeEnum,
@@ -149,7 +148,7 @@ export class ObjectSerializer {
             // Get the actual type of this object
             type = this.findCorrectType(data, type);
 
-            // getAll the map for the correct type.
+            // get the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
             for (let index in attributeTypes) {

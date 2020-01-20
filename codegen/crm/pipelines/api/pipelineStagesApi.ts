@@ -269,6 +269,93 @@ export class PipelineStagesApi {
         });
     }
     /**
+     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
+     * @summary Return all stages of a pipeline
+     * @param objectType 
+     * @param pipelineId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public async getAll (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }> {
+        const localVarPath = this.basePath + '/{objectType}/{pipelineId}/stages'
+            .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
+            .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json', '*/*'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'objectType' is not null or undefined
+        if (objectType === null || objectType === undefined) {
+            throw new Error('Required parameter objectType was null or undefined when calling getAll.');
+        }
+
+        // verify required parameter 'pipelineId' is not null or undefined
+        if (pipelineId === null || pipelineId === undefined) {
+            throw new Error('Required parameter pipelineId was null or undefined when calling getAll.');
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        }
+        if (this.authentications.oauth2.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "CollectionResponsePipelineStage");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
      * Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
      * @summary Return a pipeline stage by ID
      * @param objectType 
@@ -352,93 +439,6 @@ export class PipelineStagesApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "PipelineStage");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Return all the stages associated with the pipeline identified by `{pipelineId}`.
-     * @summary Return all stages of a pipeline
-     * @param objectType 
-     * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
-     */
-    public async getPage (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }> {
-        const localVarPath = this.basePath + '/{objectType}/{pipelineId}/stages'
-            .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
-            .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json', '*/*'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'objectType' is not null or undefined
-        if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling getPage.');
-        }
-
-        // verify required parameter 'pipelineId' is not null or undefined
-        if (pipelineId === null || pipelineId === undefined) {
-            throw new Error('Required parameter pipelineId was null or undefined when calling getPage.');
-        }
-
-        if (archived !== undefined) {
-            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponsePipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

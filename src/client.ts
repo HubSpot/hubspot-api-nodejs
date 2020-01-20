@@ -1,66 +1,172 @@
-import http = require('http');
+import http = require('http')
 import * as _ from 'lodash'
 import * as qs from 'querystring'
-import request = require('request');
+import request = require('request')
 import { Response } from 'request'
 // @ts-ignore
 import * as pJson from '../../package.json'
+import { BatchApi as AssociationsBatchApi } from '../codegen/crm/associations/api'
 import {
-    AssociationsApi,
-    BasicApi,
-    BatchApi as BatchObjectsApi,
-    CreateNativeObjectsApi,
-    SearchApi,
-} from '../codegen/crm/objects/api'
-import { ApiKeyAuth, DefaultApi, OAuth } from '../codegen/crm/owners/api'
+    AssociationsApi as CompaniesAssociationsApi,
+    BasicApi as CompaniesBasicApi,
+    BatchApi as CompaniesBatchApi,
+    SearchApi as CompaniesSearchApi,
+} from '../codegen/crm/companies/api'
+import {
+    AssociationsApi as ContactsAssociationsApi,
+    BasicApi as ContactsBasicApi,
+    BatchApi as ContactsBatchApi,
+    SearchApi as ContactsSearchApi,
+} from '../codegen/crm/contacts/api'
+import {
+    AssociationsApi as DealsAssociationsApi,
+    BasicApi as DealsBasicApi,
+    BatchApi as DealsBatchApi,
+    SearchApi as DealsSearchApi,
+} from '../codegen/crm/deals/api'
+import { DefaultApi as CardsDefaultApi } from '../codegen/crm/extensions/cards/api'
+import {
+    AssociationsApi as LineItemsAssociationsApi,
+    BasicApi as LineItemsBasicApi,
+    BatchApi as LineItemsBatchApi,
+    SearchApi as LineItemsSearchApi,
+} from '../codegen/crm/line_items/api'
+import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
-import { BatchApi, CoreApi, GroupsApi } from '../codegen/crm/properties/api'
-import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../codegen/oauth/api'
+import {
+    AssociationsApi as ProductsAssociationsApi,
+    BasicApi as ProductsBasicApi,
+    BatchApi as ProductsBatchApi,
+    SearchApi as ProductsSearchApi,
+} from '../codegen/crm/products/api'
+import {
+    BatchApi as PropertiesBatchApi,
+    CoreApi as PropertiesCoreApi,
+    GroupsApi as PropertiesGroupsApi,
+} from '../codegen/crm/properties/api'
+import {
+    AssociationsApi as QuotesAssociationsApi,
+    BasicApi as QuotesBasicApi,
+    BatchApi as QuotesBatchApi,
+    SearchApi as QuotesSearchApi,
+} from '../codegen/crm/quotes/api'
+import {
+    AssociationsApi as TicketsAssociationsApi,
+    BasicApi as TicketsBasicApi,
+    BatchApi as TicketsBatchApi,
+    SearchApi as TicketsSearchApi,
+} from '../codegen/crm/tickets/api'
+
+import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
 
 export class Client {
     public oauth: {
-        accessTokensApi: AccessTokensApi,
-        refreshTokensApi: RefreshTokensApi,
-        tokensApi: TokensApi,
+        defaultApi: OauthDefaultApi,
         getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
     }
     public crm: {
-        objects: {
-            associationsApi: AssociationsApi
-            basicApi: BasicApi
-            batchApi: BatchObjectsApi
-            createNativeObjectsApi: CreateNativeObjectsApi
-            searchApi: SearchApi
-        }
+        associations: {
+            batchApi: AssociationsBatchApi
+        },
+        companies: {
+            associationsApi: CompaniesAssociationsApi,
+            basicApi: CompaniesBasicApi,
+            batchApi: CompaniesBatchApi,
+            searchApi: CompaniesSearchApi
+        },
+        contacts: {
+            associationsApi: ContactsAssociationsApi,
+            basicApi: ContactsBasicApi,
+            batchApi: ContactsBatchApi,
+            searchApi: ContactsSearchApi
+        },
+        deals: {
+            associationsApi: DealsAssociationsApi,
+            basicApi: DealsBasicApi,
+            batchApi: DealsBatchApi,
+            searchApi: DealsSearchApi
+        },
+        extensions: {
+            cards: {
+                defaultApi: CardsDefaultApi
+            },
+        },
+        line_items: {
+            associationsApi: LineItemsAssociationsApi,
+            basicApi: LineItemsBasicApi,
+            batchApi: LineItemsBatchApi,
+            searchApi: LineItemsSearchApi
+        },
         owners: {
-            defaultApi: DefaultApi
-        }
+            defaultApi: OwnersDefaultApi
+        },
         pipelines: {
-            pipelinesApi: PipelinesApi
+            pipelinesApi: PipelinesApi,
             pipelineStagesApi: PipelineStagesApi
-        }
+        },
+        products: {
+            associationsApi: ProductsAssociationsApi,
+            basicApi: ProductsBasicApi,
+            batchApi: ProductsBatchApi,
+            searchApi: ProductsSearchApi
+        },
         properties: {
-            batchApi: BatchApi
-            coreApi: CoreApi
-            groupsApi: GroupsApi
+            batchApi: PropertiesBatchApi,
+            coreApi: PropertiesCoreApi,
+            groupsApi: PropertiesGroupsApi
+        },
+        quotes: {
+            associationsApi: QuotesAssociationsApi,
+            basicApi: QuotesBasicApi,
+            batchApi: QuotesBatchApi,
+            searchApi: QuotesSearchApi
+        },
+        tickets: {
+            associationsApi: TicketsAssociationsApi,
+            basicApi: TicketsBasicApi,
+            batchApi: TicketsBatchApi,
+            searchApi: TicketsSearchApi
         }
     }
-    protected _associationsApi: AssociationsApi
-    protected _basicApi: BasicApi
-    protected _batchObjectsApi: BatchObjectsApi
-    protected _createNativeObjectsApi: CreateNativeObjectsApi
-    protected _searchApi: SearchApi
-    protected _defaultApi: DefaultApi
+    protected _oauthDefaultApi: OauthDefaultApi
+    protected _associationsBatchApi: AssociationsBatchApi
+    protected _companiesAssociationsApi: CompaniesAssociationsApi
+    protected _companiesBasicApi: CompaniesBasicApi
+    protected _companiesBatchApi: CompaniesBatchApi
+    protected _companiesSearchApi: CompaniesSearchApi
+    protected _contactsAssociationsApi: ContactsAssociationsApi
+    protected _contactsBasicApi: ContactsBasicApi
+    protected _contactsBatchApi: ContactsBatchApi
+    protected _contactsSearchApi: ContactsSearchApi
+    protected _dealsAssociationsApi: DealsAssociationsApi
+    protected _dealsBasicApi: DealsBasicApi
+    protected _dealsBatchApi: DealsBatchApi
+    protected _dealsSearchApi: DealsSearchApi
+    protected _cardsDefaultApi: CardsDefaultApi
+    protected _lineItemsAssociationsApi: LineItemsAssociationsApi
+    protected _lineItemsBasicApi: LineItemsBasicApi
+    protected _lineItemsBatchApi: LineItemsBatchApi
+    protected _lineItemsSearchApi: LineItemsSearchApi
+    protected _ownersDefaultApi: OwnersDefaultApi
     protected _pipelinesApi: PipelinesApi
     protected _pipelineStagesApi: PipelineStagesApi
-    protected _batchApi: BatchApi
-    protected _coreApi: CoreApi
-    protected _groupsApi: GroupsApi
-    protected _accessTokensApi: AccessTokensApi
-    protected _refreshTokensApi: RefreshTokensApi
-    protected _tokensApi: TokensApi
+    protected _productsAssociationsApi: ProductsAssociationsApi
+    protected _productsBasicApi: ProductsBasicApi
+    protected _productsBatchApi: ProductsBatchApi
+    protected _productsSearchApi: ProductsSearchApi
+    protected _propertiesBatchApi: PropertiesBatchApi
+    protected _propertiesCoreApi: PropertiesCoreApi
+    protected _propertiesGroupsApi: PropertiesGroupsApi
+    protected _quotesAssociationsApi: QuotesAssociationsApi
+    protected _quotesBasicApi: QuotesBasicApi
+    protected _quotesBatchApi: QuotesBatchApi
+    protected _quotesSearchApi: QuotesSearchApi
+    protected _ticketsAssociationsApi: TicketsAssociationsApi
+    protected _ticketsBasicApi: TicketsBasicApi
+    protected _ticketsBatchApi: TicketsBatchApi
+    protected _ticketsSearchApi: TicketsSearchApi
     protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
@@ -72,6 +178,7 @@ export class Client {
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
     }
+
     constructor(
         options: {
             apiKey?: string
@@ -84,69 +191,158 @@ export class Client {
             defaultHeaders?: object
         } = {},
     ) {
-        this._associationsApi = new AssociationsApi()
-        this._basicApi = new BasicApi()
-        this._batchObjectsApi = new BatchObjectsApi()
-        this._createNativeObjectsApi = new CreateNativeObjectsApi()
-        this._searchApi = new SearchApi()
-        this._defaultApi = new DefaultApi()
+        this._oauthDefaultApi = new OauthDefaultApi()
+        this._associationsBatchApi = new AssociationsBatchApi()
+        this._companiesAssociationsApi = new CompaniesAssociationsApi()
+        this._companiesBasicApi = new CompaniesBasicApi()
+        this._companiesBatchApi = new CompaniesBatchApi()
+        this._companiesSearchApi = new CompaniesSearchApi()
+        this._contactsAssociationsApi = new ContactsAssociationsApi()
+        this._contactsBasicApi = new ContactsBasicApi()
+        this._contactsBatchApi = new ContactsBatchApi()
+        this._contactsSearchApi = new ContactsSearchApi()
+        this._dealsAssociationsApi = new DealsAssociationsApi()
+        this._dealsBasicApi = new DealsBasicApi()
+        this._dealsBatchApi = new DealsBatchApi()
+        this._dealsSearchApi = new DealsSearchApi()
+        this._cardsDefaultApi = new CardsDefaultApi()
+        this._lineItemsAssociationsApi = new LineItemsAssociationsApi()
+        this._lineItemsBasicApi = new LineItemsBasicApi()
+        this._lineItemsBatchApi = new LineItemsBatchApi()
+        this._lineItemsSearchApi = new LineItemsSearchApi()
+        this._ownersDefaultApi = new OwnersDefaultApi()
         this._pipelinesApi = new PipelinesApi()
         this._pipelineStagesApi = new PipelineStagesApi()
-        this._batchApi = new BatchApi()
-        this._coreApi = new CoreApi()
-        this._groupsApi = new GroupsApi()
-        this._accessTokensApi = new AccessTokensApi()
-        this._refreshTokensApi = new RefreshTokensApi()
-        this._tokensApi = new TokensApi()
+        this._productsAssociationsApi = new ProductsAssociationsApi()
+        this._productsBasicApi = new ProductsBasicApi()
+        this._productsBatchApi = new ProductsBatchApi()
+        this._productsSearchApi = new ProductsSearchApi()
+        this._propertiesBatchApi = new PropertiesBatchApi()
+        this._propertiesCoreApi = new PropertiesCoreApi()
+        this._propertiesGroupsApi = new PropertiesGroupsApi()
+        this._quotesAssociationsApi = new QuotesAssociationsApi()
+        this._quotesBasicApi = new QuotesBasicApi()
+        this._quotesBatchApi = new QuotesBatchApi()
+        this._quotesSearchApi = new QuotesSearchApi()
+        this._ticketsAssociationsApi = new TicketsAssociationsApi()
+        this._ticketsBasicApi = new TicketsBasicApi()
+        this._ticketsBatchApi = new TicketsBatchApi()
+        this._ticketsSearchApi = new TicketsSearchApi()
         this._apiClientsWithAuth = [
-            this._associationsApi,
-            this._basicApi,
-            this._batchObjectsApi,
-            this._createNativeObjectsApi,
-            this._searchApi,
-            this._defaultApi,
+            this._associationsBatchApi,
+            this._companiesAssociationsApi,
+            this._companiesBasicApi,
+            this._companiesBatchApi,
+            this._companiesSearchApi,
+            this._contactsAssociationsApi,
+            this._contactsBasicApi,
+            this._contactsBatchApi,
+            this._contactsSearchApi,
+            this._dealsAssociationsApi,
+            this._dealsBasicApi,
+            this._dealsBatchApi,
+            this._dealsSearchApi,
+            this._cardsDefaultApi,
+            this._lineItemsAssociationsApi,
+            this._lineItemsBasicApi,
+            this._lineItemsBatchApi,
+            this._lineItemsSearchApi,
+            this._ownersDefaultApi,
             this._pipelinesApi,
             this._pipelineStagesApi,
-            this._batchApi,
-            this._coreApi,
-            this._groupsApi
+            this._productsAssociationsApi,
+            this._productsBasicApi,
+            this._productsBatchApi,
+            this._productsSearchApi,
+            this._propertiesBatchApi,
+            this._propertiesCoreApi,
+            this._propertiesGroupsApi,
+            this._quotesAssociationsApi,
+            this._quotesBasicApi,
+            this._quotesBatchApi,
+            this._quotesSearchApi,
+            this._ticketsAssociationsApi,
+            this._ticketsBasicApi,
+            this._ticketsBatchApi,
+            this._ticketsSearchApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
-        this._apiClients.push(this._accessTokensApi, this._refreshTokensApi, this._tokensApi)
+        this._apiClients.push(this._oauthDefaultApi)
         this._setUseQuerystring(true)
         this._setOptions(options)
         this.crm = {
-            objects: {
-                associationsApi: this._associationsApi,
-                basicApi: this._basicApi,
-                batchApi: this._batchObjectsApi,
-                createNativeObjectsApi: this._createNativeObjectsApi,
-                searchApi: this._searchApi,
+            associations: {
+                batchApi: this._associationsBatchApi,
+            },
+            companies: {
+                associationsApi: this._companiesAssociationsApi,
+                basicApi: this._companiesBasicApi,
+                batchApi: this._companiesBatchApi,
+                searchApi: this._companiesSearchApi,
+            },
+            contacts: {
+                associationsApi: this._contactsAssociationsApi,
+                basicApi: this._contactsBasicApi,
+                batchApi: this._contactsBatchApi,
+                searchApi: this._contactsSearchApi,
+            },
+            deals: {
+                associationsApi: this._dealsAssociationsApi,
+                basicApi: this._dealsBasicApi,
+                batchApi: this._dealsBatchApi,
+                searchApi: this._dealsSearchApi,
+            },
+            extensions: {
+                cards: {
+                    defaultApi: this._cardsDefaultApi,
+                },
+            },
+            line_items: {
+                associationsApi: this._lineItemsAssociationsApi,
+                basicApi: this._lineItemsBasicApi,
+                batchApi: this._lineItemsBatchApi,
+                searchApi: this._lineItemsSearchApi,
             },
             owners: {
-                defaultApi: this._defaultApi,
+                defaultApi: this._ownersDefaultApi,
             },
             pipelines: {
-                pipelineStagesApi: this._pipelineStagesApi,
                 pipelinesApi: this._pipelinesApi,
+                pipelineStagesApi: this._pipelineStagesApi,
+            },
+            products: {
+                associationsApi: this._productsAssociationsApi,
+                basicApi: this._productsBasicApi,
+                batchApi: this._productsBatchApi,
+                searchApi: this._productsSearchApi,
             },
             properties: {
-                batchApi: this._batchApi,
-                coreApi: this._coreApi,
-                groupsApi: this._groupsApi
+                batchApi: this._propertiesBatchApi,
+                coreApi: this._propertiesCoreApi,
+                groupsApi: this._propertiesGroupsApi,
+            },
+            quotes: {
+                associationsApi: this._quotesAssociationsApi,
+                basicApi: this._quotesBasicApi,
+                batchApi: this._quotesBatchApi,
+                searchApi: this._quotesSearchApi,
+            },
+            tickets: {
+                associationsApi: this._ticketsAssociationsApi,
+                basicApi: this._ticketsBasicApi,
+                batchApi: this._ticketsBatchApi,
+                searchApi: this._ticketsSearchApi,
             },
         }
         this.oauth = {
-            accessTokensApi: this._accessTokensApi,
-            refreshTokensApi: this._refreshTokensApi,
-            tokensApi: this._tokensApi,
-            getAuthorizationUrl: this._getAuthorizationUrl.bind(this)
+            defaultApi: this._oauthDefaultApi,
+            getAuthorizationUrl: this._getAuthorizationUrl.bind(this),
         }
     }
 
     public setApiKey(apiKeyToSet: string) {
         this._apiKey = apiKeyToSet
-        this.authentications.hapikey.apiKey = apiKeyToSet;
+        this.authentications.hapikey.apiKey = apiKeyToSet
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.setApiKey(0, apiKeyToSet)
         })
@@ -158,30 +354,62 @@ export class Client {
         }
 
         this._basePath = basePathToSet
-        const objectsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const oauthBasePath = `${basePathToSet}/oauth`.replace(/\/+$/, '')
+        const associationsBasePath = `${basePathToSet}/crm/v3/associations`.replace(/\/+$/, '')
+        const companiesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const contactsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const dealsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const cardsBasePath = `${basePathToSet}/crm/v3/extensions`.replace(/\/+$/, '')
+        const lineItemsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const ownersBasePath = `${basePathToSet}/crm/v3/owners`.replace(/\/+$/, '')
         const pipelinesBasePath = `${basePathToSet}/crm/v3/pipelines`.replace(/\/+$/, '')
+        const productsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const propertiesBasePath = `${basePathToSet}/crm/v3/properties`.replace(/\/+$/, '')
-        const oauthBasePath = `${basePathToSet}/oauth`.replace(/\/+$/, '')
-        this._associationsApi.basePath = objectsBasePath
-        this._basicApi.basePath = objectsBasePath
-        this._batchObjectsApi.basePath = objectsBasePath
-        this._createNativeObjectsApi.basePath = objectsBasePath
-        this._searchApi.basePath = objectsBasePath
-        this._defaultApi.basePath = ownersBasePath
+        const quotesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const ticketsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+
+        this._oauthDefaultApi.basePath = oauthBasePath
+        this._associationsBatchApi.basePath = associationsBasePath
+        this._companiesAssociationsApi.basePath = companiesBasePath
+        this._companiesBasicApi.basePath = companiesBasePath
+        this._companiesBatchApi.basePath = companiesBasePath
+        this._companiesSearchApi.basePath = companiesBasePath
+        this._contactsAssociationsApi.basePath = contactsBasePath
+        this._contactsBasicApi.basePath = contactsBasePath
+        this._contactsBatchApi.basePath = contactsBasePath
+        this._contactsSearchApi.basePath = contactsBasePath
+        this._dealsAssociationsApi.basePath = dealsBasePath
+        this._dealsBasicApi.basePath = dealsBasePath
+        this._dealsBatchApi.basePath = dealsBasePath
+        this._dealsSearchApi.basePath = dealsBasePath
+        this._cardsDefaultApi.basePath = cardsBasePath
+        this._lineItemsAssociationsApi.basePath = lineItemsBasePath
+        this._lineItemsBasicApi.basePath = lineItemsBasePath
+        this._lineItemsBatchApi.basePath = lineItemsBasePath
+        this._lineItemsSearchApi.basePath = lineItemsBasePath
+        this._ownersDefaultApi.basePath = ownersBasePath
         this._pipelinesApi.basePath = pipelinesBasePath
         this._pipelineStagesApi.basePath = pipelinesBasePath
-        this._batchApi.basePath = propertiesBasePath
-        this._coreApi.basePath = propertiesBasePath
-        this._accessTokensApi.basePath = oauthBasePath
-        this._refreshTokensApi.basePath = oauthBasePath
-        this._tokensApi.basePath = oauthBasePath
-
+        this._productsAssociationsApi.basePath = productsBasePath
+        this._productsBasicApi.basePath = productsBasePath
+        this._productsBatchApi.basePath = productsBasePath
+        this._productsSearchApi.basePath = productsBasePath
+        this._propertiesBatchApi.basePath = propertiesBasePath
+        this._propertiesCoreApi.basePath = propertiesBasePath
+        this._propertiesGroupsApi.basePath = propertiesBasePath
+        this._quotesAssociationsApi.basePath = quotesBasePath
+        this._quotesBasicApi.basePath = quotesBasePath
+        this._quotesBatchApi.basePath = quotesBasePath
+        this._quotesSearchApi.basePath = quotesBasePath
+        this._ticketsAssociationsApi.basePath = ticketsBasePath
+        this._ticketsBasicApi.basePath = ticketsBasePath
+        this._ticketsBatchApi.basePath = ticketsBasePath
+        this._ticketsSearchApi.basePath = ticketsBasePath
     }
 
     public setAccessToken(accessTokenToSet: string) {
         this._accessToken = accessTokenToSet
-        this.authentications.oauth2.accessToken = accessTokenToSet;
+        this.authentications.oauth2.accessToken = accessTokenToSet
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.accessToken = accessTokenToSet
         })
@@ -218,7 +446,7 @@ export class Client {
         }
     }
 
-    public apiRequest(opts: any): Promise<{ response: http.IncomingMessage; body?: any;}> {
+    public apiRequest(opts: any): Promise<{ response: http.IncomingMessage; body?: any; }> {
         const params = _.cloneDeep(opts)
         params.method = params.method || 'GET'
         params.json = true
@@ -234,32 +462,32 @@ export class Client {
         params.headers = _.assign({}, opts.headers, this._defaultHeaders)
 
         if (this.authentications.hapikey.apiKey) {
-            this.authentications.hapikey.applyToRequest(params);
+            this.authentications.hapikey.applyToRequest(params)
         }
         if (this.authentications.oauth2.accessToken) {
-            this.authentications.oauth2.applyToRequest(params);
+            this.authentications.oauth2.applyToRequest(params)
         }
 
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any; }>((resolve, reject) => {
             request(params, (error: any, response: Response, body: any) => {
                 if (error) {
-                    reject(error);
+                    reject(error)
                 } else {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response, body });
+                        resolve({ response, body })
                     } else {
-                        reject({ response, body });
+                        reject({ response, body })
                     }
                 }
-            });
-        });
+            })
+        })
     }
 
     protected _getAuthorizationUrl(clientId: string, redirectUri: string, scopes: string): string {
         const params = {
             client_id: clientId,
             redirect_uri: redirectUri,
-            scopes
+            scopes,
         }
         return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
     }

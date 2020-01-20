@@ -17,9 +17,9 @@ export class BatchResponseProperty {
     'numErrors'?: number;
     'errors': Array<Error>;
     'status': BatchResponseProperty.StatusEnum;
-    'requestedAt'?: Date;
-    'startedAt': Date;
-    'completedAt': Date;
+    'requestedAt'?: string;
+    'startedAt': string;
+    'completedAt': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,17 +47,17 @@ export class BatchResponseProperty {
         {
             "name": "requestedAt",
             "baseName": "requestedAt",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "startedAt",
             "baseName": "startedAt",
-            "type": "Date"
+            "type": "string"
         },
         {
             "name": "completedAt",
             "baseName": "completedAt",
-            "type": "Date"
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
