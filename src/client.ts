@@ -93,7 +93,7 @@ export class Client {
                 defaultApi: CardsDefaultApi
             },
         },
-        line_items: {
+        lineItems: {
             associationsApi: LineItemsAssociationsApi,
             basicApi: LineItemsBasicApi,
             batchApi: LineItemsBatchApi,
@@ -297,7 +297,7 @@ export class Client {
                     defaultApi: this._cardsDefaultApi,
                 },
             },
-            line_items: {
+            lineItems: {
                 associationsApi: this._lineItemsAssociationsApi,
                 basicApi: this._lineItemsBasicApi,
                 batchApi: this._lineItemsBatchApi,
