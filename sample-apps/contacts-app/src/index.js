@@ -172,10 +172,10 @@ app.post('/contacts', async (req, res) => {
             const properties = req.body
 
             // Create a contact
-            // POST /crm/v3/objects/:objectType/
+            // POST /crm/v3/objects/contacts/
             // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-            console.log('Calling crm.objects.basicApi.create API method. Create new contact')
-            const createResponse = await hubspotClient.crm.objects.basicApi.create(CONTACT_OBJECT_TYPE, { properties })
+            console.log('Calling crm.contacts.basicApi.create API method. Create new contact')
+            const createResponse = await hubspotClient.crm.contacts.basicApi.create({ properties })
             logResponse(createResponse)
 
             res.redirect('/contacts')
@@ -194,10 +194,10 @@ app.post('/contacts/:id', async (req, res) => {
             const properties = req.body
 
             // Update a contact
-            // POST /crm/v3/objects/:objectType/:objectId
+            // POST /crm/v3/objects/contacts/:objectId
             // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-            console.log('Calling crm.objects.basicApi.update API method. Update contact with id:', id)
-            const updateResponse = await hubspotClient.crm.objects.basicApi.update(CONTACT_OBJECT_TYPE, id, { properties })
+            console.log('Calling crm.contacts.basicApi.update API method. Update contact with id:', id)
+            const updateResponse = await hubspotClient.crm.contacts.basicApi.update(id, { properties })
             logResponse(updateResponse)
 
             res.redirect('/contacts')
@@ -215,33 +215,31 @@ app.get('/contacts', async (req, res) => {
         const properties = ['firstname', 'lastname', 'company']
         if (_.isNil(query)) {
             // Get all contacts
-            // GET /crm/v3/objects/:objectType
+            // GET /crm/v3/objects/contacts
             // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-            console.log('Calling crm.objects.basicApi.getPage API method. Retrieve contacts')
-            contactsResponse = await hubspotClient.crm.objects.basicApi.getPage(
-                CONTACT_OBJECT_TYPE,
-                CONTACTS_LIMIT,
-                undefined,
-                properties,
-            )
+            console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
+            contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(CONTACTS_LIMIT, undefined, properties)
             logResponse(contactsResponse)
         } else {
             // Search for contacts by email, name, or company name
-            // POST /crm/v3/objects/:objectType/search
+            // POST /crm/v3/objects/contacts/search
             // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
             console.log(
-                'Calling crm.objects.searchApi.doSearch API method. Retrieve contacts with search query:',
+                'Calling crm.contacts.searchApi.doSearch API method. Retrieve contacts with search query:',
                 query,
             )
-            contactsResponse = await hubspotClient.crm.objects.searchApi.doSearch(CONTACT_OBJECT_TYPE, {
+            contactsResponse = await hubspotClient.crm.contacts.searchApi.doSearch({
                 query,
                 limit: CONTACTS_LIMIT,
                 properties,
+                filterGroups: [],
+                after: 0,
+                sorts: [],
             })
             logResponse(contactsResponse)
         }
 
-        res.render('contacts', { contacts: prepareContactsContent(contactsResponse.response.body.results), query })
+        res.render('contacts', { contacts: prepareContactsContent(contactsResponse.body.results), query })
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
@@ -289,14 +287,10 @@ app.get('/contacts/:id', async (req, res) => {
         const contactPropertiesNames = _.map(propertiesResponse.body.results, 'name')
 
         // Get a contact record by its id
-        // GET /crm/v3/objects/:objectType/:objectId
+        // GET /crm/v3/objects/contacts/:objectId
         // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-        console.log('Calling crm.objects.basicApi.getById API method. Retrieve a contact by id:', id)
-        const contactResponse = await hubspotClient.crm.objects.basicApi.getById(
-            CONTACT_OBJECT_TYPE,
-            id,
-            contactPropertiesNames,
-        )
+        console.log('Calling crm.contacts.basicApi.getById API method. Retrieve a contact by id:', id)
+        const contactResponse = await hubspotClient.crm.contacts.basicApi.getById(id, contactPropertiesNames)
         logResponse(contactResponse)
 
         // Get List of Owners
@@ -309,9 +303,8 @@ app.get('/contacts/:id', async (req, res) => {
         // Get Associated Engagements
         // GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType
         // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
-        console.log('Calling crm.objects.associationsApi.getAssociations API method. Retrieve all contact engagements')
-        const hubspotEngagementsResponse = await hubspotClient.crm.objects.associationsApi.getAssociations(
-            CONTACT_OBJECT_TYPE,
+        console.log('Calling crm.contacts.associationsApi.getAssociations API method. Retrieve all contact engagements')
+        const hubspotEngagementsResponse = await hubspotClient.crm.contacts.associationsApi.getAssociations(
             id,
             ENGAGEMENT_OBJECT_TYPE,
         )
@@ -377,7 +370,7 @@ app.post('/contacts/:id/engagement', async (req, res) => {
 app.get('/properties', async (req, res) => {
     try {
         // Get All Contacts Properties
-        // GET /crm/v3/properties/{objectType}
+        // GET /crm/v3/properties/:objectType
         // https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve all contacts properties')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(CONTACT_OBJECT_TYPE)
@@ -395,7 +388,7 @@ app.get('/properties', async (req, res) => {
 app.post('/properties', async (req, res) => {
     try {
         // Create a contact property
-        // POST /crm/v3/properties/{objectType}
+        // POST /crm/v3/properties/:objectType
         // https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public
         console.log('Calling crm.properties.coreApi.create API method. Create contact property')
         const result = await hubspotClient.crm.properties.coreApi.create(CONTACT_OBJECT_TYPE, req.body)
@@ -413,9 +406,9 @@ app.post('/properties/:name', async (req, res) => {
         const name = _.get(req, 'params.name')
 
         // Update a contact property
-        // PATCH /crm/v3/properties/{objectType}/{propertyName}
+        // PATCH /crm/v3/properties/:objectType/:propertyName
         // https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public
-        console.log('Calling contacts.properties.update API method. Update contact property, with name:', name)
+        console.log('Calling crm.properties.coreApi.update API method. Update contact property, with name:', name)
         const result = await hubspotClient.crm.properties.coreApi.update(CONTACT_OBJECT_TYPE, name, req.body)
         console.log('Response from API', result)
 
@@ -429,13 +422,13 @@ app.post('/properties/:name', async (req, res) => {
 app.get('/properties/new', async (req, res) => {
     try {
         // Get Contact Property Groups
-        // GET /properties/v1/contacts/groups
-        // https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
-        console.log('Calling apiRequest API method. Retrieve all contact property groups')
-        const groupsResponse = await hubspotClient.apiRequest({ path: `/properties/v1/contacts/groups` })
+        // GET //crm/v3/properties/:objectType/groups
+        // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fproperties
+        console.log('Calling crm.properties.groupsApi.getAll API method. Retrieve all contact property groups')
+        const groupsResponse = await hubspotClient.crm.properties.groupsApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(groupsResponse)
 
-        res.render('list', { items: getPropertyDetails(), action: '/properties', groups: groupsResponse.body })
+        res.render('list', { items: getPropertyDetails(), action: '/properties', groups: groupsResponse.body.results })
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
@@ -455,14 +448,18 @@ app.get('/properties/:name', async (req, res) => {
         logResponse(propertyResponse)
 
         // Get Contact Property Groups
-        // GET /properties/v1/contacts/groups
-        // https://developers.hubspot.com/docs/methods/contacts/v2/get_contact_property_groups
-        console.log('Calling apiRequest API method. Retrieve all contact property groups')
-        const groupsResponse = await hubspotClient.apiRequest({ path: `/properties/v1/contacts/groups` })
+        // GET //crm/v3/properties/:objectType/groups
+        // https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fproperties
+        console.log('Calling crm.properties.groupsApi.getAll API method. Retrieve all contact property groups')
+        const groupsResponse = await hubspotClient.crm.properties.groupsApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(groupsResponse)
 
         const propertyDetails = getPropertyDetails(propertyResponse.body)
-        res.render('list', { items: propertyDetails, action: `/properties/${name}`, groups: groupsResponse.body })
+        res.render('list', {
+            items: propertyDetails,
+            action: `/properties/${name}`,
+            groups: groupsResponse.body.results,
+        })
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
@@ -484,8 +481,7 @@ app.get('/export', async (req, res) => {
         // GET /crm/v3/objects/:objectType
         // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
         console.log('Calling crm.objects.basicApi.getPage API method. Retrieve contacts')
-        const contactsResponse = await hubspotClient.crm.objects.basicApi.getPage(
-            CONTACT_OBJECT_TYPE,
+        const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(
             CONTACTS_LIMIT,
             undefined,
             contactsPropertiesNames,
