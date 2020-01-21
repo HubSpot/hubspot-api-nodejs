@@ -16,8 +16,8 @@ Please see the documentation on [How do I create an app in HubSpot?](https://dev
   - [Read a batch of contact objects by ID](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview)
   - [Get all contacts](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview)
   - [Search for contacts by email, name, or company name](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview)
-  - [Create association between CRM objects](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview)
-  - [Delete associations between CRM objects](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fobjects-preview)
+  - [Create associations between company and contacts](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fassociations)
+  - [Delete associations between company and contacts](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fassociations)
 
 ### Setup App
 

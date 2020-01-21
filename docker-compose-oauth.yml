@@ -12,4 +12,4 @@ services:
       - /oauth-sample-app/sample-apps/oauth-app/node_modules
     ports:
       - 3000:3000
-    command: npm run start
+    command: npm run dev

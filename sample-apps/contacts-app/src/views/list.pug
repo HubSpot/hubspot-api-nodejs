@@ -22,7 +22,7 @@ block content
                   option(value='') Not assigned
                     each group in groups
                       -let selected = '' + group.name === '' + item.value
-                      option(value=group.name selected=selected) #{group.displayName}
+                      option(value=group.name selected=selected) #{group.label}
               else
                 input(name=key id=key type='text' value=`${item.value || ''}` required=isRequired)
 

@@ -1,8 +1,8 @@
 extends includes/layout
 block content
-  -const searchDetails = ' Search for contacts by email, name, or company name\n POST /crm/v3/objects/:objectType/search\n crm.objects.searchApi.doSearch'
-  -const createCRMAssociateAPIDetails = ' Create an association between company and contact\n PUT /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId\n crm.objects.associationsApi.createAssociation'
-  -const deleteCRMAssociateAPIDetails = ' Remove an association between company and contact\n DELETE /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType/:toObjectId\n crm.objects.associationsApi.archiveAssociation'
+  -const searchDetails = ' Search for contacts by email, name, or company name\n POST /crm/v3/objects/contacts/search\n crm.contacts.searchApi.doSearch'
+  -const createCRMAssociateAPIDetails = ' Create an associations between company and contacts\n PUT /crm/v3/associations/:fromObjectType/:toObjectType/batch/create\n crm.associations.batchApi.createBatch'
+  -const deleteCRMAssociateAPIDetails = ' Remove an associations between company and contacts\n DELETE /crm/v3/associations/:fromObjectType/:toObjectType/batch/archive\n crm.associations.batchApi.archiveBatch'
   .container
     pre #{searchDetails}
     form
