@@ -15,8 +15,8 @@ block content
                 select(name=key id=key)
                   option(value='') Not assigned
                   each owner in owners
-                    -let selected = '' + owner.ownerId === '' + item.value
-                    option(value=owner.ownerId selected=selected) #{owner.firstName} #{owner.lastName}
+                    -let selected = '' + owner.id === '' + item.value
+                    option(value=owner.id selected=selected) #{owner.firstName} #{owner.lastName}
               else if (key === 'groupName')
                 select(name=key id=key)
                   option(value='') Not assigned
