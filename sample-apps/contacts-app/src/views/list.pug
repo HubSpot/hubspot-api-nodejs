@@ -1,9 +1,20 @@
 extends includes/layout
 block content
+  - const getContactPropertiesApiDetails = ' Get All Contacts Properties\n GET /crm/v3/properties/:objectType\n crm.properties.coreApi.getAll';
+  - const getContactPropertyGroupsApiDetails = ' Get Contact Property Groups\n GET //crm/v3/properties/:objectType/groups\n crm.properties.groupsApi.getAll';
+  - const createContactApiDetails = ' Create a contact\n POST /crm/v3/objects/contacts\n crm.contacts.basicApi.create';
+  - const updateContactApiDetails = ' Update a contact\n POST /crm/v3/objects/contacts/:objectId\n crm.contacts.basicApi.update';
+  - const createContactPropertyApiDetails = ' Create a contact property\n POST /crm/v3/properties/:objectType\n crm.properties.coreApi.create';
+  - const updateContactPropertyApiDetails = ' Update a contact property\n PATCH /crm/v3/properties/:objectType/:propertyName\n crm.properties.coreApi.update';
+  - const getContactPropertyApiDetails = ' Get Contact Property by Name\n GET /crm/v3/properties/:objectType/:propertyName\n crm.properties.coreApi.getByName';
+  - const getAllContactEngagementsApiDetails = ' Get Associated Contact Engagements\n GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType\n crm.contacts.associationsApi.getAssociations';
+  - const getAllOwnersApiDetails = ' Get Owners\n GET /crm/v3/owners/\n crm.owners.defaultApi.getPage';
   .container
     .row
       .column
         h3 Properties
+        pre #{getContactPropertiesApiDetails}
+        pre #{getContactPropertyApiDetails}
         form(method='post' action=action)
           fieldset
             each item, key in items
@@ -12,12 +23,14 @@ block content
               label(for=key) #{item.label} #{isRequired ? '*' : ''}
 
               if (key === 'hubspot_owner_id')
+                pre #{getAllOwnersApiDetails}
                 select(name=key id=key)
                   option(value='') Not assigned
                   each owner in owners
                     -let selected = '' + owner.id === '' + item.value
                     option(value=owner.id selected=selected) #{owner.firstName} #{owner.lastName}
               else if (key === 'groupName')
+                pre #{getContactPropertyGroupsApiDetails}
                 select(name=key id=key)
                   option(value='') Not assigned
                     each group in groups
@@ -28,10 +41,15 @@ block content
 
 
             input(class='button-primary' type='submit' value='Save')
+            pre #{createContactApiDetails}
+            pre #{updateContactApiDetails}
+            pre #{createContactPropertyApiDetails}
+            pre #{updateContactPropertyApiDetails}
 
       if (engagements)
         .column
           h3 Engagements
+          pre #{getAllContactEngagementsApiDetails}
           table
             thead
               tr

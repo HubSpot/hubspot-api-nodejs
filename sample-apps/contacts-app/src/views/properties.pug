@@ -1,6 +1,9 @@
 extends includes/layout
 block content
+  - const getContactPropertiesApiDetails = ' Get All Contacts Properties\n GET /crm/v3/properties/:objectType\n crm.properties.coreApi.getAll';
   .container
+    h3 Mutable Properties
+    pre #{getContactPropertiesApiDetails}
     table
       thead
         tr

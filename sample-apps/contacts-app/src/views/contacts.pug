@@ -1,6 +1,11 @@
 extends includes/layout
 block content
+  - const getContactsApiDetails = ' Get contacts\n GET /crm/v3/objects/contacts\n crm.contacts.basicApi.getPage';
+  - const searchContactsApiDetails = ' Search for contacts\n POST /crm/v3/objects/contacts/search\n crm.contacts.searchApi.doSearch';
   .container
+    h3 Contacts
+    pre #{getContactsApiDetails}
+    pre #{searchContactsApiDetails}
     table
       thead
         tr
