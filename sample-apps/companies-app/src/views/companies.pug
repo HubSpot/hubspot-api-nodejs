@@ -1,10 +1,10 @@
 extends includes/layout
 block content
-  - const getCompaniesApiDetails = ' Get all companies\n GET /crm/v3/objects/companies\n crm.companies.basicApi.getPage';
-  - const searchCompaniesApiDetails = ' Search for companies by domain\n POST /crm/v3/objects/companies/search\n crm.companies.searchApi.doSearch';
+  - const getCompaniesApiDetails = ' Get companies\n GET /crm/v3/objects/companies\n crm.companies.basicApi.getPage';
+  - const searchCompaniesApiDetails = ' Search for companies\n POST /crm/v3/objects/companies/search\n crm.companies.searchApi.doSearch';
 
   section(class='container')
-
+    h3 Companies
     pre #{getCompaniesApiDetails}
     form(action='/companies')
       fieldset
