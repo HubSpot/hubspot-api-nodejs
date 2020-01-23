@@ -6,15 +6,15 @@ Please see the documentation on [How do I create an app in HubSpot?](https://dev
 
 ### HubSpot Public API links used in this application
 
-  - [Create contact](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
-  - [Get a contact record by its id](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
-  - [Get all contacts](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
-  - [Get all contacts properties](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public?branch=master&swaggerVersion=2)
-  - [Get all contact property groups](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public?branch=master&swaggerVersion=2)
-  - [Get list of owners](https://app.hubspot.com/vnext/api/v1%2Fapis%2Fcrm%2Fv3%2Fowners-preview)
-  - [Update a contact property](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public)
-  - [Create a contact property](https://tools.hubteam.com/api-catalog/services/CrmPublicProperties-Service/v3/spec/public)
-  - [Search for contacts by email, name, or company name](https://tools.hubteam.com/api-catalog/services/CrmPublicObjects-Service/v3/spec/internal)
+  - [Create contact](https://developers.hubspot.com/docs-beta/crm/contacts)
+  - [Get a contact record by its id](https://developers.hubspot.com/docs-beta/crm/contacts)
+  - [Get all contacts](https://developers.hubspot.com/docs-beta/crm/contacts)
+  - [Get all contacts properties](https://developers.hubspot.com/docs-beta/crm/properties)
+  - [Get all contact property groups](https://developers.hubspot.com/docs-beta/crm/properties)
+  - [Get list of owners](https://developers.hubspot.com/docs-beta/crm/owners)
+  - [Update a contact property](https://developers.hubspot.com/docs-beta/crm/properties)
+  - [Create a contact property](https://developers.hubspot.com/docs-beta/crm/properties)
+  - [Search for contacts](https://developers.hubspot.com/docs-beta/crm/contacts)
 
 
 ### Setup App
