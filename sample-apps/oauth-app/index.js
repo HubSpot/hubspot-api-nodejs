@@ -103,7 +103,7 @@ app.get('/', async (req, res) => {
 
         // Get all contacts
         // GET /crm/v3/objects/contacts
-        // https://tools.hubteam.com/api-catalog/services/CrmPublicPipelines-Service/v3/spec/internal
+        // https://developers.hubspot.com/docs-beta/crm/contacts
         console.log('Calling crm.contacts.basicApi.getPage. Retrieve contacts.')
         const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(undefined, undefined, properties)
         logResponse('Response from API', contactsResponse)
@@ -130,7 +130,7 @@ app.use('/oauth-callback', async (req, res) => {
 
     // Get OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://tools.hubteam.com/api-catalog/services/OAuthService/v1/spec/public?branch=master&swaggerVersion=3
+    // https://developers.hubspot.com/docs-beta/working-with-oauth
     console.log('Retrieving access token by code:', code)
     const getTokensResponse = await hubspotClient.oauth.defaultApi.createToken(
         GRANT_TYPES.AUTHORIZATION_CODE,

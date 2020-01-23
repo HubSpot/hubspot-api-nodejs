@@ -1,7 +1,10 @@
 extends includes/layout
 block content
+  - const getTokenApiDetails = ' Get OAuth 2.0 Access Token and Refresh Tokens\n POST /oauth/v1/token\n oauth.defaultApi.createToken'
+  - const getContactsApiDetails = ' Get all companies\n GET /crm/v3/objects/contacts\n crm.contacts.basicApi.getPage'
   .container
     h3 Tokens
+    pre #{getTokenApiDetails}
     table(class='tokens-table')
       thead
         tr
@@ -22,6 +25,7 @@ block content
           td #{tokenStore.updatedAt ? new Date(tokenStore.updatedAt) : ''}
 
     h3 Contacts
+    pre #{getContactsApiDetails}
     table
       thead
         tr
