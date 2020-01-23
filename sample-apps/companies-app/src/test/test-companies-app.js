@@ -1,4 +1,3 @@
-require('dotenv').config({ path: './test/.env' })
 const _ = require('lodash')
 const Promise = require('bluebird')
 const chai = require('chai')
