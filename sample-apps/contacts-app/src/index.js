@@ -178,7 +178,9 @@ app.post('/contacts', async (req, res) => {
             const createResponse = await hubspotClient.crm.contacts.basicApi.create({ properties })
             logResponse(createResponse)
 
-            res.redirect('/contacts')
+            const id = _.get(createResponse, 'body.id')
+
+            res.redirect(`/contacts/${id}`)
         }
     } catch (e) {
         console.error(e)
@@ -200,7 +202,7 @@ app.post('/contacts/:id', async (req, res) => {
             const updateResponse = await hubspotClient.crm.contacts.basicApi.update(id, { properties })
             logResponse(updateResponse)
 
-            res.redirect('/contacts')
+            res.redirect(`/contacts/${id}`)
         }
     } catch (e) {
         console.error(e)

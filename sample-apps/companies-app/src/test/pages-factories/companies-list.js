@@ -9,6 +9,7 @@ module.exports = async (driver, companiesNames) => {
     await Promise.map(companiesNames, async (companyName) => {
         const companyLink = await driver.wait(
             until.elementLocated(By.xpath(`.//td[text()="${companyName}"]/preceding-sibling::td/a[1]`)),
+            30000,
         )
         await driver.wait(until.elementIsVisible(companyLink))
         _.set(companiesLinks, companyName, companyLink)

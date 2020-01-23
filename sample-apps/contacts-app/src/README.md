@@ -32,6 +32,14 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose -f  ../../../docker-compose-contacts.yml up
+docker-compose -f  ../../../docker-compose-contacts.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
+
+### Testing
+1. Copy .test-env.template to .test-env
+2. Paste your HubSpot Apikey, HubSpot User Name and HubSpot User Last Name as the value for HUBSPOT_API_KEY, HUBSPOT_USER_NAME and HUBSPOT_USER_LAST_NAME in .env-test
+
+```bash
+docker-compose -f  ../../../docker-compose-contacts-test.yml up --build
+```

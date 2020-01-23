@@ -34,7 +34,7 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose -f  ../../../docker-compose-companies.yml up
+docker-compose -f  ../../../docker-compose-companies.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
 
@@ -45,6 +45,6 @@ and HubSpot Account Name as the value for HUBSPOT_API_KEY, HUBSPOT_CLIENT_ID, HU
 HUBSPOT_AUTHORIZATION_PASSWORD and HUBSPOT_ACCOUNT_NAME in .env-test
 
 ```bash
-docker-compose -f  ../../../docker-compose-companies-test.yml up
+docker-compose -f  ../../../docker-compose-companies-test.yml up --build
 ```
 
