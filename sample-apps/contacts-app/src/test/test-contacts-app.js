@@ -239,7 +239,7 @@ describe('contacts-sample', () => {
     })
 
     describe('Create new property', () => {
-        it('Verify new contact page', async () => {
+        it('Verify create new property page', async () => {
             await driver.get(`${BASE_PATH}/properties/new`)
             const newPropertyPage = await propertyFactory(driver, propertiesInputsNames)
             const isGroupListedInGroupOptions = await newPropertyPage.isGroupOptionAvailable(
