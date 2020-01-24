@@ -396,7 +396,9 @@ app.post('/properties', async (req, res) => {
         const result = await hubspotClient.crm.properties.coreApi.create(CONTACT_OBJECT_TYPE, req.body)
         console.log('Response from API', result)
 
-        res.redirect('/properties')
+        const name = _.get(result, 'body.name')
+
+        res.redirect(`/properties/${name}`)
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
@@ -414,7 +416,7 @@ app.post('/properties/:name', async (req, res) => {
         const result = await hubspotClient.crm.properties.coreApi.update(CONTACT_OBJECT_TYPE, name, req.body)
         console.log('Response from API', result)
 
-        res.redirect('/properties')
+        res.redirect(`/properties/${name}`)
     } catch (e) {
         console.error(e)
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
