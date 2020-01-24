@@ -78,8 +78,10 @@ const restoreEnvironment = async () => {
     await hubspotClient.crm.contacts.batchApi.archiveBatch({ inputs: contactsIdsToArchive })
 
     console.log('Archiving contact properties created for tests')
+    const propertiesBatchArchiveInputs = _.map(CONTACT_PROPERTIES_TO_CREATE, (contactProperty) => _.pick(contactProperty, ['name']))
+    propertiesBatchArchiveInputs.push({ name: 'contacts_sample_test_03' })
     await hubspotClient.crm.properties.batchApi.archiveBatch(CONTACT_OBJECT_TYPE, {
-        inputs: _.map(CONTACT_PROPERTIES_TO_CREATE, (contactProperty) => _.pick(contactProperty, ['name'])),
+        inputs: propertiesBatchArchiveInputs,
     })
 
     console.log('Archiving `test-contacts` contact property group created for tests')
@@ -116,3 +118,5 @@ exports.initializeEnvironment = async () => {
 exports.restoreEnvironment = restoreEnvironment
 
 exports.createdContacts = CONTACTS_TO_CREATE
+exports.createdProperties = CONTACT_PROPERTIES_TO_CREATE
+exports.createdPropertyGroup = CONTACT_TEST_PROPERTY_GROUP

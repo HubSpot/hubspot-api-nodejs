@@ -1,6 +1,5 @@
 const { By, until, Key } = require('selenium-webdriver')
 const Promise = require('bluebird')
-const _ = require('lodash')
 
 module.exports = async (driver) => {
     const titleInput = await driver.wait(until.elementLocated(By.id(`title`)), 30000)
