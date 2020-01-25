@@ -1,6 +1,6 @@
 # HubSpot-nodejs oauth sample app
 
-This is a sample app for the [node-hubspot wrapper](https://www.npmjs.com/package/hubspot). Currently, this app focuses on demonstrating the functionality of [OAuth API](https://developers.hubspot.com/docs-beta/intro-to-auth) endpoints and their related actions.
+This is a sample app for the [hubspot-php SDK](../../../../). Currently, this app focuses on demonstrating the functionality of [OAuth API](https://developers.hubspot.com/docs-beta/working-with-oauth) endpoints and their related actions.
 
   - [Using OAuth 2.0 access tokens](https://developers.hubspot.com/docs-beta/intro-to-auth)
   - [Get all contacts](https://developers.hubspot.com/docs-beta/crm/contacts)

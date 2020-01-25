@@ -1,9 +1,9 @@
 # HubSpot-nodejs companies sample app
 
-This is a sample app for the [node-hubspot wrapper](https://www.npmjs.com/package/hubspot). Currently, this app focuses on demonstrating the functionality of [OAuth API](https://developers.hubspot.com/docs/methods/oauth2/oauth2-overview) endpoints and their related actions.
+This is a sample app for the [hubspot-nodejs SDK](../../../../).
+Currently, this app focuses on demonstrating the functionality of [Companies API](https://developers.hubspot.com/docs-beta/crm/companies) endpoints and their related actions.
 
-Please see the documentation on [How do I create an app in HubSpot?](https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot)
-
+Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs-beta/creating-an-app)
 ### HubSpot Public API links used in this application
 
   - [Create a company object](https://developers.hubspot.com/docs-beta/crm/companies)
