@@ -70,6 +70,17 @@ const refreshToken = async () => {
     hubspotClient.setAccessToken(tokenStore.accessToken)
 }
 
+const handleError = (e, res) => {
+    if (_.isEqual(e.message, 'HTTP request failed')) {
+        const errorMessage = JSON.stringify(e, null, 2)
+        console.error(errorMessage)
+        return res.redirect(`/error?msg=${errorMessage}`)
+    }
+
+    console.error(e)
+    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
+}
+
 const app = express()
 
 const hubspotClient = new hubspot.Client()
@@ -110,8 +121,7 @@ app.get('/', async (req, res) => {
 
         res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.body.results) })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -160,8 +170,7 @@ app.get('/refresh', async (req, res) => {
         if (isAuthorized()) await refreshToken()
         res.redirect('/')
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${e.message}`)
+        handleError(e, res)
     }
 })
 
