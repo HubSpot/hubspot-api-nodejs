@@ -110,7 +110,7 @@ app.get('/', async (req, res) => {
 
         res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.body.results) })
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${e.message}`)
     }
 })
@@ -160,7 +160,7 @@ app.get('/refresh', async (req, res) => {
         if (isAuthorized()) await refreshToken()
         res.redirect('/')
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${e.message}`)
     }
 })

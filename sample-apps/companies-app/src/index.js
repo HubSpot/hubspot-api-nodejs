@@ -257,7 +257,7 @@ app.get('/companies', checkAuthorization, async (req, res) => {
 
         res.render('companies', { companies, search })
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
@@ -274,7 +274,7 @@ app.get('/companies/new', checkAuthorization, async (req, res) => {
 
         res.render('company', { companyId: '', properties, contacts: null })
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
@@ -331,7 +331,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
         res.render('company', { companyId, properties, contacts })
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
@@ -368,7 +368,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
         const contacts = prepareAllContactsForView(contactsResponse.body.results)
         res.render('contacts', { contacts, search: query })
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
@@ -393,7 +393,7 @@ app.post('/companies/:companyId/contacts', checkAuthorization, async (req, res) 
         }
         res.redirect(`/companies/${companyId}`)
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
@@ -412,7 +412,7 @@ app.post('/companies/:companyId*?', checkAuthorization, async (req, res) => {
         const id = _.get(response, 'body.id')
         res.redirect(`/companies/${id}`)
     } catch (e) {
-        console.error(e)
+        console.error(JSON.stringify(e, null, 2))
         res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
     }
 })
