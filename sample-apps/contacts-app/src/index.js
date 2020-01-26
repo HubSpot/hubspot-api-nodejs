@@ -136,6 +136,17 @@ const getEngagementById = async (engagementId) => {
     return engagementResponse.body
 }
 
+const handleError = (e, res) => {
+    if (_.isEqual(e.message, 'HTTP request failed')) {
+        const errorMessage = JSON.stringify(e, null, 2)
+        console.error(errorMessage)
+        return res.redirect(`/error?msg=${errorMessage}`)
+    }
+
+    console.error(e)
+    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
+}
+
 const app = express()
 
 app.use(express.static('css'))
@@ -183,8 +194,7 @@ app.post('/contacts', async (req, res) => {
             res.redirect(`/contacts/${id}`)
         }
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -205,8 +215,7 @@ app.post('/contacts/:id', async (req, res) => {
             res.redirect(`/contacts/${id}`)
         }
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -243,8 +252,7 @@ app.get('/contacts', async (req, res) => {
 
         res.render('contacts', { contacts: prepareContactsContent(contactsResponse.body.results), query })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -269,8 +277,7 @@ app.get('/contacts/new', async (req, res) => {
 
         res.render('list', { items: properties, owners: ownersResponse.body.results, action: '/contacts' })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -328,8 +335,7 @@ app.get('/contacts/:id', async (req, res) => {
             engagementAction: `/contacts/${id}/engagement`,
         })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -339,8 +345,7 @@ app.get('/contacts/:id/engagement', async (req, res) => {
         if (_.isNil(id)) return res.redirect('/error?msg=Missed contact')
         res.render('engagements', { id })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -364,8 +369,7 @@ app.post('/contacts/:id/engagement', async (req, res) => {
 
         res.redirect(`/contacts/${id}`)
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -382,8 +386,7 @@ app.get('/properties', async (req, res) => {
 
         res.render('properties', { properties: mutableProperties })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -400,8 +403,7 @@ app.post('/properties', async (req, res) => {
 
         res.redirect(`/properties/${name}`)
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -418,8 +420,7 @@ app.post('/properties/:name', async (req, res) => {
 
         res.redirect(`/properties/${name}`)
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -434,8 +435,7 @@ app.get('/properties/new', async (req, res) => {
 
         res.render('list', { items: getPropertyDetails(), action: '/properties', groups: groupsResponse.body.results })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -465,8 +465,7 @@ app.get('/properties/:name', async (req, res) => {
             groups: groupsResponse.body.results,
         })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -496,8 +495,7 @@ app.get('/export', async (req, res) => {
 
         res.csv(csvContent, true, { 'Content-disposition': 'attachment; filename=contacts.csv' })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
