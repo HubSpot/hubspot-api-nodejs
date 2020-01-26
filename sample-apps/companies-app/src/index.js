@@ -218,6 +218,17 @@ const createCompanyContactsAssociations = async (companyId, contactIds) => {
     logResponse(createAssociationsResponse)
 }
 
+const handleError = (e, res) => {
+    if (_.isEqual(e.message, 'HTTP request failed')) {
+        const errorMessage = JSON.stringify(e, null, 2)
+        console.error(errorMessage)
+        return res.redirect(`/error?msg=${errorMessage}`)
+    }
+
+    console.error(e)
+    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
+}
+
 app.use(express.static('css'))
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
@@ -257,8 +268,7 @@ app.get('/companies', checkAuthorization, async (req, res) => {
 
         res.render('companies', { companies, search })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -274,8 +284,7 @@ app.get('/companies/new', checkAuthorization, async (req, res) => {
 
         res.render('company', { companyId: '', properties, contacts: null })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -331,8 +340,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
         res.render('company', { companyId, properties, contacts })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -368,8 +376,7 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
         const contacts = prepareAllContactsForView(contactsResponse.body.results)
         res.render('contacts', { contacts, search: query })
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -393,8 +400,7 @@ app.post('/companies/:companyId/contacts', checkAuthorization, async (req, res) 
         }
         res.redirect(`/companies/${companyId}`)
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
@@ -412,8 +418,7 @@ app.post('/companies/:companyId*?', checkAuthorization, async (req, res) => {
         const id = _.get(response, 'body.id')
         res.redirect(`/companies/${id}`)
     } catch (e) {
-        console.error(JSON.stringify(e, null, 2))
-        res.redirect(`/error?msg=${_.get(e, 'response.body.message') || e.message}`)
+        handleError(e, res)
     }
 })
 
