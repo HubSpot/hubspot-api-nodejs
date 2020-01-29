@@ -1,0 +1,32 @@
+extends includes/layout
+block content
+  .container
+    h3(class='alert-not-shown-events') New webhooks are received.
+      =' '
+      a(href='#') Reload the page to see updates
+    table
+      thead
+        tr
+          th ContactID
+          th Name
+          th Events
+
+      tbody
+        each contact, contactId in contacts
+          tr
+            td #{contactId}
+            td #{contact.name}
+            td
+              each hookEvent in contact.events
+                .row
+                  span(class=`event ${hookEvent.type}`) #{hookEvent.type}
+                    = ' '
+                    span #{hookEvent.name}
+                    = ' '
+                    span #{hookEvent.value}
+                    = ' '
+    if Object.keys(contacts).length === 0
+      span There are no HubSpot webhooks events yet
+    .row(class='pagination')
+      each page in paginationConfig
+        a(href=page.link class=page.aClass) #{page.label}
