@@ -25,3 +25,13 @@ The best way to run this project (with the least configuration), is using docker
 docker-compose -f  ../../docker-compose-oauth.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
+
+### Testing
+1. Copy .test-env.template to .test-env
+2. Paste your HubSpot Apikey, HubSpot Client Id, HubSpot Client Secret, HubSpot Authorization email, HubSpot Authorization password 
+and HubSpot Account Name as the value for HUBSPOT_API_KEY, HUBSPOT_CLIENT_ID, HUBSPOT_CLIENT_SECRET, HUBSPOT_AUTHORIZATION_EMAIL, 
+HUBSPOT_AUTHORIZATION_PASSWORD and HUBSPOT_ACCOUNT_NAME in .env-test
+
+```bash
+docker-compose -f  ../../docker-compose-oauth-test.yml up --build
+```
