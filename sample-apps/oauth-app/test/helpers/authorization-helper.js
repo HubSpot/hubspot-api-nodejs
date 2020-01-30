@@ -1,9 +1,10 @@
 const driverHelper = require('./driver-helper')
-const APPLICATION_TITLE = 'HubSpot JavaScript Sample Oauth'
 const hubspotLoginFactory = require('../pages-factories/hubspot-login')
 const loginFactory = require('../pages-factories/login')
 const hubspotAccountsListFactory = require('../pages-factories/hubspot-accounts-list')
 const companiesListFactory = require('../pages-factories/contacts-list')
+
+const APPLICATION_TITLE = 'HubSpot JavaScript Sample Oauth'
 
 const verifyTitle = async (driver) => {
     const pageTitle = await driver.getTitle()
