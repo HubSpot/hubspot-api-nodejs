@@ -1,3 +1,4 @@
+import Bottleneck from 'bottleneck'
 import http = require('http')
 import * as _ from 'lodash'
 import * as qs from 'querystring'
@@ -60,6 +61,32 @@ import {
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
+const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
+    'constructor',
+    'useQuerystring',
+    'basePath',
+    'defaultHeaders',
+    'setDefaultAuthentication',
+    'setApiKey',
+    'accessToken',
+    'addInterceptor',]
+
+const RETRY_TIMEOUT = {
+    INTERNAL_SERVER_ERROR: 200,
+    TOO_MANY_REQUESTS: 10*1000
+}
+
+const TEN_SECONDLY_ROLLING = "TEN_SECONDLY_ROLLING"
+
+export enum NumberOfRetries {
+    NoRetries,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six
+}
 
 export class Client {
     public oauth: {
@@ -178,6 +205,9 @@ export class Client {
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
     }
+    protected _limiter: Bottleneck
+    protected _numberOfApiCallRetries: NumberOfRetries
+    protected _allowRateLimiting = true
 
     constructor(
         options: {
@@ -189,6 +219,8 @@ export class Client {
             refreshToken?: string
             basePath?: string
             defaultHeaders?: object
+            allowRateLimiting?: boolean
+            numberOfApiCallRetries?: NumberOfRetries
         } = {},
     ) {
         this._oauthDefaultApi = new OauthDefaultApi()
@@ -268,6 +300,11 @@ export class Client {
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._oauthDefaultApi)
+        this._limiter = new Bottleneck({
+            maxConcurrent: 5,
+            minTime: 1000/9,
+        })
+        this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
         this.crm = {
@@ -436,6 +473,8 @@ export class Client {
         refreshToken: string | undefined
         apiKey: string | undefined
         accessToken: string | undefined
+        allowRateLimiting: boolean
+        numberOfApiCallRetries: NumberOfRetries
     } {
         return {
             accessToken: this._accessToken,
@@ -443,6 +482,8 @@ export class Client {
             basePath: this._basePath,
             defaultHeaders: this._defaultHeaders,
             refreshToken: this._refreshToken,
+            allowRateLimiting: this._allowRateLimiting,
+            numberOfApiCallRetries: this._numberOfApiCallRetries
         }
     }
 
@@ -498,13 +539,109 @@ export class Client {
         refreshToken?: string
         basePath?: string
         defaultHeaders?: object
+        allowRateLimiting?: boolean
+        numberOfApiCallRetries? : NumberOfRetries
     }) {
         this.setAuth(options)
         this.setBasePath(options.basePath)
         this.setDefaultHeaders(options.defaultHeaders)
+        this._patchApiClients(options)
     }
 
     private _setUseQuerystring(useQuerystring: boolean) {
         _.each(this._apiClients, (apiClient) => apiClient._useQuerystring = useQuerystring)
+    }
+
+    private _getLimiterWrappedMethod(method: any) {
+        return this._limiter.wrap(method)
+    }
+
+    private _waitAfterRequestFailure(statusCode: number, retryNumber: number, retryTimeout: number) {
+        console.error(`Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`)
+        return new Promise((resolve) => setTimeout(resolve, retryTimeout))
+    }
+
+    private _getRetryWrappedMethod(method: any) {
+        return async (...args: any) => {
+            const numberOfRetries = this._numberOfApiCallRetries.valueOf() + 1
+            let resultSuccess: any
+            let resultRejected: any
+
+            for (let index = 1; index <= numberOfRetries; index++) {
+                try {
+                    resultSuccess = await method(...args)
+                    resultRejected = null
+                    break
+                } catch (e) {
+                    resultRejected = e
+
+                    if (_.isEqual(index, numberOfRetries)) {
+                        break
+                    }
+
+                    const statusCode = _.get(e, 'response.statusCode')
+
+                    if (_.isEqual(statusCode,500)) {
+                        await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.INTERNAL_SERVER_ERROR)
+                        continue
+                    }
+
+                    if (_.isEqual(statusCode,429)) {
+                        const policyName = _.get(e, 'response.body.policyName')
+
+                        if (_.isEqual(policyName, TEN_SECONDLY_ROLLING)) {
+                            await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_REQUESTS)
+                            continue
+                        }
+                    }
+
+                    break
+                }
+            }
+
+            return new Promise((resolve, reject)=> {
+                if (resultRejected) {
+                    return reject(resultRejected)
+                }
+                return resolve(resultSuccess)
+            })
+        }
+    }
+
+    private _patchApiClientMethod (methodName: string, clientInstance: any, clientPrototype: any) {
+        const methodBinned = clientPrototype[methodName].bind(clientInstance)
+
+        let patchedMethod = methodBinned
+
+        if (this._allowRateLimiting) {
+            patchedMethod = this._getLimiterWrappedMethod(methodBinned)
+        }
+
+        if (!_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
+            patchedMethod = this._getRetryWrappedMethod(patchedMethod)
+        }
+
+        clientInstance[methodName] = patchedMethod
+    }
+
+    private _patchApiClient(clientInstance: any) {
+        const clientPrototype = Object.getPrototypeOf(clientInstance)
+        let methodsNamesToPatch = Object.getOwnPropertyNames(clientPrototype);
+        methodsNamesToPatch = _.differenceWith(methodsNamesToPatch, METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING)
+
+        const patchFn = this._patchApiClientMethod.bind(this)
+
+        _.each(methodsNamesToPatch, (methodName) => {
+            patchFn(methodName, clientInstance, clientPrototype)
+        })
+    }
+
+    private _patchApiClients(options: { allowRateLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
+        this._allowRateLimiting = _.isNil(options.allowRateLimiting)? true: options.allowRateLimiting
+        this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)? NumberOfRetries.NoRetries: options.numberOfApiCallRetries
+
+        if (this._allowRateLimiting || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
+            _.each(this._apiClients, this._patchApiClient.bind(this))
+        }
     }
 }

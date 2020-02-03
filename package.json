@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 10000 --exit",
+    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 50000 --exit",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json -e codegen",
@@ -23,6 +23,7 @@
     "@types/node": "^12.12.21",
     "@types/request": "^2.48.4",
     "bluebird": "^3.7.2",
+    "bottleneck": "^2.19.5",
     "lodash": "^4.17.15",
     "request": "^2.88.0"
   },
