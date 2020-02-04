@@ -88,6 +88,13 @@ export enum NumberOfRetries {
     Six
 }
 
+export class HttpError extends Error {
+    constructor (public response: http.IncomingMessage, public body: any, public statusCode?: number) {
+        super('HTTP request failed');
+        this.name = 'HttpError';
+    }
+}
+
 export class Client {
     public oauth: {
         defaultApi: OauthDefaultApi,
@@ -517,7 +524,7 @@ export class Client {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         resolve({ response, body })
                     } else {
-                        reject({ response, body })
+                        reject(new HttpError(response, body, response.statusCode));
                     }
                 }
             })
@@ -545,7 +552,7 @@ export class Client {
         this.setAuth(options)
         this.setBasePath(options.basePath)
         this.setDefaultHeaders(options.defaultHeaders)
-        this._patchApiClients(options)
+        this._setMethodsPatchOptions(options)
     }
 
     private _setUseQuerystring(useQuerystring: boolean) {
@@ -636,12 +643,31 @@ export class Client {
         })
     }
 
-    private _patchApiClients(options: { allowRateLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
+    private _patchApiClients() {
+        _.each(this._apiClients, this._patchApiClient.bind(this))
+    }
+
+    private _patchApiRequestMethod() {
+        let apiRequestMethodToPatch: any = this.apiRequest.bind(this)
+
+        if (this._allowRateLimiting) {
+            apiRequestMethodToPatch = this._getLimiterWrappedMethod(apiRequestMethodToPatch)
+        }
+
+        if (!_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
+            apiRequestMethodToPatch = this._getRetryWrappedMethod(apiRequestMethodToPatch)
+        }
+
+        this.apiRequest = apiRequestMethodToPatch
+    }
+
+    private _setMethodsPatchOptions(options: { allowRateLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
         this._allowRateLimiting = _.isNil(options.allowRateLimiting)? true: options.allowRateLimiting
         this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)? NumberOfRetries.NoRetries: options.numberOfApiCallRetries
 
         if (this._allowRateLimiting || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
-            _.each(this._apiClients, this._patchApiClient.bind(this))
+            this._patchApiClients()
+            this._patchApiRequestMethod()
         }
     }
 }
