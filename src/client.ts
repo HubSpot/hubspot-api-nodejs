@@ -581,12 +581,12 @@ export class Client {
 
                     const statusCode = _.get(e, 'response.statusCode')
 
-                    if (_.isEqual(statusCode,500)) {
+                    if (_.isEqual(statusCode, 500)) {
                         await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.INTERNAL_SERVER_ERROR)
                         continue
                     }
 
-                    if (_.isEqual(statusCode,429)) {
+                    if (_.isEqual(statusCode, 429)) {
                         const policyName = _.get(e, 'response.body.policyName')
 
                         if (_.isEqual(policyName, TEN_SECONDLY_ROLLING)) {
@@ -609,12 +609,12 @@ export class Client {
     }
 
     private _patchApiClientMethod (methodName: string, clientInstance: any, clientPrototype: any) {
-        const methodBinned = clientPrototype[methodName].bind(clientInstance)
+        const methodToPatch = clientPrototype[methodName].bind(clientInstance)
 
-        let patchedMethod = methodBinned
+        let patchedMethod = methodToPatch
 
         if (this._allowRateLimiting) {
-            patchedMethod = this._getLimiterWrappedMethod(methodBinned)
+            patchedMethod = this._getLimiterWrappedMethod(methodToPatch)
         }
 
         if (!_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
