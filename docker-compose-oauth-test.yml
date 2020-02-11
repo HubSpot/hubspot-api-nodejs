@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    environment:
+      - USE_SELENIUM_SERVER=true
+    env_file:
+      - sample-apps/oauth-app/.env-test
+    build:
+      context: .
+      dockerfile: Dockerfile-oauth-test
+    volumes:
+      - ./sample-apps/oauth-app:/oauth-sample-app/sample-apps/oauth-app
+      - /oauth-sample-app/sample-apps/oauth-app/node_modules
+    command: bash ./start-tests.sh

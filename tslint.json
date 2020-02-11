@@ -12,6 +12,7 @@
   "rules": {
     "max-classes-per-file": false,
     "object-literal-sort-keys": false,
+    "no-console": false,
     "variable-name": {
       "options": [
         "allow-leading-underscore"

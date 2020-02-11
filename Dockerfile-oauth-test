@@ -1,0 +1,18 @@
+FROM selenium/standalone-chrome-debug:latest
+
+USER root
+WORKDIR /oauth-sample-app
+COPY sample-apps/oauth-app/package.json ./sample-apps/oauth-app/
+COPY codegen ./codegen
+COPY src ./src
+COPY .prettierrc ./
+COPY index.ts ./
+COPY package.json ./
+COPY tsconfig.json ./
+COPY tslint.json ./
+RUN apt-get update
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get -y install nodejs
+RUN npm install --unsafe-perm
+WORKDIR /oauth-sample-app/sample-apps/oauth-app
+RUN npm install

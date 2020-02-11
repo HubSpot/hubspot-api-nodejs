@@ -1,4 +1,3 @@
-require('dotenv').config({ path: '.env' })
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
@@ -6,7 +5,7 @@ const hubspot = require(`${__dirname}/../..`)
 const bodyParser = require('body-parser')
 
 const PORT = 3000
-
+const OBJECTS_LIMIT = 30
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
 const SCOPES = 'contacts'
@@ -116,7 +115,7 @@ app.get('/', async (req, res) => {
         // GET /crm/v3/objects/contacts
         // https://developers.hubspot.com/docs-beta/crm/contacts
         console.log('Calling crm.contacts.basicApi.getPage. Retrieve contacts.')
-        const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(undefined, undefined, properties)
+        const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(OBJECTS_LIMIT, undefined, properties)
         logResponse('Response from API', contactsResponse)
 
         res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.body.results) })

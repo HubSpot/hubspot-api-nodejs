@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "./node_modules/.bin/mocha \"./test/test-contacts-app.js\" --timeout 500000 --exit"
+    "test": "./node_modules/.bin/mocha \"./test/test-contacts-app.js\" --timeout 60000 --exit"
   },
   "keywords": [
     "hubspot",
