@@ -652,7 +652,7 @@ export class Client {
 
         let patchedMethod = methodToPatch
 
-        if (this._allowRateLimiting) {
+        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
             patchedMethod = this._getLimiterWrappedMethod(methodToPatch)
         }
 
@@ -682,7 +682,7 @@ export class Client {
     private _patchApiRequestMethod() {
         let apiRequestMethodToPatch: any = this.apiRequest.bind(this)
 
-        if (this._allowRateLimiting) {
+        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
             apiRequestMethodToPatch = this._getLimiterWrappedMethod(apiRequestMethodToPatch)
         }
 
