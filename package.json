@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "./node_modules/.bin/mocha \"test/test-objects.js\" --timeout 50000 --exit",
+    "test": "echo \"No test specified\"",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json -e codegen",

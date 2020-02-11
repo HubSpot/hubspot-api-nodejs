@@ -88,6 +88,8 @@ export enum NumberOfRetries {
     Six
 }
 
+export type Interceptor = (requestOptions: request.Options) => (Promise<any> | void);
+
 export class HttpError extends Error {
     constructor (public response: http.IncomingMessage, public body: any, public statusCode?: number) {
         super('HTTP request failed');
@@ -164,6 +166,7 @@ export class Client {
             searchApi: TicketsSearchApi
         }
     }
+    protected _interceptors: Interceptor[] = [];
     protected _oauthDefaultApi: OauthDefaultApi
     protected _associationsBatchApi: AssociationsBatchApi
     protected _companiesAssociationsApi: CompaniesAssociationsApi
@@ -207,27 +210,25 @@ export class Client {
     protected _basePath = 'https://api.hubapi.com'
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
-    protected _refreshToken: string | undefined
     protected authentications = {
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
     }
-    protected _limiter: Bottleneck
+    protected _limiter: Bottleneck | undefined
     protected _numberOfApiCallRetries: NumberOfRetries
     protected _allowRateLimiting = true
+    protected _allowConcurrentLimiting = true
 
     constructor(
         options: {
             apiKey?: string
             accessToken?: string
-            clientId?: string
-            clientSecret?: string
-            redirectUri?: string
-            refreshToken?: string
             basePath?: string
             defaultHeaders?: object
             allowRateLimiting?: boolean
-            numberOfApiCallRetries?: NumberOfRetries
+            allowConcurrentLimiting?: boolean
+            numberOfApiCallRetries? : NumberOfRetries
+            interceptors?: Interceptor[]
         } = {},
     ) {
         this._oauthDefaultApi = new OauthDefaultApi()
@@ -307,10 +308,6 @@ export class Client {
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._oauthDefaultApi)
-        this._limiter = new Bottleneck({
-            maxConcurrent: 5,
-            minTime: 1000/9,
-        })
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
@@ -459,6 +456,13 @@ export class Client {
         })
     }
 
+    public addInterceptor(interceptor: Interceptor) {
+        this._interceptors.push(interceptor)
+        _.each(this._apiClients, (apiClient) => {
+            apiClient.addInterceptor(interceptor)
+        })
+    }
+
     public setDefaultHeaders(defaultHeadersToSet?: object) {
         this._defaultHeaders = _.assign({}, defaultHeadersToSet, DEFAULT_HEADERS)
         _.each(this._apiClients, (apiClient) => {
@@ -477,20 +481,22 @@ export class Client {
     public getOptions(): {
         basePath: string | undefined
         defaultHeaders: object | undefined
-        refreshToken: string | undefined
         apiKey: string | undefined
         accessToken: string | undefined
         allowRateLimiting: boolean
+        allowConcurrentLimiting: boolean
         numberOfApiCallRetries: NumberOfRetries
+        interceptors: Interceptor[]
     } {
         return {
             accessToken: this._accessToken,
             apiKey: this._apiKey,
             basePath: this._basePath,
             defaultHeaders: this._defaultHeaders,
-            refreshToken: this._refreshToken,
             allowRateLimiting: this._allowRateLimiting,
-            numberOfApiCallRetries: this._numberOfApiCallRetries
+            allowConcurrentLimiting: this._allowConcurrentLimiting,
+            numberOfApiCallRetries: this._numberOfApiCallRetries,
+            interceptors: this._interceptors,
         }
     }
 
@@ -516,17 +522,33 @@ export class Client {
             this.authentications.oauth2.applyToRequest(params)
         }
 
-        return new Promise<{ response: http.IncomingMessage; body?: any; }>((resolve, reject) => {
-            request(params, (error: any, response: Response, body: any) => {
-                if (error) {
-                    reject(error)
-                } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response, body })
+        let authenticationPromise = Promise.resolve()
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(params))
+        }
+        if (this.authentications.oauth2.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(params))
+        }
+
+        let interceptorPromise = authenticationPromise
+
+        for (const interceptor of this._interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(params))
+        }
+
+        return interceptorPromise.then(() => {
+            return new Promise<{ response: http.IncomingMessage; body?: any; }>((resolve, reject) => {
+                request(params, (error: any, response: Response, body: any) => {
+                    if (error) {
+                        reject(error)
                     } else {
-                        reject(new HttpError(response, body, response.statusCode));
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response, body })
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
                     }
-                }
+                })
             })
         })
     }
@@ -543,16 +565,18 @@ export class Client {
     private _setOptions(options: {
         apiKey?: string
         accessToken?: string
-        refreshToken?: string
         basePath?: string
         defaultHeaders?: object
         allowRateLimiting?: boolean
+        allowConcurrentLimiting?: boolean
         numberOfApiCallRetries? : NumberOfRetries
+        interceptors?: Interceptor[]
     }) {
         this.setAuth(options)
         this.setBasePath(options.basePath)
         this.setDefaultHeaders(options.defaultHeaders)
         this._setMethodsPatchOptions(options)
+        this._setInterceptors(options)
     }
 
     private _setUseQuerystring(useQuerystring: boolean) {
@@ -560,6 +584,9 @@ export class Client {
     }
 
     private _getLimiterWrappedMethod(method: any) {
+        if (!this._limiter) {
+            throw new Error('Limiter not defined')
+        }
         return this._limiter.wrap(method)
     }
 
@@ -620,7 +647,7 @@ export class Client {
 
         let patchedMethod = methodToPatch
 
-        if (this._allowRateLimiting) {
+        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
             patchedMethod = this._getLimiterWrappedMethod(methodToPatch)
         }
 
@@ -650,7 +677,7 @@ export class Client {
     private _patchApiRequestMethod() {
         let apiRequestMethodToPatch: any = this.apiRequest.bind(this)
 
-        if (this._allowRateLimiting) {
+        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
             apiRequestMethodToPatch = this._getLimiterWrappedMethod(apiRequestMethodToPatch)
         }
 
@@ -661,13 +688,34 @@ export class Client {
         this.apiRequest = apiRequestMethodToPatch
     }
 
-    private _setMethodsPatchOptions(options: { allowRateLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
+    private _setMethodsPatchOptions(options: { allowRateLimiting?: boolean; allowConcurrentLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
         this._allowRateLimiting = _.isNil(options.allowRateLimiting)? true: options.allowRateLimiting
         this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)? NumberOfRetries.NoRetries: options.numberOfApiCallRetries
+        this._allowConcurrentLimiting = _.isNil(options.allowConcurrentLimiting)? true: options.allowConcurrentLimiting
 
-        if (this._allowRateLimiting || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
+        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
+            const bottleneckOptions = {}
+
+            if (this._allowRateLimiting) {
+                _.set(bottleneckOptions, 'minTime', 1000/9)
+            }
+
+            if (this._allowConcurrentLimiting) {
+                _.set(bottleneckOptions, 'maxConcurrent', 5)
+            }
+
+            this._limiter = new Bottleneck(bottleneckOptions)
+        }
+
+        if (this._allowRateLimiting || this._allowConcurrentLimiting || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
             this._patchApiClients()
             this._patchApiRequestMethod()
+        }
+    }
+
+    private _setInterceptors(options: { interceptors?: Interceptor[] } = {}) {
+        if (options.interceptors) {
+            _.each(options.interceptors, this.addInterceptor.bind(this))
         }
     }
 }
