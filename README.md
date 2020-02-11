@@ -1,10 +1,10 @@
-# nodejs-hubspot-3
+# hubspot-api-nodejs
 NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs-beta/overview) SDK(Client) files and sample apps
 
 Sample Applications can be found in [sample-apps](sample-apps/) folder
 
 ```shell
-npm install hubspot
+npm install @hubspot/api-client
 ```
 
 ## Instantiate client
@@ -32,8 +32,9 @@ To add custom headers to all request:
 const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, defaultHeaders: { "My-header": "test-example" } })
 ```
 
-By default client created with [Bottleneck](https://github.com/SGrondin/bottleneck) realization of Rate and Concurrent Limiting.
-Default settings for limiter are:
+API Client is using [Bottoleneck](https://github.com/SGrondin/bottleneck) for implementation of Rate and Concurrent Limiting.
+Please note that Apps using OAuth are only subject to a limit of 100 requests every 10 seconds. Limits related to the API Add-on don't apply.
+Default settings for the limiter are:
 
 ```javascript
 {
@@ -42,7 +43,7 @@ Default settings for limiter are:
  }
 ```
 
-It's possible to turn of either Rate or Concurrent Limiting:
+It's possible to turn off either Rate or Concurrent Limiting:
 
 ```javascript
 const hubspotClient = new hubspot.Client({ 
@@ -53,7 +54,7 @@ const hubspotClient = new hubspot.Client({
 ```
 
 It's possible to turn on retry for failed requests with statuses 429 or 500. To turn on/off Configurable Retries use numberOfApiCallRetries option on Client instance creation.
-numberOfApiCallRetries could be from 0 - 6. If numberOfApiCallRetries have value more than 0 it means that on ISE500 called method would be retried after delay 200 ms and on 429 for "TEN_SECONDLY_ROLLING" called method would be retried after delay 10 sec. Number of retries can not reach more than numberOfApiCallRetries value.
+numberOfApiCallRetries could be set to a numberfrom 0 - 6. If numberOfApiCallRetries is set to a number greater than 0 it means that if any API Call receives ISE500 this call will be retried after a delay 200 ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed numberOfApiCallRetries value.
 
 ```javascript
 const hubspotClient = new hubspot.Client({ 
