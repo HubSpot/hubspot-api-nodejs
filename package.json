@@ -1,5 +1,5 @@
 {
-  "name": "node-hubspot-3",
+  "name": "api-client",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
