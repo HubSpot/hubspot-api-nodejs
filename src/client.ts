@@ -210,7 +210,6 @@ export class Client {
     protected _basePath = 'https://api.hubapi.com'
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
-    protected _refreshToken: string | undefined
     protected authentications = {
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
@@ -224,7 +223,6 @@ export class Client {
         options: {
             apiKey?: string
             accessToken?: string
-            refreshToken?: string
             basePath?: string
             defaultHeaders?: object
             allowRateLimiting?: boolean
@@ -483,7 +481,6 @@ export class Client {
     public getOptions(): {
         basePath: string | undefined
         defaultHeaders: object | undefined
-        refreshToken: string | undefined
         apiKey: string | undefined
         accessToken: string | undefined
         allowRateLimiting: boolean
@@ -496,7 +493,6 @@ export class Client {
             apiKey: this._apiKey,
             basePath: this._basePath,
             defaultHeaders: this._defaultHeaders,
-            refreshToken: this._refreshToken,
             allowRateLimiting: this._allowRateLimiting,
             allowConcurrentLimiting: this._allowConcurrentLimiting,
             numberOfApiCallRetries: this._numberOfApiCallRetries,
@@ -569,7 +565,6 @@ export class Client {
     private _setOptions(options: {
         apiKey?: string
         accessToken?: string
-        refreshToken?: string
         basePath?: string
         defaultHeaders?: object
         allowRateLimiting?: boolean
