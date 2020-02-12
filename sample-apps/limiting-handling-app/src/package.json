@@ -1,0 +1,37 @@
+{
+  "name": "hubspot-limiting-handling",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "description": "hubspot-node limiting handling sample application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "hubspot",
+    "companies",
+    "sample",
+    "example"
+  ],
+  "author": "hubspot",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bee-queue": "^1.2.3",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "chance": "^1.1.4",
+    "dotenv": "^8.1.0",
+    "express": "^4.16.3",
+    "ioredis": "^4.14.1",
+    "lodash": "^4.17.15",
+    "pug": "^2.0.4",
+    "query-string": "^6.10.1",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}

@@ -1,0 +1,40 @@
+extends includes/layout
+block content
+  - const clientConfigForDefaultLimiter = '{\n  accessToken: tokenStore.accessToken\n}'
+  - const clientConfigForRetry = '{\n  allowRateLimiting: false,\n  allowConcurrentLimiting: false,\n  accessToken: tokenStore.accessToke,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Six \n}'
+  - const clientConfigForWaitInterceptor = '{\n  allowRateLimiting: false,\n  allowConcurrentLimiting: true,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptorHelper]\n}'
+
+  section(class='container')
+    table(class='tokens-table')
+      thead
+        tr
+          th Function
+          th Function description
+          th Client configuration
+          th Execution time, ms
+      tbody
+        tr
+          td
+            a(href=`/execute-batch/with-default-limiter/?retryExecTime=${retryExecTime}&waitInterceptorExecTime=${waitInterceptorExecTime}`)
+              input(class='button-primary' type='button' value='Execute Batch' id='batch-default-limiter')
+          td  Execute batch of 200 requests using one client with default limiter
+          td
+            pre #{clientConfigForDefaultLimiter}
+          td #{defaultLimiterExecTime || ''}
+        tr
+          td
+            a(href=`/execute-batch/with-default-limiter/?defaultLimiterExecTime=${defaultLimiterExecTime}&waitInterceptorExecTime=${waitInterceptorExecTime}`)
+              input(class='button-primary' type='button' value='Execute Batch' id='batch-retry')
+          td  Execute batch of 200 requests using two client instances with retries and without limiter
+          td
+            pre #{clientConfigForRetry}
+          td #{retryExecTime || ''}
+        tr
+          td
+            a(href=`/execute-batch/with-wait-interceptor/?defaultLimiterExecTime=${defaultLimiterExecTime}&retryExecTime=${retryExecTime}`)
+              input(class='button-primary' type='button' value='Execute Batch' id='batch-redis-limiter')
+          td  Execute batch of 200 requests using four client instances with custom wait interceptor
+          td
+            pre #{clientConfigForWaitInterceptor}
+          td #{waitInterceptorExecTime || ''}
+
