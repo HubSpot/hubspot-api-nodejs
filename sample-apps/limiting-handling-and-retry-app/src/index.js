@@ -16,7 +16,7 @@ const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
 const SCOPES = 'contacts'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const REFRESH_TOKEN = 'refresh_token'
-
+const TEN_SECOND_ROLLING = 10 * 1000
 const hubspotClientsWithWaitInterceptor = []
 const hubspotClientsWithWaitInterceptorAndThreeRetry = []
 let tokenStore = {}
@@ -25,6 +25,16 @@ let hubspotClient,
     hubspotClientWithDefaultLimiterAndThreeRetry,
     hubspotClientWithSixRetry
 let initialStart = true
+let executeBatchWithRetryEndTime = 0
+
+const waitUntilTenSecondRollingForExecuteBatchWithRetry = async () => {
+    const timeSinceLastExecutionOfBatchWithRetry = Date.now() - executeBatchWithRetryEndTime
+    if (TEN_SECOND_ROLLING > timeSinceLastExecutionOfBatchWithRetry) {
+        const timeToWait = TEN_SECOND_ROLLING - timeSinceLastExecutionOfBatchWithRetry
+        console.log(`Waiting ${timeToWait} to Ten Second Rolling for execution Batch With Retry`)
+        await Promise.delay(timeToWait)
+    }
+}
 
 const checkEnv = (req, res, next) => {
     if (_.startsWith(req.url, '/error')) return next()
@@ -218,6 +228,7 @@ app.get('/', checkAuthorization, async (req, res) => {
 
 app.get('/execute-batch/with-default-limiter', checkAuthorization, async (req, res) => {
     try {
+        await waitUntilTenSecondRollingForExecuteBatchWithRetry()
         const execTimes = getExecTimesFromQuery(req.query)
         console.log('Started batch execution by clients with default limiter')
         execTimes.defaultLimiterExecTime = await getBatchExecutionTime([hubspotClientWithDefaultLimiter])
@@ -253,6 +264,7 @@ app.get('/execute-batch/with-retry', checkAuthorization, async (req, res) => {
         execTimes.retryExecTime = await getBatchExecutionTime([hubspotClientWithSixRetry])
         console.log(`Batch execution by clients with six api call retries took: ${execTimes.retryExecTime}`)
 
+        executeBatchWithRetryEndTime = Date.now()
         res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))
     } catch (e) {
         handleError(e, res)
@@ -261,6 +273,7 @@ app.get('/execute-batch/with-retry', checkAuthorization, async (req, res) => {
 
 app.get('/execute-batch/with-wait-interceptor', checkAuthorization, async (req, res) => {
     try {
+        await waitUntilTenSecondRollingForExecuteBatchWithRetry()
         const execTimes = getExecTimesFromQuery(req.query)
         console.log('Started batch execution by clients that have custom wait interceptor')
         execTimes.waitInterceptorExecTime = await getBatchExecutionTime(hubspotClientsWithWaitInterceptor)

@@ -9,17 +9,22 @@ async function setDisablePropertyForAllButtons(value) {
 $(document).ready(() => {
     $('#batch-default-limiter').click(async () => {
         await setDisablePropertyForAllButtons(true)
+        $('*').css('cursor', 'wait')
     })
     $('#batch-default-limiter-and-retry').click(async () => {
         await setDisablePropertyForAllButtons(true)
+        $('*').css('cursor', 'wait')
     })
     $('#batch-retry').click(async () => {
         await setDisablePropertyForAllButtons(true)
+        $('*').css('cursor', 'wait')
     })
     $('#batch-wait-interceptor').click(async () => {
         await setDisablePropertyForAllButtons(true)
+        $('*').css('cursor', 'wait')
     })
     $('#batch-wait-interceptor-and-retry').click(async () => {
         await setDisablePropertyForAllButtons(true)
+        $('*').css('cursor', 'wait')
     })
 })
