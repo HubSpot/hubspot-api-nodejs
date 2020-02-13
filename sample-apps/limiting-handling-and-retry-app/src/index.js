@@ -17,9 +17,13 @@ const SCOPES = 'contacts'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const REFRESH_TOKEN = 'refresh_token'
 
-const hubspotClientsWithRedisLimiter = []
+const hubspotClientsWithWaitInterceptor = []
+const hubspotClientsWithWaitInterceptorAndThreeRetry = []
 let tokenStore = {}
-let hubspotClient, hubspotClientWithDefaultLimiter, hubspotClientWithSixRetry
+let hubspotClient,
+    hubspotClientWithDefaultLimiter,
+    hubspotClientWithDefaultLimiterAndThreeRetry,
+    hubspotClientWithSixRetry
 let initialStart = true
 
 const checkEnv = (req, res, next) => {
@@ -38,6 +42,9 @@ const initializeClients = () => {
         interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
     })
     hubspotClientWithDefaultLimiter = new hubspot.Client()
+    hubspotClientWithDefaultLimiterAndThreeRetry = new hubspot.Client({
+        numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
+    })
     hubspotClientWithSixRetry = new hubspot.Client({
         allowRateLimiting: false,
         allowConcurrentLimiting: false,
@@ -49,7 +56,16 @@ const initializeClients = () => {
             allowConcurrentLimiting: false,
             interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
         })
-        hubspotClientsWithRedisLimiter.push(hubspotClient)
+        hubspotClientsWithWaitInterceptor.push(hubspotClient)
+    })
+    _.map(new Array(4), () => {
+        const hubspotClient = new hubspot.Client({
+            allowRateLimiting: false,
+            allowConcurrentLimiting: false,
+            numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
+            interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
+        })
+        hubspotClientsWithWaitInterceptorAndThreeRetry.push(hubspotClient)
     })
 }
 
@@ -65,8 +81,10 @@ const isTokenExpired = () => {
 const setAccessTokenToAllClients = (accessToken) => {
     hubspotClient.setAccessToken(accessToken)
     hubspotClientWithDefaultLimiter.setAccessToken(accessToken)
+    hubspotClientWithDefaultLimiterAndThreeRetry.setAccessToken(accessToken)
     hubspotClientWithSixRetry.setAccessToken(accessToken)
-    _.map(hubspotClientsWithRedisLimiter, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.map(hubspotClientsWithWaitInterceptor, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.map(hubspotClientsWithWaitInterceptorAndThreeRetry, (hsClient) => hsClient.setAccessToken(accessToken))
 }
 
 const refreshToken = async () => {
@@ -157,9 +175,17 @@ const getBatchExecutionTime = async (hubspotClients) => {
 
 const getExecTimesFromQuery = (query) => {
     const defaultLimiterExecTime = _.get(query, 'defaultLimiterExecTime') || ''
+    const defaultLimiterAndRetryExecTime = _.get(query, 'defaultLimiterAndRetryExecTime') || ''
     const retryExecTime = _.get(query, 'retryExecTime') || ''
     const waitInterceptorExecTime = _.get(query, 'waitInterceptorExecTime') || ''
-    return { defaultLimiterExecTime, retryExecTime, waitInterceptorExecTime }
+    const waitInterceptorAndRetryExecTime = _.get(query, 'waitInterceptorAndRetryExecTime') || ''
+    return {
+        defaultLimiterExecTime,
+        defaultLimiterAndRetryExecTime,
+        retryExecTime,
+        waitInterceptorExecTime,
+        waitInterceptorAndRetryExecTime,
+    }
 }
 
 app.use(express.static('public'))
@@ -203,6 +229,23 @@ app.get('/execute-batch/with-default-limiter', checkAuthorization, async (req, r
     }
 })
 
+app.get('/execute-batch/with-default-limiter-and-retry', checkAuthorization, async (req, res) => {
+    try {
+        const execTimes = getExecTimesFromQuery(req.query)
+        console.log('Started batch execution by clients with default limiter wit retry')
+        execTimes.defaultLimiterAndRetryExecTime = await getBatchExecutionTime([
+            hubspotClientWithDefaultLimiterAndThreeRetry,
+        ])
+        console.log(
+            `Batch execution by clients with default limiter and retry took: ${execTimes.defaultLimiterAndRetryExecTime}`,
+        )
+
+        res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
 app.get('/execute-batch/with-retry', checkAuthorization, async (req, res) => {
     try {
         const execTimes = getExecTimesFromQuery(req.query)
@@ -220,9 +263,26 @@ app.get('/execute-batch/with-wait-interceptor', checkAuthorization, async (req, 
     try {
         const execTimes = getExecTimesFromQuery(req.query)
         console.log('Started batch execution by clients that have custom wait interceptor')
-        execTimes.waitInterceptorExecTime = await getBatchExecutionTime(hubspotClientsWithRedisLimiter)
+        execTimes.waitInterceptorExecTime = await getBatchExecutionTime(hubspotClientsWithWaitInterceptor)
         console.log(
             `Batch execution by clients that have custom wait interceptor took: ${execTimes.waitInterceptorExecTime} ms`,
+        )
+
+        res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/execute-batch/with-wait-interceptor-and-retry', checkAuthorization, async (req, res) => {
+    try {
+        const execTimes = getExecTimesFromQuery(req.query)
+        console.log('Started batch execution by clients that have custom wait interceptor and retry')
+        execTimes.waitInterceptorAndRetryExecTime = await getBatchExecutionTime(
+            hubspotClientsWithWaitInterceptorAndThreeRetry,
+        )
+        console.log(
+            `Batch execution by clients that have custom wait interceptor and retry took: ${execTimes.waitInterceptorAndRetryExecTime} ms`,
         )
 
         res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))

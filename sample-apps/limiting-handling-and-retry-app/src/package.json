@@ -1,10 +1,10 @@
 {
-  "name": "hubspot-limiting-handling",
+  "name": "hubspot-limiting-handling-and-retry",
   "version": "1.0.0",
   "engines": {
     "node": ">= 10.13.0"
   },
-  "description": "hubspot-node limiting handling sample application",
+  "description": "hubspot-node limiting handling and retry sample application",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

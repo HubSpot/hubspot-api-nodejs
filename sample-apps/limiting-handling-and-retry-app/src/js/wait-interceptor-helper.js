@@ -1,6 +1,7 @@
 const Promise = require('bluebird')
 const Queue = require('bee-queue')
 
+const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1'
 let waitFnQueue, waitFnWorker
 
 const runWaitInterceptor = (waitTimeout, callback) => {
@@ -39,11 +40,17 @@ module.exports = {
     init: () => {
         try {
             waitFnQueue = new Queue('waitFn', {
+                redis: {
+                    host: REDIS_HOST,
+                },
                 isWorker: false,
                 removeOnSuccess: true,
                 removeOnFailure: true,
             })
             waitFnWorker = new Queue('waitFn', {
+                redis: {
+                    host: REDIS_HOST,
+                },
                 isWorker: true,
                 removeOnSuccess: true,
                 removeOnFailure: true,

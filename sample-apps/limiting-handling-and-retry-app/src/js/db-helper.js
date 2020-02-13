@@ -1,10 +1,13 @@
+const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1'
 let redisClient = null
 
 module.exports = {
     init: () => {
         try {
             const Redis = require('ioredis')
-            redisClient = new Redis()
+            redisClient = new Redis({
+                host: REDIS_HOST,
+            })
         } catch (e) {
             console.error('Redis db is not available')
             console.error(e)
