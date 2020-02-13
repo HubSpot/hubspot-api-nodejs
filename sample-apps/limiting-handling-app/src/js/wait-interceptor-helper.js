@@ -5,17 +5,24 @@ let waitFnQueue, waitFnWorker
 
 const runWaitInterceptor = (waitTimeout, callback) => {
     return waitFnQueue
-        .createJob({ waitTimeout })
-        .timeout(waitTimeout)
+        .createJob()
+        .timeout(1000)
         .retries(0)
         .save()
         .then((job) => {
+            const timeoutTimer = setTimeout(() => {
+                console.error(`Waited for a job ${job.id} to be executed more than ${waitTimeout} ms`)
+                waitFnQueue.removeJob(job.id)
+                callback(new Error(`Job ${job.id} wait timeout ${waitTimeout} ms`))
+            }, waitTimeout)
             job.once('succeeded', (result) => {
+                clearTimeout(timeoutTimer)
                 console.log(`Job ${job.id} succeeded with result: ${result}`)
                 return callback()
             })
 
             return job.once('failed', (err) => {
+                clearTimeout(timeoutTimer)
                 console.log(`Job ${job.id} failed with error ${err.message}`)
                 return callback(err)
             })
@@ -33,14 +40,18 @@ module.exports = {
         try {
             waitFnQueue = new Queue('waitFn', {
                 isWorker: false,
+                removeOnSuccess: true,
+                removeOnFailure: true,
             })
             waitFnWorker = new Queue('waitFn', {
                 isWorker: true,
+                removeOnSuccess: true,
+                removeOnFailure: true,
             })
 
             waitFnWorker.process(async (job) => {
                 console.log(`Processing job ${job.id}`)
-                await Promise.delay(130)
+                await Promise.delay(110)
                 return Date.now()
             })
         } catch (e) {
