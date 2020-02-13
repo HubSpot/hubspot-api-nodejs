@@ -1,7 +1,6 @@
 # HubSpot-nodejs limiting handling and retry sample app
 
 This is a sample app for the [hubspot-nodejs SDK](../../../../../).
-Currently, this app focuses on demonstrating the functionality of [Companies API](https://developers.hubspot.com/docs-beta/crm/companies) endpoints and their related actions.
 
 Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs-beta/creating-an-app)
 
