@@ -592,7 +592,7 @@ export class Client {
 
     private _waitAfterRequestFailure(statusCode: number, retryNumber: number, retryTimeout: number) {
         console.error(`Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`)
-        return new Promise((resolve) => setTimeout(resolve, retryTimeout))
+        return new Promise((resolve) => setTimeout(resolve, retryTimeout * retryNumber))
     }
 
     private _getRetryWrappedMethod(method: any) {
@@ -615,7 +615,7 @@ export class Client {
 
                     const statusCode = _.get(e, 'response.statusCode')
 
-                    if (_.isEqual(statusCode, 500)) {
+                    if (statusCode >= 500 && statusCode <= 599) {
                         await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.INTERNAL_SERVER_ERROR)
                         continue
                     }
