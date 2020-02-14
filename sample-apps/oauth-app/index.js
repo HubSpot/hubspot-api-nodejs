@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const hubspot = require(`${__dirname}/../..`)
 const bodyParser = require('body-parser')
+require('./config')
 
 const PORT = 3000
 const OBJECTS_LIMIT = 30
