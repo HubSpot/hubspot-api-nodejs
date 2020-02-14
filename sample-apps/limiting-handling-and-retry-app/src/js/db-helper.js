@@ -15,7 +15,7 @@ module.exports = {
         }
     },
 
-    close: async () => {
+    close: () => {
         if (redisClient) redisClient.disconnect()
     },
     getTokens: async () => {

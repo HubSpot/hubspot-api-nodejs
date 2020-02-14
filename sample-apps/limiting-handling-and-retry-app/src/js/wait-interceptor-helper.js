@@ -2,6 +2,7 @@ const Promise = require('bluebird')
 const Queue = require('bee-queue')
 
 const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1'
+const THROTTLING_DELAY_TIME = 110
 let waitFnQueue, waitFnWorker
 
 const runWaitInterceptor = (waitTimeout, callback) => {
@@ -11,19 +12,19 @@ const runWaitInterceptor = (waitTimeout, callback) => {
         .retries(0)
         .save()
         .then((job) => {
-            const timeoutTimer = setTimeout(() => {
+            const timeoutTimerId = setTimeout(() => {
                 console.error(`Waited for a job ${job.id} to be executed more than ${waitTimeout} ms`)
                 waitFnQueue.removeJob(job.id)
                 callback(new Error(`Job ${job.id} wait timeout ${waitTimeout} ms`))
             }, waitTimeout)
             job.once('succeeded', (result) => {
-                clearTimeout(timeoutTimer)
+                clearTimeout(timeoutTimerId)
                 console.log(`Job ${job.id} succeeded with result: ${result}`)
                 return callback()
             })
 
             return job.once('failed', (err) => {
-                clearTimeout(timeoutTimer)
+                clearTimeout(timeoutTimerId)
                 console.log(`Job ${job.id} failed with error ${err.message}`)
                 return callback(err)
             })
@@ -58,7 +59,7 @@ module.exports = {
 
             waitFnWorker.process(async (job) => {
                 console.log(`Processing job ${job.id}`)
-                await Promise.delay(110)
+                await Promise.delay(THROTTLING_DELAY_TIME)
                 return Date.now()
             })
         } catch (e) {

@@ -60,7 +60,7 @@ const initializeClients = () => {
         allowConcurrentLimiting: false,
         numberOfApiCallRetries: hubspot.NumberOfRetries.Six,
     })
-    _.map(new Array(4), () => {
+    _.times(4, () => {
         const hubspotClient = new hubspot.Client({
             allowRateLimiting: false,
             allowConcurrentLimiting: false,
@@ -68,7 +68,7 @@ const initializeClients = () => {
         })
         hubspotClientsWithWaitInterceptor.push(hubspotClient)
     })
-    _.map(new Array(4), () => {
+    _.times(4, () => {
         const hubspotClient = new hubspot.Client({
             allowRateLimiting: false,
             allowConcurrentLimiting: false,
@@ -93,8 +93,8 @@ const setAccessTokenToAllClients = (accessToken) => {
     hubspotClientWithDefaultLimiter.setAccessToken(accessToken)
     hubspotClientWithDefaultLimiterAndThreeRetry.setAccessToken(accessToken)
     hubspotClientWithSixRetry.setAccessToken(accessToken)
-    _.map(hubspotClientsWithWaitInterceptor, (hsClient) => hsClient.setAccessToken(accessToken))
-    _.map(hubspotClientsWithWaitInterceptorAndThreeRetry, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.each(hubspotClientsWithWaitInterceptor, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.each(hubspotClientsWithWaitInterceptorAndThreeRetry, (hsClient) => hsClient.setAccessToken(accessToken))
 }
 
 const refreshToken = async () => {
@@ -360,9 +360,8 @@ app.use((error, req, res, next) => {
         initializeClients()
         const server = app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
 
-        process.on('SIGTERM', async () => {
-            await dbHelper.close()
-
+        process.on('SIGTERM', () => {
+            dbHelper.close()
             server.close(() => {
                 console.log('Process terminated')
             })
