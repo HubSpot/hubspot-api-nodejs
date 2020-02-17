@@ -2,9 +2,9 @@ extends includes/layout
 block content
   - const clientConfigForDefaultLimiter = '{\n  accessToken: tokenStore.accessToken\n}'
   - const clientConfigForDefaultLimiterAndRetry = '{\n  accessToken: tokenStore.accessToken,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
-  - const clientConfigForRetry = '{\n  allowRateLimiting: false,\n  allowConcurrentLimiting: false,\n  accessToken: tokenStore.accessToke,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Six \n}'
-  - const clientConfigForWaitInterceptor = '{\n  allowRateLimiting: false,\n  allowConcurrentLimiting: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n}'
-  - const clientConfigForWaitInterceptorAndRetry = '{\n  allowRateLimiting: false,\n  allowConcurrentLimiting: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
+  - const clientConfigForRetry = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Six \n}'
+  - const clientConfigForWaitInterceptor = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n}'
+  - const clientConfigForWaitInterceptorAndRetry = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
   - const query = `/?defaultLimiterExecTime=${defaultLimiterExecTime}&defaultLimiterAndRetryExecTime=${defaultLimiterAndRetryExecTime}&retryExecTime=${retryExecTime}&waitInterceptorExecTime=${waitInterceptorExecTime}&waitInterceptorAndRetryExecTime=${waitInterceptorAndRetryExecTime}`
   section(class='container')
     table(class='tokens-table')

@@ -48,7 +48,7 @@ const checkEnv = (req, res, next) => {
 
 const initializeClients = () => {
     hubspotClient = new hubspot.Client({
-        allowRateLimiting: false,
+        useLimiter: false,
         interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
     })
     hubspotClientWithDefaultLimiter = new hubspot.Client()
@@ -56,22 +56,19 @@ const initializeClients = () => {
         numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
     })
     hubspotClientWithSixRetry = new hubspot.Client({
-        allowRateLimiting: false,
-        allowConcurrentLimiting: false,
+        useLimiter: false,
         numberOfApiCallRetries: hubspot.NumberOfRetries.Six,
     })
     _.times(4, () => {
         const hubspotClient = new hubspot.Client({
-            allowRateLimiting: false,
-            allowConcurrentLimiting: false,
+            useLimiter: false,
             interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
         })
         hubspotClientsWithWaitInterceptor.push(hubspotClient)
     })
     _.times(4, () => {
         const hubspotClient = new hubspot.Client({
-            allowRateLimiting: false,
-            allowConcurrentLimiting: false,
+            useLimiter: false,
             numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
             interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
         })

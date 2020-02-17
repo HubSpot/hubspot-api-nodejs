@@ -32,24 +32,23 @@ To add custom headers to all request:
 const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, defaultHeaders: { "My-header": "test-example" } })
 ```
 
-API Client is using [Bottoleneck](https://github.com/SGrondin/bottleneck) for implementation of Rate and Concurrent Limiting.
+[Bottleneck](https://github.com/SGrondin/bottleneck) is used for rate limiting. To override the default settings, pass a `limiterOptions` object when instantiating the client. Bottleneck options can be found [here](https://github.com/SGrondin/bottleneck#constructor).
 Please note that Apps using OAuth are only subject to a limit of 100 requests every 10 seconds. Limits related to the API Add-on don't apply.
 Default settings for the limiter are:
 
 ```javascript
-{
+const DEFAULT_LIMITER_OPTIONS = {
+    minTime: 1000 / 9,
     maxConcurrent: 5,
-    minTime: 1000 / 9
- }
+}
 ```
 
-It's possible to turn off either Rate or Concurrent Limiting:
+It's possible to turn off rate limiting:
 
 ```javascript
 const hubspotClient = new hubspot.Client({ 
     accessToken: YOUR_ACCESS_TOKEN, 
-    allowRateLimiting: false,
-    allowConcurrentLimiting: false
+    useLimiter: false,
 })
 ```
 

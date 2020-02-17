@@ -61,6 +61,10 @@ import {
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
 const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
+const DEFAULT_LIMITER_OPTIONS = {
+    minTime: 1000 / 9,
+    maxConcurrent: 5,
+}
 const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
     'constructor',
     'useQuerystring',
@@ -77,6 +81,8 @@ const RETRY_TIMEOUT = {
 }
 
 const TEN_SECONDLY_ROLLING = "TEN_SECONDLY_ROLLING"
+
+export type LimiterOptions = Bottleneck.ConstructorOptions
 
 export enum NumberOfRetries {
     NoRetries,
@@ -216,8 +222,8 @@ export class Client {
     }
     protected _limiter: Bottleneck | undefined
     protected _numberOfApiCallRetries: NumberOfRetries
-    protected _allowRateLimiting = true
-    protected _allowConcurrentLimiting = true
+    protected _useLimiter = true
+    protected _limiterOptions: LimiterOptions | undefined
 
     constructor(
         options: {
@@ -225,8 +231,8 @@ export class Client {
             accessToken?: string
             basePath?: string
             defaultHeaders?: object
-            allowRateLimiting?: boolean
-            allowConcurrentLimiting?: boolean
+            useLimiter?: boolean
+            limiterOptions?: LimiterOptions
             numberOfApiCallRetries? : NumberOfRetries
             interceptors?: Interceptor[]
         } = {},
@@ -483,8 +489,8 @@ export class Client {
         defaultHeaders: object | undefined
         apiKey: string | undefined
         accessToken: string | undefined
-        allowRateLimiting: boolean
-        allowConcurrentLimiting: boolean
+        useLimiter: boolean
+        limiterOptions: LimiterOptions | undefined
         numberOfApiCallRetries: NumberOfRetries
         interceptors: Interceptor[]
     } {
@@ -493,8 +499,8 @@ export class Client {
             apiKey: this._apiKey,
             basePath: this._basePath,
             defaultHeaders: this._defaultHeaders,
-            allowRateLimiting: this._allowRateLimiting,
-            allowConcurrentLimiting: this._allowConcurrentLimiting,
+            useLimiter: this._useLimiter,
+            limiterOptions: this._limiterOptions,
             numberOfApiCallRetries: this._numberOfApiCallRetries,
             interceptors: this._interceptors,
         }
@@ -567,8 +573,8 @@ export class Client {
         accessToken?: string
         basePath?: string
         defaultHeaders?: object
-        allowRateLimiting?: boolean
-        allowConcurrentLimiting?: boolean
+        useLimiter?: boolean
+        limiterOptions? : LimiterOptions
         numberOfApiCallRetries? : NumberOfRetries
         interceptors?: Interceptor[]
     }) {
@@ -647,7 +653,7 @@ export class Client {
 
         let patchedMethod = methodToPatch
 
-        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
+        if (this._useLimiter) {
             patchedMethod = this._getLimiterWrappedMethod(methodToPatch)
         }
 
@@ -677,7 +683,7 @@ export class Client {
     private _patchApiRequestMethod() {
         let apiRequestMethodToPatch: any = this.apiRequest.bind(this)
 
-        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
+        if (this. _useLimiter) {
             apiRequestMethodToPatch = this._getLimiterWrappedMethod(apiRequestMethodToPatch)
         }
 
@@ -688,26 +694,16 @@ export class Client {
         this.apiRequest = apiRequestMethodToPatch
     }
 
-    private _setMethodsPatchOptions(options: { allowRateLimiting?: boolean; allowConcurrentLimiting?: boolean; numberOfApiCallRetries? : NumberOfRetries } = {}) {
-        this._allowRateLimiting = _.isNil(options.allowRateLimiting)? true: options.allowRateLimiting
+    private _setMethodsPatchOptions(options: { useLimiter?: boolean; limiterOptions?: LimiterOptions; numberOfApiCallRetries? : NumberOfRetries } = {}) {
+        this._useLimiter = _.isNil(options.useLimiter)? true: options.useLimiter
         this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)? NumberOfRetries.NoRetries: options.numberOfApiCallRetries
-        this._allowConcurrentLimiting = _.isNil(options.allowConcurrentLimiting)? true: options.allowConcurrentLimiting
 
-        if (this._allowRateLimiting || this._allowConcurrentLimiting) {
-            const bottleneckOptions = {}
-
-            if (this._allowRateLimiting) {
-                _.set(bottleneckOptions, 'minTime', 1000/9)
-            }
-
-            if (this._allowConcurrentLimiting) {
-                _.set(bottleneckOptions, 'maxConcurrent', 5)
-            }
-
-            this._limiter = new Bottleneck(bottleneckOptions)
+        if (this._useLimiter) {
+            this._limiterOptions = _.isNil(options.limiterOptions)? DEFAULT_LIMITER_OPTIONS: options.limiterOptions
+            this._limiter = new Bottleneck(this._limiterOptions)
         }
 
-        if (this._allowRateLimiting || this._allowConcurrentLimiting || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
+        if (this._useLimiter || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
             this._patchApiClients()
             this._patchApiRequestMethod()
         }
