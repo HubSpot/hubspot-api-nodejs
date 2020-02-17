@@ -109,12 +109,7 @@ const logResponse = (response) => {
 
 const app = express()
 
-const hubspotClient = new hubspot.Client({
-    clientId: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
-    redirectUri: REDIRECT_URI,
-    scopes: SCOPES,
-})
+const hubspotClient = new hubspot.Client()
 
 const getAllCompanies = async () => {
     // Get companies

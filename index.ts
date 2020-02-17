@@ -11,7 +11,7 @@ import * as propertiesModels from './codegen/crm/properties/model/models'
 import * as quotesModels from './codegen/crm/quotes/model/models'
 import * as ticketsModels from './codegen/crm/tickets/model/models'
 import * as oauthModels from './codegen/oauth/model/models'
-import { Client, HttpError, Interceptor, NumberOfRetries } from './src/client'
+import { Client, HttpError, Interceptor, LimiterOptions, NumberOfRetries } from './src/client'
 export {
     associationsModels,
     companiesModels,
@@ -29,5 +29,6 @@ export {
     Client,
     NumberOfRetries,
     HttpError,
-    Interceptor
+    Interceptor,
+    LimiterOptions
 }
