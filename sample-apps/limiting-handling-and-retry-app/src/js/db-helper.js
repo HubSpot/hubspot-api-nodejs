@@ -16,7 +16,7 @@ module.exports = {
     },
 
     close: () => {
-        if (redisClient) redisClient.disconnect()
+        if (redisClient) return redisClient.disconnect()
     },
     getTokens: async () => {
         const tokensString = await redisClient.get('tokens')
