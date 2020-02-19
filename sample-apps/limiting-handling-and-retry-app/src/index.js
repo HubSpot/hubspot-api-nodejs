@@ -7,9 +7,9 @@ const bodyParser = require('body-parser')
 const Promise = require('bluebird')
 const chance = require('chance').Chance()
 const queryString = require('query-string')
-const waitInterceptorHelper = require('./js/wait-interceptor-helper')
 const dbHelper = require('./js/db-helper')
-const WAIT_TIMEOUT = 60 * 1000
+const Redis = require('ioredis')
+
 const PORT = 3000
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
@@ -17,8 +17,30 @@ const SCOPES = 'contacts'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const REFRESH_TOKEN = 'refresh_token'
 const TEN_SECOND_ROLLING = 10 * 1000
-const hubspotClientsWithWaitInterceptor = []
-const hubspotClientsWithWaitInterceptorAndThreeRetry = []
+const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1'
+const REDIS_PORT = 6379
+const THROTTLING_DELAY_TIME = 105
+const CONCURRENCY_LIMIT = 10
+const BOTTLENECK_ID = 'sample-app'
+const CUSTOM_LIMITER_OPTIONS = {
+    /* Some basic options */
+    maxConcurrent: CONCURRENCY_LIMIT,
+    minTime: THROTTLING_DELAY_TIME,
+    id: BOTTLENECK_ID, // All limiters with the same id will be clustered together
+    /* Clustering options */
+    datastore: 'ioredis', // or "redis"
+    clearDatastore: false,
+    clientOptions: {
+        host: REDIS_HOST,
+        port: REDIS_PORT,
+        // Redis client options
+        // Using NodeRedis? See https://github.com/NodeRedis/node_redis#options-object-properties
+        // Using ioredis? See https://github.com/luin/ioredis/blob/master/API.md#new-redisport-host-options
+    },
+    Redis,
+}
+const hubspotClientsWithCustomLimiterOptions = []
+const hubspotClientsWithCustomLimiterOptionsAndThreeRetry = []
 let tokenStore = {}
 let hubspotClient,
     hubspotClientWithDefaultLimiter,
@@ -47,10 +69,7 @@ const checkEnv = (req, res, next) => {
 }
 
 const initializeClients = () => {
-    hubspotClient = new hubspot.Client({
-        useLimiter: false,
-        interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
-    })
+    hubspotClient = new hubspot.Client()
     hubspotClientWithDefaultLimiter = new hubspot.Client()
     hubspotClientWithDefaultLimiterAndThreeRetry = new hubspot.Client({
         numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
@@ -61,18 +80,18 @@ const initializeClients = () => {
     })
     _.times(4, () => {
         const hubspotClient = new hubspot.Client({
-            useLimiter: false,
-            interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
+            useLimiter: true,
+            limiterOptions: CUSTOM_LIMITER_OPTIONS,
         })
-        hubspotClientsWithWaitInterceptor.push(hubspotClient)
+        hubspotClientsWithCustomLimiterOptions.push(hubspotClient)
     })
     _.times(4, () => {
         const hubspotClient = new hubspot.Client({
-            useLimiter: false,
+            useLimiter: true,
+            limiterOptions: CUSTOM_LIMITER_OPTIONS,
             numberOfApiCallRetries: hubspot.NumberOfRetries.Three,
-            interceptors: [waitInterceptorHelper.getWaitInterceptor(WAIT_TIMEOUT)],
         })
-        hubspotClientsWithWaitInterceptorAndThreeRetry.push(hubspotClient)
+        hubspotClientsWithCustomLimiterOptionsAndThreeRetry.push(hubspotClient)
     })
 }
 
@@ -90,8 +109,8 @@ const setAccessTokenToAllClients = (accessToken) => {
     hubspotClientWithDefaultLimiter.setAccessToken(accessToken)
     hubspotClientWithDefaultLimiterAndThreeRetry.setAccessToken(accessToken)
     hubspotClientWithSixRetry.setAccessToken(accessToken)
-    _.each(hubspotClientsWithWaitInterceptor, (hsClient) => hsClient.setAccessToken(accessToken))
-    _.each(hubspotClientsWithWaitInterceptorAndThreeRetry, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.each(hubspotClientsWithCustomLimiterOptions, (hsClient) => hsClient.setAccessToken(accessToken))
+    _.each(hubspotClientsWithCustomLimiterOptionsAndThreeRetry, (hsClient) => hsClient.setAccessToken(accessToken))
 }
 
 const refreshToken = async () => {
@@ -184,14 +203,14 @@ const getExecTimesFromQuery = (query) => {
     const defaultLimiterExecTime = _.get(query, 'defaultLimiterExecTime') || ''
     const defaultLimiterAndRetryExecTime = _.get(query, 'defaultLimiterAndRetryExecTime') || ''
     const retryExecTime = _.get(query, 'retryExecTime') || ''
-    const waitInterceptorExecTime = _.get(query, 'waitInterceptorExecTime') || ''
-    const waitInterceptorAndRetryExecTime = _.get(query, 'waitInterceptorAndRetryExecTime') || ''
+    const customLimiterOptionsExecTime = _.get(query, 'customLimiterOptionsExecTime') || ''
+    const customLimiterOptionsAndRetryExecTime = _.get(query, 'customLimiterOptionsAndRetryExecTime') || ''
     return {
         defaultLimiterExecTime,
         defaultLimiterAndRetryExecTime,
         retryExecTime,
-        waitInterceptorExecTime,
-        waitInterceptorAndRetryExecTime,
+        customLimiterOptionsExecTime,
+        customLimiterOptionsAndRetryExecTime,
     }
 }
 
@@ -268,14 +287,14 @@ app.get('/execute-batch/with-retry', checkAuthorization, async (req, res) => {
     }
 })
 
-app.get('/execute-batch/with-wait-interceptor', checkAuthorization, async (req, res) => {
+app.get('/execute-batch/with-custom-limiter-options', checkAuthorization, async (req, res) => {
     try {
         await waitUntilTenSecondRollingForExecuteBatchWithRetry()
         const execTimes = getExecTimesFromQuery(req.query)
-        console.log('Started batch execution by clients that have custom wait interceptor')
-        execTimes.waitInterceptorExecTime = await getBatchExecutionTime(hubspotClientsWithWaitInterceptor)
+        console.log('Started batch execution by clients that have custom limiter options')
+        execTimes.customLimiterOptionsExecTime = await getBatchExecutionTime(hubspotClientsWithCustomLimiterOptions)
         console.log(
-            `Batch execution by clients that have custom wait interceptor took: ${execTimes.waitInterceptorExecTime} ms`,
+            `Batch execution by clients that have custom limiter options took: ${execTimes.customLimiterOptionsExecTime} ms`,
         )
 
         res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))
@@ -284,15 +303,15 @@ app.get('/execute-batch/with-wait-interceptor', checkAuthorization, async (req, 
     }
 })
 
-app.get('/execute-batch/with-wait-interceptor-and-retry', checkAuthorization, async (req, res) => {
+app.get('/execute-batch/with-custom-limiter-options-and-retry', checkAuthorization, async (req, res) => {
     try {
         const execTimes = getExecTimesFromQuery(req.query)
-        console.log('Started batch execution by clients that have custom wait interceptor and retry')
-        execTimes.waitInterceptorAndRetryExecTime = await getBatchExecutionTime(
-            hubspotClientsWithWaitInterceptorAndThreeRetry,
+        console.log('Started batch execution by clients that have custom limiter options and retry')
+        execTimes.customLimiterOptionsAndRetryExecTime = await getBatchExecutionTime(
+            hubspotClientsWithCustomLimiterOptionsAndThreeRetry,
         )
         console.log(
-            `Batch execution by clients that have custom wait interceptor and retry took: ${execTimes.waitInterceptorAndRetryExecTime} ms`,
+            `Batch execution by clients that have custom limiter options and retry took: ${execTimes.customLimiterOptionsAndRetryExecTime} ms`,
         )
 
         res.redirect(queryString.stringifyUrl({ url: '/', query: execTimes }))
@@ -353,7 +372,6 @@ app.use((error, req, res, next) => {
 ;(async () => {
     try {
         dbHelper.init()
-        waitInterceptorHelper.init()
         initializeClients()
         const server = app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
 

@@ -3,9 +3,9 @@ block content
   - const clientConfigForDefaultLimiter = '{\n  accessToken: tokenStore.accessToken\n}'
   - const clientConfigForDefaultLimiterAndRetry = '{\n  accessToken: tokenStore.accessToken,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
   - const clientConfigForRetry = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Six \n}'
-  - const clientConfigForWaitInterceptor = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n}'
-  - const clientConfigForWaitInterceptorAndRetry = '{\n  useLimiter: false,\n  accessToken: tokenStore.accessToke,\n  interceptors: [waitInterceptor]\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
-  - const query = `/?defaultLimiterExecTime=${defaultLimiterExecTime}&defaultLimiterAndRetryExecTime=${defaultLimiterAndRetryExecTime}&retryExecTime=${retryExecTime}&waitInterceptorExecTime=${waitInterceptorExecTime}&waitInterceptorAndRetryExecTime=${waitInterceptorAndRetryExecTime}`
+  - const clientConfigForCustomLimiterOptions = '{\n  limiterOptions: {\n    maxConcurrent: CONCURRENCY_LIMIT,\n    minTime: THROTTLING_DELAY_TIME,\n    id: BOTTLENECK_ID,\n    datastore: \'ioredis\',\n    clearDatastore: false,\n    clientOptions: {\n      host: REDIS_HOST,\n      port: REDIS_PORT\n    },\n    Redis\n  },\n  accessToken: tokenStore.accessToke,\n}'
+  - const clientConfigForCustomLimiterOptionsAndRetry = '{\n  limiterOptions: {\n    maxConcurrent: CONCURRENCY_LIMIT,\n    minTime: THROTTLING_DELAY_TIME,\n    id: BOTTLENECK_ID,\n    datastore: \'ioredis\',\n    clearDatastore: false,\n    clientOptions: {\n      host: REDIS_HOST,\n      port: REDIS_PORT\n    },\n    Redis\n  },\n  accessToken: tokenStore.accessToke,\n  numberOfApiCallRetries: hubspot.NumberOfRetries.Three \n}'
+  - const query = `/?defaultLimiterExecTime=${defaultLimiterExecTime}&defaultLimiterAndRetryExecTime=${defaultLimiterAndRetryExecTime}&retryExecTime=${retryExecTime}&customLimiterOptionsExecTime=${customLimiterOptionsExecTime}&customLimiterOptionsAndRetryExecTime=${customLimiterOptionsAndRetryExecTime}`
   section(class='container')
     table(class='tokens-table')
       thead
@@ -41,18 +41,18 @@ block content
           td #{retryExecTime || ''}
         tr
           td
-            a(href=`/execute-batch/with-wait-interceptor${query}`)
+            a(href=`/execute-batch/with-custom-limiter-options${query}`)
               input(class='button-primary' type='button' value='Execute Batch' id='batch-wait-interceptor')
-          td  Execute batch of 200 requests using four client instances with custom wait interceptor
+          td  Execute batch of 200 requests using four client instances with customized limiter that use Clustering
           td
-            pre #{clientConfigForWaitInterceptor}
-          td #{waitInterceptorExecTime || ''}
+            pre #{clientConfigForCustomLimiterOptions}
+          td #{customLimiterOptionsExecTime || ''}
         tr
           td
-            a(href=`/execute-batch/with-wait-interceptor-and-retry${query}`)
+            a(href=`/execute-batch/with-custom-limiter-options-and-retry${query}`)
               input(class='button-primary' type='button' value='Execute Batch' id='batch-wait-interceptor-and-retry')
-          td  Execute batch of 200 requests using four client instances with custom wait interceptor and three retries
+          td  Execute batch of 200 requests using four client instances with customized limiter that use Clustering and three retries
           td
-            pre #{clientConfigForWaitInterceptorAndRetry}
-          td #{waitInterceptorAndRetryExecTime || ''}
+            pre #{clientConfigForCustomLimiterOptionsAndRetry}
+          td #{customLimiterOptionsAndRetryExecTime || ''}
 
