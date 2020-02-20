@@ -3,6 +3,8 @@ NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs-beta/overview) SDK(C
 
 Sample Applications can be found in [sample-apps](sample-apps/) folder
 
+## Installing
+
 ```shell
 npm install @hubspot/api-client
 ```
@@ -30,6 +32,30 @@ To add custom headers to all request:
 
 ```javascript
 const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, defaultHeaders: { "My-header": "test-example" } })
+```
+
+If you're an app developer, you can also instantiate a client and obtain a new accessToken with your app
+details and a refresh_token:
+
+```javascript
+const hubspotClient = new hubspot.Client();
+return hubspotClient.oauth.defaultApi.createToken(
+    'refresh_token',
+    undefined,
+    undefined,
+    YOUR_CLIENT_ID,
+    YOUR_CLIENT_SECRET,
+    YOUR_REFRESH_TOKEN
+)
+    .then(results => {
+        console.log(results.body);
+        
+        // this assigns the accessToken to the client, so your client is ready
+        // to use
+        hubspotClient.setAccessToken(results.body.accessToken)
+
+        return hubspotClient.crm.companies.basicApi.getPage()
+    })
 ```
 
 [Bottleneck](https://github.com/SGrondin/bottleneck) is used for rate limiting. To override the default settings, pass a `limiterOptions` object when instantiating the client. Bottleneck options can be found [here](https://github.com/SGrondin/bottleneck#constructor).
@@ -71,9 +97,45 @@ const hubspotClient = new hubspot.Client({
 })
 ```
 
-All methods return a [promise]. The success includes the serialized to JSON body and response objects.
+## Usage
+
+All methods return a [promise]. The success includes the serialized to JSON body and response objects. Use the API method via:
+
+```javascript
+hubspotClient.crm.contacts.basicApi.getPage(limit, after, properties, associations, archived)
+  .then(results => {
+    console.log(results.body)
+  })
+  .catch(err => {
+    console.error(err)
+  })
+```
 
 [promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+## {EXAMPLE} Create Contact, Company and associate created objects
+
+```javascript
+const contactObj = { 
+    properties: {
+        firstname: yourValue,
+        lastname: yourValue
+    }
+};
+const companyObj = {
+    properties: {
+        domain: yourValue,
+        name: yourValue
+     }
+};
+
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
+const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
+await hubspotClient.crm.companies.associationsApi.createAssociation(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
+```
+
+### OAuth
 
 #### Obtain your authorization url
 
@@ -90,9 +152,9 @@ const uri = hubspotClient.oauth.getAuthorizationUrl(client_id, redirect_uri, sco
 return hubspotClient.oauth.defaultApi.createToken(
         'authorization_code',
         code, // the code you received from the oauth flow
-        REDIRECT_URI,
-        CLIENT_ID,
-        CLIENT_SECRET,
+        YOUR_REDIRECT_URI,
+        YOUR_CLIENT_ID,
+        YOUR_CLIENT_SECRET,
     ).then(...)
 ```
 
