@@ -25,7 +25,8 @@ import {
     BatchApi as DealsBatchApi,
     SearchApi as DealsSearchApi,
 } from '../codegen/crm/deals/api'
-import { DefaultApi as CardsDefaultApi } from '../codegen/crm/extensions/cards/api'
+import { CardsApi } from '../codegen/crm/extensions/cards/api'
+import { CoreApi as ImportsCoreApi } from '../codegen/crm/imports/api/coreApi'
 import {
     AssociationsApi as LineItemsAssociationsApi,
     BasicApi as LineItemsBasicApi,
@@ -132,8 +133,11 @@ export class Client {
         },
         extensions: {
             cards: {
-                defaultApi: CardsDefaultApi
+                cardsApi: CardsApi
             },
+        },
+        imports: {
+            coreApi: ImportsCoreApi
         },
         lineItems: {
             associationsApi: LineItemsAssociationsApi,
@@ -187,7 +191,8 @@ export class Client {
     protected _dealsBasicApi: DealsBasicApi
     protected _dealsBatchApi: DealsBatchApi
     protected _dealsSearchApi: DealsSearchApi
-    protected _cardsDefaultApi: CardsDefaultApi
+    protected _cardsApi: CardsApi
+    protected _importsCoreApi: ImportsCoreApi
     protected _lineItemsAssociationsApi: LineItemsAssociationsApi
     protected _lineItemsBasicApi: LineItemsBasicApi
     protected _lineItemsBatchApi: LineItemsBatchApi
@@ -251,7 +256,8 @@ export class Client {
         this._dealsBasicApi = new DealsBasicApi()
         this._dealsBatchApi = new DealsBatchApi()
         this._dealsSearchApi = new DealsSearchApi()
-        this._cardsDefaultApi = new CardsDefaultApi()
+        this._cardsApi = new CardsApi()
+        this._importsCoreApi = new ImportsCoreApi()
         this._lineItemsAssociationsApi = new LineItemsAssociationsApi()
         this._lineItemsBasicApi = new LineItemsBasicApi()
         this._lineItemsBatchApi = new LineItemsBatchApi()
@@ -288,7 +294,8 @@ export class Client {
             this._dealsBasicApi,
             this._dealsBatchApi,
             this._dealsSearchApi,
-            this._cardsDefaultApi,
+            this._cardsApi,
+            this._importsCoreApi,
             this._lineItemsAssociationsApi,
             this._lineItemsBasicApi,
             this._lineItemsBatchApi,
@@ -341,8 +348,11 @@ export class Client {
             },
             extensions: {
                 cards: {
-                    defaultApi: this._cardsDefaultApi,
+                    cardsApi: this._cardsApi,
                 },
+            },
+            imports: {
+              coreApi: this._importsCoreApi,
             },
             lineItems: {
                 associationsApi: this._lineItemsAssociationsApi,
@@ -406,7 +416,8 @@ export class Client {
         const companiesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const contactsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const dealsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const cardsBasePath = `${basePathToSet}/crm/v3/extensions`.replace(/\/+$/, '')
+        const cardsBasePath = `${basePathToSet}/crm/v3/extensions/cards`.replace(/\/+$/, '')
+        const importsBasePath = `${basePathToSet}/crm/v3/imports`.replace(/\/+$/, '')
         const lineItemsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const ownersBasePath = `${basePathToSet}/crm/v3/owners`.replace(/\/+$/, '')
         const pipelinesBasePath = `${basePathToSet}/crm/v3/pipelines`.replace(/\/+$/, '')
@@ -429,7 +440,8 @@ export class Client {
         this._dealsBasicApi.basePath = dealsBasePath
         this._dealsBatchApi.basePath = dealsBasePath
         this._dealsSearchApi.basePath = dealsBasePath
-        this._cardsDefaultApi.basePath = cardsBasePath
+        this._cardsApi.basePath = cardsBasePath
+        this._importsCoreApi.basePath = importsBasePath
         this._lineItemsAssociationsApi.basePath = lineItemsBasePath
         this._lineItemsBasicApi.basePath = lineItemsBasePath
         this._lineItemsBatchApi.basePath = lineItemsBasePath

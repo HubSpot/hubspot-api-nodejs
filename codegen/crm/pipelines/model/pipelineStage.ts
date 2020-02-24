@@ -18,15 +18,15 @@ export class PipelineStage {
     /**
     * The date the pipeline stage was created. The stages on default pipelines will have createdAt = 0.
     */
-    'createdAt': string;
+    'createdAt': Date;
     /**
     * The date the pipeline was archived. `archivedAt` will only be present if the pipeline is archived.
     */
-    'archivedAt'?: string;
+    'archivedAt'?: Date;
     /**
     * The date the pipeline stage was last updated.
     */
-    'updatedAt': string;
+    'updatedAt': Date;
     /**
     * Whether the pipeline is archived.
     */
@@ -54,17 +54,17 @@ export class PipelineStage {
         {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "archivedAt",
             "baseName": "archivedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "archived",

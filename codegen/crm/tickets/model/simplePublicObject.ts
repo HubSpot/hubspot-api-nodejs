@@ -15,11 +15,11 @@ import { CollectionResponseSimplePublicObjectId } from './collectionResponseSimp
 export class SimplePublicObject {
     'id': string;
     'properties': { [key: string]: string; };
-    'createdAt': string;
-    'updatedAt': string;
+    'createdAt': Date;
+    'updatedAt': Date;
     'associations': { [key: string]: CollectionResponseSimplePublicObjectId; };
     'archived': boolean;
-    'archivedAt'?: string;
+    'archivedAt'?: Date;
 
     static discriminator: string | undefined = undefined;
 
@@ -37,12 +37,12 @@ export class SimplePublicObject {
         {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "associations",
@@ -57,7 +57,7 @@ export class SimplePublicObject {
         {
             "name": "archivedAt",
             "baseName": "archivedAt",
-            "type": "string"
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {

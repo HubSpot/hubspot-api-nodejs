@@ -17,9 +17,9 @@ export class BatchResponsePublicAssociation {
     'numErrors'?: number;
     'errors': Array<Error>;
     'status': BatchResponsePublicAssociation.StatusEnum;
-    'requestedAt'?: string;
-    'startedAt': string;
-    'completedAt': string;
+    'requestedAt'?: Date;
+    'startedAt': Date;
+    'completedAt': Date;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,17 +47,17 @@ export class BatchResponsePublicAssociation {
         {
             "name": "requestedAt",
             "baseName": "requestedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "startedAt",
             "baseName": "startedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "completedAt",
             "baseName": "completedAt",
-            "type": "string"
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {
