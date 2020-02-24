@@ -3,6 +3,7 @@ import * as companiesModels from './codegen/crm/companies/model/models'
 import * as contactsModels from './codegen/crm/contacts/model/models'
 import * as dealsModels from './codegen/crm/deals/model/models'
 import * as cardsModels from './codegen/crm/extensions/cards/model/models'
+import * as importsModels from './codegen/crm/imports/model/models'
 import * as lineItemsModels from './codegen/crm/line_items/model/models'
 import * as ownersModels from './codegen/crm/owners/model/models'
 import * as pipelinesModels from './codegen/crm/pipelines/model/models'
@@ -18,6 +19,7 @@ export {
     contactsModels,
     dealsModels,
     cardsModels,
+    importsModels,
     lineItemsModels,
     ownersModels,
     pipelinesModels,

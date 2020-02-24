@@ -18,8 +18,8 @@ export class PublicOwner {
     'firstName'?: string;
     'lastName'?: string;
     'userId'?: number;
-    'createdAt': string;
-    'updatedAt': string;
+    'createdAt': Date;
+    'updatedAt': Date;
     'archived': boolean;
     'teams': Array<PublicTeam>;
 
@@ -54,12 +54,12 @@ export class PublicOwner {
         {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "archived",

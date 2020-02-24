@@ -1,5 +1,5 @@
-export * from './cardsApi';
-import { CardsApi } from './cardsApi';
+export * from './coreApi';
+import { CoreApi } from './coreApi';
 import * as fs from 'fs';
 import * as http from 'http';
 
@@ -20,4 +20,4 @@ export interface RequestDetailedFile {
 
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
-export const APIS = [CardsApi];
+export const APIS = [CoreApi];
