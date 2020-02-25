@@ -34,7 +34,7 @@ const hubspotClient = new hubspot.Client({
 })
 ```
 
-Intent of this sample is to show how to overcome HubSpot API rate limits and show how to use Retry client functionality. Sample shows 5 different ways of configuring hubspot client instance/'s depending of app needs:
+Intent of this sample is to show how to work with  HubSpot API rate limits and show how to use Retry client functionality. Sample shows 5 different ways of configuring hubspot client instance/'s depending of app needs:
 
 1. One client instance with default bottleneck limiting config. Applicable for app's that: 
     - use only one client instance 
