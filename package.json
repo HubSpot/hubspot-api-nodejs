@@ -1,7 +1,7 @@
 {
-  "name": "api-client",
-  "version": "0.1.0",
-  "description": "",
+  "name": "@hubspot/api-client",
+  "version": "0.2.0",
+  "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs-beta/overview) SDK(Client) files and sample apps",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -15,7 +15,7 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "author": "",
+  "author": "HubSpot",
   "license": "ISC",
   "dependencies": {
     "@types/bluebird": "^3.5.29",
@@ -46,5 +46,22 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HubSpot/hubspot-api-nodejs.git"
+  },
+  "keywords": [
+    "hubspot",
+    "nodejs",
+    "api",
+    "client",
+    "sdk",
+    "library",
+    "wrapper"
+  ],
+  "bugs": {
+    "url": "https://github.com/HubSpot/hubspot-api-nodejs/issues"
+  },
+  "homepage": "https://github.com/HubSpot/hubspot-api-nodejs#readme"
 }
