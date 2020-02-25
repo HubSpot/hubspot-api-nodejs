@@ -61,7 +61,7 @@ import {
 
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
-const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name}_${pJson.version}` }
+const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name};${pJson.version}` }
 const DEFAULT_LIMITER_OPTIONS = {
     minTime: 1000 / 9,
     maxConcurrent: 5,

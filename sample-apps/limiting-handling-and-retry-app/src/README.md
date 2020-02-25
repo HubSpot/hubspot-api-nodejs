@@ -142,4 +142,8 @@ docker-compose -f  ../../../docker-compose-limiting-handling-and-retry.yml up --
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application. 
 
-
+Application makes a Promise map of 200 clients and launches all of them in random order.
+Additionally you can check console for logs. For batch execution logs are showing:
+ - batch execution start
+ - execution index of the client (selected randomly), iteration number (order number in which the client was launched) and requestTime for batch function. e.g { index: 188, iteration: 186, requestTime: 37425 }
+ - batch execution end
