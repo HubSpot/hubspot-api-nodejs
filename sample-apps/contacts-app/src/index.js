@@ -265,7 +265,7 @@ app.get('/contacts', async (req, res) => {
         const query = _.get(req, 'query.search')
         const properties = ['firstname', 'lastname', 'company']
         const contacts = await getAllContacts(properties, query)
-        res.render('contacts', { contacts: prepareContactsContent(contacts), query })
+        res.render('contacts', { contacts: prepareContactsContent(contacts.slice(0, 100)), query })
     } catch (e) {
         handleError(e, res)
     }
