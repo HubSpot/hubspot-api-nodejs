@@ -10,7 +10,7 @@ const bodyParser = require('body-parser')
 const Promise = require('bluebird')
 
 const PORT = 3000
-const CONTACTS_LIMIT = 30
+const CONTACTS_LIMIT = 100
 const CONTACT_OBJECT_TYPE = 'contacts'
 const ENGAGEMENT_OBJECT_TYPE = 'engagements'
 
@@ -147,6 +147,47 @@ const handleError = (e, res) => {
     res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
 }
 
+const getAllContacts = async (properties, query) => {
+    const contacts = []
+    let contactsResponse
+    let after
+    do {
+        if (_.isNil(query) || _.isEmpty(query)) {
+            // Get contacts
+            // GET /crm/v3/objects/contacts
+            // https://developers.hubspot.com/docs-beta/crm/contacts
+            console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
+            contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(CONTACTS_LIMIT, after, properties)
+        } else {
+            if (!_.isNil(after)) {
+                // Search is expensive operation and have limitation of 1 request per second
+                await Promise.delay(1000)
+            }
+
+            // Search for contacts
+            // POST /crm/v3/objects/contacts/search
+            // https://developers.hubspot.com/docs-beta/crm/contacts
+            console.log(
+                'Calling crm.contacts.searchApi.doSearch API method. Retrieve contacts with search query:',
+                query,
+            )
+            contactsResponse = await hubspotClient.crm.contacts.searchApi.doSearch({
+                query,
+                limit: CONTACTS_LIMIT,
+                properties,
+                filterGroups: [],
+                after,
+                sorts: ['firstname'],
+            })
+        }
+        logResponse(contactsResponse)
+        after = _.get(contactsResponse, 'body.paging.next.after')
+        contacts.push(...contactsResponse.body.results)
+    } while (!_.isNil(after))
+
+    return contacts
+}
+
 const app = express()
 
 app.use(express.static('css'))
@@ -222,35 +263,9 @@ app.post('/contacts/:id', async (req, res) => {
 app.get('/contacts', async (req, res) => {
     try {
         const query = _.get(req, 'query.search')
-        let contactsResponse = { results: [] }
         const properties = ['firstname', 'lastname', 'company']
-        if (_.isNil(query)) {
-            // Get contacts
-            // GET /crm/v3/objects/contacts
-            // https://developers.hubspot.com/docs-beta/crm/contacts
-            console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
-            contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(CONTACTS_LIMIT, undefined, properties)
-            logResponse(contactsResponse)
-        } else {
-            // Search for contacts
-            // POST /crm/v3/objects/contacts/search
-            // https://developers.hubspot.com/docs-beta/crm/contacts
-            console.log(
-                'Calling crm.contacts.searchApi.doSearch API method. Retrieve contacts with search query:',
-                query,
-            )
-            contactsResponse = await hubspotClient.crm.contacts.searchApi.doSearch({
-                query,
-                limit: CONTACTS_LIMIT,
-                properties,
-                filterGroups: [],
-                after: 0,
-                sorts: [],
-            })
-            logResponse(contactsResponse)
-        }
-
-        res.render('contacts', { contacts: prepareContactsContent(contactsResponse.body.results), query })
+        const contacts = await getAllContacts(properties, query)
+        res.render('contacts', { contacts: prepareContactsContent(contacts), query })
     } catch (e) {
         handleError(e, res)
     }
@@ -479,19 +494,8 @@ app.get('/export', async (req, res) => {
         logResponse(propertiesResponse)
 
         const contactsPropertiesNames = _.map(propertiesResponse.body.results, 'name')
-
-        // Get all contacts
-        // GET /crm/v3/objects/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/contacts
-        console.log('Calling crm.objects.basicApi.getPage API method. Retrieve contacts')
-        const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(
-            CONTACTS_LIMIT,
-            undefined,
-            contactsPropertiesNames,
-        )
-        logResponse(contactsResponse)
-
-        const csvContent = toCsv(contactsResponse.body.results, propertiesResponse.body.results)
+        const contacts = await getAllContacts(contactsPropertiesNames)
+        const csvContent = toCsv(contacts, propertiesResponse.body.results)
 
         res.csv(csvContent, true, { 'Content-disposition': 'attachment; filename=contacts.csv' })
     } catch (e) {
