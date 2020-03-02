@@ -12,7 +12,7 @@ npm install @hubspot/api-client
 ## Instantiate client
 
 ```javascript
-const hubspot = require('hubspot')
+const hubspot = require('@hubspot/api-client')
 const hubspotClient = new hubspot.Client({ apiKey: 'abc'})
 ```
 
@@ -177,7 +177,7 @@ hubspotClient.apiRequest({
 You may use this library in your Typescript project via:
 
 ```typescript
-import Client from 'hubspot';
+import Client from '@hubspot/api-client';
 const hubspotClient = new Client({ apiKey: YOUR_API_KEY });
 ```
 
