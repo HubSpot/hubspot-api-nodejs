@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 import { Property } from './property';
 
 export class BatchResponseProperty {
@@ -17,9 +18,9 @@ export class BatchResponseProperty {
     'numErrors'?: number;
     'errors': Array<Error>;
     'status': BatchResponseProperty.StatusEnum;
-    'requestedAt'?: string;
-    'startedAt': string;
-    'completedAt': string;
+    'requestedAt'?: Date;
+    'startedAt': Date;
+    'completedAt': Date;
 
     static discriminator: string | undefined = undefined;
 
@@ -47,17 +48,17 @@ export class BatchResponseProperty {
         {
             "name": "requestedAt",
             "baseName": "requestedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "startedAt",
             "baseName": "startedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "completedAt",
             "baseName": "completedAt",
-            "type": "string"
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {

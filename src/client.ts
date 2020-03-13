@@ -430,64 +430,14 @@ export class Client {
             return
         }
 
-        this._basePath = basePathToSet
-        const oauthBasePath = `${basePathToSet}/oauth`.replace(/\/+$/, '')
-        const associationsBasePath = `${basePathToSet}/crm/v3/associations`.replace(/\/+$/, '')
-        const companiesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const contactsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const dealsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const cardsBasePath = `${basePathToSet}/crm/v3/extensions/cards`.replace(/\/+$/, '')
-        const importsBasePath = `${basePathToSet}/crm/v3/imports`.replace(/\/+$/, '')
-        const lineItemsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const ownersBasePath = `${basePathToSet}/crm/v3/owners`.replace(/\/+$/, '')
-        const pipelinesBasePath = `${basePathToSet}/crm/v3/pipelines`.replace(/\/+$/, '')
-        const productsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const propertiesBasePath = `${basePathToSet}/crm/v3/properties`.replace(/\/+$/, '')
-        const quotesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const ticketsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
-        const timelinesBasePath = `${basePathToSet}`.replace(/\/+$/, '')
+        this._basePath = basePathToSet.replace(/\/+$/, '')
+        const oauthBasePath = `${basePathToSet}/oauth`
+
+        _.each(this._apiClientsWithAuth, (apiClient) => {
+            apiClient.basePath = this._basePath
+        })
 
         this._oauthDefaultApi.basePath = oauthBasePath
-        this._associationsBatchApi.basePath = associationsBasePath
-        this._companiesAssociationsApi.basePath = companiesBasePath
-        this._companiesBasicApi.basePath = companiesBasePath
-        this._companiesBatchApi.basePath = companiesBasePath
-        this._companiesSearchApi.basePath = companiesBasePath
-        this._contactsAssociationsApi.basePath = contactsBasePath
-        this._contactsBasicApi.basePath = contactsBasePath
-        this._contactsBatchApi.basePath = contactsBasePath
-        this._contactsSearchApi.basePath = contactsBasePath
-        this._dealsAssociationsApi.basePath = dealsBasePath
-        this._dealsBasicApi.basePath = dealsBasePath
-        this._dealsBatchApi.basePath = dealsBasePath
-        this._dealsSearchApi.basePath = dealsBasePath
-        this._cardsApi.basePath = cardsBasePath
-        this._importsCoreApi.basePath = importsBasePath
-        this._lineItemsAssociationsApi.basePath = lineItemsBasePath
-        this._lineItemsBasicApi.basePath = lineItemsBasePath
-        this._lineItemsBatchApi.basePath = lineItemsBasePath
-        this._lineItemsSearchApi.basePath = lineItemsBasePath
-        this._ownersDefaultApi.basePath = ownersBasePath
-        this._pipelinesApi.basePath = pipelinesBasePath
-        this._pipelineStagesApi.basePath = pipelinesBasePath
-        this._productsAssociationsApi.basePath = productsBasePath
-        this._productsBasicApi.basePath = productsBasePath
-        this._productsBatchApi.basePath = productsBasePath
-        this._productsSearchApi.basePath = productsBasePath
-        this._propertiesBatchApi.basePath = propertiesBasePath
-        this._propertiesCoreApi.basePath = propertiesBasePath
-        this._propertiesGroupsApi.basePath = propertiesBasePath
-        this._quotesAssociationsApi.basePath = quotesBasePath
-        this._quotesBasicApi.basePath = quotesBasePath
-        this._quotesBatchApi.basePath = quotesBasePath
-        this._quotesSearchApi.basePath = quotesBasePath
-        this._ticketsAssociationsApi.basePath = ticketsBasePath
-        this._ticketsBasicApi.basePath = ticketsBasePath
-        this._ticketsBatchApi.basePath = ticketsBasePath
-        this._ticketsSearchApi.basePath = ticketsBasePath
-        this._eventsApi.basePath = timelinesBasePath
-        this._templatesApi.basePath = timelinesBasePath
-        this._tokensApi.basePath = timelinesBasePath
     }
 
     public setAccessToken(accessTokenToSet: string) {

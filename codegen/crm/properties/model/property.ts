@@ -10,16 +10,17 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 import { Option } from './option';
 import { PropertyModificationMetadata } from './propertyModificationMetadata';
 
 export class Property {
-    'updatedAt'?: string;
-    'createdAt'?: string;
+    'updatedAt'?: Date;
+    'createdAt'?: Date;
     /**
     * When the property was archived.
     */
-    'archivedAt'?: string;
+    'archivedAt'?: Date;
     /**
     * The internal property name, which must be used when referencing the property via the API.
     */
@@ -104,17 +105,17 @@ export class Property {
         {
             "name": "updatedAt",
             "baseName": "updatedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "archivedAt",
             "baseName": "archivedAt",
-            "type": "string"
+            "type": "Date"
         },
         {
             "name": "name",

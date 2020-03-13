@@ -10,9 +10,10 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 
 export class ErrorDetail {
-    'subCategory'?: string;
+    'subCategory'?: object;
     /**
     * A human readable message describing the error along with remediation steps where appropriate
     */
@@ -33,7 +34,7 @@ export class ErrorDetail {
         {
             "name": "subCategory",
             "baseName": "subCategory",
-            "type": "string"
+            "type": "object"
         },
         {
             "name": "message",

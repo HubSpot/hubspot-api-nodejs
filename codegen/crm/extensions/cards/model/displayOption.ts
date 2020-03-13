@@ -13,19 +13,19 @@
 import { RequestFile } from '../api';
 
 /**
-* Option definition for STATUS dataTypes
+* Option definition for STATUS dataTypes.
 */
 export class DisplayOption {
     /**
-    * Json friendly unique name for option
+    * JSON-friendly unique name for option.
     */
     'name': string;
     /**
-    * Displayed text for option
+    * The text that will be displayed to users for this option.
     */
     'label': string;
     /**
-    * Type of option
+    * The type of status.
     */
     'type': DisplayOption.TypeEnum;
 
