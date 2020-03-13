@@ -58,6 +58,7 @@ import {
     BatchApi as TicketsBatchApi,
     SearchApi as TicketsSearchApi,
 } from '../codegen/crm/tickets/api'
+import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timelines/api'
 
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
@@ -174,6 +175,11 @@ export class Client {
             basicApi: TicketsBasicApi,
             batchApi: TicketsBatchApi,
             searchApi: TicketsSearchApi
+        },
+        timelines: {
+            eventsApi: EventsApi,
+            templatesApi: TemplatesApi,
+            tokensApi: TokensApi
         }
     }
     protected _interceptors: Interceptor[] = [];
@@ -215,6 +221,9 @@ export class Client {
     protected _ticketsBasicApi: TicketsBasicApi
     protected _ticketsBatchApi: TicketsBatchApi
     protected _ticketsSearchApi: TicketsSearchApi
+    protected _eventsApi: EventsApi
+    protected _templatesApi: TemplatesApi
+    protected _tokensApi: TokensApi
     protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
@@ -280,6 +289,9 @@ export class Client {
         this._ticketsBasicApi = new TicketsBasicApi()
         this._ticketsBatchApi = new TicketsBatchApi()
         this._ticketsSearchApi = new TicketsSearchApi()
+        this._eventsApi = new EventsApi()
+        this._templatesApi = new TemplatesApi()
+        this._tokensApi = new TokensApi()
         this._apiClientsWithAuth = [
             this._associationsBatchApi,
             this._companiesAssociationsApi,
@@ -318,6 +330,9 @@ export class Client {
             this._ticketsBasicApi,
             this._ticketsBatchApi,
             this._ticketsSearchApi,
+            this._eventsApi,
+            this._templatesApi,
+            this._tokensApi
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._oauthDefaultApi)
@@ -390,6 +405,11 @@ export class Client {
                 batchApi: this._ticketsBatchApi,
                 searchApi: this._ticketsSearchApi,
             },
+            timelines: {
+                eventsApi: this._eventsApi,
+                templatesApi: this._templatesApi,
+                tokensApi: this._tokensApi,
+            }
         }
         this.oauth = {
             defaultApi: this._oauthDefaultApi,
@@ -425,6 +445,7 @@ export class Client {
         const propertiesBasePath = `${basePathToSet}/crm/v3/properties`.replace(/\/+$/, '')
         const quotesBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
         const ticketsBasePath = `${basePathToSet}/crm/v3/objects`.replace(/\/+$/, '')
+        const timelinesBasePath = `${basePathToSet}`.replace(/\/+$/, '')
 
         this._oauthDefaultApi.basePath = oauthBasePath
         this._associationsBatchApi.basePath = associationsBasePath
@@ -464,6 +485,9 @@ export class Client {
         this._ticketsBasicApi.basePath = ticketsBasePath
         this._ticketsBatchApi.basePath = ticketsBasePath
         this._ticketsSearchApi.basePath = ticketsBasePath
+        this._eventsApi.basePath = timelinesBasePath
+        this._templatesApi.basePath = timelinesBasePath
+        this._tokensApi.basePath = timelinesBasePath
     }
 
     public setAccessToken(accessTokenToSet: string) {
