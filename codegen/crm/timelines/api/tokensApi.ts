@@ -102,7 +102,7 @@ export class TokensApi {
      * @param appId The ID of the target app.
      */
     public async archiveEventTemplateToken (eventTemplateId: string, tokenName: string, appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+        const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -190,7 +190,7 @@ export class TokensApi {
      * @param timelineEventTemplateToken The new token definition.
      */
     public async createEventTemplateToken (eventTemplateId: string, appId: object, timelineEventTemplateToken?: TimelineEventTemplateToken, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens'
+        const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -275,7 +275,7 @@ export class TokensApi {
      * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
      */
     public async updateEventTemplateToken (eventTemplateId: string, tokenName: string, appId: object, timelineEventTemplateTokenUpdateRequest?: TimelineEventTemplateTokenUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+        const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));

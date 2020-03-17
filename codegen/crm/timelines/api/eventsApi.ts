@@ -103,7 +103,7 @@ export class EventsApi {
      * @param timelineEvent The timeline event definition.
      */
     public async create (timelineEvent?: TimelineEvent, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventResponse;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/events';
+        const localVarPath = this.basePath + '/crm/v3/timeline/events';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -173,7 +173,7 @@ export class EventsApi {
      * @param batchInputTimelineEvent The timeline event definition.
      */
     public async createBatch (batchInputTimelineEvent?: BatchInputTimelineEvent, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseTimelineEventResponse;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/events/batch/create';
+        const localVarPath = this.basePath + '/crm/v3/timeline/events/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -244,7 +244,7 @@ export class EventsApi {
      * @param eventId The event ID.
      */
     public async getById (eventTemplateId: number, eventId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventResponse;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}'
+        const localVarPath = this.basePath + '/crm/v3/timeline/events/{eventTemplateId}/{eventId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
         let localVarQueryParameters: any = {};
@@ -326,7 +326,7 @@ export class EventsApi {
      * @param eventId The event ID.
      */
     public async getDetailById (eventTemplateId: number, eventId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: EventDetail;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}/detail'
+        const localVarPath = this.basePath + '/crm/v3/timeline/events/{eventTemplateId}/{eventId}/detail'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
         let localVarQueryParameters: any = {};
@@ -409,7 +409,7 @@ export class EventsApi {
      * @param detail Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
      */
     public async getRenderById (eventTemplateId: number, eventId: string, detail?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = this.basePath + '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}/render'
+        const localVarPath = this.basePath + '/crm/v3/timeline/events/{eventTemplateId}/{eventId}/render'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
         let localVarQueryParameters: any = {};

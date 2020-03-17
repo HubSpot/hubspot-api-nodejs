@@ -62,7 +62,7 @@ import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timelines/api
 
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
-const DEFAULT_HEADERS = { 'User-Agent': `${pJson.name};${pJson.version}` }
+const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${pJson.version}` }
 const DEFAULT_LIMITER_OPTIONS = {
     minTime: 1000 / 9,
     maxConcurrent: 5,
@@ -431,7 +431,7 @@ export class Client {
         }
 
         this._basePath = basePathToSet.replace(/\/+$/, '')
-        const oauthBasePath = `${basePathToSet}/oauth`
+        const oauthBasePath = `${this._basePath}/oauth`
 
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.basePath = this._basePath
