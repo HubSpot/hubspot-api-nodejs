@@ -431,7 +431,7 @@ export class Client {
         }
 
         this._basePath = basePathToSet.replace(/\/+$/, '')
-        const oauthBasePath = `${basePathToSet}/oauth`
+        const oauthBasePath = `${this._basePath}/oauth`
 
         _.each(this._apiClientsWithAuth, (apiClient) => {
             apiClient.basePath = this._basePath
