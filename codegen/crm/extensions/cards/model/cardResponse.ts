@@ -20,19 +20,19 @@ import { CardFetchBody } from './cardFetchBody';
 */
 export class CardResponse {
     /**
-    * Generated unique ID for card
+    * Generated unique ID for card.
     */
     'id': string;
     /**
-    * When this card was created
+    * When this card was created.
     */
     'createdAt'?: Date;
     /**
-    * Last time this card was updated
+    * The last time this card was updated.
     */
     'updatedAt'?: Date;
     /**
-    * Displayed title of this Crm Card
+    * Displayed title of this card.
     */
     'title': string;
     'fetch': CardFetchBody;
