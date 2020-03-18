@@ -494,7 +494,7 @@ app.get('/export', async (req, res) => {
         logResponse(propertiesResponse)
 
         const contactsPropertiesNames = _.map(propertiesResponse.body.results, 'name')
-        const contacts = await getAllContacts(contactsPropertiesNames)
+        const contacts = await hubspotClient.crm.contacts.getAll(undefined, undefined, contactsPropertiesNames)
         const csvContent = toCsv(contacts, propertiesResponse.body.results)
 
         res.csv(csvContent, true, { 'Content-disposition': 'attachment; filename=contacts.csv' })

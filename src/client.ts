@@ -109,10 +109,10 @@ export enum NumberOfRetries {
     Three,
     Four,
     Five,
-    Six
+    Six,
 }
 
-export type Interceptor = (requestOptions: request.Options) => (Promise<any> | void);
+export type Interceptor = (requestOptions: request.Options) => Promise<any> | void
 
 export {
     associationsModels,
@@ -141,86 +141,135 @@ export class HttpError extends Error {
 
 export class Client {
     public oauth: {
-        defaultApi: OauthDefaultApi,
-        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string,
+        defaultApi: OauthDefaultApi
+        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
     }
     public crm: {
         associations: {
-            batchApi: AssociationsBatchApi,
-        },
+            batchApi: AssociationsBatchApi
+        }
         companies: {
-            associationsApi: CompaniesAssociationsApi,
-            basicApi: CompaniesBasicApi,
-            batchApi: CompaniesBatchApi,
-            searchApi: CompaniesSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<companiesModels.SimplePublicObject[]>,
-        },
+            associationsApi: CompaniesAssociationsApi
+            basicApi: CompaniesBasicApi
+            batchApi: CompaniesBatchApi
+            searchApi: CompaniesSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<companiesModels.SimplePublicObject[]>
+        }
         contacts: {
-            associationsApi: ContactsAssociationsApi,
-            basicApi: ContactsBasicApi,
-            batchApi: ContactsBatchApi,
-            searchApi: ContactsSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<contactsModels.SimplePublicObject[]>,
-        },
+            associationsApi: ContactsAssociationsApi
+            basicApi: ContactsBasicApi
+            batchApi: ContactsBatchApi
+            searchApi: ContactsSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<contactsModels.SimplePublicObject[]>
+        }
         deals: {
-            associationsApi: DealsAssociationsApi,
-            basicApi: DealsBasicApi,
-            batchApi: DealsBatchApi,
-            searchApi: DealsSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<dealsModels.SimplePublicObject[]>,
-        },
+            associationsApi: DealsAssociationsApi
+            basicApi: DealsBasicApi
+            batchApi: DealsBatchApi
+            searchApi: DealsSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<dealsModels.SimplePublicObject[]>
+        }
         extensions: {
             cards: {
-                cardsApi: CardsApi,
-            },
-        },
+                cardsApi: CardsApi
+            }
+        }
         imports: {
-            coreApi: ImportsCoreApi,
-        },
+            coreApi: ImportsCoreApi
+        }
         lineItems: {
-            associationsApi: LineItemsAssociationsApi,
-            basicApi: LineItemsBasicApi,
-            batchApi: LineItemsBatchApi,
-            searchApi: LineItemsSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<lineItemsModels.SimplePublicObject[]>,
-        },
+            associationsApi: LineItemsAssociationsApi
+            basicApi: LineItemsBasicApi
+            batchApi: LineItemsBatchApi
+            searchApi: LineItemsSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<lineItemsModels.SimplePublicObject[]>
+        }
         owners: {
-            defaultApi: OwnersDefaultApi,
-        },
+            defaultApi: OwnersDefaultApi
+        }
         pipelines: {
-            pipelinesApi: PipelinesApi,
-            pipelineStagesApi: PipelineStagesApi,
-        },
+            pipelinesApi: PipelinesApi
+            pipelineStagesApi: PipelineStagesApi
+        }
         products: {
-            associationsApi: ProductsAssociationsApi,
-            basicApi: ProductsBasicApi,
-            batchApi: ProductsBatchApi,
-            searchApi: ProductsSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<productsModels.SimplePublicObject[]>,
-        },
+            associationsApi: ProductsAssociationsApi
+            basicApi: ProductsBasicApi
+            batchApi: ProductsBatchApi
+            searchApi: ProductsSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<productsModels.SimplePublicObject[]>
+        }
         properties: {
-            batchApi: PropertiesBatchApi,
-            coreApi: PropertiesCoreApi,
-            groupsApi: PropertiesGroupsApi,
-        },
+            batchApi: PropertiesBatchApi
+            coreApi: PropertiesCoreApi
+            groupsApi: PropertiesGroupsApi
+        }
         quotes: {
-            associationsApi: QuotesAssociationsApi,
-            basicApi: QuotesBasicApi,
-            batchApi: QuotesBatchApi,
-            searchApi: QuotesSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<quotesModels.SimplePublicObject[]>,
-        },
+            associationsApi: QuotesAssociationsApi
+            basicApi: QuotesBasicApi
+            batchApi: QuotesBatchApi
+            searchApi: QuotesSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<quotesModels.SimplePublicObject[]>
+        }
         tickets: {
-            associationsApi: TicketsAssociationsApi,
-            basicApi: TicketsBasicApi,
-            batchApi: TicketsBatchApi,
-            searchApi: TicketsSearchApi,
-            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<ticketsModels.SimplePublicObject[]>,
-        },
+            associationsApi: TicketsAssociationsApi
+            basicApi: TicketsBasicApi
+            batchApi: TicketsBatchApi
+            searchApi: TicketsSearchApi
+            getAll: (
+                limit?: number,
+                after?: string,
+                properties?: string[],
+                associations?: string[],
+                archived?: boolean,
+                options?: { headers: { [name: string]: string } },
+            ) => Promise<ticketsModels.SimplePublicObject[]>
+        }
         timelines: {
-            eventsApi: EventsApi,
-            templatesApi: TemplatesApi,
-            tokensApi: TokensApi,
+            eventsApi: EventsApi
+            templatesApi: TemplatesApi
+            tokensApi: TokensApi
         }
     }
     protected _interceptors: Interceptor[] = []
@@ -272,8 +321,8 @@ export class Client {
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
     protected authentications = {
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        hapikey: new ApiKeyAuth('query', 'hapikey'),
+        oauth2: new OAuth(),
     }
     protected _limiter: Bottleneck | undefined
     protected _numberOfApiCallRetries: NumberOfRetries
@@ -389,21 +438,30 @@ export class Client {
                 basicApi: this._companiesBasicApi,
                 batchApi: this._companiesBatchApi,
                 searchApi: this._companiesSearchApi,
-                getAll: this._retrieveGetAllFunction<companiesModels.SimplePublicObject, companiesModels.CollectionResponseSimplePublicObject>(this._companiesBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    companiesModels.SimplePublicObject,
+                    companiesModels.CollectionResponseSimplePublicObject
+                >(this._companiesBasicApi.getPage),
             },
             contacts: {
                 associationsApi: this._contactsAssociationsApi,
                 basicApi: this._contactsBasicApi,
                 batchApi: this._contactsBatchApi,
                 searchApi: this._contactsSearchApi,
-                getAll: this._retrieveGetAllFunction<contactsModels.SimplePublicObject, contactsModels.CollectionResponseSimplePublicObject>(this._contactsBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    contactsModels.SimplePublicObject,
+                    contactsModels.CollectionResponseSimplePublicObject
+                >(this._contactsBasicApi.getPage),
             },
             deals: {
                 associationsApi: this._dealsAssociationsApi,
                 basicApi: this._dealsBasicApi,
                 batchApi: this._dealsBatchApi,
                 searchApi: this._dealsSearchApi,
-                getAll: this._retrieveGetAllFunction<dealsModels.SimplePublicObject, dealsModels.CollectionResponseSimplePublicObject>(this._dealsBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    dealsModels.SimplePublicObject,
+                    dealsModels.CollectionResponseSimplePublicObject
+                >(this._dealsBasicApi.getPage),
             },
             extensions: {
                 cards: {
@@ -418,7 +476,10 @@ export class Client {
                 basicApi: this._lineItemsBasicApi,
                 batchApi: this._lineItemsBatchApi,
                 searchApi: this._lineItemsSearchApi,
-                getAll: this._retrieveGetAllFunction<lineItemsModels.SimplePublicObject, lineItemsModels.CollectionResponseSimplePublicObject>(this._lineItemsBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    lineItemsModels.SimplePublicObject,
+                    lineItemsModels.CollectionResponseSimplePublicObject
+                >(this._lineItemsBasicApi.getPage),
             },
             owners: {
                 defaultApi: this._ownersDefaultApi,
@@ -432,7 +493,10 @@ export class Client {
                 basicApi: this._productsBasicApi,
                 batchApi: this._productsBatchApi,
                 searchApi: this._productsSearchApi,
-                getAll: this._retrieveGetAllFunction<productsModels.SimplePublicObject, productsModels.CollectionResponseSimplePublicObject>(this._productsBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    productsModels.SimplePublicObject,
+                    productsModels.CollectionResponseSimplePublicObject
+                >(this._productsBasicApi.getPage),
             },
             properties: {
                 batchApi: this._propertiesBatchApi,
@@ -444,14 +508,20 @@ export class Client {
                 basicApi: this._quotesBasicApi,
                 batchApi: this._quotesBatchApi,
                 searchApi: this._quotesSearchApi,
-                getAll: this._retrieveGetAllFunction<quotesModels.SimplePublicObject, quotesModels.CollectionResponseSimplePublicObject>(this._quotesBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    quotesModels.SimplePublicObject,
+                    quotesModels.CollectionResponseSimplePublicObject
+                >(this._quotesBasicApi.getPage),
             },
             tickets: {
                 associationsApi: this._ticketsAssociationsApi,
                 basicApi: this._ticketsBasicApi,
                 batchApi: this._ticketsBatchApi,
                 searchApi: this._ticketsSearchApi,
-                getAll: this._retrieveGetAllFunction<ticketsModels.SimplePublicObject, ticketsModels.CollectionResponseSimplePublicObject>(this._ticketsBasicApi.getPage),
+                getAll: this._retrieveGetAllFunction<
+                    ticketsModels.SimplePublicObject,
+                    ticketsModels.CollectionResponseSimplePublicObject
+                >(this._ticketsBasicApi.getPage),
             },
             timelines: {
                 eventsApi: this._eventsApi,
@@ -540,7 +610,7 @@ export class Client {
         }
     }
 
-    public apiRequest(opts: any): Promise<{ response: http.IncomingMessage; body?: any; }> {
+    public apiRequest(opts: any): Promise<{ response: http.IncomingMessage; body?: any }> {
         const params = _.cloneDeep(opts)
         params.method = params.method || 'GET'
         params.json = true
@@ -564,7 +634,9 @@ export class Client {
 
         let authenticationPromise = Promise.resolve()
         if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(params))
+            authenticationPromise = authenticationPromise.then(() =>
+                this.authentications.hapikey.applyToRequest(params),
+            )
         }
         if (this.authentications.oauth2.accessToken) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(params))
@@ -577,7 +649,7 @@ export class Client {
         }
 
         return interceptorPromise.then(() => {
-            return new Promise<{ response: http.IncomingMessage; body?: any; }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body?: any }>((resolve, reject) => {
                 request(params, (error: any, response: Response, body: any) => {
                     if (error) {
                         reject(error)
@@ -602,16 +674,45 @@ export class Client {
         return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
     }
 
-
-    private _retrieveGetAllFunction<T, V>(getPageFunction: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<{ response: http.IncomingMessage; body: V; }>): (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<T[]> {
-        return  async (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }): Promise<T[]> => {
+    private _retrieveGetAllFunction<T, V>(
+        getPageFunction: (
+            limit?: number,
+            after?: string,
+            properties?: string[],
+            associations?: string[],
+            archived?: boolean,
+            options?: { headers: { [name: string]: string } },
+        ) => Promise<{ response: http.IncomingMessage; body: V }>,
+    ): (
+        limit?: number,
+        after?: string,
+        properties?: string[],
+        associations?: string[],
+        archived?: boolean,
+        options?: { headers: { [name: string]: string } },
+    ) => Promise<T[]> {
+        return async (
+            limit?: number,
+            after?: string,
+            properties?: string[],
+            associations?: string[],
+            archived?: boolean,
+            options?: { headers: { [name: string]: string } },
+        ): Promise<T[]> => {
             const limitInternal = limit ?? 100
             let afterInternal = after
             const result: T[] = []
-            let response: { response: http.IncomingMessage; body: V; }
+            let response: { response: http.IncomingMessage; body: V }
 
             do {
-                response = await getPageFunction(limitInternal, afterInternal, properties, associations, archived, options)
+                response = await getPageFunction(
+                    limitInternal,
+                    afterInternal,
+                    properties,
+                    associations,
+                    archived,
+                    options,
+                )
                 afterInternal = _.get(response, 'body.paging.next.after')
                 result.push(..._.get(response, 'body.results'))
             } while (!_.isNil(afterInternal))
@@ -638,7 +739,7 @@ export class Client {
     }
 
     private _setUseQuerystring(useQuerystring: boolean) {
-        _.each(this._apiClients, (apiClient) => apiClient._useQuerystring = useQuerystring)
+        _.each(this._apiClients, (apiClient) => (apiClient._useQuerystring = useQuerystring))
     }
 
     private _getLimiterWrappedMethod(method: any) {
@@ -649,7 +750,9 @@ export class Client {
     }
 
     private _waitAfterRequestFailure(statusCode: number, retryNumber: number, retryTimeout: number) {
-        console.error(`Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`)
+        console.error(
+            `Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`,
+        )
         return new Promise((resolve) => setTimeout(resolve, retryTimeout * retryNumber))
     }
 
@@ -746,9 +849,17 @@ export class Client {
         this.apiRequest = apiRequestMethodToPatch
     }
 
-    private _setMethodsPatchOptions(options: { useLimiter?: boolean; limiterOptions?: LimiterOptions; numberOfApiCallRetries?: NumberOfRetries } = {}) {
+    private _setMethodsPatchOptions(
+        options: {
+            useLimiter?: boolean
+            limiterOptions?: LimiterOptions
+            numberOfApiCallRetries?: NumberOfRetries
+        } = {},
+    ) {
         this._useLimiter = _.isNil(options.useLimiter) ? true : options.useLimiter
-        this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries) ? NumberOfRetries.NoRetries : options.numberOfApiCallRetries
+        this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)
+            ? NumberOfRetries.NoRetries
+            : options.numberOfApiCallRetries
 
         if (this._useLimiter) {
             this._limiterOptions = _.isNil(options.limiterOptions) ? DEFAULT_LIMITER_OPTIONS : options.limiterOptions
