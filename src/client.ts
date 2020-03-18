@@ -7,58 +7,73 @@ import { Response } from 'request'
 // @ts-ignore
 import * as pJson from '../../package.json'
 import { BatchApi as AssociationsBatchApi } from '../codegen/crm/associations/api'
+import * as associationsModels from '../codegen/crm/associations/model/models'
 import {
     AssociationsApi as CompaniesAssociationsApi,
     BasicApi as CompaniesBasicApi,
     BatchApi as CompaniesBatchApi,
     SearchApi as CompaniesSearchApi,
 } from '../codegen/crm/companies/api'
+import * as companiesModels from '../codegen/crm/companies/model/models'
 import {
     AssociationsApi as ContactsAssociationsApi,
     BasicApi as ContactsBasicApi,
     BatchApi as ContactsBatchApi,
     SearchApi as ContactsSearchApi,
 } from '../codegen/crm/contacts/api'
+import * as contactsModels from '../codegen/crm/contacts/model/models'
 import {
     AssociationsApi as DealsAssociationsApi,
     BasicApi as DealsBasicApi,
     BatchApi as DealsBatchApi,
     SearchApi as DealsSearchApi,
 } from '../codegen/crm/deals/api'
+import * as dealsModels from '../codegen/crm/deals/model/models'
 import { CardsApi } from '../codegen/crm/extensions/cards/api'
+import * as cardsModels from '../codegen/crm/extensions/cards/model/models'
 import { CoreApi as ImportsCoreApi } from '../codegen/crm/imports/api/coreApi'
+import * as importsModels from '../codegen/crm/imports/model/models'
 import {
     AssociationsApi as LineItemsAssociationsApi,
     BasicApi as LineItemsBasicApi,
     BatchApi as LineItemsBatchApi,
     SearchApi as LineItemsSearchApi,
 } from '../codegen/crm/line_items/api'
+import * as lineItemsModels from '../codegen/crm/line_items/model/models'
 import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
+import * as ownersModels from '../codegen/crm/owners/model/models'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
+import * as pipelinesModels from '../codegen/crm/pipelines/model/models'
 import {
     AssociationsApi as ProductsAssociationsApi,
     BasicApi as ProductsBasicApi,
     BatchApi as ProductsBatchApi,
     SearchApi as ProductsSearchApi,
 } from '../codegen/crm/products/api'
+import * as productsModels from '../codegen/crm/products/model/models'
 import {
     BatchApi as PropertiesBatchApi,
     CoreApi as PropertiesCoreApi,
     GroupsApi as PropertiesGroupsApi,
 } from '../codegen/crm/properties/api'
+import * as propertiesModels from '../codegen/crm/properties/model/models'
 import {
     AssociationsApi as QuotesAssociationsApi,
     BasicApi as QuotesBasicApi,
     BatchApi as QuotesBatchApi,
     SearchApi as QuotesSearchApi,
 } from '../codegen/crm/quotes/api'
+import * as quotesModels from '../codegen/crm/quotes/model/models'
 import {
     AssociationsApi as TicketsAssociationsApi,
     BasicApi as TicketsBasicApi,
     BatchApi as TicketsBatchApi,
     SearchApi as TicketsSearchApi,
 } from '../codegen/crm/tickets/api'
+import * as ticketsModels from '../codegen/crm/tickets/model/models'
 import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timelines/api'
+import * as timelinesModels from '../codegen/crm/timelines/model/models'
+import * as oauthModels from '../codegen/oauth/model/models'
 
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 
@@ -75,14 +90,15 @@ const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
     'setDefaultAuthentication',
     'setApiKey',
     'accessToken',
-    'addInterceptor',]
+    'addInterceptor',
+]
 
 const RETRY_TIMEOUT = {
     INTERNAL_SERVER_ERROR: 200,
-    TOO_MANY_REQUESTS: 10*1000
+    TOO_MANY_REQUESTS: 10 * 1000,
 }
 
-const TEN_SECONDLY_ROLLING = "TEN_SECONDLY_ROLLING"
+const TEN_SECONDLY_ROLLING = 'TEN_SECONDLY_ROLLING'
 
 export type LimiterOptions = Bottleneck.ConstructorOptions
 
@@ -98,91 +114,116 @@ export enum NumberOfRetries {
 
 export type Interceptor = (requestOptions: request.Options) => (Promise<any> | void);
 
+export {
+    associationsModels,
+    companiesModels,
+    contactsModels,
+    dealsModels,
+    cardsModels,
+    importsModels,
+    lineItemsModels,
+    ownersModels,
+    pipelinesModels,
+    productsModels,
+    propertiesModels,
+    quotesModels,
+    ticketsModels,
+    timelinesModels,
+    oauthModels,
+}
+
 export class HttpError extends Error {
-    constructor (public response: http.IncomingMessage, public body: any, public statusCode?: number) {
-        super('HTTP request failed');
-        this.name = 'HttpError';
+    constructor(public response: http.IncomingMessage, public body: any, public statusCode?: number) {
+        super('HTTP request failed')
+        this.name = 'HttpError'
     }
 }
 
 export class Client {
     public oauth: {
         defaultApi: OauthDefaultApi,
-        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
+        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string,
     }
     public crm: {
         associations: {
-            batchApi: AssociationsBatchApi
+            batchApi: AssociationsBatchApi,
         },
         companies: {
             associationsApi: CompaniesAssociationsApi,
             basicApi: CompaniesBasicApi,
             batchApi: CompaniesBatchApi,
-            searchApi: CompaniesSearchApi
+            searchApi: CompaniesSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<companiesModels.SimplePublicObject[]>,
         },
         contacts: {
             associationsApi: ContactsAssociationsApi,
             basicApi: ContactsBasicApi,
             batchApi: ContactsBatchApi,
-            searchApi: ContactsSearchApi
+            searchApi: ContactsSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<contactsModels.SimplePublicObject[]>,
         },
         deals: {
             associationsApi: DealsAssociationsApi,
             basicApi: DealsBasicApi,
             batchApi: DealsBatchApi,
-            searchApi: DealsSearchApi
+            searchApi: DealsSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<dealsModels.SimplePublicObject[]>,
         },
         extensions: {
             cards: {
-                cardsApi: CardsApi
+                cardsApi: CardsApi,
             },
         },
         imports: {
-            coreApi: ImportsCoreApi
+            coreApi: ImportsCoreApi,
         },
         lineItems: {
             associationsApi: LineItemsAssociationsApi,
             basicApi: LineItemsBasicApi,
             batchApi: LineItemsBatchApi,
-            searchApi: LineItemsSearchApi
+            searchApi: LineItemsSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<lineItemsModels.SimplePublicObject[]>,
         },
         owners: {
-            defaultApi: OwnersDefaultApi
+            defaultApi: OwnersDefaultApi,
         },
         pipelines: {
             pipelinesApi: PipelinesApi,
-            pipelineStagesApi: PipelineStagesApi
+            pipelineStagesApi: PipelineStagesApi,
         },
         products: {
             associationsApi: ProductsAssociationsApi,
             basicApi: ProductsBasicApi,
             batchApi: ProductsBatchApi,
-            searchApi: ProductsSearchApi
+            searchApi: ProductsSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<productsModels.SimplePublicObject[]>,
         },
         properties: {
             batchApi: PropertiesBatchApi,
             coreApi: PropertiesCoreApi,
-            groupsApi: PropertiesGroupsApi
+            groupsApi: PropertiesGroupsApi,
         },
         quotes: {
             associationsApi: QuotesAssociationsApi,
             basicApi: QuotesBasicApi,
             batchApi: QuotesBatchApi,
-            searchApi: QuotesSearchApi
+            searchApi: QuotesSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<quotesModels.SimplePublicObject[]>,
         },
         tickets: {
             associationsApi: TicketsAssociationsApi,
             basicApi: TicketsBasicApi,
             batchApi: TicketsBatchApi,
-            searchApi: TicketsSearchApi
+            searchApi: TicketsSearchApi,
+            getAll: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<ticketsModels.SimplePublicObject[]>,
         },
         timelines: {
             eventsApi: EventsApi,
             templatesApi: TemplatesApi,
-            tokensApi: TokensApi
+            tokensApi: TokensApi,
         }
     }
-    protected _interceptors: Interceptor[] = [];
+    protected _interceptors: Interceptor[] = []
     protected _oauthDefaultApi: OauthDefaultApi
     protected _associationsBatchApi: AssociationsBatchApi
     protected _companiesAssociationsApi: CompaniesAssociationsApi
@@ -247,7 +288,7 @@ export class Client {
             defaultHeaders?: object
             useLimiter?: boolean
             limiterOptions?: LimiterOptions
-            numberOfApiCallRetries? : NumberOfRetries
+            numberOfApiCallRetries?: NumberOfRetries
             interceptors?: Interceptor[]
         } = {},
     ) {
@@ -332,7 +373,7 @@ export class Client {
             this._ticketsSearchApi,
             this._eventsApi,
             this._templatesApi,
-            this._tokensApi
+            this._tokensApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._oauthDefaultApi)
@@ -348,18 +389,21 @@ export class Client {
                 basicApi: this._companiesBasicApi,
                 batchApi: this._companiesBatchApi,
                 searchApi: this._companiesSearchApi,
+                getAll: this._retrieveGetAllFunction<companiesModels.SimplePublicObject, companiesModels.CollectionResponseSimplePublicObject>(this._companiesBasicApi.getPage),
             },
             contacts: {
                 associationsApi: this._contactsAssociationsApi,
                 basicApi: this._contactsBasicApi,
                 batchApi: this._contactsBatchApi,
                 searchApi: this._contactsSearchApi,
+                getAll: this._retrieveGetAllFunction<contactsModels.SimplePublicObject, contactsModels.CollectionResponseSimplePublicObject>(this._contactsBasicApi.getPage),
             },
             deals: {
                 associationsApi: this._dealsAssociationsApi,
                 basicApi: this._dealsBasicApi,
                 batchApi: this._dealsBatchApi,
                 searchApi: this._dealsSearchApi,
+                getAll: this._retrieveGetAllFunction<dealsModels.SimplePublicObject, dealsModels.CollectionResponseSimplePublicObject>(this._dealsBasicApi.getPage),
             },
             extensions: {
                 cards: {
@@ -367,13 +411,14 @@ export class Client {
                 },
             },
             imports: {
-              coreApi: this._importsCoreApi,
+                coreApi: this._importsCoreApi,
             },
             lineItems: {
                 associationsApi: this._lineItemsAssociationsApi,
                 basicApi: this._lineItemsBasicApi,
                 batchApi: this._lineItemsBatchApi,
                 searchApi: this._lineItemsSearchApi,
+                getAll: this._retrieveGetAllFunction<lineItemsModels.SimplePublicObject, lineItemsModels.CollectionResponseSimplePublicObject>(this._lineItemsBasicApi.getPage),
             },
             owners: {
                 defaultApi: this._ownersDefaultApi,
@@ -387,6 +432,7 @@ export class Client {
                 basicApi: this._productsBasicApi,
                 batchApi: this._productsBatchApi,
                 searchApi: this._productsSearchApi,
+                getAll: this._retrieveGetAllFunction<productsModels.SimplePublicObject, productsModels.CollectionResponseSimplePublicObject>(this._productsBasicApi.getPage),
             },
             properties: {
                 batchApi: this._propertiesBatchApi,
@@ -398,18 +444,20 @@ export class Client {
                 basicApi: this._quotesBasicApi,
                 batchApi: this._quotesBatchApi,
                 searchApi: this._quotesSearchApi,
+                getAll: this._retrieveGetAllFunction<quotesModels.SimplePublicObject, quotesModels.CollectionResponseSimplePublicObject>(this._quotesBasicApi.getPage),
             },
             tickets: {
                 associationsApi: this._ticketsAssociationsApi,
                 basicApi: this._ticketsBasicApi,
                 batchApi: this._ticketsBatchApi,
                 searchApi: this._ticketsSearchApi,
+                getAll: this._retrieveGetAllFunction<ticketsModels.SimplePublicObject, ticketsModels.CollectionResponseSimplePublicObject>(this._ticketsBasicApi.getPage),
             },
             timelines: {
                 eventsApi: this._eventsApi,
                 templatesApi: this._templatesApi,
                 tokensApi: this._tokensApi,
-            }
+            },
         }
         this.oauth = {
             defaultApi: this._oauthDefaultApi,
@@ -537,7 +585,7 @@ export class Client {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response, body })
                         } else {
-                            reject(new HttpError(response, body, response.statusCode));
+                            reject(new HttpError(response, body, response.statusCode))
                         }
                     }
                 })
@@ -554,14 +602,32 @@ export class Client {
         return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
     }
 
+
+    private _retrieveGetAllFunction<T, V>(getPageFunction: (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<{ response: http.IncomingMessage; body: V; }>): (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }) => Promise<T[]> {
+        return  async (limit?: number, after?: string, properties?: string[], associations?: string[], archived?: boolean, options?: { headers: { [name: string]: string } }): Promise<T[]> => {
+            const limitInternal = limit ?? 100
+            let afterInternal = after
+            const result: T[] = []
+            let response: { response: http.IncomingMessage; body: V; }
+
+            do {
+                response = await getPageFunction(limitInternal, afterInternal, properties, associations, archived, options)
+                afterInternal = _.get(response, 'body.paging.next.after')
+                result.push(..._.get(response, 'body.results'))
+            } while (!_.isNil(afterInternal))
+
+            return result
+        }
+    }
+
     private _setOptions(options: {
         apiKey?: string
         accessToken?: string
         basePath?: string
         defaultHeaders?: object
         useLimiter?: boolean
-        limiterOptions? : LimiterOptions
-        numberOfApiCallRetries? : NumberOfRetries
+        limiterOptions?: LimiterOptions
+        numberOfApiCallRetries?: NumberOfRetries
         interceptors?: Interceptor[]
     }) {
         this.setAuth(options)
@@ -625,7 +691,7 @@ export class Client {
                 }
             }
 
-            return new Promise((resolve, reject)=> {
+            return new Promise((resolve, reject) => {
                 if (resultRejected) {
                     return reject(resultRejected)
                 }
@@ -634,7 +700,7 @@ export class Client {
         }
     }
 
-    private _patchApiClientMethod (methodName: string, clientInstance: any, clientPrototype: any) {
+    private _patchApiClientMethod(methodName: string, clientInstance: any, clientPrototype: any) {
         const methodToPatch = clientPrototype[methodName].bind(clientInstance)
 
         let patchedMethod = methodToPatch
@@ -652,7 +718,7 @@ export class Client {
 
     private _patchApiClient(clientInstance: any) {
         const clientPrototype = Object.getPrototypeOf(clientInstance)
-        let methodsNamesToPatch = Object.getOwnPropertyNames(clientPrototype);
+        let methodsNamesToPatch = Object.getOwnPropertyNames(clientPrototype)
         methodsNamesToPatch = _.differenceWith(methodsNamesToPatch, METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING)
 
         const patchFn = this._patchApiClientMethod.bind(this)
@@ -669,7 +735,7 @@ export class Client {
     private _patchApiRequestMethod() {
         let apiRequestMethodToPatch: any = this.apiRequest.bind(this)
 
-        if (this. _useLimiter) {
+        if (this._useLimiter) {
             apiRequestMethodToPatch = this._getLimiterWrappedMethod(apiRequestMethodToPatch)
         }
 
@@ -680,12 +746,12 @@ export class Client {
         this.apiRequest = apiRequestMethodToPatch
     }
 
-    private _setMethodsPatchOptions(options: { useLimiter?: boolean; limiterOptions?: LimiterOptions; numberOfApiCallRetries? : NumberOfRetries } = {}) {
-        this._useLimiter = _.isNil(options.useLimiter)? true: options.useLimiter
-        this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries)? NumberOfRetries.NoRetries: options.numberOfApiCallRetries
+    private _setMethodsPatchOptions(options: { useLimiter?: boolean; limiterOptions?: LimiterOptions; numberOfApiCallRetries?: NumberOfRetries } = {}) {
+        this._useLimiter = _.isNil(options.useLimiter) ? true : options.useLimiter
+        this._numberOfApiCallRetries = _.isNil(options.numberOfApiCallRetries) ? NumberOfRetries.NoRetries : options.numberOfApiCallRetries
 
         if (this._useLimiter) {
-            this._limiterOptions = _.isNil(options.limiterOptions)? DEFAULT_LIMITER_OPTIONS: options.limiterOptions
+            this._limiterOptions = _.isNil(options.limiterOptions) ? DEFAULT_LIMITER_OPTIONS : options.limiterOptions
             this._limiter = new Bottleneck(this._limiterOptions)
         }
 
