@@ -1,6 +1,6 @@
 # HubSpot-nodejs contacts sample app
 
-This is a sample app for the [hubspot-php SDK](../../../../../). Currently, this app focuses on demonstrating the functionality of [Contacts API](https://developers.hubspot.com/docs-beta/crm/contacts) endpoints and their related actions. Additionally it shows how to work with paged results.
+This is a sample app for the [hubspot-php SDK](../../../../../). Currently, this app focuses on demonstrating the functionality of [Contacts API](https://developers.hubspot.com/docs-beta/crm/contacts) endpoints and their related actions. Additionally it shows how to work with paged results and how to use getAll method.
 
 Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs-beta/creating-an-app)
 ### HubSpot Public API links used in this application

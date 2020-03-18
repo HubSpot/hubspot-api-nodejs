@@ -113,7 +113,7 @@ hubspotClient.crm.contacts.basicApi.getPage(limit, after, properties, associatio
 
 [promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-## {EXAMPLE} Create Contact, Company and associate created objects
+### {EXAMPLE} Create Contact, Company and associate created objects
 
 ```javascript
 const contactObj = { 
@@ -134,6 +134,16 @@ const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(c
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
 await hubspotClient.crm.companies.associationsApi.createAssociation(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
 ```
+
+### Get all:
+
+getAll method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
+
+```javascript
+const allContacts = await hubspotClient.crm.contacts.getAll()
+```
+
+Please note that pagination is used under the hood to get all results.
 
 ### OAuth
 
