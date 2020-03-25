@@ -1,5 +1,7 @@
 export * from './cardsApi';
 import { CardsApi } from './cardsApi';
+export * from './sampleResponseApi';
+import { SampleResponseApi } from './sampleResponseApi';
 import * as fs from 'fs';
 import * as http from 'http';
 
@@ -20,4 +22,4 @@ export interface RequestDetailedFile {
 
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
-export const APIS = [CardsApi];
+export const APIS = [CardsApi, SampleResponseApi];
