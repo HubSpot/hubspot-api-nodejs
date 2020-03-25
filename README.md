@@ -150,10 +150,10 @@ Please note that pagination is used under the hood to get all results.
 #### Obtain your authorization url
 
 ```javascript
-const client_id = 'your_client_id'
-const redirect_uri = 'take_me_to_the_ballpark'
+const clientId = 'your_client_id'
+const redirectUri = 'take_me_to_the_ballpark'
 const scope = 'some scopes'
-const uri = hubspotClient.oauth.getAuthorizationUrl(client_id, redirect_uri, scope)
+const uri = hubspotClient.oauth.getAuthorizationUrl(clientId, redirectUri, scope)
 ```
 
 #### Obtain an access token from an authorization_code
