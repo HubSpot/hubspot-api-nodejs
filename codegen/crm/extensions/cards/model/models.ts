@@ -1,3 +1,5 @@
+export * from './actionConfirmationBody';
+export * from './actionHookActionBody';
 export * from './cardActions';
 export * from './cardCreateRequest';
 export * from './cardDisplayBody';
@@ -10,10 +12,17 @@ export * from './cardPatchRequest';
 export * from './cardResponse';
 export * from './displayOption';
 export * from './errorDetail';
+export * from './iFrameActionBody';
+export * from './integratorCardPayloadResponse';
+export * from './integratorObjectResult';
 export * from './modelError';
+export * from './objectToken';
+export * from './topLevelActions';
 
 import localVarRequest = require('request');
 
+import { ActionConfirmationBody } from './actionConfirmationBody';
+import { ActionHookActionBody } from './actionHookActionBody';
 import { CardActions } from './cardActions';
 import { CardCreateRequest } from './cardCreateRequest';
 import { CardDisplayBody } from './cardDisplayBody';
@@ -26,7 +35,12 @@ import { CardPatchRequest } from './cardPatchRequest';
 import { CardResponse } from './cardResponse';
 import { DisplayOption } from './displayOption';
 import { ErrorDetail } from './errorDetail';
+import { IFrameActionBody } from './iFrameActionBody';
+import { IntegratorCardPayloadResponse } from './integratorCardPayloadResponse';
+import { IntegratorObjectResult } from './integratorObjectResult';
 import { ModelError } from './modelError';
+import { ObjectToken } from './objectToken';
+import { TopLevelActions } from './topLevelActions';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -41,12 +55,19 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
+        "ActionHookActionBody.TypeEnum": ActionHookActionBody.TypeEnum,
+        "ActionHookActionBody.HttpMethodEnum": ActionHookActionBody.HttpMethodEnum,
         "CardDisplayProperty.DataTypeEnum": CardDisplayProperty.DataTypeEnum,
         "CardObjectTypeBody.NameEnum": CardObjectTypeBody.NameEnum,
         "DisplayOption.TypeEnum": DisplayOption.TypeEnum,
+        "IFrameActionBody.TypeEnum": IFrameActionBody.TypeEnum,
+        "IntegratorCardPayloadResponse.ResponseVersionEnum": IntegratorCardPayloadResponse.ResponseVersionEnum,
+        "ObjectToken.DataTypeEnum": ObjectToken.DataTypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
+    "ActionConfirmationBody": ActionConfirmationBody,
+    "ActionHookActionBody": ActionHookActionBody,
     "CardActions": CardActions,
     "CardCreateRequest": CardCreateRequest,
     "CardDisplayBody": CardDisplayBody,
@@ -59,7 +80,12 @@ let typeMap: {[index: string]: any} = {
     "CardResponse": CardResponse,
     "DisplayOption": DisplayOption,
     "ErrorDetail": ErrorDetail,
+    "IFrameActionBody": IFrameActionBody,
+    "IntegratorCardPayloadResponse": IntegratorCardPayloadResponse,
+    "IntegratorObjectResult": IntegratorObjectResult,
     "ModelError": ModelError,
+    "ObjectToken": ObjectToken,
+    "TopLevelActions": TopLevelActions,
 }
 
 export class ObjectSerializer {

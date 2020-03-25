@@ -29,7 +29,7 @@ import {
     SearchApi as DealsSearchApi,
 } from '../codegen/crm/deals/api'
 import * as dealsModels from '../codegen/crm/deals/model/models'
-import { CardsApi } from '../codegen/crm/extensions/cards/api'
+import { CardsApi, SampleResponseApi as CardsSampleResponseApi } from '../codegen/crm/extensions/cards/api'
 import * as cardsModels from '../codegen/crm/extensions/cards/model/models'
 import { CoreApi as ImportsCoreApi } from '../codegen/crm/imports/api/coreApi'
 import * as importsModels from '../codegen/crm/imports/model/models'
@@ -193,6 +193,7 @@ export class Client {
         extensions: {
             cards: {
                 cardsApi: CardsApi
+                sampleResponseApi: CardsSampleResponseApi
             }
         }
         imports: {
@@ -288,6 +289,7 @@ export class Client {
     protected _dealsBatchApi: DealsBatchApi
     protected _dealsSearchApi: DealsSearchApi
     protected _cardsApi: CardsApi
+    protected _cardsSampleResponseApi: CardsSampleResponseApi
     protected _importsCoreApi: ImportsCoreApi
     protected _lineItemsAssociationsApi: LineItemsAssociationsApi
     protected _lineItemsBasicApi: LineItemsBasicApi
@@ -356,6 +358,7 @@ export class Client {
         this._dealsBatchApi = new DealsBatchApi()
         this._dealsSearchApi = new DealsSearchApi()
         this._cardsApi = new CardsApi()
+        this._cardsSampleResponseApi = new CardsSampleResponseApi()
         this._importsCoreApi = new ImportsCoreApi()
         this._lineItemsAssociationsApi = new LineItemsAssociationsApi()
         this._lineItemsBasicApi = new LineItemsBasicApi()
@@ -425,7 +428,7 @@ export class Client {
             this._tokensApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
-        this._apiClients.push(this._oauthDefaultApi)
+        this._apiClients.push(this._oauthDefaultApi, this._cardsSampleResponseApi)
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
@@ -466,6 +469,7 @@ export class Client {
             extensions: {
                 cards: {
                     cardsApi: this._cardsApi,
+                    sampleResponseApi: this._cardsSampleResponseApi,
                 },
             },
             imports: {
