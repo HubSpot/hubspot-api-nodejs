@@ -142,7 +142,13 @@ export class HttpError extends Error {
 export class Client {
     public oauth: {
         defaultApi: OauthDefaultApi
-        getAuthorizationUrl: (clientId: string, redirectUri: string, scopes: string) => string
+        getAuthorizationUrl: (
+            clientId: string,
+            redirectUri: string,
+            scope: string,
+            optionalScope?: string,
+            state?: string,
+        ) => string
     }
     public crm: {
         associations: {
@@ -669,13 +675,22 @@ export class Client {
         })
     }
 
-    protected _getAuthorizationUrl(clientId: string, redirectUri: string, scopes: string): string {
+    protected _getAuthorizationUrl(
+        clientId: string,
+        redirectUri: string,
+        scope: string,
+        optionalScope?: string,
+        state?: string,
+    ): string {
         const params = {
             client_id: clientId,
             redirect_uri: redirectUri,
-            scopes,
+            scope,
+            optional_scope: optionalScope,
+            state,
         }
-        return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
+
+        return `https://app.hubspot.com/oauth/authorize?${qs.stringify(_.omitBy(params, _.isNil))}`
     }
 
     private _retrieveGetAllFunction<T, V>(
