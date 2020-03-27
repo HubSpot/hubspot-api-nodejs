@@ -187,8 +187,8 @@ hubspotClient.apiRequest({
 You may use this library in your Typescript project via:
 
 ```typescript
-import Client from '@hubspot/api-client';
-const hubspotClient = new Client({ apiKey: YOUR_API_KEY });
+import * as hubspot from '@hubspot/api-client';
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
 ```
 
 ## License
