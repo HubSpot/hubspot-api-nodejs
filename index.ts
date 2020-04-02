@@ -14,6 +14,7 @@ export {
     ticketsModels,
     timelinesModels,
     oauthModels,
+    webhooksModels,
     Client,
     NumberOfRetries,
     HttpError,

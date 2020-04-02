@@ -73,9 +73,10 @@ import {
 import * as ticketsModels from '../codegen/crm/tickets/model/models'
 import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timelines/api'
 import * as timelinesModels from '../codegen/crm/timelines/model/models'
-import * as oauthModels from '../codegen/oauth/model/models'
-
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
+import * as oauthModels from '../codegen/oauth/model/models'
+import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
+import * as webhooksModels from '../codegen/webhooks/model/models'
 
 const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${pJson.version}` }
 const DEFAULT_LIMITER_OPTIONS = {
@@ -130,6 +131,7 @@ export {
     ticketsModels,
     timelinesModels,
     oauthModels,
+    webhooksModels,
 }
 
 export class HttpError extends Error {
@@ -279,6 +281,10 @@ export class Client {
             tokensApi: TokensApi
         }
     }
+    public webhooks: {
+        settingsApi: SettingsApi
+        subscriptionsApi: SubscriptionsApi
+    }
     protected _interceptors: Interceptor[] = []
     protected _oauthDefaultApi: OauthDefaultApi
     protected _associationsBatchApi: AssociationsBatchApi
@@ -322,6 +328,8 @@ export class Client {
     protected _eventsApi: EventsApi
     protected _templatesApi: TemplatesApi
     protected _tokensApi: TokensApi
+    protected _settingsApi: SettingsApi
+    protected _subscriptionsApi: SubscriptionsApi
     protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
@@ -391,6 +399,8 @@ export class Client {
         this._eventsApi = new EventsApi()
         this._templatesApi = new TemplatesApi()
         this._tokensApi = new TokensApi()
+        this._settingsApi = new SettingsApi()
+        this._subscriptionsApi = new SubscriptionsApi()
         this._apiClientsWithAuth = [
             this._associationsBatchApi,
             this._companiesAssociationsApi,
@@ -434,7 +444,12 @@ export class Client {
             this._tokensApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
-        this._apiClients.push(this._oauthDefaultApi, this._cardsSampleResponseApi)
+        this._apiClients.push(
+            this._oauthDefaultApi,
+            this._cardsSampleResponseApi,
+            this._settingsApi,
+            this._subscriptionsApi,
+        )
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
@@ -542,6 +557,10 @@ export class Client {
         this.oauth = {
             defaultApi: this._oauthDefaultApi,
             getAuthorizationUrl: this._getAuthorizationUrl.bind(this),
+        }
+        this.webhooks = {
+            settingsApi: this._settingsApi,
+            subscriptionsApi: this._subscriptionsApi,
         }
     }
 
