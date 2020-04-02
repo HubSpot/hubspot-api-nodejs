@@ -71,8 +71,8 @@ import {
     SearchApi as TicketsSearchApi,
 } from '../codegen/crm/tickets/api'
 import * as ticketsModels from '../codegen/crm/tickets/model/models'
-import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timelines/api'
-import * as timelinesModels from '../codegen/crm/timelines/model/models'
+import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timeline/api'
+import * as timelineModels from '../codegen/crm/timeline/model/models'
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 import * as oauthModels from '../codegen/oauth/model/models'
 import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
@@ -129,7 +129,7 @@ export {
     propertiesModels,
     quotesModels,
     ticketsModels,
-    timelinesModels,
+    timelineModels,
     oauthModels,
     webhooksModels,
 }
@@ -275,7 +275,7 @@ export class Client {
                 options?: { headers: { [name: string]: string } },
             ) => Promise<ticketsModels.SimplePublicObject[]>
         }
-        timelines: {
+        timeline: {
             eventsApi: EventsApi
             templatesApi: TemplatesApi
             tokensApi: TokensApi
@@ -548,7 +548,7 @@ export class Client {
                     ticketsModels.CollectionResponseSimplePublicObject
                 >(this._ticketsBasicApi.getPage),
             },
-            timelines: {
+            timeline: {
                 eventsApi: this._eventsApi,
                 templatesApi: this._templatesApi,
                 tokensApi: this._tokensApi,
