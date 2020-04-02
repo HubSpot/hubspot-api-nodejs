@@ -54,8 +54,6 @@ export namespace Filter {
         NOTIN = <any> 'NOT_IN',
         HASPROPERTY = <any> 'HAS_PROPERTY',
         NOTHASPROPERTY = <any> 'NOT_HAS_PROPERTY',
-        ROLLINGDATERANGE = <any> 'ROLLING_DATE_RANGE',
-        TIMEUNITTODATE = <any> 'TIME_UNIT_TO_DATE',
         CONTAINSTOKEN = <any> 'CONTAINS_TOKEN',
         NOTCONTAINSTOKEN = <any> 'NOT_CONTAINS_TOKEN'
     }

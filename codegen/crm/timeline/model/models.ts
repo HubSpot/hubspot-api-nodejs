@@ -1,11 +1,56 @@
+export * from './addNumbers';
+export * from './and';
 export * from './batchInputTimelineEvent';
 export * from './batchResponseTimelineEventResponse';
+export * from './beginsWith';
+export * from './booleanPropertyVariable';
 export * from './collectionResponseTimelineEventTemplate';
+export * from './concatStrings';
+export * from './constantBoolean';
+export * from './constantNumber';
+export * from './constantString';
+export * from './contains';
+export * from './divideNumbers';
 export * from './errorDetail';
 export * from './eventDetail';
+export * from './extractMostRecentEmailReplyHtml';
+export * from './extractMostRecentEmailReplyText';
+export * from './extractMostRecentPlainTextEmailReply';
+export * from './fetchExchangeRate';
+export * from './hasEmailReply';
+export * from './hasPlainTextEmailReply';
+export * from './ifBoolean';
+export * from './ifNumber';
+export * from './ifString';
+export * from './isPresent';
+export * from './lessThan';
+export * from './lessThanOrEqual';
+export * from './lowerCase';
+export * from './maxNumbers';
+export * from './minNumbers';
+export * from './modelDate';
 export * from './modelError';
+export * from './month';
+export * from './moreThan';
+export * from './moreThanOrEqual';
+export * from './multiplyNumbers';
 export * from './nextPage';
+export * from './not';
+export * from './now';
+export * from './numberEquals';
+export * from './numberPropertyVariable';
+export * from './numberToString';
+export * from './or';
 export * from './paging';
+export * from './parseNumber';
+export * from './periodToMonths';
+export * from './pipelineProbability';
+export * from './roundDownNumbers';
+export * from './roundUpNumbers';
+export * from './stringEquals';
+export * from './stringPropertyVariable';
+export * from './subtractNumbers';
+export * from './timeBetween';
 export * from './timelineEvent';
 export * from './timelineEventIFrame';
 export * from './timelineEventResponse';
@@ -15,17 +60,65 @@ export * from './timelineEventTemplateToken';
 export * from './timelineEventTemplateTokenOption';
 export * from './timelineEventTemplateTokenUpdateRequest';
 export * from './timelineEventTemplateUpdateRequest';
+export * from './upperCase';
+export * from './xor';
+export * from './year';
 
 import localVarRequest = require('request');
 
+import { AddNumbers } from './addNumbers';
+import { And } from './and';
 import { BatchInputTimelineEvent } from './batchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from './batchResponseTimelineEventResponse';
+import { BeginsWith } from './beginsWith';
+import { BooleanPropertyVariable } from './booleanPropertyVariable';
 import { CollectionResponseTimelineEventTemplate } from './collectionResponseTimelineEventTemplate';
+import { ConcatStrings } from './concatStrings';
+import { ConstantBoolean } from './constantBoolean';
+import { ConstantNumber } from './constantNumber';
+import { ConstantString } from './constantString';
+import { Contains } from './contains';
+import { DivideNumbers } from './divideNumbers';
 import { ErrorDetail } from './errorDetail';
 import { EventDetail } from './eventDetail';
+import { ExtractMostRecentEmailReplyHtml } from './extractMostRecentEmailReplyHtml';
+import { ExtractMostRecentEmailReplyText } from './extractMostRecentEmailReplyText';
+import { ExtractMostRecentPlainTextEmailReply } from './extractMostRecentPlainTextEmailReply';
+import { FetchExchangeRate } from './fetchExchangeRate';
+import { HasEmailReply } from './hasEmailReply';
+import { HasPlainTextEmailReply } from './hasPlainTextEmailReply';
+import { IfBoolean } from './ifBoolean';
+import { IfNumber } from './ifNumber';
+import { IfString } from './ifString';
+import { IsPresent } from './isPresent';
+import { LessThan } from './lessThan';
+import { LessThanOrEqual } from './lessThanOrEqual';
+import { LowerCase } from './lowerCase';
+import { MaxNumbers } from './maxNumbers';
+import { MinNumbers } from './minNumbers';
+import { ModelDate } from './modelDate';
 import { ModelError } from './modelError';
+import { Month } from './month';
+import { MoreThan } from './moreThan';
+import { MoreThanOrEqual } from './moreThanOrEqual';
+import { MultiplyNumbers } from './multiplyNumbers';
 import { NextPage } from './nextPage';
+import { Not } from './not';
+import { Now } from './now';
+import { NumberEquals } from './numberEquals';
+import { NumberPropertyVariable } from './numberPropertyVariable';
+import { NumberToString } from './numberToString';
+import { Or } from './or';
 import { Paging } from './paging';
+import { ParseNumber } from './parseNumber';
+import { PeriodToMonths } from './periodToMonths';
+import { PipelineProbability } from './pipelineProbability';
+import { RoundDownNumbers } from './roundDownNumbers';
+import { RoundUpNumbers } from './roundUpNumbers';
+import { StringEquals } from './stringEquals';
+import { StringPropertyVariable } from './stringPropertyVariable';
+import { SubtractNumbers } from './subtractNumbers';
+import { TimeBetween } from './timeBetween';
 import { TimelineEvent } from './timelineEvent';
 import { TimelineEventIFrame } from './timelineEventIFrame';
 import { TimelineEventResponse } from './timelineEventResponse';
@@ -35,6 +128,9 @@ import { TimelineEventTemplateToken } from './timelineEventTemplateToken';
 import { TimelineEventTemplateTokenOption } from './timelineEventTemplateTokenOption';
 import { TimelineEventTemplateTokenUpdateRequest } from './timelineEventTemplateTokenUpdateRequest';
 import { TimelineEventTemplateUpdateRequest } from './timelineEventTemplateUpdateRequest';
+import { UpperCase } from './upperCase';
+import { Xor } from './xor';
+import { Year } from './year';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -49,19 +145,112 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
+        "AddNumbers.OperatorEnum": AddNumbers.OperatorEnum,
+        "And.OperatorEnum": And.OperatorEnum,
         "BatchResponseTimelineEventResponse.StatusEnum": BatchResponseTimelineEventResponse.StatusEnum,
+        "BeginsWith.OperatorEnum": BeginsWith.OperatorEnum,
+        "BooleanPropertyVariable.OperatorEnum": BooleanPropertyVariable.OperatorEnum,
+        "ConcatStrings.OperatorEnum": ConcatStrings.OperatorEnum,
+        "ConstantBoolean.OperatorEnum": ConstantBoolean.OperatorEnum,
+        "ConstantNumber.OperatorEnum": ConstantNumber.OperatorEnum,
+        "ConstantString.OperatorEnum": ConstantString.OperatorEnum,
+        "Contains.OperatorEnum": Contains.OperatorEnum,
+        "DivideNumbers.OperatorEnum": DivideNumbers.OperatorEnum,
+        "ExtractMostRecentEmailReplyHtml.OperatorEnum": ExtractMostRecentEmailReplyHtml.OperatorEnum,
+        "ExtractMostRecentEmailReplyText.OperatorEnum": ExtractMostRecentEmailReplyText.OperatorEnum,
+        "ExtractMostRecentPlainTextEmailReply.OperatorEnum": ExtractMostRecentPlainTextEmailReply.OperatorEnum,
+        "FetchExchangeRate.OperatorEnum": FetchExchangeRate.OperatorEnum,
+        "HasEmailReply.OperatorEnum": HasEmailReply.OperatorEnum,
+        "HasPlainTextEmailReply.OperatorEnum": HasPlainTextEmailReply.OperatorEnum,
+        "IfBoolean.OperatorEnum": IfBoolean.OperatorEnum,
+        "IfNumber.OperatorEnum": IfNumber.OperatorEnum,
+        "IfString.OperatorEnum": IfString.OperatorEnum,
+        "IsPresent.OperatorEnum": IsPresent.OperatorEnum,
+        "LessThan.OperatorEnum": LessThan.OperatorEnum,
+        "LessThanOrEqual.OperatorEnum": LessThanOrEqual.OperatorEnum,
+        "LowerCase.OperatorEnum": LowerCase.OperatorEnum,
+        "MaxNumbers.OperatorEnum": MaxNumbers.OperatorEnum,
+        "MinNumbers.OperatorEnum": MinNumbers.OperatorEnum,
+        "ModelDate.OperatorEnum": ModelDate.OperatorEnum,
+        "Month.OperatorEnum": Month.OperatorEnum,
+        "MoreThan.OperatorEnum": MoreThan.OperatorEnum,
+        "MoreThanOrEqual.OperatorEnum": MoreThanOrEqual.OperatorEnum,
+        "MultiplyNumbers.OperatorEnum": MultiplyNumbers.OperatorEnum,
+        "Not.OperatorEnum": Not.OperatorEnum,
+        "Now.OperatorEnum": Now.OperatorEnum,
+        "NumberEquals.OperatorEnum": NumberEquals.OperatorEnum,
+        "NumberPropertyVariable.OperatorEnum": NumberPropertyVariable.OperatorEnum,
+        "NumberToString.OperatorEnum": NumberToString.OperatorEnum,
+        "Or.OperatorEnum": Or.OperatorEnum,
+        "ParseNumber.OperatorEnum": ParseNumber.OperatorEnum,
+        "PeriodToMonths.OperatorEnum": PeriodToMonths.OperatorEnum,
+        "PipelineProbability.OperatorEnum": PipelineProbability.OperatorEnum,
+        "RoundDownNumbers.OperatorEnum": RoundDownNumbers.OperatorEnum,
+        "RoundUpNumbers.OperatorEnum": RoundUpNumbers.OperatorEnum,
+        "StringEquals.OperatorEnum": StringEquals.OperatorEnum,
+        "StringPropertyVariable.OperatorEnum": StringPropertyVariable.OperatorEnum,
+        "SubtractNumbers.OperatorEnum": SubtractNumbers.OperatorEnum,
+        "TimeBetween.OperatorEnum": TimeBetween.OperatorEnum,
         "TimelineEventTemplateToken.TypeEnum": TimelineEventTemplateToken.TypeEnum,
+        "UpperCase.OperatorEnum": UpperCase.OperatorEnum,
+        "Xor.OperatorEnum": Xor.OperatorEnum,
+        "Year.OperatorEnum": Year.OperatorEnum,
 }
 
 let typeMap: {[index: string]: any} = {
+    "AddNumbers": AddNumbers,
+    "And": And,
     "BatchInputTimelineEvent": BatchInputTimelineEvent,
     "BatchResponseTimelineEventResponse": BatchResponseTimelineEventResponse,
+    "BeginsWith": BeginsWith,
+    "BooleanPropertyVariable": BooleanPropertyVariable,
     "CollectionResponseTimelineEventTemplate": CollectionResponseTimelineEventTemplate,
+    "ConcatStrings": ConcatStrings,
+    "ConstantBoolean": ConstantBoolean,
+    "ConstantNumber": ConstantNumber,
+    "ConstantString": ConstantString,
+    "Contains": Contains,
+    "DivideNumbers": DivideNumbers,
     "ErrorDetail": ErrorDetail,
     "EventDetail": EventDetail,
+    "ExtractMostRecentEmailReplyHtml": ExtractMostRecentEmailReplyHtml,
+    "ExtractMostRecentEmailReplyText": ExtractMostRecentEmailReplyText,
+    "ExtractMostRecentPlainTextEmailReply": ExtractMostRecentPlainTextEmailReply,
+    "FetchExchangeRate": FetchExchangeRate,
+    "HasEmailReply": HasEmailReply,
+    "HasPlainTextEmailReply": HasPlainTextEmailReply,
+    "IfBoolean": IfBoolean,
+    "IfNumber": IfNumber,
+    "IfString": IfString,
+    "IsPresent": IsPresent,
+    "LessThan": LessThan,
+    "LessThanOrEqual": LessThanOrEqual,
+    "LowerCase": LowerCase,
+    "MaxNumbers": MaxNumbers,
+    "MinNumbers": MinNumbers,
+    "ModelDate": ModelDate,
     "ModelError": ModelError,
+    "Month": Month,
+    "MoreThan": MoreThan,
+    "MoreThanOrEqual": MoreThanOrEqual,
+    "MultiplyNumbers": MultiplyNumbers,
     "NextPage": NextPage,
+    "Not": Not,
+    "Now": Now,
+    "NumberEquals": NumberEquals,
+    "NumberPropertyVariable": NumberPropertyVariable,
+    "NumberToString": NumberToString,
+    "Or": Or,
     "Paging": Paging,
+    "ParseNumber": ParseNumber,
+    "PeriodToMonths": PeriodToMonths,
+    "PipelineProbability": PipelineProbability,
+    "RoundDownNumbers": RoundDownNumbers,
+    "RoundUpNumbers": RoundUpNumbers,
+    "StringEquals": StringEquals,
+    "StringPropertyVariable": StringPropertyVariable,
+    "SubtractNumbers": SubtractNumbers,
+    "TimeBetween": TimeBetween,
     "TimelineEvent": TimelineEvent,
     "TimelineEventIFrame": TimelineEventIFrame,
     "TimelineEventResponse": TimelineEventResponse,
@@ -71,6 +260,9 @@ let typeMap: {[index: string]: any} = {
     "TimelineEventTemplateTokenOption": TimelineEventTemplateTokenOption,
     "TimelineEventTemplateTokenUpdateRequest": TimelineEventTemplateTokenUpdateRequest,
     "TimelineEventTemplateUpdateRequest": TimelineEventTemplateUpdateRequest,
+    "UpperCase": UpperCase,
+    "Xor": Xor,
+    "Year": Year,
 }
 
 export class ObjectSerializer {

@@ -11,15 +11,15 @@
  */
 
 import { RequestFile } from '../api';
-import { CollectionResponseSimplePublicObjectId } from './collectionResponseSimplePublicObjectId';
+import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
 
 export class SimplePublicObject {
     'id': string;
     'properties': { [key: string]: string; };
     'createdAt': Date;
     'updatedAt': Date;
-    'associations': { [key: string]: CollectionResponseSimplePublicObjectId; };
-    'archived': boolean;
+    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
+    'archived'?: boolean;
     'archivedAt'?: Date;
 
     static discriminator: string | undefined = undefined;
@@ -48,7 +48,7 @@ export class SimplePublicObject {
         {
             "name": "associations",
             "baseName": "associations",
-            "type": "{ [key: string]: CollectionResponseSimplePublicObjectId; }"
+            "type": "{ [key: string]: CollectionResponseAssociatedId; }"
         },
         {
             "name": "archived",

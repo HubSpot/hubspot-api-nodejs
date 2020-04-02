@@ -1,22 +1,32 @@
+export * from './associatedId';
 export * from './batchInputPublicAssociation';
 export * from './batchInputPublicObjectId';
 export * from './batchResponsePublicAssociation';
 export * from './batchResponsePublicAssociationMulti';
+export * from './collectionResponsePublicAssociationDefiniton';
 export * from './errorDetail';
 export * from './modelError';
+export * from './nextPage';
+export * from './paging';
 export * from './publicAssociation';
+export * from './publicAssociationDefiniton';
 export * from './publicAssociationMulti';
 export * from './publicObjectId';
 
 import localVarRequest = require('request');
 
+import { AssociatedId } from './associatedId';
 import { BatchInputPublicAssociation } from './batchInputPublicAssociation';
 import { BatchInputPublicObjectId } from './batchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from './batchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from './batchResponsePublicAssociationMulti';
+import { CollectionResponsePublicAssociationDefiniton } from './collectionResponsePublicAssociationDefiniton';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
+import { NextPage } from './nextPage';
+import { Paging } from './paging';
 import { PublicAssociation } from './publicAssociation';
+import { PublicAssociationDefiniton } from './publicAssociationDefiniton';
 import { PublicAssociationMulti } from './publicAssociationMulti';
 import { PublicObjectId } from './publicObjectId';
 
@@ -38,13 +48,18 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "AssociatedId": AssociatedId,
     "BatchInputPublicAssociation": BatchInputPublicAssociation,
     "BatchInputPublicObjectId": BatchInputPublicObjectId,
     "BatchResponsePublicAssociation": BatchResponsePublicAssociation,
     "BatchResponsePublicAssociationMulti": BatchResponsePublicAssociationMulti,
+    "CollectionResponsePublicAssociationDefiniton": CollectionResponsePublicAssociationDefiniton,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
+    "NextPage": NextPage,
+    "Paging": Paging,
     "PublicAssociation": PublicAssociation,
+    "PublicAssociationDefiniton": PublicAssociationDefiniton,
     "PublicAssociationMulti": PublicAssociationMulti,
     "PublicObjectId": PublicObjectId,
 }

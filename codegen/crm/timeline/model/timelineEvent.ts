@@ -24,7 +24,7 @@ export class TimelineEvent {
     /**
     * The event template ID.
     */
-    'eventTemplateId': number;
+    'eventTemplateId': string;
     /**
     * The email address used for contact-specific events. This can be used to identify existing contacts, create new ones, or change the email for an existing contact (if paired with the `objectId`).
     */
@@ -66,7 +66,7 @@ export class TimelineEvent {
         {
             "name": "eventTemplateId",
             "baseName": "eventTemplateId",
-            "type": "number"
+            "type": "string"
         },
         {
             "name": "email",

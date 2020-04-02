@@ -15,6 +15,7 @@ import { SimplePublicObjectId } from './simplePublicObjectId';
 
 export class BatchReadInputSimplePublicObjectId {
     'properties': Array<string>;
+    'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
 
     static discriminator: string | undefined = undefined;
@@ -24,6 +25,11 @@ export class BatchReadInputSimplePublicObjectId {
             "name": "properties",
             "baseName": "properties",
             "type": "Array<string>"
+        },
+        {
+            "name": "idProperty",
+            "baseName": "idProperty",
+            "type": "string"
         },
         {
             "name": "inputs",

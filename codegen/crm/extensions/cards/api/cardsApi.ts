@@ -94,13 +94,13 @@ export class CardsApi {
     /**
      * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can\'t be undone.
      * @summary Delete a card
-     * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
+     * @param cardId The ID of the card to delete.
      */
-    public async archive (cardId: string, appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['*/*'];
@@ -112,14 +112,14 @@ export class CardsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'cardId' is not null or undefined
-        if (cardId === null || cardId === undefined) {
-            throw new Error('Required parameter cardId was null or undefined when calling archive.');
-        }
-
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling archive.');
+        }
+
+        // verify required parameter 'cardId' is not null or undefined
+        if (cardId === null || cardId === undefined) {
+            throw new Error('Required parameter cardId was null or undefined when calling archive.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -175,7 +175,7 @@ export class CardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public async create (appId: object, cardCreateRequest?: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async create (appId: number, cardCreateRequest?: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -248,7 +248,7 @@ export class CardsApi {
      * @summary Get all cards
      * @param appId The ID of the target app.
      */
-    public async getAll (appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardListResponse;  }> {
+    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardListResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -318,13 +318,13 @@ export class CardsApi {
     /**
      * Returns the definition for a card with the given ID.
      * @summary Get a card.
-     * @param cardId The ID of the target card.
      * @param appId The ID of the target app.
+     * @param cardId The ID of the target card.
      */
-    public async getById (cardId: string, appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async getById (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -336,14 +336,14 @@ export class CardsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'cardId' is not null or undefined
-        if (cardId === null || cardId === undefined) {
-            throw new Error('Required parameter cardId was null or undefined when calling getById.');
-        }
-
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling getById.');
+        }
+
+        // verify required parameter 'cardId' is not null or undefined
+        if (cardId === null || cardId === undefined) {
+            throw new Error('Required parameter cardId was null or undefined when calling getById.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -397,14 +397,14 @@ export class CardsApi {
     /**
      * Update a card definition with new details.
      * @summary Update a card
-     * @param cardId The ID of the card to update.
      * @param appId The ID of the target app.
+     * @param cardId The ID of the card to update.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public async update (cardId: string, appId: object, cardPatchRequest?: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async update (appId: number, cardId: string, cardPatchRequest?: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -416,14 +416,14 @@ export class CardsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'cardId' is not null or undefined
-        if (cardId === null || cardId === undefined) {
-            throw new Error('Required parameter cardId was null or undefined when calling update.');
-        }
-
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'cardId' is not null or undefined
+        if (cardId === null || cardId === undefined) {
+            throw new Error('Required parameter cardId was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

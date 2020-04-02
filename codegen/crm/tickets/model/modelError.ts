@@ -27,6 +27,10 @@ export class ModelError {
     */
     'category': string;
     /**
+    * A specific category that contains more specific detail about the error
+    */
+    'subCategory'?: string;
+    /**
     * further information about the error
     */
     'errors'?: Array<ErrorDetail>;
@@ -55,6 +59,11 @@ export class ModelError {
         {
             "name": "category",
             "baseName": "category",
+            "type": "string"
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string"
         },
         {

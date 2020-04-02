@@ -6,7 +6,7 @@ import request = require('request')
 import { Response } from 'request'
 // @ts-ignore
 import * as pJson from '../../package.json'
-import { BatchApi as AssociationsBatchApi } from '../codegen/crm/associations/api'
+import { BatchApi as AssociationsBatchApi, TypesApi } from '../codegen/crm/associations/api'
 import * as associationsModels from '../codegen/crm/associations/model/models'
 import {
     AssociationsApi as CompaniesAssociationsApi,
@@ -154,7 +154,8 @@ export class Client {
     }
     public crm: {
         associations: {
-            batchApi: AssociationsBatchApi
+            batchApi: AssociationsBatchApi,
+            typesApi: TypesApi,
         }
         companies: {
             associationsApi: CompaniesAssociationsApi
@@ -288,6 +289,7 @@ export class Client {
     protected _interceptors: Interceptor[] = []
     protected _oauthDefaultApi: OauthDefaultApi
     protected _associationsBatchApi: AssociationsBatchApi
+    protected _typesApi: TypesApi
     protected _companiesAssociationsApi: CompaniesAssociationsApi
     protected _companiesBasicApi: CompaniesBasicApi
     protected _companiesBatchApi: CompaniesBatchApi
@@ -359,6 +361,7 @@ export class Client {
     ) {
         this._oauthDefaultApi = new OauthDefaultApi()
         this._associationsBatchApi = new AssociationsBatchApi()
+        this._typesApi = new TypesApi()
         this._companiesAssociationsApi = new CompaniesAssociationsApi()
         this._companiesBasicApi = new CompaniesBasicApi()
         this._companiesBatchApi = new CompaniesBatchApi()
@@ -403,6 +406,7 @@ export class Client {
         this._subscriptionsApi = new SubscriptionsApi()
         this._apiClientsWithAuth = [
             this._associationsBatchApi,
+            this._typesApi,
             this._companiesAssociationsApi,
             this._companiesBasicApi,
             this._companiesBatchApi,
@@ -456,6 +460,7 @@ export class Client {
         this.crm = {
             associations: {
                 batchApi: this._associationsBatchApi,
+                typesApi: this._typesApi,
             },
             companies: {
                 associationsApi: this._companiesAssociationsApi,
@@ -578,13 +583,10 @@ export class Client {
         }
 
         this._basePath = basePathToSet.replace(/\/+$/, '')
-        const oauthBasePath = `${this._basePath}/oauth`
 
-        _.each(this._apiClientsWithAuth, (apiClient) => {
+        _.each(this._apiClients, (apiClient) => {
             apiClient.basePath = this._basePath
         })
-
-        this._oauthDefaultApi.basePath = oauthBasePath
     }
 
     public setAccessToken(accessTokenToSet: string) {

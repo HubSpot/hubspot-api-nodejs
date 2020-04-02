@@ -238,7 +238,7 @@ export class BatchApi {
     }
     /**
      * Read a list of products given a collection of IDs. Use the `properties` request body property to control which properties are returned.
-     * @summary Read a batch of products by ID
+     * @summary Read a batch of products by internal ID, or unique property values
      * @param archived Whether to return only results that have been archived.
      * @param batchReadInputSimplePublicObjectId 
      */

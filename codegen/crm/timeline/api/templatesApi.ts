@@ -102,7 +102,7 @@ export class TemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public async archiveEventTemplate (eventTemplateId: string, appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archiveEventTemplate (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -183,7 +183,7 @@ export class TemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateCreateRequest The new event template definition.
      */
-    public async createEventTemplate (appId: object, timelineEventTemplateCreateRequest?: TimelineEventTemplateCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+    public async createEventTemplate (appId: number, timelineEventTemplateCreateRequest?: TimelineEventTemplateCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -259,7 +259,7 @@ export class TemplatesApi {
      * @summary List all event templates for your app
      * @param appId The ID of the target app.
      */
-    public async getAllEventTemplates (appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseTimelineEventTemplate;  }> {
+    public async getAllEventTemplates (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseTimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -335,7 +335,7 @@ export class TemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public async getEventTemplateById (eventTemplateId: string, appId: object, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+    public async getEventTemplateById (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -418,7 +418,7 @@ export class TemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateUpdateRequest The updated event template definition.
      */
-    public async updateEventTemplate (eventTemplateId: string, appId: object, timelineEventTemplateUpdateRequest?: TimelineEventTemplateUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+    public async updateEventTemplate (eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest?: TimelineEventTemplateUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));

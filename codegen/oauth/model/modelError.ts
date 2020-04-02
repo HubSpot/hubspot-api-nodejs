@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 import { ErrorDetail } from './errorDetail';
 
 export class ModelError {
@@ -25,6 +26,10 @@ export class ModelError {
     * The error category
     */
     'category': string;
+    /**
+    * A specific category that contains more specific detail about the error
+    */
+    'subCategory'?: string;
     /**
     * further information about the error
     */
@@ -54,6 +59,11 @@ export class ModelError {
         {
             "name": "category",
             "baseName": "category",
+            "type": "string"
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string"
         },
         {

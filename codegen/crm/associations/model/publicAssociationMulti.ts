@@ -11,6 +11,7 @@
  */
 
 import { RequestFile } from '../api';
+import { AssociatedId } from './associatedId';
 import { PublicObjectId } from './publicObjectId';
 
 export class PublicAssociationMulti {
@@ -18,7 +19,7 @@ export class PublicAssociationMulti {
     /**
     * The IDs of objects that are associated with the object identified by the ID in \'from\'.
     */
-    'to': Array<PublicObjectId>;
+    'to': Array<AssociatedId>;
 
     static discriminator: string | undefined = undefined;
 
@@ -31,7 +32,7 @@ export class PublicAssociationMulti {
         {
             "name": "to",
             "baseName": "to",
-            "type": "Array<PublicObjectId>"
+            "type": "Array<AssociatedId>"
         }    ];
 
     static getAttributeTypeMap() {

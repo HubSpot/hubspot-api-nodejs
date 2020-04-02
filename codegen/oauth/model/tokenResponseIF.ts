@@ -10,11 +10,12 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 
 export class TokenResponseIF {
     'accessToken': string;
-    'refreshToken': string;
     'expiresIn': number;
+    'refreshToken': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -25,14 +26,14 @@ export class TokenResponseIF {
             "type": "string"
         },
         {
-            "name": "refreshToken",
-            "baseName": "refresh_token",
-            "type": "string"
-        },
-        {
             "name": "expiresIn",
             "baseName": "expires_in",
             "type": "number"
+        },
+        {
+            "name": "refreshToken",
+            "baseName": "refresh_token",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

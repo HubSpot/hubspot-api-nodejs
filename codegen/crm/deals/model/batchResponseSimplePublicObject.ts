@@ -16,7 +16,7 @@ import { SimplePublicObject } from './simplePublicObject';
 export class BatchResponseSimplePublicObject {
     'results': Array<SimplePublicObject>;
     'numErrors'?: number;
-    'errors': Array<Error>;
+    'errors'?: Array<Error>;
     'status': BatchResponseSimplePublicObject.StatusEnum;
     'requestedAt'?: Date;
     'startedAt': Date;

@@ -22,6 +22,14 @@ export class ErrorDetail {
     */
     '_in'?: string;
     /**
+    * The status code associated with the error detail
+    */
+    'code'?: string;
+    /**
+    * A specific category that contains more specific detail about the error
+    */
+    'subCategory'?: string;
+    /**
     * Context about the error condition
     */
     'context'?: { [key: string]: Array<string>; };
@@ -37,6 +45,16 @@ export class ErrorDetail {
         {
             "name": "_in",
             "baseName": "in",
+            "type": "string"
+        },
+        {
+            "name": "code",
+            "baseName": "code",
+            "type": "string"
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string"
         },
         {
