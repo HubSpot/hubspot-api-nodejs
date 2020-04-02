@@ -12,7 +12,7 @@ export {
     propertiesModels,
     quotesModels,
     ticketsModels,
-    timelinesModels,
+    timelineModels,
     oauthModels,
     webhooksModels,
     Client,
