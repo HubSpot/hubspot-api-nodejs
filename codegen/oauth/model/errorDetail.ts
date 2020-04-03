@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+import { RequestFile } from '../api';
 
 export class ErrorDetail {
     /**
@@ -20,6 +21,14 @@ export class ErrorDetail {
     * The name of the field or parameter in which the error was found.
     */
     '_in'?: string;
+    /**
+    * The status code associated with the error detail
+    */
+    'code'?: string;
+    /**
+    * A specific category that contains more specific detail about the error
+    */
+    'subCategory'?: string;
     /**
     * Context about the error condition
     */
@@ -36,6 +45,16 @@ export class ErrorDetail {
         {
             "name": "_in",
             "baseName": "in",
+            "type": "string"
+        },
+        {
+            "name": "code",
+            "baseName": "code",
+            "type": "string"
+        },
+        {
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string"
         },
         {

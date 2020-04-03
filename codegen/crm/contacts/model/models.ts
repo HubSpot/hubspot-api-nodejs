@@ -1,10 +1,11 @@
+export * from './associatedId';
 export * from './batchInputSimplePublicObjectBatchInput';
 export * from './batchInputSimplePublicObjectId';
 export * from './batchInputSimplePublicObjectInput';
 export * from './batchReadInputSimplePublicObjectId';
 export * from './batchResponseSimplePublicObject';
+export * from './collectionResponseAssociatedId';
 export * from './collectionResponseSimplePublicObject';
-export * from './collectionResponseSimplePublicObjectId';
 export * from './collectionResponseWithTotalSimplePublicObject';
 export * from './errorDetail';
 export * from './filter';
@@ -20,13 +21,14 @@ export * from './simplePublicObjectInput';
 
 import localVarRequest = require('request');
 
+import { AssociatedId } from './associatedId';
 import { BatchInputSimplePublicObjectBatchInput } from './batchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from './batchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from './batchInputSimplePublicObjectInput';
 import { BatchReadInputSimplePublicObjectId } from './batchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from './batchResponseSimplePublicObject';
+import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObject } from './collectionResponseSimplePublicObject';
-import { CollectionResponseSimplePublicObjectId } from './collectionResponseSimplePublicObjectId';
 import { CollectionResponseWithTotalSimplePublicObject } from './collectionResponseWithTotalSimplePublicObject';
 import { ErrorDetail } from './errorDetail';
 import { Filter } from './filter';
@@ -58,13 +60,14 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+    "AssociatedId": AssociatedId,
     "BatchInputSimplePublicObjectBatchInput": BatchInputSimplePublicObjectBatchInput,
     "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
     "BatchInputSimplePublicObjectInput": BatchInputSimplePublicObjectInput,
     "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
+    "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObject": CollectionResponseSimplePublicObject,
-    "CollectionResponseSimplePublicObjectId": CollectionResponseSimplePublicObjectId,
     "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,

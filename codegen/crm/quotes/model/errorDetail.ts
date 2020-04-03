@@ -13,32 +13,38 @@
 import { RequestFile } from '../api';
 
 export class ErrorDetail {
-    'subCategory'?: string;
     /**
     * A human readable message describing the error along with remediation steps where appropriate
     */
     'message': string;
-    'code'?: string;
     /**
     * The name of the field or parameter in which the error was found.
     */
     '_in'?: string;
     /**
+    * The status code associated with the error detail
+    */
+    'code'?: string;
+    /**
+    * A specific category that contains more specific detail about the error
+    */
+    'subCategory'?: string;
+    /**
     * Context about the error condition
     */
-    'context': { [key: string]: Array<string>; };
+    'context'?: { [key: string]: Array<string>; };
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
+            "name": "message",
+            "baseName": "message",
             "type": "string"
         },
         {
-            "name": "message",
-            "baseName": "message",
+            "name": "_in",
+            "baseName": "in",
             "type": "string"
         },
         {
@@ -47,8 +53,8 @@ export class ErrorDetail {
             "type": "string"
         },
         {
-            "name": "_in",
-            "baseName": "in",
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string"
         },
         {

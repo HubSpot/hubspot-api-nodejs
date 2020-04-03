@@ -14,7 +14,7 @@ import localVarRequest = require('request');
 import http = require('http');
 
 /* tslint:disable:no-unused-locals */
-import { CollectionResponseSimplePublicObjectId } from '../model/collectionResponseSimplePublicObjectId';
+import { CollectionResponseAssociatedId } from '../model/collectionResponseAssociatedId';
 import { SimplePublicObject } from '../model/simplePublicObject';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -98,14 +98,16 @@ export class AssociationsApi {
      * 
      * @summary Remove an association between two products
      * @param productId 
-     * @param associatedObjectType 
+     * @param toObjectType 
      * @param toObjectId 
+     * @param associationType 
      */
-    public async archiveAssociation (productId: string, associatedObjectType: string, toObjectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{associatedObjectType}/{toObjectId}'
+    public async archiveAssociation (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
-            .replace('{' + 'associatedObjectType' + '}', encodeURIComponent(String(associatedObjectType)))
-            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)));
+            .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
+            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
+            .replace('{' + 'associationType' + '}', encodeURIComponent(String(associationType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['*/*'];
@@ -122,14 +124,19 @@ export class AssociationsApi {
             throw new Error('Required parameter productId was null or undefined when calling archiveAssociation.');
         }
 
-        // verify required parameter 'associatedObjectType' is not null or undefined
-        if (associatedObjectType === null || associatedObjectType === undefined) {
-            throw new Error('Required parameter associatedObjectType was null or undefined when calling archiveAssociation.');
+        // verify required parameter 'toObjectType' is not null or undefined
+        if (toObjectType === null || toObjectType === undefined) {
+            throw new Error('Required parameter toObjectType was null or undefined when calling archiveAssociation.');
         }
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
             throw new Error('Required parameter toObjectId was null or undefined when calling archiveAssociation.');
+        }
+
+        // verify required parameter 'associationType' is not null or undefined
+        if (associationType === null || associationType === undefined) {
+            throw new Error('Required parameter associationType was null or undefined when calling archiveAssociation.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -186,14 +193,16 @@ export class AssociationsApi {
      * 
      * @summary Associate two products
      * @param productId 
-     * @param associatedObjectType 
+     * @param toObjectType 
      * @param toObjectId 
+     * @param associationType 
      */
-    public async createAssociation (productId: string, associatedObjectType: string, toObjectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
-        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{associatedObjectType}/{toObjectId}'
+    public async createAssociation (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
-            .replace('{' + 'associatedObjectType' + '}', encodeURIComponent(String(associatedObjectType)))
-            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)));
+            .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
+            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
+            .replace('{' + 'associationType' + '}', encodeURIComponent(String(associationType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -210,14 +219,19 @@ export class AssociationsApi {
             throw new Error('Required parameter productId was null or undefined when calling createAssociation.');
         }
 
-        // verify required parameter 'associatedObjectType' is not null or undefined
-        if (associatedObjectType === null || associatedObjectType === undefined) {
-            throw new Error('Required parameter associatedObjectType was null or undefined when calling createAssociation.');
+        // verify required parameter 'toObjectType' is not null or undefined
+        if (toObjectType === null || toObjectType === undefined) {
+            throw new Error('Required parameter toObjectType was null or undefined when calling createAssociation.');
         }
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
             throw new Error('Required parameter toObjectId was null or undefined when calling createAssociation.');
+        }
+
+        // verify required parameter 'associationType' is not null or undefined
+        if (associationType === null || associationType === undefined) {
+            throw new Error('Required parameter associationType was null or undefined when calling createAssociation.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -275,12 +289,12 @@ export class AssociationsApi {
      * 
      * @summary List associations of a product by type
      * @param productId 
-     * @param associatedObjectType 
+     * @param toObjectType 
      */
-    public async getAssociations (productId: string, associatedObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObjectId;  }> {
-        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{associatedObjectType}'
+    public async getAssociations (productId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+        const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
-            .replace('{' + 'associatedObjectType' + '}', encodeURIComponent(String(associatedObjectType)));
+            .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -297,9 +311,9 @@ export class AssociationsApi {
             throw new Error('Required parameter productId was null or undefined when calling getAssociations.');
         }
 
-        // verify required parameter 'associatedObjectType' is not null or undefined
-        if (associatedObjectType === null || associatedObjectType === undefined) {
-            throw new Error('Required parameter associatedObjectType was null or undefined when calling getAssociations.');
+        // verify required parameter 'toObjectType' is not null or undefined
+        if (toObjectType === null || toObjectType === undefined) {
+            throw new Error('Required parameter toObjectType was null or undefined when calling getAssociations.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -337,12 +351,12 @@ export class AssociationsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObjectId;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseSimplePublicObjectId");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

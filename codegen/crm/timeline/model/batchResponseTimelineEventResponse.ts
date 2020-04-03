@@ -28,7 +28,7 @@ export class BatchResponseTimelineEventResponse {
     /**
     * The events that weren\'t created.
     */
-    'errors': Array<Error>;
+    'errors'?: Array<Error>;
     /**
     * The status of the batch response. Should always be COMPLETED if processed.
     */

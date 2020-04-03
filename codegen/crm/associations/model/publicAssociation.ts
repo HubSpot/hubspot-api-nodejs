@@ -16,6 +16,7 @@ import { PublicObjectId } from './publicObjectId';
 export class PublicAssociation {
     'from': PublicObjectId;
     'to': PublicObjectId;
+    'type': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -29,6 +30,11 @@ export class PublicAssociation {
             "name": "to",
             "baseName": "to",
             "type": "PublicObjectId"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

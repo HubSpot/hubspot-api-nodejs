@@ -1,5 +1,7 @@
 export * from './batchApi';
 import { BatchApi } from './batchApi';
+export * from './typesApi';
+import { TypesApi } from './typesApi';
 import * as fs from 'fs';
 import * as http from 'http';
 
@@ -20,4 +22,4 @@ export interface RequestDetailedFile {
 
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
-export const APIS = [BatchApi];
+export const APIS = [BatchApi, TypesApi];

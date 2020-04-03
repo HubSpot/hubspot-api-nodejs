@@ -22,7 +22,7 @@ export class PublicOwner {
     'createdAt': Date;
     'updatedAt': Date;
     'archived': boolean;
-    'teams': Array<PublicTeam>;
+    'teams'?: Array<PublicTeam>;
 
     static discriminator: string | undefined = undefined;
 

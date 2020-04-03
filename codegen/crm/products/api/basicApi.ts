@@ -240,14 +240,15 @@ export class BasicApi {
         });
     }
     /**
-     * Read an Object identified by `{productId}`. Control what is returned via the `properties` query param.
+     * Read an Object identified by `{productId}`. `{productId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * @summary Read
      * @param productId 
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async getById (productId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async getById (productId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)));
         let localVarQueryParameters: any = {};
@@ -276,6 +277,10 @@ export class BasicApi {
 
         if (archived !== undefined) {
             localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
+        }
+
+        if (idProperty !== undefined) {
+            localVarQueryParameters['idProperty'] = ObjectSerializer.serialize(idProperty, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

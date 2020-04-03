@@ -16,7 +16,7 @@ import { PublicAssociationMulti } from './publicAssociationMulti';
 export class BatchResponsePublicAssociationMulti {
     'results': Array<PublicAssociationMulti>;
     'numErrors'?: number;
-    'errors': Array<Error>;
+    'errors'?: Array<Error>;
     'status': BatchResponsePublicAssociationMulti.StatusEnum;
     'requestedAt'?: Date;
     'startedAt': Date;
