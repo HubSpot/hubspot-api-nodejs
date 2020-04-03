@@ -9,7 +9,7 @@ const PORT = 3000
 
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
-const SCOPES = 'contacts'
+const SCOPE = 'contacts'
 const OBJECTS_LIMIT = 30
 const ADD_ACTION = 'Add selected to company'
 const DELETE_ACTION = 'Delete selected from Company'
@@ -17,6 +17,7 @@ const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const CONTACT_OBJECT_TYPE = 'contacts'
 const COMPANY_OBJECT_TYPE = 'companies'
 const REFRESH_TOKEN = 'refresh_token'
+const COMPANY_TO_CONTACT_ASSOCIATION_TYPE = 'company_to_contact'
 
 let tokenStore = {}
 
@@ -172,6 +173,7 @@ const deleteCompanyContactsAssociations = async (companyId, contactIds) => {
             return {
                 from: { id: companyId },
                 to: { id: contactId },
+                type: COMPANY_TO_CONTACT_ASSOCIATION_TYPE,
             }
         }),
     }
@@ -195,6 +197,7 @@ const createCompanyContactsAssociations = async (companyId, contactIds) => {
             return {
                 from: { id: companyId },
                 to: { id: contactId },
+                type: COMPANY_TO_CONTACT_ASSOCIATION_TYPE,
             }
         }),
     }
@@ -427,7 +430,7 @@ app.get('/oauth', async (req, res) => {
     // Use the client to getAll authorization Url
     // https://www.npmjs.com/package/hubspot
     console.log('Creating authorization Url')
-    const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
+    const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPE)
     console.log('Authorization Url', authorizationUrl)
 
     res.redirect(authorizationUrl)
@@ -451,9 +454,6 @@ app.get('/oauth-callback', async (req, res) => {
 
     tokenStore = tokenStoreResult.body
     tokenStore.updatedAt = Date.now()
-
-    // Set token for the
-    // https://www.npmjs.com/package/hubspot
     hubspotClient.setAccessToken(tokenStore.accessToken)
     res.redirect('/')
 })

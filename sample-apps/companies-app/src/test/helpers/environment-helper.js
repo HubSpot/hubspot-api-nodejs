@@ -53,6 +53,7 @@ const CONTACTS_TO_CREATE = [
 ]
 const CONTACT_OBJECT_TYPE = 'contacts'
 const COMPANY_OBJECT_TYPE = 'companies'
+const COMPANY_TO_CONTACT_ASSOCIATION_TYPE = 'company_to_contact'
 
 const getObjectsIdsCreatedForTests = async (objectType, query) => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -72,7 +73,12 @@ const getObjectsIdsCreatedForTests = async (objectType, query) => {
 }
 
 const createAssociation = async (companyId, contactId) => {
-    await hubspotClient.crm.companies.associationsApi.createAssociation(companyId, CONTACT_OBJECT_TYPE, contactId)
+    await hubspotClient.crm.companies.associationsApi.createAssociation(
+        companyId,
+        CONTACT_OBJECT_TYPE,
+        contactId,
+        COMPANY_TO_CONTACT_ASSOCIATION_TYPE,
+    )
 }
 
 const restoreEnvironment = async () => {

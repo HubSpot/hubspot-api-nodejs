@@ -21,9 +21,12 @@ const logResponse = (data) => {
 }
 
 const checkEnv = (req, res, next) => {
-    if (_.startsWith(req.url, '/error')) return next()
-    if (_.isNil(process.env.HUBSPOT_API_KEY))
+    if (_.startsWith(req.url, '/error')) {
+        return next()
+    }
+    if (_.isNil(process.env.HUBSPOT_API_KEY)) {
         return res.redirect('/error?msg=Please set HUBSPOT_API_KEY env variable to proceed')
+    }
 
     next()
 }
@@ -52,7 +55,9 @@ const getEditableProperties = (properties) => {
     return _.reduce(
         properties,
         (editableProps, property) => {
-            if (!isReadOnly(property)) editableProps[property.name] = { name: property.name, label: property.label }
+            if (!isReadOnly(property)) {
+                editableProps[property.name] = { name: property.name, label: property.label }
+            }
             return editableProps
         },
         {},
@@ -64,7 +69,9 @@ const getMutableProperties = (properties) => {
     return _.reduce(
         properties,
         (mutableProps, property) => {
-            if (!isMutable(property)) mutableProps[property.name] = property
+            if (!isMutable(property)) {
+                mutableProps[property.name] = property
+            }
             return mutableProps
         },
         {},
@@ -81,7 +88,9 @@ const getContactEditableProperties = (contactProperties, editableProperties) => 
         (contactEditableProperties, property, propertyName) => {
             contactEditableProperties[propertyName] = property
             const contactProperty = contactProperties[propertyName]
-            if (contactProperty) contactEditableProperties[propertyName].value = contactProperty
+            if (contactProperty) {
+                contactEditableProperties[propertyName].value = contactProperty
+            }
 
             return contactEditableProperties
         },
@@ -299,7 +308,9 @@ app.get('/contacts/new', async (req, res) => {
 app.get('/contacts/:id', async (req, res) => {
     try {
         const id = _.get(req, 'params.id')
-        if (_.isNil(id)) return res.redirect('/error?msg=Missed contact')
+        if (_.isNil(id)) {
+            return res.redirect('/error?msg=Missed contact')
+        }
 
         // Get All Contacts Properties
         // GET /crm/v3/properties/:objectType
@@ -357,7 +368,9 @@ app.get('/contacts/:id', async (req, res) => {
 app.get('/contacts/:id/engagement', async (req, res) => {
     try {
         const id = _.get(req, 'params.id')
-        if (_.isNil(id)) return res.redirect('/error?msg=Missed contact')
+        if (_.isNil(id)) {
+            return res.redirect('/error?msg=Missed contact')
+        }
         res.render('engagements', { id })
     } catch (e) {
         handleError(e, res)
@@ -457,7 +470,9 @@ app.get('/properties/new', async (req, res) => {
 app.get('/properties/:name', async (req, res) => {
     try {
         const name = _.get(req, 'params.name')
-        if (_.isNil(name)) return res.redirect('/error?msg=Missed property')
+        if (_.isNil(name)) {
+            return res.redirect('/error?msg=Missed property')
+        }
 
         // Get Contact Property by Name
         // GET /crm/v3/properties/:objectType/:propertyName
