@@ -172,23 +172,6 @@ describe('companies-sample', () => {
             expect(isContact02Listed).to.be.true
         })
 
-        it('User can associate contacts to company', async () => {
-            await navigateToUpdateCompanyPage(driver, environmentHelper.createdCompanies[1].properties.name)
-            const updateCompanyPage = await companyFactory(driver, companyPropertiesNames, [])
-
-            const isContact01Listed = await updateCompanyPage.isContactListed(contactName01)
-            const isContact02Listed = await updateCompanyPage.isContactListed(contactName02)
-            expect(isContact01Listed).to.be.false
-            expect(isContact02Listed).to.be.false
-
-            await updateCompanyPage.openManageContactsPage()
-            const manageContactsPage = await manageContactsFactory(driver, [contactName01, contactName02])
-            await manageContactsPage.selectContact(contactName01)
-            await manageContactsPage.selectContact(contactName02)
-            await manageContactsPage.pressAddSelectedToCompanyButton()
-            await companyFactory(driver, companyPropertiesNames, [contactName01, contactName02])
-        })
-
         it('User can delete contacts association to company', async () => {
             await navigateToUpdateCompanyPage(driver, environmentHelper.createdCompanies[0].properties.name)
             const updateCompanyPage = await companyFactory(driver, companyPropertiesNames, [contactName01])
@@ -204,6 +187,23 @@ describe('companies-sample', () => {
 
             const isContact01Listed = await updateCompanyPage.isContactListed(contactName01)
             expect(isContact01Listed).to.be.false
+        })
+
+        it('User can associate contacts to company', async () => {
+            await navigateToUpdateCompanyPage(driver, environmentHelper.createdCompanies[1].properties.name)
+            const updateCompanyPage = await companyFactory(driver, companyPropertiesNames, [])
+
+            const isContact01Listed = await updateCompanyPage.isContactListed(contactName01)
+            const isContact02Listed = await updateCompanyPage.isContactListed(contactName02)
+            expect(isContact01Listed).to.be.false
+            expect(isContact02Listed).to.be.false
+
+            await updateCompanyPage.openManageContactsPage()
+            const manageContactsPage = await manageContactsFactory(driver, [contactName01, contactName02])
+            await manageContactsPage.selectContact(contactName01)
+            await manageContactsPage.selectContact(contactName02)
+            await manageContactsPage.pressAddSelectedToCompanyButton()
+            await companyFactory(driver, companyPropertiesNames, [contactName01, contactName02])
         })
     })
 })

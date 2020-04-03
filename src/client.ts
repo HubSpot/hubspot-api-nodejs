@@ -154,8 +154,8 @@ export class Client {
     }
     public crm: {
         associations: {
-            batchApi: AssociationsBatchApi,
-            typesApi: TypesApi,
+            batchApi: AssociationsBatchApi
+            typesApi: TypesApi
         }
         companies: {
             associationsApi: CompaniesAssociationsApi
