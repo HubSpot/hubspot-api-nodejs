@@ -326,7 +326,7 @@ export class SubscriptionsApi {
      * @param appId The ID of the target app.
      * @param subscriptionCreateRequest Details about the new subscription.
      */
-    public async subscribe (appId: number, subscriptionCreateRequest?: SubscriptionCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
+    public async subscribe (appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -343,6 +343,11 @@ export class SubscriptionsApi {
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling subscribe.');
+        }
+
+        // verify required parameter 'subscriptionCreateRequest' is not null or undefined
+        if (subscriptionCreateRequest === null || subscriptionCreateRequest === undefined) {
+            throw new Error('Required parameter subscriptionCreateRequest was null or undefined when calling subscribe.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
