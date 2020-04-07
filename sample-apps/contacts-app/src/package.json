@@ -29,10 +29,10 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2",
+    "nodemon": "^1.19.3",
     "chromedriver": "^79.0.0",
     "selenium-webdriver": "^4.0.0-alpha.5",
     "chai": "^4.2.0",
-    "mocha": "^6.2.2"
+    "mocha": "^7.1.1"
   }
 }
