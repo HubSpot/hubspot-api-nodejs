@@ -4,8 +4,8 @@ block content
   - const companyPropertiesApiDetails = ' Get all Company Properties\n GET /crm/v3/properties/:objectType/\n crm.properties.coreApi.getAll';
   - const companyApiSaveDetails = ' Update a Company\n PATCH /crm/v3/objects/companies/:objectId/\n crm.companies.basicApi.update';
   - const companyApiCreateDetails = ' Create a Company\n POST /crm/v3/objects/companies/\n crm.companies.basicApi.create';
-  - const companyAssociatedContactsApiDetails = ' Get a Company associated Contacts ids\n GET /crm/v3/objects/companies/:objectId/associations/:associatedObjectType\n crm.companies.associationsApi.getAssociations';
-  - const readContactsByIdsApiDetails = ' Read a list of contacts objects given a collection of IDs\n POST /crm/v3/objects/contacts/batch/read\n crm.contacts.batchApi.readBatch';
+  - const companyAssociatedContactsApiDetails = ' Get a Company associated Contacts ids\n GET /crm/v3/objects/companies/:objectId/associations/:associatedObjectType\n crm.companies.associationsApi.getAll';
+  - const readContactsByIdsApiDetails = ' Read a list of contacts objects given a collection of IDs\n POST /crm/v3/objects/contacts/batch/read\n crm.contacts.batchApi.read';
   section(class='container')
     div(class='row')
       div(class='column column-50')

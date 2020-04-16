@@ -103,7 +103,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public async archiveBatch (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -120,12 +120,12 @@ export class BatchApi {
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new Error('Required parameter fromObjectType was null or undefined when calling archiveBatch.');
+            throw new Error('Required parameter fromObjectType was null or undefined when calling archive.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling archiveBatch.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling archive.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -186,7 +186,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public async createBatch (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation;  }> {
+    public async create (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -203,12 +203,12 @@ export class BatchApi {
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new Error('Required parameter fromObjectType was null or undefined when calling createBatch.');
+            throw new Error('Required parameter fromObjectType was null or undefined when calling create.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling createBatch.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -270,7 +270,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public async readBatch (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti;  }> {
+    public async read (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -287,12 +287,12 @@ export class BatchApi {
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new Error('Required parameter fromObjectType was null or undefined when calling readBatch.');
+            throw new Error('Required parameter fromObjectType was null or undefined when calling read.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling readBatch.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling read.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

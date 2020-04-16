@@ -5,7 +5,7 @@ const _ = require('lodash')
 const path = require('path')
 const express = require('express')
 // eslint-disable-next-line node/no-unpublished-require
-const hubspot = require(`${__dirname}/../../..`)
+const hubspot = require('../../..')
 const bodyParser = require('body-parser')
 const Promise = require('bluebird')
 
@@ -338,8 +338,8 @@ app.get('/contacts/:id', async (req, res) => {
         // Get Associated Engagements
         // GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType
         // https://developers.hubspot.com/docs-beta/crm/associations
-        console.log('Calling crm.contacts.associationsApi.getAssociations API method. Retrieve all contact engagements')
-        const hubspotEngagementsResponse = await hubspotClient.crm.contacts.associationsApi.getAssociations(
+        console.log('Calling crm.contacts.associationsApi.getAll API method. Retrieve all contact engagements')
+        const hubspotEngagementsResponse = await hubspotClient.crm.contacts.associationsApi.getAll(
             id,
             ENGAGEMENT_OBJECT_TYPE,
         )

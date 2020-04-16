@@ -102,7 +102,7 @@ export class BatchApi {
      * @summary Archive a batch of deals by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public async archiveBatch (batchInputSimplePublicObjectId?: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (batchInputSimplePublicObjectId?: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/batch/archive';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -171,7 +171,7 @@ export class BatchApi {
      * @summary Create a batch of deals
      * @param batchInputSimplePublicObjectInput 
      */
-    public async createBatch (batchInputSimplePublicObjectInput?: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async create (batchInputSimplePublicObjectInput?: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -242,7 +242,7 @@ export class BatchApi {
      * @param archived Whether to return only results that have been archived.
      * @param batchReadInputSimplePublicObjectId 
      */
-    public async readBatch (archived?: boolean, batchReadInputSimplePublicObjectId?: BatchReadInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async read (archived?: boolean, batchReadInputSimplePublicObjectId?: BatchReadInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -316,7 +316,7 @@ export class BatchApi {
      * @summary Update a batch of deals
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public async updateBatch (batchInputSimplePublicObjectBatchInput?: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async update (batchInputSimplePublicObjectBatchInput?: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/batch/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
