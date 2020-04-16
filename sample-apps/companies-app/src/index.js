@@ -181,9 +181,9 @@ const deleteCompanyContactsAssociations = async (companyId, contactIds) => {
     // DELETE /crm/v3/associations/:fromObjectType/:toObjectType/batch/archive
     // https://developers.hubspot.com/docs-beta/crm/associations
     console.log(
-        'Calling crm.associations.batchApi.archiveBatch API method. Deleting association between company and contacts.',
+        'Calling crm.associations.batchApi.archive API method. Deleting association between company and contacts.',
     )
-    const deleteAssociationsResponse = await hubspotClient.crm.associations.batchApi.archiveBatch(
+    const deleteAssociationsResponse = await hubspotClient.crm.associations.batchApi.archive(
         COMPANY_OBJECT_TYPE,
         CONTACT_OBJECT_TYPE,
         requestBody,
@@ -206,9 +206,9 @@ const createCompanyContactsAssociations = async (companyId, contactIds) => {
     // POST /crm/v3/associations/:fromObjectType/:toObjectType/batch/create
     // https://developers.hubspot.com/docs-beta/crm/associations
     console.log(
-        'Calling crm.associations.batchApi.createBatch API method. Creating association between company and contacts.',
+        'Calling crm.associations.batchApi.create API method. Creating association between company and contacts.',
     )
-    const createAssociationsResponse = await hubspotClient.crm.associations.batchApi.createBatch(
+    const createAssociationsResponse = await hubspotClient.crm.associations.batchApi.create(
         COMPANY_OBJECT_TYPE,
         CONTACT_OBJECT_TYPE,
         requestBody,
@@ -310,9 +310,9 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // GET /crm/v3/objects/companies/:objectId/associations/:associatedObjectType
         // https://developers.hubspot.com/docs-beta/crm/companies
         console.log(
-            `Calling crm.companies.associationsApi.getAssociations API method. Retrieve list of contacts id's associated with the company ${companyId}.`,
+            `Calling crm.companies.associationsApi.getAll API method. Retrieve list of contacts id's associated with the company ${companyId}.`,
         )
-        const companyAssociatedContactsResponse = await hubspotClient.crm.companies.associationsApi.getAssociations(
+        const companyAssociatedContactsResponse = await hubspotClient.crm.companies.associationsApi.getAll(
             companyId,
             CONTACT_OBJECT_TYPE,
         )
@@ -326,11 +326,8 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // Read a list of contacts objects given a collection of IDs
         // POST /crm/v3/objects/contacts/batch/read
         // https://developers.hubspot.com/docs-beta/crm/contacts
-        console.log(`Calling crm.contacts.batchApi.readBatch API method. Retrieve list of contacts.`)
-        const contactsReadBatchResponse = await hubspotClient.crm.contacts.batchApi.readBatch(
-            false,
-            contactsReadBatchBody,
-        )
+        console.log(`Calling crm.contacts.batchApi.read API method. Retrieve list of contacts.`)
+        const contactsReadBatchResponse = await hubspotClient.crm.contacts.batchApi.read(false, contactsReadBatchBody)
         logResponse(contactsReadBatchResponse)
 
         const contacts = prepareAllContactsForView(contactsReadBatchResponse.body.results)
