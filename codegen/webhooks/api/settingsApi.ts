@@ -94,7 +94,7 @@ export class SettingsApi {
      * @summary Clear webhook settings
      * @param appId The ID of the target app.
      */
-    public async clearSettings (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async clear (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -110,7 +110,7 @@ export class SettingsApi {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling clearSettings.');
+            throw new Error('Required parameter appId was null or undefined when calling clear.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -166,7 +166,7 @@ export class SettingsApi {
      * @param appId The ID of the target app.
      * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
      */
-    public async configureSettings (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async configure (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -182,12 +182,12 @@ export class SettingsApi {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling configureSettings.');
+            throw new Error('Required parameter appId was null or undefined when calling configure.');
         }
 
         // verify required parameter 'settingsChangeRequest' is not null or undefined
         if (settingsChangeRequest === null || settingsChangeRequest === undefined) {
-            throw new Error('Required parameter settingsChangeRequest was null or undefined when calling configureSettings.');
+            throw new Error('Required parameter settingsChangeRequest was null or undefined when calling configure.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -244,7 +244,7 @@ export class SettingsApi {
      * @summary Get webhook settings
      * @param appId The ID of the target app.
      */
-    public async getSettings (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -260,7 +260,7 @@ export class SettingsApi {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling getSettings.');
+            throw new Error('Required parameter appId was null or undefined when calling getAll.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

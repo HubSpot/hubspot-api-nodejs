@@ -99,7 +99,7 @@ export class TypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public async getTypes (fromObjectType: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicAssociationDefiniton;  }> {
+    public async getAll (fromObjectType: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicAssociationDefiniton;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/types'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -116,12 +116,12 @@ export class TypesApi {
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new Error('Required parameter fromObjectType was null or undefined when calling getTypes.');
+            throw new Error('Required parameter fromObjectType was null or undefined when calling getAll.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling getTypes.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling getAll.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

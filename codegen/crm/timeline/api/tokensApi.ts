@@ -101,7 +101,7 @@ export class TokensApi {
      * @param tokenName The token name.
      * @param appId The ID of the target app.
      */
-    public async archiveEventTemplateToken (eventTemplateId: string, tokenName: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (eventTemplateId: string, tokenName: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
@@ -119,17 +119,17 @@ export class TokensApi {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new Error('Required parameter eventTemplateId was null or undefined when calling archiveEventTemplateToken.');
+            throw new Error('Required parameter eventTemplateId was null or undefined when calling archive.');
         }
 
         // verify required parameter 'tokenName' is not null or undefined
         if (tokenName === null || tokenName === undefined) {
-            throw new Error('Required parameter tokenName was null or undefined when calling archiveEventTemplateToken.');
+            throw new Error('Required parameter tokenName was null or undefined when calling archive.');
         }
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling archiveEventTemplateToken.');
+            throw new Error('Required parameter appId was null or undefined when calling archive.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -189,7 +189,7 @@ export class TokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateToken The new token definition.
      */
-    public async createEventTemplateToken (eventTemplateId: string, appId: number, timelineEventTemplateToken?: TimelineEventTemplateToken, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
+    public async create (eventTemplateId: string, appId: number, timelineEventTemplateToken?: TimelineEventTemplateToken, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -206,12 +206,12 @@ export class TokensApi {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new Error('Required parameter eventTemplateId was null or undefined when calling createEventTemplateToken.');
+            throw new Error('Required parameter eventTemplateId was null or undefined when calling create.');
         }
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling createEventTemplateToken.');
+            throw new Error('Required parameter appId was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -274,7 +274,7 @@ export class TokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
      */
-    public async updateEventTemplateToken (eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest?: TimelineEventTemplateTokenUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
+    public async update (eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest?: TimelineEventTemplateTokenUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
@@ -292,17 +292,17 @@ export class TokensApi {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new Error('Required parameter eventTemplateId was null or undefined when calling updateEventTemplateToken.');
+            throw new Error('Required parameter eventTemplateId was null or undefined when calling update.');
         }
 
         // verify required parameter 'tokenName' is not null or undefined
         if (tokenName === null || tokenName === undefined) {
-            throw new Error('Required parameter tokenName was null or undefined when calling updateEventTemplateToken.');
+            throw new Error('Required parameter tokenName was null or undefined when calling update.');
         }
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new Error('Required parameter appId was null or undefined when calling updateEventTemplateToken.');
+            throw new Error('Required parameter appId was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

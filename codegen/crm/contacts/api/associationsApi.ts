@@ -102,7 +102,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-    public async archiveAssociation (contactId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (contactId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/contacts/{contactId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'contactId' + '}', encodeURIComponent(String(contactId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -121,22 +121,22 @@ export class AssociationsApi {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new Error('Required parameter contactId was null or undefined when calling archiveAssociation.');
+            throw new Error('Required parameter contactId was null or undefined when calling archive.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling archiveAssociation.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling archive.');
         }
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
-            throw new Error('Required parameter toObjectId was null or undefined when calling archiveAssociation.');
+            throw new Error('Required parameter toObjectId was null or undefined when calling archive.');
         }
 
         // verify required parameter 'associationType' is not null or undefined
         if (associationType === null || associationType === undefined) {
-            throw new Error('Required parameter associationType was null or undefined when calling archiveAssociation.');
+            throw new Error('Required parameter associationType was null or undefined when calling archive.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -197,7 +197,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-    public async createAssociation (contactId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (contactId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/contacts/{contactId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'contactId' + '}', encodeURIComponent(String(contactId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -216,22 +216,22 @@ export class AssociationsApi {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new Error('Required parameter contactId was null or undefined when calling createAssociation.');
+            throw new Error('Required parameter contactId was null or undefined when calling create.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling createAssociation.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling create.');
         }
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
-            throw new Error('Required parameter toObjectId was null or undefined when calling createAssociation.');
+            throw new Error('Required parameter toObjectId was null or undefined when calling create.');
         }
 
         // verify required parameter 'associationType' is not null or undefined
         if (associationType === null || associationType === undefined) {
-            throw new Error('Required parameter associationType was null or undefined when calling createAssociation.');
+            throw new Error('Required parameter associationType was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -291,7 +291,7 @@ export class AssociationsApi {
      * @param contactId 
      * @param toObjectType 
      */
-    public async getAssociations (contactId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (contactId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/contacts/{contactId}/associations/{toObjectType}'
             .replace('{' + 'contactId' + '}', encodeURIComponent(String(contactId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -308,12 +308,12 @@ export class AssociationsApi {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new Error('Required parameter contactId was null or undefined when calling getAssociations.');
+            throw new Error('Required parameter contactId was null or undefined when calling getAll.');
         }
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new Error('Required parameter toObjectType was null or undefined when calling getAssociations.');
+            throw new Error('Required parameter toObjectType was null or undefined when calling getAll.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
