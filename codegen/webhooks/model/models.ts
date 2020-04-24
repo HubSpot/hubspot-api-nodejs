@@ -1,7 +1,10 @@
+export * from './batchInputSubscriptionBatchUpdateRequest';
+export * from './batchResponseSubscriptionResponse';
 export * from './errorDetail';
 export * from './modelError';
 export * from './settingsChangeRequest';
 export * from './settingsResponse';
+export * from './subscriptionBatchUpdateRequest';
 export * from './subscriptionCreateRequest';
 export * from './subscriptionListResponse';
 export * from './subscriptionPatchRequest';
@@ -10,10 +13,13 @@ export * from './throttlingSettings';
 
 import localVarRequest = require('request');
 
+import { BatchInputSubscriptionBatchUpdateRequest } from './batchInputSubscriptionBatchUpdateRequest';
+import { BatchResponseSubscriptionResponse } from './batchResponseSubscriptionResponse';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { SettingsChangeRequest } from './settingsChangeRequest';
 import { SettingsResponse } from './settingsResponse';
+import { SubscriptionBatchUpdateRequest } from './subscriptionBatchUpdateRequest';
 import { SubscriptionCreateRequest } from './subscriptionCreateRequest';
 import { SubscriptionListResponse } from './subscriptionListResponse';
 import { SubscriptionPatchRequest } from './subscriptionPatchRequest';
@@ -33,16 +39,20 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
+        "BatchResponseSubscriptionResponse.StatusEnum": BatchResponseSubscriptionResponse.StatusEnum,
         "SubscriptionCreateRequest.EventTypeEnum": SubscriptionCreateRequest.EventTypeEnum,
         "SubscriptionResponse.EventTypeEnum": SubscriptionResponse.EventTypeEnum,
         "ThrottlingSettings.PeriodEnum": ThrottlingSettings.PeriodEnum,
 }
 
 let typeMap: {[index: string]: any} = {
+    "BatchInputSubscriptionBatchUpdateRequest": BatchInputSubscriptionBatchUpdateRequest,
+    "BatchResponseSubscriptionResponse": BatchResponseSubscriptionResponse,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "SettingsChangeRequest": SettingsChangeRequest,
     "SettingsResponse": SettingsResponse,
+    "SubscriptionBatchUpdateRequest": SubscriptionBatchUpdateRequest,
     "SubscriptionCreateRequest": SubscriptionCreateRequest,
     "SubscriptionListResponse": SubscriptionListResponse,
     "SubscriptionPatchRequest": SubscriptionPatchRequest,
