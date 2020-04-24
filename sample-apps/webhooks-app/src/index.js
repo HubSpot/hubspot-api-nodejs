@@ -12,10 +12,13 @@ const eventsService = require('./js/events-service')
 const oauthController = require('./js/oauth-controller')
 const contactsController = require('./js/contacts-controller')
 const webhooksController = require('./js/webhooks-controller')
+const webhooksHelper = require('./js/webhooks-helper')
 
 const PORT = 3000
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
+const APPLICATION_ID = process.env.HUBSPOT_APPLICATION_ID
+const DEVELOPER_API_KEY = process.env.HUBSPOT_DEVELOPER_API_KEY
 const REFRESH_TOKEN = 'refresh_token'
 
 let hubspotClient
@@ -27,6 +30,10 @@ const checkEnv = (req, res, next) => {
     if (_.isNil(CLIENT_ID)) return res.redirect('/error?msg=Please set HUBSPOT_CLIENT_ID env variable to proceed')
     if (_.isNil(CLIENT_SECRET))
         return res.redirect('/error?msg=Please set HUBSPOT_CLIENT_SECRET env variable to proceed')
+    if (_.isNil(APPLICATION_ID))
+        return res.redirect('/error?msg=Please set HUBSPOT_APPLICATION_ID env variable to proceed')
+    if (_.isNil(DEVELOPER_API_KEY))
+        return res.redirect('/error?msg=Please set HUBSPOT_DEVELOPER_API_KEY env variable to proceed')
 
     next()
 }
@@ -92,6 +99,24 @@ const setupHubspotClient = async (req, res, next) => {
     next()
 }
 
+const setupWebhooksSubscriptions = async (req, res, next) => {
+    if (_.startsWith(req.url, '/error')) return next()
+    if (_.startsWith(req.url, '/login')) return next()
+
+    const urlInfo = await dbHelper.getUrlInfo()
+
+    if (_.isEmpty(urlInfo)) {
+        return res.redirect('/error?msg=Cannot get url info')
+    }
+
+    if (!urlInfo.webhooks_initialized) {
+        await webhooksHelper.setupWebhooksSubscriptions(urlInfo.url)
+        await dbHelper.setWebhooksInitializedForUrl(urlInfo.url)
+    }
+
+    next()
+}
+
 const app = express()
 
 app.use(express.static('public'))
@@ -120,6 +145,7 @@ app.use((req, res, next) => {
 
 app.use(checkEnv)
 app.use(setupHubspotClient)
+app.use(setupWebhooksSubscriptions)
 
 app.get('/', (req, res) => {
     res.redirect('/contacts')
@@ -145,12 +171,19 @@ app.use((error, req, res, next) => {
     try {
         await dbConnector.init()
         await kafkaHelper.init(eventsService.getHandler())
-
-        const server = app.listen(PORT, () => {
+        const server = app.listen(PORT, async () => {
             console.log(`Listening on port: ${PORT}`)
-            Promise.delay(100)
+            await Promise.delay(100)
                 .then(() => ngrok.connect(PORT))
-                .then((url) => console.log('Please use:', url))
+                .tap((url) => console.log('Please use:', url))
+                .then(dbHelper.saveUrl)
+                .catch(async (e) => {
+                    console.log('Error during app start. ', e)
+                    await dbConnector.close()
+                    server.close(() => {
+                        console.log('Process terminated')
+                    })
+                })
         })
 
         process.on('SIGTERM', async () => {

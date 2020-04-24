@@ -5,13 +5,29 @@ const dbConnector = require('./db-connector')
 const GET_EVENTS_COUNT = 'select count(distinct object_id) as result from events'
 const GET_NEW_EVENTS_COUNT = 'select count(*) from events where shown = 0'
 const SET_EVENTS_SHOWN = 'update events set shown = 1 where shown = 0'
-const GET_TOKENS = `select * from tokens order by 'updated_at' desc limit 1`
+const GET_TOKENS = `select * from tokens ORDER BY updated_at DESC limit 1`
+const GET_URL_INFO = `select * from urls ORDER BY id DESC limit 1`
 
 const getStringValueForSQL = (value) => {
     return _.isNil(value) ? null : `"${value}"`
 }
 
 module.exports = {
+    saveUrl: (url) => {
+        const SAVE_URL = `insert into urls (url, webhooks_initialized) values ("${url}", "0")`
+        return dbConnector.run(SAVE_URL)
+    },
+
+    getUrlInfo: async () => {
+        const result = await dbConnector.run(GET_URL_INFO)
+        return result[0]
+    },
+
+    setWebhooksInitializedForUrl: (url) => {
+        const UPDATE_URL = `update urls set webhooks_initialized = TRUE where url = "${url}"`
+        return dbConnector.run(UPDATE_URL)
+    },
+
     getTokens: async () => {
         const result = await dbConnector.run(GET_TOKENS)
         return result[0]

@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const dbHelper = require('./db-helper')
 
 exports.getHandler = () => {
