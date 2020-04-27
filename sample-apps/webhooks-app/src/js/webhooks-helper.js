@@ -1,12 +1,10 @@
 const _ = require('lodash')
+const Promise = require('bluebird')
 const utils = require('./utils')
 const hubspot = require('../../../..')
 
 const APPLICATION_ID = process.env.HUBSPOT_APPLICATION_ID
 const DEVELOPER_API_KEY = process.env.HUBSPOT_DEVELOPER_API_KEY
-
-let hubspotClient
-
 const WEBHOOKS_SUBSCRIPTIONS = [
     {
         eventType: 'contact.propertyChange',
@@ -23,6 +21,8 @@ const WEBHOOKS_SUBSCRIPTIONS = [
         eventType: 'contact.deletion',
     },
 ]
+
+let hubspotClient
 
 const getAllWebhooksSubscriptions = async () => {
     console.log(
@@ -48,15 +48,12 @@ const createWebhooksSubscription = async (webhooksSubscription) => {
     return contactsResponse.body
 }
 
-const addIdForExistedWebhooksSubscriptions = (webhooksSubscriptions, allWebhooksSubscriptions) => {
-    webhooksSubscriptions.forEach((webhooksSubscription) => {
-        const existedWebhooksSubscription = _.find(allWebhooksSubscriptions, webhooksSubscription)
-        webhooksSubscription.id = _.get(existedWebhooksSubscription, 'id')
-    })
-}
-
 const updateAllWebhooksSubscriptions = async (webhooksSubscriptions, active) => {
     const inputs = _.map(webhooksSubscriptions, (webhooksSubscription) => ({ id: webhooksSubscription.id, active }))
+
+    if (_.isEmpty(inputs)) {
+        return Promise.resolve()
+    }
 
     console.log('Calling hubspotClient.webhooks.subscriptionsApi.updateBatch API method. Update webhooks subscription.')
     // Update webhooks subscriptions
@@ -77,36 +74,39 @@ const configureWebhooksSubscriptionsSettings = async (targetUrl) => {
     utils.logJson(response.body)
 }
 
-const createNotExistedWebhooksSubscriptions = (webhooksSubscriptions) =>
-    webhooksSubscriptions.forEach(async (webhooksSubscription) => {
-        if (_.isNil(webhooksSubscription.id)) {
-            await createWebhooksSubscription(_.assign({}, webhooksSubscription, { active: true }))
-        }
-    })
+const getWebhooksSubscriptionsToActivate = (allWebhooksSubscriptions) =>
+    _.filter(allWebhooksSubscriptions, (webhooksSubscription) =>
+        _.find(WEBHOOKS_SUBSCRIPTIONS, { eventType: webhooksSubscription.eventType }),
+    )
 
-exports.setupWebhooksSubscriptions = async (url) => {
-    console.log('Started Webhooks Subscriptions setup')
+const getWebhooksSubscriptionsToDeActivate = (allWebhooksSubscriptions) => _.filter(allWebhooksSubscriptions, 'active')
 
+const getWebhooksSubscriptionsToCreate = (allWebhooksSubscriptions) =>
+    WEBHOOKS_SUBSCRIPTIONS.filter(
+        (webhooksSubscription) => !_.find(allWebhooksSubscriptions, webhooksSubscription),
+    ).map((webhooksSubscription) => _.assign({}, webhooksSubscription, { active: true }))
+
+const createNotExistedWebhooksSubscriptions = (allWebhooksSubscriptions) => {
+    const webhooksSubscriptionsToCreate = getWebhooksSubscriptionsToCreate(allWebhooksSubscriptions)
+
+    return Promise.map(webhooksSubscriptionsToCreate, createWebhooksSubscription)
+}
+
+const setupClient = () => {
     if (_.isNil(hubspotClient)) {
         hubspotClient = new hubspot.Client({ apiKey: DEVELOPER_API_KEY })
     }
+}
 
-    const webhooksSubscriptions = _.cloneDeep(WEBHOOKS_SUBSCRIPTIONS)
+exports.setupWebhooksSubscriptions = async (url) => {
+    console.log('Started Webhooks Subscriptions setup')
+    setupClient()
     const allWebhooksSubscriptions = await getAllWebhooksSubscriptions()
-
-    if (!_.isEmpty(allWebhooksSubscriptions)) {
-        addIdForExistedWebhooksSubscriptions(webhooksSubscriptions, allWebhooksSubscriptions)
-        await updateAllWebhooksSubscriptions(allWebhooksSubscriptions, false)
-    }
-
+    const webhooksSubscriptionsToDeActivate = getWebhooksSubscriptionsToDeActivate(allWebhooksSubscriptions)
+    await updateAllWebhooksSubscriptions(webhooksSubscriptionsToDeActivate, false)
     await configureWebhooksSubscriptionsSettings(`${url}/webhooks`)
-
-    if (!_.isEmpty(allWebhooksSubscriptions)) {
-        addIdForExistedWebhooksSubscriptions(webhooksSubscriptions, allWebhooksSubscriptions)
-        await updateAllWebhooksSubscriptions(allWebhooksSubscriptions, true)
-    }
-
-    await createNotExistedWebhooksSubscriptions(webhooksSubscriptions)
-
+    const webhooksSubscriptionsToActivate = getWebhooksSubscriptionsToActivate(allWebhooksSubscriptions)
+    await updateAllWebhooksSubscriptions(webhooksSubscriptionsToActivate, true)
+    await createNotExistedWebhooksSubscriptions(allWebhooksSubscriptions)
     console.log('Finished Webhooks Subscriptions setup')
 }
