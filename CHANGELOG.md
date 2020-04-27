@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
   - extended webhooks-sample-app to setup application webhooks configuration after successful authorization
+  - documents path in sample-app
   
 ### Fixed
 

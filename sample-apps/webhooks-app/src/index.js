@@ -74,6 +74,9 @@ const setupHubspotClient = async (req, res, next) => {
 
         if (isTokenExpired()) {
             console.log('HubSpot: need to refresh token')
+            // Create OAuth 2.0 Access Token and Refresh Tokens
+            // POST /oauth/v1/token
+            // https://developers.hubspot.com/docs/api/intro-to-auth
             const result = await hubspotClient.oauth.defaultApi.createToken(
                 REFRESH_TOKEN,
                 undefined,
