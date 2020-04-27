@@ -171,9 +171,9 @@ app.use((error, req, res, next) => {
     try {
         await dbConnector.init()
         await kafkaHelper.init(eventsService.getHandler())
-        const server = app.listen(PORT, async () => {
+        const server = app.listen(PORT, () => {
             console.log(`Listening on port: ${PORT}`)
-            await Promise.delay(100)
+            return Promise.delay(100)
                 .then(() => ngrok.connect(PORT))
                 .tap((url) => console.log('Please use:', url))
                 .then(dbHelper.saveUrl)
