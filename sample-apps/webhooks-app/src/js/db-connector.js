@@ -30,6 +30,12 @@ const TOKENS_TABLE_INIT = `create table if not exists tokens  (
   updated_at     datetime       default CURRENT_TIMESTAMP
 );`
 
+const URLS_TABLE_INIT = `create table if not exists urls  (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  url                    VARCHAR(255)   default null,
+  webhooks_initialized   boolean        default 0
+);`
+
 exports.init = async () => {
     try {
         connection = new mysql.createConnection({
@@ -48,6 +54,7 @@ exports.init = async () => {
         console.log('init tables')
         await connection.queryAsync(EVENTS_TABLE_INIT)
         await connection.queryAsync(TOKENS_TABLE_INIT)
+        await connection.queryAsync(URLS_TABLE_INIT)
     } catch (e) {
         console.error('DB is not available')
         console.error(e)
@@ -60,5 +67,5 @@ exports.close = async () => {
 
 exports.run = (sql) => {
     console.log(sql)
-    return _.isNull(connection) ? Promise.reject('DB not initialized!') : connection.queryAsync(sql)
+    return _.isNull(connection) ? Promise.reject(new Error('DB not initialized!')) : connection.queryAsync(sql)
 }

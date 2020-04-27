@@ -446,13 +446,13 @@ export class Client {
             this._eventsApi,
             this._templatesApi,
             this._tokensApi,
+            this._settingsApi,
+            this._subscriptionsApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(
             this._oauthDefaultApi,
             this._cardsSampleResponseApi,
-            this._settingsApi,
-            this._subscriptionsApi,
         )
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)

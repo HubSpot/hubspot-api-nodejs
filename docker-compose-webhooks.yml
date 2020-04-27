@@ -33,7 +33,7 @@ services:
     image: mysql:8.0
     command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./db/mysql:/var/lib/mysql
+      - ./sample-apps/webhooks-app/db/mysql:/var/lib/mysql
     ports:
       - 3306:3306
     environment:

@@ -20,7 +20,7 @@ exports.getRouter = () => {
     router.get('/oauth', async (req, res) => {
         const redirectUri = `${getHostUrl(req)}/auth/oauth-callback`
         // Use the client to get authorization Url
-        // https://www.npmjs.com/package/hubspot#obtain-your-authorization-url
+        // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
         const authorizationUrl = req.hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, redirectUri, SCOPE)
         console.log('Authorization Url:', authorizationUrl)
 
@@ -32,7 +32,7 @@ exports.getRouter = () => {
         const redirectUri = `${getHostUrl(req)}/auth/oauth-callback`
         // Get OAuth 2.0 Access Token and Refresh Tokens
         // POST /oauth/v1/token
-        // https://developers.hubspot.com/docs-beta/working-with-oauth
+        // https://developers.hubspot.com/docs/api/working-with-oauth
         console.log('Retrieving access token by code:', code)
         const getTokensResponse = await req.hubspotClient.oauth.defaultApi.createToken(
             AUTHORIZATION_CODE,
