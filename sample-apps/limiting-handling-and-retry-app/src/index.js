@@ -116,7 +116,7 @@ const setAccessTokenToAllClients = (accessToken) => {
 const refreshToken = async () => {
     // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://developers.hubspot.com/docs-beta/intro-to-auth
+    // https://developers.hubspot.com/docs/api/working-with-oauth
     const result = await hubspotClient.oauth.defaultApi.createToken(
         REFRESH_TOKEN,
         undefined,
@@ -327,8 +327,8 @@ app.get('/login', async (req, res) => {
 })
 
 app.get('/oauth', async (req, res) => {
-    // Use the client to getAll authorization Url
-    // https://www.npmjs.com/package/hubspot
+    // Use the client to get authorization Url
+    // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
     console.log('Creating authorization Url')
     const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
     console.log('Authorization Url', authorizationUrl)
@@ -341,7 +341,7 @@ app.get('/oauth-callback', async (req, res) => {
 
     // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://developers.hubspot.com/docs-beta/intro-to-auth
+    // https://developers.hubspot.com/docs/api/working-with-oauth
     console.log('Retrieving access token by code:', code)
     const tokenStoreResult = await hubspotClient.oauth.defaultApi.createToken(
         'authorization_code',
@@ -356,7 +356,7 @@ app.get('/oauth-callback', async (req, res) => {
     tokenStore.updatedAt = Date.now()
 
     // Set token for the
-    // https://www.npmjs.com/package/hubspot
+    // https://www.npmjs.com/package/@hubspot/api-client
     await dbHelper.saveTokens(tokenStore)
     setAccessTokenToAllClients(tokenStore.accessToken)
     res.redirect('/')

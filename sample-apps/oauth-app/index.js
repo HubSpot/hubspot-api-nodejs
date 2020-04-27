@@ -112,9 +112,9 @@ app.get('/', async (req, res) => {
 
         const properties = ['firstname', 'lastname', 'company']
 
-        // Get all contacts
+        // Get first contacts page
         // GET /crm/v3/objects/contacts
-        // https://developers.hubspot.com/docs-beta/crm/contacts
+        // https://developers.hubspot.com/docs/api/crm/contacts
         console.log('Calling crm.contacts.basicApi.getPage. Retrieve contacts.')
         const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(OBJECTS_LIMIT, undefined, properties)
         logResponse('Response from API', contactsResponse)
@@ -127,7 +127,7 @@ app.get('/', async (req, res) => {
 
 app.use('/oauth', async (req, res) => {
     // Use the client to get authorization Url
-    // https://www.npmjs.com/package/hubspot
+    // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
     console.log('Creating authorization Url')
     const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPES)
     console.log('Authorization Url', authorizationUrl)
@@ -138,9 +138,9 @@ app.use('/oauth', async (req, res) => {
 app.use('/oauth-callback', async (req, res) => {
     const code = _.get(req, 'query.code')
 
-    // Get OAuth 2.0 Access Token and Refresh Tokens
+    // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://developers.hubspot.com/docs-beta/working-with-oauth
+    // https://developers.hubspot.com/docs/api/working-with-oauth
     console.log('Retrieving access token by code:', code)
     const getTokensResponse = await hubspotClient.oauth.defaultApi.createToken(
         GRANT_TYPES.AUTHORIZATION_CODE,
@@ -155,7 +155,7 @@ app.use('/oauth-callback', async (req, res) => {
     tokenStore.updatedAt = Date.now()
 
     // Set token for the
-    // https://www.npmjs.com/package/hubspot
+    // https://www.npmjs.com/package/@hubspot/api-client
     hubspotClient.setAccessToken(tokenStore.accessToken)
     res.redirect('/')
 })

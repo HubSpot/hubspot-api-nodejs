@@ -1,19 +1,19 @@
 # HubSpot-nodejs contacts sample app
 
-This is a sample app for the [hubspot-php SDK](../../../../../). Currently, this app focuses on demonstrating the functionality of [Contacts API](https://developers.hubspot.com/docs-beta/crm/contacts) endpoints and their related actions. Additionally it shows how to work with paged results and how to use getAll method.
+This is a sample app for the [hubspot-php SDK](../../../../../). Currently, this app focuses on demonstrating the functionality of [Contacts API](https://developers.hubspot.com/docs/api/crm/contacts) endpoints and their related actions. Additionally it shows how to work with paged results and how to use getAll method.
 
-Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs-beta/creating-an-app)
+Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-app)
 ### HubSpot Public API links used in this application
 
-  - [Create contact](https://developers.hubspot.com/docs-beta/crm/contacts)
-  - [Get a contact record by its id](https://developers.hubspot.com/docs-beta/crm/contacts)
-  - [Get all contacts](https://developers.hubspot.com/docs-beta/crm/contacts)
-  - [Get all contacts properties](https://developers.hubspot.com/docs-beta/crm/properties)
-  - [Get all contact property groups](https://developers.hubspot.com/docs-beta/crm/properties)
-  - [Get list of owners](https://developers.hubspot.com/docs-beta/crm/owners)
-  - [Update a contact property](https://developers.hubspot.com/docs-beta/crm/properties)
-  - [Create a contact property](https://developers.hubspot.com/docs-beta/crm/properties)
-  - [Search for contacts](https://developers.hubspot.com/docs-beta/crm/contacts)
+  - [Create contact](https://developers.hubspot.com/docs/api/crm/contacts)
+  - [Get a contact record by its id](https://developers.hubspot.com/docs/api/crm/contacts)
+  - [Get all contacts](https://developers.hubspot.com/docs/api/crm/contacts)
+  - [Get all contacts properties](https://developers.hubspot.com/docs/api/crm/properties)
+  - [Get all contact property groups](https://developers.hubspot.com/docs/api/crm/properties)
+  - [Get list of owners](https://developers.hubspot.com/docs/api/crm/owners)
+  - [Update a contact property](https://developers.hubspot.com/docs/api/crm/properties)
+  - [Create a contact property](https://developers.hubspot.com/docs/api/crm/properties)
+  - [Search for contacts](https://developers.hubspot.com/docs/api/crm/contacts)
 
 
 ### Setup App

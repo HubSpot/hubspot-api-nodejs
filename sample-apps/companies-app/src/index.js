@@ -43,7 +43,7 @@ const isTokenExpired = () => {
 const refreshToken = async () => {
     // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://developers.hubspot.com/docs-beta/intro-to-auth
+    // https://developers.hubspot.com/docs/api/intro-to-auth
     const result = await hubspotClient.oauth.defaultApi.createToken(
         REFRESH_TOKEN,
         undefined,
@@ -115,7 +115,7 @@ const hubspotClient = new hubspot.Client()
 const getAllCompanies = async () => {
     // Get companies
     // GET /crm/v3/objects/companies
-    // https://developers.hubspot.com/docs-beta/crm/companies
+    // https://developers.hubspot.com/docs/api/crm/companies
     console.log('Calling crm.companies.basicApi.getPage API method. Retrieve all companies.')
     const companiesResponse = await hubspotClient.crm.companies.basicApi.getPage(OBJECTS_LIMIT)
     logResponse(companiesResponse)
@@ -143,7 +143,7 @@ const getCompaniesByDomain = async (domain) => {
     }
     // Search for companies by domain
     // POST /crm/v3/objects/companies/search
-    // https://developers.hubspot.com/docs-beta/crm/companies
+    // https://developers.hubspot.com/docs/api/crm/companies
     console.log('Calling crm.companies.searchApi.doSearch API method. Retrieve companies by domain.')
     const companiesResponse = await hubspotClient.crm.companies.searchApi.doSearch(searchBody)
     logResponse(companiesResponse)
@@ -154,7 +154,7 @@ const getCompaniesByDomain = async (domain) => {
 const createCompany = async (properties) => {
     // Create a Company
     // POST /crm/v3/objects/companies/
-    // https://developers.hubspot.com/docs-beta/crm/companies
+    // https://developers.hubspot.com/docs/api/crm/companies
     console.log('Calling crm.companies.basicApi.create API method. Create company.')
     return hubspotClient.crm.companies.basicApi.create({ properties })
 }
@@ -162,7 +162,7 @@ const createCompany = async (properties) => {
 const updateCompany = (id, properties) => {
     // Update a Company
     // PATCH /crm/v3/objects/companies/:objectId/
-    // https://developers.hubspot.com/docs-beta/crm/companies
+    // https://developers.hubspot.com/docs/api/crm/companies
     console.log('Calling crm.companies.basicApi.update API method. Update company.')
     return hubspotClient.crm.companies.basicApi.update(id, { properties })
 }
@@ -179,7 +179,7 @@ const deleteCompanyContactsAssociations = async (companyId, contactIds) => {
     }
     // Remove an associations between company and contacts
     // DELETE /crm/v3/associations/:fromObjectType/:toObjectType/batch/archive
-    // https://developers.hubspot.com/docs-beta/crm/associations
+    // https://developers.hubspot.com/docs/api/crm/associations
     console.log(
         'Calling crm.associations.batchApi.archive API method. Deleting association between company and contacts.',
     )
@@ -204,7 +204,7 @@ const createCompanyContactsAssociations = async (companyId, contactIds) => {
     console.log('requestBody', JSON.stringify(requestBody))
     // Associate company and contacts
     // POST /crm/v3/associations/:fromObjectType/:toObjectType/batch/create
-    // https://developers.hubspot.com/docs-beta/crm/associations
+    // https://developers.hubspot.com/docs/api/crm/associations
     console.log(
         'Calling crm.associations.batchApi.create API method. Creating association between company and contacts.',
     )
@@ -274,7 +274,7 @@ app.get('/companies/new', checkAuthorization, async (req, res) => {
     try {
         // Get all Company Properties
         // GET /crm/v3/properties/:objectType/
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve company properties.')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
         logResponse(propertiesResponse)
@@ -292,7 +292,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
         // Get all Company Properties
         // GET /crm/v3/properties/:objectType/
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve company properties.')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(COMPANY_OBJECT_TYPE)
         logResponse(propertiesResponse)
@@ -301,14 +301,14 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
         // Get a company record by it's id
         // GET /crm/v3/objects/companies/:objectId
-        // https://developers.hubspot.com/docs-beta/crm/companies
+        // https://developers.hubspot.com/docs/api/crm/companies
         console.log('Calling crm.companies.basicApi.getById API method. Retrieve a company by id:', companyId)
         const companyResponse = await hubspotClient.crm.companies.basicApi.getById(companyId, companyPropertiesNames)
         logResponse(companyResponse)
 
         // Get a Company associated Contacts id's
         // GET /crm/v3/objects/companies/:objectId/associations/:associatedObjectType
-        // https://developers.hubspot.com/docs-beta/crm/companies
+        // https://developers.hubspot.com/docs/api/crm/companies
         console.log(
             `Calling crm.companies.associationsApi.getAll API method. Retrieve list of contacts id's associated with the company ${companyId}.`,
         )
@@ -325,7 +325,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
 
         // Read a list of contacts objects given a collection of IDs
         // POST /crm/v3/objects/contacts/batch/read
-        // https://developers.hubspot.com/docs-beta/crm/contacts
+        // https://developers.hubspot.com/docs/api/crm/contacts
         console.log(`Calling crm.contacts.batchApi.read API method. Retrieve list of contacts.`)
         const contactsReadBatchResponse = await hubspotClient.crm.contacts.batchApi.read(false, contactsReadBatchBody)
         logResponse(contactsReadBatchResponse)
@@ -346,13 +346,13 @@ app.get('/companies/:companyId/contacts', checkAuthorization, async (req, res) =
         if (_.isNil(query) || _.isEmpty(query)) {
             // Get contacts
             // GET /crm/v3/objects/contacts
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
             contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(OBJECTS_LIMIT)
         } else {
             // Search for contacts
             // POST /crm/v3/objects/contacts/search
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log(
                 'Calling crm.contacts.searchApi.doSearch API method. Retrieve contacts with search query:',
                 query,
@@ -424,8 +424,8 @@ app.get('/login', async (req, res) => {
 })
 
 app.get('/oauth', async (req, res) => {
-    // Use the client to getAll authorization Url
-    // https://www.npmjs.com/package/hubspot
+    // Use the client to get authorization Url
+    // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
     console.log('Creating authorization Url')
     const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(CLIENT_ID, REDIRECT_URI, SCOPE)
     console.log('Authorization Url', authorizationUrl)
@@ -438,7 +438,7 @@ app.get('/oauth-callback', async (req, res) => {
 
     // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
-    // https://developers.hubspot.com/docs-beta/intro-to-auth
+    // https://developers.hubspot.com/docs/api/working-with-oauth
     console.log('Retrieving access token by code:', code)
     const tokenStoreResult = await hubspotClient.oauth.defaultApi.createToken(
         'authorization_code',

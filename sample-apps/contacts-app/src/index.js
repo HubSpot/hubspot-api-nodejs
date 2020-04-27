@@ -164,7 +164,7 @@ const getAllContacts = async (properties, query) => {
         if (_.isNil(query) || _.isEmpty(query)) {
             // Get contacts
             // GET /crm/v3/objects/contacts
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
             contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(CONTACTS_LIMIT, after, properties)
         } else {
@@ -175,7 +175,7 @@ const getAllContacts = async (properties, query) => {
 
             // Search for contacts
             // POST /crm/v3/objects/contacts/search
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log(
                 'Calling crm.contacts.searchApi.doSearch API method. Retrieve contacts with search query:',
                 query,
@@ -234,7 +234,7 @@ app.post('/contacts', async (req, res) => {
 
             // Create a contact
             // POST /crm/v3/objects/contacts/
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log('Calling crm.contacts.basicApi.create API method. Create new contact')
             const createResponse = await hubspotClient.crm.contacts.basicApi.create({ properties })
             logResponse(createResponse)
@@ -257,7 +257,7 @@ app.post('/contacts/:id', async (req, res) => {
 
             // Update a contact
             // POST /crm/v3/objects/contacts/:objectId
-            // https://developers.hubspot.com/docs-beta/crm/contacts
+            // https://developers.hubspot.com/docs/api/crm/contacts
             console.log('Calling crm.contacts.basicApi.update API method. Update contact with id:', id)
             const updateResponse = await hubspotClient.crm.contacts.basicApi.update(id, { properties })
             logResponse(updateResponse)
@@ -284,14 +284,14 @@ app.get('/contacts/new', async (req, res) => {
     try {
         // Get All Contacts Properties
         // GET /crm/v3/properties/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve all contacts properties')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(propertiesResponse)
 
         // Get List of Owners
         // GET /crm/v3/owners/
-        // https://developers.hubspot.com/docs-beta/crm/owners
+        // https://developers.hubspot.com/docs/api/crm/owners
         console.log('Calling crm.owners.defaultApi.getPage API method. Retrieve all contacts owners')
         const ownersResponse = await hubspotClient.crm.owners.defaultApi.getPage()
         logResponse(ownersResponse)
@@ -314,7 +314,7 @@ app.get('/contacts/:id', async (req, res) => {
 
         // Get All Contacts Properties
         // GET /crm/v3/properties/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve all contacts properties')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(propertiesResponse)
@@ -323,21 +323,21 @@ app.get('/contacts/:id', async (req, res) => {
 
         // Get a contact record by its id
         // GET /crm/v3/objects/contacts/:objectId
-        // https://developers.hubspot.com/docs-beta/crm/contacts
+        // https://developers.hubspot.com/docs/api/crm/contacts
         console.log('Calling crm.contacts.basicApi.getById API method. Retrieve a contact by id:', id)
         const contactResponse = await hubspotClient.crm.contacts.basicApi.getById(id, contactPropertiesNames)
         logResponse(contactResponse)
 
         // Get List of Owners
         // GET /crm/v3/owners/
-        // https://developers.hubspot.com/docs-beta/crm/owners
+        // https://developers.hubspot.com/docs/api/crm/owners
         console.log('Calling crm.owners.defaultApi.getPage API method. Retrieve all contacts owners')
         const ownersResponse = await hubspotClient.crm.owners.defaultApi.getPage()
         logResponse(ownersResponse)
 
         // Get Associated Engagements
         // GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType
-        // https://developers.hubspot.com/docs-beta/crm/associations
+        // https://developers.hubspot.com/docs/api/crm/associations
         console.log('Calling crm.contacts.associationsApi.getAll API method. Retrieve all contact engagements')
         const hubspotEngagementsResponse = await hubspotClient.crm.contacts.associationsApi.getAll(
             id,
@@ -405,7 +405,7 @@ app.get('/properties', async (req, res) => {
     try {
         // Get All Contacts Properties
         // GET /crm/v3/properties/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve all contacts properties')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(propertiesResponse)
@@ -422,7 +422,7 @@ app.post('/properties', async (req, res) => {
     try {
         // Create a contact property
         // POST /crm/v3/properties/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.create API method. Create contact property')
         const result = await hubspotClient.crm.properties.coreApi.create(CONTACT_OBJECT_TYPE, req.body)
         console.log('Response from API', result)
@@ -441,7 +441,7 @@ app.post('/properties/:name', async (req, res) => {
 
         // Update a contact property
         // PATCH /crm/v3/properties/:objectType/:propertyName
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.update API method. Update contact property, with name:', name)
         const result = await hubspotClient.crm.properties.coreApi.update(CONTACT_OBJECT_TYPE, name, req.body)
         console.log('Response from API', result)
@@ -456,7 +456,7 @@ app.get('/properties/new', async (req, res) => {
     try {
         // Get Contact Property Groups
         // GET //crm/v3/properties/:objectType/groups
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.groupsApi.getAll API method. Retrieve all contact property groups')
         const groupsResponse = await hubspotClient.crm.properties.groupsApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(groupsResponse)
@@ -476,14 +476,14 @@ app.get('/properties/:name', async (req, res) => {
 
         // Get Contact Property by Name
         // GET /crm/v3/properties/:objectType/:propertyName
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getByName API method. Retrieve all contacts properties')
         const propertyResponse = await hubspotClient.crm.properties.coreApi.getByName(CONTACT_OBJECT_TYPE, name)
         logResponse(propertyResponse)
 
         // Get Contact Property Groups
         // GET //crm/v3/properties/:objectType/groups
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.groupsApi.getAll API method. Retrieve all contact property groups')
         const groupsResponse = await hubspotClient.crm.properties.groupsApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(groupsResponse)
@@ -503,12 +503,13 @@ app.get('/export', async (req, res) => {
     try {
         // Get All Contacts Properties
         // GET /crm/v3/properties/:objectType
-        // https://developers.hubspot.com/docs-beta/crm/properties
+        // https://developers.hubspot.com/docs/api/crm/properties
         console.log('Calling crm.properties.coreApi.getAll API method. Retrieve all contacts properties')
         const propertiesResponse = await hubspotClient.crm.properties.coreApi.getAll(CONTACT_OBJECT_TYPE)
         logResponse(propertiesResponse)
 
         const contactsPropertiesNames = _.map(propertiesResponse.body.results, 'name')
+        console.log('Calling hubspotClient.crm.contacts.getAll API method. Retrieve all contacts')
         const contacts = await hubspotClient.crm.contacts.getAll(undefined, undefined, contactsPropertiesNames)
         const csvContent = toCsv(contacts, propertiesResponse.body.results)
 
