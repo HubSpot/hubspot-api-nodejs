@@ -58,7 +58,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
   - 'apiKey' authorization for webhooks clients  
+  
+## [2.0.0] - 2020-05-06
+
+### Breaking changes:
+
+- Updated crm.imports.coreApi client method names: getAll => getPage
+  
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
+[2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
