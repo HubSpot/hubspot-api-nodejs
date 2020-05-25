@@ -125,14 +125,19 @@ const app = express()
 app.use(express.static('public'))
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
-
 app.use(
     bodyParser.urlencoded({
         limit: '50mb',
         extended: true,
     }),
 )
-
+app.use((req, res, next) => {
+    console.log(req.method, req.url)
+    next()
+})
+app.use(checkEnv)
+app.use(setupHubspotClient)
+app.use(setupWebhooksSubscriptions)
 app.use(
     bodyParser.json({
         limit: '50mb',
@@ -140,15 +145,6 @@ app.use(
         verify: webhooksController.getWebhookVerification(),
     }),
 )
-
-app.use((req, res, next) => {
-    console.log(req.method, req.url)
-    next()
-})
-
-app.use(checkEnv)
-app.use(setupHubspotClient)
-app.use(setupWebhooksSubscriptions)
 
 app.get('/', (req, res) => {
     res.redirect('/contacts')

@@ -1,4 +1,5 @@
 import Bottleneck from 'bottleneck'
+import crypto = require('crypto')
 import http = require('http')
 import * as _ from 'lodash'
 import * as qs from 'querystring'
@@ -284,7 +285,15 @@ export class Client {
     }
     public webhooks: {
         settingsApi: SettingsApi
-        subscriptionsApi: SubscriptionsApi
+        subscriptionsApi: SubscriptionsApi,
+        validateSignature: (
+            signature: string,
+            clientSecret: string,
+            requestBody: string,
+            signatureVersion?: string,
+            webhooksUrl?: string,
+            webhooksMethod?: string,
+        ) => boolean
     }
     protected _interceptors: Interceptor[] = []
     protected _oauthDefaultApi: OauthDefaultApi
@@ -561,11 +570,12 @@ export class Client {
         }
         this.oauth = {
             defaultApi: this._oauthDefaultApi,
-            getAuthorizationUrl: this._getAuthorizationUrl.bind(this),
+            getAuthorizationUrl: this._getAuthorizationUrl,
         }
         this.webhooks = {
             settingsApi: this._settingsApi,
             subscriptionsApi: this._subscriptionsApi,
+            validateSignature: this._validateSignature,
         }
     }
 
@@ -712,6 +722,26 @@ export class Client {
         }
 
         return `https://app.hubspot.com/oauth/authorize?${qs.stringify(_.omitBy(params, _.isNil))}`
+    }
+
+    protected _validateSignature(
+        signature: string,
+        clientSecret: string,
+        requestBody: string,
+        signatureVersion = 'v1',
+        webhooksUrl?: string,
+        webhooksMethod = 'POST',
+    ): boolean {
+        const sourceString = _.isEqual(signatureVersion, 'v1') ?
+            clientSecret + requestBody :
+            clientSecret + webhooksMethod + webhooksUrl + requestBody
+
+        const hash = crypto
+            .createHash('sha256')
+            .update(sourceString)
+            .digest('hex')
+
+        return _.isEqual(signature, hash)
     }
 
     private _retrieveGetAllFunction<T, V>(

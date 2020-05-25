@@ -1,5 +1,3 @@
-const _ = require('lodash')
-const crypto = require('crypto')
 const express = require('express')
 const router = new express.Router()
 const dbHelper = require('./db-helper')
@@ -8,6 +6,7 @@ const utils = require('./utils')
 const kafkaHelper = require('./kafka-helper')
 
 const SIGNATURE_HEADER = 'X-HubSpot-Signature'
+const SIGNATURE_VERSION_HEADER = 'X-HubSpot-Signature-Version'
 
 exports.getRouter = () => {
     router.post('/', async (req, res) => {
@@ -28,20 +27,27 @@ exports.getRouter = () => {
 }
 
 exports.getWebhookVerification = () => {
-    return (req, res, buf, encoding) => {
+    return (req, res, buf) => {
+        const originalUrl = req.originalUrl
+        if (originalUrl !== '/webhooks') return
+
         try {
-            if (req.originalUrl === '/webhooks') {
-                const rawBody = buf.toString(encoding)
-                const signature = req.header(SIGNATURE_HEADER)
+            const requestBody = buf.toString()
+            const signature = req.header(SIGNATURE_HEADER)
+            const clientSecret = process.env.HUBSPOT_CLIENT_SECRET
+            const signatureVersion = req.header(SIGNATURE_VERSION_HEADER)
 
-                const secret = process.env.HUBSPOT_CLIENT_SECRET
-                const hash = crypto
-                    .createHash('sha256')
-                    .update(secret + rawBody)
-                    .digest('hex')
-
-                if (signature === hash) return
-            }
+            if (
+                req.hubspotClient.webhooks.validateSignature(
+                    signature,
+                    clientSecret,
+                    requestBody,
+                    signatureVersion,
+                    originalUrl,
+                    req.method,
+                )
+            )
+                return
         } catch (e) {
             console.log(e)
         }
