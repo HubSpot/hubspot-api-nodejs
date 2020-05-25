@@ -1,6 +1,6 @@
 {
   "name": "@hubspot/api-client",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs-beta/overview) SDK(Client) files and sample apps",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,6 +24,7 @@
     "@types/request": "^2.48.4",
     "bluebird": "^3.7.2",
     "bottleneck": "^2.19.5",
+    "crypto": "^1.0.1",
     "lodash": "^4.17.15",
     "request": "^2.88.0"
   },

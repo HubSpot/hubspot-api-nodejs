@@ -64,9 +64,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking changes:
 
 - Updated crm.imports.coreApi client method names: getAll => getPage
-  
+
+## [2.0.1] - 2020-05-25
+
+### Added:
+
+- validateSignature method to webhooks  
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
+[2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.1
