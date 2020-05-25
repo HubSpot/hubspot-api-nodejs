@@ -125,6 +125,12 @@ const app = express()
 app.use(express.static('public'))
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
+app.use(
+    bodyParser.urlencoded({
+        limit: '50mb',
+        extended: true,
+    }),
+)
 app.use((req, res, next) => {
     console.log(req.method, req.url)
     next()
