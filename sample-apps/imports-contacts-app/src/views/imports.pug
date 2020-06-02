@@ -1,0 +1,12 @@
+extends includes/layout
+block content
+  - const getTokenApiDetails = ' Get OAuth 2.0 Access Token and Refresh Tokens\n POST /oauth/v1/token\n oauth.defaultApi.createToken'
+  - const getContactsApiDetails = ' Get all companies\n GET /crm/v3/objects/contacts\n crm.contacts.basicApi.getPage'
+  .container
+    h3 Select File
+    p You can take an example of file
+      a(href='/data/example.csv')  here
+
+    form(method='post', enctype='multipart/form-data' action="/import")
+      input(type='file', name='file', accept='.csv', required)
+      input(type='submit', name='Upload', value='Upload')
