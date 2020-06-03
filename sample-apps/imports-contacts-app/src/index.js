@@ -3,12 +3,13 @@ const path = require('path')
 const express = require('express')
 const hubspot = require('../../..')
 const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload')
 require('./config')
 
 const PORT = 3000
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
-const SCOPES = 'contacts'
+const SCOPES = 'contacts crm.import'
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
 const GRANT_TYPES = {
     AUTHORIZATION_CODE: 'authorization_code',
@@ -83,6 +84,12 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(
+    fileUpload({
+        createParentPath: false,
+    }),
+)
+
+app.use(
     bodyParser.urlencoded({
         limit: '50mb',
         extended: true,
@@ -136,6 +143,59 @@ app.use(checkAuthorization)
 app.get('/', async (req, res) => {
     try {
         res.render('imports')
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.post('/import', async (req, res) => {
+    try {
+        const fileToImport = _.get(req, 'files.file')
+
+        if (!fileToImport) {
+            throw new Error('Cannot get file to import')
+        }
+
+        const fileToImportConfig = {
+            value: fileToImport.data,
+            options: {
+                filename: fileToImport.name,
+                contentType: 'text/csv',
+            },
+        }
+
+        const importRequest = {
+            name: 'test_import',
+            files: [
+                {
+                    fileName: fileToImport.name,
+                    fileImportPage: {
+                        hasHeader: true,
+                        columnMappings: [
+                            {
+                                columnName: 'First Name',
+                                propertyName: 'firstname',
+                                columnObjectType: 'CONTACT',
+                            },
+                            {
+                                columnName: 'Email',
+                                propertyName: 'email',
+                                columnObjectType: 'CONTACT',
+                            },
+                        ],
+                    },
+                },
+            ],
+        }
+
+        // Start a new import
+        // POST/crm/v3/imports
+        // https://developers.hubspot.com/docs/api/crm/imports
+        console.log('Calling crm.imports.coreApi.create API method. Starting a new import')
+        const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), fileToImportConfig)
+
+        logResponse('Import result', result)
+        res.render('imports_result', { importsResult: JSON.stringify(result.body, null, 2) })
     } catch (e) {
         handleError(e, res)
     }
