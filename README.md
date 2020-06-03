@@ -135,6 +135,88 @@ const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(
 await hubspotClient.crm.companies.associationsApi.createAssociation(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
 ```
 
+### {EXAMPLE} Import Contacts:
+
+#### first option with fs.ReadStream
+
+```javascript
+const hubspot = require('@hubspot/api-client')
+const fs = require('fs');
+
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const importRequest = {
+    name: 'test_import',
+    files: [
+        {
+            fileName: `test.csv`,
+            fileImportPage: {
+                hasHeader: true,
+                columnMappings: [
+                    {
+                        columnName: 'First Name',
+                        propertyName: 'firstname',
+                        columnObjectType: 'CONTACT',
+                    },
+                    {
+                        columnName: 'Email',
+                        propertyName: 'email',
+                        columnObjectType: 'CONTACT',
+                    },
+                ],
+            },
+        },
+    ],
+}
+const importFilePath = `./test.csv`
+const importFileReadStream = fs.createReadStream(importFilePath)
+const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileReadStream)
+
+console.log(JSON.stringify(result.body))
+```
+
+#### second option with RequestDetailedFile
+
+```javascript
+const hubspot = require('@hubspot/api-client')
+const fs = require('fs');
+
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const importRequest = {
+    name: 'test_import',
+    files: [
+        {
+            fileName: `test.csv`,
+            fileImportPage: {
+                hasHeader: true,
+                columnMappings: [
+                    {
+                        columnName: 'First Name',
+                        propertyName: 'firstname',
+                        columnObjectType: 'CONTACT',
+                    },
+                    {
+                        columnName: 'Email',
+                        propertyName: 'email',
+                        columnObjectType: 'CONTACT',
+                    },
+                ],
+            },
+        },
+    ],
+}
+const importFilePath = `./test.csv`
+const importFileConfig = {
+    value: fs.readFileSync(importFilePath),
+    options: {
+        filename: 'test.csv',
+        contentType: 'text/csv',
+    },
+}
+const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileConfig)
+
+console.log(JSON.stringify(result.body))
+```
+
 ### Get all:
 
 getAll method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
