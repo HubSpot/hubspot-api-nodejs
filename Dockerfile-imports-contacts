@@ -1,0 +1,16 @@
+FROM node:10
+
+WORKDIR /imports-contacts-sample-app
+COPY sample-apps/imports-contacts-app/src/package.json ./sample-apps/imports-contacts-app/src/
+COPY codegen ./codegen
+COPY src ./src
+COPY .prettierrc ./
+COPY index.ts ./
+COPY package.json ./
+COPY tsconfig.json ./
+COPY tslint.json ./
+RUN npm install --unsafe-perm
+WORKDIR /imports-contacts-sample-app/sample-apps/imports-contacts-app/src
+RUN npm install
+
+EXPOSE 3000
