@@ -1,0 +1,35 @@
+{
+  "name": "hubspot-oauth",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "description": "hubspot-node client sample applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "./node_modules/.bin/mocha \"./test/test-oauth-app.js\" --timeout 60000 --exit"
+  },
+  "keywords": [
+    "hubspot",
+    "oauth",
+    "contacts",
+    "sample",
+    "example"
+  ],
+  "author": "hubspot",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.16.3",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "hubspot": "^2.3.2",
+    "lodash": "^4.17.15",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
