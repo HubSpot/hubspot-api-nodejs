@@ -81,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
   - default limiter options: increased `maxConcurrent` to 6, added `id` - 'hubspot-client-limiter'
+  - retry functionality to overcome secondly search limit failures
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD

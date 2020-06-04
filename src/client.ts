@@ -101,9 +101,11 @@ const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
 const RETRY_TIMEOUT = {
     INTERNAL_SERVER_ERROR: 200,
     TOO_MANY_REQUESTS: 10 * 1000,
+    TOO_MANY_SEARCH_REQUESTS: 1000,
 }
 
 const TEN_SECONDLY_ROLLING = 'TEN_SECONDLY_ROLLING'
+const SECONDLY_LIMIT_MESSAGE = 'You have reached your secondly limit.'
 
 export type LimiterOptions = Bottleneck.ConstructorOptions
 
@@ -869,6 +871,13 @@ export class Client {
 
                         if (_.isEqual(policyName, TEN_SECONDLY_ROLLING)) {
                             await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_REQUESTS)
+                            continue
+                        }
+
+                        const message = _.get(e, 'response.body.message')
+
+                        if (_.isEqual(message, SECONDLY_LIMIT_MESSAGE)) {
+                            await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_SEARCH_REQUESTS)
                             continue
                         }
                     }
