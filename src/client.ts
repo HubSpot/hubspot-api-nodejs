@@ -82,8 +82,11 @@ import * as webhooksModels from '../codegen/webhooks/model/models'
 const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${pJson.version}` }
 const DEFAULT_LIMITER_OPTIONS = {
     minTime: 1000 / 9,
-    maxConcurrent: 5,
+    maxConcurrent: 6,
+    id: 'hubspot-client-limiter',
 }
+const SEARCH_LIMITER_MIN_TIME = 550
+const SEARCH_METHOD_NAME = 'doSearch'
 const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
     'constructor',
     'useQuerystring',
@@ -98,9 +101,11 @@ const METHOD_NAMES_TO_EXCLUDE_FROM_PATCHING = [
 const RETRY_TIMEOUT = {
     INTERNAL_SERVER_ERROR: 200,
     TOO_MANY_REQUESTS: 10 * 1000,
+    TOO_MANY_SEARCH_REQUESTS: 1000,
 }
 
 const TEN_SECONDLY_ROLLING = 'TEN_SECONDLY_ROLLING'
+const SECONDLY_LIMIT_MESSAGE = 'You have reached your secondly limit.'
 
 export type LimiterOptions = Bottleneck.ConstructorOptions
 
@@ -352,9 +357,12 @@ export class Client {
         oauth2: new OAuth(),
     }
     protected _limiter: Bottleneck | undefined
+    protected _searchLimiter: Bottleneck | undefined
     protected _numberOfApiCallRetries: NumberOfRetries
     protected _useLimiter = true
+    protected _useSearchLimiter = false
     protected _limiterOptions: LimiterOptions | undefined
+    protected _searchLimiterOptions: LimiterOptions | undefined
 
     constructor(
         options: {
@@ -819,6 +827,13 @@ export class Client {
         return this._limiter.wrap(method)
     }
 
+    private _getSearchLimiterWrappedMethod(method: any) {
+        if (!this._searchLimiter) {
+            throw new Error('Search Limiter not defined')
+        }
+        return this._searchLimiter.wrap(method)
+    }
+
     private _waitAfterRequestFailure(statusCode: number, retryNumber: number, retryTimeout: number) {
         console.error(
             `Request failed with status code [${statusCode}], will retry [${retryNumber}] time in [${retryTimeout}] ms`,
@@ -858,6 +873,13 @@ export class Client {
                             await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_REQUESTS)
                             continue
                         }
+
+                        const message = _.get(e, 'response.body.message')
+
+                        if (_.isEqual(message, SECONDLY_LIMIT_MESSAGE)) {
+                            await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_SEARCH_REQUESTS)
+                            continue
+                        }
                     }
 
                     break
@@ -878,8 +900,12 @@ export class Client {
 
         let patchedMethod = methodToPatch
 
+        if (this._useSearchLimiter && _.isEqual(methodName, SEARCH_METHOD_NAME)) {
+            patchedMethod = this._getSearchLimiterWrappedMethod(methodToPatch)
+        }
+
         if (this._useLimiter) {
-            patchedMethod = this._getLimiterWrappedMethod(methodToPatch)
+            patchedMethod = this._getLimiterWrappedMethod(patchedMethod)
         }
 
         if (!_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {
@@ -934,6 +960,15 @@ export class Client {
         if (this._useLimiter) {
             this._limiterOptions = _.isNil(options.limiterOptions) ? DEFAULT_LIMITER_OPTIONS : options.limiterOptions
             this._limiter = new Bottleneck(this._limiterOptions)
+            const limiterMinTime = _.get(this._limiterOptions, 'minTime') || 0;
+
+            if (limiterMinTime < SEARCH_LIMITER_MIN_TIME) {
+                this._useSearchLimiter = true;
+                const minTime = SEARCH_LIMITER_MIN_TIME - limiterMinTime;
+                const id = `search-${this._limiterOptions.id}`
+                this._searchLimiterOptions = {...this._limiterOptions, minTime, id, maxConcurrent: 3}
+                this._searchLimiter = new Bottleneck(this._searchLimiterOptions)
+            }
         }
 
         if (this._useLimiter || !_.isEqual(this._numberOfApiCallRetries, NumberOfRetries.NoRetries)) {

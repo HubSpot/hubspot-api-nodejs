@@ -65,9 +65,23 @@ Default settings for the limiter are:
 ```javascript
 const DEFAULT_LIMITER_OPTIONS = {
     minTime: 1000 / 9,
-    maxConcurrent: 5,
+    maxConcurrent: 6,
+    id: 'hubspot-client-limiter',
 }
 ```
+
+Additional limiter created for search requests with following default setting:
+
+```javascript
+const DEFAULT_SEARCH_LIMITER_OPTIONS = {
+    minTime: 550,
+    maxConcurrent: 3,
+    id: 'search-hubspot-client-limiter',
+}
+```
+
+For search limiter settings provided in `limiterOptions` merged with DEFAULT_SEARCH_LIMITER_OPTIONS, so it's not possible to change 'minTime' & 'maxConcurrent' values and `id` would always have prefix 'search-'.
+
 
 It's possible to turn off rate limiting:
 

@@ -168,11 +168,6 @@ const getAllContacts = async (properties, query) => {
             console.log('Calling crm.contacts.basicApi.getPage API method. Retrieve contacts')
             contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(CONTACTS_LIMIT, after, properties)
         } else {
-            if (!_.isNil(after)) {
-                // Search is expensive operation and have limitation of 1 request per second
-                await Promise.delay(1000)
-            }
-
             // Search for contacts
             // POST /crm/v3/objects/contacts/search
             // https://developers.hubspot.com/docs/api/crm/contacts
