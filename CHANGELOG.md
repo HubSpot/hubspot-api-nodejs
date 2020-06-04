@@ -71,8 +71,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - validateSignature method to webhooks  
 
+## [2.1.0] - 2020-06-04
+  
+### Added
+  
+  - imports-contacts-app sample
+  - limiter for search methods
+
+### Updated
+
+  - default limiter options: increased `maxConcurrent` to 6, added `id` - 'hubspot-client-limiter'
+  
+
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.1
+[2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.0
