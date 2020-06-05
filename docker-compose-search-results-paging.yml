@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  redis:
+    image: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - ./sample-apps/search-results-paging-app/redis-data:/data
+    ports:
+      - 6379:6379
+
+  web:
+    env_file:
+      - sample-apps/search-results-paging-app/src/.env
+    environment:
+      REDIS_HOST: redis
+    build:
+      context: .
+      dockerfile: Dockerfile-search-results-paging
+    volumes:
+      - ./sample-apps/search-results-paging-app/src:/search-results-paging-sample-app/sample-apps/search-results-paging-app/src
+      - /search-results-paging-sample-app/sample-apps/search-results-paging-app/src/node_modules
+      - ./sample-apps/search-results-paging-app/tools:/search-results-paging-sample-app/sample-apps/search-results-paging-app/tools
+    ports:
+      - 3000:3000
+    command: ../tools/wait-for-it.sh redis:6379 -t 30 --strict -- npm run dev
+    depends_on:
+      - redis

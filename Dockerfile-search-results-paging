@@ -1,0 +1,16 @@
+FROM node:10
+
+WORKDIR /search-results-paging-sample-app
+COPY sample-apps/search-results-paging-app/src/package.json ./sample-apps/search-results-paging-app/src/
+COPY codegen ./codegen
+COPY src ./src
+COPY .prettierrc ./
+COPY index.ts ./
+COPY package.json ./
+COPY tsconfig.json ./
+COPY tslint.json ./
+RUN npm install --unsafe-perm
+WORKDIR /search-results-paging-sample-app/sample-apps/search-results-paging-app/src
+RUN npm install
+
+EXPOSE 3000
