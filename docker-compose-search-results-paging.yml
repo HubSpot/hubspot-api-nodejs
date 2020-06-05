@@ -9,7 +9,7 @@ services:
     ports:
       - 6379:6379
 
-  search_results_paging_web:
+  web:
     env_file:
       - sample-apps/search-results-paging-app/src/.env
     environment:

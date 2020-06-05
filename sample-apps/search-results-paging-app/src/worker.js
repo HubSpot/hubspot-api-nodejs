@@ -1,5 +1,8 @@
+const _ = require('lodash')
 const hubspotClientHelper = require('./helpers/hubspot-client-helper')
+const SEARCH_LIMIT = 100
 let hubspotClient
+
 const searchNextContactsBatch = async (after, limit, query) => {
     const searchParams = {
         filterGroups: [
@@ -19,15 +22,34 @@ const searchNextContactsBatch = async (after, limit, query) => {
         properties: ['hs_object_id'],
     }
     const result = await hubspotClient.crm.contacts.searchApi.doSearch(searchParams)
-    return result.body
+    return _.get(result, 'body.results') || []
+}
+
+const processContactsBatch = (contactsBatch) => {
+    const contactIds = _.map(contactsBatch, 'id')
+    console.log(`Processed contact id's: ${contactIds}`)
 }
 
 ;(async () => {
     try {
+        console.log('Started worker execution')
         hubspotClient = await hubspotClientHelper.getHubspotClientWithRefreshedToken()
-        const result = await searchNextContactsBatch(0, 100, 'aprots')
-        console.log(JSON.stringify(result, null, 2))
+        const query = process.env.CONTACTS_SEARCH_QUERY
+        let after = 0
+
+        do {
+            const contactsBatch = await searchNextContactsBatch(after, SEARCH_LIMIT, query)
+
+            if (_.isEmpty(contactsBatch)) {
+                break
+            }
+
+            processContactsBatch(contactsBatch)
+            after = _.last(contactsBatch).id
+        } while (true)
+
+        console.log('Finished worker execution')
     } catch (e) {
-        console.error('Error during app start. ', e)
+        console.error('Error during worker execution. ', e)
     }
 })()

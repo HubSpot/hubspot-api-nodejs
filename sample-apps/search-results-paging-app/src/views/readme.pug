@@ -3,5 +3,5 @@ block content
   .container
     h3 Run the following command to see iterating via search results in action:
     pre.
-      docker-compose exec web python worker.py
+      docker-compose -f  ../../../docker-compose-search-results-paging.yml exec web node worker.js
 
