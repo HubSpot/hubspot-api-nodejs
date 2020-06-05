@@ -21,6 +21,9 @@ const searchNextContactsBatch = async (after, limit, query) => {
         sorts: [{ propertyName: 'hs_object_id', direction: 'ASCENDING' }],
         properties: ['hs_object_id'],
     }
+    // Search for contacts
+    // POST /crm/v3/objects/contacts/search
+    // https://developers.hubspot.com/docs/api/crm/contacts
     const result = await hubspotClient.crm.contacts.searchApi.doSearch(searchParams)
     return _.get(result, 'body.results') || []
 }
