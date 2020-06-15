@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - validateSignature method to webhooks  
 
-## [2.1.0] - 2020-06-015
+## [2.1.0] - 2020-06-15
   
 ### Added
   
