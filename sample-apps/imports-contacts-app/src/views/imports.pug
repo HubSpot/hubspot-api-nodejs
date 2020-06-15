@@ -1,48 +1,26 @@
 extends includes/layout
 block content
   .container
-    h3 Select File
-    p You can take an example of file
-      a(href='/data/example.csv')  here
-
-    form(method='post', enctype='multipart/form-data' action="/import")
-      input(type='file', name='file', accept='.csv', required)
-      input(type='submit', name='Upload', value='Upload')
-
-      pre.
-        Bulk import CRM data
-        POST/crm/v3/imports/
-
-        const fileToImportConfig = {
-            value: fileToImport.data,
-            options: {
-                filename: fileToImport.name,
-                contentType: 'text/csv',
-            },
-        }
-
-        const importRequest = {
-            name: 'test_import',
-            files: [
-                {
-                    fileName: fileToImport.name,
-                    fileImportPage: {
-                        hasHeader: true,
-                        columnMappings: [
-                            {
-                                columnName: 'First Name',
-                                propertyName: 'firstname',
-                                columnObjectType: 'CONTACT',
-                            },
-                            {
-                                columnName: 'Email',
-                                propertyName: 'email',
-                                columnObjectType: 'CONTACT',
-                            },
-                        ],
-                    },
-                },
-            ],
-        }
-
-        const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), fileToImportConfig)
+    h3 Imports
+    pre.
+      Retrieving import records
+      GET /crm/v3/imports
+      crm.imports.coreApi.getPage
+    table
+      thead
+        tr
+          th ID
+          th Name
+          th Status
+          th Created At
+      tbody
+        each importDetails in importsDetails
+          tr
+            td
+              a(href=`/imports/${importDetails.id}`) #{importDetails.id}
+            td #{importDetails.importRequestJson.importName}
+            td #{importDetails.state}
+            td #{new Date(importDetails.createdAt).toISOString()}
+    .row
+      a(href='/imports/new')
+        input(class='button-primary' type='button' value='New Import')

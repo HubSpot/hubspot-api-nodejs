@@ -1,0 +1,48 @@
+extends includes/layout
+block content
+  .container
+    h3 Select File
+    p You can take an example of file
+      a(href='/data/example.csv')  here
+
+    form(method='post', enctype='multipart/form-data' action="/imports")
+      input(type='file', name='file', accept='.csv', required)
+      input(type='submit', name='Upload', value='Upload')
+
+      pre.
+        Bulk import CRM data
+        POST/crm/v3/imports/
+
+        const fileToImportConfig = {
+            value: fileToImport.data,
+            options: {
+                filename: fileToImport.name,
+                contentType: 'text/csv',
+            },
+        }
+
+        const importRequest = {
+            name: 'test_import',
+            files: [
+                {
+                    fileName: fileToImport.name,
+                    fileImportPage: {
+                        hasHeader: true,
+                        columnMappings: [
+                            {
+                                columnName: 'First Name',
+                                propertyName: 'firstname',
+                                columnObjectType: 'CONTACT',
+                            },
+                            {
+                                columnName: 'Email',
+                                propertyName: 'email',
+                                columnObjectType: 'CONTACT',
+                            },
+                        ],
+                    },
+                },
+            ],
+        }
+
+        const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), fileToImportConfig)

@@ -1,0 +1,45 @@
+doctype html
+html(lang='en')
+  include includes/head
+  script(type='application/javascript' src='/js/main.js')
+  body
+    main(class='wrapper')
+      include includes/header
+      block content
+        .container
+          h4 Import details
+          table
+            tbody
+              tr
+                td Id
+                td(class='import-id') #{importDetails.id}
+              tr
+                td Name
+                td #{importDetails.importRequestJson.importName}
+              tr
+                td Status
+                td(class='import-state') #{importDetails.state}
+              tr
+                td Created At
+                td #{new Date(importDetails.createdAt).toISOString()}
+              tr
+                td Updated At
+                td(class='import-updated-at') #{new Date(importDetails.updatedAt).toISOString()}
+              tr
+                td metadata
+                td
+                  pre(class='import-metadata').
+                    #{JSON.stringify(importDetails.metadata, null, 2)}
+          .row
+            pre.
+              Cancel an active import (Imports in status 'DONE' or 'CANCELED' cannot be canceled)
+              POST /crm/v3/imports/:importId/cancel
+              crm.imports.coreApi.cancel
+          .row
+            a(href=`/imports/${importDetails.id}/cancel`)
+              -let disabled = importDetails.state === 'DONE' || importDetails.state === 'CANCELED'
+              input(class='button-primary' type='button' value='Cancel Import' id='cancel-button', disabled=disabled)
+            span &nbsp;
+              a(href='/imports')
+                input(class='button-primary' type='button' value='Return To Imports')
+      include includes/footer

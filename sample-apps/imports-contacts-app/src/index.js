@@ -75,6 +75,17 @@ const handleError = (e, res) => {
     res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
 }
 
+const getImportDetails = async (id) => {
+    // Get a complete summary of an import record
+    // GET /crm/v3/imports/:importId
+    // https://developers.hubspot.com/docs/api/crm/imports
+    console.log('Calling hubspotClient.crm.imports.coreApi.getById. Retrieve a import details by id:', id)
+    const importResponse = await hubspotClient.crm.imports.coreApi.getById(id)
+    logResponse('Import Response:', importResponse)
+
+    return importResponse.body
+}
+
 const app = express()
 
 const hubspotClient = new hubspot.Client()
@@ -141,14 +152,25 @@ app.use('/oauth-callback', async (req, res) => {
 app.use(checkAuthorization)
 
 app.get('/', async (req, res) => {
+    res.redirect('/imports')
+})
+
+app.get('/imports', async (req, res) => {
     try {
-        res.render('imports')
+        // Retrieving import records
+        // GET /crm/v3/imports
+        // https://developers.hubspot.com/docs/api/crm/imports
+        console.log('Calling hubspotClient.crm.imports.coreApi.getPage. Get imports page.')
+        const importsResponse = await hubspotClient.crm.imports.coreApi.getPage()
+        logResponse('Imports Response:', importsResponse)
+
+        res.render('imports', { importsDetails: importsResponse.body.results })
     } catch (e) {
         handleError(e, res)
     }
 })
 
-app.post('/import', async (req, res) => {
+app.post('/imports', async (req, res) => {
     try {
         const fileToImport = _.get(req, 'files.file')
 
@@ -165,7 +187,7 @@ app.post('/import', async (req, res) => {
         }
 
         const importRequest = {
-            name: 'test_import',
+            name: fileToImport.name,
             files: [
                 {
                     fileName: fileToImport.name,
@@ -195,7 +217,67 @@ app.post('/import', async (req, res) => {
         const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), fileToImportConfig)
 
         logResponse('Import result', result)
-        res.render('imports_result', { importsResult: JSON.stringify(result.body, null, 2) })
+        res.redirect(`imports/${result.body.id}`)
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/imports/new', async (req, res) => {
+    try {
+        res.render('imports-start')
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/imports/:id', async (req, res) => {
+    try {
+        const id = _.get(req, 'params.id')
+        if (_.isNil(id)) {
+            return res.redirect('/error?msg=Missed import id')
+        }
+
+        const importDetails = await getImportDetails(id)
+
+        res.render('import-details', { importDetails })
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/imports/:id/internal', async (req, res) => {
+    try {
+        const id = _.get(req, 'params.id')
+        if (_.isNil(id)) {
+            return res.redirect('/error?msg=Missed import id')
+        }
+
+        const importDetails = await getImportDetails(id)
+
+        res.status(200).jsonp(importDetails)
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/imports/:id/cancel', async (req, res) => {
+    try {
+        const id = _.get(req, 'params.id')
+
+        console.error('/imports/:id/cancel', id)
+        if (_.isNil(id)) {
+            return res.redirect('/error?msg=Missed import id')
+        }
+
+        // Cancel an active import
+        // POST /crm/v3/imports/:importId/cancel
+        // https://developers.hubspot.com/docs/api/crm/imports
+        console.log('Calling hubspotClient.crm.imports.coreApi.cancel. Cancel import by id:', id)
+        const importCancelResponse = await hubspotClient.crm.imports.coreApi.cancel(id)
+        logResponse('Import Cancel Response:', importCancelResponse)
+
+        res.redirect(`/imports/${id}`)
     } catch (e) {
         handleError(e, res)
     }
