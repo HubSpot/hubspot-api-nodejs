@@ -71,10 +71,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - validateSignature method to webhooks  
 
-## [2.1.0] - 2020-06-15
+## [2.1.0] - 2020-06-16
   
 ### Added
   
+  - auditLogs, domains, performance and urlRedirects cms clients
   - imports-contacts-app sample
   - limiter for search methods
   - search-results-paging-app sample
