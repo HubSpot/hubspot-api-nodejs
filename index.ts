@@ -19,5 +19,9 @@ export {
     NumberOfRetries,
     HttpError,
     Interceptor,
-    LimiterOptions
+    LimiterOptions,
+    auditLogsModels,
+    domainsModels,
+    performanceModels,
+    urlRedirectsModels,
 } from './src/client';

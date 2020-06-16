@@ -7,6 +7,14 @@ import request = require('request')
 import { Response } from 'request'
 // @ts-ignore
 import * as pJson from '../../package.json'
+import { DefaultApi as AuditLogsDefaultApi } from '../codegen/cms/audit_logs/api'
+import * as auditLogsModels from '../codegen/cms/audit_logs/model/models'
+import { DomainsApi } from '../codegen/cms/domains/api'
+import * as domainsModels from '../codegen/cms/domains/model/models'
+import { DefaultApi as PerformanceDefaultApi } from '../codegen/cms/performance/api'
+import * as performanceModels from '../codegen/cms/performance/model/models'
+import { RedirectsApi } from '../codegen/cms/url_redirects/api'
+import * as urlRedirectsModels from '../codegen/cms/url_redirects/model/models'
 import { BatchApi as AssociationsBatchApi, TypesApi } from '../codegen/crm/associations/api'
 import * as associationsModels from '../codegen/crm/associations/model/models'
 import {
@@ -138,6 +146,10 @@ export {
     timelineModels,
     oauthModels,
     webhooksModels,
+    auditLogsModels,
+    domainsModels,
+    performanceModels,
+    urlRedirectsModels,
 }
 
 export class HttpError extends Error {
@@ -290,7 +302,7 @@ export class Client {
     }
     public webhooks: {
         settingsApi: SettingsApi
-        subscriptionsApi: SubscriptionsApi,
+        subscriptionsApi: SubscriptionsApi
         validateSignature: (
             signature: string,
             clientSecret: string,
@@ -299,6 +311,20 @@ export class Client {
             webhooksUrl?: string,
             webhooksMethod?: string,
         ) => boolean
+    }
+    public cms: {
+        auditLogs: {
+            defaultApi: AuditLogsDefaultApi
+        }
+        domains: {
+            domainsApi: DomainsApi
+        }
+        performance: {
+            defaultApi: PerformanceDefaultApi
+        }
+        urlRedirects: {
+            redirectsApi: RedirectsApi
+        }
     }
     protected _interceptors: Interceptor[] = []
     protected _oauthDefaultApi: OauthDefaultApi
@@ -346,6 +372,10 @@ export class Client {
     protected _tokensApi: TokensApi
     protected _settingsApi: SettingsApi
     protected _subscriptionsApi: SubscriptionsApi
+    protected _auditLogsDefaultApi: AuditLogsDefaultApi
+    protected _domainsApi: DomainsApi
+    protected _performanceDefaultApi: PerformanceDefaultApi
+    protected _redirectsApi: RedirectsApi
     protected _apiClientsWithAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
@@ -421,6 +451,10 @@ export class Client {
         this._tokensApi = new TokensApi()
         this._settingsApi = new SettingsApi()
         this._subscriptionsApi = new SubscriptionsApi()
+        this._auditLogsDefaultApi = new AuditLogsDefaultApi()
+        this._domainsApi = new DomainsApi()
+        this._performanceDefaultApi = new PerformanceDefaultApi()
+        this._redirectsApi = new RedirectsApi()
         this._apiClientsWithAuth = [
             this._associationsBatchApi,
             this._typesApi,
@@ -465,12 +499,13 @@ export class Client {
             this._tokensApi,
             this._settingsApi,
             this._subscriptionsApi,
+            this._auditLogsDefaultApi,
+            this._domainsApi,
+            this._performanceDefaultApi,
+            this._redirectsApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
-        this._apiClients.push(
-            this._oauthDefaultApi,
-            this._cardsSampleResponseApi,
-        )
+        this._apiClients.push(this._oauthDefaultApi, this._cardsSampleResponseApi)
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
@@ -584,6 +619,20 @@ export class Client {
             settingsApi: this._settingsApi,
             subscriptionsApi: this._subscriptionsApi,
             validateSignature: this._validateSignature,
+        }
+        this.cms = {
+            auditLogs: {
+                defaultApi: this._auditLogsDefaultApi,
+            },
+            domains: {
+                domainsApi: this._domainsApi,
+            },
+            performance: {
+                defaultApi: this._performanceDefaultApi,
+            },
+            urlRedirects: {
+                redirectsApi: this._redirectsApi,
+            },
         }
     }
 
@@ -740,9 +789,9 @@ export class Client {
         webhooksUrl?: string,
         webhooksMethod = 'POST',
     ): boolean {
-        const sourceString = _.isEqual(signatureVersion, 'v1') ?
-            clientSecret + requestBody :
-            clientSecret + webhooksMethod + webhooksUrl + requestBody
+        const sourceString = _.isEqual(signatureVersion, 'v1')
+            ? clientSecret + requestBody
+            : clientSecret + webhooksMethod + webhooksUrl + requestBody
 
         const hash = crypto
             .createHash('sha256')
@@ -877,7 +926,11 @@ export class Client {
                         const message = _.get(e, 'response.body.message')
 
                         if (_.isEqual(message, SECONDLY_LIMIT_MESSAGE)) {
-                            await this._waitAfterRequestFailure(statusCode, index, RETRY_TIMEOUT.TOO_MANY_SEARCH_REQUESTS)
+                            await this._waitAfterRequestFailure(
+                                statusCode,
+                                index,
+                                RETRY_TIMEOUT.TOO_MANY_SEARCH_REQUESTS,
+                            )
                             continue
                         }
                     }
@@ -960,13 +1013,13 @@ export class Client {
         if (this._useLimiter) {
             this._limiterOptions = _.isNil(options.limiterOptions) ? DEFAULT_LIMITER_OPTIONS : options.limiterOptions
             this._limiter = new Bottleneck(this._limiterOptions)
-            const limiterMinTime = _.get(this._limiterOptions, 'minTime') || 0;
+            const limiterMinTime = _.get(this._limiterOptions, 'minTime') || 0
 
             if (limiterMinTime < SEARCH_LIMITER_MIN_TIME) {
-                this._useSearchLimiter = true;
-                const minTime = SEARCH_LIMITER_MIN_TIME - limiterMinTime;
+                this._useSearchLimiter = true
+                const minTime = SEARCH_LIMITER_MIN_TIME - limiterMinTime
                 const id = `search-${this._limiterOptions.id}`
-                this._searchLimiterOptions = {...this._limiterOptions, minTime, id, maxConcurrent: 3}
+                this._searchLimiterOptions = { ...this._limiterOptions, minTime, id, maxConcurrent: 3 }
                 this._searchLimiter = new Bottleneck(this._searchLimiterOptions)
             }
         }
