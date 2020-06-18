@@ -13,6 +13,8 @@ import { DomainsApi } from '../codegen/cms/domains/api'
 import * as domainsModels from '../codegen/cms/domains/model/models'
 import { DefaultApi as PerformanceDefaultApi } from '../codegen/cms/performance/api'
 import * as performanceModels from '../codegen/cms/performance/model/models'
+import { DefaultApi as SiteSearchDefaultApi } from '../codegen/cms/site_search/api'
+import * as siteSearchModels from '../codegen/cms/site_search/model/models'
 import { RedirectsApi } from '../codegen/cms/url_redirects/api'
 import * as urlRedirectsModels from '../codegen/cms/url_redirects/model/models'
 import { BatchApi as AssociationsBatchApi, TypesApi } from '../codegen/crm/associations/api'
@@ -150,6 +152,7 @@ export {
     domainsModels,
     performanceModels,
     urlRedirectsModels,
+    siteSearchModels,
 }
 
 export class HttpError extends Error {
@@ -324,6 +327,9 @@ export class Client {
         }
         urlRedirects: {
             redirectsApi: RedirectsApi
+        },
+        sireSearch: {
+            defaultApi: SiteSearchDefaultApi
         }
     }
     protected _interceptors: Interceptor[] = []
@@ -373,6 +379,7 @@ export class Client {
     protected _settingsApi: SettingsApi
     protected _subscriptionsApi: SubscriptionsApi
     protected _auditLogsDefaultApi: AuditLogsDefaultApi
+    protected _siteSearchDefaultApi: SiteSearchDefaultApi
     protected _domainsApi: DomainsApi
     protected _performanceDefaultApi: PerformanceDefaultApi
     protected _redirectsApi: RedirectsApi
@@ -455,6 +462,7 @@ export class Client {
         this._domainsApi = new DomainsApi()
         this._performanceDefaultApi = new PerformanceDefaultApi()
         this._redirectsApi = new RedirectsApi()
+        this._siteSearchDefaultApi = new SiteSearchDefaultApi()
         this._apiClientsWithAuth = [
             this._associationsBatchApi,
             this._typesApi,
@@ -503,6 +511,7 @@ export class Client {
             this._domainsApi,
             this._performanceDefaultApi,
             this._redirectsApi,
+            this._siteSearchDefaultApi,
         ]
         this._apiClients = this._apiClientsWithAuth.slice()
         this._apiClients.push(this._oauthDefaultApi, this._cardsSampleResponseApi)
@@ -632,6 +641,9 @@ export class Client {
             },
             urlRedirects: {
                 redirectsApi: this._redirectsApi,
+            },
+            sireSearch: {
+                defaultApi: this._siteSearchDefaultApi,
             },
         }
     }
