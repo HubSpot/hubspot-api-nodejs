@@ -24,4 +24,5 @@ export {
     domainsModels,
     performanceModels,
     urlRedirectsModels,
+    siteSearchModels,
 } from './src/client';
