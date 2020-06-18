@@ -264,6 +264,14 @@ return hubspotClient.oauth.defaultApi.createToken(
     ).then(...)
 ```
 
+### CMS
+
+#### Get audit logs
+
+```javascript
+const auditLogsResponse = await hubspotClient.cms.auditLogs.defaultApi.getPage()
+```
+
 ## Not wrapped endpoint(s)
 
 It is possible to access the hubspot request method directly,
