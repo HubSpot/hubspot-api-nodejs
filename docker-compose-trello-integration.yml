@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  redis:
+    image: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - ./sample-apps/trello-integration-app/redis-data:/data
+    ports:
+      - 6379:6379
+
+  web:
+    env_file:
+      - sample-apps/trello-integration-app/src/.env
+    environment:
+      REDIS_HOST: redis
+    build:
+      context: .
+      dockerfile: Dockerfile-trello-integration
+    volumes:
+      - ./sample-apps/trello-integration-app/src:/trello-integration-sample-app/sample-apps/trello-integration-app/src
+      - /trello-integration-sample-app/sample-apps/trello-integration-app/src/node_modules
+      - ./sample-apps/trello-integration-app/tools:/trello-integration-sample-app/sample-apps/trello-integration-app/tools
+    ports:
+      - 3000:3000
+    command: ../tools/wait-for-it.sh redis:6379 -t 30 --strict -- npm run dev
+    depends_on:
+      - redis
