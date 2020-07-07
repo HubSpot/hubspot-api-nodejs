@@ -146,6 +146,31 @@ app.get('/oauth/hubspot', async (req, res) => {
     res.redirect(authorizationUrl)
 })
 
+app.get('/oauth/trello', async (req, res) => {
+    const redirectUrl = await trelloOauthHelper.getOauthRedirectUri()
+    console.log('Creating authorization Url')
+    const authorizationUrl = trelloOauthHelper.getAuthUrl(ENV_VARIABLES.TRELLO_API_KEY, redirectUrl)
+    console.log('Authorization Url', authorizationUrl)
+
+    res.redirect(authorizationUrl)
+})
+
+app.get('/oauth/trello/callback', async (req, res) => {
+    res.send(
+        `<script type="text/javascript"> 
+            var token = window.location.href.split("token=")[1];
+            window.location = "/oauth/trello/token/" + token;
+         </script>`,
+    )
+})
+
+app.get('/oauth/trello/token/:token', async (req, res) => {
+    const token = _.get(req, 'params.token')
+    console.log('Trello token', token)
+    await dbHelper.saveTrelloToken(token)
+    res.redirect('/')
+})
+
 app.get('/oauth/hubspot/callback', async (req, res) => {
     const code = _.get(req, 'query.code')
     const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
@@ -174,7 +199,7 @@ app.get('/error', (req, res) => {
     res.render('error', { error: req.query.msg })
 })
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
     res.render('error', { error: error.message })
 })
 ;(async () => {

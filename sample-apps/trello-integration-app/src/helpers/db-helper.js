@@ -19,7 +19,7 @@ module.exports = {
         return redisClient.set(HUBSPOT_TOKENS_DATA_KEY, hubspotTokensDataString)
     },
     getTrelloToken: () => redisClient.get(TRELLO_TOKEN_KEY),
-    saveTrelloToken: (trelloToken) => redisClient.set(TRELLO_TOKEN_KEY, trelloToken),
+    saveTrelloToken: (token) => redisClient.set(TRELLO_TOKEN_KEY, token),
     getUrl: () => redisClient.get(URL_KEY),
     saveUrl: (url) => redisClient.set(URL_KEY, url),
 }

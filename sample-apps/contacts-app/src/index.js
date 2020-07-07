@@ -268,7 +268,11 @@ app.get('/contacts', async (req, res) => {
     try {
         const query = _.get(req, 'query.search')
         const properties = ['firstname', 'lastname', 'company']
-        const contacts = await getAllContacts(properties, query)
+        const siteSerachResponse  = await hubspotClient.cms.sireSearch.defaultApi.search('b')
+        console.log(JSON.stringify(siteSerachResponse.body), null, 2)
+        const siteResult = await hubspotClient.cms.sireSearch.defaultApi.getById(siteSerachResponse.body.results[0].id, "LISTING_PAGE")
+        console.log(JSON.stringify(siteResult.body, null, 2))
+        const contacts = []
         res.render('contacts', { contacts: prepareContactsContent(contacts.slice(0, 100)), query })
     } catch (e) {
         handleError(e, res)
