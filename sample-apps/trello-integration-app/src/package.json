@@ -1,0 +1,32 @@
+{
+  "name": "hubspot-limiting-handling-and-retry",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">= 10.13.0"
+  },
+  "description": "hubspot-node limiting handling and retry sample application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "hubspot",
+    "companies",
+    "sample",
+    "example"
+  ],
+  "author": "hubspot",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.16.3",
+    "ioredis": "^4.14.1",
+    "lodash": "^4.17.15",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
