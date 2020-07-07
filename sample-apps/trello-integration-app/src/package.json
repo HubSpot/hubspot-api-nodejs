@@ -19,12 +19,15 @@
   "author": "hubspot",
   "license": "Apache-2.0",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.16.3",
     "ioredis": "^4.14.1",
     "lodash": "^4.17.15",
-    "pug": "^2.0.4"
+    "ngrok": "^3.2.7",
+    "pug": "^2.0.4",
+    "trello": "^0.10.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.3"

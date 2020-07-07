@@ -65,3 +65,7 @@ a>.button-primary {
   margin-bottom: 0;
   padding: 0 1.0rem;
 }
+
+span.green {
+  color: #3c763d;
+}

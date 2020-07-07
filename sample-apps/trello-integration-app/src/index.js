@@ -1,10 +1,13 @@
 require('./config')
+const Promise = require('bluebird')
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const ngrok = require('ngrok')
 const dbHelper = require('./helpers/db-helper')
 const hubspotOauthHelper = require('./helpers/hubspot-oauth-helper')
+const trelloOauthHelper = require('./helpers/trello-oauth-helper')
 const hubspotClientHelper = require('./helpers/hubspot-client-helper')
 
 const PORT = 3000
@@ -16,7 +19,13 @@ const ENV_VARIABLES = {
     TRELLO_API_KEY: process.env.TRELLO_API_KEY,
 }
 const SCOPES = 'contacts'
-const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`
+
+const releaseConnections = (server) => {
+    dbHelper.close()
+    return server.close(() => {
+        console.log('Process terminated')
+    })
+}
 
 const checkEnv = (req, res, next) => {
     if (_.startsWith(req.url, '/error')) return next()
@@ -45,21 +54,27 @@ const checkAuthorization = async (req, res, next) => {
         return next()
     }
 
-    if (_.startsWith(req.url, '/login')) {
+    if (_.startsWith(req.url, '/oauth/login')) {
         return next()
     }
 
     const hubspotAuthorized = await hubspotOauthHelper.verifyAuthorization()
 
     if (!hubspotAuthorized) {
-        return res.redirect('/login')
+        return res.redirect('/oauth/login')
     }
 
     const hubspotTokenExpired = await hubspotOauthHelper.verifyTokenExpiration()
 
     if (hubspotTokenExpired) {
-        const hubspotClient = hubspotClientHelper.getHubspotClient()
+        const hubspotClient = await hubspotClientHelper.getHubspotClient()
         await hubspotOauthHelper.refreshToken(hubspotClient)
+    }
+
+    const trelloAuthorized = await trelloOauthHelper.verifyAuthorization()
+
+    if (!trelloAuthorized) {
+        return res.redirect('/oauth/login')
     }
 
     return next()
@@ -108,21 +123,22 @@ app.get('/', checkAuthorization, async (req, res) => {
     }
 })
 
-app.get('/login', async (req, res) => {
-    const isAuthorized = await hubspotOauthHelper.verifyAuthorization()
-    console.log('Is logged-in', isAuthorized)
-    if (isAuthorized) return res.redirect('/')
-    res.render('login')
+app.get('/oauth/login', async (req, res) => {
+    const hubspotAuthorized = await hubspotOauthHelper.verifyAuthorization()
+    const trelloAuthorized = await trelloOauthHelper.verifyAuthorization()
+    const baseUrl = await dbHelper.getUrl()
+    res.render('login', { hubspotAuthorized, trelloAuthorized, baseUrl })
 })
 
-app.get('/oauth', async (req, res) => {
-    const hubspotClient = hubspotClientHelper.getHubspotClient()
+app.get('/oauth/hubspot', async (req, res) => {
+    const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
+    const hubspotClient = await hubspotClientHelper.getHubspotClient()
     // Use the client to get authorization Url
     // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
     console.log('Creating authorization Url')
     const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(
         ENV_VARIABLES.HUBSPOT_CLIENT_ID,
-        REDIRECT_URI,
+        redirectUrl,
         SCOPES,
     )
     console.log('Authorization Url', authorizationUrl)
@@ -130,9 +146,10 @@ app.get('/oauth', async (req, res) => {
     res.redirect(authorizationUrl)
 })
 
-app.get('/oauth-callback', async (req, res) => {
+app.get('/oauth/hubspot/callback', async (req, res) => {
     const code = _.get(req, 'query.code')
-    const hubspotClient = hubspotClientHelper.getHubspotClient()
+    const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
+    const hubspotClient = await hubspotClientHelper.getHubspotClient()
     // Create OAuth 2.0 Access Token and Refresh Tokens
     // POST /oauth/v1/token
     // https://developers.hubspot.com/docs/api/working-with-oauth
@@ -140,7 +157,7 @@ app.get('/oauth-callback', async (req, res) => {
     const result = await hubspotClient.oauth.defaultApi.createToken(
         'authorization_code',
         code,
-        REDIRECT_URI,
+        redirectUrl,
         ENV_VARIABLES.HUBSPOT_CLIENT_ID,
         ENV_VARIABLES.HUBSPOT_CLIENT_SECRET,
     )
@@ -162,14 +179,19 @@ app.use((error, req, res) => {
 })
 ;(async () => {
     try {
-        const server = app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`))
-
-        process.on('SIGTERM', () => {
-            dbHelper.close()
-            server.close(() => {
-                console.log('Process terminated')
-            })
+        const server = app.listen(PORT, () => {
+            console.log(`Listening on port: ${PORT}`)
+            return Promise.delay(100)
+                .then(() => ngrok.connect(PORT))
+                .tap((url) => console.log('Please use:', url))
+                .then(dbHelper.saveUrl)
+                .catch(async (e) => {
+                    console.log('Error during app start. ', e)
+                    return releaseConnections(server)
+                })
         })
+
+        process.on('SIGTERM', () => releaseConnections(server))
     } catch (e) {
         console.error('Error during app start. ', e)
     }

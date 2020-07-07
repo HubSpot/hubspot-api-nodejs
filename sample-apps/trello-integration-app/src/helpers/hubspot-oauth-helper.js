@@ -41,4 +41,8 @@ module.exports = {
         const tokensData = await dbHelper.getHubspotTokensData()
         return Date.now() >= tokensData.updatedAt + tokensData.expiresIn * 1000
     },
+    getOauthRedirectUri: async () => {
+        const baseUrl = await dbHelper.getUrl()
+        return `${baseUrl}/oauth/hubspot/callback`
+    },
 }
