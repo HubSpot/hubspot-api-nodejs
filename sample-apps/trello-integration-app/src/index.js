@@ -54,7 +54,7 @@ app.use(checkEnvironmentMiddleware)
 
 app.get('/', checkAuthorizationMiddleware, async (req, res) => {
     try {
-        res.render('readme')
+        res.render('extension')
     } catch (e) {
         handleError(e, res)
     }
