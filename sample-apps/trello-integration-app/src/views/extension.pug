@@ -1,7 +1,18 @@
 extends includes/layout
 block content
   .container
-    h3 Run the following command to see iterating via search results in action:
-    pre.
-      docker-compose -f  ../../../docker-compose-search-results-paging.yml exec web node worker.js
-
+    div(class="row")
+      div(class="column")
+        h3 CRM extension card initialization #{cardId}:
+        ol
+          if (!cardId)
+            li New CRM extension card will be created (with "#{cardTitle}" title)
+          li "Data fetch URL" will be updated to
+            = ' '
+            a(href="/trello/cards/") #{baseUrl}/trello/cards/
+          li "Deals" in "Target record types" section will be activated with "hs_object_id", "dealname" properties sent form HubSpot
+          li "Custom actions"->"Base URL" section will be updated with
+            = ' '
+            a(href="/") #{baseUrl}
+        form(method="post" class="text-center")
+          button(type="submit") Continue

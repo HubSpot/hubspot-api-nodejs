@@ -9,6 +9,7 @@ const dbHelper = require('./helpers/db-helper')
 const checkAuthorizationMiddleware = require('./middlewares/check-authorization')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
+const extensionsCardsController = require('./controllers/extensions-cards-controller')
 const PORT = 3000
 
 const releaseConnections = (server) => {
@@ -53,11 +54,7 @@ app.use(
 app.use(checkEnvironmentMiddleware)
 
 app.get('/', checkAuthorizationMiddleware, async (req, res) => {
-    try {
-        res.render('extension')
-    } catch (e) {
-        handleError(e, res)
-    }
+    res.redirect('/init/extension')
 })
 
 app.get('/error', (req, res) => {
@@ -65,6 +62,7 @@ app.get('/error', (req, res) => {
 })
 
 app.use('/oauth', oauthController.getRouter())
+app.use('/init', extensionsCardsController.getRouter())
 
 app.use((error, req, res, next) => {
     res.render('error', { error: error.message })

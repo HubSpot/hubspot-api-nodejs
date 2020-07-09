@@ -69,3 +69,7 @@ a>.button-primary {
 span.green {
   color: #3c763d;
 }
+
+.text-center {
+  text-align: center;
+}
