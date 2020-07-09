@@ -14,5 +14,15 @@ block content
           li "Custom actions"->"Base URL" section will be updated with
             = ' '
             a(href="/") #{baseUrl}
+        if (!cardId)
+          pre.
+            Create a new extension card
+            POST /crm/v3/extensions/cards/:appId
+            crm.extensions.cards.cardsApi.create
+        else
+          pre.
+            Update extension card
+            PATCH /crm/v3/extensions/cards/:appId/:cardId
+            crm.extensions.cards.cardsApi.update
         form(method="post" class="text-center")
           button(type="submit") Continue

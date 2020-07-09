@@ -1,12 +1,10 @@
 require('./config')
 const Promise = require('bluebird')
-const _ = require('lodash')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const ngrok = require('ngrok')
 const dbHelper = require('./helpers/db-helper')
-const checkAuthorizationMiddleware = require('./middlewares/check-authorization')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
 const extensionsCardsController = require('./controllers/extensions-cards-controller')
@@ -17,17 +15,6 @@ const releaseConnections = (server) => {
     return server.close(() => {
         console.log('Process terminated')
     })
-}
-
-const handleError = (e, res) => {
-    if (_.isEqual(e.message, 'HTTP request failed')) {
-        const errorMessage = JSON.stringify(e, null, 2)
-        console.error(errorMessage)
-        return res.redirect(`/error?msg=${errorMessage}`)
-    }
-
-    console.error(e)
-    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
 }
 
 const app = express()
@@ -53,7 +40,7 @@ app.use(
 
 app.use(checkEnvironmentMiddleware)
 
-app.get('/', checkAuthorizationMiddleware, async (req, res) => {
+app.get('/', async (req, res) => {
     res.redirect('/init/extension')
 })
 
