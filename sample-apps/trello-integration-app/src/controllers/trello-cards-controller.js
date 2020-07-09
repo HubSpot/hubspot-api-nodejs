@@ -6,6 +6,7 @@ const trelloHelper = require('../helpers/trello-helper')
 const hubspotHelper = require('../helpers/hubspot-helper')
 const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
+const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-signature-validator')
 
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
@@ -52,7 +53,7 @@ exports.getRouter = () => {
         }
     })
 
-    router.delete('/associations', async (req, res) => {
+    router.delete('/associations', hubspotSignatureValidatorMiddleware, async (req, res) => {
         try {
             const dealId = _.get(req, 'query.hs_object_id')
             await dbHelper.deleteDealAssociation(dealId)
@@ -63,7 +64,7 @@ exports.getRouter = () => {
         }
     })
 
-    router.get('/', async (req, res) => {
+    router.get('/', hubspotSignatureValidatorMiddleware, async (req, res) => {
         try {
             const dealId = _.get(req, 'query.hs_object_id')
             let card
