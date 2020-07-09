@@ -2,12 +2,14 @@ require('./config')
 const Promise = require('bluebird')
 const path = require('path')
 const express = require('express')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const ngrok = require('ngrok')
 const dbHelper = require('./helpers/db-helper')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
 const extensionsCardsController = require('./controllers/extensions-cards-controller')
+const trelloCardsController = require('./controllers/trello-cards-controller')
 const PORT = 3000
 
 const releaseConnections = (server) => {
@@ -19,6 +21,7 @@ const releaseConnections = (server) => {
 
 const app = express()
 
+app.use(morgan(':method :url :response-time'))
 app.use(express.static('public'))
 
 app.set('view engine', 'pug')
@@ -50,6 +53,7 @@ app.get('/error', (req, res) => {
 
 app.use('/oauth', oauthController.getRouter())
 app.use('/init', extensionsCardsController.getRouter())
+app.use('/trello/cards', trelloCardsController.getRouter())
 
 app.use((error, req, res, next) => {
     res.render('error', { error: error.message })

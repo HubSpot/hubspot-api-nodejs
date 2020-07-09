@@ -13,6 +13,7 @@ module.exports = {
             throw new Error('Cannot find refresh token')
         }
 
+        console.log(`Refreshing hubspot token`)
         // Create OAuth 2.0 Access Token and Refresh Tokens
         // POST /oauth/v1/token
         // https://developers.hubspot.com/docs/api/working-with-oauth

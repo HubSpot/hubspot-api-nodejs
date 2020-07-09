@@ -9,6 +9,8 @@ const redisClient = new Redis({
     host: REDIS_HOST,
 })
 
+const getDealAssociationKey = (dealId) => `deal_association_${dealId}`
+
 module.exports = {
     close: () => redisClient.disconnect(),
     getHubspotTokensData: async () => {
@@ -25,4 +27,7 @@ module.exports = {
     saveUrl: (url) => redisClient.set(URL_KEY, url),
     getCardId: () => redisClient.get(CARD_ID_KEY),
     saveCardId: (cardId) => redisClient.set(CARD_ID_KEY, cardId),
+    getDealAssociation: (dealId) => redisClient.get(getDealAssociationKey(dealId)),
+    createDealAssociation: (dealId, cardId) => redisClient.set(getDealAssociationKey(dealId), cardId),
+    deleteDealAssociation: (dealId) => redisClient.del(getDealAssociationKey(dealId)),
 }

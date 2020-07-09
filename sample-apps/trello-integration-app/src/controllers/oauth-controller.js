@@ -4,6 +4,7 @@ const router = new express.Router()
 const dbHelper = require('../helpers/db-helper')
 const hubspotOauthHelper = require('../helpers/hubspot-oauth-helper')
 const trelloOauthHelper = require('../helpers/trello-oauth-helper')
+const trelloClientHelper = require('../helpers/trello-client-helper')
 const hubspotClientHelper = require('../helpers/hubspot-client-helper')
 const logResponse = require('../helpers/log-response-helper')
 const handleError = require('../helpers/error-handler-helper')
@@ -68,7 +69,11 @@ exports.getRouter = () => {
         try {
             const token = _.get(req, 'params.token')
             console.log('Trello token', token)
+
             await dbHelper.saveTrelloToken(token)
+
+            const trelloClient = await trelloClientHelper.getClient()
+            trelloClient.token = token
 
             res.redirect('/')
         } catch (e) {

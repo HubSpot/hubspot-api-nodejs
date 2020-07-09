@@ -51,6 +51,7 @@ exports.getRouter = () => {
                     display: { properties: [] },
                 }
 
+                console.log('Calling crm.extensions.cards.cardsApi.create API method. Create extension card.')
                 // Create a new extension card
                 // POST /crm/v3/extensions/cards/:appId
                 // https://developers.hubspot.com/docs/api/crm/extensions/custom-cards
@@ -66,6 +67,7 @@ exports.getRouter = () => {
                     actions,
                 }
 
+                console.log('Calling crm.extensions.cards.cardsApi.update API method. Update extension card.')
                 // Update extension card
                 // PATCH /crm/v3/extensions/cards/:appId/:cardId
                 // https://developers.hubspot.com/docs/api/crm/extensions/custom-cards
