@@ -1,14 +1,16 @@
 require('./config')
 const Promise = require('bluebird')
-const _ = require('lodash')
 const path = require('path')
 const express = require('express')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const ngrok = require('ngrok')
 const dbHelper = require('./helpers/db-helper')
-const checkAuthorizationMiddleware = require('./middlewares/check-authorization')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
+const extensionsCardsController = require('./controllers/extensions-cards-controller')
+const trelloCardsController = require('./controllers/trello-cards-controller')
+const handleError = require('./helpers/error-handler-helper')
 const PORT = 3000
 
 const releaseConnections = (server) => {
@@ -18,19 +20,9 @@ const releaseConnections = (server) => {
     })
 }
 
-const handleError = (e, res) => {
-    if (_.isEqual(e.message, 'HTTP request failed')) {
-        const errorMessage = JSON.stringify(e, null, 2)
-        console.error(errorMessage)
-        return res.redirect(`/error?msg=${errorMessage}`)
-    }
-
-    console.error(e)
-    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
-}
-
 const app = express()
 
+app.use(morgan(':method :url :response-time'))
 app.use(express.static('public'))
 
 app.set('view engine', 'pug')
@@ -52,12 +44,8 @@ app.use(
 
 app.use(checkEnvironmentMiddleware)
 
-app.get('/', checkAuthorizationMiddleware, async (req, res) => {
-    try {
-        res.render('readme')
-    } catch (e) {
-        handleError(e, res)
-    }
+app.get('/', async (req, res) => {
+    res.redirect('/init/extension')
 })
 
 app.get('/error', (req, res) => {
@@ -65,9 +53,11 @@ app.get('/error', (req, res) => {
 })
 
 app.use('/oauth', oauthController.getRouter())
+app.use('/init', extensionsCardsController.getRouter())
+app.use('/trello/cards', trelloCardsController.getRouter())
 
 app.use((error, req, res, next) => {
-    res.render('error', { error: error.message })
+    handleError(error, res)
 })
 ;(async () => {
     try {

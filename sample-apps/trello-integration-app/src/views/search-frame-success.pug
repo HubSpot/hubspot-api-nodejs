@@ -1,0 +1,5 @@
+doctype html
+html(lang='en')
+  body
+    script.
+      window.parent.postMessage(JSON.stringify({"action": "DONE"}), "*");

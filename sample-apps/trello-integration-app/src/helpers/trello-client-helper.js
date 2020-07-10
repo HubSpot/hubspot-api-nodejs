@@ -4,7 +4,7 @@ const TRELLO_API_KEY = process.env.TRELLO_API_KEY
 let trelloClient
 
 module.exports = {
-    getHubspotClient: async () => {
+    getClient: async () => {
         if (trelloClient) {
             return trelloClient
         }
