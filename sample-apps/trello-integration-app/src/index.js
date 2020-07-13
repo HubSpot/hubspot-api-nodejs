@@ -5,7 +5,8 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const ngrok = require('ngrok')
-const dbHelper = require('./helpers/db-helper')
+const redisDbHelper = require('./helpers/redis-db-helper')
+const mysqlDbHelper = require('./helpers/mysql-db-helper')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
 const extensionsCardsController = require('./controllers/extensions-cards-controller')
@@ -15,7 +16,8 @@ const handleError = require('./helpers/error-handler-helper')
 const PORT = 3000
 
 const releaseConnections = (server) => {
-    dbHelper.close()
+    redisDbHelper.close()
+    mysqlDbHelper.close()
     return server.close(() => {
         console.log('Process terminated')
     })
@@ -63,12 +65,13 @@ app.use((error, req, res, next) => {
 })
 ;(async () => {
     try {
+        await mysqlDbHelper.init()
         const server = app.listen(PORT, () => {
             console.log(`Listening on port: ${PORT}`)
             return Promise.delay(100)
                 .then(() => ngrok.connect(PORT))
                 .tap((url) => console.log('Please use:', url))
-                .then(dbHelper.saveUrl)
+                .then(redisDbHelper.saveUrl)
                 .catch(async (e) => {
                     console.log('Error during app start. ', e)
                     return releaseConnections(server)

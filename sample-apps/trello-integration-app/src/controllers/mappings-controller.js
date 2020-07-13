@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
-const dbHelper = require('../helpers/db-helper')
+const redisDbHelper = require('../helpers/redis-db-helper')
 const trelloHelper = require('../helpers/trello-helper')
 const hubspotHelper = require('../helpers/hubspot-helper')
 const handleError = require('../helpers/error-handler-helper')

@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const dbHelper = require('./db-helper')
+const redisDbHelper = require('./redis-db-helper')
 
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
@@ -7,7 +7,7 @@ const REFRESH_TOKEN = 'refresh_token'
 
 module.exports = {
     refreshToken: async (hubspotClient) => {
-        let tokensData = await dbHelper.getHubspotTokensData()
+        let tokensData = await redisDbHelper.getHubspotTokensData()
 
         if (!tokensData.refreshToken) {
             throw new Error('Cannot find refresh token')
@@ -28,22 +28,22 @@ module.exports = {
 
         tokensData = { ...result.body, updatedAt: Date.now() }
         console.log('Updated tokens', tokensData)
-        await dbHelper.saveHubspotTokensData(tokensData)
+        await redisDbHelper.saveHubspotTokensData(tokensData)
         hubspotClient.setAccessToken(tokensData.accessToken)
         return hubspotClient
     },
 
     verifyAuthorization: async () => {
-        const tokensData = await dbHelper.getHubspotTokensData()
+        const tokensData = await redisDbHelper.getHubspotTokensData()
         return !_.isEmpty(tokensData)
     },
 
     verifyTokenExpiration: async () => {
-        const tokensData = await dbHelper.getHubspotTokensData()
+        const tokensData = await redisDbHelper.getHubspotTokensData()
         return Date.now() >= tokensData.updatedAt + tokensData.expiresIn * 1000
     },
     getOauthRedirectUri: async () => {
-        const baseUrl = await dbHelper.getUrl()
+        const baseUrl = await redisDbHelper.getUrl()
         return `${baseUrl}/oauth/hubspot/callback`
     },
 }

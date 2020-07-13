@@ -1,13 +1,13 @@
 const _ = require('lodash')
-const dbHelper = require('./db-helper')
+const redisDbHelper = require('./redis-db-helper')
 
 module.exports = {
     checkIfDealAssociated: async (dealId) => {
-        const cardId = await dbHelper.getDealAssociation(dealId)
+        const cardId = await redisDbHelper.getDealAssociation(dealId)
         return !_.isNil(cardId)
     },
     formatCardExtensionDataResponse: async (isDealAssociated, card) => {
-        const baseUrl = await dbHelper.getUrl()
+        const baseUrl = await redisDbHelper.getUrl()
         let results
         let primaryAction
         if (isDealAssociated) {
