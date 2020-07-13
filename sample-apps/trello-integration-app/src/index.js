@@ -10,6 +10,7 @@ const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
 const extensionsCardsController = require('./controllers/extensions-cards-controller')
 const trelloCardsController = require('./controllers/trello-cards-controller')
+const mappingsController = require('./controllers/mappings-controller')
 const handleError = require('./helpers/error-handler-helper')
 const PORT = 3000
 
@@ -55,6 +56,7 @@ app.get('/error', (req, res) => {
 app.use('/oauth', oauthController.getRouter())
 app.use('/init', extensionsCardsController.getRouter())
 app.use('/trello/cards', trelloCardsController.getRouter())
+app.use('/mappings', mappingsController.getRouter())
 
 app.use((error, req, res, next) => {
     handleError(error, res)

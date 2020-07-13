@@ -73,3 +73,7 @@ span.green {
 .text-center {
   text-align: center;
 }
+
+select:invalid {
+  border-color: red;
+}
