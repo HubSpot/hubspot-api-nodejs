@@ -1,5 +1,8 @@
 const _ = require('lodash')
 const redisDbHelper = require('./redis-db-helper')
+const hubspotClientHelper = require('./hubspot-client-helper')
+const logResponse = require('../helpers/log-response-helper')
+const DEAL_OBJECT_TYPE = 'deals'
 
 module.exports = {
     checkIfDealAssociated: async (dealId) => {
@@ -51,5 +54,17 @@ module.exports = {
             results,
             primaryAction,
         }
+    },
+    getPipelines: async () => {
+        const client = await hubspotClientHelper.getClient()
+
+        console.log(`Getting HubSpot pipelines`)
+        // Get all pipelines for the deals
+        // GET /crm/v3/pipelines/:objectType
+        // https://developers.hubspot.com/docs/api/crm/pipelines
+        const response = await client.crm.pipelines.pipelinesApi.getAll(DEAL_OBJECT_TYPE)
+        logResponse(response)
+
+        return response.body.results
     },
 }

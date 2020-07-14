@@ -30,7 +30,7 @@ exports.getRouter = () => {
     router.get('/hubspot', async (req, res) => {
         try {
             const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
-            const hubspotClient = await hubspotClientHelper.getHubspotClient()
+            const hubspotClient = await hubspotClientHelper.getClient()
             // Use the client to get authorization Url
             // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
             console.log('Creating authorization Url')
@@ -85,7 +85,7 @@ exports.getRouter = () => {
         try {
             const code = _.get(req, 'query.code')
             const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
-            const hubspotClient = await hubspotClientHelper.getHubspotClient()
+            const hubspotClient = await hubspotClientHelper.getClient()
             // Create OAuth 2.0 Access Token and Refresh Tokens
             // POST /oauth/v1/token
             // https://developers.hubspot.com/docs/api/working-with-oauth

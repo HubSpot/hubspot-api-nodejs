@@ -25,7 +25,7 @@ exports.getRouter = () => {
 
     router.post('/extension', async (req, res) => {
         try {
-            const hubspotClient = hubspotClientHelper.getHubspotClientWithDevApiKey()
+            const hubspotClient = hubspotClientHelper.getClientWithDevApiKey()
             const dealObjectType = {
                 name: 'deals',
                 propertiesToSend: ['hs_object_id', 'dealname'],

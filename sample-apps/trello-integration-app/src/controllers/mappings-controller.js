@@ -1,12 +1,10 @@
 const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
-const redisDbHelper = require('../helpers/redis-db-helper')
 const trelloHelper = require('../helpers/trello-helper')
 const hubspotHelper = require('../helpers/hubspot-helper')
 const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
-const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-signature-validator')
 
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
@@ -101,17 +99,7 @@ exports.getRouter = () => {
     router.get('/board/:boardId', async (req, res) => {
         try {
             const boardId = _.get(req, 'params.boardId')
-
-            const pipelines = [
-                {
-                    id: 60,
-                    label: 'Name 60',
-                },
-                {
-                    id: 90,
-                    label: 'Name 90',
-                },
-            ]
+            const pipelines = await hubspotHelper.getPipelines()
 
             res.render('pipelines', { pipelines, boardId })
         } catch (e) {

@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
         const signature = req.header(SIGNATURE_HEADER)
         const clientSecret = process.env.HUBSPOT_CLIENT_SECRET
         const signatureVersion = req.header(SIGNATURE_VERSION_HEADER)
-        const hubspotClient = await hubspotClientHelper.getHubspotClient()
+        const hubspotClient = await hubspotClientHelper.getClient()
 
         if (
             hubspotClient.webhooks.validateSignature(
