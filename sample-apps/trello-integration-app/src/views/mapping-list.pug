@@ -1,0 +1,64 @@
+extends includes/layout
+block content
+  section(class='container')
+    div(class='row')
+      h3 Map board lists with pipelines stages
+    div(class='row')
+      pre.
+        Selected Trello List and Pipeline Stage should be unique for all rows in table
+    div(class='row')
+      pre.
+        Get pipeline by id
+        GET /crm/v3/pipelines/:objectType/:pipelineId
+        client.crm.pipelines.pipelinesApi.getById
+    div(class='row')
+      form(method="POST" id='mappings-form')
+        table
+          thead
+            tr
+              th ID
+              th Trello List
+              th Pipeline Stage
+              th
+                a(class='button' href=`/mappings/board/${boardId}/pipeline/${pipelineId}/mapping/add` id='add-row') Add Row
+                script.
+                  const $form = $('#mappings-form')[0]
+                  $(document).ready(() => {
+                    if (!$form.checkValidity()) {
+                      $('#add-row').attr('disabled', true)
+                      $('#save-button').attr('disabled', true)
+                    }
+                    if (!$('input[name$="id[]"]').length) {
+                      $('#save-button').attr('disabled', true)
+                    }
+                  })
+                  $('#mappings-form').change(() => {
+                    if (!$form.checkValidity()) {
+                      $('#add-row').attr('disabled', true)
+                      $('#save-button').attr('disabled', true)
+                    } else {
+                      $('#save-button').attr('disabled', false)
+                    }
+                  })
+          tbody
+            each mapping in mappings
+              tr
+                td
+                  input(name="id[]" type='text' value=`${mapping.id}` readonly)
+                td
+                  select(name="boardListId[]" required)
+                    -let boardListIdSelected = !mapping.board_list_id
+                    option(disabled value='' selected=boardListIdSelected) -- select trello list --
+                    each list in boardLists
+                      -let boardListIdSelected = '' + list.id === '' + mapping.board_list_id
+                      option(value=list.id selected=boardListIdSelected) #{list.name}
+                td
+                  select(name="pipelineStageId[]" required)
+                    -let pipelineStageIdSelected = !mapping.pipeline_stage_id
+                    option(disabled value='' selected=pipelineStageIdSelected) -- select pipeline stage --
+                    each pipelineStage in pipelineStages
+                      -let pipelineStageIdSelected = '' + pipelineStage.id === '' + mapping.pipeline_stage_id
+                      option(value=pipelineStage.id selected=pipelineStageIdSelected) #{pipelineStage.label}
+                td
+                  a(class='button' href=`/mappings/board/${boardId}/pipeline/${pipelineId}/mapping/${mapping.id}/remove`) Remove Row
+        button(type="submit" id="save-button") Save

@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
-const dbHelper = require('../helpers/db-helper')
+const redisDbHelper = require('../helpers/redis-db-helper')
 const hubspotOauthHelper = require('../helpers/hubspot-oauth-helper')
 const trelloOauthHelper = require('../helpers/trello-oauth-helper')
 const trelloClientHelper = require('../helpers/trello-client-helper')
@@ -19,7 +19,7 @@ exports.getRouter = () => {
         try {
             const hubspotAuthorized = await hubspotOauthHelper.verifyAuthorization()
             const trelloAuthorized = await trelloOauthHelper.verifyAuthorization()
-            const baseUrl = await dbHelper.getUrl()
+            const baseUrl = await redisDbHelper.getUrl()
 
             res.render('login', { hubspotAuthorized, trelloAuthorized, baseUrl })
         } catch (e) {
@@ -30,7 +30,7 @@ exports.getRouter = () => {
     router.get('/hubspot', async (req, res) => {
         try {
             const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
-            const hubspotClient = await hubspotClientHelper.getHubspotClient()
+            const hubspotClient = await hubspotClientHelper.getClient()
             // Use the client to get authorization Url
             // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
             console.log('Creating authorization Url')
@@ -70,7 +70,7 @@ exports.getRouter = () => {
             const token = _.get(req, 'params.token')
             console.log('Trello token', token)
 
-            await dbHelper.saveTrelloToken(token)
+            await redisDbHelper.saveTrelloToken(token)
 
             const trelloClient = await trelloClientHelper.getClient()
             trelloClient.token = token
@@ -85,7 +85,7 @@ exports.getRouter = () => {
         try {
             const code = _.get(req, 'query.code')
             const redirectUrl = await hubspotOauthHelper.getOauthRedirectUri()
-            const hubspotClient = await hubspotClientHelper.getHubspotClient()
+            const hubspotClient = await hubspotClientHelper.getClient()
             // Create OAuth 2.0 Access Token and Refresh Tokens
             // POST /oauth/v1/token
             // https://developers.hubspot.com/docs/api/working-with-oauth
@@ -101,7 +101,7 @@ exports.getRouter = () => {
             // Set token for the
             // https://www.npmjs.com/package/@hubspot/api-client
             const tokensData = { ...result.body, updatedAt: Date.now() }
-            await dbHelper.saveHubspotTokensData(tokensData)
+            await redisDbHelper.saveHubspotTokensData(tokensData)
             hubspotClient.setAccessToken(tokensData.accessToken)
 
             res.redirect('/')

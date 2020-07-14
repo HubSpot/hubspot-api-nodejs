@@ -1,0 +1,17 @@
+extends includes/layout
+block content
+  section(class='container')
+    div(class='row')
+      h3 Select HubSpot pipeline
+    div(class='row')
+      pre.
+        Get all pipelines
+        GET /crm/v3/pipelines/:objectType
+        client.crm.pipelines.pipelinesApi.getAll
+    div(class='row')
+        table
+          tbody
+            each pipeline in pipelines
+              tr
+                td
+                  a(href=`/mappings/board/${boardId}/pipeline/${pipeline.id}`) #{pipeline.label}

@@ -5,7 +5,7 @@ let hubspotClient
 const hubspotClientWithDevApiKey = new hubspot.Client({ apiKey: DEVELOPER_API_KEY })
 
 module.exports = {
-    getHubspotClient: async () => {
+    getClient: async () => {
         if (hubspotClient) {
             return hubspotClient
         }
@@ -18,5 +18,5 @@ module.exports = {
 
         return hubspotClient
     },
-    getHubspotClientWithDevApiKey: () => hubspotClientWithDevApiKey,
+    getClientWithDevApiKey: () => hubspotClientWithDevApiKey,
 }

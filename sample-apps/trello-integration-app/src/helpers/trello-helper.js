@@ -2,6 +2,7 @@ const _ = require('lodash')
 const Promise = require('bluebird')
 const trelloClientHelper = require('./trello-client-helper')
 const logResponse = require('../helpers/log-response-helper')
+const AUTHENTICATED_MEMBER = 'me'
 
 module.exports = {
     searchForCards: async (query) => {
@@ -30,6 +31,24 @@ module.exports = {
 
         console.log(`Getting trello card members`)
         const result = await Promise.map(idMembers, (memberId) => client.getMember(memberId))
+        logResponse(result)
+
+        return result
+    },
+    getBoards: async () => {
+        const client = await trelloClientHelper.getClient()
+
+        console.log(`Getting trello boards`)
+        const result = await client.getBoards(AUTHENTICATED_MEMBER)
+        logResponse(result)
+
+        return result
+    },
+    getBoardLists: async (boardId) => {
+        const client = await trelloClientHelper.getClient()
+
+        console.log(`Getting trello board lists`)
+        const result = await client.getListsOnBoard(boardId)
         logResponse(result)
 
         return result

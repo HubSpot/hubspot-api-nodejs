@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
     const hubspotTokenExpired = await hubspotOauthHelper.verifyTokenExpiration()
 
     if (hubspotTokenExpired) {
-        const hubspotClient = await hubspotClientHelper.getHubspotClient()
+        const hubspotClient = await hubspotClientHelper.getClient()
         await hubspotOauthHelper.refreshToken(hubspotClient)
     }
 
