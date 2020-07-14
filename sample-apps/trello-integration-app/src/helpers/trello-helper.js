@@ -43,4 +43,13 @@ module.exports = {
 
         return result
     },
+    getBoardLists: async (boardId) => {
+        const client = await trelloClientHelper.getClient()
+
+        console.log(`Getting trello board lists`)
+        const result = await client.getListsOnBoard(boardId)
+        logResponse(result)
+
+        return result
+    },
 }

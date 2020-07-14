@@ -67,4 +67,16 @@ module.exports = {
 
         return response.body.results
     },
+    getPipelineStages: async (pipelineId) => {
+        const client = await hubspotClientHelper.getClient()
+
+        console.log(`Getting HubSpot pipeline by id ${pipelineId}`)
+        // Get pipeline by id
+        // GET /crm/v3/pipelines/:objectType/:pipelineId
+        // https://developers.hubspot.com/docs/api/crm/pipelines
+        const response = await client.crm.pipelines.pipelinesApi.getById(DEAL_OBJECT_TYPE, pipelineId)
+        logResponse(response)
+
+        return response.body.stages
+    },
 }

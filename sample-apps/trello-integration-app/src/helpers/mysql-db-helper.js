@@ -20,34 +20,53 @@ const MAPPINGS_TABLE_INIT = `create table if not exists mappings (
   UNIQUE KEY board_id_pipeline_id_pipeline_stage_id (board_id, pipeline_id, pipeline_stage_id)
 );`
 
-exports.init = async () => {
-    try {
-        connection = new mysql.createConnection({
-            host: MYSQL_HOST,
-            user: MYSQL_USER,
-            password: MYSQL_PASSWORD,
-            database: MYSQL_DATABASE,
-        })
-
-        connection.connectAsync = Promise.promisify(connection.connect)
-        connection.queryAsync = Promise.promisify(connection.query)
-
-        console.log('connecting to MYSQL DB')
-        await connection.connectAsync()
-
-        console.log('init tables')
-        await connection.queryAsync(MAPPINGS_TABLE_INIT)
-    } catch (e) {
-        console.error('DB is not available')
-        console.error(e)
-    }
-}
-
-exports.close = () => {
-    if (connection) connection.end()
-}
-
-exports.run = (sql) => {
+const run = (sql) => {
     console.log(sql)
     return _.isNull(connection) ? Promise.reject(new Error('MYSQL DB not initialized!')) : connection.queryAsync(sql)
+}
+
+module.exports = {
+    init: async () => {
+        try {
+            connection = new mysql.createConnection({
+                host: MYSQL_HOST,
+                user: MYSQL_USER,
+                password: MYSQL_PASSWORD,
+                database: MYSQL_DATABASE,
+            })
+
+            connection.connectAsync = Promise.promisify(connection.connect)
+            connection.queryAsync = Promise.promisify(connection.query)
+
+            console.log('connecting to MYSQL DB')
+            await connection.connectAsync()
+
+            console.log('init tables')
+            await connection.queryAsync(MAPPINGS_TABLE_INIT)
+        } catch (e) {
+            console.error('DB is not available')
+            console.error(e)
+        }
+    },
+    close: () => {
+        if (connection) connection.end()
+    },
+    getMappings: (boardId, pipelineId) => {
+        const getMappingsSql = `select * from mappings where board_id = "${boardId}" AND pipeline_id = "${pipelineId}" ORDER BY id ASC`
+        return run(getMappingsSql)
+    },
+    addMapping: (boardId, pipelineId) => {
+        const getMappingsSql = `insert into mappings (board_id, pipeline_id) values ("${boardId}", "${pipelineId}")`
+        return run(getMappingsSql)
+    },
+    updateMapping: ({ id, boardListId, pipelineStageId } = {}) => {
+        const updateMappingsSql = `update mappings set board_list_id = '${boardListId}', pipeline_stage_id = '${pipelineStageId}' WHERE id = ${_.toNumber(
+            id,
+        )}`
+        return run(updateMappingsSql)
+    },
+    removeMapping: (mappingId) => {
+        const removeMappingsSql = `delete from mappings WHERE id = ${_.toNumber(mappingId)}`
+        return run(removeMappingsSql)
+    },
 }

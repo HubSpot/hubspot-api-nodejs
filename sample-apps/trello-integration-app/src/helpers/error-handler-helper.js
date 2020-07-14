@@ -8,5 +8,5 @@ module.exports = (e, res) => {
     }
 
     console.error(e)
-    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2)}`)
+    res.redirect(`/error?msg=${JSON.stringify(e, Object.getOwnPropertyNames(e), 2).slice(0, 2000)}`)
 }
