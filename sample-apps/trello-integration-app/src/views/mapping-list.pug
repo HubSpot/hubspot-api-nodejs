@@ -12,7 +12,7 @@ block content
               th Trello List
               th Pipeline Stage
               th
-                a(class='button' href='/mappings/row/add' id='add-row') Add Row
+                a(class='button' href=`/mappings/board/${boardId}/pipeline/${pipelineId}/mapping/add` id='add-row') Add Row
                 script.
                   const $form = $('#mappings-form')[0]
                   $(document).ready(() => {
@@ -49,5 +49,5 @@ block content
                       -let pipelineStageIdSelected = '' + pipelineStage.id === '' + mapping.pipelineStageId
                       option(value=pipelineStage.id selected=pipelineStageIdSelected) #{pipelineStage.label}
                 td
-                  a(class='button' href=`/mappings/row/${mapping.id}/remove`) Remove Row
+                  a(class='button' href=`/mappings/board/${boardId}/pipeline/${pipelineId}/mapping/${mapping.id}/remove`) Remove Row
         button(type="submit" id="save-button") Save

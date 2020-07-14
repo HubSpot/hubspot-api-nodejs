@@ -11,8 +11,36 @@ const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-sign
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
 
-    router.get('/mapping-list', async (req, res) => {
+    router.get('/board/:boardId/pipeline/:pipelineId/mapping/:mappingId/remove', async (req, res) => {
         try {
+            console.log('/board/:boardId/pipeline/:pipelineId/mapping/:mappingId/remove')
+
+            const boardId = _.get(req, 'params.boardId')
+            const pipelineId = _.get(req, 'params.pipelineId')
+
+            res.redirect(`/mappings/board/${boardId}/pipeline/${pipelineId}`)
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
+    router.get('/board/:boardId/pipeline/:pipelineId/mapping/add', async (req, res) => {
+        try {
+            console.log('/board/:boardId/pipeline/:pipelineId/mapping/add')
+
+            const boardId = _.get(req, 'params.boardId')
+            const pipelineId = _.get(req, 'params.pipelineId')
+
+            res.redirect(`/mappings/board/${boardId}/pipeline/${pipelineId}`)
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
+    router.get('/board/:boardId/pipeline/:pipelineId', async (req, res) => {
+        try {
+            const boardId = _.get(req, 'params.boardId')
+            const pipelineId = _.get(req, 'params.pipelineId')
             const boardLists = [
                 {
                     id: 6,
@@ -51,17 +79,60 @@ exports.getRouter = () => {
                 },
             ]
 
-            res.render('mapping-list', { boardLists, pipelineStages, mappings })
+            res.render('mapping-list', { boardLists, pipelineStages, mappings, boardId, pipelineId })
         } catch (e) {
             handleError(e, res)
         }
     })
 
-    router.post('/mapping-list', async (req, res) => {
+    router.post('/board/:boardId/pipeline/:pipelineId', async (req, res) => {
         try {
             console.log("router.post('/mapping-list'", JSON.stringify(req.body, null, 2))
 
-            res.redirect('/mappings/mapping-list')
+            const boardId = _.get(req, 'params.boardId')
+            const pipelineId = _.get(req, 'params.pipelineId')
+
+            res.redirect(`/mappings/board/${boardId}/pipeline/${pipelineId}`)
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
+    router.get('/board/:boardId', async (req, res) => {
+        try {
+            const boardId = _.get(req, 'params.boardId')
+
+            const pipelines = [
+                {
+                    id: 60,
+                    label: 'Name 60',
+                },
+                {
+                    id: 90,
+                    label: 'Name 90',
+                },
+            ]
+
+            res.render('pipelines', { pipelines, boardId })
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
+    router.get('/', async (req, res) => {
+        try {
+            const trelloBoards = [
+                {
+                    id: 6,
+                    name: 'Name 06',
+                },
+                {
+                    id: 0,
+                    name: 'Name 00',
+                },
+            ]
+
+            res.render('boards', { trelloBoards })
         } catch (e) {
             handleError(e, res)
         }
