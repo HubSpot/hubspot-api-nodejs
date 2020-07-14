@@ -2,6 +2,7 @@ const _ = require('lodash')
 const Promise = require('bluebird')
 const trelloClientHelper = require('./trello-client-helper')
 const logResponse = require('../helpers/log-response-helper')
+const AUTHENTICATED_MEMBER = 'me'
 
 module.exports = {
     searchForCards: async (query) => {
@@ -38,7 +39,7 @@ module.exports = {
         const client = await trelloClientHelper.getClient()
 
         console.log(`Getting trello boards`)
-        const result = await client.getBoards('me')
+        const result = await client.getBoards(AUTHENTICATED_MEMBER)
         logResponse(result)
 
         return result
