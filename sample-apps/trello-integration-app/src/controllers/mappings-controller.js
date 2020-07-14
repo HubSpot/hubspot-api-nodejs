@@ -121,16 +121,7 @@ exports.getRouter = () => {
 
     router.get('/', async (req, res) => {
         try {
-            const trelloBoards = [
-                {
-                    id: 6,
-                    name: 'Name 06',
-                },
-                {
-                    id: 0,
-                    name: 'Name 00',
-                },
-            ]
+            const trelloBoards = await trelloHelper.getBoards()
 
             res.render('boards', { trelloBoards })
         } catch (e) {
