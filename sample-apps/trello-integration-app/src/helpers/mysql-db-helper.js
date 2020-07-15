@@ -31,12 +31,17 @@ const HUBSPOT_TOKENS_TABLE_INIT = `create table if not exists hubspot_tokens  (
 
 const TRELLO_TOKENS_TABLE_INIT = `create table if not exists trello_tokens  (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  token  VARCHAR(255)   default null
+  token VARCHAR(255) default null
 );`
 
 const URLS_TABLE_INIT = `create table if not exists urls  (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  url                    VARCHAR(255)   default null
+  url VARCHAR(255) default null
+);`
+
+const CARDS_TABLE_INIT = `create table if not exists cards  (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  card_id VARCHAR(255) default null
 );`
 
 const run = (sql) => {
@@ -65,6 +70,7 @@ module.exports = {
             await connection.queryAsync(HUBSPOT_TOKENS_TABLE_INIT)
             await connection.queryAsync(TRELLO_TOKENS_TABLE_INIT)
             await connection.queryAsync(URLS_TABLE_INIT)
+            await connection.queryAsync(CARDS_TABLE_INIT)
         } catch (e) {
             console.error('DB is not available')
             console.error(e)
@@ -127,8 +133,15 @@ module.exports = {
         const saveUrl = `insert into urls (url) values ("${url}")`
         return run(saveUrl)
     },
-    // getCardId: () => redisClient.get(CARD_ID_KEY),
-    // saveCardId: (cardId) => redisClient.set(CARD_ID_KEY, cardId),
+    getCardId: async () => {
+        const getCard = `select * from cards ORDER BY id DESC limit 1`
+        const result = await run(getCard)
+        return _.get(result, '[0].card_id')
+    },
+    saveCardId: (cardId) => {
+        const saveCard = `insert into cards (card_id) values ("${cardId}")`
+        return run(saveCard)
+    },
     // getDealAssociation: (dealId) => redisClient.get(getDealAssociationKey(dealId)),
     // createDealAssociation: (dealId, cardId) => redisClient.set(getDealAssociationKey(dealId), cardId),
     // deleteDealAssociation: (dealId) => redisClient.del(getDealAssociationKey(dealId)),
