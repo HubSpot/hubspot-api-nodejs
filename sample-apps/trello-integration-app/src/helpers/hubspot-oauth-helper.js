@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const redisDbHelper = require('./redis-db-helper')
 const mysqlDbHelper = require('../helpers/mysql-db-helper')
 
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
@@ -44,7 +43,7 @@ module.exports = {
         return Date.now() >= new Date(tokensData.updated_at).getTime() + tokensData.expires_in * 1000
     },
     getOauthRedirectUri: async () => {
-        const baseUrl = await redisDbHelper.getUrl()
+        const baseUrl = await mysqlDbHelper.getUrl()
         return `${baseUrl}/oauth/hubspot/callback`
     },
 }

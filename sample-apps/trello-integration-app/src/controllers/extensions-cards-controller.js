@@ -2,6 +2,7 @@ const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
 const redisDbHelper = require('../helpers/redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const HUBSPOT_APPLICATION_ID = process.env.HUBSPOT_APPLICATION_ID
 const CARD_TITLE = 'Trello Integration Test Card'
 const hubspotClientHelper = require('../helpers/hubspot-client-helper')
@@ -15,7 +16,7 @@ exports.getRouter = () => {
     router.get('/extension', async (req, res) => {
         try {
             const cardId = await redisDbHelper.getCardId()
-            const baseUrl = await redisDbHelper.getUrl()
+            const baseUrl = await mysqlDbHelper.getUrl()
 
             res.render('extension', { cardId, cardTitle: CARD_TITLE, baseUrl })
         } catch (e) {
@@ -30,7 +31,7 @@ exports.getRouter = () => {
                 name: 'deals',
                 propertiesToSend: ['hs_object_id', 'dealname'],
             }
-            const baseUrl = await redisDbHelper.getUrl()
+            const baseUrl = await mysqlDbHelper.getUrl()
             const fetch = {
                 targetUrl: `${baseUrl}/trello/cards`,
                 objectTypes: [dealObjectType],

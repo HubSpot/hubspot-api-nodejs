@@ -1,7 +1,6 @@
 const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
-const redisDbHelper = require('../helpers/redis-db-helper')
 const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const hubspotOauthHelper = require('../helpers/hubspot-oauth-helper')
 const trelloOauthHelper = require('../helpers/trello-oauth-helper')
@@ -20,7 +19,7 @@ exports.getRouter = () => {
         try {
             const hubspotAuthorized = await hubspotOauthHelper.verifyAuthorization()
             const trelloAuthorized = await trelloOauthHelper.verifyAuthorization()
-            const baseUrl = await redisDbHelper.getUrl()
+            const baseUrl = await mysqlDbHelper.getUrl()
 
             res.render('login', { hubspotAuthorized, trelloAuthorized, baseUrl })
         } catch (e) {

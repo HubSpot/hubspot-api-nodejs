@@ -1,6 +1,5 @@
 const Redis = require('ioredis')
 const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1'
-const URL_KEY = 'base_url'
 const CARD_ID_KEY = 'extension_card_id'
 
 const redisClient = new Redis({
@@ -11,8 +10,6 @@ const getDealAssociationKey = (dealId) => `deal_association_${dealId}`
 
 module.exports = {
     close: () => redisClient.disconnect(),
-    getUrl: () => redisClient.get(URL_KEY),
-    saveUrl: (url) => redisClient.set(URL_KEY, url),
     getCardId: () => redisClient.get(CARD_ID_KEY),
     saveCardId: (cardId) => redisClient.set(CARD_ID_KEY, cardId),
     getDealAssociation: (dealId) => redisClient.get(getDealAssociationKey(dealId)),

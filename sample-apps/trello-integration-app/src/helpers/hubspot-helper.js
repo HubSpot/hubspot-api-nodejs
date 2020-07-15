@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const redisDbHelper = require('./redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const hubspotClientHelper = require('./hubspot-client-helper')
 const logResponse = require('../helpers/log-response-helper')
 const DEAL_OBJECT_TYPE = 'deals'
@@ -10,7 +11,7 @@ module.exports = {
         return !_.isNil(cardId)
     },
     formatCardExtensionDataResponse: async (isDealAssociated, card) => {
-        const baseUrl = await redisDbHelper.getUrl()
+        const baseUrl = await mysqlDbHelper.getUrl()
         let results
         let primaryAction
         if (isDealAssociated) {

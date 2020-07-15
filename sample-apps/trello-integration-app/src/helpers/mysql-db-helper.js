@@ -118,8 +118,15 @@ module.exports = {
         const saveTrelloToken = `insert into trello_tokens (token) values ("${token}")`
         return run(saveTrelloToken)
     },
-    // getUrl: () => redisClient.get(URL_KEY),
-    // saveUrl: (url) => redisClient.set(URL_KEY, url),
+    getUrl: async () => {
+        const getUrl = `select * from urls ORDER BY id DESC limit 1`
+        const result = await run(getUrl)
+        return _.get(result, '[0].url')
+    },
+    saveUrl: (url) => {
+        const saveUrl = `insert into urls (url) values ("${url}")`
+        return run(saveUrl)
+    },
     // getCardId: () => redisClient.get(CARD_ID_KEY),
     // saveCardId: (cardId) => redisClient.set(CARD_ID_KEY, cardId),
     // getDealAssociation: (dealId) => redisClient.get(getDealAssociationKey(dealId)),

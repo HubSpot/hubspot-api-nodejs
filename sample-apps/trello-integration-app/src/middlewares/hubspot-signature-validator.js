@@ -1,12 +1,12 @@
 const SIGNATURE_HEADER = 'X-HubSpot-Signature'
 const SIGNATURE_VERSION_HEADER = 'X-HubSpot-Signature-Version'
 const hubspotClientHelper = require('../helpers/hubspot-client-helper')
-const redisDbHelper = require('../helpers/redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const _ = require('lodash')
 
 module.exports = async (req, res, next) => {
     try {
-        const baseUrl = await redisDbHelper.getUrl()
+        const baseUrl = await mysqlDbHelper.getUrl()
         const webhooksUrl = `${baseUrl}${req.originalUrl}`
         const requestBody = _.isEmpty(req.body) ? '' : JSON.stringify(req.body)
         const signature = req.header(SIGNATURE_HEADER)

@@ -71,7 +71,7 @@ app.use((error, req, res, next) => {
             return Promise.delay(100)
                 .then(() => ngrok.connect(PORT))
                 .tap((url) => console.log('Please use:', url))
-                .then(redisDbHelper.saveUrl)
+                .then(mysqlDbHelper.saveUrl)
                 .catch(async (e) => {
                     console.log('Error during app start. ', e)
                     return releaseConnections(server)
