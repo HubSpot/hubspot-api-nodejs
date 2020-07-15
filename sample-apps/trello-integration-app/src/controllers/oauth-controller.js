@@ -2,6 +2,7 @@ const _ = require('lodash')
 const express = require('express')
 const router = new express.Router()
 const redisDbHelper = require('../helpers/redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const hubspotOauthHelper = require('../helpers/hubspot-oauth-helper')
 const trelloOauthHelper = require('../helpers/trello-oauth-helper')
 const trelloClientHelper = require('../helpers/trello-client-helper')
@@ -100,8 +101,8 @@ exports.getRouter = () => {
             logResponse(result)
             // Set token for the
             // https://www.npmjs.com/package/@hubspot/api-client
-            const tokensData = { ...result.body, updatedAt: Date.now() }
-            await redisDbHelper.saveHubspotTokensData(tokensData)
+            const tokensData = result.body
+            await mysqlDbHelper.saveHubspotTokensData(tokensData)
             hubspotClient.setAccessToken(tokensData.accessToken)
 
             res.redirect('/')
