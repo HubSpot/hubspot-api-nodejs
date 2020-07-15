@@ -109,8 +109,15 @@ module.exports = {
         const result = await run(getHubspotTokensData)
         return result[0]
     },
-    // getTrelloToken: () => redisClient.get(TRELLO_TOKEN_KEY),
-    // saveTrelloToken: (token) => redisClient.set(TRELLO_TOKEN_KEY, token),
+    getTrelloToken: async () => {
+        const getTrelloToken = `select * from trello_tokens ORDER BY id DESC limit 1`
+        const result = await run(getTrelloToken)
+        return _.get(result, '[0].token')
+    },
+    saveTrelloToken: (token) => {
+        const saveTrelloToken = `insert into trello_tokens (token) values ("${token}")`
+        return run(saveTrelloToken)
+    },
     // getUrl: () => redisClient.get(URL_KEY),
     // saveUrl: (url) => redisClient.set(URL_KEY, url),
     // getCardId: () => redisClient.get(CARD_ID_KEY),

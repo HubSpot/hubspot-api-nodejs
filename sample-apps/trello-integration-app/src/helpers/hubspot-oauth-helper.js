@@ -10,7 +10,7 @@ module.exports = {
     refreshToken: async (hubspotClient) => {
         let tokensData = await mysqlDbHelper.getHubspotTokensData()
 
-        if (!tokensData.refreshToken) {
+        if (!tokensData.refresh_token) {
             throw new Error('Cannot find refresh token')
         }
 
@@ -24,7 +24,7 @@ module.exports = {
             undefined,
             CLIENT_ID,
             CLIENT_SECRET,
-            tokensData.refreshToken,
+            tokensData.refresh_token,
         )
 
         tokensData = result.body
@@ -41,7 +41,7 @@ module.exports = {
 
     verifyTokenExpiration: async () => {
         const tokensData = await mysqlDbHelper.getHubspotTokensData()
-        return Date.now() >= tokensData.updated_at + tokensData.expiresIn * 1000
+        return Date.now() >= new Date(tokensData.updated_at).getTime() + tokensData.expires_in * 1000
     },
     getOauthRedirectUri: async () => {
         const baseUrl = await redisDbHelper.getUrl()

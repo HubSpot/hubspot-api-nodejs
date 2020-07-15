@@ -1,9 +1,10 @@
 const _ = require('lodash')
 const redisDbHelper = require('./redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 
 module.exports = {
     verifyAuthorization: async () => {
-        const token = await redisDbHelper.getTrelloToken()
+        const token = await mysqlDbHelper.getTrelloToken()
         return !_.isEmpty(token)
     },
     getAuthUrl: (key, returnUrl, name = 'HubSpot', expiration = 'never', scope = 'read', responseType = 'token') =>

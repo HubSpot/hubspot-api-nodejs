@@ -71,7 +71,7 @@ exports.getRouter = () => {
             const token = _.get(req, 'params.token')
             console.log('Trello token', token)
 
-            await redisDbHelper.saveTrelloToken(token)
+            await mysqlDbHelper.saveTrelloToken(token)
 
             const trelloClient = await trelloClientHelper.getClient()
             trelloClient.token = token
