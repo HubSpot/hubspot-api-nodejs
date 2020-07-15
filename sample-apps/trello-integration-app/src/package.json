@@ -1,10 +1,10 @@
 {
-  "name": "hubspot-limiting-handling-and-retry",
+  "name": "hubspot-trello-integration",
   "version": "1.0.0",
   "engines": {
     "node": ">= 10.13.0"
   },
-  "description": "hubspot-node limiting handling and retry sample application",
+  "description": "hubspot-node trello-integration sample application",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -23,7 +23,6 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.16.3",
-    "ioredis": "^4.14.1",
     "lodash": "^4.17.15",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
