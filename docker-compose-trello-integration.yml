@@ -15,13 +15,6 @@ services:
       MYSQL_PASSWORD: mappings
     logging:
       driver: none
-  redis:
-    image: redis
-    command: redis-server --appendonly yes
-    volumes:
-      - ./sample-apps/trello-integration-app/db/redis:/data
-    ports:
-      - 6379:6379
   web:
     env_file:
       - sample-apps/trello-integration-app/src/.env
@@ -41,7 +34,6 @@ services:
       - ./sample-apps/trello-integration-app/tools:/trello-integration-sample-app/sample-apps/trello-integration-app/tools
     ports:
       - 3000:3000
-    command: ../tools/wait-for-it.sh redis:6379 -t 30 --strict -- ../tools/wait-for-it.sh db:3306 -t 60 --strict -- npm run dev
+    command: ../tools/wait-for-it.sh db:3306 -t 60 --strict -- npm run dev
     depends_on:
-      - redis
       - db
