@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const Promise = require('bluebird')
 const trelloClientHelper = require('./trello-client-helper')
+const mysqlDbHelper = require('./mysql-db-helper')
 const logResponse = require('../helpers/log-response-helper')
 const AUTHENTICATED_MEMBER = 'me'
 
@@ -52,5 +53,23 @@ module.exports = {
         logResponse(result)
 
         return result
+    },
+    createCardWebhookSubscription: async (cardId) => {
+        const client = await trelloClientHelper.getClient()
+        const baseUrl = await mysqlDbHelper.getUrl()
+        const callbackUrl = `${baseUrl}/trello/cards/webhook`
+        const webhook = await client.addWebhook(undefined, callbackUrl, cardId)
+        await mysqlDbHelper.saveCardWebhook(webhook.id, cardId)
+
+        return webhook
+    },
+    checkIfCardWebhookCreated: async (cardId) => {
+        const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
+        return !_.isNil(webhookId)
+    },
+    deleteCardWebhookSubscription: async (webhookId) => {
+        const client = await trelloClientHelper.getClient()
+        await client.deleteWebhook(webhookId)
+        await mysqlDbHelper.deleteCardWebhook(webhookId)
     },
 }

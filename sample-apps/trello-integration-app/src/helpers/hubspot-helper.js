@@ -6,8 +6,12 @@ const DEAL_OBJECT_TYPE = 'deals'
 
 module.exports = {
     checkIfDealAssociated: async (dealId) => {
-        const cardId = await mysqlDbHelper.getDealAssociation(dealId)
+        const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
         return !_.isNil(cardId)
+    },
+    checkIfCardAssociatedToDeals: async (cardId) => {
+        const associations = await mysqlDbHelper.getDealAssociationsForCard(cardId)
+        return !_.isEmpty(associations)
     },
     formatCardExtensionDataResponse: async (isDealAssociated, card) => {
         const baseUrl = await mysqlDbHelper.getUrl()

@@ -11,6 +11,14 @@ const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-sign
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
 
+    router.head('/webhook', async (req, res) => {
+        try {
+            res.status(200).end()
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
     router.get('/search', async (req, res) => {
         try {
             const query = _.get(req, 'query.q')
@@ -39,6 +47,12 @@ exports.getRouter = () => {
 
             await mysqlDbHelper.createDealAssociation(dealId, cardId)
 
+            const isCardWebhookCreated = await trelloHelper.checkIfCardWebhookCreated(cardId)
+
+            if (!isCardWebhookCreated) {
+                await trelloHelper.createCardWebhookSubscription(cardId)
+            }
+
             res.redirect('/trello/cards/search-frame-success')
         } catch (e) {
             handleError(e, res)
@@ -56,7 +70,16 @@ exports.getRouter = () => {
     router.delete('/associations', hubspotSignatureValidatorMiddleware, async (req, res) => {
         try {
             const dealId = _.get(req, 'query.hs_object_id')
+            const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
+
             await mysqlDbHelper.deleteDealAssociation(dealId)
+
+            const isCardAssociatedToDeals = await hubspotHelper.checkIfCardAssociatedToDeals(cardId)
+            const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
+
+            if (!isCardAssociatedToDeals && webhookId) {
+                await trelloHelper.deleteCardWebhookSubscription(webhookId)
+            }
 
             res.status(204).end()
         } catch (e) {
@@ -71,7 +94,7 @@ exports.getRouter = () => {
             let isDealAssociated = await hubspotHelper.checkIfDealAssociated(dealId)
 
             if (isDealAssociated) {
-                const cardId = await mysqlDbHelper.getDealAssociation(dealId)
+                const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
                 card = await trelloHelper.getCard(cardId)
                 if (_.isNil(card)) {
                     isDealAssociated = false

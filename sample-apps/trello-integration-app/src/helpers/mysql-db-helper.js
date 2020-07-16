@@ -50,6 +50,12 @@ const DEAL_ASSOCIATIONS_TABLE_INIT = `create table if not exists deal_associatio
   card_id VARCHAR(255) default null
 );`
 
+const CARD_WEBHOOKS_TABLE_INIT = `create table if not exists card_webhooks  (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  webhook_id VARCHAR(255) default null,
+  card_id VARCHAR(255) default null
+);`
+
 const run = (sql) => {
     console.log(sql)
     return _.isNull(connection) ? Promise.reject(new Error('MYSQL DB not initialized!')) : connection.queryAsync(sql)
@@ -78,6 +84,7 @@ module.exports = {
             await connection.queryAsync(URLS_TABLE_INIT)
             await connection.queryAsync(CARDS_TABLE_INIT)
             await connection.queryAsync(DEAL_ASSOCIATIONS_TABLE_INIT)
+            await connection.queryAsync(CARD_WEBHOOKS_TABLE_INIT)
         } catch (e) {
             console.error('DB is not available')
             console.error(e)
@@ -149,10 +156,14 @@ module.exports = {
         const saveCard = `insert into cards (card_id) values ("${cardId}")`
         return run(saveCard)
     },
-    getDealAssociation: async (dealId) => {
+    getDealAssociatedCard: async (dealId) => {
         const getDealAssociation = `select * from deal_associations where deal_id = "${dealId}" limit 1`
         const result = await run(getDealAssociation)
         return _.get(result, '[0].card_id')
+    },
+    getDealAssociationsForCard: (cardId) => {
+        const getDealAssociationsForCard = `select * from deal_associations where card_id = "${cardId}"`
+        return run(getDealAssociationsForCard)
     },
     createDealAssociation: (dealId, cardId) => {
         const saveDealAssociation = `insert into deal_associations (deal_id, card_id) values ("${dealId}", "${cardId}")`
@@ -161,5 +172,18 @@ module.exports = {
     deleteDealAssociation: (dealId) => {
         const deleteDealAssociation = `delete from deal_associations WHERE deal_id = ${dealId}`
         return run(deleteDealAssociation)
+    },
+    getCardWebhookId: async (cardId) => {
+        const getCardWebhook = `select * from card_webhooks where card_id = "${cardId}" limit 1`
+        const result = await run(getCardWebhook)
+        return _.get(result, '[0].webhook_id')
+    },
+    saveCardWebhook: (webhookId, cardId) => {
+        const saveCardWebhook = `insert into card_webhooks (webhook_id, card_id) values ("${webhookId}", "${cardId}")`
+        return run(saveCardWebhook)
+    },
+    deleteCardWebhook: (webhookId) => {
+        const deleteCardWebhook = `delete from card_webhooks WHERE webhook_id = '${webhookId}'`
+        return run(deleteCardWebhook)
     },
 }
