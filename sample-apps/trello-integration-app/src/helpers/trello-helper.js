@@ -4,6 +4,13 @@ const trelloClientHelper = require('./trello-client-helper')
 const mysqlDbHelper = require('./mysql-db-helper')
 const logResponse = require('../helpers/log-response-helper')
 const AUTHENTICATED_MEMBER = 'me'
+const NOT_FOUND_CODE = 404
+
+const checkIfNotFoundResponseStatus = (e) => {
+    const statusCode = _.get(e, 'response.statusCode')
+
+    return _.isEqual(statusCode, NOT_FOUND_CODE)
+}
 
 module.exports = {
     searchForCards: async (query) => {
@@ -19,13 +26,21 @@ module.exports = {
         return _.get(result, 'cards') || []
     },
     getCard: async (cardId) => {
-        const client = await trelloClientHelper.getClient()
+        try {
+            const client = await trelloClientHelper.getClient()
 
-        console.log(`Getting trello card by id [${cardId}]`)
-        const result = await client.makeRequest('GET', `/1/cards/${cardId}`)
-        logResponse(result)
+            console.log(`Getting trello card by id [${cardId}]`)
+            const result = await client.makeRequest('GET', `/1/cards/${cardId}`)
+            logResponse(result)
 
-        return result
+            return result
+        } catch (e) {
+            if (checkIfNotFoundResponseStatus(e)) {
+                return console.log(`Card ${cardId} not found`)
+            }
+
+            throw e
+        }
     },
     getMembers: async (idMembers) => {
         const client = await trelloClientHelper.getClient()
@@ -58,6 +73,7 @@ module.exports = {
         const client = await trelloClientHelper.getClient()
         const baseUrl = await mysqlDbHelper.getUrl()
         const callbackUrl = `${baseUrl}/trello/cards/webhook`
+        console.log(`Getting trello webhook for card ${cardId}`)
         const webhook = await client.addWebhook(undefined, callbackUrl, cardId)
         await mysqlDbHelper.saveCardWebhook(webhook.id, cardId)
 
@@ -69,7 +85,18 @@ module.exports = {
     },
     deleteCardWebhookSubscription: async (webhookId) => {
         const client = await trelloClientHelper.getClient()
-        await client.deleteWebhook(webhookId)
+
+        try {
+            console.log(`Removing trello webhook ${webhookId}`)
+            await client.deleteWebhook(webhookId)
+        } catch (e) {
+            if (!checkIfNotFoundResponseStatus(e)) {
+                throw e
+            }
+
+            console.log(`Webhook ${webhookId} not found`)
+        }
+
         await mysqlDbHelper.deleteCardWebhook(webhookId)
     },
 }

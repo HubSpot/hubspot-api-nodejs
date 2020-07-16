@@ -173,6 +173,10 @@ module.exports = {
         const deleteDealAssociation = `delete from deal_associations WHERE deal_id = ${dealId}`
         return run(deleteDealAssociation)
     },
+    deleteDealAssociationsForCard: (cardId) => {
+        const deleteDealAssociations = `delete from deal_associations WHERE card_id = '${cardId}'`
+        return run(deleteDealAssociations)
+    },
     getCardWebhookId: async (cardId) => {
         const getCardWebhook = `select * from card_webhooks where card_id = "${cardId}" limit 1`
         const result = await run(getCardWebhook)

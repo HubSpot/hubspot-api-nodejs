@@ -8,6 +8,15 @@ const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
 const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-signature-validator')
 
+const runRecoveryForDeletedCard = async (cardId) => {
+    await mysqlDbHelper.deleteDealAssociationsForCard(cardId)
+    const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
+
+    if (webhookId) {
+        await trelloHelper.deleteCardWebhookSubscription(webhookId)
+    }
+}
+
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
 
@@ -97,6 +106,7 @@ exports.getRouter = () => {
                 const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
                 card = await trelloHelper.getCard(cardId)
                 if (_.isNil(card)) {
+                    await runRecoveryForDeletedCard(cardId)
                     isDealAssociated = false
                 } else {
                     const idMembers = _.get(card, 'idMembers') || []
