@@ -2,15 +2,8 @@ const _ = require('lodash')
 const Promise = require('bluebird')
 const trelloClientHelper = require('./trello-client-helper')
 const mysqlDbHelper = require('./mysql-db-helper')
-const logResponse = require('../helpers/log-response-helper')
+const responseHelper = require('../helpers/log-response-helper')
 const AUTHENTICATED_MEMBER = 'me'
-const NOT_FOUND_CODE = 404
-
-const checkIfNotFoundResponseStatus = (e) => {
-    const statusCode = _.get(e, 'response.statusCode')
-
-    return _.isEqual(statusCode, NOT_FOUND_CODE)
-}
 
 module.exports = {
     searchForCards: async (query) => {
@@ -21,7 +14,7 @@ module.exports = {
 
         console.log(`Getting trello cards by query [${query}]`)
         const result = await client.makeRequest('GET', '/1/search', { query, modelTypes: ['cards'] })
-        logResponse(result)
+        responseHelper.logResponse(result)
 
         return _.get(result, 'cards') || []
     },
@@ -31,11 +24,11 @@ module.exports = {
 
             console.log(`Getting trello card by id [${cardId}]`)
             const result = await client.makeRequest('GET', `/1/cards/${cardId}`)
-            logResponse(result)
+            responseHelper.logResponse(result)
 
             return result
         } catch (e) {
-            if (checkIfNotFoundResponseStatus(e)) {
+            if (responseHelper.checkIfNotFoundResponseStatus(e)) {
                 return console.log(`Card ${cardId} not found`)
             }
 
@@ -47,7 +40,7 @@ module.exports = {
 
         console.log(`Getting trello card members`)
         const result = await Promise.map(idMembers, (memberId) => client.getMember(memberId))
-        logResponse(result)
+        responseHelper.logResponse(result)
 
         return result
     },
@@ -56,7 +49,7 @@ module.exports = {
 
         console.log(`Getting trello boards`)
         const result = await client.getBoards(AUTHENTICATED_MEMBER)
-        logResponse(result)
+        responseHelper.logResponse(result)
 
         return result
     },
@@ -65,7 +58,7 @@ module.exports = {
 
         console.log(`Getting trello board lists`)
         const result = await client.getListsOnBoard(boardId)
-        logResponse(result)
+        responseHelper.logResponse(result)
 
         return result
     },
@@ -90,7 +83,7 @@ module.exports = {
             console.log(`Removing trello webhook ${webhookId}`)
             await client.deleteWebhook(webhookId)
         } catch (e) {
-            if (!checkIfNotFoundResponseStatus(e)) {
+            if (!responseHelper.checkIfNotFoundResponseStatus(e)) {
                 throw e
             }
 

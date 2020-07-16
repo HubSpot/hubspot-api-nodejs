@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const hubspotClientHelper = require('./hubspot-client-helper')
-const logResponse = require('../helpers/log-response-helper')
+const responseHelper = require('../helpers/log-response-helper')
 const DEAL_OBJECT_TYPE = 'deals'
 
 module.exports = {
@@ -67,7 +67,7 @@ module.exports = {
         // GET /crm/v3/pipelines/:objectType
         // https://developers.hubspot.com/docs/api/crm/pipelines
         const response = await client.crm.pipelines.pipelinesApi.getAll(DEAL_OBJECT_TYPE)
-        logResponse(response)
+        responseHelper.logResponse(response)
 
         return response.body.results
     },
@@ -79,8 +79,70 @@ module.exports = {
         // GET /crm/v3/pipelines/:objectType/:pipelineId
         // https://developers.hubspot.com/docs/api/crm/pipelines
         const response = await client.crm.pipelines.pipelinesApi.getById(DEAL_OBJECT_TYPE, pipelineId)
-        logResponse(response)
+        responseHelper.logResponse(response)
 
         return response.body.stages
+    },
+    updateDeal: async (dealId, pipelineId, pipelineStageId) => {
+        const client = await hubspotClientHelper.getClient()
+        const deal = {
+            properties: {
+                pipeline: pipelineId,
+                dealstage: pipelineStageId,
+            },
+        }
+
+        console.log(`Updating deal ${dealId}`)
+        // Perform a partial update of deal
+        // PATCH /crm/v3/objects/deals/:dealId
+        // https://developers.hubspot.com/docs/api/crm/deals
+        const response = await client.crm.deals.basicApi.update(dealId, deal)
+        responseHelper.logResponse(response)
+
+        return response.body
+    },
+    verifyPipeline: async (pipelineId) => {
+        try {
+            const client = await hubspotClientHelper.getClient()
+
+            console.log(`Getting HubSpot pipeline ${pipelineId}`)
+            // Get pipeline by id for the deals
+            // GET /crm/v3/pipelines/:objectType/:pipelineId
+            // https://developers.hubspot.com/docs/api/crm/pipelines
+            const response = await client.crm.pipelines.pipelinesApi.getById(DEAL_OBJECT_TYPE, pipelineId)
+            responseHelper.logResponse(response)
+
+            return true
+        } catch (e) {
+            if (responseHelper.checkIfNotFoundResponseStatus(e)) {
+                return false
+            }
+
+            throw e
+        }
+    },
+    verifyPipelineStage: async (pipelineId, pipelineStageId) => {
+        try {
+            const client = await hubspotClientHelper.getClient()
+
+            console.log(`Getting HubSpot pipeline ${pipelineId} stage ${pipelineStageId}`)
+            // Get pipeline stage by id
+            // GET /crm/v3/pipelines/:objectType/:pipelineId/stages/:stageId
+            // https://developers.hubspot.com/docs/api/crm/pipelines
+            const response = await client.crm.pipelines.pipelineStagesApi.getById(
+                DEAL_OBJECT_TYPE,
+                pipelineId,
+                pipelineStageId,
+            )
+            responseHelper.logResponse(response)
+
+            return true
+        } catch (e) {
+            if (responseHelper.checkIfNotFoundResponseStatus(e)) {
+                return false
+            }
+
+            throw e
+        }
     },
 }

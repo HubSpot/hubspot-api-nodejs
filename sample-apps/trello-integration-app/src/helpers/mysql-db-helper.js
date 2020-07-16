@@ -98,6 +98,11 @@ module.exports = {
         const getMappingsSql = `select * from mappings where board_id = "${boardId}" AND pipeline_id = "${pipelineId}" ORDER BY id ASC`
         return run(getMappingsSql)
     },
+    getMappingForBoardList: async (boardListId) => {
+        const getMappingForBoardList = `select * from mappings where board_list_id = "${boardListId}" limit 1`
+        const result = await run(getMappingForBoardList)
+        return result[0]
+    },
     addMapping: (boardId, pipelineId) => {
         const getMappingsSql = `insert into mappings (board_id, pipeline_id) values ("${boardId}", "${pipelineId}")`
         return run(getMappingsSql)
@@ -110,6 +115,14 @@ module.exports = {
     },
     removeMapping: (mappingId) => {
         const removeMappingsSql = `delete from mappings WHERE id = ${_.toNumber(mappingId)}`
+        return run(removeMappingsSql)
+    },
+    removeMappingsForPipeline: (pipelineId) => {
+        const removeMappingsSql = `delete from mappings WHERE pipeline_id = '${pipelineId}'`
+        return run(removeMappingsSql)
+    },
+    removeMappingsForPipelineStage: (pipelineStageId) => {
+        const removeMappingsSql = `delete from mappings WHERE pipeline_stage_id = '${pipelineStageId}'`
         return run(removeMappingsSql)
     },
     getHubspotTokensData: async () => {

@@ -1,12 +1,15 @@
 const _ = require('lodash')
+const Promise = require('bluebird')
 const express = require('express')
 const router = new express.Router()
 const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const trelloHelper = require('../helpers/trello-helper')
 const hubspotHelper = require('../helpers/hubspot-helper')
+const responseHelper = require('../helpers/log-response-helper')
 const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
 const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-signature-validator')
+const DELETE_CARD_ACTION_TYPE = 'deleteCard'
 
 const runRecoveryForDeletedCard = async (cardId) => {
     await mysqlDbHelper.deleteDealAssociationsForCard(cardId)
@@ -17,11 +20,84 @@ const runRecoveryForDeletedCard = async (cardId) => {
     }
 }
 
+const runRecoveryForDeletedPipeline = async (pipelineId) => {
+    await mysqlDbHelper.removeMappingsForPipeline(pipelineId)
+}
+
+const runRecoveryForDeletedPipelineStage = async (pipelineStageId) => {
+    await mysqlDbHelper.removeMappingsForPipelineStage(pipelineStageId)
+}
+
+const runRecoveryForDeletedDeal = async (dealId, cardId) => {
+    await mysqlDbHelper.deleteDealAssociation(dealId)
+
+    const isCardAssociatedToDeals = await hubspotHelper.checkIfCardAssociatedToDeals(cardId)
+    const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
+
+    if (!isCardAssociatedToDeals && webhookId) {
+        await trelloHelper.deleteCardWebhookSubscription(webhookId)
+    }
+}
+
+const updateDeals = async (cardId, boardId, pipelineId, pipelineStageId) => {
+    if (!(await hubspotHelper.verifyPipeline(pipelineId))) {
+        return runRecoveryForDeletedPipeline(pipelineId)
+    }
+
+    if (!(await hubspotHelper.verifyPipelineStage(pipelineId, pipelineStageId))) {
+        return runRecoveryForDeletedPipelineStage(pipelineStageId)
+    }
+
+    const dealAssociations = await mysqlDbHelper.getDealAssociationsForCard(cardId)
+
+    if (_.isEmpty(dealAssociations)) {
+        return runRecoveryForDeletedCard(cardId)
+    }
+
+    return Promise.map(dealAssociations, (dealAssociation) =>
+        hubspotHelper.updateDeal(dealAssociation.deal_id, pipelineId, pipelineStageId).catch((e) => {
+            if (responseHelper.checkIfNotFoundResponseStatus(e)) {
+                return runRecoveryForDeletedDeal(dealAssociation.deal_id, cardId)
+            }
+
+            throw e
+        }),
+    )
+}
+
+const updateDealsForCardOnBoardList = async (cardId, boardId) => {
+    const mapping = await mysqlDbHelper.getMappingForBoardList(boardId)
+
+    if (!_.isNil(mapping)) {
+        return updateDeals(cardId, boardId, mapping.pipeline_id, mapping.pipeline_stage_id)
+    }
+}
+
 exports.getRouter = () => {
     router.use(checkAuthorizationMiddleware)
 
     router.head('/webhook', async (req, res) => {
         try {
+            res.status(200).end()
+        } catch (e) {
+            handleError(e, res)
+        }
+    })
+
+    router.post('/webhook', async (req, res) => {
+        try {
+            const cardId = _.get(req, 'body.model.id')
+            const actionType = _.get(req, 'body.action.type')
+            const newBoardListId = _.get(req, 'body.action.data.listAfter.id')
+
+            if (_.isEqual(actionType, DELETE_CARD_ACTION_TYPE)) {
+                await runRecoveryForDeletedCard(cardId)
+            }
+
+            if (!_.isNil(newBoardListId)) {
+                await updateDealsForCardOnBoardList(cardId, newBoardListId)
+            }
+
             res.status(200).end()
         } catch (e) {
             handleError(e, res)
@@ -81,14 +157,7 @@ exports.getRouter = () => {
             const dealId = _.get(req, 'query.hs_object_id')
             const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
 
-            await mysqlDbHelper.deleteDealAssociation(dealId)
-
-            const isCardAssociatedToDeals = await hubspotHelper.checkIfCardAssociatedToDeals(cardId)
-            const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
-
-            if (!isCardAssociatedToDeals && webhookId) {
-                await trelloHelper.deleteCardWebhookSubscription(webhookId)
-            }
+            await runRecoveryForDeletedDeal(dealId, cardId)
 
             res.status(204).end()
         } catch (e) {

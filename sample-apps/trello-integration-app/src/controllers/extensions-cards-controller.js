@@ -5,7 +5,7 @@ const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const HUBSPOT_APPLICATION_ID = process.env.HUBSPOT_APPLICATION_ID
 const CARD_TITLE = 'Trello Integration Test Card'
 const hubspotClientHelper = require('../helpers/hubspot-client-helper')
-const logResponse = require('../helpers/log-response-helper')
+const responseHelper = require('../helpers/log-response-helper')
 const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
 
@@ -77,7 +77,7 @@ exports.getRouter = () => {
                     cardUpdateRequest,
                 )
             }
-            logResponse(response)
+            responseHelper.logResponse(response)
 
             res.redirect('/init/done')
         } catch (e) {
