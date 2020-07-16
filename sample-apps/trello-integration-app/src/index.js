@@ -5,7 +5,6 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const ngrok = require('ngrok')
-const redisDbHelper = require('./helpers/redis-db-helper')
 const mysqlDbHelper = require('./helpers/mysql-db-helper')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
@@ -16,7 +15,6 @@ const handleError = require('./helpers/error-handler-helper')
 const PORT = 3000
 
 const releaseConnections = (server) => {
-    redisDbHelper.close()
     mysqlDbHelper.close()
     return server.close(() => {
         console.log('Process terminated')
@@ -71,7 +69,7 @@ app.use((error, req, res, next) => {
             return Promise.delay(100)
                 .then(() => ngrok.connect(PORT))
                 .tap((url) => console.log('Please use:', url))
-                .then(redisDbHelper.saveUrl)
+                .then(mysqlDbHelper.saveUrl)
                 .catch(async (e) => {
                     console.log('Error during app start. ', e)
                     return releaseConnections(server)

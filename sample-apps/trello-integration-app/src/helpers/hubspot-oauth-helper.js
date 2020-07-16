@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const redisDbHelper = require('./redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
@@ -7,9 +7,9 @@ const REFRESH_TOKEN = 'refresh_token'
 
 module.exports = {
     refreshToken: async (hubspotClient) => {
-        let tokensData = await redisDbHelper.getHubspotTokensData()
+        let tokensData = await mysqlDbHelper.getHubspotTokensData()
 
-        if (!tokensData.refreshToken) {
+        if (!tokensData.refresh_token) {
             throw new Error('Cannot find refresh token')
         }
 
@@ -23,27 +23,27 @@ module.exports = {
             undefined,
             CLIENT_ID,
             CLIENT_SECRET,
-            tokensData.refreshToken,
+            tokensData.refresh_token,
         )
 
-        tokensData = { ...result.body, updatedAt: Date.now() }
+        tokensData = result.body
         console.log('Updated tokens', tokensData)
-        await redisDbHelper.saveHubspotTokensData(tokensData)
+        await mysqlDbHelper.updateHubspotTokensData(tokensData)
         hubspotClient.setAccessToken(tokensData.accessToken)
         return hubspotClient
     },
 
     verifyAuthorization: async () => {
-        const tokensData = await redisDbHelper.getHubspotTokensData()
+        const tokensData = await mysqlDbHelper.getHubspotTokensData()
         return !_.isEmpty(tokensData)
     },
 
     verifyTokenExpiration: async () => {
-        const tokensData = await redisDbHelper.getHubspotTokensData()
-        return Date.now() >= tokensData.updatedAt + tokensData.expiresIn * 1000
+        const tokensData = await mysqlDbHelper.getHubspotTokensData()
+        return Date.now() >= new Date(tokensData.updated_at).getTime() + tokensData.expires_in * 1000
     },
     getOauthRedirectUri: async () => {
-        const baseUrl = await redisDbHelper.getUrl()
+        const baseUrl = await mysqlDbHelper.getUrl()
         return `${baseUrl}/oauth/hubspot/callback`
     },
 }

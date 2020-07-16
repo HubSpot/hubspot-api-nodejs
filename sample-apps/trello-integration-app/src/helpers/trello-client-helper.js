@@ -1,5 +1,5 @@
 const Trello = require('trello')
-const redisDbHelper = require('./redis-db-helper')
+const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const TRELLO_API_KEY = process.env.TRELLO_API_KEY
 let trelloClient
 
@@ -9,7 +9,7 @@ module.exports = {
             return trelloClient
         }
 
-        const token = await redisDbHelper.getTrelloToken()
+        const token = await mysqlDbHelper.getTrelloToken()
         trelloClient = new Trello(TRELLO_API_KEY, token)
 
         return trelloClient
