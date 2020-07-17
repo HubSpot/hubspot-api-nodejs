@@ -6,58 +6,31 @@ const mysqlDbHelper = require('../helpers/mysql-db-helper')
 const trelloHelper = require('../helpers/trello-helper')
 const hubspotHelper = require('../helpers/hubspot-helper')
 const responseHelper = require('../helpers/log-response-helper')
+const recoveryHelper = require('../helpers/recovery-helper')
 const handleError = require('../helpers/error-handler-helper')
 const checkAuthorizationMiddleware = require('../middlewares/check-authorization')
 const hubspotSignatureValidatorMiddleware = require('../middlewares/hubspot-signature-validator')
 const DELETE_CARD_ACTION_TYPE = 'deleteCard'
 
-const runRecoveryForDeletedCard = async (cardId) => {
-    await mysqlDbHelper.deleteDealAssociationsForCard(cardId)
-    const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
-
-    if (webhookId) {
-        await trelloHelper.deleteCardWebhookSubscription(webhookId)
-    }
-}
-
-const runRecoveryForDeletedPipeline = async (pipelineId) => {
-    await mysqlDbHelper.removeMappingsForPipeline(pipelineId)
-}
-
-const runRecoveryForDeletedPipelineStage = async (pipelineStageId) => {
-    await mysqlDbHelper.removeMappingsForPipelineStage(pipelineStageId)
-}
-
-const runRecoveryForDeletedDeal = async (dealId, cardId) => {
-    await mysqlDbHelper.deleteDealAssociation(dealId)
-
-    const isCardAssociatedToDeals = await hubspotHelper.checkIfCardAssociatedToDeals(cardId)
-    const webhookId = await mysqlDbHelper.getCardWebhookId(cardId)
-
-    if (!isCardAssociatedToDeals && webhookId) {
-        await trelloHelper.deleteCardWebhookSubscription(webhookId)
-    }
-}
-
 const updateDeals = async (cardId, boardId, pipelineId, pipelineStageId) => {
     if (!(await hubspotHelper.verifyPipeline(pipelineId))) {
-        return runRecoveryForDeletedPipeline(pipelineId)
+        return recoveryHelper.runRecoveryForDeletedPipeline(pipelineId)
     }
 
     if (!(await hubspotHelper.verifyPipelineStage(pipelineId, pipelineStageId))) {
-        return runRecoveryForDeletedPipelineStage(pipelineStageId)
+        return recoveryHelper.runRecoveryForDeletedPipelineStage(pipelineStageId)
     }
 
     const dealAssociations = await mysqlDbHelper.getDealAssociationsForCard(cardId)
 
     if (_.isEmpty(dealAssociations)) {
-        return runRecoveryForDeletedCard(cardId)
+        return recoveryHelper.runRecoveryForDeletedCard(cardId)
     }
 
     return Promise.map(dealAssociations, (dealAssociation) =>
         hubspotHelper.updateDeal(dealAssociation.deal_id, pipelineId, pipelineStageId).catch((e) => {
             if (responseHelper.checkIfNotFoundResponseStatus(e)) {
-                return runRecoveryForDeletedDeal(dealAssociation.deal_id, cardId)
+                return recoveryHelper.runRecoveryForDeletedDeal(dealAssociation.deal_id, cardId)
             }
 
             throw e
@@ -91,7 +64,7 @@ exports.getRouter = () => {
             const newBoardListId = _.get(req, 'body.action.data.listAfter.id')
 
             if (_.isEqual(actionType, DELETE_CARD_ACTION_TYPE)) {
-                await runRecoveryForDeletedCard(cardId)
+                await recoveryHelper.runRecoveryForDeletedCard(cardId)
             }
 
             if (!_.isNil(newBoardListId)) {
@@ -157,7 +130,7 @@ exports.getRouter = () => {
             const dealId = _.get(req, 'query.hs_object_id')
             const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
 
-            await runRecoveryForDeletedDeal(dealId, cardId)
+            await recoveryHelper.runRecoveryForDeletedDeal(dealId, cardId)
 
             res.status(204).end()
         } catch (e) {
@@ -175,7 +148,7 @@ exports.getRouter = () => {
                 const cardId = await mysqlDbHelper.getDealAssociatedCard(dealId)
                 card = await trelloHelper.getCard(cardId)
                 if (_.isNil(card)) {
-                    await runRecoveryForDeletedCard(cardId)
+                    await recoveryHelper.runRecoveryForDeletedCard(cardId)
                     isDealAssociated = false
                 } else {
                     const idMembers = _.get(card, 'idMembers') || []

@@ -24,5 +24,13 @@ block content
             Update extension card
             PATCH /crm/v3/extensions/cards/:appId/:cardId
             crm.extensions.cards.cardsApi.update
+    div(class="row")
+      div(class="column")
+        h3 Trello card webhooks initialization
+        ol
+          li Webhooks that was previously created by this application and match DB would be activated and updated with new "callbackUrl"
+            = ' '
+            a(href="/trello/cards/webhooks") #{baseUrl}/trello/cards/webhooks
+          li Webhooks that exist in db but not found in Trello would be re-created if webhook card still exist
         form(method="post" class="text-center")
           button(type="submit") Continue

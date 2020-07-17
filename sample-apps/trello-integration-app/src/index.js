@@ -8,7 +8,7 @@ const ngrok = require('ngrok')
 const mysqlDbHelper = require('./helpers/mysql-db-helper')
 const checkEnvironmentMiddleware = require('./middlewares/check-environment')
 const oauthController = require('./controllers/oauth-controller')
-const extensionsCardsController = require('./controllers/extensions-cards-controller')
+const extensionInitController = require('./controllers/extension-init-controller')
 const trelloCardsController = require('./controllers/trello-cards-controller')
 const mappingsController = require('./controllers/mappings-controller')
 const handleError = require('./helpers/error-handler-helper')
@@ -54,7 +54,7 @@ app.get('/error', (req, res) => {
 })
 
 app.use('/oauth', oauthController.getRouter())
-app.use('/init', extensionsCardsController.getRouter())
+app.use('/init', extensionInitController.getRouter())
 app.use('/trello/cards', trelloCardsController.getRouter())
 app.use('/mappings', mappingsController.getRouter())
 

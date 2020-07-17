@@ -66,9 +66,21 @@ module.exports = {
         const client = await trelloClientHelper.getClient()
         const baseUrl = await mysqlDbHelper.getUrl()
         const callbackUrl = `${baseUrl}/trello/cards/webhook`
-        console.log(`Getting trello webhook for card ${cardId}`)
+        console.log(`Creating trello webhook for card ${cardId}`)
         const webhook = await client.addWebhook(undefined, callbackUrl, cardId)
         await mysqlDbHelper.saveCardWebhook(webhook.id, cardId)
+
+        return webhook
+    },
+    updateCardWebhookSubscription: async (webhookId) => {
+        const client = await trelloClientHelper.getClient()
+        const baseUrl = await mysqlDbHelper.getUrl()
+        const callbackURL = `${baseUrl}/trello/cards/webhook`
+        const active = true
+
+        console.log(`Updating trello webhook by id ${webhookId}`)
+        const webhook = await client.makeRequest('PUT', `/1/webhooks/${webhookId}`, { callbackURL, active })
+        responseHelper.logResponse(webhook)
 
         return webhook
     },
@@ -91,5 +103,30 @@ module.exports = {
         }
 
         await mysqlDbHelper.deleteCardWebhook(webhookId)
+    },
+    getWebhookSubscriptions: async () => {
+        const client = await trelloClientHelper.getClient()
+        console.log(`Getting trello webhooks`)
+        return client.makeRequest('GET', `/1/tokens/${client.token}/webhooks`)
+    },
+    checkIfCardAssociatedToDeals: async (cardId) => {
+        const associations = await mysqlDbHelper.getDealAssociationsForCard(cardId)
+        return !_.isEmpty(associations)
+    },
+    verifyCard: async (cardId) => {
+        try {
+            const client = await trelloClientHelper.getClient()
+
+            console.log(`Getting Trello card by id ${cardId}`)
+            await client.makeRequest('GET', `/1/cards/${cardId}`)
+
+            return true
+        } catch (e) {
+            if (responseHelper.checkIfNotFoundResponseStatus(e)) {
+                return false
+            }
+
+            throw e
+        }
     },
 }

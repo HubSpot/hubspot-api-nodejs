@@ -195,6 +195,10 @@ module.exports = {
         const result = await run(getCardWebhook)
         return _.get(result, '[0].webhook_id')
     },
+    getCardWebhooks: () => {
+        const getCardWebhooks = `select * from card_webhooks`
+        return run(getCardWebhooks)
+    },
     saveCardWebhook: (webhookId, cardId) => {
         const saveCardWebhook = `insert into card_webhooks (webhook_id, card_id) values ("${webhookId}", "${cardId}")`
         return run(saveCardWebhook)
