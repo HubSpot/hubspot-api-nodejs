@@ -83,7 +83,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
   - default limiter options: increased `maxConcurrent` to 6, added `id` - 'hubspot-client-limiter'
-  - retry functionality to overcome secondly search limit failures
+  - retry functionality to overcome secondly search limit failures 
+  
+## [2.1.1] - 2020-07-17
+  
+### Added
+  
+  - trello-integration-app sample
+
+### Updated
+
+  - fixed initial initialization for webhooks-app
+  - fixed webhook verification for webhooks-app 
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
@@ -92,3 +103,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.1
 [2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.0
+[2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.1
