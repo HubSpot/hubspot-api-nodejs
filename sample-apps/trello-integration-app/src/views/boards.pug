@@ -1,0 +1,12 @@
+extends includes/layout
+block content
+  section(class='container')
+    div(class='row')
+      h3 Select Trello board
+    div(class='row')
+        table
+          tbody
+            each board in trelloBoards
+              tr
+                td
+                  a(href=`/mappings/board/${board.id}`) #{board.name}

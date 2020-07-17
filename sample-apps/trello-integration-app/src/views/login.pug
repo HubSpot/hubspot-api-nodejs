@@ -1,0 +1,30 @@
+extends includes/layout
+block content
+  section(class='container')
+    div(class='row')
+      div(class='column')
+        h3 Authorize via Trello
+        ol
+          li Go to
+            = ' '
+            a(href="https://trello.com/app-key", target="_blank") https://trello.com/app-key
+            = ' page'
+          li Add #{baseUrl} to "Allowed Origins" section
+          li Continue with
+            = ' '
+            a(class='button' href='/oauth/trello') Authorize
+        h4 Status:
+          = ' '
+          if (trelloAuthorized)
+            span(class='green') Authorized
+          else
+            span Not Authorized
+      div(class='column')
+        h3 Authorize via HubSpot
+        a(class='button' href='/oauth/hubspot') Authorize
+        h4 Status:
+          = ' '
+          if (hubspotAuthorized)
+            span(class='green') Authorized
+          else
+            span Not Authorized

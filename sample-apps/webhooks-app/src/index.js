@@ -103,21 +103,27 @@ const setupHubspotClient = async (req, res, next) => {
 }
 
 const setupWebhooksSubscriptions = async (req, res, next) => {
-    if (_.startsWith(req.url, '/error')) return next()
-    if (_.startsWith(req.url, '/login')) return next()
+    try {
+        if (_.startsWith(req.url, '/error')) return next()
+        if (_.startsWith(req.url, '/login')) return next()
+        if (_.startsWith(req.url, '/auth')) return next()
 
-    const urlInfo = await dbHelper.getUrlInfo()
+        const urlInfo = await dbHelper.getUrlInfo()
 
-    if (_.isEmpty(urlInfo)) {
-        return res.redirect('/error?msg=Cannot get url info')
+        if (_.isEmpty(urlInfo)) {
+            return res.redirect('/error?msg=Cannot get url info')
+        }
+
+        if (!urlInfo.webhooks_initialized) {
+            await webhooksHelper.setupWebhooksSubscriptions(urlInfo.url)
+            await dbHelper.setWebhooksInitializedForUrl(urlInfo.url)
+        }
+
+        next()
+    } catch (e) {
+        console.error(e)
+        res.redirect(`/error?msg=${e.message}`)
     }
-
-    if (!urlInfo.webhooks_initialized) {
-        await webhooksHelper.setupWebhooksSubscriptions(urlInfo.url)
-        await dbHelper.setWebhooksInitializedForUrl(urlInfo.url)
-    }
-
-    next()
 }
 
 const app = express()

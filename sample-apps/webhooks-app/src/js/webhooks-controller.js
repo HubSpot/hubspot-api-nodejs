@@ -27,9 +27,13 @@ exports.getRouter = () => {
 }
 
 exports.getWebhookVerification = () => {
-    return (req, res, buf) => {
+    return async (req, res, buf) => {
         const originalUrl = req.originalUrl
+
         if (originalUrl !== '/webhooks') return
+
+        const urlInfo = await dbHelper.getUrlInfo()
+        const webhooksUrl = `${urlInfo.url}${req.originalUrl}`
 
         try {
             const requestBody = buf.toString()
@@ -43,7 +47,7 @@ exports.getWebhookVerification = () => {
                     clientSecret,
                     requestBody,
                     signatureVersion,
-                    originalUrl,
+                    webhooksUrl,
                     req.method,
                 )
             )
