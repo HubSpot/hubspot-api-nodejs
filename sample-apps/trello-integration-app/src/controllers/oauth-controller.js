@@ -6,7 +6,7 @@ const hubspotOauthHelper = require('../helpers/hubspot-oauth-helper')
 const trelloOauthHelper = require('../helpers/trello-oauth-helper')
 const trelloClientHelper = require('../helpers/trello-client-helper')
 const hubspotClientHelper = require('../helpers/hubspot-client-helper')
-const logResponse = require('../helpers/log-response-helper')
+const responseHelper = require('../helpers/log-response-helper')
 const handleError = require('../helpers/error-handler-helper')
 
 const HUBSPOT_CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
@@ -97,7 +97,7 @@ exports.getRouter = () => {
                 HUBSPOT_CLIENT_ID,
                 HUBSPOT_CLIENT_SECRET,
             )
-            logResponse(result)
+            responseHelper.logResponse(result)
             // Set token for the
             // https://www.npmjs.com/package/@hubspot/api-client
             const tokensData = result.body

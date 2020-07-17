@@ -7,6 +7,8 @@ Please see the documentation on [Creating an app in HubSpot](https://developers.
 ### HubSpot Public API links used in this application
 
   - [CRM Custom Cards](https://developers.hubspot.com/docs/api/crm/extensions/custom-cards)
+  - [Deals](https://developers.hubspot.com/docs/api/crm/deals)
+  - [Pipelines](https://developers.hubspot.com/docs/api/crm/pipelines)
 
 ### Setup App
 

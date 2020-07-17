@@ -50,6 +50,12 @@ const DEAL_ASSOCIATIONS_TABLE_INIT = `create table if not exists deal_associatio
   card_id VARCHAR(255) default null
 );`
 
+const CARD_WEBHOOKS_TABLE_INIT = `create table if not exists card_webhooks  (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  webhook_id VARCHAR(255) default null,
+  card_id VARCHAR(255) default null
+);`
+
 const run = (sql) => {
     console.log(sql)
     return _.isNull(connection) ? Promise.reject(new Error('MYSQL DB not initialized!')) : connection.queryAsync(sql)
@@ -78,6 +84,7 @@ module.exports = {
             await connection.queryAsync(URLS_TABLE_INIT)
             await connection.queryAsync(CARDS_TABLE_INIT)
             await connection.queryAsync(DEAL_ASSOCIATIONS_TABLE_INIT)
+            await connection.queryAsync(CARD_WEBHOOKS_TABLE_INIT)
         } catch (e) {
             console.error('DB is not available')
             console.error(e)
@@ -91,6 +98,11 @@ module.exports = {
         const getMappingsSql = `select * from mappings where board_id = "${boardId}" AND pipeline_id = "${pipelineId}" ORDER BY id ASC`
         return run(getMappingsSql)
     },
+    getMappingForBoardList: async (boardListId) => {
+        const getMappingForBoardList = `select * from mappings where board_list_id = "${boardListId}" limit 1`
+        const result = await run(getMappingForBoardList)
+        return result[0]
+    },
     addMapping: (boardId, pipelineId) => {
         const getMappingsSql = `insert into mappings (board_id, pipeline_id) values ("${boardId}", "${pipelineId}")`
         return run(getMappingsSql)
@@ -103,6 +115,14 @@ module.exports = {
     },
     removeMapping: (mappingId) => {
         const removeMappingsSql = `delete from mappings WHERE id = ${_.toNumber(mappingId)}`
+        return run(removeMappingsSql)
+    },
+    removeMappingsForPipeline: (pipelineId) => {
+        const removeMappingsSql = `delete from mappings WHERE pipeline_id = '${pipelineId}'`
+        return run(removeMappingsSql)
+    },
+    removeMappingsForPipelineStage: (pipelineStageId) => {
+        const removeMappingsSql = `delete from mappings WHERE pipeline_stage_id = '${pipelineStageId}'`
         return run(removeMappingsSql)
     },
     getHubspotTokensData: async () => {
@@ -149,10 +169,14 @@ module.exports = {
         const saveCard = `insert into cards (card_id) values ("${cardId}")`
         return run(saveCard)
     },
-    getDealAssociation: async (dealId) => {
+    getDealAssociatedCard: async (dealId) => {
         const getDealAssociation = `select * from deal_associations where deal_id = "${dealId}" limit 1`
         const result = await run(getDealAssociation)
         return _.get(result, '[0].card_id')
+    },
+    getDealAssociationsForCard: (cardId) => {
+        const getDealAssociationsForCard = `select * from deal_associations where card_id = "${cardId}"`
+        return run(getDealAssociationsForCard)
     },
     createDealAssociation: (dealId, cardId) => {
         const saveDealAssociation = `insert into deal_associations (deal_id, card_id) values ("${dealId}", "${cardId}")`
@@ -161,5 +185,26 @@ module.exports = {
     deleteDealAssociation: (dealId) => {
         const deleteDealAssociation = `delete from deal_associations WHERE deal_id = ${dealId}`
         return run(deleteDealAssociation)
+    },
+    deleteDealAssociationsForCard: (cardId) => {
+        const deleteDealAssociations = `delete from deal_associations WHERE card_id = '${cardId}'`
+        return run(deleteDealAssociations)
+    },
+    getCardWebhookId: async (cardId) => {
+        const getCardWebhook = `select * from card_webhooks where card_id = "${cardId}" limit 1`
+        const result = await run(getCardWebhook)
+        return _.get(result, '[0].webhook_id')
+    },
+    getCardWebhooks: () => {
+        const getCardWebhooks = `select * from card_webhooks`
+        return run(getCardWebhooks)
+    },
+    saveCardWebhook: (webhookId, cardId) => {
+        const saveCardWebhook = `insert into card_webhooks (webhook_id, card_id) values ("${webhookId}", "${cardId}")`
+        return run(saveCardWebhook)
+    },
+    deleteCardWebhook: (webhookId) => {
+        const deleteCardWebhook = `delete from card_webhooks WHERE webhook_id = '${webhookId}'`
+        return run(deleteCardWebhook)
     },
 }
