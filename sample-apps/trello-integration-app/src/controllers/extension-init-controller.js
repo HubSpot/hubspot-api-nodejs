@@ -10,20 +10,15 @@ const hubspotHelper = require('../helpers/hubspot-helper')
 const trelloHelper = require('../helpers/trello-helper')
 const recoveryHelper = require('../helpers/recovery-helper')
 
+const webhooksComparator = (webhookFromDb, webhookFromTrello) =>
+    _.isEqual(webhookFromDb.webhook_id, webhookFromTrello.id)
+
 const getWebhooksToProcess = async () => {
     const webhooksFromDb = await mysqlDbHelper.getCardWebhooks()
     const webhooksFromTrello = await trelloHelper.getWebhookSubscriptions()
 
-    const webhooksThatShouldBeCreated = _.differenceWith(
-        webhooksFromDb,
-        webhooksFromTrello,
-        (webhookFromDb, webhookFromTrello) => _.isEqual(webhookFromDb.webhook_id, webhookFromTrello.id),
-    )
-    const webhooksThatShouldBeUpdated = _.intersectionWith(
-        webhooksFromDb,
-        webhooksFromTrello,
-        (webhookFromDb, webhookFromTrello) => _.isEqual(webhookFromDb.webhook_id, webhookFromTrello.id),
-    )
+    const webhooksThatShouldBeCreated = _.differenceWith(webhooksFromDb, webhooksFromTrello, webhooksComparator)
+    const webhooksThatShouldBeUpdated = _.intersectionWith(webhooksFromDb, webhooksFromTrello, webhooksComparator)
 
     return { webhooksThatShouldBeCreated, webhooksThatShouldBeUpdated }
 }
