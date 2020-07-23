@@ -146,7 +146,7 @@ const companyObj = {
 const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
-await hubspotClient.crm.companies.associationsApi.createAssociation(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
+await hubspotClient.crm.companies.associationsApi.create(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
 ```
 
 ### {EXAMPLE} Import Contacts:
@@ -228,6 +228,44 @@ const importFileConfig = {
 }
 const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileConfig)
 
+console.log(JSON.stringify(result.body))
+```
+
+### {EXAMPLE} Search Contacts:
+
+Only 3 FilterGroups with max 3 Filters are supported.
+
+Despite 'sorts' is an array, however, currently, only one sort parameter is supported.
+
+In JS 'sort' it's possible to set as:
+
+1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: 'hs_object_id'
+2. < stringified sort object > - returned results will be sorted by provided property name and sort direction. e.g: JSON.stringify({ propertyName: 'hs_object_id', direction: 'ASCENDING' }) or JSON.stringify({ propertyName: 'hs_object_id', direction: 'DESCENDING' })
+3. < sort object > - returned results will be sorted by provided property name and sort direction. e.g: { propertyName: 'hs_object_id', direction: 'ASCENDING' } or { propertyName: 'hs_object_id', direction: 'DESCENDING' }
+
+In TS works only the first two options.
+
+`after` for initial search should be set as 0
+
+```javascript
+const filter = { propertyName: 'createdate', operator: 'GTE', value: Date.now() - 30 * 60000 }
+const filterGroup = { filters: [filter] }
+const sort = JSON.stringify({ propertyName: 'createdate', direction: 'DESCENDING'})
+const query = 'test'
+const properties = ['createdate', 'firstname', 'lastname']
+const limit = 100
+const after = 0
+
+const publicObjectSearchRequest = {
+    filterGroups: [filterGroup],
+    sorts: [sort],
+    query,
+    properties,
+    limit,
+    after
+  };
+
+const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
 console.log(JSON.stringify(result.body))
 ```
 
