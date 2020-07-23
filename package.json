@@ -24,7 +24,7 @@
     "@types/request": "^2.48.4",
     "bluebird": "^3.7.2",
     "bottleneck": "^2.19.5",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "request": "^2.88.0"
   },
   "devDependencies": {
