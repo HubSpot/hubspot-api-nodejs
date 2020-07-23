@@ -531,7 +531,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     companiesModels.SimplePublicObject,
                     companiesModels.CollectionResponseSimplePublicObject
-                >(this._companiesBasicApi.getPage),
+                >(this._companiesBasicApi.getPage.bind(this._companiesBasicApi)),
             },
             contacts: {
                 associationsApi: this._contactsAssociationsApi,
@@ -541,7 +541,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     contactsModels.SimplePublicObject,
                     contactsModels.CollectionResponseSimplePublicObject
-                >(this._contactsBasicApi.getPage),
+                >(this._contactsBasicApi.getPage.bind(this._contactsBasicApi)),
             },
             deals: {
                 associationsApi: this._dealsAssociationsApi,
@@ -551,7 +551,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     dealsModels.SimplePublicObject,
                     dealsModels.CollectionResponseSimplePublicObject
-                >(this._dealsBasicApi.getPage),
+                >(this._dealsBasicApi.getPage.bind(this._dealsBasicApi)),
             },
             extensions: {
                 cards: {
@@ -570,7 +570,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     lineItemsModels.SimplePublicObject,
                     lineItemsModels.CollectionResponseSimplePublicObject
-                >(this._lineItemsBasicApi.getPage),
+                >(this._lineItemsBasicApi.getPage.bind(this._lineItemsBasicApi)),
             },
             owners: {
                 defaultApi: this._ownersDefaultApi,
@@ -587,7 +587,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     productsModels.SimplePublicObject,
                     productsModels.CollectionResponseSimplePublicObject
-                >(this._productsBasicApi.getPage),
+                >(this._productsBasicApi.getPage.bind(this._productsBasicApi)),
             },
             properties: {
                 batchApi: this._propertiesBatchApi,
@@ -602,7 +602,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     quotesModels.SimplePublicObject,
                     quotesModels.CollectionResponseSimplePublicObject
-                >(this._quotesBasicApi.getPage),
+                >(this._quotesBasicApi.getPage.bind(this._quotesBasicApi)),
             },
             tickets: {
                 associationsApi: this._ticketsAssociationsApi,
@@ -612,7 +612,7 @@ export class Client {
                 getAll: this._retrieveGetAllFunction<
                     ticketsModels.SimplePublicObject,
                     ticketsModels.CollectionResponseSimplePublicObject
-                >(this._ticketsBasicApi.getPage),
+                >(this._ticketsBasicApi.getPage.bind(this._ticketsBasicApi)),
             },
             timeline: {
                 eventsApi: this._eventsApi,

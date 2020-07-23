@@ -85,16 +85,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - default limiter options: increased `maxConcurrent` to 6, added `id` - 'hubspot-client-limiter'
   - retry functionality to overcome secondly search limit failures 
   
-## [2.1.1] - 2020-07-17
+## [2.1.1] - 2020-07-24
   
 ### Added
   
   - trello-integration-app sample
+  - 'Search Contacts' example to README.MD
 
-### Updated
+### Fixed
 
   - fixed initial initialization for webhooks-app
-  - fixed webhook verification for webhooks-app 
+  - fixed webhook verification for webhooks-app
+  - `getAll` methods for CRM objects (for clients with disabled limiter)
+  - 'Create Contact, Company and associate created objects' example in README.md
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
