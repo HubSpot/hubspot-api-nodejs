@@ -4,6 +4,7 @@ export * from './batchInputSimplePublicObjectId';
 export * from './batchInputSimplePublicObjectInput';
 export * from './batchReadInputSimplePublicObjectId';
 export * from './batchResponseSimplePublicObject';
+export * from './batchResponseSimplePublicObjectWithErrors';
 export * from './collectionResponseAssociatedId';
 export * from './collectionResponseSimplePublicObject';
 export * from './collectionResponseWithTotalSimplePublicObject';
@@ -27,6 +28,7 @@ import { BatchInputSimplePublicObjectId } from './batchInputSimplePublicObjectId
 import { BatchInputSimplePublicObjectInput } from './batchInputSimplePublicObjectInput';
 import { BatchReadInputSimplePublicObjectId } from './batchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from './batchResponseSimplePublicObject';
+import { BatchResponseSimplePublicObjectWithErrors } from './batchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObject } from './collectionResponseSimplePublicObject';
 import { CollectionResponseWithTotalSimplePublicObject } from './collectionResponseWithTotalSimplePublicObject';
@@ -56,6 +58,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "BatchResponseSimplePublicObject.StatusEnum": BatchResponseSimplePublicObject.StatusEnum,
+        "BatchResponseSimplePublicObjectWithErrors.StatusEnum": BatchResponseSimplePublicObjectWithErrors.StatusEnum,
         "Filter.OperatorEnum": Filter.OperatorEnum,
 }
 
@@ -66,6 +69,7 @@ let typeMap: {[index: string]: any} = {
     "BatchInputSimplePublicObjectInput": BatchInputSimplePublicObjectInput,
     "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
+    "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObject": CollectionResponseSimplePublicObject,
     "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,

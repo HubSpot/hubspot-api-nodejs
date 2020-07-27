@@ -40,7 +40,6 @@ export class SearchApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -86,10 +85,6 @@ export class SearchApi {
         (this.authentications as any)[SearchApiApiKeys[key]].apiKey = value;
     }
 
-    set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
-    }
-
     public addInterceptor(interceptor: Interceptor) {
         this.interceptors.push(interceptor);
     }
@@ -99,7 +94,7 @@ export class SearchApi {
      * @summary Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
-    public async doSearch (publicObjectSearchRequest?: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -111,6 +106,11 @@ export class SearchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'publicObjectSearchRequest' is not null or undefined
+        if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {
+            throw new Error('Required parameter publicObjectSearchRequest was null or undefined when calling doSearch.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -129,9 +129,6 @@ export class SearchApi {
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

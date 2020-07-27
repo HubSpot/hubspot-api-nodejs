@@ -191,7 +191,7 @@ export class AssociationsApi {
     }
     /**
      * 
-     * @summary Associate two line items
+     * @summary Associate a line item with another object
      * @param lineItemId 
      * @param toObjectType 
      * @param toObjectId 

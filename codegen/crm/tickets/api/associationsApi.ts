@@ -191,7 +191,7 @@ export class AssociationsApi {
     }
     /**
      * 
-     * @summary Associate two tickets
+     * @summary Associate a ticket with another object
      * @param ticketId 
      * @param toObjectType 
      * @param toObjectId 

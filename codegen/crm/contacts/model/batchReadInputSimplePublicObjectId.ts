@@ -14,13 +14,18 @@ import { RequestFile } from '../api';
 import { SimplePublicObjectId } from './simplePublicObjectId';
 
 export class BatchReadInputSimplePublicObjectId {
+    'inputs': Array<SimplePublicObjectId>;
     'properties': Array<string>;
     'idProperty'?: string;
-    'inputs': Array<SimplePublicObjectId>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<SimplePublicObjectId>"
+        },
         {
             "name": "properties",
             "baseName": "properties",
@@ -30,11 +35,6 @@ export class BatchReadInputSimplePublicObjectId {
             "name": "idProperty",
             "baseName": "idProperty",
             "type": "string"
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<SimplePublicObjectId>"
         }    ];
 
     static getAttributeTypeMap() {

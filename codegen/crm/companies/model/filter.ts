@@ -13,13 +13,18 @@
 import { RequestFile } from '../api';
 
 export class Filter {
+    'value'?: string;
     'propertyName': string;
     'operator': Filter.OperatorEnum;
-    'value'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "string"
+        },
         {
             "name": "propertyName",
             "baseName": "propertyName",
@@ -29,11 +34,6 @@ export class Filter {
             "name": "operator",
             "baseName": "operator",
             "type": "Filter.OperatorEnum"
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {
@@ -49,9 +49,6 @@ export namespace Filter {
         LTE = <any> 'LTE',
         GT = <any> 'GT',
         GTE = <any> 'GTE',
-        BETWEEN = <any> 'BETWEEN',
-        IN = <any> 'IN',
-        NOTIN = <any> 'NOT_IN',
         HASPROPERTY = <any> 'HAS_PROPERTY',
         NOTHASPROPERTY = <any> 'NOT_HAS_PROPERTY',
         CONTAINSTOKEN = <any> 'CONTAINS_TOKEN',

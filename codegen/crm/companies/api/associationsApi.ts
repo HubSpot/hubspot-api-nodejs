@@ -191,7 +191,7 @@ export class AssociationsApi {
     }
     /**
      * 
-     * @summary Associate two companies
+     * @summary Associate a company with another object
      * @param companyId 
      * @param toObjectType 
      * @param toObjectId 
