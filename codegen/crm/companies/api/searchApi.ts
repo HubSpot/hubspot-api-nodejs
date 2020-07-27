@@ -99,7 +99,7 @@ export class SearchApi {
      * @summary Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
-    public async doSearch (publicObjectSearchRequest?: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/companies/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -111,6 +111,11 @@ export class SearchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'publicObjectSearchRequest' is not null or undefined
+        if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {
+            throw new Error('Required parameter publicObjectSearchRequest was null or undefined when calling doSearch.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 

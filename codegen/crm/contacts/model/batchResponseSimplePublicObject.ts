@@ -14,36 +14,25 @@ import { RequestFile } from '../api';
 import { SimplePublicObject } from './simplePublicObject';
 
 export class BatchResponseSimplePublicObject {
-    'results': Array<SimplePublicObject>;
-    'numErrors'?: number;
-    'errors'?: Array<Error>;
     'status': BatchResponseSimplePublicObject.StatusEnum;
+    'results': Array<SimplePublicObject>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
+    'links'?: { [key: string]: string; };
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<SimplePublicObject>"
-        },
-        {
-            "name": "numErrors",
-            "baseName": "numErrors",
-            "type": "number"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<Error>"
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "BatchResponseSimplePublicObject.StatusEnum"
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicObject>"
         },
         {
             "name": "requestedAt",
@@ -59,6 +48,11 @@ export class BatchResponseSimplePublicObject {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }"
         }    ];
 
     static getAttributeTypeMap() {

@@ -174,7 +174,7 @@ export class BasicApi {
      * @summary Create
      * @param simplePublicObjectInput 
      */
-    public async create (simplePublicObjectInput?: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -186,6 +186,11 @@ export class BasicApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'simplePublicObjectInput' is not null or undefined
+        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
+            throw new Error('Required parameter simplePublicObjectInput was null or undefined when calling create.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -433,7 +438,7 @@ export class BasicApi {
      * @param ticketId 
      * @param simplePublicObjectInput 
      */
-    public async update (ticketId: string, simplePublicObjectInput?: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async update (ticketId: string, simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/{ticketId}'
             .replace('{' + 'ticketId' + '}', encodeURIComponent(String(ticketId)));
         let localVarQueryParameters: any = {};
@@ -450,6 +455,11 @@ export class BasicApi {
         // verify required parameter 'ticketId' is not null or undefined
         if (ticketId === null || ticketId === undefined) {
             throw new Error('Required parameter ticketId was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'simplePublicObjectInput' is not null or undefined
+        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
+            throw new Error('Required parameter simplePublicObjectInput was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

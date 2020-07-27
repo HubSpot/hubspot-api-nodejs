@@ -14,17 +14,23 @@ import { RequestFile } from '../api';
 import { Property } from './property';
 
 export class BatchResponseProperty {
+    'status': BatchResponseProperty.StatusEnum;
     'results': Array<Property>;
     'numErrors'?: number;
-    'errors': Array<Error>;
-    'status': BatchResponseProperty.StatusEnum;
+    'errors'?: Array<Error>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
+    'links'?: { [key: string]: string; };
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseProperty.StatusEnum"
+        },
         {
             "name": "results",
             "baseName": "results",
@@ -41,11 +47,6 @@ export class BatchResponseProperty {
             "type": "Array<Error>"
         },
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseProperty.StatusEnum"
-        },
-        {
             "name": "requestedAt",
             "baseName": "requestedAt",
             "type": "Date"
@@ -59,6 +60,11 @@ export class BatchResponseProperty {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }"
         }    ];
 
     static getAttributeTypeMap() {

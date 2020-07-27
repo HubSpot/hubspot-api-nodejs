@@ -14,21 +14,21 @@ import { RequestFile } from '../api';
 import { PropertyName } from './propertyName';
 
 export class BatchReadInputPropertyName {
-    'archived': boolean;
     'inputs': Array<PropertyName>;
+    'archived': boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean"
-        },
-        {
             "name": "inputs",
             "baseName": "inputs",
             "type": "Array<PropertyName>"
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {

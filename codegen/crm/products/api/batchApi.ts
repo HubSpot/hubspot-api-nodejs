@@ -19,6 +19,7 @@ import { BatchInputSimplePublicObjectId } from '../model/batchInputSimplePublicO
 import { BatchInputSimplePublicObjectInput } from '../model/batchInputSimplePublicObjectInput';
 import { BatchReadInputSimplePublicObjectId } from '../model/batchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../model/batchResponseSimplePublicObject';
+import { BatchResponseSimplePublicObjectWithErrors } from '../model/batchResponseSimplePublicObjectWithErrors';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -102,7 +103,7 @@ export class BatchApi {
      * @summary Archive a batch of products by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public async archive (batchInputSimplePublicObjectId?: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/batch/archive';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -114,6 +115,11 @@ export class BatchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'batchInputSimplePublicObjectId' is not null or undefined
+        if (batchInputSimplePublicObjectId === null || batchInputSimplePublicObjectId === undefined) {
+            throw new Error('Required parameter batchInputSimplePublicObjectId was null or undefined when calling archive.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -171,7 +177,7 @@ export class BatchApi {
      * @summary Create a batch of products
      * @param batchInputSimplePublicObjectInput 
      */
-    public async create (batchInputSimplePublicObjectInput?: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async create (batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -183,6 +189,11 @@ export class BatchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'batchInputSimplePublicObjectInput' is not null or undefined
+        if (batchInputSimplePublicObjectInput === null || batchInputSimplePublicObjectInput === undefined) {
+            throw new Error('Required parameter batchInputSimplePublicObjectInput was null or undefined when calling create.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -239,10 +250,10 @@ export class BatchApi {
     /**
      * Read a list of products given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * @summary Read a batch of products by internal ID, or unique property values
-     * @param archived Whether to return only results that have been archived.
      * @param batchReadInputSimplePublicObjectId 
+     * @param archived Whether to return only results that have been archived.
      */
-    public async read (archived?: boolean, batchReadInputSimplePublicObjectId?: BatchReadInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -254,6 +265,11 @@ export class BatchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'batchReadInputSimplePublicObjectId' is not null or undefined
+        if (batchReadInputSimplePublicObjectId === null || batchReadInputSimplePublicObjectId === undefined) {
+            throw new Error('Required parameter batchReadInputSimplePublicObjectId was null or undefined when calling read.');
+        }
 
         if (archived !== undefined) {
             localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
@@ -316,7 +332,7 @@ export class BatchApi {
      * @summary Update a batch of products
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public async update (batchInputSimplePublicObjectBatchInput?: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async update (batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/batch/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -328,6 +344,11 @@ export class BatchApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        // verify required parameter 'batchInputSimplePublicObjectBatchInput' is not null or undefined
+        if (batchInputSimplePublicObjectBatchInput === null || batchInputSimplePublicObjectBatchInput === undefined) {
+            throw new Error('Required parameter batchInputSimplePublicObjectBatchInput was null or undefined when calling update.');
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 

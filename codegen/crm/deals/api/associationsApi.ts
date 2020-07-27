@@ -191,7 +191,7 @@ export class AssociationsApi {
     }
     /**
      * 
-     * @summary Associate two deals
+     * @summary Associate a deal with another object
      * @param dealId 
      * @param toObjectType 
      * @param toObjectId 

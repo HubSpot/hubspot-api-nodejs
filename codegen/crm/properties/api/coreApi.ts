@@ -183,7 +183,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyCreate 
      */
-    public async create (objectType: string, propertyCreate?: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public async create (objectType: string, propertyCreate: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -200,6 +200,11 @@ export class CoreApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling create.');
+        }
+
+        // verify required parameter 'propertyCreate' is not null or undefined
+        if (propertyCreate === null || propertyCreate === undefined) {
+            throw new Error('Required parameter propertyCreate was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -428,7 +433,7 @@ export class CoreApi {
      * @param propertyName 
      * @param propertyUpdate 
      */
-    public async update (objectType: string, propertyName: string, propertyUpdate?: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public async update (objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -451,6 +456,11 @@ export class CoreApi {
         // verify required parameter 'propertyName' is not null or undefined
         if (propertyName === null || propertyName === undefined) {
             throw new Error('Required parameter propertyName was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'propertyUpdate' is not null or undefined
+        if (propertyUpdate === null || propertyUpdate === undefined) {
+            throw new Error('Required parameter propertyUpdate was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

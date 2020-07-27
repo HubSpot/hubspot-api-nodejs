@@ -191,7 +191,7 @@ export class AssociationsApi {
     }
     /**
      * 
-     * @summary Associate two contacts
+     * @summary Associate a contact with another object
      * @param contactId 
      * @param toObjectType 
      * @param toObjectId 

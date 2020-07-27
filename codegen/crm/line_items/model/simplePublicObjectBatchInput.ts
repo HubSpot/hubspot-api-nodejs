@@ -13,21 +13,21 @@
 import { RequestFile } from '../api';
 
 export class SimplePublicObjectBatchInput {
-    'id': string;
     'properties': { [key: string]: string; };
+    'id': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

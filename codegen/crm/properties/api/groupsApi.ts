@@ -183,7 +183,7 @@ export class GroupsApi {
      * @param objectType 
      * @param propertyGroupCreate 
      */
-    public async create (objectType: string, propertyGroupCreate?: PropertyGroupCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
+    public async create (objectType: string, propertyGroupCreate: PropertyGroupCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -200,6 +200,11 @@ export class GroupsApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling create.');
+        }
+
+        // verify required parameter 'propertyGroupCreate' is not null or undefined
+        if (propertyGroupCreate === null || propertyGroupCreate === undefined) {
+            throw new Error('Required parameter propertyGroupCreate was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -418,7 +423,7 @@ export class GroupsApi {
      * @param groupName 
      * @param propertyGroupUpdate 
      */
-    public async update (objectType: string, groupName: string, propertyGroupUpdate?: PropertyGroupUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
+    public async update (objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups/{groupName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'groupName' + '}', encodeURIComponent(String(groupName)));
@@ -441,6 +446,11 @@ export class GroupsApi {
         // verify required parameter 'groupName' is not null or undefined
         if (groupName === null || groupName === undefined) {
             throw new Error('Required parameter groupName was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'propertyGroupUpdate' is not null or undefined
+        if (propertyGroupUpdate === null || propertyGroupUpdate === undefined) {
+            throw new Error('Required parameter propertyGroupUpdate was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

@@ -102,7 +102,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyName 
      */
-    public async archive (objectType: string, batchInputPropertyName?: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, batchInputPropertyName: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/archive'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -119,6 +119,11 @@ export class BatchApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling archive.');
+        }
+
+        // verify required parameter 'batchInputPropertyName' is not null or undefined
+        if (batchInputPropertyName === null || batchInputPropertyName === undefined) {
+            throw new Error('Required parameter batchInputPropertyName was null or undefined when calling archive.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -178,7 +183,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-    public async create (objectType: string, batchInputPropertyCreate?: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+    public async create (objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/create'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -195,6 +200,11 @@ export class BatchApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling create.');
+        }
+
+        // verify required parameter 'batchInputPropertyCreate' is not null or undefined
+        if (batchInputPropertyCreate === null || batchInputPropertyCreate === undefined) {
+            throw new Error('Required parameter batchInputPropertyCreate was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -255,7 +265,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-    public async read (objectType: string, batchReadInputPropertyName?: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+    public async read (objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/read'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -272,6 +282,11 @@ export class BatchApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling read.');
+        }
+
+        // verify required parameter 'batchReadInputPropertyName' is not null or undefined
+        if (batchReadInputPropertyName === null || batchReadInputPropertyName === undefined) {
+            throw new Error('Required parameter batchReadInputPropertyName was null or undefined when calling read.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

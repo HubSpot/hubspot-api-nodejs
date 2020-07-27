@@ -46,6 +46,10 @@ export class PropertyUpdate {
     * If true, the property won\'t be visible and can\'t be used in HubSpot.
     */
     'hidden'?: boolean;
+    /**
+    * Whether or not the property can be used in a HubSpot form.
+    */
+    'formField'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -88,6 +92,11 @@ export class PropertyUpdate {
         {
             "name": "hidden",
             "baseName": "hidden",
+            "type": "boolean"
+        },
+        {
+            "name": "formField",
+            "baseName": "formField",
             "type": "boolean"
         }    ];
 
