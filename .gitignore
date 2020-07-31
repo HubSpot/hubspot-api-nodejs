@@ -4,4 +4,5 @@ test-results.xml
 .env
 .env-test
 /test
-/sample-apps/companies-app/src/node_modules/
+redis-data/
+db/
