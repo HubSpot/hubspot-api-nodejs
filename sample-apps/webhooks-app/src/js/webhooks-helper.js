@@ -1,10 +1,8 @@
 const _ = require('lodash')
 const Promise = require('bluebird')
 const utils = require('./utils')
-const hubspot = require('../../../..')
 
 const APPLICATION_ID = process.env.HUBSPOT_APPLICATION_ID
-const DEVELOPER_API_KEY = process.env.HUBSPOT_DEVELOPER_API_KEY
 const WEBHOOKS_SUBSCRIPTIONS = [
     {
         eventType: 'contact.propertyChange',
@@ -92,15 +90,13 @@ const createNotExistedWebhooksSubscriptions = (allWebhooksSubscriptions) => {
     return Promise.map(webhooksSubscriptionsToCreate, createWebhooksSubscription)
 }
 
-const setupClient = () => {
-    if (_.isNil(hubspotClient)) {
-        hubspotClient = new hubspot.Client({ apiKey: DEVELOPER_API_KEY })
-    }
+const setupClient = (client) => {
+    hubspotClient = client
 }
 
-exports.setupWebhooksSubscriptions = async (url) => {
+exports.setupWebhooksSubscriptions = async (url, hubspotClient) => {
     console.log('Started Webhooks Subscriptions setup')
-    setupClient()
+    setupClient(hubspotClient)
     const allWebhooksSubscriptions = await getAllWebhooksSubscriptions()
     const webhooksSubscriptionsToDeActivate = getWebhooksSubscriptionsToDeActivate(allWebhooksSubscriptions)
     await updateAllWebhooksSubscriptions(webhooksSubscriptionsToDeActivate, false)
