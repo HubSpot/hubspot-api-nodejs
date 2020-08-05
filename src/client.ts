@@ -706,7 +706,7 @@ export class Client {
         })
     }
 
-    public setAuth(options: { apiKey?: string; developerApiKey?: string; accessToken?: string; } = {}) {
+    public setAuth(options: { apiKey?: string; developerApiKey?: string; accessToken?: string } = {}) {
         if (options.apiKey) {
             this.setApiKey(options.apiKey)
         }
