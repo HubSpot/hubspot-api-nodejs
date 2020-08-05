@@ -99,6 +99,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `getAll` methods for CRM objects (for clients with disabled limiter)
   - 'Create Contact, Company and associate created objects' example in README.md
   
+## [3.0.0] - 2020-08-05
+  
+### Added
+  
+  - differentiation between Developer API key and API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.  
+
+### Updated
+
+  - SubscriptionPatchRequest model (replace `enabled` with `active` property)
+  - removed optional attribute for some parameters in crm clients methods
+  - updated Filter model for crm objects search clients
+  
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
@@ -107,3 +119,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.1
 [2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.0
 [2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.1
+[3.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.0.0
