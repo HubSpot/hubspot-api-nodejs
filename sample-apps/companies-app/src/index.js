@@ -327,7 +327,7 @@ app.get('/companies/:id', checkAuthorization, async (req, res) => {
         // POST /crm/v3/objects/contacts/batch/read
         // https://developers.hubspot.com/docs/api/crm/contacts
         console.log(`Calling crm.contacts.batchApi.read API method. Retrieve list of contacts.`)
-        const contactsReadBatchResponse = await hubspotClient.crm.contacts.batchApi.read(false, contactsReadBatchBody)
+        const contactsReadBatchResponse = await hubspotClient.crm.contacts.batchApi.read(contactsReadBatchBody)
         logResponse(contactsReadBatchResponse)
 
         const contacts = prepareAllContactsForView(contactsReadBatchResponse.body.results)
