@@ -28,7 +28,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum DefaultApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class DefaultApi {
@@ -38,7 +38,7 @@ export class DefaultApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -159,8 +159,8 @@ export class DefaultApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -264,8 +264,8 @@ export class DefaultApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

@@ -16,6 +16,7 @@ import http = require('http');
 /* tslint:disable:no-unused-locals */
 import { BatchInputSubscriptionBatchUpdateRequest } from '../model/batchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from '../model/batchResponseSubscriptionResponse';
+import { BatchResponseSubscriptionResponseWithErrors } from '../model/batchResponseSubscriptionResponseWithErrors';
 import { SubscriptionCreateRequest } from '../model/subscriptionCreateRequest';
 import { SubscriptionListResponse } from '../model/subscriptionListResponse';
 import { SubscriptionPatchRequest } from '../model/subscriptionPatchRequest';
@@ -33,7 +34,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum SubscriptionsApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class SubscriptionsApi {
@@ -43,7 +44,7 @@ export class SubscriptionsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -138,8 +139,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -216,8 +217,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -288,8 +289,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -367,8 +368,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -408,7 +409,7 @@ export class SubscriptionsApi {
      * @param appId The ID of the target app.
      * @param subscriptionPatchRequest Updated details for the subscription.
      */
-    public async update (subscriptionId: number, appId: number, subscriptionPatchRequest?: SubscriptionPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
+    public async update (subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -433,6 +434,11 @@ export class SubscriptionsApi {
             throw new Error('Required parameter appId was null or undefined when calling update.');
         }
 
+        // verify required parameter 'subscriptionPatchRequest' is not null or undefined
+        if (subscriptionPatchRequest === null || subscriptionPatchRequest === undefined) {
+            throw new Error('Required parameter subscriptionPatchRequest was null or undefined when calling update.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -448,8 +454,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -483,10 +489,10 @@ export class SubscriptionsApi {
         });
     }
     /**
-     * Activates or deactivates specified subscriptions for the given app.
+     * Activates or deactivates target app subscriptions.
      * @summary Batch update subscriptions
-     * @param appId The ID of the target app.
-     * @param batchInputSubscriptionBatchUpdateRequest Collection of updated details for the specified subscription.
+     * @param appId The app ID of the target app.
+     * @param batchInputSubscriptionBatchUpdateRequest Updated details for the specified subscriptions.
      */
     public async updateBatch (appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/batch/update'
@@ -527,8 +533,8 @@ export class SubscriptionsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

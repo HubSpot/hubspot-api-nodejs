@@ -17,6 +17,18 @@ import { RequestFile } from '../api';
 */
 export class SubscriptionResponse {
     /**
+    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+    */
+    'eventType': SubscriptionResponse.EventTypeEnum;
+    /**
+    * The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
+    */
+    'propertyName'?: string;
+    /**
+    * Determines if the subscription is active or paused.
+    */
+    'active': boolean;
+    /**
     * The unique ID of the subscription.
     */
     'id': string;
@@ -28,34 +40,10 @@ export class SubscriptionResponse {
     * When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
     */
     'updatedAt'?: Date;
-    /**
-    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-    */
-    'eventType': SubscriptionResponse.EventTypeEnum;
-    /**
-    * The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
-    */
-    'propertyName'?: string;
-    'active'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date"
-        },
         {
             "name": "eventType",
             "baseName": "eventType",
@@ -70,6 +58,21 @@ export class SubscriptionResponse {
             "name": "active",
             "baseName": "active",
             "type": "boolean"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {

@@ -16,7 +16,6 @@ import { RequestFile } from '../api';
 * New webhook settings for an app.
 */
 export class SubscriptionCreateRequest {
-    'active'?: boolean;
     /**
     * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
     */
@@ -25,15 +24,14 @@ export class SubscriptionCreateRequest {
     * The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
     */
     'propertyName'?: string;
+    /**
+    * Determines if the subscription is active or paused. Defaults to false.
+    */
+    'active'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "active",
-            "baseName": "active",
-            "type": "boolean"
-        },
         {
             "name": "eventType",
             "baseName": "eventType",
@@ -43,6 +41,11 @@ export class SubscriptionCreateRequest {
             "name": "propertyName",
             "baseName": "propertyName",
             "type": "string"
+        },
+        {
+            "name": "active",
+            "baseName": "active",
+            "type": "boolean"
         }    ];
 
     static getAttributeTypeMap() {
