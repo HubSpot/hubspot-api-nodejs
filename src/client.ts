@@ -327,7 +327,7 @@ export class Client {
         }
         urlRedirects: {
             redirectsApi: RedirectsApi
-        },
+        }
         sireSearch: {
             defaultApi: SiteSearchDefaultApi
         }
@@ -383,9 +383,11 @@ export class Client {
     protected _domainsApi: DomainsApi
     protected _performanceDefaultApi: PerformanceDefaultApi
     protected _redirectsApi: RedirectsApi
-    protected _apiClientsWithAuth: any[]
+    protected _apiClientsWithApiKeyAuth: any[]
+    protected _apiClientsWithDevApiKeyAuth: any[]
     protected _apiClients: any[]
     protected _apiKey: string | undefined
+    protected _developerApiKey: string | undefined
     protected _basePath = 'https://api.hubapi.com'
     protected _accessToken: string | undefined
     protected _defaultHeaders: object | undefined
@@ -407,6 +409,7 @@ export class Client {
             accessToken?: string
             basePath?: string
             defaultHeaders?: object
+            developerApiKey?: string
             useLimiter?: boolean
             limiterOptions?: LimiterOptions
             numberOfApiCallRetries?: NumberOfRetries
@@ -463,7 +466,7 @@ export class Client {
         this._performanceDefaultApi = new PerformanceDefaultApi()
         this._redirectsApi = new RedirectsApi()
         this._siteSearchDefaultApi = new SiteSearchDefaultApi()
-        this._apiClientsWithAuth = [
+        this._apiClientsWithApiKeyAuth = [
             this._associationsBatchApi,
             this._typesApi,
             this._companiesAssociationsApi,
@@ -478,7 +481,6 @@ export class Client {
             this._dealsBasicApi,
             this._dealsBatchApi,
             this._dealsSearchApi,
-            this._cardsApi,
             this._importsCoreApi,
             this._lineItemsAssociationsApi,
             this._lineItemsBasicApi,
@@ -505,16 +507,23 @@ export class Client {
             this._eventsApi,
             this._templatesApi,
             this._tokensApi,
-            this._settingsApi,
-            this._subscriptionsApi,
-            this._auditLogsDefaultApi,
             this._domainsApi,
-            this._performanceDefaultApi,
             this._redirectsApi,
             this._siteSearchDefaultApi,
         ]
-        this._apiClients = this._apiClientsWithAuth.slice()
-        this._apiClients.push(this._oauthDefaultApi, this._cardsSampleResponseApi)
+        this._apiClientsWithDevApiKeyAuth = [
+            this._auditLogsDefaultApi,
+            this._cardsApi,
+            this._settingsApi,
+            this._subscriptionsApi,
+            this._performanceDefaultApi,
+        ]
+        this._apiClients = [
+            ...this._apiClientsWithApiKeyAuth,
+            ...this._apiClientsWithDevApiKeyAuth,
+            this._oauthDefaultApi,
+            this._cardsSampleResponseApi,
+        ]
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
         this._setOptions(options)
@@ -651,8 +660,15 @@ export class Client {
     public setApiKey(apiKeyToSet: string) {
         this._apiKey = apiKeyToSet
         this.authentications.hapikey.apiKey = apiKeyToSet
-        _.each(this._apiClientsWithAuth, (apiClient) => {
+        _.each(this._apiClientsWithApiKeyAuth, (apiClient) => {
             apiClient.setApiKey(0, apiKeyToSet)
+        })
+    }
+
+    public setDeveloperApiKey(developerApiKeyToSet: string) {
+        this._developerApiKey = developerApiKeyToSet
+        _.each(this._apiClientsWithDevApiKeyAuth, (apiClient) => {
+            apiClient.setApiKey(0, developerApiKeyToSet)
         })
     }
 
@@ -671,7 +687,7 @@ export class Client {
     public setAccessToken(accessTokenToSet: string) {
         this._accessToken = accessTokenToSet
         this.authentications.oauth2.accessToken = accessTokenToSet
-        _.each(this._apiClientsWithAuth, (apiClient) => {
+        _.each(this._apiClients, (apiClient) => {
             apiClient.accessToken = accessTokenToSet
         })
     }
@@ -690,10 +706,16 @@ export class Client {
         })
     }
 
-    public setAuth(options: { apiKey?: string; accessToken?: string } = {}) {
+    public setAuth(options: { apiKey?: string; developerApiKey?: string; accessToken?: string; } = {}) {
         if (options.apiKey) {
             this.setApiKey(options.apiKey)
-        } else if (options.accessToken) {
+        }
+
+        if (options.developerApiKey) {
+            this.setDeveloperApiKey(options.developerApiKey)
+        }
+
+        if (options.accessToken) {
             this.setAccessToken(options.accessToken)
         }
     }
@@ -702,6 +724,7 @@ export class Client {
         basePath: string | undefined
         defaultHeaders: object | undefined
         apiKey: string | undefined
+        developerApiKey: string | undefined
         accessToken: string | undefined
         useLimiter: boolean
         limiterOptions: LimiterOptions | undefined
@@ -709,10 +732,11 @@ export class Client {
         interceptors: Interceptor[]
     } {
         return {
-            accessToken: this._accessToken,
-            apiKey: this._apiKey,
             basePath: this._basePath,
             defaultHeaders: this._defaultHeaders,
+            apiKey: this._apiKey,
+            developerApiKey: this._developerApiKey,
+            accessToken: this._accessToken,
             useLimiter: this._useLimiter,
             limiterOptions: this._limiterOptions,
             numberOfApiCallRetries: this._numberOfApiCallRetries,
@@ -862,6 +886,7 @@ export class Client {
 
     private _setOptions(options: {
         apiKey?: string
+        developerApiKey?: string
         accessToken?: string
         basePath?: string
         defaultHeaders?: object
