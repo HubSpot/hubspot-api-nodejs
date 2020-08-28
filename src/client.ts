@@ -504,7 +504,6 @@ export class Client {
             this._ticketsBasicApi,
             this._ticketsBatchApi,
             this._ticketsSearchApi,
-            this._eventsApi,
             this._templatesApi,
             this._tokensApi,
             this._domainsApi,
@@ -523,6 +522,7 @@ export class Client {
             ...this._apiClientsWithDevApiKeyAuth,
             this._oauthDefaultApi,
             this._cardsSampleResponseApi,
+            this._eventsApi,
         ]
         this._numberOfApiCallRetries = NumberOfRetries.NoRetries
         this._setUseQuerystring(true)
