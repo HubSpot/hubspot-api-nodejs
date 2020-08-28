@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `getAll` methods for CRM objects (for clients with disabled limiter)
   - 'Create Contact, Company and associate created objects' example in README.md
   
-## [3.0.0] - 2020-08-05
+## [3.0.0] - 2020-08-28
   
 ### Added
   
