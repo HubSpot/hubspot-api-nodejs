@@ -1,11 +1,13 @@
 export * from './batchInputTimelineEvent';
 export * from './batchResponseTimelineEventResponse';
+export * from './batchResponseTimelineEventResponseWithErrors';
 export * from './collectionResponseTimelineEventTemplate';
 export * from './errorDetail';
 export * from './eventDetail';
 export * from './modelError';
 export * from './nextPage';
 export * from './paging';
+export * from './previousPage';
 export * from './timelineEvent';
 export * from './timelineEventIFrame';
 export * from './timelineEventResponse';
@@ -16,16 +18,18 @@ export * from './timelineEventTemplateTokenOption';
 export * from './timelineEventTemplateTokenUpdateRequest';
 export * from './timelineEventTemplateUpdateRequest';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { BatchInputTimelineEvent } from './batchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from './batchResponseTimelineEventResponse';
+import { BatchResponseTimelineEventResponseWithErrors } from './batchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplate } from './collectionResponseTimelineEventTemplate';
 import { ErrorDetail } from './errorDetail';
 import { EventDetail } from './eventDetail';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
 import { Paging } from './paging';
+import { PreviousPage } from './previousPage';
 import { TimelineEvent } from './timelineEvent';
 import { TimelineEventIFrame } from './timelineEventIFrame';
 import { TimelineEventResponse } from './timelineEventResponse';
@@ -50,18 +54,21 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "BatchResponseTimelineEventResponse.StatusEnum": BatchResponseTimelineEventResponse.StatusEnum,
+        "BatchResponseTimelineEventResponseWithErrors.StatusEnum": BatchResponseTimelineEventResponseWithErrors.StatusEnum,
         "TimelineEventTemplateToken.TypeEnum": TimelineEventTemplateToken.TypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
     "BatchInputTimelineEvent": BatchInputTimelineEvent,
     "BatchResponseTimelineEventResponse": BatchResponseTimelineEventResponse,
+    "BatchResponseTimelineEventResponseWithErrors": BatchResponseTimelineEventResponseWithErrors,
     "CollectionResponseTimelineEventTemplate": CollectionResponseTimelineEventTemplate,
     "ErrorDetail": ErrorDetail,
     "EventDetail": EventDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
+    "PreviousPage": PreviousPage,
     "TimelineEvent": TimelineEvent,
     "TimelineEventIFrame": TimelineEventIFrame,
     "TimelineEventResponse": TimelineEventResponse,

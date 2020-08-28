@@ -13,9 +13,11 @@
 import { RequestFile } from '../api';
 import { SubscriptionResponse } from './subscriptionResponse';
 
-export class BatchResponseSubscriptionResponse {
-    'status': BatchResponseSubscriptionResponse.StatusEnum;
+export class BatchResponseSubscriptionResponseWithErrors {
+    'status': BatchResponseSubscriptionResponseWithErrors.StatusEnum;
     'results': Array<SubscriptionResponse>;
+    'numErrors'?: number;
+    'errors'?: Array<Error>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -27,12 +29,22 @@ export class BatchResponseSubscriptionResponse {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponseSubscriptionResponse.StatusEnum"
+            "type": "BatchResponseSubscriptionResponseWithErrors.StatusEnum"
         },
         {
             "name": "results",
             "baseName": "results",
             "type": "Array<SubscriptionResponse>"
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<Error>"
         },
         {
             "name": "requestedAt",
@@ -56,11 +68,11 @@ export class BatchResponseSubscriptionResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponseSubscriptionResponse.attributeTypeMap;
+        return BatchResponseSubscriptionResponseWithErrors.attributeTypeMap;
     }
 }
 
-export namespace BatchResponseSubscriptionResponse {
+export namespace BatchResponseSubscriptionResponseWithErrors {
     export enum StatusEnum {
         PENDING = <any> 'PENDING',
         PROCESSING = <any> 'PROCESSING',

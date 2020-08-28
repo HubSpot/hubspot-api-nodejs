@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchReadInputSimplePublicObjectId } from '../model/batchReadInputSimplePublicObjectId';
@@ -96,7 +97,7 @@ export class BatchApi {
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
-    public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+    public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -151,14 +152,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObjectWithErrors");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

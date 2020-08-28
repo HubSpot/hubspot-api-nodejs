@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { TimelineEventTemplateToken } from '../model/timelineEventTemplateToken';
@@ -173,7 +174,7 @@ export class TokensApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -189,7 +190,7 @@ export class TokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateToken The new token definition.
      */
-    public async create (eventTemplateId: string, appId: number, timelineEventTemplateToken?: TimelineEventTemplateToken, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
+    public async create (eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -212,6 +213,11 @@ export class TokensApi {
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling create.');
+        }
+
+        // verify required parameter 'timelineEventTemplateToken' is not null or undefined
+        if (timelineEventTemplateToken === null || timelineEventTemplateToken === undefined) {
+            throw new Error('Required parameter timelineEventTemplateToken was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -255,9 +261,12 @@ export class TokensApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -274,7 +283,7 @@ export class TokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
      */
-    public async update (eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest?: TimelineEventTemplateTokenUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
+    public async update (eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplateToken;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
@@ -303,6 +312,11 @@ export class TokensApi {
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'timelineEventTemplateTokenUpdateRequest' is not null or undefined
+        if (timelineEventTemplateTokenUpdateRequest === null || timelineEventTemplateTokenUpdateRequest === undefined) {
+            throw new Error('Required parameter timelineEventTemplateTokenUpdateRequest was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -346,9 +360,12 @@ export class TokensApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

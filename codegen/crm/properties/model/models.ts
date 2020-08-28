@@ -19,7 +19,7 @@ export * from './propertyModificationMetadata';
 export * from './propertyName';
 export * from './propertyUpdate';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { BatchInputPropertyCreate } from './batchInputPropertyCreate';
 import { BatchInputPropertyName } from './batchInputPropertyName';

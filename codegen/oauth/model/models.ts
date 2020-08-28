@@ -4,7 +4,7 @@ export * from './modelError';
 export * from './refreshTokenInfoResponse';
 export * from './tokenResponseIF';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { AccessTokenInfoResponse } from './accessTokenInfoResponse';
 import { ErrorDetail } from './errorDetail';

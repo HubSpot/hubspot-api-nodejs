@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -18,6 +18,18 @@ import { TimelineEventTemplateTokenOption } from './timelineEventTemplateTokenOp
 */
 export class TimelineEventTemplateToken {
     /**
+    * Used for list segmentation and reporting.
+    */
+    'label': string;
+    /**
+    * The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
+    */
+    'objectPropertyName'?: string;
+    /**
+    * If type is `enumeration`, we should have a list of options to choose from.
+    */
+    'options': Array<TimelineEventTemplateTokenOption>;
+    /**
     * The name of the token referenced in the templates. This must be unique for the specific template. It may only contain alphanumeric characters, periods, dashes, or underscores (. - _).
     */
     'name': string;
@@ -33,22 +45,25 @@ export class TimelineEventTemplateToken {
     * The date and time that the Event Template Token was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
     */
     'updatedAt'?: Date;
-    /**
-    * Used for list segmentation and reporting.
-    */
-    'label': string;
-    /**
-    * The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
-    */
-    'objectPropertyName'?: string;
-    /**
-    * If type is `enumeration`, we should have a list of options to choose from.
-    */
-    'options': Array<TimelineEventTemplateTokenOption>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string"
+        },
+        {
+            "name": "objectPropertyName",
+            "baseName": "objectPropertyName",
+            "type": "string"
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<TimelineEventTemplateTokenOption>"
+        },
         {
             "name": "name",
             "baseName": "name",
@@ -68,21 +83,6 @@ export class TimelineEventTemplateToken {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date"
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string"
-        },
-        {
-            "name": "objectPropertyName",
-            "baseName": "objectPropertyName",
-            "type": "string"
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<TimelineEventTemplateTokenOption>"
         }    ];
 
     static getAttributeTypeMap() {

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponsePublicAuditLog } from '../model/collectionResponsePublicAuditLog';
@@ -28,7 +29,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum DefaultApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class DefaultApi {
@@ -38,8 +39,7 @@ export class DefaultApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -83,10 +83,6 @@ export class DefaultApi {
 
     public setApiKey(key: DefaultApiApiKeys, value: string) {
         (this.authentications as any)[DefaultApiApiKeys[key]].apiKey = value;
-    }
-
-    set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -164,11 +160,8 @@ export class DefaultApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -190,9 +183,12 @@ export class DefaultApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicAuditLog");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponsePublicAuditLog");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

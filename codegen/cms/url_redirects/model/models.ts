@@ -6,7 +6,7 @@ export * from './paging';
 export * from './urlMapping';
 export * from './urlMappingCreateRequestBody';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { CollectionResponseWithTotalUrlMapping } from './collectionResponseWithTotalUrlMapping';
 import { ErrorDetail } from './errorDetail';

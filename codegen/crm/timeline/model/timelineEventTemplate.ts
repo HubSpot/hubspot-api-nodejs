@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -18,22 +18,6 @@ import { TimelineEventTemplateToken } from './timelineEventTemplateToken';
 */
 export class TimelineEventTemplate {
     /**
-    * The template ID.
-    */
-    'id': string;
-    /**
-    * The type of CRM object you want this template applicable for. Currently we support [contacts, companies, deals].
-    */
-    'objectType': string;
-    /**
-    * The date and time that the Event Template was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
-    */
-    'createdAt'?: Date;
-    /**
-    * The date and time that the Event Template was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
-    */
-    'updatedAt'?: Date;
-    /**
     * The template name.
     */
     'name': string;
@@ -49,30 +33,26 @@ export class TimelineEventTemplate {
     * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
     */
     'tokens': Array<TimelineEventTemplateToken>;
+    /**
+    * The template ID.
+    */
+    'id': string;
+    /**
+    * The type of CRM object you want this template applicable for. Currently we support [contacts, companies, tickets, deals].
+    */
+    'objectType': string;
+    /**
+    * The date and time that the Event Template was created, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
+    */
+    'createdAt'?: Date;
+    /**
+    * The date and time that the Event Template was last updated, as an ISO 8601 timestamp. Will be null if the template was created before Feb 18th, 2020.
+    */
+    'updatedAt'?: Date;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "objectType",
-            "baseName": "objectType",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date"
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -92,6 +72,26 @@ export class TimelineEventTemplate {
             "name": "tokens",
             "baseName": "tokens",
             "type": "Array<TimelineEventTemplateToken>"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
+        },
+        {
+            "name": "objectType",
+            "baseName": "objectType",
+            "type": "string"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {

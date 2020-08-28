@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -18,21 +18,13 @@ import { TimelineEventResponse } from './timelineEventResponse';
 */
 export class BatchResponseTimelineEventResponse {
     /**
-    * Successfully created events.
-    */
-    'results': Array<TimelineEventResponse>;
-    /**
-    * The number of events that weren\'t created because of an error.
-    */
-    'numErrors'?: number;
-    /**
-    * The events that weren\'t created.
-    */
-    'errors'?: Array<Error>;
-    /**
     * The status of the batch response. Should always be COMPLETED if processed.
     */
     'status': BatchResponseTimelineEventResponse.StatusEnum;
+    /**
+    * Successfully created events.
+    */
+    'results': Array<TimelineEventResponse>;
     /**
     * The time the request occurred.
     */
@@ -45,29 +37,20 @@ export class BatchResponseTimelineEventResponse {
     * The time the request was completed.
     */
     'completedAt': Date;
+    'links'?: { [key: string]: string; };
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<TimelineEventResponse>"
-        },
-        {
-            "name": "numErrors",
-            "baseName": "numErrors",
-            "type": "number"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<Error>"
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "BatchResponseTimelineEventResponse.StatusEnum"
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<TimelineEventResponse>"
         },
         {
             "name": "requestedAt",
@@ -83,6 +66,11 @@ export class BatchResponseTimelineEventResponse {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }"
         }    ];
 
     static getAttributeTypeMap() {

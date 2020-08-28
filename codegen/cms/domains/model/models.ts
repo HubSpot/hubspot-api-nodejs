@@ -7,7 +7,7 @@ export * from './modelError';
 export * from './nextPage';
 export * from './paging';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { CollectionResponseWithTotalDomain } from './collectionResponseWithTotalDomain';
 import { Domain } from './domain';

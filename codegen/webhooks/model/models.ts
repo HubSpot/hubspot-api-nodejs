@@ -1,5 +1,6 @@
 export * from './batchInputSubscriptionBatchUpdateRequest';
 export * from './batchResponseSubscriptionResponse';
+export * from './batchResponseSubscriptionResponseWithErrors';
 export * from './errorDetail';
 export * from './modelError';
 export * from './settingsChangeRequest';
@@ -11,10 +12,11 @@ export * from './subscriptionPatchRequest';
 export * from './subscriptionResponse';
 export * from './throttlingSettings';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { BatchInputSubscriptionBatchUpdateRequest } from './batchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from './batchResponseSubscriptionResponse';
+import { BatchResponseSubscriptionResponseWithErrors } from './batchResponseSubscriptionResponseWithErrors';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { SettingsChangeRequest } from './settingsChangeRequest';
@@ -40,6 +42,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "BatchResponseSubscriptionResponse.StatusEnum": BatchResponseSubscriptionResponse.StatusEnum,
+        "BatchResponseSubscriptionResponseWithErrors.StatusEnum": BatchResponseSubscriptionResponseWithErrors.StatusEnum,
         "SubscriptionCreateRequest.EventTypeEnum": SubscriptionCreateRequest.EventTypeEnum,
         "SubscriptionResponse.EventTypeEnum": SubscriptionResponse.EventTypeEnum,
         "ThrottlingSettings.PeriodEnum": ThrottlingSettings.PeriodEnum,
@@ -48,6 +51,7 @@ let enumsMap: {[index: string]: any} = {
 let typeMap: {[index: string]: any} = {
     "BatchInputSubscriptionBatchUpdateRequest": BatchInputSubscriptionBatchUpdateRequest,
     "BatchResponseSubscriptionResponse": BatchResponseSubscriptionResponse,
+    "BatchResponseSubscriptionResponseWithErrors": BatchResponseSubscriptionResponseWithErrors,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "SettingsChangeRequest": SettingsChangeRequest,

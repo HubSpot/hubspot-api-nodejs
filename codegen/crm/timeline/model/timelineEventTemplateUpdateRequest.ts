@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -18,10 +18,6 @@ import { TimelineEventTemplateToken } from './timelineEventTemplateToken';
 */
 export class TimelineEventTemplateUpdateRequest {
     /**
-    * The template ID.
-    */
-    'id': string;
-    /**
     * The template name.
     */
     'name': string;
@@ -37,15 +33,14 @@ export class TimelineEventTemplateUpdateRequest {
     * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
     */
     'tokens': Array<TimelineEventTemplateToken>;
+    /**
+    * The template ID.
+    */
+    'id': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -65,6 +60,11 @@ export class TimelineEventTemplateUpdateRequest {
             "name": "tokens",
             "baseName": "tokens",
             "type": "Array<TimelineEventTemplateToken>"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

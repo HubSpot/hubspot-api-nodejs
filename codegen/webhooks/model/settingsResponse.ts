@@ -18,6 +18,11 @@ import { ThrottlingSettings } from './throttlingSettings';
 */
 export class SettingsResponse {
     /**
+    * A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+    */
+    'targetUrl': string;
+    'throttling': ThrottlingSettings;
+    /**
     * When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
     */
     'createdAt': Date;
@@ -25,25 +30,10 @@ export class SettingsResponse {
     * When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
     */
     'updatedAt'?: Date;
-    /**
-    * A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
-    */
-    'targetUrl': string;
-    'throttling': ThrottlingSettings;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date"
-        },
         {
             "name": "targetUrl",
             "baseName": "targetUrl",
@@ -53,6 +43,16 @@ export class SettingsResponse {
             "name": "throttling",
             "baseName": "throttling",
             "type": "ThrottlingSettings"
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date"
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date"
         }    ];
 
     static getAttributeTypeMap() {

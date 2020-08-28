@@ -19,14 +19,14 @@ export class SubscriptionPatchRequest {
     /**
     * Determines if the subscription is active or paused.
     */
-    'enabled'?: boolean;
+    'active'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "enabled",
-            "baseName": "enabled",
+            "name": "active",
+            "baseName": "active",
             "type": "boolean"
         }    ];
 

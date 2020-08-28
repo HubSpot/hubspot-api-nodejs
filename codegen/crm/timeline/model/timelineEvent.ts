@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -17,10 +17,6 @@ import { TimelineEventIFrame } from './timelineEventIFrame';
 * The state of the timeline event.
 */
 export class TimelineEvent {
-    /**
-    * Identifier for the event. This is optional, and we recommend you do not pass this in. We will create one for you if you omit this. You can also use `{{uuid}}` anywhere in the ID to generate a unique string, guaranteeing uniqueness.
-    */
-    'id': string;
     /**
     * The event template ID.
     */
@@ -54,15 +50,14 @@ export class TimelineEvent {
     */
     'extraData'?: object;
     'timelineIFrame'?: TimelineEventIFrame;
+    /**
+    * Identifier for the event. This is optional, and we recommend you do not pass this in. We will create one for you if you omit this. You can also use `{{uuid}}` anywhere in the ID to generate a unique string, guaranteeing uniqueness.
+    */
+    'id': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
         {
             "name": "eventTemplateId",
             "baseName": "eventTemplateId",
@@ -107,6 +102,11 @@ export class TimelineEvent {
             "name": "timelineIFrame",
             "baseName": "timelineIFrame",
             "type": "TimelineEventIFrame"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

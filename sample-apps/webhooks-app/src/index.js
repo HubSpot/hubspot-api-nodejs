@@ -64,7 +64,7 @@ const setupHubspotClient = async (req, res, next) => {
 
     if (_.isNil(hubspotClient)) {
         console.log('Creating HubSpot api wrapper instance')
-        hubspotClient = new hubspot.Client()
+        hubspotClient = new hubspot.Client({ developerApiKey: DEVELOPER_API_KEY })
     }
 
     req.hubspotClient = hubspotClient
@@ -115,7 +115,7 @@ const setupWebhooksSubscriptions = async (req, res, next) => {
         }
 
         if (!urlInfo.webhooks_initialized) {
-            await webhooksHelper.setupWebhooksSubscriptions(urlInfo.url)
+            await webhooksHelper.setupWebhooksSubscriptions(urlInfo.url, req.hubspotClient)
             await dbHelper.setWebhooksInitializedForUrl(urlInfo.url)
         }
 

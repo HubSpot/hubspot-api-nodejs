@@ -1,6 +1,6 @@
 /**
- * Webhooks API
- * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
+ * Timeline events
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -11,11 +11,13 @@
  */
 
 import { RequestFile } from '../api';
-import { SubscriptionResponse } from './subscriptionResponse';
+import { TimelineEventResponse } from './timelineEventResponse';
 
-export class BatchResponseSubscriptionResponse {
-    'status': BatchResponseSubscriptionResponse.StatusEnum;
-    'results': Array<SubscriptionResponse>;
+export class BatchResponseTimelineEventResponseWithErrors {
+    'status': BatchResponseTimelineEventResponseWithErrors.StatusEnum;
+    'results': Array<TimelineEventResponse>;
+    'numErrors'?: number;
+    'errors'?: Array<Error>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -27,12 +29,22 @@ export class BatchResponseSubscriptionResponse {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponseSubscriptionResponse.StatusEnum"
+            "type": "BatchResponseTimelineEventResponseWithErrors.StatusEnum"
         },
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<SubscriptionResponse>"
+            "type": "Array<TimelineEventResponse>"
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<Error>"
         },
         {
             "name": "requestedAt",
@@ -56,11 +68,11 @@ export class BatchResponseSubscriptionResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponseSubscriptionResponse.attributeTypeMap;
+        return BatchResponseTimelineEventResponseWithErrors.attributeTypeMap;
     }
 }
 
-export namespace BatchResponseSubscriptionResponse {
+export namespace BatchResponseTimelineEventResponseWithErrors {
     export enum StatusEnum {
         PENDING = <any> 'PENDING',
         PROCESSING = <any> 'PROCESSING',
