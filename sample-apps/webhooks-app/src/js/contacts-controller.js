@@ -83,7 +83,7 @@ exports.getRouter = () => {
             // Get a batch of contacts by id's
             // POST /crm/v3/objects/contacts/batch/read
             // https://developers.hubspot.com/docs/api/crm/contacts
-            const contactsResponse = await req.hubspotClient.crm.contacts.batchApi.read(false, batchRead)
+            const contactsResponse = await req.hubspotClient.crm.contacts.batchApi.read(batchRead)
             utils.logJson(contactsResponse.body)
 
             const events = await dbHelper.getEvents(contactIds)
