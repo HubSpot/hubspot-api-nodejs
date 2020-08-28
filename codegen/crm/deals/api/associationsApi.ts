@@ -103,7 +103,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-        public async archive (dealId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (dealId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -198,7 +198,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-        public async create (dealId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (dealId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -295,7 +295,7 @@ export class AssociationsApi {
      * @param dealId 
      * @param toObjectType 
      */
-        public async getAll (dealId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (dealId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/{dealId}/associations/{toObjectType}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));

@@ -103,7 +103,7 @@ export class GroupsApi {
      * @param objectType 
      * @param groupName 
      */
-        public async archive (objectType: string, groupName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, groupName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups/{groupName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'groupName' + '}', encodeURIComponent(String(groupName)));
@@ -184,7 +184,7 @@ export class GroupsApi {
      * @param objectType 
      * @param propertyGroupCreate 
      */
-        public async create (objectType: string, propertyGroupCreate: PropertyGroupCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
+    public async create (objectType: string, propertyGroupCreate: PropertyGroupCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -268,7 +268,7 @@ export class GroupsApi {
      * @summary Read all property groups
      * @param objectType 
      */
-        public async getAll (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePropertyGroup;  }> {
+    public async getAll (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -347,7 +347,7 @@ export class GroupsApi {
      * @param objectType 
      * @param groupName 
      */
-        public async getByName (objectType: string, groupName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
+    public async getByName (objectType: string, groupName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups/{groupName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'groupName' + '}', encodeURIComponent(String(groupName)));
@@ -433,7 +433,7 @@ export class GroupsApi {
      * @param groupName 
      * @param propertyGroupUpdate 
      */
-        public async update (objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
+    public async update (objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PropertyGroup;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/groups/{groupName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'groupName' + '}', encodeURIComponent(String(groupName)));

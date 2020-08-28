@@ -103,7 +103,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param pipelineId 
      */
-        public async archive (objectType: string, pipelineId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, pipelineId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -184,7 +184,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param pipelineInput 
      */
-        public async create (objectType: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+    public async create (objectType: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -264,7 +264,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipeline;  }> {
+    public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -348,7 +348,7 @@ export class PipelinesApi {
      * @param pipelineId 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getById (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+    public async getById (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -438,7 +438,7 @@ export class PipelinesApi {
      * @param pipelineId 
      * @param pipelineInput 
      */
-        public async replace (objectType: string, pipelineId: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+    public async replace (objectType: string, pipelineId: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -526,7 +526,7 @@ export class PipelinesApi {
      * @param archived Whether to return only results that have been archived.
      * @param pipelinePatchInput 
      */
-        public async update (objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+    public async update (objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));

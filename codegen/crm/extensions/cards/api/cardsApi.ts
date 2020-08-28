@@ -98,7 +98,7 @@ export class CardsApi {
      * @param appId The ID of the target app.
      * @param cardId The ID of the card to delete.
      */
-        public async archive (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
@@ -176,7 +176,7 @@ export class CardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-        public async create (appId: number, cardCreateRequest?: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async create (appId: number, cardCreateRequest?: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -252,7 +252,7 @@ export class CardsApi {
      * @summary Get all cards
      * @param appId The ID of the target app.
      */
-        public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardListResponse;  }> {
+    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardListResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -328,7 +328,7 @@ export class CardsApi {
      * @param appId The ID of the target app.
      * @param cardId The ID of the target card.
      */
-        public async getById (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async getById (appId: number, cardId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
@@ -411,7 +411,7 @@ export class CardsApi {
      * @param cardId The ID of the card to update.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-        public async update (appId: number, cardId: string, cardPatchRequest?: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async update (appId: number, cardId: string, cardPatchRequest?: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));

@@ -97,7 +97,7 @@ export class BatchApi {
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
-        public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
+    public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

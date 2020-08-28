@@ -90,7 +90,7 @@ export class SampleResponseApi {
      * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
      * @summary Get sample card detail response
      */
-        public async getCardsSampleResponse (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: IntegratorCardPayloadResponse;  }> {
+    public async getCardsSampleResponse (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: IntegratorCardPayloadResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/sample-response';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

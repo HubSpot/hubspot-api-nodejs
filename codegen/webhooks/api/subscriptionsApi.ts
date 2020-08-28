@@ -101,7 +101,7 @@ export class SubscriptionsApi {
      * @param subscriptionId The ID of subscription to delete.
      * @param appId The ID of the target app.
      */
-        public async archive (subscriptionId: number, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (subscriptionId: number, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -179,7 +179,7 @@ export class SubscriptionsApi {
      * @param appId The ID of the target app.
      * @param subscriptionCreateRequest Details about the new subscription.
      */
-        public async create (appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
+    public async create (appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -260,7 +260,7 @@ export class SubscriptionsApi {
      * @summary Get subscription details
      * @param appId The ID of the target app.
      */
-        public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionListResponse;  }> {
+    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionListResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -336,7 +336,7 @@ export class SubscriptionsApi {
      * @param appId The ID of the target app.
      * @param subscriptionId The ID of the target subscription.
      */
-        public async getById (appId: number, subscriptionId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
+    public async getById (appId: number, subscriptionId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
@@ -419,7 +419,7 @@ export class SubscriptionsApi {
      * @param appId The ID of the target app.
      * @param subscriptionPatchRequest Updated details for the subscription.
      */
-        public async update (subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
+    public async update (subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SubscriptionResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -507,7 +507,7 @@ export class SubscriptionsApi {
      * @param appId The app ID of the target app.
      * @param batchInputSubscriptionBatchUpdateRequest Updated details for the specified subscriptions.
      */
-        public async updateBatch (appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors;  }> {
+    public async updateBatch (appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/subscriptions/batch/update'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};

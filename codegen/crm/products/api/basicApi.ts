@@ -101,7 +101,7 @@ export class BasicApi {
      * @summary Archive
      * @param productId 
      */
-        public async archive (productId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (productId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)));
         let localVarQueryParameters: any = {};
@@ -175,7 +175,7 @@ export class BasicApi {
      * @summary Create
      * @param simplePublicObjectInput 
      */
-        public async create (simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -257,7 +257,7 @@ export class BasicApi {
      * @param archived Whether to return only results that have been archived.
      * @param idProperty The name of a property whose values are unique for this object type
      */
-        public async getById (productId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async getById (productId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)));
         let localVarQueryParameters: any = {};
@@ -355,7 +355,7 @@ export class BasicApi {
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      */
-        public async getPage (limit?: number, after?: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObject;  }> {
+    public async getPage (limit?: number, after?: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -448,7 +448,7 @@ export class BasicApi {
      * @param productId 
      * @param simplePublicObjectInput 
      */
-        public async update (productId: string, simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async update (productId: string, simplePublicObjectInput: SimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)));
         let localVarQueryParameters: any = {};

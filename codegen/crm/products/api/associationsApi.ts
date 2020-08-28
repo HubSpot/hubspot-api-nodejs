@@ -103,7 +103,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-        public async archive (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -198,7 +198,7 @@ export class AssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-        public async create (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (productId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -295,7 +295,7 @@ export class AssociationsApi {
      * @param productId 
      * @param toObjectType 
      */
-        public async getAll (productId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (productId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/products/{productId}/associations/{toObjectType}'
             .replace('{' + 'productId' + '}', encodeURIComponent(String(productId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));

@@ -101,7 +101,7 @@ export class DefaultApi {
      * @param ownerId 
      * @param idProperty 
      */
-        public async getById (ownerId: number, idProperty?: 'id' | 'userId', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicOwner;  }> {
+    public async getById (ownerId: number, idProperty?: 'id' | 'userId', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicOwner;  }> {
         const localVarPath = this.basePath + '/crm/v3/owners/{ownerId}'
             .replace('{' + 'ownerId' + '}', encodeURIComponent(String(ownerId)));
         let localVarQueryParameters: any = {};
@@ -185,7 +185,7 @@ export class DefaultApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-        public async getPage (email?: string, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwner;  }> {
+    public async getPage (email?: string, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwner;  }> {
         const localVarPath = this.basePath + '/crm/v3/owners/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

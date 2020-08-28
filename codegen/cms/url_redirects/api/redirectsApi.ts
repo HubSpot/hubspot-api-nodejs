@@ -101,7 +101,7 @@ export class RedirectsApi {
      * @summary Delete a redirect
      * @param urlRedirectId The ID of the target redirect.
      */
-        public async archive (urlRedirectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (urlRedirectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/cms/v3/url-redirects/{urlRedirectId}'
             .replace('{' + 'urlRedirectId' + '}', encodeURIComponent(String(urlRedirectId)));
         let localVarQueryParameters: any = {};
@@ -175,7 +175,7 @@ export class RedirectsApi {
      * @summary Create a redirect
      * @param urlMappingCreateRequestBody 
      */
-        public async create (urlMappingCreateRequestBody?: UrlMappingCreateRequestBody, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
+    public async create (urlMappingCreateRequestBody?: UrlMappingCreateRequestBody, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
         const localVarPath = this.basePath + '/cms/v3/url-redirects/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -248,7 +248,7 @@ export class RedirectsApi {
      * @summary Get details for a redirect
      * @param urlRedirectId The ID of the target redirect.
      */
-        public async getById (urlRedirectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
+    public async getById (urlRedirectId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
         const localVarPath = this.basePath + '/cms/v3/url-redirects/{urlRedirectId}'
             .replace('{' + 'urlRedirectId' + '}', encodeURIComponent(String(urlRedirectId)));
         let localVarQueryParameters: any = {};
@@ -337,7 +337,7 @@ export class RedirectsApi {
      * @param limit Maximum number of result per page
      * @param archived Whether to return only results that have been archived.
      */
-        public async getPage (createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalUrlMapping;  }> {
+    public async getPage (createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalUrlMapping;  }> {
         const localVarPath = this.basePath + '/cms/v3/url-redirects/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -458,7 +458,7 @@ export class RedirectsApi {
      * @param urlRedirectId 
      * @param urlMapping 
      */
-        public async update (urlRedirectId: string, urlMapping?: UrlMapping, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
+    public async update (urlRedirectId: string, urlMapping?: UrlMapping, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: UrlMapping;  }> {
         const localVarPath = this.basePath + '/cms/v3/url-redirects/{urlRedirectId}'
             .replace('{' + 'urlRedirectId' + '}', encodeURIComponent(String(urlRedirectId)));
         let localVarQueryParameters: any = {};

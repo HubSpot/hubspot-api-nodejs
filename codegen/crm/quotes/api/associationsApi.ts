@@ -95,7 +95,7 @@ export class AssociationsApi {
      * @param quoteId 
      * @param toObjectType 
      */
-        public async getAll (quoteId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (quoteId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/{quoteId}/associations/{toObjectType}'
             .replace('{' + 'quoteId' + '}', encodeURIComponent(String(quoteId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));

@@ -104,7 +104,7 @@ export class PipelineStagesApi {
      * @param pipelineId 
      * @param stageId 
      */
-        public async archive (objectType: string, pipelineId: string, stageId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, pipelineId: string, stageId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)))
@@ -192,7 +192,7 @@ export class PipelineStagesApi {
      * @param pipelineId 
      * @param pipelineStageInput 
      */
-        public async create (objectType: string, pipelineId: string, pipelineStageInput?: PipelineStageInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
+    public async create (objectType: string, pipelineId: string, pipelineStageInput?: PipelineStageInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -279,7 +279,7 @@ export class PipelineStagesApi {
      * @param pipelineId 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getAll (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }> {
+    public async getAll (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipelineStage;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -370,7 +370,7 @@ export class PipelineStagesApi {
      * @param stageId 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getById (objectType: string, pipelineId: string, stageId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
+    public async getById (objectType: string, pipelineId: string, stageId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)))
@@ -467,7 +467,7 @@ export class PipelineStagesApi {
      * @param stageId 
      * @param pipelineStageInput 
      */
-        public async replace (objectType: string, pipelineId: string, stageId: string, pipelineStageInput?: PipelineStageInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
+    public async replace (objectType: string, pipelineId: string, stageId: string, pipelineStageInput?: PipelineStageInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)))
@@ -562,7 +562,7 @@ export class PipelineStagesApi {
      * @param archived Whether to return only results that have been archived.
      * @param pipelineStagePatchInput 
      */
-        public async update (objectType: string, pipelineId: string, stageId: string, archived?: boolean, pipelineStagePatchInput?: PipelineStagePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
+    public async update (objectType: string, pipelineId: string, stageId: string, archived?: boolean, pipelineStagePatchInput?: PipelineStagePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PipelineStage;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)))

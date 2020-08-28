@@ -103,7 +103,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyName 
      */
-        public async archive (objectType: string, batchInputPropertyName: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, batchInputPropertyName: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/archive'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -184,7 +184,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-        public async create (objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
+    public async create (objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/create'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -273,7 +273,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-        public async read (objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
+    public async read (objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/read'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};

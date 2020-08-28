@@ -100,7 +100,7 @@ export class TypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-        public async getAll (fromObjectType: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicAssociationDefiniton;  }> {
+    public async getAll (fromObjectType: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicAssociationDefiniton;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/types'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));

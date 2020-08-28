@@ -95,7 +95,7 @@ export class SearchApi {
      * @summary Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
-        public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

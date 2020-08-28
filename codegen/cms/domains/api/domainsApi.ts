@@ -101,7 +101,7 @@ export class DomainsApi {
      * @param domainId The unique ID of the domain.
      * @param archived Whether to return only results that have been archived.
      */
-        public async getById (domainId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Domain;  }> {
+    public async getById (domainId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Domain;  }> {
         const localVarPath = this.basePath + '/cms/v3/domains/{domainId}'
             .replace('{' + 'domainId' + '}', encodeURIComponent(String(domainId)));
         let localVarQueryParameters: any = {};
@@ -194,7 +194,7 @@ export class DomainsApi {
      * @param limit Maximum number of results per page.
      * @param archived Whether to return only results that have been archived.
      */
-        public async getPage (createdAt?: number, createdAfter?: number, createdBefore?: number, updatedAt?: number, updatedAfter?: number, updatedBefore?: number, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalDomain;  }> {
+    public async getPage (createdAt?: number, createdAfter?: number, createdBefore?: number, updatedAt?: number, updatedAfter?: number, updatedBefore?: number, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalDomain;  }> {
         const localVarPath = this.basePath + '/cms/v3/domains/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

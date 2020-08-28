@@ -95,7 +95,7 @@ export class SettingsApi {
      * @summary Clear webhook settings
      * @param appId The ID of the target app.
      */
-        public async clear (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async clear (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -167,7 +167,7 @@ export class SettingsApi {
      * @param appId The ID of the target app.
      * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
      */
-        public async configure (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async configure (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -248,7 +248,7 @@ export class SettingsApi {
      * @summary Get webhook settings
      * @param appId The ID of the target app.
      */
-        public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};

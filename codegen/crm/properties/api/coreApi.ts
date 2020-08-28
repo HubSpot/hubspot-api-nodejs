@@ -103,7 +103,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyName 
      */
-        public async archive (objectType: string, propertyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, propertyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -184,7 +184,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyCreate 
      */
-        public async create (objectType: string, propertyCreate: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public async create (objectType: string, propertyCreate: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -269,7 +269,7 @@ export class CoreApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
+    public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -353,7 +353,7 @@ export class CoreApi {
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
      */
-        public async getByName (objectType: string, propertyName: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public async getByName (objectType: string, propertyName: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -443,7 +443,7 @@ export class CoreApi {
      * @param propertyName 
      * @param propertyUpdate 
      */
-        public async update (objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+    public async update (objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));

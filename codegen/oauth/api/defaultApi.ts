@@ -92,7 +92,7 @@ export class DefaultApi {
      * 
      * @param token 
      */
-        public async archiveRefreshToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Error;  }> {
+    public async archiveRefreshToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Error;  }> {
         const localVarPath = this.basePath + '/oauth/v1/refresh-tokens/{token}'
             .replace('{' + 'token' + '}', encodeURIComponent(String(token)));
         let localVarQueryParameters: any = {};
@@ -165,7 +165,7 @@ export class DefaultApi {
      * @param clientSecret 
      * @param refreshToken 
      */
-        public async createToken (grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TokenResponseIF;  }> {
+    public async createToken (grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TokenResponseIF;  }> {
         const localVarPath = this.basePath + '/oauth/v1/token';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -254,7 +254,7 @@ export class DefaultApi {
      * 
      * @param token 
      */
-        public async getAccessToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccessTokenInfoResponse;  }> {
+    public async getAccessToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AccessTokenInfoResponse;  }> {
         const localVarPath = this.basePath + '/oauth/v1/access-tokens/{token}'
             .replace('{' + 'token' + '}', encodeURIComponent(String(token)));
         let localVarQueryParameters: any = {};
@@ -325,7 +325,7 @@ export class DefaultApi {
      * 
      * @param token 
      */
-        public async getRefreshToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: RefreshTokenInfoResponse;  }> {
+    public async getRefreshToken (token: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: RefreshTokenInfoResponse;  }> {
         const localVarPath = this.basePath + '/oauth/v1/refresh-tokens/{token}'
             .replace('{' + 'token' + '}', encodeURIComponent(String(token)));
         let localVarQueryParameters: any = {};

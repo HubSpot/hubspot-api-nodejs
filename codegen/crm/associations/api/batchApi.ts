@@ -104,7 +104,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-        public async archive (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -187,7 +187,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-        public async create (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation | BatchResponsePublicAssociation;  }> {
+    public async create (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation | BatchResponsePublicAssociation;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -278,7 +278,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-        public async read (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti | BatchResponsePublicAssociationMulti;  }> {
+    public async read (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti | BatchResponsePublicAssociationMulti;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
