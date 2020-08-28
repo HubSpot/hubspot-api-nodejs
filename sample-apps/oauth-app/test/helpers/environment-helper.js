@@ -46,14 +46,14 @@ const getContactsIdsCreatedForTests = async (query) => {
 const restoreEnvironment = async () => {
     console.log('Archiving contacts created for tests')
     const contactsIdsToArchive = await getContactsIdsCreatedForTests(CONTACTS_TO_CREATE[0].properties.firstname)
-    await hubspotClient.crm.contacts.batchApi.archiveBatch({ inputs: contactsIdsToArchive })
+    await hubspotClient.crm.contacts.batchApi.archive({ inputs: contactsIdsToArchive })
 }
 
 exports.initializeEnvironment = async () => {
     await restoreEnvironment()
 
     console.log('Creating contacts for tests')
-    await hubspotClient.crm.contacts.batchApi.createBatch({
+    await hubspotClient.crm.contacts.batchApi.create({
         inputs: CONTACTS_TO_CREATE,
     })
 }
