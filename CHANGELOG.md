@@ -109,7 +109,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - SubscriptionPatchRequest model (replace `enabled` with `active` property)
   - removed optional attribute for some parameters in crm clients methods
-  - updated Filter model for crm objects search clients
+  - changed parameters order for all crm.**.batchApi.read methods
+  - removed all create/update methods from CRM quotes
+  - response types extended for all crm.**.batchApi.create/read/update methods
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD

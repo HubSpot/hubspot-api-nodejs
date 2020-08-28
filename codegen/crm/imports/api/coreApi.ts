@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { ActionResponse } from '../model/actionResponse';
@@ -100,7 +101,7 @@ export class CoreApi {
      * @summary Cancel an active import
      * @param importId 
      */
-    public async cancel (importId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ActionResponse;  }> {
+        public async cancel (importId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ActionResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/imports/{importId}/cancel'
             .replace('{' + 'importId' + '}', encodeURIComponent(String(importId)));
         let localVarQueryParameters: any = {};
@@ -159,9 +160,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "ActionResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "ActionResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -176,7 +180,7 @@ export class CoreApi {
      * @param importRequest JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See [this page]() for more on the required format.
      * @param files A list of files containing the data to import
      */
-    public async create (importRequest?: string, files?: RequestFile, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
+        public async create (importRequest?: string, files?: RequestFile, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/imports/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -238,9 +242,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "PublicImportResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "PublicImportResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -254,7 +261,7 @@ export class CoreApi {
      * @summary Get the information on any import
      * @param importId 
      */
-    public async getById (importId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
+        public async getById (importId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/imports/{importId}'
             .replace('{' + 'importId' + '}', encodeURIComponent(String(importId)));
         let localVarQueryParameters: any = {};
@@ -313,9 +320,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "PublicImportResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "PublicImportResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -331,7 +341,7 @@ export class CoreApi {
      * @param before 
      * @param limit The maximum number of results to display per page.
      */
-    public async getPage (after?: string, before?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicImportResponse;  }> {
+        public async getPage (after?: string, before?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicImportResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/imports/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -396,9 +406,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicImportResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponsePublicImportResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

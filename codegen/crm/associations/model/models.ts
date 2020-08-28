@@ -13,7 +13,7 @@ export * from './publicAssociationDefiniton';
 export * from './publicAssociationMulti';
 export * from './publicObjectId';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { AssociatedId } from './associatedId';
 import { BatchInputPublicAssociation } from './batchInputPublicAssociation';

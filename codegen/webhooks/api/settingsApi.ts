@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { SettingsChangeRequest } from '../model/settingsChangeRequest';
@@ -94,7 +95,7 @@ export class SettingsApi {
      * @summary Clear webhook settings
      * @param appId The ID of the target app.
      */
-    public async clear (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async clear (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -151,7 +152,7 @@ export class SettingsApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -166,7 +167,7 @@ export class SettingsApi {
      * @param appId The ID of the target app.
      * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
      */
-    public async configure (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+        public async configure (appId: number, settingsChangeRequest: SettingsChangeRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -228,9 +229,12 @@ export class SettingsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "SettingsResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "SettingsResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -244,7 +248,7 @@ export class SettingsApi {
      * @summary Get webhook settings
      * @param appId The ID of the target app.
      */
-    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+        public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/webhooks/v3/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -300,9 +304,12 @@ export class SettingsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "SettingsResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "SettingsResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

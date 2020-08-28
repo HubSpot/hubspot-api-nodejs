@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { PublicPerformanceResponse } from '../model/publicPerformanceResponse';
@@ -100,7 +101,7 @@ export class DefaultApi {
      * @param start A timestamp in milliseconds that indicates the start of the time period.
      * @param end A timestamp in milliseconds that indicates the end of the time period.
      */
-    public async getPage (domain?: string, path?: string, pad?: boolean, sum?: boolean, period?: string, interval?: string, start?: number, end?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicPerformanceResponse;  }> {
+        public async getPage (domain?: string, path?: string, pad?: boolean, sum?: boolean, period?: string, interval?: string, start?: number, end?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicPerformanceResponse;  }> {
         const localVarPath = this.basePath + '/cms/v3/performance/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -182,9 +183,12 @@ export class DefaultApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "PublicPerformanceResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "PublicPerformanceResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -205,7 +209,7 @@ export class DefaultApi {
      * @param start A timestamp in milliseconds that indicates the start of the time period.
      * @param end A timestamp in milliseconds that indicates the end of the time period.
      */
-    public async getUptime (domain?: string, path?: string, pad?: boolean, sum?: boolean, period?: string, interval?: string, start?: number, end?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicPerformanceResponse;  }> {
+        public async getUptime (domain?: string, path?: string, pad?: boolean, sum?: boolean, period?: string, interval?: string, start?: number, end?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicPerformanceResponse;  }> {
         const localVarPath = this.basePath + '/cms/v3/performance/uptime';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -287,9 +291,12 @@ export class DefaultApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "PublicPerformanceResponse");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "PublicPerformanceResponse");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

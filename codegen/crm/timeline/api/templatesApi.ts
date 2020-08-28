@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseTimelineEventTemplate } from '../model/collectionResponseTimelineEventTemplate';
@@ -97,12 +98,12 @@ export class TemplatesApi {
     }
 
     /**
-     * This will delete the event template. All events associated with it will be removed from search and the timeline UI.  There is no recovery from this option, so it\'s highly recommended that you stop using any events for a template before deleting it.
+     * This will delete the event template. All associated events will be removed from search results and the timeline UI.  This action can\'t be undone, so it\'s highly recommended that you stop using any associated events before deleting a template.
      * @summary Deletes an event template for the app
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public async archive (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async archive (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -168,7 +169,7 @@ export class TemplatesApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -178,12 +179,12 @@ export class TemplatesApi {
         });
     }
     /**
-     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies and deals as well.   Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
+     * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
      * @summary Create an event template for your app
      * @param appId The ID of the target app.
      * @param timelineEventTemplateCreateRequest The new event template definition.
      */
-    public async create (appId: number, timelineEventTemplateCreateRequest?: TimelineEventTemplateCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+        public async create (appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -200,6 +201,11 @@ export class TemplatesApi {
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling create.');
+        }
+
+        // verify required parameter 'timelineEventTemplateCreateRequest' is not null or undefined
+        if (timelineEventTemplateCreateRequest === null || timelineEventTemplateCreateRequest === undefined) {
+            throw new Error('Required parameter timelineEventTemplateCreateRequest was null or undefined when calling create.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -243,9 +249,12 @@ export class TemplatesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        if (response.statusCode && response.statusCode === 201) {
+                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -259,7 +268,7 @@ export class TemplatesApi {
      * @summary List all event templates for your app
      * @param appId The ID of the target app.
      */
-    public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseTimelineEventTemplate;  }> {
+        public async getAll (appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseTimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -318,9 +327,12 @@ export class TemplatesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseTimelineEventTemplate");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponseTimelineEventTemplate");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -335,7 +347,7 @@ export class TemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public async getById (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+        public async getById (eventTemplateId: string, appId: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -400,9 +412,12 @@ export class TemplatesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -418,7 +433,7 @@ export class TemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateUpdateRequest The updated event template definition.
      */
-    public async update (eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest?: TimelineEventTemplateUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
+        public async update (eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: TimelineEventTemplate;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -441,6 +456,11 @@ export class TemplatesApi {
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new Error('Required parameter appId was null or undefined when calling update.');
+        }
+
+        // verify required parameter 'timelineEventTemplateUpdateRequest' is not null or undefined
+        if (timelineEventTemplateUpdateRequest === null || timelineEventTemplateUpdateRequest === undefined) {
+            throw new Error('Required parameter timelineEventTemplateUpdateRequest was null or undefined when calling update.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -484,9 +504,12 @@ export class TemplatesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplate");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

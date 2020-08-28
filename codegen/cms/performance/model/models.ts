@@ -3,7 +3,7 @@ export * from './modelError';
 export * from './performanceView';
 export * from './publicPerformanceResponse';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';

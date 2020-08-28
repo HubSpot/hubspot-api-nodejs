@@ -8,7 +8,7 @@ export * from './publicImportMetadata';
 export * from './publicImportResponse';
 export * from './publicObjectListRecord';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { ActionResponse } from './actionResponse';
 import { CollectionResponsePublicImportResponse } from './collectionResponsePublicImportResponse';

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseWithTotalSimplePublicObject } from '../model/collectionResponseWithTotalSimplePublicObject';
@@ -99,7 +100,7 @@ export class SearchApi {
      * @summary Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
-    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+        public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/deals/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -158,9 +159,12 @@ export class SearchApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObject");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObject");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

@@ -20,7 +20,7 @@ export * from './simplePublicObjectBatchInput';
 export * from './simplePublicObjectId';
 export * from './simplePublicObjectInput';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { AssociatedId } from './associatedId';
 import { BatchInputSimplePublicObjectBatchInput } from './batchInputSimplePublicObjectBatchInput';

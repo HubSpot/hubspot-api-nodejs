@@ -5,7 +5,7 @@ export * from './modelError';
 export * from './publicSearchResults';
 export * from './searchHitField';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { ContentSearchResult } from './contentSearchResult';
 import { ErrorDetail } from './errorDetail';

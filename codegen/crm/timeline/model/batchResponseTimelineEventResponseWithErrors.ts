@@ -13,29 +13,13 @@
 import { RequestFile } from '../api';
 import { TimelineEventResponse } from './timelineEventResponse';
 
-/**
-* The state of the batch event request.
-*/
-export class BatchResponseTimelineEventResponse {
-    /**
-    * The status of the batch response. Should always be COMPLETED if processed.
-    */
-    'status': BatchResponseTimelineEventResponse.StatusEnum;
-    /**
-    * Successfully created events.
-    */
+export class BatchResponseTimelineEventResponseWithErrors {
+    'status': BatchResponseTimelineEventResponseWithErrors.StatusEnum;
     'results': Array<TimelineEventResponse>;
-    /**
-    * The time the request occurred.
-    */
+    'numErrors'?: number;
+    'errors'?: Array<Error>;
     'requestedAt'?: Date;
-    /**
-    * The time the request began processing.
-    */
     'startedAt': Date;
-    /**
-    * The time the request was completed.
-    */
     'completedAt': Date;
     'links'?: { [key: string]: string; };
 
@@ -45,12 +29,22 @@ export class BatchResponseTimelineEventResponse {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponseTimelineEventResponse.StatusEnum"
+            "type": "BatchResponseTimelineEventResponseWithErrors.StatusEnum"
         },
         {
             "name": "results",
             "baseName": "results",
             "type": "Array<TimelineEventResponse>"
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<Error>"
         },
         {
             "name": "requestedAt",
@@ -74,11 +68,11 @@ export class BatchResponseTimelineEventResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponseTimelineEventResponse.attributeTypeMap;
+        return BatchResponseTimelineEventResponseWithErrors.attributeTypeMap;
     }
 }
 
-export namespace BatchResponseTimelineEventResponse {
+export namespace BatchResponseTimelineEventResponseWithErrors {
     export enum StatusEnum {
         PENDING = <any> 'PENDING',
         PROCESSING = <any> 'PROCESSING',

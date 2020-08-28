@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseAssociatedId } from '../model/collectionResponseAssociatedId';
@@ -94,7 +95,7 @@ export class AssociationsApi {
      * @param quoteId 
      * @param toObjectType 
      */
-    public async getAll (quoteId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+        public async getAll (quoteId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/{quoteId}/associations/{toObjectType}'
             .replace('{' + 'quoteId' + '}', encodeURIComponent(String(quoteId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -156,9 +157,12 @@ export class AssociationsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseProperty } from '../model/collectionResponseProperty';
@@ -102,7 +103,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyName 
      */
-    public async archive (objectType: string, propertyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async archive (objectType: string, propertyName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -168,7 +169,7 @@ export class CoreApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -183,7 +184,7 @@ export class CoreApi {
      * @param objectType 
      * @param propertyCreate 
      */
-    public async create (objectType: string, propertyCreate: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+        public async create (objectType: string, propertyCreate: PropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -248,9 +249,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Property");
+                        if (response.statusCode && response.statusCode === 201) {
+                            body = ObjectSerializer.deserialize(body, "Property");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -265,7 +269,7 @@ export class CoreApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-    public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
+        public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -328,9 +332,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseProperty");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponseProperty");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -346,7 +353,7 @@ export class CoreApi {
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
      */
-    public async getByName (objectType: string, propertyName: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+        public async getByName (objectType: string, propertyName: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -415,9 +422,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Property");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "Property");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -433,7 +443,7 @@ export class CoreApi {
      * @param propertyName 
      * @param propertyUpdate 
      */
-    public async update (objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
+        public async update (objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Property;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'propertyName' + '}', encodeURIComponent(String(propertyName)));
@@ -504,9 +514,12 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Property");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "Property");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

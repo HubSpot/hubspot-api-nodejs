@@ -12,7 +12,7 @@ export * from './subscriptionPatchRequest';
 export * from './subscriptionResponse';
 export * from './throttlingSettings';
 
-import localVarRequest = require('request');
+import localVarRequest from 'request';
 
 import { BatchInputSubscriptionBatchUpdateRequest } from './batchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from './batchResponseSubscriptionResponse';

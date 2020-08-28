@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputSimplePublicObjectBatchInput } from '../model/batchInputSimplePublicObjectBatchInput';
@@ -103,7 +104,7 @@ export class BatchApi {
      * @summary Archive a batch of tickets by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public async archive (batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async archive (batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/batch/archive';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -163,7 +164,7 @@ export class BatchApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -177,7 +178,7 @@ export class BatchApi {
      * @summary Create a batch of tickets
      * @param batchInputSimplePublicObjectInput 
      */
-    public async create (batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+        public async create (batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -231,14 +232,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        if (response.statusCode && response.statusCode === 201) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObjectWithErrors");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -253,7 +261,7 @@ export class BatchApi {
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
-    public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+        public async read (batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -311,14 +319,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObjectWithErrors");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -332,7 +347,7 @@ export class BatchApi {
      * @summary Update a batch of tickets
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public async update (batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }> {
+        public async update (batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/batch/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -386,14 +401,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObject");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseSimplePublicObjectWithErrors");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

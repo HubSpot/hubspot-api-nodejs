@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -18,10 +18,6 @@ import { TimelineEventTemplateToken } from './timelineEventTemplateToken';
 */
 export class TimelineEventTemplateCreateRequest {
     /**
-    * The type of CRM object you want this template applicable for. Currently we support [contacts, companies, deals].
-    */
-    'objectType': string;
-    /**
     * The template name.
     */
     'name': string;
@@ -37,15 +33,14 @@ export class TimelineEventTemplateCreateRequest {
     * A collection of tokens that can be used as custom properties on the event and to create fully fledged CRM objects.
     */
     'tokens': Array<TimelineEventTemplateToken>;
+    /**
+    * The type of CRM object you want this template applicable for. Currently we support [contacts, companies, tickets, deals].
+    */
+    'objectType': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "objectType",
-            "baseName": "objectType",
-            "type": "string"
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -65,6 +60,11 @@ export class TimelineEventTemplateCreateRequest {
             "name": "tokens",
             "baseName": "tokens",
             "type": "Array<TimelineEventTemplateToken>"
+        },
+        {
+            "name": "objectType",
+            "baseName": "objectType",
+            "type": "string"
         }    ];
 
     static getAttributeTypeMap() {

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponsePipeline } from '../model/collectionResponsePipeline';
@@ -102,7 +103,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param pipelineId 
      */
-    public async archive (objectType: string, pipelineId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async archive (objectType: string, pipelineId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -168,7 +169,7 @@ export class PipelinesApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -183,7 +184,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param pipelineInput 
      */
-    public async create (objectType: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+        public async create (objectType: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -243,9 +244,12 @@ export class PipelinesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Pipeline");
+                        if (response.statusCode && response.statusCode === 201) {
+                            body = ObjectSerializer.deserialize(body, "Pipeline");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -260,7 +264,7 @@ export class PipelinesApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-    public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipeline;  }> {
+        public async getAll (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -323,9 +327,12 @@ export class PipelinesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponsePipeline");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "CollectionResponsePipeline");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -341,7 +348,7 @@ export class PipelinesApi {
      * @param pipelineId 
      * @param archived Whether to return only results that have been archived.
      */
-    public async getById (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+        public async getById (objectType: string, pipelineId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -410,9 +417,12 @@ export class PipelinesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Pipeline");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "Pipeline");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -428,7 +438,7 @@ export class PipelinesApi {
      * @param pipelineId 
      * @param pipelineInput 
      */
-    public async replace (objectType: string, pipelineId: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+        public async replace (objectType: string, pipelineId: string, pipelineInput?: PipelineInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -494,9 +504,12 @@ export class PipelinesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Pipeline");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "Pipeline");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -513,7 +526,7 @@ export class PipelinesApi {
      * @param archived Whether to return only results that have been archived.
      * @param pipelinePatchInput 
      */
-    public async update (objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
+        public async update (objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Pipeline;  }> {
         const localVarPath = this.basePath + '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'pipelineId' + '}', encodeURIComponent(String(pipelineId)));
@@ -583,9 +596,12 @@ export class PipelinesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "Pipeline");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "Pipeline");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

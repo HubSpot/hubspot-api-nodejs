@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputPropertyCreate } from '../model/batchInputPropertyCreate';
@@ -102,7 +103,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyName 
      */
-    public async archive (objectType: string, batchInputPropertyName: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        public async archive (objectType: string, batchInputPropertyName: BatchInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/archive'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -168,7 +169,7 @@ export class BatchApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -183,7 +184,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-    public async create (objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+        public async create (objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/create'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -243,14 +244,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        if (response.statusCode && response.statusCode === 201) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -265,7 +273,7 @@ export class BatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-    public async read (objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }> {
+        public async read (objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }> {
         const localVarPath = this.basePath + '/crm/v3/properties/{objectType}/batch/read'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -325,14 +333,21 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseProperty;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseProperty | BatchResponseProperty;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        if (response.statusCode && response.statusCode === 200) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        }
+
+                        if (response.statusCode && response.statusCode === 207) {
+                            body = ObjectSerializer.deserialize(body, "BatchResponseProperty");
+                        }
+
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
+                            resolve({ response: response, body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
