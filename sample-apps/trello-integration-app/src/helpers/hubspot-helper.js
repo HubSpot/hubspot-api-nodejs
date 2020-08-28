@@ -143,7 +143,7 @@ module.exports = {
         }
     },
     initExtensionCard: async (cardTitle) => {
-        const hubspotClient = hubspotClientHelper.getClient()
+        const hubspotClient = await hubspotClientHelper.getClient()
         const dealObjectType = {
             name: 'deals',
             propertiesToSend: ['hs_object_id', 'dealname'],
