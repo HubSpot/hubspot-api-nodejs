@@ -51,6 +51,13 @@ import {
     SearchApi as LineItemsSearchApi,
 } from '../codegen/crm/line_items/api'
 import * as lineItemsModels from '../codegen/crm/line_items/model/models'
+import {
+  AssociationsApi as ObjectsAssociationsApi,
+  BasicApi as ObjectsBasicApi,
+  BatchApi as ObjectsBatchApi,
+  SearchApi as ObjectsSearchApi,
+} from '../codegen/crm/objects/api'
+import * as objectsModels from '../codegen/crm/objects/model/models'
 import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
 import * as ownersModels from '../codegen/crm/owners/model/models'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
@@ -140,6 +147,7 @@ export {
     importsModels,
     lineItemsModels,
     ownersModels,
+    objectsModels,
     pipelinesModels,
     productsModels,
     propertiesModels,
@@ -205,6 +213,12 @@ export class Client {
                 archived?: boolean,
                 options?: { headers: { [name: string]: string } },
             ) => Promise<contactsModels.SimplePublicObject[]>
+        }
+        objects: {
+            associationsApi: ObjectsAssociationsApi
+            basicApi: ObjectsBasicApi
+            batchApi: ObjectsBatchApi
+            searchApi: ObjectsSearchApi
         }
         deals: {
             associationsApi: DealsAssociationsApi
@@ -344,6 +358,10 @@ export class Client {
     protected _contactsBasicApi: ContactsBasicApi
     protected _contactsBatchApi: ContactsBatchApi
     protected _contactsSearchApi: ContactsSearchApi
+    protected _objectsAssociationsApi: ObjectsAssociationsApi
+    protected _objectsBasicApi: ObjectsBasicApi
+    protected _objectsBatchApi: ObjectsBatchApi
+    protected _objectsSearchApi: ObjectsSearchApi
     protected _dealsAssociationsApi: DealsAssociationsApi
     protected _dealsBasicApi: DealsBasicApi
     protected _dealsBatchApi: DealsBatchApi
@@ -438,6 +456,10 @@ export class Client {
         this._lineItemsBasicApi = new LineItemsBasicApi()
         this._lineItemsBatchApi = new LineItemsBatchApi()
         this._lineItemsSearchApi = new LineItemsSearchApi()
+        this._objectsAssociationsApi = new ObjectsAssociationsApi()
+        this._objectsBasicApi = new ObjectsBasicApi()
+        this._objectsBatchApi = new ObjectsBatchApi()
+        this._objectsSearchApi = new ObjectsSearchApi()
         this._ownersDefaultApi = new OwnersDefaultApi()
         this._pipelinesApi = new PipelinesApi()
         this._pipelineStagesApi = new PipelineStagesApi()
@@ -486,6 +508,10 @@ export class Client {
             this._lineItemsBasicApi,
             this._lineItemsBatchApi,
             this._lineItemsSearchApi,
+            this._objectsAssociationsApi,
+            this._objectsBasicApi,
+            this._objectsBatchApi,
+            this._objectsSearchApi,
             this._ownersDefaultApi,
             this._pipelinesApi,
             this._pipelineStagesApi,
@@ -580,6 +606,12 @@ export class Client {
                     lineItemsModels.SimplePublicObject,
                     lineItemsModels.CollectionResponseSimplePublicObject
                 >(this._lineItemsBasicApi.getPage.bind(this._lineItemsBasicApi)),
+            },
+            objects: {
+                associationsApi: this._objectsAssociationsApi,
+                basicApi: this._objectsBasicApi,
+                batchApi: this._objectsBatchApi,
+                searchApi: this._objectsSearchApi,
             },
             owners: {
                 defaultApi: this._ownersDefaultApi,
