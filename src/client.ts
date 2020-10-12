@@ -82,6 +82,8 @@ import {
     SearchApi as QuotesSearchApi,
 } from '../codegen/crm/quotes/api'
 import * as quotesModels from '../codegen/crm/quotes/model/models'
+import { CoreApi as SchemasCoreApi, DefaultApi as SchemasDefaultApi } from '../codegen/crm/schemas/api'
+import * as schemasModels from '../codegen/crm/schemas/model/models'
 import {
     AssociationsApi as TicketsAssociationsApi,
     BasicApi as TicketsBasicApi,
@@ -159,6 +161,7 @@ export {
     auditLogsModels,
     domainsModels,
     performanceModels,
+    schemasModels,
     urlRedirectsModels,
     siteSearchModels,
 }
@@ -297,6 +300,10 @@ export class Client {
                 options?: { headers: { [name: string]: string } },
             ) => Promise<quotesModels.SimplePublicObject[]>
         }
+        schemas: {
+            coreApi: SchemasCoreApi
+            defaultApi: SchemasDefaultApi
+        }
         tickets: {
             associationsApi: TicketsAssociationsApi
             basicApi: TicketsBasicApi
@@ -387,6 +394,8 @@ export class Client {
     protected _quotesBasicApi: QuotesBasicApi
     protected _quotesBatchApi: QuotesBatchApi
     protected _quotesSearchApi: QuotesSearchApi
+    protected _schemasDefaultApi: SchemasDefaultApi
+    protected _schemasCoreApi: SchemasCoreApi
     protected _ticketsAssociationsApi: TicketsAssociationsApi
     protected _ticketsBasicApi: TicketsBasicApi
     protected _ticketsBatchApi: TicketsBatchApi
@@ -474,6 +483,8 @@ export class Client {
         this._quotesBasicApi = new QuotesBasicApi()
         this._quotesBatchApi = new QuotesBatchApi()
         this._quotesSearchApi = new QuotesSearchApi()
+        this._schemasDefaultApi = new SchemasDefaultApi()
+        this._schemasCoreApi = new SchemasCoreApi()
         this._ticketsAssociationsApi = new TicketsAssociationsApi()
         this._ticketsBasicApi = new TicketsBasicApi()
         this._ticketsBatchApi = new TicketsBatchApi()
@@ -526,6 +537,8 @@ export class Client {
             this._quotesBasicApi,
             this._quotesBatchApi,
             this._quotesSearchApi,
+            this._schemasDefaultApi,
+            this._schemasCoreApi,
             this._ticketsAssociationsApi,
             this._ticketsBasicApi,
             this._ticketsBatchApi,
@@ -644,6 +657,10 @@ export class Client {
                     quotesModels.SimplePublicObject,
                     quotesModels.CollectionResponseSimplePublicObject
                 >(this._quotesBasicApi.getPage.bind(this._quotesBasicApi)),
+            },
+            schemas: {
+                defaultApi: this._schemasDefaultApi,
+                coreApi: this._schemasCoreApi,
             },
             tickets: {
                 associationsApi: this._ticketsAssociationsApi,
