@@ -112,9 +112,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - changed parameters order for all crm.**.batchApi.read methods
   - removed all create/update methods from CRM quotes
   - response types extended for all crm.**.batchApi.create/read/update methods
+
+## [3.1.0] - 2020-10-12
+
+### Added
+
+  - crm.objects and crm.schemas clients  
   
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v1.0.0-beta...HEAD
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.1.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -122,3 +128,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.0
 [2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.1
 [3.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.0.0
+[3.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.1.0
