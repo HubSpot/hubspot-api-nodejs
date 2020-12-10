@@ -92,7 +92,7 @@ export class DefaultApi {
      * @param objectType 
      */
     public async purge (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}/purge'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}/purge'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

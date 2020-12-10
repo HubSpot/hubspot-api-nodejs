@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { SettingsChangeRequest } from '../model/settingsChangeRequest';
@@ -30,7 +29,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum SettingsApiApiKeys {
-    developer_hapikey,
+    hapikey,
 }
 
 export class SettingsApi {
@@ -40,7 +39,7 @@ export class SettingsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -128,8 +127,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.developer_hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -152,7 +151,7 @@ export class SettingsApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -206,8 +205,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.developer_hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -229,12 +228,9 @@ export class SettingsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "SettingsResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "SettingsResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -281,8 +277,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.developer_hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -304,12 +300,9 @@ export class SettingsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "SettingsResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "SettingsResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

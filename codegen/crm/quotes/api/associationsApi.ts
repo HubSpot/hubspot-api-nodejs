@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseAssociatedId } from '../model/collectionResponseAssociatedId';
@@ -94,8 +93,11 @@ export class AssociationsApi {
      * @summary List associations of a quote by type
      * @param quoteId 
      * @param toObjectType 
+     * @param paginateAssociations 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
      */
-    public async getAll (quoteId: string, toObjectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (quoteId: string, toObjectType: string, paginateAssociations?: boolean, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/{quoteId}/associations/{toObjectType}'
             .replace('{' + 'quoteId' + '}', encodeURIComponent(String(quoteId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -118,6 +120,18 @@ export class AssociationsApi {
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
             throw new Error('Required parameter toObjectType was null or undefined when calling getAll.');
+        }
+
+        if (paginateAssociations !== undefined) {
+            localVarQueryParameters['paginateAssociations'] = ObjectSerializer.serialize(paginateAssociations, "boolean");
+        }
+
+        if (after !== undefined) {
+            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -157,12 +171,9 @@ export class AssociationsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { TimelineEventTemplateToken } from '../model/timelineEventTemplateToken';
@@ -30,7 +29,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum TokensApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class TokensApi {
@@ -40,8 +39,7 @@ export class TokensApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -85,10 +83,6 @@ export class TokensApi {
 
     public setApiKey(key: TokensApiApiKeys, value: string) {
         (this.authentications as any)[TokensApiApiKeys[key]].apiKey = value;
-    }
-
-    set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -147,11 +141,8 @@ export class TokensApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -174,7 +165,7 @@ export class TokensApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -235,11 +226,8 @@ export class TokensApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -261,12 +249,9 @@ export class TokensApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -334,11 +319,8 @@ export class TokensApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -360,12 +342,9 @@ export class TokensApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "TimelineEventTemplateToken");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

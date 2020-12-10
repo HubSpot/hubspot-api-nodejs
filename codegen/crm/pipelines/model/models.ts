@@ -11,7 +11,7 @@ export * from './pipelineStage';
 export * from './pipelineStageInput';
 export * from './pipelineStagePatchInput';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { CollectionResponsePipeline } from './collectionResponsePipeline';
 import { CollectionResponsePipelineStage } from './collectionResponsePipelineStage';

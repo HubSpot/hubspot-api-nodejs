@@ -12,11 +12,12 @@
 
 import { RequestFile } from '../api';
 import { PublicAssociationMulti } from './publicAssociationMulti';
+import { StandardError } from './standardError';
 
 export class BatchResponsePublicAssociationMulti {
     'results': Array<PublicAssociationMulti>;
     'numErrors'?: number;
-    'errors'?: Array<Error>;
+    'errors'?: Array<StandardError>;
     'status': BatchResponsePublicAssociationMulti.StatusEnum;
     'requestedAt'?: Date;
     'startedAt': Date;
@@ -38,7 +39,7 @@ export class BatchResponsePublicAssociationMulti {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<Error>"
+            "type": "Array<StandardError>"
         },
         {
             "name": "status",

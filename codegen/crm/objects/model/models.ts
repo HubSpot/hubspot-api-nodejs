@@ -8,6 +8,7 @@ export * from './batchResponseSimplePublicObjectWithErrors';
 export * from './collectionResponseAssociatedId';
 export * from './collectionResponseSimplePublicObject';
 export * from './collectionResponseWithTotalSimplePublicObject';
+export * from './errorCategory';
 export * from './errorDetail';
 export * from './filter';
 export * from './filterGroup';
@@ -20,6 +21,7 @@ export * from './simplePublicObject';
 export * from './simplePublicObjectBatchInput';
 export * from './simplePublicObjectId';
 export * from './simplePublicObjectInput';
+export * from './standardError';
 
 import localVarRequest = require('request');
 
@@ -33,6 +35,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from './batchResponseSimple
 import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObject } from './collectionResponseSimplePublicObject';
 import { CollectionResponseWithTotalSimplePublicObject } from './collectionResponseWithTotalSimplePublicObject';
+import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { Filter } from './filter';
 import { FilterGroup } from './filterGroup';
@@ -45,6 +48,7 @@ import { SimplePublicObject } from './simplePublicObject';
 import { SimplePublicObjectBatchInput } from './simplePublicObjectBatchInput';
 import { SimplePublicObjectId } from './simplePublicObjectId';
 import { SimplePublicObjectInput } from './simplePublicObjectInput';
+import { StandardError } from './standardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -61,6 +65,7 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "BatchResponseSimplePublicObject.StatusEnum": BatchResponseSimplePublicObject.StatusEnum,
         "BatchResponseSimplePublicObjectWithErrors.StatusEnum": BatchResponseSimplePublicObjectWithErrors.StatusEnum,
+        "ErrorCategory.HttpStatusEnum": ErrorCategory.HttpStatusEnum,
         "Filter.OperatorEnum": Filter.OperatorEnum,
 }
 
@@ -75,6 +80,7 @@ let typeMap: {[index: string]: any} = {
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObject": CollectionResponseSimplePublicObject,
     "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,
+    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,
@@ -87,6 +93,7 @@ let typeMap: {[index: string]: any} = {
     "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,
     "SimplePublicObjectId": SimplePublicObjectId,
     "SimplePublicObjectInput": SimplePublicObjectInput,
+    "StandardError": StandardError,
 }
 
 export class ObjectSerializer {

@@ -13,16 +13,16 @@
 import { RequestFile } from '../api';
 
 export class TokenResponseIF {
-    'accessToken': string;
-    'expiresIn': number;
     'refreshToken': string;
+    'expiresIn': number;
+    'accessToken': string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "accessToken",
-            "baseName": "access_token",
+            "name": "refreshToken",
+            "baseName": "refresh_token",
             "type": "string"
         },
         {
@@ -31,8 +31,8 @@ export class TokenResponseIF {
             "type": "number"
         },
         {
-            "name": "refreshToken",
-            "baseName": "refresh_token",
+            "name": "accessToken",
+            "baseName": "access_token",
             "type": "string"
         }    ];
 

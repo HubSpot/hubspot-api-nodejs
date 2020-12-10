@@ -12,9 +12,11 @@
 
 import { RequestFile } from '../api';
 import { NextPage } from './nextPage';
+import { PreviousPage } from './previousPage';
 
 export class Paging {
     'next'?: NextPage;
+    'prev'?: PreviousPage;
 
     static discriminator: string | undefined = undefined;
 
@@ -23,6 +25,11 @@ export class Paging {
             "name": "next",
             "baseName": "next",
             "type": "NextPage"
+        },
+        {
+            "name": "prev",
+            "baseName": "prev",
+            "type": "PreviousPage"
         }    ];
 
     static getAttributeTypeMap() {

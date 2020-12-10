@@ -4,11 +4,12 @@ export * from './errorDetail';
 export * from './modelError';
 export * from './nextPage';
 export * from './paging';
+export * from './previousPage';
 export * from './publicImportMetadata';
 export * from './publicImportResponse';
 export * from './publicObjectListRecord';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { ActionResponse } from './actionResponse';
 import { CollectionResponsePublicImportResponse } from './collectionResponsePublicImportResponse';
@@ -16,6 +17,7 @@ import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
 import { Paging } from './paging';
+import { PreviousPage } from './previousPage';
 import { PublicImportMetadata } from './publicImportMetadata';
 import { PublicImportResponse } from './publicImportResponse';
 import { PublicObjectListRecord } from './publicObjectListRecord';
@@ -44,6 +46,7 @@ let typeMap: {[index: string]: any} = {
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
+    "PreviousPage": PreviousPage,
     "PublicImportMetadata": PublicImportMetadata,
     "PublicImportResponse": PublicImportResponse,
     "PublicObjectListRecord": PublicObjectListRecord,

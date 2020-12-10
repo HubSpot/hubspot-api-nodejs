@@ -105,7 +105,7 @@ export class CoreApi {
      * @param objectType Fully qualified name or object type ID for the target schema.
      */
     public async archive (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -177,7 +177,7 @@ export class CoreApi {
      * @param associationIdentifier Unique ID of the association to remove.
      */
     public async archiveAssociation (objectType: string, associationIdentifier: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}/associations/{associationIdentifier}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'associationIdentifier' + '}', encodeURIComponent(String(associationIdentifier)));
         let localVarQueryParameters: any = {};
@@ -254,7 +254,7 @@ export class CoreApi {
      * @param objectSchemaEgg Object schema definition, including properties and associations.
      */
     public async create (objectSchemaEgg: ObjectSchemaEgg, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ObjectSchema;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas';
+        const localVarPath = this.basePath + '/crm/v3/schemas';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -330,7 +330,7 @@ export class CoreApi {
      * @param associationDefinitionEgg Attributes that define the association.
      */
     public async createAssociation (objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AssociationDefinition;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}/associations'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}/associations'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -410,7 +410,7 @@ export class CoreApi {
      * @summary Get all schemas
      */
     public async getAll (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseObjectSchema;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas';
+        const localVarPath = this.basePath + '/crm/v3/schemas';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -479,7 +479,7 @@ export class CoreApi {
      * @param objectType Fully qualified name or object type ID of the target schema.
      */
     public async getById (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ObjectSchema;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -555,7 +555,7 @@ export class CoreApi {
      * @param objectTypeDefinitionPatch Attributes to update in the target schema.
      */
     public async update (objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ObjectTypeDefinition;  }> {
-        const localVarPath = this.basePath + '/crm-object-schemas/v3/schemas/{objectType}'
+        const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);

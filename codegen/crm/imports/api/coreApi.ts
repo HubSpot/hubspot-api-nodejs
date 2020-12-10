@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { ActionResponse } from '../model/actionResponse';
@@ -160,12 +159,9 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "ActionResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "ActionResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -177,10 +173,10 @@ export class CoreApi {
     /**
      * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
      * @summary Start a new import
-     * @param importRequest JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See [this page]() for more on the required format.
      * @param files A list of files containing the data to import
+     * @param importRequest JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See the overview tab for more on the required format.
      */
-    public async create (importRequest?: string, files?: RequestFile, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
+    public async create (files?: RequestFile, importRequest?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicImportResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/imports/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -197,14 +193,14 @@ export class CoreApi {
 
         let localVarUseFormData = false;
 
-        if (importRequest !== undefined) {
-            localVarFormParams['importRequest'] = ObjectSerializer.serialize(importRequest, "string");
-        }
-
         if (files !== undefined) {
             localVarFormParams['files'] = files;
         }
         localVarUseFormData = true;
+
+        if (importRequest !== undefined) {
+            localVarFormParams['importRequest'] = ObjectSerializer.serialize(importRequest, "string");
+        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -242,12 +238,9 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "PublicImportResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PublicImportResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -320,12 +313,9 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "PublicImportResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PublicImportResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -406,12 +396,9 @@ export class CoreApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "CollectionResponsePublicImportResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicImportResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
