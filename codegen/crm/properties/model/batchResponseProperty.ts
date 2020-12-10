@@ -12,12 +12,13 @@
 
 import { RequestFile } from '../api';
 import { Property } from './property';
+import { StandardError } from './standardError';
 
 export class BatchResponseProperty {
     'status': BatchResponseProperty.StatusEnum;
     'results': Array<Property>;
     'numErrors'?: number;
-    'errors'?: Array<Error>;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -44,7 +45,7 @@ export class BatchResponseProperty {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<Error>"
+            "type": "Array<StandardError>"
         },
         {
             "name": "requestedAt",

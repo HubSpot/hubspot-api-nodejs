@@ -6,7 +6,7 @@ export * from './paging';
 export * from './publicOwner';
 export * from './publicTeam';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { CollectionResponsePublicOwner } from './collectionResponsePublicOwner';
 import { ErrorDetail } from './errorDetail';

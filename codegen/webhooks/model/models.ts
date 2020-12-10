@@ -1,10 +1,12 @@
 export * from './batchInputSubscriptionBatchUpdateRequest';
 export * from './batchResponseSubscriptionResponse';
 export * from './batchResponseSubscriptionResponseWithErrors';
+export * from './errorCategory';
 export * from './errorDetail';
 export * from './modelError';
 export * from './settingsChangeRequest';
 export * from './settingsResponse';
+export * from './standardError';
 export * from './subscriptionBatchUpdateRequest';
 export * from './subscriptionCreateRequest';
 export * from './subscriptionListResponse';
@@ -12,15 +14,17 @@ export * from './subscriptionPatchRequest';
 export * from './subscriptionResponse';
 export * from './throttlingSettings';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { BatchInputSubscriptionBatchUpdateRequest } from './batchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from './batchResponseSubscriptionResponse';
 import { BatchResponseSubscriptionResponseWithErrors } from './batchResponseSubscriptionResponseWithErrors';
+import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { SettingsChangeRequest } from './settingsChangeRequest';
 import { SettingsResponse } from './settingsResponse';
+import { StandardError } from './standardError';
 import { SubscriptionBatchUpdateRequest } from './subscriptionBatchUpdateRequest';
 import { SubscriptionCreateRequest } from './subscriptionCreateRequest';
 import { SubscriptionListResponse } from './subscriptionListResponse';
@@ -43,6 +47,7 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "BatchResponseSubscriptionResponse.StatusEnum": BatchResponseSubscriptionResponse.StatusEnum,
         "BatchResponseSubscriptionResponseWithErrors.StatusEnum": BatchResponseSubscriptionResponseWithErrors.StatusEnum,
+        "ErrorCategory.HttpStatusEnum": ErrorCategory.HttpStatusEnum,
         "SubscriptionCreateRequest.EventTypeEnum": SubscriptionCreateRequest.EventTypeEnum,
         "SubscriptionResponse.EventTypeEnum": SubscriptionResponse.EventTypeEnum,
         "ThrottlingSettings.PeriodEnum": ThrottlingSettings.PeriodEnum,
@@ -52,10 +57,12 @@ let typeMap: {[index: string]: any} = {
     "BatchInputSubscriptionBatchUpdateRequest": BatchInputSubscriptionBatchUpdateRequest,
     "BatchResponseSubscriptionResponse": BatchResponseSubscriptionResponse,
     "BatchResponseSubscriptionResponseWithErrors": BatchResponseSubscriptionResponseWithErrors,
+    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "SettingsChangeRequest": SettingsChangeRequest,
     "SettingsResponse": SettingsResponse,
+    "StandardError": StandardError,
     "SubscriptionBatchUpdateRequest": SubscriptionBatchUpdateRequest,
     "SubscriptionCreateRequest": SubscriptionCreateRequest,
     "SubscriptionListResponse": SubscriptionListResponse,

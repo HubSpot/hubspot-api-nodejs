@@ -17,6 +17,7 @@ export class AccessTokenInfoResponse {
     'user'?: string;
     'hubDomain'?: string;
     'scopes': Array<string>;
+    'scopeToScopeGroupPks': Array<number>;
     'hubId': number;
     'appId': number;
     'expiresIn': number;
@@ -45,6 +46,11 @@ export class AccessTokenInfoResponse {
             "name": "scopes",
             "baseName": "scopes",
             "type": "Array<string>"
+        },
+        {
+            "name": "scopeToScopeGroupPks",
+            "baseName": "scope_to_scope_group_pks",
+            "type": "Array<number>"
         },
         {
             "name": "hubId",

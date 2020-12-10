@@ -19,7 +19,7 @@ export * from './modelError';
 export * from './objectToken';
 export * from './topLevelActions';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { ActionConfirmationBody } from './actionConfirmationBody';
 import { ActionHookActionBody } from './actionHookActionBody';

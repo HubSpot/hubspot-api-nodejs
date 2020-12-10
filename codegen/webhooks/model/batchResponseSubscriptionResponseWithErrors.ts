@@ -11,13 +11,14 @@
  */
 
 import { RequestFile } from '../api';
+import { StandardError } from './standardError';
 import { SubscriptionResponse } from './subscriptionResponse';
 
 export class BatchResponseSubscriptionResponseWithErrors {
     'status': BatchResponseSubscriptionResponseWithErrors.StatusEnum;
     'results': Array<SubscriptionResponse>;
     'numErrors'?: number;
-    'errors'?: Array<Error>;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -44,7 +45,7 @@ export class BatchResponseSubscriptionResponseWithErrors {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<Error>"
+            "type": "Array<StandardError>"
         },
         {
             "name": "requestedAt",

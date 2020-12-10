@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponsePipelineStage } from '../model/collectionResponsePipelineStage';
@@ -176,7 +175,7 @@ export class PipelineStagesApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -258,12 +257,9 @@ export class PipelineStagesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 201) {
-                            body = ObjectSerializer.deserialize(body, "PipelineStage");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -348,12 +344,9 @@ export class PipelineStagesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "CollectionResponsePipelineStage");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "CollectionResponsePipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -445,12 +438,9 @@ export class PipelineStagesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "PipelineStage");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -539,12 +529,9 @@ export class PipelineStagesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "PipelineStage");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -638,12 +625,9 @@ export class PipelineStagesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "PipelineStage");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "PipelineStage");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputTimelineEvent } from '../model/batchInputTimelineEvent';
@@ -158,12 +157,9 @@ export class EventsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 201) {
-                            body = ObjectSerializer.deserialize(body, "TimelineEventResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "TimelineEventResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -177,7 +173,7 @@ export class EventsApi {
      * @summary Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
-    public async createBatch (batchInputTimelineEvent: BatchInputTimelineEvent, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors;  }> {
+    public async createBatch (batchInputTimelineEvent: BatchInputTimelineEvent, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponseTimelineEventResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/timeline/events/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -228,21 +224,14 @@ export class EventsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponseTimelineEventResponse;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 201) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponseTimelineEventResponse");
-                        }
-
-                        if (response.statusCode && response.statusCode === 207) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponseTimelineEventResponseWithErrors");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "BatchResponseTimelineEventResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -319,12 +308,9 @@ export class EventsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "TimelineEventResponse");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "TimelineEventResponse");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -401,12 +387,9 @@ export class EventsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "EventDetail");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "EventDetail");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -488,12 +471,9 @@ export class EventsApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "string");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "string");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

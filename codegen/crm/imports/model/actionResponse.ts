@@ -17,6 +17,7 @@ export class ActionResponse {
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
+    'links'?: { [key: string]: string; };
 
     static discriminator: string | undefined = undefined;
 
@@ -40,6 +41,11 @@ export class ActionResponse {
             "name": "completedAt",
             "baseName": "completedAt",
             "type": "Date"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }"
         }    ];
 
     static getAttributeTypeMap() {

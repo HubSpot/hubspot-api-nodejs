@@ -12,12 +12,13 @@
 
 import { RequestFile } from '../api';
 import { SimplePublicObject } from './simplePublicObject';
+import { StandardError } from './standardError';
 
 export class BatchResponseSimplePublicObjectWithErrors {
     'status': BatchResponseSimplePublicObjectWithErrors.StatusEnum;
     'results': Array<SimplePublicObject>;
     'numErrors'?: number;
-    'errors'?: Array<Error>;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -44,7 +45,7 @@ export class BatchResponseSimplePublicObjectWithErrors {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<Error>"
+            "type": "Array<StandardError>"
         },
         {
             "name": "requestedAt",

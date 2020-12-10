@@ -17,14 +17,15 @@ import { PublicImportMetadata } from './publicImportMetadata';
 * A current summary of the import, whether complete or not.
 */
 export class PublicImportResponse {
-    'createdAt': Date;
-    'metadata': PublicImportMetadata;
-    'updatedAt': Date;
     /**
     * The status of the import.
     */
     'state': PublicImportResponse.StateEnum;
     'importRequestJson'?: object;
+    'createdAt': Date;
+    'metadata': PublicImportMetadata;
+    'importName'?: string;
+    'updatedAt': Date;
     /**
     * Whether or not the import is a list of people disqualified from receiving emails.
     */
@@ -34,6 +35,16 @@ export class PublicImportResponse {
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "PublicImportResponse.StateEnum"
+        },
+        {
+            "name": "importRequestJson",
+            "baseName": "importRequestJson",
+            "type": "object"
+        },
         {
             "name": "createdAt",
             "baseName": "createdAt",
@@ -45,19 +56,14 @@ export class PublicImportResponse {
             "type": "PublicImportMetadata"
         },
         {
+            "name": "importName",
+            "baseName": "importName",
+            "type": "string"
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date"
-        },
-        {
-            "name": "state",
-            "baseName": "state",
-            "type": "PublicImportResponse.StateEnum"
-        },
-        {
-            "name": "importRequestJson",
-            "baseName": "importRequestJson",
-            "type": "object"
         },
         {
             "name": "optOutImport",

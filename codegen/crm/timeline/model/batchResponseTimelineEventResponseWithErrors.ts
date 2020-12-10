@@ -1,6 +1,6 @@
 /**
  * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM object like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -11,13 +11,14 @@
  */
 
 import { RequestFile } from '../api';
+import { StandardError } from './standardError';
 import { TimelineEventResponse } from './timelineEventResponse';
 
 export class BatchResponseTimelineEventResponseWithErrors {
     'status': BatchResponseTimelineEventResponseWithErrors.StatusEnum;
     'results': Array<TimelineEventResponse>;
     'numErrors'?: number;
-    'errors'?: Array<Error>;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -44,7 +45,7 @@ export class BatchResponseTimelineEventResponseWithErrors {
         {
             "name": "errors",
             "baseName": "errors",
-            "type": "Array<Error>"
+            "type": "Array<StandardError>"
         },
         {
             "name": "requestedAt",

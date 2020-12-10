@@ -4,6 +4,7 @@ export * from './batchReadInputPropertyName';
 export * from './batchResponseProperty';
 export * from './collectionResponseProperty';
 export * from './collectionResponsePropertyGroup';
+export * from './errorCategory';
 export * from './errorDetail';
 export * from './modelError';
 export * from './nextPage';
@@ -18,8 +19,9 @@ export * from './propertyGroupUpdate';
 export * from './propertyModificationMetadata';
 export * from './propertyName';
 export * from './propertyUpdate';
+export * from './standardError';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { BatchInputPropertyCreate } from './batchInputPropertyCreate';
 import { BatchInputPropertyName } from './batchInputPropertyName';
@@ -27,6 +29,7 @@ import { BatchReadInputPropertyName } from './batchReadInputPropertyName';
 import { BatchResponseProperty } from './batchResponseProperty';
 import { CollectionResponseProperty } from './collectionResponseProperty';
 import { CollectionResponsePropertyGroup } from './collectionResponsePropertyGroup';
+import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
@@ -41,6 +44,7 @@ import { PropertyGroupUpdate } from './propertyGroupUpdate';
 import { PropertyModificationMetadata } from './propertyModificationMetadata';
 import { PropertyName } from './propertyName';
 import { PropertyUpdate } from './propertyUpdate';
+import { StandardError } from './standardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -56,6 +60,7 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "BatchResponseProperty.StatusEnum": BatchResponseProperty.StatusEnum,
+        "ErrorCategory.HttpStatusEnum": ErrorCategory.HttpStatusEnum,
         "PropertyCreate.TypeEnum": PropertyCreate.TypeEnum,
         "PropertyCreate.FieldTypeEnum": PropertyCreate.FieldTypeEnum,
         "PropertyUpdate.TypeEnum": PropertyUpdate.TypeEnum,
@@ -69,6 +74,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseProperty": BatchResponseProperty,
     "CollectionResponseProperty": CollectionResponseProperty,
     "CollectionResponsePropertyGroup": CollectionResponsePropertyGroup,
+    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
@@ -83,6 +89,7 @@ let typeMap: {[index: string]: any} = {
     "PropertyModificationMetadata": PropertyModificationMetadata,
     "PropertyName": PropertyName,
     "PropertyUpdate": PropertyUpdate,
+    "StandardError": StandardError,
 }
 
 export class ObjectSerializer {

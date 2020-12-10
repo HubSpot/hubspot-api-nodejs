@@ -4,6 +4,7 @@ export * from './batchInputPublicObjectId';
 export * from './batchResponsePublicAssociation';
 export * from './batchResponsePublicAssociationMulti';
 export * from './collectionResponsePublicAssociationDefiniton';
+export * from './errorCategory';
 export * from './errorDetail';
 export * from './modelError';
 export * from './nextPage';
@@ -12,8 +13,9 @@ export * from './publicAssociation';
 export * from './publicAssociationDefiniton';
 export * from './publicAssociationMulti';
 export * from './publicObjectId';
+export * from './standardError';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { AssociatedId } from './associatedId';
 import { BatchInputPublicAssociation } from './batchInputPublicAssociation';
@@ -21,6 +23,7 @@ import { BatchInputPublicObjectId } from './batchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from './batchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from './batchResponsePublicAssociationMulti';
 import { CollectionResponsePublicAssociationDefiniton } from './collectionResponsePublicAssociationDefiniton';
+import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
@@ -29,6 +32,7 @@ import { PublicAssociation } from './publicAssociation';
 import { PublicAssociationDefiniton } from './publicAssociationDefiniton';
 import { PublicAssociationMulti } from './publicAssociationMulti';
 import { PublicObjectId } from './publicObjectId';
+import { StandardError } from './standardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -45,6 +49,7 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "BatchResponsePublicAssociation.StatusEnum": BatchResponsePublicAssociation.StatusEnum,
         "BatchResponsePublicAssociationMulti.StatusEnum": BatchResponsePublicAssociationMulti.StatusEnum,
+        "ErrorCategory.HttpStatusEnum": ErrorCategory.HttpStatusEnum,
 }
 
 let typeMap: {[index: string]: any} = {
@@ -54,6 +59,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponsePublicAssociation": BatchResponsePublicAssociation,
     "BatchResponsePublicAssociationMulti": BatchResponsePublicAssociationMulti,
     "CollectionResponsePublicAssociationDefiniton": CollectionResponsePublicAssociationDefiniton,
+    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
@@ -62,6 +68,7 @@ let typeMap: {[index: string]: any} = {
     "PublicAssociationDefiniton": PublicAssociationDefiniton,
     "PublicAssociationMulti": PublicAssociationMulti,
     "PublicObjectId": PublicObjectId,
+    "StandardError": StandardError,
 }
 
 export class ObjectSerializer {

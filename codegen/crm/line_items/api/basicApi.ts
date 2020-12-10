@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseSimplePublicObject } from '../model/collectionResponseSimplePublicObject';
@@ -161,7 +160,7 @@ export class BasicApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -171,7 +170,7 @@ export class BasicApi {
         });
     }
     /**
-     * Create a line item with the given properties and return a copy of the object, including the ID. Documentation and examples for creating native line items is provided.
+     * Create a line item with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard line items is provided.
      * @summary Create
      * @param simplePublicObjectInput 
      */
@@ -234,12 +233,9 @@ export class BasicApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 201) {
-                            body = ObjectSerializer.deserialize(body, "SimplePublicObject");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "SimplePublicObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -254,10 +250,11 @@ export class BasicApi {
      * @param lineItemId 
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param paginateAssociations 
      * @param archived Whether to return only results that have been archived.
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async getById (lineItemId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async getById (lineItemId: string, properties?: Array<string>, associations?: Array<string>, paginateAssociations?: boolean, archived?: boolean, idProperty?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/line_items/{lineItemId}'
             .replace('{' + 'lineItemId' + '}', encodeURIComponent(String(lineItemId)));
         let localVarQueryParameters: any = {};
@@ -282,6 +279,10 @@ export class BasicApi {
 
         if (associations !== undefined) {
             localVarQueryParameters['associations'] = ObjectSerializer.serialize(associations, "Array<string>");
+        }
+
+        if (paginateAssociations !== undefined) {
+            localVarQueryParameters['paginateAssociations'] = ObjectSerializer.serialize(paginateAssociations, "boolean");
         }
 
         if (archived !== undefined) {
@@ -332,12 +333,9 @@ export class BasicApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "SimplePublicObject");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "SimplePublicObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -353,9 +351,10 @@ export class BasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param paginateAssociations 
      * @param archived Whether to return only results that have been archived.
      */
-    public async getPage (limit?: number, after?: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObject;  }> {
+    public async getPage (limit?: number, after?: string, properties?: Array<string>, associations?: Array<string>, paginateAssociations?: boolean, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseSimplePublicObject;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/line_items';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -382,6 +381,10 @@ export class BasicApi {
 
         if (associations !== undefined) {
             localVarQueryParameters['associations'] = ObjectSerializer.serialize(associations, "Array<string>");
+        }
+
+        if (paginateAssociations !== undefined) {
+            localVarQueryParameters['paginateAssociations'] = ObjectSerializer.serialize(paginateAssociations, "boolean");
         }
 
         if (archived !== undefined) {
@@ -428,12 +431,9 @@ export class BasicApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "CollectionResponseSimplePublicObject");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseSimplePublicObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -513,12 +513,9 @@ export class BasicApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "SimplePublicObject");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "SimplePublicObject");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

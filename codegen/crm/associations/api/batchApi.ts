@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputPublicAssociation } from '../model/batchInputPublicAssociation';
@@ -171,7 +170,7 @@ export class BatchApi {
                         reject(error);
                     } else {
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -187,7 +186,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public async create (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation | BatchResponsePublicAssociation;  }> {
+    public async create (fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -248,21 +247,14 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation | BatchResponsePublicAssociation;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociation;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 201) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociation");
-                        }
-
-                        if (response.statusCode && response.statusCode === 207) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociation");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociation");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }
@@ -278,7 +270,7 @@ export class BatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public async read (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti | BatchResponsePublicAssociationMulti;  }> {
+    public async read (fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti;  }> {
         const localVarPath = this.basePath + '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -339,21 +331,14 @@ export class BatchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti | BatchResponsePublicAssociationMulti;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: BatchResponsePublicAssociationMulti;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociationMulti");
-                        }
-
-                        if (response.statusCode && response.statusCode === 207) {
-                            body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociationMulti");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "BatchResponsePublicAssociationMulti");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

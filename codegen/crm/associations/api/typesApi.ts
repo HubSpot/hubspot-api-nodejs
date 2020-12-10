@@ -10,9 +10,8 @@
  * Do not edit the class manually.
  */
 
-
-import localVarRequest from 'request';
-import http from 'http';
+import localVarRequest = require('request');
+import http = require('http');
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponsePublicAssociationDefiniton } from '../model/collectionResponsePublicAssociationDefiniton';
@@ -165,12 +164,9 @@ export class TypesApi {
                     if (error) {
                         reject(error);
                     } else {
-                        if (response.statusCode && response.statusCode === 200) {
-                            body = ObjectSerializer.deserialize(body, "CollectionResponsePublicAssociationDefiniton");
-                        }
-
+                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicAssociationDefiniton");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body });
+                            resolve({ response: response, body: body });
                         } else {
                             reject(new HttpError(response, body, response.statusCode));
                         }

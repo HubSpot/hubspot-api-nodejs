@@ -5,7 +5,7 @@ export * from './nextPage';
 export * from './paging';
 export * from './publicAuditLog';
 
-import localVarRequest from 'request';
+import localVarRequest = require('request');
 
 import { CollectionResponsePublicAuditLog } from './collectionResponsePublicAuditLog';
 import { ErrorDetail } from './errorDetail';
