@@ -14,7 +14,7 @@ import { RequestFile } from '../api';
 
 export class SearchHitField {
     'metadataField': boolean;
-    'values': Array;
+    'values': Array<object>;
     'name': string;
     'value': object;
 
@@ -29,7 +29,7 @@ export class SearchHitField {
         {
             "name": "values",
             "baseName": "values",
-            "type": "Array"
+            "type": "Array<object>"
         },
         {
             "name": "name",
