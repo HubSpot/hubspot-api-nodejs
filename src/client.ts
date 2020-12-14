@@ -9,6 +9,12 @@ import { Response } from 'request'
 import * as pJson from '../../package.json'
 import { DefaultApi as AuditLogsDefaultApi } from '../codegen/cms/audit_logs/api'
 import * as auditLogsModels from '../codegen/cms/audit_logs/model/models'
+import { DefaultApi as AuthorsDefaultApi } from '../codegen/cms/blogs/authors/api'
+import * as authorsModels from '../codegen/cms/blos/authors/model/models'
+import { DefaultApi as BlogPostsDefaultApi } from '../codegen/cms/blogs/blog_posts/api'
+import * as blogPostsModels from '../codegen/cms/blos/blog_posts/model/models'
+import { DefaultApi as TagsDefaultApi } from '../codegen/cms/blogs/tags/api'
+import * as tagsModels from '../codegen/cms/blos/tags/model/models'
 import { DomainsApi } from '../codegen/cms/domains/api'
 import * as domainsModels from '../codegen/cms/domains/model/models'
 import { DefaultApi as PerformanceDefaultApi } from '../codegen/cms/performance/api'
@@ -159,6 +165,9 @@ export {
     oauthModels,
     webhooksModels,
     auditLogsModels,
+    authorsModels,
+    blogPostsModels,
+    tagsModels,
     domainsModels,
     performanceModels,
     schemasModels,
@@ -347,6 +356,17 @@ export class Client {
         auditLogs: {
             defaultApi: AuditLogsDefaultApi
         }
+        blogs: {
+            authors: {
+                defaultApi: AuthorsDefaultApi
+            }
+            blogPosts: {
+                defaultApi: BlogPostsDefaultApi
+            }
+            tags: {
+                defaultApi: TagsDefaultApi
+            }
+        }
         domains: {
             domainsApi: DomainsApi
         }
@@ -413,6 +433,9 @@ export class Client {
     protected _settingsApi: SettingsApi
     protected _subscriptionsApi: SubscriptionsApi
     protected _auditLogsDefaultApi: AuditLogsDefaultApi
+    protected _authorsDefaultApi: AuthorsDefaultApi
+    protected _blogPostsDefaultApi: BlogPostsDefaultApi
+    protected _tagsDefaultApi: TagsDefaultApi
     protected _siteSearchDefaultApi: SiteSearchDefaultApi
     protected _domainsApi: DomainsApi
     protected _performanceDefaultApi: PerformanceDefaultApi
@@ -502,6 +525,9 @@ export class Client {
         this._settingsApi = new SettingsApi()
         this._subscriptionsApi = new SubscriptionsApi()
         this._auditLogsDefaultApi = new AuditLogsDefaultApi()
+        this._authorsDefaultApi = new AuthorsDefaultApi()
+        this._blogPostsDefaultApi = new BlogPostsDefaultApi()
+        this._tagsDefaultApi = new TagsDefaultApi()
         this._domainsApi = new DomainsApi()
         this._performanceDefaultApi = new PerformanceDefaultApi()
         this._redirectsApi = new RedirectsApi()
@@ -552,6 +578,9 @@ export class Client {
             this._ticketsSearchApi,
             this._templatesApi,
             this._tokensApi,
+            this._authorsDefaultApi,
+            this._blogPostsDefaultApi,
+            this._tagsDefaultApi,
             this._domainsApi,
             this._redirectsApi,
             this._siteSearchDefaultApi,
@@ -697,6 +726,17 @@ export class Client {
         this.cms = {
             auditLogs: {
                 defaultApi: this._auditLogsDefaultApi,
+            },
+            blogs: {
+                authors: {
+                    defaultApi: this._authorsDefaultApi
+                },
+                blogPosts: {
+                    defaultApi: this._blogPostsDefaultApi
+                },
+                tags: {
+                    defaultApi: this._tagsDefaultApi
+                },
             },
             domains: {
                 domainsApi: this._domainsApi,
