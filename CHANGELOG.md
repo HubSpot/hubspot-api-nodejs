@@ -113,11 +113,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - removed all create/update methods from CRM quotes
   - response types extended for all crm.**.batchApi.create/read/update methods
 
-## [3.1.0] - 2020-10-12
+## [3.1.0] - 2020-12-15
 
 ### Added
 
   - crm.objects and crm.schemas clients  
+  - cms.hubdb
+  - cms.blogs.authors, cms.blogs.blogPosts  and cms.blogs.tags
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.1.0...HEAD
