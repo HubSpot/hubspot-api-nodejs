@@ -118,8 +118,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
   - crm.objects and crm.schemas clients  
-  - cms.hubdb
-  - cms.blogs.authors, cms.blogs.blogPosts and cms.blogs.tags
+  - cms.hubdb clients
+  - cms.blogs.authors, cms.blogs.blogPosts and cms.blogs.tags clients
   
 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.1.0...HEAD
