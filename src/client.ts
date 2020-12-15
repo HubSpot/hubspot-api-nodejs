@@ -377,7 +377,7 @@ export class Client {
         domains: {
             domainsApi: DomainsApi
         }
-        hubDB: {
+        hubdb: {
             rowsApi: RowsApi
             rowsBatchApi: RowsBatchApi
             tablesApi: TablesApi
@@ -762,7 +762,7 @@ export class Client {
             domains: {
                 domainsApi: this._domainsApi,
             },
-            hubDB: {
+            hubdb: {
                 rowsApi: this._rowsApi,
                 rowsBatchApi: this._rowsBatchApi,
                 tablesApi: this._tablesApi,
