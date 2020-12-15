@@ -47,8 +47,8 @@
   color: #606c76
 }
 
-.row.authorize-button {
-  justify-content: center;
+.authorize-button {
+  text-align: center;
 }
 
 .alert-error {
