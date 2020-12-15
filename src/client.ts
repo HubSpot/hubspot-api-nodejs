@@ -10,13 +10,19 @@ import * as pJson from '../../package.json'
 import { DefaultApi as AuditLogsDefaultApi } from '../codegen/cms/audit_logs/api'
 import * as auditLogsModels from '../codegen/cms/audit_logs/model/models'
 import { DefaultApi as AuthorsDefaultApi } from '../codegen/cms/blogs/authors/api'
-import * as authorsModels from '../codegen/cms/blos/authors/model/models'
+import * as authorsModels from '../codegen/cms/blogs/authors/model/models'
 import { DefaultApi as BlogPostsDefaultApi } from '../codegen/cms/blogs/blog_posts/api'
-import * as blogPostsModels from '../codegen/cms/blos/blog_posts/model/models'
+import * as blogPostsModels from '../codegen/cms/blogs/blog_posts/model/models'
 import { DefaultApi as TagsDefaultApi } from '../codegen/cms/blogs/tags/api'
-import * as tagsModels from '../codegen/cms/blos/tags/model/models'
+import * as tagsModels from '../codegen/cms/blogs/tags/model/models'
 import { DomainsApi } from '../codegen/cms/domains/api'
 import * as domainsModels from '../codegen/cms/domains/model/models'
+import { 
+    RowsApi,
+    RowsBatchApi,
+    TablesApi
+} from '../codegen/cms/hubdb/api'
+import * as hubdbModels from '../codegen/cms/hubdb/model/models'
 import { DefaultApi as PerformanceDefaultApi } from '../codegen/cms/performance/api'
 import * as performanceModels from '../codegen/cms/performance/model/models'
 import { DefaultApi as SiteSearchDefaultApi } from '../codegen/cms/site_search/api'
@@ -169,6 +175,7 @@ export {
     blogPostsModels,
     tagsModels,
     domainsModels,
+    hubdbModels,
     performanceModels,
     schemasModels,
     urlRedirectsModels,
@@ -370,6 +377,11 @@ export class Client {
         domains: {
             domainsApi: DomainsApi
         }
+        hubdb: {
+            rowsApi: RowsApi
+            rowsBatchApi: RowsBatchApi
+            tablesApi: TablesApi
+        }
         performance: {
             defaultApi: PerformanceDefaultApi
         }
@@ -438,6 +450,9 @@ export class Client {
     protected _tagsDefaultApi: TagsDefaultApi
     protected _siteSearchDefaultApi: SiteSearchDefaultApi
     protected _domainsApi: DomainsApi
+    protected _rowsApi: RowsApi
+    protected _rowsBatchApi: RowsBatchApi
+    protected _tablesApi: TablesApi
     protected _performanceDefaultApi: PerformanceDefaultApi
     protected _redirectsApi: RedirectsApi
     protected _apiClientsWithApiKeyAuth: any[]
@@ -529,6 +544,9 @@ export class Client {
         this._blogPostsDefaultApi = new BlogPostsDefaultApi()
         this._tagsDefaultApi = new TagsDefaultApi()
         this._domainsApi = new DomainsApi()
+        this._rowsApi = new RowsApi()
+        this._rowsBatchApi = new RowsBatchApi()
+        this._tablesApi = new TablesApi()
         this._performanceDefaultApi = new PerformanceDefaultApi()
         this._redirectsApi = new RedirectsApi()
         this._siteSearchDefaultApi = new SiteSearchDefaultApi()
@@ -582,6 +600,9 @@ export class Client {
             this._blogPostsDefaultApi,
             this._tagsDefaultApi,
             this._domainsApi,
+            this._rowsApi,
+            this._rowsBatchApi,
+            this._tablesApi,
             this._redirectsApi,
             this._siteSearchDefaultApi,
         ]
@@ -740,6 +761,11 @@ export class Client {
             },
             domains: {
                 domainsApi: this._domainsApi,
+            },
+            hubdb: {
+                rowsApi: this._rowsApi,
+                rowsBatchApi: this._rowsBatchApi,
+                tablesApi: this._tablesApi,
             },
             performance: {
                 defaultApi: this._performanceDefaultApi,
