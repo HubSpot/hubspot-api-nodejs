@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    environment:
+      - USE_SELENIUM_SERVER=true
+    env_file:
+      - src/.env-test
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    volumes:
+      - ./src:/companies-sample-app/src
+      - /companies-sample-app/src/node_modules
+    command: bash ./start-tests.sh
