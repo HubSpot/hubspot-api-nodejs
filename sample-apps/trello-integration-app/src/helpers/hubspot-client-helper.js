@@ -1,4 +1,4 @@
-const hubspot = require('../../../..')
+const hubspot = require('@hubspot/api-client')
 const hubspotOauthHelper = require('./hubspot-oauth-helper')
 const DEVELOPER_API_KEY = process.env.HUBSPOT_DEVELOPER_API_KEY
 let hubspotClient
