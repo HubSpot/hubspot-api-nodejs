@@ -1,6 +1,6 @@
 # HubSpot-nodejs limiting handling and retry sample app
 
-This is a sample app for the [hubspot-nodejs SDK](../../../../../).
+This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client).
 
 Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-ap)
 
@@ -138,7 +138,7 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose -f  ../../../docker-compose-limiting-handling-and-retry.yml up --build
+docker-compose -f  ../docker-compose.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application. 
 
