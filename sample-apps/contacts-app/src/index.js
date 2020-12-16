@@ -5,7 +5,7 @@ const _ = require('lodash')
 const path = require('path')
 const express = require('express')
 // eslint-disable-next-line node/no-unpublished-require
-const hubspot = require('../../..')
+const hubspot = require('@hubspot/api-client')
 const bodyParser = require('body-parser')
 const Promise = require('bluebird')
 
