@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 const express = require('express')
-const hubspot = require('../../..')
+const hubspot = require('@hubspot/api-client')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 require('./config')
