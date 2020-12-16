@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "./node_modules/.bin/mocha \"./test/test-oauth-app.js\" --timeout 60000 --exit"
+    "test": "./node_modules/.bin/mocha \\\"test/test-oauth-app.js\\\" --timeout 60000 --exit"
   },
   "keywords": [
     "hubspot",
@@ -21,6 +21,7 @@
   "author": "hubspot",
   "license": "Apache-2.0",
   "dependencies": {
+    "@hubspot/api-client": "^3.1.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.16.3",

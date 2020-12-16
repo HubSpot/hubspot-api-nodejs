@@ -1,6 +1,6 @@
 # HubSpot-nodejs oauth sample app
 
-This is a sample app for the [hubspot-php SDK](../../../../). Currently, this app focuses on demonstrating the functionality of [OAuth API](https://developers.hubspot.com/docs/api/working-with-oauth) endpoints and their related actions.
+This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client). Currently, this app focuses on demonstrating the functionality of [OAuth API](https://developers.hubspot.com/docs/api/working-with-oauth) endpoints and their related actions.
 
   - [Using OAuth 2.0 access tokens](https://developers.hubspot.com/docs/api/intro-to-auth)
   - [Get all contacts](https://developers.hubspot.com/docs/api/crm/contacts)
@@ -22,7 +22,7 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose -f  ../../docker-compose-oauth.yml up --build
+docker-compose -f ../docker-compose.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
 
@@ -33,5 +33,5 @@ and HubSpot Account Name as the value for HUBSPOT_API_KEY, HUBSPOT_CLIENT_ID, HU
 HUBSPOT_AUTHORIZATION_PASSWORD and HUBSPOT_ACCOUNT_NAME in .env-test
 
 ```bash
-docker-compose -f  ../../docker-compose-oauth-test.yml up --build
+docker-compose -f ../docker-compose-test.yml up --build
 ```

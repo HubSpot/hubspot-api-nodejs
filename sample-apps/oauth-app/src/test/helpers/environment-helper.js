@@ -1,4 +1,4 @@
-const hubspot = require('../../../..')
+const hubspot = require('@hubspot/api-client')
 const _ = require('lodash')
 const Promise = require('bluebird')
 
