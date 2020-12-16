@@ -1,6 +1,6 @@
 # HubSpot-nodejs imports contacts sample app
 
-This is a sample app for the [hubspot-nodejs SDK](../../../../../). Currently, this app focuses on demonstrating the functionality of [Imports API](https://developers.hubspot.com/docs/api/crm/imports) endpoints and their related actions.
+This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client). Currently, this app focuses on demonstrating the functionality of [Imports API](https://developers.hubspot.com/docs/api/crm/imports) endpoints and their related actions.
 
 Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-ap)
 
@@ -23,6 +23,6 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 The best way to run this project (with the least configuration), is using docker cli.
 
 ```bash
-docker-compose -f  ../../../docker-compose-imports-contacts.yml up --build
+docker-compose -f  ../docker-compose.yml up --build
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
