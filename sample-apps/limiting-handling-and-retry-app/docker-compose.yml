@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  redis:
+    image: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis-data:/data
+    ports:
+      - 6379:6379
+
+  limiting_handling_and_retry_web:
+    env_file:
+      - src/.env
+    environment:
+      REDIS_HOST: redis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/limiting-handling-and-retry-sample-app/src
+      - /limiting-handling-and-retry-sample-app/src/node_modules
+      - ./tools:/limiting-handling-and-retry-sample-app/tools
+    ports:
+      - 3000:3000
+    command: ../tools/wait-for-it.sh redis:6379 -t 30 --strict -- npm run dev
+    depends_on:
+      - redis
