@@ -33,7 +33,7 @@ services:
     image: mysql:8.0
     command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./sample-apps/webhooks-app/db/mysql:/var/lib/mysql
+      - ./db/mysql:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
@@ -46,7 +46,7 @@ services:
 
   webhooks_web:
     env_file:
-      - sample-apps/webhooks-app/src/.env
+      - src/.env
     environment:
       KAFKA_BROKER_LIST: kafka:9092
       KAFKA_GROUP_ID: events
@@ -58,12 +58,12 @@ services:
       MYSQL_PASSWORD: events
     build:
       context: .
-      dockerfile: Dockerfile-webhooks
+      dockerfile: Dockerfile
     volumes:
-      - ./sample-apps/webhooks-app/src:/webhooks-sample-app/sample-apps/webhooks-app/src
-      - /webhooks-sample-app/sample-apps/webhooks-app/src/node_modules
-      - ./sample-apps/webhooks-app/db:/webhooks-sample-app/sample-apps/webhooks-app/db
-      - ./sample-apps/webhooks-app/tools:/webhooks-sample-app/sample-apps/webhooks-app/tools
+      - ./src:/webhooks-sample-app/src
+      - /webhooks-sample-app/src/node_modules
+      - ./db:/webhooks-sample-app/db
+      - ./tools:/webhooks-sample-app/tools
     ports:
       - 3000:3000
     command: ../tools/wait-for-it.sh db:3306 -t 60 --strict -- npm run dev
