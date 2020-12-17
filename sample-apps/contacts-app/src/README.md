@@ -18,26 +18,29 @@ Please see the documentation on [Creating an app in HubSpot](https://developers.
 
 ### Setup App
 
-Make sure you have [Docker](https://www.docker.com/) installed.
-Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
+Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
 
 ### Configure
 
 1. Copy .env.template to .env
 2. Paste your HubSpot API Key as the value for HUBSPOT_API_KEY in .env
 
+### Install
+```bash
+npm install
+```
+
 ### Running
 
-The best way to run this project (with the least configuration), is using docker cli.
-
 ```bash
-docker-compose -f  ../docker-compose.yml up --build
+npm run dev
 ```
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
 
 ### Testing
 1. Copy .test-env.template to .test-env
-2. Paste your HubSpot Apikey, HubSpot User Name and HubSpot User Last Name as the value for HUBSPOT_API_KEY, HUBSPOT_USER_NAME and HUBSPOT_USER_LAST_NAME in .env-test
+2. Make sure you have [Docker](https://www.docker.com/) installed. Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
+3. Paste your HubSpot Apikey, HubSpot User Name and HubSpot User Last Name as the value for HUBSPOT_API_KEY, HUBSPOT_USER_NAME and HUBSPOT_USER_LAST_NAME in .env-test
 
 ```bash
 docker-compose -f  ../docker-compose-test.yml up --build
