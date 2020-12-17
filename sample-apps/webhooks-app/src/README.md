@@ -1,6 +1,6 @@
 # HubSpot-nodejs webhooks sample app
 
-This is a sample app for the [hubspot-nodejs SDK](../../../../../).
+This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client).
 Currently, this app focuses on demonstrating the functionality of [Webhooks API](https://developers.hubspot.com/docs/api/webhooks), contact update/creation/deletion in particular.
 
 Please note that the Webhooks events are not sent in chronological order with respect to the creation time. Events might be sent in large numbers, for example when the user imports large number of contacts or deletes a large list of contacts.
@@ -67,7 +67,7 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) and [Ngrok
 The best way to run this project (with the least configuration), is using docker compose.  Change to the webroot and start it
 
 ```bash
-docker-compose -f  ../../../docker-compose-webhooks.yml up --build
+docker-compose -f  ../docker-compose.yml up --build
 ```
 
 Copy Ngrok url from console. Now you should now be able to navigate to that url and use the application.
