@@ -7,13 +7,13 @@ This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/
 
 Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-ap)
 
+### Setup App
+Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
+
 ### Configure
 
 1. Copy .env.template to .env
 2. Paste your HubSpot Client Id and HubSpot Client Secret as the value for HUBSPOT_CLIENT_ID and HUBSPOT_CLIENT_SECRET in .env
-
-### Setup App
-Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
 
 ### Install
 ```bash
