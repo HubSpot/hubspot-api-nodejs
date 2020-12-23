@@ -1,0 +1,16 @@
+{
+  "samples": [
+    {
+      "name": "Oauth App",
+      "id": "oauth-app",
+      "description": "Focuses on demonstrating the functionality of OAuth API endpoints and their related actions.",
+      "languages": ["node"]
+    },
+    {
+      "name": "Contacts App",
+      "id": "contacts-app",
+      "description": "Focuses on demonstrating the functionality of Contacts API endpoints and their related actions. Additionally it shows how to work with paged results and how to use getAll method.",
+      "languages": ["node"]
+    }
+  ]
+}
