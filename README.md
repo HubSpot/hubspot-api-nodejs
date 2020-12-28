@@ -349,4 +349,4 @@ const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey
 
 ## License
 
-MIT
+Apache 2.0
