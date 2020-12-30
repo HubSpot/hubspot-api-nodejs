@@ -10,5 +10,5 @@
     "moduleResolution": "node"
   },
   "include": ["index.ts"],
-  "exclude": ["node_modules", "./package.json"]
+  "exclude": ["node_modules", "./lib", "./package.json"]
 }
