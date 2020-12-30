@@ -5,3 +5,4 @@ test-results.xml
 /test
 redis-data/
 db/
+lib
