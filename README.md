@@ -1,4 +1,5 @@
 # hubspot-api-nodejs
+
 NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files and sample apps
 
 Sample Applications can be found in [sample-apps](sample-apps/) folder
@@ -13,7 +14,7 @@ npm install @hubspot/api-client
 
 ```javascript
 const hubspot = require('@hubspot/api-client')
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY})
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 ```
 
 You can also authenticate via token:
@@ -45,25 +46,22 @@ const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, baseP
 To add custom headers to all request:
 
 ```javascript
-const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN, defaultHeaders: { "My-header": "test-example" } })
+const hubspotClient = new hubspot.Client({
+    accessToken: YOUR_ACCESS_TOKEN,
+    defaultHeaders: { 'My-header': 'test-example' },
+})
 ```
 
 If you're an app developer, you can also instantiate a client and obtain a new accessToken with your app
 details and a refresh_token:
 
 ```javascript
-const hubspotClient = new hubspot.Client();
-return hubspotClient.oauth.defaultApi.createToken(
-    'refresh_token',
-    undefined,
-    undefined,
-    YOUR_CLIENT_ID,
-    YOUR_CLIENT_SECRET,
-    YOUR_REFRESH_TOKEN
-)
-    .then(results => {
-        console.log(results.body);
-        
+const hubspotClient = new hubspot.Client()
+return hubspotClient.oauth.defaultApi
+    .createToken('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
+    .then((results) => {
+        console.log(results.body)
+
         // this assigns the accessToken to the client, so your client is ready
         // to use
         hubspotClient.setAccessToken(results.body.accessToken)
@@ -96,32 +94,31 @@ const DEFAULT_SEARCH_LIMITER_OPTIONS = {
 
 For search limiter settings provided in `limiterOptions` merged with DEFAULT_SEARCH_LIMITER_OPTIONS, so it's not possible to change 'minTime' & 'maxConcurrent' values and `id` would always have prefix 'search-'.
 
-
 It's possible to turn off rate limiting:
 
 ```javascript
-const hubspotClient = new hubspot.Client({ 
-    accessToken: YOUR_ACCESS_TOKEN, 
+const hubspotClient = new hubspot.Client({
+    accessToken: YOUR_ACCESS_TOKEN,
     useLimiter: false,
 })
 ```
 
 It's possible to turn on retry for failed requests with statuses 429 or 5xx. To turn on/off Configurable Retries use numberOfApiCallRetries option on Client instance creation.
-numberOfApiCallRetries could be set to a numberfrom 0 - 6. If numberOfApiCallRetries is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 * retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed numberOfApiCallRetries value.
+numberOfApiCallRetries could be set to a numberfrom 0 - 6. If numberOfApiCallRetries is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 \* retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed numberOfApiCallRetries value.
 
 ```javascript
-const hubspotClient = new hubspot.Client({ 
-    accessToken: YOUR_ACCESS_TOKEN, 
-    numberOfApiCallRetries : NumberOfRetries.Six
+const hubspotClient = new hubspot.Client({
+    accessToken: YOUR_ACCESS_TOKEN,
+    numberOfApiCallRetries: NumberOfRetries.Six,
 })
 ```
 
 It's possible to create client instance with Interceptors functions which would be called and awaited before request is made:
 
 ```javascript
-const hubspotClient = new hubspot.Client({ 
-    accessToken: YOUR_ACCESS_TOKEN, 
-    interceptors: [interceptorFn1, interceptorFn2]
+const hubspotClient = new hubspot.Client({
+    accessToken: YOUR_ACCESS_TOKEN,
+    interceptors: [interceptorFn1, interceptorFn2],
 })
 ```
 
@@ -130,13 +127,14 @@ const hubspotClient = new hubspot.Client({
 All methods return a [promise]. The success includes the serialized to JSON body and response objects. Use the API method via:
 
 ```javascript
-hubspotClient.crm.contacts.basicApi.getPage(limit, after, properties, associations, archived)
-  .then(results => {
-    console.log(results.body)
-  })
-  .catch(err => {
-    console.error(err)
-  })
+hubspotClient.crm.contacts.basicApi
+    .getPage(limit, after, properties, associations, archived)
+    .then((results) => {
+        console.log(results.body)
+    })
+    .catch((err) => {
+        console.error(err)
+    })
 ```
 
 [promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
@@ -144,23 +142,48 @@ hubspotClient.crm.contacts.basicApi.getPage(limit, after, properties, associatio
 ### {EXAMPLE} Create Contact, Company and associate created objects
 
 ```javascript
-const contactObj = { 
+const contactObj = {
     properties: {
         firstname: yourValue,
-        lastname: yourValue
-    }
-};
+        lastname: yourValue,
+    },
+}
 const companyObj = {
     properties: {
         domain: yourValue,
-        name: yourValue
-     }
-};
+        name: yourValue,
+    },
+}
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
-await hubspotClient.crm.companies.associationsApi.create(createCompanyResponse.body.id, 'contacts', createContactResponse.body.id)
+await hubspotClient.crm.companies.associationsApi.create(
+    createCompanyResponse.body.id,
+    'contacts',
+    createContactResponse.body.id,
+)
+```
+
+### {EXAMPLE} Update multiple objects in batch mode
+
+```javascript
+const dealObj = {
+    id: yourId,
+    properties: {
+        amount: yourValue,
+    },
+}
+
+const dealObj2 = {
+    id: yourId,
+    properties: {
+        amount: yourValue,
+    },
+}
+
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 ```
 
 ### {EXAMPLE} Import Contacts:
@@ -169,9 +192,9 @@ await hubspotClient.crm.companies.associationsApi.create(createCompanyResponse.b
 
 ```javascript
 const hubspot = require('@hubspot/api-client')
-const fs = require('fs');
+const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const importRequest = {
     name: 'test_import',
     files: [
@@ -206,9 +229,9 @@ console.log(JSON.stringify(result.body))
 
 ```javascript
 const hubspot = require('@hubspot/api-client')
-const fs = require('fs');
+const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY });
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const importRequest = {
     name: 'test_import',
     files: [
@@ -264,7 +287,7 @@ In TS works only the first two options.
 ```javascript
 const filter = { propertyName: 'createdate', operator: 'GTE', value: Date.now() - 30 * 60000 }
 const filterGroup = { filters: [filter] }
-const sort = JSON.stringify({ propertyName: 'createdate', direction: 'DESCENDING'})
+const sort = JSON.stringify({ propertyName: 'createdate', direction: 'DESCENDING' })
 const query = 'test'
 const properties = ['createdate', 'firstname', 'lastname']
 const limit = 100
@@ -276,8 +299,8 @@ const publicObjectSearchRequest = {
     query,
     properties,
     limit,
-    after
-  };
+    after,
+}
 
 const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
 console.log(JSON.stringify(result.body))
@@ -332,10 +355,10 @@ Exposed request method benefits by having all configured client params.
 
 ```javascript
 hubspotClient.apiRequest({
-            method: 'PUT',
-            path: '/some/api/not/wrapped/yet',
-            body: { key: 'value' },
-          })
+    method: 'PUT',
+    path: '/some/api/not/wrapped/yet',
+    body: { key: 'value' },
+})
 ```
 
 ## Typescript
@@ -343,8 +366,8 @@ hubspotClient.apiRequest({
 You may use this library in your Typescript project via:
 
 ```typescript
-import * as hubspot from '@hubspot/api-client';
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey: YOUR_DEVELOPER_API_KEY });
+import * as hubspot from '@hubspot/api-client'
+const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey: YOUR_DEVELOPER_API_KEY })
 ```
 
 ## License
