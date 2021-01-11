@@ -8,9 +8,7 @@ module.exports = {
     'plugin:node/recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: [
-    'prefer-arrow'
-  ],
+  plugins: ['prefer-arrow'],
   env: {
     es6: true,
     node: true,
