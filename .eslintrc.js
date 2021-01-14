@@ -12,7 +12,6 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    jasmine: true,
   },
   rules: {
     'prefer-arrow-callback': 2,

@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "ts-node -P tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "prettier:check": "prettier --check {,**/}*.{js,ts}",
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
     "lint": "tslint -p tsconfig.json && npm run prettier:check"
