@@ -7,5 +7,5 @@ describe('api client', () => {
     expect(client.hasOwnProperty('batchApi')).toBeTruthy()
     expect(client.hasOwnProperty('searchApi')).toBeTruthy()
     expect(client.hasOwnProperty('getAll')).toBeTruthy()
-  });
-});
+  })
+})
