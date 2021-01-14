@@ -8,7 +8,5 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "moduleResolution": "node"
-  },
-  "include": ["index.ts"],
-  "exclude": ["node_modules", "./lib", "./package.json"]
+  }
 }
