@@ -2,7 +2,6 @@ node_modules/
 test-results.xml
 .env
 .env-test
-/test
 redis-data/
 db/
 lib
