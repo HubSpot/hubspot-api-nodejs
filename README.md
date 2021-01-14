@@ -380,7 +380,6 @@ You can run the tests by executing:
 npm run test
 ```
 
-
 ## Linting
 You can check the TypeScript code by running:
 ```
