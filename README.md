@@ -374,13 +374,19 @@ const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey
 
 Apache 2.0
 
-## Testing
+## Contributing
+
+Install project dependencies with
+```bash
+npm install
+```
+
+
 You can run the tests by executing:
 ```bash
 npm run test
 ```
 
-## Linting
 You can check the TypeScript code by running:
 ```
 npm run lint
