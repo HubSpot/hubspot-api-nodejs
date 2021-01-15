@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"No test specified\"",
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "prettier:check": "prettier --check {,**/}*.{js,ts}",
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
     "lint": "tslint -p tsconfig.json && npm run prettier:check"
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.29",
+    "@types/jasmine": "^3.6.2",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.21",
     "@types/request": "^2.48.4",
@@ -33,7 +34,9 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
+    "jasmine": "^3.6.3",
     "prettier": "^1.19.1",
+    "ts-node": "^9.1.1",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.3"

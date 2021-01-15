@@ -373,3 +373,26 @@ const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey
 ## License
 
 Apache 2.0
+
+## Contributing
+
+Install project dependencies with
+```bash
+npm install
+```
+
+
+You can run the tests by executing:
+```bash
+npm run test
+```
+
+You can check the TypeScript code by running:
+```
+npm run lint
+```
+
+If there is a linting error based on formatting, you can run the command below to auto-correct the formatting:
+```
+npm run prettier:write
+```
