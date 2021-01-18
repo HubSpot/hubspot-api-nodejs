@@ -4,12 +4,14 @@
       "name": "Oauth App",
       "id": "oauth-app",
       "description": "Focuses on demonstrating the functionality of OAuth API endpoints and their related actions.",
+      "url": "https://github.com/HubSpot/sample-apps-oauth",
       "languages": ["node"]
     },
     {
-      "name": "Contacts App",
-      "id": "contacts-app",
-      "description": "Focuses on demonstrating the functionality of Contacts API endpoints and their related actions. Additionally it shows how to work with paged results and how to use getAll method.",
+      "name": "CRM Objects App",
+      "id": "crm-objects-app",
+      "description": "Focuses on demonstrating the functionality of CRUD CRM objects API endpoints and their related actions.",
+      "url": "https://github.com/HubSpot/sample-apps-manage-crm-objects",
       "languages": ["node"]
     }
   ]
