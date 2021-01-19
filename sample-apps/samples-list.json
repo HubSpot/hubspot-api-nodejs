@@ -2,17 +2,15 @@
   "samples": [
     {
       "name": "Oauth App",
-      "id": "oauth-app",
+      "id": "sample-apps-oauth",
       "description": "Focuses on demonstrating the functionality of OAuth API endpoints and their related actions.",
-      "url": "https://github.com/HubSpot/sample-apps-oauth",
-      "languages": ["node"]
-    },
-    {
-      "name": "CRM Objects App",
-      "id": "crm-objects-app",
-      "description": "Focuses on demonstrating the functionality of CRUD CRM objects API endpoints and their related actions.",
-      "url": "https://github.com/HubSpot/sample-apps-manage-crm-objects",
       "languages": ["node"]
     }
+//    {
+//      "name": "CRM Objects App",
+//      "id": "sample-apps-manage-crm-objects",
+//      "description": "Focuses on demonstrating the functionality of CRUD CRM objects API endpoints and their related actions.",
+//      "languages": ["node"]
+//    }
   ]
 }
