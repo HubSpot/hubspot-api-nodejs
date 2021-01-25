@@ -5,6 +5,13 @@ import * as _ from 'lodash'
 import * as qs from 'querystring'
 import request = require('request')
 import { Response } from 'request'
+import {
+  CallbacksApi as ActionsCallbacksApi,
+  DefinitionsApi as ActionsDefinitionsApi,
+  FunctionsApi as ActionsFunctionsApi,
+  RevisionsApi as ActionsRevisionsApi,
+} from '../codegen/automation/actions/api'
+import * as actionsModels from '../codegen/automation/actions/model/models'
 import { DefaultApi as AuditLogsDefaultApi } from '../codegen/cms/audit_logs/api'
 import * as auditLogsModels from '../codegen/cms/audit_logs/model/models'
 import { DefaultApi as AuthorsDefaultApi } from '../codegen/cms/blogs/authors/api'
@@ -149,6 +156,7 @@ export enum NumberOfRetries {
 export type Interceptor = (requestOptions: request.Options) => Promise<any> | void
 
 export {
+  actionsModels,
   associationsModels,
   companiesModels,
   contactsModels,
@@ -186,6 +194,14 @@ export class HttpError extends Error {
 }
 
 export class Client {
+  public automation: {
+    actions: {
+      callbacksApi: ActionsCallbacksApi
+      definitionsApi: ActionsDefinitionsApi
+      functionsApi: ActionsFunctionsApi
+      revisionsApi: ActionsRevisionsApi
+    }
+  }
   public oauth: {
     defaultApi: OauthDefaultApi
     getAuthorizationUrl: (
@@ -389,6 +405,10 @@ export class Client {
     }
   }
   protected _interceptors: Interceptor[] = []
+  protected _actionsCallbacksApi: ActionsCallbacksApi
+  protected _actionsDefinitionsApi: ActionsDefinitionsApi
+  protected _actionsFunctionsApi: ActionsFunctionsApi
+  protected _actionsRevisionsApi: ActionsRevisionsApi
   protected _oauthDefaultApi: OauthDefaultApi
   protected _associationsBatchApi: AssociationsBatchApi
   protected _typesApi: TypesApi
@@ -484,6 +504,10 @@ export class Client {
       interceptors?: Interceptor[]
     } = {},
   ) {
+    this._actionsCallbacksApi = new ActionsCallbacksApi()
+    this._actionsDefinitionsApi = new ActionsDefinitionsApi()
+    this._actionsFunctionsApi = new ActionsFunctionsApi()
+    this._actionsRevisionsApi = new ActionsRevisionsApi()
     this._oauthDefaultApi = new OauthDefaultApi()
     this._associationsBatchApi = new AssociationsBatchApi()
     this._typesApi = new TypesApi()
@@ -547,6 +571,7 @@ export class Client {
     this._redirectsApi = new RedirectsApi()
     this._siteSearchDefaultApi = new SiteSearchDefaultApi()
     this._apiClientsWithApiKeyAuth = [
+      this._actionsCallbacksApi,
       this._associationsBatchApi,
       this._typesApi,
       this._companiesAssociationsApi,
@@ -603,6 +628,9 @@ export class Client {
       this._siteSearchDefaultApi,
     ]
     this._apiClientsWithDevApiKeyAuth = [
+      this._actionsDefinitionsApi,
+      this._actionsFunctionsApi,
+      this._actionsRevisionsApi,
       this._auditLogsDefaultApi,
       this._cardsApi,
       this._settingsApi,
@@ -619,6 +647,14 @@ export class Client {
     this._numberOfApiCallRetries = NumberOfRetries.NoRetries
     this._setUseQuerystring(true)
     this._setOptions(options)
+    this.automation = {
+      actions: {
+        callbacksApi: this._actionsCallbacksApi,
+        definitionsApi: this._actionsDefinitionsApi,
+        functionsApi: this._actionsFunctionsApi,
+        revisionsApi: this._actionsRevisionsApi,
+      }
+    }
     this.crm = {
       associations: {
         batchApi: this._associationsBatchApi,
