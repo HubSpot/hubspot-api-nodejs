@@ -93,6 +93,27 @@ export class BlogPost {
     */
     'blogAuthorId': string;
     /**
+    * The html title of this Blog Post.
+    */
+    'htmlTitle': string;
+    'pageRedirected': boolean;
+    'pageExpiryEnabled': boolean;
+    'pageExpiryDate': number;
+    'pageExpiryRedirectId': number;
+    'pageExpiryRedirectUrl': string;
+    /**
+    * Boolean to determine if this post should use a featuredImage.
+    */
+    'useFeaturedImage': boolean;
+    /**
+    * List of IDs for the tags associated with this Blog Post.
+    */
+    'tagIds': Array<number>;
+    /**
+    * Boolean to allow overriding the AMP settings for the blog.
+    */
+    'enableGoogleAmpOutputOverride': boolean;
+    /**
     * The HTML of the main post body.
     */
     'postBody': string;
@@ -109,42 +130,13 @@ export class BlogPost {
     */
     'rssSummary': string;
     /**
-    * List of IDs for the tags associated with this Blog Post.
-    */
-    'tagIds': Array<number>;
-    /**
-    * Boolean to allow overriding the AMP settings for the blog.
-    */
-    'enableGoogleAmpOutputOverride': boolean;
-    /**
-    * The html title of this Blog Post.
-    */
-    'htmlTitle': string;
-    'pageRedirected': boolean;
-    'pageExpiryEnabled': boolean;
-    'pageExpiryDate': number;
-    'pageExpiryRedirectId': number;
-    'pageExpiryRedirectUrl': string;
-    /**
-    * Boolean to determine if this post should use a featuredImage.
-    */
-    'useFeaturedImage': boolean;
-    /**
     * Set this to create a password protected page. Entering the password will be required to view the page.
     */
     'password': string;
     /**
-    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
+    * List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
     */
-    'publishImmediately': boolean;
-    /**
-    * Optional override to set the URL to be used in the rel=canonical link tag on the page.
-    */
-    'linkRelCanonicalUrl': string;
-    /**
-    * A generated ENUM descibing the current state of this Blog Post. Should always match state.
-    */
-    'currentState': BlogPost.CurrentStateEnum;
+    'attachedStylesheets': Array<object>;
     /**
     * Boolean to determine whether or not the Primary CSS Files should be applied.
     */
@@ -152,19 +144,19 @@ export class BlogPost {
     /**
     * Boolean to determine whether or not the styles from the template should be applied.
     */
-    'enableLayoutStylesheets': boolean;
+    'enableDomainStylesheets': boolean;
     /**
     * Boolean to determine whether or not the styles from the template should be applied.
     */
-    'enableDomainStylesheets': boolean;
-    /**
-    * List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
-    */
-    'attachedStylesheets': Array<object>;
+    'enableLayoutStylesheets': boolean;
     /**
     * A description that goes in <meta> tag on the page.
     */
     'metaDescription': string;
+    /**
+    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
+    */
+    'publishImmediately': boolean;
     /**
     * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
     */
@@ -177,6 +169,14 @@ export class BlogPost {
     * An ENUM descibing the type of this object. Should always be BLOG_POST.
     */
     'contentTypeCategory': BlogPost.ContentTypeCategoryEnum;
+    /**
+    * A generated ENUM descibing the current state of this Blog Post. Should always match state.
+    */
+    'currentState': BlogPost.CurrentStateEnum;
+    /**
+    * Optional override to set the URL to be used in the rel=canonical link tag on the page.
+    */
+    'linkRelCanonicalUrl': string;
     /**
     * The featuredImage of this Blog Post.
     */
@@ -344,36 +344,6 @@ export class BlogPost {
             "type": "string"
         },
         {
-            "name": "postBody",
-            "baseName": "postBody",
-            "type": "string"
-        },
-        {
-            "name": "postSummary",
-            "baseName": "postSummary",
-            "type": "string"
-        },
-        {
-            "name": "rssBody",
-            "baseName": "rssBody",
-            "type": "string"
-        },
-        {
-            "name": "rssSummary",
-            "baseName": "rssSummary",
-            "type": "string"
-        },
-        {
-            "name": "tagIds",
-            "baseName": "tagIds",
-            "type": "Array<number>"
-        },
-        {
-            "name": "enableGoogleAmpOutputOverride",
-            "baseName": "enableGoogleAmpOutputOverride",
-            "type": "boolean"
-        },
-        {
             "name": "htmlTitle",
             "baseName": "htmlTitle",
             "type": "string"
@@ -409,33 +379,48 @@ export class BlogPost {
             "type": "boolean"
         },
         {
+            "name": "tagIds",
+            "baseName": "tagIds",
+            "type": "Array<number>"
+        },
+        {
+            "name": "enableGoogleAmpOutputOverride",
+            "baseName": "enableGoogleAmpOutputOverride",
+            "type": "boolean"
+        },
+        {
+            "name": "postBody",
+            "baseName": "postBody",
+            "type": "string"
+        },
+        {
+            "name": "postSummary",
+            "baseName": "postSummary",
+            "type": "string"
+        },
+        {
+            "name": "rssBody",
+            "baseName": "rssBody",
+            "type": "string"
+        },
+        {
+            "name": "rssSummary",
+            "baseName": "rssSummary",
+            "type": "string"
+        },
+        {
             "name": "password",
             "baseName": "password",
             "type": "string"
         },
         {
-            "name": "publishImmediately",
-            "baseName": "publishImmediately",
-            "type": "boolean"
-        },
-        {
-            "name": "linkRelCanonicalUrl",
-            "baseName": "linkRelCanonicalUrl",
-            "type": "string"
-        },
-        {
-            "name": "currentState",
-            "baseName": "currentState",
-            "type": "BlogPost.CurrentStateEnum"
+            "name": "attachedStylesheets",
+            "baseName": "attachedStylesheets",
+            "type": "Array<object>"
         },
         {
             "name": "includeDefaultCustomCss",
             "baseName": "includeDefaultCustomCss",
-            "type": "boolean"
-        },
-        {
-            "name": "enableLayoutStylesheets",
-            "baseName": "enableLayoutStylesheets",
             "type": "boolean"
         },
         {
@@ -444,14 +429,19 @@ export class BlogPost {
             "type": "boolean"
         },
         {
-            "name": "attachedStylesheets",
-            "baseName": "attachedStylesheets",
-            "type": "Array<object>"
+            "name": "enableLayoutStylesheets",
+            "baseName": "enableLayoutStylesheets",
+            "type": "boolean"
         },
         {
             "name": "metaDescription",
             "baseName": "metaDescription",
             "type": "string"
+        },
+        {
+            "name": "publishImmediately",
+            "baseName": "publishImmediately",
+            "type": "boolean"
         },
         {
             "name": "headHtml",
@@ -467,6 +457,16 @@ export class BlogPost {
             "name": "contentTypeCategory",
             "baseName": "contentTypeCategory",
             "type": "BlogPost.ContentTypeCategoryEnum"
+        },
+        {
+            "name": "currentState",
+            "baseName": "currentState",
+            "type": "BlogPost.CurrentStateEnum"
+        },
+        {
+            "name": "linkRelCanonicalUrl",
+            "baseName": "linkRelCanonicalUrl",
+            "type": "string"
         },
         {
             "name": "featuredImage",
@@ -1257,6 +1257,15 @@ export namespace BlogPost {
         Zu = <any> 'zu',
         ZuZa = <any> 'zu-za'
     }
+    export enum ContentTypeCategoryEnum {
+        _0 = <any> '0',
+        _1 = <any> '1',
+        _2 = <any> '2',
+        _3 = <any> '3',
+        _4 = <any> '4',
+        _5 = <any> '5',
+        _6 = <any> '6'
+    }
     export enum CurrentStateEnum {
         AUTOMATED = <any> 'AUTOMATED',
         AUTOMATEDDRAFT = <any> 'AUTOMATED_DRAFT',
@@ -1289,14 +1298,5 @@ export namespace BlogPost {
         AUTOMATEDDRAFTAB = <any> 'AUTOMATED_DRAFT_AB',
         AUTOMATEDDRAFTABVARIANT = <any> 'AUTOMATED_DRAFT_ABVARIANT',
         AUTOMATEDLOSERABVARIANT = <any> 'AUTOMATED_LOSER_ABVARIANT'
-    }
-    export enum ContentTypeCategoryEnum {
-        _0 = <any> '0',
-        _1 = <any> '1',
-        _2 = <any> '2',
-        _3 = <any> '3',
-        _4 = <any> '4',
-        _5 = <any> '5',
-        _6 = <any> '6'
     }
 }

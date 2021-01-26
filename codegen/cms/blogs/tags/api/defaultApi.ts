@@ -99,12 +99,14 @@ export class DefaultApi {
     }
 
     /**
-     * Archive the Blog Tag objects identified in the request body.
-     * @summary Archive a batch of Blog Tags
-     * @param batchInputString The JSON array of Blog Tag ids.
+     * Delete the Blog Tag object identified by the id in the path.
+     * @summary Delete a Blog Tag
+     * @param objectId The Blog Tag id.
+     * @param archived Whether to return only results that have been archived.
      */
-    public async archive (batchInputString: BatchInputString, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/archive';
+    public async archive (objectId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/cms/v3/blogs/tags/{objectId}'
+            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['*/*'];
@@ -116,9 +118,13 @@ export class DefaultApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'batchInputString' is not null or undefined
-        if (batchInputString === null || batchInputString === undefined) {
-            throw new Error('Required parameter batchInputString was null or undefined when calling archive.');
+        // verify required parameter 'objectId' is not null or undefined
+        if (objectId === null || objectId === undefined) {
+            throw new Error('Required parameter objectId was null or undefined when calling archive.');
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -126,13 +132,12 @@ export class DefaultApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
+            method: 'DELETE',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(batchInputString, "BatchInputString")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -173,14 +178,12 @@ export class DefaultApi {
         });
     }
     /**
-     * Delete the Blog Tag object identified by the id in the path.
-     * @summary Delete a Blog Tag
-     * @param objectId The Blog Tag id.
-     * @param archived Whether to return only results that have been archived.
+     * Archive the Blog Tag objects identified in the request body.
+     * @summary Archive a batch of Blog Tags
+     * @param batchInputString The JSON array of Blog Tag ids.
      */
-    public async archive_1 (objectId: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/cms/v3/blogs/tags/{objectId}'
-            .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
+    public async archiveBatch (batchInputString: BatchInputString, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/archive';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['*/*'];
@@ -192,13 +195,9 @@ export class DefaultApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'objectId' is not null or undefined
-        if (objectId === null || objectId === undefined) {
-            throw new Error('Required parameter objectId was null or undefined when calling archive_1.');
-        }
-
-        if (archived !== undefined) {
-            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
+        // verify required parameter 'batchInputString' is not null or undefined
+        if (batchInputString === null || batchInputString === undefined) {
+            throw new Error('Required parameter batchInputString was null or undefined when calling archiveBatch.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -206,12 +205,13 @@ export class DefaultApi {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'DELETE',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(batchInputString, "BatchInputString")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -331,7 +331,7 @@ export class DefaultApi {
      * @summary Create a batch of Blog Tags
      * @param batchInputTag The JSON array of new Blog Tags to create.
      */
-    public async create_2 (batchInputTag: BatchInputTag, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async createBatch (batchInputTag: BatchInputTag, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -346,7 +346,7 @@ export class DefaultApi {
 
         // verify required parameter 'batchInputTag' is not null or undefined
         if (batchInputTag === null || batchInputTag === undefined) {
-            throw new Error('Required parameter batchInputTag was null or undefined when calling create_2.');
+            throw new Error('Required parameter batchInputTag was null or undefined when calling createBatch.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -605,7 +605,7 @@ export class DefaultApi {
      * @param batchInputString The JSON array of Blog Tag ids.
      * @param archived Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
      */
-    public async read (batchInputString: BatchInputString, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async readBatch (batchInputString: BatchInputString, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -620,7 +620,7 @@ export class DefaultApi {
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new Error('Required parameter batchInputString was null or undefined when calling read.');
+            throw new Error('Required parameter batchInputString was null or undefined when calling readBatch.');
         }
 
         if (archived !== undefined) {
@@ -680,93 +680,13 @@ export class DefaultApi {
         });
     }
     /**
-     * Update the Blog Tag objects identified in the request body.
-     * @summary Update a batch of Blog Tags
-     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Tags.
-     * @param archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
-     */
-    public async update (batchInputJsonNode: BatchInputJsonNode, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
-        const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/update';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json', '*/*'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'batchInputJsonNode' is not null or undefined
-        if (batchInputJsonNode === null || batchInputJsonNode === undefined) {
-            throw new Error('Required parameter batchInputJsonNode was null or undefined when calling update.');
-        }
-
-        if (archived !== undefined) {
-            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(batchInputJsonNode, "BatchInputJsonNode")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "object");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
      * Sparse updates a single Blog Tag object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * @summary Update a Blog Tag
      * @param objectId The Blog Tag id.
      * @param tag The JSON representation of the updated Blog Tag.
      * @param archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
      */
-    public async update_3 (objectId: string, tag: Tag, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Tag;  }> {
+    public async update (objectId: string, tag: Tag, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: Tag;  }> {
         const localVarPath = this.basePath + '/cms/v3/blogs/tags/{objectId}'
             .replace('{' + 'objectId' + '}', encodeURIComponent(String(objectId)));
         let localVarQueryParameters: any = {};
@@ -782,12 +702,12 @@ export class DefaultApi {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new Error('Required parameter objectId was null or undefined when calling update_3.');
+            throw new Error('Required parameter objectId was null or undefined when calling update.');
         }
 
         // verify required parameter 'tag' is not null or undefined
         if (tag === null || tag === undefined) {
-            throw new Error('Required parameter tag was null or undefined when calling update_3.');
+            throw new Error('Required parameter tag was null or undefined when calling update.');
         }
 
         if (archived !== undefined) {
@@ -836,6 +756,86 @@ export class DefaultApi {
                         reject(error);
                     } else {
                         body = ObjectSerializer.deserialize(body, "Tag");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Update the Blog Tag objects identified in the request body.
+     * @summary Update a batch of Blog Tags
+     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Tags.
+     * @param archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+     */
+    public async updateBatch (batchInputJsonNode: BatchInputJsonNode, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+        const localVarPath = this.basePath + '/cms/v3/blogs/tags/batch/update';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json', '*/*'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'batchInputJsonNode' is not null or undefined
+        if (batchInputJsonNode === null || batchInputJsonNode === undefined) {
+            throw new Error('Required parameter batchInputJsonNode was null or undefined when calling updateBatch.');
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(batchInputJsonNode, "BatchInputJsonNode")
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        }
+        if (this.authentications.oauth2.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: object;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "object");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
