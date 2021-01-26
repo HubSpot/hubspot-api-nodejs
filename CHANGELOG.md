@@ -121,8 +121,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - cms.hubdb clients
   - cms.blogs.authors, cms.blogs.blogPosts and cms.blogs.tags clients
   
+## [3.2.0] - 2021-01-26
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.1.0...HEAD
+### Added
+
+  - automation.actions client
+  
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.2.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -131,3 +137,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.1
 [3.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.0.0
 [3.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.1.0
+[3.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.0
