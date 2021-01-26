@@ -5,7 +5,7 @@ This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/
   - [Using OAuth 2.0 access tokens](https://developers.hubspot.com/docs/api/intro-to-auth)
   - [Get all contacts](https://developers.hubspot.com/docs/api/crm/contacts)
 
-Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-ap)
+Please see the documentation on [Creating an app in HubSpot](https://developers.hubspot.com/docs/api/creating-an-app)
 
 ### Setup App
 Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
