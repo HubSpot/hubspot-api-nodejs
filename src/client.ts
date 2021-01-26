@@ -653,7 +653,7 @@ export class Client {
         definitionsApi: this._actionsDefinitionsApi,
         functionsApi: this._actionsFunctionsApi,
         revisionsApi: this._actionsRevisionsApi,
-      }
+      },
     }
     this.crm = {
       associations: {
