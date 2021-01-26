@@ -126,9 +126,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
   - automation.actions client
+
+## [3.2.1] - 2021-01-26
+
+### Fixed
+
+- fix batch methods in `cms.blogs` API clients
   
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.2.0...HEAD
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.2.1...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -138,3 +144,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.0.0
 [3.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.1.0
 [3.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.0
+[3.2.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.1
