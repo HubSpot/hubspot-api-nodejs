@@ -9,7 +9,8 @@
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "prettier:check": "prettier --check {,**/}*.{js,ts}",
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
-    "lint": "tslint -p tsconfig.json && npm run prettier:check"
+    "lint": "tslint -p tsconfig.json && npm run prettier:check",
+    "prepare": "npm run build"
   },
   "author": "HubSpot",
   "license": "ISC",
