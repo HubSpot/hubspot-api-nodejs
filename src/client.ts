@@ -110,10 +110,10 @@ import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 import * as oauthModels from '../codegen/oauth/model/models'
 import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
 import * as webhooksModels from '../codegen/webhooks/model/models'
-// @ts-ignore
-import * as pJson from '../package.json'
 
-const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${pJson.version}` }
+import { VERSION } from './version'
+
+const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${VERSION}` }
 const DEFAULT_LIMITER_OPTIONS = {
   minTime: 1000 / 9,
   maxConcurrent: 6,
