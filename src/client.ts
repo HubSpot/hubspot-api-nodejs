@@ -110,7 +110,6 @@ import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
 import * as oauthModels from '../codegen/oauth/model/models'
 import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
 import * as webhooksModels from '../codegen/webhooks/model/models'
-
 import { VERSION } from './version'
 
 const DEFAULT_HEADERS = { 'User-Agent': `hubspot-api-client-nodejs; ${VERSION}` }

@@ -11,8 +11,8 @@
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
     "lint": "tslint -p tsconfig.json && npm run prettier:check",
     "prepare": "npm run build",
-    "version:add":  "replace '@VERSION@' $npm_package_version ./lib/src/version.*",
-    "prepublishOnly": "npm run version:add"
+    "version:set":  "replace '@VERSION@' $npm_package_version ./lib/src/version.*",
+    "prepublishOnly": "npm run version:set"
   },
   "author": "HubSpot",
   "license": "ISC",
