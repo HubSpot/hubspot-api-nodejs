@@ -1,6 +1,6 @@
 {
   "name": "@hubspot/api-client",
-  "version": "3.2.1",
+  "version": "3.2.6",
   "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files and sample apps",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -11,7 +11,7 @@
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
     "lint": "tslint -p tsconfig.json && npm run prettier:check",
     "prepare": "npm run build",
-    "version:set":  "replace '@VERSION@' $npm_package_version ./lib/src/version.*",
+    "version:set": "replace '@VERSION@' $npm_package_version ./lib/src/version.*",
     "prepublishOnly": "npm run version:set"
   },
   "author": "HubSpot",
