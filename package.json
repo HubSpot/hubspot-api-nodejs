@@ -10,7 +10,9 @@
     "prettier:check": "prettier --check {,**/}*.{js,ts}",
     "prettier:write": "prettier --write {,**/}*.{js,ts}",
     "lint": "tslint -p tsconfig.json && npm run prettier:check",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "version:set":  "replace '@VERSION@' $npm_package_version ./lib/src/version.*",
+    "prepublishOnly": "npm run version:set"
   },
   "author": "HubSpot",
   "license": "ISC",
@@ -37,6 +39,7 @@
     "eslint-plugin-standard": "4.0.1",
     "jasmine": "^3.6.3",
     "prettier": "^1.19.1",
+    "replace": "^1.2.0",
     "ts-node": "^9.1.1",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
