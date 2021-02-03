@@ -65,7 +65,6 @@ export class CardDisplayProperty {
 
 export namespace CardDisplayProperty {
     export enum DataTypeEnum {
-        BOOLEAN = <any> 'BOOLEAN',
         CURRENCY = <any> 'CURRENCY',
         DATE = <any> 'DATE',
         DATETIME = <any> 'DATETIME',
