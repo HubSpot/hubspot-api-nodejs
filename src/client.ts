@@ -53,8 +53,20 @@ import {
   SearchApi as DealsSearchApi,
 } from '../codegen/crm/deals/api'
 import * as dealsModels from '../codegen/crm/deals/model/models'
+import {
+    CallbacksApi as AccountingCallbacksApi,
+    InvoiceApi as AccountingInvoiceApi,
+    SettingsApi as AccountingSettingsApi,
+    SyncApi as AccountingSyncApi,
+    UserAccountsApi as AccountingUserAccountsApi,
+  } from '../codegen/crm/extensions/accounting/api'
+import * as accountingModels from '../codegen/crm/extensions/accounting/model/models'
+import { SettingsApi as СallingSettingsApi } from '../codegen/crm/extensions/calling/api'
+import * as callingModels from '../codegen/crm/extensions/calling/model/models'
 import { CardsApi, SampleResponseApi as CardsSampleResponseApi } from '../codegen/crm/extensions/cards/api'
 import * as cardsModels from '../codegen/crm/extensions/cards/model/models'
+import { SettingsApi as VideoconferencingSettingsApi } from '../codegen/crm/extensions/videoconferencing/api'
+import * as videoconferencingModels from '../codegen/crm/extensions/videoconferencing/model/models'
 import { CoreApi as ImportsCoreApi } from '../codegen/crm/imports/api/coreApi'
 import * as importsModels from '../codegen/crm/imports/model/models'
 import {
@@ -155,11 +167,13 @@ export enum NumberOfRetries {
 export type Interceptor = (requestOptions: request.Options) => Promise<any> | void
 
 export {
+  accountingModels,
   actionsModels,
   associationsModels,
   companiesModels,
   contactsModels,
   dealsModels,
+  callingModels,
   cardsModels,
   importsModels,
   lineItemsModels,
@@ -183,6 +197,7 @@ export {
   schemasModels,
   urlRedirectsModels,
   siteSearchModels,
+  videoconferencingModels,
 }
 
 export class HttpError extends Error {
@@ -268,9 +283,22 @@ export class Client {
       ) => Promise<dealsModels.SimplePublicObject[]>
     }
     extensions: {
+      accounting: {
+        CallbacksApi: AccountingCallbacksApi
+        InvoiceApi: AccountingInvoiceApi
+        SettingsApi: AccountingSettingsApi
+        SyncApi: AccountingSyncApi
+        UserAccountsApi: AccountingUserAccountsApi
+      }
+      calling: {
+        SettingsApi: СallingSettingsApi
+      }
       cards: {
         cardsApi: CardsApi
         sampleResponseApi: CardsSampleResponseApi
+      }
+      videoconferencing: {
+        SettingsApi: VideoconferencingSettingsApi
       }
     }
     imports: {
@@ -427,8 +455,15 @@ export class Client {
   protected _dealsBasicApi: DealsBasicApi
   protected _dealsBatchApi: DealsBatchApi
   protected _dealsSearchApi: DealsSearchApi
+  protected _accountingCallbacksApi: AccountingCallbacksApi
+  protected _accountingInvoiceApi: AccountingInvoiceApi
+  protected _accountingSettingsApi: AccountingSettingsApi
+  protected _accountingSyncApi: AccountingSyncApi
+  protected _accountingUserAccountsApi: AccountingUserAccountsApi
+  protected _callingSettingsApi: СallingSettingsApi
   protected _cardsApi: CardsApi
   protected _cardsSampleResponseApi: CardsSampleResponseApi
+  protected _videoconferencingSettingsApi: VideoconferencingSettingsApi
   protected _importsCoreApi: ImportsCoreApi
   protected _lineItemsAssociationsApi: LineItemsAssociationsApi
   protected _lineItemsBasicApi: LineItemsBasicApi
@@ -522,8 +557,15 @@ export class Client {
     this._dealsBasicApi = new DealsBasicApi()
     this._dealsBatchApi = new DealsBatchApi()
     this._dealsSearchApi = new DealsSearchApi()
+    this._accountingCallbacksApi = new AccountingCallbacksApi()
+    this._accountingInvoiceApi = new AccountingInvoiceApi()
+    this._accountingSettingsApi = new AccountingSettingsApi()
+    this._accountingSyncApi = new AccountingSyncApi()
+    this._accountingUserAccountsApi = new AccountingUserAccountsApi()
+    this._callingSettingsApi = new СallingSettingsApi()
     this._cardsApi = new CardsApi()
     this._cardsSampleResponseApi = new CardsSampleResponseApi()
+    this._videoconferencingSettingsApi = new VideoconferencingSettingsApi()
     this._importsCoreApi = new ImportsCoreApi()
     this._lineItemsAssociationsApi = new LineItemsAssociationsApi()
     this._lineItemsBasicApi = new LineItemsBasicApi()
@@ -569,10 +611,17 @@ export class Client {
     this._performanceDefaultApi = new PerformanceDefaultApi()
     this._redirectsApi = new RedirectsApi()
     this._siteSearchDefaultApi = new SiteSearchDefaultApi()
+
     this._apiClientsWithApiKeyAuth = [
+      this._accountingCallbacksApi,
+      this._accountingInvoiceApi,
+      this._accountingSettingsApi,
+      this._accountingSyncApi,
+      this._accountingUserAccountsApi,
       this._actionsCallbacksApi,
       this._associationsBatchApi,
       this._typesApi,
+      this._callingSettingsApi,
       this._companiesAssociationsApi,
       this._companiesBasicApi,
       this._companiesBatchApi,
@@ -625,6 +674,7 @@ export class Client {
       this._tablesApi,
       this._redirectsApi,
       this._siteSearchDefaultApi,
+      this._videoconferencingSettingsApi
     ]
     this._apiClientsWithDevApiKeyAuth = [
       this._actionsDefinitionsApi,
@@ -690,9 +740,22 @@ export class Client {
         >(this._dealsBasicApi.getPage.bind(this._dealsBasicApi)),
       },
       extensions: {
+        accounting: {
+          CallbacksApi: this._accountingCallbacksApi,
+          InvoiceApi: this._accountingInvoiceApi,
+          SettingsApi: this._accountingSettingsApi,
+          SyncApi: this._accountingSyncApi,
+          UserAccountsApi: this._accountingUserAccountsApi,
+        },
+        calling: {
+          SettingsApi: this._callingSettingsApi,
+        },
         cards: {
           cardsApi: this._cardsApi,
           sampleResponseApi: this._cardsSampleResponseApi,
+        },
+        videoconferencing: {
+          SettingsApi: this._videoconferencingSettingsApi,
         },
       },
       imports: {
