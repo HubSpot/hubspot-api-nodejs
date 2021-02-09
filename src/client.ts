@@ -284,21 +284,21 @@ export class Client {
     }
     extensions: {
       accounting: {
-        CallbacksApi: AccountingCallbacksApi
-        InvoiceApi: AccountingInvoiceApi
-        SettingsApi: AccountingSettingsApi
-        SyncApi: AccountingSyncApi
-        UserAccountsApi: AccountingUserAccountsApi
+        callbacksApi: AccountingCallbacksApi
+        invoiceApi: AccountingInvoiceApi
+        settingsApi: AccountingSettingsApi
+        syncApi: AccountingSyncApi
+        userAccountsApi: AccountingUserAccountsApi
       }
       calling: {
-        SettingsApi: СallingSettingsApi
+        settingsApi: СallingSettingsApi
       }
       cards: {
         cardsApi: CardsApi
         sampleResponseApi: CardsSampleResponseApi
       }
       videoconferencing: {
-        SettingsApi: VideoconferencingSettingsApi
+        settingsApi: VideoconferencingSettingsApi
       }
     }
     imports: {
@@ -741,21 +741,21 @@ export class Client {
       },
       extensions: {
         accounting: {
-          CallbacksApi: this._accountingCallbacksApi,
-          InvoiceApi: this._accountingInvoiceApi,
-          SettingsApi: this._accountingSettingsApi,
-          SyncApi: this._accountingSyncApi,
-          UserAccountsApi: this._accountingUserAccountsApi,
+          callbacksApi: this._accountingCallbacksApi,
+          invoiceApi: this._accountingInvoiceApi,
+          settingsApi: this._accountingSettingsApi,
+          syncApi: this._accountingSyncApi,
+          userAccountsApi: this._accountingUserAccountsApi,
         },
         calling: {
-          SettingsApi: this._callingSettingsApi,
+          settingsApi: this._callingSettingsApi,
         },
         cards: {
           cardsApi: this._cardsApi,
           sampleResponseApi: this._cardsSampleResponseApi,
         },
         videoconferencing: {
-          SettingsApi: this._videoconferencingSettingsApi,
+          settingsApi: this._videoconferencingSettingsApi,
         },
       },
       imports: {
