@@ -54,12 +54,12 @@ import {
 } from '../codegen/crm/deals/api'
 import * as dealsModels from '../codegen/crm/deals/model/models'
 import {
-    CallbacksApi as AccountingCallbacksApi,
-    InvoiceApi as AccountingInvoiceApi,
-    SettingsApi as AccountingSettingsApi,
-    SyncApi as AccountingSyncApi,
-    UserAccountsApi as AccountingUserAccountsApi,
-  } from '../codegen/crm/extensions/accounting/api'
+  CallbacksApi as AccountingCallbacksApi,
+  InvoiceApi as AccountingInvoiceApi,
+  SettingsApi as AccountingSettingsApi,
+  SyncApi as AccountingSyncApi,
+  UserAccountsApi as AccountingUserAccountsApi,
+} from '../codegen/crm/extensions/accounting/api'
 import * as accountingModels from '../codegen/crm/extensions/accounting/model/models'
 import { SettingsApi as СallingSettingsApi } from '../codegen/crm/extensions/calling/api'
 import * as callingModels from '../codegen/crm/extensions/calling/model/models'
@@ -674,7 +674,7 @@ export class Client {
       this._tablesApi,
       this._redirectsApi,
       this._siteSearchDefaultApi,
-      this._videoconferencingSettingsApi
+      this._videoconferencingSettingsApi,
     ]
     this._apiClientsWithDevApiKeyAuth = [
       this._actionsDefinitionsApi,
