@@ -83,6 +83,13 @@ import {
   SearchApi as ObjectsSearchApi,
 } from '../codegen/crm/objects/api'
 import * as objectsModels from '../codegen/crm/objects/model/models'
+import {
+  AssociationsApi as FeedbackSubmissionsAssociationsApi,
+  BasicApi as FeedbackSubmissionsBasicApi,
+  BatchApi as FeedbackSubmissionsBatchApi,
+  SearchApi as FeedbackSubmissionsSearchApi,
+} from '../codegen/crm/objects/feedback_submissions/api'
+import * as feedbackSubmissionsModels from '../codegen/crm/objects/feedback_submissions/model/models'
 import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
 import * as ownersModels from '../codegen/crm/owners/model/models'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
@@ -177,6 +184,7 @@ export {
   dealsModels,
   callingModels,
   cardsModels,
+  feedbackSubmissionsModels,
   importsModels,
   lineItemsModels,
   ownersModels,
@@ -269,6 +277,12 @@ export class Client {
       basicApi: ObjectsBasicApi
       batchApi: ObjectsBatchApi
       searchApi: ObjectsSearchApi
+      feedbackSubmissions: {
+        associationsApi: FeedbackSubmissionsAssociationsApi
+        basicApi: FeedbackSubmissionsBasicApi
+        batchApi: FeedbackSubmissionsBatchApi
+        searchApi: FeedbackSubmissionsSearchApi
+      }
     }
     deals: {
       associationsApi: DealsAssociationsApi
@@ -455,6 +469,10 @@ export class Client {
   protected _contactsBasicApi: ContactsBasicApi
   protected _contactsBatchApi: ContactsBatchApi
   protected _contactsSearchApi: ContactsSearchApi
+  protected _feedbackSubmissionsAssociationsApi: FeedbackSubmissionsAssociationsApi
+  protected _feedbackSubmissionsBasicApi: FeedbackSubmissionsBasicApi
+  protected _feedbackSubmissionsBatchApi: FeedbackSubmissionsBatchApi
+  protected _feedbackSubmissionsSearchApi: FeedbackSubmissionsSearchApi
   protected _objectsAssociationsApi: ObjectsAssociationsApi
   protected _objectsBasicApi: ObjectsBasicApi
   protected _objectsBatchApi: ObjectsBatchApi
@@ -574,6 +592,10 @@ export class Client {
     this._callingSettingsApi = new СallingSettingsApi()
     this._cardsApi = new CardsApi()
     this._cardsSampleResponseApi = new CardsSampleResponseApi()
+    this._feedbackSubmissionsAssociationsApi = new FeedbackSubmissionsAssociationsApi()
+    this._feedbackSubmissionsBasicApi = new FeedbackSubmissionsBasicApi()
+    this._feedbackSubmissionsBatchApi = new FeedbackSubmissionsBatchApi()
+    this._feedbackSubmissionsSearchApi = new FeedbackSubmissionsSearchApi()
     this._videoconferencingSettingsApi = new VideoconferencingSettingsApi()
     this._importsCoreApi = new ImportsCoreApi()
     this._lineItemsAssociationsApi = new LineItemsAssociationsApi()
@@ -644,6 +666,10 @@ export class Client {
       this._dealsBasicApi,
       this._dealsBatchApi,
       this._dealsSearchApi,
+      this._feedbackSubmissionsAssociationsApi,
+      this._feedbackSubmissionsBasicApi,
+      this._feedbackSubmissionsBatchApi,
+      this._feedbackSubmissionsSearchApi,
       this._importsCoreApi,
       this._lineItemsAssociationsApi,
       this._lineItemsBasicApi,
@@ -787,6 +813,12 @@ export class Client {
         basicApi: this._objectsBasicApi,
         batchApi: this._objectsBatchApi,
         searchApi: this._objectsSearchApi,
+        feedbackSubmissions: {
+          associationsApi: this._feedbackSubmissionsAssociationsApi,
+          basicApi: this._feedbackSubmissionsBasicApi,
+          batchApi: this._feedbackSubmissionsBatchApi,
+          searchApi: this._feedbackSubmissionsSearchApi,
+        },
       },
       owners: {
         defaultApi: this._ownersDefaultApi,
