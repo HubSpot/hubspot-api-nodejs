@@ -139,6 +139,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - fixed npm build
 
+## [3.2.0] - 2021-02-10
+
+### Added
+
+  - crm.extensions.accounting API client
+  - crm.extensions.calling API client
+  - crm.extensions.videoconferencing API client
+  - crm.objects.feedbackSubmissions API client
+  - marketing.transactional API client
+
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.2.6...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
@@ -151,3 +161,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.0
 [3.2.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.1
 [3.2.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.6
+[3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.3.0
