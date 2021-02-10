@@ -82,7 +82,6 @@ import {
   BatchApi as ObjectsBatchApi,
   SearchApi as ObjectsSearchApi,
 } from '../codegen/crm/objects/api'
-import * as objectsModels from '../codegen/crm/objects/model/models'
 import {
   AssociationsApi as FeedbackSubmissionsAssociationsApi,
   BasicApi as FeedbackSubmissionsBasicApi,
@@ -90,6 +89,7 @@ import {
   SearchApi as FeedbackSubmissionsSearchApi,
 } from '../codegen/crm/objects/feedback_submissions/api'
 import * as feedbackSubmissionsModels from '../codegen/crm/objects/feedback_submissions/model/models'
+import * as objectsModels from '../codegen/crm/objects/model/models'
 import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
 import * as ownersModels from '../codegen/crm/owners/model/models'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
