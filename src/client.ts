@@ -125,6 +125,8 @@ import {
 import * as ticketsModels from '../codegen/crm/tickets/model/models'
 import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timeline/api'
 import * as timelineModels from '../codegen/crm/timeline/model/models'
+import { EventsApi as EventsEventsApi } from '../codegen/events/api'
+import * as eventsModels from '../codegen/events/model/models'
 import { DefaultApi as TransactionalDefaultApi } from '../codegen/marketing/transactional/api'
 import * as transactionalModels from '../codegen/marketing/transactional/model/models'
 import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
@@ -185,6 +187,7 @@ export {
   callingModels,
   cardsModels,
   feedbackSubmissionsModels,
+  eventsModels,
   importsModels,
   lineItemsModels,
   ownersModels,
@@ -403,6 +406,9 @@ export class Client {
       tokensApi: TokensApi
     }
   }
+  public events: {
+    eventsApi: EventsEventsApi
+  }
   public marketing: {
     transactional: {
       defaultApi: TransactionalDefaultApi
@@ -518,6 +524,7 @@ export class Client {
   protected _eventsApi: EventsApi
   protected _templatesApi: TemplatesApi
   protected _tokensApi: TokensApi
+  protected _eventsEventsApi: EventsEventsApi
   protected _transactionalDefaultApi: TransactionalDefaultApi
   protected _settingsApi: SettingsApi
   protected _subscriptionsApi: SubscriptionsApi
@@ -629,6 +636,7 @@ export class Client {
     this._eventsApi = new EventsApi()
     this._templatesApi = new TemplatesApi()
     this._tokensApi = new TokensApi()
+    this._eventsEventsApi = new EventsEventsApi()
     this._transactionalDefaultApi = new TransactionalDefaultApi()
     this._settingsApi = new SettingsApi()
     this._subscriptionsApi = new SubscriptionsApi()
@@ -701,6 +709,7 @@ export class Client {
       this._ticketsSearchApi,
       this._templatesApi,
       this._tokensApi,
+      this._eventsEventsApi,
       this._transactionalDefaultApi,
       this._authorsDefaultApi,
       this._blogPostsDefaultApi,
@@ -871,6 +880,9 @@ export class Client {
         templatesApi: this._templatesApi,
         tokensApi: this._tokensApi,
       },
+    }
+    this.events = {
+      eventsApi: this._eventsEventsApi,
     }
     this.marketing = {
       transactional: {
