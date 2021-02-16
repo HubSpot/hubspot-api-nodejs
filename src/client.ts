@@ -30,6 +30,8 @@ import { DefaultApi as SiteSearchDefaultApi } from '../codegen/cms/site_search/a
 import * as siteSearchModels from '../codegen/cms/site_search/model/models'
 import { RedirectsApi } from '../codegen/cms/url_redirects/api'
 import * as urlRedirectsModels from '../codegen/cms/url_redirects/model/models'
+import { GenerateApi } from '../codegen/conversations/visitor_identification/api'
+import * as visitorIdentificationModels from '../codegen/conversations/visitor_identification/model/models'
 import { BatchApi as AssociationsBatchApi, TypesApi } from '../codegen/crm/associations/api'
 import * as associationsModels from '../codegen/crm/associations/model/models'
 import {
@@ -207,6 +209,7 @@ export {
   performanceModels,
   schemasModels,
   urlRedirectsModels,
+  visitorIdentificationModels,
   siteSearchModels,
   videoconferencingModels,
 }
@@ -453,6 +456,11 @@ export class Client {
       defaultApi: SiteSearchDefaultApi
     }
   }
+  public conversations: {
+    visitorIdentification: {
+      generateApi: GenerateApi
+    }
+  }
   protected _interceptors: Interceptor[] = []
   protected _actionsCallbacksApi: ActionsCallbacksApi
   protected _actionsDefinitionsApi: ActionsDefinitionsApi
@@ -532,6 +540,7 @@ export class Client {
   protected _tablesApi: TablesApi
   protected _performanceDefaultApi: PerformanceDefaultApi
   protected _redirectsApi: RedirectsApi
+  protected _generateApi: GenerateApi
   protected _apiClientsWithApiKeyAuth: any[]
   protected _apiClientsWithDevApiKeyAuth: any[]
   protected _apiClients: any[]
@@ -642,6 +651,7 @@ export class Client {
     this._tablesApi = new TablesApi()
     this._performanceDefaultApi = new PerformanceDefaultApi()
     this._redirectsApi = new RedirectsApi()
+    this._generateApi = new GenerateApi()
     this._siteSearchDefaultApi = new SiteSearchDefaultApi()
 
     this._apiClientsWithApiKeyAuth = [
@@ -709,6 +719,7 @@ export class Client {
       this._rowsApi,
       this._rowsBatchApi,
       this._tablesApi,
+      this._generateApi,
       this._redirectsApi,
       this._siteSearchDefaultApi,
       this._videoconferencingSettingsApi,
@@ -917,6 +928,11 @@ export class Client {
       },
       sireSearch: {
         defaultApi: this._siteSearchDefaultApi,
+      },
+    }
+    this.conversations = {
+      visitorIdentification: {
+        generateApi: this._generateApi,
       },
     }
   }
