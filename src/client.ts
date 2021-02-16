@@ -882,7 +882,7 @@ export class Client {
       },
     }
     this.events = {
-      eventsApi: this._eventsEventsApi
+      eventsApi: this._eventsEventsApi,
     }
     this.marketing = {
       transactional: {
