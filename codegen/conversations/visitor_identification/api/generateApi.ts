@@ -99,7 +99,7 @@ export class GenerateApi {
      * @summary Generate a token
      * @param identificationTokenGenerationRequest 
      */
-    public async postVisitorIdentificationV3TokensCreate (identificationTokenGenerationRequest: IdentificationTokenGenerationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: IdentificationTokenResponse;  }> {
+    public async generateToken (identificationTokenGenerationRequest: IdentificationTokenGenerationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: IdentificationTokenResponse;  }> {
         const localVarPath = this.basePath + '/conversations/v3/visitor-identification/tokens/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -114,7 +114,7 @@ export class GenerateApi {
 
         // verify required parameter 'identificationTokenGenerationRequest' is not null or undefined
         if (identificationTokenGenerationRequest === null || identificationTokenGenerationRequest === undefined) {
-            throw new Error('Required parameter identificationTokenGenerationRequest was null or undefined when calling postVisitorIdentificationV3TokensCreate.');
+            throw new Error('Required parameter identificationTokenGenerationRequest was null or undefined when calling generateToken.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
