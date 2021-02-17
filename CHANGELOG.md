@@ -156,7 +156,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - conversations.visitorIdentification API client
   - events API client
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.4.0...HEAD
+## [3.4.1] - 2021-02-17
+
+### Fixed
+
+  - fix generateToken method in `conversations.visitorIdentification` API clients
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.4.1...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -170,3 +176,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.2.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.6
 [3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.3.0
 [3.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.0
+[3.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.1
