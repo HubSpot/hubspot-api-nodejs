@@ -214,7 +214,7 @@ app.post('/imports', async (req, res) => {
         // POST/crm/v3/imports
         // https://developers.hubspot.com/docs/api/crm/imports
         console.log('Calling crm.imports.coreApi.create API method. Starting a new import')
-        const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), fileToImportConfig)
+        const result = await hubspotClient.crm.imports.coreApi.create(fileToImportConfig, JSON.stringify(importRequest))
 
         logResponse('Import result', result)
         res.redirect(`imports/${result.body.id}`)
