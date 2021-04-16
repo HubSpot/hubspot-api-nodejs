@@ -384,7 +384,7 @@ export class Client {
     urlRedirects: {
       redirectsApi: RedirectsApi
     }
-    sireSearch: {
+    siteSearch: {
       defaultApi: SiteSearchDefaultApi
     }
   }
@@ -769,7 +769,7 @@ export class Client {
       urlRedirects: {
         redirectsApi: this._redirectsApi,
       },
-      sireSearch: {
+      siteSearch: {
         defaultApi: this._siteSearchDefaultApi,
       },
     }
