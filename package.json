@@ -20,14 +20,18 @@
     "bluebird": "^3.7.2",
     "bottleneck": "^2.19.5",
     "lodash": "^4.17.19",
-    "request": "^2.88.0"
+    "node-fetch": "^2.6.0",
+    "form-data": "^2.5.0",
+    "btoa": "^1.2.1",
+    "es6-promise": "^4.2.4",
+    "url-parse": "^1.4.3"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.29",
     "@types/jasmine": "^3.6.2",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.21",
-    "@types/request": "^2.48.4",
+    "@types/node-fetch": "^2.5.7",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-config-standard": "14.1.0",
