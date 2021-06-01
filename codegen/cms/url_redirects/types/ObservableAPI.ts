@@ -1,0 +1,162 @@
+import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import * as models from '../models/all';
+import { Configuration} from '../configuration'
+import { Observable, of, from } from '../rxjsStub';
+import {mergeMap, map} from  '../rxjsStub';
+import { CollectionResponseWithTotalUrlMapping } from '../models/CollectionResponseWithTotalUrlMapping';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { UrlMapping } from '../models/UrlMapping';
+import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
+
+import { RedirectsApiRequestFactory, RedirectsApiResponseProcessor} from "../apis/RedirectsApi";
+export class ObservableRedirectsApi {
+    private requestFactory: RedirectsApiRequestFactory;
+    private responseProcessor: RedirectsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: RedirectsApiRequestFactory,
+        responseProcessor?: RedirectsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new RedirectsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new RedirectsApiResponseProcessor();
+    }
+
+    /**
+     * Delete one existing redirect, so it is no longer mapped.
+     * Delete a redirect
+     * @param urlRedirectId The ID of the target redirect.
+     */
+    public archive(urlRedirectId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(urlRedirectId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+            }));
+    }
+ 
+    /**
+     * Creates and configures a new URL redirect.
+     * Create a redirect
+     * @param urlMappingCreateRequestBody 
+     */
+    public create(urlMappingCreateRequestBody?: UrlMappingCreateRequestBody, _options?: Configuration): Observable<UrlMapping> {
+        const requestContextPromise = this.requestFactory.create(urlMappingCreateRequestBody, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+            }));
+    }
+ 
+    /**
+     * Returns the details for a single existing URL redirect by ID.
+     * Get details for a redirect
+     * @param urlRedirectId The ID of the target redirect.
+     */
+    public getById(urlRedirectId: string, _options?: Configuration): Observable<UrlMapping> {
+        const requestContextPromise = this.requestFactory.getById(urlRedirectId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+            }));
+    }
+ 
+    /**
+     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
+     * Get current redirects
+     * @param createdAt Only return redirects created on exactly this date.
+     * @param createdAfter Only return redirects created after this date.
+     * @param createdBefore Only return redirects created before this date.
+     * @param updatedAt Only return redirects last updated on exactly this date.
+     * @param updatedAfter Only return redirects last updated after this date.
+     * @param updatedBefore Only return redirects last updated before this date.
+     * @param sort 
+     * @param properties 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param before 
+     * @param limit Maximum number of result per page
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, _options?: Configuration): Observable<CollectionResponseWithTotalUrlMapping> {
+        const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, properties, after, before, limit, archived, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+            }));
+    }
+ 
+    /**
+     * Updates the settings for an existing URL redirect.
+     * Update a redirect
+     * @param urlRedirectId 
+     * @param urlMapping 
+     */
+    public update(urlRedirectId: string, urlMapping?: UrlMapping, _options?: Configuration): Observable<UrlMapping> {
+        const requestContextPromise = this.requestFactory.update(urlRedirectId, urlMapping, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+            }));
+    }
+ 
+}
