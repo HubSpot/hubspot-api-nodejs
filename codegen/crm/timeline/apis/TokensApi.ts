@@ -1,0 +1,324 @@
+// TODO: better import syntax?
+import { BaseAPIRequestFactory, RequiredError } from './baseapi';
+import {Configuration} from '../configuration';
+import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import * as FormData from "form-data";
+import {ObjectSerializer} from '../models/ObjectSerializer';
+import {ApiException} from './exception';
+import {isCodeInRange} from '../util';
+
+import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
+import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEventTemplateTokenUpdateRequest';
+
+/**
+ * no description
+ */
+export class TokensApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it's still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
+     * Removes a token from the event template
+     * @param eventTemplateId The event template ID.
+     * @param tokenName The token name.
+     * @param appId The ID of the target app.
+     */
+    public async archive(eventTemplateId: string, tokenName: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'eventTemplateId' is not null or undefined
+        if (eventTemplateId === null || eventTemplateId === undefined) {
+            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling archive.');
+        }
+
+
+        // verify required parameter 'tokenName' is not null or undefined
+        if (tokenName === null || tokenName === undefined) {
+            throw new RequiredError('Required parameter tokenName was null or undefined when calling archive.');
+        }
+
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+            .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
+            .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+
+        // Header Params
+
+        // Form Params
+
+
+        // Body Params
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Once you've defined an event template, it's likely that you'll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
+     * Adds a token to an existing event template
+     * @param eventTemplateId The event template ID.
+     * @param appId The ID of the target app.
+     * @param timelineEventTemplateToken The new token definition.
+     */
+    public async create(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'eventTemplateId' is not null or undefined
+        if (eventTemplateId === null || eventTemplateId === undefined) {
+            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling create.');
+        }
+
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError('Required parameter appId was null or undefined when calling create.');
+        }
+
+
+        // verify required parameter 'timelineEventTemplateToken' is not null or undefined
+        if (timelineEventTemplateToken === null || timelineEventTemplateToken === undefined) {
+            throw new RequiredError('Required parameter timelineEventTemplateToken was null or undefined when calling create.');
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'
+            .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+
+        // Header Params
+
+        // Form Params
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(timelineEventTemplateToken, "TimelineEventTemplateToken", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * This will update the existing token on an event template. Name and type can't be changed on existing tokens.
+     * Updates an existing token on an event template
+     * @param eventTemplateId The event template ID.
+     * @param tokenName The token name.
+     * @param appId The ID of the target app.
+     * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
+     */
+    public async update(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'eventTemplateId' is not null or undefined
+        if (eventTemplateId === null || eventTemplateId === undefined) {
+            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling update.');
+        }
+
+
+        // verify required parameter 'tokenName' is not null or undefined
+        if (tokenName === null || tokenName === undefined) {
+            throw new RequiredError('Required parameter tokenName was null or undefined when calling update.');
+        }
+
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError('Required parameter appId was null or undefined when calling update.');
+        }
+
+
+        // verify required parameter 'timelineEventTemplateTokenUpdateRequest' is not null or undefined
+        if (timelineEventTemplateTokenUpdateRequest === null || timelineEventTemplateTokenUpdateRequest === undefined) {
+            throw new RequiredError('Required parameter timelineEventTemplateTokenUpdateRequest was null or undefined when calling update.');
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+            .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
+            .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+
+        // Header Params
+
+        // Form Params
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(timelineEventTemplateTokenUpdateRequest, "TimelineEventTemplateTokenUpdateRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+}
+
+export class TokensApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to archive
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async archive(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, body);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        let body = response.body || "";
+        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to create
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async create(response: ResponseContext): Promise<TimelineEventTemplateToken > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TimelineEventTemplateToken", ""
+            ) as TimelineEventTemplateToken;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, body);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TimelineEventTemplateToken", ""
+            ) as TimelineEventTemplateToken;
+            return body;
+        }
+
+        let body = response.body || "";
+        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to update
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async update(response: ResponseContext): Promise<TimelineEventTemplateToken > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TimelineEventTemplateToken", ""
+            ) as TimelineEventTemplateToken;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, body);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "TimelineEventTemplateToken", ""
+            ) as TimelineEventTemplateToken;
+            return body;
+        }
+
+        let body = response.body || "";
+        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+    }
+
+}
