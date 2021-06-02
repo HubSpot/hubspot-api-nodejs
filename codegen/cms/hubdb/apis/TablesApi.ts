@@ -13,7 +13,6 @@ import { HubDbTableV3 } from '../models/HubDbTableV3';
 import { HubDbTableV3Input } from '../models/HubDbTableV3Input';
 import { HubDbTableV3LiveInput } from '../models/HubDbTableV3LiveInput';
 import { ImportResult } from '../models/ImportResult';
-import { ModelFile } from '../models/ModelFile';
 
 /**
  * no description
