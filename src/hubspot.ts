@@ -6,6 +6,7 @@ import { CrmDiscovery } from './discovery/crm/CrmDiscovery'
 import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
+import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 
 export class hubspot {
     public automation: AutomationDiscovery
@@ -15,6 +16,7 @@ export class hubspot {
     public events: EventsDiscovery
     public marketing: MarketingDiscovery
     public oauth: OauthDiscovery
+    public webhooks: WebhooksDiscovery
 
     constructor(config: configuration) {
         this.automation = new AutomationDiscovery(config)
@@ -24,5 +26,6 @@ export class hubspot {
         this.events = new EventsDiscovery(config)
         this.marketing = new MarketingDiscovery(config)
         this.oauth = new OauthDiscovery(config)
+        this.webhooks = new WebhooksDiscovery(config)
     }
 }
