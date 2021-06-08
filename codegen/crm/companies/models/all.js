@@ -1,0 +1,30 @@
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(require('./AssociatedId'));
+__export(require('./BatchInputSimplePublicObjectBatchInput'));
+__export(require('./BatchInputSimplePublicObjectId'));
+__export(require('./BatchInputSimplePublicObjectInput'));
+__export(require('./BatchReadInputSimplePublicObjectId'));
+__export(require('./BatchResponseSimplePublicObject'));
+__export(require('./BatchResponseSimplePublicObjectWithErrors'));
+__export(require('./CollectionResponseAssociatedId'));
+__export(require('./CollectionResponseAssociatedIdForwardPaging'));
+__export(require('./CollectionResponseSimplePublicObjectWithAssociationsForwardPaging'));
+__export(require('./CollectionResponseWithTotalSimplePublicObjectForwardPaging'));
+__export(require('./ErrorCategory'));
+__export(require('./ErrorDetail'));
+__export(require('./Filter'));
+__export(require('./FilterGroup'));
+__export(require('./ForwardPaging'));
+__export(require('./ModelError'));
+__export(require('./NextPage'));
+__export(require('./Paging'));
+__export(require('./PreviousPage'));
+__export(require('./PublicObjectSearchRequest'));
+__export(require('./SimplePublicObject'));
+__export(require('./SimplePublicObjectBatchInput'));
+__export(require('./SimplePublicObjectId'));
+__export(require('./SimplePublicObjectInput'));
+__export(require('./SimplePublicObjectWithAssociations'));
+__export(require('./StandardError'));
