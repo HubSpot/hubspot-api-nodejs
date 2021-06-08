@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { DefaultApi} from '../../../../codegen/crm/owners/index'
 import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
@@ -6,7 +6,7 @@ import { createConfiguration } from '../../../../codegen/crm/owners/configuratio
 export class OwnersDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

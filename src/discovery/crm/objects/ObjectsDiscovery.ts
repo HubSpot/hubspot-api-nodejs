@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/objects/index'
 import { createConfiguration } from '../../../../codegen/crm/objects/configuration'
@@ -9,7 +9,7 @@ export class ObjectsDiscovery extends BaseDiscovery {
     public batchApi: BatchApi
     public searchApi: SearchApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { AccountingDiscovery } from './accounting/AccountingDiscovery'
 import { CallingDiscovery } from './calling/CallingDiscovery'
 import { CardsDiscovery } from './cards/CardsDiscovery'
@@ -10,7 +10,7 @@ export class ExtensionsDiscovery {
     public cards: CardsDiscovery
     public videoconferencing: VideoconferencingDiscovery
     
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         this.accounting = new AccountingDiscovery(config)
         this.calling = new CallingDiscovery(config)
         this.cards = new CardsDiscovery(config)

@@ -1,4 +1,4 @@
-import { configuration } from '../../configuration'
+import { Configuration } from '../../Configuration'
 import { AssociationsDiscovery } from './associations/AssociationsDiscovery'
 import { CompaniesDiscovery } from './companies/CompaniesDiscovery'
 import { ContactsDiscovery } from './contacts/ContactsDiscovery'
@@ -37,7 +37,7 @@ export class CrmDiscovery {
     public tickets: TicketsDiscovery
     public timeline: TimelineDiscovery
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         this.associations = new AssociationsDiscovery(config)
         this.companies = new CompaniesDiscovery(config)
         this.contacts = new ContactsDiscovery(config)

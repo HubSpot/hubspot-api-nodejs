@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { RedirectsApi } from '../../../../codegen/cms/url_redirects/index'
 import { createConfiguration } from '../../../../codegen/cms/url_redirects/configuration'
@@ -6,7 +6,7 @@ import { createConfiguration } from '../../../../codegen/cms/url_redirects/confi
 export class UrlRedirectsDiscovery extends BaseDiscovery {
     public redirectsApi: RedirectsApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

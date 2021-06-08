@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { DefaultApi } from '../../../../codegen/cms/site_search/index'
 import { createConfiguration } from '../../../../codegen/cms/site_search/configuration'
@@ -6,7 +6,7 @@ import { createConfiguration } from '../../../../codegen/cms/site_search/configu
 export class SiteSearchDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

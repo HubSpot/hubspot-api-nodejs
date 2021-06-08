@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { CallbacksApi, DefinitionsApi, FunctionsApi, RevisionsApi } from '../../../../codegen/automation/actions/index'
 import { createConfiguration } from '../../../../codegen/automation/actions/configuration'
@@ -9,7 +9,7 @@ export class ActionsDiscovery extends BaseDiscovery {
     public functionsApi: FunctionsApi
     public revisionsApi: RevisionsApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

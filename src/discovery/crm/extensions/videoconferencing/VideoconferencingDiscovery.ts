@@ -1,4 +1,4 @@
-import { configuration } from '../../../../configuration'
+import { Configuration } from '../../../../Configuration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/videoconferencing/configuration'
@@ -6,7 +6,7 @@ import { createConfiguration } from '../../../../../codegen/crm/extensions/video
 export class VideoconferencingDiscovery extends BaseDiscovery {
     public settingsApi: SettingsApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

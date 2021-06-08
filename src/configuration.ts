@@ -5,7 +5,7 @@ export interface ConfigurationParameters {
 }
 
 
-export class configuration {
+export class Configuration {
     public apiKey?: string
     public accessToken?: string
 

@@ -1,4 +1,4 @@
-import { configuration } from '../../configuration'
+import { Configuration } from '../../Configuration'
 import { BaseDiscovery } from '../BaseDiscovery'
 import { EventsApi } from '../../../codegen/events/index'
 import { createConfiguration } from '../../../codegen/events/configuration'
@@ -7,7 +7,7 @@ import { createConfiguration } from '../../../codegen/events/configuration'
 export class EventsDiscovery extends BaseDiscovery {
     public eventsApi: EventsApi
     
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())

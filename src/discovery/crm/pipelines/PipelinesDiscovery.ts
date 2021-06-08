@@ -1,4 +1,4 @@
-import { configuration } from '../../../configuration'
+import { Configuration } from '../../../Configuration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { PipelineStagesApi, PipelinesApi} from '../../../../codegen/crm/pipelines/index'
 import { createConfiguration } from '../../../../codegen/crm/pipelines/configuration'
@@ -7,7 +7,7 @@ export class PipelinesDiscovery extends BaseDiscovery {
     public pipelineStagesApi: PipelineStagesApi
     public pipelinesApi: PipelinesApi
 
-    constructor(config: configuration) {
+    constructor(config: Configuration) {
         super(config)
 
         let configuration = createConfiguration(this.getParams())
