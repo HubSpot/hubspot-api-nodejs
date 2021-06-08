@@ -9,7 +9,6 @@ import {isCodeInRange} from '../util';
 
 import { ActionResponse } from '../models/ActionResponse';
 import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
-import { ModelFile } from '../models/ModelFile';
 import { PublicImportResponse } from '../models/PublicImportResponse';
 
 /**
