@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { CallbacksApi, DefinitionsApi, FunctionsApi, RevisionsApi } from '../../../../codegen/automation/actions/index'
 import { createConfiguration } from '../../../../codegen/automation/actions/configuration'
 
-export class ActionsDiscovery extends baseDiscovery {
+export class ActionsDiscovery extends BaseDiscovery {
     public callbacksApi: CallbacksApi
     public definitionsApi: DefinitionsApi
     public functionsApi: FunctionsApi

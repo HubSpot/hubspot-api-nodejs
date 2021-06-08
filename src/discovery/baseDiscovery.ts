@@ -1,6 +1,6 @@
 import { configuration } from '../configuration'
 
-export class baseDiscovery {
+export class BaseDiscovery {
 
     public config: configuration
   

@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { GenerateApi } from '../../../../codegen/conversations/visitor_identification/index'
 import { createConfiguration } from '../../../../codegen/conversations/visitor_identification/configuration'
 
-export class VisitorIdentificationDiscovery extends baseDiscovery {
+export class VisitorIdentificationDiscovery extends BaseDiscovery {
     public generateApi: GenerateApi
 
     constructor(config: configuration) {

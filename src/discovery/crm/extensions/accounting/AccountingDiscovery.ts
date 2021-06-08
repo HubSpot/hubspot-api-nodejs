@@ -1,9 +1,9 @@
 import { configuration } from '../../../../configuration'
-import { baseDiscovery } from '../../../baseDiscovery'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 import { CallbacksApi, InvoiceApi, SettingsApi, SyncApi, UserAccountsApi } from '../../../../../codegen/crm/extensions/accounting/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/accounting/configuration'
 
-export class AccountingDiscovery extends baseDiscovery {
+export class AccountingDiscovery extends BaseDiscovery {
     public callbacksApi: CallbacksApi
     public invoiceApi: InvoiceApi
     public settingsApi: SettingsApi

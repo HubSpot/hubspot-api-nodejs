@@ -1,9 +1,9 @@
 import { configuration } from '../../../../configuration'
-import { baseDiscovery } from '../../../baseDiscovery'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 import { DefaultApi } from '../../../../../codegen/cms/blogs/tags/index'
 import { createConfiguration } from '../../../../../codegen/cms/blogs/tags/configuration'
 
-export class TagsDiscovery extends baseDiscovery {
+export class TagsDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
     constructor(config: configuration) {

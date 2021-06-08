@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { DefaultApi } from '../../../../codegen/marketing/transactional/index'
 import { createConfiguration } from '../../../../codegen/marketing/transactional/configuration'
 
-export class TransactionalDiscovery extends baseDiscovery {
+export class TransactionalDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
     constructor(config: configuration) {

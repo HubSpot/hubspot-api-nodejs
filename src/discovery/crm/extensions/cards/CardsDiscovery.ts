@@ -1,9 +1,9 @@
 import { configuration } from '../../../../configuration'
-import { baseDiscovery } from '../../../baseDiscovery'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 import { CardsApi, SampleResponseApi } from '../../../../../codegen/crm/extensions/cards/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/cards/configuration'
 
-export class CardsDiscovery extends baseDiscovery {
+export class CardsDiscovery extends BaseDiscovery {
     public cardsApi: CardsApi
     public sampleResponseApi: SampleResponseApi
 

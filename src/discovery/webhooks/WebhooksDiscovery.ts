@@ -1,10 +1,10 @@
 import { configuration } from '../../configuration'
-import { baseDiscovery } from '../baseDiscovery'
+import { BaseDiscovery } from '../BaseDiscovery'
 import { SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
 import { createConfiguration } from '../../../codegen/webhooks/configuration'
 
 
-export class WebhooksDiscovery extends baseDiscovery {
+export class WebhooksDiscovery extends BaseDiscovery {
     public settingsApi: SettingsApi
     public subscriptionsApi: SubscriptionsApi
     

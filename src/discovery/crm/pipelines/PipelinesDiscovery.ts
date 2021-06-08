@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { PipelineStagesApi, PipelinesApi} from '../../../../codegen/crm/pipelines/index'
 import { createConfiguration } from '../../../../codegen/crm/pipelines/configuration'
 
-export class PipelinesDiscovery extends baseDiscovery {
+export class PipelinesDiscovery extends BaseDiscovery {
     public pipelineStagesApi: PipelineStagesApi
     public pipelinesApi: PipelinesApi
 

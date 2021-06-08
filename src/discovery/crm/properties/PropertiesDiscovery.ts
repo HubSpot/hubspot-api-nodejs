@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { BatchApi, CoreApi, GroupsApi} from '../../../../codegen/crm/properties/index'
 import { createConfiguration } from '../../../../codegen/crm/properties/configuration'
 
-export class PropertiesDiscovery extends baseDiscovery {
+export class PropertiesDiscovery extends BaseDiscovery {
     public batchApi: BatchApi
     public coreApi: CoreApi
     public groupsApi: GroupsApi

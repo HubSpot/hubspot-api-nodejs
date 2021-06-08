@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/tickets/index'
 import { createConfiguration } from '../../../../codegen/crm/tickets/configuration'
 
-export class TicketsDiscovery extends baseDiscovery {
+export class TicketsDiscovery extends BaseDiscovery {
     public associationsApi: AssociationsApi
     public basicApi: BasicApi
     public batchApi: BatchApi

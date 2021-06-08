@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { CoreApi, DefaultApi } from '../../../../codegen/crm/schemas/index'
 import { createConfiguration } from '../../../../codegen/crm/schemas/configuration'
 
-export class SchemasDiscovery extends baseDiscovery {
+export class SchemasDiscovery extends BaseDiscovery {
     public coreApi: CoreApi
     public defaultApi: DefaultApi
 

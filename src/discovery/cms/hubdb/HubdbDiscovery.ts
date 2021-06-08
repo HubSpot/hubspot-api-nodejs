@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
 import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
 
-export class HubdbDiscovery extends baseDiscovery {
+export class HubdbDiscovery extends BaseDiscovery {
     public rowsApi: RowsApi
     public rowsBatchApi: RowsBatchApi
     public tablesApi: TablesApi

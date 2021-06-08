@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { DefaultApi } from '../../../../codegen/cms/site_search/index'
 import { createConfiguration } from '../../../../codegen/cms/site_search/configuration'
 
-export class SiteSearchDiscovery extends baseDiscovery {
+export class SiteSearchDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
     constructor(config: configuration) {

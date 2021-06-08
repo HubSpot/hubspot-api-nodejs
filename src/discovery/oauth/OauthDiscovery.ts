@@ -1,10 +1,10 @@
 import { configuration } from '../../configuration'
-import { baseDiscovery } from '../baseDiscovery'
+import { BaseDiscovery } from '../BaseDiscovery'
 import { DefaultApi } from '../../../codegen/oauth/index'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
 
 
-export class OauthDiscovery extends baseDiscovery {
+export class OauthDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
     
     constructor(config: configuration) {

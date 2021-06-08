@@ -1,10 +1,10 @@
 import { configuration } from '../../configuration'
-import { baseDiscovery } from '../baseDiscovery'
+import { BaseDiscovery } from '../BaseDiscovery'
 import { EventsApi } from '../../../codegen/events/index'
 import { createConfiguration } from '../../../codegen/events/configuration'
 
 
-export class EventsDiscovery extends baseDiscovery {
+export class EventsDiscovery extends BaseDiscovery {
     public eventsApi: EventsApi
     
     constructor(config: configuration) {

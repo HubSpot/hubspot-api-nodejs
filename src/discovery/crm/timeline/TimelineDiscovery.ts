@@ -1,9 +1,9 @@
 import { configuration } from '../../../configuration'
-import { baseDiscovery } from '../../baseDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 import { EventsApi, TemplatesApi, TokensApi } from '../../../../codegen/crm/timeline/index'
 import { createConfiguration } from '../../../../codegen/crm/timeline/configuration'
 
-export class TimelineDiscovery extends baseDiscovery {
+export class TimelineDiscovery extends BaseDiscovery {
     public eventsApi: EventsApi
     public templatesApi: TemplatesApi
     public tokensApi: TokensApi
