@@ -11,7 +11,7 @@ export class HubdbDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
         
         this.rowsApi = new RowsApi(configuration)
         this.rowsBatchApi = new RowsBatchApi(configuration)

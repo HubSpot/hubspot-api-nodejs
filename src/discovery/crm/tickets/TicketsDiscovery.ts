@@ -12,7 +12,7 @@ export class TicketsDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.associationsApi = new AssociationsApi(configuration)
         this.basicApi = new BasicApi(configuration)

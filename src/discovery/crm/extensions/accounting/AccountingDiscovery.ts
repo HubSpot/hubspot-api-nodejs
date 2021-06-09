@@ -13,7 +13,7 @@ export class AccountingDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.callbacksApi = new CallbacksApi(configuration)
         this.invoiceApi = new InvoiceApi(configuration)

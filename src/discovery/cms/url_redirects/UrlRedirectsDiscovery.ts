@@ -9,7 +9,7 @@ export class UrlRedirectsDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
         
         this.redirectsApi = new RedirectsApi(configuration)
     }

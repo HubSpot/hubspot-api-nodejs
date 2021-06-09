@@ -9,7 +9,7 @@ export class VideoconferencingDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.settingsApi = new SettingsApi(configuration)
     }

@@ -11,7 +11,7 @@ export class PropertiesDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.batchApi = new BatchApi(configuration)
         this.coreApi = new CoreApi(configuration)

@@ -10,7 +10,7 @@ export class CardsDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.cardsApi = new CardsApi(configuration)
         this.sampleResponseApi = new SampleResponseApi(configuration)

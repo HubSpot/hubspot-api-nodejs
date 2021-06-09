@@ -11,7 +11,7 @@ export class TimelineDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.eventsApi = new EventsApi(configuration)
         this.templatesApi = new TemplatesApi(configuration)

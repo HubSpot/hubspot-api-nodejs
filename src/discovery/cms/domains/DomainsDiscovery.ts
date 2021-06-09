@@ -9,7 +9,7 @@ export class DomainsDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
         
         this.domainsApi = new DomainsApi(configuration)
     }

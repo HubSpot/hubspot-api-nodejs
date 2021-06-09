@@ -10,7 +10,7 @@ export class PipelinesDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.pipelineStagesApi = new PipelineStagesApi(configuration)
         this.pipelinesApi = new PipelinesApi(configuration)

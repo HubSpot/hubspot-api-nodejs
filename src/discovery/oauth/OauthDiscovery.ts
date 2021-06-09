@@ -10,7 +10,7 @@ export class OauthDiscovery extends BaseDiscovery {
     constructor(config: Configuration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
         
         this.defaultApi = new DefaultApi(configuration)
     }
