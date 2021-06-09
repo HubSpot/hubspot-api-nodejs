@@ -1,5 +1,6 @@
 import { Configuration } from '../../Configuration'
 import { AuditLogsDiscovery } from './audit_logs/AuditLogsDiscovery'
+import { BlogsDiscovery } from './blogs/BlogsDiscovery'
 import { DomainsDiscovery } from './domains/DomainsDiscovery'
 import { HubdbDiscovery } from './hubdb/HubdbDiscovery'
 import { PerformanceDiscovery } from './performance/PerformanceDiscovery'
@@ -9,6 +10,7 @@ import { UrlRedirectsDiscovery } from './url_redirects/UrlRedirectsDiscovery'
 
 export class CmsDiscovery {
     public auditLogs: AuditLogsDiscovery
+    public blogs: BlogsDiscovery
     public domains: DomainsDiscovery
     public hubdb: HubdbDiscovery
     public performance: PerformanceDiscovery
@@ -17,6 +19,7 @@ export class CmsDiscovery {
 
     constructor(config: Configuration) {
         this.auditLogs = new AuditLogsDiscovery(config)
+        this.blogs = new BlogsDiscovery(config)
         this.domains = new DomainsDiscovery(config)
         this.hubdb = new HubdbDiscovery(config)
         this.performance = new PerformanceDiscovery(config)

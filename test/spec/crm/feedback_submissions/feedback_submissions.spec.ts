@@ -1,8 +1,8 @@
-import { Client } from '../../../../../index'
+import { Client } from '../../../../index'
 
 describe('api client', () => {
   it('is discoverable', () => {
-    const client = new Client().crm.objects.feedbackSubmissions
+    const client = new Client().crm.feedbackSubmissions
     expect(client.hasOwnProperty('associationsApi')).toBeTruthy()
     expect(client.hasOwnProperty('basicApi')).toBeTruthy()
     expect(client.hasOwnProperty('batchApi')).toBeTruthy()

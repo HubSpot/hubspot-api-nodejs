@@ -18,7 +18,10 @@ export class Client {
     public oauth: OauthDiscovery
     public webhooks: WebhooksDiscovery
 
-    constructor(config: Configuration) {
+    constructor(config?: Configuration) {
+        if (!config) {
+            config = {}
+        }
         this.automation = new AutomationDiscovery(config)
         this.cms = new CmsDiscovery(config)
         this.conversations = new ConversationsDiscovery(config)
