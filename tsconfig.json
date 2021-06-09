@@ -1,12 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./lib",
     "strict": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "declaration": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "./lib",
+    "noLib": false,
+    "lib": [ "es6" ],
+  },
+  "exclude": [
+    "lib",
+    "node_modules"
+  ]
 }
