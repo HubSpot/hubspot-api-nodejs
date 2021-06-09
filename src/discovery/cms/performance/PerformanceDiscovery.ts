@@ -1,15 +1,15 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { DefaultApi } from '../../../../codegen/cms/performance/index'
 import { createConfiguration } from '../../../../codegen/cms/performance/configuration'
+import { DefaultApi } from '../../../../codegen/cms/performance/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PerformanceDiscovery extends BaseDiscovery {
     public defaultApi: DefaultApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
         
         this.defaultApi = new DefaultApi(configuration)
     }

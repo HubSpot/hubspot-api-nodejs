@@ -1,10 +1,10 @@
-import { Configuration } from '../Configuration'
+import { IConfiguration } from '../IConfiguration'
 
 export class BaseDiscovery {
 
-    public config: Configuration
+    public config: IConfiguration
   
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         this.config = config
     }
 

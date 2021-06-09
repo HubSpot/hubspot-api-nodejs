@@ -1,4 +1,4 @@
-import { Configuration } from '../../Configuration'
+import { IConfiguration } from '../../IConfiguration'
 import { AuditLogsDiscovery } from './audit_logs/AuditLogsDiscovery'
 import { BlogsDiscovery } from './blogs/BlogsDiscovery'
 import { DomainsDiscovery } from './domains/DomainsDiscovery'
@@ -17,7 +17,7 @@ export class CmsDiscovery {
     public siteSearch: SiteSearchDiscovery
     public urlRedirects: UrlRedirectsDiscovery
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         this.auditLogs = new AuditLogsDiscovery(config)
         this.blogs = new BlogsDiscovery(config)
         this.domains = new DomainsDiscovery(config)

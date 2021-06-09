@@ -1,15 +1,15 @@
-import { Configuration } from '../../../../Configuration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
-import { SettingsApi } from '../../../../../codegen/crm/extensions/calling/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/calling/configuration'
+import { SettingsApi } from '../../../../../codegen/crm/extensions/calling/index'
+import { IConfiguration } from '../../../../IConfiguration'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class CallingDiscovery extends BaseDiscovery {
     public settingsApi: SettingsApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.settingsApi = new SettingsApi(configuration)
     }

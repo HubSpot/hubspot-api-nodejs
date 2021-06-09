@@ -1,7 +1,7 @@
-import { Configuration } from '../../../../Configuration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
-import { CallbacksApi, InvoiceApi, SettingsApi, SyncApi, UserAccountsApi } from '../../../../../codegen/crm/extensions/accounting/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/accounting/configuration'
+import { CallbacksApi, InvoiceApi, SettingsApi, SyncApi, UserAccountsApi } from '../../../../../codegen/crm/extensions/accounting/index'
+import { IConfiguration } from '../../../../IConfiguration'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class AccountingDiscovery extends BaseDiscovery {
     public callbacksApi: CallbacksApi
@@ -10,10 +10,10 @@ export class AccountingDiscovery extends BaseDiscovery {
     public syncApi: SyncApi
     public userAccountsApi: UserAccountsApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
-        let configuration = createConfiguration(this.getParams())
+        const configuration = createConfiguration(this.getParams())
 
         this.callbacksApi = new CallbacksApi(configuration)
         this.invoiceApi = new InvoiceApi(configuration)
