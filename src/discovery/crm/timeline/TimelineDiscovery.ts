@@ -1,14 +1,14 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { EventsApi, TemplatesApi, TokensApi } from '../../../../codegen/crm/timeline/index'
 import { createConfiguration } from '../../../../codegen/crm/timeline/configuration'
+import { EventsApi, TemplatesApi, TokensApi } from '../../../../codegen/crm/timeline/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class TimelineDiscovery extends BaseDiscovery {
     public eventsApi: EventsApi
     public templatesApi: TemplatesApi
     public tokensApi: TokensApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

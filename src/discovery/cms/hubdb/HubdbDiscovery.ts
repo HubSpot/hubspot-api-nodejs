@@ -1,14 +1,14 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
 import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
+import { RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class HubdbDiscovery extends BaseDiscovery {
     public rowsApi: RowsApi
     public rowsBatchApi: RowsBatchApi
     public tablesApi: TablesApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

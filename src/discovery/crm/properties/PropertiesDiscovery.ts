@@ -1,14 +1,14 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { BatchApi, CoreApi, GroupsApi} from '../../../../codegen/crm/properties/index'
 import { createConfiguration } from '../../../../codegen/crm/properties/configuration'
+import { BatchApi, CoreApi, GroupsApi} from '../../../../codegen/crm/properties/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PropertiesDiscovery extends BaseDiscovery {
     public batchApi: BatchApi
     public coreApi: CoreApi
     public groupsApi: GroupsApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

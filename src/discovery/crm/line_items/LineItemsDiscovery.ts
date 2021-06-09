@@ -1,7 +1,7 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/line_items/index'
 import { createConfiguration } from '../../../../codegen/crm/line_items/configuration'
+import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/line_items/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class LineItemsDiscovery extends BaseDiscovery {
     public associationsApi: AssociationsApi
@@ -9,7 +9,7 @@ export class LineItemsDiscovery extends BaseDiscovery {
     public batchApi: BatchApi
     public searchApi: SearchApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

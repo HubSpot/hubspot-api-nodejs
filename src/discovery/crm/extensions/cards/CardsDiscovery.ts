@@ -1,13 +1,13 @@
-import { Configuration } from '../../../../Configuration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
-import { CardsApi, SampleResponseApi } from '../../../../../codegen/crm/extensions/cards/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/cards/configuration'
+import { CardsApi, SampleResponseApi } from '../../../../../codegen/crm/extensions/cards/index'
+import { IConfiguration } from '../../../../IConfiguration'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class CardsDiscovery extends BaseDiscovery {
     public cardsApi: CardsApi
     public sampleResponseApi: SampleResponseApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

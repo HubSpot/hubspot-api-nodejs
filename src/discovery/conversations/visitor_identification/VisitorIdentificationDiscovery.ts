@@ -1,12 +1,12 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { GenerateApi } from '../../../../codegen/conversations/visitor_identification/index'
 import { createConfiguration } from '../../../../codegen/conversations/visitor_identification/configuration'
+import { GenerateApi } from '../../../../codegen/conversations/visitor_identification/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class VisitorIdentificationDiscovery extends BaseDiscovery {
     public generateApi: GenerateApi
 
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())

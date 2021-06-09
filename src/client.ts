@@ -1,4 +1,3 @@
-import { Configuration } from './Configuration'
 import { AutomationDiscovery } from './discovery/automation/AutomationDiscovery'
 import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
 import { ConversationsDiscovery } from './discovery/conversations/ConversationsDiscovery'
@@ -7,6 +6,7 @@ import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
+import { IConfiguration } from './IConfiguration'
 
 export class Client {
   public automation: AutomationDiscovery
@@ -18,7 +18,7 @@ export class Client {
   public oauth: OauthDiscovery
   public webhooks: WebhooksDiscovery
 
-  constructor(config: Configuration) {
+  constructor(config: IConfiguration) {
     this.automation = new AutomationDiscovery(config)
     this.cms = new CmsDiscovery(config)
     this.conversations = new ConversationsDiscovery(config)

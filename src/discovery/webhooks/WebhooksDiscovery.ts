@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../codegen/webhooks/configuration'
 import { SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
-import { Configuration } from '../../Configuration'
+import { IConfiguration } from '../../IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
 
 
@@ -8,7 +8,7 @@ export class WebhooksDiscovery extends BaseDiscovery {
     public settingsApi: SettingsApi
     public subscriptionsApi: SubscriptionsApi
     
-    constructor(config: Configuration) {
+    constructor(config: IConfiguration) {
         super(config)
 
         const configuration = createConfiguration(this.getParams())
