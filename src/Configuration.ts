@@ -1,6 +1,5 @@
-
 export interface Configuration {
-    apiKey?: string;
-    accessToken?: string;
-    developerApiKey?: string;
+  apiKey?: string
+  accessToken?: string
+  developerApiKey?: string
 }
