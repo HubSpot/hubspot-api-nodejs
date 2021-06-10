@@ -5,11 +5,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "removeComments": true,
     "sourceMap": true,
     "outDir": "./lib",
-    "noLib": false,
-    "lib": [ "es6" ],
     "resolveJsonModule": true,
   },
   "exclude": [
