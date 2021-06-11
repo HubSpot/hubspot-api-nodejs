@@ -1,10 +1,10 @@
-import { Configuration } from '../../Configuration'
+import { IConfiguration } from '../../IConfiguration'
 import { ActionsDiscovery } from './actions/ActionsDiscovery'
 
 export class AutomationDiscovery {
-    public actions: ActionsDiscovery
+  public actions: ActionsDiscovery
 
-    constructor(config: Configuration) {
-        this.actions = new ActionsDiscovery(config)
-    }
+  constructor(config: IConfiguration) {
+    this.actions = new ActionsDiscovery(config)
+  }
 }

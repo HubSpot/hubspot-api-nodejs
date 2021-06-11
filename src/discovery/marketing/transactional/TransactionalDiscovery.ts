@@ -1,16 +1,16 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { DefaultApi } from '../../../../codegen/marketing/transactional/index'
 import { createConfiguration } from '../../../../codegen/marketing/transactional/configuration'
+import { DefaultApi } from '../../../../codegen/marketing/transactional/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class TransactionalDiscovery extends BaseDiscovery {
-    public defaultApi: DefaultApi
+  public defaultApi: DefaultApi
 
-    constructor(config: Configuration) {
-        super(config)
+  constructor(config: IConfiguration) {
+    super(config)
 
-        let configuration = createConfiguration(this.getParams())
-        
-        this.defaultApi = new DefaultApi(configuration)
-    }
+    const configuration = createConfiguration(this.getParams())
+
+    this.defaultApi = new DefaultApi(configuration)
+  }
 }

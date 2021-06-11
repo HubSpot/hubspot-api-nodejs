@@ -1,16 +1,16 @@
-import { Configuration } from '../../../../Configuration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
-import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { createConfiguration } from '../../../../../codegen/crm/extensions/videoconferencing/configuration'
+import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
+import { IConfiguration } from '../../../../IConfiguration'
+import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class VideoconferencingDiscovery extends BaseDiscovery {
-    public settingsApi: SettingsApi
+  public settingsApi: SettingsApi
 
-    constructor(config: Configuration) {
-        super(config)
+  constructor(config: IConfiguration) {
+    super(config)
 
-        let configuration = createConfiguration(this.getParams())
+    const configuration = createConfiguration(this.getParams())
 
-        this.settingsApi = new SettingsApi(configuration)
-    }
+    this.settingsApi = new SettingsApi(configuration)
+  }
 }

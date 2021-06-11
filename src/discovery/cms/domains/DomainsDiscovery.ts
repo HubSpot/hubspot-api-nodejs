@@ -1,16 +1,16 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { DomainsApi } from '../../../../codegen/cms/domains/index'
 import { createConfiguration } from '../../../../codegen/cms/domains/configuration'
+import { DomainsApi } from '../../../../codegen/cms/domains/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class DomainsDiscovery extends BaseDiscovery {
-    public domainsApi: DomainsApi
+  public domainsApi: DomainsApi
 
-    constructor(config: Configuration) {
-        super(config)
+  constructor(config: IConfiguration) {
+    super(config)
 
-        let configuration = createConfiguration(this.getParams())
-        
-        this.domainsApi = new DomainsApi(configuration)
-    }
+    const configuration = createConfiguration(this.getParams())
+
+    this.domainsApi = new DomainsApi(configuration)
+  }
 }
