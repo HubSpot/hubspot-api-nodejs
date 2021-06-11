@@ -1,3 +1,1 @@
-export {
-  Client
-} from './src/client'
+export { Client } from './src/client'

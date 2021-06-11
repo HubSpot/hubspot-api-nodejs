@@ -1,18 +1,18 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { PipelineStagesApi, PipelinesApi} from '../../../../codegen/crm/pipelines/index'
 import { createConfiguration } from '../../../../codegen/crm/pipelines/configuration'
+import { PipelinesApi, PipelineStagesApi } from '../../../../codegen/crm/pipelines/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PipelinesDiscovery extends BaseDiscovery {
-    public pipelineStagesApi: PipelineStagesApi
-    public pipelinesApi: PipelinesApi
+  public pipelineStagesApi: PipelineStagesApi
+  public pipelinesApi: PipelinesApi
 
-    constructor(config: Configuration) {
-        super(config)
+  constructor(config: IConfiguration) {
+    super(config)
 
-        let configuration = createConfiguration(this.getParams())
+    const configuration = createConfiguration(this.getParams())
 
-        this.pipelineStagesApi = new PipelineStagesApi(configuration)
-        this.pipelinesApi = new PipelinesApi(configuration)
-    }
+    this.pipelineStagesApi = new PipelineStagesApi(configuration)
+    this.pipelinesApi = new PipelinesApi(configuration)
+  }
 }

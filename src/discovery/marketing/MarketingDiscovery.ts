@@ -1,11 +1,10 @@
-import { Configuration } from '../../Configuration'
+import { IConfiguration } from '../../IConfiguration'
 import { TransactionalDiscovery } from './transactional/TransactionalDiscovery'
 
-
 export class MarketingDiscovery {
-    public transactional: TransactionalDiscovery
+  public transactional: TransactionalDiscovery
 
-    constructor(config: Configuration) {
-        this.transactional = new TransactionalDiscovery(config)
-    }
+  constructor(config: IConfiguration) {
+    this.transactional = new TransactionalDiscovery(config)
+  }
 }

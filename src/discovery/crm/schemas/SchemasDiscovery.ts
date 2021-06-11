@@ -1,18 +1,18 @@
-import { Configuration } from '../../../Configuration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { CoreApi, DefaultApi } from '../../../../codegen/crm/schemas/index'
 import { createConfiguration } from '../../../../codegen/crm/schemas/configuration'
+import { CoreApi, DefaultApi } from '../../../../codegen/crm/schemas/index'
+import { IConfiguration } from '../../../IConfiguration'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class SchemasDiscovery extends BaseDiscovery {
-    public coreApi: CoreApi
-    public defaultApi: DefaultApi
+  public coreApi: CoreApi
+  public defaultApi: DefaultApi
 
-    constructor(config: Configuration) {
-        super(config)
+  constructor(config: IConfiguration) {
+    super(config)
 
-        let configuration = createConfiguration(this.getParams())
+    const configuration = createConfiguration(this.getParams())
 
-        this.coreApi = new CoreApi(configuration)
-        this.defaultApi = new DefaultApi(configuration)
-    }
+    this.coreApi = new CoreApi(configuration)
+    this.defaultApi = new DefaultApi(configuration)
+  }
 }
