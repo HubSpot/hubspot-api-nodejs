@@ -36,6 +36,10 @@ export class SettingsRequest {
     * When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
     */
     'isReady'?: boolean;
+    /**
+    * When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+    */
+    'supportsCustomObjects'?: boolean;
 
     static discriminator: string | undefined = undefined;
 
@@ -63,6 +67,11 @@ export class SettingsRequest {
         {
             "name": "isReady",
             "baseName": "isReady",
+            "type": "boolean"
+        },
+        {
+            "name": "supportsCustomObjects",
+            "baseName": "supportsCustomObjects",
             "type": "boolean"
         }    ];
 

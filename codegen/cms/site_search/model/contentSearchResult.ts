@@ -16,22 +16,73 @@ import { RequestFile } from '../api';
 * An individual search result.
 */
 export class ContentSearchResult {
+    /**
+    * The ID of the content.
+    */
     'id': number;
+    /**
+    * The matching score of the document.
+    */
     'score': number;
+    /**
+    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
+    */
     'type': ContentSearchResult.TypeEnum;
+    /**
+    * The domain the document is hosted on.
+    */
     'domain': string;
+    /**
+    * The url of the document.
+    */
     'url': string;
+    /**
+    * URL of the featured image.
+    */
     'featuredImageUrl'?: string;
+    /**
+    * The document\'s language.
+    */
     'language'?: ContentSearchResult.LanguageEnum;
+    /**
+    * The title of the returned document.
+    */
     'title'?: string;
+    /**
+    * The result\'s description. The content will be determined by the value of `length` in the request.
+    */
     'description'?: string;
+    /**
+    * For knowledge articles, the category of the article.
+    */
     'category'?: string;
+    /**
+    * For knowledge articles, the subcategory of the article.
+    */
     'subcategory'?: string;
+    /**
+    * Name of the author.
+    */
     'authorFullName'?: string;
+    /**
+    * If a blog post, the tags associated with it.
+    */
     'tags'?: Array<string>;
+    /**
+    * If a dynamic page, the ID of the HubDB table.
+    */
     'tableId'?: number;
+    /**
+    * If a dynamic page, the row ID in the HubDB table.
+    */
     'rowId'?: number;
+    /**
+    * The date the content was published.
+    */
     'publishedDate'?: number;
+    /**
+    * The ID of the document in HubSpot.
+    */
     'combinedId'?: string;
 
     static discriminator: string | undefined = undefined;
@@ -133,7 +184,6 @@ export namespace ContentSearchResult {
         LANDINGPAGE = <any> 'LANDING_PAGE',
         BLOGPOST = <any> 'BLOG_POST',
         SITEPAGE = <any> 'SITE_PAGE',
-        DOCUMENT = <any> 'DOCUMENT',
         KNOWLEDGEARTICLE = <any> 'KNOWLEDGE_ARTICLE',
         LISTINGPAGE = <any> 'LISTING_PAGE'
     }

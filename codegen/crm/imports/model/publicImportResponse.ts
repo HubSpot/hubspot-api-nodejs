@@ -87,6 +87,7 @@ export namespace PublicImportResponse {
         PROCESSING = <any> 'PROCESSING',
         DONE = <any> 'DONE',
         FAILED = <any> 'FAILED',
-        CANCELED = <any> 'CANCELED'
+        CANCELED = <any> 'CANCELED',
+        DEFERRED = <any> 'DEFERRED'
     }
 }

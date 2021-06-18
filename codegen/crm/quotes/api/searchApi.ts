@@ -14,7 +14,7 @@ import localVarRequest = require('request');
 import http = require('http');
 
 /* tslint:disable:no-unused-locals */
-import { CollectionResponseWithTotalSimplePublicObject } from '../model/collectionResponseWithTotalSimplePublicObject';
+import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../model/collectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { PublicObjectSearchRequest } from '../model/publicObjectSearchRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -94,7 +94,7 @@ export class SearchApi {
      * @summary Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
-    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+    public async doSearch (publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObjectForwardPaging;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/quotes/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -145,12 +145,12 @@ export class SearchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObjectForwardPaging;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObject");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObjectForwardPaging");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

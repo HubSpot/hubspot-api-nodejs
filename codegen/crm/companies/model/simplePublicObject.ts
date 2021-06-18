@@ -11,14 +11,12 @@
  */
 
 import { RequestFile } from '../api';
-import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
 
 export class SimplePublicObject {
     'id': string;
     'properties': { [key: string]: string; };
     'createdAt': Date;
     'updatedAt': Date;
-    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
     'archived'?: boolean;
     'archivedAt'?: Date;
 
@@ -44,11 +42,6 @@ export class SimplePublicObject {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date"
-        },
-        {
-            "name": "associations",
-            "baseName": "associations",
-            "type": "{ [key: string]: CollectionResponseAssociatedId; }"
         },
         {
             "name": "archived",

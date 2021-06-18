@@ -20,7 +20,7 @@ export class LayoutSection {
     'name': string;
     'label': string;
     'type': string;
-    'params': object;
+    'params': { [key: string]: object; };
     'rows': Array<{ [key: string]: LayoutSection; }>;
     'rowMetaData': Array<RowMetaData>;
     'cells': Array<LayoutSection>;
@@ -60,7 +60,7 @@ export class LayoutSection {
         {
             "name": "params",
             "baseName": "params",
-            "type": "object"
+            "type": "{ [key: string]: object; }"
         },
         {
             "name": "rows",

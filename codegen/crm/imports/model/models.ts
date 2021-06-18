@@ -1,10 +1,14 @@
 export * from './actionResponse';
+export * from './collectionResponsePublicImportErrorForwardPaging';
 export * from './collectionResponsePublicImportResponse';
 export * from './errorDetail';
+export * from './forwardPaging';
+export * from './importRowCore';
 export * from './modelError';
 export * from './nextPage';
 export * from './paging';
 export * from './previousPage';
+export * from './publicImportError';
 export * from './publicImportMetadata';
 export * from './publicImportResponse';
 export * from './publicObjectListRecord';
@@ -12,12 +16,16 @@ export * from './publicObjectListRecord';
 import localVarRequest = require('request');
 
 import { ActionResponse } from './actionResponse';
+import { CollectionResponsePublicImportErrorForwardPaging } from './collectionResponsePublicImportErrorForwardPaging';
 import { CollectionResponsePublicImportResponse } from './collectionResponsePublicImportResponse';
 import { ErrorDetail } from './errorDetail';
+import { ForwardPaging } from './forwardPaging';
+import { ImportRowCore } from './importRowCore';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
 import { Paging } from './paging';
 import { PreviousPage } from './previousPage';
+import { PublicImportError } from './publicImportError';
 import { PublicImportMetadata } from './publicImportMetadata';
 import { PublicImportResponse } from './publicImportResponse';
 import { PublicObjectListRecord } from './publicObjectListRecord';
@@ -36,17 +44,23 @@ let primitives = [
 
 let enumsMap: {[index: string]: any} = {
         "ActionResponse.StatusEnum": ActionResponse.StatusEnum,
+        "PublicImportError.ErrorTypeEnum": PublicImportError.ErrorTypeEnum,
+        "PublicImportError.ObjectTypeEnum": PublicImportError.ObjectTypeEnum,
         "PublicImportResponse.StateEnum": PublicImportResponse.StateEnum,
 }
 
 let typeMap: {[index: string]: any} = {
     "ActionResponse": ActionResponse,
+    "CollectionResponsePublicImportErrorForwardPaging": CollectionResponsePublicImportErrorForwardPaging,
     "CollectionResponsePublicImportResponse": CollectionResponsePublicImportResponse,
     "ErrorDetail": ErrorDetail,
+    "ForwardPaging": ForwardPaging,
+    "ImportRowCore": ImportRowCore,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
+    "PublicImportError": PublicImportError,
     "PublicImportMetadata": PublicImportMetadata,
     "PublicImportResponse": PublicImportResponse,
     "PublicObjectListRecord": PublicObjectListRecord,

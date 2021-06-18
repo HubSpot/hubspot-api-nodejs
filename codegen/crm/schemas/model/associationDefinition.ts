@@ -28,8 +28,6 @@ export class AssociationDefinition {
     * A unique name for this association.
     */
     'name'?: string;
-    'cardinality': AssociationDefinition.CardinalityEnum;
-    'inverseCardinality': AssociationDefinition.InverseCardinalityEnum;
     /**
     * A unique ID for this association.
     */
@@ -62,16 +60,6 @@ export class AssociationDefinition {
             "type": "string"
         },
         {
-            "name": "cardinality",
-            "baseName": "cardinality",
-            "type": "AssociationDefinition.CardinalityEnum"
-        },
-        {
-            "name": "inverseCardinality",
-            "baseName": "inverseCardinality",
-            "type": "AssociationDefinition.InverseCardinalityEnum"
-        },
-        {
             "name": "id",
             "baseName": "id",
             "type": "string"
@@ -92,13 +80,3 @@ export class AssociationDefinition {
     }
 }
 
-export namespace AssociationDefinition {
-    export enum CardinalityEnum {
-        ONE = <any> 'ONE_TO_ONE',
-        MANY = <any> 'ONE_TO_MANY'
-    }
-    export enum InverseCardinalityEnum {
-        ONE = <any> 'ONE_TO_ONE',
-        MANY = <any> 'ONE_TO_MANY'
-    }
-}

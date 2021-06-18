@@ -31,7 +31,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum CardsApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class CardsApi {
@@ -41,7 +41,7 @@ export class CardsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -136,8 +136,8 @@ export class CardsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -175,7 +175,7 @@ export class CardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public async create (appId: number, cardCreateRequest?: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async create (appId: number, cardCreateRequest: CardCreateRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -194,6 +194,11 @@ export class CardsApi {
             throw new Error('Required parameter appId was null or undefined when calling create.');
         }
 
+        // verify required parameter 'cardCreateRequest' is not null or undefined
+        if (cardCreateRequest === null || cardCreateRequest === undefined) {
+            throw new Error('Required parameter cardCreateRequest was null or undefined when calling create.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -209,8 +214,8 @@ export class CardsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -281,8 +286,8 @@ export class CardsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -360,8 +365,8 @@ export class CardsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -401,7 +406,7 @@ export class CardsApi {
      * @param cardId The ID of the card to update.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public async update (appId: number, cardId: string, cardPatchRequest?: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
+    public async update (appId: number, cardId: string, cardPatchRequest: CardPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CardResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/cards/{appId}/{cardId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
             .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
@@ -426,6 +431,11 @@ export class CardsApi {
             throw new Error('Required parameter cardId was null or undefined when calling update.');
         }
 
+        // verify required parameter 'cardPatchRequest' is not null or undefined
+        if (cardPatchRequest === null || cardPatchRequest === undefined) {
+            throw new Error('Required parameter cardPatchRequest was null or undefined when calling update.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -441,8 +451,8 @@ export class CardsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

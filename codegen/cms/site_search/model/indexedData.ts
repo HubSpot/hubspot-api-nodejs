@@ -17,8 +17,17 @@ import { SearchHitField } from './searchHitField';
 * The indexed data in HubSpot
 */
 export class IndexedData {
+    /**
+    * The ID of the document in HubSpot.
+    */
     'id': string;
+    /**
+    * The type of document. Can be `SITE_PAGE`, `LANDING_PAGE`, `BLOG_POST`, `LISTING_PAGE`, or `KNOWLEDGE_ARTICLE`.
+    */
     'type': IndexedData.TypeEnum;
+    /**
+    * The indexed fields in HubSpot.
+    */
     'fields': { [key: string]: SearchHitField; };
 
     static discriminator: string | undefined = undefined;
@@ -50,7 +59,6 @@ export namespace IndexedData {
         LANDINGPAGE = <any> 'LANDING_PAGE',
         BLOGPOST = <any> 'BLOG_POST',
         SITEPAGE = <any> 'SITE_PAGE',
-        DOCUMENT = <any> 'DOCUMENT',
         KNOWLEDGEARTICLE = <any> 'KNOWLEDGE_ARTICLE',
         LISTINGPAGE = <any> 'LISTING_PAGE'
     }

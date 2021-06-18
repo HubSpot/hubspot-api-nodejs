@@ -120,6 +120,7 @@ export namespace ObjectTypePropertyCreate {
         Number = <any> 'number',
         Date = <any> 'date',
         Datetime = <any> 'datetime',
-        Enumeration = <any> 'enumeration'
+        Enumeration = <any> 'enumeration',
+        Bool = <any> 'bool'
     }
 }

@@ -6,12 +6,14 @@ export * from './batchReadInputSimplePublicObjectId';
 export * from './batchResponseSimplePublicObject';
 export * from './batchResponseSimplePublicObjectWithErrors';
 export * from './collectionResponseAssociatedId';
-export * from './collectionResponseSimplePublicObject';
-export * from './collectionResponseWithTotalSimplePublicObject';
+export * from './collectionResponseAssociatedIdForwardPaging';
+export * from './collectionResponseSimplePublicObjectWithAssociationsForwardPaging';
+export * from './collectionResponseWithTotalSimplePublicObjectForwardPaging';
 export * from './errorCategory';
 export * from './errorDetail';
 export * from './filter';
 export * from './filterGroup';
+export * from './forwardPaging';
 export * from './modelError';
 export * from './nextPage';
 export * from './paging';
@@ -21,6 +23,7 @@ export * from './simplePublicObject';
 export * from './simplePublicObjectBatchInput';
 export * from './simplePublicObjectId';
 export * from './simplePublicObjectInput';
+export * from './simplePublicObjectWithAssociations';
 export * from './standardError';
 
 import localVarRequest = require('request');
@@ -33,12 +36,14 @@ import { BatchReadInputSimplePublicObjectId } from './batchReadInputSimplePublic
 import { BatchResponseSimplePublicObject } from './batchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from './batchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from './collectionResponseAssociatedId';
-import { CollectionResponseSimplePublicObject } from './collectionResponseSimplePublicObject';
-import { CollectionResponseWithTotalSimplePublicObject } from './collectionResponseWithTotalSimplePublicObject';
+import { CollectionResponseAssociatedIdForwardPaging } from './collectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from './collectionResponseSimplePublicObjectWithAssociationsForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from './collectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { Filter } from './filter';
 import { FilterGroup } from './filterGroup';
+import { ForwardPaging } from './forwardPaging';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
 import { Paging } from './paging';
@@ -48,6 +53,7 @@ import { SimplePublicObject } from './simplePublicObject';
 import { SimplePublicObjectBatchInput } from './simplePublicObjectBatchInput';
 import { SimplePublicObjectId } from './simplePublicObjectId';
 import { SimplePublicObjectInput } from './simplePublicObjectInput';
+import { SimplePublicObjectWithAssociations } from './simplePublicObjectWithAssociations';
 import { StandardError } from './standardError';
 
 /* tslint:disable:no-unused-variable */
@@ -78,12 +84,14 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
-    "CollectionResponseSimplePublicObject": CollectionResponseSimplePublicObject,
-    "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,
+    "CollectionResponseAssociatedIdForwardPaging": CollectionResponseAssociatedIdForwardPaging,
+    "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
+    "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,
+    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
@@ -93,6 +101,7 @@ let typeMap: {[index: string]: any} = {
     "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,
     "SimplePublicObjectId": SimplePublicObjectId,
     "SimplePublicObjectInput": SimplePublicObjectInput,
+    "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
     "StandardError": StandardError,
 }
 

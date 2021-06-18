@@ -30,7 +30,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum SettingsApiApiKeys {
-    hapikey,
+    developer_hapikey,
 }
 
 export class SettingsApi {
@@ -40,7 +40,7 @@ export class SettingsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -128,8 +128,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -167,7 +167,7 @@ export class SettingsApi {
      * @param appId The ID of the target app.
      * @param settingsRequest Settings state to create with.
      */
-    public async create (appId: number, settingsRequest?: SettingsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async create (appId: number, settingsRequest: SettingsRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/calling/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -186,6 +186,11 @@ export class SettingsApi {
             throw new Error('Required parameter appId was null or undefined when calling create.');
         }
 
+        // verify required parameter 'settingsRequest' is not null or undefined
+        if (settingsRequest === null || settingsRequest === undefined) {
+            throw new Error('Required parameter settingsRequest was null or undefined when calling create.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -201,8 +206,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -273,8 +278,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -313,7 +318,7 @@ export class SettingsApi {
      * @param appId The ID of the target app.
      * @param settingsPatchRequest Updated details for the settings.
      */
-    public async update (appId: number, settingsPatchRequest?: SettingsPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
+    public async update (appId: number, settingsPatchRequest: SettingsPatchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SettingsResponse;  }> {
         const localVarPath = this.basePath + '/crm/v3/extensions/calling/{appId}/settings'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
         let localVarQueryParameters: any = {};
@@ -332,6 +337,11 @@ export class SettingsApi {
             throw new Error('Required parameter appId was null or undefined when calling update.');
         }
 
+        // verify required parameter 'settingsPatchRequest' is not null or undefined
+        if (settingsPatchRequest === null || settingsPatchRequest === undefined) {
+            throw new Error('Required parameter settingsPatchRequest was null or undefined when calling update.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -347,8 +357,8 @@ export class SettingsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        if (this.authentications.developer_hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.developer_hapikey.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

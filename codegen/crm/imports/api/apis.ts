@@ -1,5 +1,7 @@
 export * from './coreApi';
 import { CoreApi } from './coreApi';
+export * from './defaultApi';
+import { DefaultApi } from './defaultApi';
 import * as fs from 'fs';
 import * as http from 'http';
 
@@ -20,4 +22,4 @@ export interface RequestDetailedFile {
 
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
-export const APIS = [CoreApi];
+export const APIS = [CoreApi, DefaultApi];

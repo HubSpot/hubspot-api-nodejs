@@ -1,18 +1,18 @@
-export * from './collectionResponsePublicOwner';
+export * from './collectionResponsePublicOwnerForwardPaging';
 export * from './errorDetail';
+export * from './forwardPaging';
 export * from './modelError';
 export * from './nextPage';
-export * from './paging';
 export * from './publicOwner';
 export * from './publicTeam';
 
 import localVarRequest = require('request');
 
-import { CollectionResponsePublicOwner } from './collectionResponsePublicOwner';
+import { CollectionResponsePublicOwnerForwardPaging } from './collectionResponsePublicOwnerForwardPaging';
 import { ErrorDetail } from './errorDetail';
+import { ForwardPaging } from './forwardPaging';
 import { ModelError } from './modelError';
 import { NextPage } from './nextPage';
-import { Paging } from './paging';
 import { PublicOwner } from './publicOwner';
 import { PublicTeam } from './publicTeam';
 
@@ -33,11 +33,11 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponsePublicOwner": CollectionResponsePublicOwner,
+    "CollectionResponsePublicOwnerForwardPaging": CollectionResponsePublicOwnerForwardPaging,
     "ErrorDetail": ErrorDetail,
+    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "Paging": Paging,
     "PublicOwner": PublicOwner,
     "PublicTeam": PublicTeam,
 }

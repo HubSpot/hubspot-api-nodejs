@@ -28,8 +28,6 @@ export class AssociationDefinitionEgg {
     * A unique name for this association.
     */
     'name'?: string;
-    'cardinality': AssociationDefinitionEgg.CardinalityEnum;
-    'inverseCardinality': AssociationDefinitionEgg.InverseCardinalityEnum;
 
     static discriminator: string | undefined = undefined;
 
@@ -48,16 +46,6 @@ export class AssociationDefinitionEgg {
             "name": "name",
             "baseName": "name",
             "type": "string"
-        },
-        {
-            "name": "cardinality",
-            "baseName": "cardinality",
-            "type": "AssociationDefinitionEgg.CardinalityEnum"
-        },
-        {
-            "name": "inverseCardinality",
-            "baseName": "inverseCardinality",
-            "type": "AssociationDefinitionEgg.InverseCardinalityEnum"
         }    ];
 
     static getAttributeTypeMap() {
@@ -65,13 +53,3 @@ export class AssociationDefinitionEgg {
     }
 }
 
-export namespace AssociationDefinitionEgg {
-    export enum CardinalityEnum {
-        ONE = <any> 'ONE_TO_ONE',
-        MANY = <any> 'ONE_TO_MANY'
-    }
-    export enum InverseCardinalityEnum {
-        ONE = <any> 'ONE_TO_ONE',
-        MANY = <any> 'ONE_TO_MANY'
-    }
-}
