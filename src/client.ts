@@ -773,7 +773,7 @@ export class Client {
         searchApi: this._companiesSearchApi,
         getAll: this._retrieveGetAllFunction<
           companiesModels.SimplePublicObject,
-          companiesModels.CollectionResponseSimplePublicObject
+          companiesModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._companiesBasicApi.getPage.bind(this._companiesBasicApi)),
       },
       contacts: {
@@ -783,7 +783,7 @@ export class Client {
         searchApi: this._contactsSearchApi,
         getAll: this._retrieveGetAllFunction<
           contactsModels.SimplePublicObject,
-          contactsModels.CollectionResponseSimplePublicObject
+          contactsModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._contactsBasicApi.getPage.bind(this._contactsBasicApi)),
       },
       deals: {
@@ -793,7 +793,7 @@ export class Client {
         searchApi: this._dealsSearchApi,
         getAll: this._retrieveGetAllFunction<
           dealsModels.SimplePublicObject,
-          dealsModels.CollectionResponseSimplePublicObject
+          dealsModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._dealsBasicApi.getPage.bind(this._dealsBasicApi)),
       },
       extensions: {
@@ -825,7 +825,7 @@ export class Client {
         searchApi: this._lineItemsSearchApi,
         getAll: this._retrieveGetAllFunction<
           lineItemsModels.SimplePublicObject,
-          lineItemsModels.CollectionResponseSimplePublicObject
+          lineItemsModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._lineItemsBasicApi.getPage.bind(this._lineItemsBasicApi)),
       },
       objects: {
@@ -854,7 +854,7 @@ export class Client {
         searchApi: this._productsSearchApi,
         getAll: this._retrieveGetAllFunction<
           productsModels.SimplePublicObject,
-          productsModels.CollectionResponseSimplePublicObject
+          productsModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._productsBasicApi.getPage.bind(this._productsBasicApi)),
       },
       properties: {
@@ -869,7 +869,7 @@ export class Client {
         searchApi: this._quotesSearchApi,
         getAll: this._retrieveGetAllFunction<
           quotesModels.SimplePublicObject,
-          quotesModels.CollectionResponseSimplePublicObject
+          quotesModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._quotesBasicApi.getPage.bind(this._quotesBasicApi)),
       },
       schemas: {
@@ -883,7 +883,7 @@ export class Client {
         searchApi: this._ticketsSearchApi,
         getAll: this._retrieveGetAllFunction<
           ticketsModels.SimplePublicObject,
-          ticketsModels.CollectionResponseSimplePublicObject
+          ticketsModels.CollectionResponseSimplePublicObjectWithAssociationsForwardPaging
         >(this._ticketsBasicApi.getPage.bind(this._ticketsBasicApi)),
       },
       timeline: {
