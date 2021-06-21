@@ -1151,14 +1151,7 @@ export class Client {
       let response: { response: http.IncomingMessage; body: V }
 
       do {
-        response = await getPageFunction(
-          limitInternal,
-          afterInternal,
-          properties,
-          associations,
-          archived,
-          options,
-        )
+        response = await getPageFunction(limitInternal, afterInternal, properties, associations, archived, options)
         afterInternal = _.get(response, 'body.paging.next.after')
         result.push(..._.get(response, 'body.results'))
       } while (!_.isNil(afterInternal))
