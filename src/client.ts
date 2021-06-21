@@ -258,7 +258,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<companiesModels.SimplePublicObject[]>
@@ -273,7 +272,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<contactsModels.SimplePublicObject[]>
@@ -300,7 +298,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<dealsModels.SimplePublicObject[]>
@@ -337,7 +334,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<lineItemsModels.SimplePublicObject[]>
@@ -359,7 +355,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<productsModels.SimplePublicObject[]>
@@ -379,7 +374,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<quotesModels.SimplePublicObject[]>
@@ -398,7 +392,6 @@ export class Client {
         after?: string,
         properties?: string[],
         associations?: string[],
-        paginateAssociations?: boolean,
         archived?: boolean,
         options?: { headers: { [name: string]: string } },
       ) => Promise<ticketsModels.SimplePublicObject[]>
@@ -1133,7 +1126,6 @@ export class Client {
       after?: string,
       properties?: string[],
       associations?: string[],
-      paginateAssociations?: boolean,
       archived?: boolean,
       options?: { headers: { [name: string]: string } },
     ) => Promise<{ response: http.IncomingMessage; body: V }>,
@@ -1142,7 +1134,6 @@ export class Client {
     after?: string,
     properties?: string[],
     associations?: string[],
-    paginateAssociations?: boolean,
     archived?: boolean,
     options?: { headers: { [name: string]: string } },
   ) => Promise<T[]> {
@@ -1151,7 +1142,6 @@ export class Client {
       after?: string,
       properties?: string[],
       associations?: string[],
-      paginateAssociations?: boolean,
       archived?: boolean,
       options?: { headers: { [name: string]: string } },
     ): Promise<T[]> => {
@@ -1166,7 +1156,6 @@ export class Client {
           afterInternal,
           properties,
           associations,
-          paginateAssociations,
           archived,
           options,
         )
