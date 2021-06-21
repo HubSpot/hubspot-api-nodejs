@@ -37,6 +37,10 @@ export class SettingsResponse {
     */
     'isReady': boolean;
     /**
+    * When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+    */
+    'supportsCustomObjects': boolean;
+    /**
     * When this calling extension was created.
     */
     'createdAt': Date;
@@ -71,6 +75,11 @@ export class SettingsResponse {
         {
             "name": "isReady",
             "baseName": "isReady",
+            "type": "boolean"
+        },
+        {
+            "name": "supportsCustomObjects",
+            "baseName": "supportsCustomObjects",
             "type": "boolean"
         },
         {

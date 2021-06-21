@@ -14,7 +14,7 @@ import localVarRequest = require('request');
 import http = require('http');
 
 /* tslint:disable:no-unused-locals */
-import { CollectionResponseWithTotalSimplePublicObject } from '../model/collectionResponseWithTotalSimplePublicObject';
+import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../model/collectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { PublicObjectSearchRequest } from '../model/publicObjectSearchRequest';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -100,7 +100,7 @@ export class SearchApi {
      * @param objectType 
      * @param publicObjectSearchRequest 
      */
-    public async search (objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }> {
+    public async doSearch (objectType: string, publicObjectSearchRequest: PublicObjectSearchRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObjectForwardPaging;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/{objectType}/search'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -116,12 +116,12 @@ export class SearchApi {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new Error('Required parameter objectType was null or undefined when calling search.');
+            throw new Error('Required parameter objectType was null or undefined when calling doSearch.');
         }
 
         // verify required parameter 'publicObjectSearchRequest' is not null or undefined
         if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {
-            throw new Error('Required parameter publicObjectSearchRequest was null or undefined when calling search.');
+            throw new Error('Required parameter publicObjectSearchRequest was null or undefined when calling doSearch.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -160,12 +160,12 @@ export class SearchApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalSimplePublicObjectForwardPaging;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObject");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseWithTotalSimplePublicObjectForwardPaging");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

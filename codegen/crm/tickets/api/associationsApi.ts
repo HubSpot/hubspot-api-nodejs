@@ -14,8 +14,8 @@ import localVarRequest = require('request');
 import http = require('http');
 
 /* tslint:disable:no-unused-locals */
-import { CollectionResponseAssociatedId } from '../model/collectionResponseAssociatedId';
-import { SimplePublicObject } from '../model/simplePublicObject';
+import { CollectionResponseAssociatedIdForwardPaging } from '../model/collectionResponseAssociatedIdForwardPaging';
+import { SimplePublicObjectWithAssociations } from '../model/simplePublicObjectWithAssociations';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -196,9 +196,8 @@ export class AssociationsApi {
      * @param toObjectType 
      * @param toObjectId 
      * @param associationType 
-     * @param paginateAssociations 
      */
-    public async create (ticketId: string, toObjectType: string, toObjectId: string, associationType: string, paginateAssociations?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }> {
+    public async create (ticketId: string, toObjectType: string, toObjectId: string, associationType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: SimplePublicObjectWithAssociations;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/{ticketId}/associations/{toObjectType}/{toObjectId}/{associationType}'
             .replace('{' + 'ticketId' + '}', encodeURIComponent(String(ticketId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
@@ -233,10 +232,6 @@ export class AssociationsApi {
         // verify required parameter 'associationType' is not null or undefined
         if (associationType === null || associationType === undefined) {
             throw new Error('Required parameter associationType was null or undefined when calling create.');
-        }
-
-        if (paginateAssociations !== undefined) {
-            localVarQueryParameters['paginateAssociations'] = ObjectSerializer.serialize(paginateAssociations, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -274,12 +269,12 @@ export class AssociationsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: SimplePublicObject;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: SimplePublicObjectWithAssociations;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "SimplePublicObject");
+                        body = ObjectSerializer.deserialize(body, "SimplePublicObjectWithAssociations");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -295,11 +290,10 @@ export class AssociationsApi {
      * @summary List associations of a ticket by type
      * @param ticketId 
      * @param toObjectType 
-     * @param paginateAssociations 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public async getAll (ticketId: string, toObjectType: string, paginateAssociations?: boolean, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }> {
+    public async getAll (ticketId: string, toObjectType: string, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedIdForwardPaging;  }> {
         const localVarPath = this.basePath + '/crm/v3/objects/tickets/{ticketId}/associations/{toObjectType}'
             .replace('{' + 'ticketId' + '}', encodeURIComponent(String(ticketId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
@@ -322,10 +316,6 @@ export class AssociationsApi {
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
             throw new Error('Required parameter toObjectType was null or undefined when calling getAll.');
-        }
-
-        if (paginateAssociations !== undefined) {
-            localVarQueryParameters['paginateAssociations'] = ObjectSerializer.serialize(paginateAssociations, "boolean");
         }
 
         if (after !== undefined) {
@@ -371,12 +361,12 @@ export class AssociationsApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedId;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseAssociatedIdForwardPaging;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedId");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseAssociatedIdForwardPaging");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

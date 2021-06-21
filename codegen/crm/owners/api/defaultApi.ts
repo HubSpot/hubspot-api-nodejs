@@ -14,7 +14,7 @@ import localVarRequest = require('request');
 import http = require('http');
 
 /* tslint:disable:no-unused-locals */
-import { CollectionResponsePublicOwner } from '../model/collectionResponsePublicOwner';
+import { CollectionResponsePublicOwnerForwardPaging } from '../model/collectionResponsePublicOwnerForwardPaging';
 import { PublicOwner } from '../model/publicOwner';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -99,8 +99,9 @@ export class DefaultApi {
      * @summary Read an owner by given `id` or `userId`
      * @param ownerId 
      * @param idProperty 
+     * @param archived Whether to return only results that have been archived.
      */
-    public async getById (ownerId: number, idProperty?: 'id' | 'userId', options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicOwner;  }> {
+    public async getById (ownerId: number, idProperty?: 'id' | 'userId', archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: PublicOwner;  }> {
         const localVarPath = this.basePath + '/crm/v3/owners/{ownerId}'
             .replace('{' + 'ownerId' + '}', encodeURIComponent(String(ownerId)));
         let localVarQueryParameters: any = {};
@@ -121,6 +122,10 @@ export class DefaultApi {
 
         if (idProperty !== undefined) {
             localVarQueryParameters['idProperty'] = ObjectSerializer.serialize(idProperty, "'id' | 'userId'");
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -180,8 +185,9 @@ export class DefaultApi {
      * @param email Filter by email address (optional)
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
+     * @param archived Whether to return only results that have been archived.
      */
-    public async getPage (email?: string, after?: string, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwner;  }> {
+    public async getPage (email?: string, after?: string, limit?: number, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwnerForwardPaging;  }> {
         const localVarPath = this.basePath + '/crm/v3/owners/';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -204,6 +210,10 @@ export class DefaultApi {
 
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -241,12 +251,12 @@ export class DefaultApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwner;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponsePublicOwnerForwardPaging;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicOwner");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponsePublicOwnerForwardPaging");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {

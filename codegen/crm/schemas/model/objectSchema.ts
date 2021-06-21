@@ -36,6 +36,7 @@ export class ObjectSchema {
     * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
     */
     'secondaryDisplayProperties': Array<string>;
+    'archived': boolean;
     /**
     * A unique ID for this schema\'s object type. Will be defined as {meta-type}-{unique ID}.
     */
@@ -93,6 +94,11 @@ export class ObjectSchema {
             "name": "secondaryDisplayProperties",
             "baseName": "secondaryDisplayProperties",
             "type": "Array<string>"
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean"
         },
         {
             "name": "id",

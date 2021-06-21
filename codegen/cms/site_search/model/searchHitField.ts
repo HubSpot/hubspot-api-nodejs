@@ -13,8 +13,8 @@
 import { RequestFile } from '../api';
 
 export class SearchHitField {
-    'metadataField': boolean;
     'values': Array<object>;
+    'metadataField': boolean;
     'name': string;
     'value': object;
 
@@ -22,14 +22,14 @@ export class SearchHitField {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "metadataField",
-            "baseName": "metadataField",
-            "type": "boolean"
-        },
-        {
             "name": "values",
             "baseName": "values",
             "type": "Array<object>"
+        },
+        {
+            "name": "metadataField",
+            "baseName": "metadataField",
+            "type": "boolean"
         },
         {
             "name": "name",

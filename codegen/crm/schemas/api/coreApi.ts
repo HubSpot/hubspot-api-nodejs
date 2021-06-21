@@ -16,7 +16,7 @@ import http = require('http');
 /* tslint:disable:no-unused-locals */
 import { AssociationDefinition } from '../model/associationDefinition';
 import { AssociationDefinitionEgg } from '../model/associationDefinitionEgg';
-import { CollectionResponseObjectSchema } from '../model/collectionResponseObjectSchema';
+import { CollectionResponseObjectSchemaNoPaging } from '../model/collectionResponseObjectSchemaNoPaging';
 import { ObjectSchema } from '../model/objectSchema';
 import { ObjectSchemaEgg } from '../model/objectSchemaEgg';
 import { ObjectTypeDefinition } from '../model/objectTypeDefinition';
@@ -102,9 +102,10 @@ export class CoreApi {
     /**
      * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
      * @summary Delete a schema
-     * @param objectType Fully qualified name or object type ID for the target schema.
+     * @param objectType Fully qualified name or object type ID of your schema.
+     * @param archived Whether to return only results that have been archived.
      */
-    public async archive (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async archive (objectType: string, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
         let localVarQueryParameters: any = {};
@@ -121,6 +122,10 @@ export class CoreApi {
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new Error('Required parameter objectType was null or undefined when calling archive.');
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -173,7 +178,7 @@ export class CoreApi {
     /**
      * Removes an existing association from a schema.
      * @summary Remove an association
-     * @param objectType Fully qualified name or object type ID for the target schema.
+     * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationIdentifier Unique ID of the association to remove.
      */
     public async archiveAssociation (objectType: string, associationIdentifier: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
@@ -326,7 +331,7 @@ export class CoreApi {
     /**
      * Defines a new association between the primary schema\'s object type and other object types.
      * @summary Create an association
-     * @param objectType Fully qualified name or object type ID for the primary schema to associate.
+     * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationDefinitionEgg Attributes that define the association.
      */
     public async createAssociation (objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: AssociationDefinition;  }> {
@@ -406,10 +411,11 @@ export class CoreApi {
         });
     }
     /**
-     * Returns all object schemas that have been defined for the target account.
+     * Returns all object schemas that have been defined for your account.
      * @summary Get all schemas
+     * @param archived Whether to return only results that have been archived.
      */
-    public async getAll (options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseObjectSchema;  }> {
+    public async getAll (archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseObjectSchemaNoPaging;  }> {
         const localVarPath = this.basePath + '/crm/v3/schemas';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -421,6 +427,10 @@ export class CoreApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
+        }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -457,12 +467,12 @@ export class CoreApi {
                     localVarRequestOptions.form = localVarFormParams;
                 }
             }
-            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseObjectSchema;  }>((resolve, reject) => {
+            return new Promise<{ response: http.IncomingMessage; body: CollectionResponseObjectSchemaNoPaging;  }>((resolve, reject) => {
                 localVarRequest(localVarRequestOptions, (error, response, body) => {
                     if (error) {
                         reject(error);
                     } else {
-                        body = ObjectSerializer.deserialize(body, "CollectionResponseObjectSchema");
+                        body = ObjectSerializer.deserialize(body, "CollectionResponseObjectSchemaNoPaging");
                         if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                             resolve({ response: response, body: body });
                         } else {
@@ -476,7 +486,7 @@ export class CoreApi {
     /**
      * Returns an existing object schema.
      * @summary Get an existing schema
-     * @param objectType Fully qualified name or object type ID of the target schema.
+     * @param objectType Fully qualified name or object type ID of your schema.
      */
     public async getById (objectType: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ObjectSchema;  }> {
         const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'
@@ -551,8 +561,8 @@ export class CoreApi {
     /**
      * Update the details for an existing object schema.
      * @summary Update a schema
-     * @param objectType Fully qualified name or object type ID for the target schema.
-     * @param objectTypeDefinitionPatch Attributes to update in the target schema.
+     * @param objectType Fully qualified name or object type ID of your schema.
+     * @param objectTypeDefinitionPatch Attributes to update in your schema.
      */
     public async update (objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ObjectTypeDefinition;  }> {
         const localVarPath = this.basePath + '/crm/v3/schemas/{objectType}'

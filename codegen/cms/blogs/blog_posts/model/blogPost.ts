@@ -74,11 +74,11 @@ export class BlogPost {
     /**
     * A data structure containing the data for all the modules inside the containers for this post. This will only be populated if the page has widget containers.
     */
-    'widgetContainers': object;
+    'widgetContainers': { [key: string]: object; };
     /**
     * A data structure containing the data for all the modules for this page.
     */
-    'widgets': object;
+    'widgets': { [key: string]: object; };
     /**
     * The explicitly defined language of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
     */
@@ -93,26 +93,9 @@ export class BlogPost {
     */
     'blogAuthorId': string;
     /**
-    * The html title of this Blog Post.
-    */
-    'htmlTitle': string;
-    'pageRedirected': boolean;
-    'pageExpiryEnabled': boolean;
-    'pageExpiryDate': number;
-    'pageExpiryRedirectId': number;
-    'pageExpiryRedirectUrl': string;
-    /**
-    * Boolean to determine if this post should use a featuredImage.
-    */
-    'useFeaturedImage': boolean;
-    /**
     * List of IDs for the tags associated with this Blog Post.
     */
     'tagIds': Array<number>;
-    /**
-    * Boolean to allow overriding the AMP settings for the blog.
-    */
-    'enableGoogleAmpOutputOverride': boolean;
     /**
     * The HTML of the main post body.
     */
@@ -130,13 +113,30 @@ export class BlogPost {
     */
     'rssSummary': string;
     /**
+    * Boolean to allow overriding the AMP settings for the blog.
+    */
+    'enableGoogleAmpOutputOverride': boolean;
+    /**
+    * The html title of this Blog Post.
+    */
+    'htmlTitle': string;
+    'pageRedirected': boolean;
+    'pageExpiryEnabled': boolean;
+    'pageExpiryDate': number;
+    'pageExpiryRedirectId': number;
+    'pageExpiryRedirectUrl': string;
+    /**
+    * Boolean to determine if this post should use a featuredImage.
+    */
+    'useFeaturedImage': boolean;
+    /**
     * Set this to create a password protected page. Entering the password will be required to view the page.
     */
     'password': string;
     /**
     * List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
     */
-    'attachedStylesheets': Array<object>;
+    'attachedStylesheets': Array<{ [key: string]: object; }>;
     /**
     * Boolean to determine whether or not the Primary CSS Files should be applied.
     */
@@ -194,7 +194,7 @@ export class BlogPost {
     */
     'publicAccessRules': Array<object>;
     'layoutSections': { [key: string]: LayoutSection; };
-    'themeSettingsValues': object;
+    'themeSettingsValues': { [key: string]: object; };
     /**
     * A generated field representing the URL of this blog post.
     */
@@ -316,12 +316,12 @@ export class BlogPost {
         {
             "name": "widgetContainers",
             "baseName": "widgetContainers",
-            "type": "object"
+            "type": "{ [key: string]: object; }"
         },
         {
             "name": "widgets",
             "baseName": "widgets",
-            "type": "object"
+            "type": "{ [key: string]: object; }"
         },
         {
             "name": "language",
@@ -342,6 +342,36 @@ export class BlogPost {
             "name": "blogAuthorId",
             "baseName": "blogAuthorId",
             "type": "string"
+        },
+        {
+            "name": "tagIds",
+            "baseName": "tagIds",
+            "type": "Array<number>"
+        },
+        {
+            "name": "postBody",
+            "baseName": "postBody",
+            "type": "string"
+        },
+        {
+            "name": "postSummary",
+            "baseName": "postSummary",
+            "type": "string"
+        },
+        {
+            "name": "rssBody",
+            "baseName": "rssBody",
+            "type": "string"
+        },
+        {
+            "name": "rssSummary",
+            "baseName": "rssSummary",
+            "type": "string"
+        },
+        {
+            "name": "enableGoogleAmpOutputOverride",
+            "baseName": "enableGoogleAmpOutputOverride",
+            "type": "boolean"
         },
         {
             "name": "htmlTitle",
@@ -379,36 +409,6 @@ export class BlogPost {
             "type": "boolean"
         },
         {
-            "name": "tagIds",
-            "baseName": "tagIds",
-            "type": "Array<number>"
-        },
-        {
-            "name": "enableGoogleAmpOutputOverride",
-            "baseName": "enableGoogleAmpOutputOverride",
-            "type": "boolean"
-        },
-        {
-            "name": "postBody",
-            "baseName": "postBody",
-            "type": "string"
-        },
-        {
-            "name": "postSummary",
-            "baseName": "postSummary",
-            "type": "string"
-        },
-        {
-            "name": "rssBody",
-            "baseName": "rssBody",
-            "type": "string"
-        },
-        {
-            "name": "rssSummary",
-            "baseName": "rssSummary",
-            "type": "string"
-        },
-        {
             "name": "password",
             "baseName": "password",
             "type": "string"
@@ -416,7 +416,7 @@ export class BlogPost {
         {
             "name": "attachedStylesheets",
             "baseName": "attachedStylesheets",
-            "type": "Array<object>"
+            "type": "Array<{ [key: string]: object; }>"
         },
         {
             "name": "includeDefaultCustomCss",
@@ -496,7 +496,7 @@ export class BlogPost {
         {
             "name": "themeSettingsValues",
             "baseName": "themeSettingsValues",
-            "type": "object"
+            "type": "{ [key: string]: object; }"
         },
         {
             "name": "url",
@@ -1264,7 +1264,8 @@ export namespace BlogPost {
         _3 = <any> '3',
         _4 = <any> '4',
         _5 = <any> '5',
-        _6 = <any> '6'
+        _6 = <any> '6',
+        _7 = <any> '7'
     }
     export enum CurrentStateEnum {
         AUTOMATED = <any> 'AUTOMATED',

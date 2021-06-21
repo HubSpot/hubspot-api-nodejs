@@ -182,7 +182,7 @@ export class DefaultApi {
         });
     }
     /**
-     * Archive the Blog Post objects identified in the request body.
+     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
      * @summary Archive a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
      */

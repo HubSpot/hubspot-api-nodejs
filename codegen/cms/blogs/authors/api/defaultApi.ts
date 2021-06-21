@@ -178,7 +178,7 @@ export class DefaultApi {
         });
     }
     /**
-     * Archive the Blog Author objects identified in the request body.
+     * Delete the Blog Author objects identified in the request body. Note: This is not the same as the in-app `archive` function.
      * @summary Archive a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
      */

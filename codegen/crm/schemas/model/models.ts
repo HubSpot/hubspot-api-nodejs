@@ -1,9 +1,8 @@
 export * from './associationDefinition';
 export * from './associationDefinitionEgg';
-export * from './collectionResponseObjectSchema';
+export * from './collectionResponseObjectSchemaNoPaging';
 export * from './errorDetail';
 export * from './modelError';
-export * from './nextPage';
 export * from './objectSchema';
 export * from './objectSchemaEgg';
 export * from './objectTypeDefinition';
@@ -12,8 +11,6 @@ export * from './objectTypeDefinitionPatch';
 export * from './objectTypePropertyCreate';
 export * from './option';
 export * from './optionInput';
-export * from './paging';
-export * from './previousPage';
 export * from './property';
 export * from './propertyModificationMetadata';
 
@@ -21,10 +18,9 @@ import localVarRequest = require('request');
 
 import { AssociationDefinition } from './associationDefinition';
 import { AssociationDefinitionEgg } from './associationDefinitionEgg';
-import { CollectionResponseObjectSchema } from './collectionResponseObjectSchema';
+import { CollectionResponseObjectSchemaNoPaging } from './collectionResponseObjectSchemaNoPaging';
 import { ErrorDetail } from './errorDetail';
 import { ModelError } from './modelError';
-import { NextPage } from './nextPage';
 import { ObjectSchema } from './objectSchema';
 import { ObjectSchemaEgg } from './objectSchemaEgg';
 import { ObjectTypeDefinition } from './objectTypeDefinition';
@@ -33,8 +29,6 @@ import { ObjectTypeDefinitionPatch } from './objectTypeDefinitionPatch';
 import { ObjectTypePropertyCreate } from './objectTypePropertyCreate';
 import { Option } from './option';
 import { OptionInput } from './optionInput';
-import { Paging } from './paging';
-import { PreviousPage } from './previousPage';
 import { Property } from './property';
 import { PropertyModificationMetadata } from './propertyModificationMetadata';
 
@@ -51,20 +45,15 @@ let primitives = [
                  ];
 
 let enumsMap: {[index: string]: any} = {
-        "AssociationDefinition.CardinalityEnum": AssociationDefinition.CardinalityEnum,
-        "AssociationDefinition.InverseCardinalityEnum": AssociationDefinition.InverseCardinalityEnum,
-        "AssociationDefinitionEgg.CardinalityEnum": AssociationDefinitionEgg.CardinalityEnum,
-        "AssociationDefinitionEgg.InverseCardinalityEnum": AssociationDefinitionEgg.InverseCardinalityEnum,
         "ObjectTypePropertyCreate.TypeEnum": ObjectTypePropertyCreate.TypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
     "AssociationDefinition": AssociationDefinition,
     "AssociationDefinitionEgg": AssociationDefinitionEgg,
-    "CollectionResponseObjectSchema": CollectionResponseObjectSchema,
+    "CollectionResponseObjectSchemaNoPaging": CollectionResponseObjectSchemaNoPaging,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
-    "NextPage": NextPage,
     "ObjectSchema": ObjectSchema,
     "ObjectSchemaEgg": ObjectSchemaEgg,
     "ObjectTypeDefinition": ObjectTypeDefinition,
@@ -73,8 +62,6 @@ let typeMap: {[index: string]: any} = {
     "ObjectTypePropertyCreate": ObjectTypePropertyCreate,
     "Option": Option,
     "OptionInput": OptionInput,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "Property": Property,
     "PropertyModificationMetadata": PropertyModificationMetadata,
 }

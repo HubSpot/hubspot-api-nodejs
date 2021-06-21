@@ -178,7 +178,7 @@ export class DefaultApi {
         });
     }
     /**
-     * Archive the Blog Tag objects identified in the request body.
+     * Delete the Blog Tag objects identified in the request body. Note: This is not the same as the in-app `archive` function.
      * @summary Archive a batch of Blog Tags
      * @param batchInputString The JSON array of Blog Tag ids.
      */
