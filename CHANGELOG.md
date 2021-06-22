@@ -162,7 +162,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - fix generateToken method in `conversations.visitorIdentification` API clients
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.4.1...HEAD
+## [4.0.0] - 2021-06-22
+
+### Fixed
+
+  - rename method "search" => "doSearch" crm.objects.searchApi API clients
+  - regenerate all clients
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v4.0.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -177,3 +184,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.3.0
 [3.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.0
 [3.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.1
+[4.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v4.0.0
