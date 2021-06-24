@@ -20,7 +20,7 @@
   "author": "hubspot",
   "license": "Apache-2.0",
   "dependencies": {
-    "@hubspot/api-client": "^3.0.1",
+    "@hubspot/api-client": "^4.0.0",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "csv-express": "^1.2.2",
@@ -30,10 +30,10 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3",
-    "chromedriver": "^79.0.0",
-    "selenium-webdriver": "^4.0.0-alpha.5",
     "chai": "^4.2.0",
-    "mocha": "^7.1.1"
+    "chromedriver": "^79.0.0",
+    "mocha": "^7.1.1",
+    "nodemon": "^1.19.3",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   }
 }
