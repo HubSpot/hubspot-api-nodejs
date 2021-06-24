@@ -167,6 +167,14 @@ const updateCompany = (id, properties) => {
     return hubspotClient.crm.companies.basicApi.update(id, { properties })
 }
 
+const deleteCompany = (id) => {
+    // Delete a Company
+    // DELETE /crm/v3/objects/companies/:objectId
+    // https://developers.hubspot.com/docs/api/crm/companies
+    console.log('Calling crm.companies.basicApi.update API method. Update company.')
+    return hubspotClient.crm.companies.basicApi.archive(id)
+}
+
 const deleteCompanyContactsAssociations = async (companyId, contactIds) => {
     const requestBody = {
         inputs: _.map(contactIds, (contactId) => {
@@ -412,6 +420,21 @@ app.post('/companies/:companyId*?', checkAuthorization, async (req, res) => {
 
         const id = _.get(response, 'body.id')
         res.redirect(`/companies/${id}`)
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/companies/delete/:companyId*?', checkAuthorization, async (req, res) => {
+    try {
+        const companyId = _.get(req, 'params.companyId')
+
+        if (!_.isNil(companyId)) {
+            const response =  await deleteCompany(companyId)
+            logResponse(response)
+        }
+
+        res.redirect('/companies')
     } catch (e) {
         handleError(e, res)
     }

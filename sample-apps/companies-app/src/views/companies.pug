@@ -17,6 +17,7 @@ block content
           th ID
           th Name
           th Domain
+          th Actions
       tbody
         each company in companies
           tr
@@ -24,5 +25,8 @@ block content
               a(class='navigation-link' href=`/companies/${company.id}`)= company.id
             td= company.name
             td= company.domain
+            td
+              a(href=`/companies/delete/${company.id}`)
+                input(class='button-primary' type='button' value='Delete' id='delete-company-button')
     a(href='/companies/new')
      input(class='button-primary' type='button' value='New Company' id='create-new-company-button')
