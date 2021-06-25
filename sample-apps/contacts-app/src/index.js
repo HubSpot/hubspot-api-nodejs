@@ -397,7 +397,6 @@ app.post('/contacts/:id/engagement', async (req, res) => {
 })
 
 app.get('/contacts/delete/:id', async (req, res) => {
-    console.log('sdsdd')
     try {
         const id = _.get(req, 'params.id')
 
