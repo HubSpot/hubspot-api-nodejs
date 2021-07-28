@@ -30,6 +30,11 @@ import { DefaultApi as SiteSearchDefaultApi } from '../codegen/cms/site_search/a
 import * as siteSearchModels from '../codegen/cms/site_search/model/models'
 import { RedirectsApi } from '../codegen/cms/url_redirects/api'
 import * as urlRedirectsModels from '../codegen/cms/url_redirects/model/models'
+import {
+  DefinitionApi as CommunicationPreferencesDefinitionApi,
+  StatusApi as CommunicationPreferencesStatusApi,
+} from '../codegen/communication_preferences/api'
+import * as communicationPreferencesModels from '../codegen/communication_preferences/model/models'
 import { GenerateApi } from '../codegen/conversations/visitor_identification/api'
 import * as visitorIdentificationModels from '../codegen/conversations/visitor_identification/model/models'
 import { BatchApi as AssociationsBatchApi, TypesApi } from '../codegen/crm/associations/api'
@@ -183,6 +188,7 @@ export {
   accountingModels,
   actionsModels,
   associationsModels,
+  communicationPreferencesModels,
   companiesModels,
   contactsModels,
   dealsModels,
@@ -455,6 +461,10 @@ export class Client {
       defaultApi: SiteSearchDefaultApi
     }
   }
+  public communicationPreferences: {
+    definitionApi: CommunicationPreferencesDefinitionApi
+    statusApi: CommunicationPreferencesStatusApi
+  }
   public conversations: {
     visitorIdentification: {
       generateApi: GenerateApi
@@ -468,6 +478,8 @@ export class Client {
   protected _oauthDefaultApi: OauthDefaultApi
   protected _associationsBatchApi: AssociationsBatchApi
   protected _typesApi: TypesApi
+  protected _communicationPreferencesDefinitionApi: CommunicationPreferencesDefinitionApi
+  protected _communicationPreferencesStatusApi: CommunicationPreferencesStatusApi
   protected _companiesAssociationsApi: CompaniesAssociationsApi
   protected _companiesBasicApi: CompaniesBasicApi
   protected _companiesBatchApi: CompaniesBatchApi
@@ -581,6 +593,8 @@ export class Client {
     this._oauthDefaultApi = new OauthDefaultApi()
     this._associationsBatchApi = new AssociationsBatchApi()
     this._typesApi = new TypesApi()
+    this._communicationPreferencesDefinitionApi = new CommunicationPreferencesDefinitionApi()
+    this._communicationPreferencesStatusApi = new CommunicationPreferencesStatusApi()
     this._companiesAssociationsApi = new CompaniesAssociationsApi()
     this._companiesBasicApi = new CompaniesBasicApi()
     this._companiesBatchApi = new CompaniesBatchApi()
@@ -665,6 +679,8 @@ export class Client {
       this._associationsBatchApi,
       this._typesApi,
       this._callingSettingsApi,
+      this._communicationPreferencesDefinitionApi,
+      this._communicationPreferencesStatusApi,
       this._companiesAssociationsApi,
       this._companiesBasicApi,
       this._companiesBatchApi,
@@ -934,6 +950,10 @@ export class Client {
       siteSearch: {
         defaultApi: this._siteSearchDefaultApi,
       },
+    }
+    this.communicationPreferences = {
+      definitionApi: this._communicationPreferencesDefinitionApi,
+      statusApi: this._communicationPreferencesStatusApi,
     }
     this.conversations = {
       visitorIdentification: {
