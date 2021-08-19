@@ -8,108 +8,132 @@ import { ModelError } from '../models/ModelError';
 import { RefreshTokenInfoResponse } from '../models/RefreshTokenInfoResponse';
 import { TokenResponseIF } from '../models/TokenResponseIF';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservableAccessTokensApi } from "./ObservableAPI";
+import { AccessTokensApiRequestFactory, AccessTokensApiResponseProcessor} from "../apis/AccessTokensApi";
 
-export interface DefaultApiArchiveRefreshTokenRequest {
+export interface AccessTokensApiGetAccessTokenRequest {
     /**
      * 
      * @type string
-     * @memberof DefaultApiarchiveRefreshToken
+     * @memberof AccessTokensApigetAccessToken
      */
     token: string
 }
 
-export interface DefaultApiCreateTokenRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    grantType?: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    code?: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    redirectUri?: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    clientId?: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    clientSecret?: string
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApicreateToken
-     */
-    refreshToken?: string
-}
+export class ObjectAccessTokensApi {
+    private api: ObservableAccessTokensApi
 
-export interface DefaultApiGetAccessTokenRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApigetAccessToken
-     */
-    token: string
-}
-
-export interface DefaultApiGetRefreshTokenRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefaultApigetRefreshToken
-     */
-    token: string
-}
-
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
-
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: AccessTokensApiRequestFactory, responseProcessor?: AccessTokensApiResponseProcessor) {
+        this.api = new ObservableAccessTokensApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * @param param the request object
      */
-    public archiveRefreshToken(param: DefaultApiArchiveRefreshTokenRequest, options?: Configuration): Promise<void> {
+    public getAccessToken(param: AccessTokensApiGetAccessTokenRequest, options?: Configuration): Promise<AccessTokenInfoResponse> {
+        return this.api.getAccessToken(param.token,  options).toPromise();
+    }
+
+}
+
+import { ObservableRefreshTokensApi } from "./ObservableAPI";
+import { RefreshTokensApiRequestFactory, RefreshTokensApiResponseProcessor} from "../apis/RefreshTokensApi";
+
+export interface RefreshTokensApiArchiveRefreshTokenRequest {
+    /**
+     * 
+     * @type string
+     * @memberof RefreshTokensApiarchiveRefreshToken
+     */
+    token: string
+}
+
+export interface RefreshTokensApiGetRefreshTokenRequest {
+    /**
+     * 
+     * @type string
+     * @memberof RefreshTokensApigetRefreshToken
+     */
+    token: string
+}
+
+export class ObjectRefreshTokensApi {
+    private api: ObservableRefreshTokensApi
+
+    public constructor(configuration: Configuration, requestFactory?: RefreshTokensApiRequestFactory, responseProcessor?: RefreshTokensApiResponseProcessor) {
+        this.api = new ObservableRefreshTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public archiveRefreshToken(param: RefreshTokensApiArchiveRefreshTokenRequest, options?: Configuration): Promise<void> {
         return this.api.archiveRefreshToken(param.token,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
-    public createToken(param: DefaultApiCreateTokenRequest, options?: Configuration): Promise<TokenResponseIF> {
-        return this.api.createToken(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getAccessToken(param: DefaultApiGetAccessTokenRequest, options?: Configuration): Promise<AccessTokenInfoResponse> {
-        return this.api.getAccessToken(param.token,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getRefreshToken(param: DefaultApiGetRefreshTokenRequest, options?: Configuration): Promise<RefreshTokenInfoResponse> {
+    public getRefreshToken(param: RefreshTokensApiGetRefreshTokenRequest, options?: Configuration): Promise<RefreshTokenInfoResponse> {
         return this.api.getRefreshToken(param.token,  options).toPromise();
+    }
+
+}
+
+import { ObservableTokensApi } from "./ObservableAPI";
+import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
+
+export interface TokensApiCreateTokenRequest {
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    grantType?: string
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    code?: string
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    redirectUri?: string
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    clientId?: string
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    clientSecret?: string
+    /**
+     * 
+     * @type string
+     * @memberof TokensApicreateToken
+     */
+    refreshToken?: string
+}
+
+export class ObjectTokensApi {
+    private api: ObservableTokensApi
+
+    public constructor(configuration: Configuration, requestFactory?: TokensApiRequestFactory, responseProcessor?: TokensApiResponseProcessor) {
+        this.api = new ObservableTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public createToken(param: TokensApiCreateTokenRequest, options?: Configuration): Promise<TokenResponseIF> {
+        return this.api.createToken(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
     }
 
 }
