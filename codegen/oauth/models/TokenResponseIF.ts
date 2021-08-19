@@ -16,6 +16,8 @@ export class TokenResponseIF {
     'refreshToken': string;
     'expiresIn': number;
     'accessToken': string;
+    'idToken'?: string;
+    'tokenType': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,6 +37,18 @@ export class TokenResponseIF {
         {
             "name": "accessToken",
             "baseName": "access_token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "idToken",
+            "baseName": "id_token",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tokenType",
+            "baseName": "token_type",
             "type": "string",
             "format": ""
         }    ];
