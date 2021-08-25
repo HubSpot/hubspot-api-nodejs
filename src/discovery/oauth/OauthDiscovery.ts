@@ -20,7 +20,7 @@ export class OauthDiscovery extends BaseDiscovery {
     this.tokensApi = new TokensApi(configuration)
   }
 
-  getAuthorizationUrl(
+  public getAuthorizationUrl(
     clientId: string,
     redirectUri: string,
     scope: string,
@@ -37,5 +37,4 @@ export class OauthDiscovery extends BaseDiscovery {
 
     return `https://app.hubspot.com/oauth/authorize?${qs.stringify(_.omitBy(params, _.isNil))}`
   }
-
 }
