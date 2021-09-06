@@ -9,23 +9,53 @@ import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 import { IConfiguration } from './IConfiguration'
 
 export class Client {
-  public automation: AutomationDiscovery
-  public cms: CmsDiscovery
-  public conversations: ConversationsDiscovery
-  public crm: CrmDiscovery
-  public events: EventsDiscovery
-  public marketing: MarketingDiscovery
-  public oauth: OauthDiscovery
-  public webhooks: WebhooksDiscovery
+  public automation: AutomationDiscovery = new AutomationDiscovery()
+  public cms: CmsDiscovery = new CmsDiscovery()
+  public conversations: ConversationsDiscovery = new ConversationsDiscovery()
+  public crm: CrmDiscovery = new CrmDiscovery()
+  public events: EventsDiscovery = new EventsDiscovery()
+  public marketing: MarketingDiscovery = new MarketingDiscovery()
+  public oauth: OauthDiscovery = new OauthDiscovery()
+  public webhooks: WebhooksDiscovery = new WebhooksDiscovery()
+  public config: IConfiguration
 
   constructor(config: IConfiguration = {}) {
-    this.automation = new AutomationDiscovery(config)
-    this.cms = new CmsDiscovery(config)
-    this.conversations = new ConversationsDiscovery(config)
-    this.crm = new CrmDiscovery(config)
-    this.events = new EventsDiscovery(config)
-    this.marketing = new MarketingDiscovery(config)
-    this.oauth = new OauthDiscovery(config)
-    this.webhooks = new WebhooksDiscovery(config)
+    this.config = config
+    this.init()
+  }
+
+  public init() {
+    this.automation = new AutomationDiscovery(this.config)
+    this.cms = new CmsDiscovery(this.config)
+    this.conversations = new ConversationsDiscovery(this.config)
+    this.crm = new CrmDiscovery(this.config)
+    this.events = new EventsDiscovery(this.config)
+    this.marketing = new MarketingDiscovery(this.config)
+    this.oauth = new OauthDiscovery(this.config)
+    this.webhooks = new WebhooksDiscovery(this.config)
+  }
+
+  public setAccessToken(token: string) {
+    this.cleanAuth()
+    this.config.accessToken = token
+    this.init()
+  }
+
+  public setApiKey(apiKey: string) {
+    this.cleanAuth()
+    this.config.apiKey = apiKey
+    this.init()
+  }
+
+  public setDeveloperApiKey(developerApiKey: string) {
+    this.cleanAuth()
+    this.config.developerApiKey = developerApiKey
+    this.init()
+  }
+
+  protected cleanAuth() {
+    delete this.config.accessToken
+    delete this.config.apiKey
+    delete this.config.developerApiKey
   }
 }

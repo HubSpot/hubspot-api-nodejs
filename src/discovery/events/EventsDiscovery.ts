@@ -6,7 +6,7 @@ import { BaseDiscovery } from '../BaseDiscovery'
 export class EventsDiscovery extends BaseDiscovery {
   public eventsApi: EventsApi
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     super(config)
 
     const configuration = createConfiguration(this.getParams())

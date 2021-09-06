@@ -36,7 +36,7 @@ export class CrmDiscovery {
   public tickets: TicketsDiscovery
   public timeline: TimelineDiscovery
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     this.associations = new AssociationsDiscovery(config)
     this.companies = new CompaniesDiscovery(config)
     this.contacts = new ContactsDiscovery(config)

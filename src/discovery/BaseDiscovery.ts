@@ -12,18 +12,24 @@ export class BaseDiscovery {
    */
   public getParams() {
     let params = {}
-    if (this.config.apiKey) {
-      params = {
-        authMethods: {
-          hapikey: this.config.apiKey,
-        },
-      }
-    } else if (this.config.accessToken) {
+    if (this.config.accessToken) {
       params = {
         authMethods: {
           oauth2: {
             accessToken: this.config.accessToken,
           },
+        },
+      }
+    } else if (this.config.apiKey) {
+      params = {
+        authMethods: {
+          hapikey: this.config.apiKey,
+        },
+      }
+    } else if (this.config.developerApiKey) {
+      params = {
+        authMethods: {
+          hapikey: this.config.developerApiKey,
         },
       }
     }

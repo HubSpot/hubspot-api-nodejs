@@ -55,7 +55,7 @@ const getFullName = (contactProperties) => {
 }
 
 const refreshToken = async () => {
-    const result = await hubspotClient.oauth.defaultApi.createToken(
+    tokenStore = await hubspotClient.oauth.tokensApi.createToken(
         GRANT_TYPES.REFRESH_TOKEN,
         undefined,
         undefined,
@@ -63,7 +63,6 @@ const refreshToken = async () => {
         CLIENT_SECRET,
         tokenStore.refreshToken,
     )
-    tokenStore = result.body
     tokenStore.updatedAt = Date.now()
     console.log('Updated tokens', tokenStore)
 
@@ -119,7 +118,7 @@ app.get('/', async (req, res) => {
         const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(OBJECTS_LIMIT, undefined, properties)
         logResponse('Response from API', contactsResponse)
 
-        res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.body.results) })
+        res.render('contacts', { tokenStore, contacts: prepareContactsContent(contactsResponse.results) })
     } catch (e) {
         handleError(e, res)
     }
