@@ -35,7 +35,6 @@ export class Client {
     this.webhooks = new WebhooksDiscovery(this.config)
   }
 
-
   public setAccessToken(token: string) {
     this.cleanAuth()
     this.config.accessToken = token

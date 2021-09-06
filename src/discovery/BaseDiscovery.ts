@@ -32,7 +32,7 @@ export class BaseDiscovery {
           hapikey: this.config.developerApiKey,
         },
       }
-    } 
+    }
 
     return params
   }
