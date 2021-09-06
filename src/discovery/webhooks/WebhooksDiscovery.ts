@@ -7,7 +7,7 @@ export class WebhooksDiscovery extends BaseDiscovery {
   public settingsApi: SettingsApi
   public subscriptionsApi: SubscriptionsApi
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     super(config)
 
     const configuration = createConfiguration(this.getParams())

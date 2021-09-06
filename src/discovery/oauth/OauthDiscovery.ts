@@ -10,7 +10,7 @@ export class OauthDiscovery extends BaseDiscovery {
   public refreshTokensApi: RefreshTokensApi
   public tokensApi: TokensApi
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     super(config)
 
     const configuration = createConfiguration(this.getParams())

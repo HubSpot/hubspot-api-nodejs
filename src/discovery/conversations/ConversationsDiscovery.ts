@@ -4,7 +4,7 @@ import { VisitorIdentificationDiscovery } from './visitor_identification/Visitor
 export class ConversationsDiscovery {
   public visitorIdentification: VisitorIdentificationDiscovery
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     this.visitorIdentification = new VisitorIdentificationDiscovery(config)
   }
 }

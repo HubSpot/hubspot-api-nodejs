@@ -16,7 +16,7 @@ export class CmsDiscovery {
   public siteSearch: SiteSearchDiscovery
   public urlRedirects: UrlRedirectsDiscovery
 
-  constructor(config: IConfiguration) {
+  constructor(config: IConfiguration = {}) {
     this.auditLogs = new AuditLogsDiscovery(config)
     this.blogs = new BlogsDiscovery(config)
     this.domains = new DomainsDiscovery(config)
