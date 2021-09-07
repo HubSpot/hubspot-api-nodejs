@@ -10,12 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class TokenResponseIF {
     'refreshToken': string;
     'expiresIn': number;
     'accessToken': string;
+    'idToken'?: string;
+    'tokenType': string;
 
     static discriminator: string | undefined = undefined;
 
@@ -33,6 +35,16 @@ export class TokenResponseIF {
         {
             "name": "accessToken",
             "baseName": "access_token",
+            "type": "string"
+        },
+        {
+            "name": "idToken",
+            "baseName": "id_token",
+            "type": "string"
+        },
+        {
+            "name": "tokenType",
+            "baseName": "token_type",
             "type": "string"
         }    ];
 

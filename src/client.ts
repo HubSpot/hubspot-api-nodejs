@@ -136,7 +136,11 @@ import { EventsApi as EventsEventsApi } from '../codegen/events/api'
 import * as eventsModels from '../codegen/events/model/models'
 import { DefaultApi as TransactionalDefaultApi } from '../codegen/marketing/transactional/api'
 import * as transactionalModels from '../codegen/marketing/transactional/model/models'
-import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
+import {
+  AccessTokensApi as OauthAccessTokensApi,
+  RefreshTokensApi as OauthRefreshTokensApi,
+  TokensApi as OauthTokensApi,
+} from '../codegen/oauth/api'
 import * as oauthModels from '../codegen/oauth/model/models'
 import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
 import * as webhooksModels from '../codegen/webhooks/model/models'
@@ -240,7 +244,9 @@ export class Client {
     }
   }
   public oauth: {
-    defaultApi: OauthDefaultApi
+    accessTokensApi: OauthAccessTokensApi
+    refreshTokensApi: OauthRefreshTokensApi
+    tokensApi: OauthTokensApi
     getAuthorizationUrl: (
       clientId: string,
       redirectUri: string,
@@ -475,7 +481,9 @@ export class Client {
   protected _actionsDefinitionsApi: ActionsDefinitionsApi
   protected _actionsFunctionsApi: ActionsFunctionsApi
   protected _actionsRevisionsApi: ActionsRevisionsApi
-  protected _oauthDefaultApi: OauthDefaultApi
+  protected _oauthAccessTokensApi: OauthAccessTokensApi
+  protected _oauthRefreshTokensApi: OauthRefreshTokensApi
+  protected _oauthTokensApi: OauthTokensApi
   protected _associationsBatchApi: AssociationsBatchApi
   protected _typesApi: TypesApi
   protected _communicationPreferencesDefinitionApi: CommunicationPreferencesDefinitionApi
@@ -590,7 +598,9 @@ export class Client {
     this._actionsDefinitionsApi = new ActionsDefinitionsApi()
     this._actionsFunctionsApi = new ActionsFunctionsApi()
     this._actionsRevisionsApi = new ActionsRevisionsApi()
-    this._oauthDefaultApi = new OauthDefaultApi()
+    this._oauthAccessTokensApi = new OauthAccessTokensApi()
+    this._oauthRefreshTokensApi = new OauthRefreshTokensApi()
+    this._oauthTokensApi = new OauthTokensApi()
     this._associationsBatchApi = new AssociationsBatchApi()
     this._typesApi = new TypesApi()
     this._communicationPreferencesDefinitionApi = new CommunicationPreferencesDefinitionApi()
@@ -755,7 +765,9 @@ export class Client {
     this._apiClients = [
       ...this._apiClientsWithApiKeyAuth,
       ...this._apiClientsWithDevApiKeyAuth,
-      this._oauthDefaultApi,
+      this._oauthAccessTokensApi,
+      this._oauthRefreshTokensApi,
+      this._oauthTokensApi,
       this._cardsSampleResponseApi,
       this._eventsApi,
     ]
@@ -910,7 +922,9 @@ export class Client {
       },
     }
     this.oauth = {
-      defaultApi: this._oauthDefaultApi,
+      accessTokensApi: this._oauthAccessTokensApi,
+      refreshTokensApi: this._oauthRefreshTokensApi,
+      tokensApi: this._oauthTokensApi,
       getAuthorizationUrl: this._getAuthorizationUrl,
     }
     this.webhooks = {
