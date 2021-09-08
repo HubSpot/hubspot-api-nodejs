@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { TimelineEventResponse } from './timelineEventResponse';
 
 /**
@@ -80,9 +80,9 @@ export class BatchResponseTimelineEventResponse {
 
 export namespace BatchResponseTimelineEventResponse {
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        PROCESSING = <any> 'PROCESSING',
-        CANCELED = <any> 'CANCELED',
-        COMPLETE = <any> 'COMPLETE'
+        Pending = <any> 'PENDING',
+        Processing = <any> 'PROCESSING',
+        Canceled = <any> 'CANCELED',
+        Complete = <any> 'COMPLETE'
     }
 }

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class PublicAuditLog {
     /**
@@ -88,30 +88,30 @@ export class PublicAuditLog {
 
 export namespace PublicAuditLog {
     export enum EventEnum {
-        CREATED = <any> 'CREATED',
-        UPDATED = <any> 'UPDATED',
-        PUBLISHED = <any> 'PUBLISHED',
-        DELETED = <any> 'DELETED',
-        UNPUBLISHED = <any> 'UNPUBLISHED'
+        Created = <any> 'CREATED',
+        Updated = <any> 'UPDATED',
+        Published = <any> 'PUBLISHED',
+        Deleted = <any> 'DELETED',
+        Unpublished = <any> 'UNPUBLISHED'
     }
     export enum ObjectTypeEnum {
-        BLOG = <any> 'BLOG',
-        BLOGPOST = <any> 'BLOG_POST',
-        LANDINGPAGE = <any> 'LANDING_PAGE',
-        WEBSITEPAGE = <any> 'WEBSITE_PAGE',
-        TEMPLATE = <any> 'TEMPLATE',
-        MODULE = <any> 'MODULE',
-        GLOBALMODULE = <any> 'GLOBAL_MODULE',
-        SERVERLESSFUNCTION = <any> 'SERVERLESS_FUNCTION',
-        DOMAIN = <any> 'DOMAIN',
-        URLMAPPING = <any> 'URL_MAPPING',
-        EMAIL = <any> 'EMAIL',
-        CONTENTSETTINGS = <any> 'CONTENT_SETTINGS',
-        HUBDBTABLE = <any> 'HUBDB_TABLE',
-        KNOWLEDGEBASEARTICLE = <any> 'KNOWLEDGE_BASE_ARTICLE',
-        KNOWLEDGEBASE = <any> 'KNOWLEDGE_BASE',
-        THEME = <any> 'THEME',
-        CSS = <any> 'CSS',
-        JS = <any> 'JS'
+        Blog = <any> 'BLOG',
+        BlogPost = <any> 'BLOG_POST',
+        LandingPage = <any> 'LANDING_PAGE',
+        WebsitePage = <any> 'WEBSITE_PAGE',
+        Template = <any> 'TEMPLATE',
+        Module = <any> 'MODULE',
+        GlobalModule = <any> 'GLOBAL_MODULE',
+        ServerlessFunction = <any> 'SERVERLESS_FUNCTION',
+        Domain = <any> 'DOMAIN',
+        UrlMapping = <any> 'URL_MAPPING',
+        Email = <any> 'EMAIL',
+        ContentSettings = <any> 'CONTENT_SETTINGS',
+        HubdbTable = <any> 'HUBDB_TABLE',
+        KnowledgeBaseArticle = <any> 'KNOWLEDGE_BASE_ARTICLE',
+        KnowledgeBase = <any> 'KNOWLEDGE_BASE',
+        Theme = <any> 'THEME',
+        Css = <any> 'CSS',
+        Js = <any> 'JS'
     }
 }

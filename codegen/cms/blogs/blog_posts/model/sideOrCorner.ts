@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class SideOrCorner {
     'verticalSide': SideOrCorner.VerticalSideEnum;
@@ -37,13 +37,13 @@ export class SideOrCorner {
 
 export namespace SideOrCorner {
     export enum VerticalSideEnum {
-        TOP = <any> 'TOP',
-        MIDDLE = <any> 'MIDDLE',
-        BOTTOM = <any> 'BOTTOM'
+        Top = <any> 'TOP',
+        Middle = <any> 'MIDDLE',
+        Bottom = <any> 'BOTTOM'
     }
     export enum HorizontalSideEnum {
-        LEFT = <any> 'LEFT',
-        CENTER = <any> 'CENTER',
-        RIGHT = <any> 'RIGHT'
+        Left = <any> 'LEFT',
+        Center = <any> 'CENTER',
+        Right = <any> 'RIGHT'
     }
 }

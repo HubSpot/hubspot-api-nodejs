@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A request to import external accounting contact properties in HubSpot
@@ -73,12 +73,12 @@ export class UpdatedContact {
 
 export namespace UpdatedContact {
     export enum SyncActionEnum {
-        CREATE = <any> 'CREATE',
-        UPDATE = <any> 'UPDATE',
-        DELETE = <any> 'DELETE'
+        Create = <any> 'CREATE',
+        Update = <any> 'UPDATE',
+        Delete = <any> 'DELETE'
     }
     export enum CustomerTypeEnum {
-        CONTACT = <any> 'CONTACT',
-        COMPANY = <any> 'COMPANY'
+        Contact = <any> 'CONTACT',
+        Company = <any> 'COMPANY'
     }
 }

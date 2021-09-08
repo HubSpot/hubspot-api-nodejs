@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { StandardError } from './standardError';
 import { Tag } from './tag';
 
@@ -75,9 +75,9 @@ export class BatchResponseTagWithErrors {
 
 export namespace BatchResponseTagWithErrors {
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        PROCESSING = <any> 'PROCESSING',
-        CANCELED = <any> 'CANCELED',
-        COMPLETE = <any> 'COMPLETE'
+        Pending = <any> 'PENDING',
+        Processing = <any> 'PROCESSING',
+        Canceled = <any> 'CANCELED',
+        Complete = <any> 'COMPLETE'
     }
 }

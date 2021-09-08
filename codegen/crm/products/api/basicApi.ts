@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../model/collectionResponseSimplePublicObjectWithAssociationsForwardPaging';
@@ -42,7 +43,7 @@ export class BasicApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -89,7 +90,7 @@ export class BasicApi {
     }
 
     set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -137,8 +138,8 @@ export class BasicApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -211,8 +212,8 @@ export class BasicApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -306,8 +307,8 @@ export class BasicApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -399,8 +400,8 @@ export class BasicApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -486,8 +487,8 @@ export class BasicApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

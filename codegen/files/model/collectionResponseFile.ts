@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Files
+ * Upload and manage files.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,18 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { Paging } from './paging';
-import { TimelineEventTemplate } from './timelineEventTemplate';
 
 /**
-* Container for all templates being returned.
+* Collections of files
 */
-export class CollectionResponseTimelineEventTemplate {
-    /**
-    * A collection of templates.
-    */
-    'results': Array<TimelineEventTemplate>;
+export class CollectionResponseFile {
+    'results': Array<any>;
     'paging'?: Paging;
 
     static discriminator: string | undefined = undefined;
@@ -30,7 +26,7 @@ export class CollectionResponseTimelineEventTemplate {
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<TimelineEventTemplate>"
+            "type": "Array<any>"
         },
         {
             "name": "paging",
@@ -39,7 +35,7 @@ export class CollectionResponseTimelineEventTemplate {
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseTimelineEventTemplate.attributeTypeMap;
+        return CollectionResponseFile.attributeTypeMap;
     }
 }
 

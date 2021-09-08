@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * Lists the individual aspects of creating invoices that are enabled for the integration, as part of the create invoice flow in HubSpot.

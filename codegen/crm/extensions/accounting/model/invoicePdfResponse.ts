@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A response that contains the PDF of an invoice
@@ -46,7 +46,7 @@ export class InvoicePdfResponse {
 
 export namespace InvoicePdfResponse {
     export enum ResultEnum {
-        OK = <any> 'OK',
-        ERR = <any> 'ERR'
+        Ok = <any> 'OK',
+        Err = <any> 'ERR'
     }
 }

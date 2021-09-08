@@ -1,6 +1,7 @@
-export * from './defaultApi';
-import { DefaultApi } from './defaultApi';
-import * as fs from 'fs';
+export * from './publicSmtpTokensApi';
+import { PublicSmtpTokensApi } from './publicSmtpTokensApi';
+export * from './singleSendApi';
+import { SingleSendApi } from './singleSendApi';
 import * as http from 'http';
 
 export class HttpError extends Error {
@@ -10,14 +11,6 @@ export class HttpError extends Error {
     }
 }
 
-export interface RequestDetailedFile {
-    value: Buffer;
-    options?: {
-        filename?: string;
-        contentType?: string;
-    }
-}
+export { RequestFile } from '../model/models';
 
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
-
-export const APIS = [DefaultApi];
+export const APIS = [PublicSmtpTokensApi, SingleSendApi];

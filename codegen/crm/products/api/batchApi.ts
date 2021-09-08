@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputSimplePublicObjectBatchInput } from '../model/batchInputSimplePublicObjectBatchInput';
@@ -44,7 +45,7 @@ export class BatchApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -91,7 +92,7 @@ export class BatchApi {
     }
 
     set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -99,7 +100,7 @@ export class BatchApi {
     }
 
     /**
-     * Archive a list of products given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
+     * 
      * @summary Archive a batch of products by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -139,8 +140,8 @@ export class BatchApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -173,7 +174,7 @@ export class BatchApi {
         });
     }
     /**
-     * Create a batch of products. This follows the same rules as creating an individual object.
+     * 
      * @summary Create a batch of products
      * @param batchInputSimplePublicObjectInput 
      */
@@ -213,8 +214,8 @@ export class BatchApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -248,7 +249,7 @@ export class BatchApi {
         });
     }
     /**
-     * Read a list of products given a collection of IDs. Use the `properties` request body property to control which properties are returned.
+     * 
      * @summary Read a batch of products by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -293,8 +294,8 @@ export class BatchApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -328,7 +329,7 @@ export class BatchApi {
         });
     }
     /**
-     * Perform a partial upate on a batch of products. This follows the same rules as performing partial updates on an individual object.
+     * 
      * @summary Update a batch of products
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -368,8 +369,8 @@ export class BatchApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

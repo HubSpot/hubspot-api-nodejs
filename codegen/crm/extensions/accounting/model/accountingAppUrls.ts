@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * The URL endpoints that HubSpot will send requests to an external accounting system for certain actions.

@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Files
+ * Upload and manage files.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
-export class NextPage {
-    'after': string;
+export class PreviousPage {
+    'before': string;
     'link'?: string;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "before",
+            "baseName": "before",
             "type": "string"
         },
         {
@@ -31,7 +31,7 @@ export class NextPage {
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return PreviousPage.attributeTypeMap;
     }
 }
 

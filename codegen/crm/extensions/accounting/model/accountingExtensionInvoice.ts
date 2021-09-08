@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * Representation of an invoice in the external accounting system.
@@ -109,11 +109,11 @@ export class AccountingExtensionInvoice {
 
 export namespace AccountingExtensionInvoice {
     export enum StatusEnum {
-        CREATED = <any> 'CREATED',
-        SENT = <any> 'SENT',
-        PAID = <any> 'PAID',
-        CLOSED = <any> 'CLOSED',
-        OVERDUE = <any> 'OVERDUE',
-        VOIDED = <any> 'VOIDED'
+        Created = <any> 'CREATED',
+        Sent = <any> 'SENT',
+        Paid = <any> 'PAID',
+        Closed = <any> 'CLOSED',
+        Overdue = <any> 'OVERDUE',
+        Voided = <any> 'VOIDED'
     }
 }

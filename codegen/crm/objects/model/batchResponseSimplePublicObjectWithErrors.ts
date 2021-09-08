@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { SimplePublicObject } from './simplePublicObject';
 import { StandardError } from './standardError';
 
@@ -75,9 +75,9 @@ export class BatchResponseSimplePublicObjectWithErrors {
 
 export namespace BatchResponseSimplePublicObjectWithErrors {
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        PROCESSING = <any> 'PROCESSING',
-        CANCELED = <any> 'CANCELED',
-        COMPLETE = <any> 'COMPLETE'
+        Pending = <any> 'PENDING',
+        Processing = <any> 'PROCESSING',
+        Canceled = <any> 'CANCELED',
+        Complete = <any> 'COMPLETE'
     }
 }

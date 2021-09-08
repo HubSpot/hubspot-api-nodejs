@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class InvoiceUpdateResponse {
     'externalInvoiceNumber'?: string;
@@ -121,13 +121,13 @@ export class InvoiceUpdateResponse {
 
 export namespace InvoiceUpdateResponse {
     export enum InvoiceStatusEnum {
-        CREATED = <any> 'CREATED',
-        SENT = <any> 'SENT',
-        PAID = <any> 'PAID',
-        CLOSED = <any> 'CLOSED',
-        OVERDUE = <any> 'OVERDUE',
-        VOIDED = <any> 'VOIDED',
-        NONE = <any> 'NONE',
-        UNPAID = <any> 'UNPAID'
+        Created = <any> 'CREATED',
+        Sent = <any> 'SENT',
+        Paid = <any> 'PAID',
+        Closed = <any> 'CLOSED',
+        Overdue = <any> 'OVERDUE',
+        Voided = <any> 'VOIDED',
+        None = <any> 'NONE',
+        Unpaid = <any> 'UNPAID'
     }
 }

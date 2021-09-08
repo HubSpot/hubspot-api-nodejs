@@ -1,6 +1,6 @@
 /**
  * HubDB endpoints
- * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+ * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../model/collectionResponseWithTotalHubDbTableV3ForwardPaging';
 import { HubDbTableCloneRequest } from '../model/hubDbTableCloneRequest';
 import { HubDbTableV3 } from '../model/hubDbTableV3';
-import { HubDbTableV3Input } from '../model/hubDbTableV3Input';
-import { HubDbTableV3LiveInput } from '../model/hubDbTableV3LiveInput';
+import { HubDbTableV3Request } from '../model/hubDbTableV3Request';
 import { ImportResult } from '../model/importResult';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
@@ -44,7 +44,7 @@ export class TablesApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -91,7 +91,7 @@ export class TablesApi {
     }
 
     set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -99,7 +99,7 @@ export class TablesApi {
     }
 
     /**
-     * Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+     * Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
      * @summary Archive a table
      * @param tableIdOrName The ID or name of the table to archive.
      */
@@ -139,8 +139,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -220,8 +220,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -257,9 +257,9 @@ export class TablesApi {
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
      * @summary Create a new table
-     * @param hubDbTableV3Input The JSON schema for the table being created.
+     * @param hubDbTableV3Request The JSON schema for the table being created.
      */
-    public async createTable (hubDbTableV3Input: HubDbTableV3Input, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
+    public async createTable (hubDbTableV3Request: HubDbTableV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -272,9 +272,9 @@ export class TablesApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'hubDbTableV3Input' is not null or undefined
-        if (hubDbTableV3Input === null || hubDbTableV3Input === undefined) {
-            throw new Error('Required parameter hubDbTableV3Input was null or undefined when calling createTable.');
+        // verify required parameter 'hubDbTableV3Request' is not null or undefined
+        if (hubDbTableV3Request === null || hubDbTableV3Request === undefined) {
+            throw new Error('Required parameter hubDbTableV3Request was null or undefined when calling createTable.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -288,15 +288,15 @@ export class TablesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(hubDbTableV3Input, "HubDbTableV3Input")
+            body: ObjectSerializer.serialize(hubDbTableV3Request, "HubDbTableV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -375,8 +375,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -410,7 +410,7 @@ export class TablesApi {
         });
     }
     /**
-     * Exports the `live` version of a table to CSV / EXCEL format.
+     * Exports the `published` version of a table to CSV / EXCEL format.
      * @summary Export a published version of a table
      * @param tableIdOrName The ID or name of the table to export.
      * @param format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -455,8 +455,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -492,18 +492,18 @@ export class TablesApi {
     /**
      * Returns the details for each draft table defined in the specified account, including column definitions.
      * @summary Return all draft tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllDraftTables (updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableV3ForwardPaging;  }> {
+    public async getAllDraftTables (sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableV3ForwardPaging;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/draft';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -516,16 +516,16 @@ export class TablesApi {
         }
         let localVarFormParams: any = {};
 
-        if (updatedAfter !== undefined) {
-            localVarQueryParameters['updatedAfter'] = ObjectSerializer.serialize(updatedAfter, "Date");
-        }
-
-        if (updatedBefore !== undefined) {
-            localVarQueryParameters['updatedBefore'] = ObjectSerializer.serialize(updatedBefore, "Date");
-        }
-
         if (sort !== undefined) {
             localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
+        }
+
+        if (after !== undefined) {
+            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
         if (createdAt !== undefined) {
@@ -536,14 +536,6 @@ export class TablesApi {
             localVarQueryParameters['createdAfter'] = ObjectSerializer.serialize(createdAfter, "Date");
         }
 
-        if (after !== undefined) {
-            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
-        }
-
-        if (archived !== undefined) {
-            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
-        }
-
         if (createdBefore !== undefined) {
             localVarQueryParameters['createdBefore'] = ObjectSerializer.serialize(createdBefore, "Date");
         }
@@ -552,8 +544,16 @@ export class TablesApi {
             localVarQueryParameters['updatedAt'] = ObjectSerializer.serialize(updatedAt, "Date");
         }
 
-        if (limit !== undefined) {
-            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        if (updatedAfter !== undefined) {
+            localVarQueryParameters['updatedAfter'] = ObjectSerializer.serialize(updatedAfter, "Date");
+        }
+
+        if (updatedBefore !== undefined) {
+            localVarQueryParameters['updatedBefore'] = ObjectSerializer.serialize(updatedBefore, "Date");
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -573,8 +573,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -608,20 +608,20 @@ export class TablesApi {
         });
     }
     /**
-     * Returns the details for the `live` version of each table defined in an account, including column definitions.
-     * @summary Get all live tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
+     * Returns the details for the `published` version of each table defined in an account, including column definitions.
+     * @summary Get all published tables
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllTables (updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableV3ForwardPaging;  }> {
+    public async getAllTables (sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableV3ForwardPaging;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -634,16 +634,16 @@ export class TablesApi {
         }
         let localVarFormParams: any = {};
 
-        if (updatedAfter !== undefined) {
-            localVarQueryParameters['updatedAfter'] = ObjectSerializer.serialize(updatedAfter, "Date");
-        }
-
-        if (updatedBefore !== undefined) {
-            localVarQueryParameters['updatedBefore'] = ObjectSerializer.serialize(updatedBefore, "Date");
-        }
-
         if (sort !== undefined) {
             localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
+        }
+
+        if (after !== undefined) {
+            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
+        }
+
+        if (limit !== undefined) {
+            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
         if (createdAt !== undefined) {
@@ -654,14 +654,6 @@ export class TablesApi {
             localVarQueryParameters['createdAfter'] = ObjectSerializer.serialize(createdAfter, "Date");
         }
 
-        if (after !== undefined) {
-            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
-        }
-
-        if (archived !== undefined) {
-            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
-        }
-
         if (createdBefore !== undefined) {
             localVarQueryParameters['createdBefore'] = ObjectSerializer.serialize(createdBefore, "Date");
         }
@@ -670,8 +662,16 @@ export class TablesApi {
             localVarQueryParameters['updatedAt'] = ObjectSerializer.serialize(updatedAt, "Date");
         }
 
-        if (limit !== undefined) {
-            localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
+        if (updatedAfter !== undefined) {
+            localVarQueryParameters['updatedAfter'] = ObjectSerializer.serialize(updatedAfter, "Date");
+        }
+
+        if (updatedBefore !== undefined) {
+            localVarQueryParameters['updatedBefore'] = ObjectSerializer.serialize(updatedBefore, "Date");
+        }
+
+        if (archived !== undefined) {
+            localVarQueryParameters['archived'] = ObjectSerializer.serialize(archived, "boolean");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -691,8 +691,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -776,8 +776,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -811,8 +811,8 @@ export class TablesApi {
         });
     }
     /**
-     * Returns the details for the `live` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
-     * @summary Get details for a live table
+     * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * @summary Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
@@ -861,8 +861,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -896,13 +896,13 @@ export class TablesApi {
         });
     }
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/push-live` endpoint to push these changes to `live` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/publish` endpoint to push these changes to `published` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * @summary Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
-     * @param file The source CSV file to be imported.
      * @param config Configuration for the import in JSON format as described above.
+     * @param file The source CSV file to be imported.
      */
-    public async importDraftTable (tableIdOrName: string, file?: RequestFile, config?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ImportResult;  }> {
+    public async importDraftTable (tableIdOrName: string, config?: string, file?: RequestFile, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: ImportResult;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/draft/import'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -925,14 +925,14 @@ export class TablesApi {
 
         let localVarUseFormData = false;
 
+        if (config !== undefined) {
+            localVarFormParams['config'] = ObjectSerializer.serialize(config, "string");
+        }
+
         if (file !== undefined) {
             localVarFormParams['file'] = file;
         }
         localVarUseFormData = true;
-
-        if (config !== undefined) {
-            localVarFormParams['config'] = ObjectSerializer.serialize(config, "string");
-        }
 
         let localVarRequestOptions: localVarRequest.Options = {
             method: 'POST',
@@ -947,8 +947,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -982,13 +982,13 @@ export class TablesApi {
         });
     }
     /**
-     * Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the `live` version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+     * Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
      * @summary Publish a table from draft
      * @param tableIdOrName The ID or name of the table to publish.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
      */
     public async publishDraftTable (tableIdOrName: string, includeForeignIds?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
-        const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/draft/push-live'
+        const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/draft/publish'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -1027,8 +1027,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -1062,7 +1062,7 @@ export class TablesApi {
         });
     }
     /**
-     * Replaces the data in the `draft` version of the table with values from the `live` version. Any unpublished changes in the `draft` will be lost after this call is made.
+     * Replaces the data in the `draft` version of the table with values from the `published` version. Any unpublished changes in the `draft` will be lost after this call is made.
      * @summary Reset a draft table
      * @param tableIdOrName The ID or name of the table to reset.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -1107,8 +1107,8 @@ export class TablesApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -1142,13 +1142,94 @@ export class TablesApi {
         });
     }
     /**
-     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `push-live` endpoint to push all the changes to the `live` version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+     * Unpublishes the table, meaning any website pages using data from the table will not render any data.
+     * @summary Unpublish a table
+     * @param tableIdOrName The ID or name of the table to publish.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+     */
+    public async unpublishTable (tableIdOrName: string, includeForeignIds?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
+        const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/unpublish'
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
+        const produces = ['application/json', '*/*'];
+        // give precedence to 'application/json'
+        if (produces.indexOf('application/json') >= 0) {
+            localVarHeaderParams.Accept = 'application/json';
+        } else {
+            localVarHeaderParams.Accept = produces.join(',');
+        }
+        let localVarFormParams: any = {};
+
+        // verify required parameter 'tableIdOrName' is not null or undefined
+        if (tableIdOrName === null || tableIdOrName === undefined) {
+            throw new Error('Required parameter tableIdOrName was null or undefined when calling unpublishTable.');
+        }
+
+        if (includeForeignIds !== undefined) {
+            localVarQueryParameters['includeForeignIds'] = ObjectSerializer.serialize(includeForeignIds, "boolean");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+        };
+
+        let authenticationPromise = Promise.resolve();
+        if (this.authentications.hapikey.apiKey) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
+        }
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
+        }
+        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
+
+        let interceptorPromise = authenticationPromise;
+        for (const interceptor of this.interceptors) {
+            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
+        }
+
+        return interceptorPromise.then(() => {
+            if (Object.keys(localVarFormParams).length) {
+                if (localVarUseFormData) {
+                    (<any>localVarRequestOptions).formData = localVarFormParams;
+                } else {
+                    localVarRequestOptions.form = localVarFormParams;
+                }
+            }
+            return new Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }>((resolve, reject) => {
+                localVarRequest(localVarRequestOptions, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        body = ObjectSerializer.deserialize(body, "HubDbTableV3");
+                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
+                            resolve({ response: response, body: body });
+                        } else {
+                            reject(new HttpError(response, body, response.statusCode));
+                        }
+                    }
+                });
+            });
+        });
+    }
+    /**
+     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `publish` endpoint to push all the changes to the `published` version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
      * @summary Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
-     * @param hubDbTableV3Input The JSON schema for the table being updated.
+     * @param hubDbTableV3Request The JSON schema for the table being updated.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public async updateDraftTable (tableIdOrName: string, hubDbTableV3Input: HubDbTableV3Input, includeForeignIds?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
+    public async updateDraftTable (tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/draft'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -1167,97 +1248,9 @@ export class TablesApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling updateDraftTable.');
         }
 
-        // verify required parameter 'hubDbTableV3Input' is not null or undefined
-        if (hubDbTableV3Input === null || hubDbTableV3Input === undefined) {
-            throw new Error('Required parameter hubDbTableV3Input was null or undefined when calling updateDraftTable.');
-        }
-
-        if (includeForeignIds !== undefined) {
-            localVarQueryParameters['includeForeignIds'] = ObjectSerializer.serialize(includeForeignIds, "boolean");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'PATCH',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(hubDbTableV3Input, "HubDbTableV3Input")
-        };
-
-        let authenticationPromise = Promise.resolve();
-        if (this.authentications.hapikey.apiKey) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
-        }
-        authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
-
-        let interceptorPromise = authenticationPromise;
-        for (const interceptor of this.interceptors) {
-            interceptorPromise = interceptorPromise.then(() => interceptor(localVarRequestOptions));
-        }
-
-        return interceptorPromise.then(() => {
-            if (Object.keys(localVarFormParams).length) {
-                if (localVarUseFormData) {
-                    (<any>localVarRequestOptions).formData = localVarFormParams;
-                } else {
-                    localVarRequestOptions.form = localVarFormParams;
-                }
-            }
-            return new Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        body = ObjectSerializer.deserialize(body, "HubDbTableV3");
-                        if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                            resolve({ response: response, body: body });
-                        } else {
-                            reject(new HttpError(response, body, response.statusCode));
-                        }
-                    }
-                });
-            });
-        });
-    }
-    /**
-     * Use this endpoint to perform one of the following <ul><li> Publish a live version of a table (without copying table data from draft) </li><li>Un-publish a live version of a table (Leaving the data in the live version)</li><li>Restore an archived table</li></ul>  To publish a table, send `published` property in the JSON object with the value `true`. To unpublish a table, send `published` property in the JSON object with the value `false`.  To restore an archived table, send `archived` property in the JSON object with the value `false` along with the query parameter `archived=true`. When restoring an archived table, if an active table already exists with the same `name` or `label`, you will need to change the name of the archived table when restoring it using the `name` and `label` parameters with a new name and new label. When you restore a table, the table will be restored only in the `draft` version.  Examples:  Publish live version of a table:  ```     {       \"published\": true     } ``` Unpublish live version of a table: ```     {       \"published\": false     } ``` Restore a table: (send `archived=true` in query parameters) ```     {       \"archived\": false     } ``` Restore a table with a new name: (send `archived=true` in query parameters) ```     {       \"label\": \"New Table Name\",       \"name\": \"new_table_name\",       \"archived\": false     } ```
-     * @summary Publish or unpublish a live version of a table or restore an archived table
-     * @param tableIdOrName The ID or name of the table to return.
-     * @param hubDbTableV3LiveInput The JSON object as described.
-     * @param archived Whether to return only results that have been archived.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-     */
-    public async updateTable (tableIdOrName: string, hubDbTableV3LiveInput: HubDbTableV3LiveInput, archived?: boolean, includeForeignIds?: boolean, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableV3;  }> {
-        const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}'
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
-        const produces = ['application/json', '*/*'];
-        // give precedence to 'application/json'
-        if (produces.indexOf('application/json') >= 0) {
-            localVarHeaderParams.Accept = 'application/json';
-        } else {
-            localVarHeaderParams.Accept = produces.join(',');
-        }
-        let localVarFormParams: any = {};
-
-        // verify required parameter 'tableIdOrName' is not null or undefined
-        if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new Error('Required parameter tableIdOrName was null or undefined when calling updateTable.');
-        }
-
-        // verify required parameter 'hubDbTableV3LiveInput' is not null or undefined
-        if (hubDbTableV3LiveInput === null || hubDbTableV3LiveInput === undefined) {
-            throw new Error('Required parameter hubDbTableV3LiveInput was null or undefined when calling updateTable.');
+        // verify required parameter 'hubDbTableV3Request' is not null or undefined
+        if (hubDbTableV3Request === null || hubDbTableV3Request === undefined) {
+            throw new Error('Required parameter hubDbTableV3Request was null or undefined when calling updateDraftTable.');
         }
 
         if (archived !== undefined) {
@@ -1279,15 +1272,15 @@ export class TablesApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(hubDbTableV3LiveInput, "HubDbTableV3LiveInput")
+            body: ObjectSerializer.serialize(hubDbTableV3Request, "HubDbTableV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

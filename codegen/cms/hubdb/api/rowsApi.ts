@@ -1,6 +1,6 @@
 /**
  * HubDB endpoints
- * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+ * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,13 +10,14 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../model/collectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { HubDbTableRowV3 } from '../model/hubDbTableRowV3';
-import { HubDbTableRowV3Input } from '../model/hubDbTableRowV3Input';
+import { HubDbTableRowV3Request } from '../model/hubDbTableRowV3Request';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
 import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
@@ -41,7 +42,7 @@ export class RowsApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
-        'oauth2': new OAuth(),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -88,7 +89,7 @@ export class RowsApi {
     }
 
     set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -98,13 +99,13 @@ export class RowsApi {
     /**
      * Clones a single row in the `draft` version of the table.
      * @summary Clone a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async cloneDraftTableRow (rowId: string, tableIdOrName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async cloneDraftTableRow (tableIdOrName: string, rowId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -116,14 +117,14 @@ export class RowsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling cloneDraftTableRow.');
-        }
-
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling cloneDraftTableRow.');
+        }
+
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling cloneDraftTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -143,8 +144,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -178,12 +179,12 @@ export class RowsApi {
         });
     }
     /**
-     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `push-live` endpoint to push these changes to live version and publish them.
+     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `publish` endpoint to push these changes to published version.
      * @summary Add a new row to a table
      * @param tableIdOrName The ID or name of the target table.
-     * @param hubDbTableRowV3Input The row definition JSON, formatted as described above.
+     * @param hubDbTableRowV3Request The row definition JSON, formatted as described above.
      */
-    public async createTableRow (tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async createTableRow (tableIdOrName: string, hubDbTableRowV3Request: HubDbTableRowV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -202,9 +203,9 @@ export class RowsApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling createTableRow.');
         }
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new Error('Required parameter hubDbTableRowV3Input was null or undefined when calling createTableRow.');
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new Error('Required parameter hubDbTableRowV3Request was null or undefined when calling createTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -218,15 +219,15 @@ export class RowsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input")
+            body: ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -262,13 +263,13 @@ export class RowsApi {
     /**
      * Get a single row by ID from a table\'s `draft` version.
      * @summary Get a row from the draft table
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async getDraftTableRowById (rowId: string, tableIdOrName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async getDraftTableRowById (tableIdOrName: string, rowId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -279,17 +280,17 @@ export class RowsApi {
             localVarHeaderParams.Accept = produces.join(',');
         }
         let localVarFormParams: any = {};
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling getDraftTableRowById.');
-        }
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling getDraftTableRowById.');
         }
 
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling getDraftTableRowById.');
+        }
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -307,8 +308,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -342,15 +343,15 @@ export class RowsApi {
         });
     }
     /**
-     * Get a single row by ID from a table\'s `live` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Get a single row by ID from a table\'s `published` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * @summary Get a table row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async getTableRow (rowId: string, tableIdOrName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async getTableRow (tableIdOrName: string, rowId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -362,14 +363,14 @@ export class RowsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling getTableRow.');
-        }
-
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling getTableRow.');
+        }
+
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling getTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -389,8 +390,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -424,15 +425,15 @@ export class RowsApi {
         });
     }
     /**
-     * Returns a set of rows in the `live` version of the specified table. Row results can be filtered and sorted. Refer to the overview section for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the `published` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * @summary Get rows for a table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
+     * @param sort Specifies the column names to sort the results by. See the above description for more details.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * @param sort Specifies the column names to sort the results by. See the above description for more details.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
      */
-    public async getTableRows (tableIdOrName: string, properties?: Array<string>, after?: string, limit?: number, sort?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableRowV3ForwardPaging;  }> {
+    public async getTableRows (tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableRowV3ForwardPaging;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -451,8 +452,8 @@ export class RowsApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling getTableRows.');
         }
 
-        if (properties !== undefined) {
-            localVarQueryParameters['properties'] = ObjectSerializer.serialize(properties, "Array<string>");
+        if (sort !== undefined) {
+            localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
         }
 
         if (after !== undefined) {
@@ -463,8 +464,8 @@ export class RowsApi {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (sort !== undefined) {
-            localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
+        if (properties !== undefined) {
+            localVarQueryParameters['properties'] = ObjectSerializer.serialize(properties, "Array<string>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -484,8 +485,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -521,13 +522,13 @@ export class RowsApi {
     /**
      * Permanently deletes a row from a table\'s `draft` version.
      * @summary Permanently deletes a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async purgeDraftTableRow (rowId: string, tableIdOrName: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public async purgeDraftTableRow (tableIdOrName: string, rowId: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['*/*'];
@@ -539,14 +540,14 @@ export class RowsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling purgeDraftTableRow.');
-        }
-
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling purgeDraftTableRow.');
+        }
+
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling purgeDraftTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -566,8 +567,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -600,15 +601,15 @@ export class RowsApi {
         });
     }
     /**
-     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted using the options mentioned in the overview section.
+     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * @summary Get rows from draft table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
      * @param sort Specifies the column names to sort the results by.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
      */
-    public async readDraftTableRows (tableIdOrName: string, after?: string, properties?: Array<string>, limit?: number, sort?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableRowV3ForwardPaging;  }> {
+    public async readDraftTableRows (tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: CollectionResponseWithTotalHubDbTableRowV3ForwardPaging;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -627,20 +628,20 @@ export class RowsApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling readDraftTableRows.');
         }
 
-        if (after !== undefined) {
-            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
+        if (sort !== undefined) {
+            localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
         }
 
-        if (properties !== undefined) {
-            localVarQueryParameters['properties'] = ObjectSerializer.serialize(properties, "Array<string>");
+        if (after !== undefined) {
+            localVarQueryParameters['after'] = ObjectSerializer.serialize(after, "string");
         }
 
         if (limit !== undefined) {
             localVarQueryParameters['limit'] = ObjectSerializer.serialize(limit, "number");
         }
 
-        if (sort !== undefined) {
-            localVarQueryParameters['sort'] = ObjectSerializer.serialize(sort, "Array<string>");
+        if (properties !== undefined) {
+            localVarQueryParameters['properties'] = ObjectSerializer.serialize(properties, "Array<string>");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -660,8 +661,8 @@ export class RowsApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -697,14 +698,14 @@ export class RowsApi {
     /**
      * Replace a single row in the table\'s `draft` version. All the column values must be specified. If a column has a value in the target table and this request doesn\'t define that value, it will be deleted. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * @summary Replaces an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row
      */
-    public async replaceDraftTableRow (rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async replaceDraftTableRow (tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -716,19 +717,19 @@ export class RowsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling replaceDraftTableRow.');
-        }
-
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling replaceDraftTableRow.');
         }
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new Error('Required parameter hubDbTableRowV3Input was null or undefined when calling replaceDraftTableRow.');
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling replaceDraftTableRow.');
+        }
+
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new Error('Required parameter hubDbTableRowV3Request was null or undefined when calling replaceDraftTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -742,15 +743,15 @@ export class RowsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input")
+            body: ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -786,14 +787,14 @@ export class RowsApi {
     /**
      * Sparse updates a single row in the table\'s `draft` version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * @summary Updates an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row with necessary fields that needs to be updated.
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row with necessary fields that needs to be updated.
      */
-    public async updateDraftTableRow (rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
+    public async updateDraftTableRow (tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: HubDbTableRowV3;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
         const produces = ['application/json', '*/*'];
@@ -805,19 +806,19 @@ export class RowsApi {
         }
         let localVarFormParams: any = {};
 
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new Error('Required parameter rowId was null or undefined when calling updateDraftTableRow.');
-        }
-
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling updateDraftTableRow.');
         }
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new Error('Required parameter hubDbTableRowV3Input was null or undefined when calling updateDraftTableRow.');
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new Error('Required parameter rowId was null or undefined when calling updateDraftTableRow.');
+        }
+
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new Error('Required parameter hubDbTableRowV3Request was null or undefined when calling updateDraftTableRow.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -831,15 +832,15 @@ export class RowsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input")
+            body: ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

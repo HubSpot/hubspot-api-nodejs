@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { EventIdView } from './eventIdView';
 
 /**
@@ -89,52 +89,52 @@ export class EmailSendStatusView {
 
 export namespace EmailSendStatusView {
     export enum SendResultEnum {
-        SENT = <any> 'SENT',
-        IDEMPOTENTIGNORE = <any> 'IDEMPOTENT_IGNORE',
-        QUEUED = <any> 'QUEUED',
-        IDEMPOTENTFAIL = <any> 'IDEMPOTENT_FAIL',
-        THROTTLED = <any> 'THROTTLED',
-        EMAILDISABLED = <any> 'EMAIL_DISABLED',
-        PORTALSUSPENDED = <any> 'PORTAL_SUSPENDED',
-        INVALIDTOADDRESS = <any> 'INVALID_TO_ADDRESS',
-        BLOCKEDDOMAIN = <any> 'BLOCKED_DOMAIN',
-        PREVIOUSLYBOUNCED = <any> 'PREVIOUSLY_BOUNCED',
-        EMAILUNCONFIRMED = <any> 'EMAIL_UNCONFIRMED',
-        PREVIOUSSPAM = <any> 'PREVIOUS_SPAM',
-        PREVIOUSLYUNSUBSCRIBEDMESSAGE = <any> 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE',
-        PREVIOUSLYUNSUBSCRIBEDPORTAL = <any> 'PREVIOUSLY_UNSUBSCRIBED_PORTAL',
-        INVALIDFROMADDRESS = <any> 'INVALID_FROM_ADDRESS',
-        CAMPAIGNCANCELLED = <any> 'CAMPAIGN_CANCELLED',
-        VALIDATIONFAILED = <any> 'VALIDATION_FAILED',
-        MTAIGNORE = <any> 'MTA_IGNORE',
-        BLOCKEDADDRESS = <any> 'BLOCKED_ADDRESS',
-        PORTALOVERLIMIT = <any> 'PORTAL_OVER_LIMIT',
-        PORTALEXPIRED = <any> 'PORTAL_EXPIRED',
-        PORTALMISSINGMARKETINGSCOPE = <any> 'PORTAL_MISSING_MARKETING_SCOPE',
-        MISSINGTEMPLATEPROPERTIES = <any> 'MISSING_TEMPLATE_PROPERTIES',
-        MISSINGREQUIREDPARAMETER = <any> 'MISSING_REQUIRED_PARAMETER',
-        PORTALAUTHENTICATIONFAILURE = <any> 'PORTAL_AUTHENTICATION_FAILURE',
-        MISSINGCONTENT = <any> 'MISSING_CONTENT',
-        CORRUPTINPUT = <any> 'CORRUPT_INPUT',
-        TEMPLATERENDEREXCEPTION = <any> 'TEMPLATE_RENDER_EXCEPTION',
-        GRAYMAILSUPPRESSED = <any> 'GRAYMAIL_SUPPRESSED',
-        UNCONFIGUREDSENDINGDOMAIN = <any> 'UNCONFIGURED_SENDING_DOMAIN',
-        UNDELIVERABLE = <any> 'UNDELIVERABLE',
-        CANCELLEDABUSE = <any> 'CANCELLED_ABUSE',
-        QUARANTINEDADDRESS = <any> 'QUARANTINED_ADDRESS',
-        ADDRESSONLYACCEPTEDONPROD = <any> 'ADDRESS_ONLY_ACCEPTED_ON_PROD',
-        PORTALNOTAUTHORIZEDFORAPPLICATION = <any> 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION',
-        ADDRESSLISTBOMBED = <any> 'ADDRESS_LIST_BOMBED',
-        ADDRESSOPTEDOUT = <any> 'ADDRESS_OPTED_OUT',
-        RECIPIENTFATIGUESUPPRESSED = <any> 'RECIPIENT_FATIGUE_SUPPRESSED',
-        TOOMANYRECIPIENTS = <any> 'TOO_MANY_RECIPIENTS',
-        PREVIOUSLYUNSUBSCRIBEDBRAND = <any> 'PREVIOUSLY_UNSUBSCRIBED_BRAND',
-        NONMARKETABLECONTACT = <any> 'NON_MARKETABLE_CONTACT'
+        Sent = <any> 'SENT',
+        IdempotentIgnore = <any> 'IDEMPOTENT_IGNORE',
+        Queued = <any> 'QUEUED',
+        IdempotentFail = <any> 'IDEMPOTENT_FAIL',
+        Throttled = <any> 'THROTTLED',
+        EmailDisabled = <any> 'EMAIL_DISABLED',
+        PortalSuspended = <any> 'PORTAL_SUSPENDED',
+        InvalidToAddress = <any> 'INVALID_TO_ADDRESS',
+        BlockedDomain = <any> 'BLOCKED_DOMAIN',
+        PreviouslyBounced = <any> 'PREVIOUSLY_BOUNCED',
+        EmailUnconfirmed = <any> 'EMAIL_UNCONFIRMED',
+        PreviousSpam = <any> 'PREVIOUS_SPAM',
+        PreviouslyUnsubscribedMessage = <any> 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE',
+        PreviouslyUnsubscribedPortal = <any> 'PREVIOUSLY_UNSUBSCRIBED_PORTAL',
+        InvalidFromAddress = <any> 'INVALID_FROM_ADDRESS',
+        CampaignCancelled = <any> 'CAMPAIGN_CANCELLED',
+        ValidationFailed = <any> 'VALIDATION_FAILED',
+        MtaIgnore = <any> 'MTA_IGNORE',
+        BlockedAddress = <any> 'BLOCKED_ADDRESS',
+        PortalOverLimit = <any> 'PORTAL_OVER_LIMIT',
+        PortalExpired = <any> 'PORTAL_EXPIRED',
+        PortalMissingMarketingScope = <any> 'PORTAL_MISSING_MARKETING_SCOPE',
+        MissingTemplateProperties = <any> 'MISSING_TEMPLATE_PROPERTIES',
+        MissingRequiredParameter = <any> 'MISSING_REQUIRED_PARAMETER',
+        PortalAuthenticationFailure = <any> 'PORTAL_AUTHENTICATION_FAILURE',
+        MissingContent = <any> 'MISSING_CONTENT',
+        CorruptInput = <any> 'CORRUPT_INPUT',
+        TemplateRenderException = <any> 'TEMPLATE_RENDER_EXCEPTION',
+        GraymailSuppressed = <any> 'GRAYMAIL_SUPPRESSED',
+        UnconfiguredSendingDomain = <any> 'UNCONFIGURED_SENDING_DOMAIN',
+        Undeliverable = <any> 'UNDELIVERABLE',
+        CancelledAbuse = <any> 'CANCELLED_ABUSE',
+        QuarantinedAddress = <any> 'QUARANTINED_ADDRESS',
+        AddressOnlyAcceptedOnProd = <any> 'ADDRESS_ONLY_ACCEPTED_ON_PROD',
+        PortalNotAuthorizedForApplication = <any> 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION',
+        AddressListBombed = <any> 'ADDRESS_LIST_BOMBED',
+        AddressOptedOut = <any> 'ADDRESS_OPTED_OUT',
+        RecipientFatigueSuppressed = <any> 'RECIPIENT_FATIGUE_SUPPRESSED',
+        TooManyRecipients = <any> 'TOO_MANY_RECIPIENTS',
+        PreviouslyUnsubscribedBrand = <any> 'PREVIOUSLY_UNSUBSCRIBED_BRAND',
+        NonMarketableContact = <any> 'NON_MARKETABLE_CONTACT'
     }
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
-        PROCESSING = <any> 'PROCESSING',
-        CANCELED = <any> 'CANCELED',
-        COMPLETE = <any> 'COMPLETE'
+        Pending = <any> 'PENDING',
+        Processing = <any> 'PROCESSING',
+        Canceled = <any> 'CANCELED',
+        Complete = <any> 'COMPLETE'
     }
 }

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputTimelineEvent } from '../model/batchInputTimelineEvent';
@@ -33,6 +34,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum EventsApiApiKeys {
+    developer_hapikey,
 }
 
 export class EventsApi {
@@ -42,7 +44,8 @@ export class EventsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
-        'oauth2': new OAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -89,7 +92,7 @@ export class EventsApi {
     }
 
     set accessToken(token: string) {
-        this.authentications.oauth2.accessToken = token;
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
@@ -134,8 +137,8 @@ export class EventsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -206,8 +209,8 @@ export class EventsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -285,8 +288,8 @@ export class EventsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -364,8 +367,8 @@ export class EventsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
@@ -448,8 +451,8 @@ export class EventsApi {
         };
 
         let authenticationPromise = Promise.resolve();
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
+        if (this.authentications.oauth2_legacy.accessToken) {
+            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2_legacy.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

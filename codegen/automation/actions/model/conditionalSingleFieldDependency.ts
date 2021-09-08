@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class ConditionalSingleFieldDependency {
     'dependencyType': ConditionalSingleFieldDependency.DependencyTypeEnum;
@@ -49,6 +49,6 @@ export class ConditionalSingleFieldDependency {
 
 export namespace ConditionalSingleFieldDependency {
     export enum DependencyTypeEnum {
-        CONDITIONALSINGLEFIELD = <any> 'CONDITIONAL_SINGLE_FIELD'
+        ConditionalSingleField = <any> 'CONDITIONAL_SINGLE_FIELD'
     }
 }

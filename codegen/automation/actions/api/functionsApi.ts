@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { ActionFunction } from '../model/actionFunction';
@@ -31,6 +32,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 
 export enum FunctionsApiApiKeys {
     developer_hapikey,
+    hapikey,
 }
 
 export class FunctionsApi {
@@ -41,6 +43,8 @@ export class FunctionsApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'oauth2_legacy': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -84,6 +88,10 @@ export class FunctionsApi {
 
     public setApiKey(key: FunctionsApiApiKeys, value: string) {
         (this.authentications as any)[FunctionsApiApiKeys[key]].apiKey = value;
+    }
+
+    set accessToken(token: string) {
+        this.authentications.oauth2_legacy.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {

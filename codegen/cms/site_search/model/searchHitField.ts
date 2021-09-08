@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class SearchHitField {
-    'values': Array<object>;
     'metadataField': boolean;
+    'values': Array<object>;
     'name': string;
     'value': object;
 
@@ -22,14 +22,14 @@ export class SearchHitField {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<object>"
-        },
-        {
             "name": "metadataField",
             "baseName": "metadataField",
             "type": "boolean"
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<object>"
         },
         {
             "name": "name",

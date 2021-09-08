@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
+ * Files
+ * Upload and manage files.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { NextPage } from './nextPage';
 import { PreviousPage } from './previousPage';
 

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A request to change the status of a contact\'s subscription.
@@ -64,12 +64,12 @@ export class PublicUpdateSubscriptionStatusRequest {
 
 export namespace PublicUpdateSubscriptionStatusRequest {
     export enum LegalBasisEnum {
-        LEGITIMATEINTERESTPQL = <any> 'LEGITIMATE_INTEREST_PQL',
-        LEGITIMATEINTERESTCLIENT = <any> 'LEGITIMATE_INTEREST_CLIENT',
-        PERFORMANCEOFCONTRACT = <any> 'PERFORMANCE_OF_CONTRACT',
-        CONSENTWITHNOTICE = <any> 'CONSENT_WITH_NOTICE',
-        NONGDPR = <any> 'NON_GDPR',
-        PROCESSANDSTORE = <any> 'PROCESS_AND_STORE',
-        LEGITIMATEINTERESTOTHER = <any> 'LEGITIMATE_INTEREST_OTHER'
+        LegitimateInterestPql = <any> 'LEGITIMATE_INTEREST_PQL',
+        LegitimateInterestClient = <any> 'LEGITIMATE_INTEREST_CLIENT',
+        PerformanceOfContract = <any> 'PERFORMANCE_OF_CONTRACT',
+        ConsentWithNotice = <any> 'CONSENT_WITH_NOTICE',
+        NonGdpr = <any> 'NON_GDPR',
+        ProcessAndStore = <any> 'PROCESS_AND_STORE',
+        LegitimateInterestOther = <any> 'LEGITIMATE_INTEREST_OTHER'
     }
 }

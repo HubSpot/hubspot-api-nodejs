@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { CreateInvoiceFeature } from './createInvoiceFeature';
 import { ImportInvoiceFeature } from './importInvoiceFeature';
 import { ObjectSyncFeature } from './objectSyncFeature';

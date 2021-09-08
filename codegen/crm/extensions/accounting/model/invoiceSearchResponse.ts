@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { AccountingExtensionInvoice } from './accountingExtensionInvoice';
 
 /**
@@ -47,7 +47,7 @@ export class InvoiceSearchResponse {
 
 export namespace InvoiceSearchResponse {
     export enum ResultEnum {
-        OK = <any> 'OK',
-        ERR = <any> 'ERR'
+        Ok = <any> 'OK',
+        Err = <any> 'ERR'
     }
 }
