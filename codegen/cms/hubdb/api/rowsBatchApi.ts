@@ -1,6 +1,6 @@
 /**
  * HubDB endpoints
- * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `live` versions and you can publish and unpublish the live version. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, pushed to live version, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the live version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
+ * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * The version of the OpenAPI document: v3
  * 
@@ -10,11 +10,12 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
-import { BatchInputHubDbTableRowV3 } from '../model/batchInputHubDbTableRowV3';
+import { BatchInputHubDbTableRowV3Request } from '../model/batchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from '../model/batchInputJsonNode';
 import { BatchInputString } from '../model/batchInputString';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../model/batchResponseHubDbTableRowV3WithErrors';
@@ -182,9 +183,9 @@ export class RowsBatchApi {
      * Creates rows in the `draft` version of the specified table, given an array of row objects. See the overview section for more details with an example.
      * @summary Create rows in batch
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public async batchCreateDraftTableRows (tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async batchCreateDraftTableRows (tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/create'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -203,9 +204,9 @@ export class RowsBatchApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling batchCreateDraftTableRows.');
         }
 
-        // verify required parameter 'batchInputHubDbTableRowV3' is not null or undefined
-        if (batchInputHubDbTableRowV3 === null || batchInputHubDbTableRowV3 === undefined) {
-            throw new Error('Required parameter batchInputHubDbTableRowV3 was null or undefined when calling batchCreateDraftTableRows.');
+        // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
+        if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
+            throw new Error('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchCreateDraftTableRows.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -219,7 +220,7 @@ export class RowsBatchApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(batchInputHubDbTableRowV3, "BatchInputHubDbTableRowV3")
+            body: ObjectSerializer.serialize(batchInputHubDbTableRowV3Request, "BatchInputHubDbTableRowV3Request")
         };
 
         let authenticationPromise = Promise.resolve();
@@ -424,7 +425,7 @@ export class RowsBatchApi {
         });
     }
     /**
-     * Returns rows in the `live` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Returns rows in the `published` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * @summary Get a set of rows
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
@@ -509,9 +510,9 @@ export class RowsBatchApi {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * @summary Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects.
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
      */
-    public async batchReplaceDraftTableRows (tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
+    public async batchReplaceDraftTableRows (tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: http.IncomingMessage; body: object;  }> {
         const localVarPath = this.basePath + '/cms/v3/hubdb/tables/{tableIdOrName}/rows/draft/batch/replace'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
         let localVarQueryParameters: any = {};
@@ -530,9 +531,9 @@ export class RowsBatchApi {
             throw new Error('Required parameter tableIdOrName was null or undefined when calling batchReplaceDraftTableRows.');
         }
 
-        // verify required parameter 'batchInputHubDbTableRowV3' is not null or undefined
-        if (batchInputHubDbTableRowV3 === null || batchInputHubDbTableRowV3 === undefined) {
-            throw new Error('Required parameter batchInputHubDbTableRowV3 was null or undefined when calling batchReplaceDraftTableRows.');
+        // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
+        if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
+            throw new Error('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchReplaceDraftTableRows.');
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -546,7 +547,7 @@ export class RowsBatchApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(batchInputHubDbTableRowV3, "BatchInputHubDbTableRowV3")
+            body: ObjectSerializer.serialize(batchInputHubDbTableRowV3Request, "BatchInputHubDbTableRowV3Request")
         };
 
         let authenticationPromise = Promise.resolve();

@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchReadInputSimplePublicObjectId } from '../model/batchReadInputSimplePublicObjectId';
@@ -91,7 +92,7 @@ export class BatchApi {
     }
 
     /**
-     * Read a list of feedback submissions given a collection of IDs. Use the `properties` request body property to control which properties are returned.
+     * 
      * @summary Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.

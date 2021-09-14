@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { DisplayOption } from './displayOption';
 
 /**
@@ -65,14 +65,14 @@ export class CardDisplayProperty {
 
 export namespace CardDisplayProperty {
     export enum DataTypeEnum {
-        BOOLEAN = <any> 'BOOLEAN',
-        CURRENCY = <any> 'CURRENCY',
-        DATE = <any> 'DATE',
-        DATETIME = <any> 'DATETIME',
-        EMAIL = <any> 'EMAIL',
-        LINK = <any> 'LINK',
-        NUMERIC = <any> 'NUMERIC',
-        STRING = <any> 'STRING',
-        STATUS = <any> 'STATUS'
+        Boolean = <any> 'BOOLEAN',
+        Currency = <any> 'CURRENCY',
+        Date = <any> 'DATE',
+        Datetime = <any> 'DATETIME',
+        Email = <any> 'EMAIL',
+        Link = <any> 'LINK',
+        Numeric = <any> 'NUMERIC',
+        String = <any> 'STRING',
+        Status = <any> 'STATUS'
     }
 }

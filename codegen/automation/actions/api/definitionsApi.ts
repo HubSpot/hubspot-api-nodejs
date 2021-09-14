@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../model/collectionResponseExtensionActionDefinitionForwardPaging';
@@ -32,6 +33,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 
 export enum DefinitionsApiApiKeys {
     developer_hapikey,
+    hapikey,
 }
 
 export class DefinitionsApi {
@@ -42,6 +44,8 @@ export class DefinitionsApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'oauth2': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -85,6 +89,10 @@ export class DefinitionsApi {
 
     public setApiKey(key: DefinitionsApiApiKeys, value: string) {
         (this.authentications as any)[DefinitionsApiApiKeys[key]].apiKey = value;
+    }
+
+    set accessToken(token: string) {
+        this.authentications.oauth2.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {

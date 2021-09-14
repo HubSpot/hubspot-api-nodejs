@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class Filter {
     'value'?: string;
     'propertyName': string;
+    /**
+    * null
+    */
     'operator': Filter.OperatorEnum;
 
     static discriminator: string | undefined = undefined;
@@ -43,15 +46,18 @@ export class Filter {
 
 export namespace Filter {
     export enum OperatorEnum {
-        EQ = <any> 'EQ',
-        NEQ = <any> 'NEQ',
-        LT = <any> 'LT',
-        LTE = <any> 'LTE',
-        GT = <any> 'GT',
-        GTE = <any> 'GTE',
-        HASPROPERTY = <any> 'HAS_PROPERTY',
-        NOTHASPROPERTY = <any> 'NOT_HAS_PROPERTY',
-        CONTAINSTOKEN = <any> 'CONTAINS_TOKEN',
-        NOTCONTAINSTOKEN = <any> 'NOT_CONTAINS_TOKEN'
+        Eq = <any> 'EQ',
+        Neq = <any> 'NEQ',
+        Lt = <any> 'LT',
+        Lte = <any> 'LTE',
+        Gt = <any> 'GT',
+        Gte = <any> 'GTE',
+        Between = <any> 'BETWEEN',
+        In = <any> 'IN',
+        NotIn = <any> 'NOT_IN',
+        HasProperty = <any> 'HAS_PROPERTY',
+        NotHasProperty = <any> 'NOT_HAS_PROPERTY',
+        ContainsToken = <any> 'CONTAINS_TOKEN',
+        NotContainsToken = <any> 'NOT_CONTAINS_TOKEN'
     }
 }

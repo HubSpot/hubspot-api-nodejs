@@ -1,6 +1,9 @@
-export * from './defaultApi';
-import { DefaultApi } from './defaultApi';
-import * as fs from 'fs';
+export * from './accessTokensApi';
+import { AccessTokensApi } from './accessTokensApi';
+export * from './refreshTokensApi';
+import { RefreshTokensApi } from './refreshTokensApi';
+export * from './tokensApi';
+import { TokensApi } from './tokensApi';
 import * as http from 'http';
 
 export class HttpError extends Error {
@@ -10,14 +13,6 @@ export class HttpError extends Error {
     }
 }
 
-export interface RequestDetailedFile {
-    value: Buffer;
-    options?: {
-        filename?: string;
-        contentType?: string;
-    }
-}
+export { RequestFile } from '../model/models';
 
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
-
-export const APIS = [DefaultApi];
+export const APIS = [AccessTokensApi, RefreshTokensApi, TokensApi];

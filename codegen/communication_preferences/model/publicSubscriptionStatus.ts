@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * The status of a subscription for a contact.
@@ -109,21 +109,21 @@ export class PublicSubscriptionStatus {
 
 export namespace PublicSubscriptionStatus {
     export enum StatusEnum {
-        SUBSCRIBED = <any> 'SUBSCRIBED',
-        NOTSUBSCRIBED = <any> 'NOT_SUBSCRIBED'
+        Subscribed = <any> 'SUBSCRIBED',
+        NotSubscribed = <any> 'NOT_SUBSCRIBED'
     }
     export enum SourceOfStatusEnum {
-        PORTALWIDESTATUS = <any> 'PORTAL_WIDE_STATUS',
-        BRANDWIDESTATUS = <any> 'BRAND_WIDE_STATUS',
-        SUBSCRIPTIONSTATUS = <any> 'SUBSCRIPTION_STATUS'
+        PortalWideStatus = <any> 'PORTAL_WIDE_STATUS',
+        BrandWideStatus = <any> 'BRAND_WIDE_STATUS',
+        SubscriptionStatus = <any> 'SUBSCRIPTION_STATUS'
     }
     export enum LegalBasisEnum {
-        LEGITIMATEINTERESTPQL = <any> 'LEGITIMATE_INTEREST_PQL',
-        LEGITIMATEINTERESTCLIENT = <any> 'LEGITIMATE_INTEREST_CLIENT',
-        PERFORMANCEOFCONTRACT = <any> 'PERFORMANCE_OF_CONTRACT',
-        CONSENTWITHNOTICE = <any> 'CONSENT_WITH_NOTICE',
-        NONGDPR = <any> 'NON_GDPR',
-        PROCESSANDSTORE = <any> 'PROCESS_AND_STORE',
-        LEGITIMATEINTERESTOTHER = <any> 'LEGITIMATE_INTEREST_OTHER'
+        LegitimateInterestPql = <any> 'LEGITIMATE_INTEREST_PQL',
+        LegitimateInterestClient = <any> 'LEGITIMATE_INTEREST_CLIENT',
+        PerformanceOfContract = <any> 'PERFORMANCE_OF_CONTRACT',
+        ConsentWithNotice = <any> 'CONSENT_WITH_NOTICE',
+        NonGdpr = <any> 'NON_GDPR',
+        ProcessAndStore = <any> 'PROCESS_AND_STORE',
+        LegitimateInterestOther = <any> 'LEGITIMATE_INTEREST_OTHER'
     }
 }

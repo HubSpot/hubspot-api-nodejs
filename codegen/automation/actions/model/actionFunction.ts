@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A serverless function associated with this custom workflow action.
@@ -55,8 +55,8 @@ export class ActionFunction {
 
 export namespace ActionFunction {
     export enum FunctionTypeEnum {
-        PREACTIONEXECUTION = <any> 'PRE_ACTION_EXECUTION',
-        PREFETCHOPTIONS = <any> 'PRE_FETCH_OPTIONS',
-        POSTFETCHOPTIONS = <any> 'POST_FETCH_OPTIONS'
+        PreActionExecution = <any> 'PRE_ACTION_EXECUTION',
+        PreFetchOptions = <any> 'PRE_FETCH_OPTIONS',
+        PostFetchOptions = <any> 'POST_FETCH_OPTIONS'
     }
 }

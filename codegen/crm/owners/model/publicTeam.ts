@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class PublicTeam {
     'id': string;
@@ -43,8 +43,8 @@ export class PublicTeam {
 
 export namespace PublicTeam {
     export enum MembershipEnum {
-        PRIMARY = <any> 'PRIMARY',
-        SECONDARY = <any> 'SECONDARY',
-        CHILD = <any> 'CHILD'
+        Primary = <any> 'PRIMARY',
+        Secondary = <any> 'SECONDARY',
+        Child = <any> 'CHILD'
     }
 }

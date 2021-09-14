@@ -10,28 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
+import { TimelineEventTemplate } from './timelineEventTemplate';
 
-export class PreviousPage {
-    'before': string;
-    'link'?: string;
+export class CollectionResponseTimelineEventTemplateNoPaging {
+    'results': Array<TimelineEventTemplate>;
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
-            "name": "before",
-            "baseName": "before",
-            "type": "string"
-        },
-        {
-            "name": "link",
-            "baseName": "link",
-            "type": "string"
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<TimelineEventTemplate>"
         }    ];
 
     static getAttributeTypeMap() {
-        return PreviousPage.attributeTypeMap;
+        return CollectionResponseTimelineEventTemplateNoPaging.attributeTypeMap;
     }
 }
 

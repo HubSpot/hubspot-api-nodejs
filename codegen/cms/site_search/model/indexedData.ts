@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { SearchHitField } from './searchHitField';
 
 /**
@@ -56,10 +56,10 @@ export class IndexedData {
 
 export namespace IndexedData {
     export enum TypeEnum {
-        LANDINGPAGE = <any> 'LANDING_PAGE',
-        BLOGPOST = <any> 'BLOG_POST',
-        SITEPAGE = <any> 'SITE_PAGE',
-        KNOWLEDGEARTICLE = <any> 'KNOWLEDGE_ARTICLE',
-        LISTINGPAGE = <any> 'LISTING_PAGE'
+        LandingPage = <any> 'LANDING_PAGE',
+        BlogPost = <any> 'BLOG_POST',
+        SitePage = <any> 'SITE_PAGE',
+        KnowledgeArticle = <any> 'KNOWLEDGE_ARTICLE',
+        ListingPage = <any> 'LISTING_PAGE'
     }
 }
