@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { AssociationDefinition } from './associationDefinition';
 import { ObjectTypeDefinitionLabels } from './objectTypeDefinitionLabels';
 import { Property } from './property';

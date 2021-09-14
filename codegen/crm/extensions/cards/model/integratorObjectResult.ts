@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { ActionHookActionBody } from './actionHookActionBody';
 import { IFrameActionBody } from './iFrameActionBody';
 import { ObjectToken } from './objectToken';

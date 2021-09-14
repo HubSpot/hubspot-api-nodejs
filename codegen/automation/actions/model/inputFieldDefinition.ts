@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { FieldTypeDefinition } from './fieldTypeDefinition';
 
 /**
@@ -53,8 +53,8 @@ export class InputFieldDefinition {
 
 export namespace InputFieldDefinition {
     export enum SupportedValueTypesEnum {
-        STATICVALUE = <any> 'STATIC_VALUE',
-        OBJECTPROPERTY = <any> 'OBJECT_PROPERTY',
-        FIELDDATA = <any> 'FIELD_DATA'
+        StaticValue = <any> 'STATIC_VALUE',
+        ObjectProperty = <any> 'OBJECT_PROPERTY',
+        FieldData = <any> 'FIELD_DATA'
     }
 }

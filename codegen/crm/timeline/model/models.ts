@@ -1,14 +1,13 @@
+import localVarRequest from 'request';
+
 export * from './batchInputTimelineEvent';
 export * from './batchResponseTimelineEventResponse';
 export * from './batchResponseTimelineEventResponseWithErrors';
-export * from './collectionResponseTimelineEventTemplate';
+export * from './collectionResponseTimelineEventTemplateNoPaging';
 export * from './errorCategory';
 export * from './errorDetail';
 export * from './eventDetail';
 export * from './modelError';
-export * from './nextPage';
-export * from './paging';
-export * from './previousPage';
 export * from './standardError';
 export * from './timelineEvent';
 export * from './timelineEventIFrame';
@@ -20,19 +19,27 @@ export * from './timelineEventTemplateTokenOption';
 export * from './timelineEventTemplateTokenUpdateRequest';
 export * from './timelineEventTemplateUpdateRequest';
 
-import localVarRequest = require('request');
+import * as fs from 'fs';
+
+export interface RequestDetailedFile {
+    value: Buffer;
+    options?: {
+        filename?: string;
+        contentType?: string;
+    }
+}
+
+export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
+
 
 import { BatchInputTimelineEvent } from './batchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from './batchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from './batchResponseTimelineEventResponseWithErrors';
-import { CollectionResponseTimelineEventTemplate } from './collectionResponseTimelineEventTemplate';
+import { CollectionResponseTimelineEventTemplateNoPaging } from './collectionResponseTimelineEventTemplateNoPaging';
 import { ErrorCategory } from './errorCategory';
 import { ErrorDetail } from './errorDetail';
 import { EventDetail } from './eventDetail';
 import { ModelError } from './modelError';
-import { NextPage } from './nextPage';
-import { Paging } from './paging';
-import { PreviousPage } from './previousPage';
 import { StandardError } from './standardError';
 import { TimelineEvent } from './timelineEvent';
 import { TimelineEventIFrame } from './timelineEventIFrame';
@@ -67,14 +74,11 @@ let typeMap: {[index: string]: any} = {
     "BatchInputTimelineEvent": BatchInputTimelineEvent,
     "BatchResponseTimelineEventResponse": BatchResponseTimelineEventResponse,
     "BatchResponseTimelineEventResponseWithErrors": BatchResponseTimelineEventResponseWithErrors,
-    "CollectionResponseTimelineEventTemplate": CollectionResponseTimelineEventTemplate,
+    "CollectionResponseTimelineEventTemplateNoPaging": CollectionResponseTimelineEventTemplateNoPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "EventDetail": EventDetail,
     "ModelError": ModelError,
-    "NextPage": NextPage,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "StandardError": StandardError,
     "TimelineEvent": TimelineEvent,
     "TimelineEventIFrame": TimelineEventIFrame,
@@ -132,9 +136,9 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
-                transformedData.push(ObjectSerializer.serialize(date, subType));
+            for (let index = 0; index < data.length; index++) {
+                let datum = data[index];
+                transformedData.push(ObjectSerializer.serialize(datum, subType));
             }
             return transformedData;
         } else if (type === "Date") {
@@ -153,7 +157,7 @@ export class ObjectSerializer {
             // get the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
+            for (let index = 0; index < attributeTypes.length; index++) {
                 let attributeType = attributeTypes[index];
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type);
             }
@@ -172,9 +176,9 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
-                transformedData.push(ObjectSerializer.deserialize(date, subType));
+            for (let index = 0; index < data.length; index++) {
+                let datum = data[index];
+                transformedData.push(ObjectSerializer.deserialize(datum, subType));
             }
             return transformedData;
         } else if (type === "Date") {
@@ -189,7 +193,7 @@ export class ObjectSerializer {
             }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
+            for (let index = 0; index < attributeTypes.length; index++) {
                 let attributeType = attributeTypes[index];
                 instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type);
             }

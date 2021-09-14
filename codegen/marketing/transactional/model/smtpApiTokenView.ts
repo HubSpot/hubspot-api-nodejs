@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A SMTP API token provides both an ID and password that can be used to send email through the HubSpot SMTP API.

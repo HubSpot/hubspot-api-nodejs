@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A response to the creation of an entity (eg. invoice, customer).
@@ -46,7 +46,7 @@ export class ResultIdAccountingResponse {
 
 export namespace ResultIdAccountingResponse {
     export enum ResultEnum {
-        OK = <any> 'OK',
-        ERR = <any> 'ERR'
+        Ok = <any> 'OK',
+        Err = <any> 'ERR'
     }
 }

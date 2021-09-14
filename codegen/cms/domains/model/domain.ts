@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { DomainCdnConfig } from './domainCdnConfig';
 import { DomainSetupInfo } from './domainSetupInfo';
 
@@ -387,53 +387,53 @@ export class Domain {
 
 export namespace Domain {
     export enum ApexResolutionStatusEnum {
-        INELIGIBLE = <any> 'INELIGIBLE',
-        SUGGESTRESOLVING = <any> 'SUGGEST_RESOLVING',
-        ALREADYRESOLVING = <any> 'ALREADY_RESOLVING',
-        ERROR = <any> 'ERROR'
+        Ineligible = <any> 'INELIGIBLE',
+        SuggestResolving = <any> 'SUGGEST_RESOLVING',
+        AlreadyResolving = <any> 'ALREADY_RESOLVING',
+        Error = <any> 'ERROR'
     }
     export enum CosObjectTypeEnum {
-        CONTENT = <any> 'CONTENT',
-        EXTENSIONRESOURCE = <any> 'EXTENSION_RESOURCE',
-        LAYOUT = <any> 'LAYOUT',
-        CUSTOMWIDGET = <any> 'CUSTOM_WIDGET',
-        WIDGET = <any> 'WIDGET',
-        FORM = <any> 'FORM',
-        PLACEMENT = <any> 'PLACEMENT',
-        IMAGE = <any> 'IMAGE',
-        DOMAINSETTINGS = <any> 'DOMAIN_SETTINGS',
-        SITESETTINGS = <any> 'SITE_SETTINGS',
-        EMAILADDRESS = <any> 'EMAIL_ADDRESS',
-        WORKFLOW = <any> 'WORKFLOW',
-        HUBDBTABLE = <any> 'HUBDB_TABLE',
-        REDIRECTURL = <any> 'REDIRECT_URL',
-        DESIGNFOLDER = <any> 'DESIGN_FOLDER',
-        SITEMAP = <any> 'SITE_MAP',
-        DOMAIN = <any> 'DOMAIN',
-        BLOG = <any> 'BLOG',
-        FILE = <any> 'FILE',
-        FOLDER = <any> 'FOLDER',
-        SITEMENU = <any> 'SITE_MENU',
-        THEME = <any> 'THEME',
-        CONTENTGROUP = <any> 'CONTENT_GROUP',
-        FOLLOWME = <any> 'FOLLOW_ME',
-        KNOWLEDGEBASE = <any> 'KNOWLEDGE_BASE',
-        LISTMEMBERSHIP = <any> 'LIST_MEMBERSHIP',
-        CONTACTMEMBERSHIP = <any> 'CONTACT_MEMBERSHIP',
-        PASSWORDPROTECTED = <any> 'PASSWORD_PROTECTED',
-        UNRESTRICTEDACCESS = <any> 'UNRESTRICTED_ACCESS',
-        MARKETPLACELISTING = <any> 'MARKETPLACE_LISTING',
-        LAYOUTSECTION = <any> 'LAYOUT_SECTION',
-        THEMESETTINGS = <any> 'THEME_SETTINGS',
-        VIDEOPLAYER = <any> 'VIDEO_PLAYER',
-        URLMAPPING = <any> 'URL_MAPPING',
-        KNOWLEDGECATEGORY = <any> 'KNOWLEDGE_CATEGORY',
-        KNOWLEDGEHOMEPAGECATEGORY = <any> 'KNOWLEDGE_HOMEPAGE_CATEGORY',
-        RAWASSET = <any> 'RAW_ASSET',
-        GLOBALCONTENT = <any> 'GLOBAL_CONTENT',
-        HUBDBTABLEROW = <any> 'HUBDB_TABLE_ROW',
-        BLOGAUTHOR = <any> 'BLOG_AUTHOR',
-        SERVERLESSFUNCTION = <any> 'SERVERLESS_FUNCTION',
-        KNOWLEDGECATEGORYTRANSLATION = <any> 'KNOWLEDGE_CATEGORY_TRANSLATION'
+        Content = <any> 'CONTENT',
+        ExtensionResource = <any> 'EXTENSION_RESOURCE',
+        Layout = <any> 'LAYOUT',
+        CustomWidget = <any> 'CUSTOM_WIDGET',
+        Widget = <any> 'WIDGET',
+        Form = <any> 'FORM',
+        Placement = <any> 'PLACEMENT',
+        Image = <any> 'IMAGE',
+        DomainSettings = <any> 'DOMAIN_SETTINGS',
+        SiteSettings = <any> 'SITE_SETTINGS',
+        EmailAddress = <any> 'EMAIL_ADDRESS',
+        Workflow = <any> 'WORKFLOW',
+        HubdbTable = <any> 'HUBDB_TABLE',
+        RedirectUrl = <any> 'REDIRECT_URL',
+        DesignFolder = <any> 'DESIGN_FOLDER',
+        SiteMap = <any> 'SITE_MAP',
+        Domain = <any> 'DOMAIN',
+        Blog = <any> 'BLOG',
+        File = <any> 'FILE',
+        Folder = <any> 'FOLDER',
+        SiteMenu = <any> 'SITE_MENU',
+        Theme = <any> 'THEME',
+        ContentGroup = <any> 'CONTENT_GROUP',
+        FollowMe = <any> 'FOLLOW_ME',
+        KnowledgeBase = <any> 'KNOWLEDGE_BASE',
+        ListMembership = <any> 'LIST_MEMBERSHIP',
+        ContactMembership = <any> 'CONTACT_MEMBERSHIP',
+        PasswordProtected = <any> 'PASSWORD_PROTECTED',
+        UnrestrictedAccess = <any> 'UNRESTRICTED_ACCESS',
+        MarketplaceListing = <any> 'MARKETPLACE_LISTING',
+        LayoutSection = <any> 'LAYOUT_SECTION',
+        ThemeSettings = <any> 'THEME_SETTINGS',
+        VideoPlayer = <any> 'VIDEO_PLAYER',
+        UrlMapping = <any> 'URL_MAPPING',
+        KnowledgeCategory = <any> 'KNOWLEDGE_CATEGORY',
+        KnowledgeHomepageCategory = <any> 'KNOWLEDGE_HOMEPAGE_CATEGORY',
+        RawAsset = <any> 'RAW_ASSET',
+        GlobalContent = <any> 'GLOBAL_CONTENT',
+        HubdbTableRow = <any> 'HUBDB_TABLE_ROW',
+        BlogAuthor = <any> 'BLOG_AUTHOR',
+        ServerlessFunction = <any> 'SERVERLESS_FUNCTION',
+        KnowledgeCategoryTranslation = <any> 'KNOWLEDGE_CATEGORY_TRANSLATION'
     }
 }

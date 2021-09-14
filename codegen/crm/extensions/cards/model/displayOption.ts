@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * Option definition for STATUS dataTypes.
@@ -55,10 +55,10 @@ export class DisplayOption {
 
 export namespace DisplayOption {
     export enum TypeEnum {
-        DEFAULT = <any> 'DEFAULT',
-        SUCCESS = <any> 'SUCCESS',
-        WARNING = <any> 'WARNING',
-        DANGER = <any> 'DANGER',
-        INFO = <any> 'INFO'
+        Default = <any> 'DEFAULT',
+        Success = <any> 'SUCCESS',
+        Warning = <any> 'WARNING',
+        Danger = <any> 'DANGER',
+        Info = <any> 'INFO'
     }
 }

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { ActionConfirmationBody } from './actionConfirmationBody';
 
 export class ActionHookActionBody {
@@ -62,17 +62,17 @@ export class ActionHookActionBody {
 
 export namespace ActionHookActionBody {
     export enum TypeEnum {
-        ACTIONHOOK = <any> 'ACTION_HOOK'
+        ActionHook = <any> 'ACTION_HOOK'
     }
     export enum HttpMethodEnum {
-        CONNECT = <any> 'CONNECT',
-        DELETE = <any> 'DELETE',
-        GET = <any> 'GET',
-        HEAD = <any> 'HEAD',
-        OPTIONS = <any> 'OPTIONS',
-        PATCH = <any> 'PATCH',
-        POST = <any> 'POST',
-        PUT = <any> 'PUT',
-        TRACE = <any> 'TRACE'
+        Connect = <any> 'CONNECT',
+        Delete = <any> 'DELETE',
+        Get = <any> 'GET',
+        Head = <any> 'HEAD',
+        Options = <any> 'OPTIONS',
+        Patch = <any> 'PATCH',
+        Post = <any> 'POST',
+        Put = <any> 'PUT',
+        Trace = <any> 'TRACE'
     }
 }

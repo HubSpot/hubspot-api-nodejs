@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { PerformanceView } from './performanceView';
 
 export class PublicPerformanceResponse {
@@ -68,27 +68,27 @@ export class PublicPerformanceResponse {
 
 export namespace PublicPerformanceResponse {
     export enum IntervalEnum {
-        ONEMINUTE = <any> 'ONE_MINUTE',
-        FIVEMINUTES = <any> 'FIVE_MINUTES',
-        TENMINUTES = <any> 'TEN_MINUTES',
-        FIFTEENMINUTES = <any> 'FIFTEEN_MINUTES',
-        THIRTYMINUTES = <any> 'THIRTY_MINUTES',
-        ONEHOUR = <any> 'ONE_HOUR',
-        FOURHOURS = <any> 'FOUR_HOURS',
-        TWELVEHOURS = <any> 'TWELVE_HOURS',
-        ONEDAY = <any> 'ONE_DAY',
-        ONEWEEK = <any> 'ONE_WEEK'
+        OneMinute = <any> 'ONE_MINUTE',
+        FiveMinutes = <any> 'FIVE_MINUTES',
+        TenMinutes = <any> 'TEN_MINUTES',
+        FifteenMinutes = <any> 'FIFTEEN_MINUTES',
+        ThirtyMinutes = <any> 'THIRTY_MINUTES',
+        OneHour = <any> 'ONE_HOUR',
+        FourHours = <any> 'FOUR_HOURS',
+        TwelveHours = <any> 'TWELVE_HOURS',
+        OneDay = <any> 'ONE_DAY',
+        OneWeek = <any> 'ONE_WEEK'
     }
     export enum PeriodEnum {
-        ONEMINUTE = <any> 'ONE_MINUTE',
-        FIVEMINUTES = <any> 'FIVE_MINUTES',
-        TENMINUTES = <any> 'TEN_MINUTES',
-        FIFTEENMINUTES = <any> 'FIFTEEN_MINUTES',
-        THIRTYMINUTES = <any> 'THIRTY_MINUTES',
-        ONEHOUR = <any> 'ONE_HOUR',
-        FOURHOURS = <any> 'FOUR_HOURS',
-        TWELVEHOURS = <any> 'TWELVE_HOURS',
-        ONEDAY = <any> 'ONE_DAY',
-        ONEWEEK = <any> 'ONE_WEEK'
+        OneMinute = <any> 'ONE_MINUTE',
+        FiveMinutes = <any> 'FIVE_MINUTES',
+        TenMinutes = <any> 'TEN_MINUTES',
+        FifteenMinutes = <any> 'FIFTEEN_MINUTES',
+        ThirtyMinutes = <any> 'THIRTY_MINUTES',
+        OneHour = <any> 'ONE_HOUR',
+        FourHours = <any> 'FOUR_HOURS',
+        TwelveHours = <any> 'TWELVE_HOURS',
+        OneDay = <any> 'ONE_DAY',
+        OneWeek = <any> 'ONE_WEEK'
     }
 }

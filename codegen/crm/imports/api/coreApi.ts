@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { ActionResponse } from '../model/actionResponse';
@@ -290,9 +291,6 @@ export class CoreApi {
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
         }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
-        }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 
         let interceptorPromise = authenticationPromise;
@@ -372,9 +370,6 @@ export class CoreApi {
         let authenticationPromise = Promise.resolve();
         if (this.authentications.hapikey.apiKey) {
             authenticationPromise = authenticationPromise.then(() => this.authentications.hapikey.applyToRequest(localVarRequestOptions));
-        }
-        if (this.authentications.oauth2.accessToken) {
-            authenticationPromise = authenticationPromise.then(() => this.authentications.oauth2.applyToRequest(localVarRequestOptions));
         }
         authenticationPromise = authenticationPromise.then(() => this.authentications.default.applyToRequest(localVarRequestOptions));
 

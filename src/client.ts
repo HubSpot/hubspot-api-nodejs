@@ -12,21 +12,21 @@ import {
   RevisionsApi as ActionsRevisionsApi,
 } from '../codegen/automation/actions/api'
 import * as actionsModels from '../codegen/automation/actions/model/models'
-import { DefaultApi as AuditLogsDefaultApi } from '../codegen/cms/audit_logs/api'
+import { AuditLogsApi } from '../codegen/cms/audit_logs/api'
 import * as auditLogsModels from '../codegen/cms/audit_logs/model/models'
-import { DefaultApi as AuthorsDefaultApi } from '../codegen/cms/blogs/authors/api'
+import { AuthorApi } from '../codegen/cms/blogs/authors/api'
 import * as authorsModels from '../codegen/cms/blogs/authors/model/models'
-import { DefaultApi as BlogPostsDefaultApi } from '../codegen/cms/blogs/blog_posts/api'
+import { BlogPostApi } from '../codegen/cms/blogs/blog_posts/api'
 import * as blogPostsModels from '../codegen/cms/blogs/blog_posts/model/models'
-import { DefaultApi as TagsDefaultApi } from '../codegen/cms/blogs/tags/api'
+import { TagApi } from '../codegen/cms/blogs/tags/api'
 import * as tagsModels from '../codegen/cms/blogs/tags/model/models'
 import { DomainsApi } from '../codegen/cms/domains/api'
 import * as domainsModels from '../codegen/cms/domains/model/models'
 import { RowsApi, RowsBatchApi, TablesApi } from '../codegen/cms/hubdb/api'
 import * as hubdbModels from '../codegen/cms/hubdb/model/models'
-import { DefaultApi as PerformanceDefaultApi } from '../codegen/cms/performance/api'
+import { PublicPerformanceApi } from '../codegen/cms/performance/api'
 import * as performanceModels from '../codegen/cms/performance/model/models'
-import { DefaultApi as SiteSearchDefaultApi } from '../codegen/cms/site_search/api'
+import { PublicApi } from '../codegen/cms/site_search/api'
 import * as siteSearchModels from '../codegen/cms/site_search/model/models'
 import { RedirectsApi } from '../codegen/cms/url_redirects/api'
 import * as urlRedirectsModels from '../codegen/cms/url_redirects/model/models'
@@ -50,6 +50,7 @@ import {
   AssociationsApi as ContactsAssociationsApi,
   BasicApi as ContactsBasicApi,
   BatchApi as ContactsBatchApi,
+  GDPRApi as ContactsGDPRApi,
   SearchApi as ContactsSearchApi,
 } from '../codegen/crm/contacts/api'
 import * as contactsModels from '../codegen/crm/contacts/model/models'
@@ -87,6 +88,7 @@ import {
   AssociationsApi as ObjectsAssociationsApi,
   BasicApi as ObjectsBasicApi,
   BatchApi as ObjectsBatchApi,
+  GDPRApi as ObjectsGDPRApi,
   SearchApi as ObjectsSearchApi,
 } from '../codegen/crm/objects/api'
 import {
@@ -97,7 +99,7 @@ import {
 } from '../codegen/crm/objects/feedback_submissions/api'
 import * as feedbackSubmissionsModels from '../codegen/crm/objects/feedback_submissions/model/models'
 import * as objectsModels from '../codegen/crm/objects/model/models'
-import { ApiKeyAuth, DefaultApi as OwnersDefaultApi, OAuth } from '../codegen/crm/owners/api'
+import { ApiKeyAuth, OAuth, OwnersApi } from '../codegen/crm/owners/api'
 import * as ownersModels from '../codegen/crm/owners/model/models'
 import { PipelinesApi, PipelineStagesApi } from '../codegen/crm/pipelines/api'
 import * as pipelinesModels from '../codegen/crm/pipelines/model/models'
@@ -121,7 +123,7 @@ import {
   SearchApi as QuotesSearchApi,
 } from '../codegen/crm/quotes/api'
 import * as quotesModels from '../codegen/crm/quotes/model/models'
-import { CoreApi as SchemasCoreApi, DefaultApi as SchemasDefaultApi } from '../codegen/crm/schemas/api'
+import { CoreApi as SchemasCoreApi, PublicObjectSchemasApi } from '../codegen/crm/schemas/api'
 import * as schemasModels from '../codegen/crm/schemas/model/models'
 import {
   AssociationsApi as TicketsAssociationsApi,
@@ -134,9 +136,13 @@ import { EventsApi, TemplatesApi, TokensApi } from '../codegen/crm/timeline/api'
 import * as timelineModels from '../codegen/crm/timeline/model/models'
 import { EventsApi as EventsEventsApi } from '../codegen/events/api'
 import * as eventsModels from '../codegen/events/model/models'
-import { DefaultApi as TransactionalDefaultApi } from '../codegen/marketing/transactional/api'
+import { PublicSmtpTokensApi, SingleSendApi } from '../codegen/marketing/transactional/api'
 import * as transactionalModels from '../codegen/marketing/transactional/model/models'
-import { DefaultApi as OauthDefaultApi } from '../codegen/oauth/api'
+import {
+  AccessTokensApi as OauthAccessTokensApi,
+  RefreshTokensApi as OauthRefreshTokensApi,
+  TokensApi as OauthTokensApi,
+} from '../codegen/oauth/api'
 import * as oauthModels from '../codegen/oauth/model/models'
 import { SettingsApi, SubscriptionsApi } from '../codegen/webhooks/api'
 import * as webhooksModels from '../codegen/webhooks/model/models'
@@ -240,7 +246,9 @@ export class Client {
     }
   }
   public oauth: {
-    defaultApi: OauthDefaultApi
+    accessTokensApi: OauthAccessTokensApi
+    refreshTokensApi: OauthRefreshTokensApi
+    tokensApi: OauthTokensApi
     getAuthorizationUrl: (
       clientId: string,
       redirectUri: string,
@@ -272,6 +280,7 @@ export class Client {
       associationsApi: ContactsAssociationsApi
       basicApi: ContactsBasicApi
       batchApi: ContactsBatchApi
+      gdprApi: ContactsGDPRApi
       searchApi: ContactsSearchApi
       getAll: (
         limit?: number,
@@ -286,6 +295,7 @@ export class Client {
       associationsApi: ObjectsAssociationsApi
       basicApi: ObjectsBasicApi
       batchApi: ObjectsBatchApi
+      gdprApi: ObjectsGDPRApi
       searchApi: ObjectsSearchApi
       feedbackSubmissions: {
         associationsApi: FeedbackSubmissionsAssociationsApi
@@ -345,7 +355,7 @@ export class Client {
       ) => Promise<lineItemsModels.SimplePublicObject[]>
     }
     owners: {
-      defaultApi: OwnersDefaultApi
+      ownersApi: OwnersApi
     }
     pipelines: {
       pipelinesApi: PipelinesApi
@@ -386,7 +396,7 @@ export class Client {
     }
     schemas: {
       coreApi: SchemasCoreApi
-      defaultApi: SchemasDefaultApi
+      publicObjectSchemasApi: PublicObjectSchemasApi
     }
     tickets: {
       associationsApi: TicketsAssociationsApi
@@ -413,7 +423,8 @@ export class Client {
   }
   public marketing: {
     transactional: {
-      defaultApi: TransactionalDefaultApi
+      publicSmtpTokensApi: PublicSmtpTokensApi
+      singleSendApi: SingleSendApi
     }
   }
   public webhooks: {
@@ -430,17 +441,17 @@ export class Client {
   }
   public cms: {
     auditLogs: {
-      defaultApi: AuditLogsDefaultApi
+      auditLogsApi: AuditLogsApi
     }
     blogs: {
       authors: {
-        defaultApi: AuthorsDefaultApi
+        authorApi: AuthorApi
       }
       blogPosts: {
-        defaultApi: BlogPostsDefaultApi
+        blogPostApi: BlogPostApi
       }
       tags: {
-        defaultApi: TagsDefaultApi
+        tagApi: TagApi
       }
     }
     domains: {
@@ -452,13 +463,13 @@ export class Client {
       tablesApi: TablesApi
     }
     performance: {
-      defaultApi: PerformanceDefaultApi
+      publicPerformanceApi: PublicPerformanceApi
     }
     urlRedirects: {
       redirectsApi: RedirectsApi
     }
     siteSearch: {
-      defaultApi: SiteSearchDefaultApi
+      publicApi: PublicApi
     }
   }
   public communicationPreferences: {
@@ -475,7 +486,9 @@ export class Client {
   protected _actionsDefinitionsApi: ActionsDefinitionsApi
   protected _actionsFunctionsApi: ActionsFunctionsApi
   protected _actionsRevisionsApi: ActionsRevisionsApi
-  protected _oauthDefaultApi: OauthDefaultApi
+  protected _oauthAccessTokensApi: OauthAccessTokensApi
+  protected _oauthRefreshTokensApi: OauthRefreshTokensApi
+  protected _oauthTokensApi: OauthTokensApi
   protected _associationsBatchApi: AssociationsBatchApi
   protected _typesApi: TypesApi
   protected _communicationPreferencesDefinitionApi: CommunicationPreferencesDefinitionApi
@@ -487,6 +500,7 @@ export class Client {
   protected _contactsAssociationsApi: ContactsAssociationsApi
   protected _contactsBasicApi: ContactsBasicApi
   protected _contactsBatchApi: ContactsBatchApi
+  protected _contactsGDPRApi: ContactsGDPRApi
   protected _contactsSearchApi: ContactsSearchApi
   protected _feedbackSubmissionsAssociationsApi: FeedbackSubmissionsAssociationsApi
   protected _feedbackSubmissionsBasicApi: FeedbackSubmissionsBasicApi
@@ -495,6 +509,7 @@ export class Client {
   protected _objectsAssociationsApi: ObjectsAssociationsApi
   protected _objectsBasicApi: ObjectsBasicApi
   protected _objectsBatchApi: ObjectsBatchApi
+  protected _objectsGDPRApi: ObjectsGDPRApi
   protected _objectsSearchApi: ObjectsSearchApi
   protected _dealsAssociationsApi: DealsAssociationsApi
   protected _dealsBasicApi: DealsBasicApi
@@ -514,7 +529,7 @@ export class Client {
   protected _lineItemsBasicApi: LineItemsBasicApi
   protected _lineItemsBatchApi: LineItemsBatchApi
   protected _lineItemsSearchApi: LineItemsSearchApi
-  protected _ownersDefaultApi: OwnersDefaultApi
+  protected _ownersApi: OwnersApi
   protected _pipelinesApi: PipelinesApi
   protected _pipelineStagesApi: PipelineStagesApi
   protected _productsAssociationsApi: ProductsAssociationsApi
@@ -524,11 +539,12 @@ export class Client {
   protected _propertiesBatchApi: PropertiesBatchApi
   protected _propertiesCoreApi: PropertiesCoreApi
   protected _propertiesGroupsApi: PropertiesGroupsApi
+  protected _publicSmtpTokensApi: PublicSmtpTokensApi
   protected _quotesAssociationsApi: QuotesAssociationsApi
   protected _quotesBasicApi: QuotesBasicApi
   protected _quotesBatchApi: QuotesBatchApi
   protected _quotesSearchApi: QuotesSearchApi
-  protected _schemasDefaultApi: SchemasDefaultApi
+  protected _publicObjectSchemasApi: PublicObjectSchemasApi
   protected _schemasCoreApi: SchemasCoreApi
   protected _ticketsAssociationsApi: TicketsAssociationsApi
   protected _ticketsBasicApi: TicketsBasicApi
@@ -538,19 +554,19 @@ export class Client {
   protected _templatesApi: TemplatesApi
   protected _tokensApi: TokensApi
   protected _eventsEventsApi: EventsEventsApi
-  protected _transactionalDefaultApi: TransactionalDefaultApi
   protected _settingsApi: SettingsApi
   protected _subscriptionsApi: SubscriptionsApi
-  protected _auditLogsDefaultApi: AuditLogsDefaultApi
-  protected _authorsDefaultApi: AuthorsDefaultApi
-  protected _blogPostsDefaultApi: BlogPostsDefaultApi
-  protected _tagsDefaultApi: TagsDefaultApi
-  protected _siteSearchDefaultApi: SiteSearchDefaultApi
+  protected _auditLogsApi: AuditLogsApi
+  protected _authorApi: AuthorApi
+  protected _blogPostApi: BlogPostApi
+  protected _tagApi: TagApi
+  protected _singleSendApi: SingleSendApi
+  protected _publicApi: PublicApi
   protected _domainsApi: DomainsApi
   protected _rowsApi: RowsApi
   protected _rowsBatchApi: RowsBatchApi
   protected _tablesApi: TablesApi
-  protected _performanceDefaultApi: PerformanceDefaultApi
+  protected _publicPerformanceApi: PublicPerformanceApi
   protected _redirectsApi: RedirectsApi
   protected _generateApi: GenerateApi
   protected _apiClientsWithApiKeyAuth: any[]
@@ -590,7 +606,9 @@ export class Client {
     this._actionsDefinitionsApi = new ActionsDefinitionsApi()
     this._actionsFunctionsApi = new ActionsFunctionsApi()
     this._actionsRevisionsApi = new ActionsRevisionsApi()
-    this._oauthDefaultApi = new OauthDefaultApi()
+    this._oauthAccessTokensApi = new OauthAccessTokensApi()
+    this._oauthRefreshTokensApi = new OauthRefreshTokensApi()
+    this._oauthTokensApi = new OauthTokensApi()
     this._associationsBatchApi = new AssociationsBatchApi()
     this._typesApi = new TypesApi()
     this._communicationPreferencesDefinitionApi = new CommunicationPreferencesDefinitionApi()
@@ -602,6 +620,7 @@ export class Client {
     this._contactsAssociationsApi = new ContactsAssociationsApi()
     this._contactsBasicApi = new ContactsBasicApi()
     this._contactsBatchApi = new ContactsBatchApi()
+    this._contactsGDPRApi = new ContactsGDPRApi()
     this._contactsSearchApi = new ContactsSearchApi()
     this._dealsAssociationsApi = new DealsAssociationsApi()
     this._dealsBasicApi = new DealsBasicApi()
@@ -628,8 +647,9 @@ export class Client {
     this._objectsAssociationsApi = new ObjectsAssociationsApi()
     this._objectsBasicApi = new ObjectsBasicApi()
     this._objectsBatchApi = new ObjectsBatchApi()
+    this._objectsGDPRApi = new ObjectsGDPRApi()
     this._objectsSearchApi = new ObjectsSearchApi()
-    this._ownersDefaultApi = new OwnersDefaultApi()
+    this._ownersApi = new OwnersApi()
     this._pipelinesApi = new PipelinesApi()
     this._pipelineStagesApi = new PipelineStagesApi()
     this._productsAssociationsApi = new ProductsAssociationsApi()
@@ -643,7 +663,7 @@ export class Client {
     this._quotesBasicApi = new QuotesBasicApi()
     this._quotesBatchApi = new QuotesBatchApi()
     this._quotesSearchApi = new QuotesSearchApi()
-    this._schemasDefaultApi = new SchemasDefaultApi()
+    this._publicObjectSchemasApi = new PublicObjectSchemasApi()
     this._schemasCoreApi = new SchemasCoreApi()
     this._ticketsAssociationsApi = new TicketsAssociationsApi()
     this._ticketsBasicApi = new TicketsBasicApi()
@@ -653,21 +673,22 @@ export class Client {
     this._templatesApi = new TemplatesApi()
     this._tokensApi = new TokensApi()
     this._eventsEventsApi = new EventsEventsApi()
-    this._transactionalDefaultApi = new TransactionalDefaultApi()
+    this._publicSmtpTokensApi = new PublicSmtpTokensApi()
+    this._singleSendApi = new SingleSendApi()
     this._settingsApi = new SettingsApi()
     this._subscriptionsApi = new SubscriptionsApi()
-    this._auditLogsDefaultApi = new AuditLogsDefaultApi()
-    this._authorsDefaultApi = new AuthorsDefaultApi()
-    this._blogPostsDefaultApi = new BlogPostsDefaultApi()
-    this._tagsDefaultApi = new TagsDefaultApi()
+    this._auditLogsApi = new AuditLogsApi()
+    this._authorApi = new AuthorApi()
+    this._blogPostApi = new BlogPostApi()
+    this._tagApi = new TagApi()
     this._domainsApi = new DomainsApi()
     this._rowsApi = new RowsApi()
     this._rowsBatchApi = new RowsBatchApi()
     this._tablesApi = new TablesApi()
-    this._performanceDefaultApi = new PerformanceDefaultApi()
+    this._publicPerformanceApi = new PublicPerformanceApi()
     this._redirectsApi = new RedirectsApi()
     this._generateApi = new GenerateApi()
-    this._siteSearchDefaultApi = new SiteSearchDefaultApi()
+    this._publicApi = new PublicApi()
 
     this._apiClientsWithApiKeyAuth = [
       this._accountingCallbacksApi,
@@ -688,6 +709,7 @@ export class Client {
       this._contactsAssociationsApi,
       this._contactsBasicApi,
       this._contactsBatchApi,
+      this._contactsGDPRApi,
       this._contactsSearchApi,
       this._dealsAssociationsApi,
       this._dealsBasicApi,
@@ -705,8 +727,9 @@ export class Client {
       this._objectsAssociationsApi,
       this._objectsBasicApi,
       this._objectsBatchApi,
+      this._objectsGDPRApi,
       this._objectsSearchApi,
-      this._ownersDefaultApi,
+      this._ownersApi,
       this._pipelinesApi,
       this._pipelineStagesApi,
       this._productsAssociationsApi,
@@ -720,7 +743,7 @@ export class Client {
       this._quotesBasicApi,
       this._quotesBatchApi,
       this._quotesSearchApi,
-      this._schemasDefaultApi,
+      this._publicObjectSchemasApi,
       this._schemasCoreApi,
       this._ticketsAssociationsApi,
       this._ticketsBasicApi,
@@ -729,33 +752,36 @@ export class Client {
       this._templatesApi,
       this._tokensApi,
       this._eventsEventsApi,
-      this._transactionalDefaultApi,
-      this._authorsDefaultApi,
-      this._blogPostsDefaultApi,
-      this._tagsDefaultApi,
+      this._publicSmtpTokensApi,
+      this._singleSendApi,
+      this._authorApi,
+      this._blogPostApi,
+      this._tagApi,
       this._domainsApi,
       this._rowsApi,
       this._rowsBatchApi,
       this._tablesApi,
       this._generateApi,
       this._redirectsApi,
-      this._siteSearchDefaultApi,
+      this._publicApi,
       this._videoconferencingSettingsApi,
     ]
     this._apiClientsWithDevApiKeyAuth = [
       this._actionsDefinitionsApi,
       this._actionsFunctionsApi,
       this._actionsRevisionsApi,
-      this._auditLogsDefaultApi,
+      this._auditLogsApi,
       this._cardsApi,
       this._settingsApi,
       this._subscriptionsApi,
-      this._performanceDefaultApi,
+      this._publicPerformanceApi,
     ]
     this._apiClients = [
       ...this._apiClientsWithApiKeyAuth,
       ...this._apiClientsWithDevApiKeyAuth,
-      this._oauthDefaultApi,
+      this._oauthAccessTokensApi,
+      this._oauthRefreshTokensApi,
+      this._oauthTokensApi,
       this._cardsSampleResponseApi,
       this._eventsApi,
     ]
@@ -789,6 +815,7 @@ export class Client {
         associationsApi: this._contactsAssociationsApi,
         basicApi: this._contactsBasicApi,
         batchApi: this._contactsBatchApi,
+        gdprApi: this._contactsGDPRApi,
         searchApi: this._contactsSearchApi,
         getAll: this._retrieveGetAllFunction<
           contactsModels.SimplePublicObject,
@@ -841,6 +868,7 @@ export class Client {
         associationsApi: this._objectsAssociationsApi,
         basicApi: this._objectsBasicApi,
         batchApi: this._objectsBatchApi,
+        gdprApi: this._objectsGDPRApi,
         searchApi: this._objectsSearchApi,
         feedbackSubmissions: {
           associationsApi: this._feedbackSubmissionsAssociationsApi,
@@ -850,7 +878,7 @@ export class Client {
         },
       },
       owners: {
-        defaultApi: this._ownersDefaultApi,
+        ownersApi: this._ownersApi,
       },
       pipelines: {
         pipelinesApi: this._pipelinesApi,
@@ -882,7 +910,7 @@ export class Client {
         >(this._quotesBasicApi.getPage.bind(this._quotesBasicApi)),
       },
       schemas: {
-        defaultApi: this._schemasDefaultApi,
+        publicObjectSchemasApi: this._publicObjectSchemasApi,
         coreApi: this._schemasCoreApi,
       },
       tickets: {
@@ -906,11 +934,14 @@ export class Client {
     }
     this.marketing = {
       transactional: {
-        defaultApi: this._transactionalDefaultApi,
+        publicSmtpTokensApi: this._publicSmtpTokensApi,
+        singleSendApi: this._singleSendApi,
       },
     }
     this.oauth = {
-      defaultApi: this._oauthDefaultApi,
+      accessTokensApi: this._oauthAccessTokensApi,
+      refreshTokensApi: this._oauthRefreshTokensApi,
+      tokensApi: this._oauthTokensApi,
       getAuthorizationUrl: this._getAuthorizationUrl,
     }
     this.webhooks = {
@@ -920,17 +951,17 @@ export class Client {
     }
     this.cms = {
       auditLogs: {
-        defaultApi: this._auditLogsDefaultApi,
+        auditLogsApi: this._auditLogsApi,
       },
       blogs: {
         authors: {
-          defaultApi: this._authorsDefaultApi,
+          authorApi: this._authorApi,
         },
         blogPosts: {
-          defaultApi: this._blogPostsDefaultApi,
+          blogPostApi: this._blogPostApi,
         },
         tags: {
-          defaultApi: this._tagsDefaultApi,
+          tagApi: this._tagApi,
         },
       },
       domains: {
@@ -942,13 +973,13 @@ export class Client {
         tablesApi: this._tablesApi,
       },
       performance: {
-        defaultApi: this._performanceDefaultApi,
+        publicPerformanceApi: this._publicPerformanceApi,
       },
       urlRedirects: {
         redirectsApi: this._redirectsApi,
       },
       siteSearch: {
-        defaultApi: this._siteSearchDefaultApi,
+        publicApi: this._publicApi,
       },
     }
     this.communicationPreferences = {

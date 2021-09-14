@@ -10,13 +10,15 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { IntegratorCardPayloadResponse } from '../model/integratorCardPayloadResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
+import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
 
 import { HttpError, RequestFile } from './apis';
 
@@ -27,6 +29,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum SampleResponseApiApiKeys {
+    developer_hapikey,
 }
 
 export class SampleResponseApi {
@@ -36,6 +39,7 @@ export class SampleResponseApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
     }
 
     protected interceptors: Interceptor[] = [];

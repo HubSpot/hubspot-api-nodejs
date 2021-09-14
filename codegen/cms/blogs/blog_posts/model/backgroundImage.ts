@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class BackgroundImage {
     'imageUrl': string;
@@ -43,14 +43,14 @@ export class BackgroundImage {
 
 export namespace BackgroundImage {
     export enum BackgroundPositionEnum {
-        TOPLEFT = <any> 'TOP_LEFT',
-        TOPCENTER = <any> 'TOP_CENTER',
-        TOPRIGHT = <any> 'TOP_RIGHT',
-        MIDDLELEFT = <any> 'MIDDLE_LEFT',
-        MIDDLECENTER = <any> 'MIDDLE_CENTER',
-        MIDDLERIGHT = <any> 'MIDDLE_RIGHT',
-        BOTTOMLEFT = <any> 'BOTTOM_LEFT',
-        BOTTOMCENTER = <any> 'BOTTOM_CENTER',
-        BOTTOMRIGHT = <any> 'BOTTOM_RIGHT'
+        TopLeft = <any> 'TOP_LEFT',
+        TopCenter = <any> 'TOP_CENTER',
+        TopRight = <any> 'TOP_RIGHT',
+        MiddleLeft = <any> 'MIDDLE_LEFT',
+        MiddleCenter = <any> 'MIDDLE_CENTER',
+        MiddleRight = <any> 'MIDDLE_RIGHT',
+        BottomLeft = <any> 'BOTTOM_LEFT',
+        BottomCenter = <any> 'BOTTOM_CENTER',
+        BottomRight = <any> 'BOTTOM_RIGHT'
     }
 }

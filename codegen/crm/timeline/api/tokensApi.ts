@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { TimelineEventTemplateToken } from '../model/timelineEventTemplateToken';
@@ -40,6 +41,7 @@ export class TokensApi {
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
         'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
+        'oauth2': new OAuth(),
     }
 
     protected interceptors: Interceptor[] = [];
@@ -83,6 +85,10 @@ export class TokensApi {
 
     public setApiKey(key: TokensApiApiKeys, value: string) {
         (this.authentications as any)[TokensApiApiKeys[key]].apiKey = value;
+    }
+
+    set accessToken(token: string) {
+        this.authentications.oauth2.accessToken = token;
     }
 
     public addInterceptor(interceptor: Interceptor) {
