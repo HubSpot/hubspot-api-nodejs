@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputTimelineEvent } from '../model/batchInputTimelineEvent';
@@ -33,6 +34,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum EventsApiApiKeys {
+    developer_hapikey,
 }
 
 export class EventsApi {
@@ -42,6 +44,7 @@ export class EventsApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
     }
 

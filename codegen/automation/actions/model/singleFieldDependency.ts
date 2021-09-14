@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class SingleFieldDependency {
     'dependencyType': SingleFieldDependency.DependencyTypeEnum;
@@ -43,6 +43,6 @@ export class SingleFieldDependency {
 
 export namespace SingleFieldDependency {
     export enum DependencyTypeEnum {
-        SINGLEFIELD = <any> 'SINGLE_FIELD'
+        SingleField = <any> 'SINGLE_FIELD'
     }
 }

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * Representation of payment terms that are defined in the external accounting system. One of \'dueDays\' or \'dueDate\' is required.

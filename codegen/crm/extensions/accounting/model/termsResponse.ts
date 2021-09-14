@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { AccountingExtensionTerm } from './accountingExtensionTerm';
 
 /**
@@ -47,7 +47,7 @@ export class TermsResponse {
 
 export namespace TermsResponse {
     export enum ResultEnum {
-        OK = <any> 'OK',
-        ERR = <any> 'ERR'
+        Ok = <any> 'OK',
+        Err = <any> 'ERR'
     }
 }

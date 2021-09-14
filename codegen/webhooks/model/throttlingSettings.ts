@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * Configuration details for webhook throttling.
@@ -46,7 +46,7 @@ export class ThrottlingSettings {
 
 export namespace ThrottlingSettings {
     export enum PeriodEnum {
-        SECONDLY = <any> 'SECONDLY',
-        ROLLINGMINUTE = <any> 'ROLLING_MINUTE'
+        Secondly = <any> 'SECONDLY',
+        RollingMinute = <any> 'ROLLING_MINUTE'
     }
 }

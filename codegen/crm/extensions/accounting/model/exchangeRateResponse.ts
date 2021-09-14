@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A response to the request for an exchange rate value. It represents the exchange rate from the source currency to the target currency.
@@ -64,7 +64,7 @@ export class ExchangeRateResponse {
 
 export namespace ExchangeRateResponse {
     export enum ResultEnum {
-        OK = <any> 'OK',
-        ERR = <any> 'ERR'
+        Ok = <any> 'OK',
+        Err = <any> 'ERR'
     }
 }

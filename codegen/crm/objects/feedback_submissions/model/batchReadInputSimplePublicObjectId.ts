@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { SimplePublicObjectId } from './simplePublicObjectId';
 
 export class BatchReadInputSimplePublicObjectId {

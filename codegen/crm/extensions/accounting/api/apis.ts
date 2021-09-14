@@ -8,7 +8,6 @@ export * from './syncApi';
 import { SyncApi } from './syncApi';
 export * from './userAccountsApi';
 import { UserAccountsApi } from './userAccountsApi';
-import * as fs from 'fs';
 import * as http from 'http';
 
 export class HttpError extends Error {
@@ -18,14 +17,6 @@ export class HttpError extends Error {
     }
 }
 
-export interface RequestDetailedFile {
-    value: Buffer;
-    options?: {
-        filename?: string;
-        contentType?: string;
-    }
-}
-
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
+export { RequestFile } from '../model/models';
 
 export const APIS = [CallbacksApi, InvoiceApi, SettingsApi, SyncApi, UserAccountsApi];

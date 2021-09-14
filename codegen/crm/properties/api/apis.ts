@@ -4,7 +4,6 @@ export * from './coreApi';
 import { CoreApi } from './coreApi';
 export * from './groupsApi';
 import { GroupsApi } from './groupsApi';
-import * as fs from 'fs';
 import * as http from 'http';
 
 export class HttpError extends Error {
@@ -14,14 +13,6 @@ export class HttpError extends Error {
     }
 }
 
-export interface RequestDetailedFile {
-    value: Buffer;
-    options?: {
-        filename?: string;
-        contentType?: string;
-    }
-}
-
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
+export { RequestFile } from '../model/models';
 
 export const APIS = [BatchApi, CoreApi, GroupsApi];

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class AccessTokenInfoResponse {
     'token': string;
@@ -18,6 +18,8 @@ export class AccessTokenInfoResponse {
     'hubDomain'?: string;
     'scopes': Array<string>;
     'scopeToScopeGroupPks': Array<number>;
+    'trialScopes': Array<string>;
+    'trialScopeToScopeGroupPks': Array<number>;
     'hubId': number;
     'appId': number;
     'expiresIn': number;
@@ -50,6 +52,16 @@ export class AccessTokenInfoResponse {
         {
             "name": "scopeToScopeGroupPks",
             "baseName": "scope_to_scope_group_pks",
+            "type": "Array<number>"
+        },
+        {
+            "name": "trialScopes",
+            "baseName": "trial_scopes",
+            "type": "Array<string>"
+        },
+        {
+            "name": "trialScopeToScopeGroupPks",
+            "baseName": "trial_scope_to_scope_group_pks",
             "type": "Array<number>"
         },
         {

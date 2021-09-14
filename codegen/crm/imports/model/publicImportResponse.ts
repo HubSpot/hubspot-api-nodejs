@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { PublicImportMetadata } from './publicImportMetadata';
 
 /**
@@ -83,11 +83,11 @@ export class PublicImportResponse {
 
 export namespace PublicImportResponse {
     export enum StateEnum {
-        STARTED = <any> 'STARTED',
-        PROCESSING = <any> 'PROCESSING',
-        DONE = <any> 'DONE',
-        FAILED = <any> 'FAILED',
-        CANCELED = <any> 'CANCELED',
-        DEFERRED = <any> 'DEFERRED'
+        Started = <any> 'STARTED',
+        Processing = <any> 'PROCESSING',
+        Done = <any> 'DONE',
+        Failed = <any> 'FAILED',
+        Canceled = <any> 'CANCELED',
+        Deferred = <any> 'DEFERRED'
     }
 }

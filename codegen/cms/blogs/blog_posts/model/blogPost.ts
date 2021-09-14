@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 import { LayoutSection } from './layoutSection';
 
 /**
@@ -1268,36 +1268,36 @@ export namespace BlogPost {
         _7 = <any> '7'
     }
     export enum CurrentStateEnum {
-        AUTOMATED = <any> 'AUTOMATED',
-        AUTOMATEDDRAFT = <any> 'AUTOMATED_DRAFT',
-        AUTOMATEDSENDING = <any> 'AUTOMATED_SENDING',
-        AUTOMATEDFORFORM = <any> 'AUTOMATED_FOR_FORM',
-        AUTOMATEDFORFORMBUFFER = <any> 'AUTOMATED_FOR_FORM_BUFFER',
-        AUTOMATEDFORFORMDRAFT = <any> 'AUTOMATED_FOR_FORM_DRAFT',
-        AUTOMATEDFORFORMLEGACY = <any> 'AUTOMATED_FOR_FORM_LEGACY',
-        BLOGEMAILDRAFT = <any> 'BLOG_EMAIL_DRAFT',
-        BLOGEMAILPUBLISHED = <any> 'BLOG_EMAIL_PUBLISHED',
-        DRAFT = <any> 'DRAFT',
-        DRAFTAB = <any> 'DRAFT_AB',
-        DRAFTABVARIANT = <any> 'DRAFT_AB_VARIANT',
-        ERROR = <any> 'ERROR',
-        LOSERABVARIANT = <any> 'LOSER_AB_VARIANT',
-        PAGESTUB = <any> 'PAGE_STUB',
-        PREPROCESSING = <any> 'PRE_PROCESSING',
-        PROCESSING = <any> 'PROCESSING',
-        PUBLISHED = <any> 'PUBLISHED',
-        PUBLISHEDAB = <any> 'PUBLISHED_AB',
-        PUBLISHEDABVARIANT = <any> 'PUBLISHED_AB_VARIANT',
-        PUBLISHEDORSCHEDULED = <any> 'PUBLISHED_OR_SCHEDULED',
-        RSSTOEMAILDRAFT = <any> 'RSS_TO_EMAIL_DRAFT',
-        RSSTOEMAILPUBLISHED = <any> 'RSS_TO_EMAIL_PUBLISHED',
-        SCHEDULED = <any> 'SCHEDULED',
-        SCHEDULEDAB = <any> 'SCHEDULED_AB',
-        SCHEDULEDORPUBLISHED = <any> 'SCHEDULED_OR_PUBLISHED',
-        AUTOMATEDAB = <any> 'AUTOMATED_AB',
-        AUTOMATEDABVARIANT = <any> 'AUTOMATED_AB_VARIANT',
-        AUTOMATEDDRAFTAB = <any> 'AUTOMATED_DRAFT_AB',
-        AUTOMATEDDRAFTABVARIANT = <any> 'AUTOMATED_DRAFT_ABVARIANT',
-        AUTOMATEDLOSERABVARIANT = <any> 'AUTOMATED_LOSER_ABVARIANT'
+        Automated = <any> 'AUTOMATED',
+        AutomatedDraft = <any> 'AUTOMATED_DRAFT',
+        AutomatedSending = <any> 'AUTOMATED_SENDING',
+        AutomatedForForm = <any> 'AUTOMATED_FOR_FORM',
+        AutomatedForFormBuffer = <any> 'AUTOMATED_FOR_FORM_BUFFER',
+        AutomatedForFormDraft = <any> 'AUTOMATED_FOR_FORM_DRAFT',
+        AutomatedForFormLegacy = <any> 'AUTOMATED_FOR_FORM_LEGACY',
+        BlogEmailDraft = <any> 'BLOG_EMAIL_DRAFT',
+        BlogEmailPublished = <any> 'BLOG_EMAIL_PUBLISHED',
+        Draft = <any> 'DRAFT',
+        DraftAb = <any> 'DRAFT_AB',
+        DraftAbVariant = <any> 'DRAFT_AB_VARIANT',
+        Error = <any> 'ERROR',
+        LoserAbVariant = <any> 'LOSER_AB_VARIANT',
+        PageStub = <any> 'PAGE_STUB',
+        PreProcessing = <any> 'PRE_PROCESSING',
+        Processing = <any> 'PROCESSING',
+        Published = <any> 'PUBLISHED',
+        PublishedAb = <any> 'PUBLISHED_AB',
+        PublishedAbVariant = <any> 'PUBLISHED_AB_VARIANT',
+        PublishedOrScheduled = <any> 'PUBLISHED_OR_SCHEDULED',
+        RssToEmailDraft = <any> 'RSS_TO_EMAIL_DRAFT',
+        RssToEmailPublished = <any> 'RSS_TO_EMAIL_PUBLISHED',
+        Scheduled = <any> 'SCHEDULED',
+        ScheduledAb = <any> 'SCHEDULED_AB',
+        ScheduledOrPublished = <any> 'SCHEDULED_OR_PUBLISHED',
+        AutomatedAb = <any> 'AUTOMATED_AB',
+        AutomatedAbVariant = <any> 'AUTOMATED_AB_VARIANT',
+        AutomatedDraftAb = <any> 'AUTOMATED_DRAFT_AB',
+        AutomatedDraftAbvariant = <any> 'AUTOMATED_DRAFT_ABVARIANT',
+        AutomatedLoserAbvariant = <any> 'AUTOMATED_LOSER_ABVARIANT'
     }
 }

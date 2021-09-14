@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { BatchInputCallbackCompletionBatchRequest } from '../model/batchInputCallbackCompletionBatchRequest';
@@ -29,6 +30,7 @@ let defaultBasePath = 'https://api.hubapi.com';
 // ===============================================
 
 export enum CallbacksApiApiKeys {
+    developer_hapikey,
     hapikey,
 }
 
@@ -39,6 +41,7 @@ export class CallbacksApi {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth(),
+        'developer_hapikey': new ApiKeyAuth('query', 'hapikey'),
         'hapikey': new ApiKeyAuth('query', 'hapikey'),
         'oauth2': new OAuth(),
     }

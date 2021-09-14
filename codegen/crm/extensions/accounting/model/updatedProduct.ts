@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 /**
 * A request to import external accounting product properties in HubSpot
@@ -82,8 +82,8 @@ export class UpdatedProduct {
 
 export namespace UpdatedProduct {
     export enum SyncActionEnum {
-        CREATE = <any> 'CREATE',
-        UPDATE = <any> 'UPDATE',
-        DELETE = <any> 'DELETE'
+        Create = <any> 'CREATE',
+        Update = <any> 'UPDATE',
+        Delete = <any> 'DELETE'
     }
 }

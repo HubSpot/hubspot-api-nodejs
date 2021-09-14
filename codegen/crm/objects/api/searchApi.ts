@@ -10,8 +10,9 @@
  * Do not edit the class manually.
  */
 
-import localVarRequest = require('request');
-import http = require('http');
+
+import localVarRequest from 'request';
+import http from 'http';
 
 /* tslint:disable:no-unused-locals */
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../model/collectionResponseWithTotalSimplePublicObjectForwardPaging';
@@ -95,8 +96,7 @@ export class SearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * @summary Filter, Sort, and Search CRM Objects
+     * 
      * @param objectType 
      * @param publicObjectSearchRequest 
      */

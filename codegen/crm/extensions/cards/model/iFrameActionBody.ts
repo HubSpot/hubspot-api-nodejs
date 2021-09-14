@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from '../api';
+import { RequestFile } from './models';
 
 export class IFrameActionBody {
     'type': IFrameActionBody.TypeEnum;
@@ -61,6 +61,6 @@ export class IFrameActionBody {
 
 export namespace IFrameActionBody {
     export enum TypeEnum {
-        IFRAME = <any> 'IFRAME'
+        Iframe = <any> 'IFRAME'
     }
 }
