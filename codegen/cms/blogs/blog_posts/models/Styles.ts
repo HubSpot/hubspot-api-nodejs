@@ -73,7 +73,7 @@ export class Styles {
     static getAttributeTypeMap() {
         return Styles.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

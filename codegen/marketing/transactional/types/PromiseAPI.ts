@@ -13,18 +13,18 @@ import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservablePublicSmtpTokensApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { PublicSmtpTokensApiRequestFactory, PublicSmtpTokensApiResponseProcessor} from "../apis/PublicSmtpTokensApi";
+export class PromisePublicSmtpTokensApi {
+    private api: ObservablePublicSmtpTokensApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicSmtpTokensApiRequestFactory,
+        responseProcessor?: PublicSmtpTokensApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicSmtpTokensApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -78,6 +78,25 @@ export class PromiseDefaultApi {
     public resetPassword(tokenId: string, _options?: Configuration): Promise<SmtpApiTokenView> {
         const result = this.api.resetPassword(tokenId, _options);
         return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableSingleSendApi } from './ObservableAPI';
+
+import { SingleSendApiRequestFactory, SingleSendApiResponseProcessor} from "../apis/SingleSendApi";
+export class PromiseSingleSendApi {
+    private api: ObservableSingleSendApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SingleSendApiRequestFactory,
+        responseProcessor?: SingleSendApiResponseProcessor
+    ) {
+        this.api = new ObservableSingleSendApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

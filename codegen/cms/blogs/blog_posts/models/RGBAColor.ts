@@ -49,7 +49,7 @@ export class RGBAColor {
     static getAttributeTypeMap() {
         return RGBAColor.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

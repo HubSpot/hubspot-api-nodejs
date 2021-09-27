@@ -42,7 +42,7 @@ export class ImportRowCore {
     static getAttributeTypeMap() {
         return ImportRowCore.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

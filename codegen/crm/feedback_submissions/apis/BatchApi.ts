@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
@@ -17,7 +19,6 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Read a list of feedback submissions given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -43,10 +44,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params

@@ -29,7 +29,7 @@ export class BatchInputSubscriptionBatchUpdateRequest {
     static getAttributeTypeMap() {
         return BatchInputSubscriptionBatchUpdateRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

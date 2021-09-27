@@ -37,7 +37,7 @@ export class CollectionResponseActionRevisionForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponseActionRevisionForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

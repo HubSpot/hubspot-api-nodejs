@@ -35,7 +35,7 @@ export class SimplePublicObjectBatchInput {
     static getAttributeTypeMap() {
         return SimplePublicObjectBatchInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -59,7 +59,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Removes an existing association from a schema.
      * Remove an association
@@ -84,7 +84,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveAssociation(rsp)));
             }));
     }
- 
+
     /**
      * Define a new object schema, along with custom properties and associations. The entire object schema, including its object type ID, properties, and associations will be returned in the response.
      * Create a new schema
@@ -108,7 +108,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Defines a new association between the primary schema's object type and other object types.
      * Create an association
@@ -133,7 +133,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createAssociation(rsp)));
             }));
     }
- 
+
     /**
      * Returns all object schemas that have been defined for your account.
      * Get all schemas
@@ -157,7 +157,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Returns an existing object schema.
      * Get an existing schema
@@ -181,7 +181,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Update the details for an existing object schema.
      * Update a schema
@@ -206,23 +206,23 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { PublicObjectSchemasApiRequestFactory, PublicObjectSchemasApiResponseProcessor} from "../apis/PublicObjectSchemasApi";
+export class ObservablePublicObjectSchemasApi {
+    private requestFactory: PublicObjectSchemasApiRequestFactory;
+    private responseProcessor: PublicObjectSchemasApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicObjectSchemasApiRequestFactory,
+        responseProcessor?: PublicObjectSchemasApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicObjectSchemasApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicObjectSchemasApiResponseProcessor();
     }
 
     /**
@@ -246,5 +246,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purge(rsp)));
             }));
     }
- 
+
 }

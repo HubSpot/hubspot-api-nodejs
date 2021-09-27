@@ -92,7 +92,7 @@ export class ModelError {
     static getAttributeTypeMap() {
         return ModelError.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

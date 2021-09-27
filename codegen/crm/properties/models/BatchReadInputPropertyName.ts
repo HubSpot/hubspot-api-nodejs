@@ -36,7 +36,7 @@ export class BatchReadInputPropertyName {
     static getAttributeTypeMap() {
         return BatchReadInputPropertyName.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { InvoiceCreatePaymentRequest } from '../models/InvoiceCreatePaymentRequest';
 import { InvoiceReadResponse } from '../models/InvoiceReadResponse';
@@ -53,10 +55,6 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("accountId", ObjectSerializer.serialize(accountId, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -75,7 +73,8 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -117,12 +116,6 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("accountId", ObjectSerializer.serialize(accountId, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -130,7 +123,8 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -179,10 +173,6 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("accountId", ObjectSerializer.serialize(accountId, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -201,7 +191,8 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

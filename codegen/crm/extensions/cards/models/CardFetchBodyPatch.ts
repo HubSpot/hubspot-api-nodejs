@@ -45,7 +45,7 @@ export class CardFetchBodyPatch {
     static getAttributeTypeMap() {
         return CardFetchBodyPatch.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

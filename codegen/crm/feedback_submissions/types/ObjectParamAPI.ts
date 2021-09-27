@@ -199,7 +199,6 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Read a list of feedback submissions given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param param the request object
      */
@@ -229,8 +228,6 @@ export class ObjectSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param param the request object
      */
     public doSearch(param: SearchApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {

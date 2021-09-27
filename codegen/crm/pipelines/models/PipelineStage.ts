@@ -104,7 +104,7 @@ export class PipelineStage {
     static getAttributeTypeMap() {
         return PipelineStage.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

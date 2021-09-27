@@ -247,7 +247,7 @@ export class Property {
     static getAttributeTypeMap() {
         return Property.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

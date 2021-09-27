@@ -37,7 +37,7 @@ export class CollectionResponseExternalUnifiedEvent {
     static getAttributeTypeMap() {
         return CollectionResponseExternalUnifiedEvent.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

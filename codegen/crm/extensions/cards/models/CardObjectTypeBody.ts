@@ -41,7 +41,7 @@ export class CardObjectTypeBody {
     static getAttributeTypeMap() {
         return CardObjectTypeBody.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

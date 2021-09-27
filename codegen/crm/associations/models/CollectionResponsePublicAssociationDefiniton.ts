@@ -37,7 +37,7 @@ export class CollectionResponsePublicAssociationDefiniton {
     static getAttributeTypeMap() {
         return CollectionResponsePublicAssociationDefiniton.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

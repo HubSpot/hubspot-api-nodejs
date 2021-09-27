@@ -1,20 +1,19 @@
-export * from './BatchInputHubDbTableRowV3';
+export * from './BatchInputHubDbTableRowV3Request';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
 export * from './BatchResponseHubDbTableRowV3WithErrors';
 export * from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 export * from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 export * from './Column';
-export * from './ColumnInput';
+export * from './ColumnRequest';
 export * from './ErrorDetail';
 export * from './ForeignId';
 export * from './ForwardPaging';
 export * from './HubDbTableCloneRequest';
 export * from './HubDbTableRowV3';
-export * from './HubDbTableRowV3Input';
+export * from './HubDbTableRowV3Request';
 export * from './HubDbTableV3';
-export * from './HubDbTableV3Input';
-export * from './HubDbTableV3LiveInput';
+export * from './HubDbTableV3Request';
 export * from './ImportResult';
 export * from './ModelError';
 export * from './NextPage';
@@ -22,23 +21,22 @@ export * from './Option';
 export * from './SimpleUser';
 export * from './StandardError';
 
-import { BatchInputHubDbTableRowV3 } from './BatchInputHubDbTableRowV3';
+import { BatchInputHubDbTableRowV3Request } from './BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchResponseHubDbTableRowV3WithErrors, BatchResponseHubDbTableRowV3WithErrorsStatusEnum          } from './BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 import { Column         , ColumnTypeEnum      } from './Column';
-import { ColumnInput } from './ColumnInput';
+import { ColumnRequest   , ColumnRequestTypeEnum    } from './ColumnRequest';
 import { ErrorDetail } from './ErrorDetail';
 import { ForeignId } from './ForeignId';
 import { ForwardPaging } from './ForwardPaging';
 import { HubDbTableCloneRequest } from './HubDbTableCloneRequest';
 import { HubDbTableRowV3 } from './HubDbTableRowV3';
-import { HubDbTableRowV3Input } from './HubDbTableRowV3Input';
+import { HubDbTableRowV3Request } from './HubDbTableRowV3Request';
 import { HubDbTableV3 } from './HubDbTableV3';
-import { HubDbTableV3Input } from './HubDbTableV3Input';
-import { HubDbTableV3LiveInput } from './HubDbTableV3LiveInput';
+import { HubDbTableV3Request } from './HubDbTableV3Request';
 import { ImportResult } from './ImportResult';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
@@ -60,33 +58,34 @@ let primitives = [
 
 const supportedMediaTypes: { [mediaType: string]: number } = {
   "application/json": Infinity,
-  "application/octet-stream": 0
+  "application/octet-stream": 0,
+  "application/x-www-form-urlencoded": 0
 }
 
-                 
+
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseHubDbTableRowV3WithErrorsStatusEnum",
     "ColumnTypeEnum",
+    "ColumnRequestTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "BatchInputHubDbTableRowV3": BatchInputHubDbTableRowV3,
+    "BatchInputHubDbTableRowV3Request": BatchInputHubDbTableRowV3Request,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
     "BatchResponseHubDbTableRowV3WithErrors": BatchResponseHubDbTableRowV3WithErrors,
     "CollectionResponseWithTotalHubDbTableRowV3ForwardPaging": CollectionResponseWithTotalHubDbTableRowV3ForwardPaging,
     "CollectionResponseWithTotalHubDbTableV3ForwardPaging": CollectionResponseWithTotalHubDbTableV3ForwardPaging,
     "Column": Column,
-    "ColumnInput": ColumnInput,
+    "ColumnRequest": ColumnRequest,
     "ErrorDetail": ErrorDetail,
     "ForeignId": ForeignId,
     "ForwardPaging": ForwardPaging,
     "HubDbTableCloneRequest": HubDbTableCloneRequest,
     "HubDbTableRowV3": HubDbTableRowV3,
-    "HubDbTableRowV3Input": HubDbTableRowV3Input,
+    "HubDbTableRowV3Request": HubDbTableRowV3Request,
     "HubDbTableV3": HubDbTableV3,
-    "HubDbTableV3Input": HubDbTableV3Input,
-    "HubDbTableV3LiveInput": HubDbTableV3LiveInput,
+    "HubDbTableV3Request": HubDbTableV3Request,
     "ImportResult": ImportResult,
     "ModelError": ModelError,
     "NextPage": NextPage,
@@ -163,7 +162,7 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // in case we dont know the type
                 return data;
             }
-            
+
             // Get the actual type of this object
             type = this.findCorrectType(data, type);
 

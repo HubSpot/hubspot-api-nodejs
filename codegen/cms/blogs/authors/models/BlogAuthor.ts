@@ -144,7 +144,7 @@ export class BlogAuthor {
     static getAttributeTypeMap() {
         return BlogAuthor.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

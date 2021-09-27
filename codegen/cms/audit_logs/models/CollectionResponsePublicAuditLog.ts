@@ -40,7 +40,7 @@ export class CollectionResponsePublicAuditLog {
     static getAttributeTypeMap() {
         return CollectionResponsePublicAuditLog.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

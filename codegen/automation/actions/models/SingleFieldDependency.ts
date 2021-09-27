@@ -42,7 +42,7 @@ export class SingleFieldDependency {
     static getAttributeTypeMap() {
         return SingleFieldDependency.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

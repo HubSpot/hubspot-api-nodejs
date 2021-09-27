@@ -77,7 +77,7 @@ export class RefreshTokenInfoResponse {
     static getAttributeTypeMap() {
         return RefreshTokenInfoResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

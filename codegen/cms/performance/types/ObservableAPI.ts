@@ -8,20 +8,20 @@ import { ModelError } from '../models/ModelError';
 import { PerformanceView } from '../models/PerformanceView';
 import { PublicPerformanceResponse } from '../models/PublicPerformanceResponse';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { PublicPerformanceApiRequestFactory, PublicPerformanceApiResponseProcessor} from "../apis/PublicPerformanceApi";
+export class ObservablePublicPerformanceApi {
+    private requestFactory: PublicPerformanceApiRequestFactory;
+    private responseProcessor: PublicPerformanceApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicPerformanceApiRequestFactory,
+        responseProcessor?: PublicPerformanceApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicPerformanceApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicPerformanceApiResponseProcessor();
     }
 
     /**
@@ -54,7 +54,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Returns uptime time series website performance data for the given domain.
      * View your website's uptime.
@@ -85,5 +85,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getUptime(rsp)));
             }));
     }
- 
+
 }

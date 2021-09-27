@@ -85,7 +85,7 @@ export class FieldTypeDefinition {
     static getAttributeTypeMap() {
         return FieldTypeDefinition.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

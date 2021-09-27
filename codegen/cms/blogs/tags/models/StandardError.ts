@@ -78,7 +78,7 @@ export class StandardError {
     static getAttributeTypeMap() {
         return StandardError.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

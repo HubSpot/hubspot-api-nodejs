@@ -43,7 +43,7 @@ export class BatchReadInputSimplePublicObjectId {
     static getAttributeTypeMap() {
         return BatchReadInputSimplePublicObjectId.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

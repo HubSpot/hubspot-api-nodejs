@@ -3,11 +3,13 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
 
-import { CollectionResponseTimelineEventTemplate } from '../models/CollectionResponseTimelineEventTemplate';
+
+import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
 import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
 import { TimelineEventTemplateCreateRequest } from '../models/TimelineEventTemplateCreateRequest';
 import { TimelineEventTemplateUpdateRequest } from '../models/TimelineEventTemplateUpdateRequest';
@@ -47,14 +49,6 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -94,12 +88,6 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params
@@ -145,14 +133,6 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -194,14 +174,6 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -249,12 +221,6 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params
@@ -359,13 +325,13 @@ export class TemplatesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponseTimelineEventTemplate > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponseTimelineEventTemplateNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseTimelineEventTemplate = ObjectSerializer.deserialize(
+            const body: CollectionResponseTimelineEventTemplateNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseTimelineEventTemplate", ""
-            ) as CollectionResponseTimelineEventTemplate;
+                "CollectionResponseTimelineEventTemplateNoPaging", ""
+            ) as CollectionResponseTimelineEventTemplateNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -378,10 +344,10 @@ export class TemplatesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseTimelineEventTemplate = ObjectSerializer.deserialize(
+            const body: CollectionResponseTimelineEventTemplateNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseTimelineEventTemplate", ""
-            ) as CollectionResponseTimelineEventTemplate;
+                "CollectionResponseTimelineEventTemplateNoPaging", ""
+            ) as CollectionResponseTimelineEventTemplateNoPaging;
             return body;
         }
 

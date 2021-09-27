@@ -72,7 +72,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
 }
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -118,7 +118,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Read a page of feedback submissions. Control what is returned via the `properties` query param.
      * List
@@ -146,7 +146,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -166,7 +166,6 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Read a list of feedback submissions given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -189,7 +188,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readBatch(rsp)));
             }));
     }
- 
+
 }
 
 import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
@@ -209,8 +208,6 @@ export class ObservableSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Observable<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
@@ -231,5 +228,5 @@ export class ObservableSearchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doSearch(rsp)));
             }));
     }
- 
+
 }

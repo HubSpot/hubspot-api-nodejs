@@ -1,16 +1,18 @@
 import { createConfiguration } from '../../../../codegen/marketing/transactional/configuration'
-import { DefaultApi } from '../../../../codegen/marketing/transactional/index'
+import { PublicSmtpTokensApi, SingleSendApi } from '../../../../codegen/marketing/transactional/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class TransactionalDiscovery extends BaseDiscovery {
-  public defaultApi: DefaultApi
+  public publicSmtpTokensApi: PublicSmtpTokensApi
+  public singleSendApi: SingleSendApi
 
   constructor(config: IConfiguration) {
     super(config)
 
     const configuration = createConfiguration(this.getParams())
 
-    this.defaultApi = new DefaultApi(configuration)
+    this.publicSmtpTokensApi = new PublicSmtpTokensApi(configuration)
+    this.singleSendApi = new SingleSendApi(configuration)
   }
 }

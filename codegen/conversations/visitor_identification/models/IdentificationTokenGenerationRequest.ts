@@ -54,7 +54,7 @@ export class IdentificationTokenGenerationRequest {
     static getAttributeTypeMap() {
         return IdentificationTokenGenerationRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

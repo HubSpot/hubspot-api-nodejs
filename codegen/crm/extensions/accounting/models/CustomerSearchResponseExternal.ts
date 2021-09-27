@@ -45,7 +45,7 @@ export class CustomerSearchResponseExternal {
     static getAttributeTypeMap() {
         return CustomerSearchResponseExternal.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

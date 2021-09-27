@@ -29,7 +29,7 @@ export class BatchInputPropertyCreate {
     static getAttributeTypeMap() {
         return BatchInputPropertyCreate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

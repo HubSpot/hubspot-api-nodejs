@@ -29,7 +29,7 @@ export class BatchInputBlogAuthor {
     static getAttributeTypeMap() {
         return BatchInputBlogAuthor.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

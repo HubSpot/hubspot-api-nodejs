@@ -13,18 +13,18 @@ import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { StandardError } from '../models/StandardError';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservableAuthorApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { AuthorApiRequestFactory, AuthorApiResponseProcessor} from "../apis/AuthorApi";
+export class PromiseAuthorApi {
+    private api: ObservableAuthorApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: AuthorApiRequestFactory,
+        responseProcessor?: AuthorApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableAuthorApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

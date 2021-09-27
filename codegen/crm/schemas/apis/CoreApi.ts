@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { AssociationDefinition } from '../models/AssociationDefinition';
 import { AssociationDefinitionEgg } from '../models/AssociationDefinitionEgg';
@@ -49,12 +51,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -96,14 +92,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -136,12 +124,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -157,10 +139,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         let authMethod = null;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -197,12 +175,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -218,10 +190,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         let authMethod = null;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -250,12 +218,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -263,7 +225,8 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -293,14 +256,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -308,7 +263,8 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -345,12 +301,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -366,10 +316,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         let authMethod = null;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

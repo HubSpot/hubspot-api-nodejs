@@ -10,20 +10,20 @@ import { ModelError } from '../models/ModelError';
 import { PublicSearchResults } from '../models/PublicSearchResults';
 import { SearchHitField } from '../models/SearchHitField';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { PublicApiRequestFactory, PublicApiResponseProcessor} from "../apis/PublicApi";
+export class ObservablePublicApi {
+    private requestFactory: PublicApiRequestFactory;
+    private responseProcessor: PublicApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicApiRequestFactory,
+        responseProcessor?: PublicApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicApiResponseProcessor();
     }
 
     /**
@@ -50,7 +50,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns any website content matching the given search criteria for a given HubSpot account. Searches can be filtered by content type, domain, or URL path.
      * Search your site.
@@ -91,5 +91,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.search(rsp)));
             }));
     }
- 
+
 }

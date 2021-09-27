@@ -44,7 +44,7 @@ export class TopLevelActions {
     static getAttributeTypeMap() {
         return TopLevelActions.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

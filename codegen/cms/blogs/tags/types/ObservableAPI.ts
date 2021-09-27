@@ -15,20 +15,20 @@ import { NextPage } from '../models/NextPage';
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { TagApiRequestFactory, TagApiResponseProcessor} from "../apis/TagApi";
+export class ObservableTagApi {
+    private requestFactory: TagApiRequestFactory;
+    private responseProcessor: TagApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: TagApiRequestFactory,
+        responseProcessor?: TagApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new TagApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new TagApiResponseProcessor();
     }
 
     /**
@@ -55,7 +55,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Delete the Blog Tag objects identified in the request body. Note: This is not the same as the in-app `archive` function.
      * Archive a batch of Blog Tags
@@ -79,7 +79,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveBatch(rsp)));
             }));
     }
- 
+
     /**
      * Create a new Blog Tag.
      * Create a new Blog Tag
@@ -103,7 +103,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Create the Blog Tag objects detailed in the request body.
      * Create a batch of Blog Tags
@@ -127,7 +127,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatch(rsp)));
             }));
     }
- 
+
     /**
      * Retrieve the Blog Tag object identified by the id in the path.
      * Retrieve a Blog Tag
@@ -152,7 +152,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Get the list of blog tags. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Blog Tags
@@ -185,7 +185,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Retrieve the Blog Tag objects identified in the request body.
      * Retrieve a batch of Blog Tags
@@ -210,7 +210,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readBatch(rsp)));
             }));
     }
- 
+
     /**
      * Sparse updates a single Blog Tag object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * Update a Blog Tag
@@ -236,7 +236,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
     /**
      * Update the Blog Tag objects identified in the request body.
      * Update a batch of Blog Tags
@@ -261,5 +261,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatch(rsp)));
             }));
     }
- 
+
 }

@@ -37,7 +37,7 @@ export class CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponseSimplePublicObjectWithAssociationsForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

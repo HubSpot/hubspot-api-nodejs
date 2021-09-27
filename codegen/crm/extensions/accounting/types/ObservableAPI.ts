@@ -80,7 +80,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createCustomer(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to an exchange rate request.
      * Endpoint for exchange rate response
@@ -105,7 +105,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createExchangeRate(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a invoice creation request.
      * Endpoint for invoice creation response
@@ -130,7 +130,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createInvoice(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a terms search request.
      * Endpoint for terms search response
@@ -155,7 +155,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createTerm(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a customer search request.
      * Endpoint for customer search response
@@ -180,7 +180,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doCustomerSearch(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a invoice search request.
      * Endpoint for invoice search response
@@ -205,7 +205,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doInvoiceSearch(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a product search request.
      * Endpoint for product search response
@@ -230,7 +230,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doProductSearch(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a taxes search request.
      * Endpoint for taxes search response
@@ -255,7 +255,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doTaxSearch(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the response to a invoice get-by-id request.
      * Endpoint for invoice get-by-id response
@@ -280,7 +280,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Call this endpoint with the PDF content of a requested invoice.
      * Endpoint for PDF content of invoice
@@ -305,7 +305,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.invoicePdf(rsp)));
             }));
     }
- 
+
 }
 
 import { InvoiceApiRequestFactory, InvoiceApiResponseProcessor} from "../apis/InvoiceApi";
@@ -349,7 +349,7 @@ export class ObservableInvoiceApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createPayment(rsp)));
             }));
     }
- 
+
     /**
      * Returns invoice data for an Accounting account from the specified ID
      * Get invoice data
@@ -374,7 +374,7 @@ export class ObservableInvoiceApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Updates an Invoice by the given ID.
      * Update an invoice
@@ -400,7 +400,7 @@ export class ObservableInvoiceApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
@@ -442,7 +442,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Add/Update the URL settings for an accounting app with the specified ID.  All URLs must use the `https` protocol.
      * Add/Update URL Settings
@@ -467,7 +467,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
             }));
     }
- 
+
 }
 
 import { SyncApiRequestFactory, SyncApiResponseProcessor} from "../apis/SyncApi";
@@ -510,7 +510,7 @@ export class ObservableSyncApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createContact(rsp)));
             }));
     }
- 
+
     /**
      * Imports products' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
      * Import products
@@ -535,7 +535,7 @@ export class ObservableSyncApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createProduct(rsp)));
             }));
     }
- 
+
 }
 
 import { UserAccountsApiRequestFactory, UserAccountsApiResponseProcessor} from "../apis/UserAccountsApi";
@@ -577,7 +577,7 @@ export class ObservableUserAccountsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Creates an account which contains the information about the account in the external accounting system.  This *must* be called after a user connects their HubSpot account to the external accounting system, as there is no other way for HubSpot to obtain the external account details.
      * Create a user account
@@ -601,5 +601,5 @@ export class ObservableUserAccountsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
             }));
     }
- 
+
 }

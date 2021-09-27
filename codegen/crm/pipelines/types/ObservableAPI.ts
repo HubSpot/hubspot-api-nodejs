@@ -57,7 +57,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create a new stage associated with the pipeline identified by `{pipelineId}`. The entire stage object, including its unique ID, will be returned in the response.
      * Create a pipeline stage
@@ -83,7 +83,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Return all the stages associated with the pipeline identified by `{pipelineId}`.
      * Return all stages of a pipeline
@@ -109,7 +109,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Return the stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
      * Return a pipeline stage by ID
@@ -136,7 +136,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Replace all the properties of an existing pipeline stage with the values provided. The updated stage will be returned in the response.
      * Replace a pipeline stage
@@ -163,7 +163,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`. Any properties not included in this update will keep their existing values. The updated stage will be returned in the response.
      * Update a pipeline stage
@@ -191,7 +191,7 @@ export class ObservablePipelineStagesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { PipelinesApiRequestFactory, PipelinesApiResponseProcessor} from "../apis/PipelinesApi";
@@ -234,7 +234,7 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create a new pipeline with the provided property values. The entire pipeline object, including its unique ID, will be returned in the response.
      * Create a pipeline
@@ -259,7 +259,7 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Return all pipelines for the object type specified by `{objectType}`.
      * Retrieve all pipelines
@@ -284,7 +284,7 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Return a single pipeline object identified by its unique `{pipelineId}`.
      * Return a pipeline by ID
@@ -310,7 +310,7 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Replace all the properties of an existing pipeline with the values provided. This will overwrite any existing pipeline stages. The updated pipeline will be returned in the response.
      * Replace a pipeline
@@ -336,7 +336,7 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of the pipeline identified by `{pipelineId}`. The updated pipeline will be returned in the response.
      * Update a pipeline
@@ -363,5 +363,5 @@ export class ObservablePipelinesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }

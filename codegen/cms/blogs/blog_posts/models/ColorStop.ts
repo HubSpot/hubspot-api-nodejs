@@ -29,7 +29,7 @@ export class ColorStop {
     static getAttributeTypeMap() {
         return ColorStop.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

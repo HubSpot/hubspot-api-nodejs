@@ -37,7 +37,7 @@ export class Paging {
     static getAttributeTypeMap() {
         return Paging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

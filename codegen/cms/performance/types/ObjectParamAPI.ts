@@ -7,116 +7,116 @@ import { ModelError } from '../models/ModelError';
 import { PerformanceView } from '../models/PerformanceView';
 import { PublicPerformanceResponse } from '../models/PublicPerformanceResponse';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservablePublicPerformanceApi } from "./ObservableAPI";
+import { PublicPerformanceApiRequestFactory, PublicPerformanceApiResponseProcessor} from "../apis/PublicPerformanceApi";
 
-export interface DefaultApiGetPageRequest {
+export interface PublicPerformanceApiGetPageRequest {
     /**
      * The domain to search return data for.
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     domain?: string
     /**
      * The url path of the domain to return data for.
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     path?: string
     /**
      * Specifies whether the time series data should have empty intervals if performance data is not present to create a continuous set.
      * @type boolean
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     pad?: boolean
     /**
      * Specifies whether the time series data should be summated for the given period. Defaults to false.
      * @type boolean
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     sum?: boolean
     /**
      * A relative period to return time series data for. This value is ignored if start and/or end are provided. Valid periods: [15m, 30m, 1h, 4h, 12h, 1d, 1w]
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     period?: string
     /**
      * The time series interval to group data by. Valid intervals: [1m, 5m, 15m, 30m, 1h, 4h, 12h, 1d, 1w]
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     interval?: string
     /**
      * A timestamp in milliseconds that indicates the start of the time period.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     start?: number
     /**
      * A timestamp in milliseconds that indicates the end of the time period.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof PublicPerformanceApigetPage
      */
     end?: number
 }
 
-export interface DefaultApiGetUptimeRequest {
+export interface PublicPerformanceApiGetUptimeRequest {
     /**
      * The domain to search return data for.
      * @type string
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     domain?: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     path?: string
     /**
      * Specifies whether the time series data should have empty intervals if performance data is not present to create a continuous set.
      * @type boolean
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     pad?: boolean
     /**
      * Specifies whether the time series data should be summated for the given period. Defaults to false.
      * @type boolean
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     sum?: boolean
     /**
      * A relative period to return time series data for. This value is ignored if start and/or end are provided. Valid periods: [15m, 30m, 1h, 4h, 12h, 1d, 1w]
      * @type string
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     period?: string
     /**
      * The time series interval to group data by. Valid intervals: [1m, 5m, 15m, 30m, 1h, 4h, 12h, 1d, 1w]
      * @type string
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     interval?: string
     /**
      * A timestamp in milliseconds that indicates the start of the time period.
      * @type number
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     start?: number
     /**
      * A timestamp in milliseconds that indicates the end of the time period.
      * @type number
-     * @memberof DefaultApigetUptime
+     * @memberof PublicPerformanceApigetUptime
      */
     end?: number
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectPublicPerformanceApi {
+    private api: ObservablePublicPerformanceApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicPerformanceApiRequestFactory, responseProcessor?: PublicPerformanceApiResponseProcessor) {
+        this.api = new ObservablePublicPerformanceApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -124,7 +124,7 @@ export class ObjectDefaultApi {
      * View your website's performance.
      * @param param the request object
      */
-    public getPage(param: DefaultApiGetPageRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
+    public getPage(param: PublicPerformanceApiGetPageRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
         return this.api.getPage(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
     }
 
@@ -133,7 +133,7 @@ export class ObjectDefaultApi {
      * View your website's uptime.
      * @param param the request object
      */
-    public getUptime(param: DefaultApiGetUptimeRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
+    public getUptime(param: PublicPerformanceApiGetUptimeRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
         return this.api.getUptime(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
     }
 

@@ -72,7 +72,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Associate a contact with another object
      * @param contactId 
@@ -98,7 +98,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * List associations of a contact by type
      * @param contactId 
@@ -124,7 +124,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
 }
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -166,7 +166,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create a contact with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard contacts is provided.
      * Create
@@ -190,7 +190,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Read an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
@@ -218,7 +218,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Read a page of contacts. Control what is returned via the `properties` query param.
      * List
@@ -246,7 +246,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
@@ -272,7 +272,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -292,7 +292,6 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Archive a list of contacts given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of contacts by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -314,9 +313,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
-     * Create a batch of contacts. This follows the same rules as creating an individual object.
      * Create a batch of contacts
      * @param batchInputSimplePublicObjectInput 
      */
@@ -338,9 +336,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
-     * Read a list of contacts given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of contacts by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -363,9 +360,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
- 
+
     /**
-     * Perform a partial upate on a batch of contacts. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of contacts
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -387,7 +383,73 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
+}
+
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+export class ObservableGDPRApi {
+    private requestFactory: GDPRApiRequestFactory;
+    private responseProcessor: GDPRApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: GDPRApiRequestFactory,
+        responseProcessor?: GDPRApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new GDPRApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new GDPRApiResponseProcessor();
+    }
+
+    /**
+     * Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn't found, blacklists an email address from being used in the future.
+     * DELETE
+     * @param email 
+     */
+    public purgeByEmail(email: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.purgeByEmail(email, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purgeByEmail(rsp)));
+            }));
+    }
+
+    /**
+     * Permanently delete a contact by id and all associated content to follow GDPR
+     * DELETE
+     * @param contactId 
+     */
+    public purgeById(contactId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.purgeById(contactId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purgeById(rsp)));
+            }));
+    }
+
 }
 
 import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
@@ -407,8 +469,6 @@ export class ObservableSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Observable<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
@@ -429,5 +489,5 @@ export class ObservableSearchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doSearch(rsp)));
             }));
     }
- 
+
 }

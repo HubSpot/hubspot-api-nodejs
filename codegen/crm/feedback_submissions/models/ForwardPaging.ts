@@ -29,7 +29,7 @@ export class ForwardPaging {
     static getAttributeTypeMap() {
         return ForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

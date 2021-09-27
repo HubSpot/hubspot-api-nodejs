@@ -74,7 +74,7 @@ export class UpdatedContact {
     static getAttributeTypeMap() {
         return UpdatedContact.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -45,7 +45,7 @@ export class SyncContactsRequest {
     static getAttributeTypeMap() {
         return SyncContactsRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

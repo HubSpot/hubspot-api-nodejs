@@ -105,7 +105,7 @@ export class Pipeline {
     static getAttributeTypeMap() {
         return Pipeline.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

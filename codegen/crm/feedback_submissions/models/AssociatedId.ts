@@ -35,7 +35,7 @@ export class AssociatedId {
     static getAttributeTypeMap() {
         return AssociatedId.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

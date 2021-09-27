@@ -98,7 +98,7 @@ export class InvoiceUpdateRequest {
     static getAttributeTypeMap() {
         return InvoiceUpdateRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

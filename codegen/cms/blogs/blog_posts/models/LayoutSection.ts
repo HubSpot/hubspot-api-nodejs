@@ -114,7 +114,7 @@ export class LayoutSection {
     static getAttributeTypeMap() {
         return LayoutSection.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -29,7 +29,7 @@ export class FilterGroup {
     static getAttributeTypeMap() {
         return FilterGroup.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

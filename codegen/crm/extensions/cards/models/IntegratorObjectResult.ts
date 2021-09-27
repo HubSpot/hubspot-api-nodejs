@@ -59,7 +59,7 @@ export class IntegratorObjectResult {
     static getAttributeTypeMap() {
         return IntegratorObjectResult.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -29,7 +29,7 @@ export class BatchInputCallbackCompletionBatchRequest {
     static getAttributeTypeMap() {
         return BatchInputCallbackCompletionBatchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

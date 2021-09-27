@@ -31,20 +31,20 @@ import { Styles } from '../models/Styles';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { BlogPostApiRequestFactory, BlogPostApiResponseProcessor} from "../apis/BlogPostApi";
+export class ObservableBlogPostApi {
+    private requestFactory: BlogPostApiRequestFactory;
+    private responseProcessor: BlogPostApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: BlogPostApiRequestFactory,
+        responseProcessor?: BlogPostApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new BlogPostApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BlogPostApiResponseProcessor();
     }
 
     /**
@@ -71,7 +71,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
      * Archive a batch of Blog Posts
@@ -95,7 +95,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveBatch(rsp)));
             }));
     }
- 
+
     /**
      * Clone a Blog.
      * Clone a Blog Post
@@ -119,7 +119,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.clone(rsp)));
             }));
     }
- 
+
     /**
      * Create a new Blog Post.
      * Create a new Blog Post
@@ -143,7 +143,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Create the Blog Post objects detailed in the request body.
      * Create a batch of Blog Posts
@@ -167,7 +167,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatch(rsp)));
             }));
     }
- 
+
     /**
      * Retrieve the Blog Post object identified by the id in the path.
      * Retrieve a Blog Post
@@ -192,7 +192,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Retrieve the full draft version of the Blog Post.
      * Retrieve the full draft version of the Blog Post
@@ -216,7 +216,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDraftById(rsp)));
             }));
     }
- 
+
     /**
      * Get the list of blog posts. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Blog Posts
@@ -249,7 +249,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Retrieves a previous version of a blog post.
      * Retrieves a previous version of a blog post
@@ -274,7 +274,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPreviousVersion(rsp)));
             }));
     }
- 
+
     /**
      * Retrieves all the previous versions of a blog post.
      * Retrieves all the previous versions of a blog post
@@ -301,7 +301,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPreviousVersions(rsp)));
             }));
     }
- 
+
     /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
@@ -325,7 +325,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.pushLive(rsp)));
             }));
     }
- 
+
     /**
      * Retrieve the Blog Post objects identified in the request body.
      * Retrieve a batch of Blog Posts
@@ -350,7 +350,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readBatch(rsp)));
             }));
     }
- 
+
     /**
      * Discards any edits and resets the draft to the live version.
      * Reset the Blog Post draft to the live version
@@ -374,7 +374,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.resetDraft(rsp)));
             }));
     }
- 
+
     /**
      * Takes a specified version of a blog post and restores it.
      * Restore a previous version of a blog post
@@ -399,7 +399,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.restorePreviousVersion(rsp)));
             }));
     }
- 
+
     /**
      * Takes a specified version of a blog post, sets it as the new draft version of the blog post.
      * Restore a previous version of a blog post, to the draft version of the blog post
@@ -424,7 +424,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.restorePreviousVersionToDraft(rsp)));
             }));
     }
- 
+
     /**
      * Schedule a Blog Post to be Published.
      * Schedule a Blog Post to be Published
@@ -448,7 +448,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.schedule(rsp)));
             }));
     }
- 
+
     /**
      * Sparse updates a single Blog Post object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * Update a Blog Post
@@ -474,7 +474,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
     /**
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
@@ -499,7 +499,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatch(rsp)));
             }));
     }
- 
+
     /**
      * Sparse updates the draft version of a single Blog Post object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * Update a Blog Post draft
@@ -524,5 +524,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateDraft(rsp)));
             }));
     }
- 
+
 }

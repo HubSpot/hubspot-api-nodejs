@@ -29,18 +29,18 @@ import { StandardError } from '../models/StandardError';
 import { Styles } from '../models/Styles';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservableBlogPostApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { BlogPostApiRequestFactory, BlogPostApiResponseProcessor} from "../apis/BlogPostApi";
+export class PromiseBlogPostApi {
+    private api: ObservableBlogPostApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: BlogPostApiRequestFactory,
+        responseProcessor?: BlogPostApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBlogPostApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

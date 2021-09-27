@@ -122,7 +122,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Read a list of feedback submissions given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -152,8 +151,6 @@ export class PromiseSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {

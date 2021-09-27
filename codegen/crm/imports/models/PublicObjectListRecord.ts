@@ -44,7 +44,7 @@ export class PublicObjectListRecord {
     static getAttributeTypeMap() {
         return PublicObjectListRecord.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -50,7 +50,7 @@ export class ObservableRedirectsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Creates and configures a new URL redirect.
      * Create a redirect
@@ -74,7 +74,7 @@ export class ObservableRedirectsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Returns the details for a single existing URL redirect by ID.
      * Get details for a redirect
@@ -98,7 +98,7 @@ export class ObservableRedirectsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
      * Get current redirects
@@ -133,7 +133,7 @@ export class ObservableRedirectsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Updates the settings for an existing URL redirect.
      * Update a redirect
@@ -158,5 +158,5 @@ export class ObservableRedirectsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }

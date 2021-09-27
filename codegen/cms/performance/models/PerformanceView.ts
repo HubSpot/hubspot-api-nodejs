@@ -235,7 +235,7 @@ export class PerformanceView {
     static getAttributeTypeMap() {
         return PerformanceView.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

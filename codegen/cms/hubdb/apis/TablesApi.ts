@@ -3,15 +3,16 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableV3 } from '../models/HubDbTableV3';
-import { HubDbTableV3Input } from '../models/HubDbTableV3Input';
-import { HubDbTableV3LiveInput } from '../models/HubDbTableV3LiveInput';
+import { HubDbTableV3Request } from '../models/HubDbTableV3Request';
 import { ImportResult } from '../models/ImportResult';
 
 /**
@@ -20,7 +21,7 @@ import { ImportResult } from '../models/ImportResult';
 export class TablesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+     * Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
      * Archive a table
      * @param tableIdOrName The ID or name of the table to archive.
      */
@@ -41,14 +42,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -56,7 +49,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -93,12 +87,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -117,7 +105,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -128,14 +117,14 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
      * Create a new table
-     * @param hubDbTableV3Input The JSON schema for the table being created.
+     * @param hubDbTableV3Request The JSON schema for the table being created.
      */
-    public async createTable(hubDbTableV3Input: HubDbTableV3Input, _options?: Configuration): Promise<RequestContext> {
+    public async createTable(hubDbTableV3Request: HubDbTableV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'hubDbTableV3Input' is not null or undefined
-        if (hubDbTableV3Input === null || hubDbTableV3Input === undefined) {
-            throw new RequiredError('Required parameter hubDbTableV3Input was null or undefined when calling createTable.');
+        // verify required parameter 'hubDbTableV3Request' is not null or undefined
+        if (hubDbTableV3Request === null || hubDbTableV3Request === undefined) {
+            throw new RequiredError('Required parameter hubDbTableV3Request was null or undefined when calling createTable.');
         }
 
 
@@ -146,12 +135,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -159,7 +142,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableV3Input, "HubDbTableV3Input", ""),
+            ObjectSerializer.serialize(hubDbTableV3Request, "HubDbTableV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -170,7 +153,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -207,12 +191,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("format", ObjectSerializer.serialize(format, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -220,7 +198,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -229,7 +208,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Exports the `live` version of a table to CSV / EXCEL format.
+     * Exports the `published` version of a table to CSV / EXCEL format.
      * Export a published version of a table
      * @param tableIdOrName The ID or name of the table to export.
      * @param format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -257,12 +236,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("format", ObjectSerializer.serialize(format, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -270,7 +243,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -281,18 +255,18 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns the details for each draft table defined in the specified account, including column definitions.
      * Return all draft tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllDraftTables(updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -313,43 +287,55 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (updatedAfter !== undefined) {
-            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
-        }
-        if (updatedBefore !== undefined) {
-            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
-        }
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
-        if (createdAt !== undefined) {
-            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
-        }
-        if (createdAfter !== undefined) {
-            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "Date", "date-time"));
-        }
+
+        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-        if (createdBefore !== undefined) {
-            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
-        }
-        if (updatedAt !== undefined) {
-            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
-        }
+
+        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
-        // Header Params
+        // Query Params
+        if (createdAt !== undefined) {
+            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
+        }
 
-        // Form Params
+        // Query Params
+        if (createdAfter !== undefined) {
+            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "Date", "date-time"));
+        }
 
+        // Query Params
+        if (createdBefore !== undefined) {
+            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
+        }
 
-        // Body Params
+        // Query Params
+        if (updatedAt !== undefined) {
+            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedAfter !== undefined) {
+            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedBefore !== undefined) {
+            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
 
         let authMethod = null;
         // Apply auth methods
@@ -357,7 +343,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -366,20 +353,20 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the details for the `live` version of each table defined in an account, including column definitions.
-     * Get all live tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
+     * Returns the details for the `published` version of each table defined in an account, including column definitions.
+     * Get all published tables
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllTables(updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -400,43 +387,55 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (updatedAfter !== undefined) {
-            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
-        }
-        if (updatedBefore !== undefined) {
-            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
-        }
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
-        if (createdAt !== undefined) {
-            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
-        }
-        if (createdAfter !== undefined) {
-            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "Date", "date-time"));
-        }
+
+        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-        if (createdBefore !== undefined) {
-            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
-        }
-        if (updatedAt !== undefined) {
-            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
-        }
+
+        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
-        // Header Params
+        // Query Params
+        if (createdAt !== undefined) {
+            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
+        }
 
-        // Form Params
+        // Query Params
+        if (createdAfter !== undefined) {
+            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "Date", "date-time"));
+        }
 
+        // Query Params
+        if (createdBefore !== undefined) {
+            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
+        }
 
-        // Body Params
+        // Query Params
+        if (updatedAt !== undefined) {
+            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedAfter !== undefined) {
+            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (updatedBefore !== undefined) {
+            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
+        }
+
+        // Query Params
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
 
         let authMethod = null;
         // Apply auth methods
@@ -444,7 +443,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -482,16 +482,12 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
+
+        // Query Params
         if (includeForeignIds !== undefined) {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -499,7 +495,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -508,8 +505,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the details for the `live` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
-     * Get details for a live table
+     * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
@@ -537,16 +534,12 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
+
+        // Query Params
         if (includeForeignIds !== undefined) {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -554,7 +547,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -563,13 +557,13 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/push-live` endpoint to push these changes to `live` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/publish` endpoint to push these changes to `published` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
-     * @param file The source CSV file to be imported.
      * @param config Configuration for the import in JSON format as described above.
+     * @param file The source CSV file to be imported.
      */
-    public async importDraftTable(tableIdOrName: string, file?: HttpFile, config?: string, _options?: Configuration): Promise<RequestContext> {
+    public async importDraftTable(tableIdOrName: string, config?: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -588,24 +582,37 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
         // Form Params
-        let localVarFormParams = new FormData();
+        const useForm = canConsumeForm([
+            'multipart/form-data',
+        ]);
 
-        if (file !== undefined) {
-             // TODO: replace .append with .set
-             localVarFormParams.append('file', file.data, file.name);
+        let localVarFormParams
+        if (useForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new URLSearchParams();
         }
+
         if (config !== undefined) {
              // TODO: replace .append with .set
              localVarFormParams.append('config', config as any);
         }
+        if (file !== undefined) {
+             // TODO: replace .append with .set
+             if (localVarFormParams instanceof FormData) {
+                 localVarFormParams.append('file', file.data, file.name);
+             }
+        }
+
         requestContext.setBody(localVarFormParams);
 
-        // Body Params
+        if(!useForm) {
+            const contentType = ObjectSerializer.getPreferredMediaType([
+                "multipart/form-data"
+            ]);
+            requestContext.setHeaderParam("Content-Type", contentType);
+        }
 
         let authMethod = null;
         // Apply auth methods
@@ -613,7 +620,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -622,7 +630,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the `live` version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+     * Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
      * Publish a table from draft
      * @param tableIdOrName The ID or name of the table to publish.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -638,7 +646,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/draft/push-live'
+        const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/draft/publish'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
 
         // Make Request Context
@@ -650,12 +658,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -663,7 +665,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -672,7 +675,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Replaces the data in the `draft` version of the table with values from the `live` version. Any unpublished changes in the `draft` will be lost after this call is made.
+     * Replaces the data in the `draft` version of the table with values from the `published` version. Any unpublished changes in the `draft` will be lost after this call is made.
      * Reset a draft table
      * @param tableIdOrName The ID or name of the table to reset.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -700,12 +703,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -713,7 +710,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -722,13 +720,59 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `push-live` endpoint to push all the changes to the `live` version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+     * Unpublishes the table, meaning any website pages using data from the table will not render any data.
+     * Unpublish a table
+     * @param tableIdOrName The ID or name of the table to publish.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
+     */
+    public async unpublishTable(tableIdOrName: string, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'tableIdOrName' is not null or undefined
+        if (tableIdOrName === null || tableIdOrName === undefined) {
+            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling unpublishTable.');
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/unpublish'
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (includeForeignIds !== undefined) {
+            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
+        }
+
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `publish` endpoint to push all the changes to the `published` version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
-     * @param hubDbTableV3Input The JSON schema for the table being updated.
+     * @param hubDbTableV3Request The JSON schema for the table being updated.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public async updateDraftTable(tableIdOrName: string, hubDbTableV3Input: HubDbTableV3Input, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -737,10 +781,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'hubDbTableV3Input' is not null or undefined
-        if (hubDbTableV3Input === null || hubDbTableV3Input === undefined) {
-            throw new RequiredError('Required parameter hubDbTableV3Input was null or undefined when calling updateDraftTable.');
+        // verify required parameter 'hubDbTableV3Request' is not null or undefined
+        if (hubDbTableV3Request === null || hubDbTableV3Request === undefined) {
+            throw new RequiredError('Required parameter hubDbTableV3Request was null or undefined when calling updateDraftTable.');
         }
+
 
 
 
@@ -753,84 +798,14 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (includeForeignIds !== undefined) {
-            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
-        }
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableV3Input, "HubDbTableV3Input", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Use this endpoint to perform one of the following <ul><li> Publish a live version of a table (without copying table data from draft) </li><li>Un-publish a live version of a table (Leaving the data in the live version)</li><li>Restore an archived table</li></ul>  To publish a table, send `published` property in the JSON object with the value `true`. To unpublish a table, send `published` property in the JSON object with the value `false`.  To restore an archived table, send `archived` property in the JSON object with the value `false` along with the query parameter `archived=true`. When restoring an archived table, if an active table already exists with the same `name` or `label`, you will need to change the name of the archived table when restoring it using the `name` and `label` parameters with a new name and new label. When you restore a table, the table will be restored only in the `draft` version.  Examples:  Publish live version of a table:  ```     {       \"published\": true     } ``` Unpublish live version of a table: ```     {       \"published\": false     } ``` Restore a table: (send `archived=true` in query parameters) ```     {       \"archived\": false     } ``` Restore a table with a new name: (send `archived=true` in query parameters) ```     {       \"label\": \"New Table Name\",       \"name\": \"new_table_name\",       \"archived\": false     } ```
-     * Publish or unpublish a live version of a table or restore an archived table
-     * @param tableIdOrName The ID or name of the table to return.
-     * @param hubDbTableV3LiveInput The JSON object as described.
-     * @param archived Whether to return only results that have been archived.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-     */
-    public async updateTable(tableIdOrName: string, hubDbTableV3LiveInput: HubDbTableV3LiveInput, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'tableIdOrName' is not null or undefined
-        if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling updateTable.');
-        }
-
-
-        // verify required parameter 'hubDbTableV3LiveInput' is not null or undefined
-        if (hubDbTableV3LiveInput === null || hubDbTableV3LiveInput === undefined) {
-            throw new RequiredError('Required parameter hubDbTableV3LiveInput was null or undefined when calling updateTable.');
-        }
-
-
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}'
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
+
+        // Query Params
         if (includeForeignIds !== undefined) {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params
@@ -839,7 +814,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableV3LiveInput, "HubDbTableV3LiveInput", ""),
+            ObjectSerializer.serialize(hubDbTableV3Request, "HubDbTableV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -850,7 +825,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1300,10 +1276,10 @@ export class TablesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to updateDraftTable
+     * @params response Response returned by the server for a request to unpublishTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async unpublishTable(response: ResponseContext): Promise<HubDbTableV3 > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
@@ -1337,10 +1313,10 @@ export class TablesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to updateTable
+     * @params response Response returned by the server for a request to updateDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async updateDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(

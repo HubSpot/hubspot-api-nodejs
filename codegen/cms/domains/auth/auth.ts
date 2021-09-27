@@ -44,30 +44,9 @@ export class HapikeyAuthentication implements SecurityAuthentication {
     }
 }
 
-/**
- * Applies oauth2 authentication to the request context.
- */
-export class Oauth2Authentication implements SecurityAuthentication {
-    /**
-     * Configures OAuth2 with the necessary properties
-     *
-     * @param accessToken: The access token to be used for every request
-     */
-    public constructor(private accessToken: string) {}
-
-    public getName(): string {
-        return "oauth2";
-    }
-
-    public applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("Authorization", "Bearer " + this.accessToken);
-    }
-}
-
 
 export type AuthMethods = {
-    "hapikey"?: SecurityAuthentication,
-    "oauth2"?: SecurityAuthentication
+    "hapikey"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -76,8 +55,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
-    "hapikey"?: ApiKeyConfiguration,
-    "oauth2"?: OAuth2Configuration
+    "hapikey"?: ApiKeyConfiguration
 }
 
 /**
@@ -94,12 +72,6 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (config["hapikey"]) {
         authMethods["hapikey"] = new HapikeyAuthentication(
             config["hapikey"]
-        );
-    }
-
-    if (config["oauth2"]) {
-        authMethods["oauth2"] = new Oauth2Authentication(
-            config["oauth2"]["accessToken"]
         );
     }
 

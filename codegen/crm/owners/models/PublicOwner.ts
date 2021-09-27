@@ -85,7 +85,7 @@ export class PublicOwner {
     static getAttributeTypeMap() {
         return PublicOwner.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

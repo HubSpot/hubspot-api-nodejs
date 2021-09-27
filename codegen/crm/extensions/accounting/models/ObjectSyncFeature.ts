@@ -31,7 +31,7 @@ export class ObjectSyncFeature {
     static getAttributeTypeMap() {
         return ObjectSyncFeature.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

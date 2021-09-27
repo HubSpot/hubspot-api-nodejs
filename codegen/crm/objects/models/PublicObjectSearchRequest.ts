@@ -64,7 +64,7 @@ export class PublicObjectSearchRequest {
     static getAttributeTypeMap() {
         return PublicObjectSearchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

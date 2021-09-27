@@ -31,7 +31,7 @@ export class IdentificationTokenResponse {
     static getAttributeTypeMap() {
         return IdentificationTokenResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

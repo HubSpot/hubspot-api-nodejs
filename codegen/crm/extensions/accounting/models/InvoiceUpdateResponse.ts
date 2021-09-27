@@ -133,7 +133,7 @@ export class InvoiceUpdateResponse {
     static getAttributeTypeMap() {
         return InvoiceUpdateResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

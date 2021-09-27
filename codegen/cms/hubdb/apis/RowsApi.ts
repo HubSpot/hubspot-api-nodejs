@@ -3,13 +3,15 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
-import { HubDbTableRowV3Input } from '../models/HubDbTableRowV3Input';
+import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
 
 /**
  * no description
@@ -19,17 +21,11 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Clones a single row in the `draft` version of the table.
      * Clone a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async cloneDraftTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<RequestContext> {
+    public async cloneDraftTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling cloneDraftTableRow.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -37,23 +33,21 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling cloneDraftTableRow.');
+        }
+
+
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft/clone'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -61,7 +55,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -70,12 +65,12 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `push-live` endpoint to push these changes to live version and publish them.
+     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `publish` endpoint to push these changes to published version.
      * Add a new row to a table
      * @param tableIdOrName The ID or name of the target table.
-     * @param hubDbTableRowV3Input The row definition JSON, formatted as described above.
+     * @param hubDbTableRowV3Request The row definition JSON, formatted as described above.
      */
-    public async createTableRow(tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<RequestContext> {
+    public async createTableRow(tableIdOrName: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -84,9 +79,9 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Input was null or undefined when calling createTableRow.');
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling createTableRow.');
         }
 
 
@@ -98,12 +93,6 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -111,7 +100,7 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input", ""),
+            ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -122,7 +111,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -133,17 +123,11 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Get a single row by ID from a table's `draft` version.
      * Get a row from the draft table
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async getDraftTableRowById(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<RequestContext> {
+    public async getDraftTableRowById(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling getDraftTableRowById.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -151,23 +135,21 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling getDraftTableRowById.');
+        }
+
+
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -175,7 +157,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -184,19 +167,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get a single row by ID from a table's `live` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Get a single row by ID from a table's `published` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get a table row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async getTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<RequestContext> {
+    public async getTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling getTableRow.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -204,23 +181,21 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling getTableRow.');
+        }
+
+
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -228,7 +203,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -237,15 +213,15 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a set of rows in the `live` version of the specified table. Row results can be filtered and sorted. Refer to the overview section for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the `published` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
+     * @param sort Specifies the column names to sort the results by. See the above description for more details.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * @param sort Specifies the column names to sort the results by. See the above description for more details.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
      */
-    public async getTableRows(tableIdOrName: string, properties?: Array<string>, after?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -267,25 +243,25 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
-        }
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
 
-        // Header Params
+        // Query Params
+        if (after !== undefined) {
+            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        }
 
-        // Form Params
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        }
 
+        // Query Params
+        if (properties !== undefined) {
+            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+        }
 
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -293,7 +269,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -304,17 +281,11 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Permanently deletes a row from a table's `draft` version.
      * Permanently deletes a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public async purgeDraftTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<RequestContext> {
+    public async purgeDraftTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling purgeDraftTableRow.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -322,23 +293,21 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling purgeDraftTableRow.');
+        }
+
+
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -346,7 +315,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -355,15 +325,15 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted using the options mentioned in the overview section.
+     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
      * @param sort Specifies the column names to sort the results by.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
      */
-    public async readDraftTableRows(tableIdOrName: string, after?: string, properties?: Array<string>, limit?: number, sort?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async readDraftTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -385,25 +355,25 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
-        }
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
 
-        // Header Params
+        // Query Params
+        if (after !== undefined) {
+            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
+        }
 
-        // Form Params
+        // Query Params
+        if (limit !== undefined) {
+            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
+        }
 
+        // Query Params
+        if (properties !== undefined) {
+            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+        }
 
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -411,7 +381,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -422,18 +393,12 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Replace a single row in the table's `draft` version. All the column values must be specified. If a column has a value in the target table and this request doesn't define that value, it will be deleted. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * Replaces an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row
      */
-    public async replaceDraftTableRow(rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<RequestContext> {
+    public async replaceDraftTableRow(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling replaceDraftTableRow.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -441,26 +406,26 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Input was null or undefined when calling replaceDraftTableRow.');
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling replaceDraftTableRow.');
+        }
+
+
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling replaceDraftTableRow.');
         }
 
 
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params
@@ -469,7 +434,7 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input", ""),
+            ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -480,7 +445,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -491,18 +457,12 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Sparse updates a single row in the table's `draft` version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * Updates an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row with necessary fields that needs to be updated.
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row with necessary fields that needs to be updated.
      */
-    public async updateDraftTableRow(rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<RequestContext> {
+    public async updateDraftTableRow(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'rowId' is not null or undefined
-        if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling updateDraftTableRow.');
-        }
-
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
@@ -510,26 +470,26 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'hubDbTableRowV3Input' is not null or undefined
-        if (hubDbTableRowV3Input === null || hubDbTableRowV3Input === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Input was null or undefined when calling updateDraftTableRow.');
+        // verify required parameter 'rowId' is not null or undefined
+        if (rowId === null || rowId === undefined) {
+            throw new RequiredError('Required parameter rowId was null or undefined when calling updateDraftTableRow.');
+        }
+
+
+        // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
+        if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
+            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling updateDraftTableRow.');
         }
 
 
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/rows/{rowId}/draft'
-            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)))
-            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'rowId' + '}', encodeURIComponent(String(rowId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-
-        // Header Params
-
-        // Form Params
 
 
         // Body Params
@@ -538,7 +498,7 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(hubDbTableRowV3Input, "HubDbTableRowV3Input", ""),
+            ObjectSerializer.serialize(hubDbTableRowV3Request, "HubDbTableRowV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -549,7 +509,8 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

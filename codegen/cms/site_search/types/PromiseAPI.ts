@@ -8,18 +8,18 @@ import { IndexedData } from '../models/IndexedData';
 import { ModelError } from '../models/ModelError';
 import { PublicSearchResults } from '../models/PublicSearchResults';
 import { SearchHitField } from '../models/SearchHitField';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservablePublicApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { PublicApiRequestFactory, PublicApiResponseProcessor} from "../apis/PublicApi";
+export class PromisePublicApi {
+    private api: ObservablePublicApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicApiRequestFactory,
+        responseProcessor?: PublicApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

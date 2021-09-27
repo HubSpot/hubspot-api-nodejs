@@ -84,7 +84,7 @@ export class UpdatedProduct {
     static getAttributeTypeMap() {
         return UpdatedProduct.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -158,7 +158,7 @@ export class ObjectSchema {
     static getAttributeTypeMap() {
         return ObjectSchema.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

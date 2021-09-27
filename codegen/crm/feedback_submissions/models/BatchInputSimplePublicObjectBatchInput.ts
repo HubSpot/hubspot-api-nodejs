@@ -29,7 +29,7 @@ export class BatchInputSimplePublicObjectBatchInput {
     static getAttributeTypeMap() {
         return BatchInputSimplePublicObjectBatchInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -37,7 +37,7 @@ export class CollectionResponseAssociatedIdForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponseAssociatedIdForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

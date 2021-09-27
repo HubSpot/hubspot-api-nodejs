@@ -44,7 +44,7 @@ export class ObjectTypeDefinitionLabels {
     static getAttributeTypeMap() {
         return ObjectTypeDefinitionLabels.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -80,7 +80,7 @@ export class IntegratorCardPayloadResponse {
     static getAttributeTypeMap() {
         return IntegratorCardPayloadResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

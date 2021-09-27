@@ -82,7 +82,7 @@ export class BatchResponseTimelineEventResponse {
     static getAttributeTypeMap() {
         return BatchResponseTimelineEventResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

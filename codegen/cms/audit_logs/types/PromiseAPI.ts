@@ -8,18 +8,18 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PublicAuditLog } from '../models/PublicAuditLog';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservableAuditLogsApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { AuditLogsApiRequestFactory, AuditLogsApiResponseProcessor} from "../apis/AuditLogsApi";
+export class PromiseAuditLogsApi {
+    private api: ObservableAuditLogsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: AuditLogsApiRequestFactory,
+        responseProcessor?: AuditLogsApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableAuditLogsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

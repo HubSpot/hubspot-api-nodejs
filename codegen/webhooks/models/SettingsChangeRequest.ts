@@ -42,7 +42,7 @@ export class SettingsChangeRequest {
     static getAttributeTypeMap() {
         return SettingsChangeRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

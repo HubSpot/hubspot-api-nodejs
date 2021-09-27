@@ -79,7 +79,7 @@ export class BatchResponseTimelineEventResponseWithErrors {
     static getAttributeTypeMap() {
         return BatchResponseTimelineEventResponseWithErrors.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

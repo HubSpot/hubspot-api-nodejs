@@ -64,7 +64,7 @@ export class BatchResponseSimplePublicObject {
     static getAttributeTypeMap() {
         return BatchResponseSimplePublicObject.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

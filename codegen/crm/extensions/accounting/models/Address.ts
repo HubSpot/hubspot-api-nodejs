@@ -74,7 +74,7 @@ export class Address {
     static getAttributeTypeMap() {
         return Address.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

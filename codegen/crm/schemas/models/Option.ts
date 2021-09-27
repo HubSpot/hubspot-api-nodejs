@@ -74,7 +74,7 @@ export class Option {
     static getAttributeTypeMap() {
         return Option.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

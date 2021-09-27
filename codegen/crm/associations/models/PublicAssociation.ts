@@ -43,7 +43,7 @@ export class PublicAssociation {
     static getAttributeTypeMap() {
         return PublicAssociation.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

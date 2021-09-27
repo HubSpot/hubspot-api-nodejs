@@ -104,7 +104,7 @@ export class SettingsResponse {
     static getAttributeTypeMap() {
         return SettingsResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

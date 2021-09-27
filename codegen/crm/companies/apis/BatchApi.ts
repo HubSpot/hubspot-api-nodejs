@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
@@ -20,7 +22,6 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive a list of companies given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of companies by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -40,12 +41,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -64,7 +59,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -73,7 +74,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a batch of companies. This follows the same rules as creating an individual object.
      * Create a batch of companies
      * @param batchInputSimplePublicObjectInput 
      */
@@ -93,12 +93,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -117,7 +111,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -126,7 +126,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read a list of companies given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of companies by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -153,10 +152,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -175,7 +170,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -184,7 +185,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Perform a partial upate on a batch of companies. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of companies
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -204,12 +204,6 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -228,7 +222,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

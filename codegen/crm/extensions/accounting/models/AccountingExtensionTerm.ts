@@ -64,7 +64,7 @@ export class AccountingExtensionTerm {
     static getAttributeTypeMap() {
         return AccountingExtensionTerm.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

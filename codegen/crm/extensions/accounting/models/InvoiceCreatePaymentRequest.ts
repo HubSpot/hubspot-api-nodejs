@@ -61,7 +61,7 @@ export class InvoiceCreatePaymentRequest {
     static getAttributeTypeMap() {
         return InvoiceCreatePaymentRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

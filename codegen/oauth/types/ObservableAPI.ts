@@ -46,7 +46,7 @@ export class ObservableAccessTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAccessToken(rsp)));
             }));
     }
- 
+
 }
 
 import { RefreshTokensApiRequestFactory, RefreshTokensApiResponseProcessor} from "../apis/RefreshTokensApi";
@@ -86,7 +86,7 @@ export class ObservableRefreshTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveRefreshToken(rsp)));
             }));
     }
- 
+
     /**
      * @param token 
      */
@@ -108,7 +108,7 @@ export class ObservableRefreshTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getRefreshToken(rsp)));
             }));
     }
- 
+
 }
 
 import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
@@ -153,5 +153,5 @@ export class ObservableTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createToken(rsp)));
             }));
     }
- 
+
 }

@@ -79,7 +79,7 @@ export class BatchResponseSubscriptionResponseWithErrors {
     static getAttributeTypeMap() {
         return BatchResponseSubscriptionResponseWithErrors.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

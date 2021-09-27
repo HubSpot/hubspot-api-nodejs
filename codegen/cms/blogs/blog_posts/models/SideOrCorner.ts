@@ -35,7 +35,7 @@ export class SideOrCorner {
     static getAttributeTypeMap() {
         return SideOrCorner.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

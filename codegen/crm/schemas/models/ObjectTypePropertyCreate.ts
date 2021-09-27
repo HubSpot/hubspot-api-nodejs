@@ -122,7 +122,7 @@ export class ObjectTypePropertyCreate {
     static getAttributeTypeMap() {
         return ObjectTypePropertyCreate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }
