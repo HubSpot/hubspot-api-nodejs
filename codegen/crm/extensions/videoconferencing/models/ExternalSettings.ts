@@ -64,7 +64,7 @@ export class ExternalSettings {
     static getAttributeTypeMap() {
         return ExternalSettings.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

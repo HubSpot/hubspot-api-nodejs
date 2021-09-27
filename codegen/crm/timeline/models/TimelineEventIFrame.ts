@@ -71,7 +71,7 @@ export class TimelineEventIFrame {
     static getAttributeTypeMap() {
         return TimelineEventIFrame.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

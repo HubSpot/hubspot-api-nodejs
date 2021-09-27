@@ -49,7 +49,7 @@ export class ConditionalSingleFieldDependency {
     static getAttributeTypeMap() {
         return ConditionalSingleFieldDependency.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

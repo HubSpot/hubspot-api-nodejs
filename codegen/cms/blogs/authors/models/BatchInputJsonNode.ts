@@ -28,7 +28,7 @@ export class BatchInputJsonNode {
     static getAttributeTypeMap() {
         return BatchInputJsonNode.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

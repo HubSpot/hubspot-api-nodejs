@@ -80,7 +80,7 @@ export class Product {
     static getAttributeTypeMap() {
         return Product.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

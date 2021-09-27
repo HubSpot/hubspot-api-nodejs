@@ -91,7 +91,7 @@ export class UrlMappingCreateRequestBody {
     static getAttributeTypeMap() {
         return UrlMappingCreateRequestBody.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

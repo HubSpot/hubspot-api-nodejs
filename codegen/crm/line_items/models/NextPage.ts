@@ -35,7 +35,7 @@ export class NextPage {
     static getAttributeTypeMap() {
         return NextPage.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

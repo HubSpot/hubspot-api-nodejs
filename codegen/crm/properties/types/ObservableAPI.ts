@@ -66,7 +66,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create a batch of properties using the same rules as when creating an individual property.
      * Create a batch of properties
@@ -91,7 +91,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Read a provided list of properties.
      * Read a batch of properties
@@ -116,7 +116,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
- 
+
 }
 
 import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";
@@ -159,7 +159,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create and return a copy of a new property for the specified object type.
      * Create a property
@@ -184,7 +184,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Read all existing properties for the specified object type and HubSpot account.
      * Read all properties
@@ -209,7 +209,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Read a property identified by {propertyName}.
      * Read a property
@@ -235,7 +235,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByName(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
      * Update a property
@@ -261,7 +261,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { GroupsApiRequestFactory, GroupsApiResponseProcessor} from "../apis/GroupsApi";
@@ -304,7 +304,7 @@ export class ObservableGroupsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create and return a copy of a new property group.
      * Create a property group
@@ -329,7 +329,7 @@ export class ObservableGroupsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Read all existing property groups for the specified object type and HubSpot account.
      * Read all property groups
@@ -353,7 +353,7 @@ export class ObservableGroupsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Read a property group identified by {groupName}.
      * Read a property group
@@ -378,7 +378,7 @@ export class ObservableGroupsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByName(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
      * Update a property group
@@ -404,5 +404,5 @@ export class ObservableGroupsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }

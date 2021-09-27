@@ -47,7 +47,7 @@ export class DeveloperHapikeyAuthentication implements SecurityAuthentication {
 /**
  * Applies oauth2 authentication to the request context.
  */
-export class Oauth2Authentication implements SecurityAuthentication {
+export class Oauth2LegacyAuthentication implements SecurityAuthentication {
     /**
      * Configures OAuth2 with the necessary properties
      *
@@ -56,7 +56,7 @@ export class Oauth2Authentication implements SecurityAuthentication {
     public constructor(private accessToken: string) {}
 
     public getName(): string {
-        return "oauth2";
+        return "oauth2_legacy";
     }
 
     public applySecurityAuthentication(context: RequestContext) {
@@ -67,7 +67,7 @@ export class Oauth2Authentication implements SecurityAuthentication {
 
 export type AuthMethods = {
     "developer_hapikey"?: SecurityAuthentication,
-    "oauth2"?: SecurityAuthentication
+    "oauth2_legacy"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -77,7 +77,7 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "developer_hapikey"?: ApiKeyConfiguration,
-    "oauth2"?: OAuth2Configuration
+    "oauth2_legacy"?: OAuth2Configuration
 }
 
 /**
@@ -97,9 +97,9 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
         );
     }
 
-    if (config["oauth2"]) {
-        authMethods["oauth2"] = new Oauth2Authentication(
-            config["oauth2"]["accessToken"]
+    if (config["oauth2_legacy"]) {
+        authMethods["oauth2_legacy"] = new Oauth2LegacyAuthentication(
+            config["oauth2_legacy"]["accessToken"]
         );
     }
 

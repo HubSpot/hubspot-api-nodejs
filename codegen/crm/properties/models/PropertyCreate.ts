@@ -132,7 +132,7 @@ export class PropertyCreate {
     static getAttributeTypeMap() {
         return PropertyCreate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

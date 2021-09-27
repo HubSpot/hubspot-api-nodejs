@@ -178,7 +178,7 @@ export class InvoiceReadResponse {
     static getAttributeTypeMap() {
         return InvoiceReadResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
 import { Domain } from '../models/Domain';
@@ -44,20 +46,10 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -107,54 +99,66 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
         if (createdAt !== undefined) {
             requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "number", "int64"));
         }
+
+        // Query Params
         if (createdAfter !== undefined) {
             requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "number", "int64"));
         }
+
+        // Query Params
         if (createdBefore !== undefined) {
             requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "number", "int64"));
         }
+
+        // Query Params
         if (updatedAt !== undefined) {
             requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "number", "int64"));
         }
+
+        // Query Params
         if (updatedAfter !== undefined) {
             requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "number", "int64"));
         }
+
+        // Query Params
         if (updatedBefore !== undefined) {
             requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "number", "int64"));
         }
+
+        // Query Params
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
+
+        // Query Params
         if (properties !== undefined) {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
         }
+
+        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
+
+        // Query Params
         if (before !== undefined) {
             requestContext.setQueryParam("before", ObjectSerializer.serialize(before, "string", ""));
         }
+
+        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
+
+        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

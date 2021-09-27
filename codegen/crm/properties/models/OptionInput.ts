@@ -71,7 +71,7 @@ export class OptionInput {
     static getAttributeTypeMap() {
         return OptionInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

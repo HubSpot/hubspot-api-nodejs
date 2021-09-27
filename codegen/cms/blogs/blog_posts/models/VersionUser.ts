@@ -54,7 +54,7 @@ export class VersionUser {
     static getAttributeTypeMap() {
         return VersionUser.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

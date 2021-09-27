@@ -229,7 +229,7 @@ export class UrlMapping {
     static getAttributeTypeMap() {
         return UrlMapping.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

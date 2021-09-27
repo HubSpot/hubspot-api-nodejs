@@ -34,7 +34,7 @@ export class SubscriptionPatchRequest {
     static getAttributeTypeMap() {
         return SubscriptionPatchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

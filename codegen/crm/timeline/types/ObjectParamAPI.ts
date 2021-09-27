@@ -5,14 +5,11 @@ import { Configuration} from '../configuration'
 import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from '../models/BatchResponseTimelineEventResponseWithErrors';
-import { CollectionResponseTimelineEventTemplate } from '../models/CollectionResponseTimelineEventTemplate';
+import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetail } from '../models/EventDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
 import { StandardError } from '../models/StandardError';
 import { TimelineEvent } from '../models/TimelineEvent';
 import { TimelineEventIFrame } from '../models/TimelineEventIFrame';
@@ -258,7 +255,7 @@ export class ObjectTemplatesApi {
      * List all event templates for your app
      * @param param the request object
      */
-    public getAll(param: TemplatesApiGetAllRequest, options?: Configuration): Promise<CollectionResponseTimelineEventTemplate> {
+    public getAll(param: TemplatesApiGetAllRequest, options?: Configuration): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 

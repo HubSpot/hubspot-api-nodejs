@@ -41,7 +41,7 @@ export class ContentCloneRequestVNext {
     static getAttributeTypeMap() {
         return ContentCloneRequestVNext.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

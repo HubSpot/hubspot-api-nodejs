@@ -45,7 +45,7 @@ export class InvoicesResponseExternal {
     static getAttributeTypeMap() {
         return InvoicesResponseExternal.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

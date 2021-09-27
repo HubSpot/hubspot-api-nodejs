@@ -35,7 +35,7 @@ export class ErrorCategory {
     static getAttributeTypeMap() {
         return ErrorCategory.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

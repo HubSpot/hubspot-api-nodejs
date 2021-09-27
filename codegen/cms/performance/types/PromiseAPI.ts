@@ -6,18 +6,18 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { PerformanceView } from '../models/PerformanceView';
 import { PublicPerformanceResponse } from '../models/PublicPerformanceResponse';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservablePublicPerformanceApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { PublicPerformanceApiRequestFactory, PublicPerformanceApiResponseProcessor} from "../apis/PublicPerformanceApi";
+export class PromisePublicPerformanceApi {
+    private api: ObservablePublicPerformanceApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicPerformanceApiRequestFactory,
+        responseProcessor?: PublicPerformanceApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicPerformanceApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

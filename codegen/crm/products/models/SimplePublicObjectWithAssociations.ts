@@ -71,7 +71,7 @@ export class SimplePublicObjectWithAssociations {
     static getAttributeTypeMap() {
         return SimplePublicObjectWithAssociations.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

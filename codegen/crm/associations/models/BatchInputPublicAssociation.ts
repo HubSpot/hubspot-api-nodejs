@@ -29,7 +29,7 @@ export class BatchInputPublicAssociation {
     static getAttributeTypeMap() {
         return BatchInputPublicAssociation.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

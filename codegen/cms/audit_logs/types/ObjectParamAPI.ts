@@ -9,65 +9,65 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PublicAuditLog } from '../models/PublicAuditLog';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservableAuditLogsApi } from "./ObservableAPI";
+import { AuditLogsApiRequestFactory, AuditLogsApiResponseProcessor} from "../apis/AuditLogsApi";
 
-export interface DefaultApiGetPageRequest {
+export interface AuditLogsApiGetPageRequest {
     /**
      * Comma separated list of object ids to filter by.
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     objectId?: Array<string>
     /**
      * Comma separated list of user ids to filter by.
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     userId?: Array<string>
     /**
      * Timestamp after which audit logs will be returned
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     after?: string
     /**
      * Timestamp before which audit logs will be returned
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     before?: string
     /**
      * The sort direction for the audit logs. (Can only sort by timestamp).
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     sort?: Array<string>
     /**
      * Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     eventType?: Array<string>
     /**
      * The number of logs to return.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     limit?: number
     /**
      * Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuditLogsApigetPage
      */
     objectType?: Array<string>
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectAuditLogsApi {
+    private api: ObservableAuditLogsApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: AuditLogsApiRequestFactory, responseProcessor?: AuditLogsApiResponseProcessor) {
+        this.api = new ObservableAuditLogsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -75,7 +75,7 @@ export class ObjectDefaultApi {
      * Query audit logs
      * @param param the request object
      */
-    public getPage(param: DefaultApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicAuditLog> {
+    public getPage(param: AuditLogsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicAuditLog> {
         return this.api.getPage(param.objectId, param.userId, param.after, param.before, param.sort, param.eventType, param.limit, param.objectType,  options).toPromise();
     }
 

@@ -362,7 +362,6 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Archive a list of companies given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of companies by ID
      * @param param the request object
      */
@@ -371,7 +370,6 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Create a batch of companies. This follows the same rules as creating an individual object.
      * Create a batch of companies
      * @param param the request object
      */
@@ -380,7 +378,6 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Read a list of companies given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of companies by internal ID, or unique property values
      * @param param the request object
      */
@@ -389,7 +386,6 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Perform a partial upate on a batch of companies. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of companies
      * @param param the request object
      */
@@ -419,8 +415,6 @@ export class ObjectSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param param the request object
      */
     public doSearch(param: SearchApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {

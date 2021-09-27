@@ -180,29 +180,29 @@ export class ObjectCoreApi {
 
 }
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservablePublicObjectSchemasApi } from "./ObservableAPI";
+import { PublicObjectSchemasApiRequestFactory, PublicObjectSchemasApiResponseProcessor} from "../apis/PublicObjectSchemasApi";
 
-export interface DefaultApiPurgeRequest {
+export interface PublicObjectSchemasApiPurgeRequest {
     /**
      * 
      * @type string
-     * @memberof DefaultApipurge
+     * @memberof PublicObjectSchemasApipurge
      */
     objectType: string
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectPublicObjectSchemasApi {
+    private api: ObservablePublicObjectSchemasApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicObjectSchemasApiRequestFactory, responseProcessor?: PublicObjectSchemasApiResponseProcessor) {
+        this.api = new ObservablePublicObjectSchemasApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * @param param the request object
      */
-    public purge(param: DefaultApiPurgeRequest, options?: Configuration): Promise<void> {
+    public purge(param: PublicObjectSchemasApiPurgeRequest, options?: Configuration): Promise<void> {
         return this.api.purge(param.objectType,  options).toPromise();
     }
 

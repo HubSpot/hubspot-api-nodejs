@@ -45,7 +45,7 @@ export class TermsResponse {
     static getAttributeTypeMap() {
         return TermsResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

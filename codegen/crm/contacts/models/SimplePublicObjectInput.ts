@@ -28,7 +28,7 @@ export class SimplePublicObjectInput {
     static getAttributeTypeMap() {
         return SimplePublicObjectInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

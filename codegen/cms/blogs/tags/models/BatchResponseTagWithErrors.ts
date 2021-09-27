@@ -79,7 +79,7 @@ export class BatchResponseTagWithErrors {
     static getAttributeTypeMap() {
         return BatchResponseTagWithErrors.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

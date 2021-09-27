@@ -10,20 +10,20 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PublicAuditLog } from '../models/PublicAuditLog';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { AuditLogsApiRequestFactory, AuditLogsApiResponseProcessor} from "../apis/AuditLogsApi";
+export class ObservableAuditLogsApi {
+    private requestFactory: AuditLogsApiRequestFactory;
+    private responseProcessor: AuditLogsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: AuditLogsApiRequestFactory,
+        responseProcessor?: AuditLogsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new AuditLogsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new AuditLogsApiResponseProcessor();
     }
 
     /**
@@ -56,5 +56,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }

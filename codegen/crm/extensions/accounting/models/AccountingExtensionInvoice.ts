@@ -114,7 +114,7 @@ export class AccountingExtensionInvoice {
     static getAttributeTypeMap() {
         return AccountingExtensionInvoice.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

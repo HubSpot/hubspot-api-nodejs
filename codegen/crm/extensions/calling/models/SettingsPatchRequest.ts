@@ -84,7 +84,7 @@ export class SettingsPatchRequest {
     static getAttributeTypeMap() {
         return SettingsPatchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

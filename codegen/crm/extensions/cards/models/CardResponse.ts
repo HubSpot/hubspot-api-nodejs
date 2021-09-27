@@ -88,7 +88,7 @@ export class CardResponse {
     static getAttributeTypeMap() {
         return CardResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

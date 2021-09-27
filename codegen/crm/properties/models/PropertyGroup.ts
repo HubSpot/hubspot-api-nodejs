@@ -61,7 +61,7 @@ export class PropertyGroup {
     static getAttributeTypeMap() {
         return PropertyGroup.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

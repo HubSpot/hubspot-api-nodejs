@@ -42,7 +42,7 @@ export class PublicTeam {
     static getAttributeTypeMap() {
         return PublicTeam.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

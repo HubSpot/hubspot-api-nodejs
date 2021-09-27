@@ -44,7 +44,7 @@ export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponseWithTotalSimplePublicObjectForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

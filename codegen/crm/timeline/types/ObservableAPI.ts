@@ -6,14 +6,11 @@ import {mergeMap, map} from  '../rxjsStub';
 import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from '../models/BatchResponseTimelineEventResponseWithErrors';
-import { CollectionResponseTimelineEventTemplate } from '../models/CollectionResponseTimelineEventTemplate';
+import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetail } from '../models/EventDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
 import { StandardError } from '../models/StandardError';
 import { TimelineEvent } from '../models/TimelineEvent';
 import { TimelineEventIFrame } from '../models/TimelineEventIFrame';
@@ -64,7 +61,7 @@ export class ObservableEventsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don't exist.
      * Creates multiple events
@@ -88,7 +85,7 @@ export class ObservableEventsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatch(rsp)));
             }));
     }
- 
+
     /**
      * This returns the previously created event. It contains all existing info for the event, but not necessarily the CRM object.
      * Gets the event
@@ -113,7 +110,7 @@ export class ObservableEventsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn't found in the event, it will be ignored and we'll render without it.
      * Gets the detailTemplate as rendered
@@ -138,7 +135,7 @@ export class ObservableEventsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getDetailById(rsp)));
             }));
     }
- 
+
     /**
      * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn't found in the event, it will be ignored and we'll render without it.
      * Renders the header or detail as HTML
@@ -164,7 +161,7 @@ export class ObservableEventsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getRenderById(rsp)));
             }));
     }
- 
+
 }
 
 import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
@@ -207,7 +204,7 @@ export class ObservableTemplatesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Event templates define the general structure for a custom timeline event. This includes formatted copy for its heading and details, as well as any custom property definitions. The event could be something like viewing a video, registering for a webinar, or filling out a survey. A single app can define multiple event templates.  Event templates will be created for contacts by default, but they can be created for companies, tickets, and deals as well.  Each event template contains its own set of tokens and `Markdown` templates. These tokens can be associated with any CRM object properties via the `objectPropertyName` field to fully build out CRM objects.  You must create an event template before you can create events.
      * Create an event template for your app
@@ -232,13 +229,13 @@ export class ObservableTemplatesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Use this to list all event templates owned by your app.
      * List all event templates for your app
      * @param appId The ID of the target app.
      */
-    public getAll(appId: number, _options?: Configuration): Observable<CollectionResponseTimelineEventTemplate> {
+    public getAll(appId: number, _options?: Configuration): Observable<CollectionResponseTimelineEventTemplateNoPaging> {
         const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
@@ -256,7 +253,7 @@ export class ObservableTemplatesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * View the current state of a specific template and its tokens.
      * Gets a specific event template for your app
@@ -281,7 +278,7 @@ export class ObservableTemplatesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Updates an existing template and its tokens. This is primarily used to update the headerTemplate/detailTemplate, and those changes will take effect for existing events.  You can also update or replace all the tokens in the template here instead of doing individual API calls on the `/tokens` endpoint.
      * Update an existing event template
@@ -307,7 +304,7 @@ export class ObservableTemplatesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
@@ -351,7 +348,7 @@ export class ObservableTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Once you've defined an event template, it's likely that you'll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
      * Adds a token to an existing event template
@@ -377,7 +374,7 @@ export class ObservableTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * This will update the existing token on an event template. Name and type can't be changed on existing tokens.
      * Updates an existing token on an event template
@@ -404,5 +401,5 @@ export class ObservableTokensApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }

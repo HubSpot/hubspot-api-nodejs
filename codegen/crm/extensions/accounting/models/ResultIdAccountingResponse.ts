@@ -44,7 +44,7 @@ export class ResultIdAccountingResponse {
     static getAttributeTypeMap() {
         return ResultIdAccountingResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

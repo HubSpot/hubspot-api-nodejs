@@ -92,7 +92,7 @@ export class EmailSendStatusView {
     static getAttributeTypeMap() {
         return EmailSendStatusView.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

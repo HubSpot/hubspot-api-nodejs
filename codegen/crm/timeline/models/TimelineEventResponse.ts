@@ -139,7 +139,7 @@ export class TimelineEventResponse {
     static getAttributeTypeMap() {
         return TimelineEventResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -55,7 +55,7 @@ export class PublicImportMetadata {
     static getAttributeTypeMap() {
         return PublicImportMetadata.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

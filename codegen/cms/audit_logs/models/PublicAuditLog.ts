@@ -91,7 +91,7 @@ export class PublicAuditLog {
     static getAttributeTypeMap() {
         return PublicAuditLog.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

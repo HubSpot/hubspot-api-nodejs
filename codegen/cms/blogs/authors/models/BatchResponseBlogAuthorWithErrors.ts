@@ -79,7 +79,7 @@ export class BatchResponseBlogAuthorWithErrors {
     static getAttributeTypeMap() {
         return BatchResponseBlogAuthorWithErrors.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

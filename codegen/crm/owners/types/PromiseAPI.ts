@@ -9,18 +9,18 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { PublicOwner } from '../models/PublicOwner';
 import { PublicTeam } from '../models/PublicTeam';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservableOwnersApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";
+export class PromiseOwnersApi {
+    private api: ObservableOwnersApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: OwnersApiRequestFactory,
+        responseProcessor?: OwnersApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableOwnersApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

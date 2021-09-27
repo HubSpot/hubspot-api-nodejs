@@ -194,7 +194,7 @@ export class ContentSearchResult {
     static getAttributeTypeMap() {
         return ContentSearchResult.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

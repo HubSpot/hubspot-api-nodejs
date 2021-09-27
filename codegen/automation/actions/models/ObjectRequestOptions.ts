@@ -34,7 +34,7 @@ export class ObjectRequestOptions {
     static getAttributeTypeMap() {
         return ObjectRequestOptions.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

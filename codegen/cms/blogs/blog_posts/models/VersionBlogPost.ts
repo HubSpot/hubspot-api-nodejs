@@ -60,7 +60,7 @@ export class VersionBlogPost {
     static getAttributeTypeMap() {
         return VersionBlogPost.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

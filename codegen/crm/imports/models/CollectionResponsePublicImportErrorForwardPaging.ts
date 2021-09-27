@@ -37,7 +37,7 @@ export class CollectionResponsePublicImportErrorForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponsePublicImportErrorForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

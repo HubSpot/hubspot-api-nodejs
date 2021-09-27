@@ -58,7 +58,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.clear(rsp)));
             }));
     }
- 
+
     /**
      * Used to set the webhook target URL and max concurrency limit for the given app.
      * Configure webhook settings
@@ -83,7 +83,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.configure(rsp)));
             }));
     }
- 
+
     /**
      * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
      * Get webhook settings
@@ -107,7 +107,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
 }
 
 import { SubscriptionsApiRequestFactory, SubscriptionsApiResponseProcessor} from "../apis/SubscriptionsApi";
@@ -150,7 +150,7 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
      * Subscribe to an event
@@ -175,7 +175,7 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Returns full details for all existing subscriptions for the given app.
      * Get subscription details
@@ -199,7 +199,7 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Returns details about a subscription.
      * Get subscription
@@ -224,7 +224,7 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Updates the details for an existing subscription.
      * Update a subscription
@@ -250,7 +250,7 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
     /**
      * Activates or deactivates target app subscriptions.
      * Batch update subscriptions
@@ -275,5 +275,5 @@ export class ObservableSubscriptionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatch(rsp)));
             }));
     }
- 
+
 }

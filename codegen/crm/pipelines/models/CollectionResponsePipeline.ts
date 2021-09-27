@@ -37,7 +37,7 @@ export class CollectionResponsePipeline {
     static getAttributeTypeMap() {
         return CollectionResponsePipeline.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

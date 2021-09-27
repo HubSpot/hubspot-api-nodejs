@@ -64,7 +64,7 @@ export class ActionHookActionBody {
     static getAttributeTypeMap() {
         return ActionHookActionBody.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

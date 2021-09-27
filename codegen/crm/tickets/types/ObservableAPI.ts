@@ -72,7 +72,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Associate a ticket with another object
      * @param ticketId 
@@ -98,7 +98,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * List associations of a ticket by type
      * @param ticketId 
@@ -124,7 +124,7 @@ export class ObservableAssociationsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
 }
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -166,7 +166,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Create a ticket with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard tickets is provided.
      * Create
@@ -190,7 +190,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Read an Object identified by `{ticketId}`. `{ticketId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
@@ -218,7 +218,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Read a page of tickets. Control what is returned via the `properties` query param.
      * List
@@ -246,7 +246,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Perform a partial update of an Object identified by `{ticketId}`. `{ticketId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
@@ -272,7 +272,7 @@ export class ObservableBasicApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -292,7 +292,6 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Archive a list of tickets given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of tickets by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -314,9 +313,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
-     * Create a batch of tickets. This follows the same rules as creating an individual object.
      * Create a batch of tickets
      * @param batchInputSimplePublicObjectInput 
      */
@@ -338,9 +336,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
-     * Read a list of tickets given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of tickets by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -363,9 +360,8 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
- 
+
     /**
-     * Perform a partial upate on a batch of tickets. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of tickets
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -387,7 +383,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
@@ -407,8 +403,6 @@ export class ObservableSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Observable<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
@@ -429,5 +423,5 @@ export class ObservableSearchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doSearch(rsp)));
             }));
     }
- 
+
 }

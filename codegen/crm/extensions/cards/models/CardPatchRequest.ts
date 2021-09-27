@@ -58,7 +58,7 @@ export class CardPatchRequest {
     static getAttributeTypeMap() {
         return CardPatchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

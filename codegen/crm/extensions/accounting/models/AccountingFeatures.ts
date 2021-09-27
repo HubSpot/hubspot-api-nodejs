@@ -51,7 +51,7 @@ export class AccountingFeatures {
     static getAttributeTypeMap() {
         return AccountingFeatures.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

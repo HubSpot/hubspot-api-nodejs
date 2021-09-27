@@ -35,7 +35,7 @@ export class BatchInputTimelineEvent {
     static getAttributeTypeMap() {
         return BatchInputTimelineEvent.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

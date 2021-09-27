@@ -87,7 +87,7 @@ export class PublicImportResponse {
     static getAttributeTypeMap() {
         return PublicImportResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

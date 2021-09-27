@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
 
@@ -49,37 +51,47 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
         if (occurredAfter !== undefined) {
             requestContext.setQueryParam("occurredAfter", ObjectSerializer.serialize(occurredAfter, "Date", "date-time"));
         }
+
+        // Query Params
         if (occurredBefore !== undefined) {
             requestContext.setQueryParam("occurredBefore", ObjectSerializer.serialize(occurredBefore, "Date", "date-time"));
         }
+
+        // Query Params
         if (objectType !== undefined) {
             requestContext.setQueryParam("objectType", ObjectSerializer.serialize(objectType, "string", ""));
         }
+
+        // Query Params
         if (objectId !== undefined) {
             requestContext.setQueryParam("objectId", ObjectSerializer.serialize(objectId, "number", "int64"));
         }
+
+        // Query Params
         if (eventType !== undefined) {
             requestContext.setQueryParam("eventType", ObjectSerializer.serialize(eventType, "string", ""));
         }
+
+        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
+
+        // Query Params
         if (before !== undefined) {
             requestContext.setQueryParam("before", ObjectSerializer.serialize(before, "string", ""));
         }
+
+        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
+
+        // Query Params
         if (sort !== undefined) {
             requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -87,7 +99,8 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

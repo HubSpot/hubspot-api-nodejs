@@ -42,7 +42,7 @@ export class BackgroundImage {
     static getAttributeTypeMap() {
         return BackgroundImage.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -64,7 +64,7 @@ export class ObservableCardsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Defines a new card that will become active on an account when this app is installed.
      * Create a new card
@@ -89,7 +89,7 @@ export class ObservableCardsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Returns a list of cards for a given app.
      * Get all cards
@@ -113,7 +113,7 @@ export class ObservableCardsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
     /**
      * Returns the definition for a card with the given ID.
      * Get a card.
@@ -138,7 +138,7 @@ export class ObservableCardsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Update a card definition with new details.
      * Update a card
@@ -164,7 +164,7 @@ export class ObservableCardsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { SampleResponseApiRequestFactory, SampleResponseApiResponseProcessor} from "../apis/SampleResponseApi";
@@ -205,5 +205,5 @@ export class ObservableSampleResponseApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCardsSampleResponse(rsp)));
             }));
     }
- 
+
 }

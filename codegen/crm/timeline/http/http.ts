@@ -1,7 +1,8 @@
 // TODO: evaluate if we can easily get rid of this library
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 // typings of url-parse are incorrect...
-// @ts-ignore 
+// @ts-ignore
 import * as URLParse from "url-parse";
 import { Observable, from } from '../rxjsStub';
 
@@ -30,6 +31,8 @@ export type HttpFile = {
     name: string
 };
 
+export type Headers = { [key: string]: string }
+
 
 export class HttpException extends Error {
     public constructor(msg: string) {
@@ -40,13 +43,13 @@ export class HttpException extends Error {
 /**
  * Represents the body of an outgoing HTTP request.
  */
-export type RequestBody = undefined | string | FormData;
+export type RequestBody = undefined | string | FormData | URLSearchParams;
 
 /**
  * Represents an HTTP request context
  */
 export class RequestContext {
-    private headers: { [key: string]: string } = {};
+    private headers: Headers = {};
     private body: RequestBody = undefined;
     private url: URLParse;
 
@@ -56,8 +59,9 @@ export class RequestContext {
      * @param url url of the requested resource
      * @param httpMethod http method
      */
-    public constructor(url: string, private httpMethod: HttpMethod) {
+    public constructor(url: string, private httpMethod: HttpMethod, headers: Headers = {}) {
         this.url = new URLParse(url, true);
+        this.headers = headers;
     }
 
     /*
@@ -93,7 +97,7 @@ export class RequestContext {
         return this.httpMethod;
     }
 
-    public getHeaders(): { [key: string]: string } {
+    public getHeaders(): Headers {
         return this.headers;
     }
 
@@ -118,7 +122,7 @@ export class RequestContext {
         this.headers["Cookie"] += name + "=" + value + "; ";
     }
 
-    public setHeaderParam(key: string, value: string): void  { 
+    public setHeaderParam(key: string, value: string): void  {
         this.headers[key] = value;
     }
 }

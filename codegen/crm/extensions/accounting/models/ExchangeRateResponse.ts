@@ -64,7 +64,7 @@ export class ExchangeRateResponse {
     static getAttributeTypeMap() {
         return ExchangeRateResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

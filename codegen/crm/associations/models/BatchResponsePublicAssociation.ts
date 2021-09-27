@@ -72,7 +72,7 @@ export class BatchResponsePublicAssociation {
     static getAttributeTypeMap() {
         return BatchResponsePublicAssociation.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

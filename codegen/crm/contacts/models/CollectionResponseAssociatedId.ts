@@ -37,7 +37,7 @@ export class CollectionResponseAssociatedId {
     static getAttributeTypeMap() {
         return CollectionResponseAssociatedId.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -7,5 +7,5 @@ export * from "./apis/exception";
 export * from "./servers";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseCoreApi as CoreApi,  PromiseDefaultApi as DefaultApi } from './types/PromiseAPI';
+export { PromiseCoreApi as CoreApi,  PromisePublicObjectSchemasApi as PublicObjectSchemasApi } from './types/PromiseAPI';
 

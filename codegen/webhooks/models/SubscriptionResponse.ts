@@ -84,7 +84,7 @@ export class SubscriptionResponse {
     static getAttributeTypeMap() {
         return SubscriptionResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

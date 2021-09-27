@@ -34,7 +34,7 @@ export class ImportInvoiceFeature {
     static getAttributeTypeMap() {
         return ImportInvoiceFeature.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

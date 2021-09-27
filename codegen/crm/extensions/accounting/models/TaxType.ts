@@ -44,7 +44,7 @@ export class TaxType {
     static getAttributeTypeMap() {
         return TaxType.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

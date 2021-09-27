@@ -49,7 +49,7 @@ export class ObjectToken {
     static getAttributeTypeMap() {
         return ObjectToken.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

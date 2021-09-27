@@ -94,7 +94,7 @@ export class SmtpApiTokenView {
     static getAttributeTypeMap() {
         return SmtpApiTokenView.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

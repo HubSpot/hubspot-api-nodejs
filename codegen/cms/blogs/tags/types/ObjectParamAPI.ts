@@ -14,185 +14,185 @@ import { NextPage } from '../models/NextPage';
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservableTagApi } from "./ObservableAPI";
+import { TagApiRequestFactory, TagApiResponseProcessor} from "../apis/TagApi";
 
-export interface DefaultApiArchiveRequest {
+export interface TagApiArchiveRequest {
     /**
      * The Blog Tag id.
      * @type string
-     * @memberof DefaultApiarchive
+     * @memberof TagApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefaultApiarchive
+     * @memberof TagApiarchive
      */
     archived?: boolean
 }
 
-export interface DefaultApiArchiveBatchRequest {
+export interface TagApiArchiveBatchRequest {
     /**
      * The JSON array of Blog Tag ids.
      * @type BatchInputString
-     * @memberof DefaultApiarchiveBatch
+     * @memberof TagApiarchiveBatch
      */
     batchInputString: BatchInputString
 }
 
-export interface DefaultApiCreateRequest {
+export interface TagApiCreateRequest {
     /**
      * The JSON representation of a new Blog Tag.
      * @type Tag
-     * @memberof DefaultApicreate
+     * @memberof TagApicreate
      */
     tag: Tag
 }
 
-export interface DefaultApiCreateBatchRequest {
+export interface TagApiCreateBatchRequest {
     /**
      * The JSON array of new Blog Tags to create.
      * @type BatchInputTag
-     * @memberof DefaultApicreateBatch
+     * @memberof TagApicreateBatch
      */
     batchInputTag: BatchInputTag
 }
 
-export interface DefaultApiGetByIdRequest {
+export interface TagApiGetByIdRequest {
     /**
      * The Blog Tag id.
      * @type string
-     * @memberof DefaultApigetById
+     * @memberof TagApigetById
      */
     objectId: string
     /**
      * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetById
+     * @memberof TagApigetById
      */
     archived?: boolean
 }
 
-export interface DefaultApiGetPageRequest {
+export interface TagApiGetPageRequest {
     /**
      * Only return Blog Tags created at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     createdAt?: Date
     /**
      * Only return Blog Tags created after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Blog Tags created before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Blog Tags last updated at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Blog Tags last updated after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Blog Tags last updated before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetPage
+     * @memberof TagApigetPage
      */
     archived?: boolean
 }
 
-export interface DefaultApiReadBatchRequest {
+export interface TagApiReadBatchRequest {
     /**
      * The JSON array of Blog Tag ids.
      * @type BatchInputString
-     * @memberof DefaultApireadBatch
+     * @memberof TagApireadBatch
      */
     batchInputString: BatchInputString
     /**
      * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApireadBatch
+     * @memberof TagApireadBatch
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateRequest {
+export interface TagApiUpdateRequest {
     /**
      * The Blog Tag id.
      * @type string
-     * @memberof DefaultApiupdate
+     * @memberof TagApiupdate
      */
     objectId: string
     /**
      * The JSON representation of the updated Blog Tag.
      * @type Tag
-     * @memberof DefaultApiupdate
+     * @memberof TagApiupdate
      */
     tag: Tag
     /**
      * Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApiupdate
+     * @memberof TagApiupdate
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateBatchRequest {
+export interface TagApiUpdateBatchRequest {
     /**
      * A JSON array of the JSON representations of the updated Blog Tags.
      * @type BatchInputJsonNode
-     * @memberof DefaultApiupdateBatch
+     * @memberof TagApiupdateBatch
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApiupdateBatch
+     * @memberof TagApiupdateBatch
      */
     archived?: boolean
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectTagApi {
+    private api: ObservableTagApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: TagApiRequestFactory, responseProcessor?: TagApiResponseProcessor) {
+        this.api = new ObservableTagApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -200,7 +200,7 @@ export class ObjectDefaultApi {
      * Delete a Blog Tag
      * @param param the request object
      */
-    public archive(param: DefaultApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: TagApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -209,7 +209,7 @@ export class ObjectDefaultApi {
      * Archive a batch of Blog Tags
      * @param param the request object
      */
-    public archiveBatch(param: DefaultApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: TagApiArchiveBatchRequest, options?: Configuration): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -218,7 +218,7 @@ export class ObjectDefaultApi {
      * Create a new Blog Tag
      * @param param the request object
      */
-    public create(param: DefaultApiCreateRequest, options?: Configuration): Promise<Tag> {
+    public create(param: TagApiCreateRequest, options?: Configuration): Promise<Tag> {
         return this.api.create(param.tag,  options).toPromise();
     }
 
@@ -227,7 +227,7 @@ export class ObjectDefaultApi {
      * Create a batch of Blog Tags
      * @param param the request object
      */
-    public createBatch(param: DefaultApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public createBatch(param: TagApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
         return this.api.createBatch(param.batchInputTag,  options).toPromise();
     }
 
@@ -236,7 +236,7 @@ export class ObjectDefaultApi {
      * Retrieve a Blog Tag
      * @param param the request object
      */
-    public getById(param: DefaultApiGetByIdRequest, options?: Configuration): Promise<Tag> {
+    public getById(param: TagApiGetByIdRequest, options?: Configuration): Promise<Tag> {
         return this.api.getById(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -245,7 +245,7 @@ export class ObjectDefaultApi {
      * Get all Blog Tags
      * @param param the request object
      */
-    public getPage(param: DefaultApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
+    public getPage(param: TagApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
@@ -254,7 +254,7 @@ export class ObjectDefaultApi {
      * Retrieve a batch of Blog Tags
      * @param param the request object
      */
-    public readBatch(param: DefaultApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public readBatch(param: TagApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -263,7 +263,7 @@ export class ObjectDefaultApi {
      * Update a Blog Tag
      * @param param the request object
      */
-    public update(param: DefaultApiUpdateRequest, options?: Configuration): Promise<Tag> {
+    public update(param: TagApiUpdateRequest, options?: Configuration): Promise<Tag> {
         return this.api.update(param.objectId, param.tag, param.archived,  options).toPromise();
     }
 
@@ -272,7 +272,7 @@ export class ObjectDefaultApi {
      * Update a batch of Blog Tags
      * @param param the request object
      */
-    public updateBatch(param: DefaultApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public updateBatch(param: TagApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 

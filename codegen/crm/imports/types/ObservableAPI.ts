@@ -57,7 +57,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.cancel(rsp)));
             }));
     }
- 
+
     /**
      * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
      * Start a new import
@@ -82,7 +82,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * A complete summary of an import record, including any updates.
      * Get the information on any import
@@ -106,7 +106,7 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns a paged list of active imports for this account.
      * Get active imports
@@ -132,23 +132,23 @@ export class ObservableCoreApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { PublicImportsApiRequestFactory, PublicImportsApiResponseProcessor} from "../apis/PublicImportsApi";
+export class ObservablePublicImportsApi {
+    private requestFactory: PublicImportsApiRequestFactory;
+    private responseProcessor: PublicImportsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicImportsApiRequestFactory,
+        responseProcessor?: PublicImportsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicImportsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicImportsApiResponseProcessor();
     }
 
     /**
@@ -156,8 +156,8 @@ export class ObservableDefaultApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getCrmV3ImportsImportIdErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponsePublicImportErrorForwardPaging> {
-        const requestContextPromise = this.requestFactory.getCrmV3ImportsImportIdErrors(importId, after, limit, _options);
+    public getErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponsePublicImportErrorForwardPaging> {
+        const requestContextPromise = this.requestFactory.getErrors(importId, after, limit, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -171,8 +171,8 @@ export class ObservableDefaultApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3ImportsImportIdErrors(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getErrors(rsp)));
             }));
     }
- 
+
 }

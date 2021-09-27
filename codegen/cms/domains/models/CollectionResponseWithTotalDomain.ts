@@ -44,7 +44,7 @@ export class CollectionResponseWithTotalDomain {
     static getAttributeTypeMap() {
         return CollectionResponseWithTotalDomain.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -41,7 +41,7 @@ export class ContentScheduleRequestVNext {
     static getAttributeTypeMap() {
         return ContentScheduleRequestVNext.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

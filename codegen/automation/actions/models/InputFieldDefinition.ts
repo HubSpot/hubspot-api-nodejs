@@ -52,7 +52,7 @@ export class InputFieldDefinition {
     static getAttributeTypeMap() {
         return InputFieldDefinition.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

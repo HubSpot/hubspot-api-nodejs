@@ -79,7 +79,7 @@ export class BatchResponseProperty {
     static getAttributeTypeMap() {
         return BatchResponseProperty.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -31,7 +31,7 @@ export class PropertyName {
     static getAttributeTypeMap() {
         return PropertyName.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

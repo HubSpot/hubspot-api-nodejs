@@ -42,7 +42,7 @@ export class ActionConfirmationBody {
     static getAttributeTypeMap() {
         return ActionConfirmationBody.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

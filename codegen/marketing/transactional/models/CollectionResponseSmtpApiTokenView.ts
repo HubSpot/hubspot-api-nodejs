@@ -43,7 +43,7 @@ export class CollectionResponseSmtpApiTokenView {
     static getAttributeTypeMap() {
         return CollectionResponseSmtpApiTokenView.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

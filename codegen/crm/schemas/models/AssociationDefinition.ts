@@ -84,7 +84,7 @@ export class AssociationDefinition {
     static getAttributeTypeMap() {
         return AssociationDefinition.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

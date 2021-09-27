@@ -58,7 +58,7 @@ export class CardCreateRequest {
     static getAttributeTypeMap() {
         return CardCreateRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

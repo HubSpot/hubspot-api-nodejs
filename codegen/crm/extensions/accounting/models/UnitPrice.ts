@@ -44,7 +44,7 @@ export class UnitPrice {
     static getAttributeTypeMap() {
         return UnitPrice.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

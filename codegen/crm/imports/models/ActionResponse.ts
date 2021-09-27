@@ -56,7 +56,7 @@ export class ActionResponse {
     static getAttributeTypeMap() {
         return ActionResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

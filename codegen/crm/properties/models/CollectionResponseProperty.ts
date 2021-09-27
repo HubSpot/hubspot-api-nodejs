@@ -37,7 +37,7 @@ export class CollectionResponseProperty {
     static getAttributeTypeMap() {
         return CollectionResponseProperty.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

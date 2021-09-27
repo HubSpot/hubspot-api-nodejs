@@ -64,10 +64,31 @@ export class Oauth2Authentication implements SecurityAuthentication {
     }
 }
 
+/**
+ * Applies oauth2 authentication to the request context.
+ */
+export class Oauth2LegacyAuthentication implements SecurityAuthentication {
+    /**
+     * Configures OAuth2 with the necessary properties
+     *
+     * @param accessToken: The access token to be used for every request
+     */
+    public constructor(private accessToken: string) {}
+
+    public getName(): string {
+        return "oauth2_legacy";
+    }
+
+    public applySecurityAuthentication(context: RequestContext) {
+        context.setHeaderParam("Authorization", "Bearer " + this.accessToken);
+    }
+}
+
 
 export type AuthMethods = {
     "hapikey"?: SecurityAuthentication,
-    "oauth2"?: SecurityAuthentication
+    "oauth2"?: SecurityAuthentication,
+    "oauth2_legacy"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -77,7 +98,8 @@ export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
     "hapikey"?: ApiKeyConfiguration,
-    "oauth2"?: OAuth2Configuration
+    "oauth2"?: OAuth2Configuration,
+    "oauth2_legacy"?: OAuth2Configuration
 }
 
 /**
@@ -100,6 +122,12 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (config["oauth2"]) {
         authMethods["oauth2"] = new Oauth2Authentication(
             config["oauth2"]["accessToken"]
+        );
+    }
+
+    if (config["oauth2_legacy"]) {
+        authMethods["oauth2_legacy"] = new Oauth2LegacyAuthentication(
+            config["oauth2_legacy"]["accessToken"]
         );
     }
 
