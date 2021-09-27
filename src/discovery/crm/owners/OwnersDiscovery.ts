@@ -1,16 +1,16 @@
 import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
-import { DefaultApi } from '../../../../codegen/crm/owners/index'
+import { OwnersApi } from '../../../../codegen/crm/owners/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class OwnersDiscovery extends BaseDiscovery {
-  public defaultApi: DefaultApi
+  public ownersApi: OwnersApi
 
   constructor(config: IConfiguration) {
     super(config)
 
     const configuration = createConfiguration(this.getParams())
 
-    this.defaultApi = new DefaultApi(configuration)
+    this.ownersApi = new OwnersApi(configuration)
   }
 }
