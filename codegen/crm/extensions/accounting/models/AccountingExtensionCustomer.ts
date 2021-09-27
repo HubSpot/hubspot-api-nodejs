@@ -72,7 +72,7 @@ export class AccountingExtensionCustomer {
     static getAttributeTypeMap() {
         return AccountingExtensionCustomer.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

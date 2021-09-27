@@ -44,7 +44,7 @@ export class InvoicePdfResponse {
     static getAttributeTypeMap() {
         return InvoicePdfResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

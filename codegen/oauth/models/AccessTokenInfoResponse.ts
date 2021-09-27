@@ -18,6 +18,8 @@ export class AccessTokenInfoResponse {
     'hubDomain'?: string;
     'scopes': Array<string>;
     'scopeToScopeGroupPks': Array<number>;
+    'trialScopes': Array<string>;
+    'trialScopeToScopeGroupPks': Array<number>;
     'hubId': number;
     'appId': number;
     'expiresIn': number;
@@ -58,6 +60,18 @@ export class AccessTokenInfoResponse {
             "format": "int32"
         },
         {
+            "name": "trialScopes",
+            "baseName": "trial_scopes",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "trialScopeToScopeGroupPks",
+            "baseName": "trial_scope_to_scope_group_pks",
+            "type": "Array<number>",
+            "format": "int32"
+        },
+        {
             "name": "hubId",
             "baseName": "hub_id",
             "type": "number",
@@ -91,7 +105,7 @@ export class AccessTokenInfoResponse {
     static getAttributeTypeMap() {
         return AccessTokenInfoResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

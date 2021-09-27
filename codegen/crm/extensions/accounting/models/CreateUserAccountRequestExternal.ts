@@ -54,7 +54,7 @@ export class CreateUserAccountRequestExternal {
     static getAttributeTypeMap() {
         return CreateUserAccountRequestExternal.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

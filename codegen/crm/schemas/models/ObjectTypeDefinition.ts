@@ -143,7 +143,7 @@ export class ObjectTypeDefinition {
     static getAttributeTypeMap() {
         return ObjectTypeDefinition.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

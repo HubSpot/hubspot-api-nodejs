@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -39,14 +41,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -54,7 +48,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -83,12 +83,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -107,7 +101,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -149,22 +149,22 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (properties !== undefined) {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
         }
+
+        // Query Params
         if (associations !== undefined) {
             requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
         }
+
+        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
+
+        // Query Params
         if (idProperty !== undefined) {
             requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -172,7 +172,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -208,25 +214,27 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
+
+        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
+
+        // Query Params
         if (properties !== undefined) {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
         }
+
+        // Query Params
         if (associations !== undefined) {
             requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
         }
+
+        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -234,7 +242,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -278,10 +292,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
         }
 
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -300,7 +310,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

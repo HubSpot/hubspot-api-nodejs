@@ -54,7 +54,7 @@ export class PipelinePatchInput {
     static getAttributeTypeMap() {
         return PipelinePatchInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

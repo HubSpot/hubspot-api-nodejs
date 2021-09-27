@@ -79,7 +79,7 @@ export class BatchResponseSimplePublicObjectWithErrors {
     static getAttributeTypeMap() {
         return BatchResponseSimplePublicObjectWithErrors.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

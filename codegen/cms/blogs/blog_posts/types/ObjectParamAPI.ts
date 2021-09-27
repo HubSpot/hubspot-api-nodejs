@@ -30,317 +30,317 @@ import { Styles } from '../models/Styles';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservableBlogPostApi } from "./ObservableAPI";
+import { BlogPostApiRequestFactory, BlogPostApiResponseProcessor} from "../apis/BlogPostApi";
 
-export interface DefaultApiArchiveRequest {
+export interface BlogPostApiArchiveRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApiarchive
+     * @memberof BlogPostApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefaultApiarchive
+     * @memberof BlogPostApiarchive
      */
     archived?: boolean
 }
 
-export interface DefaultApiArchiveBatchRequest {
+export interface BlogPostApiArchiveBatchRequest {
     /**
      * The JSON array of Blog Post ids.
      * @type BatchInputString
-     * @memberof DefaultApiarchiveBatch
+     * @memberof BlogPostApiarchiveBatch
      */
     batchInputString: BatchInputString
 }
 
-export interface DefaultApiCloneRequest {
+export interface BlogPostApiCloneRequest {
     /**
      * The JSON representation of the ContentCloneRequest object.
      * @type ContentCloneRequestVNext
-     * @memberof DefaultApiclone
+     * @memberof BlogPostApiclone
      */
     contentCloneRequestVNext: ContentCloneRequestVNext
 }
 
-export interface DefaultApiCreateRequest {
+export interface BlogPostApiCreateRequest {
     /**
      * The JSON representation of a new Blog Post.
      * @type BlogPost
-     * @memberof DefaultApicreate
+     * @memberof BlogPostApicreate
      */
     blogPost: BlogPost
 }
 
-export interface DefaultApiCreateBatchRequest {
+export interface BlogPostApiCreateBatchRequest {
     /**
      * The JSON array of new Blog Posts to create.
      * @type BatchInputBlogPost
-     * @memberof DefaultApicreateBatch
+     * @memberof BlogPostApicreateBatch
      */
     batchInputBlogPost: BatchInputBlogPost
 }
 
-export interface DefaultApiGetByIdRequest {
+export interface BlogPostApiGetByIdRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApigetById
+     * @memberof BlogPostApigetById
      */
     objectId: string
     /**
      * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetById
+     * @memberof BlogPostApigetById
      */
     archived?: boolean
 }
 
-export interface DefaultApiGetDraftByIdRequest {
+export interface BlogPostApiGetDraftByIdRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApigetDraftById
+     * @memberof BlogPostApigetDraftById
      */
     objectId: string
 }
 
-export interface DefaultApiGetPageRequest {
+export interface BlogPostApiGetPageRequest {
     /**
      * Only return Blog Posts created at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     createdAt?: Date
     /**
      * Only return Blog Posts created after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Blog Posts created before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Blog Posts last updated at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Blog Posts last updated after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Blog Posts last updated before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetPage
+     * @memberof BlogPostApigetPage
      */
     archived?: boolean
 }
 
-export interface DefaultApiGetPreviousVersionRequest {
+export interface BlogPostApiGetPreviousVersionRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApigetPreviousVersion
+     * @memberof BlogPostApigetPreviousVersion
      */
     objectId: string
     /**
      * The Blog Post version id.
      * @type string
-     * @memberof DefaultApigetPreviousVersion
+     * @memberof BlogPostApigetPreviousVersion
      */
     revisionId: string
 }
 
-export interface DefaultApiGetPreviousVersionsRequest {
+export interface BlogPostApiGetPreviousVersionsRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApigetPreviousVersions
+     * @memberof BlogPostApigetPreviousVersions
      */
     objectId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefaultApigetPreviousVersions
+     * @memberof BlogPostApigetPreviousVersions
      */
     after?: string
     /**
      * 
      * @type string
-     * @memberof DefaultApigetPreviousVersions
+     * @memberof BlogPostApigetPreviousVersions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
      * @type number
-     * @memberof DefaultApigetPreviousVersions
+     * @memberof BlogPostApigetPreviousVersions
      */
     limit?: number
 }
 
-export interface DefaultApiPushLiveRequest {
+export interface BlogPostApiPushLiveRequest {
     /**
      * The id of the Blog Post for which it&#39;s draft will be pushed live.
      * @type string
-     * @memberof DefaultApipushLive
+     * @memberof BlogPostApipushLive
      */
     objectId: string
 }
 
-export interface DefaultApiReadBatchRequest {
+export interface BlogPostApiReadBatchRequest {
     /**
      * The JSON array of Blog Post ids.
      * @type BatchInputString
-     * @memberof DefaultApireadBatch
+     * @memberof BlogPostApireadBatch
      */
     batchInputString: BatchInputString
     /**
      * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApireadBatch
+     * @memberof BlogPostApireadBatch
      */
     archived?: boolean
 }
 
-export interface DefaultApiResetDraftRequest {
+export interface BlogPostApiResetDraftRequest {
     /**
      * The id of the Blog Post for which it&#39;s draft will be reset.
      * @type string
-     * @memberof DefaultApiresetDraft
+     * @memberof BlogPostApiresetDraft
      */
     objectId: string
 }
 
-export interface DefaultApiRestorePreviousVersionRequest {
+export interface BlogPostApiRestorePreviousVersionRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApirestorePreviousVersion
+     * @memberof BlogPostApirestorePreviousVersion
      */
     objectId: string
     /**
      * The Blog Post version id to restore.
      * @type string
-     * @memberof DefaultApirestorePreviousVersion
+     * @memberof BlogPostApirestorePreviousVersion
      */
     revisionId: string
 }
 
-export interface DefaultApiRestorePreviousVersionToDraftRequest {
+export interface BlogPostApiRestorePreviousVersionToDraftRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApirestorePreviousVersionToDraft
+     * @memberof BlogPostApirestorePreviousVersionToDraft
      */
     objectId: string
     /**
      * The Blog Post version id to restore.
      * @type number
-     * @memberof DefaultApirestorePreviousVersionToDraft
+     * @memberof BlogPostApirestorePreviousVersionToDraft
      */
     revisionId: number
 }
 
-export interface DefaultApiScheduleRequest {
+export interface BlogPostApiScheduleRequest {
     /**
      * The JSON representation of the ContentCloneRequestVNext object.
      * @type ContentScheduleRequestVNext
-     * @memberof DefaultApischedule
+     * @memberof BlogPostApischedule
      */
     contentScheduleRequestVNext: ContentScheduleRequestVNext
 }
 
-export interface DefaultApiUpdateRequest {
+export interface BlogPostApiUpdateRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApiupdate
+     * @memberof BlogPostApiupdate
      */
     objectId: string
     /**
      * The JSON representation of the updated Blog Post.
      * @type BlogPost
-     * @memberof DefaultApiupdate
+     * @memberof BlogPostApiupdate
      */
     blogPost: BlogPost
     /**
      * Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApiupdate
+     * @memberof BlogPostApiupdate
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateBatchRequest {
+export interface BlogPostApiUpdateBatchRequest {
     /**
      * 
      * @type BatchInputJsonNode
-     * @memberof DefaultApiupdateBatch
+     * @memberof BlogPostApiupdateBatch
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefaultApiupdateBatch
+     * @memberof BlogPostApiupdateBatch
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateDraftRequest {
+export interface BlogPostApiUpdateDraftRequest {
     /**
      * The Blog Post id.
      * @type string
-     * @memberof DefaultApiupdateDraft
+     * @memberof BlogPostApiupdateDraft
      */
     objectId: string
     /**
      * The JSON representation of the updated Blog Post to be applied to the draft.
      * @type BlogPost
-     * @memberof DefaultApiupdateDraft
+     * @memberof BlogPostApiupdateDraft
      */
     blogPost: BlogPost
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectBlogPostApi {
+    private api: ObservableBlogPostApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: BlogPostApiRequestFactory, responseProcessor?: BlogPostApiResponseProcessor) {
+        this.api = new ObservableBlogPostApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -348,7 +348,7 @@ export class ObjectDefaultApi {
      * Delete a Blog Post
      * @param param the request object
      */
-    public archive(param: DefaultApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BlogPostApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -357,7 +357,7 @@ export class ObjectDefaultApi {
      * Archive a batch of Blog Posts
      * @param param the request object
      */
-    public archiveBatch(param: DefaultApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: BlogPostApiArchiveBatchRequest, options?: Configuration): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -366,7 +366,7 @@ export class ObjectDefaultApi {
      * Clone a Blog Post
      * @param param the request object
      */
-    public clone(param: DefaultApiCloneRequest, options?: Configuration): Promise<BlogPost> {
+    public clone(param: BlogPostApiCloneRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.clone(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -375,7 +375,7 @@ export class ObjectDefaultApi {
      * Create a new Blog Post
      * @param param the request object
      */
-    public create(param: DefaultApiCreateRequest, options?: Configuration): Promise<BlogPost> {
+    public create(param: BlogPostApiCreateRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.create(param.blogPost,  options).toPromise();
     }
 
@@ -384,7 +384,7 @@ export class ObjectDefaultApi {
      * Create a batch of Blog Posts
      * @param param the request object
      */
-    public createBatch(param: DefaultApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public createBatch(param: BlogPostApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
         return this.api.createBatch(param.batchInputBlogPost,  options).toPromise();
     }
 
@@ -393,7 +393,7 @@ export class ObjectDefaultApi {
      * Retrieve a Blog Post
      * @param param the request object
      */
-    public getById(param: DefaultApiGetByIdRequest, options?: Configuration): Promise<BlogPost> {
+    public getById(param: BlogPostApiGetByIdRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.getById(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -402,7 +402,7 @@ export class ObjectDefaultApi {
      * Retrieve the full draft version of the Blog Post
      * @param param the request object
      */
-    public getDraftById(param: DefaultApiGetDraftByIdRequest, options?: Configuration): Promise<BlogPost> {
+    public getDraftById(param: BlogPostApiGetDraftByIdRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.getDraftById(param.objectId,  options).toPromise();
     }
 
@@ -411,7 +411,7 @@ export class ObjectDefaultApi {
      * Get all Blog Posts
      * @param param the request object
      */
-    public getPage(param: DefaultApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
+    public getPage(param: BlogPostApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
@@ -420,7 +420,7 @@ export class ObjectDefaultApi {
      * Retrieves a previous version of a blog post
      * @param param the request object
      */
-    public getPreviousVersion(param: DefaultApiGetPreviousVersionRequest, options?: Configuration): Promise<VersionBlogPost> {
+    public getPreviousVersion(param: BlogPostApiGetPreviousVersionRequest, options?: Configuration): Promise<VersionBlogPost> {
         return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -429,7 +429,7 @@ export class ObjectDefaultApi {
      * Retrieves all the previous versions of a blog post
      * @param param the request object
      */
-    public getPreviousVersions(param: DefaultApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionBlogPost> {
+    public getPreviousVersions(param: BlogPostApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionBlogPost> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -438,7 +438,7 @@ export class ObjectDefaultApi {
      * Push Blog Post draft edits live
      * @param param the request object
      */
-    public pushLive(param: DefaultApiPushLiveRequest, options?: Configuration): Promise<void> {
+    public pushLive(param: BlogPostApiPushLiveRequest, options?: Configuration): Promise<void> {
         return this.api.pushLive(param.objectId,  options).toPromise();
     }
 
@@ -447,7 +447,7 @@ export class ObjectDefaultApi {
      * Retrieve a batch of Blog Posts
      * @param param the request object
      */
-    public readBatch(param: DefaultApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public readBatch(param: BlogPostApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -456,7 +456,7 @@ export class ObjectDefaultApi {
      * Reset the Blog Post draft to the live version
      * @param param the request object
      */
-    public resetDraft(param: DefaultApiResetDraftRequest, options?: Configuration): Promise<void> {
+    public resetDraft(param: BlogPostApiResetDraftRequest, options?: Configuration): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
     }
 
@@ -465,7 +465,7 @@ export class ObjectDefaultApi {
      * Restore a previous version of a blog post
      * @param param the request object
      */
-    public restorePreviousVersion(param: DefaultApiRestorePreviousVersionRequest, options?: Configuration): Promise<BlogPost> {
+    public restorePreviousVersion(param: BlogPostApiRestorePreviousVersionRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -474,7 +474,7 @@ export class ObjectDefaultApi {
      * Restore a previous version of a blog post, to the draft version of the blog post
      * @param param the request object
      */
-    public restorePreviousVersionToDraft(param: DefaultApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<BlogPost> {
+    public restorePreviousVersionToDraft(param: BlogPostApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -483,7 +483,7 @@ export class ObjectDefaultApi {
      * Schedule a Blog Post to be Published
      * @param param the request object
      */
-    public schedule(param: DefaultApiScheduleRequest, options?: Configuration): Promise<void> {
+    public schedule(param: BlogPostApiScheduleRequest, options?: Configuration): Promise<void> {
         return this.api.schedule(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -492,7 +492,7 @@ export class ObjectDefaultApi {
      * Update a Blog Post
      * @param param the request object
      */
-    public update(param: DefaultApiUpdateRequest, options?: Configuration): Promise<BlogPost> {
+    public update(param: BlogPostApiUpdateRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.update(param.objectId, param.blogPost, param.archived,  options).toPromise();
     }
 
@@ -501,7 +501,7 @@ export class ObjectDefaultApi {
      * Update a batch of Blog Posts
      * @param param the request object
      */
-    public updateBatch(param: DefaultApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public updateBatch(param: BlogPostApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -510,7 +510,7 @@ export class ObjectDefaultApi {
      * Update a Blog Post draft
      * @param param the request object
      */
-    public updateDraft(param: DefaultApiUpdateDraftRequest, options?: Configuration): Promise<BlogPost> {
+    public updateDraft(param: BlogPostApiUpdateDraftRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.updateDraft(param.objectId, param.blogPost,  options).toPromise();
     }
 

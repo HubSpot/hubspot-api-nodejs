@@ -44,7 +44,7 @@ export class ActionFunctionIdentifier {
     static getAttributeTypeMap() {
         return ActionFunctionIdentifier.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -31,7 +31,7 @@ export class PublicObjectId {
     static getAttributeTypeMap() {
         return PublicObjectId.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

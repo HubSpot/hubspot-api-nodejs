@@ -56,7 +56,7 @@ export class TokenResponseIF {
     static getAttributeTypeMap() {
         return TokenResponseIF.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -65,7 +65,7 @@ export class CardDisplayProperty {
     static getAttributeTypeMap() {
         return CardDisplayProperty.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

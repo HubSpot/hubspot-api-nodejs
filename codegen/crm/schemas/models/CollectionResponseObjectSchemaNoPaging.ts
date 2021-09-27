@@ -29,7 +29,7 @@ export class CollectionResponseObjectSchemaNoPaging {
     static getAttributeTypeMap() {
         return CollectionResponseObjectSchemaNoPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

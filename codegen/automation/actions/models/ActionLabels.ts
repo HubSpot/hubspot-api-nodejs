@@ -84,7 +84,7 @@ export class ActionLabels {
     static getAttributeTypeMap() {
         return ActionLabels.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

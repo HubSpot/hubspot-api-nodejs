@@ -44,7 +44,7 @@ export class CallbackCompletionBatchRequest {
     static getAttributeTypeMap() {
         return CallbackCompletionBatchRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

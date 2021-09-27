@@ -44,7 +44,7 @@ export class EventIdView {
     static getAttributeTypeMap() {
         return EventIdView.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

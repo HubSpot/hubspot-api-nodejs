@@ -13,18 +13,18 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservableTagApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { TagApiRequestFactory, TagApiResponseProcessor} from "../apis/TagApi";
+export class PromiseTagApi {
+    private api: ObservableTagApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: TagApiRequestFactory,
+        responseProcessor?: TagApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableTagApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

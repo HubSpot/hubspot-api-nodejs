@@ -178,7 +178,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Archive a list of contacts given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of contacts by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -188,7 +187,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create a batch of contacts. This follows the same rules as creating an individual object.
      * Create a batch of contacts
      * @param batchInputSimplePublicObjectInput 
      */
@@ -198,7 +196,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Read a list of contacts given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of contacts by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -209,12 +206,50 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Perform a partial upate on a batch of contacts. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of contacts
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableGDPRApi } from './ObservableAPI';
+
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+export class PromiseGDPRApi {
+    private api: ObservableGDPRApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: GDPRApiRequestFactory,
+        responseProcessor?: GDPRApiResponseProcessor
+    ) {
+        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn't found, blacklists an email address from being used in the future.
+     * DELETE
+     * @param email 
+     */
+    public purgeByEmail(email: string, _options?: Configuration): Promise<void> {
+        const result = this.api.purgeByEmail(email, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Permanently delete a contact by id and all associated content to follow GDPR
+     * DELETE
+     * @param contactId 
+     */
+    public purgeById(contactId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.purgeById(contactId, _options);
         return result.toPromise();
     }
 
@@ -238,8 +273,6 @@ export class PromiseSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {

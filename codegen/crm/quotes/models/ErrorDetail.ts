@@ -71,7 +71,7 @@ export class ErrorDetail {
     static getAttributeTypeMap() {
         return ErrorDetail.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

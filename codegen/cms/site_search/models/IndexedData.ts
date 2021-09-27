@@ -55,7 +55,7 @@ export class IndexedData {
     static getAttributeTypeMap() {
         return IndexedData.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

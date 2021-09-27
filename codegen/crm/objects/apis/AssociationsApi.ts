@@ -3,9 +3,11 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
+
 
 import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
@@ -68,14 +70,6 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -83,7 +77,13 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -144,14 +144,6 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -159,7 +151,13 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -212,16 +210,12 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
         }
+
+        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
-        // Header Params
-
-        // Form Params
-
-
-        // Body Params
 
         let authMethod = null;
         // Apply auth methods
@@ -229,7 +223,13 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
+        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

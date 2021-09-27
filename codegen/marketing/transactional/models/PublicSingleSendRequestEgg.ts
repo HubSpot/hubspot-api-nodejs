@@ -62,7 +62,7 @@ export class PublicSingleSendRequestEgg {
     static getAttributeTypeMap() {
         return PublicSingleSendRequestEgg.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

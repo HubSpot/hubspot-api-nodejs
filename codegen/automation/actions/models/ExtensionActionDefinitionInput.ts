@@ -117,7 +117,7 @@ export class ExtensionActionDefinitionInput {
     static getAttributeTypeMap() {
         return ExtensionActionDefinitionInput.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

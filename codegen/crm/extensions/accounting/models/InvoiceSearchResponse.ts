@@ -45,7 +45,7 @@ export class InvoiceSearchResponse {
     static getAttributeTypeMap() {
         return InvoiceSearchResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

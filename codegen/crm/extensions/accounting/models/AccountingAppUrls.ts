@@ -168,7 +168,7 @@ export class AccountingAppUrls {
     static getAttributeTypeMap() {
         return AccountingAppUrls.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

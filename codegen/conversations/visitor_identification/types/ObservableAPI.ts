@@ -47,5 +47,5 @@ export class ObservableGenerateApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.generateToken(rsp)));
             }));
     }
- 
+
 }

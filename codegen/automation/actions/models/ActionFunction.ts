@@ -54,7 +54,7 @@ export class ActionFunction {
     static getAttributeTypeMap() {
         return ActionFunction.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

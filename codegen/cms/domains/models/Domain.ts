@@ -443,7 +443,7 @@ export class Domain {
     static getAttributeTypeMap() {
         return Domain.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

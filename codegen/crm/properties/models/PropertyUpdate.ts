@@ -112,7 +112,7 @@ export class PropertyUpdate {
     static getAttributeTypeMap() {
         return PropertyUpdate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -119,42 +119,42 @@ export class ObjectCoreApi {
 
 }
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservablePublicImportsApi } from "./ObservableAPI";
+import { PublicImportsApiRequestFactory, PublicImportsApiResponseProcessor} from "../apis/PublicImportsApi";
 
-export interface DefaultApiGetCrmV3ImportsImportIdErrorsRequest {
+export interface PublicImportsApiGetErrorsRequest {
     /**
      * 
      * @type number
-     * @memberof DefaultApigetCrmV3ImportsImportIdErrors
+     * @memberof PublicImportsApigetErrors
      */
     importId: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefaultApigetCrmV3ImportsImportIdErrors
+     * @memberof PublicImportsApigetErrors
      */
     after?: string
     /**
      * The maximum number of results to display per page.
      * @type number
-     * @memberof DefaultApigetCrmV3ImportsImportIdErrors
+     * @memberof PublicImportsApigetErrors
      */
     limit?: number
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectPublicImportsApi {
+    private api: ObservablePublicImportsApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicImportsApiRequestFactory, responseProcessor?: PublicImportsApiResponseProcessor) {
+        this.api = new ObservablePublicImportsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * @param param the request object
      */
-    public getCrmV3ImportsImportIdErrors(param: DefaultApiGetCrmV3ImportsImportIdErrorsRequest, options?: Configuration): Promise<CollectionResponsePublicImportErrorForwardPaging> {
-        return this.api.getCrmV3ImportsImportIdErrors(param.importId, param.after, param.limit,  options).toPromise();
+    public getErrors(param: PublicImportsApiGetErrorsRequest, options?: Configuration): Promise<CollectionResponsePublicImportErrorForwardPaging> {
+        return this.api.getErrors(param.importId, param.after, param.limit,  options).toPromise();
     }
 
 }

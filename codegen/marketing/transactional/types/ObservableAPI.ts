@@ -15,20 +15,20 @@ import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { PublicSmtpTokensApiRequestFactory, PublicSmtpTokensApiResponseProcessor} from "../apis/PublicSmtpTokensApi";
+export class ObservablePublicSmtpTokensApi {
+    private requestFactory: PublicSmtpTokensApiRequestFactory;
+    private responseProcessor: PublicSmtpTokensApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicSmtpTokensApiRequestFactory,
+        responseProcessor?: PublicSmtpTokensApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicSmtpTokensApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicSmtpTokensApiResponseProcessor();
     }
 
     /**
@@ -54,7 +54,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveToken(rsp)));
             }));
     }
- 
+
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
@@ -78,7 +78,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createToken(rsp)));
             }));
     }
- 
+
     /**
      * Query a single token by ID.
      * Query a single token by ID.
@@ -102,7 +102,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getTokenById(rsp)));
             }));
     }
- 
+
     /**
      * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
      * Query SMTP API tokens by campaign name or an emailCampaignId.
@@ -129,7 +129,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getTokensPage(rsp)));
             }));
     }
- 
+
     /**
      * Allows the creation of a replacement password for a given token. Once the password is successfully reset, the old password for the token will be invalid.
      * Reset the password of an existing token.
@@ -153,7 +153,25 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.resetPassword(rsp)));
             }));
     }
- 
+
+}
+
+import { SingleSendApiRequestFactory, SingleSendApiResponseProcessor} from "../apis/SingleSendApi";
+export class ObservableSingleSendApi {
+    private requestFactory: SingleSendApiRequestFactory;
+    private responseProcessor: SingleSendApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SingleSendApiRequestFactory,
+        responseProcessor?: SingleSendApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new SingleSendApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SingleSendApiResponseProcessor();
+    }
+
     /**
      * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
      * Send a single transactional email asynchronously.
@@ -177,5 +195,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sendEmail(rsp)));
             }));
     }
- 
+
 }

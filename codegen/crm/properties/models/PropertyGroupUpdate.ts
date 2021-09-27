@@ -41,7 +41,7 @@ export class PropertyGroupUpdate {
     static getAttributeTypeMap() {
         return PropertyGroupUpdate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

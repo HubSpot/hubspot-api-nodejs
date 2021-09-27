@@ -45,7 +45,7 @@ export class Gradient {
     static getAttributeTypeMap() {
         return Gradient.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

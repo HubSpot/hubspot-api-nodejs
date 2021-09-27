@@ -44,7 +44,7 @@ export class ThrottlingSettings {
     static getAttributeTypeMap() {
         return ThrottlingSettings.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

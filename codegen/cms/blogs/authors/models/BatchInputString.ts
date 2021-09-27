@@ -28,7 +28,7 @@ export class BatchInputString {
     static getAttributeTypeMap() {
         return BatchInputString.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

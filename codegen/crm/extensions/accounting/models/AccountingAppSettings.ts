@@ -50,7 +50,7 @@ export class AccountingAppSettings {
     static getAttributeTypeMap() {
         return AccountingAppSettings.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

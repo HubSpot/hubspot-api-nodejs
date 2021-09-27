@@ -64,7 +64,7 @@ export class BatchResponseSubscriptionResponse {
     static getAttributeTypeMap() {
         return BatchResponseSubscriptionResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

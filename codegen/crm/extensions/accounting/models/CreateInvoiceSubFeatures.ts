@@ -84,7 +84,7 @@ export class CreateInvoiceSubFeatures {
     static getAttributeTypeMap() {
         return CreateInvoiceSubFeatures.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

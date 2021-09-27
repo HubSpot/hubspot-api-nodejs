@@ -67,7 +67,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.complete(rsp)));
             }));
     }
- 
+
     /**
      * Completes the given action callbacks.
      * Complete a batch of callbacks
@@ -91,7 +91,7 @@ export class ObservableCallbacksApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatch(rsp)));
             }));
     }
- 
+
 }
 
 import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
@@ -134,7 +134,7 @@ export class ObservableDefinitionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Creates a new custom workflow action.
      * Create new custom action
@@ -159,7 +159,7 @@ export class ObservableDefinitionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Returns a single custom workflow action with the specified ID.
      * Get a custom action
@@ -185,7 +185,7 @@ export class ObservableDefinitionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns a list of all custom workflow actions.
      * Get all custom actions
@@ -212,7 +212,7 @@ export class ObservableDefinitionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
     /**
      * Updates a custom workflow action with new values for the specified fields.
      * Update a custom action
@@ -238,7 +238,7 @@ export class ObservableDefinitionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }
 
 import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
@@ -283,7 +283,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
      * Delete a custom action function
@@ -309,7 +309,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveByFunctionType(rsp)));
             }));
     }
- 
+
     /**
      * Creates or replaces a function for a custom workflow action.
      * Create or replace a custom action function
@@ -337,7 +337,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplace(rsp)));
             }));
     }
- 
+
     /**
      * Creates or replaces a function for a custom workflow action.
      * Create or replace a custom action function
@@ -364,7 +364,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplaceByFunctionType(rsp)));
             }));
     }
- 
+
     /**
      * Returns the given function for a custom workflow action.
      * Get a custom action function
@@ -390,7 +390,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByFunctionType(rsp)));
             }));
     }
- 
+
     /**
      * Returns the given function for a custom workflow action.
      * Get a custom action function
@@ -417,7 +417,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns a list of all functions that are associated with the given custom workflow action.
      * Get all custom action functions
@@ -442,7 +442,7 @@ export class ObservableFunctionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }
 
 import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
@@ -486,7 +486,7 @@ export class ObservableRevisionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns a list of revisions for a custom workflow action.
      * Get all revisions for a custom action
@@ -513,5 +513,5 @@ export class ObservableRevisionsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }

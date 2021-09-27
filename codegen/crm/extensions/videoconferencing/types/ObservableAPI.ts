@@ -46,7 +46,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Return the settings for a video conference application with the specified ID.
      * Get settings
@@ -70,7 +70,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Updates the settings for a video conference application with the specified ID.
      * Update settings
@@ -95,5 +95,5 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
             }));
     }
- 
+
 }

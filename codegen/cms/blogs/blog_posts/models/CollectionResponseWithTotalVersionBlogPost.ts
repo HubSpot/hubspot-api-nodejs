@@ -44,7 +44,7 @@ export class CollectionResponseWithTotalVersionBlogPost {
     static getAttributeTypeMap() {
         return CollectionResponseWithTotalVersionBlogPost.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

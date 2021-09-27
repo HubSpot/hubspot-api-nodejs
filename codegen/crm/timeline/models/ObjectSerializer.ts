@@ -1,14 +1,11 @@
 export * from './BatchInputTimelineEvent';
 export * from './BatchResponseTimelineEventResponse';
 export * from './BatchResponseTimelineEventResponseWithErrors';
-export * from './CollectionResponseTimelineEventTemplate';
+export * from './CollectionResponseTimelineEventTemplateNoPaging';
 export * from './ErrorCategory';
 export * from './ErrorDetail';
 export * from './EventDetail';
 export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PreviousPage';
 export * from './StandardError';
 export * from './TimelineEvent';
 export * from './TimelineEventIFrame';
@@ -23,14 +20,11 @@ export * from './TimelineEventTemplateUpdateRequest';
 import { BatchInputTimelineEvent } from './BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse, BatchResponseTimelineEventResponseStatusEnum        } from './BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors, BatchResponseTimelineEventResponseWithErrorsStatusEnum          } from './BatchResponseTimelineEventResponseWithErrors';
-import { CollectionResponseTimelineEventTemplate } from './CollectionResponseTimelineEventTemplate';
+import { CollectionResponseTimelineEventTemplateNoPaging } from './CollectionResponseTimelineEventTemplateNoPaging';
 import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
 import { ErrorDetail } from './ErrorDetail';
 import { EventDetail } from './EventDetail';
 import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PreviousPage } from './PreviousPage';
 import { StandardError } from './StandardError';
 import { TimelineEvent } from './TimelineEvent';
 import { TimelineEventIFrame } from './TimelineEventIFrame';
@@ -56,10 +50,11 @@ let primitives = [
 
 const supportedMediaTypes: { [mediaType: string]: number } = {
   "application/json": Infinity,
-  "application/octet-stream": 0
+  "application/octet-stream": 0,
+  "application/x-www-form-urlencoded": 0
 }
 
-                 
+
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseTimelineEventResponseStatusEnum",
     "BatchResponseTimelineEventResponseWithErrorsStatusEnum",
@@ -71,14 +66,11 @@ let typeMap: {[index: string]: any} = {
     "BatchInputTimelineEvent": BatchInputTimelineEvent,
     "BatchResponseTimelineEventResponse": BatchResponseTimelineEventResponse,
     "BatchResponseTimelineEventResponseWithErrors": BatchResponseTimelineEventResponseWithErrors,
-    "CollectionResponseTimelineEventTemplate": CollectionResponseTimelineEventTemplate,
+    "CollectionResponseTimelineEventTemplateNoPaging": CollectionResponseTimelineEventTemplateNoPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "EventDetail": EventDetail,
     "ModelError": ModelError,
-    "NextPage": NextPage,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "StandardError": StandardError,
     "TimelineEvent": TimelineEvent,
     "TimelineEventIFrame": TimelineEventIFrame,
@@ -159,7 +151,7 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // in case we dont know the type
                 return data;
             }
-            
+
             // Get the actual type of this object
             type = this.findCorrectType(data, type);
 

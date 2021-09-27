@@ -44,7 +44,7 @@ export class SmtpApiTokenRequestEgg {
     static getAttributeTypeMap() {
         return SmtpApiTokenRequestEgg.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

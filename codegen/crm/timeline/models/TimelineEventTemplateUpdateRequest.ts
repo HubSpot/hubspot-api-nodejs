@@ -75,7 +75,7 @@ export class TimelineEventTemplateUpdateRequest {
     static getAttributeTypeMap() {
         return TimelineEventTemplateUpdateRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

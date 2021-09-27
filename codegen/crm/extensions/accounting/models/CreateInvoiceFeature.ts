@@ -42,7 +42,7 @@ export class CreateInvoiceFeature {
     static getAttributeTypeMap() {
         return CreateInvoiceFeature.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -54,7 +54,7 @@ export class AssociationDefinitionEgg {
     static getAttributeTypeMap() {
         return AssociationDefinitionEgg.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

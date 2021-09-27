@@ -84,7 +84,7 @@ export class PublicSingleSendEmail {
     static getAttributeTypeMap() {
         return PublicSingleSendEmail.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

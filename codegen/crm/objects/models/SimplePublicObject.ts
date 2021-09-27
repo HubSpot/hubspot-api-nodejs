@@ -63,7 +63,7 @@ export class SimplePublicObject {
     static getAttributeTypeMap() {
         return SimplePublicObject.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

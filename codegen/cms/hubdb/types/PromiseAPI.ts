@@ -2,23 +2,22 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { BatchInputHubDbTableRowV3 } from '../models/BatchInputHubDbTableRowV3';
+import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 import { Column } from '../models/Column';
-import { ColumnInput } from '../models/ColumnInput';
+import { ColumnRequest } from '../models/ColumnRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForeignId } from '../models/ForeignId';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
-import { HubDbTableRowV3Input } from '../models/HubDbTableRowV3Input';
+import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
 import { HubDbTableV3 } from '../models/HubDbTableV3';
-import { HubDbTableV3Input } from '../models/HubDbTableV3Input';
-import { HubDbTableV3LiveInput } from '../models/HubDbTableV3LiveInput';
+import { HubDbTableV3Request } from '../models/HubDbTableV3Request';
 import { ImportResult } from '../models/ImportResult';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
@@ -42,107 +41,107 @@ export class PromiseRowsApi {
     /**
      * Clones a single row in the `draft` version of the table.
      * Clone a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public cloneDraftTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.cloneDraftTableRow(rowId, tableIdOrName, _options);
+    public cloneDraftTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.cloneDraftTableRow(tableIdOrName, rowId, _options);
         return result.toPromise();
     }
 
     /**
-     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `push-live` endpoint to push these changes to live version and publish them.
+     * Add a new row to a HubDB table. New rows will be added to the `draft` version of the table. Use `publish` endpoint to push these changes to published version.
      * Add a new row to a table
      * @param tableIdOrName The ID or name of the target table.
-     * @param hubDbTableRowV3Input The row definition JSON, formatted as described above.
+     * @param hubDbTableRowV3Request The row definition JSON, formatted as described above.
      */
-    public createTableRow(tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.createTableRow(tableIdOrName, hubDbTableRowV3Input, _options);
+    public createTableRow(tableIdOrName: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.createTableRow(tableIdOrName, hubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
     /**
      * Get a single row by ID from a table's `draft` version.
      * Get a row from the draft table
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public getDraftTableRowById(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.getDraftTableRowById(rowId, tableIdOrName, _options);
+    public getDraftTableRowById(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.getDraftTableRowById(tableIdOrName, rowId, _options);
         return result.toPromise();
     }
 
     /**
-     * Get a single row by ID from a table's `live` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Get a single row by ID from a table's `published` version. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get a table row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public getTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.getTableRow(rowId, tableIdOrName, _options);
+    public getTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.getTableRow(tableIdOrName, rowId, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns a set of rows in the `live` version of the specified table. Row results can be filtered and sorted. Refer to the overview section for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the `published` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
+     * @param sort Specifies the column names to sort the results by. See the above description for more details.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * @param sort Specifies the column names to sort the results by. See the above description for more details.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details.
      */
-    public getTableRows(tableIdOrName: string, properties?: Array<string>, after?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableRowV3ForwardPaging> {
-        const result = this.api.getTableRows(tableIdOrName, properties, after, limit, sort, _options);
+    public getTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableRowV3ForwardPaging> {
+        const result = this.api.getTableRows(tableIdOrName, sort, after, limit, properties, _options);
         return result.toPromise();
     }
 
     /**
      * Permanently deletes a row from a table's `draft` version.
      * Permanently deletes a row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
+     * @param rowId The ID of the row
      */
-    public purgeDraftTableRow(rowId: string, tableIdOrName: string, _options?: Configuration): Promise<void> {
-        const result = this.api.purgeDraftTableRow(rowId, tableIdOrName, _options);
+    public purgeDraftTableRow(tableIdOrName: string, rowId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.purgeDraftTableRow(tableIdOrName, rowId, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted using the options mentioned in the overview section.
+     * Returns rows in the `draft` version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param tableIdOrName The ID or name of the table to query.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
      * @param sort Specifies the column names to sort the results by.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is &#x60;1000&#x60;.
+     * @param properties Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
      */
-    public readDraftTableRows(tableIdOrName: string, after?: string, properties?: Array<string>, limit?: number, sort?: Array<string>, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableRowV3ForwardPaging> {
-        const result = this.api.readDraftTableRows(tableIdOrName, after, properties, limit, sort, _options);
+    public readDraftTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableRowV3ForwardPaging> {
+        const result = this.api.readDraftTableRows(tableIdOrName, sort, after, limit, properties, _options);
         return result.toPromise();
     }
 
     /**
      * Replace a single row in the table's `draft` version. All the column values must be specified. If a column has a value in the target table and this request doesn't define that value, it will be deleted. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * Replaces an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row
      */
-    public replaceDraftTableRow(rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.replaceDraftTableRow(rowId, tableIdOrName, hubDbTableRowV3Input, _options);
+    public replaceDraftTableRow(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.replaceDraftTableRow(tableIdOrName, rowId, hubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
     /**
      * Sparse updates a single row in the table's `draft` version. All the column values need not be specified. Only the columns or fields that needs to be modified can be specified. See the `Create a row` endpoint for instructions on how to format the JSON row definitions.
      * Updates an existing row
-     * @param rowId The ID of the row
      * @param tableIdOrName The ID or name of the table
-     * @param hubDbTableRowV3Input The JSON object of the row with necessary fields that needs to be updated.
+     * @param rowId The ID of the row
+     * @param hubDbTableRowV3Request The JSON object of the row with necessary fields that needs to be updated.
      */
-    public updateDraftTableRow(rowId: string, tableIdOrName: string, hubDbTableRowV3Input: HubDbTableRowV3Input, _options?: Configuration): Promise<HubDbTableRowV3> {
-        const result = this.api.updateDraftTableRow(rowId, tableIdOrName, hubDbTableRowV3Input, _options);
+    public updateDraftTableRow(tableIdOrName: string, rowId: string, hubDbTableRowV3Request: HubDbTableRowV3Request, _options?: Configuration): Promise<HubDbTableRowV3> {
+        const result = this.api.updateDraftTableRow(tableIdOrName, rowId, hubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
@@ -180,10 +179,10 @@ export class PromiseRowsBatchApi {
      * Creates rows in the `draft` version of the specified table, given an array of row objects. See the overview section for more details with an example.
      * Create rows in batch
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
-        const result = this.api.batchCreateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3, _options);
+    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+        const result = this.api.batchCreateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
@@ -210,7 +209,7 @@ export class PromiseRowsBatchApi {
     }
 
     /**
-     * Returns rows in the `live` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Returns rows in the `published` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get a set of rows
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
@@ -224,10 +223,10 @@ export class PromiseRowsBatchApi {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects.
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
      */
-    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
-        const result = this.api.batchReplaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3, _options);
+    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+        const result = this.api.batchReplaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
@@ -262,7 +261,7 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Archive (soft delete) an existing HubDB table. This archives both the live and draft versions.
+     * Archive (soft delete) an existing HubDB table. This archives both the published and draft versions.
      * Archive a table
      * @param tableIdOrName The ID or name of the table to archive.
      */
@@ -285,10 +284,10 @@ export class PromiseTablesApi {
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
      * Create a new table
-     * @param hubDbTableV3Input The JSON schema for the table being created.
+     * @param hubDbTableV3Request The JSON schema for the table being created.
      */
-    public createTable(hubDbTableV3Input: HubDbTableV3Input, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.createTable(hubDbTableV3Input, _options);
+    public createTable(hubDbTableV3Request: HubDbTableV3Request, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.createTable(hubDbTableV3Request, _options);
         return result.toPromise();
     }
 
@@ -304,7 +303,7 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Exports the `live` version of a table to CSV / EXCEL format.
+     * Exports the `published` version of a table to CSV / EXCEL format.
      * Export a published version of a table
      * @param tableIdOrName The ID or name of the table to export.
      * @param format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -317,38 +316,38 @@ export class PromiseTablesApi {
     /**
      * Returns the details for each draft table defined in the specified account, including column definitions.
      * Return all draft tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public getAllDraftTables(updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        const result = this.api.getAllDraftTables(updatedAfter, updatedBefore, sort, createdAt, createdAfter, after, archived, createdBefore, updatedAt, limit, _options);
+    public getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+        const result = this.api.getAllDraftTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, archived, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns the details for the `live` version of each table defined in an account, including column definitions.
-     * Get all live tables
-     * @param updatedAfter Only return tables last updated after the specified time.
-     * @param updatedBefore Only return tables last updated before the specified time.
+     * Returns the details for the `published` version of each table defined in an account, including column definitions.
+     * Get all published tables
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to return. Default is 1000.
      * @param createdAt Only return tables created at exactly the specified time.
      * @param createdAfter Only return tables created after the specified time.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param createdBefore Only return tables created before the specified time.
      * @param updatedAt Only return tables last updated at exactly the specified time.
-     * @param limit The maximum number of results to return. Default is 1000.
+     * @param updatedAfter Only return tables last updated after the specified time.
+     * @param updatedBefore Only return tables last updated before the specified time.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public getAllTables(updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, createdAt?: Date, createdAfter?: Date, after?: string, archived?: boolean, createdBefore?: Date, updatedAt?: Date, limit?: number, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        const result = this.api.getAllTables(updatedAfter, updatedBefore, sort, createdAt, createdAfter, after, archived, createdBefore, updatedAt, limit, _options);
+    public getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+        const result = this.api.getAllTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, archived, _options);
         return result.toPromise();
     }
 
@@ -365,8 +364,8 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Returns the details for the `live` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
-     * Get details for a live table
+     * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
@@ -377,19 +376,19 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/push-live` endpoint to push these changes to `live` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the overview section to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/publish` endpoint to push these changes to `published` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
-     * @param file The source CSV file to be imported.
      * @param config Configuration for the import in JSON format as described above.
+     * @param file The source CSV file to be imported.
      */
-    public importDraftTable(tableIdOrName: string, file?: HttpFile, config?: string, _options?: Configuration): Promise<ImportResult> {
-        const result = this.api.importDraftTable(tableIdOrName, file, config, _options);
+    public importDraftTable(tableIdOrName: string, config?: string, file?: HttpFile, _options?: Configuration): Promise<ImportResult> {
+        const result = this.api.importDraftTable(tableIdOrName, config, file, _options);
         return result.toPromise();
     }
 
     /**
-     * Copies the data from draft to live version of the table and also publishes the live version. This will immediately push the data to the `live` version of the table and publishes the live version, meaning any website pages using data from the table will be updated.
+     * Publishes the table by copying the data and table schema changes from draft version to the published version, meaning any website pages using data from the table will be updated.
      * Publish a table from draft
      * @param tableIdOrName The ID or name of the table to publish.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -400,7 +399,7 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Replaces the data in the `draft` version of the table with values from the `live` version. Any unpublished changes in the `draft` will be lost after this call is made.
+     * Replaces the data in the `draft` version of the table with values from the `published` version. Any unpublished changes in the `draft` will be lost after this call is made.
      * Reset a draft table
      * @param tableIdOrName The ID or name of the table to reset.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -411,27 +410,26 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `push-live` endpoint to push all the changes to the `live` version. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
-     * Update an existing table
-     * @param tableIdOrName The ID or name of the table to update.
-     * @param hubDbTableV3Input The JSON schema for the table being updated.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * Unpublishes the table, meaning any website pages using data from the table will not render any data.
+     * Unpublish a table
+     * @param tableIdOrName The ID or name of the table to publish.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
      */
-    public updateDraftTable(tableIdOrName: string, hubDbTableV3Input: HubDbTableV3Input, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Input, includeForeignIds, _options);
+    public unpublishTable(tableIdOrName: string, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.unpublishTable(tableIdOrName, includeForeignIds, _options);
         return result.toPromise();
     }
 
     /**
-     * Use this endpoint to perform one of the following <ul><li> Publish a live version of a table (without copying table data from draft) </li><li>Un-publish a live version of a table (Leaving the data in the live version)</li><li>Restore an archived table</li></ul>  To publish a table, send `published` property in the JSON object with the value `true`. To unpublish a table, send `published` property in the JSON object with the value `false`.  To restore an archived table, send `archived` property in the JSON object with the value `false` along with the query parameter `archived=true`. When restoring an archived table, if an active table already exists with the same `name` or `label`, you will need to change the name of the archived table when restoring it using the `name` and `label` parameters with a new name and new label. When you restore a table, the table will be restored only in the `draft` version.  Examples:  Publish live version of a table:  ```     {       \"published\": true     } ``` Unpublish live version of a table: ```     {       \"published\": false     } ``` Restore a table: (send `archived=true` in query parameters) ```     {       \"archived\": false     } ``` Restore a table with a new name: (send `archived=true` in query parameters) ```     {       \"label\": \"New Table Name\",       \"name\": \"new_table_name\",       \"archived\": false     } ```
-     * Publish or unpublish a live version of a table or restore an archived table
-     * @param tableIdOrName The ID or name of the table to return.
-     * @param hubDbTableV3LiveInput The JSON object as described.
-     * @param archived Whether to return only results that have been archived.
+     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `publish` endpoint to push all the changes to the `published` version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+     * Update an existing table
+     * @param tableIdOrName The ID or name of the table to update.
+     * @param hubDbTableV3Request The JSON schema for the table being updated.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public updateTable(tableIdOrName: string, hubDbTableV3LiveInput: HubDbTableV3LiveInput, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.updateTable(tableIdOrName, hubDbTableV3LiveInput, archived, includeForeignIds, _options);
+    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Request, archived, includeForeignIds, _options);
         return result.toPromise();
     }
 

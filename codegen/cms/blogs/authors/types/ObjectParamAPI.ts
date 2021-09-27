@@ -14,185 +14,185 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { StandardError } from '../models/StandardError';
 
-import { ObservableDefaultApi } from "./ObservableAPI";
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
+import { ObservableAuthorApi } from "./ObservableAPI";
+import { AuthorApiRequestFactory, AuthorApiResponseProcessor} from "../apis/AuthorApi";
 
-export interface DefaultApiArchiveRequest {
+export interface AuthorApiArchiveRequest {
     /**
      * The Blog Author id.
      * @type string
-     * @memberof DefaultApiarchive
+     * @memberof AuthorApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefaultApiarchive
+     * @memberof AuthorApiarchive
      */
     archived?: boolean
 }
 
-export interface DefaultApiArchiveBatchRequest {
+export interface AuthorApiArchiveBatchRequest {
     /**
      * The JSON array of Blog Author ids.
      * @type BatchInputString
-     * @memberof DefaultApiarchiveBatch
+     * @memberof AuthorApiarchiveBatch
      */
     batchInputString: BatchInputString
 }
 
-export interface DefaultApiCreateRequest {
+export interface AuthorApiCreateRequest {
     /**
      * The JSON representation of a new Blog Author.
      * @type BlogAuthor
-     * @memberof DefaultApicreate
+     * @memberof AuthorApicreate
      */
     blogAuthor: BlogAuthor
 }
 
-export interface DefaultApiCreateBatchRequest {
+export interface AuthorApiCreateBatchRequest {
     /**
      * The JSON array of new Blog Authors to create.
      * @type BatchInputBlogAuthor
-     * @memberof DefaultApicreateBatch
+     * @memberof AuthorApicreateBatch
      */
     batchInputBlogAuthor: BatchInputBlogAuthor
 }
 
-export interface DefaultApiGetByIdRequest {
+export interface AuthorApiGetByIdRequest {
     /**
      * The Blog Author id.
      * @type string
-     * @memberof DefaultApigetById
+     * @memberof AuthorApigetById
      */
     objectId: string
     /**
      * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetById
+     * @memberof AuthorApigetById
      */
     archived?: boolean
 }
 
-export interface DefaultApiGetPageRequest {
+export interface AuthorApiGetPageRequest {
     /**
      * Only return Blog Authors created at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     createdAt?: Date
     /**
      * Only return Blog Authors created after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Blog Authors created before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Blog Authors last updated at exactly the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Blog Authors last updated after the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Blog Authors last updated before the specified time.
      * @type Date
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @type Array&lt;string&gt;
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
      * @type number
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApigetPage
+     * @memberof AuthorApigetPage
      */
     archived?: boolean
 }
 
-export interface DefaultApiReadBatchRequest {
+export interface AuthorApiReadBatchRequest {
     /**
      * The JSON array of Blog Author ids.
      * @type BatchInputString
-     * @memberof DefaultApireadBatch
+     * @memberof AuthorApireadBatch
      */
     batchInputString: BatchInputString
     /**
      * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApireadBatch
+     * @memberof AuthorApireadBatch
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateRequest {
+export interface AuthorApiUpdateRequest {
     /**
      * The Blog Author id.
      * @type string
-     * @memberof DefaultApiupdate
+     * @memberof AuthorApiupdate
      */
     objectId: string
     /**
      * The JSON representation of the updated Blog Author.
      * @type BlogAuthor
-     * @memberof DefaultApiupdate
+     * @memberof AuthorApiupdate
      */
     blogAuthor: BlogAuthor
     /**
      * Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApiupdate
+     * @memberof AuthorApiupdate
      */
     archived?: boolean
 }
 
-export interface DefaultApiUpdateBatchRequest {
+export interface AuthorApiUpdateBatchRequest {
     /**
      * A JSON array of the JSON representations of the updated Blog Authors.
      * @type BatchInputJsonNode
-     * @memberof DefaultApiupdateBatch
+     * @memberof AuthorApiupdateBatch
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
-     * @memberof DefaultApiupdateBatch
+     * @memberof AuthorApiupdateBatch
      */
     archived?: boolean
 }
 
-export class ObjectDefaultApi {
-    private api: ObservableDefaultApi
+export class ObjectAuthorApi {
+    private api: ObservableAuthorApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefaultApiRequestFactory, responseProcessor?: DefaultApiResponseProcessor) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: AuthorApiRequestFactory, responseProcessor?: AuthorApiResponseProcessor) {
+        this.api = new ObservableAuthorApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -200,7 +200,7 @@ export class ObjectDefaultApi {
      * Delete a Blog Author
      * @param param the request object
      */
-    public archive(param: DefaultApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: AuthorApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -209,7 +209,7 @@ export class ObjectDefaultApi {
      * Archive a batch of Blog Authors
      * @param param the request object
      */
-    public archiveBatch(param: DefaultApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: AuthorApiArchiveBatchRequest, options?: Configuration): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -218,7 +218,7 @@ export class ObjectDefaultApi {
      * Create a new Blog Author
      * @param param the request object
      */
-    public create(param: DefaultApiCreateRequest, options?: Configuration): Promise<BlogAuthor> {
+    public create(param: AuthorApiCreateRequest, options?: Configuration): Promise<BlogAuthor> {
         return this.api.create(param.blogAuthor,  options).toPromise();
     }
 
@@ -227,7 +227,7 @@ export class ObjectDefaultApi {
      * Create a batch of Blog Authors
      * @param param the request object
      */
-    public createBatch(param: DefaultApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public createBatch(param: AuthorApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
         return this.api.createBatch(param.batchInputBlogAuthor,  options).toPromise();
     }
 
@@ -236,7 +236,7 @@ export class ObjectDefaultApi {
      * Retrieve a Blog Author
      * @param param the request object
      */
-    public getById(param: DefaultApiGetByIdRequest, options?: Configuration): Promise<BlogAuthor> {
+    public getById(param: AuthorApiGetByIdRequest, options?: Configuration): Promise<BlogAuthor> {
         return this.api.getById(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -245,7 +245,7 @@ export class ObjectDefaultApi {
      * Get all Blog Authors
      * @param param the request object
      */
-    public getPage(param: DefaultApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
+    public getPage(param: AuthorApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
@@ -254,7 +254,7 @@ export class ObjectDefaultApi {
      * Retrieve a batch of Blog Authors
      * @param param the request object
      */
-    public readBatch(param: DefaultApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public readBatch(param: AuthorApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -263,7 +263,7 @@ export class ObjectDefaultApi {
      * Update a Blog Author
      * @param param the request object
      */
-    public update(param: DefaultApiUpdateRequest, options?: Configuration): Promise<BlogAuthor> {
+    public update(param: AuthorApiUpdateRequest, options?: Configuration): Promise<BlogAuthor> {
         return this.api.update(param.objectId, param.blogAuthor, param.archived,  options).toPromise();
     }
 
@@ -272,7 +272,7 @@ export class ObjectDefaultApi {
      * Update a batch of Blog Authors
      * @param param the request object
      */
-    public updateBatch(param: DefaultApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public updateBatch(param: AuthorApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 

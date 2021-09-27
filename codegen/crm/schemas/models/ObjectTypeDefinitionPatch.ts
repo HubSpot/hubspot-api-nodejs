@@ -79,7 +79,7 @@ export class ObjectTypeDefinitionPatch {
     static getAttributeTypeMap() {
         return ObjectTypeDefinitionPatch.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

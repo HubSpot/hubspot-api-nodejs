@@ -134,7 +134,7 @@ export class ExtensionActionDefinition {
     static getAttributeTypeMap() {
         return ExtensionActionDefinition.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

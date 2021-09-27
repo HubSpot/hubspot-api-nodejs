@@ -15,6 +15,9 @@ import { HttpFile } from '../http/http';
 export class Filter {
     'value'?: string;
     'propertyName': string;
+    /**
+    * null
+    */
     'operator': FilterOperatorEnum;
 
     static readonly discriminator: string | undefined = undefined;
@@ -42,11 +45,11 @@ export class Filter {
     static getAttributeTypeMap() {
         return Filter.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }
 
 
-export type FilterOperatorEnum = "EQ" | "NEQ" | "LT" | "LTE" | "GT" | "GTE" | "HAS_PROPERTY" | "NOT_HAS_PROPERTY" | "CONTAINS_TOKEN" | "NOT_CONTAINS_TOKEN" ;
+export type FilterOperatorEnum = "EQ" | "NEQ" | "LT" | "LTE" | "GT" | "GTE" | "BETWEEN" | "IN" | "NOT_IN" | "HAS_PROPERTY" | "NOT_HAS_PROPERTY" | "CONTAINS_TOKEN" | "NOT_CONTAINS_TOKEN" ;
 

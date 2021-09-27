@@ -3,11 +3,13 @@ import { BaseAPIRequestFactory, RequiredError } from './baseapi';
 import {Configuration} from '../configuration';
 import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
+import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {isCodeInRange} from '../util';
+import {canConsumeForm, isCodeInRange} from '../util';
 
-import { BatchInputHubDbTableRowV3 } from '../models/BatchInputHubDbTableRowV3';
+
+import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -46,12 +48,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -70,7 +66,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -82,9 +79,9 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * Creates rows in the `draft` version of the specified table, given an array of row objects. See the overview section for more details with an example.
      * Create rows in batch
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public async batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, _options?: Configuration): Promise<RequestContext> {
+    public async batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -93,9 +90,9 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'batchInputHubDbTableRowV3' is not null or undefined
-        if (batchInputHubDbTableRowV3 === null || batchInputHubDbTableRowV3 === undefined) {
-            throw new RequiredError('Required parameter batchInputHubDbTableRowV3 was null or undefined when calling batchCreateDraftTableRows.');
+        // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
+        if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
+            throw new RequiredError('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchCreateDraftTableRows.');
         }
 
 
@@ -107,12 +104,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -120,7 +111,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputHubDbTableRowV3, "BatchInputHubDbTableRowV3", ""),
+            ObjectSerializer.serialize(batchInputHubDbTableRowV3Request, "BatchInputHubDbTableRowV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -131,7 +122,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -168,12 +160,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -192,7 +178,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -229,12 +216,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -253,7 +234,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -262,7 +244,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns rows in the `live` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Returns rows in the `published` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get a set of rows
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
@@ -290,12 +272,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -314,7 +290,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -326,9 +303,9 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3 JSON array of row objects.
+     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
      */
-    public async batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3: BatchInputHubDbTableRowV3, _options?: Configuration): Promise<RequestContext> {
+    public async batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -337,9 +314,9 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'batchInputHubDbTableRowV3' is not null or undefined
-        if (batchInputHubDbTableRowV3 === null || batchInputHubDbTableRowV3 === undefined) {
-            throw new RequiredError('Required parameter batchInputHubDbTableRowV3 was null or undefined when calling batchReplaceDraftTableRows.');
+        // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
+        if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
+            throw new RequiredError('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchReplaceDraftTableRows.');
         }
 
 
@@ -351,12 +328,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -364,7 +335,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputHubDbTableRowV3, "BatchInputHubDbTableRowV3", ""),
+            ObjectSerializer.serialize(batchInputHubDbTableRowV3Request, "BatchInputHubDbTableRowV3Request", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -375,7 +346,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -412,12 +384,6 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-
-        // Header Params
-
-        // Form Params
-
 
         // Body Params
         const contentType = ObjectSerializer.getPreferredMediaType([
@@ -436,7 +402,8 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        authMethod = _config.authMethods["oauth2"]
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

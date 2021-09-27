@@ -40,7 +40,7 @@ export class PublicAssociationMulti {
     static getAttributeTypeMap() {
         return PublicAssociationMulti.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

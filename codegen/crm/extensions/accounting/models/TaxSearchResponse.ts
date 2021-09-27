@@ -45,7 +45,7 @@ export class TaxSearchResponse {
     static getAttributeTypeMap() {
         return TaxSearchResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -593,7 +593,7 @@ export class BlogPost {
     static getAttributeTypeMap() {
         return BlogPost.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

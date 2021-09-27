@@ -110,18 +110,18 @@ export class PromiseCoreApi {
 
 
 
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservablePublicObjectSchemasApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { PublicObjectSchemasApiRequestFactory, PublicObjectSchemasApiResponseProcessor} from "../apis/PublicObjectSchemasApi";
+export class PromisePublicObjectSchemasApi {
+    private api: ObservablePublicObjectSchemasApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicObjectSchemasApiRequestFactory,
+        responseProcessor?: PublicObjectSchemasApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicObjectSchemasApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

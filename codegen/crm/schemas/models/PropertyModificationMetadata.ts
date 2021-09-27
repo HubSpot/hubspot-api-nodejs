@@ -49,7 +49,7 @@ export class PropertyModificationMetadata {
     static getAttributeTypeMap() {
         return PropertyModificationMetadata.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

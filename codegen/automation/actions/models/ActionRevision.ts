@@ -59,7 +59,7 @@ export class ActionRevision {
     static getAttributeTypeMap() {
         return ActionRevision.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -36,7 +36,7 @@ export class RowMetaData {
     static getAttributeTypeMap() {
         return RowMetaData.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

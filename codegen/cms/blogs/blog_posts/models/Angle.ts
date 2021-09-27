@@ -35,7 +35,7 @@ export class Angle {
     static getAttributeTypeMap() {
         return Angle.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -44,7 +44,7 @@ export class CollectionResponseWithTotalBlogPostForwardPaging {
     static getAttributeTypeMap() {
         return CollectionResponseWithTotalBlogPostForwardPaging.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -96,7 +96,7 @@ export class ExtensionActionDefinitionPatch {
     static getAttributeTypeMap() {
         return ExtensionActionDefinitionPatch.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -11,20 +11,20 @@ import { NextPage } from '../models/NextPage';
 import { PublicOwner } from '../models/PublicOwner';
 import { PublicTeam } from '../models/PublicTeam';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class ObservableDefaultApi {
-    private requestFactory: DefaultApiRequestFactory;
-    private responseProcessor: DefaultApiResponseProcessor;
+import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";
+export class ObservableOwnersApi {
+    private requestFactory: OwnersApiRequestFactory;
+    private responseProcessor: OwnersApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: OwnersApiRequestFactory,
+        responseProcessor?: OwnersApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefaultApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefaultApiResponseProcessor();
+        this.requestFactory = requestFactory || new OwnersApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new OwnersApiResponseProcessor();
     }
 
     /**
@@ -51,7 +51,7 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Get a page of owners
      * @param email Filter by email address (optional)
@@ -77,5 +77,5 @@ export class ObservableDefaultApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }

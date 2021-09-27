@@ -81,7 +81,7 @@ export class ExternalUnifiedEvent {
     static getAttributeTypeMap() {
         return ExternalUnifiedEvent.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -78,18 +78,18 @@ export class PromiseCoreApi {
 
 
 
-import { ObservableDefaultApi } from './ObservableAPI';
+import { ObservablePublicImportsApi } from './ObservableAPI';
 
-import { DefaultApiRequestFactory, DefaultApiResponseProcessor} from "../apis/DefaultApi";
-export class PromiseDefaultApi {
-    private api: ObservableDefaultApi
+import { PublicImportsApiRequestFactory, PublicImportsApiResponseProcessor} from "../apis/PublicImportsApi";
+export class PromisePublicImportsApi {
+    private api: ObservablePublicImportsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: DefaultApiRequestFactory,
-        responseProcessor?: DefaultApiResponseProcessor
+        requestFactory?: PublicImportsApiRequestFactory,
+        responseProcessor?: PublicImportsApiResponseProcessor
     ) {
-        this.api = new ObservableDefaultApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicImportsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -97,8 +97,8 @@ export class PromiseDefaultApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getCrmV3ImportsImportIdErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponsePublicImportErrorForwardPaging> {
-        const result = this.api.getCrmV3ImportsImportIdErrors(importId, after, limit, _options);
+    public getErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponsePublicImportErrorForwardPaging> {
+        const result = this.api.getErrors(importId, after, limit, _options);
         return result.toPromise();
     }
 

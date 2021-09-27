@@ -54,7 +54,7 @@ export class SubscriptionCreateRequest {
     static getAttributeTypeMap() {
         return SubscriptionCreateRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

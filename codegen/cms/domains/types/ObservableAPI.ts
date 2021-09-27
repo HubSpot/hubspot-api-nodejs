@@ -52,7 +52,7 @@ export class ObservableDomainsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Returns all existing domains that have been created. Results can be limited and filtered by creation or updated date.
      * Get current domains
@@ -87,5 +87,5 @@ export class ObservableDomainsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
- 
+
 }

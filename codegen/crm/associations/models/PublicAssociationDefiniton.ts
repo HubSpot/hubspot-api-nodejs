@@ -35,7 +35,7 @@ export class PublicAssociationDefiniton {
     static getAttributeTypeMap() {
         return PublicAssociationDefiniton.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

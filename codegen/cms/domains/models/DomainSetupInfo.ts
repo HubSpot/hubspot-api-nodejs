@@ -35,7 +35,7 @@ export class DomainSetupInfo {
     static getAttributeTypeMap() {
         return DomainSetupInfo.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -45,7 +45,7 @@ export class SyncProductsRequest {
     static getAttributeTypeMap() {
         return SyncProductsRequest.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

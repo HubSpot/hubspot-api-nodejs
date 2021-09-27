@@ -71,7 +71,7 @@ export class PublicPerformanceResponse {
     static getAttributeTypeMap() {
         return PublicPerformanceResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

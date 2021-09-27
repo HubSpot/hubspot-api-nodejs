@@ -103,7 +103,7 @@ export class ObjectSchemaEgg {
     static getAttributeTypeMap() {
         return ObjectSchemaEgg.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

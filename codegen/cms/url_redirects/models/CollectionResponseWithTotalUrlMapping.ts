@@ -50,7 +50,7 @@ export class CollectionResponseWithTotalUrlMapping {
     static getAttributeTypeMap() {
         return CollectionResponseWithTotalUrlMapping.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

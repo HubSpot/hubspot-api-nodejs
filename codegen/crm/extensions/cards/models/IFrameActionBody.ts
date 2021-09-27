@@ -63,7 +63,7 @@ export class IFrameActionBody {
     static getAttributeTypeMap() {
         return IFrameActionBody.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

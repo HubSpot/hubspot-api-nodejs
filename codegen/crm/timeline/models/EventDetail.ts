@@ -34,7 +34,7 @@ export class EventDetail {
     static getAttributeTypeMap() {
         return EventDetail.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

@@ -178,7 +178,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Archive a list of deals given a collection of IDs. This method will return a `204 No Content` response on success regardless of the initial state of the object (e.g. active, already archived, non-existent).
      * Archive a batch of deals by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -188,7 +187,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Create a batch of deals. This follows the same rules as creating an individual object.
      * Create a batch of deals
      * @param batchInputSimplePublicObjectInput 
      */
@@ -198,7 +196,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Read a list of deals given a collection of IDs. Use the `properties` request body property to control which properties are returned.
      * Read a batch of deals by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -209,7 +206,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Perform a partial upate on a batch of deals. This follows the same rules as performing partial updates on an individual object.
      * Update a batch of deals
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -238,8 +234,6 @@ export class PromiseSearchApi {
     }
 
     /**
-     * Filter, Sort, and Search CRM Objects
-     * Filter, Sort, and Search CRM Objects
      * @param publicObjectSearchRequest 
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {

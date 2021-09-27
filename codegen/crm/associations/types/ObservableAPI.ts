@@ -61,7 +61,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Associate all pairs of objects identified in the request body.
      * Create a batch of associations
@@ -87,7 +87,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
      * Read a batch of associations
@@ -113,7 +113,7 @@ export class ObservableBatchApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
- 
+
 }
 
 import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
@@ -156,5 +156,5 @@ export class ObservableTypesApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
- 
+
 }

@@ -48,7 +48,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
- 
+
     /**
      * Used to set the menu label, target iframe URL, and dimensions for your calling extension.
      * Configure a calling extension
@@ -73,7 +73,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
- 
+
     /**
      * Returns the calling extension settings configured for your app.
      * Get calling settings
@@ -97,7 +97,7 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
             }));
     }
- 
+
     /**
      * Updates existing calling extension settings.
      * Update settings
@@ -122,5 +122,5 @@ export class ObservableSettingsApi {
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
- 
+
 }

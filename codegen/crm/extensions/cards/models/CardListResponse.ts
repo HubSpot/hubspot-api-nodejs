@@ -35,7 +35,7 @@ export class CardListResponse {
     static getAttributeTypeMap() {
         return CardListResponse.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

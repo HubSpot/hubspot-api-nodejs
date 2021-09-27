@@ -140,7 +140,7 @@ export class DomainCdnConfig {
     static getAttributeTypeMap() {
         return DomainCdnConfig.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

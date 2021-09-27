@@ -105,7 +105,7 @@ export class TimelineEventTemplate {
     static getAttributeTypeMap() {
         return TimelineEventTemplate.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }

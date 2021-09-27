@@ -54,7 +54,7 @@ export class DisplayOption {
     static getAttributeTypeMap() {
         return DisplayOption.attributeTypeMap;
     }
-    
+
     public constructor() {
     }
 }
