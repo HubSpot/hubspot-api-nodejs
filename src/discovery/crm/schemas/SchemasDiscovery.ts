@@ -10,7 +10,7 @@ export class SchemasDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = createConfiguration(this.getParams())
+    const configuration = this.createConfiguration(createConfiguration)
 
     this.coreApi = new CoreApi(configuration)
     this.publicObjectSchemasApi = new PublicObjectSchemasApi(configuration)

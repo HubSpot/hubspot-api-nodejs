@@ -1,10 +1,21 @@
 import { IConfiguration } from '../IConfiguration'
+import { VERSION } from '../version'
 
 export class BaseDiscovery {
   public config: IConfiguration
 
   constructor(config: IConfiguration) {
     this.config = config
+  }
+
+  /**
+   * create Configuration
+   */
+  public createConfiguration(createFunction: any) {
+    const configuration = createFunction(this.getParams())
+    configuration.baseServer.setHeaderParam('User-Agent', `hubspot-api-client-nodejs; ${VERSION}`)
+
+    return configuration
   }
 
   /**

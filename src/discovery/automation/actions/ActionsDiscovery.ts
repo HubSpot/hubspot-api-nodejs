@@ -12,7 +12,7 @@ export class ActionsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = createConfiguration(this.getParams())
+    const configuration = this.createConfiguration(createConfiguration)
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.definitionsApi = new DefinitionsApi(configuration)

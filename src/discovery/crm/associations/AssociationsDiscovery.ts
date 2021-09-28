@@ -10,7 +10,7 @@ export class AssociationsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = createConfiguration(this.getParams())
+    const configuration = this.createConfiguration(createConfiguration)
 
     this.batchApi = new BatchApi(configuration)
     this.typesApi = new TypesApi(configuration)

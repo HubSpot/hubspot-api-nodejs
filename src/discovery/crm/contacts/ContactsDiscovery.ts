@@ -13,7 +13,7 @@ export class ContactsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = createConfiguration(this.getParams())
+    const configuration = this.createConfiguration(createConfiguration)
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)
