@@ -11,7 +11,7 @@ export class BaseDiscovery {
   /**
    * create Configuration
    */
-  public createConfiguration(createFunction: Function) {
+  public createConfiguration(createFunction: any) {
     const configuration = createFunction(this.getParams())
     configuration.baseServer.setHeaderParam('User-Agent', `hubspot-api-client-nodejs; ${VERSION}`)
 
