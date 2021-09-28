@@ -9,7 +9,7 @@ export class EventsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration = {}) {
     super(config)
 
-    const configuration = createConfiguration(this.getParams())
+    const configuration = this.createConfiguration(createConfiguration)
 
     this.eventsApi = new EventsApi(configuration)
   }
