@@ -1,9 +1,9 @@
 import { createConfiguration } from '../../../../codegen/crm/quotes/configuration'
 import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/quotes/index'
 import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import { ObjectDiscovery } from '../ObjectDiscovery'
 
-export class QuotesDiscovery extends BaseDiscovery {
+export class QuotesDiscovery extends ObjectDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
