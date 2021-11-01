@@ -1,9 +1,9 @@
 import { createConfiguration } from '../../../../codegen/crm/tickets/configuration'
-import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/tickets/index'
+import { AssociationsApi, BasicApi, BatchApi, SearchApi, SimplePublicObjectWithAssociations } from '../../../../codegen/crm/tickets/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { ObjectDiscovery } from '../ObjectDiscovery'
 
-export class TicketsDiscovery extends ObjectDiscovery {
+export class TicketsDiscovery extends ObjectDiscovery<SimplePublicObjectWithAssociations> {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
