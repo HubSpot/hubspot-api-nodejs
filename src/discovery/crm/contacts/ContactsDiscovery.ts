@@ -1,9 +1,10 @@
+import * as _ from 'lodash'
 import { createConfiguration } from '../../../../codegen/crm/contacts/configuration'
-import { AssociationsApi, BasicApi, BatchApi, GDPRApi, SearchApi, SimplePublicObjectWithAssociations } from '../../../../codegen/crm/contacts/index'
+import { AssociationsApi, BasicApi, BatchApi, CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,  GDPRApi, SearchApi, SimplePublicObjectWithAssociations } from '../../../../codegen/crm/contacts/index'
 import { IConfiguration } from '../../../IConfiguration'
-import { ObjectDiscovery } from '../ObjectDiscovery'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class ContactsDiscovery extends ObjectDiscovery<SimplePublicObjectWithAssociations> {
+export class ContactsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
@@ -21,4 +22,17 @@ export class ContactsDiscovery extends ObjectDiscovery<SimplePublicObjectWithAss
     this.gdprApi = new GDPRApi(configuration)
     this.searchApi = new SearchApi(configuration)
   }
+
+  public async getAll(properties?: Array<string>, associations?: Array<string>, archived?: boolean): Promise<SimplePublicObjectWithAssociations[]> {
+    let after
+    let result: SimplePublicObjectWithAssociations[] = []
+    do {
+      let response:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging  = await this.basicApi.getPage(100, after, properties, associations, archived)
+      result = result.concat(response.results)
+      after = _.get(response, 'paging.next.after')
+    } while (!_.isNil(after))
+
+    return result
+  }
+  
 }
