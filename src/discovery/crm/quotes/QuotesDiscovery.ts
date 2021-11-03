@@ -53,5 +53,4 @@ export class QuotesDiscovery extends BaseDiscovery {
 
     return result
   }
-  
 }

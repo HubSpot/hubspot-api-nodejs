@@ -53,5 +53,4 @@ export class ProductsDiscovery extends BaseDiscovery {
 
     return result
   }
-
 }

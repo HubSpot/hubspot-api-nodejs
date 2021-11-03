@@ -53,5 +53,4 @@ export class CompaniesDiscovery extends BaseDiscovery {
 
     return result
   }
-  
 }

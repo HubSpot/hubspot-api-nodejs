@@ -53,5 +53,4 @@ export class DealsDiscovery extends BaseDiscovery {
 
     return result
   }
-  
 }

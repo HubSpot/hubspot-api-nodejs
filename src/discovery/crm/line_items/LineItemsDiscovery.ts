@@ -53,5 +53,4 @@ export class LineItemsDiscovery extends BaseDiscovery {
 
     return result
   }
-  
 }

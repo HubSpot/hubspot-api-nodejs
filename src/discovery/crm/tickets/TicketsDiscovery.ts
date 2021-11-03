@@ -53,5 +53,4 @@ export class TicketsDiscovery extends BaseDiscovery {
 
     return result
   }
-  
 }
