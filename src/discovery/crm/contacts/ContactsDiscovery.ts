@@ -1,6 +1,5 @@
 import * as _ from 'lodash'
 import { createConfiguration } from '../../../../codegen/crm/contacts/configuration'
-import { DEFAULT_OBJECTS_LIMIT } from '../../../constants'
 import {
   AssociationsApi,
   BasicApi,
@@ -10,6 +9,7 @@ import {
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/contacts/index'
+import { DEFAULT_OBJECTS_LIMIT } from '../../../constants'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -35,15 +35,15 @@ export class ContactsDiscovery extends BaseDiscovery {
   public async getAll(
     limit?: number,
     after?: string,
-    properties?: Array<string>,
-    associations?: Array<string>,
+    properties?: string[],
+    associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
     const limitInternal = limit ?? DEFAULT_OBJECTS_LIMIT
     let afterInternal = after
     let result: SimplePublicObjectWithAssociations[] = []
     do {
-      let response: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = await this.basicApi.getPage(
+      const response: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = await this.basicApi.getPage(
         limitInternal,
         after,
         properties,
