@@ -1,16 +1,15 @@
 import * as _ from 'lodash'
-import { createConfiguration } from '../../../../codegen/crm/tickets/configuration'
+import { Configuration, createConfiguration } from '../../../../codegen/crm/tickets/configuration'
 import {
   AssociationsApi,
   BasicApi,
   BatchApi,
-  CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/tickets/index'
-import { DEFAULT_OBJECTS_LIMIT } from '../../../constants'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
+import { getAll } from '../getAll'
 
 export class TicketsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
@@ -36,21 +35,13 @@ export class TicketsDiscovery extends BaseDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    const limitInternal = limit ?? DEFAULT_OBJECTS_LIMIT
-    let afterInternal = after
-    let result: SimplePublicObjectWithAssociations[] = []
-    do {
-      const response: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = await this.basicApi.getPage(
-        limitInternal,
-        after,
-        properties,
-        associations,
-        archived,
-      )
-      result = result.concat(response.results)
-      afterInternal = _.get(response, 'paging.next.after')
-    } while (!_.isNil(afterInternal))
-
-    return result
+    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+      this.basicApi,
+      limit,
+      after,
+      properties,
+      associations,
+      archived,
+    )
   }
 }

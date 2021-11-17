@@ -7,7 +7,6 @@ import {
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/companies/index'
-import { DEFAULT_OBJECTS_LIMIT } from '../../../constants'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 import { getAll } from '../getAll'
@@ -36,7 +35,7 @@ export class CompaniesDiscovery extends BaseDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll< SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
       this.basicApi,
       limit,
       after,
