@@ -1,34 +1,33 @@
-
-import { DEFAULT_OBJECTS_LIMIT } from '../../constants'
 import * as _ from 'lodash'
+import { DEFAULT_OBJECTS_LIMIT } from '../../constants'
 
-interface APIType<CollectionType, ConfigurationType> {
+interface IAPIType<CollectionType, ConfigurationType> {
   getPage(
     limit?: number,
     after?: string,
-    properties?: Array<string>,
-    associations?: Array<string>,
+    properties?: string[],
+    associations?: string[],
     archived?: boolean,
     _options?: ConfigurationType,
   ): Promise<CollectionType>
 }
-interface CollectionType<ObjectType> {
-  results: Array<ObjectType>
+interface ICollectionType<ObjectType> {
+  results: ObjectType[]
 }
 
 export async function getAll<ReturnType, ConfigurationType>(
-  api: APIType<CollectionType<ReturnType>, ConfigurationType>,
+  api: IAPIType<ICollectionType<ReturnType>, ConfigurationType>,
   limit?: number,
   after?: string,
-  properties?: Array<string>,
-  associations?: Array<string>,
+  properties?: string[],
+  associations?: string[],
   archived?: boolean,
 ): Promise<ReturnType[]> {
   const limitInternal = limit ?? DEFAULT_OBJECTS_LIMIT
   let afterInternal = after
   let result: ReturnType[] = []
   do {
-    let response = await api.getPage(limitInternal, afterInternal, properties, associations, archived)
+    const response = await api.getPage(limitInternal, afterInternal, properties, associations, archived)
     result = result.concat(response.results)
     afterInternal = _.get(response, 'paging.next.after')
     console.log(afterInternal)
