@@ -1,7 +1,16 @@
-import { createConfiguration } from '../../../../codegen/crm/contacts/configuration'
-import { AssociationsApi, BasicApi, BatchApi, GDPRApi, SearchApi } from '../../../../codegen/crm/contacts/index'
+import * as _ from 'lodash'
+import { Configuration, createConfiguration } from '../../../../codegen/crm/contacts/configuration'
+import {
+  AssociationsApi,
+  BasicApi,
+  BatchApi,
+  GDPRApi,
+  SearchApi,
+  SimplePublicObjectWithAssociations,
+} from '../../../../codegen/crm/contacts/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
+import { getAll } from '../getAll'
 
 export class ContactsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
@@ -20,5 +29,22 @@ export class ContactsDiscovery extends BaseDiscovery {
     this.batchApi = new BatchApi(configuration)
     this.gdprApi = new GDPRApi(configuration)
     this.searchApi = new SearchApi(configuration)
+  }
+
+  public async getAll(
+    limit?: number,
+    after?: string,
+    properties?: string[],
+    associations?: string[],
+    archived?: boolean,
+  ): Promise<SimplePublicObjectWithAssociations[]> {
+    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+      this.basicApi,
+      limit,
+      after,
+      properties,
+      associations,
+      archived,
+    )
   }
 }
