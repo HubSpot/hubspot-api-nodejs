@@ -53,7 +53,7 @@ export class TimelineEvent {
     /**
     * Identifier for the event. This is optional, and we recommend you do not pass this in. We will create one for you if you omit this. You can also use `{{uuid}}` anywhere in the ID to generate a unique string, guaranteeing uniqueness.
     */
-    'id': string;
+    'id'?: string;
 
     static discriminator: string | undefined = undefined;
 
