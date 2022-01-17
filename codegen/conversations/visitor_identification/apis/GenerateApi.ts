@@ -27,7 +27,7 @@ export class GenerateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'identificationTokenGenerationRequest' is not null or undefined
         if (identificationTokenGenerationRequest === null || identificationTokenGenerationRequest === undefined) {
-            throw new RequiredError('Required parameter identificationTokenGenerationRequest was null or undefined when calling generateToken.');
+            throw new RequiredError("GenerateApi", "generateToken", "identificationTokenGenerationRequest");
         }
 
 
@@ -90,7 +90,7 @@ export class GenerateApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -102,8 +102,7 @@ export class GenerateApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

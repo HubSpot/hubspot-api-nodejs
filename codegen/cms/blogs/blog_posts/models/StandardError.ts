@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -13,14 +13,41 @@
 import { ErrorDetail } from './ErrorDetail';
 import { HttpFile } from '../http/http';
 
+/**
+* Model definition for a standard error.
+*/
 export class StandardError {
+    /**
+    * Error status.
+    */
     'status': string;
+    /**
+    * Error ID.
+    */
     'id'?: string;
+    /**
+    * Model definition for an error category.
+    */
     'category': any;
+    /**
+    * Error subcategory.
+    */
     'subCategory'?: any;
+    /**
+    * Error message.
+    */
     'message': string;
+    /**
+    * List of error details.
+    */
     'errors': Array<ErrorDetail>;
+    /**
+    * Error context.
+    */
     'context': { [key: string]: Array<string>; };
+    /**
+    * Error links.
+    */
     'links': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;

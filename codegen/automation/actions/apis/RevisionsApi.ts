@@ -29,19 +29,19 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getById.');
+            throw new RequiredError("RevisionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'revisionId' is not null or undefined
         if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError('Required parameter revisionId was null or undefined when calling getById.');
+            throw new RequiredError("RevisionsApi", "getById", "revisionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("RevisionsApi", "getById", "appId");
         }
 
 
@@ -79,13 +79,13 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getPage.');
+            throw new RequiredError("RevisionsApi", "getPage", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getPage.');
+            throw new RequiredError("RevisionsApi", "getPage", "appId");
         }
 
 
@@ -146,7 +146,7 @@ export class RevisionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -158,8 +158,7 @@ export class RevisionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -183,7 +182,7 @@ export class RevisionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -195,8 +194,7 @@ export class RevisionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

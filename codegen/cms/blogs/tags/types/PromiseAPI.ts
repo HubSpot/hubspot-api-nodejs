@@ -2,29 +2,34 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
 import { BatchResponseTagWithErrors } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
-import { ObservableTagApi } from './ObservableAPI';
+import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
+import { ObservableBlogTagsApi } from './ObservableAPI';
 
-import { TagApiRequestFactory, TagApiResponseProcessor} from "../apis/TagApi";
-export class PromiseTagApi {
-    private api: ObservableTagApi
+import { BlogTagsApiRequestFactory, BlogTagsApiResponseProcessor} from "../apis/BlogTagsApi";
+export class PromiseBlogTagsApi {
+    private api: ObservableBlogTagsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TagApiRequestFactory,
-        responseProcessor?: TagApiResponseProcessor
+        requestFactory?: BlogTagsApiRequestFactory,
+        responseProcessor?: BlogTagsApiResponseProcessor
     ) {
-        this.api = new ObservableTagApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBlogTagsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -95,6 +100,56 @@ export class PromiseTagApi {
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
         const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Attach a Blog Tag to a multi-language group.
+     * Attach a Blog Tag to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Tag
+     * Create a new language variation
+     * @param tagCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext: TagCloneRequestVNext, _options?: Configuration): Promise<Tag> {
+        const result = this.api.postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Detach a Blog Tag from a multi-language group.
+     * Detach a Blog Tag from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Tag in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Set a Blog Tag as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
         return result.toPromise();
     }
 

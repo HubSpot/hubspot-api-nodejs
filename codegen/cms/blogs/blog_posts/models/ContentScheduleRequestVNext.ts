@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,6 +12,9 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Request body object for scheduling the publish of content
+*/
 export class ContentScheduleRequestVNext {
     /**
     * The ID of the object to be scheduled.

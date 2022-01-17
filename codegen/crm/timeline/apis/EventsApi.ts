@@ -31,7 +31,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'timelineEvent' is not null or undefined
         if (timelineEvent === null || timelineEvent === undefined) {
-            throw new RequiredError('Required parameter timelineEvent was null or undefined when calling create.');
+            throw new RequiredError("EventsApi", "create", "timelineEvent");
         }
 
 
@@ -74,7 +74,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'batchInputTimelineEvent' is not null or undefined
         if (batchInputTimelineEvent === null || batchInputTimelineEvent === undefined) {
-            throw new RequiredError('Required parameter batchInputTimelineEvent was null or undefined when calling createBatch.');
+            throw new RequiredError("EventsApi", "createBatch", "batchInputTimelineEvent");
         }
 
 
@@ -118,13 +118,13 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling getById.');
+            throw new RequiredError("EventsApi", "getById", "eventTemplateId");
         }
 
 
         // verify required parameter 'eventId' is not null or undefined
         if (eventId === null || eventId === undefined) {
-            throw new RequiredError('Required parameter eventId was null or undefined when calling getById.');
+            throw new RequiredError("EventsApi", "getById", "eventId");
         }
 
 
@@ -159,13 +159,13 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling getDetailById.');
+            throw new RequiredError("EventsApi", "getDetailById", "eventTemplateId");
         }
 
 
         // verify required parameter 'eventId' is not null or undefined
         if (eventId === null || eventId === undefined) {
-            throw new RequiredError('Required parameter eventId was null or undefined when calling getDetailById.');
+            throw new RequiredError("EventsApi", "getDetailById", "eventId");
         }
 
 
@@ -201,13 +201,13 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling getRenderById.');
+            throw new RequiredError("EventsApi", "getRenderById", "eventTemplateId");
         }
 
 
         // verify required parameter 'eventId' is not null or undefined
         if (eventId === null || eventId === undefined) {
-            throw new RequiredError('Required parameter eventId was null or undefined when calling getRenderById.');
+            throw new RequiredError("EventsApi", "getRenderById", "eventId");
         }
 
 
@@ -262,7 +262,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -274,8 +274,7 @@ export class EventsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -306,7 +305,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -318,8 +317,7 @@ export class EventsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -343,7 +341,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -355,8 +353,7 @@ export class EventsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -380,7 +377,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -392,8 +389,7 @@ export class EventsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -417,7 +413,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -429,8 +425,7 @@ export class EventsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

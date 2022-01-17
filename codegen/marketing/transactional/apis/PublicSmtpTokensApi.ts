@@ -28,7 +28,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError('Required parameter tokenId was null or undefined when calling archiveToken.');
+            throw new RequiredError("PublicSmtpTokensApi", "archiveToken", "tokenId");
         }
 
 
@@ -99,7 +99,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError('Required parameter tokenId was null or undefined when calling getTokenById.');
+            throw new RequiredError("PublicSmtpTokensApi", "getTokenById", "tokenId");
         }
 
 
@@ -185,7 +185,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError('Required parameter tokenId was null or undefined when calling resetPassword.');
+            throw new RequiredError("PublicSmtpTokensApi", "resetPassword", "tokenId");
         }
 
 
@@ -229,7 +229,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -241,8 +241,7 @@ export class PublicSmtpTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -266,7 +265,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -278,8 +277,7 @@ export class PublicSmtpTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -303,7 +301,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -315,8 +313,7 @@ export class PublicSmtpTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -340,7 +337,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -352,8 +349,7 @@ export class PublicSmtpTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -377,7 +373,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -389,8 +385,7 @@ export class PublicSmtpTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

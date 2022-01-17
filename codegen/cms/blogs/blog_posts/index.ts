@@ -7,5 +7,5 @@ export * from "./apis/exception";
 export * from "./servers";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseBlogPostApi as BlogPostApi } from './types/PromiseAPI';
+export { PromiseBlogPostsApi as BlogPostsApi } from './types/PromiseAPI';
 

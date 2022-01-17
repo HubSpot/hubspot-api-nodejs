@@ -29,13 +29,13 @@ export class SyncApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling createContact.');
+            throw new RequiredError("SyncApi", "createContact", "appId");
         }
 
 
         // verify required parameter 'syncContactsRequest' is not null or undefined
         if (syncContactsRequest === null || syncContactsRequest === undefined) {
-            throw new RequiredError('Required parameter syncContactsRequest was null or undefined when calling createContact.');
+            throw new RequiredError("SyncApi", "createContact", "syncContactsRequest");
         }
 
 
@@ -85,13 +85,13 @@ export class SyncApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling createProduct.');
+            throw new RequiredError("SyncApi", "createProduct", "appId");
         }
 
 
         // verify required parameter 'syncProductsRequest' is not null or undefined
         if (syncProductsRequest === null || syncProductsRequest === undefined) {
-            throw new RequiredError('Required parameter syncProductsRequest was null or undefined when calling createProduct.');
+            throw new RequiredError("SyncApi", "createProduct", "syncProductsRequest");
         }
 
 
@@ -155,7 +155,7 @@ export class SyncApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -167,8 +167,7 @@ export class SyncApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -192,7 +191,7 @@ export class SyncApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -204,8 +203,7 @@ export class SyncApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

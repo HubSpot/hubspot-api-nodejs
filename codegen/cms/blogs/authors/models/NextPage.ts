@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,6 +12,9 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Model definition for a next page.
+*/
 export class NextPage {
     'after': string;
     'link'?: string;

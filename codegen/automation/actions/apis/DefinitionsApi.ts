@@ -30,13 +30,13 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling archive.');
+            throw new RequiredError("DefinitionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+            throw new RequiredError("DefinitionsApi", "archive", "appId");
         }
 
 
@@ -71,13 +71,13 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling create.');
+            throw new RequiredError("DefinitionsApi", "create", "appId");
         }
 
 
         // verify required parameter 'extensionActionDefinitionInput' is not null or undefined
         if (extensionActionDefinitionInput === null || extensionActionDefinitionInput === undefined) {
-            throw new RequiredError('Required parameter extensionActionDefinitionInput was null or undefined when calling create.');
+            throw new RequiredError("DefinitionsApi", "create", "extensionActionDefinitionInput");
         }
 
 
@@ -123,13 +123,13 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getById.');
+            throw new RequiredError("DefinitionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("DefinitionsApi", "getById", "appId");
         }
 
 
@@ -172,7 +172,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getPage.');
+            throw new RequiredError("DefinitionsApi", "getPage", "appId");
         }
 
 
@@ -225,19 +225,19 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling update.');
+            throw new RequiredError("DefinitionsApi", "update", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling update.');
+            throw new RequiredError("DefinitionsApi", "update", "appId");
         }
 
 
         // verify required parameter 'extensionActionDefinitionPatch' is not null or undefined
         if (extensionActionDefinitionPatch === null || extensionActionDefinitionPatch === undefined) {
-            throw new RequiredError('Required parameter extensionActionDefinitionPatch was null or undefined when calling update.');
+            throw new RequiredError("DefinitionsApi", "update", "extensionActionDefinitionPatch");
         }
 
 
@@ -293,7 +293,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -305,8 +305,7 @@ export class DefinitionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -330,7 +329,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -342,8 +341,7 @@ export class DefinitionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -367,7 +365,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -379,8 +377,7 @@ export class DefinitionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -404,7 +401,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -416,8 +413,7 @@ export class DefinitionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -441,7 +437,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -453,8 +449,7 @@ export class DefinitionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

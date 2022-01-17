@@ -2,29 +2,34 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseBlogAuthorWithErrors } from '../models/BatchResponseBlogAuthorWithErrors';
 import { BlogAuthor } from '../models/BlogAuthor';
+import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
 import { CollectionResponseWithTotalBlogAuthorForwardPaging } from '../models/CollectionResponseWithTotalBlogAuthorForwardPaging';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
-import { ObservableAuthorApi } from './ObservableAPI';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
+import { ObservableBlogAuthorsApi } from './ObservableAPI';
 
-import { AuthorApiRequestFactory, AuthorApiResponseProcessor} from "../apis/AuthorApi";
-export class PromiseAuthorApi {
-    private api: ObservableAuthorApi
+import { BlogAuthorsApiRequestFactory, BlogAuthorsApiResponseProcessor} from "../apis/BlogAuthorsApi";
+export class PromiseBlogAuthorsApi {
+    private api: ObservableBlogAuthorsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: AuthorApiRequestFactory,
-        responseProcessor?: AuthorApiResponseProcessor
+        requestFactory?: BlogAuthorsApiRequestFactory,
+        responseProcessor?: BlogAuthorsApiResponseProcessor
     ) {
-        this.api = new ObservableAuthorApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBlogAuthorsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -95,6 +100,56 @@ export class PromiseAuthorApi {
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
         const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Attach a Blog Author to a multi-language group.
+     * Attach a Blog Author to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Author.
+     * Create a new language variation
+     * @param blogAuthorCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: Configuration): Promise<BlogAuthor> {
+        const result = this.api.postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(blogAuthorCloneRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Detach a Blog Author from a multi-language group.
+     * Detach a Blog Author from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Author in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
+     */
+    public postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Set a Blog Author as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
         return result.toPromise();
     }
 

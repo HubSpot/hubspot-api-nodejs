@@ -35,13 +35,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling createCustomer.');
+            throw new RequiredError("CallbacksApi", "createCustomer", "requestId");
         }
 
 
         // verify required parameter 'resultIdAccountingResponse' is not null or undefined
         if (resultIdAccountingResponse === null || resultIdAccountingResponse === undefined) {
-            throw new RequiredError('Required parameter resultIdAccountingResponse was null or undefined when calling createCustomer.');
+            throw new RequiredError("CallbacksApi", "createCustomer", "resultIdAccountingResponse");
         }
 
 
@@ -91,13 +91,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling createExchangeRate.');
+            throw new RequiredError("CallbacksApi", "createExchangeRate", "requestId");
         }
 
 
         // verify required parameter 'exchangeRateResponse' is not null or undefined
         if (exchangeRateResponse === null || exchangeRateResponse === undefined) {
-            throw new RequiredError('Required parameter exchangeRateResponse was null or undefined when calling createExchangeRate.');
+            throw new RequiredError("CallbacksApi", "createExchangeRate", "exchangeRateResponse");
         }
 
 
@@ -147,13 +147,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling createInvoice.');
+            throw new RequiredError("CallbacksApi", "createInvoice", "requestId");
         }
 
 
         // verify required parameter 'resultIdAccountingResponse' is not null or undefined
         if (resultIdAccountingResponse === null || resultIdAccountingResponse === undefined) {
-            throw new RequiredError('Required parameter resultIdAccountingResponse was null or undefined when calling createInvoice.');
+            throw new RequiredError("CallbacksApi", "createInvoice", "resultIdAccountingResponse");
         }
 
 
@@ -203,13 +203,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling createTerm.');
+            throw new RequiredError("CallbacksApi", "createTerm", "requestId");
         }
 
 
         // verify required parameter 'termsResponse' is not null or undefined
         if (termsResponse === null || termsResponse === undefined) {
-            throw new RequiredError('Required parameter termsResponse was null or undefined when calling createTerm.');
+            throw new RequiredError("CallbacksApi", "createTerm", "termsResponse");
         }
 
 
@@ -259,13 +259,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling doCustomerSearch.');
+            throw new RequiredError("CallbacksApi", "doCustomerSearch", "requestId");
         }
 
 
         // verify required parameter 'customerSearchResponseExternal' is not null or undefined
         if (customerSearchResponseExternal === null || customerSearchResponseExternal === undefined) {
-            throw new RequiredError('Required parameter customerSearchResponseExternal was null or undefined when calling doCustomerSearch.');
+            throw new RequiredError("CallbacksApi", "doCustomerSearch", "customerSearchResponseExternal");
         }
 
 
@@ -315,13 +315,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling doInvoiceSearch.');
+            throw new RequiredError("CallbacksApi", "doInvoiceSearch", "requestId");
         }
 
 
         // verify required parameter 'invoiceSearchResponse' is not null or undefined
         if (invoiceSearchResponse === null || invoiceSearchResponse === undefined) {
-            throw new RequiredError('Required parameter invoiceSearchResponse was null or undefined when calling doInvoiceSearch.');
+            throw new RequiredError("CallbacksApi", "doInvoiceSearch", "invoiceSearchResponse");
         }
 
 
@@ -371,13 +371,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling doProductSearch.');
+            throw new RequiredError("CallbacksApi", "doProductSearch", "requestId");
         }
 
 
         // verify required parameter 'productSearchResponse' is not null or undefined
         if (productSearchResponse === null || productSearchResponse === undefined) {
-            throw new RequiredError('Required parameter productSearchResponse was null or undefined when calling doProductSearch.');
+            throw new RequiredError("CallbacksApi", "doProductSearch", "productSearchResponse");
         }
 
 
@@ -427,13 +427,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling doTaxSearch.');
+            throw new RequiredError("CallbacksApi", "doTaxSearch", "requestId");
         }
 
 
         // verify required parameter 'taxSearchResponse' is not null or undefined
         if (taxSearchResponse === null || taxSearchResponse === undefined) {
-            throw new RequiredError('Required parameter taxSearchResponse was null or undefined when calling doTaxSearch.');
+            throw new RequiredError("CallbacksApi", "doTaxSearch", "taxSearchResponse");
         }
 
 
@@ -483,13 +483,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling getById.');
+            throw new RequiredError("CallbacksApi", "getById", "requestId");
         }
 
 
         // verify required parameter 'invoicesResponseExternal' is not null or undefined
         if (invoicesResponseExternal === null || invoicesResponseExternal === undefined) {
-            throw new RequiredError('Required parameter invoicesResponseExternal was null or undefined when calling getById.');
+            throw new RequiredError("CallbacksApi", "getById", "invoicesResponseExternal");
         }
 
 
@@ -539,13 +539,13 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'requestId' is not null or undefined
         if (requestId === null || requestId === undefined) {
-            throw new RequiredError('Required parameter requestId was null or undefined when calling invoicePdf.');
+            throw new RequiredError("CallbacksApi", "invoicePdf", "requestId");
         }
 
 
         // verify required parameter 'invoicePdfResponse' is not null or undefined
         if (invoicePdfResponse === null || invoicePdfResponse === undefined) {
-            throw new RequiredError('Required parameter invoicePdfResponse was null or undefined when calling invoicePdf.');
+            throw new RequiredError("CallbacksApi", "invoicePdf", "invoicePdfResponse");
         }
 
 
@@ -605,7 +605,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -617,8 +617,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -638,7 +637,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -650,8 +649,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -671,7 +669,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -683,8 +681,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -704,7 +701,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -716,8 +713,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -737,7 +733,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -749,8 +745,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -770,7 +765,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -782,8 +777,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -803,7 +797,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -815,8 +809,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -836,7 +829,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -848,8 +841,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -869,7 +861,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -881,8 +873,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -902,7 +893,7 @@ export class CallbacksApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -914,8 +905,7 @@ export class CallbacksApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -14,14 +14,41 @@ import { BlogAuthor } from './BlogAuthor';
 import { StandardError } from './StandardError';
 import { HttpFile } from '../http/http';
 
+/**
+* Response object for batch operations on blog authors with errors.
+*/
 export class BatchResponseBlogAuthorWithErrors {
+    /**
+    * Status of batch operation.
+    */
     'status': BatchResponseBlogAuthorWithErrorsStatusEnum;
+    /**
+    * Results of batch operation.
+    */
     'results': Array<BlogAuthor>;
+    /**
+    * Number of errors.
+    */
     'numErrors'?: number;
+    /**
+    * Errors in batch operation.
+    */
     'errors'?: Array<StandardError>;
+    /**
+    * Time of batch operation request.
+    */
     'requestedAt'?: Date;
+    /**
+    * Time of batch operation start.
+    */
     'startedAt': Date;
+    /**
+    * Time of batch operation completion.
+    */
     'completedAt': Date;
+    /**
+    * Links associated with batch operation.
+    */
     'links'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;

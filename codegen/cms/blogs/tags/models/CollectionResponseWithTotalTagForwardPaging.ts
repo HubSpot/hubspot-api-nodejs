@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -14,8 +14,17 @@ import { ForwardPaging } from './ForwardPaging';
 import { Tag } from './Tag';
 import { HttpFile } from '../http/http';
 
+/**
+* Response object for collections of blog tags with pagination information.
+*/
 export class CollectionResponseWithTotalTagForwardPaging {
+    /**
+    * Total number of blog tags.
+    */
     'total': number;
+    /**
+    * Collection of blog tags.
+    */
     'results': Array<Tag>;
     'paging'?: ForwardPaging;
 

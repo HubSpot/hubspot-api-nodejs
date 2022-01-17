@@ -31,13 +31,13 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'invoiceId' is not null or undefined
         if (invoiceId === null || invoiceId === undefined) {
-            throw new RequiredError('Required parameter invoiceId was null or undefined when calling createPayment.');
+            throw new RequiredError("InvoiceApi", "createPayment", "invoiceId");
         }
 
 
         // verify required parameter 'invoiceCreatePaymentRequest' is not null or undefined
         if (invoiceCreatePaymentRequest === null || invoiceCreatePaymentRequest === undefined) {
-            throw new RequiredError('Required parameter invoiceCreatePaymentRequest was null or undefined when calling createPayment.');
+            throw new RequiredError("InvoiceApi", "createPayment", "invoiceCreatePaymentRequest");
         }
 
 
@@ -93,13 +93,13 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'invoiceId' is not null or undefined
         if (invoiceId === null || invoiceId === undefined) {
-            throw new RequiredError('Required parameter invoiceId was null or undefined when calling getById.');
+            throw new RequiredError("InvoiceApi", "getById", "invoiceId");
         }
 
 
         // verify required parameter 'accountId' is not null or undefined
         if (accountId === null || accountId === undefined) {
-            throw new RequiredError('Required parameter accountId was null or undefined when calling getById.');
+            throw new RequiredError("InvoiceApi", "getById", "accountId");
         }
 
 
@@ -144,19 +144,19 @@ export class InvoiceApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'invoiceId' is not null or undefined
         if (invoiceId === null || invoiceId === undefined) {
-            throw new RequiredError('Required parameter invoiceId was null or undefined when calling update.');
+            throw new RequiredError("InvoiceApi", "update", "invoiceId");
         }
 
 
         // verify required parameter 'accountId' is not null or undefined
         if (accountId === null || accountId === undefined) {
-            throw new RequiredError('Required parameter accountId was null or undefined when calling update.');
+            throw new RequiredError("InvoiceApi", "update", "accountId");
         }
 
 
         // verify required parameter 'invoiceUpdateRequest' is not null or undefined
         if (invoiceUpdateRequest === null || invoiceUpdateRequest === undefined) {
-            throw new RequiredError('Required parameter invoiceUpdateRequest was null or undefined when calling update.');
+            throw new RequiredError("InvoiceApi", "update", "invoiceUpdateRequest");
         }
 
 
@@ -225,7 +225,7 @@ export class InvoiceApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -237,8 +237,7 @@ export class InvoiceApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -262,7 +261,7 @@ export class InvoiceApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -274,8 +273,7 @@ export class InvoiceApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -299,7 +297,7 @@ export class InvoiceApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -311,8 +309,7 @@ export class InvoiceApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

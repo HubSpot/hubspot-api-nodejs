@@ -29,13 +29,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling cloneDraftTableRow.');
+            throw new RequiredError("RowsApi", "cloneDraftTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling cloneDraftTableRow.');
+            throw new RequiredError("RowsApi", "cloneDraftTableRow", "rowId");
         }
 
 
@@ -75,13 +75,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling createTableRow.');
+            throw new RequiredError("RowsApi", "createTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
         if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling createTableRow.');
+            throw new RequiredError("RowsApi", "createTableRow", "hubDbTableRowV3Request");
         }
 
 
@@ -131,13 +131,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling getDraftTableRowById.');
+            throw new RequiredError("RowsApi", "getDraftTableRowById", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling getDraftTableRowById.');
+            throw new RequiredError("RowsApi", "getDraftTableRowById", "rowId");
         }
 
 
@@ -177,13 +177,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling getTableRow.');
+            throw new RequiredError("RowsApi", "getTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling getTableRow.');
+            throw new RequiredError("RowsApi", "getTableRow", "rowId");
         }
 
 
@@ -226,7 +226,7 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling getTableRows.');
+            throw new RequiredError("RowsApi", "getTableRows", "tableIdOrName");
         }
 
 
@@ -289,13 +289,13 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling purgeDraftTableRow.');
+            throw new RequiredError("RowsApi", "purgeDraftTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling purgeDraftTableRow.');
+            throw new RequiredError("RowsApi", "purgeDraftTableRow", "rowId");
         }
 
 
@@ -338,7 +338,7 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling readDraftTableRows.');
+            throw new RequiredError("RowsApi", "readDraftTableRows", "tableIdOrName");
         }
 
 
@@ -402,19 +402,19 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling replaceDraftTableRow.');
+            throw new RequiredError("RowsApi", "replaceDraftTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling replaceDraftTableRow.');
+            throw new RequiredError("RowsApi", "replaceDraftTableRow", "rowId");
         }
 
 
         // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
         if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling replaceDraftTableRow.');
+            throw new RequiredError("RowsApi", "replaceDraftTableRow", "hubDbTableRowV3Request");
         }
 
 
@@ -466,19 +466,19 @@ export class RowsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling updateDraftTableRow.');
+            throw new RequiredError("RowsApi", "updateDraftTableRow", "tableIdOrName");
         }
 
 
         // verify required parameter 'rowId' is not null or undefined
         if (rowId === null || rowId === undefined) {
-            throw new RequiredError('Required parameter rowId was null or undefined when calling updateDraftTableRow.');
+            throw new RequiredError("RowsApi", "updateDraftTableRow", "rowId");
         }
 
 
         // verify required parameter 'hubDbTableRowV3Request' is not null or undefined
         if (hubDbTableRowV3Request === null || hubDbTableRowV3Request === undefined) {
-            throw new RequiredError('Required parameter hubDbTableRowV3Request was null or undefined when calling updateDraftTableRow.');
+            throw new RequiredError("RowsApi", "updateDraftTableRow", "hubDbTableRowV3Request");
         }
 
 
@@ -543,7 +543,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -555,8 +555,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -580,7 +579,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -592,8 +591,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -617,7 +615,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -629,8 +627,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -654,7 +651,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -666,8 +663,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -691,7 +687,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -703,8 +699,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -724,7 +719,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -736,8 +731,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -761,7 +755,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -773,8 +767,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -798,7 +791,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -810,8 +803,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -835,7 +827,7 @@ export class RowsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -847,8 +839,7 @@ export class RowsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

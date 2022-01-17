@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -20,6 +20,9 @@ export class LayoutSection {
     'name': string;
     'label': string;
     'type': string;
+    /**
+    * null
+    */
     'params': { [key: string]: any; };
     'rows': Array<{ [key: string]: LayoutSection; }>;
     'rowMetaData': Array<RowMetaData>;

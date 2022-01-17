@@ -22,6 +22,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -398,22 +399,13 @@ export class ObjectBatchApi {
 import { ObservableGDPRApi } from "./ObservableAPI";
 import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
 
-export interface GDPRApiPurgeByEmailRequest {
+export interface GDPRApiPostCrmV3ObjectsContactsGdprDeleteRequest {
     /**
      * 
-     * @type string
-     * @memberof GDPRApipurgeByEmail
+     * @type PublicGdprDeleteInput
+     * @memberof GDPRApipostCrmV3ObjectsContactsGdprDelete
      */
-    email: string
-}
-
-export interface GDPRApiPurgeByIdRequest {
-    /**
-     * 
-     * @type number
-     * @memberof GDPRApipurgeById
-     */
-    contactId: number
+    publicGdprDeleteInput: PublicGdprDeleteInput
 }
 
 export class ObjectGDPRApi {
@@ -424,21 +416,12 @@ export class ObjectGDPRApi {
     }
 
     /**
-     * Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn't found, blacklists an email address from being used in the future.
-     * DELETE
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
      * @param param the request object
      */
-    public purgeByEmail(param: GDPRApiPurgeByEmailRequest, options?: Configuration): Promise<void> {
-        return this.api.purgeByEmail(param.email,  options).toPromise();
-    }
-
-    /**
-     * Permanently delete a contact by id and all associated content to follow GDPR
-     * DELETE
-     * @param param the request object
-     */
-    public purgeById(param: GDPRApiPurgeByIdRequest, options?: Configuration): Promise<void> {
-        return this.api.purgeById(param.contactId,  options).toPromise();
+    public postCrmV3ObjectsContactsGdprDelete(param: GDPRApiPostCrmV3ObjectsContactsGdprDeleteRequest, options?: Configuration): Promise<void> {
+        return this.api.postCrmV3ObjectsContactsGdprDelete(param.publicGdprDeleteInput,  options).toPromise();
     }
 
 }

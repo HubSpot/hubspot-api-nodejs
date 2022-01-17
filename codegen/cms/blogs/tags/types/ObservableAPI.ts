@@ -3,32 +3,37 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
 import { BatchResponseTagWithErrors } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
+import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
 
-import { TagApiRequestFactory, TagApiResponseProcessor} from "../apis/TagApi";
-export class ObservableTagApi {
-    private requestFactory: TagApiRequestFactory;
-    private responseProcessor: TagApiResponseProcessor;
+import { BlogTagsApiRequestFactory, BlogTagsApiResponseProcessor} from "../apis/BlogTagsApi";
+export class ObservableBlogTagsApi {
+    private requestFactory: BlogTagsApiRequestFactory;
+    private responseProcessor: BlogTagsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TagApiRequestFactory,
-        responseProcessor?: TagApiResponseProcessor
+        requestFactory?: BlogTagsApiRequestFactory,
+        responseProcessor?: BlogTagsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new TagApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new TagApiResponseProcessor();
+        this.requestFactory = requestFactory || new BlogTagsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BlogTagsApiResponseProcessor();
     }
 
     /**
@@ -183,6 +188,126 @@ export class ObservableTagApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+            }));
+    }
+
+    /**
+     * Attach a Blog Tag to a multi-language group.
+     * Attach a Blog Tag to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(rsp)));
+            }));
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Tag
+     * Create a new language variation
+     * @param tagCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext: TagCloneRequestVNext, _options?: Configuration): Observable<Tag> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(rsp)));
+            }));
+    }
+
+    /**
+     * Detach a Blog Tag from a multi-language group.
+     * Detach a Blog Tag from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(rsp)));
+            }));
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Tag in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
+     */
+    public postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsTagsMultiLanguageUpdateLanguages(rsp)));
+            }));
+    }
+
+    /**
+     * Set a Blog Tag as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(rsp)));
             }));
     }
 

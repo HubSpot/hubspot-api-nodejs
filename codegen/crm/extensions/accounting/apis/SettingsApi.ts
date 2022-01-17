@@ -26,7 +26,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("SettingsApi", "getById", "appId");
         }
 
 
@@ -60,13 +60,13 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling replace.');
+            throw new RequiredError("SettingsApi", "replace", "appId");
         }
 
 
         // verify required parameter 'accountingAppSettings' is not null or undefined
         if (accountingAppSettings === null || accountingAppSettings === undefined) {
-            throw new RequiredError('Required parameter accountingAppSettings was null or undefined when calling replace.');
+            throw new RequiredError("SettingsApi", "replace", "accountingAppSettings");
         }
 
 
@@ -125,7 +125,7 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -137,8 +137,7 @@ export class SettingsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -158,7 +157,7 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -170,8 +169,7 @@ export class SettingsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

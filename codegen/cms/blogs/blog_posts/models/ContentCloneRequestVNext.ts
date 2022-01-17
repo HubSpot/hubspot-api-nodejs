@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,13 +12,16 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Request body object for cloning content.
+*/
 export class ContentCloneRequestVNext {
     /**
-    * The ID of the object to be cloned.
+    * ID of the object to be cloned.
     */
     'id': string;
     /**
-    * The name of the cloned object.
+    * Name of the cloned object.
     */
     'cloneName'?: string;
 

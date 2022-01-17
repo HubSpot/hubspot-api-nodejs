@@ -3,6 +3,7 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
 import { Angle } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
@@ -13,7 +14,9 @@ import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/Coll
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
+import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { Gradient } from '../models/Gradient';
@@ -24,23 +27,25 @@ import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { RGBAColor } from '../models/RGBAColor';
 import { RowMetaData } from '../models/RowMetaData';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { SideOrCorner } from '../models/SideOrCorner';
 import { StandardError } from '../models/StandardError';
 import { Styles } from '../models/Styles';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
-import { ObservableBlogPostApi } from './ObservableAPI';
+import { ObservableBlogPostsApi } from './ObservableAPI';
 
-import { BlogPostApiRequestFactory, BlogPostApiResponseProcessor} from "../apis/BlogPostApi";
-export class PromiseBlogPostApi {
-    private api: ObservableBlogPostApi
+import { BlogPostsApiRequestFactory, BlogPostsApiResponseProcessor} from "../apis/BlogPostsApi";
+export class PromiseBlogPostsApi {
+    private api: ObservableBlogPostsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BlogPostApiRequestFactory,
-        responseProcessor?: BlogPostApiResponseProcessor
+        requestFactory?: BlogPostsApiRequestFactory,
+        responseProcessor?: BlogPostsApiResponseProcessor
     ) {
-        this.api = new ObservableBlogPostApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableBlogPostsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -65,7 +70,7 @@ export class PromiseBlogPostApi {
     }
 
     /**
-     * Clone a Blog.
+     * Clone a Blog Post.
      * Clone a Blog Post
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
@@ -126,7 +131,7 @@ export class PromiseBlogPostApi {
      * @param updatedBefore Only return Blog Posts last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param limit The maximum number of results to return. Default is 20.
      * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
@@ -159,12 +164,62 @@ export class PromiseBlogPostApi {
     }
 
     /**
+     * Attach a Blog Post to a multi-language group.
+     * Attach a Blog Post to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Post
+     * Create a new language variation
+     * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<BlogPost> {
+        const result = this.api.postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Detach a Blog Post from a multi-language group.
+     * Detach a Blog Post from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Post in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
      * @param objectId The id of the Blog Post for which it&#39;s draft will be pushed live.
      */
     public pushLive(objectId: string, _options?: Configuration): Promise<void> {
         const result = this.api.pushLive(objectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Set a Blog Post as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
         return result.toPromise();
     }
 
@@ -214,7 +269,7 @@ export class PromiseBlogPostApi {
     /**
      * Schedule a Blog Post to be Published.
      * Schedule a Blog Post to be Published
-     * @param contentScheduleRequestVNext The JSON representation of the ContentCloneRequestVNext object.
+     * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
     public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<void> {
         const result = this.api.schedule(contentScheduleRequestVNext, _options);
@@ -236,8 +291,8 @@ export class PromiseBlogPostApi {
     /**
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
-     * @param batchInputJsonNode 
-     * @param archived Whether to return only results that have been archived.
+     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
+     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
         const result = this.api.updateBatch(batchInputJsonNode, archived, _options);

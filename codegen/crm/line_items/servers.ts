@@ -1,10 +1,7 @@
-import { RequestContext, HttpMethod, Headers } from "./http/http";
+import { RequestContext, HttpMethod } from "./http/http";
 
 export interface BaseServerConfiguration {
-    getHeaders(): Headers
     makeRequestContext(endpoint: string, httpMethod: HttpMethod): RequestContext;
-    setHeaders(headers: Headers): any;
-    setHeaderParam(key: string, value: string): void
 }
 
 /**
@@ -14,7 +11,7 @@ export interface BaseServerConfiguration {
  *
  */
 export class ServerConfiguration<T extends { [key: string]: string }> implements BaseServerConfiguration {
-    public constructor(private url: string, private variableConfiguration: T, private headers: Headers = {}) {}
+    public constructor(private url: string, private variableConfiguration: T) {}
 
     /**
      * Sets the value of the variables of this server.
@@ -27,18 +24,6 @@ export class ServerConfiguration<T extends { [key: string]: string }> implements
 
     public getConfiguration(): T {
         return this.variableConfiguration
-    }
-
-    public setHeaders(headers: Headers): void {
-        Object.assign(this.headers, headers);
-    }
-
-    public getHeaders(): Headers {
-        return this.headers
-    }
-
-    public setHeaderParam(key: string, value: string): void  {
-        this.headers[key] = value;
     }
 
     private getUrl() {
@@ -59,7 +44,7 @@ export class ServerConfiguration<T extends { [key: string]: string }> implements
      *
      */
     public makeRequestContext(endpoint: string, httpMethod: HttpMethod): RequestContext {
-        return new RequestContext(this.getUrl() + endpoint, httpMethod, this.headers);
+        return new RequestContext(this.getUrl() + endpoint, httpMethod);
     }
 }
 

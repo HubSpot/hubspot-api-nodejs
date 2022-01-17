@@ -15,7 +15,7 @@ import { PublicObjectId } from './PublicObjectId';
 import { HttpFile } from '../http/http';
 
 export class PublicAssociationMulti {
-    'from': PublicObjectId;
+    '_from': PublicObjectId;
     /**
     * The IDs of objects that are associated with the object identified by the ID in 'from'.
     */
@@ -25,7 +25,7 @@ export class PublicAssociationMulti {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "from",
+            "name": "_from",
             "baseName": "from",
             "type": "PublicObjectId",
             "format": ""

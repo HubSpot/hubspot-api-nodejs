@@ -30,13 +30,13 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+            throw new RequiredError("CardsApi", "archive", "appId");
         }
 
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
-            throw new RequiredError('Required parameter cardId was null or undefined when calling archive.');
+            throw new RequiredError("CardsApi", "archive", "cardId");
         }
 
 
@@ -71,13 +71,13 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling create.');
+            throw new RequiredError("CardsApi", "create", "appId");
         }
 
 
         // verify required parameter 'cardCreateRequest' is not null or undefined
         if (cardCreateRequest === null || cardCreateRequest === undefined) {
-            throw new RequiredError('Required parameter cardCreateRequest was null or undefined when calling create.');
+            throw new RequiredError("CardsApi", "create", "cardCreateRequest");
         }
 
 
@@ -121,7 +121,7 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getAll.');
+            throw new RequiredError("CardsApi", "getAll", "appId");
         }
 
 
@@ -155,13 +155,13 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("CardsApi", "getById", "appId");
         }
 
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
-            throw new RequiredError('Required parameter cardId was null or undefined when calling getById.');
+            throw new RequiredError("CardsApi", "getById", "cardId");
         }
 
 
@@ -197,19 +197,19 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling update.');
+            throw new RequiredError("CardsApi", "update", "appId");
         }
 
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
-            throw new RequiredError('Required parameter cardId was null or undefined when calling update.');
+            throw new RequiredError("CardsApi", "update", "cardId");
         }
 
 
         // verify required parameter 'cardPatchRequest' is not null or undefined
         if (cardPatchRequest === null || cardPatchRequest === undefined) {
-            throw new RequiredError('Required parameter cardPatchRequest was null or undefined when calling update.');
+            throw new RequiredError("CardsApi", "update", "cardPatchRequest");
         }
 
 
@@ -265,7 +265,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -277,8 +277,7 @@ export class CardsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -302,7 +301,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -314,8 +313,7 @@ export class CardsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -339,7 +337,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -351,8 +349,7 @@ export class CardsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -376,7 +373,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -388,8 +385,7 @@ export class CardsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -413,7 +409,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -425,8 +421,7 @@ export class CardsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

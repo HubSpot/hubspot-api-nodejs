@@ -27,13 +27,13 @@ export class TypesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError('Required parameter fromObjectType was null or undefined when calling getAll.');
+            throw new RequiredError("TypesApi", "getAll", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError('Required parameter toObjectType was null or undefined when calling getAll.');
+            throw new RequiredError("TypesApi", "getAll", "toObjectType");
         }
 
 
@@ -92,7 +92,7 @@ export class TypesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -104,8 +104,7 @@ export class TypesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

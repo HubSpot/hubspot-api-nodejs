@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -15,7 +15,7 @@ import { VersionUser } from './VersionUser';
 import { HttpFile } from '../http/http';
 
 /**
-* Model definition for a Version Blog Post. Contains metadata describing the version of the Blog Post. It can be used to view edit history of a post.
+* Model definition of a version of a blog post.
 */
 export class VersionBlogPost {
     'object': BlogPost;

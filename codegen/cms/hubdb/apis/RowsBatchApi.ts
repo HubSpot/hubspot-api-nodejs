@@ -30,13 +30,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchCloneDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchCloneDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling batchCloneDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchCloneDraftTableRows", "batchInputString");
         }
 
 
@@ -86,13 +86,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchCreateDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchCreateDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
         if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
-            throw new RequiredError('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchCreateDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchCreateDraftTableRows", "batchInputHubDbTableRowV3Request");
         }
 
 
@@ -142,13 +142,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchPurgeDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchPurgeDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling batchPurgeDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchPurgeDraftTableRows", "batchInputString");
         }
 
 
@@ -198,13 +198,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchReadDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReadDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling batchReadDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReadDraftTableRows", "batchInputString");
         }
 
 
@@ -254,13 +254,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchReadTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReadTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling batchReadTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReadTableRows", "batchInputString");
         }
 
 
@@ -310,13 +310,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchReplaceDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReplaceDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
         if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
-            throw new RequiredError('Required parameter batchInputHubDbTableRowV3Request was null or undefined when calling batchReplaceDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchReplaceDraftTableRows", "batchInputHubDbTableRowV3Request");
         }
 
 
@@ -366,13 +366,13 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError('Required parameter tableIdOrName was null or undefined when calling batchUpdateDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchUpdateDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputJsonNode' is not null or undefined
         if (batchInputJsonNode === null || batchInputJsonNode === undefined) {
-            throw new RequiredError('Required parameter batchInputJsonNode was null or undefined when calling batchUpdateDraftTableRows.');
+            throw new RequiredError("RowsBatchApi", "batchUpdateDraftTableRows", "batchInputJsonNode");
         }
 
 
@@ -436,7 +436,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -448,8 +448,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -480,7 +479,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -492,8 +491,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -513,7 +511,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -525,8 +523,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -557,7 +554,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -569,8 +566,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -601,7 +597,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -613,8 +609,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -645,7 +640,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -657,8 +652,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -689,7 +683,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -701,8 +695,7 @@ export class RowsBatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

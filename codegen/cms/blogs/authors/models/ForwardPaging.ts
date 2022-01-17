@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -13,6 +13,9 @@
 import { NextPage } from './NextPage';
 import { HttpFile } from '../http/http';
 
+/**
+* Model definition for forward paging.
+*/
 export class ForwardPaging {
     'next'?: NextPage;
 
