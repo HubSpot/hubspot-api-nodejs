@@ -1,6 +1,6 @@
 /**
- * Files
- * Upload and manage files.
+ * Blog Post endpoints
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -13,17 +13,13 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Information on the task that has been started, and where to check it's status.
+* Request body object for setting a new primary language.
 */
-export class FolderUpdateTaskLocator {
+export class SetNewLanguagePrimaryRequestVNext {
     /**
-    * The ID of the task
+    * ID of object to set as primary in multi-language group.
     */
     'id': string;
-    /**
-    * Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
-    */
-    'links'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,16 +29,10 @@ export class FolderUpdateTaskLocator {
             "baseName": "id",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return FolderUpdateTaskLocator.attributeTypeMap;
+        return SetNewLanguagePrimaryRequestVNext.attributeTypeMap;
     }
 
     public constructor() {

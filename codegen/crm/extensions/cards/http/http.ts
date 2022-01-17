@@ -31,8 +31,6 @@ export type HttpFile = {
     name: string
 };
 
-export type Headers = { [key: string]: string }
-
 
 export class HttpException extends Error {
     public constructor(msg: string) {
@@ -49,7 +47,7 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
  * Represents an HTTP request context
  */
 export class RequestContext {
-    private headers: Headers = {};
+    private headers: { [key: string]: string } = {};
     private body: RequestBody = undefined;
     private url: URLParse;
 
@@ -59,9 +57,8 @@ export class RequestContext {
      * @param url url of the requested resource
      * @param httpMethod http method
      */
-    public constructor(url: string, private httpMethod: HttpMethod, headers: Headers = {}) {
+    public constructor(url: string, private httpMethod: HttpMethod) {
         this.url = new URLParse(url, true);
-        this.headers = headers;
     }
 
     /*
@@ -97,7 +94,7 @@ export class RequestContext {
         return this.httpMethod;
     }
 
-    public getHeaders(): Headers {
+    public getHeaders(): { [key: string]: string } {
         return this.headers;
     }
 
@@ -189,6 +186,22 @@ export class ResponseContext {
         const data = await this.body.binary();
         const fileName = this.getParsedHeader("content-disposition")["filename"] || "";
         return { data, name: fileName };
+    }
+
+    /**
+     * Use a heuristic to get a body of unknown data structure.
+     * Return as string if possible, otherwise as binary.
+     */
+    public getBodyAsAny(): Promise<string | Buffer | undefined> {
+        try {
+            return this.body.text();
+        } catch {}
+
+        try {
+            return this.body.binary();
+        } catch {}
+
+        return Promise.resolve(undefined);
     }
 }
 

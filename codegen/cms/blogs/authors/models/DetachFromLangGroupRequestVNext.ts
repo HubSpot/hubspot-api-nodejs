@@ -1,6 +1,6 @@
 /**
- * Files
- * Upload and manage files.
+ * Blog Post endpoints
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,28 +12,27 @@
 
 import { HttpFile } from '../http/http';
 
-export class NextPage {
-    'after': string;
-    'link'?: string;
+/**
+* Request body object for detaching objects from multi-language groups.
+*/
+export class DetachFromLangGroupRequestVNext {
+    /**
+    * ID of the object to remove from a multi-language group.
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "after",
-            "baseName": "after",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "link",
-            "baseName": "link",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return DetachFromLangGroupRequestVNext.attributeTypeMap;
     }
 
     public constructor() {

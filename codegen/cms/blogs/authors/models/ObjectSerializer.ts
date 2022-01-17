@@ -1,26 +1,36 @@
+export * from './AttachToLangPrimaryRequestVNext';
 export * from './BatchInputBlogAuthor';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
 export * from './BatchResponseBlogAuthorWithErrors';
 export * from './BlogAuthor';
+export * from './BlogAuthorCloneRequestVNext';
 export * from './CollectionResponseWithTotalBlogAuthorForwardPaging';
+export * from './DetachFromLangGroupRequestVNext';
 export * from './ErrorDetail';
 export * from './ForwardPaging';
 export * from './ModelError';
 export * from './NextPage';
+export * from './SetNewLanguagePrimaryRequestVNext';
 export * from './StandardError';
+export * from './UpdateLanguagesRequestVNext';
 
+import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from './AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogAuthor } from './BatchInputBlogAuthor';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchResponseBlogAuthorWithErrors, BatchResponseBlogAuthorWithErrorsStatusEnum          } from './BatchResponseBlogAuthorWithErrors';
-import { BlogAuthor } from './BlogAuthor';
+import { BlogAuthor    , BlogAuthorLanguageEnum               } from './BlogAuthor';
+import { BlogAuthorCloneRequestVNext } from './BlogAuthorCloneRequestVNext';
 import { CollectionResponseWithTotalBlogAuthorForwardPaging } from './CollectionResponseWithTotalBlogAuthorForwardPaging';
+import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from './ErrorDetail';
 import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from './SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from './StandardError';
+import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from './UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -42,21 +52,30 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseBlogAuthorWithErrorsStatusEnum",
+    "BlogAuthorLanguageEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AttachToLangPrimaryRequestVNext": AttachToLangPrimaryRequestVNext,
     "BatchInputBlogAuthor": BatchInputBlogAuthor,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
     "BatchResponseBlogAuthorWithErrors": BatchResponseBlogAuthorWithErrors,
     "BlogAuthor": BlogAuthor,
+    "BlogAuthorCloneRequestVNext": BlogAuthorCloneRequestVNext,
     "CollectionResponseWithTotalBlogAuthorForwardPaging": CollectionResponseWithTotalBlogAuthorForwardPaging,
+    "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
     "StandardError": StandardError,
+    "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,
 }
 
 export class ObjectSerializer {

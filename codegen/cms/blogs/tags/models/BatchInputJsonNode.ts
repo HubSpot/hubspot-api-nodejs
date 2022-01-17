@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,7 +12,13 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Wrapper for providing an array of JSON nodes as inputs.
+*/
 export class BatchInputJsonNode {
+    /**
+    * JSON nodes to input.
+    */
     'inputs': Array<any>;
 
     static readonly discriminator: string | undefined = undefined;

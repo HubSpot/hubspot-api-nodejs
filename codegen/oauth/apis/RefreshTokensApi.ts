@@ -24,7 +24,7 @@ export class RefreshTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'token' is not null or undefined
         if (token === null || token === undefined) {
-            throw new RequiredError('Required parameter token was null or undefined when calling archiveRefreshToken.');
+            throw new RequiredError("RefreshTokensApi", "archiveRefreshToken", "token");
         }
 
 
@@ -49,7 +49,7 @@ export class RefreshTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'token' is not null or undefined
         if (token === null || token === undefined) {
-            throw new RequiredError('Required parameter token was null or undefined when calling getRefreshToken.');
+            throw new RequiredError("RefreshTokensApi", "getRefreshToken", "token");
         }
 
 
@@ -84,7 +84,7 @@ export class RefreshTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -92,8 +92,7 @@ export class RefreshTokensApiResponseProcessor {
             return;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -117,7 +116,7 @@ export class RefreshTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -129,8 +128,7 @@ export class RefreshTokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

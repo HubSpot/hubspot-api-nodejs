@@ -31,7 +31,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'feedbackSubmissionId' is not null or undefined
         if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError('Required parameter feedbackSubmissionId was null or undefined when calling getById.');
+            throw new RequiredError("BasicApi", "getById", "feedbackSubmissionId");
         }
 
 
@@ -163,7 +163,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -175,8 +175,7 @@ export class BasicApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -200,7 +199,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -212,8 +211,7 @@ export class BasicApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

@@ -30,13 +30,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling archive.');
+            throw new RequiredError("BatchApi", "archive", "objectType");
         }
 
 
         // verify required parameter 'batchInputPropertyName' is not null or undefined
         if (batchInputPropertyName === null || batchInputPropertyName === undefined) {
-            throw new RequiredError('Required parameter batchInputPropertyName was null or undefined when calling archive.');
+            throw new RequiredError("BatchApi", "archive", "batchInputPropertyName");
         }
 
 
@@ -91,13 +91,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling create.');
+            throw new RequiredError("BatchApi", "create", "objectType");
         }
 
 
         // verify required parameter 'batchInputPropertyCreate' is not null or undefined
         if (batchInputPropertyCreate === null || batchInputPropertyCreate === undefined) {
-            throw new RequiredError('Required parameter batchInputPropertyCreate was null or undefined when calling create.');
+            throw new RequiredError("BatchApi", "create", "batchInputPropertyCreate");
         }
 
 
@@ -152,13 +152,13 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling read.');
+            throw new RequiredError("BatchApi", "read", "objectType");
         }
 
 
         // verify required parameter 'batchReadInputPropertyName' is not null or undefined
         if (batchReadInputPropertyName === null || batchReadInputPropertyName === undefined) {
-            throw new RequiredError('Required parameter batchReadInputPropertyName was null or undefined when calling read.');
+            throw new RequiredError("BatchApi", "read", "batchReadInputPropertyName");
         }
 
 
@@ -223,7 +223,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -235,8 +235,7 @@ export class BatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -267,7 +266,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -279,8 +278,7 @@ export class BatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -311,7 +309,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -323,8 +321,7 @@ export class BatchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

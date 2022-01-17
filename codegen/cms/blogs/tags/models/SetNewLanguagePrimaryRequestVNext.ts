@@ -1,6 +1,6 @@
 /**
- * Files
- * Upload and manage files.
+ * Blog Post endpoints
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -10,32 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from './NextPage';
-import { PreviousPage } from './PreviousPage';
 import { HttpFile } from '../http/http';
 
-export class Paging {
-    'next'?: NextPage;
-    'prev'?: PreviousPage;
+/**
+* Request body object for setting a new primary language.
+*/
+export class SetNewLanguagePrimaryRequestVNext {
+    /**
+    * ID of object to set as primary in multi-language group.
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "next",
-            "baseName": "next",
-            "type": "NextPage",
-            "format": ""
-        },
-        {
-            "name": "prev",
-            "baseName": "prev",
-            "type": "PreviousPage",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Paging.attributeTypeMap;
+        return SetNewLanguagePrimaryRequestVNext.attributeTypeMap;
     }
 
     public constructor() {

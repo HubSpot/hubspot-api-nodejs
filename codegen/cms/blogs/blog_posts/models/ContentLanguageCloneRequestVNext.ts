@@ -1,6 +1,6 @@
 /**
- * Files
- * Upload and manage files.
+ * Blog Post endpoints
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -13,21 +13,22 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Object for updating folders.
+* Request body object for creating new language variant content.
 */
-export class FolderUpdateInput {
+export class ContentLanguageCloneRequestVNext {
     /**
-    * Id of the folder to change.
+    * ID of content to clone.
     */
     'id': string;
     /**
-    * New name. If specified the folder's name and fullPath will change. All children of the folder will be updated accordingly.
+    * Target language of new variant.
     */
-    'name'?: string;
+    'language'?: string;
     /**
-    * New parent folder ID. If changed, the folder and all it's children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
+    * Language of primary content to clone.
     */
-    'parentFolderId'?: number;
+    'primaryLanguage'?: string;
+    'contentGroupId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -39,20 +40,26 @@ export class FolderUpdateInput {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "language",
+            "baseName": "language",
             "type": "string",
             "format": ""
         },
         {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
+            "name": "primaryLanguage",
+            "baseName": "primaryLanguage",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contentGroupId",
+            "baseName": "contentGroupId",
             "type": "number",
             "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
-        return FolderUpdateInput.attributeTypeMap;
+        return ContentLanguageCloneRequestVNext.attributeTypeMap;
     }
 
     public constructor() {

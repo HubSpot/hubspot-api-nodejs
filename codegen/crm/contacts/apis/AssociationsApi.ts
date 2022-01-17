@@ -29,25 +29,25 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new RequiredError('Required parameter contactId was null or undefined when calling archive.');
+            throw new RequiredError("AssociationsApi", "archive", "contactId");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError('Required parameter toObjectType was null or undefined when calling archive.');
+            throw new RequiredError("AssociationsApi", "archive", "toObjectType");
         }
 
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
-            throw new RequiredError('Required parameter toObjectId was null or undefined when calling archive.');
+            throw new RequiredError("AssociationsApi", "archive", "toObjectId");
         }
 
 
         // verify required parameter 'associationType' is not null or undefined
         if (associationType === null || associationType === undefined) {
-            throw new RequiredError('Required parameter associationType was null or undefined when calling archive.');
+            throw new RequiredError("AssociationsApi", "archive", "associationType");
         }
 
 
@@ -95,25 +95,25 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new RequiredError('Required parameter contactId was null or undefined when calling create.');
+            throw new RequiredError("AssociationsApi", "create", "contactId");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError('Required parameter toObjectType was null or undefined when calling create.');
+            throw new RequiredError("AssociationsApi", "create", "toObjectType");
         }
 
 
         // verify required parameter 'toObjectId' is not null or undefined
         if (toObjectId === null || toObjectId === undefined) {
-            throw new RequiredError('Required parameter toObjectId was null or undefined when calling create.');
+            throw new RequiredError("AssociationsApi", "create", "toObjectId");
         }
 
 
         // verify required parameter 'associationType' is not null or undefined
         if (associationType === null || associationType === undefined) {
-            throw new RequiredError('Required parameter associationType was null or undefined when calling create.');
+            throw new RequiredError("AssociationsApi", "create", "associationType");
         }
 
 
@@ -161,13 +161,13 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
-            throw new RequiredError('Required parameter contactId was null or undefined when calling getAll.');
+            throw new RequiredError("AssociationsApi", "getAll", "contactId");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError('Required parameter toObjectType was null or undefined when calling getAll.');
+            throw new RequiredError("AssociationsApi", "getAll", "toObjectType");
         }
 
 
@@ -234,7 +234,7 @@ export class AssociationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -246,8 +246,7 @@ export class AssociationsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -271,7 +270,7 @@ export class AssociationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -283,8 +282,7 @@ export class AssociationsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -308,7 +306,7 @@ export class AssociationsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -320,8 +318,7 @@ export class AssociationsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

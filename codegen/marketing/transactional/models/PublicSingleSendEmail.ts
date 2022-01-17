@@ -19,7 +19,7 @@ export class PublicSingleSendEmail {
     /**
     * The From header for the email.
     */
-    'from'?: string;
+    '_from'?: string;
     /**
     * The recipient of the email.
     */
@@ -45,7 +45,7 @@ export class PublicSingleSendEmail {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "from",
+            "name": "_from",
             "baseName": "from",
             "type": "string",
             "format": ""

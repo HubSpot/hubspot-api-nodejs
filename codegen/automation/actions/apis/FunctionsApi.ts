@@ -31,25 +31,25 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling archive.');
+            throw new RequiredError("FunctionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling archive.');
+            throw new RequiredError("FunctionsApi", "archive", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError('Required parameter functionId was null or undefined when calling archive.');
+            throw new RequiredError("FunctionsApi", "archive", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+            throw new RequiredError("FunctionsApi", "archive", "appId");
         }
 
 
@@ -87,19 +87,19 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling archiveByFunctionType.');
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling archiveByFunctionType.');
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archiveByFunctionType.');
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "appId");
         }
 
 
@@ -138,31 +138,31 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling createOrReplace.');
+            throw new RequiredError("FunctionsApi", "createOrReplace", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling createOrReplace.');
+            throw new RequiredError("FunctionsApi", "createOrReplace", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError('Required parameter functionId was null or undefined when calling createOrReplace.');
+            throw new RequiredError("FunctionsApi", "createOrReplace", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling createOrReplace.');
+            throw new RequiredError("FunctionsApi", "createOrReplace", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError('Required parameter body was null or undefined when calling createOrReplace.');
+            throw new RequiredError("FunctionsApi", "createOrReplace", "body");
         }
 
 
@@ -212,25 +212,25 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling createOrReplaceByFunctionType.');
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling createOrReplaceByFunctionType.');
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling createOrReplaceByFunctionType.');
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError('Required parameter body was null or undefined when calling createOrReplaceByFunctionType.');
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "body");
         }
 
 
@@ -278,19 +278,19 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getByFunctionType.');
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling getByFunctionType.');
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getByFunctionType.');
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "appId");
         }
 
 
@@ -328,25 +328,25 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getById.');
+            throw new RequiredError("FunctionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError('Required parameter functionType was null or undefined when calling getById.');
+            throw new RequiredError("FunctionsApi", "getById", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError('Required parameter functionId was null or undefined when calling getById.');
+            throw new RequiredError("FunctionsApi", "getById", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("FunctionsApi", "getById", "appId");
         }
 
 
@@ -383,13 +383,13 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError('Required parameter definitionId was null or undefined when calling getPage.');
+            throw new RequiredError("FunctionsApi", "getPage", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getPage.');
+            throw new RequiredError("FunctionsApi", "getPage", "appId");
         }
 
 
@@ -434,7 +434,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -446,8 +446,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -467,7 +466,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -479,8 +478,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -504,7 +502,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -516,8 +514,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -541,7 +538,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -553,8 +550,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -578,7 +574,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -590,8 +586,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -615,7 +610,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -627,8 +622,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -652,7 +646,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -664,8 +658,7 @@ export class FunctionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

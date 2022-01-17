@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -12,10 +12,25 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* A color defined by RGB values.
+*/
 export class RGBAColor {
+    /**
+    * Red.
+    */
     'r': number;
+    /**
+    * Green.
+    */
     'g': number;
+    /**
+    * Blue.
+    */
     'b': number;
+    /**
+    * Alpha.
+    */
     'a': number;
 
     static readonly discriminator: string | undefined = undefined;

@@ -1,4 +1,5 @@
 export * from './Angle';
+export * from './AttachToLangPrimaryRequestVNext';
 export * from './BackgroundImage';
 export * from './BatchInputBlogPost';
 export * from './BatchInputJsonNode';
@@ -9,7 +10,9 @@ export * from './CollectionResponseWithTotalBlogPostForwardPaging';
 export * from './CollectionResponseWithTotalVersionBlogPost';
 export * from './ColorStop';
 export * from './ContentCloneRequestVNext';
+export * from './ContentLanguageCloneRequestVNext';
 export * from './ContentScheduleRequestVNext';
+export * from './DetachFromLangGroupRequestVNext';
 export * from './ErrorDetail';
 export * from './ForwardPaging';
 export * from './Gradient';
@@ -20,24 +23,29 @@ export * from './Paging';
 export * from './PreviousPage';
 export * from './RGBAColor';
 export * from './RowMetaData';
+export * from './SetNewLanguagePrimaryRequestVNext';
 export * from './SideOrCorner';
 export * from './StandardError';
 export * from './Styles';
+export * from './UpdateLanguagesRequestVNext';
 export * from './VersionBlogPost';
 export * from './VersionUser';
 
 import { Angle , AngleUnitsEnum   } from './Angle';
+import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from './AttachToLangPrimaryRequestVNext';
 import { BackgroundImage  , BackgroundImageBackgroundPositionEnum   } from './BackgroundImage';
 import { BatchInputBlogPost } from './BatchInputBlogPost';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchResponseBlogPostWithErrors, BatchResponseBlogPostWithErrorsStatusEnum          } from './BatchResponseBlogPostWithErrors';
-import { BlogPost                , BlogPostAbStatusEnum     , BlogPostLanguageEnum                           , BlogPostContentTypeCategoryEnum  , BlogPostCurrentStateEnum                } from './BlogPost';
+import { BlogPost              , BlogPostAbStatusEnum     , BlogPostLanguageEnum                     , BlogPostContentTypeCategoryEnum  , BlogPostCurrentStateEnum                     } from './BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from './CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from './CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from './ColorStop';
 import { ContentCloneRequestVNext } from './ContentCloneRequestVNext';
+import { ContentLanguageCloneRequestVNext } from './ContentLanguageCloneRequestVNext';
 import { ContentScheduleRequestVNext } from './ContentScheduleRequestVNext';
+import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from './ErrorDetail';
 import { ForwardPaging } from './ForwardPaging';
 import { Gradient } from './Gradient';
@@ -48,9 +56,11 @@ import { Paging } from './Paging';
 import { PreviousPage } from './PreviousPage';
 import { RGBAColor } from './RGBAColor';
 import { RowMetaData } from './RowMetaData';
+import { SetNewLanguagePrimaryRequestVNext } from './SetNewLanguagePrimaryRequestVNext';
 import { SideOrCorner, SideOrCornerVerticalSideEnum  , SideOrCornerHorizontalSideEnum   } from './SideOrCorner';
 import { StandardError } from './StandardError';
 import { Styles, StylesVerticalAlignmentEnum       , StylesFlexboxPositioningEnum   } from './Styles';
+import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from './UpdateLanguagesRequestVNext';
 import { VersionBlogPost } from './VersionBlogPost';
 import { VersionUser } from './VersionUser';
 
@@ -75,6 +85,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "AngleUnitsEnum",
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BackgroundImageBackgroundPositionEnum",
     "BatchResponseBlogPostWithErrorsStatusEnum",
     "BlogPostAbStatusEnum",
@@ -85,10 +97,12 @@ let enumsMap: Set<string> = new Set<string>([
     "SideOrCornerHorizontalSideEnum",
     "StylesVerticalAlignmentEnum",
     "StylesFlexboxPositioningEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "Angle": Angle,
+    "AttachToLangPrimaryRequestVNext": AttachToLangPrimaryRequestVNext,
     "BackgroundImage": BackgroundImage,
     "BatchInputBlogPost": BatchInputBlogPost,
     "BatchInputJsonNode": BatchInputJsonNode,
@@ -99,7 +113,9 @@ let typeMap: {[index: string]: any} = {
     "CollectionResponseWithTotalVersionBlogPost": CollectionResponseWithTotalVersionBlogPost,
     "ColorStop": ColorStop,
     "ContentCloneRequestVNext": ContentCloneRequestVNext,
+    "ContentLanguageCloneRequestVNext": ContentLanguageCloneRequestVNext,
     "ContentScheduleRequestVNext": ContentScheduleRequestVNext,
+    "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "Gradient": Gradient,
@@ -110,9 +126,11 @@ let typeMap: {[index: string]: any} = {
     "PreviousPage": PreviousPage,
     "RGBAColor": RGBAColor,
     "RowMetaData": RowMetaData,
+    "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
     "SideOrCorner": SideOrCorner,
     "StandardError": StandardError,
     "Styles": Styles,
+    "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,
     "VersionBlogPost": VersionBlogPost,
     "VersionUser": VersionUser,
 }

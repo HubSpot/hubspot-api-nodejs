@@ -27,7 +27,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling clear.');
+            throw new RequiredError("SettingsApi", "clear", "appId");
         }
 
 
@@ -61,13 +61,13 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling configure.');
+            throw new RequiredError("SettingsApi", "configure", "appId");
         }
 
 
         // verify required parameter 'settingsChangeRequest' is not null or undefined
         if (settingsChangeRequest === null || settingsChangeRequest === undefined) {
-            throw new RequiredError('Required parameter settingsChangeRequest was null or undefined when calling configure.');
+            throw new RequiredError("SettingsApi", "configure", "settingsChangeRequest");
         }
 
 
@@ -111,7 +111,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getAll.');
+            throw new RequiredError("SettingsApi", "getAll", "appId");
         }
 
 
@@ -155,7 +155,7 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -167,8 +167,7 @@ export class SettingsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -192,7 +191,7 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -204,8 +203,7 @@ export class SettingsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -229,7 +227,7 @@ export class SettingsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -241,8 +239,7 @@ export class SettingsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

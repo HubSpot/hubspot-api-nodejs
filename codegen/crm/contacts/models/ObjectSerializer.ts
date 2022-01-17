@@ -18,6 +18,7 @@ export * from './ModelError';
 export * from './NextPage';
 export * from './Paging';
 export * from './PreviousPage';
+export * from './PublicGdprDeleteInput';
 export * from './PublicObjectSearchRequest';
 export * from './SimplePublicObject';
 export * from './SimplePublicObjectBatchInput';
@@ -46,6 +47,7 @@ import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
 import { Paging } from './Paging';
 import { PreviousPage } from './PreviousPage';
+import { PublicGdprDeleteInput } from './PublicGdprDeleteInput';
 import { PublicObjectSearchRequest } from './PublicObjectSearchRequest';
 import { SimplePublicObject } from './SimplePublicObject';
 import { SimplePublicObjectBatchInput } from './SimplePublicObjectBatchInput';
@@ -101,6 +103,7 @@ let typeMap: {[index: string]: any} = {
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
+    "PublicGdprDeleteInput": PublicGdprDeleteInput,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,
     "SimplePublicObject": SimplePublicObject,
     "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,

@@ -4,6 +4,7 @@ import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { Angle } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
@@ -14,7 +15,9 @@ import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/Coll
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
+import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { Gradient } from '../models/Gradient';
@@ -25,26 +28,28 @@ import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { RGBAColor } from '../models/RGBAColor';
 import { RowMetaData } from '../models/RowMetaData';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { SideOrCorner } from '../models/SideOrCorner';
 import { StandardError } from '../models/StandardError';
 import { Styles } from '../models/Styles';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 import { VersionUser } from '../models/VersionUser';
 
-import { BlogPostApiRequestFactory, BlogPostApiResponseProcessor} from "../apis/BlogPostApi";
-export class ObservableBlogPostApi {
-    private requestFactory: BlogPostApiRequestFactory;
-    private responseProcessor: BlogPostApiResponseProcessor;
+import { BlogPostsApiRequestFactory, BlogPostsApiResponseProcessor} from "../apis/BlogPostsApi";
+export class ObservableBlogPostsApi {
+    private requestFactory: BlogPostsApiRequestFactory;
+    private responseProcessor: BlogPostsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BlogPostApiRequestFactory,
-        responseProcessor?: BlogPostApiResponseProcessor
+        requestFactory?: BlogPostsApiRequestFactory,
+        responseProcessor?: BlogPostsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new BlogPostApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new BlogPostApiResponseProcessor();
+        this.requestFactory = requestFactory || new BlogPostsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BlogPostsApiResponseProcessor();
     }
 
     /**
@@ -97,7 +102,7 @@ export class ObservableBlogPostApi {
     }
 
     /**
-     * Clone a Blog.
+     * Clone a Blog Post.
      * Clone a Blog Post
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
@@ -228,7 +233,7 @@ export class ObservableBlogPostApi {
      * @param updatedBefore Only return Blog Posts last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param limit The maximum number of results to return. Default is 20.
      * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Observable<CollectionResponseWithTotalBlogPostForwardPaging> {
@@ -303,6 +308,102 @@ export class ObservableBlogPostApi {
     }
 
     /**
+     * Attach a Blog Post to a multi-language group.
+     * Attach a Blog Post to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(rsp)));
+            }));
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Post
+     * Create a new language variation
+     * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Observable<BlogPost> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(rsp)));
+            }));
+    }
+
+    /**
+     * Detach a Blog Post from a multi-language group.
+     * Detach a Blog Post from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(rsp)));
+            }));
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Post in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCmsV3BlogsPostsMultiLanguageUpdateLanguages(rsp)));
+            }));
+    }
+
+    /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
      * @param objectId The id of the Blog Post for which it&#39;s draft will be pushed live.
@@ -323,6 +424,30 @@ export class ObservableBlogPostApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.pushLive(rsp)));
+            }));
+    }
+
+    /**
+     * Set a Blog Post as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(rsp)));
             }));
     }
 
@@ -428,7 +553,7 @@ export class ObservableBlogPostApi {
     /**
      * Schedule a Blog Post to be Published.
      * Schedule a Blog Post to be Published
-     * @param contentScheduleRequestVNext The JSON representation of the ContentCloneRequestVNext object.
+     * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
     public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Observable<void> {
         const requestContextPromise = this.requestFactory.schedule(contentScheduleRequestVNext, _options);
@@ -478,8 +603,8 @@ export class ObservableBlogPostApi {
     /**
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
-     * @param batchInputJsonNode 
-     * @param archived Whether to return only results that have been archived.
+     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
+     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogPostWithErrors | any> {
         const requestContextPromise = this.requestFactory.updateBatch(batchInputJsonNode, archived, _options);

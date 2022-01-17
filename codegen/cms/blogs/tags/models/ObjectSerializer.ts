@@ -1,26 +1,36 @@
+export * from './AttachToLangPrimaryRequestVNext';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
 export * from './BatchInputTag';
 export * from './BatchResponseTagWithErrors';
 export * from './CollectionResponseWithTotalTagForwardPaging';
+export * from './DetachFromLangGroupRequestVNext';
 export * from './ErrorDetail';
 export * from './ForwardPaging';
 export * from './ModelError';
 export * from './NextPage';
+export * from './SetNewLanguagePrimaryRequestVNext';
 export * from './StandardError';
 export * from './Tag';
+export * from './TagCloneRequestVNext';
+export * from './UpdateLanguagesRequestVNext';
 
+import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from './AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchInputTag } from './BatchInputTag';
 import { BatchResponseTagWithErrors, BatchResponseTagWithErrorsStatusEnum          } from './BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from './CollectionResponseWithTotalTagForwardPaging';
+import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from './ErrorDetail';
 import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from './SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from './StandardError';
-import { Tag } from './Tag';
+import { Tag  , TagLanguageEnum       } from './Tag';
+import { TagCloneRequestVNext } from './TagCloneRequestVNext';
+import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from './UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -42,21 +52,30 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
+    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseTagWithErrorsStatusEnum",
+    "TagLanguageEnum",
+    "UpdateLanguagesRequestVNextLanguagesEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AttachToLangPrimaryRequestVNext": AttachToLangPrimaryRequestVNext,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
     "BatchInputTag": BatchInputTag,
     "BatchResponseTagWithErrors": BatchResponseTagWithErrors,
     "CollectionResponseWithTotalTagForwardPaging": CollectionResponseWithTotalTagForwardPaging,
+    "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
     "StandardError": StandardError,
     "Tag": Tag,
+    "TagCloneRequestVNext": TagCloneRequestVNext,
+    "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,
 }
 
 export class ObjectSerializer {

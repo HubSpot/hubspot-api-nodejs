@@ -29,19 +29,19 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling archive.');
+            throw new RequiredError("TokensApi", "archive", "eventTemplateId");
         }
 
 
         // verify required parameter 'tokenName' is not null or undefined
         if (tokenName === null || tokenName === undefined) {
-            throw new RequiredError('Required parameter tokenName was null or undefined when calling archive.');
+            throw new RequiredError("TokensApi", "archive", "tokenName");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+            throw new RequiredError("TokensApi", "archive", "appId");
         }
 
 
@@ -78,19 +78,19 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling create.');
+            throw new RequiredError("TokensApi", "create", "eventTemplateId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling create.');
+            throw new RequiredError("TokensApi", "create", "appId");
         }
 
 
         // verify required parameter 'timelineEventTemplateToken' is not null or undefined
         if (timelineEventTemplateToken === null || timelineEventTemplateToken === undefined) {
-            throw new RequiredError('Required parameter timelineEventTemplateToken was null or undefined when calling create.');
+            throw new RequiredError("TokensApi", "create", "timelineEventTemplateToken");
         }
 
 
@@ -138,25 +138,25 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'eventTemplateId' is not null or undefined
         if (eventTemplateId === null || eventTemplateId === undefined) {
-            throw new RequiredError('Required parameter eventTemplateId was null or undefined when calling update.');
+            throw new RequiredError("TokensApi", "update", "eventTemplateId");
         }
 
 
         // verify required parameter 'tokenName' is not null or undefined
         if (tokenName === null || tokenName === undefined) {
-            throw new RequiredError('Required parameter tokenName was null or undefined when calling update.');
+            throw new RequiredError("TokensApi", "update", "tokenName");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling update.');
+            throw new RequiredError("TokensApi", "update", "appId");
         }
 
 
         // verify required parameter 'timelineEventTemplateTokenUpdateRequest' is not null or undefined
         if (timelineEventTemplateTokenUpdateRequest === null || timelineEventTemplateTokenUpdateRequest === undefined) {
-            throw new RequiredError('Required parameter timelineEventTemplateTokenUpdateRequest was null or undefined when calling update.');
+            throw new RequiredError("TokensApi", "update", "timelineEventTemplateTokenUpdateRequest");
         }
 
 
@@ -213,7 +213,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -225,8 +225,7 @@ export class TokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -250,7 +249,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -262,8 +261,7 @@ export class TokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -287,7 +285,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -299,8 +297,7 @@ export class TokensApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

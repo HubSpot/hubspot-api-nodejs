@@ -9,6 +9,7 @@ import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
 
 
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
@@ -17,13 +18,17 @@ import { BlogPost } from '../models/BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
+import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
 import { VersionBlogPost } from '../models/VersionBlogPost';
 
 /**
  * no description
  */
-export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
+export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Delete the Blog Post object identified by the id in the path.
@@ -36,7 +41,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling archive.');
+            throw new RequiredError("BlogPostsApi", "archive", "objectId");
         }
 
 
@@ -80,7 +85,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling archiveBatch.');
+            throw new RequiredError("BlogPostsApi", "archiveBatch", "batchInputString");
         }
 
 
@@ -119,7 +124,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Clone a Blog.
+     * Clone a Blog Post.
      * Clone a Blog Post
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
@@ -128,7 +133,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'contentCloneRequestVNext' is not null or undefined
         if (contentCloneRequestVNext === null || contentCloneRequestVNext === undefined) {
-            throw new RequiredError('Required parameter contentCloneRequestVNext was null or undefined when calling clone.');
+            throw new RequiredError("BlogPostsApi", "clone", "contentCloneRequestVNext");
         }
 
 
@@ -176,7 +181,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'blogPost' is not null or undefined
         if (blogPost === null || blogPost === undefined) {
-            throw new RequiredError('Required parameter blogPost was null or undefined when calling create.');
+            throw new RequiredError("BlogPostsApi", "create", "blogPost");
         }
 
 
@@ -224,7 +229,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'batchInputBlogPost' is not null or undefined
         if (batchInputBlogPost === null || batchInputBlogPost === undefined) {
-            throw new RequiredError('Required parameter batchInputBlogPost was null or undefined when calling createBatch.');
+            throw new RequiredError("BlogPostsApi", "createBatch", "batchInputBlogPost");
         }
 
 
@@ -273,7 +278,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling getById.');
+            throw new RequiredError("BlogPostsApi", "getById", "objectId");
         }
 
 
@@ -317,7 +322,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling getDraftById.');
+            throw new RequiredError("BlogPostsApi", "getDraftById", "objectId");
         }
 
 
@@ -356,7 +361,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedBefore Only return Blog Posts last updated before the specified time.
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param limit The maximum number of results to return. Default is 20.
      * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
@@ -456,13 +461,13 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling getPreviousVersion.');
+            throw new RequiredError("BlogPostsApi", "getPreviousVersion", "objectId");
         }
 
 
         // verify required parameter 'revisionId' is not null or undefined
         if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError('Required parameter revisionId was null or undefined when calling getPreviousVersion.');
+            throw new RequiredError("BlogPostsApi", "getPreviousVersion", "revisionId");
         }
 
 
@@ -504,7 +509,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling getPreviousVersions.');
+            throw new RequiredError("BlogPostsApi", "getPreviousVersions", "objectId");
         }
 
 
@@ -551,6 +556,198 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Attach a Blog Post to a multi-language group.
+     * Attach a Blog Post to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public async postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'attachToLangPrimaryRequestVNext' is not null or undefined
+        if (attachToLangPrimaryRequestVNext === null || attachToLangPrimaryRequestVNext === undefined) {
+            throw new RequiredError("BlogPostsApi", "postCmsV3BlogsPostsMultiLanguageAttachToLangGroup", "attachToLangPrimaryRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/posts/multi-language/attach-to-lang-group';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(attachToLangPrimaryRequestVNext, "AttachToLangPrimaryRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Post
+     * Create a new language variation
+     * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public async postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'contentLanguageCloneRequestVNext' is not null or undefined
+        if (contentLanguageCloneRequestVNext === null || contentLanguageCloneRequestVNext === undefined) {
+            throw new RequiredError("BlogPostsApi", "postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation", "contentLanguageCloneRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/posts/multi-language/create-language-variation';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(contentLanguageCloneRequestVNext, "ContentLanguageCloneRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Detach a Blog Post from a multi-language group.
+     * Detach a Blog Post from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public async postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'detachFromLangGroupRequestVNext' is not null or undefined
+        if (detachFromLangGroupRequestVNext === null || detachFromLangGroupRequestVNext === undefined) {
+            throw new RequiredError("BlogPostsApi", "postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup", "detachFromLangGroupRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/posts/multi-language/detach-from-lang-group';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(detachFromLangGroupRequestVNext, "DetachFromLangGroupRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Post in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public async postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'updateLanguagesRequestVNext' is not null or undefined
+        if (updateLanguagesRequestVNext === null || updateLanguagesRequestVNext === undefined) {
+            throw new RequiredError("BlogPostsApi", "postCmsV3BlogsPostsMultiLanguageUpdateLanguages", "updateLanguagesRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/posts/multi-language/update-languages';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateLanguagesRequestVNext, "UpdateLanguagesRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
      * @param objectId The id of the Blog Post for which it&#39;s draft will be pushed live.
@@ -560,7 +757,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling pushLive.');
+            throw new RequiredError("BlogPostsApi", "pushLive", "objectId");
         }
 
 
@@ -589,6 +786,54 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Set a Blog Post as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public async putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'setNewLanguagePrimaryRequestVNext' is not null or undefined
+        if (setNewLanguagePrimaryRequestVNext === null || setNewLanguagePrimaryRequestVNext === undefined) {
+            throw new RequiredError("BlogPostsApi", "putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary", "setNewLanguagePrimaryRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/posts/multi-language/set-new-lang-primary';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(setNewLanguagePrimaryRequestVNext, "SetNewLanguagePrimaryRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2_legacy"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Retrieve the Blog Post objects identified in the request body.
      * Retrieve a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
@@ -599,7 +844,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError('Required parameter batchInputString was null or undefined when calling readBatch.');
+            throw new RequiredError("BlogPostsApi", "readBatch", "batchInputString");
         }
 
 
@@ -653,7 +898,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling resetDraft.');
+            throw new RequiredError("BlogPostsApi", "resetDraft", "objectId");
         }
 
 
@@ -692,13 +937,13 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling restorePreviousVersion.');
+            throw new RequiredError("BlogPostsApi", "restorePreviousVersion", "objectId");
         }
 
 
         // verify required parameter 'revisionId' is not null or undefined
         if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError('Required parameter revisionId was null or undefined when calling restorePreviousVersion.');
+            throw new RequiredError("BlogPostsApi", "restorePreviousVersion", "revisionId");
         }
 
 
@@ -738,13 +983,13 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling restorePreviousVersionToDraft.');
+            throw new RequiredError("BlogPostsApi", "restorePreviousVersionToDraft", "objectId");
         }
 
 
         // verify required parameter 'revisionId' is not null or undefined
         if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError('Required parameter revisionId was null or undefined when calling restorePreviousVersionToDraft.');
+            throw new RequiredError("BlogPostsApi", "restorePreviousVersionToDraft", "revisionId");
         }
 
 
@@ -776,14 +1021,14 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Schedule a Blog Post to be Published.
      * Schedule a Blog Post to be Published
-     * @param contentScheduleRequestVNext The JSON representation of the ContentCloneRequestVNext object.
+     * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
     public async schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'contentScheduleRequestVNext' is not null or undefined
         if (contentScheduleRequestVNext === null || contentScheduleRequestVNext === undefined) {
-            throw new RequiredError('Required parameter contentScheduleRequestVNext was null or undefined when calling schedule.');
+            throw new RequiredError("BlogPostsApi", "schedule", "contentScheduleRequestVNext");
         }
 
 
@@ -833,13 +1078,13 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling update.');
+            throw new RequiredError("BlogPostsApi", "update", "objectId");
         }
 
 
         // verify required parameter 'blogPost' is not null or undefined
         if (blogPost === null || blogPost === undefined) {
-            throw new RequiredError('Required parameter blogPost was null or undefined when calling update.');
+            throw new RequiredError("BlogPostsApi", "update", "blogPost");
         }
 
 
@@ -887,15 +1132,15 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
-     * @param batchInputJsonNode 
-     * @param archived Whether to return only results that have been archived.
+     * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
+     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputJsonNode' is not null or undefined
         if (batchInputJsonNode === null || batchInputJsonNode === undefined) {
-            throw new RequiredError('Required parameter batchInputJsonNode was null or undefined when calling updateBatch.');
+            throw new RequiredError("BlogPostsApi", "updateBatch", "batchInputJsonNode");
         }
 
 
@@ -950,13 +1195,13 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
-            throw new RequiredError('Required parameter objectId was null or undefined when calling updateDraft.');
+            throw new RequiredError("BlogPostsApi", "updateDraft", "objectId");
         }
 
 
         // verify required parameter 'blogPost' is not null or undefined
         if (blogPost === null || blogPost === undefined) {
-            throw new RequiredError('Required parameter blogPost was null or undefined when calling updateDraft.');
+            throw new RequiredError("BlogPostsApi", "updateDraft", "blogPost");
         }
 
 
@@ -997,7 +1242,7 @@ export class BlogPostApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class BlogPostApiResponseProcessor {
+export class BlogPostsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -1016,7 +1261,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1028,8 +1273,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1049,7 +1293,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1061,8 +1305,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1086,7 +1329,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1098,8 +1341,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1123,7 +1365,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1135,8 +1377,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1167,7 +1408,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1179,8 +1420,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1204,7 +1444,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1216,8 +1456,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1241,7 +1480,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1253,8 +1492,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1278,7 +1516,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1290,8 +1528,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1315,7 +1552,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1327,8 +1564,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1352,7 +1588,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1364,8 +1600,118 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to postCmsV3BlogsPostsMultiLanguageAttachToLangGroup
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(response: ResponseContext): Promise<BlogPost > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BlogPost = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BlogPost", ""
+            ) as BlogPost;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BlogPost = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BlogPost", ""
+            ) as BlogPost;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to postCmsV3BlogsPostsMultiLanguageUpdateLanguages
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async postCmsV3BlogsPostsMultiLanguageUpdateLanguages(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1385,7 +1731,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1397,8 +1743,39 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1429,7 +1806,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1441,8 +1818,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1462,7 +1838,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1474,8 +1850,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1499,7 +1874,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1511,8 +1886,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1536,7 +1910,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1548,8 +1922,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1569,7 +1942,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1581,8 +1954,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1606,7 +1978,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1618,8 +1990,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1650,7 +2021,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1662,8 +2033,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -1687,7 +2057,7 @@ export class BlogPostApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -1699,8 +2069,7 @@ export class BlogPostApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

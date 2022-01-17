@@ -22,6 +22,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -246,24 +247,13 @@ export class PromiseGDPRApi {
     }
 
     /**
-     * Permanently delete a contact by email address and all associated content to follow GDPR. If contact isn't found, blacklists an email address from being used in the future.
-     * DELETE
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
      * @param objectType 
-     * @param email 
+     * @param publicGdprDeleteInput 
      */
-    public purgeByEmail(objectType: string, email: string, _options?: Configuration): Promise<void> {
-        const result = this.api.purgeByEmail(objectType, email, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Permanently delete a contact by id and all associated content to follow GDPR
-     * DELETE
-     * @param objectType 
-     * @param objectId 
-     */
-    public purgeById(objectType: string, objectId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.purgeById(objectType, objectId, _options);
+    public postCrmV3ObjectsObjectTypeGdprDelete(objectType: string, publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
+        const result = this.api.postCrmV3ObjectsObjectTypeGdprDelete(objectType, publicGdprDeleteInput, _options);
         return result.toPromise();
     }
 

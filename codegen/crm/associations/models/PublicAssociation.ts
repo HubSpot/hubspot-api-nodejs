@@ -14,7 +14,7 @@ import { PublicObjectId } from './PublicObjectId';
 import { HttpFile } from '../http/http';
 
 export class PublicAssociation {
-    'from': PublicObjectId;
+    '_from': PublicObjectId;
     'to': PublicObjectId;
     'type': string;
 
@@ -22,7 +22,7 @@ export class PublicAssociation {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "from",
+            "name": "_from",
             "baseName": "from",
             "type": "PublicObjectId",
             "format": ""

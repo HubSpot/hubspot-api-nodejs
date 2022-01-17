@@ -1,6 +1,6 @@
 /**
  * Blog Post endpoints
- * \"Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags\"
+ * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
  * 
@@ -14,8 +14,17 @@ import { Paging } from './Paging';
 import { VersionBlogPost } from './VersionBlogPost';
 import { HttpFile } from '../http/http';
 
+/**
+* Response object for collections of blog post versions with pagination information.
+*/
 export class CollectionResponseWithTotalVersionBlogPost {
+    /**
+    * Total number of blog post versions.
+    */
     'total': number;
+    /**
+    * Collection of blog post versions.
+    */
     'results': Array<VersionBlogPost>;
     'paging'?: Paging;
 

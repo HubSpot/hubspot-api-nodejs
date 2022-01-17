@@ -33,13 +33,13 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
-            throw new RequiredError('Required parameter subscriptionId was null or undefined when calling archive.');
+            throw new RequiredError("SubscriptionsApi", "archive", "subscriptionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling archive.');
+            throw new RequiredError("SubscriptionsApi", "archive", "appId");
         }
 
 
@@ -74,13 +74,13 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling create.');
+            throw new RequiredError("SubscriptionsApi", "create", "appId");
         }
 
 
         // verify required parameter 'subscriptionCreateRequest' is not null or undefined
         if (subscriptionCreateRequest === null || subscriptionCreateRequest === undefined) {
-            throw new RequiredError('Required parameter subscriptionCreateRequest was null or undefined when calling create.');
+            throw new RequiredError("SubscriptionsApi", "create", "subscriptionCreateRequest");
         }
 
 
@@ -124,7 +124,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getAll.');
+            throw new RequiredError("SubscriptionsApi", "getAll", "appId");
         }
 
 
@@ -158,13 +158,13 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling getById.');
+            throw new RequiredError("SubscriptionsApi", "getById", "appId");
         }
 
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
-            throw new RequiredError('Required parameter subscriptionId was null or undefined when calling getById.');
+            throw new RequiredError("SubscriptionsApi", "getById", "subscriptionId");
         }
 
 
@@ -200,19 +200,19 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
-            throw new RequiredError('Required parameter subscriptionId was null or undefined when calling update.');
+            throw new RequiredError("SubscriptionsApi", "update", "subscriptionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling update.');
+            throw new RequiredError("SubscriptionsApi", "update", "appId");
         }
 
 
         // verify required parameter 'subscriptionPatchRequest' is not null or undefined
         if (subscriptionPatchRequest === null || subscriptionPatchRequest === undefined) {
-            throw new RequiredError('Required parameter subscriptionPatchRequest was null or undefined when calling update.');
+            throw new RequiredError("SubscriptionsApi", "update", "subscriptionPatchRequest");
         }
 
 
@@ -258,13 +258,13 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError('Required parameter appId was null or undefined when calling updateBatch.');
+            throw new RequiredError("SubscriptionsApi", "updateBatch", "appId");
         }
 
 
         // verify required parameter 'batchInputSubscriptionBatchUpdateRequest' is not null or undefined
         if (batchInputSubscriptionBatchUpdateRequest === null || batchInputSubscriptionBatchUpdateRequest === undefined) {
-            throw new RequiredError('Required parameter batchInputSubscriptionBatchUpdateRequest was null or undefined when calling updateBatch.');
+            throw new RequiredError("SubscriptionsApi", "updateBatch", "batchInputSubscriptionBatchUpdateRequest");
         }
 
 
@@ -319,7 +319,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -331,8 +331,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -356,7 +355,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -368,8 +367,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -393,7 +391,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -405,8 +403,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -430,7 +427,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -442,8 +439,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -467,7 +463,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -479,8 +475,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -511,7 +506,7 @@ export class SubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -523,8 +518,7 @@ export class SubscriptionsApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

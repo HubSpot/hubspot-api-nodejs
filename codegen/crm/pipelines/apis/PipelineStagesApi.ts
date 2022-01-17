@@ -31,19 +31,19 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling archive.');
+            throw new RequiredError("PipelineStagesApi", "archive", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling archive.');
+            throw new RequiredError("PipelineStagesApi", "archive", "pipelineId");
         }
 
 
         // verify required parameter 'stageId' is not null or undefined
         if (stageId === null || stageId === undefined) {
-            throw new RequiredError('Required parameter stageId was null or undefined when calling archive.');
+            throw new RequiredError("PipelineStagesApi", "archive", "stageId");
         }
 
 
@@ -85,13 +85,13 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling create.');
+            throw new RequiredError("PipelineStagesApi", "create", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling create.');
+            throw new RequiredError("PipelineStagesApi", "create", "pipelineId");
         }
 
 
@@ -144,13 +144,13 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling getAll.');
+            throw new RequiredError("PipelineStagesApi", "getAll", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling getAll.');
+            throw new RequiredError("PipelineStagesApi", "getAll", "pipelineId");
         }
 
 
@@ -198,19 +198,19 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling getById.');
+            throw new RequiredError("PipelineStagesApi", "getById", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling getById.');
+            throw new RequiredError("PipelineStagesApi", "getById", "pipelineId");
         }
 
 
         // verify required parameter 'stageId' is not null or undefined
         if (stageId === null || stageId === undefined) {
-            throw new RequiredError('Required parameter stageId was null or undefined when calling getById.');
+            throw new RequiredError("PipelineStagesApi", "getById", "stageId");
         }
 
 
@@ -259,19 +259,19 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling replace.');
+            throw new RequiredError("PipelineStagesApi", "replace", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling replace.');
+            throw new RequiredError("PipelineStagesApi", "replace", "pipelineId");
         }
 
 
         // verify required parameter 'stageId' is not null or undefined
         if (stageId === null || stageId === undefined) {
-            throw new RequiredError('Required parameter stageId was null or undefined when calling replace.');
+            throw new RequiredError("PipelineStagesApi", "replace", "stageId");
         }
 
 
@@ -327,19 +327,19 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError('Required parameter objectType was null or undefined when calling update.');
+            throw new RequiredError("PipelineStagesApi", "update", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError('Required parameter pipelineId was null or undefined when calling update.');
+            throw new RequiredError("PipelineStagesApi", "update", "pipelineId");
         }
 
 
         // verify required parameter 'stageId' is not null or undefined
         if (stageId === null || stageId === undefined) {
-            throw new RequiredError('Required parameter stageId was null or undefined when calling update.');
+            throw new RequiredError("PipelineStagesApi", "update", "stageId");
         }
 
 
@@ -408,7 +408,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -420,8 +420,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -445,7 +444,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -457,8 +456,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -482,7 +480,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -494,8 +492,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -519,7 +516,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -531,8 +528,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -556,7 +552,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -568,8 +564,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
     /**
@@ -593,7 +588,7 @@ export class PipelineStagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -605,8 +600,7 @@ export class PipelineStagesApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }

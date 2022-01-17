@@ -25,7 +25,7 @@ export class SearchApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'publicObjectSearchRequest' is not null or undefined
         if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {
-            throw new RequiredError('Required parameter publicObjectSearchRequest was null or undefined when calling doSearch.');
+            throw new RequiredError("SearchApi", "doSearch", "publicObjectSearchRequest");
         }
 
 
@@ -88,7 +88,7 @@ export class SearchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, body);
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -100,8 +100,7 @@ export class SearchApiResponseProcessor {
             return body;
         }
 
-        let body = response.body || "";
-        throw new ApiException<string>(response.httpStatusCode, "Unknown API Status Code!\nBody: \"" + body + "\"");
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
     }
 
 }
