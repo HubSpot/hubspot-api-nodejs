@@ -1,5 +1,6 @@
 import * as _ from 'lodash'
 import { Configuration, createConfiguration } from '../../../../codegen/crm/contacts/configuration'
+import { RequestContext, ResponseContext } from '../../../../codegen/crm/contacts'
 import {
   AssociationsApi,
   BasicApi,
@@ -22,7 +23,7 @@ export class ContactsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.newgetParams<RequestContext, ResponseContext>())
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)
