@@ -1,5 +1,10 @@
 import { createConfiguration } from '../../../../codegen/crm/pipelines/configuration'
-import { PipelinesApi, PipelineStagesApi } from '../../../../codegen/crm/pipelines/index'
+import {
+  PipelinesApi,
+  PipelineStagesApi,
+  RequestContext,
+  ResponseContext,
+} from '../../../../codegen/crm/pipelines/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -10,7 +15,7 @@ export class PipelinesDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.pipelineStagesApi = new PipelineStagesApi(configuration)
     this.pipelinesApi = new PipelinesApi(configuration)

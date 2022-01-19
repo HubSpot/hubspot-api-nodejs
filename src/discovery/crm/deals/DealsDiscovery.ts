@@ -4,6 +4,8 @@ import {
   AssociationsApi,
   BasicApi,
   BatchApi,
+  RequestContext,
+  ResponseContext,
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/deals/index'
@@ -20,7 +22,7 @@ export class DealsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

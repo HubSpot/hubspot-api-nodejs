@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/crm/imports/configuration'
-import { CoreApi, PublicImportsApi } from '../../../../codegen/crm/imports/index'
+import { CoreApi, PublicImportsApi, RequestContext, ResponseContext } from '../../../../codegen/crm/imports/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -10,7 +10,7 @@ export class ImportsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.coreApi = new CoreApi(configuration)
     this.publicImportsApi = new PublicImportsApi(configuration)

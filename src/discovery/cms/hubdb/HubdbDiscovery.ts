@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
-import { RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
+import { RequestContext, ResponseContext, RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -11,7 +11,7 @@ export class HubdbDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.rowsApi = new RowsApi(configuration)
     this.rowsBatchApi = new RowsBatchApi(configuration)

@@ -1,5 +1,10 @@
 import { createConfiguration } from '../../../../../codegen/crm/extensions/cards/configuration'
-import { CardsApi, SampleResponseApi } from '../../../../../codegen/crm/extensions/cards/index'
+import {
+  CardsApi,
+  RequestContext,
+  ResponseContext,
+  SampleResponseApi,
+} from '../../../../../codegen/crm/extensions/cards/index'
 import { IConfiguration } from '../../../../IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
@@ -10,7 +15,7 @@ export class CardsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.cardsApi = new CardsApi(configuration)
     this.sampleResponseApi = new SampleResponseApi(configuration)

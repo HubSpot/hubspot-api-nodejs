@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/domains/configuration'
-import { DomainsApi } from '../../../../codegen/cms/domains/index'
+import { DomainsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/domains/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class DomainsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.domainsApi = new DomainsApi(configuration)
   }

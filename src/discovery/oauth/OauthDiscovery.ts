@@ -1,7 +1,13 @@
 import * as _ from 'lodash'
 import * as qs from 'querystring'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
-import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../../../codegen/oauth/index'
+import {
+  AccessTokensApi,
+  RefreshTokensApi,
+  RequestContext,
+  ResponseContext,
+  TokensApi,
+} from '../../../codegen/oauth/index'
 import { IConfiguration } from '../../IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
 
@@ -13,7 +19,7 @@ export class OauthDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration = {}) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.accessTokensApi = new AccessTokensApi(configuration)
     this.refreshTokensApi = new RefreshTokensApi(configuration)

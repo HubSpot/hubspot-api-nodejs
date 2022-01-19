@@ -11,18 +11,9 @@ export class BaseDiscovery {
   }
 
   /**
-   * create Configuration
-   */
-  public createConfiguration(createFunction: any) {
-    const configuration = createFunction(this.getParams())
-
-    return configuration
-  }
-
-  /**
    * getParams
    */
-  public getParams() {
+  public getParams<RequestContextType extends IRequestContext, ResponseContextType>() {
     let params = {}
     if (this.config.accessToken) {
       params = {
@@ -30,6 +21,7 @@ export class BaseDiscovery {
           oauth2: {
             accessToken: this.config.accessToken,
           },
+          middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
         },
       }
     } else if (this.config.apiKey) {
@@ -37,59 +29,29 @@ export class BaseDiscovery {
         authMethods: {
           hapikey: this.config.apiKey,
         },
+        middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
       }
     } else if (this.config.developerApiKey) {
       params = {
         authMethods: {
           hapikey: this.config.developerApiKey,
         },
+        middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
       }
     }
 
     return params
   }
 
-
-  /**
-   * newgetParams
-   */
-   public newgetParams<RequestContextType extends IRequestContext, ResponseContextType>() {
-    let midllewares = [{
+  public getHeaderMiddleware<RequestContextType extends IRequestContext, ResponseContextType>() {
+    return {
       pre(context: RequestContextType): Observable<RequestContextType> {
-        context.setHeaderParam("User-agent", `hubspot-api-client-nodejs; ${VERSION}`);
-        return new Observable<RequestContextType>(Promise.resolve(context));
+        context.setHeaderParam('User-agent', `hubspot-api-client-nodejs; ${VERSION}`)
+        return new Observable<RequestContextType>(Promise.resolve(context))
       },
       post(context: ResponseContextType): Observable<ResponseContextType> {
-        return new Observable<ResponseContextType>(Promise.resolve(context));
-      }
-    }];
-    let params = {}
-    if (this.config.accessToken) {
-      params = {
-        authMethods: {
-          oauth2: {
-            accessToken: this.config.accessToken,
-          },
-          middleware: midllewares,
-        },
-      }
-    } else if (this.config.apiKey) {
-      params = {
-        authMethods: {
-          hapikey: this.config.apiKey,
-        },
-        middleware: midllewares,
-      }
-    } else if (this.config.developerApiKey) {
-      params = {
-        authMethods: {
-          hapikey: this.config.developerApiKey,
-        },
-        middleware: midllewares,
-      }
+        return new Observable<ResponseContextType>(Promise.resolve(context))
+      },
     }
-
-    return params
   }
 }
-

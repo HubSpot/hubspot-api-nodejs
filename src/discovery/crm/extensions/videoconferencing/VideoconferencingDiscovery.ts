@@ -1,5 +1,9 @@
 import { createConfiguration } from '../../../../../codegen/crm/extensions/videoconferencing/configuration'
-import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
+import {
+  RequestContext,
+  ResponseContext,
+  SettingsApi,
+} from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { IConfiguration } from '../../../../IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
@@ -9,7 +13,7 @@ export class VideoconferencingDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.settingsApi = new SettingsApi(configuration)
   }

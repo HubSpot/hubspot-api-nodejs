@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/audit_logs/configuration'
-import { AuditLogsApi } from '../../../../codegen/cms/audit_logs/index'
+import { AuditLogsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/audit_logs/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class AuditLogsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.auditLogsApi = new AuditLogsApi(configuration)
   }

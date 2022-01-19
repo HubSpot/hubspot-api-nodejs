@@ -2,6 +2,8 @@ import { createConfiguration } from '../../../../../codegen/crm/extensions/accou
 import {
   CallbacksApi,
   InvoiceApi,
+  RequestContext,
+  ResponseContext,
   SettingsApi,
   SyncApi,
   UserAccountsApi,
@@ -19,7 +21,7 @@ export class AccountingDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.invoiceApi = new InvoiceApi(configuration)

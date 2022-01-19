@@ -1,11 +1,12 @@
 import * as _ from 'lodash'
 import { Configuration, createConfiguration } from '../../../../codegen/crm/contacts/configuration'
-import { RequestContext, ResponseContext } from '../../../../codegen/crm/contacts'
 import {
   AssociationsApi,
   BasicApi,
   BatchApi,
   GDPRApi,
+  RequestContext,
+  ResponseContext,
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/contacts/index'
@@ -23,7 +24,7 @@ export class ContactsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = createConfiguration(this.newgetParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

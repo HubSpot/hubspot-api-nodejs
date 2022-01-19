@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/performance/configuration'
-import { PublicPerformanceApi } from '../../../../codegen/cms/performance/index'
+import { PublicPerformanceApi, RequestContext, ResponseContext } from '../../../../codegen/cms/performance/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class PerformanceDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.publicPerformanceApi = new PublicPerformanceApi(configuration)
   }

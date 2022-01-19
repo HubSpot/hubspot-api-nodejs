@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/tags/configuration'
-import { BlogTagsApi } from '../../../../../codegen/cms/blogs/tags/index'
+import { BlogTagsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/tags/index'
 import { IConfiguration } from '../../../../IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class TagsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.blogTagsApi = new BlogTagsApi(configuration)
   }

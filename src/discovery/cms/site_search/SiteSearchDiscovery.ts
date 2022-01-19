@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/site_search/configuration'
-import { PublicApi } from '../../../../codegen/cms/site_search/index'
+import { PublicApi, RequestContext, ResponseContext } from '../../../../codegen/cms/site_search/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class SiteSearchDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.publicApi = new PublicApi(configuration)
   }

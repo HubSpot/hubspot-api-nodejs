@@ -1,5 +1,12 @@
 import { createConfiguration } from '../../../../codegen/automation/actions/configuration'
-import { CallbacksApi, DefinitionsApi, FunctionsApi, RevisionsApi } from '../../../../codegen/automation/actions/index'
+import {
+  CallbacksApi,
+  DefinitionsApi,
+  FunctionsApi,
+  RequestContext,
+  ResponseContext,
+  RevisionsApi,
+} from '../../../../codegen/automation/actions/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -12,7 +19,7 @@ export class ActionsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.definitionsApi = new DefinitionsApi(configuration)

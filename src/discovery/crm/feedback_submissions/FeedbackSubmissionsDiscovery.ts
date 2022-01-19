@@ -1,5 +1,12 @@
 import { createConfiguration } from '../../../../codegen/crm/feedback_submissions/configuration'
-import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/feedback_submissions/index'
+import {
+  AssociationsApi,
+  BasicApi,
+  BatchApi,
+  RequestContext,
+  ResponseContext,
+  SearchApi,
+} from '../../../../codegen/crm/feedback_submissions/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -12,7 +19,7 @@ export class FeedbackSubmissionsDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

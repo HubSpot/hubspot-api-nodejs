@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
-import { OwnersApi } from '../../../../codegen/crm/owners/index'
+import { OwnersApi, RequestContext, ResponseContext } from '../../../../codegen/crm/owners/index'
 import { IConfiguration } from '../../../IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
@@ -9,7 +9,7 @@ export class OwnersDiscovery extends BaseDiscovery {
   constructor(config: IConfiguration) {
     super(config)
 
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
 
     this.ownersApi = new OwnersApi(configuration)
   }

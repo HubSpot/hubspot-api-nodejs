@@ -1,3 +1,3 @@
 export interface IRequestContext {
-    setHeaderParam(key: string, value: string): void
+  setHeaderParam(key: string, value: string): void
 }
