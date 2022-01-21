@@ -9,9 +9,9 @@ import {
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/tickets/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
-import { getAll } from '../getAll'
+import { getAll } from '../../../services/getAll'
 
 export class TicketsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi

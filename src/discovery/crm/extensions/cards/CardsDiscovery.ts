@@ -5,7 +5,7 @@ import {
   ResponseContext,
   SampleResponseApi,
 } from '../../../../../codegen/crm/extensions/cards/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class CardsDiscovery extends BaseDiscovery {

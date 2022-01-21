@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../IConfiguration'
+import { IConfiguration } from '../../configuration/IConfiguration'
 import { ActionsDiscovery } from './actions/ActionsDiscovery'
 
 export class AutomationDiscovery {

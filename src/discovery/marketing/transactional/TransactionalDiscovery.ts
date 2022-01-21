@@ -5,7 +5,7 @@ import {
   ResponseContext,
   SingleSendApi,
 } from '../../../../codegen/marketing/transactional/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class TransactionalDiscovery extends BaseDiscovery {

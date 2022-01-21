@@ -4,7 +4,7 @@ import {
   RequestContext,
   ResponseContext,
 } from '../../../../codegen/conversations/visitor_identification/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class VisitorIdentificationDiscovery extends BaseDiscovery {

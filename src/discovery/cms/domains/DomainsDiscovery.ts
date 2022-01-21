@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/domains/configuration'
 import { DomainsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/domains/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class DomainsDiscovery extends BaseDiscovery {

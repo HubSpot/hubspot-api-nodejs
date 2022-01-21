@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/url_redirects/configuration'
 import { RedirectsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/url_redirects/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class UrlRedirectsDiscovery extends BaseDiscovery {

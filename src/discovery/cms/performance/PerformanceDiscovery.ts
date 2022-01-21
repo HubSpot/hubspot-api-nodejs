@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/performance/configuration'
 import { PublicPerformanceApi, RequestContext, ResponseContext } from '../../../../codegen/cms/performance/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PerformanceDiscovery extends BaseDiscovery {

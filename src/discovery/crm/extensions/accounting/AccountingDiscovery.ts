@@ -8,7 +8,7 @@ import {
   SyncApi,
   UserAccountsApi,
 } from '../../../../../codegen/crm/extensions/accounting/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class AccountingDiscovery extends BaseDiscovery {

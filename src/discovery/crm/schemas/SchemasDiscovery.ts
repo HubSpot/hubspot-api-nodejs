@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/crm/schemas/configuration'
 import { CoreApi, PublicObjectSchemasApi, RequestContext, ResponseContext } from '../../../../codegen/crm/schemas/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class SchemasDiscovery extends BaseDiscovery {

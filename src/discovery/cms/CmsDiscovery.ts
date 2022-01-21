@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../IConfiguration'
+import { IConfiguration } from '../../configuration/IConfiguration'
 import { AuditLogsDiscovery } from './audit_logs/AuditLogsDiscovery'
 import { BlogsDiscovery } from './blogs/BlogsDiscovery'
 import { DomainsDiscovery } from './domains/DomainsDiscovery'

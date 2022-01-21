@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
 import { RequestContext, ResponseContext, RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class HubdbDiscovery extends BaseDiscovery {

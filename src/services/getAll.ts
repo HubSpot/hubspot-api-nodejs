@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import { DEFAULT_OBJECTS_LIMIT } from '../../constants'
+import { DEFAULT_OBJECTS_LIMIT } from '../configuration/constants'
 
 interface IAPIType<CollectionType, ConfigurationType> {
   getPage(

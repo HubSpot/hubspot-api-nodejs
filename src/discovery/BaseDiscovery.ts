@@ -1,7 +1,7 @@
-import { IConfiguration } from '../IConfiguration'
-import { VERSION } from '../version'
-import { IRequestContext } from './IRequestContext'
-import { Observable } from './Observable'
+import { IConfiguration } from '../configuration/IConfiguration'
+import { VERSION } from '../configuration/version'
+import { IRequestContext } from '../services/IRequestContext'
+import { Observable } from '../services/Observable'
 
 export class BaseDiscovery {
   public config: IConfiguration

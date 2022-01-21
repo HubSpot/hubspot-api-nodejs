@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../codegen/events/configuration'
 import { EventsApi, RequestContext, ResponseContext } from '../../../codegen/events/index'
-import { IConfiguration } from '../../IConfiguration'
+import { IConfiguration } from '../../configuration/IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
 
 export class EventsDiscovery extends BaseDiscovery {

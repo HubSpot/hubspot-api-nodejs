@@ -8,7 +8,7 @@ import {
   ResponseContext,
   TokensApi,
 } from '../../../codegen/oauth/index'
-import { IConfiguration } from '../../IConfiguration'
+import { IConfiguration } from '../../configuration/IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
 
 export class OauthDiscovery extends BaseDiscovery {

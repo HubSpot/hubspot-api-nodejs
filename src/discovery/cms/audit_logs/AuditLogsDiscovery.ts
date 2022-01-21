@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/audit_logs/configuration'
 import { AuditLogsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/audit_logs/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class AuditLogsDiscovery extends BaseDiscovery {

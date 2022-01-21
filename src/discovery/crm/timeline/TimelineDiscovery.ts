@@ -6,7 +6,7 @@ import {
   TemplatesApi,
   TokensApi,
 } from '../../../../codegen/crm/timeline/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class TimelineDiscovery extends BaseDiscovery {

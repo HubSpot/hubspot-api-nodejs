@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/crm/properties/configuration'
 import { BatchApi, CoreApi, GroupsApi, RequestContext, ResponseContext } from '../../../../codegen/crm/properties/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PropertiesDiscovery extends BaseDiscovery {

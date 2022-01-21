@@ -7,7 +7,7 @@ import {
   ResponseContext,
   SearchApi,
 } from '../../../../codegen/crm/feedback_submissions/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class FeedbackSubmissionsDiscovery extends BaseDiscovery {

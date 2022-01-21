@@ -6,7 +6,7 @@ import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
-import { IConfiguration } from './IConfiguration'
+import { IConfiguration } from './configuration/IConfiguration'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()

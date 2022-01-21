@@ -7,7 +7,7 @@ import {
   ResponseContext,
   RevisionsApi,
 } from '../../../../codegen/automation/actions/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class ActionsDiscovery extends BaseDiscovery {

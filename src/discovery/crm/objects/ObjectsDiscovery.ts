@@ -8,7 +8,7 @@ import {
   ResponseContext,
   SearchApi,
 } from '../../../../codegen/crm/objects/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class ObjectsDiscovery extends BaseDiscovery {

@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../../codegen/crm/extensions/calling/configuration'
 import { RequestContext, ResponseContext, SettingsApi } from '../../../../../codegen/crm/extensions/calling/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class CallingDiscovery extends BaseDiscovery {

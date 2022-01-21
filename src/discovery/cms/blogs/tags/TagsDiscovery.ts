@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/tags/configuration'
 import { BlogTagsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/tags/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class TagsDiscovery extends BaseDiscovery {

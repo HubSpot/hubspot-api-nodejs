@@ -4,7 +4,7 @@ import {
   ResponseContext,
   SettingsApi,
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class VideoconferencingDiscovery extends BaseDiscovery {

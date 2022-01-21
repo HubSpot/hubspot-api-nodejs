@@ -5,7 +5,7 @@ import {
   RequestContext,
   ResponseContext,
 } from '../../../../codegen/crm/pipelines/index'
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
 export class PipelinesDiscovery extends BaseDiscovery {

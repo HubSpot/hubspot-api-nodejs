@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/authors/configuration'
 import { BlogAuthorsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/authors/index'
-import { IConfiguration } from '../../../../IConfiguration'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 import { BaseDiscovery } from '../../../BaseDiscovery'
 
 export class AuthorsDiscovery extends BaseDiscovery {

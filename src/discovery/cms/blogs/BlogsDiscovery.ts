@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { AuthorsDiscovery } from './authors/AuthorsDiscovery'
 import { BlogPostsDiscovery } from './blog_posts/BlogPostsDiscovery'
 import { TagsDiscovery } from './tags/TagsDiscovery'
