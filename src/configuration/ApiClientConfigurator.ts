@@ -34,7 +34,7 @@ export class ApiClientConfigurator {
     return params
   }
 
-  public static getHeaderMiddleware<RequestContextType extends IRequestContext, ResponseContextType>() {
+  protected static getHeaderMiddleware<RequestContextType extends IRequestContext, ResponseContextType>() {
     return {
       pre(context: RequestContextType): Observable<RequestContextType> {
         context.setHeaderParam('User-agent', `hubspot-api-client-nodejs; ${VERSION}`)
