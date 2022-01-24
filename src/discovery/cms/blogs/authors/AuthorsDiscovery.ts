@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/authors/configuration'
 import { BlogAuthorsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/authors/index'
+import { ApiClientConfirator } from '../../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
 
-export class AuthorsDiscovery extends BaseDiscovery {
+export class AuthorsDiscovery {
   public blogAuthorsApi: BlogAuthorsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.blogAuthorsApi = new BlogAuthorsApi(configuration)
   }

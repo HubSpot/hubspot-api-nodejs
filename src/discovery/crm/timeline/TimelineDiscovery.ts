@@ -6,18 +6,16 @@ import {
   TemplatesApi,
   TokensApi,
 } from '../../../../codegen/crm/timeline/index'
+import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class TimelineDiscovery extends BaseDiscovery {
+export class TimelineDiscovery {
   public eventsApi: EventsApi
   public templatesApi: TemplatesApi
   public tokensApi: TokensApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.eventsApi = new EventsApi(configuration)
     this.templatesApi = new TemplatesApi(configuration)

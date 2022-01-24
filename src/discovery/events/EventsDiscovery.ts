@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../codegen/events/configuration'
 import { EventsApi, RequestContext, ResponseContext } from '../../../codegen/events/index'
+import { ApiClientConfirator } from '../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../configuration/IConfiguration'
-import { BaseDiscovery } from '../BaseDiscovery'
 
-export class EventsDiscovery extends BaseDiscovery {
+export class EventsDiscovery {
   public eventsApi: EventsApi
 
   constructor(config: IConfiguration = {}) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.eventsApi = new EventsApi(configuration)
   }

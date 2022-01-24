@@ -8,18 +8,16 @@ import {
   ResponseContext,
   TokensApi,
 } from '../../../codegen/oauth/index'
+import { ApiClientConfirator } from '../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../configuration/IConfiguration'
-import { BaseDiscovery } from '../BaseDiscovery'
 
-export class OauthDiscovery extends BaseDiscovery {
+export class OauthDiscovery {
   public accessTokensApi: AccessTokensApi
   public refreshTokensApi: RefreshTokensApi
   public tokensApi: TokensApi
 
   constructor(config: IConfiguration = {}) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.accessTokensApi = new AccessTokensApi(configuration)
     this.refreshTokensApi = new RefreshTokensApi(configuration)

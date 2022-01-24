@@ -4,16 +4,14 @@ import {
   ResponseContext,
   SettingsApi,
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
+import { ApiClientConfirator } from '../../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
 
-export class VideoconferencingDiscovery extends BaseDiscovery {
+export class VideoconferencingDiscovery {
   public settingsApi: SettingsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.settingsApi = new SettingsApi(configuration)
   }

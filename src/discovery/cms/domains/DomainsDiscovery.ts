@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../codegen/cms/domains/configuration'
 import { DomainsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/domains/index'
+import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class DomainsDiscovery extends BaseDiscovery {
+export class DomainsDiscovery {
   public domainsApi: DomainsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.domainsApi = new DomainsApi(configuration)
   }

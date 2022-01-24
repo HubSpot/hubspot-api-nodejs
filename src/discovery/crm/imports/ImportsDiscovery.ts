@@ -1,16 +1,14 @@
 import { createConfiguration } from '../../../../codegen/crm/imports/configuration'
 import { CoreApi, PublicImportsApi, RequestContext, ResponseContext } from '../../../../codegen/crm/imports/index'
+import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class ImportsDiscovery extends BaseDiscovery {
+export class ImportsDiscovery {
   public coreApi: CoreApi
   public publicImportsApi: PublicImportsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.coreApi = new CoreApi(configuration)
     this.publicImportsApi = new PublicImportsApi(configuration)

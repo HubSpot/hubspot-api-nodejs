@@ -4,16 +4,14 @@ import {
   RequestContext,
   ResponseContext,
 } from '../../../../codegen/conversations/visitor_identification/index'
+import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class VisitorIdentificationDiscovery extends BaseDiscovery {
+export class VisitorIdentificationDiscovery {
   public generateApi: GenerateApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.generateApi = new GenerateApi(configuration)
   }

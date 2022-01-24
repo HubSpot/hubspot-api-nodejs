@@ -1,16 +1,14 @@
 import { createConfiguration } from '../../../../codegen/crm/associations/configuration'
 import { BatchApi, RequestContext, ResponseContext, TypesApi } from '../../../../codegen/crm/associations/index'
+import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class AssociationsDiscovery extends BaseDiscovery {
+export class AssociationsDiscovery {
   public batchApi: BatchApi
   public typesApi: TypesApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = createConfiguration(this.getParams<RequestContext, ResponseContext>())
+    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
 
     this.batchApi = new BatchApi(configuration)
     this.typesApi = new TypesApi(configuration)
