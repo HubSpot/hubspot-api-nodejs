@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
 import { RequestContext, ResponseContext, RowsApi, RowsBatchApi, TablesApi } from '../../../../codegen/cms/hubdb/index'
-import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export class HubdbDiscovery {
@@ -9,7 +9,7 @@ export class HubdbDiscovery {
   public tablesApi: TablesApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.rowsApi = new RowsApi(configuration)
     this.rowsBatchApi = new RowsBatchApi(configuration)

@@ -5,7 +5,7 @@ import {
   ResponseContext,
   SingleSendApi,
 } from '../../../../codegen/marketing/transactional/index'
-import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export class TransactionalDiscovery {
@@ -13,7 +13,7 @@ export class TransactionalDiscovery {
   public singleSendApi: SingleSendApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.publicSmtpTokensApi = new PublicSmtpTokensApi(configuration)
     this.singleSendApi = new SingleSendApi(configuration)

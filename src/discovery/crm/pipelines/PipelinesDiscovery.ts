@@ -5,7 +5,7 @@ import {
   RequestContext,
   ResponseContext,
 } from '../../../../codegen/crm/pipelines/index'
-import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export class PipelinesDiscovery {
@@ -13,7 +13,7 @@ export class PipelinesDiscovery {
   public pipelinesApi: PipelinesApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.pipelineStagesApi = new PipelineStagesApi(configuration)
     this.pipelinesApi = new PipelinesApi(configuration)

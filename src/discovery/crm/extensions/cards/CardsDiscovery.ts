@@ -5,7 +5,7 @@ import {
   ResponseContext,
   SampleResponseApi,
 } from '../../../../../codegen/crm/extensions/cards/index'
-import { ApiClientConfirator } from '../../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
 export class CardsDiscovery {
@@ -13,7 +13,7 @@ export class CardsDiscovery {
   public sampleResponseApi: SampleResponseApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.cardsApi = new CardsApi(configuration)
     this.sampleResponseApi = new SampleResponseApi(configuration)

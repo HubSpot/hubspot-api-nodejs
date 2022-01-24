@@ -1,6 +1,6 @@
 import { createConfiguration } from '../../../../codegen/crm/properties/configuration'
 import { BatchApi, CoreApi, GroupsApi, RequestContext, ResponseContext } from '../../../../codegen/crm/properties/index'
-import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export class PropertiesDiscovery {
@@ -9,7 +9,7 @@ export class PropertiesDiscovery {
   public groupsApi: GroupsApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.batchApi = new BatchApi(configuration)
     this.coreApi = new CoreApi(configuration)

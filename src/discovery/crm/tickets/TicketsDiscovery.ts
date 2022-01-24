@@ -9,7 +9,7 @@ import {
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/tickets/index'
-import { ApiClientConfirator } from '../../../configuration/ApiClientConfirator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 
@@ -20,7 +20,7 @@ export class TicketsDiscovery {
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfirator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)
