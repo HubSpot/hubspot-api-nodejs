@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/tags/configuration'
-import { BlogTagsApi } from '../../../../../codegen/cms/blogs/tags/index'
-import { IConfiguration } from '../../../../IConfiguration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
+import { BlogTagsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/tags/index'
+import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class TagsDiscovery extends BaseDiscovery {
+export class TagsDiscovery {
   public blogTagsApi: BlogTagsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.blogTagsApi = new BlogTagsApi(configuration)
   }

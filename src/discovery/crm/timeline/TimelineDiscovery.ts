@@ -1,17 +1,21 @@
 import { createConfiguration } from '../../../../codegen/crm/timeline/configuration'
-import { EventsApi, TemplatesApi, TokensApi } from '../../../../codegen/crm/timeline/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import {
+  EventsApi,
+  RequestContext,
+  ResponseContext,
+  TemplatesApi,
+  TokensApi,
+} from '../../../../codegen/crm/timeline/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class TimelineDiscovery extends BaseDiscovery {
+export class TimelineDiscovery {
   public eventsApi: EventsApi
   public templatesApi: TemplatesApi
   public tokensApi: TokensApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.eventsApi = new EventsApi(configuration)
     this.templatesApi = new TemplatesApi(configuration)

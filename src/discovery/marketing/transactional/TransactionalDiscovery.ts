@@ -1,16 +1,19 @@
 import { createConfiguration } from '../../../../codegen/marketing/transactional/configuration'
-import { PublicSmtpTokensApi, SingleSendApi } from '../../../../codegen/marketing/transactional/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import {
+  PublicSmtpTokensApi,
+  RequestContext,
+  ResponseContext,
+  SingleSendApi,
+} from '../../../../codegen/marketing/transactional/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class TransactionalDiscovery extends BaseDiscovery {
+export class TransactionalDiscovery {
   public publicSmtpTokensApi: PublicSmtpTokensApi
   public singleSendApi: SingleSendApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.publicSmtpTokensApi = new PublicSmtpTokensApi(configuration)
     this.singleSendApi = new SingleSendApi(configuration)

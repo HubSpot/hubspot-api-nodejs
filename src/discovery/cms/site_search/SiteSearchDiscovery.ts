@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../codegen/cms/site_search/configuration'
-import { PublicApi } from '../../../../codegen/cms/site_search/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import { PublicApi, RequestContext, ResponseContext } from '../../../../codegen/cms/site_search/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class SiteSearchDiscovery extends BaseDiscovery {
+export class SiteSearchDiscovery {
   public publicApi: PublicApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.publicApi = new PublicApi(configuration)
   }

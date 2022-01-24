@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../IConfiguration'
+import { IConfiguration } from '../../configuration/IConfiguration'
 import { VisitorIdentificationDiscovery } from './visitor_identification/VisitorIdentificationDiscovery'
 
 export class ConversationsDiscovery {

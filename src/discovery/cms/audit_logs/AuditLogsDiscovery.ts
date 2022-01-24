@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../codegen/cms/audit_logs/configuration'
-import { AuditLogsApi } from '../../../../codegen/cms/audit_logs/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import { AuditLogsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/audit_logs/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class AuditLogsDiscovery extends BaseDiscovery {
+export class AuditLogsDiscovery {
   public auditLogsApi: AuditLogsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.auditLogsApi = new AuditLogsApi(configuration)
   }

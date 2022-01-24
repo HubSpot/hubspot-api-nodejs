@@ -1,19 +1,23 @@
 import * as _ from 'lodash'
 import * as qs from 'querystring'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
-import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../../../codegen/oauth/index'
-import { IConfiguration } from '../../IConfiguration'
-import { BaseDiscovery } from '../BaseDiscovery'
+import {
+  AccessTokensApi,
+  RefreshTokensApi,
+  RequestContext,
+  ResponseContext,
+  TokensApi,
+} from '../../../codegen/oauth/index'
+import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../configuration/IConfiguration'
 
-export class OauthDiscovery extends BaseDiscovery {
+export class OauthDiscovery {
   public accessTokensApi: AccessTokensApi
   public refreshTokensApi: RefreshTokensApi
   public tokensApi: TokensApi
 
   constructor(config: IConfiguration = {}) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.accessTokensApi = new AccessTokensApi(configuration)
     this.refreshTokensApi = new RefreshTokensApi(configuration)

@@ -4,23 +4,23 @@ import {
   AssociationsApi,
   BasicApi,
   BatchApi,
+  RequestContext,
+  ResponseContext,
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/products/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
-import { getAll } from '../getAll'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
+import { getAll } from '../../../services/getAll'
 
-export class ProductsDiscovery extends BaseDiscovery {
+export class ProductsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../codegen/cms/url_redirects/configuration'
-import { RedirectsApi } from '../../../../codegen/cms/url_redirects/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import { RedirectsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/url_redirects/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class UrlRedirectsDiscovery extends BaseDiscovery {
+export class UrlRedirectsDiscovery {
   public redirectsApi: RedirectsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.redirectsApi = new RedirectsApi(configuration)
   }

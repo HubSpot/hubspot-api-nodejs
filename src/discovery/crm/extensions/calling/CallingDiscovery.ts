@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../../codegen/crm/extensions/calling/configuration'
-import { SettingsApi } from '../../../../../codegen/crm/extensions/calling/index'
-import { IConfiguration } from '../../../../IConfiguration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
+import { RequestContext, ResponseContext, SettingsApi } from '../../../../../codegen/crm/extensions/calling/index'
+import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class CallingDiscovery extends BaseDiscovery {
+export class CallingDiscovery {
   public settingsApi: SettingsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.settingsApi = new SettingsApi(configuration)
   }

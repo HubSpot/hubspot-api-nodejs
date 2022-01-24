@@ -2,14 +2,16 @@ import { createConfiguration } from '../../../../../codegen/crm/extensions/accou
 import {
   CallbacksApi,
   InvoiceApi,
+  RequestContext,
+  ResponseContext,
   SettingsApi,
   SyncApi,
   UserAccountsApi,
 } from '../../../../../codegen/crm/extensions/accounting/index'
-import { IConfiguration } from '../../../../IConfiguration'
-import { BaseDiscovery } from '../../../BaseDiscovery'
+import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class AccountingDiscovery extends BaseDiscovery {
+export class AccountingDiscovery {
   public callbacksApi: CallbacksApi
   public invoiceApi: InvoiceApi
   public settingsApi: SettingsApi
@@ -17,9 +19,7 @@ export class AccountingDiscovery extends BaseDiscovery {
   public userAccountsApi: UserAccountsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.invoiceApi = new InvoiceApi(configuration)

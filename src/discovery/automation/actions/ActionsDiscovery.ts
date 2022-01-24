@@ -1,18 +1,23 @@
 import { createConfiguration } from '../../../../codegen/automation/actions/configuration'
-import { CallbacksApi, DefinitionsApi, FunctionsApi, RevisionsApi } from '../../../../codegen/automation/actions/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import {
+  CallbacksApi,
+  DefinitionsApi,
+  FunctionsApi,
+  RequestContext,
+  ResponseContext,
+  RevisionsApi,
+} from '../../../../codegen/automation/actions/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class ActionsDiscovery extends BaseDiscovery {
+export class ActionsDiscovery {
   public callbacksApi: CallbacksApi
   public definitionsApi: DefinitionsApi
   public functionsApi: FunctionsApi
   public revisionsApi: RevisionsApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.definitionsApi = new DefinitionsApi(configuration)

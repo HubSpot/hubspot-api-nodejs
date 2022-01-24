@@ -1,18 +1,23 @@
 import { createConfiguration } from '../../../../codegen/crm/feedback_submissions/configuration'
-import { AssociationsApi, BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/feedback_submissions/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import {
+  AssociationsApi,
+  BasicApi,
+  BatchApi,
+  RequestContext,
+  ResponseContext,
+  SearchApi,
+} from '../../../../codegen/crm/feedback_submissions/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class FeedbackSubmissionsDiscovery extends BaseDiscovery {
+export class FeedbackSubmissionsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

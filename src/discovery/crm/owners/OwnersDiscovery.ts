@@ -1,15 +1,13 @@
 import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
-import { OwnersApi } from '../../../../codegen/crm/owners/index'
-import { IConfiguration } from '../../../IConfiguration'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import { OwnersApi, RequestContext, ResponseContext } from '../../../../codegen/crm/owners/index'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class OwnersDiscovery extends BaseDiscovery {
+export class OwnersDiscovery {
   public ownersApi: OwnersApi
 
   constructor(config: IConfiguration) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.ownersApi = new OwnersApi(configuration)
   }

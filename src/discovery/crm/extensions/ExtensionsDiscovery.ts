@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../../IConfiguration'
+import { IConfiguration } from '../../../configuration/IConfiguration'
 import { AccountingDiscovery } from './accounting/AccountingDiscovery'
 import { CallingDiscovery } from './calling/CallingDiscovery'
 import { CardsDiscovery } from './cards/CardsDiscovery'

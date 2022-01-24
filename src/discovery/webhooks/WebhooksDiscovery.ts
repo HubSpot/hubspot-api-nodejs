@@ -1,16 +1,14 @@
 import { createConfiguration } from '../../../codegen/webhooks/configuration'
-import { SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
-import { IConfiguration } from '../../IConfiguration'
-import { BaseDiscovery } from '../BaseDiscovery'
+import { RequestContext, ResponseContext, SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
+import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../configuration/IConfiguration'
 
-export class WebhooksDiscovery extends BaseDiscovery {
+export class WebhooksDiscovery {
   public settingsApi: SettingsApi
   public subscriptionsApi: SubscriptionsApi
 
   constructor(config: IConfiguration = {}) {
-    super(config)
-
-    const configuration = this.createConfiguration(createConfiguration)
+    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
 
     this.settingsApi = new SettingsApi(configuration)
     this.subscriptionsApi = new SubscriptionsApi(configuration)
