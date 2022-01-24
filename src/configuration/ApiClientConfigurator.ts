@@ -1,7 +1,7 @@
-import { IConfiguration } from './IConfiguration'
-import { VERSION } from './version'
 import { IRequestContext } from '../services/IRequestContext'
 import { Observable } from '../services/Observable'
+import { IConfiguration } from './IConfiguration'
+import { VERSION } from './version'
 
 export class ApiClientConfigurator {
   public static getParams<RequestContextType extends IRequestContext, ResponseContextType>(config: IConfiguration) {
