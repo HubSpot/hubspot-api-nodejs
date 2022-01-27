@@ -34,6 +34,14 @@ export class ColumnRequest {
     * Options to choose for select and multi-select columns
     */
     'options': Array<Option>;
+    /**
+    * The id of another table to which the column refers/points to.
+    */
+    'foreignTableId'?: number;
+    /**
+    * The id of the column from another table to which the column refers/points to.
+    */
+    'foreignColumnId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -67,6 +75,18 @@ export class ColumnRequest {
             "baseName": "options",
             "type": "Array<Option>",
             "format": ""
+        },
+        {
+            "name": "foreignTableId",
+            "baseName": "foreignTableId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "foreignColumnId",
+            "baseName": "foreignColumnId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
