@@ -196,21 +196,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `crm.schemas.defaultApi` => `crm.schemas.publicObjectSchemasApi` and `crm.schemas.coreApi`
 - `marketing.transactional.defaultApi` => `marketing.transactional.publicSmtpTokensApi` and `marketing.transactional.singleSendApi`
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v4.1.0...HEAD
+## [6.0.0-beta] - 2022-01-27
+
+### Update (breaking changes)
+
+- Migrate from request to node-fetch
+- Rewrite [Client](src/client.ts)
+- `crm.objects.feedbackSubmissions` => `crm.feedbackSubmissions`
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.0-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
-[2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
-[2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.1
-[2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.0
-[2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.1.1
-[3.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.0.0
-[3.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.1.0
-[3.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.0
-[3.2.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.1
-[3.2.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.2.6
-[3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.3.0
-[3.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.0
-[3.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.1
-[4.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v4.0.0
-[4.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v4.1.0
-[5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v5.0.0
+[2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
+[2.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.1.0
+[2.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.1.1
+[3.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.1.0
+[3.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.2.0
+[3.2.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.2.1
+[3.2.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.2.6
+[3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.3.0
+[3.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.4.0
+[3.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/3.4.1
+[4.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/4.0.0
+[4.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/4.1.0
+[5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/5.0.0
+[5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.0-beta
