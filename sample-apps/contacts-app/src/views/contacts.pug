@@ -13,6 +13,7 @@ block content
           th ID
           th Name
           th Company
+          th Actions
       tbody
         form(action='/contacts')
           fieldset
@@ -24,6 +25,9 @@ block content
               a(href=`/contacts/${contact.id}`) #{contact.id}
             td #{contact.name}
             td #{contact.companyName}
+            td
+              a(href=`/contacts/delete/${contact.id}`)
+                input(class='button-primary' type='button' value='Delete')
     .row
       a(href='/contacts/new')
         input(class='button-primary' type='button' value='New Contact' id='create-new-contact-button')

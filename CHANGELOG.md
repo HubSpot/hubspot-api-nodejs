@@ -162,7 +162,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - fix generateToken method in `conversations.visitorIdentification` API clients
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v3.4.1...HEAD
+## [4.0.0] - 2021-06-22
+
+### Fixed
+
+  - rename method "search" => "doSearch" crm.objects.searchApi API clients
+  - regenerate all clients
+
+## [4.1.0] - 2021-07-28
+
+### Added
+
+  - communicationPreferences API client
+
+## [5.0.0] - 2021-09-14
+
+### Added
+
+- `crm.objects.gdprApi` API client
+- `crm.contacts.gdprApi` API client
+
+### Fixed (breaking changes)
+
+- `oauth()` fully regenerated
+- `cms.auditLogs.defaultApi` => `cms.auditLogs.auditLogsApi`
+- `cms.blogs.authors.defaultApi` => `cms.blogs.authors.authorApi`
+- `cms.blogs.blogPosts.defaultApi` => `cms.blogs.blogPosts.blogPostApi`
+- `cms.blogs.tags.defaultApi` => `cms.blogs.tags.tagApi`
+- `cms.performance.defaultApi` => `cms.performance.publicPerformanceApi`
+- `cms.siteSearch.defaultApi` => `cms.siteSearch.publicApi`
+- `crm.imports.defaultApi` => `crm.imports.publicImportsApi`
+- `crm.owners.defaultApi` => `crm.owners.ownersApi`
+- `crm.schemas.defaultApi` => `crm.schemas.publicObjectSchemasApi` and `crm.schemas.coreApi`
+- `marketing.transactional.defaultApi` => `marketing.transactional.publicSmtpTokensApi` and `marketing.transactional.singleSendApi`
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/v4.1.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v2.0.0
@@ -177,3 +211,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.3.0
 [3.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.0
 [3.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v3.4.1
+[4.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v4.0.0
+[4.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v4.1.0
+[5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v5.0.0

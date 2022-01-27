@@ -269,7 +269,7 @@ app.get('/contacts', async (req, res) => {
         const query = _.get(req, 'query.search')
         const properties = ['firstname', 'lastname', 'company']
         const contacts = await getAllContacts(properties, query)
-        res.render('contacts', { contacts: prepareContactsContent(contacts.slice(0, 100)), query })
+        res.render('contacts', { contacts: prepareContactsContent(contacts.slice(0, 50)), query })
     } catch (e) {
         handleError(e, res)
     }
@@ -391,6 +391,25 @@ app.post('/contacts/:id/engagement', async (req, res) => {
         logResponse(response)
 
         res.redirect(`/contacts/${id}`)
+    } catch (e) {
+        handleError(e, res)
+    }
+})
+
+app.get('/contacts/delete/:id', async (req, res) => {
+    try {
+        const id = _.get(req, 'params.id')
+
+        if (!_.isNil(id)) {
+            // Archive a contact
+            // DELETE /crm/v3/objects/contacts/:objectId
+            // https://developers.hubspot.com/docs/api/crm/contacts
+            console.log('Calling crm.contacts.basicApi.archive API method. Archive contact with id:', id)
+            const response = await hubspotClient.crm.contacts.basicApi.archive(id)
+            logResponse(response)
+        }
+
+        res.redirect('/contacts')
     } catch (e) {
         handleError(e, res)
     }
