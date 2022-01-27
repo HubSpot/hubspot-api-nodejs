@@ -1,6 +1,7 @@
 import { IConfiguration } from './configuration/IConfiguration'
 import { AutomationDiscovery } from './discovery/automation/AutomationDiscovery'
 import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
+import { CommunicationPreferencesDiscovery } from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
 import { ConversationsDiscovery } from './discovery/conversations/ConversationsDiscovery'
 import { CrmDiscovery } from './discovery/crm/CrmDiscovery'
 import { EventsDiscovery } from './discovery/events/EventsDiscovery'
@@ -11,6 +12,7 @@ import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
   public cms: CmsDiscovery = new CmsDiscovery()
+  public communicationPreferences: CommunicationPreferencesDiscovery = new CommunicationPreferencesDiscovery()
   public conversations: ConversationsDiscovery = new ConversationsDiscovery()
   public crm: CrmDiscovery = new CrmDiscovery()
   public events: EventsDiscovery = new EventsDiscovery()
@@ -27,6 +29,7 @@ export class Client {
   public init() {
     this.automation = new AutomationDiscovery(this.config)
     this.cms = new CmsDiscovery(this.config)
+    this.communicationPreferences = new CommunicationPreferencesDiscovery(this.config)
     this.conversations = new ConversationsDiscovery(this.config)
     this.crm = new CrmDiscovery(this.config)
     this.events = new EventsDiscovery(this.config)
