@@ -1,8 +1,10 @@
 # hubspot-api-nodejs
 
-NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files and sample apps
+NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files
 
-Sample Applications can be found in [sample-apps](sample-apps/) folder
+### Sample apps
+
+Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)
 
 ## Installing
 
