@@ -8,6 +8,7 @@ describe('api client', () => {
     expect(client.hasOwnProperty('contacts')).toBeTruthy()
     expect(client.hasOwnProperty('deals')).toBeTruthy()
     expect(client.hasOwnProperty('extensions')).toBeTruthy()
+    expect(client.hasOwnProperty('feedbackSubmissions')).toBeTruthy()
     expect(client.hasOwnProperty('imports')).toBeTruthy()
     expect(client.hasOwnProperty('lineItems')).toBeTruthy()
     expect(client.hasOwnProperty('objects')).toBeTruthy()

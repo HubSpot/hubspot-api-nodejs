@@ -1,0 +1,7 @@
+export * from './CollectionResponseWithTotalUrlMapping'
+export * from './ErrorDetail'
+export * from './ModelError'
+export * from './NextPage'
+export * from './Paging'
+export * from './UrlMapping'
+export * from './UrlMappingCreateRequestBody'
