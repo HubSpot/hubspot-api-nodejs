@@ -1,9 +1,0 @@
-FROM selenium/standalone-chrome-debug:latest
-
-USER root
-WORKDIR /companies-sample-app/src
-COPY src/package.json ./
-RUN apt-get update
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN apt-get -y install nodejs
-RUN npm install
