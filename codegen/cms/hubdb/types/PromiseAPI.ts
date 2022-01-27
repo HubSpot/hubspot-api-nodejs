@@ -5,6 +5,7 @@ import { Configuration} from '../configuration'
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
@@ -170,7 +171,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString The JSON array of row ids
      */
-    public batchCloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<any> {
+    public batchCloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3> {
         const result = this.api.batchCloneDraftTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
@@ -181,7 +182,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         const result = this.api.batchCreateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
         return result.toPromise();
     }
@@ -203,7 +204,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public batchReadDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+    public batchReadDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         const result = this.api.batchReadDraftTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
@@ -214,7 +215,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
      */
-    public batchReadTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+    public batchReadTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         const result = this.api.batchReadTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
@@ -225,7 +226,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects.
      */
-    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         const result = this.api.batchReplaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
         return result.toPromise();
     }
@@ -236,7 +237,7 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputJsonNode JSON array of row objects.
      */
-    public batchUpdateDraftTableRows(tableIdOrName: string, batchInputJsonNode: BatchInputJsonNode, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3WithErrors | any> {
+    public batchUpdateDraftTableRows(tableIdOrName: string, batchInputJsonNode: BatchInputJsonNode, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
         const result = this.api.batchUpdateDraftTableRows(tableIdOrName, batchInputJsonNode, _options);
         return result.toPromise();
     }

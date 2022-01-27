@@ -1,6 +1,7 @@
 export * from './BatchInputHubDbTableRowV3Request';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
+export * from './BatchResponseHubDbTableRowV3';
 export * from './BatchResponseHubDbTableRowV3WithErrors';
 export * from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 export * from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
@@ -24,11 +25,12 @@ export * from './StandardError';
 import { BatchInputHubDbTableRowV3Request } from './BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
+import { BatchResponseHubDbTableRowV3, BatchResponseHubDbTableRowV3StatusEnum        } from './BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors, BatchResponseHubDbTableRowV3WithErrorsStatusEnum          } from './BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 import { Column         , ColumnTypeEnum      } from './Column';
-import { ColumnRequest   , ColumnRequestTypeEnum    } from './ColumnRequest';
+import { ColumnRequest   , ColumnRequestTypeEnum      } from './ColumnRequest';
 import { ErrorDetail } from './ErrorDetail';
 import { ForeignId } from './ForeignId';
 import { ForwardPaging } from './ForwardPaging';
@@ -64,6 +66,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "BatchResponseHubDbTableRowV3StatusEnum",
     "BatchResponseHubDbTableRowV3WithErrorsStatusEnum",
     "ColumnTypeEnum",
     "ColumnRequestTypeEnum",
@@ -73,6 +76,7 @@ let typeMap: {[index: string]: any} = {
     "BatchInputHubDbTableRowV3Request": BatchInputHubDbTableRowV3Request,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
+    "BatchResponseHubDbTableRowV3": BatchResponseHubDbTableRowV3,
     "BatchResponseHubDbTableRowV3WithErrors": BatchResponseHubDbTableRowV3WithErrors,
     "CollectionResponseWithTotalHubDbTableRowV3ForwardPaging": CollectionResponseWithTotalHubDbTableRowV3ForwardPaging,
     "CollectionResponseWithTotalHubDbTableV3ForwardPaging": CollectionResponseWithTotalHubDbTableV3ForwardPaging,

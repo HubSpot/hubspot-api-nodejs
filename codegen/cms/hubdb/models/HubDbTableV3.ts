@@ -36,6 +36,10 @@ export class HubDbTableV3 {
     'columns'?: Array<Column>;
     'published'?: boolean;
     /**
+    * Number of columns including deleted
+    */
+    'columnCount'?: number;
+    /**
     * Number of rows in the table
     */
     'rowCount'?: number;
@@ -69,10 +73,6 @@ export class HubDbTableV3 {
     * Specifies creation of multi-level dynamic pages using child tables
     */
     'enableChildTablePages'?: boolean;
-    /**
-    * Number of columns including deleted
-    */
-    'columnCount'?: number;
     /**
     * Specifies whether child tables can be created
     */
@@ -114,6 +114,12 @@ export class HubDbTableV3 {
             "baseName": "published",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "columnCount",
+            "baseName": "columnCount",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "rowCount",
@@ -174,12 +180,6 @@ export class HubDbTableV3 {
             "baseName": "enableChildTablePages",
             "type": "boolean",
             "format": ""
-        },
-        {
-            "name": "columnCount",
-            "baseName": "columnCount",
-            "type": "number",
-            "format": "int32"
         },
         {
             "name": "allowChildTables",

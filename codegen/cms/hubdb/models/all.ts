@@ -1,6 +1,7 @@
 export * from './BatchInputHubDbTableRowV3Request'
 export * from './BatchInputJsonNode'
 export * from './BatchInputString'
+export * from './BatchResponseHubDbTableRowV3'
 export * from './BatchResponseHubDbTableRowV3WithErrors'
 export * from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging'
 export * from './CollectionResponseWithTotalHubDbTableV3ForwardPaging'

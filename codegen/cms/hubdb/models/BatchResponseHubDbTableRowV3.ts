@@ -10,87 +10,59 @@
  * Do not edit the class manually.
  */
 
-import { Option } from './Option';
+import { HubDbTableRowV3 } from './HubDbTableRowV3';
 import { HttpFile } from '../http/http';
 
-export class ColumnRequest {
-    /**
-    * Column Id
-    */
-    'id': number;
-    /**
-    * Name of the column
-    */
-    'name': string;
-    /**
-    * Label of the column
-    */
-    'label': string;
-    /**
-    * Type of the column
-    */
-    'type': ColumnRequestTypeEnum;
-    /**
-    * Options to choose for select and multi-select columns
-    */
-    'options': Array<Option>;
-    /**
-    * The id of another table to which the column refers/points to.
-    */
-    'foreignTableId'?: number;
-    /**
-    * The id of the column from another table to which the column refers/points to.
-    */
-    'foreignColumnId'?: number;
+export class BatchResponseHubDbTableRowV3 {
+    'status'?: BatchResponseHubDbTableRowV3StatusEnum;
+    'results'?: Array<HubDbTableRowV3>;
+    'requestedAt'?: Date;
+    'startedAt'?: Date;
+    'completedAt'?: Date;
+    'links'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseHubDbTableRowV3StatusEnum",
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<HubDbTableRowV3>",
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ColumnRequestTypeEnum",
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<Option>",
-            "format": ""
-        },
-        {
-            "name": "foreignTableId",
-            "baseName": "foreignTableId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "foreignColumnId",
-            "baseName": "foreignColumnId",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return ColumnRequest.attributeTypeMap;
+        return BatchResponseHubDbTableRowV3.attributeTypeMap;
     }
 
     public constructor() {
@@ -98,5 +70,5 @@ export class ColumnRequest {
 }
 
 
-export type ColumnRequestTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" ;
+export type BatchResponseHubDbTableRowV3StatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
 

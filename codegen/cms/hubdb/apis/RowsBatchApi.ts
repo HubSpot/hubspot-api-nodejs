@@ -12,6 +12,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 
 /**
@@ -422,13 +423,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchCloneDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchCloneDraftTableRows(response: ResponseContext): Promise<any > {
+     public async batchCloneDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -441,10 +442,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
 
@@ -458,13 +459,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchCreateDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchCreateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3WithErrors | any > {
+     public async batchCreateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -484,10 +485,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseHubDbTableRowV3WithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseHubDbTableRowV3WithErrors | any", ""
-            ) as BatchResponseHubDbTableRowV3WithErrors | any;
+                "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
+            ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
             return body;
         }
 
@@ -533,13 +534,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchReadDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReadDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3WithErrors | any > {
+     public async batchReadDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -559,10 +560,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseHubDbTableRowV3WithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseHubDbTableRowV3WithErrors | any", ""
-            ) as BatchResponseHubDbTableRowV3WithErrors | any;
+                "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
+            ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
             return body;
         }
 
@@ -576,13 +577,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchReadTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReadTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3WithErrors | any > {
+     public async batchReadTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -602,10 +603,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseHubDbTableRowV3WithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseHubDbTableRowV3WithErrors | any", ""
-            ) as BatchResponseHubDbTableRowV3WithErrors | any;
+                "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
+            ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
             return body;
         }
 
@@ -619,13 +620,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchReplaceDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReplaceDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3WithErrors | any > {
+     public async batchReplaceDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -645,10 +646,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseHubDbTableRowV3WithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseHubDbTableRowV3WithErrors | any", ""
-            ) as BatchResponseHubDbTableRowV3WithErrors | any;
+                "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
+            ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
             return body;
         }
 
@@ -662,13 +663,13 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to batchUpdateDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchUpdateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3WithErrors | any > {
+     public async batchUpdateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseHubDbTableRowV3", ""
+            ) as BatchResponseHubDbTableRowV3;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -688,10 +689,10 @@ export class RowsBatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseHubDbTableRowV3WithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseHubDbTableRowV3WithErrors | any", ""
-            ) as BatchResponseHubDbTableRowV3WithErrors | any;
+                "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
+            ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
             return body;
         }
 
