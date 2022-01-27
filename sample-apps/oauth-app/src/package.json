@@ -27,7 +27,7 @@
     "express": "^4.16.3",
     "hubspot": "^2.3.2",
     "lodash": "^4.17.15",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
