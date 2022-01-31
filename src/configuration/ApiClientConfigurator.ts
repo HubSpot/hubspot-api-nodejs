@@ -12,7 +12,7 @@ export class ApiClientConfigurator {
           oauth2: {
             accessToken: config.accessToken,
           },
-          middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
+          middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
         },
       }
     } else if (config.apiKey) {
@@ -20,14 +20,14 @@ export class ApiClientConfigurator {
         authMethods: {
           hapikey: config.apiKey,
         },
-        middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
+        middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
       }
     } else if (config.developerApiKey) {
       params = {
         authMethods: {
           hapikey: config.developerApiKey,
         },
-        middleware: this.getHeaderMiddleware<RequestContextType, ResponseContextType>(),
+        middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
       }
     }
 
