@@ -204,7 +204,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrite [Client](src/client.ts)
 - `crm.objects.feedbackSubmissions` => `crm.feedbackSubmissions`
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.0-beta...HEAD
+## [6.0.1-beta] - 2022-01-31
+
+### Fixed
+
+- Iterable middlewares 
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -220,4 +226,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [4.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/4.0.0
 [4.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/4.1.0
 [5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/5.0.0
-[5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.0-beta
+[6.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.0-beta
+[6.0.1-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta
