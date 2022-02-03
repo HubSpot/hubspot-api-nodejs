@@ -1,9 +1,8 @@
-import crypto = require('crypto')
-import * as _ from 'lodash'
 import { createConfiguration } from '../../../codegen/webhooks/configuration'
 import { RequestContext, ResponseContext, SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
+import { validateSignature } from '../../services/validateSignature'
 
 export class WebhooksDiscovery {
   public settingsApi: SettingsApi
@@ -24,15 +23,6 @@ export class WebhooksDiscovery {
     webhooksUrl?: string,
     webhooksMethod = 'POST',
   ): boolean {
-    const sourceString = _.isEqual(signatureVersion, 'v1')
-      ? clientSecret + requestBody
-      : clientSecret + webhooksMethod + webhooksUrl + requestBody
-
-    const hash = crypto
-      .createHash('sha256')
-      .update(sourceString)
-      .digest('hex')
-
-    return _.isEqual(signature, hash)
+    return validateSignature(signature, clientSecret, requestBody, signatureVersion, webhooksUrl, webhooksMethod)
   }
 }
