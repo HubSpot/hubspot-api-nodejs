@@ -2,6 +2,7 @@ import { createConfiguration } from '../../../codegen/webhooks/configuration'
 import { RequestContext, ResponseContext, SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
+import { validateSignature } from '../../services/validateSignature'
 
 export class WebhooksDiscovery {
   public settingsApi: SettingsApi
@@ -12,5 +13,16 @@ export class WebhooksDiscovery {
 
     this.settingsApi = new SettingsApi(configuration)
     this.subscriptionsApi = new SubscriptionsApi(configuration)
+  }
+
+  public validateSignature(
+    signature: string,
+    clientSecret: string,
+    requestBody: string,
+    signatureVersion = 'v1',
+    webhooksUrl?: string,
+    webhooksMethod = 'POST',
+  ): boolean {
+    return validateSignature(signature, clientSecret, requestBody, signatureVersion, webhooksUrl, webhooksMethod)
   }
 }
