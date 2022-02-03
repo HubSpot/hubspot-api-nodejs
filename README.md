@@ -59,14 +59,14 @@ details and a refresh_token:
 
 ```javascript
 const hubspotClient = new hubspot.Client()
-return hubspotClient.oauth.defaultApi
+return hubspotClient.oauth.tokensApi
     .createToken('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
     .then((results) => {
-        console.log(results.body)
+        console.log(results)
 
         // this assigns the accessToken to the client, so your client is ready
         // to use
-        hubspotClient.setAccessToken(results.body.accessToken)
+        hubspotClient.setAccessToken(results.accessToken)
 
         return hubspotClient.crm.companies.basicApi.getPage()
     })
@@ -132,7 +132,7 @@ All methods return a [promise]. The success includes the serialized to JSON body
 hubspotClient.crm.contacts.basicApi
     .getPage(limit, after, properties, associations, archived)
     .then((results) => {
-        console.log(results.body)
+        console.log(results)
     })
     .catch((err) => {
         console.error(err)
@@ -161,9 +161,9 @@ const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
 await hubspotClient.crm.companies.associationsApi.create(
-    createCompanyResponse.body.id,
+    createCompanyResponse.id,
     'contacts',
-    createContactResponse.body.id,
+    createContactResponse.id,
     'company_to_contact`
 )
 ```
@@ -225,7 +225,7 @@ const importFilePath = `./test.csv`
 const importFileReadStream = fs.createReadStream(importFilePath)
 const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileReadStream)
 
-console.log(JSON.stringify(result.body))
+console.log(JSON.stringify(result))
 ```
 
 #### second option with RequestDetailedFile
@@ -268,7 +268,7 @@ const importFileConfig = {
 }
 const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileConfig)
 
-console.log(JSON.stringify(result.body))
+console.log(JSON.stringify(result))
 ```
 
 ### {EXAMPLE} Search Contacts:
@@ -306,7 +306,7 @@ const publicObjectSearchRequest = {
 }
 
 const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
-console.log(JSON.stringify(result.body))
+console.log(JSON.stringify(result))
 ```
 
 ### Get all:
@@ -333,7 +333,7 @@ const uri = hubspotClient.oauth.getAuthorizationUrl(clientId, redirectUri, scope
 #### Obtain an access token from an authorization_code
 
 ```javascript
-return hubspotClient.oauth.defaultApi.createToken(
+return hubspotClient.oauth.tokensApi.createToken(
         'authorization_code',
         code, // the code you received from the oauth flow
         YOUR_REDIRECT_URI,
