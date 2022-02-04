@@ -1,3 +1,5 @@
+import * as _ from 'lodash'
+import { any } from 'bluebird'
 import { IRequestContext } from '../services/IRequestContext'
 import { Observable } from '../services/Observable'
 import { IConfiguration } from './IConfiguration'
@@ -5,30 +7,33 @@ import { VERSION } from './version'
 
 export class ApiClientConfigurator {
   public static getParams<RequestContextType extends IRequestContext, ResponseContextType>(config: IConfiguration) {
-    let params = {}
+    let params = {
+      authMethods: {},
+      middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()]
+    }
     if (config.accessToken) {
-      params = {
-        authMethods: {
-          oauth2: {
-            accessToken: config.accessToken,
-          },
-          middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
-        },
-      }
-    } else if (config.apiKey) {
-      params = {
-        authMethods: {
-          hapikey: config.apiKey,
-        },
-        middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
-      }
-    } else if (config.developerApiKey) {
-      params = {
-        authMethods: {
-          hapikey: config.developerApiKey,
-        },
-        middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()],
-      }
+      _.merge(params.authMethods, {
+        oauth2:  {
+          accessToken: config.accessToken
+        }
+      })
+      _.merge(params.authMethods, {
+        oauth2_legacy:  {
+          accessToken: config.accessToken
+        }
+      })
+    }
+    
+    if (config.apiKey) {
+      _.merge(params.authMethods, {
+        hapikey:  config.apiKey
+      })
+    }
+
+    if (config.developerApiKey) {
+      _.merge(params.authMethods, {
+        developer_hapikey:  config.developerApiKey
+      })
     }
 
     return params
