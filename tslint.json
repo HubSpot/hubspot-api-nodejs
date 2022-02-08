@@ -10,7 +10,6 @@
     ]
   },
   "rules": {
-    "prefer-const": false,
     "max-classes-per-file": false,
     "object-literal-sort-keys": false,
     "no-console": false,

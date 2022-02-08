@@ -14,7 +14,7 @@ export class ApiClientConfigurator {
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
-    let params = {
+    return {
       middleware: [
         this.getHeaderMiddleware<
           RequestContextType,
@@ -23,16 +23,20 @@ export class ApiClientConfigurator {
           ObservableResponseContextType
         >(observableRequestContextParam, observableResponseContextParam),
       ],
-      authMethods: {},
+      authMethods: this.getAuthMethods(config),
     }
+  }
+
+  protected static getAuthMethods(config: IConfiguration) {
+    let authMethods = {}
 
     if (config.accessToken) {
-      _.merge(params.authMethods, {
+      authMethods = Object.assign(authMethods, {
         oauth2: {
           accessToken: config.accessToken,
         },
       })
-      _.merge(params.authMethods, {
+      authMethods = Object.assign(authMethods, {
         oauth2_legacy: {
           accessToken: config.accessToken,
         },
@@ -40,17 +44,18 @@ export class ApiClientConfigurator {
     }
 
     if (config.apiKey) {
-      _.merge(params.authMethods, {
+      authMethods = Object.assign(authMethods, {
         hapikey: config.apiKey,
       })
     }
 
     if (config.developerApiKey) {
-      _.merge(params.authMethods, {
+      authMethods = Object.assign(authMethods, {
         developer_hapikey: config.developerApiKey,
       })
     }
-    return params
+
+    return authMethods
   }
 
   protected static getHeaderMiddleware<
