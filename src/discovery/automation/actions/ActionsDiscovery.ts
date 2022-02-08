@@ -7,6 +7,7 @@ import {
   ResponseContext,
   RevisionsApi,
 } from '../../../../codegen/automation/actions/index'
+import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
@@ -17,7 +18,14 @@ export class ActionsDiscovery {
   public revisionsApi: RevisionsApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(
+      ApiClientConfigurator.getParams<
+        RequestContext,
+        ResponseContext,
+        Observable<RequestContext>,
+        Observable<ResponseContext>
+      >(config, Observable, Observable),
+    )
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.definitionsApi = new DefinitionsApi(configuration)

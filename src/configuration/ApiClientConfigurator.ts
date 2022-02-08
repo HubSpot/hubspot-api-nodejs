@@ -1,52 +1,74 @@
 import * as _ from 'lodash'
-import { any } from 'bluebird'
 import { IRequestContext } from '../services/IRequestContext'
-import { Observable } from '../services/Observable'
 import { IConfiguration } from './IConfiguration'
 import { VERSION } from './version'
 
 export class ApiClientConfigurator {
-  public static getParams<RequestContextType extends IRequestContext, ResponseContextType>(config: IConfiguration) {
+  public static getParams<
+    RequestContextType extends IRequestContext,
+    ResponseContextType,
+    ObservableRequestContextType,
+    ObservableResponseContextType
+  >(
+    config: IConfiguration,
+    observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
+    observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
+  ) {
     let params = {
+      middleware: [
+        this.getHeaderMiddleware<
+          RequestContextType,
+          ResponseContextType,
+          ObservableRequestContextType,
+          ObservableResponseContextType
+        >(observableRequestContextParam, observableResponseContextParam),
+      ],
       authMethods: {},
-      middleware: [this.getHeaderMiddleware<RequestContextType, ResponseContextType>()]
     }
+
     if (config.accessToken) {
       _.merge(params.authMethods, {
-        oauth2:  {
-          accessToken: config.accessToken
-        }
+        oauth2: {
+          accessToken: config.accessToken,
+        },
       })
       _.merge(params.authMethods, {
-        oauth2_legacy:  {
-          accessToken: config.accessToken
-        }
+        oauth2_legacy: {
+          accessToken: config.accessToken,
+        },
       })
     }
-    
+
     if (config.apiKey) {
       _.merge(params.authMethods, {
-        hapikey:  config.apiKey
+        hapikey: config.apiKey,
       })
     }
 
     if (config.developerApiKey) {
       _.merge(params.authMethods, {
-        developer_hapikey:  config.developerApiKey
+        developer_hapikey: config.developerApiKey,
       })
     }
-
     return params
   }
 
-  protected static getHeaderMiddleware<RequestContextType extends IRequestContext, ResponseContextType>() {
+  protected static getHeaderMiddleware<
+    RequestContextType extends IRequestContext,
+    ResponseContextType,
+    ObservableRequestContextType,
+    ObservableResponseContextType
+  >(
+    observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
+    observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
+  ) {
     return {
-      pre(context: RequestContextType): Observable<RequestContextType> {
+      pre(context: RequestContextType): ObservableRequestContextType {
         context.setHeaderParam('User-agent', `hubspot-api-client-nodejs; ${VERSION}`)
-        return new Observable<RequestContextType>(Promise.resolve(context))
+        return new observableRequestContextParam(Promise.resolve(context))
       },
-      post(context: ResponseContextType): Observable<ResponseContextType> {
-        return new Observable<ResponseContextType>(Promise.resolve(context))
+      post(context: ResponseContextType): ObservableResponseContextType {
+        return new observableResponseContextParam(Promise.resolve(context))
       },
     }
   }

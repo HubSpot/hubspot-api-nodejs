@@ -5,6 +5,7 @@ import {
   ResponseContext,
   StatusApi,
 } from '../../../codegen/communication_preferences/index'
+import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
 
@@ -13,7 +14,14 @@ export class CommunicationPreferencesDiscovery {
   public statusApi: StatusApi
 
   constructor(config: IConfiguration = {}) {
-    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(
+      ApiClientConfigurator.getParams<
+        RequestContext,
+        ResponseContext,
+        Observable<RequestContext>,
+        Observable<ResponseContext>
+      >(config, Observable, Observable),
+    )
 
     this.definitionApi = new DefinitionApi(configuration)
     this.statusApi = new StatusApi(configuration)
