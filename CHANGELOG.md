@@ -216,7 +216,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - webhooks.validateSignature()
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta1...HEAD
+## [6.0.1-beta2] - 2022-02-09
+
+### Fixed 
+
+- autification configuration
+
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta2...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -234,4 +240,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [5.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/5.0.0
 [6.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.0-beta
 [6.0.1-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta
-[6.0.1-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta1
+[6.0.1-beta1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta1
+[6.0.1-beta2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta2
