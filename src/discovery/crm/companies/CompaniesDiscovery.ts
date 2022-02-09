@@ -9,6 +9,7 @@ import {
   SearchApi,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/companies/index'
+import { Observable } from '../../../../codegen/crm/companies/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
@@ -20,7 +21,14 @@ export class CompaniesDiscovery {
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(
+      ApiClientConfigurator.getParams<
+        RequestContext,
+        ResponseContext,
+        Observable<RequestContext>,
+        Observable<ResponseContext>
+      >(config, Observable, Observable),
+    )
 
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)

@@ -8,6 +8,7 @@ import {
   SyncApi,
   UserAccountsApi,
 } from '../../../../../codegen/crm/extensions/accounting/index'
+import { Observable } from '../../../../../codegen/crm/extensions/accounting/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
@@ -19,7 +20,14 @@ export class AccountingDiscovery {
   public userAccountsApi: UserAccountsApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(
+      ApiClientConfigurator.getParams<
+        RequestContext,
+        ResponseContext,
+        Observable<RequestContext>,
+        Observable<ResponseContext>
+      >(config, Observable, Observable),
+    )
 
     this.callbacksApi = new CallbacksApi(configuration)
     this.invoiceApi = new InvoiceApi(configuration)

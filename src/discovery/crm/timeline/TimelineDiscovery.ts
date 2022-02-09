@@ -6,6 +6,7 @@ import {
   TemplatesApi,
   TokensApi,
 } from '../../../../codegen/crm/timeline/index'
+import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
@@ -15,7 +16,14 @@ export class TimelineDiscovery {
   public tokensApi: TokensApi
 
   constructor(config: IConfiguration) {
-    const configuration = createConfiguration(ApiClientConfigurator.getParams<RequestContext, ResponseContext>(config))
+    const configuration = createConfiguration(
+      ApiClientConfigurator.getParams<
+        RequestContext,
+        ResponseContext,
+        Observable<RequestContext>,
+        Observable<ResponseContext>
+      >(config, Observable, Observable),
+    )
 
     this.eventsApi = new EventsApi(configuration)
     this.templatesApi = new TemplatesApi(configuration)

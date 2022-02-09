@@ -39,26 +39,17 @@ export class Client {
   }
 
   public setAccessToken(token: string) {
-    this.cleanAuth()
     this.config.accessToken = token
     this.init()
   }
 
   public setApiKey(apiKey: string) {
-    this.cleanAuth()
     this.config.apiKey = apiKey
     this.init()
   }
 
   public setDeveloperApiKey(developerApiKey: string) {
-    this.cleanAuth()
     this.config.developerApiKey = developerApiKey
     this.init()
-  }
-
-  protected cleanAuth() {
-    delete this.config.accessToken
-    delete this.config.apiKey
-    delete this.config.developerApiKey
   }
 }
