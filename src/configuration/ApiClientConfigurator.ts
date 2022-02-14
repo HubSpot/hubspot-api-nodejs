@@ -27,6 +27,10 @@ export class ApiClientConfigurator {
     }
   }
 
+  public static getUserAgent() {
+    return `hubspot-api-client-nodejs; ${VERSION}`
+  }
+
   protected static getAuthMethods(config: IConfiguration) {
     let authMethods = {}
 

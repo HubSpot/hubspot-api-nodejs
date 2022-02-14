@@ -8,6 +8,7 @@ import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
+import { Request } from './services/Request'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
@@ -51,5 +52,11 @@ export class Client {
   public setDeveloperApiKey(developerApiKey: string) {
     this.config.developerApiKey = developerApiKey
     this.init()
+  }
+
+  public async apiRequest(opts: any) {
+    const request = new Request(this.config)
+
+    return request.sent(opts)
   }
 }
