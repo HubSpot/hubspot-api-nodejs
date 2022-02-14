@@ -39,7 +39,7 @@ export class HttpClient {
         url.searchParams.set('hapikey', auth.value)
       }
       if (auth.type === 'oauth2') {
-        sentData.headers = Object.assign(sentData.headers, { Authorization: 'Bearer ' + auth.value })
+        sentData.headers = Object.assign(sentData.headers, { Authorization: `Bearer ${auth.value}` })
       }
     }
 
@@ -80,7 +80,7 @@ export class HttpClient {
     let urlStr = opts.overlapUrl || this.baseUrl + (opts.path || '')
     if (opts.qs) {
       const params = new URLSearchParams(opts.qs)
-      urlStr = urlStr + '?' + params.toString()
+      urlStr = `${urlStr}?${params}`
     }
     return new URL(urlStr)
   }
