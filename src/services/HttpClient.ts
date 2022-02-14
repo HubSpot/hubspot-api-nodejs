@@ -2,6 +2,7 @@ import * as _ from 'lodash'
 import fetch from 'node-fetch'
 import { ApiClientConfigurator } from '../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../configuration/IConfiguration'
+import { IHttpOptions } from './IHttpOptions'
 
 export class HttpClient {
   protected config: IConfiguration
@@ -16,7 +17,7 @@ export class HttpClient {
     this.config = config
   }
 
-  public async send(opts: any) {
+  public async send(opts: IHttpOptions = {}) {
     let sentData = {
       method: opts.method || 'GET',
       headers: Object.assign({}, opts.headers, this.getHeaders()),
@@ -56,7 +57,7 @@ export class HttpClient {
     }
   }
 
-  protected getAuth(opts: any) {
+  protected getAuth(opts: IHttpOptions = {}) {
     let auth
     if (opts.authType && _.get(this.config, opts.authType)) {
       auth = {
@@ -76,7 +77,7 @@ export class HttpClient {
     return auth
   }
 
-  protected getUrl(opts: any): URL {
+  protected getUrl(opts: IHttpOptions = {}): URL {
     let urlStr = opts.overlapUrl || this.baseUrl + (opts.path || '')
     if (opts.qs) {
       const params = new URLSearchParams(opts.qs)
