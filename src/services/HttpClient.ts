@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 import { ApiClientConfigurator } from '../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../configuration/IConfiguration'
 
-export class Request {
+export class HttpClient {
   protected config: IConfiguration
   protected baseUrl: string = 'https://api.hubapi.com'
   protected authTypes = {
@@ -16,10 +16,10 @@ export class Request {
     this.config = config
   }
 
-  public async sent(opts: any) {
+  public async send(opts: any) {
     let sentData = {
       method: opts.method || 'GET',
-      headers: _.assign({}, opts.headers, this.getHeaders()),
+      headers: Object.assign({}, opts.headers, this.getHeaders()),
     }
 
     if (opts.body) {
