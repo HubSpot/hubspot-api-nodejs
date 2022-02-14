@@ -5,5 +5,5 @@ export interface IHttpOptions {
   authType?: string
   overlapUrl?: string
   path?: string
-  qs?:{ [key: string]: any }
+  qs?: { [key: string]: any }
 }
