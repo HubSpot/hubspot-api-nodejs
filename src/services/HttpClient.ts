@@ -7,10 +7,12 @@ import { IHttpOptions } from './IHttpOptions'
 export class HttpClient {
   protected config: IConfiguration
   protected baseUrl: string = 'https://api.hubapi.com'
+  protected readonly hapikey: string = 'hapikey'
+  protected readonly oauth2: string = 'oauth2'
   protected authTypes = {
-    apiKey: 'qs',
-    accessToken: 'oauth2',
-    developerApiKey: 'qs',
+    apiKey: this.hapikey,
+    accessToken: this.oauth2,
+    developerApiKey: this.hapikey,
   }
 
   constructor(config: IConfiguration = {}) {
@@ -36,10 +38,10 @@ export class HttpClient {
     const auth = this.getAuth(opts)
 
     if (auth) {
-      if (auth.type === 'qs') {
+      if (auth.type === this.hapikey) {
         url.searchParams.set('hapikey', auth.value)
       }
-      if (auth.type === 'oauth2') {
+      if (auth.type === this.oauth2) {
         sentData.headers = Object.assign(sentData.headers, { Authorization: `Bearer ${auth.value}` })
       }
     }
