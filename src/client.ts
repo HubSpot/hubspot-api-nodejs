@@ -8,8 +8,8 @@ import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
-import { HttpClient } from './services/HttpClient'
-import { IHttpOptions } from './services/IHttpOptions'
+import { HttpClient } from './services/http/HttpClient'
+import { IHttpOptions } from './services/http/IHttpOptions'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
@@ -56,8 +56,6 @@ export class Client {
   }
 
   public async apiRequest(opts: IHttpOptions = {}) {
-    const request = new HttpClient(this.config)
-
-    return request.send(opts)
+    return await HttpClient.send(this.config, opts)
   }
 }
