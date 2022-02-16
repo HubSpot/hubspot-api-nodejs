@@ -58,7 +58,7 @@ export class Client {
 
   public async apiRequest(opts: IHttpOptions = {}) {
     const request = new Request(this.config, opts)
-    
+
     return await HttpClient.send(request)
   }
 }

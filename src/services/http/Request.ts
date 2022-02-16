@@ -77,12 +77,10 @@ export class Request {
 
   protected setBody() {
     if (this.opts.body) {
-      let body = this.opts.body
+      this.body = this.opts.body
       if (_.get(this.headers, 'Content-Type') === 'application/json' && _.get(this.opts, 'defaultJson', true)) {
-        body = JSON.stringify(body)
+        this.body = JSON.stringify(this.body)
       }
-
-      this.body = body
     }
   }
 }
