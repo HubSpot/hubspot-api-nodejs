@@ -10,6 +10,7 @@ import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
+import { Request } from './services/http/Request'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
@@ -56,6 +57,8 @@ export class Client {
   }
 
   public async apiRequest(opts: IHttpOptions = {}) {
-    return await HttpClient.send(this.config, opts)
+    const request = new Request(this.config, opts)
+    
+    return await HttpClient.send(request)
   }
 }
