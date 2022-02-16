@@ -2,7 +2,8 @@ import * as _ from 'lodash'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
-import { IAuthMethod } from './IAuthMethod'
+import { AuthMethods } from './AuthMethods'
+import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
 
 export interface IHeaders {
@@ -46,13 +47,28 @@ export class Request {
   }
 
   protected applyAuth() {
-    const auth: IAuthMethod | null = Auth.chooseAuth(this.opts, this.config)
+    let auth = null
+    if (this.opts.authType && _.get(this.config, this.opts.authType)) {
+      auth = {
+        type: _.get(AuthTypes, this.opts.authType),
+        value: _.get(this.config, this.opts.authType),
+      }
+    } else {
+      _.forIn(AuthTypes, (value, key) => {
+        if (_.get(this.config, key)) {
+          auth = {
+            type: value,
+            value: _.get(this.config, key),
+          }
+        }
+      })
+    }
 
     if (auth) {
-      if (auth.type === Auth.hapikey) {
+      if (auth.type === AuthMethods.hapikey) {
         this.url.searchParams.set('hapikey', auth.value)
       }
-      if (auth.type === Auth.oauth2) {
+      if (auth.type === AuthMethods.oauth2) {
         this.headers = Object.assign(this.headers, { Authorization: `Bearer ${auth.value}` })
       }
     }

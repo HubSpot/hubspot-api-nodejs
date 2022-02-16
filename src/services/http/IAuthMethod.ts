@@ -1,4 +1,6 @@
+import { AuthMethods } from './AuthMethods'
+
 export interface IAuthMethod {
-  type: string
-  value: string
+  type: AuthMethods,
+  value: string,
 }
