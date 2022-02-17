@@ -47,29 +47,16 @@ export class Request {
   }
 
   protected applyAuth() {
-    let auth = null
-    if (this.opts.authType && _.get(this.config, this.opts.authType)) {
-      auth = {
-        type: _.get(AuthTypes, this.opts.authType),
-        value: _.get(this.config, this.opts.authType),
-      }
-    } else {
-      _.forIn(AuthTypes, (value, key) => {
-        if (_.get(this.config, key)) {
-          auth = {
-            type: value,
-            value: _.get(this.config, key),
-          }
-        }
-      })
-    }
+    const authType = Auth.chooseAuth(this.opts, this.config)
 
-    if (auth) {
-      if (auth.type === AuthMethods.hapikey) {
-        this.url.searchParams.set('hapikey', auth.value)
+    if (authType) {
+      const method = _.get(AuthTypes, authType)
+      const value = _.get(this.config, authType)
+      if (method === AuthMethods.hapikey) {
+        this.url.searchParams.set('hapikey', value)
       }
-      if (auth.type === AuthMethods.oauth2) {
-        this.headers = Object.assign(this.headers, { Authorization: `Bearer ${auth.value}` })
+      if (method === AuthMethods.accessToken) {
+        this.headers = Object.assign(this.headers, { Authorization: `Bearer ${value}` })
       }
     }
   }

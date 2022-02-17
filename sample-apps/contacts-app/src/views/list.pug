@@ -1,0 +1,68 @@
+extends includes/layout
+block content
+  - const getContactPropertiesApiDetails = ' Get All Contacts Properties\n GET /crm/v3/properties/:objectType\n crm.properties.coreApi.getAll';
+  - const getContactPropertyGroupsApiDetails = ' Get Contact Property Groups\n GET //crm/v3/properties/:objectType/groups\n crm.properties.groupsApi.getAll';
+  - const createContactApiDetails = ' Create a contact\n POST /crm/v3/objects/contacts\n crm.contacts.basicApi.create';
+  - const updateContactApiDetails = ' Update a contact\n POST /crm/v3/objects/contacts/:objectId\n crm.contacts.basicApi.update';
+  - const createContactPropertyApiDetails = ' Create a contact property\n POST /crm/v3/properties/:objectType\n crm.properties.coreApi.create';
+  - const updateContactPropertyApiDetails = ' Update a contact property\n PATCH /crm/v3/properties/:objectType/:propertyName\n crm.properties.coreApi.update';
+  - const getContactPropertyApiDetails = ' Get Contact Property by Name\n GET /crm/v3/properties/:objectType/:propertyName\n crm.properties.coreApi.getByName';
+  - const getAllContactEngagementsApiDetails = ' Get Associated Contact Engagements\n GET /crm/v3/objects/:objectType/:objectId/associations/:associatedObjectType\n crm.contacts.associationsApi.getAll';
+  - const getAllOwnersApiDetails = ' Get Owners\n GET /crm/v3/owners/\n crm.owners.defaultApi.getPage';
+  .container
+    .row
+      .column
+        h3 Properties
+        pre #{getContactPropertiesApiDetails}
+        pre #{getContactPropertyApiDetails}
+        form(method='post' action=action)
+          fieldset
+            each item, key in items
+              - var isRequired = key === 'email';
+
+              label(for=key) #{item.label} #{isRequired ? '*' : ''}
+
+              if (key === 'hubspot_owner_id')
+                pre #{getAllOwnersApiDetails}
+                select(name=key id=key)
+                  option(value='') Not assigned
+                  each owner in owners
+                    -let selected = '' + owner.id === '' + item.value
+                    option(value=owner.id selected=selected) #{owner.firstName} #{owner.lastName}
+              else if (key === 'groupName')
+                pre #{getContactPropertyGroupsApiDetails}
+                select(name=key id=key)
+                  option(value='') Not assigned
+                    each group in groups
+                      -let selected = '' + group.name === '' + item.value
+                      option(value=group.name selected=selected) #{group.label}
+              else
+                input(name=key id=key type='text' value=`${item.value || ''}` required=isRequired)
+
+
+            input(class='button-primary' type='submit' value='Save')
+            pre #{createContactApiDetails}
+            pre #{updateContactApiDetails}
+            pre #{createContactPropertyApiDetails}
+            pre #{updateContactPropertyApiDetails}
+
+      if (engagements)
+        .column
+          h3 Engagements
+          pre #{getAllContactEngagementsApiDetails}
+          table
+            thead
+              tr
+                th ID
+                th Type
+                th Title
+            tbody
+              each engagement in engagements
+                tr
+                  td #{engagement.id}
+                  td #{engagement.type}
+                  td #{engagement.title}
+
+          div
+            a(href=engagementAction)
+              input(class='button-primary' type='button' value='Add Engagement')
