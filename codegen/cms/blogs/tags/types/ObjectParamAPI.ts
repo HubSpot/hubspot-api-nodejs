@@ -6,6 +6,7 @@ import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRe
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
+import { BatchResponseTag } from '../models/BatchResponseTag';
 import { BatchResponseTagWithErrors } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
@@ -72,7 +73,7 @@ export interface BlogTagsApiGetByIdRequest {
      */
     objectId: string
     /**
-     * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogTagsApigetById
      */
@@ -135,7 +136,7 @@ export interface BlogTagsApiGetPageRequest {
      */
     limit?: number
     /**
-     * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogTagsApigetPage
      */
@@ -195,7 +196,7 @@ export interface BlogTagsApiReadBatchRequest {
      */
     batchInputString: BatchInputString
     /**
-     * Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogTagsApireadBatch
      */
@@ -216,7 +217,7 @@ export interface BlogTagsApiUpdateRequest {
      */
     tag: Tag
     /**
-     * Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogTagsApiupdate
      */
@@ -231,7 +232,7 @@ export interface BlogTagsApiUpdateBatchRequest {
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
-     * Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogTagsApiupdateBatch
      */
@@ -255,8 +256,8 @@ export class ObjectBlogTagsApi {
     }
 
     /**
-     * Delete the Blog Tag objects identified in the request body. Note: This is not the same as the in-app `archive` function.
-     * Archive a batch of Blog Tags
+     * Delete the Blog Tag objects identified in the request body.
+     * Delete a batch of Blog Tags
      * @param param the request object
      */
     public archiveBatch(param: BlogTagsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
@@ -277,7 +278,7 @@ export class ObjectBlogTagsApi {
      * Create a batch of Blog Tags
      * @param param the request object
      */
-    public createBatch(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public createBatch(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.createBatch(param.batchInputTag,  options).toPromise();
     }
 
@@ -295,7 +296,7 @@ export class ObjectBlogTagsApi {
      * Get all Blog Tags
      * @param param the request object
      */
-    public getPage(param: BlogTagsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
+    public getPage(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
@@ -349,7 +350,7 @@ export class ObjectBlogTagsApi {
      * Retrieve a batch of Blog Tags
      * @param param the request object
      */
-    public readBatch(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public readBatch(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -367,7 +368,7 @@ export class ObjectBlogTagsApi {
      * Update a batch of Blog Tags
      * @param param the request object
      */
-    public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTagWithErrors | any> {
+    public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 

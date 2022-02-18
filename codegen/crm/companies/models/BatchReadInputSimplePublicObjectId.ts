@@ -15,6 +15,7 @@ import { HttpFile } from '../http/http';
 
 export class BatchReadInputSimplePublicObjectId {
     'properties': Array<string>;
+    'propertiesWithHistory': Array<string>;
     'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
 
@@ -24,6 +25,12 @@ export class BatchReadInputSimplePublicObjectId {
         {
             "name": "properties",
             "baseName": "properties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
             "type": "Array<string>",
             "format": ""
         },

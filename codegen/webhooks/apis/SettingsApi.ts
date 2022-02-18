@@ -1,12 +1,13 @@
 // TODO: better import syntax?
-import { BaseAPIRequestFactory, RequiredError } from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import {SecurityAuthentication} from '../auth/auth';
 
 
 import { SettingsChangeRequest } from '../models/SettingsChangeRequest';
@@ -18,11 +19,10 @@ import { SettingsResponse } from '../models/SettingsResponse';
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-     * Clear webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public async clear(appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async clear(appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -31,37 +31,54 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "clear", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
     }
 
     /**
-     * Used to set the webhook target URL and max concurrency limit for the given app.
-     * Configure webhook settings
-     * @param appId The ID of the target app.
-     * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
+     * @param appId 
+     * @param appId2 
+     * @param settingsChangeRequest 
      */
-    public async configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<RequestContext> {
+    public async configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new RequiredError("SettingsApi", "configure", "appId");
+        }
+
+
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "configure", "appId2");
         }
 
 
@@ -73,7 +90,8 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
@@ -91,22 +109,26 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
     }
 
     /**
-     * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-     * Get webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -115,20 +137,32 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "getAll", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;

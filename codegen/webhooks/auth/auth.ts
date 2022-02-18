@@ -27,7 +27,7 @@ export interface TokenProvider {
 /**
  * Applies apiKey authentication to the request context.
  */
-export class HapikeyAuthentication implements SecurityAuthentication {
+export class DeveloperHapikeyAuthentication implements SecurityAuthentication {
     /**
      * Configures this api key authentication with the necessary properties
      *
@@ -36,7 +36,7 @@ export class HapikeyAuthentication implements SecurityAuthentication {
     public constructor(private apiKey: string) {}
 
     public getName(): string {
-        return "hapikey";
+        return "developer_hapikey";
     }
 
     public applySecurityAuthentication(context: RequestContext) {
@@ -46,7 +46,8 @@ export class HapikeyAuthentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
-    "hapikey"?: SecurityAuthentication
+    "default"?: SecurityAuthentication,
+    "developer_hapikey"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -55,7 +56,8 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
-    "hapikey"?: ApiKeyConfiguration
+    "default"?: SecurityAuthentication,
+    "developer_hapikey"?: ApiKeyConfiguration
 }
 
 /**
@@ -68,10 +70,11 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
-    if (config["hapikey"]) {
-        authMethods["hapikey"] = new HapikeyAuthentication(
-            config["hapikey"]
+    if (config["developer_hapikey"]) {
+        authMethods["developer_hapikey"] = new DeveloperHapikeyAuthentication(
+            config["developer_hapikey"]
         );
     }
 

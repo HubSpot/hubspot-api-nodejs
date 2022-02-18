@@ -173,7 +173,7 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest, options?: Configuration): Promise<IntegratorCardPayloadResponse> {
+    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: Configuration): Promise<IntegratorCardPayloadResponse> {
         return this.api.getCardsSampleResponse( options).toPromise();
     }
 

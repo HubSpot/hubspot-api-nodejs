@@ -16,6 +16,7 @@ import { ConditionalSingleFieldDependency } from './ConditionalSingleFieldDepend
 import { InputFieldDefinition } from './InputFieldDefinition';
 import { ObjectRequestOptions } from './ObjectRequestOptions';
 import { SingleFieldDependency } from './SingleFieldDependency';
+import { SingleFieldDependency | ConditionalSingleFieldDependency } from './SingleFieldDependency | ConditionalSingleFieldDependency';
 import { HttpFile } from '../http/http';
 
 /**

@@ -11,11 +11,13 @@
  */
 
 import { CollectionResponseAssociatedId } from './CollectionResponseAssociatedId';
+import { ValueWithTimestamp } from './ValueWithTimestamp';
 import { HttpFile } from '../http/http';
 
 export class SimplePublicObjectWithAssociations {
     'id': string;
     'properties': { [key: string]: string; };
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'createdAt': Date;
     'updatedAt': Date;
     'archived'?: boolean;
@@ -35,6 +37,12 @@ export class SimplePublicObjectWithAssociations {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
         },
         {

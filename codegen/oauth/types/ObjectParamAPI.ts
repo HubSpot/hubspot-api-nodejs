@@ -132,7 +132,7 @@ export class ObjectTokensApi {
     /**
      * @param param the request object
      */
-    public createToken(param: TokensApiCreateTokenRequest, options?: Configuration): Promise<TokenResponseIF> {
+    public createToken(param: TokensApiCreateTokenRequest = {}, options?: Configuration): Promise<TokenResponseIF> {
         return this.api.createToken(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
     }
 

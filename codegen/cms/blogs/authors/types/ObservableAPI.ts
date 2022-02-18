@@ -7,6 +7,7 @@ import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRe
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogAuthor } from '../models/BatchResponseBlogAuthor';
 import { BatchResponseBlogAuthorWithErrors } from '../models/BatchResponseBlogAuthorWithErrors';
 import { BlogAuthor } from '../models/BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
@@ -62,8 +63,8 @@ export class ObservableBlogAuthorsApi {
     }
 
     /**
-     * Delete the Blog Author objects identified in the request body. Note: This is not the same as the in-app `archive` function.
-     * Archive a batch of Blog Authors
+     * Delete the Blog Author objects identified in the request body.
+     * Delete a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
      */
     public archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Observable<void> {
@@ -114,7 +115,7 @@ export class ObservableBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param batchInputBlogAuthor The JSON array of new Blog Authors to create.
      */
-    public createBatch(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: Configuration): Observable<BatchResponseBlogAuthorWithErrors | any> {
+    public createBatch(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         const requestContextPromise = this.requestFactory.createBatch(batchInputBlogAuthor, _options);
 
         // build promise chain
@@ -137,7 +138,7 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author object identified by the id in the path.
      * Retrieve a Blog Author
      * @param objectId The Blog Author id.
-     * @param archived Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
     public getById(objectId: string, archived?: boolean, _options?: Configuration): Observable<BlogAuthor> {
         const requestContextPromise = this.requestFactory.getById(objectId, archived, _options);
@@ -170,7 +171,7 @@ export class ObservableBlogAuthorsApi {
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Observable<CollectionResponseWithTotalBlogAuthorForwardPaging> {
         const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
@@ -315,9 +316,9 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author objects identified in the request body.
      * Retrieve a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
-     * @param archived Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthorWithErrors | any> {
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         const requestContextPromise = this.requestFactory.readBatch(batchInputString, archived, _options);
 
         // build promise chain
@@ -341,7 +342,7 @@ export class ObservableBlogAuthorsApi {
      * Update a Blog Author
      * @param objectId The Blog Author id.
      * @param blogAuthor The JSON representation of the updated Blog Author.
-     * @param archived Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
     public update(objectId: string, blogAuthor: BlogAuthor, archived?: boolean, _options?: Configuration): Observable<BlogAuthor> {
         const requestContextPromise = this.requestFactory.update(objectId, blogAuthor, archived, _options);
@@ -366,9 +367,9 @@ export class ObservableBlogAuthorsApi {
      * Update the Blog Author objects identified in the request body.
      * Update a batch of Blog Authors
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Authors.
-     * @param archived Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthorWithErrors | any> {
+    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         const requestContextPromise = this.requestFactory.updateBatch(batchInputJsonNode, archived, _options);
 
         // build promise chain

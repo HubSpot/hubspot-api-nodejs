@@ -26,6 +26,7 @@ export interface TokenProvider {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
 }
 
 export type ApiKeyConfiguration = string;
@@ -34,6 +35,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
 }
 
 /**
@@ -46,6 +48,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     return authMethods;
 }

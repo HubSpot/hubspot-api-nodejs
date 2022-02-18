@@ -47,7 +47,7 @@ export class DeveloperHapikeyAuthentication implements SecurityAuthentication {
 /**
  * Applies oauth2 authentication to the request context.
  */
-export class Oauth2LegacyAuthentication implements SecurityAuthentication {
+export class Oauth2Authentication implements SecurityAuthentication {
     /**
      * Configures OAuth2 with the necessary properties
      *
@@ -56,7 +56,7 @@ export class Oauth2LegacyAuthentication implements SecurityAuthentication {
     public constructor(private accessToken: string) {}
 
     public getName(): string {
-        return "oauth2_legacy";
+        return "oauth2";
     }
 
     public applySecurityAuthentication(context: RequestContext) {
@@ -66,8 +66,9 @@ export class Oauth2LegacyAuthentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
     "developer_hapikey"?: SecurityAuthentication,
-    "oauth2_legacy"?: SecurityAuthentication
+    "oauth2"?: SecurityAuthentication
 }
 
 export type ApiKeyConfiguration = string;
@@ -76,8 +77,9 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
     "developer_hapikey"?: ApiKeyConfiguration,
-    "oauth2_legacy"?: OAuth2Configuration
+    "oauth2"?: OAuth2Configuration
 }
 
 /**
@@ -90,6 +92,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     if (config["developer_hapikey"]) {
         authMethods["developer_hapikey"] = new DeveloperHapikeyAuthentication(
@@ -97,9 +100,9 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
         );
     }
 
-    if (config["oauth2_legacy"]) {
-        authMethods["oauth2_legacy"] = new Oauth2LegacyAuthentication(
-            config["oauth2_legacy"]["accessToken"]
+    if (config["oauth2"]) {
+        authMethods["oauth2"] = new Oauth2Authentication(
+            config["oauth2"]["accessToken"]
         );
     }
 

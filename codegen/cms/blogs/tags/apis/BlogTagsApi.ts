@@ -1,18 +1,20 @@
 // TODO: better import syntax?
-import { BaseAPIRequestFactory, RequiredError } from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import {SecurityAuthentication} from '../auth/auth';
 
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
+import { BatchResponseTag } from '../models/BatchResponseTag';
 import { BatchResponseTagWithErrors } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
@@ -56,24 +58,29 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
     }
 
     /**
-     * Delete the Blog Tag objects identified in the request body. Note: This is not the same as the in-app `archive` function.
-     * Archive a batch of Blog Tags
+     * Delete the Blog Tag objects identified in the request body.
+     * Delete a batch of Blog Tags
      * @param batchInputString The JSON array of Blog Tag ids.
      */
     public async archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
@@ -104,16 +111,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -152,16 +164,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -200,16 +217,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -219,7 +241,7 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve the Blog Tag object identified by the id in the path.
      * Retrieve a Blog Tag
      * @param objectId The Blog Tag id.
-     * @param archived Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
     public async getById(objectId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -245,16 +267,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -272,7 +299,7 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
     public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -345,16 +372,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -393,16 +425,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -441,16 +478,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -489,16 +531,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -537,16 +584,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -585,16 +637,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -604,7 +661,7 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve the Blog Tag objects identified in the request body.
      * Retrieve a batch of Blog Tags
      * @param batchInputString The JSON array of Blog Tag ids.
-     * @param archived Specifies whether to return archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
     public async readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -640,16 +697,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -660,7 +722,7 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * Update a Blog Tag
      * @param objectId The Blog Tag id.
      * @param tag The JSON representation of the updated Blog Tag.
-     * @param archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
     public async update(objectId: string, tag: Tag, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -703,16 +765,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -722,7 +789,7 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * Update the Blog Tag objects identified in the request body.
      * Update a batch of Blog Tags
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Tags.
-     * @param archived Specifies whether to update archived Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
     public async updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -758,16 +825,21 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -884,13 +956,13 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponseTagWithErrors | any > {
+     public async createBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseTag", ""
+            ) as BatchResponseTag;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -910,10 +982,10 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseTagWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag | BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseTagWithErrors | any", ""
-            ) as BatchResponseTagWithErrors | any;
+                "BatchResponseTag | BatchResponseTagWithErrors", ""
+            ) as BatchResponseTag | BatchResponseTagWithErrors;
             return body;
         }
 
@@ -1142,13 +1214,13 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to readBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readBatch(response: ResponseContext): Promise<BatchResponseTagWithErrors | any > {
+     public async readBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseTag", ""
+            ) as BatchResponseTag;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -1168,10 +1240,10 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseTagWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag | BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseTagWithErrors | any", ""
-            ) as BatchResponseTagWithErrors | any;
+                "BatchResponseTag | BatchResponseTagWithErrors", ""
+            ) as BatchResponseTag | BatchResponseTagWithErrors;
             return body;
         }
 
@@ -1221,13 +1293,13 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateBatch(response: ResponseContext): Promise<BatchResponseTagWithErrors | any > {
+     public async updateBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseTag", ""
+            ) as BatchResponseTag;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -1247,10 +1319,10 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseTagWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseTag | BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseTagWithErrors | any", ""
-            ) as BatchResponseTagWithErrors | any;
+                "BatchResponseTag | BatchResponseTagWithErrors", ""
+            ) as BatchResponseTag | BatchResponseTagWithErrors;
             return body;
         }
 

@@ -3,18 +3,104 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { CollectionResponsePipeline } from '../models/CollectionResponsePipeline';
-import { CollectionResponsePipelineStage } from '../models/CollectionResponsePipelineStage';
+import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
+import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
+import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionResponsePublicAuditInfoNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PublicAuditInfo } from '../models/PublicAuditInfo';
+
+import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";
+export class ObservablePipelineAuditsApi {
+    private requestFactory: PipelineAuditsApiRequestFactory;
+    private responseProcessor: PipelineAuditsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PipelineAuditsApiRequestFactory,
+        responseProcessor?: PipelineAuditsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new PipelineAuditsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PipelineAuditsApiResponseProcessor();
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
+     * Return an audit of all changes to the pipeline
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdAudit(objectType: string, pipelineId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        const requestContextPromise = this.requestFactory.getCrmV3PipelinesObjectTypePipelineIdAudit(objectType, pipelineId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3PipelinesObjectTypePipelineIdAudit(rsp)));
+            }));
+    }
+
+}
+
+import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponseProcessor} from "../apis/PipelineStageAuditsApi";
+export class ObservablePipelineStageAuditsApi {
+    private requestFactory: PipelineStageAuditsApiRequestFactory;
+    private responseProcessor: PipelineStageAuditsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PipelineStageAuditsApiRequestFactory,
+        responseProcessor?: PipelineStageAuditsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new PipelineStageAuditsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PipelineStageAuditsApiResponseProcessor();
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
+     * Return an audit of all changes to the pipeline stage
+     * @param objectType 
+     * @param stageId 
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType: string, stageId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        const requestContextPromise = this.requestFactory.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType, stageId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(rsp)));
+            }));
+    }
+
+}
 
 import { PipelineStagesApiRequestFactory, PipelineStagesApiResponseProcessor} from "../apis/PipelineStagesApi";
 export class ObservablePipelineStagesApi {
@@ -65,7 +151,7 @@ export class ObservablePipelineStagesApi {
      * @param pipelineId 
      * @param pipelineStageInput 
      */
-    public create(objectType: string, pipelineId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Observable<PipelineStage> {
+    public create(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Observable<PipelineStage> {
         const requestContextPromise = this.requestFactory.create(objectType, pipelineId, pipelineStageInput, _options);
 
         // build promise chain
@@ -91,7 +177,7 @@ export class ObservablePipelineStagesApi {
      * @param pipelineId 
      * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePipelineStage> {
+    public getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePipelineStageNoPaging> {
         const requestContextPromise = this.requestFactory.getAll(objectType, pipelineId, archived, _options);
 
         // build promise chain
@@ -145,7 +231,7 @@ export class ObservablePipelineStagesApi {
      * @param stageId 
      * @param pipelineStageInput 
      */
-    public replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Observable<PipelineStage> {
+    public replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Observable<PipelineStage> {
         const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, stageId, pipelineStageInput, _options);
 
         // build promise chain
@@ -170,11 +256,11 @@ export class ObservablePipelineStagesApi {
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelineStagePatchInput 
+     * @param archived Whether to return only results that have been archived.
      */
-    public update(objectType: string, pipelineId: string, stageId: string, archived?: boolean, pipelineStagePatchInput?: PipelineStagePatchInput, _options?: Configuration): Observable<PipelineStage> {
-        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, stageId, archived, pipelineStagePatchInput, _options);
+    public update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, archived?: boolean, _options?: Configuration): Observable<PipelineStage> {
+        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, stageId, pipelineStagePatchInput, archived, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -215,9 +301,10 @@ export class ObservablePipelinesApi {
      * Archive a pipeline
      * @param objectType 
      * @param pipelineId 
+     * @param validateReferencesBeforeDelete 
      */
-    public archive(objectType: string, pipelineId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, _options);
+    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, validateReferencesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -241,7 +328,7 @@ export class ObservablePipelinesApi {
      * @param objectType 
      * @param pipelineInput 
      */
-    public create(objectType: string, pipelineInput?: PipelineInput, _options?: Configuration): Observable<Pipeline> {
+    public create(objectType: string, pipelineInput: PipelineInput, _options?: Configuration): Observable<Pipeline> {
         const requestContextPromise = this.requestFactory.create(objectType, pipelineInput, _options);
 
         // build promise chain
@@ -266,7 +353,7 @@ export class ObservablePipelinesApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePipeline> {
+    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePipelineNoPaging> {
         const requestContextPromise = this.requestFactory.getAll(objectType, archived, _options);
 
         // build promise chain
@@ -317,9 +404,10 @@ export class ObservablePipelinesApi {
      * @param objectType 
      * @param pipelineId 
      * @param pipelineInput 
+     * @param validateReferencesBeforeDelete 
      */
-    public replace(objectType: string, pipelineId: string, pipelineInput?: PipelineInput, _options?: Configuration): Observable<Pipeline> {
-        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineInput, _options);
+    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
+        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -342,11 +430,12 @@ export class ObservablePipelinesApi {
      * Update a pipeline
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelinePatchInput 
+     * @param archived Whether to return only results that have been archived.
+     * @param validateReferencesBeforeDelete 
      */
-    public update(objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, _options?: Configuration): Observable<Pipeline> {
-        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, archived, pipelinePatchInput, _options);
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, archived?: boolean, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
+        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, pipelinePatchInput, archived, validateReferencesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

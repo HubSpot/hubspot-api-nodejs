@@ -80,7 +80,7 @@ export class ObjectOwnersApi {
      * Get a page of owners
      * @param param the request object
      */
-    public getPage(param: OwnersApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicOwnerForwardPaging> {
+    public getPage(param: OwnersApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicOwnerForwardPaging> {
         return this.api.getPage(param.email, param.after, param.limit, param.archived,  options).toPromise();
     }
 

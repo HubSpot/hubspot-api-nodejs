@@ -2,6 +2,7 @@ export * from './AttachToLangPrimaryRequestVNext';
 export * from './BatchInputBlogAuthor';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
+export * from './BatchResponseBlogAuthor';
 export * from './BatchResponseBlogAuthorWithErrors';
 export * from './BlogAuthor';
 export * from './BlogAuthorCloneRequestVNext';
@@ -19,6 +20,7 @@ import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLangua
 import { BatchInputBlogAuthor } from './BatchInputBlogAuthor';
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
+import { BatchResponseBlogAuthor, BatchResponseBlogAuthorStatusEnum        } from './BatchResponseBlogAuthor';
 import { BatchResponseBlogAuthorWithErrors, BatchResponseBlogAuthorWithErrorsStatusEnum          } from './BatchResponseBlogAuthorWithErrors';
 import { BlogAuthor    , BlogAuthorLanguageEnum               } from './BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from './BlogAuthorCloneRequestVNext';
@@ -54,6 +56,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "AttachToLangPrimaryRequestVNextLanguageEnum",
     "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
+    "BatchResponseBlogAuthorStatusEnum",
     "BatchResponseBlogAuthorWithErrorsStatusEnum",
     "BlogAuthorLanguageEnum",
     "UpdateLanguagesRequestVNextLanguagesEnum",
@@ -64,6 +67,7 @@ let typeMap: {[index: string]: any} = {
     "BatchInputBlogAuthor": BatchInputBlogAuthor,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
+    "BatchResponseBlogAuthor": BatchResponseBlogAuthor,
     "BatchResponseBlogAuthorWithErrors": BatchResponseBlogAuthorWithErrors,
     "BlogAuthor": BlogAuthor,
     "BlogAuthorCloneRequestVNext": BlogAuthorCloneRequestVNext,

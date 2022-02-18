@@ -11,6 +11,7 @@
  */
 
 import { ActionHookActionBody } from './ActionHookActionBody';
+import { ActionHookActionBody | IFrameActionBody } from './ActionHookActionBody | IFrameActionBody';
 import { IFrameActionBody } from './IFrameActionBody';
 import { HttpFile } from '../http/http';
 

@@ -75,7 +75,7 @@ export class ObjectAuditLogsApi {
      * Query audit logs
      * @param param the request object
      */
-    public getPage(param: AuditLogsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicAuditLog> {
+    public getPage(param: AuditLogsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicAuditLog> {
         return this.api.getPage(param.objectId, param.userId, param.after, param.before, param.sort, param.eventType, param.limit, param.objectType,  options).toPromise();
     }
 

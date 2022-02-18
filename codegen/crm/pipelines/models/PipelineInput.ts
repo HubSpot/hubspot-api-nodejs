@@ -18,10 +18,6 @@ import { HttpFile } from '../http/http';
 */
 export class PipelineInput {
     /**
-    * Pipeline stage inputs used to create the new or replacement pipeline.
-    */
-    'stages': Array<PipelineStageInput>;
-    /**
     * A unique label used to organize pipelines in HubSpot's UI
     */
     'label': string;
@@ -29,16 +25,14 @@ export class PipelineInput {
     * The order for displaying this pipeline. If two pipelines have a matching `displayOrder`, they will be sorted alphabetically by label.
     */
     'displayOrder': number;
+    /**
+    * Pipeline stage inputs used to create the new or replacement pipeline.
+    */
+    'stages': Array<PipelineStageInput>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "stages",
-            "baseName": "stages",
-            "type": "Array<PipelineStageInput>",
-            "format": ""
-        },
         {
             "name": "label",
             "baseName": "label",
@@ -50,6 +44,12 @@ export class PipelineInput {
             "baseName": "displayOrder",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "stages",
+            "baseName": "stages",
+            "type": "Array<PipelineStageInput>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

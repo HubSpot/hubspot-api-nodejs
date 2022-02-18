@@ -23,22 +23,34 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 
 export interface SettingsApiClearRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SettingsApiclear
      */
     appId: number
+    /**
+     * 
+     * @type number
+     * @memberof SettingsApiclear
+     */
+    appId2: number
 }
 
 export interface SettingsApiConfigureRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SettingsApiconfigure
      */
     appId: number
     /**
-     * Settings state to create new with or replace existing settings with.
+     * 
+     * @type number
+     * @memberof SettingsApiconfigure
+     */
+    appId2: number
+    /**
+     * 
      * @type SettingsChangeRequest
      * @memberof SettingsApiconfigure
      */
@@ -47,11 +59,17 @@ export interface SettingsApiConfigureRequest {
 
 export interface SettingsApiGetAllRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SettingsApigetAll
      */
     appId: number
+    /**
+     * 
+     * @type number
+     * @memberof SettingsApigetAll
+     */
+    appId2: number
 }
 
 export class ObjectSettingsApi {
@@ -62,30 +80,24 @@ export class ObjectSettingsApi {
     }
 
     /**
-     * Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-     * Clear webhook settings
      * @param param the request object
      */
     public clear(param: SettingsApiClearRequest, options?: Configuration): Promise<void> {
-        return this.api.clear(param.appId,  options).toPromise();
+        return this.api.clear(param.appId, param.appId2,  options).toPromise();
     }
 
     /**
-     * Used to set the webhook target URL and max concurrency limit for the given app.
-     * Configure webhook settings
      * @param param the request object
      */
     public configure(param: SettingsApiConfigureRequest, options?: Configuration): Promise<SettingsResponse> {
-        return this.api.configure(param.appId, param.settingsChangeRequest,  options).toPromise();
+        return this.api.configure(param.appId, param.appId2, param.settingsChangeRequest,  options).toPromise();
     }
 
     /**
-     * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-     * Get webhook settings
      * @param param the request object
      */
     public getAll(param: SettingsApiGetAllRequest, options?: Configuration): Promise<SettingsResponse> {
-        return this.api.getAll(param.appId,  options).toPromise();
+        return this.api.getAll(param.appId, param.appId2,  options).toPromise();
     }
 
 }
@@ -95,28 +107,40 @@ import { SubscriptionsApiRequestFactory, SubscriptionsApiResponseProcessor} from
 
 export interface SubscriptionsApiArchiveRequest {
     /**
-     * The ID of subscription to delete.
+     * 
      * @type number
      * @memberof SubscriptionsApiarchive
      */
     subscriptionId: number
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SubscriptionsApiarchive
      */
     appId: number
+    /**
+     * 
+     * @type number
+     * @memberof SubscriptionsApiarchive
+     */
+    appId2: number
 }
 
 export interface SubscriptionsApiCreateRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SubscriptionsApicreate
      */
     appId: number
     /**
-     * Details about the new subscription.
+     * 
+     * @type number
+     * @memberof SubscriptionsApicreate
+     */
+    appId2: number
+    /**
+     * 
      * @type SubscriptionCreateRequest
      * @memberof SubscriptionsApicreate
      */
@@ -125,43 +149,61 @@ export interface SubscriptionsApiCreateRequest {
 
 export interface SubscriptionsApiGetAllRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SubscriptionsApigetAll
      */
     appId: number
+    /**
+     * 
+     * @type number
+     * @memberof SubscriptionsApigetAll
+     */
+    appId2: number
 }
 
 export interface SubscriptionsApiGetByIdRequest {
     /**
-     * The ID of the target app.
+     * 
+     * @type number
+     * @memberof SubscriptionsApigetById
+     */
+    subscriptionId: number
+    /**
+     * 
      * @type number
      * @memberof SubscriptionsApigetById
      */
     appId: number
     /**
-     * The ID of the target subscription.
+     * 
      * @type number
      * @memberof SubscriptionsApigetById
      */
-    subscriptionId: number
+    appId2: number
 }
 
 export interface SubscriptionsApiUpdateRequest {
     /**
-     * The ID of the subscription to update.
+     * 
      * @type number
      * @memberof SubscriptionsApiupdate
      */
     subscriptionId: number
     /**
-     * The ID of the target app.
+     * 
      * @type number
      * @memberof SubscriptionsApiupdate
      */
     appId: number
     /**
-     * Updated details for the subscription.
+     * 
+     * @type number
+     * @memberof SubscriptionsApiupdate
+     */
+    appId2: number
+    /**
+     * 
      * @type SubscriptionPatchRequest
      * @memberof SubscriptionsApiupdate
      */
@@ -170,13 +212,19 @@ export interface SubscriptionsApiUpdateRequest {
 
 export interface SubscriptionsApiUpdateBatchRequest {
     /**
-     * The app ID of the target app.
+     * 
      * @type number
      * @memberof SubscriptionsApiupdateBatch
      */
     appId: number
     /**
-     * Updated details for the specified subscriptions.
+     * 
+     * @type number
+     * @memberof SubscriptionsApiupdateBatch
+     */
+    appId2: number
+    /**
+     * 
      * @type BatchInputSubscriptionBatchUpdateRequest
      * @memberof SubscriptionsApiupdateBatch
      */
@@ -191,57 +239,45 @@ export class ObjectSubscriptionsApi {
     }
 
     /**
-     * Permanently deletes a subscription. This cannot be undone.
-     * Delete a subscription
      * @param param the request object
      */
     public archive(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.subscriptionId, param.appId,  options).toPromise();
+        return this.api.archive(param.subscriptionId, param.appId, param.appId2,  options).toPromise();
     }
 
     /**
-     * Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-     * Subscribe to an event
      * @param param the request object
      */
     public create(param: SubscriptionsApiCreateRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.create(param.appId, param.subscriptionCreateRequest,  options).toPromise();
+        return this.api.create(param.appId, param.appId2, param.subscriptionCreateRequest,  options).toPromise();
     }
 
     /**
-     * Returns full details for all existing subscriptions for the given app.
-     * Get subscription details
      * @param param the request object
      */
     public getAll(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<SubscriptionListResponse> {
-        return this.api.getAll(param.appId,  options).toPromise();
+        return this.api.getAll(param.appId, param.appId2,  options).toPromise();
     }
 
     /**
-     * Returns details about a subscription.
-     * Get subscription
      * @param param the request object
      */
     public getById(param: SubscriptionsApiGetByIdRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.getById(param.appId, param.subscriptionId,  options).toPromise();
+        return this.api.getById(param.subscriptionId, param.appId, param.appId2,  options).toPromise();
     }
 
     /**
-     * Updates the details for an existing subscription.
-     * Update a subscription
      * @param param the request object
      */
     public update(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.update(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
+        return this.api.update(param.subscriptionId, param.appId, param.appId2, param.subscriptionPatchRequest,  options).toPromise();
     }
 
     /**
-     * Activates or deactivates target app subscriptions.
-     * Batch update subscriptions
      * @param param the request object
      */
     public updateBatch(param: SubscriptionsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        return this.api.updateBatch(param.appId, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
+        return this.api.updateBatch(param.appId, param.appId2, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
     }
 
 }
