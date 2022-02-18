@@ -26,6 +26,7 @@ export * from './SimplePublicObjectId';
 export * from './SimplePublicObjectInput';
 export * from './SimplePublicObjectWithAssociations';
 export * from './StandardError';
+export * from './ValueWithTimestamp';
 
 import { AssociatedId } from './AssociatedId';
 import { BatchInputSimplePublicObjectBatchInput } from './BatchInputSimplePublicObjectBatchInput';
@@ -55,6 +56,7 @@ import { SimplePublicObjectId } from './SimplePublicObjectId';
 import { SimplePublicObjectInput } from './SimplePublicObjectInput';
 import { SimplePublicObjectWithAssociations } from './SimplePublicObjectWithAssociations';
 import { StandardError } from './StandardError';
+import { ValueWithTimestamp } from './ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -111,6 +113,7 @@ let typeMap: {[index: string]: any} = {
     "SimplePublicObjectInput": SimplePublicObjectInput,
     "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
     "StandardError": StandardError,
+    "ValueWithTimestamp": ValueWithTimestamp,
 }
 
 export class ObjectSerializer {

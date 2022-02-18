@@ -10,11 +10,13 @@
  * Do not edit the class manually.
  */
 
+import { ValueWithTimestamp } from './ValueWithTimestamp';
 import { HttpFile } from '../http/http';
 
 export class SimplePublicObject {
     'id': string;
     'properties': { [key: string]: string; };
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'createdAt': Date;
     'updatedAt': Date;
     'archived'?: boolean;
@@ -33,6 +35,12 @@ export class SimplePublicObject {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
         },
         {

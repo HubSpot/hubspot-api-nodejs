@@ -8,6 +8,7 @@ import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
@@ -15,6 +16,7 @@ import { CollectionResponseWithTotalVersionBlogPost } from '../models/Collection
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
+import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -60,8 +62,8 @@ export class PromiseBlogPostsApi {
     }
 
     /**
-     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
-     * Archive a batch of Blog Posts
+     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to true.
+     * Delete a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
      */
     public archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
@@ -94,7 +96,7 @@ export class PromiseBlogPostsApi {
      * Create a batch of Blog Posts
      * @param batchInputBlogPost The JSON array of new Blog Posts to create.
      */
-    public createBatch(batchInputBlogPost: BatchInputBlogPost, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public createBatch(batchInputBlogPost: BatchInputBlogPost, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         const result = this.api.createBatch(batchInputBlogPost, _options);
         return result.toPromise();
     }
@@ -103,7 +105,7 @@ export class PromiseBlogPostsApi {
      * Retrieve the Blog Post object identified by the id in the path.
      * Retrieve a Blog Post
      * @param objectId The Blog Post id.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public getById(objectId: string, archived?: boolean, _options?: Configuration): Promise<BlogPost> {
         const result = this.api.getById(objectId, archived, _options);
@@ -132,7 +134,7 @@ export class PromiseBlogPostsApi {
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 20.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
         const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
@@ -227,9 +229,9 @@ export class PromiseBlogPostsApi {
      * Retrieve the Blog Post objects identified in the request body.
      * Retrieve a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         const result = this.api.readBatch(batchInputString, archived, _options);
         return result.toPromise();
     }
@@ -281,7 +283,7 @@ export class PromiseBlogPostsApi {
      * Update a Blog Post
      * @param objectId The Blog Post id.
      * @param blogPost The JSON representation of the updated Blog Post.
-     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public update(objectId: string, blogPost: BlogPost, archived?: boolean, _options?: Configuration): Promise<BlogPost> {
         const result = this.api.update(objectId, blogPost, archived, _options);
@@ -292,9 +294,9 @@ export class PromiseBlogPostsApi {
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
-     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
-    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         const result = this.api.updateBatch(batchInputJsonNode, archived, _options);
         return result.toPromise();
     }

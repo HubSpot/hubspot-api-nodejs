@@ -6,6 +6,7 @@ interface IAPIType<CollectionType, ConfigurationType> {
     limit?: number,
     after?: string,
     properties?: string[],
+    propertiesWithHistory?: string[],
     associations?: string[],
     archived?: boolean,
     _options?: ConfigurationType,
@@ -20,6 +21,7 @@ export async function getAll<ReturnType, ConfigurationType>(
   limit?: number,
   after?: string,
   properties?: string[],
+  propertiesWithHistory?: string[],
   associations?: string[],
   archived?: boolean,
 ): Promise<ReturnType[]> {
@@ -27,7 +29,14 @@ export async function getAll<ReturnType, ConfigurationType>(
   let afterInternal = after
   let result: ReturnType[] = []
   do {
-    const response = await api.getPage(limitInternal, afterInternal, properties, associations, archived)
+    const response = await api.getPage(
+      limitInternal,
+      afterInternal,
+      properties,
+      propertiesWithHistory,
+      associations,
+      archived,
+    )
     result = result.concat(response.results)
     afterInternal = _.get(response, 'paging.next.after')
     console.log(afterInternal)

@@ -29,6 +29,7 @@ import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { StandardError } from '../models/StandardError';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 import { ObservableAssociationsApi } from "./ObservableAPI";
 import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
@@ -94,6 +95,12 @@ export interface BasicApiGetByIdRequest {
      */
     properties?: Array<string>
     /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetById
+     */
+    propertiesWithHistory?: Array<string>
+    /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
      * @memberof BasicApigetById
@@ -133,6 +140,12 @@ export interface BasicApiGetPageRequest {
      */
     properties?: Array<string>
     /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
+     */
+    propertiesWithHistory?: Array<string>
+    /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
      * @memberof BasicApigetPage
@@ -159,7 +172,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.feedbackSubmissionId, param.properties, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.feedbackSubmissionId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -168,7 +181,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.associations, param.archived,  options).toPromise();
+        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
     }
 
 }

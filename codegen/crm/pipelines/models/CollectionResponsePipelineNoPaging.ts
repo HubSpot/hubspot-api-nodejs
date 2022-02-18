@@ -10,13 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { PipelineStage } from './PipelineStage';
+import { Pipeline } from './Pipeline';
 import { HttpFile } from '../http/http';
 
-export class CollectionResponsePipelineStage {
-    'results': Array<PipelineStage>;
-    'paging'?: Paging;
+export class CollectionResponsePipelineNoPaging {
+    'results': Array<Pipeline>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,18 +22,12 @@ export class CollectionResponsePipelineStage {
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<PipelineStage>",
-            "format": ""
-        },
-        {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "Paging",
+            "type": "Array<Pipeline>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponsePipelineStage.attributeTypeMap;
+        return CollectionResponsePipelineNoPaging.attributeTypeMap;
     }
 
     public constructor() {

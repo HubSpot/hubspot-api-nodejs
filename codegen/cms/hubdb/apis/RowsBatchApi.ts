@@ -68,7 +68,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -124,7 +124,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -180,7 +180,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -236,7 +236,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -292,7 +292,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -348,7 +348,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -404,7 +404,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

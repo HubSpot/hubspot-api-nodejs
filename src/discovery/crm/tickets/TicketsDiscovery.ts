@@ -40,6 +40,7 @@ export class TicketsDiscovery {
     limit?: number,
     after?: string,
     properties?: string[],
+    propertiesWithHistory?: string[],
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
@@ -48,6 +49,7 @@ export class TicketsDiscovery {
       limit,
       after,
       properties,
+      propertiesWithHistory,
       associations,
       archived,
     )

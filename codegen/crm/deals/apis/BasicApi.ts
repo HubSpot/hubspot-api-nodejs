@@ -53,11 +53,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
 
         return requestContext;
     }
@@ -106,11 +101,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
 
         return requestContext;
     }
@@ -120,17 +110,19 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Read
      * @param dealId 
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async getById(dealId: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getById(dealId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'dealId' is not null or undefined
         if (dealId === null || dealId === undefined) {
             throw new RequiredError("BasicApi", "getById", "dealId");
         }
+
 
 
 
@@ -148,6 +140,11 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (properties !== undefined) {
             requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (propertiesWithHistory !== undefined) {
+            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
         }
 
         // Query Params
@@ -177,11 +174,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
 
         return requestContext;
     }
@@ -192,11 +184,13 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      */
-    public async getPage(limit?: number, after?: string, properties?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -226,6 +220,11 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
+        if (propertiesWithHistory !== undefined) {
+            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+        }
+
+        // Query Params
         if (associations !== undefined) {
             requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
         }
@@ -244,11 +243,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -312,11 +306,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

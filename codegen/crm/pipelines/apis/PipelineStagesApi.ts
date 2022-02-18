@@ -9,7 +9,7 @@ import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
 
 
-import { CollectionResponsePipelineStage } from '../models/CollectionResponsePipelineStage';
+import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
@@ -65,7 +65,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -80,7 +80,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param pipelineStageInput 
      */
-    public async create(objectType: string, pipelineId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Promise<RequestContext> {
+    public async create(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -94,6 +94,11 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("PipelineStagesApi", "create", "pipelineId");
         }
 
+
+        // verify required parameter 'pipelineStageInput' is not null or undefined
+        if (pipelineStageInput === null || pipelineStageInput === undefined) {
+            throw new RequiredError("PipelineStagesApi", "create", "pipelineStageInput");
+        }
 
 
         // Path Params
@@ -124,7 +129,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -177,7 +182,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -238,7 +243,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -254,7 +259,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * @param stageId 
      * @param pipelineStageInput 
      */
-    public async replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Promise<RequestContext> {
+    public async replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -274,6 +279,11 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("PipelineStagesApi", "replace", "stageId");
         }
 
+
+        // verify required parameter 'pipelineStageInput' is not null or undefined
+        if (pipelineStageInput === null || pipelineStageInput === undefined) {
+            throw new RequiredError("PipelineStagesApi", "replace", "pipelineStageInput");
+        }
 
 
         // Path Params
@@ -305,7 +315,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -319,10 +329,10 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelineStagePatchInput 
+     * @param archived Whether to return only results that have been archived.
      */
-    public async update(objectType: string, pipelineId: string, stageId: string, archived?: boolean, pipelineStagePatchInput?: PipelineStagePatchInput, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -342,6 +352,11 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("PipelineStagesApi", "update", "stageId");
         }
 
+
+        // verify required parameter 'pipelineStagePatchInput' is not null or undefined
+        if (pipelineStagePatchInput === null || pipelineStagePatchInput === undefined) {
+            throw new RequiredError("PipelineStagesApi", "update", "pipelineStagePatchInput");
+        }
 
 
 
@@ -379,7 +394,7 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -466,13 +481,13 @@ export class PipelineStagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePipelineStage > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponsePipelineStageNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponsePipelineStage = ObjectSerializer.deserialize(
+            const body: CollectionResponsePipelineStageNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePipelineStage", ""
-            ) as CollectionResponsePipelineStage;
+                "CollectionResponsePipelineStageNoPaging", ""
+            ) as CollectionResponsePipelineStageNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -485,10 +500,10 @@ export class PipelineStagesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponsePipelineStage = ObjectSerializer.deserialize(
+            const body: CollectionResponsePipelineStageNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePipelineStage", ""
-            ) as CollectionResponsePipelineStage;
+                "CollectionResponsePipelineStageNoPaging", ""
+            ) as CollectionResponsePipelineStageNoPaging;
             return body;
         }
 
