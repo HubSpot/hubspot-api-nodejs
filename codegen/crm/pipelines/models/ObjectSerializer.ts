@@ -1,28 +1,28 @@
-export * from './CollectionResponsePipeline';
-export * from './CollectionResponsePipelineStage';
+export * from './CollectionResponsePipelineNoPaging';
+export * from './CollectionResponsePipelineStageNoPaging';
+export * from './CollectionResponsePublicAuditInfoNoPaging';
 export * from './ErrorDetail';
 export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
 export * from './Pipeline';
 export * from './PipelineInput';
 export * from './PipelinePatchInput';
 export * from './PipelineStage';
 export * from './PipelineStageInput';
 export * from './PipelineStagePatchInput';
+export * from './PublicAuditInfo';
 
-import { CollectionResponsePipeline } from './CollectionResponsePipeline';
-import { CollectionResponsePipelineStage } from './CollectionResponsePipelineStage';
+import { CollectionResponsePipelineNoPaging } from './CollectionResponsePipelineNoPaging';
+import { CollectionResponsePipelineStageNoPaging } from './CollectionResponsePipelineStageNoPaging';
+import { CollectionResponsePublicAuditInfoNoPaging } from './CollectionResponsePublicAuditInfoNoPaging';
 import { ErrorDetail } from './ErrorDetail';
 import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
 import { Pipeline } from './Pipeline';
 import { PipelineInput } from './PipelineInput';
 import { PipelinePatchInput } from './PipelinePatchInput';
 import { PipelineStage } from './PipelineStage';
 import { PipelineStageInput } from './PipelineStageInput';
 import { PipelineStagePatchInput } from './PipelineStagePatchInput';
+import { PublicAuditInfo } from './PublicAuditInfo';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -47,18 +47,18 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponsePipeline": CollectionResponsePipeline,
-    "CollectionResponsePipelineStage": CollectionResponsePipelineStage,
+    "CollectionResponsePipelineNoPaging": CollectionResponsePipelineNoPaging,
+    "CollectionResponsePipelineStageNoPaging": CollectionResponsePipelineStageNoPaging,
+    "CollectionResponsePublicAuditInfoNoPaging": CollectionResponsePublicAuditInfoNoPaging,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
-    "NextPage": NextPage,
-    "Paging": Paging,
     "Pipeline": Pipeline,
     "PipelineInput": PipelineInput,
     "PipelinePatchInput": PipelinePatchInput,
     "PipelineStage": PipelineStage,
     "PipelineStageInput": PipelineStageInput,
     "PipelineStagePatchInput": PipelineStagePatchInput,
+    "PublicAuditInfo": PublicAuditInfo,
 }
 
 export class ObjectSerializer {

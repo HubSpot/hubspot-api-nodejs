@@ -2,6 +2,7 @@ export * from './AttachToLangPrimaryRequestVNext';
 export * from './BatchInputJsonNode';
 export * from './BatchInputString';
 export * from './BatchInputTag';
+export * from './BatchResponseTag';
 export * from './BatchResponseTagWithErrors';
 export * from './CollectionResponseWithTotalTagForwardPaging';
 export * from './DetachFromLangGroupRequestVNext';
@@ -19,6 +20,7 @@ import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLangua
 import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchInputTag } from './BatchInputTag';
+import { BatchResponseTag, BatchResponseTagStatusEnum        } from './BatchResponseTag';
 import { BatchResponseTagWithErrors, BatchResponseTagWithErrorsStatusEnum          } from './BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from './CollectionResponseWithTotalTagForwardPaging';
 import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
@@ -54,6 +56,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "AttachToLangPrimaryRequestVNextLanguageEnum",
     "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
+    "BatchResponseTagStatusEnum",
     "BatchResponseTagWithErrorsStatusEnum",
     "TagLanguageEnum",
     "UpdateLanguagesRequestVNextLanguagesEnum",
@@ -64,6 +67,7 @@ let typeMap: {[index: string]: any} = {
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
     "BatchInputTag": BatchInputTag,
+    "BatchResponseTag": BatchResponseTag,
     "BatchResponseTagWithErrors": BatchResponseTagWithErrors,
     "CollectionResponseWithTotalTagForwardPaging": CollectionResponseWithTotalTagForwardPaging,
     "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,

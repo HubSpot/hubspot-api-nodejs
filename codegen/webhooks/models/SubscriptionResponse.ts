@@ -90,5 +90,5 @@ export class SubscriptionResponse {
 }
 
 
-export type SubscriptionResponseEventTypeEnum = "contact.propertyChange" | "company.propertyChange" | "deal.propertyChange" | "contact.creation" | "contact.deletion" | "contact.privacyDeletion" | "company.creation" | "company.deletion" | "deal.creation" | "deal.deletion" ;
+export type SubscriptionResponseEventTypeEnum = "contact.propertyChange" | "company.propertyChange" | "deal.propertyChange" | "ticket.propertyChange" | "product.propertyChange" | "line_item.propertyChange" | "contact.creation" | "contact.deletion" | "contact.privacyDeletion" | "company.creation" | "company.deletion" | "deal.creation" | "deal.deletion" | "ticket.creation" | "ticket.deletion" | "product.creation" | "product.deletion" | "line_item.creation" | "line_item.deletion" | "conversation.creation" | "conversation.deletion" | "conversation.newMessage" | "conversation.privacyDeletion" | "conversation.propertyChange" ;
 

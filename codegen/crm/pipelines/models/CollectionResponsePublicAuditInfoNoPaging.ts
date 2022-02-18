@@ -10,30 +10,24 @@
  * Do not edit the class manually.
  */
 
+import { PublicAuditInfo } from './PublicAuditInfo';
 import { HttpFile } from '../http/http';
 
-export class NextPage {
-    'after': string;
-    'link'?: string;
+export class CollectionResponsePublicAuditInfoNoPaging {
+    'results': Array<PublicAuditInfo>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "after",
-            "baseName": "after",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "link",
-            "baseName": "link",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAuditInfo>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return CollectionResponsePublicAuditInfoNoPaging.attributeTypeMap;
     }
 
     public constructor() {

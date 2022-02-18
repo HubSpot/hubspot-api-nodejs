@@ -30,6 +30,7 @@ import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { StandardError } from '../models/StandardError';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 import { ObservableAssociationsApi } from "./ObservableAPI";
 import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
@@ -183,6 +184,12 @@ export interface BasicApiGetByIdRequest {
      */
     properties?: Array<string>
     /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetById
+     */
+    propertiesWithHistory?: Array<string>
+    /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
      * @memberof BasicApigetById
@@ -194,12 +201,6 @@ export interface BasicApiGetByIdRequest {
      * @memberof BasicApigetById
      */
     archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object type
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
 }
 
 export interface BasicApiGetPageRequest {
@@ -221,6 +222,12 @@ export interface BasicApiGetPageRequest {
      * @memberof BasicApigetPage
      */
     properties?: Array<string>
+    /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetPage
+     */
+    propertiesWithHistory?: Array<string>
     /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
@@ -248,12 +255,6 @@ export interface BasicApiUpdateRequest {
      * @memberof BasicApiupdate
      */
     simplePublicObjectInput: SimplePublicObjectInput
-    /**
-     * The name of a property whose values are unique for this object type
-     * @type string
-     * @memberof BasicApiupdate
-     */
-    idProperty?: string
 }
 
 export class ObjectBasicApi {
@@ -282,12 +283,12 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Read an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID.  Control what is returned via the `properties` query param.
      * Read
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.contactId, param.properties, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.contactId, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
     }
 
     /**
@@ -296,16 +297,16 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.associations, param.archived,  options).toPromise();
+        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
     }
 
     /**
-     * Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param param the request object
      */
     public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.update(param.contactId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+        return this.api.update(param.contactId, param.simplePublicObjectInput,  options).toPromise();
     }
 
 }

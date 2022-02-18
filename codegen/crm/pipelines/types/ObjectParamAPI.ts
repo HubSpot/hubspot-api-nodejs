@@ -2,18 +2,90 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponsePipeline } from '../models/CollectionResponsePipeline';
-import { CollectionResponsePipelineStage } from '../models/CollectionResponsePipelineStage';
+import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
+import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
+import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionResponsePublicAuditInfoNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PublicAuditInfo } from '../models/PublicAuditInfo';
+
+import { ObservablePipelineAuditsApi } from "./ObservableAPI";
+import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";
+
+export interface PipelineAuditsApiGetCrmV3PipelinesObjectTypePipelineIdAuditRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PipelineAuditsApigetCrmV3PipelinesObjectTypePipelineIdAudit
+     */
+    objectType: string
+    /**
+     * 
+     * @type string
+     * @memberof PipelineAuditsApigetCrmV3PipelinesObjectTypePipelineIdAudit
+     */
+    pipelineId: string
+}
+
+export class ObjectPipelineAuditsApi {
+    private api: ObservablePipelineAuditsApi
+
+    public constructor(configuration: Configuration, requestFactory?: PipelineAuditsApiRequestFactory, responseProcessor?: PipelineAuditsApiResponseProcessor) {
+        this.api = new ObservablePipelineAuditsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
+     * Return an audit of all changes to the pipeline
+     * @param param the request object
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdAudit(param: PipelineAuditsApiGetCrmV3PipelinesObjectTypePipelineIdAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.api.getCrmV3PipelinesObjectTypePipelineIdAudit(param.objectType, param.pipelineId,  options).toPromise();
+    }
+
+}
+
+import { ObservablePipelineStageAuditsApi } from "./ObservableAPI";
+import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponseProcessor} from "../apis/PipelineStageAuditsApi";
+
+export interface PipelineStageAuditsApiGetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAuditRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PipelineStageAuditsApigetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit
+     */
+    objectType: string
+    /**
+     * 
+     * @type string
+     * @memberof PipelineStageAuditsApigetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit
+     */
+    stageId: string
+}
+
+export class ObjectPipelineStageAuditsApi {
+    private api: ObservablePipelineStageAuditsApi
+
+    public constructor(configuration: Configuration, requestFactory?: PipelineStageAuditsApiRequestFactory, responseProcessor?: PipelineStageAuditsApiResponseProcessor) {
+        this.api = new ObservablePipelineStageAuditsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
+     * Return an audit of all changes to the pipeline stage
+     * @param param the request object
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(param: PipelineStageAuditsApiGetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.api.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(param.objectType, param.stageId,  options).toPromise();
+    }
+
+}
 
 import { ObservablePipelineStagesApi } from "./ObservableAPI";
 import { PipelineStagesApiRequestFactory, PipelineStagesApiResponseProcessor} from "../apis/PipelineStagesApi";
@@ -57,7 +129,7 @@ export interface PipelineStagesApiCreateRequest {
      * @type PipelineStageInput
      * @memberof PipelineStagesApicreate
      */
-    pipelineStageInput?: PipelineStageInput
+    pipelineStageInput: PipelineStageInput
 }
 
 export interface PipelineStagesApiGetAllRequest {
@@ -132,7 +204,7 @@ export interface PipelineStagesApiReplaceRequest {
      * @type PipelineStageInput
      * @memberof PipelineStagesApireplace
      */
-    pipelineStageInput?: PipelineStageInput
+    pipelineStageInput: PipelineStageInput
 }
 
 export interface PipelineStagesApiUpdateRequest {
@@ -155,17 +227,17 @@ export interface PipelineStagesApiUpdateRequest {
      */
     stageId: string
     /**
+     * 
+     * @type PipelineStagePatchInput
+     * @memberof PipelineStagesApiupdate
+     */
+    pipelineStagePatchInput: PipelineStagePatchInput
+    /**
      * Whether to return only results that have been archived.
      * @type boolean
      * @memberof PipelineStagesApiupdate
      */
     archived?: boolean
-    /**
-     * 
-     * @type PipelineStagePatchInput
-     * @memberof PipelineStagesApiupdate
-     */
-    pipelineStagePatchInput?: PipelineStagePatchInput
 }
 
 export class ObjectPipelineStagesApi {
@@ -198,7 +270,7 @@ export class ObjectPipelineStagesApi {
      * Return all stages of a pipeline
      * @param param the request object
      */
-    public getAll(param: PipelineStagesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineStage> {
+    public getAll(param: PipelineStagesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
         return this.api.getAll(param.objectType, param.pipelineId, param.archived,  options).toPromise();
     }
 
@@ -226,7 +298,7 @@ export class ObjectPipelineStagesApi {
      * @param param the request object
      */
     public update(param: PipelineStagesApiUpdateRequest, options?: Configuration): Promise<PipelineStage> {
-        return this.api.update(param.objectType, param.pipelineId, param.stageId, param.archived, param.pipelineStagePatchInput,  options).toPromise();
+        return this.api.update(param.objectType, param.pipelineId, param.stageId, param.pipelineStagePatchInput, param.archived,  options).toPromise();
     }
 
 }
@@ -247,6 +319,12 @@ export interface PipelinesApiArchiveRequest {
      * @memberof PipelinesApiarchive
      */
     pipelineId: string
+    /**
+     * 
+     * @type boolean
+     * @memberof PipelinesApiarchive
+     */
+    validateReferencesBeforeDelete?: boolean
 }
 
 export interface PipelinesApiCreateRequest {
@@ -261,7 +339,7 @@ export interface PipelinesApiCreateRequest {
      * @type PipelineInput
      * @memberof PipelinesApicreate
      */
-    pipelineInput?: PipelineInput
+    pipelineInput: PipelineInput
 }
 
 export interface PipelinesApiGetAllRequest {
@@ -318,7 +396,13 @@ export interface PipelinesApiReplaceRequest {
      * @type PipelineInput
      * @memberof PipelinesApireplace
      */
-    pipelineInput?: PipelineInput
+    pipelineInput: PipelineInput
+    /**
+     * 
+     * @type boolean
+     * @memberof PipelinesApireplace
+     */
+    validateReferencesBeforeDelete?: boolean
 }
 
 export interface PipelinesApiUpdateRequest {
@@ -335,6 +419,12 @@ export interface PipelinesApiUpdateRequest {
      */
     pipelineId: string
     /**
+     * 
+     * @type PipelinePatchInput
+     * @memberof PipelinesApiupdate
+     */
+    pipelinePatchInput: PipelinePatchInput
+    /**
      * Whether to return only results that have been archived.
      * @type boolean
      * @memberof PipelinesApiupdate
@@ -342,10 +432,10 @@ export interface PipelinesApiUpdateRequest {
     archived?: boolean
     /**
      * 
-     * @type PipelinePatchInput
+     * @type boolean
      * @memberof PipelinesApiupdate
      */
-    pipelinePatchInput?: PipelinePatchInput
+    validateReferencesBeforeDelete?: boolean
 }
 
 export class ObjectPipelinesApi {
@@ -361,7 +451,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public archive(param: PipelinesApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.objectType, param.pipelineId,  options).toPromise();
+        return this.api.archive(param.objectType, param.pipelineId, param.validateReferencesBeforeDelete,  options).toPromise();
     }
 
     /**
@@ -378,7 +468,7 @@ export class ObjectPipelinesApi {
      * Retrieve all pipelines
      * @param param the request object
      */
-    public getAll(param: PipelinesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipeline> {
+    public getAll(param: PipelinesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
         return this.api.getAll(param.objectType, param.archived,  options).toPromise();
     }
 
@@ -397,7 +487,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public replace(param: PipelinesApiReplaceRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.replace(param.objectType, param.pipelineId, param.pipelineInput,  options).toPromise();
+        return this.api.replace(param.objectType, param.pipelineId, param.pipelineInput, param.validateReferencesBeforeDelete,  options).toPromise();
     }
 
     /**
@@ -406,7 +496,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public update(param: PipelinesApiUpdateRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.update(param.objectType, param.pipelineId, param.archived, param.pipelinePatchInput,  options).toPromise();
+        return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.archived, param.validateReferencesBeforeDelete,  options).toPromise();
     }
 
 }

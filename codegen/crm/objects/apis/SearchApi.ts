@@ -67,11 +67,6 @@ export class SearchApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
 
         return requestContext;
     }

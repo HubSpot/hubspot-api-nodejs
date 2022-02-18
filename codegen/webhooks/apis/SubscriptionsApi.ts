@@ -23,12 +23,11 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Permanently deletes a subscription. This cannot be undone.
-     * Delete a subscription
-     * @param subscriptionId The ID of subscription to delete.
-     * @param appId The ID of the target app.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public async archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'subscriptionId' is not null or undefined
@@ -43,10 +42,17 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "archive", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -55,7 +61,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -64,17 +70,22 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-     * Subscribe to an event
-     * @param appId The ID of the target app.
-     * @param subscriptionCreateRequest Details about the new subscription.
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionCreateRequest 
      */
-    public async create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async create(appId: number, appId2: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new RequiredError("SubscriptionsApi", "create", "appId");
+        }
+
+
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "create", "appId2");
         }
 
 
@@ -86,7 +97,8 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -106,7 +118,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -115,11 +127,10 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns full details for all existing subscriptions for the given app.
-     * Get subscription details
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -128,9 +139,16 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getAll", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -139,7 +157,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -148,19 +166,12 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns details about a subscription.
-     * Get subscription
-     * @param appId The ID of the target app.
-     * @param subscriptionId The ID of the target subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public async getById(appId: number, subscriptionId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getById(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("SubscriptionsApi", "getById", "appId");
-        }
-
 
         // verify required parameter 'subscriptionId' is not null or undefined
         if (subscriptionId === null || subscriptionId === undefined) {
@@ -168,10 +179,23 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getById", "appId");
+        }
+
+
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "getById", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
+            .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
-            .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -180,7 +204,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -189,13 +213,12 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates the details for an existing subscription.
-     * Update a subscription
-     * @param subscriptionId The ID of the subscription to update.
-     * @param appId The ID of the target app.
-     * @param subscriptionPatchRequest Updated details for the subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionPatchRequest 
      */
-    public async update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<RequestContext> {
+    public async update(subscriptionId: number, appId: number, appId2: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'subscriptionId' is not null or undefined
@@ -210,6 +233,12 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "update", "appId2");
+        }
+
+
         // verify required parameter 'subscriptionPatchRequest' is not null or undefined
         if (subscriptionPatchRequest === null || subscriptionPatchRequest === undefined) {
             throw new RequiredError("SubscriptionsApi", "update", "subscriptionPatchRequest");
@@ -219,7 +248,8 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions/{subscriptionId}'
             .replace('{' + 'subscriptionId' + '}', encodeURIComponent(String(subscriptionId)))
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
@@ -239,7 +269,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -248,17 +278,22 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Activates or deactivates target app subscriptions.
-     * Batch update subscriptions
-     * @param appId The app ID of the target app.
-     * @param batchInputSubscriptionBatchUpdateRequest Updated details for the specified subscriptions.
+     * @param appId 
+     * @param appId2 
+     * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public async updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateBatch(appId: number, appId2: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new RequiredError("SubscriptionsApi", "updateBatch", "appId");
+        }
+
+
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SubscriptionsApi", "updateBatch", "appId2");
         }
 
 
@@ -270,7 +305,8 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/subscriptions/batch/update'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -290,7 +326,7 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

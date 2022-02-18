@@ -6,6 +6,7 @@ import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRe
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogAuthor } from '../models/BatchResponseBlogAuthor';
 import { BatchResponseBlogAuthorWithErrors } from '../models/BatchResponseBlogAuthorWithErrors';
 import { BlogAuthor } from '../models/BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
@@ -72,7 +73,7 @@ export interface BlogAuthorsApiGetByIdRequest {
      */
     objectId: string
     /**
-     * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogAuthorsApigetById
      */
@@ -135,7 +136,7 @@ export interface BlogAuthorsApiGetPageRequest {
      */
     limit?: number
     /**
-     * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogAuthorsApigetPage
      */
@@ -195,7 +196,7 @@ export interface BlogAuthorsApiReadBatchRequest {
      */
     batchInputString: BatchInputString
     /**
-     * Specifies whether to return archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogAuthorsApireadBatch
      */
@@ -216,7 +217,7 @@ export interface BlogAuthorsApiUpdateRequest {
      */
     blogAuthor: BlogAuthor
     /**
-     * Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogAuthorsApiupdate
      */
@@ -231,7 +232,7 @@ export interface BlogAuthorsApiUpdateBatchRequest {
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
-     * Specifies whether to update archived Blog Authors. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogAuthorsApiupdateBatch
      */
@@ -255,8 +256,8 @@ export class ObjectBlogAuthorsApi {
     }
 
     /**
-     * Delete the Blog Author objects identified in the request body. Note: This is not the same as the in-app `archive` function.
-     * Archive a batch of Blog Authors
+     * Delete the Blog Author objects identified in the request body.
+     * Delete a batch of Blog Authors
      * @param param the request object
      */
     public archiveBatch(param: BlogAuthorsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
@@ -277,7 +278,7 @@ export class ObjectBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param param the request object
      */
-    public createBatch(param: BlogAuthorsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public createBatch(param: BlogAuthorsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.createBatch(param.batchInputBlogAuthor,  options).toPromise();
     }
 
@@ -349,7 +350,7 @@ export class ObjectBlogAuthorsApi {
      * Retrieve a batch of Blog Authors
      * @param param the request object
      */
-    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -367,7 +368,7 @@ export class ObjectBlogAuthorsApi {
      * Update a batch of Blog Authors
      * @param param the request object
      */
-    public updateBatch(param: BlogAuthorsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthorWithErrors | any> {
+    public updateBatch(param: BlogAuthorsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 

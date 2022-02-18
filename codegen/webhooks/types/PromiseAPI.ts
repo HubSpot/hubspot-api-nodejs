@@ -32,33 +32,30 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-     * Clear webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public clear(appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.clear(appId, _options);
+    public clear(appId: number, appId2: number, _options?: Configuration): Promise<void> {
+        const result = this.api.clear(appId, appId2, _options);
         return result.toPromise();
     }
 
     /**
-     * Used to set the webhook target URL and max concurrency limit for the given app.
-     * Configure webhook settings
-     * @param appId The ID of the target app.
-     * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
+     * @param appId 
+     * @param appId2 
+     * @param settingsChangeRequest 
      */
-    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.configure(appId, settingsChangeRequest, _options);
+    public configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
+        const result = this.api.configure(appId, appId2, settingsChangeRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-     * Get webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public getAll(appId: number, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, appId2: number, _options?: Configuration): Promise<SettingsResponse> {
+        const result = this.api.getAll(appId, appId2, _options);
         return result.toPromise();
     }
 
@@ -82,68 +79,62 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * Permanently deletes a subscription. This cannot be undone.
-     * Delete a subscription
-     * @param subscriptionId The ID of subscription to delete.
-     * @param appId The ID of the target app.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(subscriptionId, appId, _options);
+    public archive(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(subscriptionId, appId, appId2, _options);
         return result.toPromise();
     }
 
     /**
-     * Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-     * Subscribe to an event
-     * @param appId The ID of the target app.
-     * @param subscriptionCreateRequest Details about the new subscription.
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionCreateRequest 
      */
-    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.create(appId, subscriptionCreateRequest, _options);
+    public create(appId: number, appId2: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.create(appId, appId2, subscriptionCreateRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns full details for all existing subscriptions for the given app.
-     * Get subscription details
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public getAll(appId: number, _options?: Configuration): Promise<SubscriptionListResponse> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, appId2: number, _options?: Configuration): Promise<SubscriptionListResponse> {
+        const result = this.api.getAll(appId, appId2, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns details about a subscription.
-     * Get subscription
-     * @param appId The ID of the target app.
-     * @param subscriptionId The ID of the target subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public getById(appId: number, subscriptionId: number, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.getById(appId, subscriptionId, _options);
+    public getById(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.getById(subscriptionId, appId, appId2, _options);
         return result.toPromise();
     }
 
     /**
-     * Updates the details for an existing subscription.
-     * Update a subscription
-     * @param subscriptionId The ID of the subscription to update.
-     * @param appId The ID of the target app.
-     * @param subscriptionPatchRequest Updated details for the subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionPatchRequest 
      */
-    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.update(subscriptionId, appId, subscriptionPatchRequest, _options);
+    public update(subscriptionId: number, appId: number, appId2: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.update(subscriptionId, appId, appId2, subscriptionPatchRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Activates or deactivates target app subscriptions.
-     * Batch update subscriptions
-     * @param appId The app ID of the target app.
-     * @param batchInputSubscriptionBatchUpdateRequest Updated details for the specified subscriptions.
+     * @param appId 
+     * @param appId2 
+     * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        const result = this.api.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatch(appId: number, appId2: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        const result = this.api.updateBatch(appId, appId2, batchInputSubscriptionBatchUpdateRequest, _options);
         return result.toPromise();
     }
 

@@ -18,11 +18,10 @@ import { SettingsResponse } from '../models/SettingsResponse';
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-     * Clear webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public async clear(appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async clear(appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -31,9 +30,16 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "clear", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -42,7 +48,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -51,17 +57,22 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Used to set the webhook target URL and max concurrency limit for the given app.
-     * Configure webhook settings
-     * @param appId The ID of the target app.
-     * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
+     * @param appId 
+     * @param appId2 
+     * @param settingsChangeRequest 
      */
-    public async configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<RequestContext> {
+    public async configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
             throw new RequiredError("SettingsApi", "configure", "appId");
+        }
+
+
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "configure", "appId2");
         }
 
 
@@ -73,7 +84,8 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
@@ -93,7 +105,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -102,11 +114,10 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-     * Get webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(appId: number, appId2: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
@@ -115,9 +126,16 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId2' is not null or undefined
+        if (appId2 === null || appId2 === undefined) {
+            throw new RequiredError("SettingsApi", "getAll", "appId2");
+        }
+
+
         // Path Params
         const localVarPath = '/webhooks/v3/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId2)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -126,7 +144,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod = null;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
+        authMethod = _config.authMethods["developer_hapikey"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }

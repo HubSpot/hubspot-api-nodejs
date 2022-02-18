@@ -8,6 +8,7 @@ import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
@@ -15,6 +16,7 @@ import { CollectionResponseWithTotalVersionBlogPost } from '../models/Collection
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
 import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
+import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -97,7 +99,7 @@ export interface BlogPostsApiGetByIdRequest {
      */
     objectId: string
     /**
-     * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogPostsApigetById
      */
@@ -169,7 +171,7 @@ export interface BlogPostsApiGetPageRequest {
      */
     limit?: number
     /**
-     * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogPostsApigetPage
      */
@@ -280,7 +282,7 @@ export interface BlogPostsApiReadBatchRequest {
      */
     batchInputString: BatchInputString
     /**
-     * Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogPostsApireadBatch
      */
@@ -349,7 +351,7 @@ export interface BlogPostsApiUpdateRequest {
      */
     blogPost: BlogPost
     /**
-     * Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogPostsApiupdate
      */
@@ -364,7 +366,7 @@ export interface BlogPostsApiUpdateBatchRequest {
      */
     batchInputJsonNode: BatchInputJsonNode
     /**
-     * Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof BlogPostsApiupdateBatch
      */
@@ -403,8 +405,8 @@ export class ObjectBlogPostsApi {
     }
 
     /**
-     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
-     * Archive a batch of Blog Posts
+     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to true.
+     * Delete a batch of Blog Posts
      * @param param the request object
      */
     public archiveBatch(param: BlogPostsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
@@ -434,7 +436,7 @@ export class ObjectBlogPostsApi {
      * Create a batch of Blog Posts
      * @param param the request object
      */
-    public createBatch(param: BlogPostsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public createBatch(param: BlogPostsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.createBatch(param.batchInputBlogPost,  options).toPromise();
     }
 
@@ -542,7 +544,7 @@ export class ObjectBlogPostsApi {
      * Retrieve a batch of Blog Posts
      * @param param the request object
      */
-    public readBatch(param: BlogPostsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public readBatch(param: BlogPostsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -596,7 +598,7 @@ export class ObjectBlogPostsApi {
      * Update a batch of Blog Posts
      * @param param the request object
      */
-    public updateBatch(param: BlogPostsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | any> {
+    public updateBatch(param: BlogPostsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 

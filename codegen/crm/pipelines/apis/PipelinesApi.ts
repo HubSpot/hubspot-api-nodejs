@@ -9,7 +9,7 @@ import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
 
 
-import { CollectionResponsePipeline } from '../models/CollectionResponsePipeline';
+import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
@@ -24,8 +24,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * Archive a pipeline
      * @param objectType 
      * @param pipelineId 
+     * @param validateReferencesBeforeDelete 
      */
-    public async archive(objectType: string, pipelineId: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -40,6 +41,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -49,6 +51,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
+        // Query Params
+        if (validateReferencesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
 
         let authMethod = null;
         // Apply auth methods
@@ -57,7 +64,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -71,7 +78,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineInput 
      */
-    public async create(objectType: string, pipelineInput?: PipelineInput, _options?: Configuration): Promise<RequestContext> {
+    public async create(objectType: string, pipelineInput: PipelineInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -79,6 +86,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("PipelinesApi", "create", "objectType");
         }
 
+
+        // verify required parameter 'pipelineInput' is not null or undefined
+        if (pipelineInput === null || pipelineInput === undefined) {
+            throw new RequiredError("PipelinesApi", "create", "pipelineInput");
+        }
 
 
         // Path Params
@@ -108,7 +120,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -153,7 +165,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -206,7 +218,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -220,8 +232,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param pipelineInput 
+     * @param validateReferencesBeforeDelete 
      */
-    public async replace(objectType: string, pipelineId: string, pipelineInput?: PipelineInput, _options?: Configuration): Promise<RequestContext> {
+    public async replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -236,6 +249,12 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'pipelineInput' is not null or undefined
+        if (pipelineInput === null || pipelineInput === undefined) {
+            throw new RequiredError("PipelinesApi", "replace", "pipelineInput");
+        }
+
+
 
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
@@ -245,6 +264,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (validateReferencesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
 
 
         // Body Params
@@ -265,7 +289,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -278,10 +302,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * Update a pipeline
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelinePatchInput 
+     * @param archived Whether to return only results that have been archived.
+     * @param validateReferencesBeforeDelete 
      */
-    public async update(objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, archived?: boolean, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -293,6 +318,12 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
             throw new RequiredError("PipelinesApi", "update", "pipelineId");
+        }
+
+
+        // verify required parameter 'pipelinePatchInput' is not null or undefined
+        if (pipelinePatchInput === null || pipelinePatchInput === undefined) {
+            throw new RequiredError("PipelinesApi", "update", "pipelinePatchInput");
         }
 
 
@@ -310,6 +341,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateReferencesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
         }
 
 
@@ -331,7 +367,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -418,13 +454,13 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePipeline > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponsePipelineNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponsePipeline = ObjectSerializer.deserialize(
+            const body: CollectionResponsePipelineNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePipeline", ""
-            ) as CollectionResponsePipeline;
+                "CollectionResponsePipelineNoPaging", ""
+            ) as CollectionResponsePipelineNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -437,10 +473,10 @@ export class PipelinesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponsePipeline = ObjectSerializer.deserialize(
+            const body: CollectionResponsePipelineNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePipeline", ""
-            ) as CollectionResponsePipeline;
+                "CollectionResponsePipelineNoPaging", ""
+            ) as CollectionResponsePipelineNoPaging;
             return body;
         }
 

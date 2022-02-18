@@ -13,6 +13,7 @@ import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRe
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
@@ -67,7 +68,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -76,8 +77,8 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform an in-app `archive` send an normal update with the `archived` field set to true.
-     * Archive a batch of Blog Posts
+     * Delete the Blog Post objects identified in the request body. Note: This is not the same as the in-app `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to true.
+     * Delete a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
      */
     public async archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
@@ -115,7 +116,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -163,7 +164,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -211,7 +212,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -259,7 +260,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -271,7 +272,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve the Blog Post object identified by the id in the path.
      * Retrieve a Blog Post
      * @param objectId The Blog Post id.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async getById(objectId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -304,7 +305,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -342,7 +343,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -362,7 +363,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 20.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -442,7 +443,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -488,7 +489,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -547,7 +548,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -595,7 +596,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -643,7 +644,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -691,7 +692,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -739,7 +740,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -777,7 +778,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -825,7 +826,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -837,7 +838,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve the Blog Post objects identified in the request body.
      * Retrieve a batch of Blog Posts
      * @param batchInputString The JSON array of Blog Post ids.
-     * @param archived Specifies whether to return archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to return deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -880,7 +881,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -918,7 +919,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -964,7 +965,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1010,7 +1011,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1058,7 +1059,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1071,7 +1072,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
      * Update a Blog Post
      * @param objectId The Blog Post id.
      * @param blogPost The JSON representation of the updated Blog Post.
-     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async update(objectId: string, blogPost: BlogPost, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -1121,7 +1122,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1133,7 +1134,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
      * Update the Blog Post objects identified in the request body.
      * Update a batch of Blog Posts
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Posts.
-     * @param archived Specifies whether to update archived Blog Posts. Defaults to &#x60;false&#x60;.
+     * @param archived Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
      */
     public async updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -1176,7 +1177,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1232,7 +1233,7 @@ export class BlogPostsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
-        authMethod = _config.authMethods["oauth2_legacy"]
+        authMethod = _config.authMethods["oauth2"]
         if (authMethod) {
             await authMethod.applySecurityAuthentication(requestContext);
         }
@@ -1387,13 +1388,13 @@ export class BlogPostsApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | any > {
+     public async createBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPost;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -1413,10 +1414,10 @@ export class BlogPostsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseBlogPostWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPostWithErrors | BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseBlogPostWithErrors | any", ""
-            ) as BatchResponseBlogPostWithErrors | any;
+                "BatchResponseBlogPostWithErrors | BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPostWithErrors | BatchResponseBlogPost;
             return body;
         }
 
@@ -1785,13 +1786,13 @@ export class BlogPostsApiResponseProcessor {
      * @params response Response returned by the server for a request to readBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | any > {
+     public async readBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPost;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -1811,10 +1812,10 @@ export class BlogPostsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseBlogPostWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPostWithErrors | BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseBlogPostWithErrors | any", ""
-            ) as BatchResponseBlogPostWithErrors | any;
+                "BatchResponseBlogPostWithErrors | BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPostWithErrors | BatchResponseBlogPost;
             return body;
         }
 
@@ -2000,13 +2001,13 @@ export class BlogPostsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | any > {
+     public async updateBatch(response: ResponseContext): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPost;
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
@@ -2026,10 +2027,10 @@ export class BlogPostsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseBlogPostWithErrors | any = ObjectSerializer.deserialize(
+            const body: BatchResponseBlogPostWithErrors | BatchResponseBlogPost = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseBlogPostWithErrors | any", ""
-            ) as BatchResponseBlogPostWithErrors | any;
+                "BatchResponseBlogPostWithErrors | BatchResponseBlogPost", ""
+            ) as BatchResponseBlogPostWithErrors | BatchResponseBlogPost;
             return body;
         }
 

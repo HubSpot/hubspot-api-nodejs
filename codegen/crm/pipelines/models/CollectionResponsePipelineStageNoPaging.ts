@@ -10,24 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from './NextPage';
+import { PipelineStage } from './PipelineStage';
 import { HttpFile } from '../http/http';
 
-export class Paging {
-    'next'?: NextPage;
+export class CollectionResponsePipelineStageNoPaging {
+    'results': Array<PipelineStage>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "next",
-            "baseName": "next",
-            "type": "NextPage",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PipelineStage>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Paging.attributeTypeMap;
+        return CollectionResponsePipelineStageNoPaging.attributeTypeMap;
     }
 
     public constructor() {

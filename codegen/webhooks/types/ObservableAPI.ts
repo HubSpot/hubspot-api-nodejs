@@ -36,12 +36,11 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
-     * Clear webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public clear(appId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.clear(appId, _options);
+    public clear(appId: number, appId2: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.clear(appId, appId2, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -60,13 +59,12 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Used to set the webhook target URL and max concurrency limit for the given app.
-     * Configure webhook settings
-     * @param appId The ID of the target app.
-     * @param settingsChangeRequest Settings state to create new with or replace existing settings with.
+     * @param appId 
+     * @param appId2 
+     * @param settingsChangeRequest 
      */
-    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
-        const requestContextPromise = this.requestFactory.configure(appId, settingsChangeRequest, _options);
+    public configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
+        const requestContextPromise = this.requestFactory.configure(appId, appId2, settingsChangeRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -85,12 +83,11 @@ export class ObservableSettingsApi {
     }
 
     /**
-     * Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
-     * Get webhook settings
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public getAll(appId: number, _options?: Configuration): Observable<SettingsResponse> {
-        const requestContextPromise = this.requestFactory.getAll(appId, _options);
+    public getAll(appId: number, appId2: number, _options?: Configuration): Observable<SettingsResponse> {
+        const requestContextPromise = this.requestFactory.getAll(appId, appId2, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -127,13 +124,12 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Permanently deletes a subscription. This cannot be undone.
-     * Delete a subscription
-     * @param subscriptionId The ID of subscription to delete.
-     * @param appId The ID of the target app.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public archive(subscriptionId: number, appId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(subscriptionId, appId, _options);
+    public archive(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(subscriptionId, appId, appId2, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -152,13 +148,12 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
-     * Subscribe to an event
-     * @param appId The ID of the target app.
-     * @param subscriptionCreateRequest Details about the new subscription.
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionCreateRequest 
      */
-    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.create(appId, subscriptionCreateRequest, _options);
+    public create(appId: number, appId2: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.create(appId, appId2, subscriptionCreateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -177,12 +172,11 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Returns full details for all existing subscriptions for the given app.
-     * Get subscription details
-     * @param appId The ID of the target app.
+     * @param appId 
+     * @param appId2 
      */
-    public getAll(appId: number, _options?: Configuration): Observable<SubscriptionListResponse> {
-        const requestContextPromise = this.requestFactory.getAll(appId, _options);
+    public getAll(appId: number, appId2: number, _options?: Configuration): Observable<SubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.getAll(appId, appId2, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -201,13 +195,12 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Returns details about a subscription.
-     * Get subscription
-     * @param appId The ID of the target app.
-     * @param subscriptionId The ID of the target subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
      */
-    public getById(appId: number, subscriptionId: number, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.getById(appId, subscriptionId, _options);
+    public getById(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.getById(subscriptionId, appId, appId2, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -226,14 +219,13 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Updates the details for an existing subscription.
-     * Update a subscription
-     * @param subscriptionId The ID of the subscription to update.
-     * @param appId The ID of the target app.
-     * @param subscriptionPatchRequest Updated details for the subscription.
+     * @param subscriptionId 
+     * @param appId 
+     * @param appId2 
+     * @param subscriptionPatchRequest 
      */
-    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.update(subscriptionId, appId, subscriptionPatchRequest, _options);
+    public update(subscriptionId: number, appId: number, appId2: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.update(subscriptionId, appId, appId2, subscriptionPatchRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -252,13 +244,12 @@ export class ObservableSubscriptionsApi {
     }
 
     /**
-     * Activates or deactivates target app subscriptions.
-     * Batch update subscriptions
-     * @param appId The app ID of the target app.
-     * @param batchInputSubscriptionBatchUpdateRequest Updated details for the specified subscriptions.
+     * @param appId 
+     * @param appId2 
+     * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        const requestContextPromise = this.requestFactory.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatch(appId: number, appId2: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        const requestContextPromise = this.requestFactory.updateBatch(appId, appId2, batchInputSubscriptionBatchUpdateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

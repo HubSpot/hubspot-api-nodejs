@@ -2,18 +2,78 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponsePipeline } from '../models/CollectionResponsePipeline';
-import { CollectionResponsePipelineStage } from '../models/CollectionResponsePipelineStage';
+import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
+import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
+import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionResponsePublicAuditInfoNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PublicAuditInfo } from '../models/PublicAuditInfo';
+import { ObservablePipelineAuditsApi } from './ObservableAPI';
+
+import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";
+export class PromisePipelineAuditsApi {
+    private api: ObservablePipelineAuditsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PipelineAuditsApiRequestFactory,
+        responseProcessor?: PipelineAuditsApiResponseProcessor
+    ) {
+        this.api = new ObservablePipelineAuditsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline identified by `{pipelineId}`.
+     * Return an audit of all changes to the pipeline
+     * @param objectType 
+     * @param pipelineId 
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdAudit(objectType: string, pipelineId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        const result = this.api.getCrmV3PipelinesObjectTypePipelineIdAudit(objectType, pipelineId, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservablePipelineStageAuditsApi } from './ObservableAPI';
+
+import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponseProcessor} from "../apis/PipelineStageAuditsApi";
+export class PromisePipelineStageAuditsApi {
+    private api: ObservablePipelineStageAuditsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PipelineStageAuditsApiRequestFactory,
+        responseProcessor?: PipelineStageAuditsApiResponseProcessor
+    ) {
+        this.api = new ObservablePipelineStageAuditsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Return a reverse chronological list of all mutations that have occurred on the pipeline stage identified by `{stageId}`.
+     * Return an audit of all changes to the pipeline stage
+     * @param objectType 
+     * @param stageId 
+     */
+    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType: string, stageId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        const result = this.api.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType, stageId, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservablePipelineStagesApi } from './ObservableAPI';
 
 import { PipelineStagesApiRequestFactory, PipelineStagesApiResponseProcessor} from "../apis/PipelineStagesApi";
@@ -47,7 +107,7 @@ export class PromisePipelineStagesApi {
      * @param pipelineId 
      * @param pipelineStageInput 
      */
-    public create(objectType: string, pipelineId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Promise<PipelineStage> {
+    public create(objectType: string, pipelineId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Promise<PipelineStage> {
         const result = this.api.create(objectType, pipelineId, pipelineStageInput, _options);
         return result.toPromise();
     }
@@ -59,7 +119,7 @@ export class PromisePipelineStagesApi {
      * @param pipelineId 
      * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipelineStage> {
+    public getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
         const result = this.api.getAll(objectType, pipelineId, archived, _options);
         return result.toPromise();
     }
@@ -85,7 +145,7 @@ export class PromisePipelineStagesApi {
      * @param stageId 
      * @param pipelineStageInput 
      */
-    public replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput?: PipelineStageInput, _options?: Configuration): Promise<PipelineStage> {
+    public replace(objectType: string, pipelineId: string, stageId: string, pipelineStageInput: PipelineStageInput, _options?: Configuration): Promise<PipelineStage> {
         const result = this.api.replace(objectType, pipelineId, stageId, pipelineStageInput, _options);
         return result.toPromise();
     }
@@ -96,11 +156,11 @@ export class PromisePipelineStagesApi {
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelineStagePatchInput 
+     * @param archived Whether to return only results that have been archived.
      */
-    public update(objectType: string, pipelineId: string, stageId: string, archived?: boolean, pipelineStagePatchInput?: PipelineStagePatchInput, _options?: Configuration): Promise<PipelineStage> {
-        const result = this.api.update(objectType, pipelineId, stageId, archived, pipelineStagePatchInput, _options);
+    public update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, archived?: boolean, _options?: Configuration): Promise<PipelineStage> {
+        const result = this.api.update(objectType, pipelineId, stageId, pipelineStagePatchInput, archived, _options);
         return result.toPromise();
     }
 
@@ -128,9 +188,10 @@ export class PromisePipelinesApi {
      * Archive a pipeline
      * @param objectType 
      * @param pipelineId 
+     * @param validateReferencesBeforeDelete 
      */
-    public archive(objectType: string, pipelineId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, pipelineId, _options);
+    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(objectType, pipelineId, validateReferencesBeforeDelete, _options);
         return result.toPromise();
     }
 
@@ -140,7 +201,7 @@ export class PromisePipelinesApi {
      * @param objectType 
      * @param pipelineInput 
      */
-    public create(objectType: string, pipelineInput?: PipelineInput, _options?: Configuration): Promise<Pipeline> {
+    public create(objectType: string, pipelineInput: PipelineInput, _options?: Configuration): Promise<Pipeline> {
         const result = this.api.create(objectType, pipelineInput, _options);
         return result.toPromise();
     }
@@ -151,7 +212,7 @@ export class PromisePipelinesApi {
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipeline> {
+    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
         const result = this.api.getAll(objectType, archived, _options);
         return result.toPromise();
     }
@@ -174,9 +235,10 @@ export class PromisePipelinesApi {
      * @param objectType 
      * @param pipelineId 
      * @param pipelineInput 
+     * @param validateReferencesBeforeDelete 
      */
-    public replace(objectType: string, pipelineId: string, pipelineInput?: PipelineInput, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.replace(objectType, pipelineId, pipelineInput, _options);
+    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, _options);
         return result.toPromise();
     }
 
@@ -185,11 +247,12 @@ export class PromisePipelinesApi {
      * Update a pipeline
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      * @param pipelinePatchInput 
+     * @param archived Whether to return only results that have been archived.
+     * @param validateReferencesBeforeDelete 
      */
-    public update(objectType: string, pipelineId: string, archived?: boolean, pipelinePatchInput?: PipelinePatchInput, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.update(objectType, pipelineId, archived, pipelinePatchInput, _options);
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, archived?: boolean, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.update(objectType, pipelineId, pipelinePatchInput, archived, validateReferencesBeforeDelete, _options);
         return result.toPromise();
     }
 
