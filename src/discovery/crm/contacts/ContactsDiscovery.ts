@@ -43,6 +43,7 @@ export class ContactsDiscovery {
     limit?: number,
     after?: string,
     properties?: string[],
+    propertiesWithHistory?: string[],
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
@@ -51,6 +52,7 @@ export class ContactsDiscovery {
       limit,
       after,
       properties,
+      propertiesWithHistory,
       associations,
       archived,
     )
