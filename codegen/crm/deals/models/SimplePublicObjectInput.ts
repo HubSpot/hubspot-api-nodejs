@@ -13,7 +13,7 @@
 import { HttpFile } from '../http/http';
 
 export class SimplePublicObjectInput {
-    'properties': { [key: string]: string; };
+    'properties': { [key: string]: any; };
 
     static readonly discriminator: string | undefined = undefined;
 
