@@ -240,8 +240,8 @@ export class PromiseGDPRApi {
      * GDPR DELETE
      * @param publicGdprDeleteInput 
      */
-    public _delete(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
-        const result = this.api._delete(publicGdprDeleteInput, _options);
+    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
+        const result = this.api.purge(publicGdprDeleteInput, _options);
         return result.toPromise();
     }
 
