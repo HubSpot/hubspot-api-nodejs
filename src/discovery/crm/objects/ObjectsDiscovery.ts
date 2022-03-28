@@ -8,10 +8,10 @@ import {
   ResponseContext,
   SearchApi,
 } from '../../../../codegen/crm/objects/index'
-import { FeedbackSubmissionsDiscovery } from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
+import { FeedbackSubmissionsDiscovery } from './feedback_submissions/FeedbackSubmissionsDiscovery'
 
 export class ObjectsDiscovery {
   public associationsApi: AssociationsApi

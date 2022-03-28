@@ -1,5 +1,13 @@
 import { createConfiguration } from '../../../../codegen/cms/source_code/configuration'
-import { ContentApi, ExtractApi, MetadataApi, SourceCodeExtractApi, ValidationApi, RequestContext, ResponseContext } from '../../../../codegen/cms/source_code/index'
+import {
+  ContentApi,
+  ExtractApi,
+  MetadataApi,
+  RequestContext,
+  ResponseContext,
+  SourceCodeExtractApi,
+  ValidationApi,
+} from '../../../../codegen/cms/source_code/index'
 import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
