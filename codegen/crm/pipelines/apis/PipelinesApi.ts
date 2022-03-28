@@ -20,8 +20,8 @@ import { PipelinePatchInput } from '../models/PipelinePatchInput';
 export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline
+     * Delete the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
@@ -132,16 +132,14 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * Return all pipelines for the object type specified by `{objectType}`.
      * Retrieve all pipelines
      * @param objectType 
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(objectType: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new RequiredError("PipelinesApi", "getAll", "objectType");
         }
-
 
 
         // Path Params
@@ -151,11 +149,6 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         let authMethod = null;
@@ -178,9 +171,8 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * Return a pipeline by ID
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getById(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(objectType: string, pipelineId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -195,7 +187,6 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -204,11 +195,6 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         let authMethod = null;
@@ -303,10 +289,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param pipelinePatchInput 
-     * @param archived Whether to return only results that have been archived.
      * @param validateReferencesBeforeDelete 
      */
-    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, archived?: boolean, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -328,7 +313,6 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -337,11 +321,6 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {

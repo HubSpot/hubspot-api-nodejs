@@ -33,29 +33,26 @@ export class PromiseSettingsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public clear(appId: number, appId2: number, _options?: Configuration): Promise<void> {
-        const result = this.api.clear(appId, appId2, _options);
+    public clear(appId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.clear(appId, _options);
         return result.toPromise();
     }
 
     /**
      * @param appId 
-     * @param appId2 
      * @param settingsChangeRequest 
      */
-    public configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.configure(appId, appId2, settingsChangeRequest, _options);
+    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
+        const result = this.api.configure(appId, settingsChangeRequest, _options);
         return result.toPromise();
     }
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public getAll(appId: number, appId2: number, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.getAll(appId, appId2, _options);
+    public getAll(appId: number, _options?: Configuration): Promise<SettingsResponse> {
+        const result = this.api.getAll(appId, _options);
         return result.toPromise();
     }
 
@@ -81,60 +78,54 @@ export class PromiseSubscriptionsApi {
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      */
-    public archive(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(subscriptionId, appId, appId2, _options);
+    public archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(subscriptionId, appId, _options);
         return result.toPromise();
     }
 
     /**
      * @param appId 
-     * @param appId2 
      * @param subscriptionCreateRequest 
      */
-    public create(appId: number, appId2: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.create(appId, appId2, subscriptionCreateRequest, _options);
+    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.create(appId, subscriptionCreateRequest, _options);
         return result.toPromise();
     }
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public getAll(appId: number, appId2: number, _options?: Configuration): Promise<SubscriptionListResponse> {
-        const result = this.api.getAll(appId, appId2, _options);
+    public getAll(appId: number, _options?: Configuration): Promise<SubscriptionListResponse> {
+        const result = this.api.getAll(appId, _options);
         return result.toPromise();
     }
 
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      */
-    public getById(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.getById(subscriptionId, appId, appId2, _options);
+    public getById(subscriptionId: number, appId: number, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.getById(subscriptionId, appId, _options);
         return result.toPromise();
     }
 
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      * @param subscriptionPatchRequest 
      */
-    public update(subscriptionId: number, appId: number, appId2: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.update(subscriptionId, appId, appId2, subscriptionPatchRequest, _options);
+    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
+        const result = this.api.update(subscriptionId, appId, subscriptionPatchRequest, _options);
         return result.toPromise();
     }
 
     /**
      * @param appId 
-     * @param appId2 
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public updateBatch(appId: number, appId2: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        const result = this.api.updateBatch(appId, appId2, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        const result = this.api.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
         return result.toPromise();
     }
 

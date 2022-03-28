@@ -20,8 +20,8 @@ import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
 export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline stage
+     * Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline stage
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
@@ -142,9 +142,8 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * Return all stages of a pipeline
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(objectType: string, pipelineId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -159,7 +158,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -168,11 +166,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         let authMethod = null;
@@ -196,9 +189,8 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getById(objectType: string, pipelineId: string, stageId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(objectType: string, pipelineId: string, stageId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -219,7 +211,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -229,11 +220,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         let authMethod = null;
@@ -330,9 +316,8 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param stageId 
      * @param pipelineStagePatchInput 
-     * @param archived Whether to return only results that have been archived.
      */
-    public async update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -359,7 +344,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}/stages/{stageId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -369,11 +353,6 @@ export class PipelineStagesApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         // Body Params

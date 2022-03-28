@@ -89,8 +89,8 @@ export class PromisePipelineStagesApi {
     }
 
     /**
-     * Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline stage
+     * Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline stage
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
@@ -117,10 +117,9 @@ export class PromisePipelineStagesApi {
      * Return all stages of a pipeline
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
-        const result = this.api.getAll(objectType, pipelineId, archived, _options);
+    public getAll(objectType: string, pipelineId: string, _options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
+        const result = this.api.getAll(objectType, pipelineId, _options);
         return result.toPromise();
     }
 
@@ -130,10 +129,9 @@ export class PromisePipelineStagesApi {
      * @param objectType 
      * @param pipelineId 
      * @param stageId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public getById(objectType: string, pipelineId: string, stageId: string, archived?: boolean, _options?: Configuration): Promise<PipelineStage> {
-        const result = this.api.getById(objectType, pipelineId, stageId, archived, _options);
+    public getById(objectType: string, pipelineId: string, stageId: string, _options?: Configuration): Promise<PipelineStage> {
+        const result = this.api.getById(objectType, pipelineId, stageId, _options);
         return result.toPromise();
     }
 
@@ -157,10 +155,9 @@ export class PromisePipelineStagesApi {
      * @param pipelineId 
      * @param stageId 
      * @param pipelineStagePatchInput 
-     * @param archived Whether to return only results that have been archived.
      */
-    public update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, archived?: boolean, _options?: Configuration): Promise<PipelineStage> {
-        const result = this.api.update(objectType, pipelineId, stageId, pipelineStagePatchInput, archived, _options);
+    public update(objectType: string, pipelineId: string, stageId: string, pipelineStagePatchInput: PipelineStagePatchInput, _options?: Configuration): Promise<PipelineStage> {
+        const result = this.api.update(objectType, pipelineId, stageId, pipelineStagePatchInput, _options);
         return result.toPromise();
     }
 
@@ -184,8 +181,8 @@ export class PromisePipelinesApi {
     }
 
     /**
-     * Archive the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline
+     * Delete the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
@@ -210,10 +207,9 @@ export class PromisePipelinesApi {
      * Return all pipelines for the object type specified by `{objectType}`.
      * Retrieve all pipelines
      * @param objectType 
-     * @param archived Whether to return only results that have been archived.
      */
-    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
-        const result = this.api.getAll(objectType, archived, _options);
+    public getAll(objectType: string, _options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
+        const result = this.api.getAll(objectType, _options);
         return result.toPromise();
     }
 
@@ -222,10 +218,9 @@ export class PromisePipelinesApi {
      * Return a pipeline by ID
      * @param objectType 
      * @param pipelineId 
-     * @param archived Whether to return only results that have been archived.
      */
-    public getById(objectType: string, pipelineId: string, archived?: boolean, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.getById(objectType, pipelineId, archived, _options);
+    public getById(objectType: string, pipelineId: string, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.getById(objectType, pipelineId, _options);
         return result.toPromise();
     }
 
@@ -248,11 +243,10 @@ export class PromisePipelinesApi {
      * @param objectType 
      * @param pipelineId 
      * @param pipelinePatchInput 
-     * @param archived Whether to return only results that have been archived.
      * @param validateReferencesBeforeDelete 
      */
-    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, archived?: boolean, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.update(objectType, pipelineId, pipelinePatchInput, archived, validateReferencesBeforeDelete, _options);
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, _options);
         return result.toPromise();
     }
 

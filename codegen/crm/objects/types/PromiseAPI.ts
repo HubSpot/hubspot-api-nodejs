@@ -255,8 +255,8 @@ export class PromiseGDPRApi {
      * @param objectType 
      * @param publicGdprDeleteInput 
      */
-    public postCrmV3ObjectsObjectTypeGdprDelete(objectType: string, publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
-        const result = this.api.postCrmV3ObjectsObjectTypeGdprDelete(objectType, publicGdprDeleteInput, _options);
+    public _delete(objectType: string, publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
+        const result = this.api._delete(objectType, publicGdprDeleteInput, _options);
         return result.toPromise();
     }
 
