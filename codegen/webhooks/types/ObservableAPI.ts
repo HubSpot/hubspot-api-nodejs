@@ -37,10 +37,9 @@ export class ObservableSettingsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public clear(appId: number, appId2: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.clear(appId, appId2, _options);
+    public clear(appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.clear(appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -60,11 +59,10 @@ export class ObservableSettingsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      * @param settingsChangeRequest 
      */
-    public configure(appId: number, appId2: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
-        const requestContextPromise = this.requestFactory.configure(appId, appId2, settingsChangeRequest, _options);
+    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
+        const requestContextPromise = this.requestFactory.configure(appId, settingsChangeRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -84,10 +82,9 @@ export class ObservableSettingsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public getAll(appId: number, appId2: number, _options?: Configuration): Observable<SettingsResponse> {
-        const requestContextPromise = this.requestFactory.getAll(appId, appId2, _options);
+    public getAll(appId: number, _options?: Configuration): Observable<SettingsResponse> {
+        const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -126,10 +123,9 @@ export class ObservableSubscriptionsApi {
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      */
-    public archive(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(subscriptionId, appId, appId2, _options);
+    public archive(subscriptionId: number, appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(subscriptionId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -149,11 +145,10 @@ export class ObservableSubscriptionsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      * @param subscriptionCreateRequest 
      */
-    public create(appId: number, appId2: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.create(appId, appId2, subscriptionCreateRequest, _options);
+    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.create(appId, subscriptionCreateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -173,10 +168,9 @@ export class ObservableSubscriptionsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      */
-    public getAll(appId: number, appId2: number, _options?: Configuration): Observable<SubscriptionListResponse> {
-        const requestContextPromise = this.requestFactory.getAll(appId, appId2, _options);
+    public getAll(appId: number, _options?: Configuration): Observable<SubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -197,10 +191,9 @@ export class ObservableSubscriptionsApi {
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      */
-    public getById(subscriptionId: number, appId: number, appId2: number, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.getById(subscriptionId, appId, appId2, _options);
+    public getById(subscriptionId: number, appId: number, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.getById(subscriptionId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -221,11 +214,10 @@ export class ObservableSubscriptionsApi {
     /**
      * @param subscriptionId 
      * @param appId 
-     * @param appId2 
      * @param subscriptionPatchRequest 
      */
-    public update(subscriptionId: number, appId: number, appId2: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
-        const requestContextPromise = this.requestFactory.update(subscriptionId, appId, appId2, subscriptionPatchRequest, _options);
+    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        const requestContextPromise = this.requestFactory.update(subscriptionId, appId, subscriptionPatchRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -245,11 +237,10 @@ export class ObservableSubscriptionsApi {
 
     /**
      * @param appId 
-     * @param appId2 
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public updateBatch(appId: number, appId2: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        const requestContextPromise = this.requestFactory.updateBatch(appId, appId2, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        const requestContextPromise = this.requestFactory.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

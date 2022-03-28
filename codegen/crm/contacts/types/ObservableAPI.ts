@@ -409,8 +409,8 @@ export class ObservableGDPRApi {
      * GDPR DELETE
      * @param publicGdprDeleteInput 
      */
-    public postCrmV3ObjectsContactsGdprDelete(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.postCrmV3ObjectsContactsGdprDelete(publicGdprDeleteInput, _options);
+    public _delete(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory._delete(publicGdprDeleteInput, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -424,7 +424,7 @@ export class ObservableGDPRApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCrmV3ObjectsContactsGdprDelete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor._delete(rsp)));
             }));
     }
 

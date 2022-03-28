@@ -145,12 +145,6 @@ export interface PipelineStagesApiGetAllRequest {
      * @memberof PipelineStagesApigetAll
      */
     pipelineId: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelineStagesApigetAll
-     */
-    archived?: boolean
 }
 
 export interface PipelineStagesApiGetByIdRequest {
@@ -172,12 +166,6 @@ export interface PipelineStagesApiGetByIdRequest {
      * @memberof PipelineStagesApigetById
      */
     stageId: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelineStagesApigetById
-     */
-    archived?: boolean
 }
 
 export interface PipelineStagesApiReplaceRequest {
@@ -232,12 +220,6 @@ export interface PipelineStagesApiUpdateRequest {
      * @memberof PipelineStagesApiupdate
      */
     pipelineStagePatchInput: PipelineStagePatchInput
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelineStagesApiupdate
-     */
-    archived?: boolean
 }
 
 export class ObjectPipelineStagesApi {
@@ -248,8 +230,8 @@ export class ObjectPipelineStagesApi {
     }
 
     /**
-     * Archive the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline stage
+     * Delete the pipeline stage identified by `{stageId}` associated with the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline stage
      * @param param the request object
      */
     public archive(param: PipelineStagesApiArchiveRequest, options?: Configuration): Promise<void> {
@@ -271,7 +253,7 @@ export class ObjectPipelineStagesApi {
      * @param param the request object
      */
     public getAll(param: PipelineStagesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
-        return this.api.getAll(param.objectType, param.pipelineId, param.archived,  options).toPromise();
+        return this.api.getAll(param.objectType, param.pipelineId,  options).toPromise();
     }
 
     /**
@@ -280,7 +262,7 @@ export class ObjectPipelineStagesApi {
      * @param param the request object
      */
     public getById(param: PipelineStagesApiGetByIdRequest, options?: Configuration): Promise<PipelineStage> {
-        return this.api.getById(param.objectType, param.pipelineId, param.stageId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectType, param.pipelineId, param.stageId,  options).toPromise();
     }
 
     /**
@@ -298,7 +280,7 @@ export class ObjectPipelineStagesApi {
      * @param param the request object
      */
     public update(param: PipelineStagesApiUpdateRequest, options?: Configuration): Promise<PipelineStage> {
-        return this.api.update(param.objectType, param.pipelineId, param.stageId, param.pipelineStagePatchInput, param.archived,  options).toPromise();
+        return this.api.update(param.objectType, param.pipelineId, param.stageId, param.pipelineStagePatchInput,  options).toPromise();
     }
 
 }
@@ -349,12 +331,6 @@ export interface PipelinesApiGetAllRequest {
      * @memberof PipelinesApigetAll
      */
     objectType: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelinesApigetAll
-     */
-    archived?: boolean
 }
 
 export interface PipelinesApiGetByIdRequest {
@@ -370,12 +346,6 @@ export interface PipelinesApiGetByIdRequest {
      * @memberof PipelinesApigetById
      */
     pipelineId: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelinesApigetById
-     */
-    archived?: boolean
 }
 
 export interface PipelinesApiReplaceRequest {
@@ -425,12 +395,6 @@ export interface PipelinesApiUpdateRequest {
      */
     pipelinePatchInput: PipelinePatchInput
     /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof PipelinesApiupdate
-     */
-    archived?: boolean
-    /**
      * 
      * @type boolean
      * @memberof PipelinesApiupdate
@@ -446,8 +410,8 @@ export class ObjectPipelinesApi {
     }
 
     /**
-     * Archive the pipeline identified by `{pipelineId}`.
-     * Archive a pipeline
+     * Delete the pipeline identified by `{pipelineId}`.
+     * Delete a pipeline
      * @param param the request object
      */
     public archive(param: PipelinesApiArchiveRequest, options?: Configuration): Promise<void> {
@@ -469,7 +433,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public getAll(param: PipelinesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
-        return this.api.getAll(param.objectType, param.archived,  options).toPromise();
+        return this.api.getAll(param.objectType,  options).toPromise();
     }
 
     /**
@@ -478,7 +442,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public getById(param: PipelinesApiGetByIdRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.getById(param.objectType, param.pipelineId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectType, param.pipelineId,  options).toPromise();
     }
 
     /**
@@ -496,7 +460,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public update(param: PipelinesApiUpdateRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.archived, param.validateReferencesBeforeDelete,  options).toPromise();
+        return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.validateReferencesBeforeDelete,  options).toPromise();
     }
 
 }

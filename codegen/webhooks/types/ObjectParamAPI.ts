@@ -28,12 +28,6 @@ export interface SettingsApiClearRequest {
      * @memberof SettingsApiclear
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SettingsApiclear
-     */
-    appId2: number
 }
 
 export interface SettingsApiConfigureRequest {
@@ -43,12 +37,6 @@ export interface SettingsApiConfigureRequest {
      * @memberof SettingsApiconfigure
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SettingsApiconfigure
-     */
-    appId2: number
     /**
      * 
      * @type SettingsChangeRequest
@@ -64,12 +52,6 @@ export interface SettingsApiGetAllRequest {
      * @memberof SettingsApigetAll
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SettingsApigetAll
-     */
-    appId2: number
 }
 
 export class ObjectSettingsApi {
@@ -83,21 +65,21 @@ export class ObjectSettingsApi {
      * @param param the request object
      */
     public clear(param: SettingsApiClearRequest, options?: Configuration): Promise<void> {
-        return this.api.clear(param.appId, param.appId2,  options).toPromise();
+        return this.api.clear(param.appId,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public configure(param: SettingsApiConfigureRequest, options?: Configuration): Promise<SettingsResponse> {
-        return this.api.configure(param.appId, param.appId2, param.settingsChangeRequest,  options).toPromise();
+        return this.api.configure(param.appId, param.settingsChangeRequest,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public getAll(param: SettingsApiGetAllRequest, options?: Configuration): Promise<SettingsResponse> {
-        return this.api.getAll(param.appId, param.appId2,  options).toPromise();
+        return this.api.getAll(param.appId,  options).toPromise();
     }
 
 }
@@ -118,12 +100,6 @@ export interface SubscriptionsApiArchiveRequest {
      * @memberof SubscriptionsApiarchive
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SubscriptionsApiarchive
-     */
-    appId2: number
 }
 
 export interface SubscriptionsApiCreateRequest {
@@ -133,12 +109,6 @@ export interface SubscriptionsApiCreateRequest {
      * @memberof SubscriptionsApicreate
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SubscriptionsApicreate
-     */
-    appId2: number
     /**
      * 
      * @type SubscriptionCreateRequest
@@ -154,12 +124,6 @@ export interface SubscriptionsApiGetAllRequest {
      * @memberof SubscriptionsApigetAll
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SubscriptionsApigetAll
-     */
-    appId2: number
 }
 
 export interface SubscriptionsApiGetByIdRequest {
@@ -175,12 +139,6 @@ export interface SubscriptionsApiGetByIdRequest {
      * @memberof SubscriptionsApigetById
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SubscriptionsApigetById
-     */
-    appId2: number
 }
 
 export interface SubscriptionsApiUpdateRequest {
@@ -198,12 +156,6 @@ export interface SubscriptionsApiUpdateRequest {
     appId: number
     /**
      * 
-     * @type number
-     * @memberof SubscriptionsApiupdate
-     */
-    appId2: number
-    /**
-     * 
      * @type SubscriptionPatchRequest
      * @memberof SubscriptionsApiupdate
      */
@@ -217,12 +169,6 @@ export interface SubscriptionsApiUpdateBatchRequest {
      * @memberof SubscriptionsApiupdateBatch
      */
     appId: number
-    /**
-     * 
-     * @type number
-     * @memberof SubscriptionsApiupdateBatch
-     */
-    appId2: number
     /**
      * 
      * @type BatchInputSubscriptionBatchUpdateRequest
@@ -242,42 +188,42 @@ export class ObjectSubscriptionsApi {
      * @param param the request object
      */
     public archive(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.subscriptionId, param.appId, param.appId2,  options).toPromise();
+        return this.api.archive(param.subscriptionId, param.appId,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public create(param: SubscriptionsApiCreateRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.create(param.appId, param.appId2, param.subscriptionCreateRequest,  options).toPromise();
+        return this.api.create(param.appId, param.subscriptionCreateRequest,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public getAll(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<SubscriptionListResponse> {
-        return this.api.getAll(param.appId, param.appId2,  options).toPromise();
+        return this.api.getAll(param.appId,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public getById(param: SubscriptionsApiGetByIdRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.getById(param.subscriptionId, param.appId, param.appId2,  options).toPromise();
+        return this.api.getById(param.subscriptionId, param.appId,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public update(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<SubscriptionResponse> {
-        return this.api.update(param.subscriptionId, param.appId, param.appId2, param.subscriptionPatchRequest,  options).toPromise();
+        return this.api.update(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
     public updateBatch(param: SubscriptionsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        return this.api.updateBatch(param.appId, param.appId2, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
+        return this.api.updateBatch(param.appId, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
     }
 
 }
