@@ -10,5 +10,6 @@ describe('api client', () => {
     expect(client.hasOwnProperty('performance')).toBeTruthy()
     expect(client.hasOwnProperty('urlRedirects')).toBeTruthy()
     expect(client.hasOwnProperty('siteSearch')).toBeTruthy()
+    expect(client.hasOwnProperty('sourceCode')).toBeTruthy()
   })
 })

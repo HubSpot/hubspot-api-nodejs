@@ -8,6 +8,7 @@ import {
   ResponseContext,
   SearchApi,
 } from '../../../../codegen/crm/objects/index'
+import { FeedbackSubmissionsDiscovery } from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -17,6 +18,7 @@ export class ObjectsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
   public gdprApi: GDPRApi
+  public feedbackSubmissions: FeedbackSubmissionsDiscovery
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -33,6 +35,7 @@ export class ObjectsDiscovery {
     this.basicApi = new BasicApi(configuration)
     this.batchApi = new BatchApi(configuration)
     this.gdprApi = new GDPRApi(configuration)
+    this.feedbackSubmissions = new FeedbackSubmissionsDiscovery(config)
     this.searchApi = new SearchApi(configuration)
   }
 }

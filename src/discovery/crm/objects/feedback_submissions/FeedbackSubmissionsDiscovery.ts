@@ -1,4 +1,4 @@
-import { createConfiguration } from '../../../../codegen/crm/feedback_submissions/configuration'
+import { createConfiguration } from '../../../../../codegen/crm/objects/feedback_submissions/configuration'
 import {
   AssociationsApi,
   BasicApi,
@@ -6,10 +6,10 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
-} from '../../../../codegen/crm/feedback_submissions/index'
-import { Observable } from '../../../../codegen/crm/feedback_submissions/rxjsStub'
-import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+} from '../../../../../codegen/crm/objects/feedback_submissions/index'
+import { Observable } from '../../../../../codegen/crm/objects/feedback_submissions/rxjsStub'
+import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
+import { IConfiguration } from '../../../../configuration/IConfiguration'
 
 export class FeedbackSubmissionsDiscovery {
   public associationsApi: AssociationsApi
