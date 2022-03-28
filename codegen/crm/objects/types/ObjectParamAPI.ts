@@ -484,17 +484,17 @@ export class ObjectBatchApi {
 import { ObservableGDPRApi } from "./ObservableAPI";
 import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
 
-export interface GDPRApiDeleteRequest {
+export interface GDPRApiPurgeRequest {
     /**
      * 
      * @type string
-     * @memberof GDPRApi_delete
+     * @memberof GDPRApipurge
      */
     objectType: string
     /**
      * 
      * @type PublicGdprDeleteInput
-     * @memberof GDPRApi_delete
+     * @memberof GDPRApipurge
      */
     publicGdprDeleteInput: PublicGdprDeleteInput
 }
@@ -511,8 +511,8 @@ export class ObjectGDPRApi {
      * GDPR DELETE
      * @param param the request object
      */
-    public _delete(param: GDPRApiDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api._delete(param.objectType, param.publicGdprDeleteInput,  options).toPromise();
+    public purge(param: GDPRApiPurgeRequest, options?: Configuration): Promise<void> {
+        return this.api.purge(param.objectType, param.publicGdprDeleteInput,  options).toPromise();
     }
 
 }

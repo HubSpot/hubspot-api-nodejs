@@ -21,12 +21,12 @@ export class GDPRApiRequestFactory extends BaseAPIRequestFactory {
      * GDPR DELETE
      * @param publicGdprDeleteInput 
      */
-    public async _delete(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<RequestContext> {
+    public async purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'publicGdprDeleteInput' is not null or undefined
         if (publicGdprDeleteInput === null || publicGdprDeleteInput === undefined) {
-            throw new RequiredError("GDPRApi", "_delete", "publicGdprDeleteInput");
+            throw new RequiredError("GDPRApi", "purge", "publicGdprDeleteInput");
         }
 
 
@@ -72,10 +72,10 @@ export class GDPRApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to _delete
+     * @params response Response returned by the server for a request to purge
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async _delete(response: ResponseContext): Promise<void > {
+     public async purge(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
