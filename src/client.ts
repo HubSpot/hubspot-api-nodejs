@@ -7,6 +7,7 @@ import { CrmDiscovery } from './discovery/crm/CrmDiscovery'
 import { EventsDiscovery } from './discovery/events/EventsDiscovery'
 import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
+import { SettingsDiscovery } from './discovery/settings/SettingsDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
@@ -21,6 +22,7 @@ export class Client {
   public events: EventsDiscovery = new EventsDiscovery()
   public marketing: MarketingDiscovery = new MarketingDiscovery()
   public oauth: OauthDiscovery = new OauthDiscovery()
+  public settings: SettingsDiscovery = new SettingsDiscovery()
   public webhooks: WebhooksDiscovery = new WebhooksDiscovery()
   public config: IConfiguration
 
@@ -38,6 +40,7 @@ export class Client {
     this.events = new EventsDiscovery(this.config)
     this.marketing = new MarketingDiscovery(this.config)
     this.oauth = new OauthDiscovery(this.config)
+    this.settings = new SettingsDiscovery(this.config)
     this.webhooks = new WebhooksDiscovery(this.config)
   }
 

@@ -11,6 +11,7 @@ describe('api client', () => {
     expect(client.hasOwnProperty('events')).toBeTruthy()
     expect(client.hasOwnProperty('marketing')).toBeTruthy()
     expect(client.hasOwnProperty('oauth')).toBeTruthy()
+    expect(client.hasOwnProperty('settings')).toBeTruthy()
     expect(client.hasOwnProperty('webhooks')).toBeTruthy()
   })
 })

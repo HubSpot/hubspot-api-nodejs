@@ -4,7 +4,6 @@ import { CompaniesDiscovery } from './companies/CompaniesDiscovery'
 import { ContactsDiscovery } from './contacts/ContactsDiscovery'
 import { DealsDiscovery } from './deals/DealsDiscovery'
 import { ExtensionsDiscovery } from './extensions/ExtensionsDiscovery'
-import { FeedbackSubmissionsDiscovery } from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import { ImportsDiscovery } from './imports/ImportsDiscovery'
 import { LineItemsDiscovery } from './line_items/LineItemsDiscovery'
 import { ObjectsDiscovery } from './objects/ObjectsDiscovery'
@@ -23,7 +22,6 @@ export class CrmDiscovery {
   public contacts: ContactsDiscovery
   public deals: DealsDiscovery
   public extensions: ExtensionsDiscovery
-  public feedbackSubmissions: FeedbackSubmissionsDiscovery
   public imports: ImportsDiscovery
   public lineItems: LineItemsDiscovery
   public objects: ObjectsDiscovery
@@ -42,7 +40,6 @@ export class CrmDiscovery {
     this.contacts = new ContactsDiscovery(config)
     this.deals = new DealsDiscovery(config)
     this.extensions = new ExtensionsDiscovery(config)
-    this.feedbackSubmissions = new FeedbackSubmissionsDiscovery(config)
     this.imports = new ImportsDiscovery(config)
     this.lineItems = new LineItemsDiscovery(config)
     this.objects = new ObjectsDiscovery(config)
