@@ -232,6 +232,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - Regenerate Codegen
 
+## [6.0.1-beta4] - 2022-03-29
+
+### Added
+
+- `cms.sourceCode` API client
+- `crm.objects.calls` API client
+- `crm.objects.emails` API client
+- `crm.objects.meetings` API client
+- `crm.objects.notes` API client
+- `crm.objects.tasks` API client
+- `marketing.events` API client
+- `settings.users` API client
+
+### Fixed
+
+ - fixed TimelineEvents
+ - fixed Webhooks double appId
+
+### Update
+
+ - rename crm.contants.gdpr.postCrmV3ObjectsContactsGdprDelete() => crm.contants.gdpr.purge()
+ - rename crm.objects.gdpr.postCrmV3ObjectsContactsGdprDelete() => crm.objects.gdpr.purge()
+ 
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta3...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
@@ -253,3 +276,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [6.0.1-beta1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta1
 [6.0.1-beta2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta2
 [6.0.1-beta3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta3
+[6.0.1-beta4]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta4
