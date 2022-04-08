@@ -254,6 +254,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - rename crm.contants.gdpr.postCrmV3ObjectsContactsGdprDelete() => crm.contants.gdpr.purge()
  - rename crm.objects.gdpr.postCrmV3ObjectsContactsGdprDelete() => crm.objects.gdpr.purge()
+
+ ## [6.0.1-beta5] - 2022-04-08
+
+### Added
+
+- add to `cms.blogs.authors.blogAuthorsApi` Language methods
+- add to `cms.blogs.blogPosts.blogPostsApi` Language methods
+- add to `cms.blogs.tags.blogTagsApi` Language methods
+
+### Update
+
+ - rename crm.pipelines.pipelineStagesApi.getCrmV3PipelinesObjectTypePipelineIdAudit() => crm.pipelines.pipelineStagesApi.getAudit()
+ - rename crm.pipelines.pipelinesApi.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit() => crm.pipelines.pipelinesApi.getAudit()
  
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta3...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
@@ -277,3 +290,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [6.0.1-beta2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta2
 [6.0.1-beta3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta3
 [6.0.1-beta4]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta4
+[6.0.1-beta5]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta5
