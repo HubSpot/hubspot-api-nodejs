@@ -11,11 +11,11 @@ import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
+import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
-import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
@@ -64,6 +64,15 @@ export interface BlogPostsApiArchiveBatchRequest {
     batchInputString: BatchInputString
 }
 
+export interface BlogPostsApiAttachToLangGroupRequest {
+    /**
+     * The JSON representation of the AttachToLangPrimaryRequest object.
+     * @type AttachToLangPrimaryRequestVNext
+     * @memberof BlogPostsApiattachToLangGroup
+     */
+    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
+}
+
 export interface BlogPostsApiCloneRequest {
     /**
      * The JSON representation of the ContentCloneRequest object.
@@ -89,6 +98,24 @@ export interface BlogPostsApiCreateBatchRequest {
      * @memberof BlogPostsApicreateBatch
      */
     batchInputBlogPost: BatchInputBlogPost
+}
+
+export interface BlogPostsApiCreateLangVariationRequest {
+    /**
+     * The JSON representation of the BlogPostLanguageCloneRequestVNext object.
+     * @type BlogPostLanguageCloneRequestVNext
+     * @memberof BlogPostsApicreateLangVariation
+     */
+    blogPostLanguageCloneRequestVNext: BlogPostLanguageCloneRequestVNext
+}
+
+export interface BlogPostsApiDetachFromLangGroupRequest {
+    /**
+     * The JSON representation of the DetachFromLangGroupRequest object.
+     * @type DetachFromLangGroupRequestVNext
+     * @memberof BlogPostsApidetachFromLangGroup
+     */
+    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
 }
 
 export interface BlogPostsApiGetByIdRequest {
@@ -220,42 +247,6 @@ export interface BlogPostsApiGetPreviousVersionsRequest {
     limit?: number
 }
 
-export interface BlogPostsApiPostCmsV3BlogsPostsMultiLanguageAttachToLangGroupRequest {
-    /**
-     * The JSON representation of the AttachToLangPrimaryRequest object.
-     * @type AttachToLangPrimaryRequestVNext
-     * @memberof BlogPostsApipostCmsV3BlogsPostsMultiLanguageAttachToLangGroup
-     */
-    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
-}
-
-export interface BlogPostsApiPostCmsV3BlogsPostsMultiLanguageCreateLanguageVariationRequest {
-    /**
-     * The JSON representation of the ContentLanguageCloneRequest object.
-     * @type ContentLanguageCloneRequestVNext
-     * @memberof BlogPostsApipostCmsV3BlogsPostsMultiLanguageCreateLanguageVariation
-     */
-    contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext
-}
-
-export interface BlogPostsApiPostCmsV3BlogsPostsMultiLanguageDetachFromLangGroupRequest {
-    /**
-     * The JSON representation of the DetachFromLangGroupRequest object.
-     * @type DetachFromLangGroupRequestVNext
-     * @memberof BlogPostsApipostCmsV3BlogsPostsMultiLanguageDetachFromLangGroup
-     */
-    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
-}
-
-export interface BlogPostsApiPostCmsV3BlogsPostsMultiLanguageUpdateLanguagesRequest {
-    /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
-     * @type UpdateLanguagesRequestVNext
-     * @memberof BlogPostsApipostCmsV3BlogsPostsMultiLanguageUpdateLanguages
-     */
-    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
-}
-
 export interface BlogPostsApiPushLiveRequest {
     /**
      * The id of the Blog Post for which it&#39;s draft will be pushed live.
@@ -263,15 +254,6 @@ export interface BlogPostsApiPushLiveRequest {
      * @memberof BlogPostsApipushLive
      */
     objectId: string
-}
-
-export interface BlogPostsApiPutCmsV3BlogsPostsMultiLanguageSetNewLangPrimaryRequest {
-    /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
-     * @type SetNewLanguagePrimaryRequestVNext
-     * @memberof BlogPostsApiputCmsV3BlogsPostsMultiLanguageSetNewLangPrimary
-     */
-    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
 }
 
 export interface BlogPostsApiReadBatchRequest {
@@ -337,6 +319,15 @@ export interface BlogPostsApiScheduleRequest {
     contentScheduleRequestVNext: ContentScheduleRequestVNext
 }
 
+export interface BlogPostsApiSetLangPrimaryRequest {
+    /**
+     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @type SetNewLanguagePrimaryRequestVNext
+     * @memberof BlogPostsApisetLangPrimary
+     */
+    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
+}
+
 export interface BlogPostsApiUpdateRequest {
     /**
      * The Blog Post id.
@@ -388,6 +379,15 @@ export interface BlogPostsApiUpdateDraftRequest {
     blogPost: BlogPost
 }
 
+export interface BlogPostsApiUpdateLangsRequest {
+    /**
+     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @type UpdateLanguagesRequestVNext
+     * @memberof BlogPostsApiupdateLangs
+     */
+    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
+}
+
 export class ObjectBlogPostsApi {
     private api: ObservableBlogPostsApi
 
@@ -411,6 +411,15 @@ export class ObjectBlogPostsApi {
      */
     public archiveBatch(param: BlogPostsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
+    }
+
+    /**
+     * Attach a Blog Post to a multi-language group.
+     * Attach a Blog Post to a multi-language group
+     * @param param the request object
+     */
+    public attachToLangGroup(param: BlogPostsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
     /**
@@ -438,6 +447,24 @@ export class ObjectBlogPostsApi {
      */
     public createBatch(param: BlogPostsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.createBatch(param.batchInputBlogPost,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Post
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariation(param: BlogPostsApiCreateLangVariationRequest, options?: Configuration): Promise<BlogPost> {
+        return this.api.createLangVariation(param.blogPostLanguageCloneRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a Blog Post from a multi-language group.
+     * Detach a Blog Post from a multi-language group
+     * @param param the request object
+     */
+    public detachFromLangGroup(param: BlogPostsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
     /**
@@ -486,57 +513,12 @@ export class ObjectBlogPostsApi {
     }
 
     /**
-     * Attach a Blog Post to a multi-language group.
-     * Attach a Blog Post to a multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(param: BlogPostsApiPostCmsV3BlogsPostsMultiLanguageAttachToLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Post
-     * Create a new language variation
-     * @param param the request object
-     */
-    public postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(param: BlogPostsApiPostCmsV3BlogsPostsMultiLanguageCreateLanguageVariationRequest, options?: Configuration): Promise<BlogPost> {
-        return this.api.postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(param.contentLanguageCloneRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Detach a Blog Post from a multi-language group.
-     * Detach a Blog Post from a multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(param: BlogPostsApiPostCmsV3BlogsPostsMultiLanguageDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Post in a multi-language group.
-     * Update languages of multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsPostsMultiLanguageUpdateLanguages(param: BlogPostsApiPostCmsV3BlogsPostsMultiLanguageUpdateLanguagesRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsPostsMultiLanguageUpdateLanguages(param.updateLanguagesRequestVNext,  options).toPromise();
-    }
-
-    /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
      * @param param the request object
      */
     public pushLive(param: BlogPostsApiPushLiveRequest, options?: Configuration): Promise<void> {
         return this.api.pushLive(param.objectId,  options).toPromise();
-    }
-
-    /**
-     * Set a Blog Post as the primary language of a multi-language group.
-     * Set a new primary language
-     * @param param the request object
-     */
-    public putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(param: BlogPostsApiPutCmsV3BlogsPostsMultiLanguageSetNewLangPrimaryRequest, options?: Configuration): Promise<void> {
-        return this.api.putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
     /**
@@ -585,6 +567,15 @@ export class ObjectBlogPostsApi {
     }
 
     /**
+     * Set a Blog Post as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param param the request object
+     */
+    public setLangPrimary(param: BlogPostsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+        return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
      * Sparse updates a single Blog Post object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * Update a Blog Post
      * @param param the request object
@@ -609,6 +600,15 @@ export class ObjectBlogPostsApi {
      */
     public updateDraft(param: BlogPostsApiUpdateDraftRequest, options?: Configuration): Promise<BlogPost> {
         return this.api.updateDraft(param.objectId, param.blogPost,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Post in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangs(param: BlogPostsApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+        return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
 }

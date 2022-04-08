@@ -55,6 +55,16 @@ export class PromiseBlogTagsApi {
     }
 
     /**
+     * Attach a Blog Tag to a multi-language group.
+     * Attach a Blog Tag to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Create a new Blog Tag.
      * Create a new Blog Tag
      * @param tag The JSON representation of a new Blog Tag.
@@ -71,6 +81,26 @@ export class PromiseBlogTagsApi {
      */
     public createBatch(batchInputTag: BatchInputTag, _options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         const result = this.api.createBatch(batchInputTag, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Tag
+     * Create a new language variation
+     * @param tagCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public createLangVariation(tagCloneRequestVNext: TagCloneRequestVNext, _options?: Configuration): Promise<Tag> {
+        const result = this.api.createLangVariation(tagCloneRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Detach a Blog Tag from a multi-language group.
+     * Detach a Blog Tag from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, _options);
         return result.toPromise();
     }
 
@@ -105,42 +135,13 @@ export class PromiseBlogTagsApi {
     }
 
     /**
-     * Attach a Blog Tag to a multi-language group.
-     * Attach a Blog Tag to a multi-language group
-     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     * Retrieve the Blog Tag objects identified in the request body.
+     * Retrieve a batch of Blog Tags
+     * @param batchInputString The JSON array of Blog Tag ids.
+     * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
      */
-    public postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Tag
-     * Create a new language variation
-     * @param tagCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
-     */
-    public postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext: TagCloneRequestVNext, _options?: Configuration): Promise<Tag> {
-        const result = this.api.postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(tagCloneRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Detach a Blog Tag from a multi-language group.
-     * Detach a Blog Tag from a multi-language group
-     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
-     */
-    public postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Tag in a multi-language group.
-     * Update languages of multi-language group
-     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
-     */
-    public postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsTagsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
+        const result = this.api.readBatch(batchInputString, archived, _options);
         return result.toPromise();
     }
 
@@ -149,19 +150,8 @@ export class PromiseBlogTagsApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Retrieve the Blog Tag objects identified in the request body.
-     * Retrieve a batch of Blog Tags
-     * @param batchInputString The JSON array of Blog Tag ids.
-     * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
-     */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
-        const result = this.api.readBatch(batchInputString, archived, _options);
+    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
         return result.toPromise();
     }
 
@@ -185,6 +175,16 @@ export class PromiseBlogTagsApi {
      */
     public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         const result = this.api.updateBatch(batchInputJsonNode, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Tag in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
+     */
+    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.updateLangs(updateLanguagesRequestVNext, _options);
         return result.toPromise();
     }
 

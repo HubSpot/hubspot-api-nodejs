@@ -18,17 +18,17 @@ import { PublicAuditInfo } from '../models/PublicAuditInfo';
 import { ObservablePipelineAuditsApi } from "./ObservableAPI";
 import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";
 
-export interface PipelineAuditsApiGetCrmV3PipelinesObjectTypePipelineIdAuditRequest {
+export interface PipelineAuditsApiGetAuditRequest {
     /**
      * 
      * @type string
-     * @memberof PipelineAuditsApigetCrmV3PipelinesObjectTypePipelineIdAudit
+     * @memberof PipelineAuditsApigetAudit
      */
     objectType: string
     /**
      * 
      * @type string
-     * @memberof PipelineAuditsApigetCrmV3PipelinesObjectTypePipelineIdAudit
+     * @memberof PipelineAuditsApigetAudit
      */
     pipelineId: string
 }
@@ -45,8 +45,8 @@ export class ObjectPipelineAuditsApi {
      * Return an audit of all changes to the pipeline
      * @param param the request object
      */
-    public getCrmV3PipelinesObjectTypePipelineIdAudit(param: PipelineAuditsApiGetCrmV3PipelinesObjectTypePipelineIdAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
-        return this.api.getCrmV3PipelinesObjectTypePipelineIdAudit(param.objectType, param.pipelineId,  options).toPromise();
+    public getAudit(param: PipelineAuditsApiGetAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.api.getAudit(param.objectType, param.pipelineId,  options).toPromise();
     }
 
 }
@@ -54,17 +54,17 @@ export class ObjectPipelineAuditsApi {
 import { ObservablePipelineStageAuditsApi } from "./ObservableAPI";
 import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponseProcessor} from "../apis/PipelineStageAuditsApi";
 
-export interface PipelineStageAuditsApiGetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAuditRequest {
+export interface PipelineStageAuditsApiGetAuditRequest {
     /**
      * 
      * @type string
-     * @memberof PipelineStageAuditsApigetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit
+     * @memberof PipelineStageAuditsApigetAudit
      */
     objectType: string
     /**
      * 
      * @type string
-     * @memberof PipelineStageAuditsApigetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit
+     * @memberof PipelineStageAuditsApigetAudit
      */
     stageId: string
 }
@@ -81,8 +81,8 @@ export class ObjectPipelineStageAuditsApi {
      * Return an audit of all changes to the pipeline stage
      * @param param the request object
      */
-    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(param: PipelineStageAuditsApiGetCrmV3PipelinesObjectTypePipelineIdStagesStageIdAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
-        return this.api.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(param.objectType, param.stageId,  options).toPromise();
+    public getAudit(param: PipelineStageAuditsApiGetAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        return this.api.getAudit(param.objectType, param.stageId,  options).toPromise();
     }
 
 }

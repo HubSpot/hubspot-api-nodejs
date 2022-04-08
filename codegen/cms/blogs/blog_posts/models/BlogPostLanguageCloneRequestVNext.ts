@@ -13,22 +13,17 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Request body object for creating new language variant content.
+* Request body object for creating new blog post language variant.
 */
-export class ContentLanguageCloneRequestVNext {
+export class BlogPostLanguageCloneRequestVNext {
     /**
-    * ID of content to clone.
+    * ID of blog post to clone.
     */
     'id': string;
     /**
     * Target language of new variant.
     */
     'language'?: string;
-    /**
-    * Language of primary content to clone.
-    */
-    'primaryLanguage'?: string;
-    'contentGroupId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -44,22 +39,10 @@ export class ContentLanguageCloneRequestVNext {
             "baseName": "language",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "primaryLanguage",
-            "baseName": "primaryLanguage",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "contentGroupId",
-            "baseName": "contentGroupId",
-            "type": "number",
-            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
-        return ContentLanguageCloneRequestVNext.attributeTypeMap;
+        return BlogPostLanguageCloneRequestVNext.attributeTypeMap;
     }
 
     public constructor() {

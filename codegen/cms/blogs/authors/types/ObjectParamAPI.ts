@@ -47,6 +47,15 @@ export interface BlogAuthorsApiArchiveBatchRequest {
     batchInputString: BatchInputString
 }
 
+export interface BlogAuthorsApiAttachToLangGroupRequest {
+    /**
+     * The JSON representation of the AttachToLangPrimaryRequest object.
+     * @type AttachToLangPrimaryRequestVNext
+     * @memberof BlogAuthorsApiattachToLangGroup
+     */
+    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
+}
+
 export interface BlogAuthorsApiCreateRequest {
     /**
      * The JSON representation of a new Blog Author.
@@ -63,6 +72,24 @@ export interface BlogAuthorsApiCreateBatchRequest {
      * @memberof BlogAuthorsApicreateBatch
      */
     batchInputBlogAuthor: BatchInputBlogAuthor
+}
+
+export interface BlogAuthorsApiCreateLangVariationRequest {
+    /**
+     * The JSON representation of the ContentLanguageCloneRequest object.
+     * @type BlogAuthorCloneRequestVNext
+     * @memberof BlogAuthorsApicreateLangVariation
+     */
+    blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext
+}
+
+export interface BlogAuthorsApiDetachFromLangGroupRequest {
+    /**
+     * The JSON representation of the DetachFromLangGroupRequest object.
+     * @type DetachFromLangGroupRequestVNext
+     * @memberof BlogAuthorsApidetachFromLangGroup
+     */
+    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
 }
 
 export interface BlogAuthorsApiGetByIdRequest {
@@ -143,51 +170,6 @@ export interface BlogAuthorsApiGetPageRequest {
     archived?: boolean
 }
 
-export interface BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageAttachToLangGroupRequest {
-    /**
-     * The JSON representation of the AttachToLangPrimaryRequest object.
-     * @type AttachToLangPrimaryRequestVNext
-     * @memberof BlogAuthorsApipostCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup
-     */
-    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
-}
-
-export interface BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariationRequest {
-    /**
-     * The JSON representation of the ContentLanguageCloneRequest object.
-     * @type BlogAuthorCloneRequestVNext
-     * @memberof BlogAuthorsApipostCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation
-     */
-    blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext
-}
-
-export interface BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroupRequest {
-    /**
-     * The JSON representation of the DetachFromLangGroupRequest object.
-     * @type DetachFromLangGroupRequestVNext
-     * @memberof BlogAuthorsApipostCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup
-     */
-    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
-}
-
-export interface BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageUpdateLanguagesRequest {
-    /**
-     * The JSON representation of the UpdateLanguagesRequest object.
-     * @type UpdateLanguagesRequestVNext
-     * @memberof BlogAuthorsApipostCmsV3BlogsAuthorsMultiLanguageUpdateLanguages
-     */
-    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
-}
-
-export interface BlogAuthorsApiPutCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimaryRequest {
-    /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
-     * @type SetNewLanguagePrimaryRequestVNext
-     * @memberof BlogAuthorsApiputCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary
-     */
-    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
-}
-
 export interface BlogAuthorsApiReadBatchRequest {
     /**
      * The JSON array of Blog Author ids.
@@ -201,6 +183,15 @@ export interface BlogAuthorsApiReadBatchRequest {
      * @memberof BlogAuthorsApireadBatch
      */
     archived?: boolean
+}
+
+export interface BlogAuthorsApiSetLangPrimaryRequest {
+    /**
+     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @type SetNewLanguagePrimaryRequestVNext
+     * @memberof BlogAuthorsApisetLangPrimary
+     */
+    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
 }
 
 export interface BlogAuthorsApiUpdateRequest {
@@ -239,6 +230,15 @@ export interface BlogAuthorsApiUpdateBatchRequest {
     archived?: boolean
 }
 
+export interface BlogAuthorsApiUpdateLangsRequest {
+    /**
+     * The JSON representation of the UpdateLanguagesRequest object.
+     * @type UpdateLanguagesRequestVNext
+     * @memberof BlogAuthorsApiupdateLangs
+     */
+    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
+}
+
 export class ObjectBlogAuthorsApi {
     private api: ObservableBlogAuthorsApi
 
@@ -265,6 +265,15 @@ export class ObjectBlogAuthorsApi {
     }
 
     /**
+     * Attach a Blog Author to a multi-language group.
+     * Attach a Blog Author to a multi-language group
+     * @param param the request object
+     */
+    public attachToLangGroup(param: BlogAuthorsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
      * Create a new Blog Author.
      * Create a new Blog Author
      * @param param the request object
@@ -280,6 +289,24 @@ export class ObjectBlogAuthorsApi {
      */
     public createBatch(param: BlogAuthorsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.createBatch(param.batchInputBlogAuthor,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Author.
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariation(param: BlogAuthorsApiCreateLangVariationRequest, options?: Configuration): Promise<BlogAuthor> {
+        return this.api.createLangVariation(param.blogAuthorCloneRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a Blog Author from a multi-language group.
+     * Detach a Blog Author from a multi-language group
+     * @param param the request object
+     */
+    public detachFromLangGroup(param: BlogAuthorsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
     /**
@@ -301,39 +328,12 @@ export class ObjectBlogAuthorsApi {
     }
 
     /**
-     * Attach a Blog Author to a multi-language group.
-     * Attach a Blog Author to a multi-language group
+     * Retrieve the Blog Author objects identified in the request body.
+     * Retrieve a batch of Blog Authors
      * @param param the request object
      */
-    public postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(param: BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageAttachToLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Author.
-     * Create a new language variation
-     * @param param the request object
-     */
-    public postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(param: BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariationRequest, options?: Configuration): Promise<BlogAuthor> {
-        return this.api.postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(param.blogAuthorCloneRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Detach a Blog Author from a multi-language group.
-     * Detach a Blog Author from a multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(param: BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Author in a multi-language group.
-     * Update languages of multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(param: BlogAuthorsApiPostCmsV3BlogsAuthorsMultiLanguageUpdateLanguagesRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(param.updateLanguagesRequestVNext,  options).toPromise();
+    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+        return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
     /**
@@ -341,17 +341,8 @@ export class ObjectBlogAuthorsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(param: BlogAuthorsApiPutCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimaryRequest, options?: Configuration): Promise<void> {
-        return this.api.putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Retrieve the Blog Author objects identified in the request body.
-     * Retrieve a batch of Blog Authors
-     * @param param the request object
-     */
-    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
-        return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
+    public setLangPrimary(param: BlogAuthorsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+        return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
     /**
@@ -370,6 +361,15 @@ export class ObjectBlogAuthorsApi {
      */
     public updateBatch(param: BlogAuthorsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Author in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangs(param: BlogAuthorsApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+        return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
 }

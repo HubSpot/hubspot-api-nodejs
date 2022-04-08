@@ -7,11 +7,11 @@ export * from './BatchInputString';
 export * from './BatchResponseBlogPost';
 export * from './BatchResponseBlogPostWithErrors';
 export * from './BlogPost';
+export * from './BlogPostLanguageCloneRequestVNext';
 export * from './CollectionResponseWithTotalBlogPostForwardPaging';
 export * from './CollectionResponseWithTotalVersionBlogPost';
 export * from './ColorStop';
 export * from './ContentCloneRequestVNext';
-export * from './ContentLanguageCloneRequestVNext';
 export * from './ContentLanguageVariation';
 export * from './ContentScheduleRequestVNext';
 export * from './DetachFromLangGroupRequestVNext';
@@ -41,12 +41,12 @@ import { BatchInputJsonNode } from './BatchInputJsonNode';
 import { BatchInputString } from './BatchInputString';
 import { BatchResponseBlogPost, BatchResponseBlogPostStatusEnum        } from './BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors, BatchResponseBlogPostWithErrorsStatusEnum          } from './BatchResponseBlogPostWithErrors';
-import { BlogPost              , BlogPostAbStatusEnum     , BlogPostLanguageEnum                , BlogPostCurrentStateEnum          , BlogPostContentTypeCategoryEnum                    } from './BlogPost';
+import { BlogPost              , BlogPostAbStatusEnum     , BlogPostLanguageEnum                           , BlogPostContentTypeCategoryEnum             , BlogPostCurrentStateEnum       } from './BlogPost';
+import { BlogPostLanguageCloneRequestVNext } from './BlogPostLanguageCloneRequestVNext';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from './CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from './CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from './ColorStop';
 import { ContentCloneRequestVNext } from './ContentCloneRequestVNext';
-import { ContentLanguageCloneRequestVNext } from './ContentLanguageCloneRequestVNext';
 import { ContentLanguageVariation } from './ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from './ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
@@ -96,8 +96,8 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseBlogPostWithErrorsStatusEnum",
     "BlogPostAbStatusEnum",
     "BlogPostLanguageEnum",
-    "BlogPostCurrentStateEnum",
     "BlogPostContentTypeCategoryEnum",
+    "BlogPostCurrentStateEnum",
     "SideOrCornerVerticalSideEnum",
     "SideOrCornerHorizontalSideEnum",
     "StylesVerticalAlignmentEnum",
@@ -115,11 +115,11 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseBlogPost": BatchResponseBlogPost,
     "BatchResponseBlogPostWithErrors": BatchResponseBlogPostWithErrors,
     "BlogPost": BlogPost,
+    "BlogPostLanguageCloneRequestVNext": BlogPostLanguageCloneRequestVNext,
     "CollectionResponseWithTotalBlogPostForwardPaging": CollectionResponseWithTotalBlogPostForwardPaging,
     "CollectionResponseWithTotalVersionBlogPost": CollectionResponseWithTotalVersionBlogPost,
     "ColorStop": ColorStop,
     "ContentCloneRequestVNext": ContentCloneRequestVNext,
-    "ContentLanguageCloneRequestVNext": ContentLanguageCloneRequestVNext,
     "ContentLanguageVariation": ContentLanguageVariation,
     "ContentScheduleRequestVNext": ContentScheduleRequestVNext,
     "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,
