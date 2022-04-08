@@ -121,6 +121,54 @@ export class BlogAuthorsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Attach a Blog Author to a multi-language group.
+     * Attach a Blog Author to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public async attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'attachToLangPrimaryRequestVNext' is not null or undefined
+        if (attachToLangPrimaryRequestVNext === null || attachToLangPrimaryRequestVNext === undefined) {
+            throw new RequiredError("BlogAuthorsApi", "attachToLangGroup", "attachToLangPrimaryRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/authors/multi-language/attach-to-lang-group';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(attachToLangPrimaryRequestVNext, "AttachToLangPrimaryRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Create a new Blog Author.
      * Create a new Blog Author
      * @param blogAuthor The JSON representation of a new Blog Author.
@@ -197,6 +245,102 @@ export class BlogAuthorsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(batchInputBlogAuthor, "BatchInputBlogAuthor", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Author.
+     * Create a new language variation
+     * @param blogAuthorCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
+     */
+    public async createLangVariation(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'blogAuthorCloneRequestVNext' is not null or undefined
+        if (blogAuthorCloneRequestVNext === null || blogAuthorCloneRequestVNext === undefined) {
+            throw new RequiredError("BlogAuthorsApi", "createLangVariation", "blogAuthorCloneRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/authors/multi-language/create-language-variation';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(blogAuthorCloneRequestVNext, "BlogAuthorCloneRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Detach a Blog Author from a multi-language group.
+     * Detach a Blog Author from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public async detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'detachFromLangGroupRequestVNext' is not null or undefined
+        if (detachFromLangGroupRequestVNext === null || detachFromLangGroupRequestVNext === undefined) {
+            throw new RequiredError("BlogAuthorsApi", "detachFromLangGroup", "detachFromLangGroupRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/authors/multi-language/detach-from-lang-group';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(detachFromLangGroupRequestVNext, "DetachFromLangGroupRequestVNext", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -362,246 +506,6 @@ export class BlogAuthorsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Attach a Blog Author to a multi-language group.
-     * Attach a Blog Author to a multi-language group
-     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
-     */
-    public async postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'attachToLangPrimaryRequestVNext' is not null or undefined
-        if (attachToLangPrimaryRequestVNext === null || attachToLangPrimaryRequestVNext === undefined) {
-            throw new RequiredError("BlogAuthorsApi", "postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup", "attachToLangPrimaryRequestVNext");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/authors/multi-language/attach-to-lang-group';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(attachToLangPrimaryRequestVNext, "AttachToLangPrimaryRequestVNext", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Author.
-     * Create a new language variation
-     * @param blogAuthorCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
-     */
-    public async postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'blogAuthorCloneRequestVNext' is not null or undefined
-        if (blogAuthorCloneRequestVNext === null || blogAuthorCloneRequestVNext === undefined) {
-            throw new RequiredError("BlogAuthorsApi", "postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation", "blogAuthorCloneRequestVNext");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/authors/multi-language/create-language-variation';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(blogAuthorCloneRequestVNext, "BlogAuthorCloneRequestVNext", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Detach a Blog Author from a multi-language group.
-     * Detach a Blog Author from a multi-language group
-     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
-     */
-    public async postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'detachFromLangGroupRequestVNext' is not null or undefined
-        if (detachFromLangGroupRequestVNext === null || detachFromLangGroupRequestVNext === undefined) {
-            throw new RequiredError("BlogAuthorsApi", "postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup", "detachFromLangGroupRequestVNext");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/authors/multi-language/detach-from-lang-group';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(detachFromLangGroupRequestVNext, "DetachFromLangGroupRequestVNext", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Author in a multi-language group.
-     * Update languages of multi-language group
-     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
-     */
-    public async postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'updateLanguagesRequestVNext' is not null or undefined
-        if (updateLanguagesRequestVNext === null || updateLanguagesRequestVNext === undefined) {
-            throw new RequiredError("BlogAuthorsApi", "postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages", "updateLanguagesRequestVNext");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/authors/multi-language/update-languages';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(updateLanguagesRequestVNext, "UpdateLanguagesRequestVNext", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Set a Blog Author as the primary language of a multi-language group.
-     * Set a new primary language
-     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
-     */
-    public async putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'setNewLanguagePrimaryRequestVNext' is not null or undefined
-        if (setNewLanguagePrimaryRequestVNext === null || setNewLanguagePrimaryRequestVNext === undefined) {
-            throw new RequiredError("BlogAuthorsApi", "putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary", "setNewLanguagePrimaryRequestVNext");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/blogs/authors/multi-language/set-new-lang-primary';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(setNewLanguagePrimaryRequestVNext, "SetNewLanguagePrimaryRequestVNext", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod = null;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Retrieve the Blog Author objects identified in the request body.
      * Retrieve a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
@@ -637,6 +541,54 @@ export class BlogAuthorsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(batchInputString, "BatchInputString", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Set a Blog Author as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public async setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'setNewLanguagePrimaryRequestVNext' is not null or undefined
+        if (setNewLanguagePrimaryRequestVNext === null || setNewLanguagePrimaryRequestVNext === undefined) {
+            throw new RequiredError("BlogAuthorsApi", "setLangPrimary", "setNewLanguagePrimaryRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/authors/multi-language/set-new-lang-primary';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(setNewLanguagePrimaryRequestVNext, "SetNewLanguagePrimaryRequestVNext", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -774,6 +726,54 @@ export class BlogAuthorsApiRequestFactory extends BaseAPIRequestFactory {
         return requestContext;
     }
 
+    /**
+     * Explicitly set new languages for each Blog Author in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
+     */
+    public async updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'updateLanguagesRequestVNext' is not null or undefined
+        if (updateLanguagesRequestVNext === null || updateLanguagesRequestVNext === undefined) {
+            throw new RequiredError("BlogAuthorsApi", "updateLangs", "updateLanguagesRequestVNext");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/blogs/authors/multi-language/update-languages';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(updateLanguagesRequestVNext, "UpdateLanguagesRequestVNext", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod = null;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod) {
+            await authMethod.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
 }
 
 export class BlogAuthorsApiResponseProcessor {
@@ -837,6 +837,31 @@ export class BlogAuthorsApiResponseProcessor {
                 "void", ""
             ) as void;
             return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to attachToLangGroup
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async attachToLangGroup(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -925,6 +950,67 @@ export class BlogAuthorsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to createLangVariation
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async createLangVariation(response: ResponseContext): Promise<BlogAuthor > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BlogAuthor = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BlogAuthor", ""
+            ) as BlogAuthor;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BlogAuthor = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BlogAuthor", ""
+            ) as BlogAuthor;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to detachFromLangGroup
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async detachFromLangGroup(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -997,149 +1083,6 @@ export class BlogAuthorsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async postCmsV3BlogsAuthorsMultiLanguageAttachToLangGroup(response: ResponseContext): Promise< void> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async postCmsV3BlogsAuthorsMultiLanguageCreateLanguageVariation(response: ResponseContext): Promise<BlogAuthor > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BlogAuthor = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogAuthor", ""
-            ) as BlogAuthor;
-            return body;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BlogAuthor = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BlogAuthor", ""
-            ) as BlogAuthor;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async postCmsV3BlogsAuthorsMultiLanguageDetachFromLangGroup(response: ResponseContext): Promise< void> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async postCmsV3BlogsAuthorsMultiLanguageUpdateLanguages(response: ResponseContext): Promise< void> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async putCmsV3BlogsAuthorsMultiLanguageSetNewLangPrimary(response: ResponseContext): Promise<void > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
      * @params response Response returned by the server for a request to readBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -1173,6 +1116,38 @@ export class BlogAuthorsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors", ""
             ) as BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to setLangPrimary
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async setLangPrimary(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return body;
         }
 
@@ -1253,6 +1228,31 @@ export class BlogAuthorsApiResponseProcessor {
                 "BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors", ""
             ) as BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors;
             return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateLangs
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateLangs(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

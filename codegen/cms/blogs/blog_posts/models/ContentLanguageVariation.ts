@@ -24,9 +24,9 @@ export class ContentLanguageVariation {
     'campaign': string;
     'tagIds'?: Array<number>;
     'archivedInDashboard': boolean;
+    'created': Date;
+    'updated': Date;
     'publishDate': Date;
-    'createdAt': Date;
-    'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -98,20 +98,20 @@ export class ContentLanguageVariation {
             "format": ""
         },
         {
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "publishDate",
             "baseName": "publishDate",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
         }    ];

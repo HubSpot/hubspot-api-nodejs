@@ -24,10 +24,7 @@ export class VersionBlogPost {
     * The id of the version.
     */
     'id': string;
-    /**
-    * The timestamp (ISO8601 format) when this version was updated.
-    */
-    'updated': Date;
+    'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -51,8 +48,8 @@ export class VersionBlogPost {
             "format": ""
         },
         {
-            "name": "updated",
-            "baseName": "updated",
+            "name": "updatedAt",
+            "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
         }    ];

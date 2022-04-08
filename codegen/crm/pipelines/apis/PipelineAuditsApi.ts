@@ -22,18 +22,18 @@ export class PipelineAuditsApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      */
-    public async getCrmV3PipelinesObjectTypePipelineIdAudit(objectType: string, pipelineId: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAudit(objectType: string, pipelineId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
-            throw new RequiredError("PipelineAuditsApi", "getCrmV3PipelinesObjectTypePipelineIdAudit", "objectType");
+            throw new RequiredError("PipelineAuditsApi", "getAudit", "objectType");
         }
 
 
         // verify required parameter 'pipelineId' is not null or undefined
         if (pipelineId === null || pipelineId === undefined) {
-            throw new RequiredError("PipelineAuditsApi", "getCrmV3PipelinesObjectTypePipelineIdAudit", "pipelineId");
+            throw new RequiredError("PipelineAuditsApi", "getAudit", "pipelineId");
         }
 
 
@@ -70,10 +70,10 @@ export class PipelineAuditsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getCrmV3PipelinesObjectTypePipelineIdAudit
+     * @params response Response returned by the server for a request to getAudit
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getCrmV3PipelinesObjectTypePipelineIdAudit(response: ResponseContext): Promise<CollectionResponsePublicAuditInfoNoPaging > {
+     public async getAudit(response: ResponseContext): Promise<CollectionResponsePublicAuditInfoNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePublicAuditInfoNoPaging = ObjectSerializer.deserialize(

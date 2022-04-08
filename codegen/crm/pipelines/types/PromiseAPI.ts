@@ -34,8 +34,8 @@ export class PromisePipelineAuditsApi {
      * @param objectType 
      * @param pipelineId 
      */
-    public getCrmV3PipelinesObjectTypePipelineIdAudit(objectType: string, pipelineId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
-        const result = this.api.getCrmV3PipelinesObjectTypePipelineIdAudit(objectType, pipelineId, _options);
+    public getAudit(objectType: string, pipelineId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        const result = this.api.getAudit(objectType, pipelineId, _options);
         return result.toPromise();
     }
 
@@ -64,8 +64,8 @@ export class PromisePipelineStageAuditsApi {
      * @param objectType 
      * @param stageId 
      */
-    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType: string, stageId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
-        const result = this.api.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType, stageId, _options);
+    public getAudit(objectType: string, stageId: string, _options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+        const result = this.api.getAudit(objectType, stageId, _options);
         return result.toPromise();
     }
 

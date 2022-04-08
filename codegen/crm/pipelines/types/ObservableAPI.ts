@@ -38,8 +38,8 @@ export class ObservablePipelineAuditsApi {
      * @param objectType 
      * @param pipelineId 
      */
-    public getCrmV3PipelinesObjectTypePipelineIdAudit(objectType: string, pipelineId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
-        const requestContextPromise = this.requestFactory.getCrmV3PipelinesObjectTypePipelineIdAudit(objectType, pipelineId, _options);
+    public getAudit(objectType: string, pipelineId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        const requestContextPromise = this.requestFactory.getAudit(objectType, pipelineId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -53,7 +53,7 @@ export class ObservablePipelineAuditsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3PipelinesObjectTypePipelineIdAudit(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAudit(rsp)));
             }));
     }
 
@@ -81,8 +81,8 @@ export class ObservablePipelineStageAuditsApi {
      * @param objectType 
      * @param stageId 
      */
-    public getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType: string, stageId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
-        const requestContextPromise = this.requestFactory.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(objectType, stageId, _options);
+    public getAudit(objectType: string, stageId: string, _options?: Configuration): Observable<CollectionResponsePublicAuditInfoNoPaging> {
+        const requestContextPromise = this.requestFactory.getAudit(objectType, stageId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -96,7 +96,7 @@ export class ObservablePipelineStageAuditsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAudit(rsp)));
             }));
     }
 

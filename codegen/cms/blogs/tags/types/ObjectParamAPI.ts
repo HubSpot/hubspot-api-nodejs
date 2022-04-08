@@ -47,6 +47,15 @@ export interface BlogTagsApiArchiveBatchRequest {
     batchInputString: BatchInputString
 }
 
+export interface BlogTagsApiAttachToLangGroupRequest {
+    /**
+     * The JSON representation of the AttachToLangPrimaryRequest object.
+     * @type AttachToLangPrimaryRequestVNext
+     * @memberof BlogTagsApiattachToLangGroup
+     */
+    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
+}
+
 export interface BlogTagsApiCreateRequest {
     /**
      * The JSON representation of a new Blog Tag.
@@ -63,6 +72,24 @@ export interface BlogTagsApiCreateBatchRequest {
      * @memberof BlogTagsApicreateBatch
      */
     batchInputTag: BatchInputTag
+}
+
+export interface BlogTagsApiCreateLangVariationRequest {
+    /**
+     * The JSON representation of the ContentLanguageCloneRequest object.
+     * @type TagCloneRequestVNext
+     * @memberof BlogTagsApicreateLangVariation
+     */
+    tagCloneRequestVNext: TagCloneRequestVNext
+}
+
+export interface BlogTagsApiDetachFromLangGroupRequest {
+    /**
+     * The JSON representation of the DetachFromLangGroupRequest object.
+     * @type DetachFromLangGroupRequestVNext
+     * @memberof BlogTagsApidetachFromLangGroup
+     */
+    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
 }
 
 export interface BlogTagsApiGetByIdRequest {
@@ -143,51 +170,6 @@ export interface BlogTagsApiGetPageRequest {
     archived?: boolean
 }
 
-export interface BlogTagsApiPostCmsV3BlogsTagsMultiLanguageAttachToLangGroupRequest {
-    /**
-     * The JSON representation of the AttachToLangPrimaryRequest object.
-     * @type AttachToLangPrimaryRequestVNext
-     * @memberof BlogTagsApipostCmsV3BlogsTagsMultiLanguageAttachToLangGroup
-     */
-    attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext
-}
-
-export interface BlogTagsApiPostCmsV3BlogsTagsMultiLanguageCreateLanguageVariationRequest {
-    /**
-     * The JSON representation of the ContentLanguageCloneRequest object.
-     * @type TagCloneRequestVNext
-     * @memberof BlogTagsApipostCmsV3BlogsTagsMultiLanguageCreateLanguageVariation
-     */
-    tagCloneRequestVNext: TagCloneRequestVNext
-}
-
-export interface BlogTagsApiPostCmsV3BlogsTagsMultiLanguageDetachFromLangGroupRequest {
-    /**
-     * The JSON representation of the DetachFromLangGroupRequest object.
-     * @type DetachFromLangGroupRequestVNext
-     * @memberof BlogTagsApipostCmsV3BlogsTagsMultiLanguageDetachFromLangGroup
-     */
-    detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext
-}
-
-export interface BlogTagsApiPostCmsV3BlogsTagsMultiLanguageUpdateLanguagesRequest {
-    /**
-     * The JSON representation of the UpdateLanguagesRequest object.
-     * @type UpdateLanguagesRequestVNext
-     * @memberof BlogTagsApipostCmsV3BlogsTagsMultiLanguageUpdateLanguages
-     */
-    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
-}
-
-export interface BlogTagsApiPutCmsV3BlogsTagsMultiLanguageSetNewLangPrimaryRequest {
-    /**
-     * The JSON representation of the SetNewLanguagePrimaryRequest object.
-     * @type SetNewLanguagePrimaryRequestVNext
-     * @memberof BlogTagsApiputCmsV3BlogsTagsMultiLanguageSetNewLangPrimary
-     */
-    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
-}
-
 export interface BlogTagsApiReadBatchRequest {
     /**
      * The JSON array of Blog Tag ids.
@@ -201,6 +183,15 @@ export interface BlogTagsApiReadBatchRequest {
      * @memberof BlogTagsApireadBatch
      */
     archived?: boolean
+}
+
+export interface BlogTagsApiSetLangPrimaryRequest {
+    /**
+     * The JSON representation of the SetNewLanguagePrimaryRequest object.
+     * @type SetNewLanguagePrimaryRequestVNext
+     * @memberof BlogTagsApisetLangPrimary
+     */
+    setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext
 }
 
 export interface BlogTagsApiUpdateRequest {
@@ -239,6 +230,15 @@ export interface BlogTagsApiUpdateBatchRequest {
     archived?: boolean
 }
 
+export interface BlogTagsApiUpdateLangsRequest {
+    /**
+     * The JSON representation of the UpdateLanguagesRequest object.
+     * @type UpdateLanguagesRequestVNext
+     * @memberof BlogTagsApiupdateLangs
+     */
+    updateLanguagesRequestVNext: UpdateLanguagesRequestVNext
+}
+
 export class ObjectBlogTagsApi {
     private api: ObservableBlogTagsApi
 
@@ -265,6 +265,15 @@ export class ObjectBlogTagsApi {
     }
 
     /**
+     * Attach a Blog Tag to a multi-language group.
+     * Attach a Blog Tag to a multi-language group
+     * @param param the request object
+     */
+    public attachToLangGroup(param: BlogTagsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
      * Create a new Blog Tag.
      * Create a new Blog Tag
      * @param param the request object
@@ -280,6 +289,24 @@ export class ObjectBlogTagsApi {
      */
     public createBatch(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.createBatch(param.batchInputTag,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Tag
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariation(param: BlogTagsApiCreateLangVariationRequest, options?: Configuration): Promise<Tag> {
+        return this.api.createLangVariation(param.tagCloneRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a Blog Tag from a multi-language group.
+     * Detach a Blog Tag from a multi-language group
+     * @param param the request object
+     */
+    public detachFromLangGroup(param: BlogTagsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+        return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
     /**
@@ -301,39 +328,12 @@ export class ObjectBlogTagsApi {
     }
 
     /**
-     * Attach a Blog Tag to a multi-language group.
-     * Attach a Blog Tag to a multi-language group
+     * Retrieve the Blog Tag objects identified in the request body.
+     * Retrieve a batch of Blog Tags
      * @param param the request object
      */
-    public postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(param: BlogTagsApiPostCmsV3BlogsTagsMultiLanguageAttachToLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsTagsMultiLanguageAttachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Tag
-     * Create a new language variation
-     * @param param the request object
-     */
-    public postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(param: BlogTagsApiPostCmsV3BlogsTagsMultiLanguageCreateLanguageVariationRequest, options?: Configuration): Promise<Tag> {
-        return this.api.postCmsV3BlogsTagsMultiLanguageCreateLanguageVariation(param.tagCloneRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Detach a Blog Tag from a multi-language group.
-     * Detach a Blog Tag from a multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(param: BlogTagsApiPostCmsV3BlogsTagsMultiLanguageDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsTagsMultiLanguageDetachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Tag in a multi-language group.
-     * Update languages of multi-language group
-     * @param param the request object
-     */
-    public postCmsV3BlogsTagsMultiLanguageUpdateLanguages(param: BlogTagsApiPostCmsV3BlogsTagsMultiLanguageUpdateLanguagesRequest, options?: Configuration): Promise<void> {
-        return this.api.postCmsV3BlogsTagsMultiLanguageUpdateLanguages(param.updateLanguagesRequestVNext,  options).toPromise();
+    public readBatch(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
+        return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
     /**
@@ -341,17 +341,8 @@ export class ObjectBlogTagsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(param: BlogTagsApiPutCmsV3BlogsTagsMultiLanguageSetNewLangPrimaryRequest, options?: Configuration): Promise<void> {
-        return this.api.putCmsV3BlogsTagsMultiLanguageSetNewLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
-    }
-
-    /**
-     * Retrieve the Blog Tag objects identified in the request body.
-     * Retrieve a batch of Blog Tags
-     * @param param the request object
-     */
-    public readBatch(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
-        return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
+    public setLangPrimary(param: BlogTagsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+        return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
     /**
@@ -370,6 +361,15 @@ export class ObjectBlogTagsApi {
      */
     public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Tag in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangs(param: BlogTagsApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+        return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
 }

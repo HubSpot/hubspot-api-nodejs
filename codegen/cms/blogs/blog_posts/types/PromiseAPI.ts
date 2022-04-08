@@ -11,11 +11,11 @@ import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseBlogPost } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost } from '../models/BlogPost';
+import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from '../models/ColorStop';
 import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
-import { ContentLanguageCloneRequestVNext } from '../models/ContentLanguageCloneRequestVNext';
 import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
@@ -72,6 +72,16 @@ export class PromiseBlogPostsApi {
     }
 
     /**
+     * Attach a Blog Post to a multi-language group.
+     * Attach a Blog Post to a multi-language group
+     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
+     */
+    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Clone a Blog Post.
      * Clone a Blog Post
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
@@ -98,6 +108,26 @@ export class PromiseBlogPostsApi {
      */
     public createBatch(batchInputBlogPost: BatchInputBlogPost, _options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         const result = this.api.createBatch(batchInputBlogPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Post
+     * Create a new language variation
+     * @param blogPostLanguageCloneRequestVNext The JSON representation of the BlogPostLanguageCloneRequestVNext object.
+     */
+    public createLangVariation(blogPostLanguageCloneRequestVNext: BlogPostLanguageCloneRequestVNext, _options?: Configuration): Promise<BlogPost> {
+        const result = this.api.createLangVariation(blogPostLanguageCloneRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Detach a Blog Post from a multi-language group.
+     * Detach a Blog Post from a multi-language group
+     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
+     */
+    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, _options);
         return result.toPromise();
     }
 
@@ -166,62 +196,12 @@ export class PromiseBlogPostsApi {
     }
 
     /**
-     * Attach a Blog Post to a multi-language group.
-     * Attach a Blog Post to a multi-language group
-     * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
-     */
-    public postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsPostsMultiLanguageAttachToLangGroup(attachToLangPrimaryRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a new language variation from an existing Blog Post
-     * Create a new language variation
-     * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
-     */
-    public postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<BlogPost> {
-        const result = this.api.postCmsV3BlogsPostsMultiLanguageCreateLanguageVariation(contentLanguageCloneRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Detach a Blog Post from a multi-language group.
-     * Detach a Blog Post from a multi-language group
-     * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
-     */
-    public postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsPostsMultiLanguageDetachFromLangGroup(detachFromLangGroupRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Explicitly set new languages for each Blog Post in a multi-language group.
-     * Update languages of multi-language group
-     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
-     */
-    public postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.postCmsV3BlogsPostsMultiLanguageUpdateLanguages(updateLanguagesRequestVNext, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Take any changes from the draft version of the Blog Post and apply them to the live version.
      * Push Blog Post draft edits live
      * @param objectId The id of the Blog Post for which it&#39;s draft will be pushed live.
      */
     public pushLive(objectId: string, _options?: Configuration): Promise<void> {
         const result = this.api.pushLive(objectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Set a Blog Post as the primary language of a multi-language group.
-     * Set a new primary language
-     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
-     */
-    public putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.putCmsV3BlogsPostsMultiLanguageSetNewLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
         return result.toPromise();
     }
 
@@ -279,6 +259,16 @@ export class PromiseBlogPostsApi {
     }
 
     /**
+     * Set a Blog Post as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Sparse updates a single Blog Post object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
      * Update a Blog Post
      * @param objectId The Blog Post id.
@@ -309,6 +299,16 @@ export class PromiseBlogPostsApi {
      */
     public updateDraft(objectId: string, blogPost: BlogPost, _options?: Configuration): Promise<BlogPost> {
         const result = this.api.updateDraft(objectId, blogPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Post in a multi-language group.
+     * Update languages of multi-language group
+     * @param updateLanguagesRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
+     */
+    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
+        const result = this.api.updateLangs(updateLanguagesRequestVNext, _options);
         return result.toPromise();
     }
 
