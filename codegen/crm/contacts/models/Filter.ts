@@ -14,6 +14,7 @@ import { HttpFile } from '../http/http';
 
 export class Filter {
     'value'?: string;
+    'values'?: Array<string>;
     'propertyName': string;
     /**
     * null
@@ -27,6 +28,12 @@ export class Filter {
             "name": "value",
             "baseName": "value",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<string>",
             "format": ""
         },
         {

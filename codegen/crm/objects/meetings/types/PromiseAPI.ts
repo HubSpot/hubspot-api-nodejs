@@ -22,6 +22,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -214,6 +215,34 @@ export class PromiseBatchApi {
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservablePublicObjectApi } from './ObservableAPI';
+
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+export class PromisePublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PublicObjectApiRequestFactory,
+        responseProcessor?: PublicObjectApiResponseProcessor
+    ) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two meetings with same type
+     * @param publicMergeInput 
+     */
+    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.merge(publicMergeInput, _options);
         return result.toPromise();
     }
 

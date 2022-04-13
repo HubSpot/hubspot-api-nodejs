@@ -13,22 +13,22 @@
 import { HttpFile } from '../http/http';
 
 export class ErrorCategory {
-    'httpStatus': ErrorCategoryHttpStatusEnum;
     'name': string;
+    'httpStatus': ErrorCategoryHttpStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "httpStatus",
-            "baseName": "httpStatus",
-            "type": "ErrorCategoryHttpStatusEnum",
-            "format": ""
-        },
-        {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "httpStatus",
+            "baseName": "httpStatus",
+            "type": "ErrorCategoryHttpStatusEnum",
             "format": ""
         }    ];
 
