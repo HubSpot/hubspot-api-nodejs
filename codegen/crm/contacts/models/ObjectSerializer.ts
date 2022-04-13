@@ -19,6 +19,7 @@ export * from './NextPage';
 export * from './Paging';
 export * from './PreviousPage';
 export * from './PublicGdprDeleteInput';
+export * from './PublicMergeInput';
 export * from './PublicObjectSearchRequest';
 export * from './SimplePublicObject';
 export * from './SimplePublicObjectBatchInput';
@@ -39,9 +40,9 @@ import { CollectionResponseAssociatedId } from './CollectionResponseAssociatedId
 import { CollectionResponseAssociatedIdForwardPaging } from './CollectionResponseAssociatedIdForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from './CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from './CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
+import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
 import { ErrorDetail } from './ErrorDetail';
-import { Filter  , FilterOperatorEnum   } from './Filter';
+import { Filter   , FilterOperatorEnum   } from './Filter';
 import { FilterGroup } from './FilterGroup';
 import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
@@ -49,6 +50,7 @@ import { NextPage } from './NextPage';
 import { Paging } from './Paging';
 import { PreviousPage } from './PreviousPage';
 import { PublicGdprDeleteInput } from './PublicGdprDeleteInput';
+import { PublicMergeInput } from './PublicMergeInput';
 import { PublicObjectSearchRequest } from './PublicObjectSearchRequest';
 import { SimplePublicObject } from './SimplePublicObject';
 import { SimplePublicObjectBatchInput } from './SimplePublicObjectBatchInput';
@@ -106,6 +108,7 @@ let typeMap: {[index: string]: any} = {
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "PublicGdprDeleteInput": PublicGdprDeleteInput,
+    "PublicMergeInput": PublicMergeInput,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,
     "SimplePublicObject": SimplePublicObject,
     "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,

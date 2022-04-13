@@ -24,6 +24,7 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
+import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -440,6 +441,48 @@ export class ObservableGDPRApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purge(rsp)));
+            }));
+    }
+
+}
+
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+export class ObservablePublicObjectApi {
+    private requestFactory: PublicObjectApiRequestFactory;
+    private responseProcessor: PublicObjectApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PublicObjectApiRequestFactory,
+        responseProcessor?: PublicObjectApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new PublicObjectApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicObjectApiResponseProcessor();
+    }
+
+    /**
+     * Merge two objects with same type
+     * @param objectType 
+     * @param publicMergeInput 
+     */
+    public merge(objectType: string, publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {
+        const requestContextPromise = this.requestFactory.merge(objectType, publicMergeInput, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.merge(rsp)));
             }));
     }
 

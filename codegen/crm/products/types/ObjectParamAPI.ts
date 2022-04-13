@@ -22,6 +22,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -404,6 +405,35 @@ export class ObjectBatchApi {
      */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservablePublicObjectApi } from "./ObservableAPI";
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+
+export interface PublicObjectApiMergeRequest {
+    /**
+     * 
+     * @type PublicMergeInput
+     * @memberof PublicObjectApimerge
+     */
+    publicMergeInput: PublicMergeInput
+}
+
+export class ObjectPublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(configuration: Configuration, requestFactory?: PublicObjectApiRequestFactory, responseProcessor?: PublicObjectApiResponseProcessor) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two products with same type
+     * @param param the request object
+     */
+    public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.merge(param.publicMergeInput,  options).toPromise();
     }
 
 }

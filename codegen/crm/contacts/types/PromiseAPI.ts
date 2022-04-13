@@ -23,6 +23,7 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
+import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
@@ -242,6 +243,34 @@ export class PromiseGDPRApi {
      */
     public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
         const result = this.api.purge(publicGdprDeleteInput, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservablePublicObjectApi } from './ObservableAPI';
+
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+export class PromisePublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PublicObjectApiRequestFactory,
+        responseProcessor?: PublicObjectApiResponseProcessor
+    ) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two contacts with same type
+     * @param publicMergeInput 
+     */
+    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.merge(publicMergeInput, _options);
         return result.toPromise();
     }
 

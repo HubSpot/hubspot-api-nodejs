@@ -7,5 +7,5 @@ export * from "./apis/exception";
 export * from "./servers";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseAssociationsApi as AssociationsApi,  PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi,  PromiseGDPRApi as GDPRApi,  PromiseSearchApi as SearchApi } from './types/PromiseAPI';
+export { PromiseAssociationsApi as AssociationsApi,  PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi,  PromiseGDPRApi as GDPRApi,  PromisePublicObjectApi as PublicObjectApi,  PromiseSearchApi as SearchApi } from './types/PromiseAPI';
 
