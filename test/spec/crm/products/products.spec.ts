@@ -2,7 +2,7 @@ import { Client } from '../../../../index'
 
 describe('api client', () => {
   it('is discoverable', () => {
-    const client = new Client().crm.companies
+    const client = new Client().crm.products
     expect(client.hasOwnProperty('associationsApi')).toBeTruthy()
     expect(client.hasOwnProperty('basicApi')).toBeTruthy()
     expect(client.hasOwnProperty('batchApi')).toBeTruthy()
