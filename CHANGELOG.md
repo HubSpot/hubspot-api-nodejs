@@ -267,7 +267,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - rename crm.pipelines.pipelineStagesApi.getCrmV3PipelinesObjectTypePipelineIdAudit() => crm.pipelines.pipelineStagesApi.getAudit()
  - rename crm.pipelines.pipelinesApi.getCrmV3PipelinesObjectTypePipelineIdStagesStageIdAudit() => crm.pipelines.pipelinesApi.getAudit()
- 
+
+## [6.0.1-beta.6] - 2022-04-14
+
+### Added
+
+- `crm.companies.publicObjectApi`
+- `crm.contacts.publicObjectApi`
+- `crm.deals.publicObjectApi`
+- `crm.lineItems.publicObjectApi`
+- `crm.objects.calls.publicObjectApi`
+- `crm.objects.publicObjectApi`
+- `crm.objects.emails.publicObjectApi`
+- `crm.objects.meetings.publicObjectApi`
+- `crm.objects.notes.publicObjectApi`
+- `crm.objects.tasks.publicObjectApi`
+- `crm.products.publicObjectApi`
+- `crm.tickets.publicObjectApi`
+- add field "values" to all CRM objects `Filter`
+
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta3...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
@@ -291,3 +309,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [6.0.1-beta3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta3
 [6.0.1-beta4]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta4
 [6.0.1-beta5]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta5
+[6.0.1-beta.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta.6
