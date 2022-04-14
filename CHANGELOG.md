@@ -286,7 +286,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `crm.tickets.publicObjectApi`
 - add field "values" to all CRM objects `Filter`
 
-[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta3...HEAD
+[unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1-beta.6...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
