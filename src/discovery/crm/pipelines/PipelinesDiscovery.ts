@@ -1,6 +1,8 @@
 import { createConfiguration } from '../../../../codegen/crm/pipelines/configuration'
 import {
+  PipelineAuditsApi,
   PipelinesApi,
+  PipelineStageAuditsApi,
   PipelineStagesApi,
   RequestContext,
   ResponseContext,
@@ -10,6 +12,8 @@ import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigura
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export class PipelinesDiscovery {
+  public pipelineAuditsApi: PipelineAuditsApi
+  public pipelineStageAuditsApi: PipelineStageAuditsApi
   public pipelineStagesApi: PipelineStagesApi
   public pipelinesApi: PipelinesApi
 
@@ -23,6 +27,8 @@ export class PipelinesDiscovery {
       >(config, Observable, Observable),
     )
 
+    this.pipelineAuditsApi = new PipelineAuditsApi(configuration)
+    this.pipelineStageAuditsApi = new PipelineStageAuditsApi(configuration)
     this.pipelineStagesApi = new PipelineStagesApi(configuration)
     this.pipelinesApi = new PipelinesApi(configuration)
   }

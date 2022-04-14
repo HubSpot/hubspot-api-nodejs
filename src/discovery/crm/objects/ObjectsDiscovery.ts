@@ -4,6 +4,7 @@ import {
   BasicApi,
   BatchApi,
   GDPRApi,
+  PublicObjectApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -28,6 +29,7 @@ export class ObjectsDiscovery {
   public feedbackSubmissions: FeedbackSubmissionsDiscovery
   public meetings: MeetingsDiscovery
   public notes: NotesDiscovery
+  public publicObjectApi: PublicObjectApi
   public tasks: TasksDiscovery
   public searchApi: SearchApi
 
@@ -50,6 +52,7 @@ export class ObjectsDiscovery {
     this.feedbackSubmissions = new FeedbackSubmissionsDiscovery(config)
     this.meetings = new MeetingsDiscovery(config)
     this.notes = new NotesDiscovery(config)
+    this.publicObjectApi = new PublicObjectApi(configuration)
     this.tasks = new TasksDiscovery(config)
     this.searchApi = new SearchApi(configuration)
   }

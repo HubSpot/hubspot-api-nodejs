@@ -12,6 +12,7 @@ describe('api client', () => {
     expect(client.hasOwnProperty('feedbackSubmissions')).toBeTruthy()
     expect(client.hasOwnProperty('meetings')).toBeTruthy()
     expect(client.hasOwnProperty('notes')).toBeTruthy()
+    expect(client.hasOwnProperty('publicObjectApi')).toBeTruthy()
     expect(client.hasOwnProperty('tasks')).toBeTruthy()
     expect(client.hasOwnProperty('searchApi')).toBeTruthy()
   })
