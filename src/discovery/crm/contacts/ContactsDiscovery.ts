@@ -5,6 +5,7 @@ import {
   BasicApi,
   BatchApi,
   GDPRApi,
+  PublicObjectApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -20,6 +21,7 @@ export class ContactsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
   public gdprApi: GDPRApi
+  public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -36,6 +38,7 @@ export class ContactsDiscovery {
     this.basicApi = new BasicApi(configuration)
     this.batchApi = new BatchApi(configuration)
     this.gdprApi = new GDPRApi(configuration)
+    this.publicObjectApi = new PublicObjectApi(configuration)
     this.searchApi = new SearchApi(configuration)
   }
 
