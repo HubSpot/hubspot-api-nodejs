@@ -24,7 +24,7 @@ export class TimelineDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.eventsApi = new EventsApi(configuration)

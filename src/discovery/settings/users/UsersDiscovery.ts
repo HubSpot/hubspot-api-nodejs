@@ -1,5 +1,12 @@
 import { createConfiguration } from '../../../../codegen/settings/users/configuration'
-import { RequestContext, ResponseContext, RolesApi, ServerConfiguration, TeamsApi, UsersApi } from '../../../../codegen/settings/users/index'
+import {
+  RequestContext,
+  ResponseContext,
+  RolesApi,
+  ServerConfiguration,
+  TeamsApi,
+  UsersApi,
+} from '../../../../codegen/settings/users/index'
 import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -17,7 +24,7 @@ export class UsersDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.rolesApi = new RolesApi(configuration)

@@ -26,7 +26,7 @@ export class ActionsDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.callbacksApi = new CallbacksApi(configuration)

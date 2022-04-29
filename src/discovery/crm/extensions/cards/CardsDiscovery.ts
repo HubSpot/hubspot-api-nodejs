@@ -22,7 +22,7 @@ export class CardsDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.cardsApi = new CardsApi(configuration)

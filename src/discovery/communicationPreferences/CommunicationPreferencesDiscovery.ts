@@ -22,7 +22,7 @@ export class CommunicationPreferencesDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.definitionApi = new DefinitionApi(configuration)

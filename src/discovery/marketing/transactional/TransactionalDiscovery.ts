@@ -22,7 +22,7 @@ export class TransactionalDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.publicSmtpTokensApi = new PublicSmtpTokensApi(configuration)

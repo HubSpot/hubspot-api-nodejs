@@ -26,7 +26,7 @@ export class PipelinesDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.pipelineAuditsApi = new PipelineAuditsApi(configuration)

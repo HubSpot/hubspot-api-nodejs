@@ -12,7 +12,10 @@ export class ApiClientConfigurator {
     ServerConfiguration
   >(
     config: IConfiguration,
-    serverConfigurationClass: new (url: string,  variableConfiguration: { [key: string]: string }) => ServerConfiguration,
+    serverConfigurationClass: new (
+      url: string,
+      variableConfiguration: { [key: string]: string },
+    ) => ServerConfiguration,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
@@ -68,9 +71,15 @@ export class ApiClientConfigurator {
     return authMethods
   }
 
-  protected static getBaseServer<ServerConfiguration>(config: IConfiguration, serverConfigurationClass: new (url: string,  variableConfiguration: { [key: string]: string }) => ServerConfiguration) {
+  protected static getBaseServer<ServerConfiguration>(
+    config: IConfiguration,
+    serverConfigurationClass: new (
+      url: string,
+      variableConfiguration: { [key: string]: string },
+    ) => ServerConfiguration,
+  ) {
     if (config.basePath) {
-      return {baseServer: new serverConfigurationClass(config.basePath, {  })}
+      return { baseServer: new serverConfigurationClass(config.basePath, {}) }
     }
     return {}
   }

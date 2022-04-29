@@ -2,8 +2,8 @@ import { createConfiguration } from '../../../../../codegen/crm/extensions/video
 import {
   RequestContext,
   ResponseContext,
-  SettingsApi,
   ServerConfiguration,
+  SettingsApi,
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { Observable } from '../../../../../codegen/crm/extensions/videoconferencing/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -20,7 +20,7 @@ export class VideoconferencingDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.settingsApi = new SettingsApi(configuration)

@@ -1,5 +1,11 @@
 import { createConfiguration } from '../../../codegen/webhooks/configuration'
-import { RequestContext, ResponseContext, ServerConfiguration, SettingsApi, SubscriptionsApi } from '../../../codegen/webhooks/index'
+import {
+  RequestContext,
+  ResponseContext,
+  ServerConfiguration,
+  SettingsApi,
+  SubscriptionsApi,
+} from '../../../codegen/webhooks/index'
 import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
@@ -17,7 +23,7 @@ export class WebhooksDiscovery {
         Observable<RequestContext>,
         Observable<ResponseContext>,
         ServerConfiguration<{}>
-      >(config, ServerConfiguration, Observable, Observable)
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.settingsApi = new SettingsApi(configuration)
