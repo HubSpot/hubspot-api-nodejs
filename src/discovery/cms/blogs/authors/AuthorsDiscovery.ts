@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/authors/configuration'
-import { BlogAuthorsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/authors/index'
+import { BlogAuthorsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../../codegen/cms/blogs/authors/index'
 import { Observable } from '../../../../../codegen/cms/blogs/authors/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
@@ -13,8 +13,9 @@ export class AuthorsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.blogAuthorsApi = new BlogAuthorsApi(configuration)

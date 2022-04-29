@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/crm/imports/configuration'
-import { CoreApi, PublicImportsApi, RequestContext, ResponseContext } from '../../../../codegen/crm/imports/index'
+import { CoreApi, PublicImportsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/crm/imports/index'
 import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -14,8 +14,9 @@ export class ImportsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.coreApi = new CoreApi(configuration)

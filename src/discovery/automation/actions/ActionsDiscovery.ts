@@ -6,6 +6,7 @@ import {
   RequestContext,
   ResponseContext,
   RevisionsApi,
+  ServerConfiguration,
 } from '../../../../codegen/automation/actions/index'
 import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -23,8 +24,9 @@ export class ActionsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.callbacksApi = new CallbacksApi(configuration)

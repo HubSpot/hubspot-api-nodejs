@@ -5,6 +5,7 @@ import {
   MetadataApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   SourceCodeExtractApi,
   ValidationApi,
 } from '../../../../codegen/cms/source_code/index'
@@ -25,8 +26,9 @@ export class SourceCodeDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.contentApi = new ContentApi(configuration)

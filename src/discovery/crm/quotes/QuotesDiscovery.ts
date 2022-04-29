@@ -7,6 +7,7 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/quotes/index'
 import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
@@ -26,8 +27,9 @@ export class QuotesDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.associationsApi = new AssociationsApi(configuration)

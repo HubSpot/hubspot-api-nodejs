@@ -3,6 +3,7 @@ import {
   GenerateApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
 } from '../../../../codegen/conversations/visitor_identification/index'
 import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -17,8 +18,9 @@ export class VisitorIdentificationDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.generateApi = new GenerateApi(configuration)

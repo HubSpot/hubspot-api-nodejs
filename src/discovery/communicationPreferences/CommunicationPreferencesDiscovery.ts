@@ -3,6 +3,7 @@ import {
   DefinitionApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   StatusApi,
 } from '../../../codegen/communication_preferences/index'
 import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
@@ -19,8 +20,9 @@ export class CommunicationPreferencesDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.definitionApi = new DefinitionApi(configuration)

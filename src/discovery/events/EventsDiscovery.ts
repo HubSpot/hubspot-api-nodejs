@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../codegen/events/configuration'
-import { EventsApi, RequestContext, ResponseContext } from '../../../codegen/events/index'
+import { EventsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../codegen/events/index'
 import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
@@ -13,8 +13,9 @@ export class EventsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.eventsApi = new EventsApi(configuration)

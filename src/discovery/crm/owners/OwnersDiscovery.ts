@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
-import { OwnersApi, RequestContext, ResponseContext } from '../../../../codegen/crm/owners/index'
+import { OwnersApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/crm/owners/index'
 import { Observable } from '../../../../codegen/crm/owners/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -13,8 +13,9 @@ export class OwnersDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.ownersApi = new OwnersApi(configuration)

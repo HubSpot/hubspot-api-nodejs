@@ -6,6 +6,7 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
 } from '../../../../../codegen/crm/objects/feedback_submissions/index'
 import { Observable } from '../../../../../codegen/crm/objects/feedback_submissions/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -23,8 +24,9 @@ export class FeedbackSubmissionsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.associationsApi = new AssociationsApi(configuration)

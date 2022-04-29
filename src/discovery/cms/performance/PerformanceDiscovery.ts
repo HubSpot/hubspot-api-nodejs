@@ -1,5 +1,5 @@
 import { createConfiguration } from '../../../../codegen/cms/performance/configuration'
-import { PublicPerformanceApi, RequestContext, ResponseContext } from '../../../../codegen/cms/performance/index'
+import { PublicPerformanceApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/cms/performance/index'
 import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -13,8 +13,9 @@ export class PerformanceDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.publicPerformanceApi = new PublicPerformanceApi(configuration)

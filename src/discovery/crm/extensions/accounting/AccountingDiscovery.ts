@@ -5,6 +5,7 @@ import {
   RequestContext,
   ResponseContext,
   SettingsApi,
+  ServerConfiguration,
   SyncApi,
   UserAccountsApi,
 } from '../../../../../codegen/crm/extensions/accounting/index'
@@ -25,8 +26,9 @@ export class AccountingDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.callbacksApi = new CallbacksApi(configuration)
