@@ -9,10 +9,11 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/contacts/index'
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
-import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfiguratorTest'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 
@@ -30,8 +31,9 @@ export class ContactsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable)
     )
 
     this.associationsApi = new AssociationsApi(configuration)
