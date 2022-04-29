@@ -13,7 +13,7 @@ import {
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/contacts/index'
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
-import { ApiClientConfigurator } from '../../../configuration/ApiClientConfiguratorTest'
+import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 

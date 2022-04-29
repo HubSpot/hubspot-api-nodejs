@@ -22,6 +22,9 @@ export class Request {
   constructor(config: IConfiguration = {}, opts: IHttpOptions = {}) {
     this.config = config
     this.opts = opts
+    if (config.basePath) {
+      this.baseUrl = config.basePath
+    }
     this.url = this.generateUrl()
     this.method = this.opts.method || 'GET'
     this.headers = Object.assign({}, this.opts.headers, this.getDefaultHeaders())
