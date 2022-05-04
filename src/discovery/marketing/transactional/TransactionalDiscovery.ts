@@ -3,6 +3,7 @@ import {
   PublicSmtpTokensApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   SingleSendApi,
 } from '../../../../codegen/marketing/transactional/index'
 import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
@@ -19,8 +20,9 @@ export class TransactionalDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.publicSmtpTokensApi = new PublicSmtpTokensApi(configuration)

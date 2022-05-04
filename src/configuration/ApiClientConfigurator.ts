@@ -8,13 +8,18 @@ export class ApiClientConfigurator {
     RequestContextType extends IRequestContext,
     ResponseContextType,
     ObservableRequestContextType,
-    ObservableResponseContextType
+    ObservableResponseContextType,
+    ServerConfiguration
   >(
     config: IConfiguration,
+    serverConfigurationClass: new (
+      url: string,
+      variableConfiguration: { [key: string]: string },
+    ) => ServerConfiguration,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
-    return {
+    const params = {
       middleware: [
         this.getHeaderMiddleware<
           RequestContextType,
@@ -25,6 +30,10 @@ export class ApiClientConfigurator {
       ],
       authMethods: this.getAuthMethods(config),
     }
+
+    _.merge(params, this.getBaseServer(config, serverConfigurationClass))
+
+    return params
   }
 
   public static getUserAgent() {
@@ -60,6 +69,19 @@ export class ApiClientConfigurator {
     }
 
     return authMethods
+  }
+
+  protected static getBaseServer<ServerConfiguration>(
+    config: IConfiguration,
+    serverConfigurationClass: new (
+      url: string,
+      variableConfiguration: { [key: string]: string },
+    ) => ServerConfiguration,
+  ) {
+    if (config.basePath) {
+      return { baseServer: new serverConfigurationClass(config.basePath, {}) }
+    }
+    return {}
   }
 
   protected static getHeaderMiddleware<

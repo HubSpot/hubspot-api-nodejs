@@ -8,6 +8,7 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
   SimplePublicObjectWithAssociations,
 } from '../../../../codegen/crm/products/index'
 import { Observable } from '../../../../codegen/crm/products/rxjsStub'
@@ -28,8 +29,9 @@ export class ProductsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.associationsApi = new AssociationsApi(configuration)

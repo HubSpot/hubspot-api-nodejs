@@ -6,6 +6,7 @@ import {
   PipelineStagesApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
 } from '../../../../codegen/crm/pipelines/index'
 import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
@@ -23,8 +24,9 @@ export class PipelinesDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.pipelineAuditsApi = new PipelineAuditsApi(configuration)

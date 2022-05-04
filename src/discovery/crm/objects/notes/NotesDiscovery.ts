@@ -7,6 +7,7 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
 } from '../../../../../codegen/crm/objects/notes/index'
 import { Observable } from '../../../../../codegen/crm/objects/notes/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -25,8 +26,9 @@ export class NotesDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.associationsApi = new AssociationsApi(configuration)

@@ -3,6 +3,7 @@ import {
   EventsApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   TemplatesApi,
   TokensApi,
 } from '../../../../codegen/crm/timeline/index'
@@ -21,8 +22,9 @@ export class TimelineDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.eventsApi = new EventsApi(configuration)

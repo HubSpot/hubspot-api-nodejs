@@ -1,5 +1,10 @@
 import { createConfiguration } from '../../../../../codegen/cms/blogs/tags/configuration'
-import { BlogTagsApi, RequestContext, ResponseContext } from '../../../../../codegen/cms/blogs/tags/index'
+import {
+  BlogTagsApi,
+  RequestContext,
+  ResponseContext,
+  ServerConfiguration,
+} from '../../../../../codegen/cms/blogs/tags/index'
 import { Observable } from '../../../../../codegen/cms/blogs/tags/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
@@ -13,8 +18,9 @@ export class TagsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.blogTagsApi = new BlogTagsApi(configuration)

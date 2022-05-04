@@ -6,6 +6,7 @@ import {
   RefreshTokensApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   TokensApi,
 } from '../../../codegen/oauth/index'
 import { Observable } from '../../../codegen/oauth/rxjsStub'
@@ -23,8 +24,9 @@ export class OauthDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.accessTokensApi = new AccessTokensApi(configuration)

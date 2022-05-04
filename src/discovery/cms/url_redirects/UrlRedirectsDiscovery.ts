@@ -1,5 +1,10 @@
 import { createConfiguration } from '../../../../codegen/cms/url_redirects/configuration'
-import { RedirectsApi, RequestContext, ResponseContext } from '../../../../codegen/cms/url_redirects/index'
+import {
+  RedirectsApi,
+  RequestContext,
+  ResponseContext,
+  ServerConfiguration,
+} from '../../../../codegen/cms/url_redirects/index'
 import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
@@ -13,8 +18,9 @@ export class UrlRedirectsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.redirectsApi = new RedirectsApi(configuration)

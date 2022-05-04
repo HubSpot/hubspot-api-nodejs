@@ -4,6 +4,7 @@ import {
   RequestContext,
   ResponseContext,
   SampleResponseApi,
+  ServerConfiguration,
 } from '../../../../../codegen/crm/extensions/cards/index'
 import { Observable } from '../../../../../codegen/crm/extensions/cards/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
@@ -19,8 +20,9 @@ export class CardsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.cardsApi = new CardsApi(configuration)

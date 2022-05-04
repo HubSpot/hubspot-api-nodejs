@@ -4,6 +4,7 @@ import {
   InvoiceApi,
   RequestContext,
   ResponseContext,
+  ServerConfiguration,
   SettingsApi,
   SyncApi,
   UserAccountsApi,
@@ -25,8 +26,9 @@ export class AccountingDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.callbacksApi = new CallbacksApi(configuration)

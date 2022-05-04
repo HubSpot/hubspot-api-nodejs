@@ -5,6 +5,7 @@ import {
   RequestContext,
   ResponseContext,
   SearchApi,
+  ServerConfiguration,
   SettingsApi,
   SubscriberStateChangesApi,
 } from '../../../../codegen/marketing/events/index'
@@ -25,8 +26,9 @@ export class EventsDiscovery {
         RequestContext,
         ResponseContext,
         Observable<RequestContext>,
-        Observable<ResponseContext>
-      >(config, Observable, Observable),
+        Observable<ResponseContext>,
+        ServerConfiguration<{}>
+      >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.basicApi = new BasicApi(configuration)
