@@ -27,7 +27,7 @@ export class Request {
     }
     this.url = this.generateUrl()
     this.method = this.opts.method || 'GET'
-    this.headers = Object.assign({}, this.opts.headers, this.getDefaultHeaders())
+    this.headers = Object.assign({}, config.defaultHeaders, this.getDefaultHeaders(), this.opts.headers)
     this.applyAuth()
     this.setBody()
   }
