@@ -26,7 +26,7 @@ export class ApiClientConfigurator {
           ResponseContextType,
           ObservableRequestContextType,
           ObservableResponseContextType
-        >(observableRequestContextParam, observableResponseContextParam),
+        >(config, observableRequestContextParam, observableResponseContextParam),
       ],
       authMethods: this.getAuthMethods(config),
     }
@@ -90,12 +90,17 @@ export class ApiClientConfigurator {
     ObservableRequestContextType,
     ObservableResponseContextType
   >(
+    config: IConfiguration,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
+    const headers = _.merge(config.defaultHeaders, {'User-agent': this.getUserAgent()})
+     
     return {
       pre(context: RequestContextType): ObservableRequestContextType {
-        context.setHeaderParam('User-agent', `hubspot-api-client-nodejs; ${VERSION}`)
+        _.forIn(headers, (value, key) => {
+          context.setHeaderParam(key, value)
+        })
         return new observableRequestContextParam(Promise.resolve(context))
       },
       post(context: ResponseContextType): ObservableResponseContextType {

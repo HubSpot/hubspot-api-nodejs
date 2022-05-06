@@ -3,4 +3,5 @@ export interface IConfiguration {
   accessToken?: string
   developerApiKey?: string
   basePath?: string
+  defaultHeaders?: { [key: string]: string }
 }
