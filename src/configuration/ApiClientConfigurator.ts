@@ -94,8 +94,8 @@ export class ApiClientConfigurator {
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
-    const headers = _.merge(config.defaultHeaders, {'User-agent': this.getUserAgent()})
-     
+    const headers = _.merge(config.defaultHeaders, { 'User-agent': this.getUserAgent() })
+
     return {
       pre(context: RequestContextType): ObservableRequestContextType {
         _.forIn(headers, (value, key) => {
