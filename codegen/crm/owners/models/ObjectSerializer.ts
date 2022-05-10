@@ -12,7 +12,7 @@ import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
 import { PublicOwner } from './PublicOwner';
-import { PublicTeam  , PublicTeamMembershipEnum   } from './PublicTeam';
+import { PublicTeam } from './PublicTeam';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -34,7 +34,6 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "PublicTeamMembershipEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
