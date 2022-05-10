@@ -78,7 +78,7 @@ All methods return a [promise]. The success includes the serialized to JSON body
 
 ```javascript
 hubspotClient.crm.contacts.basicApi
-    .getPage(limit, after, properties, associations, archived)
+    .getPage(limit, after, properties, propertiesWithHistory, associations, archived)
     .then((results) => {
         console.log(results)
     })
@@ -112,7 +112,7 @@ await hubspotClient.crm.companies.associationsApi.create(
     createCompanyResponse.id,
     'contacts',
     createContactResponse.id,
-    'company_to_contact`
+    'company_to_contact'
 )
 ```
 
@@ -142,15 +142,16 @@ await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 #### first option with fs.ReadStream
 
 ```javascript
-const hubspot = require('@hubspot/api-client')
 const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+const fileName = 'test.csv'
+
 const importRequest = {
-    name: 'test_import',
+    name: 'import(' + fileName + ')',
     files: [
         {
-            fileName: `test.csv`,
+            fileName: fileName,
+            fileFormat: 'CSV',
             fileImportPage: {
                 hasHeader: true,
                 columnMappings: [
@@ -164,30 +165,29 @@ const importRequest = {
                         propertyName: 'email',
                         columnObjectType: 'CONTACT',
                     },
-                ],
-            },
-        },
-    ],
+                ]
+            }
+        }
+    ]
 }
-const importFilePath = `./test.csv`
-const importFileReadStream = fs.createReadStream(importFilePath)
-const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileReadStream)
+const importFileReadStream = fs.createReadStream(fileName)
+const response = await  hubspotClient.crm.imports.coreApi.create(importFileReadStream, JSON.stringify(importRequest));
 
-console.log(JSON.stringify(result))
+console.log(JSON.stringify(response))
 ```
 
 #### second option with RequestDetailedFile
 
 ```javascript
-const hubspot = require('@hubspot/api-client')
 const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+const fileName = 'test.csv'
 const importRequest = {
-    name: 'test_import',
+    name: 'import(' + fileName + ')',
     files: [
         {
-            fileName: `test.csv`,
+            fileName: fileName,
+            fileFormat: 'CSV',
             fileImportPage: {
                 hasHeader: true,
                 columnMappings: [
@@ -201,20 +201,20 @@ const importRequest = {
                         propertyName: 'email',
                         columnObjectType: 'CONTACT',
                     },
-                ],
-            },
-        },
-    ],
+                ]
+            }
+        }
+    ]
 }
-const importFilePath = `./test.csv`
+
 const importFileConfig = {
-    value: fs.readFileSync(importFilePath),
+    value: fs.readFileSync(fileName, "utf8"),
     options: {
-        filename: 'test.csv',
+        filename: fileName,
         contentType: 'text/csv',
     },
 }
-const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileConfig)
+const result = await  hubspotClient.crm.imports.coreApi.create(importFileConfig, JSON.stringify(importRequest));
 
 console.log(JSON.stringify(result))
 ```
