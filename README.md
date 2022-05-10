@@ -309,6 +309,17 @@ hubspotClient.apiRequest({
 })
 ```
 
+#### get contscts 
+
+```javascript
+const response = await hubspotClient.apiRequest({
+    method: 'get',
+    path: '/crm/v3/objects/contacts',
+})
+const json = await response.json()
+console.log(json)
+```
+
 ## Typescript
 
 You may use this library in your Typescript project via:
