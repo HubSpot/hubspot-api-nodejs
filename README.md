@@ -58,8 +58,7 @@ If you're an app developer, you can also instantiate a client and obtain a new a
 details and a refresh_token:
 
 ```javascript
-const hubspotClient = new hubspot.Client()
-return hubspotClient.oauth.tokensApi
+hubspotClient.oauth.tokensApi
     .createToken('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
     .then((results) => {
         console.log(results)
@@ -105,7 +104,6 @@ const companyObj = {
     },
 }
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
 await hubspotClient.crm.companies.associationsApi.create(
@@ -133,7 +131,6 @@ const dealObj2 = {
     },
 }
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 ```
 
