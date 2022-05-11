@@ -58,8 +58,7 @@ If you're an app developer, you can also instantiate a client and obtain a new a
 details and a refresh_token:
 
 ```javascript
-const hubspotClient = new hubspot.Client()
-return hubspotClient.oauth.tokensApi
+hubspotClient.oauth.tokensApi
     .createToken('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
     .then((results) => {
         console.log(results)
@@ -72,65 +71,13 @@ return hubspotClient.oauth.tokensApi
     })
 ```
 
-[Bottleneck](https://github.com/SGrondin/bottleneck) is used for rate limiting. To override the default settings, pass a `limiterOptions` object when instantiating the client. Bottleneck options can be found [here](https://github.com/SGrondin/bottleneck#constructor).
-Please note that Apps using OAuth are only subject to a limit of 100 requests every 10 seconds. Limits related to the API Add-on don't apply.
-Default settings for the limiter are:
-
-```javascript
-const DEFAULT_LIMITER_OPTIONS = {
-    minTime: 1000 / 9,
-    maxConcurrent: 6,
-    id: 'hubspot-client-limiter',
-}
-```
-
-Additional limiter created for search requests with following default setting:
-
-```javascript
-const DEFAULT_SEARCH_LIMITER_OPTIONS = {
-    minTime: 550,
-    maxConcurrent: 3,
-    id: 'search-hubspot-client-limiter',
-}
-```
-
-For search limiter settings provided in `limiterOptions` merged with DEFAULT_SEARCH_LIMITER_OPTIONS, so it's not possible to change 'minTime' & 'maxConcurrent' values and `id` would always have prefix 'search-'.
-
-It's possible to turn off rate limiting:
-
-```javascript
-const hubspotClient = new hubspot.Client({
-    accessToken: YOUR_ACCESS_TOKEN,
-    useLimiter: false,
-})
-```
-
-It's possible to turn on retry for failed requests with statuses 429 or 5xx. To turn on/off Configurable Retries use numberOfApiCallRetries option on Client instance creation.
-numberOfApiCallRetries could be set to a numberfrom 0 - 6. If numberOfApiCallRetries is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 \* retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed numberOfApiCallRetries value.
-
-```javascript
-const hubspotClient = new hubspot.Client({
-    accessToken: YOUR_ACCESS_TOKEN,
-    numberOfApiCallRetries: NumberOfRetries.Six,
-})
-```
-
-It's possible to create client instance with Interceptors functions which would be called and awaited before request is made:
-
-```javascript
-const hubspotClient = new hubspot.Client({
-    accessToken: YOUR_ACCESS_TOKEN,
-    interceptors: [interceptorFn1, interceptorFn2],
-})
-```
-
 ## Usage
 
 All methods return a [promise]. The success includes the serialized to JSON body and response objects. Use the API method via:
 
 ```javascript
 hubspotClient.crm.contacts.basicApi
-    .getPage(limit, after, properties, associations, archived)
+    .getPage(limit, after, properties, propertiesWithHistory, associations, archived)
     .then((results) => {
         console.log(results)
     })
@@ -157,14 +104,13 @@ const companyObj = {
     },
 }
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
 await hubspotClient.crm.companies.associationsApi.create(
     createCompanyResponse.id,
     'contacts',
     createContactResponse.id,
-    'company_to_contact`
+    'company_to_contact'
 )
 ```
 
@@ -185,7 +131,6 @@ const dealObj2 = {
     },
 }
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 ```
 
@@ -194,15 +139,16 @@ await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 #### first option with fs.ReadStream
 
 ```javascript
-const hubspot = require('@hubspot/api-client')
 const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+const fileName = 'test.csv'
+
 const importRequest = {
-    name: 'test_import',
+    name: 'import(' + fileName + ')',
     files: [
         {
-            fileName: `test.csv`,
+            fileName: fileName,
+            fileFormat: 'CSV',
             fileImportPage: {
                 hasHeader: true,
                 columnMappings: [
@@ -216,30 +162,29 @@ const importRequest = {
                         propertyName: 'email',
                         columnObjectType: 'CONTACT',
                     },
-                ],
-            },
-        },
-    ],
+                ]
+            }
+        }
+    ]
 }
-const importFilePath = `./test.csv`
-const importFileReadStream = fs.createReadStream(importFilePath)
-const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileReadStream)
+const importFileReadStream = fs.createReadStream(fileName)
+const response = await  hubspotClient.crm.imports.coreApi.create(importFileReadStream, JSON.stringify(importRequest));
 
-console.log(JSON.stringify(result))
+console.log(JSON.stringify(response))
 ```
 
 #### second option with RequestDetailedFile
 
 ```javascript
-const hubspot = require('@hubspot/api-client')
 const fs = require('fs')
 
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+const fileName = 'test.csv'
 const importRequest = {
-    name: 'test_import',
+    name: 'import(' + fileName + ')',
     files: [
         {
-            fileName: `test.csv`,
+            fileName: fileName,
+            fileFormat: 'CSV',
             fileImportPage: {
                 hasHeader: true,
                 columnMappings: [
@@ -253,20 +198,20 @@ const importRequest = {
                         propertyName: 'email',
                         columnObjectType: 'CONTACT',
                     },
-                ],
-            },
-        },
-    ],
+                ]
+            }
+        }
+    ]
 }
-const importFilePath = `./test.csv`
+
 const importFileConfig = {
-    value: fs.readFileSync(importFilePath),
+    value: fs.readFileSync(fileName, "utf8"),
     options: {
-        filename: 'test.csv',
+        filename: fileName,
         contentType: 'text/csv',
     },
 }
-const result = await hubspotClient.crm.imports.coreApi.create(JSON.stringify(importRequest), importFileConfig)
+const result = await  hubspotClient.crm.imports.coreApi.create(importFileConfig, JSON.stringify(importRequest));
 
 console.log(JSON.stringify(result))
 ```
@@ -362,6 +307,17 @@ hubspotClient.apiRequest({
     path: '/some/api/not/wrapped/yet',
     body: { key: 'value' },
 })
+```
+
+#### get contscts 
+
+```javascript
+const response = await hubspotClient.apiRequest({
+    method: 'get',
+    path: '/crm/v3/objects/contacts',
+})
+const json = await response.json()
+console.log(json)
 ```
 
 ## Typescript
