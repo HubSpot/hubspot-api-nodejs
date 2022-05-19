@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { ActionHookActionBody } from './ActionHookActionBody';
 import { IFrameActionBody } from './IFrameActionBody';
+import { IntegratorObjectResultActionsInner } from './IntegratorObjectResultActionsInner';
 import { HttpFile } from '../http/http';
 
 export class TopLevelActions {
     'settings'?: IFrameActionBody;
-    'primary'?: ActionHookActionBody | IFrameActionBody;
-    'secondary': Array<ActionHookActionBody | IFrameActionBody>;
+    'primary'?: IntegratorObjectResultActionsInner;
+    'secondary': Array<IntegratorObjectResultActionsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -31,13 +31,13 @@ export class TopLevelActions {
         {
             "name": "primary",
             "baseName": "primary",
-            "type": "ActionHookActionBody | IFrameActionBody",
+            "type": "IntegratorObjectResultActionsInner",
             "format": ""
         },
         {
             "name": "secondary",
             "baseName": "secondary",
-            "type": "Array<ActionHookActionBody | IFrameActionBody>",
+            "type": "Array<IntegratorObjectResultActionsInner>",
             "format": ""
         }    ];
 

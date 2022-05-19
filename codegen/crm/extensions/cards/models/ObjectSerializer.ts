@@ -15,6 +15,7 @@ export * from './ErrorDetail';
 export * from './IFrameActionBody';
 export * from './IntegratorCardPayloadResponse';
 export * from './IntegratorObjectResult';
+export * from './IntegratorObjectResultActionsInner';
 export * from './ModelError';
 export * from './ObjectToken';
 export * from './TopLevelActions';
@@ -36,6 +37,7 @@ import { ErrorDetail } from './ErrorDetail';
 import { IFrameActionBody, IFrameActionBodyTypeEnum        } from './IFrameActionBody';
 import { IntegratorCardPayloadResponse     , IntegratorCardPayloadResponseResponseVersionEnum   } from './IntegratorCardPayloadResponse';
 import { IntegratorObjectResult } from './IntegratorObjectResult';
+import { IntegratorObjectResultActionsInner, IntegratorObjectResultActionsInnerTypeEnum   , IntegratorObjectResultActionsInnerHttpMethodEnum        } from './IntegratorObjectResultActionsInner';
 import { ModelError } from './ModelError';
 import { ObjectToken  , ObjectTokenDataTypeEnum    } from './ObjectToken';
 import { TopLevelActions } from './TopLevelActions';
@@ -67,6 +69,8 @@ let enumsMap: Set<string> = new Set<string>([
     "DisplayOptionTypeEnum",
     "IFrameActionBodyTypeEnum",
     "IntegratorCardPayloadResponseResponseVersionEnum",
+    "IntegratorObjectResultActionsInnerTypeEnum",
+    "IntegratorObjectResultActionsInnerHttpMethodEnum",
     "ObjectTokenDataTypeEnum",
 ]);
 
@@ -88,6 +92,7 @@ let typeMap: {[index: string]: any} = {
     "IFrameActionBody": IFrameActionBody,
     "IntegratorCardPayloadResponse": IntegratorCardPayloadResponse,
     "IntegratorObjectResult": IntegratorObjectResult,
+    "IntegratorObjectResultActionsInner": IntegratorObjectResultActionsInner,
     "ModelError": ModelError,
     "ObjectToken": ObjectToken,
     "TopLevelActions": TopLevelActions,
@@ -206,7 +211,10 @@ export class ObjectSerializer {
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let index in attributeTypes) {
                 let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                if (value !== undefined) {
+                    instance[attributeType.name] = value;
+                }
             }
             return instance;
         }

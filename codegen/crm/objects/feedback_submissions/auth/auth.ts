@@ -1,6 +1,6 @@
 // typings for btoa are incorrect
 //@ts-ignore
-import * as btoa from "btoa";
+import  btoa from "btoa";
 import { RequestContext } from "../http/http";
 
 /**
@@ -46,6 +46,7 @@ export class HapikeyAuthentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
     "hapikey"?: SecurityAuthentication
 }
 
@@ -55,6 +56,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
     "hapikey"?: ApiKeyConfiguration
 }
 
@@ -68,6 +70,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     if (config["hapikey"]) {
         authMethods["hapikey"] = new HapikeyAuthentication(

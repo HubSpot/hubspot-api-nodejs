@@ -28,7 +28,7 @@ export class ObjectDefinitionApi {
      * Get subscription definitions
      * @param param the request object
      */
-    public getPage(param: DefinitionApiGetPageRequest, options?: Configuration): Promise<SubscriptionDefinitionsResponse> {
+    public getPage(param: DefinitionApiGetPageRequest = {}, options?: Configuration): Promise<SubscriptionDefinitionsResponse> {
         return this.api.getPage( options).toPromise();
     }
 

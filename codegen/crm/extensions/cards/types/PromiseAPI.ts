@@ -19,6 +19,7 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { IFrameActionBody } from '../models/IFrameActionBody';
 import { IntegratorCardPayloadResponse } from '../models/IntegratorCardPayloadResponse';
 import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
+import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
 import { ObjectToken } from '../models/ObjectToken';
 import { TopLevelActions } from '../models/TopLevelActions';

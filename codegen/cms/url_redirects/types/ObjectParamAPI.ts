@@ -151,7 +151,7 @@ export class ObjectRedirectsApi {
      * Create a redirect
      * @param param the request object
      */
-    public create(param: RedirectsApiCreateRequest, options?: Configuration): Promise<UrlMapping> {
+    public create(param: RedirectsApiCreateRequest = {}, options?: Configuration): Promise<UrlMapping> {
         return this.api.create(param.urlMappingCreateRequestBody,  options).toPromise();
     }
 
@@ -169,7 +169,7 @@ export class ObjectRedirectsApi {
      * Get current redirects
      * @param param the request object
      */
-    public getPage(param: RedirectsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalUrlMapping> {
+    public getPage(param: RedirectsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalUrlMapping> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.properties, param.after, param.before, param.limit, param.archived,  options).toPromise();
     }
 

@@ -10,8 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ActionHookActionBody } from './ActionHookActionBody';
-import { IFrameActionBody } from './IFrameActionBody';
+import { IntegratorObjectResultActionsInner } from './IntegratorObjectResultActionsInner';
 import { ObjectToken } from './ObjectToken';
 import { HttpFile } from '../http/http';
 
@@ -20,7 +19,7 @@ export class IntegratorObjectResult {
     'title': string;
     'linkUrl'?: string;
     'tokens': Array<ObjectToken>;
-    'actions': Array<ActionHookActionBody | IFrameActionBody>;
+    'actions': Array<IntegratorObjectResultActionsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,7 +51,7 @@ export class IntegratorObjectResult {
         {
             "name": "actions",
             "baseName": "actions",
-            "type": "Array<ActionHookActionBody | IFrameActionBody>",
+            "type": "Array<IntegratorObjectResultActionsInner>",
             "format": ""
         }    ];
 

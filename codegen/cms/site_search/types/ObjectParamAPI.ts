@@ -159,7 +159,7 @@ export class ObjectPublicApi {
      * Search your site.
      * @param param the request object
      */
-    public search(param: PublicApiSearchRequest, options?: Configuration): Promise<PublicSearchResults> {
+    public search(param: PublicApiSearchRequest = {}, options?: Configuration): Promise<PublicSearchResults> {
         return this.api.search(param.q, param.limit, param.offset, param.language, param.matchPrefix, param.autocomplete, param.popularityBoost, param.boostLimit, param.minScore, param.boostRecent, param.tableId, param.hubdbQuery, param.domain, param.type, param.pathPrefix, param.property, param.length, param.groupId,  options).toPromise();
     }
 

@@ -19,6 +19,7 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { IFrameActionBody } from '../models/IFrameActionBody';
 import { IntegratorCardPayloadResponse } from '../models/IntegratorCardPayloadResponse';
 import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
+import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
 import { ObjectToken } from '../models/ObjectToken';
 import { TopLevelActions } from '../models/TopLevelActions';
@@ -173,7 +174,7 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest, options?: Configuration): Promise<IntegratorCardPayloadResponse> {
+    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: Configuration): Promise<IntegratorCardPayloadResponse> {
         return this.api.getCardsSampleResponse( options).toPromise();
     }
 

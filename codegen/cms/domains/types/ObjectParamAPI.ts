@@ -125,7 +125,7 @@ export class ObjectDomainsApi {
      * Get current domains
      * @param param the request object
      */
-    public getPage(param: DomainsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalDomain> {
+    public getPage(param: DomainsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalDomain> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.properties, param.after, param.before, param.limit, param.archived,  options).toPromise();
     }
 

@@ -12,6 +12,7 @@ export * from './ConditionalSingleFieldDependency';
 export * from './ErrorDetail';
 export * from './ExtensionActionDefinition';
 export * from './ExtensionActionDefinitionInput';
+export * from './ExtensionActionDefinitionInputFieldDependenciesInner';
 export * from './ExtensionActionDefinitionPatch';
 export * from './FieldTypeDefinition';
 export * from './ForwardPaging';
@@ -36,6 +37,7 @@ import { ConditionalSingleFieldDependency, ConditionalSingleFieldDependencyDepen
 import { ErrorDetail } from './ErrorDetail';
 import { ExtensionActionDefinition } from './ExtensionActionDefinition';
 import { ExtensionActionDefinitionInput } from './ExtensionActionDefinitionInput';
+import { ExtensionActionDefinitionInputFieldDependenciesInner, ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum      } from './ExtensionActionDefinitionInputFieldDependenciesInner';
 import { ExtensionActionDefinitionPatch } from './ExtensionActionDefinitionPatch';
 import { FieldTypeDefinition , FieldTypeDefinitionTypeEnum  , FieldTypeDefinitionFieldTypeEnum    , FieldTypeDefinitionReferencedObjectTypeEnum   } from './FieldTypeDefinition';
 import { ForwardPaging } from './ForwardPaging';
@@ -69,6 +71,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ActionFunctionFunctionTypeEnum",
     "ActionFunctionIdentifierFunctionTypeEnum",
     "ConditionalSingleFieldDependencyDependencyTypeEnum",
+    "ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
     "FieldTypeDefinitionTypeEnum",
     "FieldTypeDefinitionFieldTypeEnum",
     "FieldTypeDefinitionReferencedObjectTypeEnum",
@@ -91,6 +94,7 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ExtensionActionDefinition": ExtensionActionDefinition,
     "ExtensionActionDefinitionInput": ExtensionActionDefinitionInput,
+    "ExtensionActionDefinitionInputFieldDependenciesInner": ExtensionActionDefinitionInputFieldDependenciesInner,
     "ExtensionActionDefinitionPatch": ExtensionActionDefinitionPatch,
     "FieldTypeDefinition": FieldTypeDefinition,
     "ForwardPaging": ForwardPaging,
@@ -215,7 +219,10 @@ export class ObjectSerializer {
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let index in attributeTypes) {
                 let attributeType = attributeTypes[index];
-                instance[attributeType.name] = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+                if (value !== undefined) {
+                    instance[attributeType.name] = value;
+                }
             }
             return instance;
         }

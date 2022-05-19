@@ -124,7 +124,7 @@ export class ObjectPublicPerformanceApi {
      * View your website's performance.
      * @param param the request object
      */
-    public getPage(param: PublicPerformanceApiGetPageRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
+    public getPage(param: PublicPerformanceApiGetPageRequest = {}, options?: Configuration): Promise<PublicPerformanceResponse> {
         return this.api.getPage(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
     }
 
@@ -133,7 +133,7 @@ export class ObjectPublicPerformanceApi {
      * View your website's uptime.
      * @param param the request object
      */
-    public getUptime(param: PublicPerformanceApiGetUptimeRequest, options?: Configuration): Promise<PublicPerformanceResponse> {
+    public getUptime(param: PublicPerformanceApiGetUptimeRequest = {}, options?: Configuration): Promise<PublicPerformanceResponse> {
         return this.api.getUptime(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
     }
 

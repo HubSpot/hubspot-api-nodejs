@@ -156,7 +156,7 @@ export class ObjectCoreApi {
      * Get all schemas
      * @param param the request object
      */
-    public getAll(param: CoreApiGetAllRequest, options?: Configuration): Promise<CollectionResponseObjectSchemaNoPaging> {
+    public getAll(param: CoreApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponseObjectSchemaNoPaging> {
         return this.api.getAll(param.archived,  options).toPromise();
     }
 
