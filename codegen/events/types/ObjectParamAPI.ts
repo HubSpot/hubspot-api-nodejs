@@ -80,7 +80,7 @@ export class ObjectEventsApi {
      * Returns a collection of events matching a query.
      * @param param the request object
      */
-    public getPage(param: EventsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseExternalUnifiedEvent> {
+    public getPage(param: EventsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseExternalUnifiedEvent> {
         return this.api.getPage(param.occurredAfter, param.occurredBefore, param.objectType, param.objectId, param.eventType, param.after, param.before, param.limit, param.sort,  options).toPromise();
     }
 

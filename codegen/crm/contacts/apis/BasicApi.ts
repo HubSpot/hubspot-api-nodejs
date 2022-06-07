@@ -1,12 +1,13 @@
 // TODO: better import syntax?
-import { BaseAPIRequestFactory, RequiredError } from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import { RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
-import * as FormData from "form-data";
+import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import  FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import {SecurityAuthentication} from '../auth/auth';
 
 
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
@@ -42,16 +43,21 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -90,16 +96,21 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -113,14 +124,16 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
             throw new RequiredError("BasicApi", "getById", "contactId");
         }
+
 
 
 
@@ -155,17 +168,27 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
+        // Query Params
+        if (idProperty !== undefined) {
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+        }
 
-        let authMethod = null;
+
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -228,16 +251,21 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -248,8 +276,9 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Update
      * @param contactId 
      * @param simplePublicObjectInput 
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
+    public async update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
@@ -264,6 +293,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/objects/contacts/{contactId}'
             .replace('{' + 'contactId' + '}', encodeURIComponent(String(contactId)));
@@ -271,6 +301,11 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (idProperty !== undefined) {
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+        }
 
 
         // Body Params
@@ -284,16 +319,21 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         );
         requestContext.setBody(serializedBody);
 
-        let authMethod = null;
+        let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
         authMethod = _config.authMethods["hapikey"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
         }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
-        if (authMethod) {
-            await authMethod.applySecurityAuthentication(requestContext);
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
         }
 
         return requestContext;
@@ -320,7 +360,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -356,7 +396,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -392,7 +432,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -428,7 +468,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -464,7 +504,7 @@ export class BasicApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Error", ""
             ) as Error;
-            throw new ApiException<Error>(0, "An error occurred.", body, response.headers);
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml

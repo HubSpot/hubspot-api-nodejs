@@ -62,6 +62,60 @@ export interface AssociationsApiGetAllRequest {
     limit?: number
 }
 
+export interface AssociationsApiSubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationTypeRequest {
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType
+     */
+    feedbackSubmissionId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType
+     */
+    toObjectId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType
+     */
+    associationType: string
+}
+
+export interface AssociationsApiSubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType0Request {
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1
+     */
+    feedbackSubmissionId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1
+     */
+    toObjectId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApisubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1
+     */
+    associationType: string
+}
+
 export class ObjectAssociationsApi {
     private api: ObservableAssociationsApi
 
@@ -75,6 +129,22 @@ export class ObjectAssociationsApi {
      */
     public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
         return this.api.getAll(param.feedbackSubmissionId, param.toObjectType, param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Associate a feedback submission with another object
+     * @param param the request object
+     */
+    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(param: AssociationsApiSubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationTypeRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        return this.api.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(param.feedbackSubmissionId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+    }
+
+    /**
+     * Remove an association between two feedback submissions
+     * @param param the request object
+     */
+    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(param: AssociationsApiSubmissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType0Request, options?: Configuration): Promise<void> {
+        return this.api.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(param.feedbackSubmissionId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
     }
 
 }
@@ -160,6 +230,45 @@ export interface BasicApiGetPageRequest {
     archived?: boolean
 }
 
+export interface BasicApiSubmissionsRequest {
+    /**
+     * 
+     * @type SimplePublicObjectInput
+     * @memberof BasicApisubmissions
+     */
+    simplePublicObjectInput: SimplePublicObjectInput
+}
+
+export interface BasicApiSubmissionsFeedbackSubmissionIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApisubmissionsFeedbackSubmissionId
+     */
+    feedbackSubmissionId: string
+}
+
+export interface BasicApiSubmissionsFeedbackSubmissionId0Request {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApisubmissionsFeedbackSubmissionId_1
+     */
+    feedbackSubmissionId: string
+    /**
+     * 
+     * @type SimplePublicObjectInput
+     * @memberof BasicApisubmissionsFeedbackSubmissionId_1
+     */
+    simplePublicObjectInput: SimplePublicObjectInput
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApisubmissionsFeedbackSubmissionId_1
+     */
+    idProperty?: string
+}
+
 export class ObjectBasicApi {
     private api: ObservableBasicApi
 
@@ -181,8 +290,35 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param param the request object
+     */
+    public submissions(param: BasicApiSubmissionsRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.submissions(param.simplePublicObjectInput,  options).toPromise();
+    }
+
+    /**
+     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+     * Archive
+     * @param param the request object
+     */
+    public submissionsFeedbackSubmissionId(param: BasicApiSubmissionsFeedbackSubmissionIdRequest, options?: Configuration): Promise<void> {
+        return this.api.submissionsFeedbackSubmissionId(param.feedbackSubmissionId,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Update
+     * @param param the request object
+     */
+    public submissionsFeedbackSubmissionId_1(param: BasicApiSubmissionsFeedbackSubmissionId0Request, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.submissionsFeedbackSubmissionId_1(param.feedbackSubmissionId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
 }
@@ -205,6 +341,33 @@ export interface BatchApiReadBatchRequest {
     archived?: boolean
 }
 
+export interface BatchApiSubmissionsBatchArchiveRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectId
+     * @memberof BatchApisubmissionsBatchArchive
+     */
+    batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId
+}
+
+export interface BatchApiSubmissionsBatchCreateRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectInput
+     * @memberof BatchApisubmissionsBatchCreate
+     */
+    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+}
+
+export interface BatchApiSubmissionsBatchUpdateRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectBatchInput
+     * @memberof BatchApisubmissionsBatchUpdate
+     */
+    batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput
+}
+
 export class ObjectBatchApi {
     private api: ObservableBatchApi
 
@@ -218,6 +381,59 @@ export class ObjectBatchApi {
      */
     public readBatch(param: BatchApiReadBatchRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.readBatch(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Archive a batch of feedback submissions by ID
+     * @param param the request object
+     */
+    public submissionsBatchArchive(param: BatchApiSubmissionsBatchArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.submissionsBatchArchive(param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Create a batch of feedback submissions
+     * @param param the request object
+     */
+    public submissionsBatchCreate(param: BatchApiSubmissionsBatchCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.submissionsBatchCreate(param.batchInputSimplePublicObjectInput,  options).toPromise();
+    }
+
+    /**
+     * Update a batch of feedback submissions
+     * @param param the request object
+     */
+    public submissionsBatchUpdate(param: BatchApiSubmissionsBatchUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.submissionsBatchUpdate(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservablePublicObjectApi } from "./ObservableAPI";
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+
+export interface PublicObjectApiSubmissionsMergeRequest {
+    /**
+     * 
+     * @type PublicMergeInput
+     * @memberof PublicObjectApisubmissionsMerge
+     */
+    publicMergeInput: PublicMergeInput
+}
+
+export class ObjectPublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(configuration: Configuration, requestFactory?: PublicObjectApiRequestFactory, responseProcessor?: PublicObjectApiResponseProcessor) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two feedback submissions with same type
+     * @param param the request object
+     */
+    public submissionsMerge(param: PublicObjectApiSubmissionsMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.submissionsMerge(param.publicMergeInput,  options).toPromise();
     }
 
 }

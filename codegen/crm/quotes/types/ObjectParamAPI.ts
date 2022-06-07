@@ -35,6 +35,60 @@ import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 import { ObservableAssociationsApi } from "./ObservableAPI";
 import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
 
+export interface AssociationsApiArchiveRequest {
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApiarchive
+     */
+    quoteId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApiarchive
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApiarchive
+     */
+    toObjectId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApiarchive
+     */
+    associationType: string
+}
+
+export interface AssociationsApiCreateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApicreate
+     */
+    quoteId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApicreate
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApicreate
+     */
+    toObjectId: string
+    /**
+     * 
+     * @type string
+     * @memberof AssociationsApicreate
+     */
+    associationType: string
+}
+
 export interface AssociationsApiGetAllRequest {
     /**
      * 
@@ -70,6 +124,22 @@ export class ObjectAssociationsApi {
     }
 
     /**
+     * Remove an association between two quotes
+     * @param param the request object
+     */
+    public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.quoteId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+    }
+
+    /**
+     * Associate a quote with another object
+     * @param param the request object
+     */
+    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        return this.api.create(param.quoteId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+    }
+
+    /**
      * List associations of a quote by type
      * @param param the request object
      */
@@ -81,6 +151,24 @@ export class ObjectAssociationsApi {
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiArchiveRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    quoteId: string
+}
+
+export interface BasicApiCreateRequest {
+    /**
+     * 
+     * @type SimplePublicObjectInput
+     * @memberof BasicApicreate
+     */
+    simplePublicObjectInput: SimplePublicObjectInput
+}
 
 export interface BasicApiGetByIdRequest {
     /**
@@ -160,11 +248,50 @@ export interface BasicApiGetPageRequest {
     archived?: boolean
 }
 
+export interface BasicApiUpdateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApiupdate
+     */
+    quoteId: string
+    /**
+     * 
+     * @type SimplePublicObjectInput
+     * @memberof BasicApiupdate
+     */
+    simplePublicObjectInput: SimplePublicObjectInput
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApiupdate
+     */
+    idProperty?: string
+}
+
 export class ObjectBasicApi {
     private api: ObservableBasicApi
 
     public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
         this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Move an Object identified by `{quoteId}` to the recycling bin.
+     * Archive
+     * @param param the request object
+     */
+    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.quoteId,  options).toPromise();
+    }
+
+    /**
+     * Create a quote with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard quotes is provided.
+     * Create
+     * @param param the request object
+     */
+    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.create(param.simplePublicObjectInput,  options).toPromise();
     }
 
     /**
@@ -181,14 +308,41 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of an Object identified by `{quoteId}`. `{quoteId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Update
+     * @param param the request object
+     */
+    public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.update(param.quoteId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
 }
 
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
+
+export interface BatchApiArchiveRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectId
+     * @memberof BatchApiarchive
+     */
+    batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId
+}
+
+export interface BatchApiCreateRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectInput
+     * @memberof BatchApicreate
+     */
+    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+}
 
 export interface BatchApiReadRequest {
     /**
@@ -205,6 +359,15 @@ export interface BatchApiReadRequest {
     archived?: boolean
 }
 
+export interface BatchApiUpdateRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectBatchInput
+     * @memberof BatchApiupdate
+     */
+    batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput
+}
+
 export class ObjectBatchApi {
     private api: ObservableBatchApi
 
@@ -213,11 +376,64 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Archive a batch of quotes by ID
+     * @param param the request object
+     */
+    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Create a batch of quotes
+     * @param param the request object
+     */
+    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.create(param.batchInputSimplePublicObjectInput,  options).toPromise();
+    }
+
+    /**
      * Read a batch of quotes by internal ID, or unique property values
      * @param param the request object
      */
     public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.read(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update a batch of quotes
+     * @param param the request object
+     */
+    public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservablePublicObjectApi } from "./ObservableAPI";
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+
+export interface PublicObjectApiMergeRequest {
+    /**
+     * 
+     * @type PublicMergeInput
+     * @memberof PublicObjectApimerge
+     */
+    publicMergeInput: PublicMergeInput
+}
+
+export class ObjectPublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(configuration: Configuration, requestFactory?: PublicObjectApiRequestFactory, responseProcessor?: PublicObjectApiResponseProcessor) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two quotes with same type
+     * @param param the request object
+     */
+    public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.merge(param.publicMergeInput,  options).toPromise();
     }
 
 }

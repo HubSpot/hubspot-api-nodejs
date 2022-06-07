@@ -95,7 +95,7 @@ export class ObjectCoreApi {
      * Start a new import
      * @param param the request object
      */
-    public create(param: CoreApiCreateRequest, options?: Configuration): Promise<PublicImportResponse> {
+    public create(param: CoreApiCreateRequest = {}, options?: Configuration): Promise<PublicImportResponse> {
         return this.api.create(param.files, param.importRequest,  options).toPromise();
     }
 
@@ -113,7 +113,7 @@ export class ObjectCoreApi {
      * Get active imports
      * @param param the request object
      */
-    public getPage(param: CoreApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicImportResponse> {
+    public getPage(param: CoreApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicImportResponse> {
         return this.api.getPage(param.after, param.before, param.limit,  options).toPromise();
     }
 

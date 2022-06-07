@@ -12,27 +12,15 @@
 
 import { HttpFile } from '../http/http';
 
-export class SearchHitField {
-    'metadataField': boolean;
-    'values': Array<any>;
+export class IndexedField {
     'name': string;
     'value': any;
+    'values': Array<any>;
+    'metadataField': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "metadataField",
-            "baseName": "metadataField",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<any>",
-            "format": ""
-        },
         {
             "name": "name",
             "baseName": "name",
@@ -44,10 +32,22 @@ export class SearchHitField {
             "baseName": "value",
             "type": "any",
             "format": ""
+        },
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<any>",
+            "format": ""
+        },
+        {
+            "name": "metadataField",
+            "baseName": "metadataField",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SearchHitField.attributeTypeMap;
+        return IndexedField.attributeTypeMap;
     }
 
     public constructor() {

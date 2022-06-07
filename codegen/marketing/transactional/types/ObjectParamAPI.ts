@@ -101,7 +101,7 @@ export class ObjectPublicSmtpTokensApi {
      * Create a SMTP API token.
      * @param param the request object
      */
-    public createToken(param: PublicSmtpTokensApiCreateTokenRequest, options?: Configuration): Promise<SmtpApiTokenView> {
+    public createToken(param: PublicSmtpTokensApiCreateTokenRequest = {}, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.createToken(param.smtpApiTokenRequestEgg,  options).toPromise();
     }
 
@@ -119,7 +119,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query SMTP API tokens by campaign name or an emailCampaignId.
      * @param param the request object
      */
-    public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest, options?: Configuration): Promise<CollectionResponseSmtpApiTokenView> {
+    public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenView> {
         return this.api.getTokensPage(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
     }
 
@@ -158,7 +158,7 @@ export class ObjectSingleSendApi {
      * Send a single transactional email asynchronously.
      * @param param the request object
      */
-    public sendEmail(param: SingleSendApiSendEmailRequest, options?: Configuration): Promise<EmailSendStatusView> {
+    public sendEmail(param: SingleSendApiSendEmailRequest = {}, options?: Configuration): Promise<EmailSendStatusView> {
         return this.api.sendEmail(param.publicSingleSendRequestEgg,  options).toPromise();
     }
 
