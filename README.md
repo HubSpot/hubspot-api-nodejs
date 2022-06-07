@@ -19,6 +19,12 @@ const hubspot = require('@hubspot/api-client')
 const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
 ```
 
+For ES modules
+```javascript
+import { Client } from "@hubspot/api-client";
+const hubSpotClient = new Client({ apiKey: YOUR_API_KEY });
+```
+
 You can also authenticate via token:
 
 ```javascript
