@@ -297,6 +297,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - hubspot.apiRequest
 
+## [7.0.0] - 2022-06-07
+
+### Added
+
+- crm()->quotes()->publicObjectApi()
+- crm()->feedbackSubmissions()->publicObjectApi()
+- added idProperty to update and getById methods of crm()->contacts()->basicApi()
+- support text/html response
+
+### Updated
+
+- dependenccies (typescript to 4.7.3 and ts-node to 10.8.1)
+
 [unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/6.0.1...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
@@ -322,3 +335,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [6.0.1-beta5]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta5
 [6.0.1-beta.6]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1-beta.6
 [6.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/6.0.1
+[7.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/7.0.0
