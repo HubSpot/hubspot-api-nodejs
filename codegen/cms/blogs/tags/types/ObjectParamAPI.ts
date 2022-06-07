@@ -323,7 +323,7 @@ export class ObjectBlogTagsApi {
      * Get all Blog Tags
      * @param param the request object
      */
-    public getPage(param: BlogTagsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
+    public getPage(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 

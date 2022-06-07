@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SearchHitField } from './SearchHitField';
+import { IndexedField } from './IndexedField';
 import { HttpFile } from '../http/http';
 
 /**
@@ -28,7 +28,7 @@ export class IndexedData {
     /**
     * The indexed fields in HubSpot.
     */
-    'fields': { [key: string]: SearchHitField; };
+    'fields': { [key: string]: IndexedField; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,7 +48,7 @@ export class IndexedData {
         {
             "name": "fields",
             "baseName": "fields",
-            "type": "{ [key: string]: SearchHitField; }",
+            "type": "{ [key: string]: IndexedField; }",
             "format": ""
         }    ];
 

@@ -46,6 +46,30 @@ export class PromiseAssociationsApi {
     }
 
     /**
+     * Remove an association between two quotes
+     * @param quoteId 
+     * @param toObjectType 
+     * @param toObjectId 
+     * @param associationType 
+     */
+    public archive(quoteId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(quoteId, toObjectType, toObjectId, associationType, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Associate a quote with another object
+     * @param quoteId 
+     * @param toObjectType 
+     * @param toObjectId 
+     * @param associationType 
+     */
+    public create(quoteId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        const result = this.api.create(quoteId, toObjectType, toObjectId, associationType, _options);
+        return result.toPromise();
+    }
+
+    /**
      * List associations of a quote by type
      * @param quoteId 
      * @param toObjectType 
@@ -74,6 +98,26 @@ export class PromiseBasicApi {
         responseProcessor?: BasicApiResponseProcessor
     ) {
         this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Move an Object identified by `{quoteId}` to the recycling bin.
+     * Archive
+     * @param quoteId 
+     */
+    public archive(quoteId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(quoteId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a quote with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard quotes is provided.
+     * Create
+     * @param simplePublicObjectInput 
+     */
+    public create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.create(simplePublicObjectInput, _options);
+        return result.toPromise();
     }
 
     /**
@@ -106,6 +150,18 @@ export class PromiseBasicApi {
         return result.toPromise();
     }
 
+    /**
+     * Perform a partial update of an Object identified by `{quoteId}`. `{quoteId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Update
+     * @param quoteId 
+     * @param simplePublicObjectInput 
+     * @param idProperty The name of a property whose values are unique for this object type
+     */
+    public update(quoteId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.update(quoteId, simplePublicObjectInput, idProperty, _options);
+        return result.toPromise();
+    }
+
 
 }
 
@@ -126,12 +182,67 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Archive a batch of quotes by ID
+     * @param batchInputSimplePublicObjectId 
+     */
+    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(batchInputSimplePublicObjectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a batch of quotes
+     * @param batchInputSimplePublicObjectInput 
+     */
+    public create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.create(batchInputSimplePublicObjectInput, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Read a batch of quotes by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
     public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         const result = this.api.read(batchReadInputSimplePublicObjectId, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update a batch of quotes
+     * @param batchInputSimplePublicObjectBatchInput 
+     */
+    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservablePublicObjectApi } from './ObservableAPI';
+
+import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+export class PromisePublicObjectApi {
+    private api: ObservablePublicObjectApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: PublicObjectApiRequestFactory,
+        responseProcessor?: PublicObjectApiResponseProcessor
+    ) {
+        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two quotes with same type
+     * @param publicMergeInput 
+     */
+    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.merge(publicMergeInput, _options);
         return result.toPromise();
     }
 

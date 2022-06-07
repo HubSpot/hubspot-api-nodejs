@@ -129,9 +129,10 @@ export class PromiseBasicApi {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        const result = this.api.getById(contactId, properties, propertiesWithHistory, associations, archived, _options);
+    public getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        const result = this.api.getById(contactId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
         return result.toPromise();
     }
 
@@ -155,9 +156,10 @@ export class PromiseBasicApi {
      * Update
      * @param contactId 
      * @param simplePublicObjectInput 
+     * @param idProperty The name of a property whose values are unique for this object type
      */
-    public update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.update(contactId, simplePublicObjectInput, _options);
+    public update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.update(contactId, simplePublicObjectInput, idProperty, _options);
         return result.toPromise();
     }
 

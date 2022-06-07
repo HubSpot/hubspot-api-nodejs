@@ -33,7 +33,7 @@ export class ObjectRolesApi {
      * Retrieves the roles on an account
      * @param param the request object
      */
-    public getAll(param: RolesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicPermissionSetNoPaging> {
+    public getAll(param: RolesApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponsePublicPermissionSetNoPaging> {
         return this.api.getAll( options).toPromise();
     }
 
@@ -57,7 +57,7 @@ export class ObjectTeamsApi {
      * See details about this account's teams
      * @param param the request object
      */
-    public getAll(param: TeamsApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicTeamNoPaging> {
+    public getAll(param: TeamsApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponsePublicTeamNoPaging> {
         return this.api.getAll( options).toPromise();
     }
 
@@ -180,7 +180,7 @@ export class ObjectUsersApi {
      * Retrieves a list of users from an account
      * @param param the request object
      */
-    public getPage(param: UsersApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicUserForwardPaging> {
+    public getPage(param: UsersApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicUserForwardPaging> {
         return this.api.getPage(param.limit, param.after,  options).toPromise();
     }
 

@@ -490,7 +490,7 @@ export class ObjectBlogPostsApi {
      * Get all Blog Posts
      * @param param the request object
      */
-    public getPage(param: BlogPostsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
+    public getPage(param: BlogPostsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 

@@ -866,7 +866,7 @@ export class ObjectTablesApi {
      * Return all draft tables
      * @param param the request object
      */
-    public getAllDraftTables(param: TablesApiGetAllDraftTablesRequest, options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+    public getAllDraftTables(param: TablesApiGetAllDraftTablesRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
         return this.api.getAllDraftTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.archived,  options).toPromise();
     }
 
@@ -875,7 +875,7 @@ export class ObjectTablesApi {
      * Get all published tables
      * @param param the request object
      */
-    public getAllTables(param: TablesApiGetAllTablesRequest, options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+    public getAllTables(param: TablesApiGetAllTablesRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
         return this.api.getAllTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.archived,  options).toPromise();
     }
 

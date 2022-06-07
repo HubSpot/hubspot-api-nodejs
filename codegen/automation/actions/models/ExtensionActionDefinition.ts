@@ -12,10 +12,9 @@
 
 import { ActionFunctionIdentifier } from './ActionFunctionIdentifier';
 import { ActionLabels } from './ActionLabels';
-import { ConditionalSingleFieldDependency } from './ConditionalSingleFieldDependency';
+import { ExtensionActionDefinitionInputFieldDependenciesInner } from './ExtensionActionDefinitionInputFieldDependenciesInner';
 import { InputFieldDefinition } from './InputFieldDefinition';
 import { ObjectRequestOptions } from './ObjectRequestOptions';
-import { SingleFieldDependency } from './SingleFieldDependency';
 import { HttpFile } from '../http/http';
 
 /**
@@ -51,7 +50,7 @@ export class ExtensionActionDefinition {
     /**
     * A list of dependencies between the input fields. These configure when the input fields should be visible.
     */
-    'inputFieldDependencies'?: Array<SingleFieldDependency | ConditionalSingleFieldDependency>;
+    'inputFieldDependencies'?: Array<ExtensionActionDefinitionInputFieldDependenciesInner>;
     /**
     * The user-facing labels for the custom action.
     */
@@ -115,7 +114,7 @@ export class ExtensionActionDefinition {
         {
             "name": "inputFieldDependencies",
             "baseName": "inputFieldDependencies",
-            "type": "Array<SingleFieldDependency | ConditionalSingleFieldDependency>",
+            "type": "Array<ExtensionActionDefinitionInputFieldDependenciesInner>",
             "format": ""
         },
         {

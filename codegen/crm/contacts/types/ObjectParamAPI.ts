@@ -202,6 +202,12 @@ export interface BasicApiGetByIdRequest {
      * @memberof BasicApigetById
      */
     archived?: boolean
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApigetById
+     */
+    idProperty?: string
 }
 
 export interface BasicApiGetPageRequest {
@@ -256,6 +262,12 @@ export interface BasicApiUpdateRequest {
      * @memberof BasicApiupdate
      */
     simplePublicObjectInput: SimplePublicObjectInput
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApiupdate
+     */
+    idProperty?: string
 }
 
 export class ObjectBasicApi {
@@ -289,7 +301,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.contactId, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+        return this.api.getById(param.contactId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -297,7 +309,7 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
     }
 
@@ -307,7 +319,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.update(param.contactId, param.simplePublicObjectInput,  options).toPromise();
+        return this.api.update(param.contactId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
 }
