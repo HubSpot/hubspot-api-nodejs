@@ -4,6 +4,7 @@ import {
   AssociationsApi,
   BasicApi,
   BatchApi,
+  PublicObjectApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -19,6 +20,7 @@ export class QuotesDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
+  public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -35,6 +37,7 @@ export class QuotesDiscovery {
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)
     this.batchApi = new BatchApi(configuration)
+    this.publicObjectApi = new PublicObjectApi(configuration)
     this.searchApi = new SearchApi(configuration)
   }
 
