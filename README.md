@@ -233,7 +233,7 @@ In TS works only the first two options.
 `after` for initial search should be set as 0
 
 ```javascript
-const filter = { propertyName: 'createdate', operator: 'GTE', value: Date.now() - 30 * 60000 }
+const filter = { propertyName: 'createdate', operator: 'GTE', value: `${Date.now() - 30 * 60000}` }
 const filterGroup = { filters: [filter] }
 const sort = JSON.stringify({ propertyName: 'createdate', direction: 'DESCENDING' })
 const query = 'test'
