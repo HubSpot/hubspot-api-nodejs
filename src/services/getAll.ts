@@ -39,7 +39,6 @@ export async function getAll<ReturnType, ConfigurationType>(
     )
     result = result.concat(response.results)
     afterInternal = _.get(response, 'paging.next.after')
-    console.log(afterInternal)
   } while (!_.isNil(afterInternal))
 
   return result
