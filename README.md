@@ -315,7 +315,7 @@ hubspotClient.apiRequest({
 })
 ```
 
-#### get contscts 
+#### get contacts 
 
 ```javascript
 const response = await hubspotClient.apiRequest({
