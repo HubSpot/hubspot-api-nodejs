@@ -21,6 +21,92 @@ import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObject
 export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+     * Archive
+     * @param feedbackSubmissionId 
+     */
+    public async archive(feedbackSubmissionId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'feedbackSubmissionId' is not null or undefined
+        if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
+            throw new RequiredError("BasicApi", "archive", "feedbackSubmissionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'
+            .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param simplePublicObjectInput 
+     */
+    public async create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'simplePublicObjectInput' is not null or undefined
+        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
+            throw new RequiredError("BasicApi", "create", "simplePublicObjectInput");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/objects/feedback_submissions';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(simplePublicObjectInput, "SimplePublicObjectInput", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param feedbackSubmissionId 
@@ -166,110 +252,24 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInput 
-     */
-    public async submissions(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'simplePublicObjectInput' is not null or undefined
-        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
-            throw new RequiredError("BasicApi", "submissions", "simplePublicObjectInput");
-        }
-
-
-        // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(simplePublicObjectInput, "SimplePublicObjectInput", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-     * Archive
-     * @param feedbackSubmissionId 
-     */
-    public async submissionsFeedbackSubmissionId(feedbackSubmissionId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'feedbackSubmissionId' is not null or undefined
-        if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError("BasicApi", "submissionsFeedbackSubmissionId", "feedbackSubmissionId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'
-            .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param feedbackSubmissionId 
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async submissionsFeedbackSubmissionId_1(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async update(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'feedbackSubmissionId' is not null or undefined
         if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError("BasicApi", "submissionsFeedbackSubmissionId_1", "feedbackSubmissionId");
+            throw new RequiredError("BasicApi", "update", "feedbackSubmissionId");
         }
 
 
         // verify required parameter 'simplePublicObjectInput' is not null or undefined
         if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
-            throw new RequiredError("BasicApi", "submissionsFeedbackSubmissionId_1", "simplePublicObjectInput");
+            throw new RequiredError("BasicApi", "update", "simplePublicObjectInput");
         }
 
 
@@ -317,6 +317,74 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 }
 
 export class BasicApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to archive
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async archive(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to create
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async create(response: ResponseContext): Promise<SimplePublicObject > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: SimplePublicObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObject", ""
+            ) as SimplePublicObject;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SimplePublicObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObject", ""
+            ) as SimplePublicObject;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -394,78 +462,10 @@ export class BasicApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to submissions
+     * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async submissions(response: ResponseContext): Promise<SimplePublicObject > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: SimplePublicObject = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObject", ""
-            ) as SimplePublicObject;
-            return body;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SimplePublicObject = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObject", ""
-            ) as SimplePublicObject;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to submissionsFeedbackSubmissionId
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async submissionsFeedbackSubmissionId(response: ResponseContext): Promise<void > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: void = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "void", ""
-            ) as void;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to submissionsFeedbackSubmissionId_1
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async submissionsFeedbackSubmissionId_1(response: ResponseContext): Promise<SimplePublicObject > {
+     public async update(response: ResponseContext): Promise<SimplePublicObject > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SimplePublicObject = ObjectSerializer.deserialize(

@@ -46,14 +46,14 @@ export class PromiseAssociationsApi {
     }
 
     /**
-     * List associations of a feedback submission by type
+     * Remove an association between two feedback submissions
      * @param feedbackSubmissionId 
      * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param toObjectId 
+     * @param associationType 
      */
-    public getAll(feedbackSubmissionId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
-        const result = this.api.getAll(feedbackSubmissionId, toObjectType, after, limit, _options);
+    public archive(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
         return result.toPromise();
     }
 
@@ -64,20 +64,20 @@ export class PromiseAssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        const result = this.api.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
+    public create(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        const result = this.api.create(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
         return result.toPromise();
     }
 
     /**
-     * Remove an association between two feedback submissions
+     * List associations of a feedback submission by type
      * @param feedbackSubmissionId 
      * @param toObjectType 
-     * @param toObjectId 
-     * @param associationType 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
      */
-    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<void> {
-        const result = this.api.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
+    public getPage(feedbackSubmissionId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
+        const result = this.api.getPage(feedbackSubmissionId, toObjectType, after, limit, _options);
         return result.toPromise();
     }
 
@@ -98,6 +98,26 @@ export class PromiseBasicApi {
         responseProcessor?: BasicApiResponseProcessor
     ) {
         this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+     * Archive
+     * @param feedbackSubmissionId 
+     */
+    public archive(feedbackSubmissionId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(feedbackSubmissionId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param simplePublicObjectInput 
+     */
+    public create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.create(simplePublicObjectInput, _options);
+        return result.toPromise();
     }
 
     /**
@@ -131,34 +151,14 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInput 
-     */
-    public submissions(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.submissions(simplePublicObjectInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-     * Archive
-     * @param feedbackSubmissionId 
-     */
-    public submissionsFeedbackSubmissionId(feedbackSubmissionId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.submissionsFeedbackSubmissionId(feedbackSubmissionId, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param feedbackSubmissionId 
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public submissionsFeedbackSubmissionId_1(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.submissionsFeedbackSubmissionId_1(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
+    public update(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.update(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
         return result.toPromise();
     }
 
@@ -182,21 +182,11 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Read a batch of feedback submissions by internal ID, or unique property values
-     * @param batchReadInputSimplePublicObjectId 
-     * @param archived Whether to return only results that have been archived.
-     */
-    public readBatch(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.readBatch(batchReadInputSimplePublicObjectId, archived, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Archive a batch of feedback submissions by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public submissionsBatchArchive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
-        const result = this.api.submissionsBatchArchive(batchInputSimplePublicObjectId, _options);
+    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(batchInputSimplePublicObjectId, _options);
         return result.toPromise();
     }
 
@@ -204,8 +194,18 @@ export class PromiseBatchApi {
      * Create a batch of feedback submissions
      * @param batchInputSimplePublicObjectInput 
      */
-    public submissionsBatchCreate(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.submissionsBatchCreate(batchInputSimplePublicObjectInput, _options);
+    public create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.create(batchInputSimplePublicObjectInput, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Read a batch of feedback submissions by internal ID, or unique property values
+     * @param batchReadInputSimplePublicObjectId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.read(batchReadInputSimplePublicObjectId, archived, _options);
         return result.toPromise();
     }
 
@@ -213,8 +213,8 @@ export class PromiseBatchApi {
      * Update a batch of feedback submissions
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public submissionsBatchUpdate(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.submissionsBatchUpdate(batchInputSimplePublicObjectBatchInput, _options);
+    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
         return result.toPromise();
     }
 
@@ -241,8 +241,8 @@ export class PromisePublicObjectApi {
      * Merge two feedback submissions with same type
      * @param publicMergeInput 
      */
-    public submissionsMerge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.submissionsMerge(publicMergeInput, _options);
+    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.merge(publicMergeInput, _options);
         return result.toPromise();
     }
 
