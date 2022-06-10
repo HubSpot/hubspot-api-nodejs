@@ -50,14 +50,14 @@ export class ObservableAssociationsApi {
     }
 
     /**
-     * List associations of a feedback submission by type
+     * Remove an association between two feedback submissions
      * @param feedbackSubmissionId 
      * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param toObjectId 
+     * @param associationType 
      */
-    public getAll(feedbackSubmissionId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseAssociatedIdForwardPaging> {
-        const requestContextPromise = this.requestFactory.getAll(feedbackSubmissionId, toObjectType, after, limit, _options);
+    public archive(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -71,7 +71,7 @@ export class ObservableAssociationsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
 
@@ -82,8 +82,8 @@ export class ObservableAssociationsApi {
      * @param toObjectId 
      * @param associationType 
      */
-    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<SimplePublicObjectWithAssociations> {
-        const requestContextPromise = this.requestFactory.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
+    public create(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<SimplePublicObjectWithAssociations> {
+        const requestContextPromise = this.requestFactory.create(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -97,19 +97,19 @@ export class ObservableAssociationsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
 
     /**
-     * Remove an association between two feedback submissions
+     * List associations of a feedback submission by type
      * @param feedbackSubmissionId 
      * @param toObjectType 
-     * @param toObjectId 
-     * @param associationType 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
      */
-    public submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(feedbackSubmissionId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(feedbackSubmissionId, toObjectType, toObjectId, associationType, _options);
+    public getPage(feedbackSubmissionId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseAssociatedIdForwardPaging> {
+        const requestContextPromise = this.requestFactory.getPage(feedbackSubmissionId, toObjectType, after, limit, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -123,7 +123,7 @@ export class ObservableAssociationsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsFeedbackSubmissionIdAssociationsToObjectTypeToObjectIdAssociationType_1(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
             }));
     }
 
@@ -143,6 +143,54 @@ export class ObservableBasicApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
+    }
+
+    /**
+     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
+     * Archive
+     * @param feedbackSubmissionId 
+     */
+    public archive(feedbackSubmissionId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(feedbackSubmissionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+            }));
+    }
+
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param simplePublicObjectInput 
+     */
+    public create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Observable<SimplePublicObject> {
+        const requestContextPromise = this.requestFactory.create(simplePublicObjectInput, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+            }));
     }
 
     /**
@@ -204,62 +252,14 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInput 
-     */
-    public submissions(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Observable<SimplePublicObject> {
-        const requestContextPromise = this.requestFactory.submissions(simplePublicObjectInput, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissions(rsp)));
-            }));
-    }
-
-    /**
-     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-     * Archive
-     * @param feedbackSubmissionId 
-     */
-    public submissionsFeedbackSubmissionId(feedbackSubmissionId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.submissionsFeedbackSubmissionId(feedbackSubmissionId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsFeedbackSubmissionId(rsp)));
-            }));
-    }
-
-    /**
      * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param feedbackSubmissionId 
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public submissionsFeedbackSubmissionId_1(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Observable<SimplePublicObject> {
-        const requestContextPromise = this.requestFactory.submissionsFeedbackSubmissionId_1(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
+    public update(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Observable<SimplePublicObject> {
+        const requestContextPromise = this.requestFactory.update(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -273,7 +273,7 @@ export class ObservableBasicApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsFeedbackSubmissionId_1(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
 
@@ -296,35 +296,11 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Read a batch of feedback submissions by internal ID, or unique property values
-     * @param batchReadInputSimplePublicObjectId 
-     * @param archived Whether to return only results that have been archived.
-     */
-    public readBatch(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const requestContextPromise = this.requestFactory.readBatch(batchReadInputSimplePublicObjectId, archived, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readBatch(rsp)));
-            }));
-    }
-
-    /**
      * Archive a batch of feedback submissions by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public submissionsBatchArchive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.submissionsBatchArchive(batchInputSimplePublicObjectId, _options);
+    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(batchInputSimplePublicObjectId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -338,7 +314,7 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsBatchArchive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
 
@@ -346,8 +322,8 @@ export class ObservableBatchApi {
      * Create a batch of feedback submissions
      * @param batchInputSimplePublicObjectInput 
      */
-    public submissionsBatchCreate(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const requestContextPromise = this.requestFactory.submissionsBatchCreate(batchInputSimplePublicObjectInput, _options);
+    public create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const requestContextPromise = this.requestFactory.create(batchInputSimplePublicObjectInput, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -361,7 +337,31 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsBatchCreate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+            }));
+    }
+
+    /**
+     * Read a batch of feedback submissions by internal ID, or unique property values
+     * @param batchReadInputSimplePublicObjectId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const requestContextPromise = this.requestFactory.read(batchReadInputSimplePublicObjectId, archived, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
 
@@ -369,8 +369,8 @@ export class ObservableBatchApi {
      * Update a batch of feedback submissions
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public submissionsBatchUpdate(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const requestContextPromise = this.requestFactory.submissionsBatchUpdate(batchInputSimplePublicObjectBatchInput, _options);
+    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const requestContextPromise = this.requestFactory.update(batchInputSimplePublicObjectBatchInput, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -384,7 +384,7 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsBatchUpdate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
 
@@ -410,8 +410,8 @@ export class ObservablePublicObjectApi {
      * Merge two feedback submissions with same type
      * @param publicMergeInput 
      */
-    public submissionsMerge(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {
-        const requestContextPromise = this.requestFactory.submissionsMerge(publicMergeInput, _options);
+    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {
+        const requestContextPromise = this.requestFactory.merge(publicMergeInput, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -425,7 +425,7 @@ export class ObservablePublicObjectApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.submissionsMerge(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.merge(rsp)));
             }));
     }
 
