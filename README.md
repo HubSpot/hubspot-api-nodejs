@@ -16,29 +16,20 @@ npm install @hubspot/api-client
 
 ```javascript
 const hubspot = require('@hubspot/api-client')
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY })
+const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN })
 ```
 
 For ES modules
 ```javascript
 import { Client } from "@hubspot/api-client";
-const hubSpotClient = new Client({ apiKey: YOUR_API_KEY });
+const hubSpotClient = new Client({ accessToken: YOUR_ACCESS_TOKEN });
 ```
-
-You can also authenticate via token:
-
-```javascript
-const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN })
-```
+You'll need to create a [private app](https://developers.hubspot.com/docs/api/private-apps) to get your access token or you can obtain [OAuth2 access token](https://developers.hubspot.com/docs/api/working-with-oauth).
 
 You can provide developer API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.
 
 ```javascript
 const hubspotClient = new hubspot.Client({ developerApiKey: YOUR_DEVELOPER_API_KEY })
-```
-
-```javascript
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey: YOUR_DEVELOPER_API_KEY })
 ```
 
 ```javascript
@@ -332,7 +323,7 @@ You may use this library in your Typescript project via:
 
 ```typescript
 import * as hubspot from '@hubspot/api-client'
-const hubspotClient = new hubspot.Client({ apiKey: YOUR_API_KEY, developerApiKey: YOUR_DEVELOPER_API_KEY })
+const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN , developerApiKey: YOUR_DEVELOPER_API_KEY })
 ```
 
 ## License
