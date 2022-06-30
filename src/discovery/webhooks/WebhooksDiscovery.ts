@@ -30,6 +30,10 @@ export class WebhooksDiscovery {
     this.subscriptionsApi = new SubscriptionsApi(configuration)
   }
 
+  /**
+   * 
+   * @deprecated
+   */
   public validateSignature(
     signature: string,
     clientSecret: string,
