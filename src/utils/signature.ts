@@ -4,31 +4,40 @@ import { ISignatureOptions } from './ISignatureOptions';
 
 export class Signature {
     public isValid(
-        options: ISignatureOptions = {method: 'POST'}
+        {method =  'POST', signatureVersion =  'v1', ...options }: ISignatureOptions 
       ): boolean {
         let sourceString = null
+        let hash = null
 
         switch (signatureVersion) {
             case 'v1':
-                sourceString = clientSecret + requestBody
+                sourceString = options.clientSecret + options.requestBody
+                hash = crypto
+                    .createHash('sha256')
+                    .update(sourceString)
+                    .digest('hex')
                 break;
             case 'v2':
-                sourceString = clientSecret + webhooksMethod + webhooksUrl + requestBody
+                sourceString = options.clientSecret + method + options.url + options.requestBody
+                hash = crypto
+                    .createHash('sha256')
+                    .update(sourceString)
+                    .digest('hex')
                 break;
             case 'v3':
-                sourceString = clientSecret + webhooksMethod + webhooksUrl + requestBody
+                sourceString = method + options.url + options.requestBody + options.timestamp
+                hash = crypto
+                    .createHmac("sha256", options.clientSecret)
+                    .update(sourceString)
+                    .digest("base64")
                 break;
             default:
                 throw new Error(`Not supported signature version: ${signatureVersion}`)
                 break;
         }
+        console.log(sourceString, hash)
       
-        const hash = crypto
-          .createHash('sha256')
-          .update(sourceString)
-          .digest('hex')
-      
-        return _.isEqual(signature, hash)
+        return _.isEqual(options.signature, hash)
     }
 
     public getV3Signature(): string
