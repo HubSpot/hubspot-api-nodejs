@@ -1,18 +1,14 @@
 import crypto = require('crypto')
 import * as _ from 'lodash'
+import { ISignatureOptions } from './ISignatureOptions';
 
 export class Signature {
     public isValid(
-        signature: string,
-        clientSecret: string,
-        requestBody: string,
-        signatureVersion = 'v1',
-        webhooksUrl?: string,
-        webhooksMethod = 'POST',
+        options: ISignatureOptions = {method: 'POST'}
       ): boolean {
         let sourceString = null
 
-        switch (signature) {
+        switch (signatureVersion) {
             case 'v1':
                 sourceString = clientSecret + requestBody
                 break;
@@ -23,7 +19,7 @@ export class Signature {
                 sourceString = clientSecret + webhooksMethod + webhooksUrl + requestBody
                 break;
             default:
-                console.log("No such day exists!"); // throw error
+                throw new Error(`Not supported signature version: ${signatureVersion}`)
                 break;
         }
       
@@ -33,5 +29,10 @@ export class Signature {
           .digest('hex')
       
         return _.isEqual(signature, hash)
+    }
+
+    public getV3Signature(): string
+    {
+        return 'f'
     }
 }      
