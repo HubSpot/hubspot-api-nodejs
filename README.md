@@ -22,7 +22,7 @@ const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN })
 For ES modules
 ```javascript
 import { Client } from "@hubspot/api-client";
-const hubSpotClient = new Client({ accessToken: YOUR_ACCESS_TOKEN });
+const hubspotClient = new Client({ accessToken: YOUR_ACCESS_TOKEN });
 ```
 You'll need to create a [private app](https://developers.hubspot.com/docs/api/private-apps) to get your access token or you can obtain [OAuth2 access token](https://developers.hubspot.com/docs/api/working-with-oauth).
 
