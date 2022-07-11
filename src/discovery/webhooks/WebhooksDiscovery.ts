@@ -31,7 +31,7 @@ export class WebhooksDiscovery {
   }
 
   /**
-   * 
+   *
    * @deprecated
    */
   public validateSignature(
