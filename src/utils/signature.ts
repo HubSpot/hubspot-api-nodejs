@@ -4,8 +4,8 @@ import { ISignatureOptions } from './ISignatureOptions'
 
 export class Signature {
   public static isValid({ method = 'POST', signatureVersion = 'v1', ...options }: ISignatureOptions): boolean {
-    let hash = Signature.getSignature(method, signatureVersion, options)
-    
+    const hash = Signature.getSignature(method, signatureVersion, options)
+
     return _.isEqual(options.signature, hash)
   }
 
