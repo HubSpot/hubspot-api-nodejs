@@ -3,8 +3,16 @@ import * as _ from 'lodash'
 import { ISignatureOptions } from './ISignatureOptions'
 
 export class Signature {
+  public static readonly MAX_ALLOWED_TIMESTAMP = 300000
+
   public static isValid({ method = 'POST', signatureVersion = 'v1', ...options }: ISignatureOptions): boolean {
     const hash = Signature.getSignature(method, signatureVersion, options)
+    if (signatureVersion === 'v3') {
+      const currentTime = Date.now()
+      if (options.timestamp === undefined || currentTime - options.timestamp > Signature.MAX_ALLOWED_TIMESTAMP) {
+        throw new Error('Timestamp is invalid, reject request')
+      }
+    }
 
     return _.isEqual(options.signature, hash)
   }
