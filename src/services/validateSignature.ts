@@ -1,6 +1,10 @@
 import crypto = require('crypto')
 import * as _ from 'lodash'
 
+/**
+ *
+ * @deprecated
+ */
 export function validateSignature(
   signature: string,
   clientSecret: string,
