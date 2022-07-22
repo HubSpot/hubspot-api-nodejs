@@ -6,4 +6,5 @@ export interface IHttpOptions {
   overlapUrl?: string
   path?: string
   qs?: { [key: string]: any }
+  defaultJson?: boolean
 }
