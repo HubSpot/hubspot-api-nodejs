@@ -16,7 +16,7 @@ export class Request {
   protected baseUrl: string = 'https://api.hubapi.com'
   protected url: URL
   protected method: string
-  protected headers: IHeaders
+  protected headers: IHeaders = {}
   protected body?: any
 
   constructor(config: IConfiguration = {}, opts: IHttpOptions = {}) {
@@ -27,7 +27,7 @@ export class Request {
     }
     this.url = this.generateUrl()
     this.method = this.opts.method || 'GET'
-    this.headers = Object.assign({}, config.defaultHeaders, this.getDefaultHeaders(), this.opts.headers)
+    this.initHeaders()
     this.applyAuth()
     this.setBody()
   }
@@ -64,17 +64,19 @@ export class Request {
     }
   }
 
+  protected initHeaders() {
+    if (_.get(this.opts, 'defaultJson', true)) {
+      this.headers = { 'Content-Type': 'application/json' }
+    }
+
+    this.headers = Object.assign(this.headers, this.config.defaultHeaders, this.getDefaultHeaders(), this.opts.headers)
+  }
+
   protected getDefaultHeaders(): IHeaders {
-    let defaultHeaders = {
+    return {
       Accept: 'application/json, */*;q=0.8',
       'User-agent': ApiClientConfigurator.getUserAgent(),
     }
-
-    if (_.get(this.opts, 'defaultJson', true)) {
-      defaultHeaders = Object.assign({}, defaultHeaders, { 'Content-Type': 'application/json' })
-    }
-
-    return defaultHeaders
   }
 
   protected generateUrl(): URL {
