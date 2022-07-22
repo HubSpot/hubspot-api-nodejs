@@ -68,7 +68,6 @@ export class Request {
     return {
       Accept: 'application/json, */*;q=0.8',
       'User-agent': ApiClientConfigurator.getUserAgent(),
-      'Content-Type': 'application/json',
     }
   }
 
