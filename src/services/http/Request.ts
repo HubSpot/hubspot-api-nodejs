@@ -65,10 +65,16 @@ export class Request {
   }
 
   protected getDefaultHeaders(): IHeaders {
-    return {
+    let defaultHeaders =  {
       Accept: 'application/json, */*;q=0.8',
       'User-agent': ApiClientConfigurator.getUserAgent(),
     }
+
+    if (_.get(this.opts, 'defaultJson', true)) {
+      defaultHeaders = Object.assign({}, defaultHeaders, { 'Content-Type': 'application/json' });
+    }
+
+    return defaultHeaders 
   }
 
   protected generateUrl(): URL {
