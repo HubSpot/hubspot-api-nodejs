@@ -326,7 +326,7 @@ const options = {
 };
 formData.append("folderPath", '/');
 formData.append("options", JSON.stringify(options));
-formData.append("file", fs.createReadStream('./up.jpg'));
+formData.append("file", fs.createReadStream('file path'));
 
 const response = await hubspotClient.apiRequest({
     method: 'POST',
