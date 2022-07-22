@@ -317,6 +317,27 @@ const json = await response.json()
 console.log(json)
 ```
 
+#### upload a file
+
+```javascript
+const formData = new FormData();
+const options = {
+// some options
+};
+formData.append("folderPath", '/');
+formData.append("options", JSON.stringify(options));
+formData.append("file", fs.createReadStream('./up.jpg'));
+
+const response = await hubspotClient.apiRequest({
+    method: 'POST',
+    path: '/filemanager/api/v3/files/upload',
+    body: formData,
+    defaultJson: false
+});
+
+console.log(response);
+```
+
 ## Typescript
 
 You may use this library in your Typescript project via:
