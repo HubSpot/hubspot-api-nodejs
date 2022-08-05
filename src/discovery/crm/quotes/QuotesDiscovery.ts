@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import { Configuration, createConfiguration } from '../../../../codegen/crm/quotes/configuration'
 import {
   AssociationsApi,

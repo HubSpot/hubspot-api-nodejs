@@ -1,5 +1,5 @@
-import * as _ from 'lodash'
-import * as qs from 'querystring'
+import omitBy from 'lodash/omitBy'
+import isNil from 'lodash/isNil'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
 import {
   AccessTokensApi,
@@ -49,6 +49,8 @@ export class OauthDiscovery {
       state,
     }
 
-    return `https://app.hubspot.com/oauth/authorize?${qs.stringify(_.omitBy(params, _.isNil))}`
+    const queryParams = new URLSearchParams(omitBy(params, isNil))
+
+    return `https://app.hubspot.com/oauth/authorize?${queryParams.toString()}`
   }
 }
