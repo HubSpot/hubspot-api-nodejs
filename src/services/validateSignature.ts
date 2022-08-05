@@ -12,9 +12,8 @@ export function validateSignature(
   webhooksUrl?: string,
   webhooksMethod = 'POST',
 ): boolean {
-  const sourceString = signatureVersion === 'v1'
-    ? clientSecret + requestBody
-    : clientSecret + webhooksMethod + webhooksUrl + requestBody
+  const sourceString =
+    signatureVersion === 'v1' ? clientSecret + requestBody : clientSecret + webhooksMethod + webhooksUrl + requestBody
 
   const hash = crypto
     .createHash('sha256')

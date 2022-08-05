@@ -1,5 +1,5 @@
-import omitBy from 'lodash/omitBy'
 import isNil from 'lodash/isNil'
+import omitBy from 'lodash/omitBy'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
 import {
   AccessTokensApi,
