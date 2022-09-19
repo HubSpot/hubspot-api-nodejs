@@ -17,7 +17,6 @@
   "author": "HubSpot",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.7.2",
     "bottleneck": "^2.19.5",
     "btoa": "^1.2.1",
     "es6-promise": "^4.2.4",
@@ -27,7 +26,6 @@
     "url-parse": "^1.4.3"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.29",
     "@types/jasmine": "^3.6.2",
     "@types/lodash": "^4.14.171",
     "@types/node": "^12.12.21",
