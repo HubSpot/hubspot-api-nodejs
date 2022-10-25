@@ -1,6 +1,5 @@
 import { IConfiguration } from './configuration/IConfiguration'
 import { AutomationDiscovery } from './discovery/automation/AutomationDiscovery'
-import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
 import { CommunicationPreferencesDiscovery } from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
 import { ConversationsDiscovery } from './discovery/conversations/ConversationsDiscovery'
 import { CrmDiscovery } from './discovery/crm/CrmDiscovery'
@@ -9,13 +8,14 @@ import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { SettingsDiscovery } from './discovery/settings/SettingsDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
+import { initObject } from './services/initObject'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
-  public cms: CmsDiscovery = new CmsDiscovery()
+  protected _cms: any
   public communicationPreferences: CommunicationPreferencesDiscovery = new CommunicationPreferencesDiscovery()
   public conversations: ConversationsDiscovery = new ConversationsDiscovery()
   public crm: CrmDiscovery = new CrmDiscovery()
@@ -33,7 +33,6 @@ export class Client {
 
   public init() {
     this.automation = new AutomationDiscovery(this.config)
-    this.cms = new CmsDiscovery(this.config)
     this.communicationPreferences = new CommunicationPreferencesDiscovery(this.config)
     this.conversations = new ConversationsDiscovery(this.config)
     this.crm = new CrmDiscovery(this.config)
@@ -42,6 +41,17 @@ export class Client {
     this.oauth = new OauthDiscovery(this.config)
     this.settings = new SettingsDiscovery(this.config)
     this.webhooks = new WebhooksDiscovery(this.config)
+  }
+  
+  /**
+  * Getter
+  * @returns CmsDiscovery
+  */
+  get cms() {
+    if(!this._cms) {
+      this._cms = initObject('cms/CmsDiscovery', this.config)
+    }
+    return this._cms
   }
 
   public setAccessToken(token: string) {

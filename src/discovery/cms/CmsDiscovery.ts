@@ -1,5 +1,7 @@
 import { IConfiguration } from '../../configuration/IConfiguration'
+import { initObject } from '../../services/initObject'
 import { AuditLogsDiscovery } from './audit_logs/AuditLogsDiscovery'
+import { BaseDiscovery } from '../BaseDiscovery'
 import { BlogsDiscovery } from './blogs/BlogsDiscovery'
 import { DomainsDiscovery } from './domains/DomainsDiscovery'
 import { HubdbDiscovery } from './hubdb/HubdbDiscovery'
@@ -8,7 +10,7 @@ import { SiteSearchDiscovery } from './site_search/SiteSearchDiscovery'
 import { SourceCodeDiscovery } from './source_code/SourceCodeDiscovery'
 import { UrlRedirectsDiscovery } from './url_redirects/UrlRedirectsDiscovery'
 
-export class CmsDiscovery {
+export default class CmsDiscovery extends BaseDiscovery {
   public auditLogs: AuditLogsDiscovery
   public blogs: BlogsDiscovery
   public domains: DomainsDiscovery
@@ -19,6 +21,7 @@ export class CmsDiscovery {
   public urlRedirects: UrlRedirectsDiscovery
 
   constructor(config: IConfiguration = {}) {
+    super(config)
     this.auditLogs = new AuditLogsDiscovery(config)
     this.blogs = new BlogsDiscovery(config)
     this.domains = new DomainsDiscovery(config)
