@@ -12,7 +12,7 @@ import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class ActionsDiscovery {
+export default class ActionsDiscovery {
   public callbacksApi: CallbacksApi
   public definitionsApi: DefinitionsApi
   public functionsApi: FunctionsApi
