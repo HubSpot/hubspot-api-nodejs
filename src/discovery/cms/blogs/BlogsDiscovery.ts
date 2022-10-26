@@ -8,7 +8,7 @@ export class BlogsDiscovery extends BaseDiscovery {
 
   /**
    * Getter
-   * @returns TimelineDiscovery
+   * @returns AuthorsDiscovery
    */
   get authors() {
     if (!this._authors) {
