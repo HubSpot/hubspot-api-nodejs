@@ -1,6 +1,6 @@
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { initObject } from '../../../services/initObject'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import BaseDiscovery from '../../BaseDiscovery'
 
 export default class ExtensionsDiscovery extends BaseDiscovery {
   protected _accounting: any
