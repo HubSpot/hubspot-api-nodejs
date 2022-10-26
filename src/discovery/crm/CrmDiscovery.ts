@@ -1,7 +1,7 @@
 import { initObject } from '../../services/initObject'
 import BaseDiscovery from '../BaseDiscovery'
 
-export class CrmDiscovery extends BaseDiscovery {
+export default class CrmDiscovery extends BaseDiscovery {
   protected _associations: any
   protected _companies: any
   protected _contacts: any

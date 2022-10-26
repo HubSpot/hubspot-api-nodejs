@@ -1,7 +1,7 @@
 import { initObject } from '../../services/initObject'
 import BaseDiscovery from '../BaseDiscovery'
 
-export class ConversationsDiscovery extends BaseDiscovery {
+export default class ConversationsDiscovery extends BaseDiscovery {
   protected _visitorIdentification: any
 
   /**

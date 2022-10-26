@@ -1,7 +1,7 @@
 import { initObject } from '../../services/initObject'
 import BaseDiscovery from '../BaseDiscovery'
 
-export class CmsDiscovery extends BaseDiscovery {
+export default class CmsDiscovery extends BaseDiscovery {
   protected _auditLogs: any
   protected _blogs: any
   protected _domains: any

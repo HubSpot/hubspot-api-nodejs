@@ -1,7 +1,7 @@
 import { initObject } from '../../services/initObject'
 import BaseDiscovery from '../BaseDiscovery'
 
-export class MarketingDiscovery extends BaseDiscovery {
+export default class MarketingDiscovery extends BaseDiscovery {
   protected _events: any
   protected _transactional: any
 

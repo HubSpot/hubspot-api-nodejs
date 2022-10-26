@@ -1,7 +1,7 @@
 import { initObject } from '../../services/initObject'
 import BaseDiscovery from '../BaseDiscovery'
 
-export class SettingsDiscovery extends BaseDiscovery {
+export default class SettingsDiscovery extends BaseDiscovery {
   protected _users: any
 
   /**

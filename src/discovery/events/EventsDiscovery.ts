@@ -4,7 +4,7 @@ import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
 
-export class EventsDiscovery {
+export default class EventsDiscovery {
   public eventsApi: EventsApi
 
   constructor(config: IConfiguration = {}) {
