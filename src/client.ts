@@ -1,5 +1,6 @@
 import { IConfiguration } from './configuration/IConfiguration'
 import { AutomationDiscovery } from './discovery/automation/AutomationDiscovery'
+import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
 import { CommunicationPreferencesDiscovery } from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
 import { ConversationsDiscovery } from './discovery/conversations/ConversationsDiscovery'
 import { CrmDiscovery } from './discovery/crm/CrmDiscovery'
@@ -11,7 +12,6 @@ import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
-import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
@@ -42,11 +42,11 @@ export class Client {
     this.settings = new SettingsDiscovery(this.config)
     this.webhooks = new WebhooksDiscovery(this.config)
   }
-  
+
   /**
-  * Getter
-  * @returns CmsDiscovery
-  */
+   * Getter
+   * @returns CmsDiscovery
+   */
   // get cms() {
   //   if(!this._cms) {
   //     this._cms = initObject('cms/CmsDiscovery', this.config)

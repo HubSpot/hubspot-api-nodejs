@@ -1,5 +1,5 @@
-import { BaseDiscovery } from '../BaseDiscovery'
 import { initObject } from '../../services/initObject'
+import BaseDiscovery from '../BaseDiscovery'
 
 export class CrmDiscovery extends BaseDiscovery {
   protected _associations: any
@@ -20,11 +20,11 @@ export class CrmDiscovery extends BaseDiscovery {
   protected _timeline: any
 
   /**
-  * Getter
-  * @returns AssociationsDiscovery
-  */
-   get associations() {
-    if(!this._associations) {
+   * Getter
+   * @returns AssociationsDiscovery
+   */
+  get associations() {
+    if (!this._associations) {
       this._associations = initObject('crm/associations/AssociationsDiscovery', this.config)
     }
 
@@ -32,11 +32,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns CompaniesDiscovery
-  */
-   get companies() {
-    if(!this._companies) {
+   * Getter
+   * @returns CompaniesDiscovery
+   */
+  get companies() {
+    if (!this._companies) {
       this._companies = initObject('crm/companies/CompaniesDiscovery', this.config)
     }
 
@@ -44,11 +44,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns ContactsDiscovery
-  */
-   get contacts() {
-    if(!this._contacts) {
+   * Getter
+   * @returns ContactsDiscovery
+   */
+  get contacts() {
+    if (!this._contacts) {
       this._contacts = initObject('crm/contacts/ContactsDiscovery', this.config)
     }
 
@@ -56,11 +56,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns DealsDiscovery
-  */
-   get deals() {
-    if(!this._deals) {
+   * Getter
+   * @returns DealsDiscovery
+   */
+  get deals() {
+    if (!this._deals) {
       this._deals = initObject('crm/deals/DealsDiscovery', this.config)
     }
 
@@ -68,11 +68,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns ExtensionsDiscovery
-  */
-   get extensions() {
-    if(!this._extensions) {
+   * Getter
+   * @returns ExtensionsDiscovery
+   */
+  get extensions() {
+    if (!this._extensions) {
       this._extensions = initObject('crm/extensions/ExtensionsDiscovery', this.config)
     }
 
@@ -80,11 +80,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns ImportsDiscovery
-  */
-   get imports() {
-    if(!this._imports) {
+   * Getter
+   * @returns ImportsDiscovery
+   */
+  get imports() {
+    if (!this._imports) {
       this._imports = initObject('crm/imports/ImportsDiscovery', this.config)
     }
 
@@ -92,11 +92,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns LineItemsDiscovery
-  */
-   get lineItems() {
-    if(!this._lineItems) {
+   * Getter
+   * @returns LineItemsDiscovery
+   */
+  get lineItems() {
+    if (!this._lineItems) {
       this._lineItems = initObject('crm/line_items/LineItemsDiscovery', this.config)
     }
 
@@ -104,11 +104,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns ObjectsDiscovery
-  */
-   get objects() {
-    if(!this._objects) {
+   * Getter
+   * @returns ObjectsDiscovery
+   */
+  get objects() {
+    if (!this._objects) {
       this._objects = initObject('crm/objects/ObjectsDiscovery', this.config)
     }
 
@@ -116,11 +116,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns OwnersDiscovery
-  */
-   get owners() {
-    if(!this._owners) {
+   * Getter
+   * @returns OwnersDiscovery
+   */
+  get owners() {
+    if (!this._owners) {
       this._owners = initObject('crm/owners/OwnersDiscovery', this.config)
     }
 
@@ -128,11 +128,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns LineItemsDiscovery
-  */
-   get pipelines() {
-    if(!this._pipelines) {
+   * Getter
+   * @returns LineItemsDiscovery
+   */
+  get pipelines() {
+    if (!this._pipelines) {
       this._pipelines = initObject('crm/pipelines/PipelinesDiscovery', this.config)
     }
 
@@ -140,11 +140,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns ProductsDiscovery
-  */
-   get products() {
-    if(!this._products) {
+   * Getter
+   * @returns ProductsDiscovery
+   */
+  get products() {
+    if (!this._products) {
       this._products = initObject('crm/products/ProductsDiscovery', this.config)
     }
 
@@ -152,11 +152,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns PropertiesDiscovery
-  */
-   get properties() {
-    if(!this._properties) {
+   * Getter
+   * @returns PropertiesDiscovery
+   */
+  get properties() {
+    if (!this._properties) {
       this._properties = initObject('crm/properties/PropertiesDiscovery', this.config)
     }
 
@@ -164,11 +164,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns QuotesDiscovery
-  */
-   get quotes() {
-    if(!this._quotes) {
+   * Getter
+   * @returns QuotesDiscovery
+   */
+  get quotes() {
+    if (!this._quotes) {
       this._quotes = initObject('crm/quotes/QuotesDiscovery', this.config)
     }
 
@@ -176,11 +176,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns SchemasDiscovery
-  */
-   get schemas() {
-    if(!this._schemas) {
+   * Getter
+   * @returns SchemasDiscovery
+   */
+  get schemas() {
+    if (!this._schemas) {
       this._schemas = initObject('crm/schemas/SchemasDiscovery', this.config)
     }
 
@@ -188,11 +188,11 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns TicketsDiscovery
-  */
-   get tickets() {
-    if(!this._tickets) {
+   * Getter
+   * @returns TicketsDiscovery
+   */
+  get tickets() {
+    if (!this._tickets) {
       this._tickets = initObject('crm/tickets/TicketsDiscovery', this.config)
     }
 
@@ -200,15 +200,14 @@ export class CrmDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns TimelineDiscovery
-  */
-   get timeline() {
-    if(!this._timeline) {
+   * Getter
+   * @returns TimelineDiscovery
+   */
+  get timeline() {
+    if (!this._timeline) {
       this._timeline = initObject('crm/timeline/TimelineDiscovery', this.config)
     }
 
     return this._timeline
   }
-
 }

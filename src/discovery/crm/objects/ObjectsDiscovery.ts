@@ -14,21 +14,21 @@ import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { initObject } from '../../../services/initObject'
-import { BaseDiscovery } from '../../BaseDiscovery'
+import BaseDiscovery from '../../BaseDiscovery'
 
 export default class ObjectsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
+  public gdprApi: GDPRApi
+  public publicObjectApi: PublicObjectApi
+  public searchApi: SearchApi
   protected _calls: any
   protected _emails: any
-  public gdprApi: GDPRApi
   protected _feedbackSubmissions: any
   protected _meetings: any
   protected _notes: any
-  public publicObjectApi: PublicObjectApi
   protected _tasks: any
-  public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
     super(config)
@@ -51,23 +51,23 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns CallsDiscovery
-  */
-   get calls() {
-    if(!this._calls) {
+   * Getter
+   * @returns CallsDiscovery
+   */
+  get calls() {
+    if (!this._calls) {
       this._calls = initObject('crm/objects/calls/CallsDiscovery', this.config)
     }
-    
+
     return this._calls
   }
 
   /**
-  * Getter
-  * @returns EmailsDiscovery
-  */
-   get emails() {
-    if(!this._emails) {
+   * Getter
+   * @returns EmailsDiscovery
+   */
+  get emails() {
+    if (!this._emails) {
       this._emails = initObject('crm/objects/emails/EmailsDiscovery', this.config)
     }
 
@@ -75,23 +75,26 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns FeedbackSubmissionsDiscovery
-  */
-   get feedbackSubmissions() {
-    if(!this._feedbackSubmissions) {
-      this._feedbackSubmissions = initObject('crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery', this.config)
+   * Getter
+   * @returns FeedbackSubmissionsDiscovery
+   */
+  get feedbackSubmissions() {
+    if (!this._feedbackSubmissions) {
+      this._feedbackSubmissions = initObject(
+        'crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery',
+        this.config,
+      )
     }
 
     return this._feedbackSubmissions
   }
 
   /**
-  * Getter
-  * @returns MeetingsDiscovery
-  */
-   get meetings() {
-    if(!this._meetings) {
+   * Getter
+   * @returns MeetingsDiscovery
+   */
+  get meetings() {
+    if (!this._meetings) {
       this._meetings = initObject('crm/objects/meetings/MeetingsDiscovery', this.config)
     }
 
@@ -99,11 +102,11 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns NotesDiscovery
-  */
-   get notes() {
-    if(!this._notes) {
+   * Getter
+   * @returns NotesDiscovery
+   */
+  get notes() {
+    if (!this._notes) {
       this._notes = initObject('crm/objects/notes/NotesDiscovery', this.config)
     }
 
@@ -111,11 +114,11 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns TasksDiscovery
-  */
-   get tasks() {
-    if(!this._tasks) {
+   * Getter
+   * @returns TasksDiscovery
+   */
+  get tasks() {
+    if (!this._tasks) {
       this._tasks = initObject('crm/objects/tasks/TasksDiscovery', this.config)
     }
 

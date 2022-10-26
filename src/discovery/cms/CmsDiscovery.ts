@@ -1,7 +1,7 @@
 import { IConfiguration } from '../../configuration/IConfiguration'
 import { initObject } from '../../services/initObject'
+import BaseDiscovery from '../BaseDiscovery'
 import { AuditLogsDiscovery } from './audit_logs/AuditLogsDiscovery'
-import { BaseDiscovery } from '../BaseDiscovery'
 import { BlogsDiscovery } from './blogs/BlogsDiscovery'
 import { DomainsDiscovery } from './domains/DomainsDiscovery'
 import { HubdbDiscovery } from './hubdb/HubdbDiscovery'

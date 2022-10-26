@@ -1,5 +1,5 @@
-import { BaseDiscovery } from '../../BaseDiscovery'
 import { initObject } from '../../../services/initObject'
+import BaseDiscovery from '../../BaseDiscovery'
 
 export class BlogsDiscovery extends BaseDiscovery {
   public _authors: any
@@ -7,23 +7,23 @@ export class BlogsDiscovery extends BaseDiscovery {
   public _tags: any
 
   /**
-  * Getter
-  * @returns TimelineDiscovery
-  */
+   * Getter
+   * @returns TimelineDiscovery
+   */
   get authors() {
-    if(!this._authors) {
+    if (!this._authors) {
       this._authors = initObject('cms/blogs/authors/AuthorsDiscovery', this.config)
     }
 
     return this._authors
   }
-  
+
   /**
-  * Getter
-  * @returns BlogPostsDiscovery
-  */
+   * Getter
+   * @returns BlogPostsDiscovery
+   */
   get blogPosts() {
-    if(!this._blogPosts) {
+    if (!this._blogPosts) {
       this._blogPosts = initObject('cms/blogs/blog_posts/BlogPostsDiscovery', this.config)
     }
 
@@ -31,11 +31,11 @@ export class BlogsDiscovery extends BaseDiscovery {
   }
 
   /**
-  * Getter
-  * @returns TagsDiscovery
-  */
+   * Getter
+   * @returns TagsDiscovery
+   */
   get tags() {
-    if(!this._tags) {
+    if (!this._tags) {
       this._tags = initObject('cms/blogs/tags/TagsDiscovery', this.config)
     }
 
