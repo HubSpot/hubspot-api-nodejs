@@ -1,6 +1,5 @@
 import { IConfiguration } from '../../configuration/IConfiguration'
-import { AssociationsDiscovery } from './associations/AssociationsDiscovery'
-import { CompaniesDiscovery } from './companies/CompaniesDiscovery'
+import { BaseDiscovery } from '../BaseDiscovery'
 import { ContactsDiscovery } from './contacts/ContactsDiscovery'
 import { DealsDiscovery } from './deals/DealsDiscovery'
 import { ExtensionsDiscovery } from './extensions/ExtensionsDiscovery'
@@ -15,10 +14,11 @@ import { QuotesDiscovery } from './quotes/QuotesDiscovery'
 import { SchemasDiscovery } from './schemas/SchemasDiscovery'
 import { TicketsDiscovery } from './tickets/TicketsDiscovery'
 import { TimelineDiscovery } from './timeline/TimelineDiscovery'
+import { initObject } from '../../services/initObject'
 
-export class CrmDiscovery {
-  public associations: AssociationsDiscovery
-  public companies: CompaniesDiscovery
+export class CrmDiscovery extends BaseDiscovery {
+  protected _associations: any
+  protected _companies: any
   public contacts: ContactsDiscovery
   public deals: DealsDiscovery
   public extensions: ExtensionsDiscovery
@@ -35,8 +35,7 @@ export class CrmDiscovery {
   public timeline: TimelineDiscovery
 
   constructor(config: IConfiguration = {}) {
-    this.associations = new AssociationsDiscovery(config)
-    this.companies = new CompaniesDiscovery(config)
+    super(config);
     this.contacts = new ContactsDiscovery(config)
     this.deals = new DealsDiscovery(config)
     this.extensions = new ExtensionsDiscovery(config)
@@ -52,4 +51,27 @@ export class CrmDiscovery {
     this.tickets = new TicketsDiscovery(config)
     this.timeline = new TimelineDiscovery(config)
   }
+
+  /**
+  * Getter
+  * @returns AssociationsDiscovery
+  */
+   get associations() {
+    if(!this._associations) {
+      this._associations = initObject('cms/associations/AssociationsDiscovery', this.config)
+    }
+    return this._associations
+  }
+
+  /**
+  * Getter
+  * @returns CompaniesDiscovery
+  */
+   get companies() {
+    if(!this._companies) {
+      this._companies = initObject('cms/companies/CompaniesDiscovery', this.config)
+    }
+    return this._companies
+  }
+
 }

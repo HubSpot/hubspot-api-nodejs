@@ -8,14 +8,14 @@ import { MarketingDiscovery } from './discovery/marketing/MarketingDiscovery'
 import { OauthDiscovery } from './discovery/oauth/OauthDiscovery'
 import { SettingsDiscovery } from './discovery/settings/SettingsDiscovery'
 import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
-import { initObject } from './services/initObject'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
+import CmsDiscovery from './discovery/cms/CmsDiscovery'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()
-  protected _cms: any
+  public cms: CmsDiscovery = new CmsDiscovery()
   public communicationPreferences: CommunicationPreferencesDiscovery = new CommunicationPreferencesDiscovery()
   public conversations: ConversationsDiscovery = new ConversationsDiscovery()
   public crm: CrmDiscovery = new CrmDiscovery()
@@ -47,12 +47,12 @@ export class Client {
   * Getter
   * @returns CmsDiscovery
   */
-  get cms() {
-    if(!this._cms) {
-      this._cms = initObject('cms/CmsDiscovery', this.config)
-    }
-    return this._cms
-  }
+  // get cms() {
+  //   if(!this._cms) {
+  //     this._cms = initObject('cms/CmsDiscovery', this.config)
+  //   }
+  //   return this._cms
+  // }
 
   public setAccessToken(token: string) {
     this.config.accessToken = token
