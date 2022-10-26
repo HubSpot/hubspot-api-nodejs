@@ -11,7 +11,7 @@ import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class UsersDiscovery {
+export default class UsersDiscovery {
   public rolesApi: RolesApi
   public teamsApi: TeamsApi
   public usersApi: UsersApi
