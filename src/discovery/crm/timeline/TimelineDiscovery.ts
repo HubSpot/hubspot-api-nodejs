@@ -11,7 +11,7 @@ import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class TimelineDiscovery {
+export default class TimelineDiscovery {
   public eventsApi: EventsApi
   public templatesApi: TemplatesApi
   public tokensApi: TokensApi

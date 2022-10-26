@@ -16,7 +16,7 @@ import { IConfiguration } from '../../../configuration/IConfiguration'
 import { initObject } from '../../../services/initObject'
 import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class ObjectsDiscovery extends BaseDiscovery {
+export default class ObjectsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

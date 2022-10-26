@@ -12,7 +12,7 @@ import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class PipelinesDiscovery {
+export default class PipelinesDiscovery {
   public pipelineAuditsApi: PipelineAuditsApi
   public pipelineStageAuditsApi: PipelineStageAuditsApi
   public pipelineStagesApi: PipelineStagesApi
