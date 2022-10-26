@@ -9,7 +9,7 @@ import { Observable } from '../../../../../codegen/cms/blogs/blog_posts/rxjsStub
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class BlogPostsDiscovery {
+export default class BlogPostsDiscovery {
   public blogPostsApi: BlogPostsApi
 
   constructor(config: IConfiguration) {

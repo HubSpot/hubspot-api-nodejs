@@ -1,4 +1,3 @@
-import { IConfiguration } from '../../configuration/IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
 import { initObject } from '../../services/initObject'
 
