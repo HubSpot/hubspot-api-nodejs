@@ -9,7 +9,7 @@ import { Observable } from '../../../../../codegen/crm/extensions/videoconferenc
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class VideoconferencingDiscovery {
+export default class VideoconferencingDiscovery {
   public settingsApi: SettingsApi
 
   constructor(config: IConfiguration) {

@@ -17,7 +17,7 @@ import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigura
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 
-export class ContactsDiscovery {
+export default class ContactsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

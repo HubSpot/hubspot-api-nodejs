@@ -10,7 +10,7 @@ import { SiteSearchDiscovery } from './site_search/SiteSearchDiscovery'
 import { SourceCodeDiscovery } from './source_code/SourceCodeDiscovery'
 import { UrlRedirectsDiscovery } from './url_redirects/UrlRedirectsDiscovery'
 
-export default class CmsDiscovery extends BaseDiscovery {
+export class CmsDiscovery extends BaseDiscovery {
   public auditLogs: AuditLogsDiscovery
   public blogs: BlogsDiscovery
   public domains: DomainsDiscovery

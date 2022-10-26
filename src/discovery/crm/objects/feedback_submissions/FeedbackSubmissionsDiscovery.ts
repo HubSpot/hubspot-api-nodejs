@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/objects/feedback_submissi
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class FeedbackSubmissionsDiscovery {
+export default class FeedbackSubmissionsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

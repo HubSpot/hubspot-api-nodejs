@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/objects/meetings/rxjsStub
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class MeetingsDiscovery {
+export default class MeetingsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

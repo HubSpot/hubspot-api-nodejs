@@ -1,10 +1,5 @@
 import { IConfiguration } from '../../configuration/IConfiguration'
 import { BaseDiscovery } from '../BaseDiscovery'
-import { ContactsDiscovery } from './contacts/ContactsDiscovery'
-import { DealsDiscovery } from './deals/DealsDiscovery'
-import { ExtensionsDiscovery } from './extensions/ExtensionsDiscovery'
-import { ImportsDiscovery } from './imports/ImportsDiscovery'
-import { LineItemsDiscovery } from './line_items/LineItemsDiscovery'
 import { ObjectsDiscovery } from './objects/ObjectsDiscovery'
 import { OwnersDiscovery } from './owners/OwnersDiscovery'
 import { PipelinesDiscovery } from './pipelines/PipelinesDiscovery'
@@ -19,11 +14,11 @@ import { initObject } from '../../services/initObject'
 export class CrmDiscovery extends BaseDiscovery {
   protected _associations: any
   protected _companies: any
-  public contacts: ContactsDiscovery
-  public deals: DealsDiscovery
-  public extensions: ExtensionsDiscovery
-  public imports: ImportsDiscovery
-  public lineItems: LineItemsDiscovery
+  protected _contacts: any
+  protected _deals: any
+  protected _extensions: any
+  protected _imports: any
+  protected _lineItems: any
   public objects: ObjectsDiscovery
   public owners: OwnersDiscovery
   public pipelines: PipelinesDiscovery
@@ -36,11 +31,6 @@ export class CrmDiscovery extends BaseDiscovery {
 
   constructor(config: IConfiguration = {}) {
     super(config);
-    this.contacts = new ContactsDiscovery(config)
-    this.deals = new DealsDiscovery(config)
-    this.extensions = new ExtensionsDiscovery(config)
-    this.imports = new ImportsDiscovery(config)
-    this.lineItems = new LineItemsDiscovery(config)
     this.objects = new ObjectsDiscovery(config)
     this.owners = new OwnersDiscovery(config)
     this.pipelines = new PipelinesDiscovery(config)
@@ -58,7 +48,7 @@ export class CrmDiscovery extends BaseDiscovery {
   */
    get associations() {
     if(!this._associations) {
-      this._associations = initObject('cms/associations/AssociationsDiscovery', this.config)
+      this._associations = initObject('crm/associations/AssociationsDiscovery', this.config)
     }
     return this._associations
   }
@@ -69,9 +59,64 @@ export class CrmDiscovery extends BaseDiscovery {
   */
    get companies() {
     if(!this._companies) {
-      this._companies = initObject('cms/companies/CompaniesDiscovery', this.config)
+      this._companies = initObject('crm/companies/CompaniesDiscovery', this.config)
     }
     return this._companies
+  }
+
+  /**
+  * Getter
+  * @returns ContactsDiscovery
+  */
+   get contacts() {
+    if(!this._contacts) {
+      this._contacts = initObject('crm/contacts/ContactsDiscovery', this.config)
+    }
+    return this._contacts
+  }
+
+  /**
+  * Getter
+  * @returns DealsDiscovery
+  */
+   get deals() {
+    if(!this._deals) {
+      this._deals = initObject('crm/deals/DealsDiscovery', this.config)
+    }
+    return this._deals
+  }
+
+  /**
+  * Getter
+  * @returns ExtensionsDiscovery
+  */
+   get extensions() {
+    if(!this._extensions) {
+      this._extensions = initObject('crm/extensions/ExtensionsDiscovery', this.config)
+    }
+    return this._extensions
+  }
+
+  /**
+  * Getter
+  * @returns ImportsDiscovery
+  */
+   get imports() {
+    if(!this._imports) {
+      this._imports = initObject('crm/imports/ImportsDiscovery', this.config)
+    }
+    return this._imports
+  }
+
+  /**
+  * Getter
+  * @returns LineItemsDiscovery
+  */
+   get lineItems() {
+    if(!this._lineItems) {
+      this._lineItems = initObject('crm/line_items/LineItemsDiscovery', this.config)
+    }
+    return this._lineItems
   }
 
 }

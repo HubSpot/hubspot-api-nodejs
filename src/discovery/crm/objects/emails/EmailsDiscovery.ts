@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/objects/emails/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class EmailsDiscovery {
+export default class EmailsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

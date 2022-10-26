@@ -16,7 +16,7 @@ import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigura
 import { IConfiguration } from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 
-export class DealsDiscovery {
+export default class DealsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

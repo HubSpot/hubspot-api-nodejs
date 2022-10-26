@@ -10,7 +10,7 @@ import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class ImportsDiscovery {
+export default class ImportsDiscovery {
   public coreApi: CoreApi
   public publicImportsApi: PublicImportsApi
 

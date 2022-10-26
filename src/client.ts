@@ -11,7 +11,7 @@ import { WebhooksDiscovery } from './discovery/webhooks/WebhooksDiscovery'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
-import CmsDiscovery from './discovery/cms/CmsDiscovery'
+import { CmsDiscovery } from './discovery/cms/CmsDiscovery'
 
 export class Client {
   public automation: AutomationDiscovery = new AutomationDiscovery()

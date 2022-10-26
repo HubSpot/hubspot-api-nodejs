@@ -1,19 +1,54 @@
 import { IConfiguration } from '../../../configuration/IConfiguration'
-import { AccountingDiscovery } from './accounting/AccountingDiscovery'
-import { CallingDiscovery } from './calling/CallingDiscovery'
-import { CardsDiscovery } from './cards/CardsDiscovery'
-import { VideoconferencingDiscovery } from './videoconferencing/VideoconferencingDiscovery'
+import { initObject } from '../../../services/initObject'
+import { BaseDiscovery } from '../../BaseDiscovery'
 
-export class ExtensionsDiscovery {
-  public accounting: AccountingDiscovery
-  public calling: CallingDiscovery
-  public cards: CardsDiscovery
-  public videoconferencing: VideoconferencingDiscovery
+export default class ExtensionsDiscovery extends BaseDiscovery {
+  protected _accounting: any
+  protected _calling: any
+  protected _cards: any
+  protected _videoconferencing: any
 
-  constructor(config: IConfiguration) {
-    this.accounting = new AccountingDiscovery(config)
-    this.calling = new CallingDiscovery(config)
-    this.cards = new CardsDiscovery(config)
-    this.videoconferencing = new VideoconferencingDiscovery(config)
+  /**
+  * Getter
+  * @returns AccountingDiscovery
+  */
+   get accounting() {
+    if(!this._accounting) {
+      this._accounting = initObject('crm/extensions/accounting/AccountingDiscovery', this.config)
+    }
+    return this._accounting
+  }
+
+  /**
+  * Getter
+  * @returns СallingDiscovery
+  */
+   get calling() {
+    if(!this._calling) {
+      this._calling = initObject('crm/extensions/calling/СallingDiscovery', this.config)
+    }
+    return this._calling
+  }
+
+  /**
+  * Getter
+  * @returns СardsDiscovery
+  */
+   get cards() {
+    if(!this._cards) {
+      this._cards = initObject('crm/extensions/cards/СardsDiscovery', this.config)
+    }
+    return this._cards
+  }
+
+  /**
+  * Getter
+  * @returns VideoconferencingDiscovery
+  */
+   get videoconferencing() {
+    if(!this._videoconferencing) {
+      this._videoconferencing = initObject('crm/extensions/videoconferencing/VideoconferencingDiscovery', this.config)
+    }
+    return this._videoconferencing
   }
 }

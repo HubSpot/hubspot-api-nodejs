@@ -9,7 +9,7 @@ import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsSt
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class CallingDiscovery {
+export default class CallingDiscovery {
   public settingsApi: SettingsApi
 
   constructor(config: IConfiguration) {
