@@ -5,6 +5,7 @@ import { Request } from './services/http/Request'
 import { initObject } from './services/initObject'
 
 export class Client {
+  public config: IConfiguration
   protected _automation: any
   protected _cms: any
   protected _communicationPreferences: any
@@ -15,7 +16,6 @@ export class Client {
   protected _oauth: any
   protected _settings: any
   protected _webhooks: any
-  public config: IConfiguration
 
   constructor(config: IConfiguration = {}) {
     this.config = config
@@ -64,7 +64,10 @@ export class Client {
    */
   get communicationPreferences() {
     if (!this._communicationPreferences) {
-      this._communicationPreferences = initObject('communicationPreferences/CommunicationPreferencesDiscovery', this.config)
+      this._communicationPreferences = initObject(
+        'communicationPreferences/CommunicationPreferencesDiscovery',
+        this.config,
+      )
     }
 
     return this._communicationPreferences
