@@ -1,4 +1,3 @@
-import { IConfiguration } from '../../../configuration/IConfiguration'
 import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 
@@ -21,22 +20,22 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
 
   /**
    * Getter
-   * @returns СallingDiscovery
+   * @returns CallingDiscovery
    */
   get calling() {
     if (!this._calling) {
-      this._calling = initObject('crm/extensions/calling/СallingDiscovery', this.config)
+      this._calling = initObject('crm/extensions/calling/CallingDiscovery', this.config)
     }
     return this._calling
   }
 
   /**
    * Getter
-   * @returns СardsDiscovery
+   * @returns CardsDiscovery
    */
   get cards() {
     if (!this._cards) {
-      this._cards = initObject('crm/extensions/cards/СardsDiscovery', this.config)
+      this._cards = initObject('crm/extensions/cards/CardsDiscovery', this.config)
     }
     return this._cards
   }
