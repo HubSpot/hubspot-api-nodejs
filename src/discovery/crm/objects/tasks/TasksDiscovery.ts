@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/objects/tasks/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class TasksDiscovery {
+export default class TasksDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

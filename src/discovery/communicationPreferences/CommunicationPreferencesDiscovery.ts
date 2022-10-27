@@ -10,7 +10,7 @@ import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
 
-export class CommunicationPreferencesDiscovery {
+export default class CommunicationPreferencesDiscovery {
   public definitionApi: DefinitionApi
   public statusApi: StatusApi
 

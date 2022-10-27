@@ -11,7 +11,7 @@ import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class PropertiesDiscovery {
+export default class PropertiesDiscovery {
   public batchApi: BatchApi
   public coreApi: CoreApi
   public groupsApi: GroupsApi

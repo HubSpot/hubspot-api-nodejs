@@ -9,7 +9,7 @@ import { Observable } from '../../../../codegen/conversations/visitor_identifica
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class VisitorIdentificationDiscovery {
+export default class VisitorIdentificationDiscovery {
   public generateApi: GenerateApi
 
   constructor(config: IConfiguration) {

@@ -13,7 +13,7 @@ import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class SourceCodeDiscovery {
+export default class SourceCodeDiscovery {
   public contentApi: ContentApi
   public extractApi: ExtractApi
   public metadataApi: MetadataApi

@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/extensions/accounting/rxj
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class AccountingDiscovery {
+export default class AccountingDiscovery {
   public callbacksApi: CallbacksApi
   public invoiceApi: InvoiceApi
   public settingsApi: SettingsApi

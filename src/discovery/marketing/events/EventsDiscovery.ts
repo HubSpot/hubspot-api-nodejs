@@ -13,7 +13,7 @@ import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class EventsDiscovery {
+export default class EventsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
   public searchApi: SearchApi

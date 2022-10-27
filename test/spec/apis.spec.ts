@@ -1,17 +1,27 @@
 import { Client } from '../../index'
+import AutomationDiscovery from '../../src/discovery/automation/AutomationDiscovery'
+import CmsDiscovery from '../../src/discovery/cms/CmsDiscovery'
+import CommunicationPreferencesDiscovery from '../../src/discovery/communicationPreferences/CommunicationPreferencesDiscovery'
+import ConversationsDiscovery from '../../src/discovery/conversations/ConversationsDiscovery'
+import CrmDiscovery from '../../src/discovery/crm/CrmDiscovery'
+import EventsDiscovery from '../../src/discovery/events/EventsDiscovery'
+import MarketingDiscovery from '../../src/discovery/marketing/MarketingDiscovery'
+import OauthDiscovery from '../../src/discovery/oauth/OauthDiscovery'
+import SettingsDiscovery from '../../src/discovery/settings/SettingsDiscovery'
+import WebhooksDiscovery from '../../src/discovery/webhooks/WebhooksDiscovery'
 
 describe('api client', () => {
   it('is discoverable', () => {
     const client = new Client()
-    expect(client.hasOwnProperty('automation')).toBeTruthy()
-    expect(client.hasOwnProperty('cms')).toBeTruthy()
-    expect(client.hasOwnProperty('communicationPreferences')).toBeTruthy()
-    expect(client.hasOwnProperty('conversations')).toBeTruthy()
-    expect(client.hasOwnProperty('crm')).toBeTruthy()
-    expect(client.hasOwnProperty('events')).toBeTruthy()
-    expect(client.hasOwnProperty('marketing')).toBeTruthy()
-    expect(client.hasOwnProperty('oauth')).toBeTruthy()
-    expect(client.hasOwnProperty('settings')).toBeTruthy()
-    expect(client.hasOwnProperty('webhooks')).toBeTruthy()
+    expect(AutomationDiscovery.name).toBe(client.automation.constructor.name)
+    expect(CmsDiscovery.name).toBe(client.cms.constructor.name)
+    expect(CommunicationPreferencesDiscovery.name).toBe(client.communicationPreferences.constructor.name)
+    expect(ConversationsDiscovery.name).toBe(client.conversations.constructor.name)
+    expect(CrmDiscovery.name).toBe(client.crm.constructor.name)
+    expect(EventsDiscovery.name).toBe(client.events.constructor.name)
+    expect(MarketingDiscovery.name).toBe(client.marketing.constructor.name)
+    expect(OauthDiscovery.name).toBe(client.oauth.constructor.name)
+    expect(SettingsDiscovery.name).toBe(client.settings.constructor.name)
+    expect(WebhooksDiscovery.name).toBe(client.webhooks.constructor.name)
   })
 })

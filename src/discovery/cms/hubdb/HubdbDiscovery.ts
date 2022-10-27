@@ -11,7 +11,7 @@ import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class HubdbDiscovery {
+export default class HubdbDiscovery {
   public rowsApi: RowsApi
   public rowsBatchApi: RowsBatchApi
   public tablesApi: TablesApi

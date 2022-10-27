@@ -13,7 +13,7 @@ import { Observable } from '../../../codegen/oauth/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../configuration/IConfiguration'
 
-export class OauthDiscovery {
+export default class OauthDiscovery {
   public accessTokensApi: AccessTokensApi
   public refreshTokensApi: RefreshTokensApi
   public tokensApi: TokensApi

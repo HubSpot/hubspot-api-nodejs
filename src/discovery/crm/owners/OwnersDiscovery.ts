@@ -4,7 +4,7 @@ import { Observable } from '../../../../codegen/crm/owners/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class OwnersDiscovery {
+export default class OwnersDiscovery {
   public ownersApi: OwnersApi
 
   constructor(config: IConfiguration) {

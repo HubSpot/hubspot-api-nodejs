@@ -9,7 +9,7 @@ import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class AuditLogsDiscovery {
+export default class AuditLogsDiscovery {
   public auditLogsApi: AuditLogsApi
 
   constructor(config: IConfiguration) {

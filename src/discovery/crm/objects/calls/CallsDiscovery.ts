@@ -13,7 +13,7 @@ import { Observable } from '../../../../../codegen/crm/objects/calls/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../../configuration/IConfiguration'
 
-export class CallsDiscovery {
+export default class CallsDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi

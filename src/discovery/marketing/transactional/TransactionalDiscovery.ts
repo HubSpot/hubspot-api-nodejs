@@ -10,7 +10,7 @@ import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class TransactionalDiscovery {
+export default class TransactionalDiscovery {
   public publicSmtpTokensApi: PublicSmtpTokensApi
   public singleSendApi: SingleSendApi
 

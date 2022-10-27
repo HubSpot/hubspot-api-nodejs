@@ -9,7 +9,7 @@ import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class PerformanceDiscovery {
+export default class PerformanceDiscovery {
   public publicPerformanceApi: PublicPerformanceApi
 
   constructor(config: IConfiguration) {
