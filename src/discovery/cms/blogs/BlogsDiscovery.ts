@@ -1,7 +1,7 @@
 import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 
-export class BlogsDiscovery extends BaseDiscovery {
+export default class BlogsDiscovery extends BaseDiscovery {
   public _authors: any
   public _blogPosts: any
   public _tags: any

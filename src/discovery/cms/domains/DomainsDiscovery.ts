@@ -4,7 +4,7 @@ import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
-export class DomainsDiscovery {
+export default class DomainsDiscovery {
   public domainsApi: DomainsApi
 
   constructor(config: IConfiguration) {
