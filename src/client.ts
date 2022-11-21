@@ -12,6 +12,7 @@ export class Client {
   protected _conversations: any
   protected _crm: any
   protected _events: any
+  protected _files: any
   protected _marketing: any
   protected _oauth: any
   protected _settings: any
@@ -28,6 +29,7 @@ export class Client {
     this._conversations = undefined
     this._crm = undefined
     this._events = undefined
+    this._files = undefined
     this._marketing = undefined
     this._oauth = undefined
     this._settings = undefined
@@ -107,6 +109,18 @@ export class Client {
     }
 
     return this._events
+  }
+
+  /**
+   * Getter
+   * @returns FilesDiscovery
+   */
+  get files() {
+    if (!this._files) {
+      this._files = initObject('files/FilesDiscovery', this.config)
+    }
+
+    return this._files
   }
 
   /**

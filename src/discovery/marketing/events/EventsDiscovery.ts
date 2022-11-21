@@ -1,24 +1,20 @@
 import { createConfiguration } from '../../../../codegen/marketing/events/configuration'
 import {
-  BasicApi,
-  BatchApi,
+  AttendanceSubscriberStateChangesApi,
+  MarketingEventsExternalApi,
   RequestContext,
   ResponseContext,
-  SearchApi,
   ServerConfiguration,
-  SettingsApi,
-  SubscriberStateChangesApi,
+  SettingsExternalApi,
 } from '../../../../codegen/marketing/events/index'
 import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import { IConfiguration } from '../../../configuration/IConfiguration'
 
 export default class EventsDiscovery {
-  public basicApi: BasicApi
-  public batchApi: BatchApi
-  public searchApi: SearchApi
-  public settingsApi: SettingsApi
-  public subscriberStateChangesApi: SubscriberStateChangesApi
+  public attendanceSubscriberStateChangesApi: AttendanceSubscriberStateChangesApi
+  public marketingEventsExternalApi: MarketingEventsExternalApi
+  public settingsExternalApi: SettingsExternalApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -31,10 +27,8 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.basicApi = new BasicApi(configuration)
-    this.batchApi = new BatchApi(configuration)
-    this.searchApi = new SearchApi(configuration)
-    this.settingsApi = new SettingsApi(configuration)
-    this.subscriberStateChangesApi = new SubscriberStateChangesApi(configuration)
+    this.attendanceSubscriberStateChangesApi = new AttendanceSubscriberStateChangesApi(configuration)
+    this.marketingEventsExternalApi = new MarketingEventsExternalApi(configuration)
+    this.settingsExternalApi = new SettingsExternalApi(configuration)
   }
 }
