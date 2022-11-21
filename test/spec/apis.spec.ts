@@ -5,6 +5,7 @@ import CommunicationPreferencesDiscovery from '../../src/discovery/communication
 import ConversationsDiscovery from '../../src/discovery/conversations/ConversationsDiscovery'
 import CrmDiscovery from '../../src/discovery/crm/CrmDiscovery'
 import EventsDiscovery from '../../src/discovery/events/EventsDiscovery'
+import FilesDiscovery from '../../src/discovery/files/FilesDiscovery'
 import MarketingDiscovery from '../../src/discovery/marketing/MarketingDiscovery'
 import OauthDiscovery from '../../src/discovery/oauth/OauthDiscovery'
 import SettingsDiscovery from '../../src/discovery/settings/SettingsDiscovery'
@@ -19,6 +20,7 @@ describe('api client', () => {
     expect(ConversationsDiscovery.name).toBe(client.conversations.constructor.name)
     expect(CrmDiscovery.name).toBe(client.crm.constructor.name)
     expect(EventsDiscovery.name).toBe(client.events.constructor.name)
+    expect(FilesDiscovery.name).toBe(client.files.constructor.name)
     expect(MarketingDiscovery.name).toBe(client.marketing.constructor.name)
     expect(OauthDiscovery.name).toBe(client.oauth.constructor.name)
     expect(SettingsDiscovery.name).toBe(client.settings.constructor.name)
