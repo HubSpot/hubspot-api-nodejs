@@ -3,11 +3,14 @@ export * from './BatchInputMarketingEventEmailSubscriber';
 export * from './BatchInputMarketingEventExternalUniqueIdentifier';
 export * from './BatchInputMarketingEventSubscriber';
 export * from './BatchResponseMarketingEventPublicDefaultResponse';
+export * from './BatchResponseSubscriberEmailResponse';
+export * from './BatchResponseSubscriberVidResponse';
 export * from './CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
 export * from './ErrorCategory';
 export * from './ErrorDetail';
 export * from './EventDetailSettings';
 export * from './EventDetailSettingsUrl';
+export * from './MarketingEventCompleteRequestParams';
 export * from './MarketingEventCreateRequestParams';
 export * from './MarketingEventDefaultResponse';
 export * from './MarketingEventEmailSubscriber';
@@ -19,17 +22,22 @@ export * from './MarketingEventUpdateRequestParams';
 export * from './ModelError';
 export * from './PropertyValue';
 export * from './StandardError';
+export * from './SubscriberEmailResponse';
+export * from './SubscriberVidResponse';
 
 import { BatchInputMarketingEventCreateRequestParams } from './BatchInputMarketingEventCreateRequestParams';
 import { BatchInputMarketingEventEmailSubscriber } from './BatchInputMarketingEventEmailSubscriber';
 import { BatchInputMarketingEventExternalUniqueIdentifier } from './BatchInputMarketingEventExternalUniqueIdentifier';
 import { BatchInputMarketingEventSubscriber } from './BatchInputMarketingEventSubscriber';
 import { BatchResponseMarketingEventPublicDefaultResponse, BatchResponseMarketingEventPublicDefaultResponseStatusEnum          } from './BatchResponseMarketingEventPublicDefaultResponse';
+import { BatchResponseSubscriberEmailResponse, BatchResponseSubscriberEmailResponseStatusEnum          } from './BatchResponseSubscriberEmailResponse';
+import { BatchResponseSubscriberVidResponse, BatchResponseSubscriberVidResponseStatusEnum          } from './BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from './CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
+import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
 import { ErrorDetail } from './ErrorDetail';
 import { EventDetailSettings } from './EventDetailSettings';
 import { EventDetailSettingsUrl } from './EventDetailSettingsUrl';
+import { MarketingEventCompleteRequestParams } from './MarketingEventCompleteRequestParams';
 import { MarketingEventCreateRequestParams } from './MarketingEventCreateRequestParams';
 import { MarketingEventDefaultResponse } from './MarketingEventDefaultResponse';
 import { MarketingEventEmailSubscriber } from './MarketingEventEmailSubscriber';
@@ -41,6 +49,8 @@ import { MarketingEventUpdateRequestParams } from './MarketingEventUpdateRequest
 import { ModelError } from './ModelError';
 import { PropertyValue     , PropertyValueSourceEnum         } from './PropertyValue';
 import { StandardError } from './StandardError';
+import { SubscriberEmailResponse } from './SubscriberEmailResponse';
+import { SubscriberVidResponse } from './SubscriberVidResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -63,6 +73,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
+    "BatchResponseSubscriberEmailResponseStatusEnum",
+    "BatchResponseSubscriberVidResponseStatusEnum",
     "ErrorCategoryHttpStatusEnum",
     "PropertyValueSourceEnum",
 ]);
@@ -73,11 +85,14 @@ let typeMap: {[index: string]: any} = {
     "BatchInputMarketingEventExternalUniqueIdentifier": BatchInputMarketingEventExternalUniqueIdentifier,
     "BatchInputMarketingEventSubscriber": BatchInputMarketingEventSubscriber,
     "BatchResponseMarketingEventPublicDefaultResponse": BatchResponseMarketingEventPublicDefaultResponse,
+    "BatchResponseSubscriberEmailResponse": BatchResponseSubscriberEmailResponse,
+    "BatchResponseSubscriberVidResponse": BatchResponseSubscriberVidResponse,
     "CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging": CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "EventDetailSettings": EventDetailSettings,
     "EventDetailSettingsUrl": EventDetailSettingsUrl,
+    "MarketingEventCompleteRequestParams": MarketingEventCompleteRequestParams,
     "MarketingEventCreateRequestParams": MarketingEventCreateRequestParams,
     "MarketingEventDefaultResponse": MarketingEventDefaultResponse,
     "MarketingEventEmailSubscriber": MarketingEventEmailSubscriber,
@@ -89,6 +104,8 @@ let typeMap: {[index: string]: any} = {
     "ModelError": ModelError,
     "PropertyValue": PropertyValue,
     "StandardError": StandardError,
+    "SubscriberEmailResponse": SubscriberEmailResponse,
+    "SubscriberVidResponse": SubscriberVidResponse,
 }
 
 export class ObjectSerializer {

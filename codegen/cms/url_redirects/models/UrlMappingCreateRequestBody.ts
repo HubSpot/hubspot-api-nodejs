@@ -13,9 +13,6 @@
 import { HttpFile } from '../http/http';
 
 export class UrlMappingCreateRequestBody {
-    'routePrefix': string;
-    'destination': string;
-    'redirectStyle': number;
     'precedence'?: number;
     'isOnlyAfterNotFound'?: boolean;
     'isMatchFullUrl'?: boolean;
@@ -23,28 +20,13 @@ export class UrlMappingCreateRequestBody {
     'isPattern'?: boolean;
     'isTrailingSlashOptional'?: boolean;
     'isProtocolAgnostic'?: boolean;
+    'routePrefix': string;
+    'destination': string;
+    'redirectStyle': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "routePrefix",
-            "baseName": "routePrefix",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "destination",
-            "baseName": "destination",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "redirectStyle",
-            "baseName": "redirectStyle",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "precedence",
             "baseName": "precedence",
@@ -86,6 +68,24 @@ export class UrlMappingCreateRequestBody {
             "baseName": "isProtocolAgnostic",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "routePrefix",
+            "baseName": "routePrefix",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "destination",
+            "baseName": "destination",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "redirectStyle",
+            "baseName": "redirectStyle",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

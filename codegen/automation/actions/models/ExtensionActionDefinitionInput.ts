@@ -12,7 +12,7 @@
 
 import { ActionFunction } from './ActionFunction';
 import { ActionLabels } from './ActionLabels';
-import { ExtensionActionDefinitionInputFieldDependenciesInner } from './ExtensionActionDefinitionInputFieldDependenciesInner';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 import { InputFieldDefinition } from './InputFieldDefinition';
 import { ObjectRequestOptions } from './ObjectRequestOptions';
 import { HttpFile } from '../http/http';
@@ -45,7 +45,7 @@ export class ExtensionActionDefinitionInput {
     /**
     * A list of dependencies between the input fields. These configure when the input fields should be visible.
     */
-    'inputFieldDependencies'?: Array<ExtensionActionDefinitionInputFieldDependenciesInner>;
+    'inputFieldDependencies'?: Array<ExtensionActionDefinitionPatchInputFieldDependenciesInner>;
     /**
     * The user-facing labels for the custom action.
     */
@@ -97,7 +97,7 @@ export class ExtensionActionDefinitionInput {
         {
             "name": "inputFieldDependencies",
             "baseName": "inputFieldDependencies",
-            "type": "Array<ExtensionActionDefinitionInputFieldDependenciesInner>",
+            "type": "Array<ExtensionActionDefinitionPatchInputFieldDependenciesInner>",
             "format": ""
         },
         {

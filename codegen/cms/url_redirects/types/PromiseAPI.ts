@@ -2,11 +2,11 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseWithTotalUrlMapping } from '../models/CollectionResponseWithTotalUrlMapping';
+import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 import { ObservableRedirectsApi } from './ObservableAPI';
@@ -38,7 +38,7 @@ export class PromiseRedirectsApi {
      * Create a redirect
      * @param urlMappingCreateRequestBody 
      */
-    public create(urlMappingCreateRequestBody?: UrlMappingCreateRequestBody, _options?: Configuration): Promise<UrlMapping> {
+    public create(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: Configuration): Promise<UrlMapping> {
         const result = this.api.create(urlMappingCreateRequestBody, _options);
         return result.toPromise();
     }
@@ -63,14 +63,12 @@ export class PromiseRedirectsApi {
      * @param updatedAfter Only return redirects last updated after this date.
      * @param updatedBefore Only return redirects last updated before this date.
      * @param sort 
-     * @param properties 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
      * @param limit Maximum number of result per page
      * @param archived Whether to return only results that have been archived.
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalUrlMapping> {
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, properties, after, before, limit, archived, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
+        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
         return result.toPromise();
     }
 
@@ -80,7 +78,7 @@ export class PromiseRedirectsApi {
      * @param urlRedirectId 
      * @param urlMapping 
      */
-    public update(urlRedirectId: string, urlMapping?: UrlMapping, _options?: Configuration): Promise<UrlMapping> {
+    public update(urlRedirectId: string, urlMapping: UrlMapping, _options?: Configuration): Promise<UrlMapping> {
         const result = this.api.update(urlRedirectId, urlMapping, _options);
         return result.toPromise();
     }

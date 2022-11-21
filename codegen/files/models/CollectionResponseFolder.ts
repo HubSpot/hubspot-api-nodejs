@@ -1,6 +1,6 @@
 /**
- * URL redirects
- * URL redirect operations
+ * Files
+ * Upload and manage files.
  *
  * OpenAPI spec version: v3
  * 
@@ -10,24 +10,32 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from './NextPage';
+import { Folder } from './Folder';
+import { Paging } from './Paging';
 import { HttpFile } from '../http/http';
 
-export class Paging {
-    'next'?: NextPage;
+export class CollectionResponseFolder {
+    'results': Array<Folder>;
+    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "next",
-            "baseName": "next",
-            "type": "NextPage",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<Folder>",
+            "format": ""
+        },
+        {
+            "name": "paging",
+            "baseName": "paging",
+            "type": "Paging",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Paging.attributeTypeMap;
+        return CollectionResponseFolder.attributeTypeMap;
     }
 
     public constructor() {

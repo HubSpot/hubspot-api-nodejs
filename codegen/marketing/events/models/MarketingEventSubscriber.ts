@@ -17,6 +17,7 @@ export class MarketingEventSubscriber {
     * The date and time at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
+    'properties'?: { [key: string]: string; };
     'vid'?: number;
 
     static readonly discriminator: string | undefined = undefined;
@@ -27,6 +28,12 @@ export class MarketingEventSubscriber {
             "baseName": "interactionDateTime",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
+            "format": ""
         },
         {
             "name": "vid",

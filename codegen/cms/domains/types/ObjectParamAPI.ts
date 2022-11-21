@@ -2,14 +2,12 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
+import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
 import { Domain } from '../models/Domain';
-import { DomainCdnConfig } from '../models/DomainCdnConfig';
-import { DomainSetupInfo } from '../models/DomainSetupInfo';
 import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 
 import { ObservableDomainsApi } from "./ObservableAPI";
 import { DomainsApiRequestFactory, DomainsApiResponseProcessor} from "../apis/DomainsApi";
@@ -21,51 +19,45 @@ export interface DomainsApiGetByIdRequest {
      * @memberof DomainsApigetById
      */
     domainId: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof DomainsApigetById
-     */
-    archived?: boolean
 }
 
 export interface DomainsApiGetPageRequest {
     /**
      * Only return domains created at this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    createdAt?: number
+    createdAt?: Date
     /**
      * Only return domains created after this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    createdAfter?: number
+    createdAfter?: Date
     /**
      * Only return domains created before this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    createdBefore?: number
+    createdBefore?: Date
     /**
      * Only return domains updated at this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    updatedAt?: number
+    updatedAt?: Date
     /**
      * Only return domains updated after this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    updatedAfter?: number
+    updatedAfter?: Date
     /**
      * Only return domains updated before this date.
-     * @type number
+     * @type Date
      * @memberof DomainsApigetPage
      */
-    updatedBefore?: number
+    updatedBefore?: Date
     /**
      * 
      * @type Array&lt;string&gt;
@@ -73,23 +65,11 @@ export interface DomainsApiGetPageRequest {
      */
     sort?: Array<string>
     /**
-     * 
-     * @type Array&lt;string&gt;
-     * @memberof DomainsApigetPage
-     */
-    properties?: Array<string>
-    /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
      * @memberof DomainsApigetPage
      */
     after?: string
-    /**
-     * 
-     * @type string
-     * @memberof DomainsApigetPage
-     */
-    before?: string
     /**
      * Maximum number of results per page.
      * @type number
@@ -117,7 +97,7 @@ export class ObjectDomainsApi {
      * @param param the request object
      */
     public getById(param: DomainsApiGetByIdRequest, options?: Configuration): Promise<Domain> {
-        return this.api.getById(param.domainId, param.archived,  options).toPromise();
+        return this.api.getById(param.domainId,  options).toPromise();
     }
 
     /**
@@ -125,8 +105,8 @@ export class ObjectDomainsApi {
      * Get current domains
      * @param param the request object
      */
-    public getPage(param: DomainsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalDomain> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.properties, param.after, param.before, param.limit, param.archived,  options).toPromise();
+    public getPage(param: DomainsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalDomainForwardPaging> {
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
 }

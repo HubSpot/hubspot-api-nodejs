@@ -14,8 +14,8 @@ import { ConditionalSingleFieldDependency } from './ConditionalSingleFieldDepend
 import { SingleFieldDependency } from './SingleFieldDependency';
 import { HttpFile } from '../http/http';
 
-export class ExtensionActionDefinitionInputFieldDependenciesInner {
-    'dependencyType': ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum;
+export class ExtensionActionDefinitionPatchInputFieldDependenciesInner {
+    'dependencyType': ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum;
     'dependentFieldNames': Array<string>;
     'controllingFieldName': string;
     'controllingFieldValue': string;
@@ -26,7 +26,7 @@ export class ExtensionActionDefinitionInputFieldDependenciesInner {
         {
             "name": "dependencyType",
             "baseName": "dependencyType",
-            "type": "ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
+            "type": "ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum",
             "format": ""
         },
         {
@@ -49,7 +49,7 @@ export class ExtensionActionDefinitionInputFieldDependenciesInner {
         }    ];
 
     static getAttributeTypeMap() {
-        return ExtensionActionDefinitionInputFieldDependenciesInner.attributeTypeMap;
+        return ExtensionActionDefinitionPatchInputFieldDependenciesInner.attributeTypeMap;
     }
 
     public constructor() {
@@ -57,5 +57,5 @@ export class ExtensionActionDefinitionInputFieldDependenciesInner {
 }
 
 
-export type ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum = "CONDITIONAL_SINGLE_FIELD" ;
+export type ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum = "CONDITIONAL_SINGLE_FIELD" ;
 

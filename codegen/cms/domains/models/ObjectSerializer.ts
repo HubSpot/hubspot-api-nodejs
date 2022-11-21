@@ -1,20 +1,16 @@
-export * from './CollectionResponseWithTotalDomain';
+export * from './CollectionResponseWithTotalDomainForwardPaging';
 export * from './Domain';
-export * from './DomainCdnConfig';
-export * from './DomainSetupInfo';
 export * from './ErrorDetail';
+export * from './ForwardPaging';
 export * from './ModelError';
 export * from './NextPage';
-export * from './Paging';
 
-import { CollectionResponseWithTotalDomain } from './CollectionResponseWithTotalDomain';
-import { Domain                                    , DomainApexResolutionStatusEnum                      , DomainCosObjectTypeEnum     } from './Domain';
-import { DomainCdnConfig        , DomainCdnConfigSslStatusEnum  , DomainCdnConfigValidationMethodEnum      , DomainCdnConfigMinimumTlsVersionEnum     } from './DomainCdnConfig';
-import { DomainSetupInfo } from './DomainSetupInfo';
+import { CollectionResponseWithTotalDomainForwardPaging } from './CollectionResponseWithTotalDomainForwardPaging';
+import { Domain } from './Domain';
 import { ErrorDetail } from './ErrorDetail';
+import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
-import { Paging } from './Paging';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -36,22 +32,15 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "DomainApexResolutionStatusEnum",
-    "DomainCosObjectTypeEnum",
-    "DomainCdnConfigSslStatusEnum",
-    "DomainCdnConfigValidationMethodEnum",
-    "DomainCdnConfigMinimumTlsVersionEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponseWithTotalDomain": CollectionResponseWithTotalDomain,
+    "CollectionResponseWithTotalDomainForwardPaging": CollectionResponseWithTotalDomainForwardPaging,
     "Domain": Domain,
-    "DomainCdnConfig": DomainCdnConfig,
-    "DomainSetupInfo": DomainSetupInfo,
     "ErrorDetail": ErrorDetail,
+    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "Paging": Paging,
 }
 
 export class ObjectSerializer {

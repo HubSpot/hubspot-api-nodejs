@@ -2,14 +2,12 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
+import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
 import { Domain } from '../models/Domain';
-import { DomainCdnConfig } from '../models/DomainCdnConfig';
-import { DomainSetupInfo } from '../models/DomainSetupInfo';
 import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { ObservableDomainsApi } from './ObservableAPI';
 
 import { DomainsApiRequestFactory, DomainsApiResponseProcessor} from "../apis/DomainsApi";
@@ -28,10 +26,9 @@ export class PromiseDomainsApi {
      * Returns a single domains with the id specified.
      * Get a single domain
      * @param domainId The unique ID of the domain.
-     * @param archived Whether to return only results that have been archived.
      */
-    public getById(domainId: string, archived?: boolean, _options?: Configuration): Promise<Domain> {
-        const result = this.api.getById(domainId, archived, _options);
+    public getById(domainId: string, _options?: Configuration): Promise<Domain> {
+        const result = this.api.getById(domainId, _options);
         return result.toPromise();
     }
 
@@ -45,14 +42,12 @@ export class PromiseDomainsApi {
      * @param updatedAfter Only return domains updated after this date.
      * @param updatedBefore Only return domains updated before this date.
      * @param sort 
-     * @param properties 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
      * @param limit Maximum number of results per page.
      * @param archived Whether to return only results that have been archived.
      */
-    public getPage(createdAt?: number, createdAfter?: number, createdBefore?: number, updatedAt?: number, updatedAfter?: number, updatedBefore?: number, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalDomain> {
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, properties, after, before, limit, archived, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalDomainForwardPaging> {
+        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
         return result.toPromise();
     }
 

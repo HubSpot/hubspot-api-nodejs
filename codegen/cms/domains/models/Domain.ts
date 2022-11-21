@@ -10,98 +10,62 @@
  * Do not edit the class manually.
  */
 
-import { DomainCdnConfig } from './DomainCdnConfig';
-import { DomainSetupInfo } from './DomainSetupInfo';
 import { HttpFile } from '../http/http';
 
 export class Domain {
-    'portalId': number;
-    'id': number;
-    'created': number;
-    'updated': number;
+    /**
+    * The unique ID of this domain.
+    */
+    'id': string;
+    /**
+    * The actual domain or sub-domain. e.g. www.hubspot.com
+    */
     'domain': string;
-    'primaryLandingPage': boolean;
-    'primaryEmail': boolean;
-    'primaryBlog': boolean;
-    'primaryBlogPost': boolean;
-    'primarySitePage': boolean;
-    'primaryKnowledge': boolean;
-    'primaryLegacyPage': boolean;
-    'primaryClickTracking': boolean;
-    'fullCategoryKey': string;
-    'secondaryToDomain': string;
+    'primaryLandingPage'?: boolean;
+    'primaryEmail'?: boolean;
+    'primaryBlogPost'?: boolean;
+    'primarySitePage'?: boolean;
+    'primaryKnowledge'?: boolean;
+    'secondaryToDomain'?: string;
+    /**
+    * Whether the DNS for this domain is optimally configured for use with HubSpot.
+    */
     'isResolving': boolean;
-    'isDnsCorrect': boolean;
-    'manuallyMarkedAsResolving': boolean;
-    'consecutiveNonResolvingCount': number;
-    'sslCname': string;
-    'isSslEnabled': boolean;
-    'isSslOnly': boolean;
-    'certificateId': number;
-    'sslRequestId': number;
+    'manuallyMarkedAsResolving'?: boolean;
+    'isSslEnabled'?: boolean;
+    'isSslOnly'?: boolean;
+    /**
+    * Whether the domain is used for CMS blog posts.
+    */
     'isUsedForBlogPost': boolean;
+    /**
+    * Whether the domain is used for CMS site pages.
+    */
     'isUsedForSitePage': boolean;
+    /**
+    * Whether the domain is used for CMS landing pages.
+    */
     'isUsedForLandingPage': boolean;
+    /**
+    * Whether the domain is used for CMS email web pages.
+    */
     'isUsedForEmail': boolean;
+    /**
+    * Whether the domain is used for CMS knowledge pages.
+    */
     'isUsedForKnowledge': boolean;
-    'setupTaskId': number;
-    'isSetupComplete': boolean;
-    'setUpLanguage': string;
-    'teamIds': Array<number>;
-    'actualCname': string;
-    'correctCname': string;
-    'actualIp': string;
-    'apexResolutionStatus': DomainApexResolutionStatusEnum;
-    'apexDomain': string;
-    'publicSuffix': string;
-    'apexIpAddresses': Array<string>;
-    'siteId': number;
-    'brandId': number;
-    'deletable': boolean;
-    'domainCdnConfig': DomainCdnConfig;
-    'setupInfo': DomainSetupInfo;
-    'derivedBrandName': string;
-    'createdById': number;
-    'updatedById': number;
-    'label': string;
-    'isAnyPrimary': boolean;
-    'isLegacyDomain': boolean;
-    'isInternalDomain': boolean;
-    'isResolvingInternalProperty': boolean;
-    'isResolvingIgnoringManuallyMarkedAsResolving': boolean;
-    'isUsedForAnyContentType': boolean;
-    'isLegacy': boolean;
-    'authorAt': number;
-    'cosObjectType': DomainCosObjectTypeEnum;
-    'cdnPurgeEmbargoTime': number;
-    'isStagingDomain': boolean;
+    'correctCname'?: string;
+    'created'?: Date;
+    'updated'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "portalId",
-            "baseName": "portalId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "id",
             "baseName": "id",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "created",
-            "baseName": "created",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "updated",
-            "baseName": "updated",
-            "type": "number",
-            "format": "int64"
+            "type": "string",
+            "format": ""
         },
         {
             "name": "domain",
@@ -118,12 +82,6 @@ export class Domain {
         {
             "name": "primaryEmail",
             "baseName": "primaryEmail",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "primaryBlog",
-            "baseName": "primaryBlog",
             "type": "boolean",
             "format": ""
         },
@@ -146,24 +104,6 @@ export class Domain {
             "format": ""
         },
         {
-            "name": "primaryLegacyPage",
-            "baseName": "primaryLegacyPage",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "primaryClickTracking",
-            "baseName": "primaryClickTracking",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "fullCategoryKey",
-            "baseName": "fullCategoryKey",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "secondaryToDomain",
             "baseName": "secondaryToDomain",
             "type": "string",
@@ -176,27 +116,9 @@ export class Domain {
             "format": ""
         },
         {
-            "name": "isDnsCorrect",
-            "baseName": "isDnsCorrect",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "manuallyMarkedAsResolving",
             "baseName": "manuallyMarkedAsResolving",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "consecutiveNonResolvingCount",
-            "baseName": "consecutiveNonResolvingCount",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "sslCname",
-            "baseName": "sslCname",
-            "type": "string",
             "format": ""
         },
         {
@@ -210,18 +132,6 @@ export class Domain {
             "baseName": "isSslOnly",
             "type": "boolean",
             "format": ""
-        },
-        {
-            "name": "certificateId",
-            "baseName": "certificateId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "sslRequestId",
-            "baseName": "sslRequestId",
-            "type": "number",
-            "format": "int64"
         },
         {
             "name": "isUsedForBlogPost",
@@ -254,190 +164,22 @@ export class Domain {
             "format": ""
         },
         {
-            "name": "setupTaskId",
-            "baseName": "setupTaskId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "isSetupComplete",
-            "baseName": "isSetupComplete",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "setUpLanguage",
-            "baseName": "setUpLanguage",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "teamIds",
-            "baseName": "teamIds",
-            "type": "Array<number>",
-            "format": "int64"
-        },
-        {
-            "name": "actualCname",
-            "baseName": "actualCname",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "correctCname",
             "baseName": "correctCname",
             "type": "string",
             "format": ""
         },
         {
-            "name": "actualIp",
-            "baseName": "actualIp",
-            "type": "string",
-            "format": ""
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "apexResolutionStatus",
-            "baseName": "apexResolutionStatus",
-            "type": "DomainApexResolutionStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "apexDomain",
-            "baseName": "apexDomain",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publicSuffix",
-            "baseName": "publicSuffix",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "apexIpAddresses",
-            "baseName": "apexIpAddresses",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "siteId",
-            "baseName": "siteId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "brandId",
-            "baseName": "brandId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "deletable",
-            "baseName": "deletable",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "domainCdnConfig",
-            "baseName": "domainCdnConfig",
-            "type": "DomainCdnConfig",
-            "format": ""
-        },
-        {
-            "name": "setupInfo",
-            "baseName": "setupInfo",
-            "type": "DomainSetupInfo",
-            "format": ""
-        },
-        {
-            "name": "derivedBrandName",
-            "baseName": "derivedBrandName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdById",
-            "baseName": "createdById",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "isAnyPrimary",
-            "baseName": "isAnyPrimary",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isLegacyDomain",
-            "baseName": "isLegacyDomain",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isInternalDomain",
-            "baseName": "isInternalDomain",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isResolvingInternalProperty",
-            "baseName": "isResolvingInternalProperty",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isResolvingIgnoringManuallyMarkedAsResolving",
-            "baseName": "isResolvingIgnoringManuallyMarkedAsResolving",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isUsedForAnyContentType",
-            "baseName": "isUsedForAnyContentType",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isLegacy",
-            "baseName": "isLegacy",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "authorAt",
-            "baseName": "authorAt",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "cosObjectType",
-            "baseName": "cosObjectType",
-            "type": "DomainCosObjectTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "cdnPurgeEmbargoTime",
-            "baseName": "cdnPurgeEmbargoTime",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "isStagingDomain",
-            "baseName": "isStagingDomain",
-            "type": "boolean",
-            "format": ""
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -447,8 +189,4 @@ export class Domain {
     public constructor() {
     }
 }
-
-
-export type DomainApexResolutionStatusEnum = "INELIGIBLE" | "SUGGEST_RESOLVING" | "ALREADY_RESOLVING" | "ERROR" ;
-export type DomainCosObjectTypeEnum = "CONTENT" | "EXTENSION_RESOURCE" | "LAYOUT" | "CUSTOM_WIDGET" | "WIDGET" | "FORM" | "PLACEMENT" | "IMAGE" | "DOMAIN_SETTINGS" | "SITE_SETTINGS" | "EMAIL_ADDRESS" | "WORKFLOW" | "HUBDB_TABLE" | "REDIRECT_URL" | "DESIGN_FOLDER" | "SITE_MAP" | "DOMAIN" | "BLOG" | "FILE" | "FOLDER" | "SITE_MENU" | "THEME" | "CONTENT_GROUP" | "FOLLOW_ME" | "KNOWLEDGE_BASE" | "LIST_MEMBERSHIP" | "CONTACT_MEMBERSHIP" | "PASSWORD_PROTECTED" | "UNRESTRICTED_ACCESS" | "MARKETPLACE_LISTING" | "LAYOUT_SECTION" | "THEME_SETTINGS" | "VIDEO_PLAYER" | "URL_MAPPING" | "KNOWLEDGE_CATEGORY" | "KNOWLEDGE_HOMEPAGE_CATEGORY" | "RAW_ASSET" | "GLOBAL_CONTENT" | "HUBDB_TABLE_ROW" | "BLOG_AUTHOR" | "SERVERLESS_FUNCTION" | "KNOWLEDGE_CATEGORY_TRANSLATION" ;
 

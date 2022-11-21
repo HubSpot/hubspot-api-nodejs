@@ -17,10 +17,12 @@ export class MarketingEventEmailSubscriber {
     * The date and time at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
+    'properties'?: { [key: string]: string; };
     /**
     * The email address of the contact in HubSpot to associate with the event. Note that the contact must already exist in HubSpot; a contact will not be created.
     */
     'email': string;
+    'contactProperties'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,9 +34,21 @@ export class MarketingEventEmailSubscriber {
             "format": "int64"
         },
         {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "email",
             "baseName": "email",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contactProperties",
+            "baseName": "contactProperties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 

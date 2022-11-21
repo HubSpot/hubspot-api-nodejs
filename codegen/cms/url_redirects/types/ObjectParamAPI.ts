@@ -2,11 +2,11 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseWithTotalUrlMapping } from '../models/CollectionResponseWithTotalUrlMapping';
+import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 
@@ -28,7 +28,7 @@ export interface RedirectsApiCreateRequest {
      * @type UrlMappingCreateRequestBody
      * @memberof RedirectsApicreate
      */
-    urlMappingCreateRequestBody?: UrlMappingCreateRequestBody
+    urlMappingCreateRequestBody: UrlMappingCreateRequestBody
 }
 
 export interface RedirectsApiGetByIdRequest {
@@ -84,23 +84,11 @@ export interface RedirectsApiGetPageRequest {
      */
     sort?: Array<string>
     /**
-     * 
-     * @type Array&lt;string&gt;
-     * @memberof RedirectsApigetPage
-     */
-    properties?: Array<string>
-    /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
      * @memberof RedirectsApigetPage
      */
     after?: string
-    /**
-     * 
-     * @type string
-     * @memberof RedirectsApigetPage
-     */
-    before?: string
     /**
      * Maximum number of result per page
      * @type number
@@ -127,7 +115,7 @@ export interface RedirectsApiUpdateRequest {
      * @type UrlMapping
      * @memberof RedirectsApiupdate
      */
-    urlMapping?: UrlMapping
+    urlMapping: UrlMapping
 }
 
 export class ObjectRedirectsApi {
@@ -151,7 +139,7 @@ export class ObjectRedirectsApi {
      * Create a redirect
      * @param param the request object
      */
-    public create(param: RedirectsApiCreateRequest = {}, options?: Configuration): Promise<UrlMapping> {
+    public create(param: RedirectsApiCreateRequest, options?: Configuration): Promise<UrlMapping> {
         return this.api.create(param.urlMappingCreateRequestBody,  options).toPromise();
     }
 
@@ -169,8 +157,8 @@ export class ObjectRedirectsApi {
      * Get current redirects
      * @param param the request object
      */
-    public getPage(param: RedirectsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalUrlMapping> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.properties, param.after, param.before, param.limit, param.archived,  options).toPromise();
+    public getPage(param: RedirectsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
     }
 
     /**

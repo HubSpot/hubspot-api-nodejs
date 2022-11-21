@@ -16,12 +16,7 @@ export class UrlMapping {
     /**
     * The unique ID of this URL redirect.
     */
-    'id': number;
-    'portalId': number;
-    'created': number;
-    'updated': number;
-    'createdById': number;
-    'updatedById': number;
+    'id': string;
     /**
     * The target incoming URL, path, or pattern to match for redirection.
     */
@@ -34,12 +29,10 @@ export class UrlMapping {
     * The type of redirect to create. Options include: 301 (permanent), 302 (temporary), or 305 (proxy). Find more details [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
     */
     'redirectStyle': number;
-    'contentGroupId': number;
     /**
     * Whether the URL redirect mapping should apply only if a live page on the URL isn't found. If False, the URL redirect mapping will take precedence over any existing page.
     */
     'isOnlyAfterNotFound': boolean;
-    'isRegex': boolean;
     /**
     * Whether the `routePrefix` should match on the entire URL, including the domain.
     */
@@ -60,17 +53,12 @@ export class UrlMapping {
     * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
     */
     'isProtocolAgnostic': boolean;
-    'name': string;
     /**
     * Used to prioritize URL redirection. If a given URL matches more than one redirect, the one with the **lower** precedence will be used.
     */
     'precedence': number;
-    'deletedAt': number;
-    'note': string;
-    'label': string;
-    'internallyCreated': boolean;
-    'cosObjectType': UrlMappingCosObjectTypeEnum;
-    'cdnPurgeEmbargoTime': number;
+    'created'?: Date;
+    'updated'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -78,38 +66,8 @@ export class UrlMapping {
         {
             "name": "id",
             "baseName": "id",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "portalId",
-            "baseName": "portalId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "created",
-            "baseName": "created",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "updated",
-            "baseName": "updated",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "createdById",
-            "baseName": "createdById",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "updatedById",
-            "baseName": "updatedById",
-            "type": "number",
-            "format": "int32"
+            "type": "string",
+            "format": ""
         },
         {
             "name": "routePrefix",
@@ -130,20 +88,8 @@ export class UrlMapping {
             "format": "int32"
         },
         {
-            "name": "contentGroupId",
-            "baseName": "contentGroupId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
             "name": "isOnlyAfterNotFound",
             "baseName": "isOnlyAfterNotFound",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isRegex",
-            "baseName": "isRegex",
             "type": "boolean",
             "format": ""
         },
@@ -178,52 +124,22 @@ export class UrlMapping {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "precedence",
             "baseName": "precedence",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "number",
-            "format": "int64"
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "note",
-            "baseName": "note",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "internallyCreated",
-            "baseName": "internallyCreated",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "cosObjectType",
-            "baseName": "cosObjectType",
-            "type": "UrlMappingCosObjectTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "cdnPurgeEmbargoTime",
-            "baseName": "cdnPurgeEmbargoTime",
-            "type": "number",
-            "format": "int64"
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -233,7 +149,4 @@ export class UrlMapping {
     public constructor() {
     }
 }
-
-
-export type UrlMappingCosObjectTypeEnum = "CONTENT" | "EXTENSION_RESOURCE" | "LAYOUT" | "CUSTOM_WIDGET" | "WIDGET" | "FORM" | "PLACEMENT" | "IMAGE" | "DOMAIN_SETTINGS" | "SITE_SETTINGS" | "EMAIL_ADDRESS" | "WORKFLOW" | "HUBDB_TABLE" | "REDIRECT_URL" | "DESIGN_FOLDER" | "SITE_MAP" | "DOMAIN" | "BLOG" | "FILE" | "FOLDER" | "SITE_MENU" | "THEME" | "CONTENT_GROUP" | "FOLLOW_ME" | "KNOWLEDGE_BASE" | "LIST_MEMBERSHIP" | "CONTACT_MEMBERSHIP" | "PASSWORD_PROTECTED" | "UNRESTRICTED_ACCESS" | "MARKETPLACE_LISTING" | "LAYOUT_SECTION" | "THEME_SETTINGS" | "VIDEO_PLAYER" | "URL_MAPPING" | "KNOWLEDGE_CATEGORY" | "KNOWLEDGE_HOMEPAGE_CATEGORY" | "RAW_ASSET" | "GLOBAL_CONTENT" | "HUBDB_TABLE_ROW" | "BLOG_AUTHOR" | "SERVERLESS_FUNCTION" | "KNOWLEDGE_CATEGORY_TRANSLATION" ;
 

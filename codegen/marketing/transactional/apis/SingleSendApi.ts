@@ -23,8 +23,13 @@ export class SingleSendApiRequestFactory extends BaseAPIRequestFactory {
      * Send a single transactional email asynchronously.
      * @param publicSingleSendRequestEgg A request object describing the email to send.
      */
-    public async sendEmail(publicSingleSendRequestEgg?: PublicSingleSendRequestEgg, _options?: Configuration): Promise<RequestContext> {
+    public async sendEmail(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'publicSingleSendRequestEgg' is not null or undefined
+        if (publicSingleSendRequestEgg === null || publicSingleSendRequestEgg === undefined) {
+            throw new RequiredError("SingleSendApi", "sendEmail", "publicSingleSendRequestEgg");
+        }
 
 
         // Path Params

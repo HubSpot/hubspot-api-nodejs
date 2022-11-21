@@ -37,7 +37,7 @@ export class SmtpApiTokenView {
     */
     'createdAt': Date;
     /**
-    * Indicates whether a contact should be created for recipients of emails.
+    * Indicates whether a contact should be created for email recipients.
     */
     'createContact': boolean;
     /**
