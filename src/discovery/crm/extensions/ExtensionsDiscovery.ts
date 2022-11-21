@@ -10,6 +10,8 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
   /**
    * Getter
    * @returns AccountingDiscovery
+   *
+   * @deprecated
    */
   get accounting() {
     if (!this._accounting) {
