@@ -1,22 +1,22 @@
-export * from './CollectionResponseSmtpApiTokenView';
+export * from './CollectionResponseSmtpApiTokenViewForwardPaging';
 export * from './EmailSendStatusView';
 export * from './ErrorDetail';
 export * from './EventIdView';
+export * from './ForwardPaging';
 export * from './ModelError';
 export * from './NextPage';
-export * from './Paging';
 export * from './PublicSingleSendEmail';
 export * from './PublicSingleSendRequestEgg';
 export * from './SmtpApiTokenRequestEgg';
 export * from './SmtpApiTokenView';
 
-import { CollectionResponseSmtpApiTokenView } from './CollectionResponseSmtpApiTokenView';
-import { EmailSendStatusView  , EmailSendStatusViewSendResultEnum     , EmailSendStatusViewStatusEnum   } from './EmailSendStatusView';
+import { CollectionResponseSmtpApiTokenViewForwardPaging } from './CollectionResponseSmtpApiTokenViewForwardPaging';
+import { EmailSendStatusView , EmailSendStatusViewSendResultEnum     , EmailSendStatusViewStatusEnum    } from './EmailSendStatusView';
 import { ErrorDetail } from './ErrorDetail';
 import { EventIdView } from './EventIdView';
+import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
-import { Paging } from './Paging';
 import { PublicSingleSendEmail } from './PublicSingleSendEmail';
 import { PublicSingleSendRequestEgg } from './PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from './SmtpApiTokenRequestEgg';
@@ -47,13 +47,13 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponseSmtpApiTokenView": CollectionResponseSmtpApiTokenView,
+    "CollectionResponseSmtpApiTokenViewForwardPaging": CollectionResponseSmtpApiTokenViewForwardPaging,
     "EmailSendStatusView": EmailSendStatusView,
     "ErrorDetail": ErrorDetail,
     "EventIdView": EventIdView,
+    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "Paging": Paging,
     "PublicSingleSendEmail": PublicSingleSendEmail,
     "PublicSingleSendRequestEgg": PublicSingleSendRequestEgg,
     "SmtpApiTokenRequestEgg": SmtpApiTokenRequestEgg,

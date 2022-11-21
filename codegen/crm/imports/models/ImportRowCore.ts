@@ -13,13 +13,26 @@
 import { HttpFile } from '../http/http';
 
 export class ImportRowCore {
+    'lineNumber': number;
+    'rowData': Array<string>;
     'fileId': number;
     'pageName'?: string;
-    'lineNumber': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "lineNumber",
+            "baseName": "lineNumber",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "rowData",
+            "baseName": "rowData",
+            "type": "Array<string>",
+            "format": ""
+        },
         {
             "name": "fileId",
             "baseName": "fileId",
@@ -31,12 +44,6 @@ export class ImportRowCore {
             "baseName": "pageName",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "lineNumber",
-            "baseName": "lineNumber",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

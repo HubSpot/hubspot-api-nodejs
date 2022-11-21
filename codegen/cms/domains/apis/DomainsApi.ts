@@ -10,7 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponseWithTotalDomain } from '../models/CollectionResponseWithTotalDomain';
+import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
 import { Domain } from '../models/Domain';
 
 /**
@@ -22,16 +22,14 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
      * Returns a single domains with the id specified.
      * Get a single domain
      * @param domainId The unique ID of the domain.
-     * @param archived Whether to return only results that have been archived.
      */
-    public async getById(domainId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(domainId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'domainId' is not null or undefined
         if (domainId === null || domainId === undefined) {
             throw new RequiredError("DomainsApi", "getById", "domainId");
         }
-
 
 
         // Path Params
@@ -41,11 +39,6 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -73,16 +66,12 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAfter Only return domains updated after this date.
      * @param updatedBefore Only return domains updated before this date.
      * @param sort 
-     * @param properties 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
      * @param limit Maximum number of results per page.
      * @param archived Whether to return only results that have been archived.
      */
-    public async getPage(createdAt?: number, createdAfter?: number, createdBefore?: number, updatedAt?: number, updatedAfter?: number, updatedBefore?: number, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-
 
 
 
@@ -103,32 +92,32 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (createdAt !== undefined) {
-            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "number", "int64"));
+            requestContext.setQueryParam("createdAt", ObjectSerializer.serialize(createdAt, "Date", "date-time"));
         }
 
         // Query Params
         if (createdAfter !== undefined) {
-            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "number", "int64"));
+            requestContext.setQueryParam("createdAfter", ObjectSerializer.serialize(createdAfter, "Date", "date-time"));
         }
 
         // Query Params
         if (createdBefore !== undefined) {
-            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "number", "int64"));
+            requestContext.setQueryParam("createdBefore", ObjectSerializer.serialize(createdBefore, "Date", "date-time"));
         }
 
         // Query Params
         if (updatedAt !== undefined) {
-            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "number", "int64"));
+            requestContext.setQueryParam("updatedAt", ObjectSerializer.serialize(updatedAt, "Date", "date-time"));
         }
 
         // Query Params
         if (updatedAfter !== undefined) {
-            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "number", "int64"));
+            requestContext.setQueryParam("updatedAfter", ObjectSerializer.serialize(updatedAfter, "Date", "date-time"));
         }
 
         // Query Params
         if (updatedBefore !== undefined) {
-            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "number", "int64"));
+            requestContext.setQueryParam("updatedBefore", ObjectSerializer.serialize(updatedBefore, "Date", "date-time"));
         }
 
         // Query Params
@@ -137,18 +126,8 @@ export class DomainsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
-        }
-
-        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
-        // Query Params
-        if (before !== undefined) {
-            requestContext.setQueryParam("before", ObjectSerializer.serialize(before, "string", ""));
         }
 
         // Query Params
@@ -224,13 +203,13 @@ export class DomainsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalDomain > {
+     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalDomainForwardPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalDomain = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalDomainForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalDomain", ""
-            ) as CollectionResponseWithTotalDomain;
+                "CollectionResponseWithTotalDomainForwardPaging", ""
+            ) as CollectionResponseWithTotalDomainForwardPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -243,10 +222,10 @@ export class DomainsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalDomain = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalDomainForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalDomain", ""
-            ) as CollectionResponseWithTotalDomain;
+                "CollectionResponseWithTotalDomainForwardPaging", ""
+            ) as CollectionResponseWithTotalDomainForwardPaging;
             return body;
         }
 

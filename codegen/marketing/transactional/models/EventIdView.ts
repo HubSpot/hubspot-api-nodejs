@@ -38,7 +38,7 @@ export class EventIdView {
             "name": "id",
             "baseName": "id",
             "type": "string",
-            "format": ""
+            "format": "uuid"
         }    ];
 
     static getAttributeTypeMap() {

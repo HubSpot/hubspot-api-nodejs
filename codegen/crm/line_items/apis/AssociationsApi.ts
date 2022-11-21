@@ -53,7 +53,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/line_items/{lineItemId}/associations/{toObjectType}/{toObjectId}/{associationType}'
+        const localVarPath = '/crm/v4/objects/line_items/{lineItemId}/associations/{toObjectType}/{toObjectId}'
             .replace('{' + 'lineItemId' + '}', encodeURIComponent(String(lineItemId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
             .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
@@ -119,7 +119,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/line_items/{lineItemId}/associations/{toObjectType}/{toObjectId}/{associationType}'
+        const localVarPath = '/crm/v4/objects/line_items/{lineItemId}/associations/{toObjectType}/{toObjectId}'
             .replace('{' + 'lineItemId' + '}', encodeURIComponent(String(lineItemId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
             .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
@@ -175,7 +175,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/line_items/{lineItemId}/associations/{toObjectType}'
+        const localVarPath = '/crm/v4/objects/line_items/{lineItemId}/associations/{toObjectType}'
             .replace('{' + 'lineItemId' + '}', encodeURIComponent(String(lineItemId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
 

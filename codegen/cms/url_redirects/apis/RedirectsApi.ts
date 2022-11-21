@@ -10,7 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponseWithTotalUrlMapping } from '../models/CollectionResponseWithTotalUrlMapping';
+import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 
@@ -67,8 +67,13 @@ export class RedirectsApiRequestFactory extends BaseAPIRequestFactory {
      * Create a redirect
      * @param urlMappingCreateRequestBody 
      */
-    public async create(urlMappingCreateRequestBody?: UrlMappingCreateRequestBody, _options?: Configuration): Promise<RequestContext> {
+    public async create(urlMappingCreateRequestBody: UrlMappingCreateRequestBody, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'urlMappingCreateRequestBody' is not null or undefined
+        if (urlMappingCreateRequestBody === null || urlMappingCreateRequestBody === undefined) {
+            throw new RequiredError("RedirectsApi", "create", "urlMappingCreateRequestBody");
+        }
 
 
         // Path Params
@@ -163,16 +168,12 @@ export class RedirectsApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAfter Only return redirects last updated after this date.
      * @param updatedBefore Only return redirects last updated before this date.
      * @param sort 
-     * @param properties 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
      * @param limit Maximum number of result per page
      * @param archived Whether to return only results that have been archived.
      */
-    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, properties?: Array<string>, after?: string, before?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-
 
 
 
@@ -227,18 +228,8 @@ export class RedirectsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
-        }
-
-        // Query Params
         if (after !== undefined) {
             requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
-        // Query Params
-        if (before !== undefined) {
-            requestContext.setQueryParam("before", ObjectSerializer.serialize(before, "string", ""));
         }
 
         // Query Params
@@ -278,7 +269,7 @@ export class RedirectsApiRequestFactory extends BaseAPIRequestFactory {
      * @param urlRedirectId 
      * @param urlMapping 
      */
-    public async update(urlRedirectId: string, urlMapping?: UrlMapping, _options?: Configuration): Promise<RequestContext> {
+    public async update(urlRedirectId: string, urlMapping: UrlMapping, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'urlRedirectId' is not null or undefined
@@ -286,6 +277,11 @@ export class RedirectsApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("RedirectsApi", "update", "urlRedirectId");
         }
 
+
+        // verify required parameter 'urlMapping' is not null or undefined
+        if (urlMapping === null || urlMapping === undefined) {
+            throw new RequiredError("RedirectsApi", "update", "urlMapping");
+        }
 
 
         // Path Params
@@ -443,13 +439,13 @@ export class RedirectsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalUrlMapping > {
+     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalUrlMappingForwardPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalUrlMapping = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalUrlMappingForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalUrlMapping", ""
-            ) as CollectionResponseWithTotalUrlMapping;
+                "CollectionResponseWithTotalUrlMappingForwardPaging", ""
+            ) as CollectionResponseWithTotalUrlMappingForwardPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -462,10 +458,10 @@ export class RedirectsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalUrlMapping = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalUrlMappingForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalUrlMapping", ""
-            ) as CollectionResponseWithTotalUrlMapping;
+                "CollectionResponseWithTotalUrlMappingForwardPaging", ""
+            ) as CollectionResponseWithTotalUrlMappingForwardPaging;
             return body;
         }
 

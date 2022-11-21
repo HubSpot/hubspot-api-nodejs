@@ -11,13 +11,13 @@
  */
 
 import { Domain } from './Domain';
-import { Paging } from './Paging';
+import { ForwardPaging } from './ForwardPaging';
 import { HttpFile } from '../http/http';
 
-export class CollectionResponseWithTotalDomain {
+export class CollectionResponseWithTotalDomainForwardPaging {
     'total': number;
     'results': Array<Domain>;
-    'paging'?: Paging;
+    'paging'?: ForwardPaging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,12 +37,12 @@ export class CollectionResponseWithTotalDomain {
         {
             "name": "paging",
             "baseName": "paging",
-            "type": "Paging",
+            "type": "ForwardPaging",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseWithTotalDomain.attributeTypeMap;
+        return CollectionResponseWithTotalDomainForwardPaging.attributeTypeMap;
     }
 
     public constructor() {

@@ -23,7 +23,7 @@ export class PublicSingleSendEmail {
     /**
     * The recipient of the email.
     */
-    'to'?: string;
+    'to': string;
     /**
     * ID for a particular send. No more than one email will be sent per sendId.
     */
@@ -31,15 +31,15 @@ export class PublicSingleSendEmail {
     /**
     * List of Reply-To header values for the email.
     */
-    'replyTo': Array<string>;
+    'replyTo'?: Array<string>;
     /**
     * List of email addresses to send as Cc.
     */
-    'cc': Array<string>;
+    'cc'?: Array<string>;
     /**
     * List of email addresses to send as Bcc.
     */
-    'bcc': Array<string>;
+    'bcc'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 

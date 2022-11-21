@@ -23,7 +23,7 @@ import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
 import { Paging } from './Paging';
 import { PreviousPage } from './PreviousPage';
-import { PublicImportError, PublicImportErrorErrorTypeEnum  , PublicImportErrorObjectTypeEnum          } from './PublicImportError';
+import { PublicImportError, PublicImportErrorErrorTypeEnum   , PublicImportErrorObjectTypeEnum         } from './PublicImportError';
 import { PublicImportMetadata } from './PublicImportMetadata';
 import { PublicImportResponse, PublicImportResponseStateEnum          } from './PublicImportResponse';
 import { PublicObjectListRecord } from './PublicObjectListRecord';

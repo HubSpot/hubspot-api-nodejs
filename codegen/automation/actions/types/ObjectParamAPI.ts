@@ -16,8 +16,8 @@ import { ConditionalSingleFieldDependency } from '../models/ConditionalSingleFie
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
 import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionInputFieldDependenciesInner } from '../models/ExtensionActionDefinitionInputFieldDependenciesInner';
 import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 import { FieldTypeDefinition } from '../models/FieldTypeDefinition';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { InputFieldDefinition } from '../models/InputFieldDefinition';

@@ -12,8 +12,8 @@ export * from './ConditionalSingleFieldDependency';
 export * from './ErrorDetail';
 export * from './ExtensionActionDefinition';
 export * from './ExtensionActionDefinitionInput';
-export * from './ExtensionActionDefinitionInputFieldDependenciesInner';
 export * from './ExtensionActionDefinitionPatch';
+export * from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 export * from './FieldTypeDefinition';
 export * from './ForwardPaging';
 export * from './InputFieldDefinition';
@@ -37,8 +37,8 @@ import { ConditionalSingleFieldDependency, ConditionalSingleFieldDependencyDepen
 import { ErrorDetail } from './ErrorDetail';
 import { ExtensionActionDefinition } from './ExtensionActionDefinition';
 import { ExtensionActionDefinitionInput } from './ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionInputFieldDependenciesInner, ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum      } from './ExtensionActionDefinitionInputFieldDependenciesInner';
 import { ExtensionActionDefinitionPatch } from './ExtensionActionDefinitionPatch';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner, ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum      } from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 import { FieldTypeDefinition , FieldTypeDefinitionTypeEnum  , FieldTypeDefinitionFieldTypeEnum    , FieldTypeDefinitionReferencedObjectTypeEnum   } from './FieldTypeDefinition';
 import { ForwardPaging } from './ForwardPaging';
 import { InputFieldDefinition , InputFieldDefinitionSupportedValueTypesEnum    } from './InputFieldDefinition';
@@ -71,7 +71,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ActionFunctionFunctionTypeEnum",
     "ActionFunctionIdentifierFunctionTypeEnum",
     "ConditionalSingleFieldDependencyDependencyTypeEnum",
-    "ExtensionActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
+    "ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum",
     "FieldTypeDefinitionTypeEnum",
     "FieldTypeDefinitionFieldTypeEnum",
     "FieldTypeDefinitionReferencedObjectTypeEnum",
@@ -94,8 +94,8 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ExtensionActionDefinition": ExtensionActionDefinition,
     "ExtensionActionDefinitionInput": ExtensionActionDefinitionInput,
-    "ExtensionActionDefinitionInputFieldDependenciesInner": ExtensionActionDefinitionInputFieldDependenciesInner,
     "ExtensionActionDefinitionPatch": ExtensionActionDefinitionPatch,
+    "ExtensionActionDefinitionPatchInputFieldDependenciesInner": ExtensionActionDefinitionPatchInputFieldDependenciesInner,
     "FieldTypeDefinition": FieldTypeDefinition,
     "ForwardPaging": ForwardPaging,
     "InputFieldDefinition": InputFieldDefinition,

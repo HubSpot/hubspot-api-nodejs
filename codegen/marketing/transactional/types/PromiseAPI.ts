@@ -2,13 +2,13 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseSmtpApiTokenView } from '../models/CollectionResponseSmtpApiTokenView';
+import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
 import { EmailSendStatusView } from '../models/EmailSendStatusView';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventIdView } from '../models/EventIdView';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
@@ -40,9 +40,9 @@ export class PromisePublicSmtpTokensApi {
     /**
      * Create a SMTP API token.
      * Create a SMTP API token.
-     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
+     * @param smtpApiTokenRequestEgg A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
      */
-    public createToken(smtpApiTokenRequestEgg?: SmtpApiTokenRequestEgg, _options?: Configuration): Promise<SmtpApiTokenView> {
+    public createToken(smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg, _options?: Configuration): Promise<SmtpApiTokenView> {
         const result = this.api.createToken(smtpApiTokenRequestEgg, _options);
         return result.toPromise();
     }
@@ -65,7 +65,7 @@ export class PromisePublicSmtpTokensApi {
      * @param after Starting point to get the next set of results.
      * @param limit Maximum number of tokens to return.
      */
-    public getTokensPage(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseSmtpApiTokenView> {
+    public getTokensPage(campaignName?: string, emailCampaignId?: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
         const result = this.api.getTokensPage(campaignName, emailCampaignId, after, limit, _options);
         return result.toPromise();
     }
@@ -104,7 +104,7 @@ export class PromiseSingleSendApi {
      * Send a single transactional email asynchronously.
      * @param publicSingleSendRequestEgg A request object describing the email to send.
      */
-    public sendEmail(publicSingleSendRequestEgg?: PublicSingleSendRequestEgg, _options?: Configuration): Promise<EmailSendStatusView> {
+    public sendEmail(publicSingleSendRequestEgg: PublicSingleSendRequestEgg, _options?: Configuration): Promise<EmailSendStatusView> {
         const result = this.api.sendEmail(publicSingleSendRequestEgg, _options);
         return result.toPromise();
     }

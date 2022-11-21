@@ -93,5 +93,5 @@ export class PublicImportResponse {
 }
 
 
-export type PublicImportResponseStateEnum = "STARTED" | "PROCESSING" | "DONE" | "FAILED" | "CANCELED" | "DEFERRED" ;
+export type PublicImportResponseStateEnum = "STARTED" | "PROCESSING" | "DONE" | "FAILED" | "CANCELED" | "DEFERRED" | "REVERTED" ;
 

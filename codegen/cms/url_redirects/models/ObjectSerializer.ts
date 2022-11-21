@@ -1,17 +1,17 @@
-export * from './CollectionResponseWithTotalUrlMapping';
+export * from './CollectionResponseWithTotalUrlMappingForwardPaging';
 export * from './ErrorDetail';
+export * from './ForwardPaging';
 export * from './ModelError';
 export * from './NextPage';
-export * from './Paging';
 export * from './UrlMapping';
 export * from './UrlMappingCreateRequestBody';
 
-import { CollectionResponseWithTotalUrlMapping } from './CollectionResponseWithTotalUrlMapping';
+import { CollectionResponseWithTotalUrlMappingForwardPaging } from './CollectionResponseWithTotalUrlMappingForwardPaging';
 import { ErrorDetail } from './ErrorDetail';
+import { ForwardPaging } from './ForwardPaging';
 import { ModelError } from './ModelError';
 import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { UrlMapping                       , UrlMappingCosObjectTypeEnum    } from './UrlMapping';
+import { UrlMapping } from './UrlMapping';
 import { UrlMappingCreateRequestBody } from './UrlMappingCreateRequestBody';
 
 /* tslint:disable:no-unused-variable */
@@ -34,15 +34,14 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "UrlMappingCosObjectTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "CollectionResponseWithTotalUrlMapping": CollectionResponseWithTotalUrlMapping,
+    "CollectionResponseWithTotalUrlMappingForwardPaging": CollectionResponseWithTotalUrlMappingForwardPaging,
     "ErrorDetail": ErrorDetail,
+    "ForwardPaging": ForwardPaging,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "Paging": Paging,
     "UrlMapping": UrlMapping,
     "UrlMappingCreateRequestBody": UrlMappingCreateRequestBody,
 }

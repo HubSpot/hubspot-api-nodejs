@@ -2,13 +2,13 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseSmtpApiTokenView } from '../models/CollectionResponseSmtpApiTokenView';
+import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
 import { EmailSendStatusView } from '../models/EmailSendStatusView';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventIdView } from '../models/EventIdView';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
@@ -28,11 +28,11 @@ export interface PublicSmtpTokensApiArchiveTokenRequest {
 
 export interface PublicSmtpTokensApiCreateTokenRequest {
     /**
-     * A request object that includes the campaign name tied to the token and whether contacts should be created for recipients of emails.
+     * A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
      * @type SmtpApiTokenRequestEgg
      * @memberof PublicSmtpTokensApicreateToken
      */
-    smtpApiTokenRequestEgg?: SmtpApiTokenRequestEgg
+    smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg
 }
 
 export interface PublicSmtpTokensApiGetTokenByIdRequest {
@@ -101,7 +101,7 @@ export class ObjectPublicSmtpTokensApi {
      * Create a SMTP API token.
      * @param param the request object
      */
-    public createToken(param: PublicSmtpTokensApiCreateTokenRequest = {}, options?: Configuration): Promise<SmtpApiTokenView> {
+    public createToken(param: PublicSmtpTokensApiCreateTokenRequest, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.createToken(param.smtpApiTokenRequestEgg,  options).toPromise();
     }
 
@@ -119,7 +119,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query SMTP API tokens by campaign name or an emailCampaignId.
      * @param param the request object
      */
-    public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenView> {
+    public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
         return this.api.getTokensPage(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
     }
 
@@ -143,7 +143,7 @@ export interface SingleSendApiSendEmailRequest {
      * @type PublicSingleSendRequestEgg
      * @memberof SingleSendApisendEmail
      */
-    publicSingleSendRequestEgg?: PublicSingleSendRequestEgg
+    publicSingleSendRequestEgg: PublicSingleSendRequestEgg
 }
 
 export class ObjectSingleSendApi {
@@ -158,7 +158,7 @@ export class ObjectSingleSendApi {
      * Send a single transactional email asynchronously.
      * @param param the request object
      */
-    public sendEmail(param: SingleSendApiSendEmailRequest = {}, options?: Configuration): Promise<EmailSendStatusView> {
+    public sendEmail(param: SingleSendApiSendEmailRequest, options?: Configuration): Promise<EmailSendStatusView> {
         return this.api.sendEmail(param.publicSingleSendRequestEgg,  options).toPromise();
     }
 
