@@ -1,18 +1,10 @@
-import { initObject } from '../../services/initObject'
-import BaseDiscovery from '../BaseDiscovery'
+import IConfiguration from '../../configuration/IConfiguration'
+import UsersDiscovery from './users/UsersDiscovery'
 
-export default class SettingsDiscovery extends BaseDiscovery {
-  protected _users: any
+export default class SettingsDiscovery {
+  public users: UsersDiscovery
 
-  /**
-   * Getter
-   * @returns UsersDiscovery
-   */
-  get users() {
-    if (!this._users) {
-      this._users = initObject('settings/users/UsersDiscovery', this.config)
-    }
-
-    return this._users
+  constructor(config: IConfiguration = {}) {
+    this.users = new UsersDiscovery(config)
   }
 }

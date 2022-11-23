@@ -1,4 +1,3 @@
-
 import IConfiguration from '../../configuration/IConfiguration'
 import AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import BlogsDiscovery from './blogs/BlogsDiscovery'
@@ -9,7 +8,7 @@ import SiteSearchDiscovery from './site_search/SiteSearchDiscovery'
 import SourceCodeDiscovery from './source_code/SourceCodeDiscovery'
 import UrlRedirectsDiscovery from './url_redirects/UrlRedirectsDiscovery'
 
-export class CmsDiscovery {
+export default class CmsDiscovery {
   public auditLogs: AuditLogsDiscovery
   public blogs: BlogsDiscovery
   public domains: DomainsDiscovery
