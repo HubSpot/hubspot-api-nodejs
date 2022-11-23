@@ -7,7 +7,7 @@ import {
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { Observable } from '../../../../../codegen/crm/extensions/videoconferencing/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class VideoconferencingDiscovery {
   public settingsApi: SettingsApi

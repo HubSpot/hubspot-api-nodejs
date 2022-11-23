@@ -1,18 +1,10 @@
-import { initObject } from '../../services/initObject'
-import BaseDiscovery from '../BaseDiscovery'
+import IConfiguration from '../../configuration/IConfiguration'
+import ActionsDiscovery from './actions/ActionsDiscovery'
 
-export default class AutomationDiscovery extends BaseDiscovery {
-  protected _actions: any
+export default class AutomationDiscovery {
+  public actions: ActionsDiscovery
 
-  /**
-   * Getter
-   * @returns ActionsDiscovery
-   */
-  get actions() {
-    if (!this._actions) {
-      this._actions = initObject('automation/actions/ActionsDiscovery', this.config)
-    }
-
-    return this._actions
+  constructor(config: IConfiguration = {}) {
+    this.actions = new ActionsDiscovery(config)
   }
 }

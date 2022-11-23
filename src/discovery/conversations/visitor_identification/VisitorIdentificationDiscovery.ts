@@ -7,7 +7,7 @@ import {
 } from '../../../../codegen/conversations/visitor_identification/index'
 import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class VisitorIdentificationDiscovery {
   public generateApi: GenerateApi

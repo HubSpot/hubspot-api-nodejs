@@ -13,7 +13,7 @@ import {
 } from '../../../../codegen/crm/deals/index'
 import { Observable } from '../../../../codegen/crm/deals/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
 
 export default class DealsDiscovery {

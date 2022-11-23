@@ -9,7 +9,7 @@ import {
 } from '../../../../codegen/cms/hubdb/index'
 import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class HubdbDiscovery {
   public rowsApi: RowsApi

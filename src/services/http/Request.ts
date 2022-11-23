@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../configuration/IConfiguration'
+import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
 import { AuthMethods } from './AuthMethods'
 import { AuthTypes } from './AuthTypes'

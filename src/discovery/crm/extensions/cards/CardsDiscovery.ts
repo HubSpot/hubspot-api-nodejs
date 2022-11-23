@@ -8,7 +8,7 @@ import {
 } from '../../../../../codegen/crm/extensions/cards/index'
 import { Observable } from '../../../../../codegen/crm/extensions/cards/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class CardsDiscovery {
   public cardsApi: CardsApi

@@ -11,7 +11,7 @@ import {
 } from '../../../../../codegen/crm/objects/meetings/index'
 import { Observable } from '../../../../../codegen/crm/objects/meetings/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class MeetingsDiscovery {
   public associationsApi: AssociationsApi

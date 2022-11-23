@@ -8,7 +8,7 @@ import {
 } from '../../../codegen/webhooks/index'
 import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../configuration/IConfiguration'
+import IConfiguration from '../../configuration/IConfiguration'
 import { validateSignature } from '../../services/validateSignature'
 
 export default class WebhooksDiscovery {

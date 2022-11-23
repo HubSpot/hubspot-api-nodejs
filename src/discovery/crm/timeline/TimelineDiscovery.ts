@@ -9,7 +9,7 @@ import {
 } from '../../../../codegen/crm/timeline/index'
 import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class TimelineDiscovery {
   public eventsApi: EventsApi

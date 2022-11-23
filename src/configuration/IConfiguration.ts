@@ -1,4 +1,4 @@
-export interface IConfiguration {
+export default interface IConfiguration {
   apiKey?: string
   accessToken?: string
   developerApiKey?: string

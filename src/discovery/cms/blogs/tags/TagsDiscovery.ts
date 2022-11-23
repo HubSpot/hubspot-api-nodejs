@@ -7,7 +7,7 @@ import {
 } from '../../../../../codegen/cms/blogs/tags/index'
 import { Observable } from '../../../../../codegen/cms/blogs/tags/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class TagsDiscovery {
   public blogTagsApi: BlogTagsApi

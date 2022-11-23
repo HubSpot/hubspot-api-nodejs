@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import { IRequestContext } from '../services/IRequestContext'
-import { IConfiguration } from './IConfiguration'
+import IConfiguration from './IConfiguration'
 import { VERSION } from './version'
 
 export class ApiClientConfigurator {

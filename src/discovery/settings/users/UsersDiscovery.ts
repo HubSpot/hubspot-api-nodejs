@@ -9,7 +9,7 @@ import {
 } from '../../../../codegen/settings/users/index'
 import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class UsersDiscovery {
   public rolesApi: RolesApi

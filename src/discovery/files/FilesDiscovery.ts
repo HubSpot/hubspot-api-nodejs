@@ -8,7 +8,7 @@ import {
 } from '../../../codegen/files/index'
 import { Observable } from '../../../codegen/files/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../configuration/IConfiguration'
+import IConfiguration from '../../configuration/IConfiguration'
 
 export default class FilesDiscovery {
   public filesApi: FilesApi

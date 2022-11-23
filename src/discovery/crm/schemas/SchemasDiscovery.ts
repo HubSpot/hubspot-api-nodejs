@@ -8,7 +8,7 @@ import {
 } from '../../../../codegen/crm/schemas/index'
 import { Observable } from '../../../../codegen/crm/schemas/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class SchemasDiscovery {
   public coreApi: CoreApi

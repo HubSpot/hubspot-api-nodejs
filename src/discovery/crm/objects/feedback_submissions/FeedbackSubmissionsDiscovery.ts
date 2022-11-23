@@ -11,7 +11,7 @@ import {
 } from '../../../../../codegen/crm/objects/feedback_submissions/index'
 import { Observable } from '../../../../../codegen/crm/objects/feedback_submissions/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class FeedbackSubmissionsDiscovery {
   public associationsApi: AssociationsApi
