@@ -8,7 +8,7 @@ import {
 } from '../../../../codegen/crm/imports/index'
 import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class ImportsDiscovery {
   public coreApi: CoreApi

@@ -7,7 +7,7 @@ import {
 } from '../../../../codegen/cms/url_redirects/index'
 import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class UrlRedirectsDiscovery {
   public redirectsApi: RedirectsApi

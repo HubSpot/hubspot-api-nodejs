@@ -2,7 +2,7 @@ import { createConfiguration } from '../../../../codegen/cms/domains/configurati
 import { DomainsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/cms/domains/index'
 import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class DomainsDiscovery {
   public domainsApi: DomainsApi

@@ -2,7 +2,7 @@ import { createConfiguration } from '../../../codegen/events/configuration'
 import { EventsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../codegen/events/index'
 import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../configuration/IConfiguration'
+import IConfiguration from '../../configuration/IConfiguration'
 
 export default class EventsDiscovery {
   public eventsApi: EventsApi

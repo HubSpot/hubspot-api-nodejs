@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import { IConfiguration } from '../../configuration/IConfiguration'
+import IConfiguration from '../../configuration/IConfiguration'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
 

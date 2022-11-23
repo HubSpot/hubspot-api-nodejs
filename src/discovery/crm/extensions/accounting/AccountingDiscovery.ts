@@ -11,7 +11,7 @@ import {
 } from '../../../../../codegen/crm/extensions/accounting/index'
 import { Observable } from '../../../../../codegen/crm/extensions/accounting/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 /**
  * @deprecated

@@ -1,4 +1,4 @@
-import { IConfiguration } from './configuration/IConfiguration'
+import IConfiguration from './configuration/IConfiguration'
 import AutomationDiscovery from './discovery/automation/AutomationDiscovery'
 import CmsDiscovery from './discovery/cms/CmsDiscovery'
 import CommunicationPreferencesDiscovery from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'

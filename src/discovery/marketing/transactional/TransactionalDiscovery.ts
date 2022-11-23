@@ -8,7 +8,7 @@ import {
 } from '../../../../codegen/marketing/transactional/index'
 import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class TransactionalDiscovery {
   public publicSmtpTokensApi: PublicSmtpTokensApi

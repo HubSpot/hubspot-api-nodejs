@@ -8,7 +8,7 @@ import {
 } from '../../../../codegen/crm/associations/index'
 import { Observable } from '../../../../codegen/crm/associations/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class AssociationsDiscovery {
   public batchApi: BatchApi

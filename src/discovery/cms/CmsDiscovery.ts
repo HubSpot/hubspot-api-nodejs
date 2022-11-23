@@ -1,109 +1,32 @@
-import { initObject } from '../../services/initObject'
-import BaseDiscovery from '../BaseDiscovery'
 
-export default class CmsDiscovery extends BaseDiscovery {
-  protected _auditLogs: any
-  protected _blogs: any
-  protected _domains: any
-  protected _hubdb: any
-  protected _performance: any
-  protected _siteSearch: any
-  protected _sourceCode: any
-  protected _urlRedirects: any
+import IConfiguration from '../../configuration/IConfiguration'
+import AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
+import BlogsDiscovery from './blogs/BlogsDiscovery'
+import DomainsDiscovery from './domains/DomainsDiscovery'
+import HubdbDiscovery from './hubdb/HubdbDiscovery'
+import PerformanceDiscovery from './performance/PerformanceDiscovery'
+import SiteSearchDiscovery from './site_search/SiteSearchDiscovery'
+import SourceCodeDiscovery from './source_code/SourceCodeDiscovery'
+import UrlRedirectsDiscovery from './url_redirects/UrlRedirectsDiscovery'
 
-  /**
-   * Getter
-   * @returns AuditLogsDiscovery
-   */
-  get auditLogs() {
-    if (!this._auditLogs) {
-      this._auditLogs = initObject('cms/audit_logs/AuditLogsDiscovery', this.config)
-    }
+export class CmsDiscovery {
+  public auditLogs: AuditLogsDiscovery
+  public blogs: BlogsDiscovery
+  public domains: DomainsDiscovery
+  public hubdb: HubdbDiscovery
+  public performance: PerformanceDiscovery
+  public siteSearch: SiteSearchDiscovery
+  public sourceCode: SourceCodeDiscovery
+  public urlRedirects: UrlRedirectsDiscovery
 
-    return this._auditLogs
-  }
-
-  /**
-   * Getter
-   * @returns BlogsDiscovery
-   */
-  get blogs() {
-    if (!this._blogs) {
-      this._blogs = initObject('cms/blogs/BlogsDiscovery', this.config)
-    }
-
-    return this._blogs
-  }
-
-  /**
-   * Getter
-   * @returns DomainsDiscovery
-   */
-  get domains() {
-    if (!this._domains) {
-      this._domains = initObject('cms/domains/DomainsDiscovery', this.config)
-    }
-
-    return this._domains
-  }
-
-  /**
-   * Getter
-   * @returns HubdbDiscovery
-   */
-  get hubdb() {
-    if (!this._hubdb) {
-      this._hubdb = initObject('cms/hubdb/HubdbDiscovery', this.config)
-    }
-
-    return this._hubdb
-  }
-
-  /**
-   * Getter
-   * @returns PerformanceDiscovery
-   */
-  get performance() {
-    if (!this._performance) {
-      this._performance = initObject('cms/performance/PerformanceDiscovery', this.config)
-    }
-
-    return this._performance
-  }
-
-  /**
-   * Getter
-   * @returns SiteSearchDiscovery
-   */
-  get siteSearch() {
-    if (!this._siteSearch) {
-      this._siteSearch = initObject('cms/site_search/SiteSearchDiscovery', this.config)
-    }
-
-    return this._siteSearch
-  }
-
-  /**
-   * Getter
-   * @returns SourceCodeDiscovery
-   */
-  get sourceCode() {
-    if (!this._sourceCode) {
-      this._sourceCode = initObject('cms/source_code/SourceCodeDiscovery', this.config)
-    }
-
-    return this._sourceCode
-  }
-
-  /**
-   * Getter
-   * @returns UrlRedirectsDiscovery
-   */
-  get urlRedirects() {
-    if (!this._urlRedirects) {
-      this._urlRedirects = initObject('cms/url_redirects/UrlRedirectsDiscovery', this.config)
-    }
-
-    return this._urlRedirects
+  constructor(config: IConfiguration = {}) {
+    this.auditLogs = new AuditLogsDiscovery(config)
+    this.blogs = new BlogsDiscovery(config)
+    this.domains = new DomainsDiscovery(config)
+    this.hubdb = new HubdbDiscovery(config)
+    this.performance = new PerformanceDiscovery(config)
+    this.siteSearch = new SiteSearchDiscovery(config)
+    this.sourceCode = new SourceCodeDiscovery(config)
+    this.urlRedirects = new UrlRedirectsDiscovery(config)
   }
 }

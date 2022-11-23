@@ -2,7 +2,7 @@ import { createConfiguration } from '../../../../codegen/crm/owners/configuratio
 import { OwnersApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/crm/owners/index'
 import { Observable } from '../../../../codegen/crm/owners/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class OwnersDiscovery {
   public ownersApi: OwnersApi

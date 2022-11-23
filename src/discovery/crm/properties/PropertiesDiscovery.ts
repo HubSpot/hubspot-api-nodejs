@@ -9,7 +9,7 @@ import {
 } from '../../../../codegen/crm/properties/index'
 import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 
 export default class PropertiesDiscovery {
   public batchApi: BatchApi

@@ -1,4 +1,4 @@
-import { IConfiguration } from '../configuration/IConfiguration'
+import IConfiguration from '../configuration/IConfiguration'
 
 export function initObject(path: string, config: IConfiguration) {
   const importedClass = require('../discovery/' + path)

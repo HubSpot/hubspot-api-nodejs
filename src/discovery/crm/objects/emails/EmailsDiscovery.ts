@@ -11,7 +11,7 @@ import {
 } from '../../../../../codegen/crm/objects/emails/index'
 import { Observable } from '../../../../../codegen/crm/objects/emails/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../../configuration/IConfiguration'
+import IConfiguration from '../../../../configuration/IConfiguration'
 
 export default class EmailsDiscovery {
   public associationsApi: AssociationsApi

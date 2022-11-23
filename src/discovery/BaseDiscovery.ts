@@ -1,4 +1,4 @@
-import { IConfiguration } from '../configuration/IConfiguration'
+import IConfiguration from '../configuration/IConfiguration'
 
 export default class BaseDiscovery {
   public config: IConfiguration

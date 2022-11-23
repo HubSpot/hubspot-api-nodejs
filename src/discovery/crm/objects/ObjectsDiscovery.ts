@@ -12,7 +12,7 @@ import {
 } from '../../../../codegen/crm/objects/index'
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import { IConfiguration } from '../../../configuration/IConfiguration'
+import IConfiguration from '../../../configuration/IConfiguration'
 import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 
