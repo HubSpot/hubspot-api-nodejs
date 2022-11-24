@@ -9,10 +9,11 @@ import FilesDiscovery from './discovery/files/FilesDiscovery'
 import MarketingDiscovery from './discovery/marketing/MarketingDiscovery'
 import OauthDiscovery from './discovery/oauth/OauthDiscovery'
 import SettingsDiscovery from './discovery/settings/SettingsDiscovery'
-import WebhooksDiscovery from './discovery/webhooks/WebhooksDiscovery'
+import type WebhooksDiscovery from './discovery/webhooks/WebhooksDiscovery'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
+import { initObject } from './services/initObject'
 
 export class Client {
   public config: IConfiguration
@@ -26,7 +27,7 @@ export class Client {
   public marketing: MarketingDiscovery = new MarketingDiscovery()
   public oauth: OauthDiscovery = new OauthDiscovery()
   public settings: SettingsDiscovery = new SettingsDiscovery()
-  public webhooks: WebhooksDiscovery = new WebhooksDiscovery()
+  protected _webhooks: WebhooksDiscovery | undefined
 
   constructor(config: IConfiguration = {}) {
     this.config = config
@@ -44,7 +45,25 @@ export class Client {
     this.marketing = new MarketingDiscovery(this.config)
     this.oauth = new OauthDiscovery(this.config)
     this.settings = new SettingsDiscovery(this.config)
-    this.webhooks = new WebhooksDiscovery(this.config)
+    this._webhooks = undefined
+  }
+
+  // get crm() {
+  //   if (!this._crm) {
+  //     this._crm = initObject<CrmDiscovery>('webhooks/WebhooksDiscovery', this.config);
+  //   }
+  //   return this._crm
+  // }
+  
+  /**
+   * Getter
+   * @returns WebhooksDiscovery
+   */
+  get webhooks() {
+    if (!this._webhooks) {
+      this._webhooks = initObject<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config);
+    }
+    return this._webhooks
   }
 
   public setAccessToken(token: string) {
