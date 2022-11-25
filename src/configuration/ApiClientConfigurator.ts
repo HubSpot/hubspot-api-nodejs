@@ -9,7 +9,7 @@ export class ApiClientConfigurator {
     ResponseContextType,
     ObservableRequestContextType,
     ObservableResponseContextType,
-    ServerConfiguration
+    ServerConfiguration,
   >(
     config: IConfiguration,
     serverConfigurationClass: new (
@@ -88,7 +88,7 @@ export class ApiClientConfigurator {
     RequestContextType extends IRequestContext,
     ResponseContextType,
     ObservableRequestContextType,
-    ObservableResponseContextType
+    ObservableResponseContextType,
   >(
     config: IConfiguration,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
