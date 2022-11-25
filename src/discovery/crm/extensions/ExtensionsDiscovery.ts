@@ -1,9 +1,9 @@
+import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 import type AccountingDiscovery from './accounting/AccountingDiscovery'
 import type CallingDiscovery from './calling/CallingDiscovery'
 import type CardsDiscovery from './cards/CardsDiscovery'
 import type VideoconferencingDiscovery from './videoconferencing/VideoconferencingDiscovery'
-import { initObject } from '../../../services/initObject'
 
 export default class ExtensionsDiscovery extends BaseDiscovery {
   protected _accounting: AccountingDiscovery | undefined
@@ -21,7 +21,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
     }
     return this._accounting
   }
-  
+
   /**
    * Getter
    * @returns CallingDiscovery
@@ -32,7 +32,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
     }
     return this._calling
   }
-  
+
   /**
    * Getter
    * @returns CardsDiscovery
@@ -50,7 +50,10 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get videoconferencing() {
     if (!this._videoconferencing) {
-      this._videoconferencing = initObject<VideoconferencingDiscovery>('crm/extensions/videoconferencing/VideoconferencingDiscovery', this.config)
+      this._videoconferencing = initObject<VideoconferencingDiscovery>(
+        'crm/extensions/videoconferencing/VideoconferencingDiscovery',
+        this.config,
+      )
     }
     return this._videoconferencing
   }

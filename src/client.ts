@@ -54,14 +54,14 @@ export class Client {
   //   }
   //   return this._crm
   // }
-  
+
   /**
    * Getter
    * @returns WebhooksDiscovery
    */
   get webhooks() {
     if (!this._webhooks) {
-      this._webhooks = initObject<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config);
+      this._webhooks = initObject<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config)
     }
     return this._webhooks
   }

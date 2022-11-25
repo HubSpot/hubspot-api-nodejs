@@ -13,6 +13,7 @@ import {
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 import type CallsDiscovery from './calls/CallsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
@@ -20,7 +21,6 @@ import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSu
 import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
 import type NotesDiscovery from './notes/NotesDiscovery'
 import type TasksDiscovery from './tasks/TasksDiscovery'
-import { initObject } from '../../../services/initObject'
 
 export default class ObjectsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
