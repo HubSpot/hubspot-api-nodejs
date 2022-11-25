@@ -17,10 +17,7 @@ export function validateSignature(
     ? clientSecret + requestBody
     : clientSecret + webhooksMethod + webhooksUrl + requestBody
 
-  const hash = crypto
-    .createHash('sha256')
-    .update(sourceString)
-    .digest('hex')
+  const hash = crypto.createHash('sha256').update(sourceString).digest('hex')
 
   return _.isEqual(signature, hash)
 }

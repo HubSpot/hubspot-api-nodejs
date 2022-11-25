@@ -4,6 +4,7 @@ import CmsDiscovery from './discovery/cms/CmsDiscovery'
 import CommunicationPreferencesDiscovery from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
 import ConversationsDiscovery from './discovery/conversations/ConversationsDiscovery'
 import CrmDiscovery from './discovery/crm/CrmDiscovery'
+import type ObjectsDiscovery from './discovery/crm/objects/ObjectsDiscovery'
 import EventsDiscovery from './discovery/events/EventsDiscovery'
 import FilesDiscovery from './discovery/files/FilesDiscovery'
 import MarketingDiscovery from './discovery/marketing/MarketingDiscovery'
@@ -27,6 +28,7 @@ export class Client {
   public oauth: OauthDiscovery = new OauthDiscovery()
   public settings: SettingsDiscovery = new SettingsDiscovery()
   public webhooks: WebhooksDiscovery = new WebhooksDiscovery()
+  public object: ObjectsDiscovery | undefined
 
   constructor(config: IConfiguration = {}) {
     this.config = config
