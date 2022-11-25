@@ -22,22 +22,13 @@ export class Signature {
     switch (signatureVersion) {
       case 'v1':
         sourceString = options.clientSecret + options.requestBody
-        return crypto
-          .createHash('sha256')
-          .update(sourceString)
-          .digest('hex')
+        return crypto.createHash('sha256').update(sourceString).digest('hex')
       case 'v2':
         sourceString = options.clientSecret + method + options.url + options.requestBody
-        return crypto
-          .createHash('sha256')
-          .update(sourceString)
-          .digest('hex')
+        return crypto.createHash('sha256').update(sourceString).digest('hex')
       case 'v3':
         sourceString = method + options.url + options.requestBody + options.timestamp
-        return crypto
-          .createHmac('sha256', options.clientSecret)
-          .update(sourceString)
-          .digest('base64')
+        return crypto.createHmac('sha256', options.clientSecret).update(sourceString).digest('base64')
       default:
         throw new Error(`Not supported signature version: ${signatureVersion}`)
     }
