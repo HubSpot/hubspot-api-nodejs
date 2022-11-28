@@ -13,28 +13,31 @@ import {
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
-import CallsDiscovery from './calls/CallsDiscovery'
-import EmailsDiscovery from './emails/EmailsDiscovery'
-import FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
-import MeetingsDiscovery from './meetings/MeetingsDiscovery'
-import NotesDiscovery from './notes/NotesDiscovery'
-import TasksDiscovery from './tasks/TasksDiscovery'
+import { initObject } from '../../../services/initObject'
+import BaseDiscovery from '../../BaseDiscovery'
+import type CallsDiscovery from './calls/CallsDiscovery'
+import type EmailsDiscovery from './emails/EmailsDiscovery'
+import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
+import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
+import type NotesDiscovery from './notes/NotesDiscovery'
+import type TasksDiscovery from './tasks/TasksDiscovery'
 
-export default class ObjectsDiscovery {
+export default class ObjectsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public calls: CallsDiscovery
-  public emails: EmailsDiscovery
   public gdprApi: GDPRApi
-  public feedbackSubmissions: FeedbackSubmissionsDiscovery
-  public meetings: MeetingsDiscovery
-  public notes: NotesDiscovery
   public publicObjectApi: PublicObjectApi
-  public tasks: TasksDiscovery
   public searchApi: SearchApi
+  protected _calls: CallsDiscovery | undefined
+  protected _emails: EmailsDiscovery | undefined
+  protected _feedbackSubmissions: FeedbackSubmissionsDiscovery | undefined
+  protected _meetings: MeetingsDiscovery | undefined
+  protected _notes: NotesDiscovery | undefined
+  protected _tasks: TasksDiscovery | undefined
 
   constructor(config: IConfiguration) {
+    super(config)
     const configuration = createConfiguration(
       ApiClientConfigurator.getParams<
         RequestContext,
@@ -48,14 +51,82 @@ export default class ObjectsDiscovery {
     this.associationsApi = new AssociationsApi(configuration)
     this.basicApi = new BasicApi(configuration)
     this.batchApi = new BatchApi(configuration)
-    this.calls = new CallsDiscovery(config)
-    this.emails = new EmailsDiscovery(config)
     this.gdprApi = new GDPRApi(configuration)
-    this.feedbackSubmissions = new FeedbackSubmissionsDiscovery(config)
-    this.meetings = new MeetingsDiscovery(config)
-    this.notes = new NotesDiscovery(config)
     this.publicObjectApi = new PublicObjectApi(configuration)
-    this.tasks = new TasksDiscovery(config)
     this.searchApi = new SearchApi(configuration)
+  }
+  /**
+   * Getter
+   * @returns CallsDiscovery
+   */
+  get calls() {
+    if (!this._calls) {
+      this._calls = initObject<CallsDiscovery>('crm/objects/calls/CallsDiscovery', this.config)
+    }
+
+    return this._calls
+  }
+
+  /**
+   * Getter
+   * @returns EmailsDiscovery
+   */
+  get emails() {
+    if (!this._emails) {
+      this._emails = initObject<EmailsDiscovery>('crm/objects/emails/EmailsDiscovery', this.config)
+    }
+
+    return this._emails
+  }
+
+  /**
+   * Getter
+   * @returns FeedbackSubmissionsDiscovery
+   */
+  get feedbackSubmissions() {
+    if (!this._feedbackSubmissions) {
+      this._feedbackSubmissions = initObject<FeedbackSubmissionsDiscovery>(
+        'crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery',
+        this.config,
+      )
+    }
+
+    return this._feedbackSubmissions
+  }
+
+  /**
+   * Getter
+   * @returns MeetingsDiscovery
+   */
+  get meetings() {
+    if (!this._meetings) {
+      this._meetings = initObject<MeetingsDiscovery>('crm/objects/meetings/MeetingsDiscovery', this.config)
+    }
+
+    return this._meetings
+  }
+
+  /**
+   * Getter
+   * @returns NotesDiscovery
+   */
+  get notes() {
+    if (!this._notes) {
+      this._notes = initObject<NotesDiscovery>('crm/objects/notes/NotesDiscovery', this.config)
+    }
+
+    return this._notes
+  }
+
+  /**
+   * Getter
+   * @returns TasksDiscovery
+   */
+  get tasks() {
+    if (!this._tasks) {
+      this._tasks = initObject<TasksDiscovery>('crm/objects/tasks/TasksDiscovery', this.config)
+    }
+
+    return this._tasks
   }
 }
