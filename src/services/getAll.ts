@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import { DEFAULT_OBJECTS_LIMIT } from '../configuration/constants'
 
 interface IAPIType<CollectionType, ConfigurationType> {
@@ -12,8 +11,18 @@ interface IAPIType<CollectionType, ConfigurationType> {
     _options?: ConfigurationType,
   ): Promise<CollectionType>
 }
+
+interface INextPage {
+  after: string
+}
+
+interface IForwardPaging {
+  next?: INextPage
+}
+
 interface ICollectionType<ObjectType> {
   results: ObjectType[]
+  paging?: IForwardPaging
 }
 
 export async function getAll<ReturnType, ConfigurationType>(
@@ -38,8 +47,8 @@ export async function getAll<ReturnType, ConfigurationType>(
       archived,
     )
     result = result.concat(response.results)
-    afterInternal = _.get(response, 'paging.next.after')
-  } while (!_.isNil(afterInternal))
+    afterInternal = response?.paging?.next?.after
+  } while (afterInternal)
 
   return result
 }
