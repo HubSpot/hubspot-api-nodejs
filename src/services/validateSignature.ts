@@ -1,5 +1,4 @@
 import crypto = require('crypto')
-import * as _ from 'lodash'
 
 /**
  *
@@ -13,11 +12,10 @@ export function validateSignature(
   webhooksUrl?: string,
   webhooksMethod = 'POST',
 ): boolean {
-  const sourceString = _.isEqual(signatureVersion, 'v1')
-    ? clientSecret + requestBody
-    : clientSecret + webhooksMethod + webhooksUrl + requestBody
+  const sourceString =
+    signatureVersion === 'v1' ? clientSecret + requestBody : clientSecret + webhooksMethod + webhooksUrl + requestBody
 
   const hash = crypto.createHash('sha256').update(sourceString).digest('hex')
 
-  return _.isEqual(signature, hash)
+  return signature === hash
 }
