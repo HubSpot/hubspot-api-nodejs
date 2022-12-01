@@ -1,5 +1,4 @@
 import crypto = require('crypto')
-import * as _ from 'lodash'
 import { ISignatureOptions } from './ISignatureOptions'
 
 export class Signature {
@@ -14,7 +13,7 @@ export class Signature {
       }
     }
 
-    return _.isEqual(options.signature, hash)
+    return options.signature === hash
   }
 
   public static getSignature(method: string, signatureVersion: string, options: ISignatureOptions): string {
