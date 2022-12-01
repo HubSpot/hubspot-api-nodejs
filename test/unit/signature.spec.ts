@@ -35,4 +35,18 @@ describe('Signature is valid', () => {
 
     expect(Signature.isValid(options)).toBe(true)
   })
+  it('is valid v3', () => {
+    const options = {
+      signature: '',
+      clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
+      requestBody: '{"example_field":"example_value"}',
+      url: 'https://www.example.com/webhook_uri',
+      method: 'POST',
+      signatureVersion: 'v3',
+      timestamp: Date.now(),
+    }
+    options.signature = Signature.getSignature(options.method, options.signatureVersion, options)
+
+    expect(Signature.isValid(options)).toBe(true)
+  })
 })
