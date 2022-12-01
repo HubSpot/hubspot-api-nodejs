@@ -1,7 +1,7 @@
 import { Signature } from '../../index'
 
 describe('Signature is valid', () => {
-  it('is valid v1', () => {
+  it('Validates v1', () => {
     const options = {
       signature: '232db2615f3d666fe21a8ec971ac7b5402d33b9a925784df3ca654d05f4817de',
       clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
@@ -11,7 +11,7 @@ describe('Signature is valid', () => {
 
     expect(Signature.isValid(options)).toBe(true)
   })
-  it('is valid v2', () => {
+  it('Validates v2', () => {
     const options = {
       signature: 'eee2dddcc73c94d699f5e395f4b9d454a069a6855fbfa152e91e88823087200e',
       clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
@@ -23,7 +23,7 @@ describe('Signature is valid', () => {
 
     expect(Signature.isValid(options)).toBe(true)
   })
-  it('is valid v2 with body', () => {
+  it('Validates v2 with body', () => {
     const options = {
       signature: '9569219f8ba981ffa6f6f16aa0f48637d35d728c7e4d93d0d52efaa512af7900',
       clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
@@ -35,7 +35,7 @@ describe('Signature is valid', () => {
 
     expect(Signature.isValid(options)).toBe(true)
   })
-  it('is valid v3', () => {
+  it('Validates v3', () => {
     const options = {
       signature: '',
       clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
