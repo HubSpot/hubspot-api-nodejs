@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import get from 'lodash/get'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
@@ -53,8 +53,8 @@ export class Request {
     const authType = Auth.chooseAuth(this.opts, this.config)
 
     if (authType) {
-      const method = _.get(AuthTypes, authType)
-      const value = _.get(this.config, authType)
+      const method = get(AuthTypes, authType)
+      const value = get(this.config, authType)
       if (method === AuthMethods.hapikey) {
         this.url.searchParams.set('hapikey', value)
       }
@@ -65,7 +65,7 @@ export class Request {
   }
 
   protected initHeaders() {
-    if (_.get(this.opts, 'defaultJson', true)) {
+    if (get(this.opts, 'defaultJson', true)) {
       this.headers = { 'Content-Type': 'application/json' }
     }
 
@@ -91,7 +91,7 @@ export class Request {
   protected setBody() {
     if (this.opts.body) {
       this.body = this.opts.body
-      if (_.get(this.headers, 'Content-Type') === 'application/json' && _.get(this.opts, 'defaultJson', true)) {
+      if (get(this.headers, 'Content-Type') === 'application/json' && get(this.opts, 'defaultJson', true)) {
         this.body = JSON.stringify(this.body)
       }
     }
