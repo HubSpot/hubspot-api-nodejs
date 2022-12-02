@@ -4,6 +4,8 @@ import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { AssociatedId } from '../models/AssociatedId';
+import { AssociationSpec } from '../models/AssociationSpec';
+import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
@@ -11,7 +13,7 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
@@ -19,7 +21,9 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
 import { ForwardPaging } from '../models/ForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
+import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -50,14 +54,14 @@ export class ObservableAssociationsApi {
     }
 
     /**
-     * Remove an association between two calls
+     * deletes all associations between two records.
+     * Delete
      * @param callId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
      */
-    public archive(callId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(callId, toObjectType, toObjectId, associationType, _options);
+    public archive(callId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(callId, toObjectType, toObjectId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -76,14 +80,15 @@ export class ObservableAssociationsApi {
     }
 
     /**
-     * Associate a call with another object
+     * Set association labels between two records.
+     * Create
      * @param callId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
+     * @param associationSpec 
      */
-    public create(callId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Observable<SimplePublicObjectWithAssociations> {
-        const requestContextPromise = this.requestFactory.create(callId, toObjectType, toObjectId, associationType, _options);
+    public create(callId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair> {
+        const requestContextPromise = this.requestFactory.create(callId, toObjectType, toObjectId, associationSpec, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -102,13 +107,14 @@ export class ObservableAssociationsApi {
     }
 
     /**
-     * List associations of a call by type
+     * List all associations of a call by object type. Limit 1000 per call.
+     * List
      * @param callId 
      * @param toObjectType 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getAll(callId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseAssociatedIdForwardPaging> {
+    public getAll(callId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         const requestContextPromise = this.requestFactory.getAll(callId, toObjectType, after, limit, _options);
 
         // build promise chain

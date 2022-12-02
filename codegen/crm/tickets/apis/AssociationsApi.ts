@@ -10,8 +10,9 @@ import {canConsumeForm, isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
-import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
+import { AssociationSpec } from '../models/AssociationSpec';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 
 /**
  * no description
@@ -19,13 +20,13 @@ import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObject
 export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Remove an association between two tickets
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>deletes all associations between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=deleteAllAssociations) | <a href='#operations-Associations-delete-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/delete/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=deleteAllAssociations&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**7,481,227** external calls in the last 90 days</a></span></span>
+     * Delete
      * @param ticketId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
      */
-    public async archive(ticketId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(ticketId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'ticketId' is not null or undefined
@@ -46,18 +47,11 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'associationType' is not null or undefined
-        if (associationType === null || associationType === undefined) {
-            throw new RequiredError("AssociationsApi", "archive", "associationType");
-        }
-
-
         // Path Params
         const localVarPath = '/crm/v4/objects/tickets/{ticketId}/associations/{toObjectType}/{toObjectId}'
             .replace('{' + 'ticketId' + '}', encodeURIComponent(String(ticketId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
-            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
-            .replace('{' + 'associationType' + '}', encodeURIComponent(String(associationType)));
+            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -85,13 +79,14 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Associate a ticket with another object
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>Set association labels between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=setAssociationLabels) | <a href='#operations-Associations-put-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/put/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=setAssociationLabels&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**84,046,482** external calls in the last 90 days</a></span></span>
+     * Create
      * @param ticketId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
+     * @param associationSpec 
      */
-    public async create(ticketId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<RequestContext> {
+    public async create(ticketId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'ticketId' is not null or undefined
@@ -112,9 +107,9 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'associationType' is not null or undefined
-        if (associationType === null || associationType === undefined) {
-            throw new RequiredError("AssociationsApi", "create", "associationType");
+        // verify required parameter 'associationSpec' is not null or undefined
+        if (associationSpec === null || associationSpec === undefined) {
+            throw new RequiredError("AssociationsApi", "create", "associationSpec");
         }
 
 
@@ -122,13 +117,23 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
         const localVarPath = '/crm/v4/objects/tickets/{ticketId}/associations/{toObjectType}/{toObjectId}'
             .replace('{' + 'ticketId' + '}', encodeURIComponent(String(ticketId)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
-            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)))
-            .replace('{' + 'associationType' + '}', encodeURIComponent(String(associationType)));
+            .replace('{' + 'toObjectId' + '}', encodeURIComponent(String(toObjectId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(associationSpec, "Array<AssociationSpec>", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -151,13 +156,14 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * List associations of a ticket by type
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>List all associations of a ticket by object type. Limit 1000 per call.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=getAllAssociationsForObject) | <a href='#operations-Associations-get-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=getAllAssociationsForObject&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**101,011,935** external calls in the last 90 days</a></span></span>
+     * List
      * @param ticketId 
      * @param toObjectType 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public async getAll(ticketId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(ticketId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'ticketId' is not null or undefined
@@ -257,13 +263,13 @@ export class AssociationsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<SimplePublicObjectWithAssociations > {
+     public async create(response: ResponseContext): Promise<LabelsBetweenObjectPair > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
+        if (isCodeInRange("201", response.httpStatusCode)) {
+            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObjectWithAssociations", ""
-            ) as SimplePublicObjectWithAssociations;
+                "LabelsBetweenObjectPair", ""
+            ) as LabelsBetweenObjectPair;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -276,10 +282,10 @@ export class AssociationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
+            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObjectWithAssociations", ""
-            ) as SimplePublicObjectWithAssociations;
+                "LabelsBetweenObjectPair", ""
+            ) as LabelsBetweenObjectPair;
             return body;
         }
 
@@ -293,13 +299,13 @@ export class AssociationsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponseAssociatedIdForwardPaging > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseAssociatedIdForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseMultiAssociatedObjectWithLabelForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseAssociatedIdForwardPaging", ""
-            ) as CollectionResponseAssociatedIdForwardPaging;
+                "CollectionResponseMultiAssociatedObjectWithLabelForwardPaging", ""
+            ) as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -312,10 +318,10 @@ export class AssociationsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseAssociatedIdForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseMultiAssociatedObjectWithLabelForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseAssociatedIdForwardPaging", ""
-            ) as CollectionResponseAssociatedIdForwardPaging;
+                "CollectionResponseMultiAssociatedObjectWithLabelForwardPaging", ""
+            ) as CollectionResponseMultiAssociatedObjectWithLabelForwardPaging;
             return body;
         }
 
