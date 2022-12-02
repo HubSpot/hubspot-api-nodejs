@@ -3,6 +3,8 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
 import { AssociatedId } from '../models/AssociatedId';
+import { AssociationSpec } from '../models/AssociationSpec';
+import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
@@ -10,7 +12,7 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
@@ -18,7 +20,9 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
 import { ForwardPaging } from '../models/ForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
+import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -46,37 +50,39 @@ export class PromiseAssociationsApi {
     }
 
     /**
-     * Remove an association between two notes
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>deletes all associations between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=deleteAllAssociations) | <a href='#operations-Associations-delete-%2Fcrm%2Fv4%2Fnotes%2F%7BobjectType%7D%2F%7BnoteId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/delete/api.hubapi.com%2Fcrm%2Fv4%2Fnotes%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BnoteId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=deleteAllAssociations&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**7,481,227** external calls in the last 90 days</a></span></span>
+     * Delete
      * @param noteId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
      */
-    public archive(noteId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(noteId, toObjectType, toObjectId, associationType, _options);
+    public archive(noteId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(noteId, toObjectType, toObjectId, _options);
         return result.toPromise();
     }
 
     /**
-     * Associate a note with another object
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>Set association labels between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=setAssociationLabels) | <a href='#operations-Associations-put-%2Fcrm%2Fv4%2Fnotes%2F%7BobjectType%7D%2F%7BnoteId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/put/api.hubapi.com%2Fcrm%2Fv4%2Fnotes%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BnoteId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=setAssociationLabels&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**84,046,482** external calls in the last 90 days</a></span></span>
+     * Create
      * @param noteId 
      * @param toObjectType 
      * @param toObjectId 
-     * @param associationType 
+     * @param associationSpec 
      */
-    public create(noteId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        const result = this.api.create(noteId, toObjectType, toObjectId, associationType, _options);
+    public create(noteId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair> {
+        const result = this.api.create(noteId, toObjectType, toObjectId, associationSpec, _options);
         return result.toPromise();
     }
 
     /**
-     * List associations of a note by type
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>List all associations of a note by object type. Limit 1000 per call.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=getAllAssociationsForObject) | <a href='#operations-Associations-get-%2Fcrm%2Fv4%2Fnotes%2F%7BobjectType%7D%2F%7BnoteId%7D%2Fassociations%2F%7BtoObjectType%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Fcrm%2Fv4%2Fnotes%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BnoteId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=getAllAssociationsForObject&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**101,011,935** external calls in the last 90 days</a></span></span>
+     * List
      * @param noteId 
      * @param toObjectType 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getAll(noteId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
+    public getAll(noteId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         const result = this.api.getAll(noteId, toObjectType, after, limit, _options);
         return result.toPromise();
     }
