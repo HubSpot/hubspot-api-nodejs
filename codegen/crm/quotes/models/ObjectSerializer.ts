@@ -1,4 +1,6 @@
 export * from './AssociatedId';
+export * from './AssociationSpec';
+export * from './AssociationSpecWithLabel';
 export * from './BatchInputSimplePublicObjectBatchInput';
 export * from './BatchInputSimplePublicObjectId';
 export * from './BatchInputSimplePublicObjectInput';
@@ -6,7 +8,7 @@ export * from './BatchReadInputSimplePublicObjectId';
 export * from './BatchResponseSimplePublicObject';
 export * from './BatchResponseSimplePublicObjectWithErrors';
 export * from './CollectionResponseAssociatedId';
-export * from './CollectionResponseAssociatedIdForwardPaging';
+export * from './CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 export * from './CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from './CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 export * from './ErrorCategory';
@@ -14,7 +16,9 @@ export * from './ErrorDetail';
 export * from './Filter';
 export * from './FilterGroup';
 export * from './ForwardPaging';
+export * from './LabelsBetweenObjectPair';
 export * from './ModelError';
+export * from './MultiAssociatedObjectWithLabel';
 export * from './NextPage';
 export * from './Paging';
 export * from './PreviousPage';
@@ -29,6 +33,8 @@ export * from './StandardError';
 export * from './ValueWithTimestamp';
 
 import { AssociatedId } from './AssociatedId';
+import { AssociationSpec, AssociationSpecAssociationCategoryEnum    } from './AssociationSpec';
+import { AssociationSpecWithLabel, AssociationSpecWithLabelCategoryEnum     } from './AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from './BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from './BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from './BatchInputSimplePublicObjectInput';
@@ -36,7 +42,7 @@ import { BatchReadInputSimplePublicObjectId } from './BatchReadInputSimplePublic
 import { BatchResponseSimplePublicObject, BatchResponseSimplePublicObjectStatusEnum        } from './BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors, BatchResponseSimplePublicObjectWithErrorsStatusEnum          } from './BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from './CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from './CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from './CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from './CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from './CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
@@ -44,7 +50,9 @@ import { ErrorDetail } from './ErrorDetail';
 import { Filter   , FilterOperatorEnum   } from './Filter';
 import { FilterGroup } from './FilterGroup';
 import { ForwardPaging } from './ForwardPaging';
+import { LabelsBetweenObjectPair } from './LabelsBetweenObjectPair';
 import { ModelError } from './ModelError';
+import { MultiAssociatedObjectWithLabel } from './MultiAssociatedObjectWithLabel';
 import { NextPage } from './NextPage';
 import { Paging } from './Paging';
 import { PreviousPage } from './PreviousPage';
@@ -78,6 +86,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "AssociationSpecAssociationCategoryEnum",
+    "AssociationSpecWithLabelCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
     "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
     "ErrorCategoryHttpStatusEnum",
@@ -86,6 +96,8 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "AssociatedId": AssociatedId,
+    "AssociationSpec": AssociationSpec,
+    "AssociationSpecWithLabel": AssociationSpecWithLabel,
     "BatchInputSimplePublicObjectBatchInput": BatchInputSimplePublicObjectBatchInput,
     "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
     "BatchInputSimplePublicObjectInput": BatchInputSimplePublicObjectInput,
@@ -93,7 +105,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
-    "CollectionResponseAssociatedIdForwardPaging": CollectionResponseAssociatedIdForwardPaging,
+    "CollectionResponseMultiAssociatedObjectWithLabelForwardPaging": CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
     "ErrorCategory": ErrorCategory,
@@ -101,7 +113,9 @@ let typeMap: {[index: string]: any} = {
     "Filter": Filter,
     "FilterGroup": FilterGroup,
     "ForwardPaging": ForwardPaging,
+    "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
     "ModelError": ModelError,
+    "MultiAssociatedObjectWithLabel": MultiAssociatedObjectWithLabel,
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,

@@ -3,6 +3,8 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
 import { AssociatedId } from '../models/AssociatedId';
+import { AssociationSpec } from '../models/AssociationSpec';
+import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
@@ -10,7 +12,7 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
@@ -18,7 +20,9 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
 import { ForwardPaging } from '../models/ForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
+import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -38,10 +42,10 @@ import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "
 export interface AssociationsApiArchiveRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApiarchive
      */
-    ticketId: string
+    ticketId: number
     /**
      * 
      * @type string
@@ -50,25 +54,19 @@ export interface AssociationsApiArchiveRequest {
     toObjectType: string
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApiarchive
      */
-    toObjectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    associationType: string
+    toObjectId: number
 }
 
 export interface AssociationsApiCreateRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApicreate
      */
-    ticketId: string
+    ticketId: number
     /**
      * 
      * @type string
@@ -77,25 +75,25 @@ export interface AssociationsApiCreateRequest {
     toObjectType: string
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApicreate
      */
-    toObjectId: string
+    toObjectId: number
     /**
      * 
-     * @type string
+     * @type Array&lt;AssociationSpec&gt;
      * @memberof AssociationsApicreate
      */
-    associationType: string
+    associationSpec: Array<AssociationSpec>
 }
 
 export interface AssociationsApiGetAllRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApigetAll
      */
-    ticketId: string
+    ticketId: number
     /**
      * 
      * @type string
@@ -124,26 +122,29 @@ export class ObjectAssociationsApi {
     }
 
     /**
-     * Remove an association between two tickets
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>deletes all associations between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=deleteAllAssociations) | <a href='#operations-Associations-delete-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/delete/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=deleteAllAssociations&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**7,481,227** external calls in the last 90 days</a></span></span>
+     * Delete
      * @param param the request object
      */
     public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.ticketId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+        return this.api.archive(param.ticketId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
     /**
-     * Associate a ticket with another object
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>Set association labels between two records.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=setAssociationLabels) | <a href='#operations-Associations-put-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D%2F%7BtoObjectId%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/put/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29%2F%28%28%7BtoObjectId%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=setAssociationLabels&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**84,046,482** external calls in the last 90 days</a></span></span>
+     * Create
      * @param param the request object
      */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.create(param.ticketId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+        return this.api.create(param.ticketId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 
     /**
-     * List associations of a ticket by type
+     * <span style='display: flex; justify-content: space-between;'><span style='flex: 1'><span style='display: inline-block;'>List all associations of a ticket by object type. Limit 1000 per call.<br />Auth Level: external ([Docs](https://product.hubteam.com/docs/appsystems/auth-and-rest/auth-levels.html)) | [Source Code](https://private.hubteam.com/opengrok/search?project=all&path=PublicObjectResource&defs=getAllAssociationsForObject) | <a href='#operations-Associations-get-%2Fcrm%2Fv4%2Ftickets%2F%7BobjectType%7D%2F%7BticketId%7D%2Fassociations%2F%7BtoObjectType%7D'>Permalink</a> | [API Goggles](https://tools.hubteam.com/api/get/api.hubapi.com%2Fcrm%2Fv4%2Ftickets%2F%28%28%7BobjectType%7D%29%29%2F%28%28%7BticketId%7D%29%29%2Fassociations%2F%28%28%7BtoObjectType%7D%29%29?showRequestDetails=true&body=&authType=external)</span></span><span style='padding-left: 12px'><a href='https://looker.hubspotcentral.net/dashboards/4566?DeployConfig=CrmPublicObjects-Service-web&Resource=PublicObjectResource&Method=getAllAssociationsForObject&API%20Version=v4&Timeframe=90%20days%20ago%20for%2090%20days'>**101,011,935** external calls in the last 90 days</a></span></span>
+     * List
      * @param param the request object
      */
-    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
+    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         return this.api.getAll(param.ticketId, param.toObjectType, param.after, param.limit,  options).toPromise();
     }
 

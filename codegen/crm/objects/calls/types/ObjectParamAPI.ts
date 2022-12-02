@@ -3,6 +3,8 @@ import * as models from '../models/all';
 import { Configuration} from '../configuration'
 
 import { AssociatedId } from '../models/AssociatedId';
+import { AssociationSpec } from '../models/AssociationSpec';
+import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
@@ -10,7 +12,7 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorCategory } from '../models/ErrorCategory';
@@ -18,7 +20,9 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
 import { ForwardPaging } from '../models/ForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
+import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -38,10 +42,10 @@ import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "
 export interface AssociationsApiArchiveRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApiarchive
      */
-    callId: string
+    callId: number
     /**
      * 
      * @type string
@@ -50,25 +54,19 @@ export interface AssociationsApiArchiveRequest {
     toObjectType: string
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApiarchive
      */
-    toObjectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    associationType: string
+    toObjectId: number
 }
 
 export interface AssociationsApiCreateRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApicreate
      */
-    callId: string
+    callId: number
     /**
      * 
      * @type string
@@ -77,25 +75,25 @@ export interface AssociationsApiCreateRequest {
     toObjectType: string
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApicreate
      */
-    toObjectId: string
+    toObjectId: number
     /**
      * 
-     * @type string
+     * @type Array&lt;AssociationSpec&gt;
      * @memberof AssociationsApicreate
      */
-    associationType: string
+    associationSpec: Array<AssociationSpec>
 }
 
 export interface AssociationsApiGetAllRequest {
     /**
      * 
-     * @type string
+     * @type number
      * @memberof AssociationsApigetAll
      */
-    callId: string
+    callId: number
     /**
      * 
      * @type string
@@ -124,26 +122,29 @@ export class ObjectAssociationsApi {
     }
 
     /**
-     * Remove an association between two calls
+     * deletes all associations between two records.
+     * Delete
      * @param param the request object
      */
     public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.callId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+        return this.api.archive(param.callId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
     /**
-     * Associate a call with another object
+     * Set association labels between two records.
+     * Create
      * @param param the request object
      */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.create(param.callId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
+    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+        return this.api.create(param.callId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 
     /**
-     * List associations of a call by type
+     * List all associations of a call by object type. Limit 1000 per call.
+     * List
      * @param param the request object
      */
-    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
+    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         return this.api.getAll(param.callId, param.toObjectType, param.after, param.limit,  options).toPromise();
     }
 
