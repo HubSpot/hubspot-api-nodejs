@@ -1,4 +1,4 @@
-import get from 'lodash/get'
+import get from 'lodash.get'
 import IConfiguration from '../../configuration/IConfiguration'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
