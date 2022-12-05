@@ -1,4 +1,4 @@
-import get from 'lodash/get'
+import get from 'lodash.get'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'

@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import fetch from 'node-fetch'
 import { Request } from './Request'
 

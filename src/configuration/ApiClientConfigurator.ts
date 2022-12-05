@@ -1,4 +1,4 @@
-import merge from 'lodash/merge'
+import merge from 'lodash.merge'
 import { IRequestContext } from '../services/IRequestContext'
 import IConfiguration from './IConfiguration'
 import { VERSION } from './version'
