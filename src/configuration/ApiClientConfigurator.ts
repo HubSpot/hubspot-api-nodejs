@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import merge from 'lodash/merge'
 import { IRequestContext } from '../services/IRequestContext'
 import IConfiguration from './IConfiguration'
 import { VERSION } from './version'
@@ -31,7 +31,7 @@ export class ApiClientConfigurator {
       authMethods: this.getAuthMethods(config),
     }
 
-    _.merge(params, this.getBaseServer(config, serverConfigurationClass))
+    merge(params, this.getBaseServer(config, serverConfigurationClass))
 
     return params
   }
@@ -94,13 +94,15 @@ export class ApiClientConfigurator {
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
-    const headers = _.merge(config.defaultHeaders, { 'User-agent': this.getUserAgent() })
+    const headers = merge(config.defaultHeaders, { 'User-agent': this.getUserAgent() })
 
     return {
       pre(context: RequestContextType): ObservableRequestContextType {
-        _.forIn(headers, (value, key) => {
-          context.setHeaderParam(key, value)
-        })
+        for (const key in headers) {
+          if (headers.hasOwnProperty(key)) {
+            context.setHeaderParam(key, headers[key])
+          }
+        }
         return new observableRequestContextParam(Promise.resolve(context))
       },
       post(context: ResponseContextType): ObservableResponseContextType {
