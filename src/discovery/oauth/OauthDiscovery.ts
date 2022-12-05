@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import * as qs from 'querystring'
 import { createConfiguration } from '../../../codegen/oauth/configuration'
 import {
@@ -49,6 +48,14 @@ export default class OauthDiscovery {
       state,
     }
 
-    return `https://app.hubspot.com/oauth/authorize?${qs.stringify(_.omitBy(params, _.isNil))}`
+    if (params.optional_scope === undefined) {
+      delete params.optional_scope
+    }
+
+    if (params.state === undefined) {
+      delete params.state
+    }
+
+    return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
   }
 }
