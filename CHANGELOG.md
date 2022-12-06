@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/8.1.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/8.2.0...HEAD)
+
+## [8.2.0] - 2022-12-06
+
+## Updated
+
+- Added Private App access token to `cms.domains`
 
 ## [8.1.1] - 2022-12-05
 
@@ -409,3 +415,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [8.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.0.1
 [8.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.1.0
 [8.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.1.1
+[8.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.2.0
