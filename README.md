@@ -133,19 +133,21 @@ await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 
 ### {EXAMPLE} Import Contacts:
 
-#### first option with fs.ReadStream
-
 ```javascript
 const fs = require('fs')
 
 const fileName = 'test.csv'
+
+const file = {
+    data: fs.createReadStream(fileName),
+    name: fileName,
+};
 
 const importRequest = {
     name: 'import(' + fileName + ')',
     files: [
         {
             fileName: fileName,
-            fileFormat: 'CSV',
             fileImportPage: {
                 hasHeader: true,
                 columnMappings: [
@@ -159,58 +161,15 @@ const importRequest = {
                         propertyName: 'email',
                         columnObjectType: 'CONTACT',
                     },
-                ]
-            }
-        }
-    ]
+                ],
+            },
+        },
+    ],
 }
-const importFileReadStream = fs.createReadStream(fileName)
-const response = await  hubspotClient.crm.imports.coreApi.create(importFileReadStream, JSON.stringify(importRequest));
+
+const response = await  hubspotClient.crm.imports.coreApi.create(file, JSON.stringify(importRequest));
 
 console.log(JSON.stringify(response))
-```
-
-#### second option with RequestDetailedFile
-
-```javascript
-const fs = require('fs')
-
-const fileName = 'test.csv'
-const importRequest = {
-    name: 'import(' + fileName + ')',
-    files: [
-        {
-            fileName: fileName,
-            fileFormat: 'CSV',
-            fileImportPage: {
-                hasHeader: true,
-                columnMappings: [
-                    {
-                        columnName: 'First Name',
-                        propertyName: 'firstname',
-                        columnObjectType: 'CONTACT',
-                    },
-                    {
-                        columnName: 'Email',
-                        propertyName: 'email',
-                        columnObjectType: 'CONTACT',
-                    },
-                ]
-            }
-        }
-    ]
-}
-
-const importFileConfig = {
-    value: fs.readFileSync(fileName, "utf8"),
-    options: {
-        filename: fileName,
-        contentType: 'text/csv',
-    },
-}
-const result = await  hubspotClient.crm.imports.coreApi.create(importFileConfig, JSON.stringify(importRequest));
-
-console.log(JSON.stringify(result))
 ```
 
 ### {EXAMPLE} Search Contacts:
