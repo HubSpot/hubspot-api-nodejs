@@ -169,7 +169,7 @@ const importRequest = {
 
 const response = await  hubspotClient.crm.imports.coreApi.create(file, JSON.stringify(importRequest));
 
-console.log(JSON.stringify(response))
+console.log(response)
 ```
 
 ### {EXAMPLE} Search Contacts:
