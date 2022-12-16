@@ -20,6 +20,7 @@ import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
 import type NotesDiscovery from './notes/NotesDiscovery'
+import type PostalMailDiscovery from './postal_mail/PostalMailDiscovery'
 import type TasksDiscovery from './tasks/TasksDiscovery'
 
 export default class ObjectsDiscovery extends BaseDiscovery {
@@ -34,6 +35,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   protected _feedbackSubmissions: FeedbackSubmissionsDiscovery | undefined
   protected _meetings: MeetingsDiscovery | undefined
   protected _notes: NotesDiscovery | undefined
+  protected _postalMail: PostalMailDiscovery | undefined
   protected _tasks: TasksDiscovery | undefined
 
   constructor(config: IConfiguration) {
@@ -116,6 +118,18 @@ export default class ObjectsDiscovery extends BaseDiscovery {
     }
 
     return this._notes
+  }
+
+  /**
+   * Getter
+   * @returns PostalMailDiscovery
+   */
+  get postalMail() {
+    if (!this._postalMail) {
+      this._postalMail = initObject<PostalMailDiscovery>('crm/objects/postal_mail/PostalMailDiscovery', this.config)
+    }
+
+    return this._postalMail
   }
 
   /**

@@ -4,6 +4,7 @@ import EmailsDiscovery from '../../../../src/discovery/crm/objects/emails/Emails
 import FeedbackSubmissionsDiscovery from '../../../../src/discovery/crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery'
 import MeetingsDiscovery from '../../../../src/discovery/crm/objects/meetings/MeetingsDiscovery'
 import NotesDiscovery from '../../../../src/discovery/crm/objects/notes/NotesDiscovery'
+import PostalMailDiscovery from '../../../../src/discovery/crm/objects/postal_mail/PostalMailDiscovery'
 import TasksDiscovery from '../../../../src/discovery/crm/objects/tasks/TasksDiscovery'
 
 describe('api client', () => {
@@ -14,6 +15,7 @@ describe('api client', () => {
     expect(FeedbackSubmissionsDiscovery.name).toBe(client.feedbackSubmissions.constructor.name)
     expect(MeetingsDiscovery.name).toBe(client.meetings.constructor.name)
     expect(NotesDiscovery.name).toBe(client.notes.constructor.name)
+    expect(PostalMailDiscovery.name).toBe(client.postalMail.constructor.name)
     expect(TasksDiscovery.name).toBe(client.tasks.constructor.name)
     expect(client.hasOwnProperty('associationsApi')).toBeTruthy()
     expect(client.hasOwnProperty('basicApi')).toBeTruthy()
