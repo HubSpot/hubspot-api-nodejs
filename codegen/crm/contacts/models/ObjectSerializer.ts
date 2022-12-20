@@ -34,21 +34,21 @@ export * from '../models/StandardError';
 export * from '../models/ValueWithTimestamp';
 
 import { AssociatedId } from '../models/AssociatedId';
-import { AssociationSpec, AssociationSpecAssociationCategoryEnum    } from '../models/AssociationSpec';
-import { AssociationSpecWithLabel, AssociationSpecWithLabelCategoryEnum     } from '../models/AssociationSpecWithLabel';
+import { AssociationSpec    } from '../models/AssociationSpec';
+import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
-import { BatchResponseSimplePublicObject, BatchResponseSimplePublicObjectStatusEnum        } from '../models/BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors, BatchResponseSimplePublicObjectWithErrorsStatusEnum          } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
+import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from '../models/ErrorCategory';
+import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { Filter   , FilterOperatorEnum   } from '../models/Filter';
+import { Filter      } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
@@ -69,7 +69,7 @@ import { StandardError } from '../models/StandardError';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
-let primitives = [
+const primitives = [
                     "string",
                     "boolean",
                     "double",
@@ -87,7 +87,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 }
 
 
-let enumsMap: Set<string> = new Set<string>([
+const enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "AssociationSpecWithLabelCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
@@ -96,7 +96,7 @@ let enumsMap: Set<string> = new Set<string>([
     "FilterOperatorEnum",
 ]);
 
-let typeMap: {[index: string]: any} = {
+const typeMap: {[index: string]: any} = {
     "AssociatedId": AssociatedId,
     "AssociationSpec": AssociationSpec,
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
@@ -151,12 +151,12 @@ export class ObjectSerializer {
             }
 
             // Check the discriminator
-            let discriminatorProperty = typeMap[expectedType].discriminator;
+            const discriminatorProperty = typeMap[expectedType].discriminator;
             if (discriminatorProperty == null) {
                 return expectedType; // the type does not have a discriminator. use it.
             } else {
                 if (data[discriminatorProperty]) {
-                    var discriminatorType = data[discriminatorProperty];
+                    const discriminatorType = data[discriminatorProperty];
                     if(typeMap[discriminatorType]){
                         return discriminatorType; // use the type given in the discriminator
                     } else {
@@ -177,9 +177,9 @@ export class ObjectSerializer {
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
-            let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            const transformedData: any[] = [];
+            for (const index in data) {
+                const date = data[index];
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
             }
             return transformedData;
@@ -206,10 +206,10 @@ export class ObjectSerializer {
             type = this.findCorrectType(data, type);
 
             // get the map for the correct type.
-            let attributeTypes = typeMap[type].getAttributeTypeMap();
-            let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
+            const attributeTypes = typeMap[type].getAttributeTypeMap();
+            const instance: {[index: string]: any} = {};
+            for (const index in attributeTypes) {
+                const attributeType = attributeTypes[index];
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type, attributeType.format);
             }
             return instance;
@@ -226,9 +226,9 @@ export class ObjectSerializer {
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
-            let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            const transformedData: any[] = [];
+            for (const index in data) {
+                const date = data[index];
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
             }
             return transformedData;
@@ -242,11 +242,11 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // dont know the type
                 return data;
             }
-            let instance = new typeMap[type]();
-            let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
-                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+            const instance = new typeMap[type]();
+            const attributeTypes = typeMap[type].getAttributeTypeMap();
+            for (const index in attributeTypes) {
+                const attributeType = attributeTypes[index];
+                const value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
                 if (value !== undefined) {
                     instance[attributeType.name] = value;
                 }
@@ -283,7 +283,7 @@ export class ObjectSerializer {
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
         let selectedMediaType: string | undefined = undefined;
-        let selectedRank: number = -Infinity;
+        let selectedRank = -Infinity;
         for (const mediaType of normalMediaTypes) {
             if (supportedMediaTypes[mediaType!] > selectedRank) {
                 selectedMediaType = mediaType;

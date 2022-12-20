@@ -1,12 +1,10 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
-import  FormData from "form-data";
-import { URLSearchParams } from 'url';
+import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {canConsumeForm, isCodeInRange} from '../util';
+import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
@@ -26,7 +24,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param contactId 
      */
     public async archive(contactId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -69,7 +67,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param simplePublicObjectInput 
      */
     public async create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'simplePublicObjectInput' is not null or undefined
         if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
@@ -127,7 +125,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param idProperty The name of a property whose values are unique for this object type
      */
     public async getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -205,7 +203,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param archived Whether to return only results that have been archived.
      */
     public async getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
 
 
@@ -279,7 +277,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param idProperty The name of a property whose values are unique for this object type
      */
     public async update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {

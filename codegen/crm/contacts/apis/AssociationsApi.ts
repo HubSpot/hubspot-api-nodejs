@@ -1,12 +1,10 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
-import  FormData from "form-data";
-import { URLSearchParams } from 'url';
+import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {canConsumeForm, isCodeInRange} from '../util';
+import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
@@ -27,7 +25,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectId 
      */
     public async archive(contactId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -87,7 +85,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param associationSpec 
      */
     public async create(contactId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -164,7 +162,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit The maximum number of results to display per page.
      */
     public async getAll(contactId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {

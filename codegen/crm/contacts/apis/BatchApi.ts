@@ -1,12 +1,10 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
-import  FormData from "form-data";
-import { URLSearchParams } from 'url';
+import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
-import {canConsumeForm, isCodeInRange} from '../util';
+import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
@@ -27,7 +25,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param batchInputSimplePublicObjectId 
      */
     public async archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'batchInputSimplePublicObjectId' is not null or undefined
         if (batchInputSimplePublicObjectId === null || batchInputSimplePublicObjectId === undefined) {
@@ -79,7 +77,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param batchInputSimplePublicObjectInput 
      */
     public async create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'batchInputSimplePublicObjectInput' is not null or undefined
         if (batchInputSimplePublicObjectInput === null || batchInputSimplePublicObjectInput === undefined) {
@@ -132,7 +130,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param archived Whether to return only results that have been archived.
      */
     public async read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'batchReadInputSimplePublicObjectId' is not null or undefined
         if (batchReadInputSimplePublicObjectId === null || batchReadInputSimplePublicObjectId === undefined) {
@@ -190,7 +188,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
+        const _config = _options || this.configuration;
 
         // verify required parameter 'batchInputSimplePublicObjectBatchInput' is not null or undefined
         if (batchInputSimplePublicObjectBatchInput === null || batchInputSimplePublicObjectBatchInput === undefined) {
