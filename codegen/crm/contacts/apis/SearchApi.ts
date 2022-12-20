@@ -20,7 +20,7 @@ export class SearchApiRequestFactory extends BaseAPIRequestFactory {
      * @param publicObjectSearchRequest 
      */
     public async doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'publicObjectSearchRequest' is not null or undefined
         if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {

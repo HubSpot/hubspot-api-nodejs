@@ -21,7 +21,7 @@ export class GDPRApiRequestFactory extends BaseAPIRequestFactory {
      * @param publicGdprDeleteInput 
      */
     public async purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'publicGdprDeleteInput' is not null or undefined
         if (publicGdprDeleteInput === null || publicGdprDeleteInput === undefined) {

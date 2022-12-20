@@ -5,8 +5,8 @@ import fetch from "node-fetch";
 export class IsomorphicFetchHttpLibrary implements HttpLibrary {
 
     public send(request: RequestContext): Observable<ResponseContext> {
-        const method = request.getHttpMethod().toString();
-        const body = request.getBody();
+        let method = request.getHttpMethod().toString();
+        let body = request.getBody();
 
         const resultPromise = fetch(request.getUrl(), {
             method: method,

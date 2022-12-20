@@ -69,7 +69,7 @@ import { StandardError } from '../models/StandardError';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
-const primitives = [
+let primitives = [
                     "string",
                     "boolean",
                     "double",
@@ -87,7 +87,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 }
 
 
-const enumsMap: Set<string> = new Set<string>([
+let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "AssociationSpecWithLabelCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
@@ -96,7 +96,7 @@ const enumsMap: Set<string> = new Set<string>([
     "FilterOperatorEnum",
 ]);
 
-const typeMap: {[index: string]: any} = {
+let typeMap: {[index: string]: any} = {
     "AssociatedId": AssociatedId,
     "AssociationSpec": AssociationSpec,
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
@@ -151,12 +151,12 @@ export class ObjectSerializer {
             }
 
             // Check the discriminator
-            const discriminatorProperty = typeMap[expectedType].discriminator;
+            let discriminatorProperty = typeMap[expectedType].discriminator;
             if (discriminatorProperty == null) {
                 return expectedType; // the type does not have a discriminator. use it.
             } else {
                 if (data[discriminatorProperty]) {
-                    const discriminatorType = data[discriminatorProperty];
+                    var discriminatorType = data[discriminatorProperty];
                     if(typeMap[discriminatorType]){
                         return discriminatorType; // use the type given in the discriminator
                     } else {
@@ -177,9 +177,9 @@ export class ObjectSerializer {
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
-            const transformedData: any[] = [];
-            for (const index in data) {
-                const date = data[index];
+            let transformedData: any[] = [];
+            for (let index in data) {
+                let date = data[index];
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
             }
             return transformedData;
@@ -206,10 +206,10 @@ export class ObjectSerializer {
             type = this.findCorrectType(data, type);
 
             // get the map for the correct type.
-            const attributeTypes = typeMap[type].getAttributeTypeMap();
-            const instance: {[index: string]: any} = {};
-            for (const index in attributeTypes) {
-                const attributeType = attributeTypes[index];
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            let instance: {[index: string]: any} = {};
+            for (let index in attributeTypes) {
+                let attributeType = attributeTypes[index];
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type, attributeType.format);
             }
             return instance;
@@ -226,9 +226,9 @@ export class ObjectSerializer {
         } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
-            const transformedData: any[] = [];
-            for (const index in data) {
-                const date = data[index];
+            let transformedData: any[] = [];
+            for (let index in data) {
+                let date = data[index];
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
             }
             return transformedData;
@@ -242,11 +242,11 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // dont know the type
                 return data;
             }
-            const instance = new typeMap[type]();
-            const attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (const index in attributeTypes) {
-                const attributeType = attributeTypes[index];
-                const value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
+            let instance = new typeMap[type]();
+            let attributeTypes = typeMap[type].getAttributeTypeMap();
+            for (let index in attributeTypes) {
+                let attributeType = attributeTypes[index];
+                let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
                 if (value !== undefined) {
                     instance[attributeType.name] = value;
                 }
@@ -283,7 +283,7 @@ export class ObjectSerializer {
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
         let selectedMediaType: string | undefined = undefined;
-        let selectedRank = -Infinity;
+        let selectedRank: number = -Infinity;
         for (const mediaType of normalMediaTypes) {
             if (supportedMediaTypes[mediaType!] > selectedRank) {
                 selectedMediaType = mediaType;

@@ -104,7 +104,7 @@ export class RequestContext {
     }
 
     public setQueryParam(name: string, value: string) {
-        const queryObj = this.url.query;
+        let queryObj = this.url.query;
         queryObj[name] = value;
         this.url.set("query", queryObj);
     }

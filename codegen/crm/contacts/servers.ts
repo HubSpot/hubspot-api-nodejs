@@ -29,7 +29,7 @@ export class ServerConfiguration<T extends { [key: string]: string }> implements
     private getUrl() {
         let replacedUrl = this.url;
         for (const key in this.variableConfiguration) {
-            const re = new RegExp("{" + key + "}","g");
+            var re = new RegExp("{" + key + "}","g");
             replacedUrl = replacedUrl.replace(re, this.variableConfiguration[key]);
         }
         return replacedUrl

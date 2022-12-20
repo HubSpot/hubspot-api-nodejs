@@ -24,7 +24,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param contactId 
      */
     public async archive(contactId: string, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -67,7 +67,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param simplePublicObjectInput 
      */
     public async create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'simplePublicObjectInput' is not null or undefined
         if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
@@ -125,7 +125,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param idProperty The name of a property whose values are unique for this object type
      */
     public async getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -203,7 +203,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param archived Whether to return only results that have been archived.
      */
     public async getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
 
 
@@ -277,7 +277,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param idProperty The name of a property whose values are unique for this object type
      */
     public async update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {

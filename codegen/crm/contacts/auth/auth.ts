@@ -84,7 +84,7 @@ export type AuthMethodsConfiguration = {
  *
  */
 export function configureAuthMethods(config: AuthMethodsConfiguration | undefined): AuthMethods {
-    const authMethods: AuthMethods = {}
+    let authMethods: AuthMethods = {}
 
     if (!config) {
         return authMethods;

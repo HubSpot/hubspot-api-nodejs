@@ -25,7 +25,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectId 
      */
     public async archive(contactId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -85,7 +85,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param associationSpec 
      */
     public async create(contactId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {
@@ -162,7 +162,7 @@ export class AssociationsApiRequestFactory extends BaseAPIRequestFactory {
      * @param limit The maximum number of results to display per page.
      */
     public async getAll(contactId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'contactId' is not null or undefined
         if (contactId === null || contactId === undefined) {

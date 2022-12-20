@@ -21,7 +21,7 @@ export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
      * @param publicMergeInput 
      */
     public async merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<RequestContext> {
-        const _config = _options || this.configuration;
+        let _config = _options || this.configuration;
 
         // verify required parameter 'publicMergeInput' is not null or undefined
         if (publicMergeInput === null || publicMergeInput === undefined) {
