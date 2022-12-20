@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CardDisplayProperty } from './CardDisplayProperty';
+import { CardDisplayProperty } from '../models/CardDisplayProperty';
 import { HttpFile } from '../http/http';
 
 /**

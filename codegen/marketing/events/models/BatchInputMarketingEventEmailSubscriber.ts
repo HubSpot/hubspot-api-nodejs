@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { MarketingEventEmailSubscriber } from './MarketingEventEmailSubscriber';
+import { MarketingEventEmailSubscriber } from '../models/MarketingEventEmailSubscriber';
 import { HttpFile } from '../http/http';
 
 /**

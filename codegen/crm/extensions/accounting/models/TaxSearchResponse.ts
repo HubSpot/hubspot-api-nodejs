@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Tax } from './Tax';
+import { Tax } from '../models/Tax';
 import { HttpFile } from '../http/http';
 
 /**

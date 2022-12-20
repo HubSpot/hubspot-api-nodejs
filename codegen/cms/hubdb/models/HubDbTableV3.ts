@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Column } from './Column';
-import { SimpleUser } from './SimpleUser';
+import { Column } from '../models/Column';
+import { SimpleUser } from '../models/SimpleUser';
 import { HttpFile } from '../http/http';
 
 /**

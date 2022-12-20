@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { ActionConfirmationBody } from './ActionConfirmationBody';
-import { ActionHookActionBody } from './ActionHookActionBody';
-import { IFrameActionBody } from './IFrameActionBody';
+import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
+import { ActionHookActionBody } from '../models/ActionHookActionBody';
+import { IFrameActionBody } from '../models/IFrameActionBody';
 import { HttpFile } from '../http/http';
 
 export class IntegratorObjectResultActionsInner {

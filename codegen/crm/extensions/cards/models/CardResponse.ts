@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CardActions } from './CardActions';
-import { CardDisplayBody } from './CardDisplayBody';
-import { CardFetchBody } from './CardFetchBody';
+import { CardActions } from '../models/CardActions';
+import { CardDisplayBody } from '../models/CardDisplayBody';
+import { CardFetchBody } from '../models/CardFetchBody';
 import { HttpFile } from '../http/http';
 
 /**

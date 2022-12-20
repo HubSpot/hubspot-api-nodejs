@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { EventIdView } from './EventIdView';
+import { EventIdView } from '../models/EventIdView';
 import { HttpFile } from '../http/http';
 
 /**

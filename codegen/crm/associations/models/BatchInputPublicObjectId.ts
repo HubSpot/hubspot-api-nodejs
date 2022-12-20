@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicObjectId } from './PublicObjectId';
+import { PublicObjectId } from '../models/PublicObjectId';
 import { HttpFile } from '../http/http';
 
 export class BatchInputPublicObjectId {

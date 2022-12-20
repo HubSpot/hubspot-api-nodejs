@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ColumnRequest } from './ColumnRequest';
+import { ColumnRequest } from '../models/ColumnRequest';
 import { HttpFile } from '../http/http';
 
 export class HubDbTableV3Request {

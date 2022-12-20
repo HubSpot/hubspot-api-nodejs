@@ -1,26 +1,26 @@
-export * from './CollectionResponseSmtpApiTokenViewForwardPaging';
-export * from './EmailSendStatusView';
-export * from './ErrorDetail';
-export * from './EventIdView';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './PublicSingleSendEmail';
-export * from './PublicSingleSendRequestEgg';
-export * from './SmtpApiTokenRequestEgg';
-export * from './SmtpApiTokenView';
+export * from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
+export * from '../models/EmailSendStatusView';
+export * from '../models/ErrorDetail';
+export * from '../models/EventIdView';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/PublicSingleSendEmail';
+export * from '../models/PublicSingleSendRequestEgg';
+export * from '../models/SmtpApiTokenRequestEgg';
+export * from '../models/SmtpApiTokenView';
 
-import { CollectionResponseSmtpApiTokenViewForwardPaging } from './CollectionResponseSmtpApiTokenViewForwardPaging';
-import { EmailSendStatusView , EmailSendStatusViewSendResultEnum     , EmailSendStatusViewStatusEnum    } from './EmailSendStatusView';
-import { ErrorDetail } from './ErrorDetail';
-import { EventIdView } from './EventIdView';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { PublicSingleSendEmail } from './PublicSingleSendEmail';
-import { PublicSingleSendRequestEgg } from './PublicSingleSendRequestEgg';
-import { SmtpApiTokenRequestEgg } from './SmtpApiTokenRequestEgg';
-import { SmtpApiTokenView } from './SmtpApiTokenView';
+import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
+import { EmailSendStatusView , EmailSendStatusViewSendResultEnum     , EmailSendStatusViewStatusEnum    } from '../models/EmailSendStatusView';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { EventIdView } from '../models/EventIdView';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
+import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
+import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
+import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -229,6 +229,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -242,6 +246,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

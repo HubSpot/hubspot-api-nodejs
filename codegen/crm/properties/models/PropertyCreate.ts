@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { OptionInput } from './OptionInput';
+import { OptionInput } from '../models/OptionInput';
 import { HttpFile } from '../http/http';
 
 export class PropertyCreate {

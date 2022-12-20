@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicPermissionSet } from './PublicPermissionSet';
+import { PublicPermissionSet } from '../models/PublicPermissionSet';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicPermissionSetNoPaging {

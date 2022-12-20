@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { FieldTypeDefinition } from './FieldTypeDefinition';
+import { FieldTypeDefinition } from '../models/FieldTypeDefinition';
 import { HttpFile } from '../http/http';
 
 /**

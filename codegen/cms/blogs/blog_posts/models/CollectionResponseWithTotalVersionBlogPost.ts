@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { VersionBlogPost } from './VersionBlogPost';
+import { Paging } from '../models/Paging';
+import { VersionBlogPost } from '../models/VersionBlogPost';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { PropertyGroup } from './PropertyGroup';
+import { Paging } from '../models/Paging';
+import { PropertyGroup } from '../models/PropertyGroup';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePropertyGroup {

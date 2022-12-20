@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { HubDbTableV3 } from './HubDbTableV3';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { HubDbTableV3 } from '../models/HubDbTableV3';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalHubDbTableV3ForwardPaging {

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { DisplayOption } from './DisplayOption';
+import { DisplayOption } from '../models/DisplayOption';
 import { HttpFile } from '../http/http';
 
 /**

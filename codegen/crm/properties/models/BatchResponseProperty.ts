@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Property } from './Property';
-import { StandardError } from './StandardError';
+import { Property } from '../models/Property';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseProperty {

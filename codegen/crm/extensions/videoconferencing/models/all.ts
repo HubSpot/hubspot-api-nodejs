@@ -1,3 +1,3 @@
-export * from './ErrorDetail'
-export * from './ExternalSettings'
-export * from './ModelError'
+export * from '../models/ErrorDetail'
+export * from '../models/ExternalSettings'
+export * from '../models/ModelError'

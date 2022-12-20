@@ -1,18 +1,18 @@
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './PublicSubscriptionStatus';
-export * from './PublicSubscriptionStatusesResponse';
-export * from './PublicUpdateSubscriptionStatusRequest';
-export * from './SubscriptionDefinition';
-export * from './SubscriptionDefinitionsResponse';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/PublicSubscriptionStatus';
+export * from '../models/PublicSubscriptionStatusesResponse';
+export * from '../models/PublicUpdateSubscriptionStatusRequest';
+export * from '../models/SubscriptionDefinition';
+export * from '../models/SubscriptionDefinitionsResponse';
 
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { PublicSubscriptionStatus   , PublicSubscriptionStatusStatusEnum  , PublicSubscriptionStatusSourceOfStatusEnum    , PublicSubscriptionStatusLegalBasisEnum    } from './PublicSubscriptionStatus';
-import { PublicSubscriptionStatusesResponse } from './PublicSubscriptionStatusesResponse';
-import { PublicUpdateSubscriptionStatusRequest  , PublicUpdateSubscriptionStatusRequestLegalBasisEnum    } from './PublicUpdateSubscriptionStatusRequest';
-import { SubscriptionDefinition } from './SubscriptionDefinition';
-import { SubscriptionDefinitionsResponse } from './SubscriptionDefinitionsResponse';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { PublicSubscriptionStatus   , PublicSubscriptionStatusStatusEnum  , PublicSubscriptionStatusSourceOfStatusEnum    , PublicSubscriptionStatusLegalBasisEnum    } from '../models/PublicSubscriptionStatus';
+import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
+import { PublicUpdateSubscriptionStatusRequest  , PublicUpdateSubscriptionStatusRequestLegalBasisEnum    } from '../models/PublicUpdateSubscriptionStatusRequest';
+import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
+import { SubscriptionDefinitionsResponse } from '../models/SubscriptionDefinitionsResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -219,6 +219,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -232,6 +236,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CreateInvoiceFeature } from './CreateInvoiceFeature';
-import { ImportInvoiceFeature } from './ImportInvoiceFeature';
-import { ObjectSyncFeature } from './ObjectSyncFeature';
+import { CreateInvoiceFeature } from '../models/CreateInvoiceFeature';
+import { ImportInvoiceFeature } from '../models/ImportInvoiceFeature';
+import { ObjectSyncFeature } from '../models/ObjectSyncFeature';
 import { HttpFile } from '../http/http';
 
 /**

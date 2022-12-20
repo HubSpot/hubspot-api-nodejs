@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForeignId } from './ForeignId';
-import { Option } from './Option';
+import { ForeignId } from '../models/ForeignId';
+import { Option } from '../models/Option';
 import { HttpFile } from '../http/http';
 
 export class Column {

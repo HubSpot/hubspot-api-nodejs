@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { UpdatedProduct } from './UpdatedProduct';
+import { UpdatedProduct } from '../models/UpdatedProduct';
 import { HttpFile } from '../http/http';
 
 /**

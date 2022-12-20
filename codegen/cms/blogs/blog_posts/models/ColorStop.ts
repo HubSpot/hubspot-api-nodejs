@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RGBAColor } from './RGBAColor';
+import { RGBAColor } from '../models/RGBAColor';
 import { HttpFile } from '../http/http';
 
 export class ColorStop {

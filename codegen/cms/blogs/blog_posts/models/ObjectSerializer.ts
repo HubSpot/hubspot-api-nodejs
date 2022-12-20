@@ -1,72 +1,72 @@
-export * from './Angle';
-export * from './AttachToLangPrimaryRequestVNext';
-export * from './BackgroundImage';
-export * from './BatchInputBlogPost';
-export * from './BatchInputJsonNode';
-export * from './BatchInputString';
-export * from './BatchResponseBlogPost';
-export * from './BatchResponseBlogPostWithErrors';
-export * from './BlogPost';
-export * from './BlogPostLanguageCloneRequestVNext';
-export * from './CollectionResponseWithTotalBlogPostForwardPaging';
-export * from './CollectionResponseWithTotalVersionBlogPost';
-export * from './ColorStop';
-export * from './ContentCloneRequestVNext';
-export * from './ContentLanguageVariation';
-export * from './ContentScheduleRequestVNext';
-export * from './DetachFromLangGroupRequestVNext';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './Gradient';
-export * from './LayoutSection';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PreviousPage';
-export * from './RGBAColor';
-export * from './RowMetaData';
-export * from './SetNewLanguagePrimaryRequestVNext';
-export * from './SideOrCorner';
-export * from './StandardError';
-export * from './Styles';
-export * from './UpdateLanguagesRequestVNext';
-export * from './VersionBlogPost';
-export * from './VersionUser';
+export * from '../models/Angle';
+export * from '../models/AttachToLangPrimaryRequestVNext';
+export * from '../models/BackgroundImage';
+export * from '../models/BatchInputBlogPost';
+export * from '../models/BatchInputJsonNode';
+export * from '../models/BatchInputString';
+export * from '../models/BatchResponseBlogPost';
+export * from '../models/BatchResponseBlogPostWithErrors';
+export * from '../models/BlogPost';
+export * from '../models/BlogPostLanguageCloneRequestVNext';
+export * from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
+export * from '../models/CollectionResponseWithTotalVersionBlogPost';
+export * from '../models/ColorStop';
+export * from '../models/ContentCloneRequestVNext';
+export * from '../models/ContentLanguageVariation';
+export * from '../models/ContentScheduleRequestVNext';
+export * from '../models/DetachFromLangGroupRequestVNext';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/Gradient';
+export * from '../models/LayoutSection';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/RGBAColor';
+export * from '../models/RowMetaData';
+export * from '../models/SetNewLanguagePrimaryRequestVNext';
+export * from '../models/SideOrCorner';
+export * from '../models/StandardError';
+export * from '../models/Styles';
+export * from '../models/UpdateLanguagesRequestVNext';
+export * from '../models/VersionBlogPost';
+export * from '../models/VersionUser';
 
-import { Angle , AngleUnitsEnum   } from './Angle';
-import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from './AttachToLangPrimaryRequestVNext';
-import { BackgroundImage  , BackgroundImageBackgroundPositionEnum   } from './BackgroundImage';
-import { BatchInputBlogPost } from './BatchInputBlogPost';
-import { BatchInputJsonNode } from './BatchInputJsonNode';
-import { BatchInputString } from './BatchInputString';
-import { BatchResponseBlogPost, BatchResponseBlogPostStatusEnum        } from './BatchResponseBlogPost';
-import { BatchResponseBlogPostWithErrors, BatchResponseBlogPostWithErrorsStatusEnum          } from './BatchResponseBlogPostWithErrors';
-import { BlogPost              , BlogPostAbStatusEnum     , BlogPostLanguageEnum                           , BlogPostContentTypeCategoryEnum             , BlogPostCurrentStateEnum       } from './BlogPost';
-import { BlogPostLanguageCloneRequestVNext } from './BlogPostLanguageCloneRequestVNext';
-import { CollectionResponseWithTotalBlogPostForwardPaging } from './CollectionResponseWithTotalBlogPostForwardPaging';
-import { CollectionResponseWithTotalVersionBlogPost } from './CollectionResponseWithTotalVersionBlogPost';
-import { ColorStop } from './ColorStop';
-import { ContentCloneRequestVNext } from './ContentCloneRequestVNext';
-import { ContentLanguageVariation } from './ContentLanguageVariation';
-import { ContentScheduleRequestVNext } from './ContentScheduleRequestVNext';
-import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { Gradient } from './Gradient';
-import { LayoutSection } from './LayoutSection';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PreviousPage } from './PreviousPage';
-import { RGBAColor } from './RGBAColor';
-import { RowMetaData } from './RowMetaData';
-import { SetNewLanguagePrimaryRequestVNext } from './SetNewLanguagePrimaryRequestVNext';
-import { SideOrCorner, SideOrCornerVerticalSideEnum  , SideOrCornerHorizontalSideEnum   } from './SideOrCorner';
-import { StandardError } from './StandardError';
-import { Styles, StylesVerticalAlignmentEnum       , StylesFlexboxPositioningEnum   } from './Styles';
-import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from './UpdateLanguagesRequestVNext';
-import { VersionBlogPost } from './VersionBlogPost';
-import { VersionUser } from './VersionUser';
+import { Angle , AngleUnitsEnum   } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from '../models/AttachToLangPrimaryRequestVNext';
+import { BackgroundImage  , BackgroundImageBackgroundPositionEnum   } from '../models/BackgroundImage';
+import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
+import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
+import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseBlogPost, BatchResponseBlogPostStatusEnum        } from '../models/BatchResponseBlogPost';
+import { BatchResponseBlogPostWithErrors, BatchResponseBlogPostWithErrorsStatusEnum          } from '../models/BatchResponseBlogPostWithErrors';
+import { BlogPost              , BlogPostAbStatusEnum     , BlogPostLanguageEnum                           , BlogPostContentTypeCategoryEnum             , BlogPostCurrentStateEnum       } from '../models/BlogPost';
+import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
+import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
+import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
+import { ColorStop } from '../models/ColorStop';
+import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
+import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
+import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { Gradient } from '../models/Gradient';
+import { LayoutSection } from '../models/LayoutSection';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { RGBAColor } from '../models/RGBAColor';
+import { RowMetaData } from '../models/RowMetaData';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
+import { SideOrCorner, SideOrCornerVerticalSideEnum  , SideOrCornerHorizontalSideEnum   } from '../models/SideOrCorner';
+import { StandardError } from '../models/StandardError';
+import { Styles, StylesVerticalAlignmentEnum       , StylesFlexboxPositioningEnum   } from '../models/Styles';
+import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from '../models/UpdateLanguagesRequestVNext';
+import { VersionBlogPost } from '../models/VersionBlogPost';
+import { VersionUser } from '../models/VersionUser';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -311,6 +311,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -324,6 +328,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

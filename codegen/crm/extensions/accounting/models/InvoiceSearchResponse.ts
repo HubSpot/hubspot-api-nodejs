@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AccountingExtensionInvoice } from './AccountingExtensionInvoice';
+import { AccountingExtensionInvoice } from '../models/AccountingExtensionInvoice';
 import { HttpFile } from '../http/http';
 
 /**

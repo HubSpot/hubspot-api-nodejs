@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CreateInvoiceSubFeatures } from './CreateInvoiceSubFeatures';
+import { CreateInvoiceSubFeatures } from '../models/CreateInvoiceSubFeatures';
 import { HttpFile } from '../http/http';
 
 /**

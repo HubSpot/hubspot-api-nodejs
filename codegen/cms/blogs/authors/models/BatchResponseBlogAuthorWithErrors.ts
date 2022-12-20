@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { BlogAuthor } from './BlogAuthor';
-import { StandardError } from './StandardError';
+import { BlogAuthor } from '../models/BlogAuthor';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 /**

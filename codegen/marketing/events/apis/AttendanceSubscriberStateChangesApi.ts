@@ -1,5 +1,5 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
 import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
 import  FormData from "form-data";
@@ -78,11 +78,6 @@ export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRe
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
@@ -153,11 +148,6 @@ export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRe
         requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {

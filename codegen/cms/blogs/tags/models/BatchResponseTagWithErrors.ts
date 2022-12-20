@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { StandardError } from './StandardError';
-import { Tag } from './Tag';
+import { StandardError } from '../models/StandardError';
+import { Tag } from '../models/Tag';
 import { HttpFile } from '../http/http';
 
 /**

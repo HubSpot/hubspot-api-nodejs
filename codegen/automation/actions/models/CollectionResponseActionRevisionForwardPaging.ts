@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ActionRevision } from './ActionRevision';
-import { ForwardPaging } from './ForwardPaging';
+import { ActionRevision } from '../models/ActionRevision';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseActionRevisionForwardPaging {

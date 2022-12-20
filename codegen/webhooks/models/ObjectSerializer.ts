@@ -1,34 +1,34 @@
-export * from './BatchInputSubscriptionBatchUpdateRequest';
-export * from './BatchResponseSubscriptionResponse';
-export * from './BatchResponseSubscriptionResponseWithErrors';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './SettingsChangeRequest';
-export * from './SettingsResponse';
-export * from './StandardError';
-export * from './SubscriptionBatchUpdateRequest';
-export * from './SubscriptionCreateRequest';
-export * from './SubscriptionListResponse';
-export * from './SubscriptionPatchRequest';
-export * from './SubscriptionResponse';
-export * from './ThrottlingSettings';
+export * from '../models/BatchInputSubscriptionBatchUpdateRequest';
+export * from '../models/BatchResponseSubscriptionResponse';
+export * from '../models/BatchResponseSubscriptionResponseWithErrors';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/SettingsChangeRequest';
+export * from '../models/SettingsResponse';
+export * from '../models/StandardError';
+export * from '../models/SubscriptionBatchUpdateRequest';
+export * from '../models/SubscriptionCreateRequest';
+export * from '../models/SubscriptionListResponse';
+export * from '../models/SubscriptionPatchRequest';
+export * from '../models/SubscriptionResponse';
+export * from '../models/ThrottlingSettings';
 
-import { BatchInputSubscriptionBatchUpdateRequest } from './BatchInputSubscriptionBatchUpdateRequest';
-import { BatchResponseSubscriptionResponse, BatchResponseSubscriptionResponseStatusEnum        } from './BatchResponseSubscriptionResponse';
-import { BatchResponseSubscriptionResponseWithErrors, BatchResponseSubscriptionResponseWithErrorsStatusEnum          } from './BatchResponseSubscriptionResponseWithErrors';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { SettingsChangeRequest } from './SettingsChangeRequest';
-import { SettingsResponse } from './SettingsResponse';
-import { StandardError } from './StandardError';
-import { SubscriptionBatchUpdateRequest } from './SubscriptionBatchUpdateRequest';
-import { SubscriptionCreateRequest, SubscriptionCreateRequestEventTypeEnum     } from './SubscriptionCreateRequest';
-import { SubscriptionListResponse } from './SubscriptionListResponse';
-import { SubscriptionPatchRequest } from './SubscriptionPatchRequest';
-import { SubscriptionResponse, SubscriptionResponseEventTypeEnum        } from './SubscriptionResponse';
-import { ThrottlingSettings , ThrottlingSettingsPeriodEnum   } from './ThrottlingSettings';
+import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
+import { BatchResponseSubscriptionResponse, BatchResponseSubscriptionResponseStatusEnum        } from '../models/BatchResponseSubscriptionResponse';
+import { BatchResponseSubscriptionResponseWithErrors, BatchResponseSubscriptionResponseWithErrorsStatusEnum          } from '../models/BatchResponseSubscriptionResponseWithErrors';
+import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { SettingsChangeRequest } from '../models/SettingsChangeRequest';
+import { SettingsResponse } from '../models/SettingsResponse';
+import { StandardError } from '../models/StandardError';
+import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
+import { SubscriptionCreateRequest, SubscriptionCreateRequestEventTypeEnum     } from '../models/SubscriptionCreateRequest';
+import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
+import { SubscriptionPatchRequest } from '../models/SubscriptionPatchRequest';
+import { SubscriptionResponse, SubscriptionResponseEventTypeEnum        } from '../models/SubscriptionResponse';
+import { ThrottlingSettings , ThrottlingSettingsPeriodEnum   } from '../models/ThrottlingSettings';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -245,6 +245,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -258,6 +262,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

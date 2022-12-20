@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicAssociation } from './PublicAssociation';
+import { PublicAssociation } from '../models/PublicAssociation';
 import { HttpFile } from '../http/http';
 
 export class BatchInputPublicAssociation {

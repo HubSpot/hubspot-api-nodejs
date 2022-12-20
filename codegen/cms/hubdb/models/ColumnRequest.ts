@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Option } from './Option';
+import { Option } from '../models/Option';
 import { HttpFile } from '../http/http';
 
 export class ColumnRequest {

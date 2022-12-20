@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ConditionalSingleFieldDependency } from './ConditionalSingleFieldDependency';
-import { SingleFieldDependency } from './SingleFieldDependency';
+import { ConditionalSingleFieldDependency } from '../models/ConditionalSingleFieldDependency';
+import { SingleFieldDependency } from '../models/SingleFieldDependency';
 import { HttpFile } from '../http/http';
 
 export class ExtensionActionDefinitionPatchInputFieldDependenciesInner {

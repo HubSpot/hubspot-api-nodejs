@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Folder } from './Folder';
-import { Paging } from './Paging';
+import { Folder } from '../models/Folder';
+import { Paging } from '../models/Paging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseFolder {

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PipelineStageInput } from './PipelineStageInput';
+import { PipelineStageInput } from '../models/PipelineStageInput';
 import { HttpFile } from '../http/http';
 
 /**

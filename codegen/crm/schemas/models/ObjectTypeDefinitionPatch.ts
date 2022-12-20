@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ObjectTypeDefinitionLabels } from './ObjectTypeDefinitionLabels';
+import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { HttpFile } from '../http/http';
 
 /**

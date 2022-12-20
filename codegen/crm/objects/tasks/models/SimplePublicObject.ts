@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ValueWithTimestamp } from './ValueWithTimestamp';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 import { HttpFile } from '../http/http';
 
 export class SimplePublicObject {

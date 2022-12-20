@@ -1,40 +1,40 @@
-export * from './BatchInputTimelineEvent';
-export * from './BatchResponseTimelineEventResponse';
-export * from './BatchResponseTimelineEventResponseWithErrors';
-export * from './CollectionResponseTimelineEventTemplateNoPaging';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './EventDetail';
-export * from './ModelError';
-export * from './StandardError';
-export * from './TimelineEvent';
-export * from './TimelineEventIFrame';
-export * from './TimelineEventResponse';
-export * from './TimelineEventTemplate';
-export * from './TimelineEventTemplateCreateRequest';
-export * from './TimelineEventTemplateToken';
-export * from './TimelineEventTemplateTokenOption';
-export * from './TimelineEventTemplateTokenUpdateRequest';
-export * from './TimelineEventTemplateUpdateRequest';
+export * from '../models/BatchInputTimelineEvent';
+export * from '../models/BatchResponseTimelineEventResponse';
+export * from '../models/BatchResponseTimelineEventResponseWithErrors';
+export * from '../models/CollectionResponseTimelineEventTemplateNoPaging';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/EventDetail';
+export * from '../models/ModelError';
+export * from '../models/StandardError';
+export * from '../models/TimelineEvent';
+export * from '../models/TimelineEventIFrame';
+export * from '../models/TimelineEventResponse';
+export * from '../models/TimelineEventTemplate';
+export * from '../models/TimelineEventTemplateCreateRequest';
+export * from '../models/TimelineEventTemplateToken';
+export * from '../models/TimelineEventTemplateTokenOption';
+export * from '../models/TimelineEventTemplateTokenUpdateRequest';
+export * from '../models/TimelineEventTemplateUpdateRequest';
 
-import { BatchInputTimelineEvent } from './BatchInputTimelineEvent';
-import { BatchResponseTimelineEventResponse, BatchResponseTimelineEventResponseStatusEnum        } from './BatchResponseTimelineEventResponse';
-import { BatchResponseTimelineEventResponseWithErrors, BatchResponseTimelineEventResponseWithErrorsStatusEnum          } from './BatchResponseTimelineEventResponseWithErrors';
-import { CollectionResponseTimelineEventTemplateNoPaging } from './CollectionResponseTimelineEventTemplateNoPaging';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { EventDetail } from './EventDetail';
-import { ModelError } from './ModelError';
-import { StandardError } from './StandardError';
-import { TimelineEvent } from './TimelineEvent';
-import { TimelineEventIFrame } from './TimelineEventIFrame';
-import { TimelineEventResponse } from './TimelineEventResponse';
-import { TimelineEventTemplate } from './TimelineEventTemplate';
-import { TimelineEventTemplateCreateRequest } from './TimelineEventTemplateCreateRequest';
-import { TimelineEventTemplateToken    , TimelineEventTemplateTokenTypeEnum     } from './TimelineEventTemplateToken';
-import { TimelineEventTemplateTokenOption } from './TimelineEventTemplateTokenOption';
-import { TimelineEventTemplateTokenUpdateRequest } from './TimelineEventTemplateTokenUpdateRequest';
-import { TimelineEventTemplateUpdateRequest } from './TimelineEventTemplateUpdateRequest';
+import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
+import { BatchResponseTimelineEventResponse, BatchResponseTimelineEventResponseStatusEnum        } from '../models/BatchResponseTimelineEventResponse';
+import { BatchResponseTimelineEventResponseWithErrors, BatchResponseTimelineEventResponseWithErrorsStatusEnum          } from '../models/BatchResponseTimelineEventResponseWithErrors';
+import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
+import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { EventDetail } from '../models/EventDetail';
+import { ModelError } from '../models/ModelError';
+import { StandardError } from '../models/StandardError';
+import { TimelineEvent } from '../models/TimelineEvent';
+import { TimelineEventIFrame } from '../models/TimelineEventIFrame';
+import { TimelineEventResponse } from '../models/TimelineEventResponse';
+import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
+import { TimelineEventTemplateCreateRequest } from '../models/TimelineEventTemplateCreateRequest';
+import { TimelineEventTemplateToken    , TimelineEventTemplateTokenTypeEnum     } from '../models/TimelineEventTemplateToken';
+import { TimelineEventTemplateTokenOption } from '../models/TimelineEventTemplateTokenOption';
+import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEventTemplateTokenUpdateRequest';
+import { TimelineEventTemplateUpdateRequest } from '../models/TimelineEventTemplateUpdateRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -252,6 +252,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -265,6 +269,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

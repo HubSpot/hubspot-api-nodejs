@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PipelineStage } from './PipelineStage';
+import { PipelineStage } from '../models/PipelineStage';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePipelineStageNoPaging {

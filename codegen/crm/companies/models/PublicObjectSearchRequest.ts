@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { FilterGroup } from './FilterGroup';
+import { FilterGroup } from '../models/FilterGroup';
 import { HttpFile } from '../http/http';
 
 export class PublicObjectSearchRequest {

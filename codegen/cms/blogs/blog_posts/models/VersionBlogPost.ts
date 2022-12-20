@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { BlogPost } from './BlogPost';
-import { VersionUser } from './VersionUser';
+import { BlogPost } from '../models/BlogPost';
+import { VersionUser } from '../models/VersionUser';
 import { HttpFile } from '../http/http';
 
 /**

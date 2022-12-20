@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { PublicAssociation } from './PublicAssociation';
-import { StandardError } from './StandardError';
+import { PublicAssociation } from '../models/PublicAssociation';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 export class BatchResponsePublicAssociation {

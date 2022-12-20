@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { HubDbTableRowV3 } from './HubDbTableRowV3';
+import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseHubDbTableRowV3 {

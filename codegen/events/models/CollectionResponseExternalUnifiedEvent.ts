@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ExternalUnifiedEvent } from './ExternalUnifiedEvent';
-import { Paging } from './Paging';
+import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
+import { Paging } from '../models/Paging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseExternalUnifiedEvent {

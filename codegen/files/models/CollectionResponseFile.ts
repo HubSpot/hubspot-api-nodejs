@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
+import { Paging } from '../models/Paging';
 import { HttpFile } from '../http/http';
 
 /**

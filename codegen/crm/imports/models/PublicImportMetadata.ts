@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicObjectListRecord } from './PublicObjectListRecord';
+import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 import { HttpFile } from '../http/http';
 
 /**

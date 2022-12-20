@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CardObjectTypeBody } from './CardObjectTypeBody';
+import { CardObjectTypeBody } from '../models/CardObjectTypeBody';
 import { HttpFile } from '../http/http';
 
 /**

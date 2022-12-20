@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ExtensionActionDefinition } from './ExtensionActionDefinition';
+import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
 import { HttpFile } from '../http/http';
 
 /**

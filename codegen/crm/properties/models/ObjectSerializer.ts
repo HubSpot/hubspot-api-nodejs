@@ -1,48 +1,48 @@
-export * from './BatchInputPropertyCreate';
-export * from './BatchInputPropertyName';
-export * from './BatchReadInputPropertyName';
-export * from './BatchResponseProperty';
-export * from './CollectionResponseProperty';
-export * from './CollectionResponsePropertyGroup';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Option';
-export * from './OptionInput';
-export * from './Paging';
-export * from './Property';
-export * from './PropertyCreate';
-export * from './PropertyGroup';
-export * from './PropertyGroupCreate';
-export * from './PropertyGroupUpdate';
-export * from './PropertyModificationMetadata';
-export * from './PropertyName';
-export * from './PropertyUpdate';
-export * from './StandardError';
+export * from '../models/BatchInputPropertyCreate';
+export * from '../models/BatchInputPropertyName';
+export * from '../models/BatchReadInputPropertyName';
+export * from '../models/BatchResponseProperty';
+export * from '../models/CollectionResponseProperty';
+export * from '../models/CollectionResponsePropertyGroup';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Option';
+export * from '../models/OptionInput';
+export * from '../models/Paging';
+export * from '../models/Property';
+export * from '../models/PropertyCreate';
+export * from '../models/PropertyGroup';
+export * from '../models/PropertyGroupCreate';
+export * from '../models/PropertyGroupUpdate';
+export * from '../models/PropertyModificationMetadata';
+export * from '../models/PropertyName';
+export * from '../models/PropertyUpdate';
+export * from '../models/StandardError';
 
-import { BatchInputPropertyCreate } from './BatchInputPropertyCreate';
-import { BatchInputPropertyName } from './BatchInputPropertyName';
-import { BatchReadInputPropertyName } from './BatchReadInputPropertyName';
-import { BatchResponseProperty, BatchResponsePropertyStatusEnum          } from './BatchResponseProperty';
-import { CollectionResponseProperty } from './CollectionResponseProperty';
-import { CollectionResponsePropertyGroup } from './CollectionResponsePropertyGroup';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Option } from './Option';
-import { OptionInput } from './OptionInput';
-import { Paging } from './Paging';
-import { Property } from './Property';
-import { PropertyCreate  , PropertyCreateTypeEnum  , PropertyCreateFieldTypeEnum          } from './PropertyCreate';
-import { PropertyGroup } from './PropertyGroup';
-import { PropertyGroupCreate } from './PropertyGroupCreate';
-import { PropertyGroupUpdate } from './PropertyGroupUpdate';
-import { PropertyModificationMetadata } from './PropertyModificationMetadata';
-import { PropertyName } from './PropertyName';
-import { PropertyUpdate , PropertyUpdateTypeEnum  , PropertyUpdateFieldTypeEnum         } from './PropertyUpdate';
-import { StandardError } from './StandardError';
+import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
+import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
+import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
+import { BatchResponseProperty, BatchResponsePropertyStatusEnum          } from '../models/BatchResponseProperty';
+import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
+import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
+import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Option } from '../models/Option';
+import { OptionInput } from '../models/OptionInput';
+import { Paging } from '../models/Paging';
+import { Property } from '../models/Property';
+import { PropertyCreate  , PropertyCreateTypeEnum  , PropertyCreateFieldTypeEnum          } from '../models/PropertyCreate';
+import { PropertyGroup } from '../models/PropertyGroup';
+import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
+import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
+import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
+import { PropertyName } from '../models/PropertyName';
+import { PropertyUpdate , PropertyUpdateTypeEnum  , PropertyUpdateFieldTypeEnum         } from '../models/PropertyUpdate';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -266,6 +266,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -279,6 +283,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

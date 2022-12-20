@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicSingleSendEmail } from './PublicSingleSendEmail';
+import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { PublicImportError } from './PublicImportError';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { PublicImportError } from '../models/PublicImportError';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicImportErrorForwardPaging {

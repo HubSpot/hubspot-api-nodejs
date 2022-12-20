@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ThrottlingSettings } from './ThrottlingSettings';
+import { ThrottlingSettings } from '../models/ThrottlingSettings';
 import { HttpFile } from '../http/http';
 
 /**

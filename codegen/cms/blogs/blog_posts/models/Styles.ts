@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { BackgroundImage } from './BackgroundImage';
-import { Gradient } from './Gradient';
-import { RGBAColor } from './RGBAColor';
+import { BackgroundImage } from '../models/BackgroundImage';
+import { Gradient } from '../models/Gradient';
+import { RGBAColor } from '../models/RGBAColor';
 import { HttpFile } from '../http/http';
 
 export class Styles {

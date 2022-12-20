@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicImportMetadata } from './PublicImportMetadata';
+import { PublicImportMetadata } from '../models/PublicImportMetadata';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { PublicUser } from './PublicUser';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { PublicUser } from '../models/PublicUser';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicUserForwardPaging {

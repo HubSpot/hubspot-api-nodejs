@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ContentLanguageVariation } from './ContentLanguageVariation';
-import { LayoutSection } from './LayoutSection';
+import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
+import { LayoutSection } from '../models/LayoutSection';
 import { HttpFile } from '../http/http';
 
 /**

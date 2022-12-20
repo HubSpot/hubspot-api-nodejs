@@ -1,50 +1,50 @@
-export * from './BatchInputHubDbTableRowV3Request';
-export * from './BatchInputJsonNode';
-export * from './BatchInputString';
-export * from './BatchResponseHubDbTableRowV3';
-export * from './BatchResponseHubDbTableRowV3WithErrors';
-export * from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
-export * from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
-export * from './Column';
-export * from './ColumnRequest';
-export * from './ErrorDetail';
-export * from './ForeignId';
-export * from './ForwardPaging';
-export * from './HubDbTableCloneRequest';
-export * from './HubDbTableRowV3';
-export * from './HubDbTableRowV3Request';
-export * from './HubDbTableV3';
-export * from './HubDbTableV3Request';
-export * from './ImportResult';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Option';
-export * from './SimpleUser';
-export * from './StandardError';
+export * from '../models/BatchInputHubDbTableRowV3Request';
+export * from '../models/BatchInputJsonNode';
+export * from '../models/BatchInputString';
+export * from '../models/BatchResponseHubDbTableRowV3';
+export * from '../models/BatchResponseHubDbTableRowV3WithErrors';
+export * from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
+export * from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
+export * from '../models/Column';
+export * from '../models/ColumnRequest';
+export * from '../models/ErrorDetail';
+export * from '../models/ForeignId';
+export * from '../models/ForwardPaging';
+export * from '../models/HubDbTableCloneRequest';
+export * from '../models/HubDbTableRowV3';
+export * from '../models/HubDbTableRowV3Request';
+export * from '../models/HubDbTableV3';
+export * from '../models/HubDbTableV3Request';
+export * from '../models/ImportResult';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Option';
+export * from '../models/SimpleUser';
+export * from '../models/StandardError';
 
-import { BatchInputHubDbTableRowV3Request } from './BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from './BatchInputJsonNode';
-import { BatchInputString } from './BatchInputString';
-import { BatchResponseHubDbTableRowV3, BatchResponseHubDbTableRowV3StatusEnum        } from './BatchResponseHubDbTableRowV3';
-import { BatchResponseHubDbTableRowV3WithErrors, BatchResponseHubDbTableRowV3WithErrorsStatusEnum          } from './BatchResponseHubDbTableRowV3WithErrors';
-import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
-import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from './CollectionResponseWithTotalHubDbTableV3ForwardPaging';
-import { Column         , ColumnTypeEnum      } from './Column';
-import { ColumnRequest   , ColumnRequestTypeEnum      } from './ColumnRequest';
-import { ErrorDetail } from './ErrorDetail';
-import { ForeignId } from './ForeignId';
-import { ForwardPaging } from './ForwardPaging';
-import { HubDbTableCloneRequest } from './HubDbTableCloneRequest';
-import { HubDbTableRowV3 } from './HubDbTableRowV3';
-import { HubDbTableRowV3Request } from './HubDbTableRowV3Request';
-import { HubDbTableV3 } from './HubDbTableV3';
-import { HubDbTableV3Request } from './HubDbTableV3Request';
-import { ImportResult } from './ImportResult';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Option } from './Option';
-import { SimpleUser } from './SimpleUser';
-import { StandardError } from './StandardError';
+import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
+import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
+import { BatchInputString } from '../models/BatchInputString';
+import { BatchResponseHubDbTableRowV3, BatchResponseHubDbTableRowV3StatusEnum        } from '../models/BatchResponseHubDbTableRowV3';
+import { BatchResponseHubDbTableRowV3WithErrors, BatchResponseHubDbTableRowV3WithErrorsStatusEnum          } from '../models/BatchResponseHubDbTableRowV3WithErrors';
+import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
+import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
+import { Column         , ColumnTypeEnum      } from '../models/Column';
+import { ColumnRequest   , ColumnRequestTypeEnum      } from '../models/ColumnRequest';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForeignId } from '../models/ForeignId';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
+import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
+import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
+import { HubDbTableV3 } from '../models/HubDbTableV3';
+import { HubDbTableV3Request } from '../models/HubDbTableV3Request';
+import { ImportResult } from '../models/ImportResult';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Option } from '../models/Option';
+import { SimpleUser } from '../models/SimpleUser';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -267,6 +267,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -280,6 +284,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

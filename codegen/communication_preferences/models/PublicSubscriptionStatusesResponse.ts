@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicSubscriptionStatus } from './PublicSubscriptionStatus';
+import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
 import { HttpFile } from '../http/http';
 
 /**

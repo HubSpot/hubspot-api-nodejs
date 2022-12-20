@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { HubDbTableRowV3 } from './HubDbTableRowV3';
-import { StandardError } from './StandardError';
+import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseHubDbTableRowV3WithErrors {

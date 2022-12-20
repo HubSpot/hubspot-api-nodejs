@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CollectionResponseAssociatedId } from './CollectionResponseAssociatedId';
-import { ValueWithTimestamp } from './ValueWithTimestamp';
+import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 import { HttpFile } from '../http/http';
 
 export class SimplePublicObjectWithAssociations {

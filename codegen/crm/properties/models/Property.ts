@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Option } from './Option';
-import { PropertyModificationMetadata } from './PropertyModificationMetadata';
+import { Option } from '../models/Option';
+import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 import { HttpFile } from '../http/http';
 
 export class Property {

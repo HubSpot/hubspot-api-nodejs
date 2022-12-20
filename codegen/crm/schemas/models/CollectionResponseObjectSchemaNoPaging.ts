@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ObjectSchema } from './ObjectSchema';
+import { ObjectSchema } from '../models/ObjectSchema';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseObjectSchemaNoPaging {

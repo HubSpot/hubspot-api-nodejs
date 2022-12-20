@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ErrorDetail } from './ErrorDetail';
+import { ErrorDetail } from '../models/ErrorDetail';
 import { HttpFile } from '../http/http';
 
 export class StandardError {

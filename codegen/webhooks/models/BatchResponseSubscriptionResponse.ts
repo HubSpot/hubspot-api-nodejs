@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SubscriptionResponse } from './SubscriptionResponse';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseSubscriptionResponse {

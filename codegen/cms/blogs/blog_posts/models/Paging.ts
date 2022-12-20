@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from './NextPage';
-import { PreviousPage } from './PreviousPage';
+import { NextPage } from '../models/NextPage';
+import { PreviousPage } from '../models/PreviousPage';
 import { HttpFile } from '../http/http';
 
 /**

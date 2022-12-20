@@ -28,6 +28,7 @@ export class PropertyValue {
     'sourceMetadata': string;
     'requestId': string;
     'updatedByUserId'?: number;
+    'persistenceTimestamp'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -103,6 +104,12 @@ export class PropertyValue {
             "baseName": "updatedByUserId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "persistenceTimestamp",
+            "baseName": "persistenceTimestamp",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

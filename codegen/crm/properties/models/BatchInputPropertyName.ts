@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PropertyName } from './PropertyName';
+import { PropertyName } from '../models/PropertyName';
 import { HttpFile } from '../http/http';
 
 export class BatchInputPropertyName {

@@ -1,34 +1,34 @@
-export * from './AssociationDefinition';
-export * from './AssociationDefinitionEgg';
-export * from './CollectionResponseObjectSchemaNoPaging';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './ObjectSchema';
-export * from './ObjectSchemaEgg';
-export * from './ObjectTypeDefinition';
-export * from './ObjectTypeDefinitionLabels';
-export * from './ObjectTypeDefinitionPatch';
-export * from './ObjectTypePropertyCreate';
-export * from './Option';
-export * from './OptionInput';
-export * from './Property';
-export * from './PropertyModificationMetadata';
+export * from '../models/AssociationDefinition';
+export * from '../models/AssociationDefinitionEgg';
+export * from '../models/CollectionResponseObjectSchemaNoPaging';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/ObjectSchema';
+export * from '../models/ObjectSchemaEgg';
+export * from '../models/ObjectTypeDefinition';
+export * from '../models/ObjectTypeDefinitionLabels';
+export * from '../models/ObjectTypeDefinitionPatch';
+export * from '../models/ObjectTypePropertyCreate';
+export * from '../models/Option';
+export * from '../models/OptionInput';
+export * from '../models/Property';
+export * from '../models/PropertyModificationMetadata';
 
-import { AssociationDefinition } from './AssociationDefinition';
-import { AssociationDefinitionEgg } from './AssociationDefinitionEgg';
-import { CollectionResponseObjectSchemaNoPaging } from './CollectionResponseObjectSchemaNoPaging';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { ObjectSchema } from './ObjectSchema';
-import { ObjectSchemaEgg } from './ObjectSchemaEgg';
-import { ObjectTypeDefinition } from './ObjectTypeDefinition';
-import { ObjectTypeDefinitionLabels } from './ObjectTypeDefinitionLabels';
-import { ObjectTypeDefinitionPatch } from './ObjectTypeDefinitionPatch';
-import { ObjectTypePropertyCreate        , ObjectTypePropertyCreateTypeEnum    } from './ObjectTypePropertyCreate';
-import { Option } from './Option';
-import { OptionInput } from './OptionInput';
-import { Property } from './Property';
-import { PropertyModificationMetadata } from './PropertyModificationMetadata';
+import { AssociationDefinition } from '../models/AssociationDefinition';
+import { AssociationDefinitionEgg } from '../models/AssociationDefinitionEgg';
+import { CollectionResponseObjectSchemaNoPaging } from '../models/CollectionResponseObjectSchemaNoPaging';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { ObjectSchema } from '../models/ObjectSchema';
+import { ObjectSchemaEgg } from '../models/ObjectSchemaEgg';
+import { ObjectTypeDefinition } from '../models/ObjectTypeDefinition';
+import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
+import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
+import { ObjectTypePropertyCreate        , ObjectTypePropertyCreateTypeEnum    } from '../models/ObjectTypePropertyCreate';
+import { Option } from '../models/Option';
+import { OptionInput } from '../models/OptionInput';
+import { Property } from '../models/Property';
+import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -240,6 +240,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -253,6 +257,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

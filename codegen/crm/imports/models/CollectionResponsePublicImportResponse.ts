@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { PublicImportResponse } from './PublicImportResponse';
+import { Paging } from '../models/Paging';
+import { PublicImportResponse } from '../models/PublicImportResponse';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicImportResponse {

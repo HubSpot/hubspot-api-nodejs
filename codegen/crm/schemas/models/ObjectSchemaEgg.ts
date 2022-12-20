@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ObjectTypeDefinitionLabels } from './ObjectTypeDefinitionLabels';
-import { ObjectTypePropertyCreate } from './ObjectTypePropertyCreate';
+import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
+import { ObjectTypePropertyCreate } from '../models/ObjectTypePropertyCreate';
 import { HttpFile } from '../http/http';
 
 /**

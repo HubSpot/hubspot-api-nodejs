@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PropertyCreate } from './PropertyCreate';
+import { PropertyCreate } from '../models/PropertyCreate';
 import { HttpFile } from '../http/http';
 
 export class BatchInputPropertyCreate {

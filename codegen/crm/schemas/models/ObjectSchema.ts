@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { AssociationDefinition } from './AssociationDefinition';
-import { ObjectTypeDefinitionLabels } from './ObjectTypeDefinitionLabels';
-import { Property } from './Property';
+import { AssociationDefinition } from '../models/AssociationDefinition';
+import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
+import { Property } from '../models/Property';
 import { HttpFile } from '../http/http';
 
 /**

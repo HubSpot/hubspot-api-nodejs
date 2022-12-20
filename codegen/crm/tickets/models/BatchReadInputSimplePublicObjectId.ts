@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectId } from './SimplePublicObjectId';
+import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 import { HttpFile } from '../http/http';
 
 export class BatchReadInputSimplePublicObjectId {
