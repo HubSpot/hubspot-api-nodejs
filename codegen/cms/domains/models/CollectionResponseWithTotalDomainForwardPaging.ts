@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Domain } from './Domain';
-import { ForwardPaging } from './ForwardPaging';
+import { Domain } from '../models/Domain';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalDomainForwardPaging {

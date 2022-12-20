@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { PublicAssociationDefiniton } from './PublicAssociationDefiniton';
+import { Paging } from '../models/Paging';
+import { PublicAssociationDefiniton } from '../models/PublicAssociationDefiniton';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicAssociationDefiniton {

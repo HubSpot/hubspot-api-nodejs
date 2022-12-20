@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SubscriptionDefinition } from './SubscriptionDefinition';
+import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
 import { HttpFile } from '../http/http';
 
 /**

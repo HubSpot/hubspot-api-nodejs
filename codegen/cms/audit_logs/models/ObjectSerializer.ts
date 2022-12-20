@@ -1,16 +1,16 @@
-export * from './CollectionResponsePublicAuditLog';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PublicAuditLog';
+export * from '../models/CollectionResponsePublicAuditLog';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PublicAuditLog';
 
-import { CollectionResponsePublicAuditLog } from './CollectionResponsePublicAuditLog';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PublicAuditLog     , PublicAuditLogEventEnum  , PublicAuditLogObjectTypeEnum   } from './PublicAuditLog';
+import { CollectionResponsePublicAuditLog } from '../models/CollectionResponsePublicAuditLog';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PublicAuditLog     , PublicAuditLogEventEnum  , PublicAuditLogObjectTypeEnum   } from '../models/PublicAuditLog';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -214,6 +214,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -227,6 +231,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

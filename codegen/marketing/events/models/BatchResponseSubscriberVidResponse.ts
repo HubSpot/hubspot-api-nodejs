@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { StandardError } from './StandardError';
-import { SubscriberVidResponse } from './SubscriberVidResponse';
+import { StandardError } from '../models/StandardError';
+import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseSubscriberVidResponse {

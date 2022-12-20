@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { MultiAssociatedObjectWithLabel } from './MultiAssociatedObjectWithLabel';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseMultiAssociatedObjectWithLabelForwardPaging {

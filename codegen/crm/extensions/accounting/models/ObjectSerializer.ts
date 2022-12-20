@@ -1,76 +1,76 @@
-export * from './AccountingAppSettings';
-export * from './AccountingAppUrls';
-export * from './AccountingExtensionCustomer';
-export * from './AccountingExtensionInvoice';
-export * from './AccountingExtensionTerm';
-export * from './AccountingFeatures';
-export * from './ActionResponse';
-export * from './Address';
-export * from './CreateInvoiceFeature';
-export * from './CreateInvoiceSubFeatures';
-export * from './CreateUserAccountRequestExternal';
-export * from './CustomerSearchResponseExternal';
-export * from './ErrorDetail';
-export * from './ExchangeRateResponse';
-export * from './ImportInvoiceFeature';
-export * from './InvoiceCreatePaymentRequest';
-export * from './InvoicePdfResponse';
-export * from './InvoiceReadResponse';
-export * from './InvoiceSearchResponse';
-export * from './InvoiceUpdateRequest';
-export * from './InvoiceUpdateResponse';
-export * from './InvoicesResponseExternal';
-export * from './ModelError';
-export * from './ObjectSyncFeature';
-export * from './Product';
-export * from './ProductSearchResponse';
-export * from './ResultIdAccountingResponse';
-export * from './SyncContactsRequest';
-export * from './SyncProductsRequest';
-export * from './Tax';
-export * from './TaxSearchResponse';
-export * from './TaxType';
-export * from './TermsResponse';
-export * from './UnitPrice';
-export * from './UpdatedContact';
-export * from './UpdatedProduct';
+export * from '../models/AccountingAppSettings';
+export * from '../models/AccountingAppUrls';
+export * from '../models/AccountingExtensionCustomer';
+export * from '../models/AccountingExtensionInvoice';
+export * from '../models/AccountingExtensionTerm';
+export * from '../models/AccountingFeatures';
+export * from '../models/ActionResponse';
+export * from '../models/Address';
+export * from '../models/CreateInvoiceFeature';
+export * from '../models/CreateInvoiceSubFeatures';
+export * from '../models/CreateUserAccountRequestExternal';
+export * from '../models/CustomerSearchResponseExternal';
+export * from '../models/ErrorDetail';
+export * from '../models/ExchangeRateResponse';
+export * from '../models/ImportInvoiceFeature';
+export * from '../models/InvoiceCreatePaymentRequest';
+export * from '../models/InvoicePdfResponse';
+export * from '../models/InvoiceReadResponse';
+export * from '../models/InvoiceSearchResponse';
+export * from '../models/InvoiceUpdateRequest';
+export * from '../models/InvoiceUpdateResponse';
+export * from '../models/InvoicesResponseExternal';
+export * from '../models/ModelError';
+export * from '../models/ObjectSyncFeature';
+export * from '../models/Product';
+export * from '../models/ProductSearchResponse';
+export * from '../models/ResultIdAccountingResponse';
+export * from '../models/SyncContactsRequest';
+export * from '../models/SyncProductsRequest';
+export * from '../models/Tax';
+export * from '../models/TaxSearchResponse';
+export * from '../models/TaxType';
+export * from '../models/TermsResponse';
+export * from '../models/UnitPrice';
+export * from '../models/UpdatedContact';
+export * from '../models/UpdatedProduct';
 
-import { AccountingAppSettings } from './AccountingAppSettings';
-import { AccountingAppUrls } from './AccountingAppUrls';
-import { AccountingExtensionCustomer } from './AccountingExtensionCustomer';
-import { AccountingExtensionInvoice        , AccountingExtensionInvoiceStatusEnum   } from './AccountingExtensionInvoice';
-import { AccountingExtensionTerm } from './AccountingExtensionTerm';
-import { AccountingFeatures } from './AccountingFeatures';
-import { ActionResponse, ActionResponseStatusEnum       } from './ActionResponse';
-import { Address } from './Address';
-import { CreateInvoiceFeature } from './CreateInvoiceFeature';
-import { CreateInvoiceSubFeatures } from './CreateInvoiceSubFeatures';
-import { CreateUserAccountRequestExternal } from './CreateUserAccountRequestExternal';
-import { CustomerSearchResponseExternal, CustomerSearchResponseExternalResultEnum    } from './CustomerSearchResponseExternal';
-import { ErrorDetail } from './ErrorDetail';
-import { ExchangeRateResponse, ExchangeRateResponseResultEnum      } from './ExchangeRateResponse';
-import { ImportInvoiceFeature } from './ImportInvoiceFeature';
-import { InvoiceCreatePaymentRequest } from './InvoiceCreatePaymentRequest';
-import { InvoicePdfResponse, InvoicePdfResponseResultEnum    } from './InvoicePdfResponse';
-import { InvoiceReadResponse              , InvoiceReadResponseInvoiceStatusEnum    } from './InvoiceReadResponse';
-import { InvoiceSearchResponse, InvoiceSearchResponseResultEnum    } from './InvoiceSearchResponse';
-import { InvoiceUpdateRequest } from './InvoiceUpdateRequest';
-import { InvoiceUpdateResponse              , InvoiceUpdateResponseInvoiceStatusEnum    } from './InvoiceUpdateResponse';
-import { InvoicesResponseExternal, InvoicesResponseExternalResultEnum    } from './InvoicesResponseExternal';
-import { ModelError } from './ModelError';
-import { ObjectSyncFeature } from './ObjectSyncFeature';
-import { Product } from './Product';
-import { ProductSearchResponse, ProductSearchResponseResultEnum    } from './ProductSearchResponse';
-import { ResultIdAccountingResponse, ResultIdAccountingResponseResultEnum    } from './ResultIdAccountingResponse';
-import { SyncContactsRequest } from './SyncContactsRequest';
-import { SyncProductsRequest } from './SyncProductsRequest';
-import { Tax } from './Tax';
-import { TaxSearchResponse, TaxSearchResponseResultEnum    } from './TaxSearchResponse';
-import { TaxType } from './TaxType';
-import { TermsResponse, TermsResponseResultEnum    } from './TermsResponse';
-import { UnitPrice } from './UnitPrice';
-import { UpdatedContact, UpdatedContactSyncActionEnum     , UpdatedContactCustomerTypeEnum   } from './UpdatedContact';
-import { UpdatedProduct, UpdatedProductSyncActionEnum        } from './UpdatedProduct';
+import { AccountingAppSettings } from '../models/AccountingAppSettings';
+import { AccountingAppUrls } from '../models/AccountingAppUrls';
+import { AccountingExtensionCustomer } from '../models/AccountingExtensionCustomer';
+import { AccountingExtensionInvoice        , AccountingExtensionInvoiceStatusEnum   } from '../models/AccountingExtensionInvoice';
+import { AccountingExtensionTerm } from '../models/AccountingExtensionTerm';
+import { AccountingFeatures } from '../models/AccountingFeatures';
+import { ActionResponse, ActionResponseStatusEnum       } from '../models/ActionResponse';
+import { Address } from '../models/Address';
+import { CreateInvoiceFeature } from '../models/CreateInvoiceFeature';
+import { CreateInvoiceSubFeatures } from '../models/CreateInvoiceSubFeatures';
+import { CreateUserAccountRequestExternal } from '../models/CreateUserAccountRequestExternal';
+import { CustomerSearchResponseExternal, CustomerSearchResponseExternalResultEnum    } from '../models/CustomerSearchResponseExternal';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ExchangeRateResponse, ExchangeRateResponseResultEnum      } from '../models/ExchangeRateResponse';
+import { ImportInvoiceFeature } from '../models/ImportInvoiceFeature';
+import { InvoiceCreatePaymentRequest } from '../models/InvoiceCreatePaymentRequest';
+import { InvoicePdfResponse, InvoicePdfResponseResultEnum    } from '../models/InvoicePdfResponse';
+import { InvoiceReadResponse              , InvoiceReadResponseInvoiceStatusEnum    } from '../models/InvoiceReadResponse';
+import { InvoiceSearchResponse, InvoiceSearchResponseResultEnum    } from '../models/InvoiceSearchResponse';
+import { InvoiceUpdateRequest } from '../models/InvoiceUpdateRequest';
+import { InvoiceUpdateResponse              , InvoiceUpdateResponseInvoiceStatusEnum    } from '../models/InvoiceUpdateResponse';
+import { InvoicesResponseExternal, InvoicesResponseExternalResultEnum    } from '../models/InvoicesResponseExternal';
+import { ModelError } from '../models/ModelError';
+import { ObjectSyncFeature } from '../models/ObjectSyncFeature';
+import { Product } from '../models/Product';
+import { ProductSearchResponse, ProductSearchResponseResultEnum    } from '../models/ProductSearchResponse';
+import { ResultIdAccountingResponse, ResultIdAccountingResponseResultEnum    } from '../models/ResultIdAccountingResponse';
+import { SyncContactsRequest } from '../models/SyncContactsRequest';
+import { SyncProductsRequest } from '../models/SyncProductsRequest';
+import { Tax } from '../models/Tax';
+import { TaxSearchResponse, TaxSearchResponseResultEnum    } from '../models/TaxSearchResponse';
+import { TaxType } from '../models/TaxType';
+import { TermsResponse, TermsResponseResultEnum    } from '../models/TermsResponse';
+import { UnitPrice } from '../models/UnitPrice';
+import { UpdatedContact, UpdatedContactSyncActionEnum     , UpdatedContactCustomerTypeEnum   } from '../models/UpdatedContact';
+import { UpdatedProduct, UpdatedProductSyncActionEnum        } from '../models/UpdatedProduct';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -318,6 +318,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -331,6 +335,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

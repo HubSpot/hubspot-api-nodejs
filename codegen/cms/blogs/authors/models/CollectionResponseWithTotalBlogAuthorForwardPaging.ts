@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { BlogAuthor } from './BlogAuthor';
-import { ForwardPaging } from './ForwardPaging';
+import { BlogAuthor } from '../models/BlogAuthor';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AssociatedId } from './AssociatedId';
-import { Paging } from './Paging';
+import { AssociatedId } from '../models/AssociatedId';
+import { Paging } from '../models/Paging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseAssociatedId {

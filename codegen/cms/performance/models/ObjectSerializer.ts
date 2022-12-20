@@ -1,12 +1,12 @@
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './PerformanceView';
-export * from './PublicPerformanceResponse';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/PerformanceView';
+export * from '../models/PublicPerformanceResponse';
 
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { PerformanceView } from './PerformanceView';
-import { PublicPerformanceResponse     , PublicPerformanceResponseIntervalEnum  , PublicPerformanceResponsePeriodEnum   } from './PublicPerformanceResponse';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { PerformanceView } from '../models/PerformanceView';
+import { PublicPerformanceResponse     , PublicPerformanceResponseIntervalEnum  , PublicPerformanceResponsePeriodEnum   } from '../models/PublicPerformanceResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -208,6 +208,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -221,6 +225,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

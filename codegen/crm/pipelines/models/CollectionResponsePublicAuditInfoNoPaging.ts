@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicAuditInfo } from './PublicAuditInfo';
+import { PublicAuditInfo } from '../models/PublicAuditInfo';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicAuditInfoNoPaging {

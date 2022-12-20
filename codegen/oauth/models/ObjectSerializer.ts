@@ -1,14 +1,14 @@
-export * from './AccessTokenInfoResponse';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './RefreshTokenInfoResponse';
-export * from './TokenResponseIF';
+export * from '../models/AccessTokenInfoResponse';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/RefreshTokenInfoResponse';
+export * from '../models/TokenResponseIF';
 
-import { AccessTokenInfoResponse } from './AccessTokenInfoResponse';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { RefreshTokenInfoResponse } from './RefreshTokenInfoResponse';
-import { TokenResponseIF } from './TokenResponseIF';
+import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { RefreshTokenInfoResponse } from '../models/RefreshTokenInfoResponse';
+import { TokenResponseIF } from '../models/TokenResponseIF';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -209,6 +209,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -222,6 +226,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

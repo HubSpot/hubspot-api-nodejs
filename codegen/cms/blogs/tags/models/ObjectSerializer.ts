@@ -1,38 +1,38 @@
-export * from './AttachToLangPrimaryRequestVNext';
-export * from './BatchInputJsonNode';
-export * from './BatchInputString';
-export * from './BatchInputTag';
-export * from './BatchResponseTag';
-export * from './BatchResponseTagWithErrors';
-export * from './CollectionResponseWithTotalTagForwardPaging';
-export * from './DetachFromLangGroupRequestVNext';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './SetNewLanguagePrimaryRequestVNext';
-export * from './StandardError';
-export * from './Tag';
-export * from './TagCloneRequestVNext';
-export * from './UpdateLanguagesRequestVNext';
+export * from '../models/AttachToLangPrimaryRequestVNext';
+export * from '../models/BatchInputJsonNode';
+export * from '../models/BatchInputString';
+export * from '../models/BatchInputTag';
+export * from '../models/BatchResponseTag';
+export * from '../models/BatchResponseTagWithErrors';
+export * from '../models/CollectionResponseWithTotalTagForwardPaging';
+export * from '../models/DetachFromLangGroupRequestVNext';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/SetNewLanguagePrimaryRequestVNext';
+export * from '../models/StandardError';
+export * from '../models/Tag';
+export * from '../models/TagCloneRequestVNext';
+export * from '../models/UpdateLanguagesRequestVNext';
 
-import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from './AttachToLangPrimaryRequestVNext';
-import { BatchInputJsonNode } from './BatchInputJsonNode';
-import { BatchInputString } from './BatchInputString';
-import { BatchInputTag } from './BatchInputTag';
-import { BatchResponseTag, BatchResponseTagStatusEnum        } from './BatchResponseTag';
-import { BatchResponseTagWithErrors, BatchResponseTagWithErrorsStatusEnum          } from './BatchResponseTagWithErrors';
-import { CollectionResponseWithTotalTagForwardPaging } from './CollectionResponseWithTotalTagForwardPaging';
-import { DetachFromLangGroupRequestVNext } from './DetachFromLangGroupRequestVNext';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { SetNewLanguagePrimaryRequestVNext } from './SetNewLanguagePrimaryRequestVNext';
-import { StandardError } from './StandardError';
-import { Tag  , TagLanguageEnum       } from './Tag';
-import { TagCloneRequestVNext } from './TagCloneRequestVNext';
-import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from './UpdateLanguagesRequestVNext';
+import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from '../models/AttachToLangPrimaryRequestVNext';
+import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
+import { BatchInputString } from '../models/BatchInputString';
+import { BatchInputTag } from '../models/BatchInputTag';
+import { BatchResponseTag, BatchResponseTagStatusEnum        } from '../models/BatchResponseTag';
+import { BatchResponseTagWithErrors, BatchResponseTagWithErrorsStatusEnum          } from '../models/BatchResponseTagWithErrors';
+import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
+import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
+import { StandardError } from '../models/StandardError';
+import { Tag  , TagLanguageEnum       } from '../models/Tag';
+import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
+import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from '../models/UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -251,6 +251,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -264,6 +268,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

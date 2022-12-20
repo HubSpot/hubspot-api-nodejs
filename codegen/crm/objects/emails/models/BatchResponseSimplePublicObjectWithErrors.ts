@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObject } from './SimplePublicObject';
-import { StandardError } from './StandardError';
+import { SimplePublicObject } from '../models/SimplePublicObject';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseSimplePublicObjectWithErrors {

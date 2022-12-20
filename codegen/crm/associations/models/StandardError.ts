@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ErrorCategory } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
+import { ErrorCategory } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
 import { HttpFile } from '../http/http';
 
 export class StandardError {

@@ -1,32 +1,32 @@
-export * from './ActionResponse';
-export * from './CollectionResponsePublicImportErrorForwardPaging';
-export * from './CollectionResponsePublicImportResponse';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './ImportRowCore';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PreviousPage';
-export * from './PublicImportError';
-export * from './PublicImportMetadata';
-export * from './PublicImportResponse';
-export * from './PublicObjectListRecord';
+export * from '../models/ActionResponse';
+export * from '../models/CollectionResponsePublicImportErrorForwardPaging';
+export * from '../models/CollectionResponsePublicImportResponse';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/ImportRowCore';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/PublicImportError';
+export * from '../models/PublicImportMetadata';
+export * from '../models/PublicImportResponse';
+export * from '../models/PublicObjectListRecord';
 
-import { ActionResponse, ActionResponseStatusEnum       } from './ActionResponse';
-import { CollectionResponsePublicImportErrorForwardPaging } from './CollectionResponsePublicImportErrorForwardPaging';
-import { CollectionResponsePublicImportResponse } from './CollectionResponsePublicImportResponse';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { ImportRowCore } from './ImportRowCore';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PreviousPage } from './PreviousPage';
-import { PublicImportError, PublicImportErrorErrorTypeEnum   , PublicImportErrorObjectTypeEnum         } from './PublicImportError';
-import { PublicImportMetadata } from './PublicImportMetadata';
-import { PublicImportResponse, PublicImportResponseStateEnum          } from './PublicImportResponse';
-import { PublicObjectListRecord } from './PublicObjectListRecord';
+import { ActionResponse, ActionResponseStatusEnum       } from '../models/ActionResponse';
+import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
+import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ImportRowCore } from '../models/ImportRowCore';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { PublicImportError, PublicImportErrorErrorTypeEnum   , PublicImportErrorObjectTypeEnum         } from '../models/PublicImportError';
+import { PublicImportMetadata } from '../models/PublicImportMetadata';
+import { PublicImportResponse, PublicImportResponseStateEnum          } from '../models/PublicImportResponse';
+import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -240,6 +240,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -253,6 +257,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

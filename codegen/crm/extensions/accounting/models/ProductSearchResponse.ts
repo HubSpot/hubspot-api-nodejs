@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Product } from './Product';
+import { Product } from '../models/Product';
 import { HttpFile } from '../http/http';
 
 /**

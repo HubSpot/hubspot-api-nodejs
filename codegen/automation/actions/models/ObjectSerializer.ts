@@ -1,52 +1,52 @@
-export * from './ActionFunction';
-export * from './ActionFunctionIdentifier';
-export * from './ActionLabels';
-export * from './ActionRevision';
-export * from './BatchInputCallbackCompletionBatchRequest';
-export * from './CallbackCompletionBatchRequest';
-export * from './CallbackCompletionRequest';
-export * from './CollectionResponseActionFunctionIdentifierNoPaging';
-export * from './CollectionResponseActionRevisionForwardPaging';
-export * from './CollectionResponseExtensionActionDefinitionForwardPaging';
-export * from './ConditionalSingleFieldDependency';
-export * from './ErrorDetail';
-export * from './ExtensionActionDefinition';
-export * from './ExtensionActionDefinitionInput';
-export * from './ExtensionActionDefinitionPatch';
-export * from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
-export * from './FieldTypeDefinition';
-export * from './ForwardPaging';
-export * from './InputFieldDefinition';
-export * from './ModelError';
-export * from './NextPage';
-export * from './ObjectRequestOptions';
-export * from './Option';
-export * from './SingleFieldDependency';
+export * from '../models/ActionFunction';
+export * from '../models/ActionFunctionIdentifier';
+export * from '../models/ActionLabels';
+export * from '../models/ActionRevision';
+export * from '../models/BatchInputCallbackCompletionBatchRequest';
+export * from '../models/CallbackCompletionBatchRequest';
+export * from '../models/CallbackCompletionRequest';
+export * from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
+export * from '../models/CollectionResponseActionRevisionForwardPaging';
+export * from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
+export * from '../models/ConditionalSingleFieldDependency';
+export * from '../models/ErrorDetail';
+export * from '../models/ExtensionActionDefinition';
+export * from '../models/ExtensionActionDefinitionInput';
+export * from '../models/ExtensionActionDefinitionPatch';
+export * from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
+export * from '../models/FieldTypeDefinition';
+export * from '../models/ForwardPaging';
+export * from '../models/InputFieldDefinition';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/ObjectRequestOptions';
+export * from '../models/Option';
+export * from '../models/SingleFieldDependency';
 
-import { ActionFunction , ActionFunctionFunctionTypeEnum    } from './ActionFunction';
-import { ActionFunctionIdentifier, ActionFunctionIdentifierFunctionTypeEnum    } from './ActionFunctionIdentifier';
-import { ActionLabels } from './ActionLabels';
-import { ActionRevision } from './ActionRevision';
-import { BatchInputCallbackCompletionBatchRequest } from './BatchInputCallbackCompletionBatchRequest';
-import { CallbackCompletionBatchRequest } from './CallbackCompletionBatchRequest';
-import { CallbackCompletionRequest } from './CallbackCompletionRequest';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from './CollectionResponseActionFunctionIdentifierNoPaging';
-import { CollectionResponseActionRevisionForwardPaging } from './CollectionResponseActionRevisionForwardPaging';
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from './CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ConditionalSingleFieldDependency, ConditionalSingleFieldDependencyDependencyTypeEnum      } from './ConditionalSingleFieldDependency';
-import { ErrorDetail } from './ErrorDetail';
-import { ExtensionActionDefinition } from './ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from './ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from './ExtensionActionDefinitionPatch';
-import { ExtensionActionDefinitionPatchInputFieldDependenciesInner, ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum      } from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
-import { FieldTypeDefinition , FieldTypeDefinitionTypeEnum  , FieldTypeDefinitionFieldTypeEnum    , FieldTypeDefinitionReferencedObjectTypeEnum   } from './FieldTypeDefinition';
-import { ForwardPaging } from './ForwardPaging';
-import { InputFieldDefinition , InputFieldDefinitionSupportedValueTypesEnum    } from './InputFieldDefinition';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { ObjectRequestOptions } from './ObjectRequestOptions';
-import { Option } from './Option';
-import { SingleFieldDependency, SingleFieldDependencyDependencyTypeEnum     } from './SingleFieldDependency';
+import { ActionFunction , ActionFunctionFunctionTypeEnum    } from '../models/ActionFunction';
+import { ActionFunctionIdentifier, ActionFunctionIdentifierFunctionTypeEnum    } from '../models/ActionFunctionIdentifier';
+import { ActionLabels } from '../models/ActionLabels';
+import { ActionRevision } from '../models/ActionRevision';
+import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
+import { CallbackCompletionBatchRequest } from '../models/CallbackCompletionBatchRequest';
+import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
+import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
+import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
+import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
+import { ConditionalSingleFieldDependency, ConditionalSingleFieldDependencyDependencyTypeEnum      } from '../models/ConditionalSingleFieldDependency';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
+import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
+import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner, ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum      } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
+import { FieldTypeDefinition , FieldTypeDefinitionTypeEnum  , FieldTypeDefinitionFieldTypeEnum    , FieldTypeDefinitionReferencedObjectTypeEnum   } from '../models/FieldTypeDefinition';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { InputFieldDefinition , InputFieldDefinitionSupportedValueTypesEnum    } from '../models/InputFieldDefinition';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
+import { Option } from '../models/Option';
+import { SingleFieldDependency, SingleFieldDependencyDependencyTypeEnum     } from '../models/SingleFieldDependency';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -275,6 +275,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -288,6 +292,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

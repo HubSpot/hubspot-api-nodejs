@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AccountingAppUrls } from './AccountingAppUrls';
-import { AccountingFeatures } from './AccountingFeatures';
+import { AccountingAppUrls } from '../models/AccountingAppUrls';
+import { AccountingFeatures } from '../models/AccountingFeatures';
 import { HttpFile } from '../http/http';
 
 /**

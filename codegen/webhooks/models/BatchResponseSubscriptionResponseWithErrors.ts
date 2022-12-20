@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { StandardError } from './StandardError';
-import { SubscriptionResponse } from './SubscriptionResponse';
+import { StandardError } from '../models/StandardError';
+import { SubscriptionResponse } from '../models/SubscriptionResponse';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseSubscriptionResponseWithErrors {

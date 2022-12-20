@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PerformanceView } from './PerformanceView';
+import { PerformanceView } from '../models/PerformanceView';
 import { HttpFile } from '../http/http';
 
 export class PublicPerformanceResponse {

@@ -1,36 +1,36 @@
-export * from './AssociatedId';
-export * from './BatchInputPublicAssociation';
-export * from './BatchInputPublicObjectId';
-export * from './BatchResponsePublicAssociation';
-export * from './BatchResponsePublicAssociationMulti';
-export * from './CollectionResponsePublicAssociationDefiniton';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PublicAssociation';
-export * from './PublicAssociationDefiniton';
-export * from './PublicAssociationMulti';
-export * from './PublicObjectId';
-export * from './StandardError';
+export * from '../models/AssociatedId';
+export * from '../models/BatchInputPublicAssociation';
+export * from '../models/BatchInputPublicObjectId';
+export * from '../models/BatchResponsePublicAssociation';
+export * from '../models/BatchResponsePublicAssociationMulti';
+export * from '../models/CollectionResponsePublicAssociationDefiniton';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PublicAssociation';
+export * from '../models/PublicAssociationDefiniton';
+export * from '../models/PublicAssociationMulti';
+export * from '../models/PublicObjectId';
+export * from '../models/StandardError';
 
-import { AssociatedId } from './AssociatedId';
-import { BatchInputPublicAssociation } from './BatchInputPublicAssociation';
-import { BatchInputPublicObjectId } from './BatchInputPublicObjectId';
-import { BatchResponsePublicAssociation   , BatchResponsePublicAssociationStatusEnum      } from './BatchResponsePublicAssociation';
-import { BatchResponsePublicAssociationMulti   , BatchResponsePublicAssociationMultiStatusEnum      } from './BatchResponsePublicAssociationMulti';
-import { CollectionResponsePublicAssociationDefiniton } from './CollectionResponsePublicAssociationDefiniton';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PublicAssociation } from './PublicAssociation';
-import { PublicAssociationDefiniton } from './PublicAssociationDefiniton';
-import { PublicAssociationMulti } from './PublicAssociationMulti';
-import { PublicObjectId } from './PublicObjectId';
-import { StandardError } from './StandardError';
+import { AssociatedId } from '../models/AssociatedId';
+import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
+import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
+import { BatchResponsePublicAssociation   , BatchResponsePublicAssociationStatusEnum      } from '../models/BatchResponsePublicAssociation';
+import { BatchResponsePublicAssociationMulti   , BatchResponsePublicAssociationMultiStatusEnum      } from '../models/BatchResponsePublicAssociationMulti';
+import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
+import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PublicAssociation } from '../models/PublicAssociation';
+import { PublicAssociationDefiniton } from '../models/PublicAssociationDefiniton';
+import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
+import { PublicObjectId } from '../models/PublicObjectId';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -245,6 +245,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -258,6 +262,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

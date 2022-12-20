@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Address } from './Address';
+import { Address } from '../models/Address';
 import { HttpFile } from '../http/http';
 
 /**

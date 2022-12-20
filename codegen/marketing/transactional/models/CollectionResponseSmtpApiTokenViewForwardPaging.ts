@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { SmtpApiTokenView } from './SmtpApiTokenView';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseSmtpApiTokenViewForwardPaging {

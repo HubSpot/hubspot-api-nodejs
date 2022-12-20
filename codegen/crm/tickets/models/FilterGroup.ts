@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Filter } from './Filter';
+import { Filter } from '../models/Filter';
 import { HttpFile } from '../http/http';
 
 export class FilterGroup {

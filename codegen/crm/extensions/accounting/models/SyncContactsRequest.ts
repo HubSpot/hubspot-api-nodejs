@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { UpdatedContact } from './UpdatedContact';
+import { UpdatedContact } from '../models/UpdatedContact';
 import { HttpFile } from '../http/http';
 
 /**

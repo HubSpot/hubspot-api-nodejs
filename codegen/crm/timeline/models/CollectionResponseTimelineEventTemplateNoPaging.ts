@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TimelineEventTemplate } from './TimelineEventTemplate';
+import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseTimelineEventTemplateNoPaging {

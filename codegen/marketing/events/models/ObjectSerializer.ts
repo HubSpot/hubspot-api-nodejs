@@ -1,56 +1,56 @@
-export * from './BatchInputMarketingEventCreateRequestParams';
-export * from './BatchInputMarketingEventEmailSubscriber';
-export * from './BatchInputMarketingEventExternalUniqueIdentifier';
-export * from './BatchInputMarketingEventSubscriber';
-export * from './BatchResponseMarketingEventPublicDefaultResponse';
-export * from './BatchResponseSubscriberEmailResponse';
-export * from './BatchResponseSubscriberVidResponse';
-export * from './CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './EventDetailSettings';
-export * from './EventDetailSettingsUrl';
-export * from './MarketingEventCompleteRequestParams';
-export * from './MarketingEventCreateRequestParams';
-export * from './MarketingEventDefaultResponse';
-export * from './MarketingEventEmailSubscriber';
-export * from './MarketingEventExternalUniqueIdentifier';
-export * from './MarketingEventPublicDefaultResponse';
-export * from './MarketingEventPublicReadResponse';
-export * from './MarketingEventSubscriber';
-export * from './MarketingEventUpdateRequestParams';
-export * from './ModelError';
-export * from './PropertyValue';
-export * from './StandardError';
-export * from './SubscriberEmailResponse';
-export * from './SubscriberVidResponse';
+export * from '../models/BatchInputMarketingEventCreateRequestParams';
+export * from '../models/BatchInputMarketingEventEmailSubscriber';
+export * from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
+export * from '../models/BatchInputMarketingEventSubscriber';
+export * from '../models/BatchResponseMarketingEventPublicDefaultResponse';
+export * from '../models/BatchResponseSubscriberEmailResponse';
+export * from '../models/BatchResponseSubscriberVidResponse';
+export * from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/EventDetailSettings';
+export * from '../models/EventDetailSettingsUrl';
+export * from '../models/MarketingEventCompleteRequestParams';
+export * from '../models/MarketingEventCreateRequestParams';
+export * from '../models/MarketingEventDefaultResponse';
+export * from '../models/MarketingEventEmailSubscriber';
+export * from '../models/MarketingEventExternalUniqueIdentifier';
+export * from '../models/MarketingEventPublicDefaultResponse';
+export * from '../models/MarketingEventPublicReadResponse';
+export * from '../models/MarketingEventSubscriber';
+export * from '../models/MarketingEventUpdateRequestParams';
+export * from '../models/ModelError';
+export * from '../models/PropertyValue';
+export * from '../models/StandardError';
+export * from '../models/SubscriberEmailResponse';
+export * from '../models/SubscriberVidResponse';
 
-import { BatchInputMarketingEventCreateRequestParams } from './BatchInputMarketingEventCreateRequestParams';
-import { BatchInputMarketingEventEmailSubscriber } from './BatchInputMarketingEventEmailSubscriber';
-import { BatchInputMarketingEventExternalUniqueIdentifier } from './BatchInputMarketingEventExternalUniqueIdentifier';
-import { BatchInputMarketingEventSubscriber } from './BatchInputMarketingEventSubscriber';
-import { BatchResponseMarketingEventPublicDefaultResponse, BatchResponseMarketingEventPublicDefaultResponseStatusEnum          } from './BatchResponseMarketingEventPublicDefaultResponse';
-import { BatchResponseSubscriberEmailResponse, BatchResponseSubscriberEmailResponseStatusEnum          } from './BatchResponseSubscriberEmailResponse';
-import { BatchResponseSubscriberVidResponse, BatchResponseSubscriberVidResponseStatusEnum          } from './BatchResponseSubscriberVidResponse';
-import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from './CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { EventDetailSettings } from './EventDetailSettings';
-import { EventDetailSettingsUrl } from './EventDetailSettingsUrl';
-import { MarketingEventCompleteRequestParams } from './MarketingEventCompleteRequestParams';
-import { MarketingEventCreateRequestParams } from './MarketingEventCreateRequestParams';
-import { MarketingEventDefaultResponse } from './MarketingEventDefaultResponse';
-import { MarketingEventEmailSubscriber } from './MarketingEventEmailSubscriber';
-import { MarketingEventExternalUniqueIdentifier } from './MarketingEventExternalUniqueIdentifier';
-import { MarketingEventPublicDefaultResponse } from './MarketingEventPublicDefaultResponse';
-import { MarketingEventPublicReadResponse } from './MarketingEventPublicReadResponse';
-import { MarketingEventSubscriber } from './MarketingEventSubscriber';
-import { MarketingEventUpdateRequestParams } from './MarketingEventUpdateRequestParams';
-import { ModelError } from './ModelError';
-import { PropertyValue     , PropertyValueSourceEnum         } from './PropertyValue';
-import { StandardError } from './StandardError';
-import { SubscriberEmailResponse } from './SubscriberEmailResponse';
-import { SubscriberVidResponse } from './SubscriberVidResponse';
+import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
+import { BatchInputMarketingEventEmailSubscriber } from '../models/BatchInputMarketingEventEmailSubscriber';
+import { BatchInputMarketingEventExternalUniqueIdentifier } from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
+import { BatchInputMarketingEventSubscriber } from '../models/BatchInputMarketingEventSubscriber';
+import { BatchResponseMarketingEventPublicDefaultResponse, BatchResponseMarketingEventPublicDefaultResponseStatusEnum          } from '../models/BatchResponseMarketingEventPublicDefaultResponse';
+import { BatchResponseSubscriberEmailResponse, BatchResponseSubscriberEmailResponseStatusEnum          } from '../models/BatchResponseSubscriberEmailResponse';
+import { BatchResponseSubscriberVidResponse, BatchResponseSubscriberVidResponseStatusEnum          } from '../models/BatchResponseSubscriberVidResponse';
+import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { EventDetailSettings } from '../models/EventDetailSettings';
+import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
+import { MarketingEventCompleteRequestParams } from '../models/MarketingEventCompleteRequestParams';
+import { MarketingEventCreateRequestParams } from '../models/MarketingEventCreateRequestParams';
+import { MarketingEventDefaultResponse } from '../models/MarketingEventDefaultResponse';
+import { MarketingEventEmailSubscriber } from '../models/MarketingEventEmailSubscriber';
+import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
+import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPublicDefaultResponse';
+import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublicReadResponse';
+import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
+import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
+import { ModelError } from '../models/ModelError';
+import { PropertyValue     , PropertyValueSourceEnum          } from '../models/PropertyValue';
+import { StandardError } from '../models/StandardError';
+import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
+import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -277,6 +277,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -290,6 +294,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

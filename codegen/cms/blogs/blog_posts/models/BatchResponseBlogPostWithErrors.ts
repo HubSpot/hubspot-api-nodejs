@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { BlogPost } from './BlogPost';
-import { StandardError } from './StandardError';
+import { BlogPost } from '../models/BlogPost';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 /**

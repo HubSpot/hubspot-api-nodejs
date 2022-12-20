@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { IndexedField } from './IndexedField';
+import { IndexedField } from '../models/IndexedField';
 import { HttpFile } from '../http/http';
 
 /**

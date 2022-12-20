@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { TaxType } from './TaxType';
-import { UnitPrice } from './UnitPrice';
+import { TaxType } from '../models/TaxType';
+import { UnitPrice } from '../models/UnitPrice';
 import { HttpFile } from '../http/http';
 
 /**

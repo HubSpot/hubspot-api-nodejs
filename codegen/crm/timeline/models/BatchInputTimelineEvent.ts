@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TimelineEvent } from './TimelineEvent';
+import { TimelineEvent } from '../models/TimelineEvent';
 import { HttpFile } from '../http/http';
 
 /**

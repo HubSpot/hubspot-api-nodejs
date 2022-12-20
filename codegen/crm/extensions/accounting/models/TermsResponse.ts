@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AccountingExtensionTerm } from './AccountingExtensionTerm';
+import { AccountingExtensionTerm } from '../models/AccountingExtensionTerm';
 import { HttpFile } from '../http/http';
 
 /**

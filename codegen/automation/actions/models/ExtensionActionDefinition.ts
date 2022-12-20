@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { ActionFunctionIdentifier } from './ActionFunctionIdentifier';
-import { ActionLabels } from './ActionLabels';
-import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from './ExtensionActionDefinitionPatchInputFieldDependenciesInner';
-import { InputFieldDefinition } from './InputFieldDefinition';
-import { ObjectRequestOptions } from './ObjectRequestOptions';
+import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
+import { ActionLabels } from '../models/ActionLabels';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
+import { InputFieldDefinition } from '../models/InputFieldDefinition';
+import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
 import { HttpFile } from '../http/http';
 
 /**

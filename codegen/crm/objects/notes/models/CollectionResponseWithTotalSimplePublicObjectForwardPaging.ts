@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { SimplePublicObject } from './SimplePublicObject';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { SimplePublicObject } from '../models/SimplePublicObject';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {

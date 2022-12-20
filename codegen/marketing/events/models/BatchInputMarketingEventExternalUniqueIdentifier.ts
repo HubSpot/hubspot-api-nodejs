@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { MarketingEventExternalUniqueIdentifier } from './MarketingEventExternalUniqueIdentifier';
+import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
 import { HttpFile } from '../http/http';
 
 export class BatchInputMarketingEventExternalUniqueIdentifier {

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectInput } from './SimplePublicObjectInput';
+import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { HttpFile } from '../http/http';
 
 export class BatchInputSimplePublicObjectInput {

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AssociatedId } from './AssociatedId';
-import { PublicObjectId } from './PublicObjectId';
+import { AssociatedId } from '../models/AssociatedId';
+import { PublicObjectId } from '../models/PublicObjectId';
 import { HttpFile } from '../http/http';
 
 export class PublicAssociationMulti {

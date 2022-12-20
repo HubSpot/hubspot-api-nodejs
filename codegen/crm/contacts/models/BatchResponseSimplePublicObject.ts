@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObject } from './SimplePublicObject';
+import { SimplePublicObject } from '../models/SimplePublicObject';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseSimplePublicObject {

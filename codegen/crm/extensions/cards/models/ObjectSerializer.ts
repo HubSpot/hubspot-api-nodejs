@@ -1,46 +1,46 @@
-export * from './ActionConfirmationBody';
-export * from './ActionHookActionBody';
-export * from './CardActions';
-export * from './CardCreateRequest';
-export * from './CardDisplayBody';
-export * from './CardDisplayProperty';
-export * from './CardFetchBody';
-export * from './CardFetchBodyPatch';
-export * from './CardListResponse';
-export * from './CardObjectTypeBody';
-export * from './CardPatchRequest';
-export * from './CardResponse';
-export * from './DisplayOption';
-export * from './ErrorDetail';
-export * from './IFrameActionBody';
-export * from './IntegratorCardPayloadResponse';
-export * from './IntegratorObjectResult';
-export * from './IntegratorObjectResultActionsInner';
-export * from './ModelError';
-export * from './ObjectToken';
-export * from './TopLevelActions';
+export * from '../models/ActionConfirmationBody';
+export * from '../models/ActionHookActionBody';
+export * from '../models/CardActions';
+export * from '../models/CardCreateRequest';
+export * from '../models/CardDisplayBody';
+export * from '../models/CardDisplayProperty';
+export * from '../models/CardFetchBody';
+export * from '../models/CardFetchBodyPatch';
+export * from '../models/CardListResponse';
+export * from '../models/CardObjectTypeBody';
+export * from '../models/CardPatchRequest';
+export * from '../models/CardResponse';
+export * from '../models/DisplayOption';
+export * from '../models/ErrorDetail';
+export * from '../models/IFrameActionBody';
+export * from '../models/IntegratorCardPayloadResponse';
+export * from '../models/IntegratorObjectResult';
+export * from '../models/IntegratorObjectResultActionsInner';
+export * from '../models/ModelError';
+export * from '../models/ObjectToken';
+export * from '../models/TopLevelActions';
 
-import { ActionConfirmationBody } from './ActionConfirmationBody';
-import { ActionHookActionBody, ActionHookActionBodyTypeEnum   , ActionHookActionBodyHttpMethodEnum      } from './ActionHookActionBody';
-import { CardActions } from './CardActions';
-import { CardCreateRequest } from './CardCreateRequest';
-import { CardDisplayBody } from './CardDisplayBody';
-import { CardDisplayProperty  , CardDisplayPropertyDataTypeEnum    } from './CardDisplayProperty';
-import { CardFetchBody } from './CardFetchBody';
-import { CardFetchBodyPatch } from './CardFetchBodyPatch';
-import { CardListResponse } from './CardListResponse';
-import { CardObjectTypeBody, CardObjectTypeBodyNameEnum    } from './CardObjectTypeBody';
-import { CardPatchRequest } from './CardPatchRequest';
-import { CardResponse } from './CardResponse';
-import { DisplayOption  , DisplayOptionTypeEnum   } from './DisplayOption';
-import { ErrorDetail } from './ErrorDetail';
-import { IFrameActionBody, IFrameActionBodyTypeEnum        } from './IFrameActionBody';
-import { IntegratorCardPayloadResponse     , IntegratorCardPayloadResponseResponseVersionEnum   } from './IntegratorCardPayloadResponse';
-import { IntegratorObjectResult } from './IntegratorObjectResult';
-import { IntegratorObjectResultActionsInner, IntegratorObjectResultActionsInnerTypeEnum   , IntegratorObjectResultActionsInnerHttpMethodEnum        } from './IntegratorObjectResultActionsInner';
-import { ModelError } from './ModelError';
-import { ObjectToken  , ObjectTokenDataTypeEnum    } from './ObjectToken';
-import { TopLevelActions } from './TopLevelActions';
+import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
+import { ActionHookActionBody, ActionHookActionBodyTypeEnum   , ActionHookActionBodyHttpMethodEnum      } from '../models/ActionHookActionBody';
+import { CardActions } from '../models/CardActions';
+import { CardCreateRequest } from '../models/CardCreateRequest';
+import { CardDisplayBody } from '../models/CardDisplayBody';
+import { CardDisplayProperty  , CardDisplayPropertyDataTypeEnum    } from '../models/CardDisplayProperty';
+import { CardFetchBody } from '../models/CardFetchBody';
+import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
+import { CardListResponse } from '../models/CardListResponse';
+import { CardObjectTypeBody, CardObjectTypeBodyNameEnum    } from '../models/CardObjectTypeBody';
+import { CardPatchRequest } from '../models/CardPatchRequest';
+import { CardResponse } from '../models/CardResponse';
+import { DisplayOption  , DisplayOptionTypeEnum   } from '../models/DisplayOption';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { IFrameActionBody, IFrameActionBodyTypeEnum        } from '../models/IFrameActionBody';
+import { IntegratorCardPayloadResponse     , IntegratorCardPayloadResponseResponseVersionEnum   } from '../models/IntegratorCardPayloadResponse';
+import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
+import { IntegratorObjectResultActionsInner, IntegratorObjectResultActionsInnerTypeEnum   , IntegratorObjectResultActionsInnerHttpMethodEnum        } from '../models/IntegratorObjectResultActionsInner';
+import { ModelError } from '../models/ModelError';
+import { ObjectToken  , ObjectTokenDataTypeEnum    } from '../models/ObjectToken';
+import { TopLevelActions } from '../models/TopLevelActions';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -267,6 +267,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -280,6 +284,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

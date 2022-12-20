@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BlogPost } from './BlogPost';
+import { BlogPost } from '../models/BlogPost';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { IntegratorObjectResult } from './IntegratorObjectResult';
-import { TopLevelActions } from './TopLevelActions';
+import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
+import { TopLevelActions } from '../models/TopLevelActions';
 import { HttpFile } from '../http/http';
 
 /**

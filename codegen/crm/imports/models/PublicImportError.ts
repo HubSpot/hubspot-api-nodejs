@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ImportRowCore } from './ImportRowCore';
+import { ImportRowCore } from '../models/ImportRowCore';
 import { HttpFile } from '../http/http';
 
 export class PublicImportError {

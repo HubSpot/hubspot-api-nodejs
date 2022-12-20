@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ActionFunctionIdentifier } from './ActionFunctionIdentifier';
+import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseActionFunctionIdentifierNoPaging {

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { StandardError } from './StandardError';
-import { TimelineEventResponse } from './TimelineEventResponse';
+import { StandardError } from '../models/StandardError';
+import { TimelineEventResponse } from '../models/TimelineEventResponse';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseTimelineEventResponseWithErrors {

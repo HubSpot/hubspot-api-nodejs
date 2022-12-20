@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { MarketingEventPublicDefaultResponse } from './MarketingEventPublicDefaultResponse';
-import { StandardError } from './StandardError';
+import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPublicDefaultResponse';
+import { StandardError } from '../models/StandardError';
 import { HttpFile } from '../http/http';
 
 export class BatchResponseMarketingEventPublicDefaultResponse {

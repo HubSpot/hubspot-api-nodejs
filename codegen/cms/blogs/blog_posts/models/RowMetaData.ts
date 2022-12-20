@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Styles } from './Styles';
+import { Styles } from '../models/Styles';
 import { HttpFile } from '../http/http';
 
 export class RowMetaData {

@@ -1,18 +1,18 @@
-export * from './CollectionResponsePublicOwnerForwardPaging';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './PublicOwner';
-export * from './PublicTeam';
+export * from '../models/CollectionResponsePublicOwnerForwardPaging';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/PublicOwner';
+export * from '../models/PublicTeam';
 
-import { CollectionResponsePublicOwnerForwardPaging } from './CollectionResponsePublicOwnerForwardPaging';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { PublicOwner } from './PublicOwner';
-import { PublicTeam } from './PublicTeam';
+import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { PublicOwner } from '../models/PublicOwner';
+import { PublicTeam } from '../models/PublicTeam';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -215,6 +215,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -228,6 +232,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

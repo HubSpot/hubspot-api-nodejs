@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Tag } from './Tag';
+import { Tag } from '../models/Tag';
 import { HttpFile } from '../http/http';
 
 /**

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ActionConfirmationBody } from './ActionConfirmationBody';
+import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 import { HttpFile } from '../http/http';
 
 export class ActionHookActionBody {

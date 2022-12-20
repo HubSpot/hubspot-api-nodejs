@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BlogAuthor } from './BlogAuthor';
+import { BlogAuthor } from '../models/BlogAuthor';
 import { HttpFile } from '../http/http';
 
 /**

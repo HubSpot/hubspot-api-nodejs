@@ -1,16 +1,16 @@
-export * from './ActionResponse';
-export * from './AssetFileMetadata';
-export * from './ErrorDetail';
-export * from './FileExtractRequest';
-export * from './ModelError';
-export * from './TaskLocator';
+export * from '../models/ActionResponse';
+export * from '../models/AssetFileMetadata';
+export * from '../models/ErrorDetail';
+export * from '../models/FileExtractRequest';
+export * from '../models/ModelError';
+export * from '../models/TaskLocator';
 
-import { ActionResponse, ActionResponseStatusEnum       } from './ActionResponse';
-import { AssetFileMetadata } from './AssetFileMetadata';
-import { ErrorDetail } from './ErrorDetail';
-import { FileExtractRequest } from './FileExtractRequest';
-import { ModelError } from './ModelError';
-import { TaskLocator } from './TaskLocator';
+import { ActionResponse, ActionResponseStatusEnum       } from '../models/ActionResponse';
+import { AssetFileMetadata } from '../models/AssetFileMetadata';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { FileExtractRequest } from '../models/FileExtractRequest';
+import { ModelError } from '../models/ModelError';
+import { TaskLocator } from '../models/TaskLocator';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -213,6 +213,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -226,6 +230,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

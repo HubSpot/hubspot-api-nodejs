@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from './ForwardPaging';
-import { Tag } from './Tag';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { Tag } from '../models/Tag';
 import { HttpFile } from '../http/http';
 
 /**

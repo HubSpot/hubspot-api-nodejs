@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from './Paging';
-import { PublicAuditLog } from './PublicAuditLog';
+import { Paging } from '../models/Paging';
+import { PublicAuditLog } from '../models/PublicAuditLog';
 import { HttpFile } from '../http/http';
 
 /**

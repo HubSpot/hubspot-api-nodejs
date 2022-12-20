@@ -1,14 +1,14 @@
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './SettingsPatchRequest';
-export * from './SettingsRequest';
-export * from './SettingsResponse';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/SettingsPatchRequest';
+export * from '../models/SettingsRequest';
+export * from '../models/SettingsResponse';
 
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { SettingsPatchRequest } from './SettingsPatchRequest';
-import { SettingsRequest } from './SettingsRequest';
-import { SettingsResponse } from './SettingsResponse';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
+import { SettingsRequest } from '../models/SettingsRequest';
+import { SettingsResponse } from '../models/SettingsResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -209,6 +209,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -222,6 +226,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

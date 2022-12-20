@@ -1,18 +1,18 @@
-export * from './CollectionResponseWithTotalUrlMappingForwardPaging';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './UrlMapping';
-export * from './UrlMappingCreateRequestBody';
+export * from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/UrlMapping';
+export * from '../models/UrlMappingCreateRequestBody';
 
-import { CollectionResponseWithTotalUrlMappingForwardPaging } from './CollectionResponseWithTotalUrlMappingForwardPaging';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { UrlMapping } from './UrlMapping';
-import { UrlMappingCreateRequestBody } from './UrlMappingCreateRequestBody';
+import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { UrlMapping } from '../models/UrlMapping';
+import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -215,6 +215,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -228,6 +232,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

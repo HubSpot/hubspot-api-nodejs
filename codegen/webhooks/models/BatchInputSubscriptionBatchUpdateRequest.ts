@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SubscriptionBatchUpdateRequest } from './SubscriptionBatchUpdateRequest';
+import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
 import { HttpFile } from '../http/http';
 
 export class BatchInputSubscriptionBatchUpdateRequest {

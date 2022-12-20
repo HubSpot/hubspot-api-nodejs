@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CardResponse } from './CardResponse';
+import { CardResponse } from '../models/CardResponse';
 import { HttpFile } from '../http/http';
 
 /**

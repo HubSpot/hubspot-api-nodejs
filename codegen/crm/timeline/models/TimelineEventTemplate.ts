@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { TimelineEventTemplateToken } from './TimelineEventTemplateToken';
+import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
 import { HttpFile } from '../http/http';
 
 /**

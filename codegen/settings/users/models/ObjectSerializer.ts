@@ -1,28 +1,28 @@
-export * from './CollectionResponsePublicPermissionSetNoPaging';
-export * from './CollectionResponsePublicTeamNoPaging';
-export * from './CollectionResponsePublicUserForwardPaging';
-export * from './ErrorDetail';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './PublicPermissionSet';
-export * from './PublicTeam';
-export * from './PublicUser';
-export * from './PublicUserUpdate';
-export * from './UserProvisionRequest';
+export * from '../models/CollectionResponsePublicPermissionSetNoPaging';
+export * from '../models/CollectionResponsePublicTeamNoPaging';
+export * from '../models/CollectionResponsePublicUserForwardPaging';
+export * from '../models/ErrorDetail';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/PublicPermissionSet';
+export * from '../models/PublicTeam';
+export * from '../models/PublicUser';
+export * from '../models/PublicUserUpdate';
+export * from '../models/UserProvisionRequest';
 
-import { CollectionResponsePublicPermissionSetNoPaging } from './CollectionResponsePublicPermissionSetNoPaging';
-import { CollectionResponsePublicTeamNoPaging } from './CollectionResponsePublicTeamNoPaging';
-import { CollectionResponsePublicUserForwardPaging } from './CollectionResponsePublicUserForwardPaging';
-import { ErrorDetail } from './ErrorDetail';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { PublicPermissionSet } from './PublicPermissionSet';
-import { PublicTeam } from './PublicTeam';
-import { PublicUser } from './PublicUser';
-import { PublicUserUpdate } from './PublicUserUpdate';
-import { UserProvisionRequest } from './UserProvisionRequest';
+import { CollectionResponsePublicPermissionSetNoPaging } from '../models/CollectionResponsePublicPermissionSetNoPaging';
+import { CollectionResponsePublicTeamNoPaging } from '../models/CollectionResponsePublicTeamNoPaging';
+import { CollectionResponsePublicUserForwardPaging } from '../models/CollectionResponsePublicUserForwardPaging';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { PublicPermissionSet } from '../models/PublicPermissionSet';
+import { PublicTeam } from '../models/PublicTeam';
+import { PublicUser } from '../models/PublicUser';
+import { PublicUserUpdate } from '../models/PublicUserUpdate';
+import { UserProvisionRequest } from '../models/UserProvisionRequest';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -230,6 +230,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -243,6 +247,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

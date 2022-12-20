@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from './NextPage';
+import { NextPage } from '../models/NextPage';
 import { HttpFile } from '../http/http';
 
 export class ForwardPaging {

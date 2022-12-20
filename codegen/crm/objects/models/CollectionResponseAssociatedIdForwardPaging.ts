@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AssociatedId } from './AssociatedId';
-import { ForwardPaging } from './ForwardPaging';
+import { AssociatedId } from '../models/AssociatedId';
+import { ForwardPaging } from '../models/ForwardPaging';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponseAssociatedIdForwardPaging {

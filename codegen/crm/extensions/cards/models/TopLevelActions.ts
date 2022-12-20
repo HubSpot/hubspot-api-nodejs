@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { IFrameActionBody } from './IFrameActionBody';
-import { IntegratorObjectResultActionsInner } from './IntegratorObjectResultActionsInner';
+import { IFrameActionBody } from '../models/IFrameActionBody';
+import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
 import { HttpFile } from '../http/http';
 
 export class TopLevelActions {

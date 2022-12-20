@@ -1,28 +1,28 @@
-export * from './CollectionResponsePipelineNoPaging';
-export * from './CollectionResponsePipelineStageNoPaging';
-export * from './CollectionResponsePublicAuditInfoNoPaging';
-export * from './ErrorDetail';
-export * from './ModelError';
-export * from './Pipeline';
-export * from './PipelineInput';
-export * from './PipelinePatchInput';
-export * from './PipelineStage';
-export * from './PipelineStageInput';
-export * from './PipelineStagePatchInput';
-export * from './PublicAuditInfo';
+export * from '../models/CollectionResponsePipelineNoPaging';
+export * from '../models/CollectionResponsePipelineStageNoPaging';
+export * from '../models/CollectionResponsePublicAuditInfoNoPaging';
+export * from '../models/ErrorDetail';
+export * from '../models/ModelError';
+export * from '../models/Pipeline';
+export * from '../models/PipelineInput';
+export * from '../models/PipelinePatchInput';
+export * from '../models/PipelineStage';
+export * from '../models/PipelineStageInput';
+export * from '../models/PipelineStagePatchInput';
+export * from '../models/PublicAuditInfo';
 
-import { CollectionResponsePipelineNoPaging } from './CollectionResponsePipelineNoPaging';
-import { CollectionResponsePipelineStageNoPaging } from './CollectionResponsePipelineStageNoPaging';
-import { CollectionResponsePublicAuditInfoNoPaging } from './CollectionResponsePublicAuditInfoNoPaging';
-import { ErrorDetail } from './ErrorDetail';
-import { ModelError } from './ModelError';
-import { Pipeline } from './Pipeline';
-import { PipelineInput } from './PipelineInput';
-import { PipelinePatchInput } from './PipelinePatchInput';
-import { PipelineStage } from './PipelineStage';
-import { PipelineStageInput } from './PipelineStageInput';
-import { PipelineStagePatchInput } from './PipelineStagePatchInput';
-import { PublicAuditInfo } from './PublicAuditInfo';
+import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
+import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
+import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionResponsePublicAuditInfoNoPaging';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { ModelError } from '../models/ModelError';
+import { Pipeline } from '../models/Pipeline';
+import { PipelineInput } from '../models/PipelineInput';
+import { PipelinePatchInput } from '../models/PipelinePatchInput';
+import { PipelineStage } from '../models/PipelineStage';
+import { PipelineStageInput } from '../models/PipelineStageInput';
+import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
+import { PublicAuditInfo } from '../models/PublicAuditInfo';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -230,6 +230,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -243,6 +247,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

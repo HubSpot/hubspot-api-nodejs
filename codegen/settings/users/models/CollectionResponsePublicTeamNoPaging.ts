@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PublicTeam } from './PublicTeam';
+import { PublicTeam } from '../models/PublicTeam';
 import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicTeamNoPaging {

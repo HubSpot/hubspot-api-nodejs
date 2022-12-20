@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ContentSearchResult } from './ContentSearchResult';
+import { ContentSearchResult } from '../models/ContentSearchResult';
 import { HttpFile } from '../http/http';
 
 export class PublicSearchResults {

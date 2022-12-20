@@ -1,44 +1,44 @@
-export * from './CollectionResponseFile';
-export * from './CollectionResponseFolder';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './FileActionResponse';
-export * from './FileUpdateInput';
-export * from './Folder';
-export * from './FolderActionResponse';
-export * from './FolderInput';
-export * from './FolderUpdateInput';
-export * from './FolderUpdateTaskLocator';
-export * from './ImportFromUrlInput';
-export * from './ImportFromUrlTaskLocator';
-export * from './ModelError';
-export * from './ModelFile';
-export * from './NextPage';
-export * from './Paging';
-export * from './PreviousPage';
-export * from './SignedUrl';
-export * from './StandardError';
+export * from '../models/CollectionResponseFile';
+export * from '../models/CollectionResponseFolder';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/FileActionResponse';
+export * from '../models/FileUpdateInput';
+export * from '../models/Folder';
+export * from '../models/FolderActionResponse';
+export * from '../models/FolderInput';
+export * from '../models/FolderUpdateInput';
+export * from '../models/FolderUpdateTaskLocator';
+export * from '../models/ImportFromUrlInput';
+export * from '../models/ImportFromUrlTaskLocator';
+export * from '../models/ModelError';
+export * from '../models/ModelFile';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/SignedUrl';
+export * from '../models/StandardError';
 
-import { CollectionResponseFile } from './CollectionResponseFile';
-import { CollectionResponseFolder } from './CollectionResponseFolder';
-import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { FileActionResponse, FileActionResponseStatusEnum           } from './FileActionResponse';
-import { FileUpdateInput    , FileUpdateInputAccessEnum   } from './FileUpdateInput';
-import { Folder } from './Folder';
-import { FolderActionResponse, FolderActionResponseStatusEnum           } from './FolderActionResponse';
-import { FolderInput } from './FolderInput';
-import { FolderUpdateInput } from './FolderUpdateInput';
-import { FolderUpdateTaskLocator } from './FolderUpdateTaskLocator';
-import { ImportFromUrlInput, ImportFromUrlInputAccessEnum       , ImportFromUrlInputDuplicateValidationStrategyEnum  , ImportFromUrlInputDuplicateValidationScopeEnum    } from './ImportFromUrlInput';
-import { ImportFromUrlTaskLocator } from './ImportFromUrlTaskLocator';
-import { ModelError } from './ModelError';
-import { ModelFile                 , ModelFileAccessEnum   } from './ModelFile';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PreviousPage } from './PreviousPage';
-import { SignedUrl } from './SignedUrl';
-import { StandardError } from './StandardError';
+import { CollectionResponseFile } from '../models/CollectionResponseFile';
+import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
+import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { FileActionResponse, FileActionResponseStatusEnum           } from '../models/FileActionResponse';
+import { FileUpdateInput    , FileUpdateInputAccessEnum   } from '../models/FileUpdateInput';
+import { Folder } from '../models/Folder';
+import { FolderActionResponse, FolderActionResponseStatusEnum           } from '../models/FolderActionResponse';
+import { FolderInput } from '../models/FolderInput';
+import { FolderUpdateInput } from '../models/FolderUpdateInput';
+import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
+import { ImportFromUrlInput, ImportFromUrlInputAccessEnum       , ImportFromUrlInputDuplicateValidationStrategyEnum  , ImportFromUrlInputDuplicateValidationScopeEnum    } from '../models/ImportFromUrlInput';
+import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
+import { ModelError } from '../models/ModelError';
+import { ModelFile                 , ModelFileAccessEnum   } from '../models/ModelFile';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { SignedUrl } from '../models/SignedUrl';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -262,6 +262,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -275,6 +279,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

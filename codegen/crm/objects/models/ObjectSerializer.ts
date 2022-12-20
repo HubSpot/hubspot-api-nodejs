@@ -1,64 +1,64 @@
-export * from './AssociatedId';
-export * from './BatchInputSimplePublicObjectBatchInput';
-export * from './BatchInputSimplePublicObjectId';
-export * from './BatchInputSimplePublicObjectInput';
-export * from './BatchReadInputSimplePublicObjectId';
-export * from './BatchResponseSimplePublicObject';
-export * from './BatchResponseSimplePublicObjectWithErrors';
-export * from './CollectionResponseAssociatedId';
-export * from './CollectionResponseAssociatedIdForwardPaging';
-export * from './CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-export * from './CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-export * from './ErrorCategory';
-export * from './ErrorDetail';
-export * from './Filter';
-export * from './FilterGroup';
-export * from './ForwardPaging';
-export * from './ModelError';
-export * from './NextPage';
-export * from './Paging';
-export * from './PreviousPage';
-export * from './PublicGdprDeleteInput';
-export * from './PublicMergeInput';
-export * from './PublicObjectSearchRequest';
-export * from './SimplePublicObject';
-export * from './SimplePublicObjectBatchInput';
-export * from './SimplePublicObjectId';
-export * from './SimplePublicObjectInput';
-export * from './SimplePublicObjectWithAssociations';
-export * from './StandardError';
-export * from './ValueWithTimestamp';
+export * from '../models/AssociatedId';
+export * from '../models/BatchInputSimplePublicObjectBatchInput';
+export * from '../models/BatchInputSimplePublicObjectId';
+export * from '../models/BatchInputSimplePublicObjectInput';
+export * from '../models/BatchReadInputSimplePublicObjectId';
+export * from '../models/BatchResponseSimplePublicObject';
+export * from '../models/BatchResponseSimplePublicObjectWithErrors';
+export * from '../models/CollectionResponseAssociatedId';
+export * from '../models/CollectionResponseAssociatedIdForwardPaging';
+export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
+export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+export * from '../models/ErrorCategory';
+export * from '../models/ErrorDetail';
+export * from '../models/Filter';
+export * from '../models/FilterGroup';
+export * from '../models/ForwardPaging';
+export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/PublicGdprDeleteInput';
+export * from '../models/PublicMergeInput';
+export * from '../models/PublicObjectSearchRequest';
+export * from '../models/SimplePublicObject';
+export * from '../models/SimplePublicObjectBatchInput';
+export * from '../models/SimplePublicObjectId';
+export * from '../models/SimplePublicObjectInput';
+export * from '../models/SimplePublicObjectWithAssociations';
+export * from '../models/StandardError';
+export * from '../models/ValueWithTimestamp';
 
-import { AssociatedId } from './AssociatedId';
-import { BatchInputSimplePublicObjectBatchInput } from './BatchInputSimplePublicObjectBatchInput';
-import { BatchInputSimplePublicObjectId } from './BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from './BatchInputSimplePublicObjectInput';
-import { BatchReadInputSimplePublicObjectId } from './BatchReadInputSimplePublicObjectId';
-import { BatchResponseSimplePublicObject, BatchResponseSimplePublicObjectStatusEnum        } from './BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors, BatchResponseSimplePublicObjectWithErrorsStatusEnum          } from './BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseAssociatedId } from './CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from './CollectionResponseAssociatedIdForwardPaging';
-import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from './CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from './CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from './ErrorCategory';
-import { ErrorDetail } from './ErrorDetail';
-import { Filter   , FilterOperatorEnum   } from './Filter';
-import { FilterGroup } from './FilterGroup';
-import { ForwardPaging } from './ForwardPaging';
-import { ModelError } from './ModelError';
-import { NextPage } from './NextPage';
-import { Paging } from './Paging';
-import { PreviousPage } from './PreviousPage';
-import { PublicGdprDeleteInput } from './PublicGdprDeleteInput';
-import { PublicMergeInput } from './PublicMergeInput';
-import { PublicObjectSearchRequest } from './PublicObjectSearchRequest';
-import { SimplePublicObject } from './SimplePublicObject';
-import { SimplePublicObjectBatchInput } from './SimplePublicObjectBatchInput';
-import { SimplePublicObjectId } from './SimplePublicObjectId';
-import { SimplePublicObjectInput } from './SimplePublicObjectInput';
-import { SimplePublicObjectWithAssociations } from './SimplePublicObjectWithAssociations';
-import { StandardError } from './StandardError';
-import { ValueWithTimestamp } from './ValueWithTimestamp';
+import { AssociatedId } from '../models/AssociatedId';
+import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
+import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
+import { BatchResponseSimplePublicObject, BatchResponseSimplePublicObjectStatusEnum        } from '../models/BatchResponseSimplePublicObject';
+import { BatchResponseSimplePublicObjectWithErrors, BatchResponseSimplePublicObjectWithErrorsStatusEnum          } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
+import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
+import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { ErrorCategory , ErrorCategoryHttpStatusEnum   } from '../models/ErrorCategory';
+import { ErrorDetail } from '../models/ErrorDetail';
+import { Filter   , FilterOperatorEnum   } from '../models/Filter';
+import { FilterGroup } from '../models/FilterGroup';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ModelError } from '../models/ModelError';
+import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
+import { PublicMergeInput } from '../models/PublicMergeInput';
+import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
+import { SimplePublicObject } from '../models/SimplePublicObject';
+import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
+import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
+import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
+import { StandardError } from '../models/StandardError';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -288,6 +288,10 @@ export class ObjectSerializer {
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
+        if (mediaType === "text/plain") {
+            return String(data);
+        }
+
         if (mediaType === "application/json") {
             return JSON.stringify(data);
         }
@@ -301,6 +305,10 @@ export class ObjectSerializer {
     public static parse(rawData: string, mediaType: string | undefined) {
         if (mediaType === undefined) {
             throw new Error("Cannot parse content. No Content-Type defined.");
+        }
+
+        if (mediaType === "text/plain") {
+            return rawData;
         }
 
         if (mediaType === "application/json") {

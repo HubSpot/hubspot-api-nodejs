@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { IntegratorObjectResultActionsInner } from './IntegratorObjectResultActionsInner';
-import { ObjectToken } from './ObjectToken';
+import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
+import { ObjectToken } from '../models/ObjectToken';
 import { HttpFile } from '../http/http';
 
 export class IntegratorObjectResult {
