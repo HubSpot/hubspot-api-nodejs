@@ -11,7 +11,6 @@
  */
 
 import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseTimelineEventTemplateNoPaging {
     'results': Array<TimelineEventTemplate>;

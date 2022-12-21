@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * A response that contains the PDF of an invoice

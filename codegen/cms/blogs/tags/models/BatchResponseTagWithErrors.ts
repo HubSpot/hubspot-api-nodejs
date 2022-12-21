@@ -12,7 +12,6 @@
 
 import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for batch operations on blog tags with errors.

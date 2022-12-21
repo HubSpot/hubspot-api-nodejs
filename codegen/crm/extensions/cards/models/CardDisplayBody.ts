@@ -11,7 +11,6 @@
  */
 
 import { CardDisplayProperty } from '../models/CardDisplayProperty';
-import { HttpFile } from '../http/http';
 
 /**
 * Configuration for displayed info on a card

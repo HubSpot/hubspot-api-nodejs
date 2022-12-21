@@ -13,7 +13,6 @@
 import { CreateInvoiceFeature } from '../models/CreateInvoiceFeature';
 import { ImportInvoiceFeature } from '../models/ImportInvoiceFeature';
 import { ObjectSyncFeature } from '../models/ObjectSyncFeature';
-import { HttpFile } from '../http/http';
 
 /**
 * Outlines the features that are supported by the external accounting system.

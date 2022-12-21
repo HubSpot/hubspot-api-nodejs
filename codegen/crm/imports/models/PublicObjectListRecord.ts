@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * A summary detailing which list contains the imported objects.

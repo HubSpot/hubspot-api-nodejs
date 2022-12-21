@@ -12,7 +12,6 @@
 
 import { AccountingAppUrls } from '../models/AccountingAppUrls';
 import { AccountingFeatures } from '../models/AccountingFeatures';
-import { HttpFile } from '../http/http';
 
 /**
 * The URL Settings, which defines the URL endpoints that HubSpot will send requests to an external accounting application for certain actions.

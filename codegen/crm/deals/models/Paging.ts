@@ -12,7 +12,6 @@
 
 import { NextPage } from '../models/NextPage';
 import { PreviousPage } from '../models/PreviousPage';
-import { HttpFile } from '../http/http';
 
 export class Paging {
     'next'?: NextPage;

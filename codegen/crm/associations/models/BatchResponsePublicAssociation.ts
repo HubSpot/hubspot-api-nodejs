@@ -12,7 +12,6 @@
 
 import { PublicAssociation } from '../models/PublicAssociation';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 export class BatchResponsePublicAssociation {
     'results': Array<PublicAssociation>;

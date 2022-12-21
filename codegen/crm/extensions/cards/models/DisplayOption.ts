@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * Option definition for STATUS dataTypes.

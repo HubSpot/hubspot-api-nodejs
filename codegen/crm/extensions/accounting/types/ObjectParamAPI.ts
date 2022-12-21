@@ -1,21 +1,10 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AccountingAppSettings } from '../models/AccountingAppSettings';
-import { AccountingAppUrls } from '../models/AccountingAppUrls';
-import { AccountingExtensionCustomer } from '../models/AccountingExtensionCustomer';
-import { AccountingExtensionInvoice } from '../models/AccountingExtensionInvoice';
-import { AccountingExtensionTerm } from '../models/AccountingExtensionTerm';
-import { AccountingFeatures } from '../models/AccountingFeatures';
 import { ActionResponse } from '../models/ActionResponse';
-import { Address } from '../models/Address';
-import { CreateInvoiceFeature } from '../models/CreateInvoiceFeature';
-import { CreateInvoiceSubFeatures } from '../models/CreateInvoiceSubFeatures';
 import { CreateUserAccountRequestExternal } from '../models/CreateUserAccountRequestExternal';
 import { CustomerSearchResponseExternal } from '../models/CustomerSearchResponseExternal';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { ExchangeRateResponse } from '../models/ExchangeRateResponse';
-import { ImportInvoiceFeature } from '../models/ImportInvoiceFeature';
 import { InvoiceCreatePaymentRequest } from '../models/InvoiceCreatePaymentRequest';
 import { InvoicePdfResponse } from '../models/InvoicePdfResponse';
 import { InvoiceReadResponse } from '../models/InvoiceReadResponse';
@@ -23,20 +12,12 @@ import { InvoiceSearchResponse } from '../models/InvoiceSearchResponse';
 import { InvoiceUpdateRequest } from '../models/InvoiceUpdateRequest';
 import { InvoiceUpdateResponse } from '../models/InvoiceUpdateResponse';
 import { InvoicesResponseExternal } from '../models/InvoicesResponseExternal';
-import { ModelError } from '../models/ModelError';
-import { ObjectSyncFeature } from '../models/ObjectSyncFeature';
-import { Product } from '../models/Product';
 import { ProductSearchResponse } from '../models/ProductSearchResponse';
 import { ResultIdAccountingResponse } from '../models/ResultIdAccountingResponse';
 import { SyncContactsRequest } from '../models/SyncContactsRequest';
 import { SyncProductsRequest } from '../models/SyncProductsRequest';
-import { Tax } from '../models/Tax';
 import { TaxSearchResponse } from '../models/TaxSearchResponse';
-import { TaxType } from '../models/TaxType';
 import { TermsResponse } from '../models/TermsResponse';
-import { UnitPrice } from '../models/UnitPrice';
-import { UpdatedContact } from '../models/UpdatedContact';
-import { UpdatedProduct } from '../models/UpdatedProduct';
 
 import { ObservableCallbacksApi } from "./ObservableAPI";
 import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";

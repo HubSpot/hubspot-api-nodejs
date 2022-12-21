@@ -13,7 +13,6 @@
 import { CardActions } from '../models/CardActions';
 import { CardDisplayBody } from '../models/CardDisplayBody';
 import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
-import { HttpFile } from '../http/http';
 
 /**
 * Body for a patch with optional fields

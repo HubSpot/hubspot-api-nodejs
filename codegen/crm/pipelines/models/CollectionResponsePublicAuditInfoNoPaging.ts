@@ -11,7 +11,6 @@
  */
 
 import { PublicAuditInfo } from '../models/PublicAuditInfo';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicAuditInfoNoPaging {
     'results': Array<PublicAuditInfo>;

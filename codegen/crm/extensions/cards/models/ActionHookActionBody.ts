@@ -11,7 +11,6 @@
  */
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
-import { HttpFile } from '../http/http';
 
 export class ActionHookActionBody {
     'type': ActionHookActionBodyTypeEnum;

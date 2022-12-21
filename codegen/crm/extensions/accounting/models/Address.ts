@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * Represents an address of a customer

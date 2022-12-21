@@ -12,7 +12,6 @@
 
 import { BlogAuthor } from '../models/BlogAuthor';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for batch operations on blog authors with errors.

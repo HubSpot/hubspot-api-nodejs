@@ -1,10 +1,7 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ErrorDetail } from '../models/ErrorDetail';
 import { IdentificationTokenGenerationRequest } from '../models/IdentificationTokenGenerationRequest';
 import { IdentificationTokenResponse } from '../models/IdentificationTokenResponse';
-import { ModelError } from '../models/ModelError';
 
 import { ObservableGenerateApi } from "./ObservableAPI";
 import { GenerateApiRequestFactory, GenerateApiResponseProcessor} from "../apis/GenerateApi";

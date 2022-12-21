@@ -11,7 +11,6 @@
  */
 
 import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { HttpFile } from '../http/http';
 
 /**
 * A revision of this custom action.

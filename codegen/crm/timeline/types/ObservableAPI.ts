@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -6,18 +6,12 @@ import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors } from '../models/BatchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
-import { ErrorCategory } from '../models/ErrorCategory';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetail } from '../models/EventDetail';
-import { ModelError } from '../models/ModelError';
-import { StandardError } from '../models/StandardError';
 import { TimelineEvent } from '../models/TimelineEvent';
-import { TimelineEventIFrame } from '../models/TimelineEventIFrame';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 import { TimelineEventTemplate } from '../models/TimelineEventTemplate';
 import { TimelineEventTemplateCreateRequest } from '../models/TimelineEventTemplateCreateRequest';
 import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
-import { TimelineEventTemplateTokenOption } from '../models/TimelineEventTemplateTokenOption';
 import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEventTemplateTokenUpdateRequest';
 import { TimelineEventTemplateUpdateRequest } from '../models/TimelineEventTemplateUpdateRequest';
 

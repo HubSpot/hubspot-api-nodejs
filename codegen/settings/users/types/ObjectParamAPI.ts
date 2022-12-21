@@ -1,15 +1,8 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicPermissionSetNoPaging } from '../models/CollectionResponsePublicPermissionSetNoPaging';
 import { CollectionResponsePublicTeamNoPaging } from '../models/CollectionResponsePublicTeamNoPaging';
 import { CollectionResponsePublicUserForwardPaging } from '../models/CollectionResponsePublicUserForwardPaging';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { PublicPermissionSet } from '../models/PublicPermissionSet';
-import { PublicTeam } from '../models/PublicTeam';
 import { PublicUser } from '../models/PublicUser';
 import { PublicUserUpdate } from '../models/PublicUserUpdate';
 import { UserProvisionRequest } from '../models/UserProvisionRequest';

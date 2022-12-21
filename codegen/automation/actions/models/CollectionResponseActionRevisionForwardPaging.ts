@@ -12,7 +12,6 @@
 
 import { ActionRevision } from '../models/ActionRevision';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseActionRevisionForwardPaging {
     'results': Array<ActionRevision>;

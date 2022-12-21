@@ -11,7 +11,6 @@
  */
 
 import { BlogAuthor } from '../models/BlogAuthor';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for batch operations on blog authors.

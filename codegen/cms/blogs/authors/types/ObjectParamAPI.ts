@@ -1,4 +1,3 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
@@ -11,12 +10,7 @@ import { BlogAuthor } from '../models/BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
 import { CollectionResponseWithTotalBlogAuthorForwardPaging } from '../models/CollectionResponseWithTotalBlogAuthorForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
-import { StandardError } from '../models/StandardError';
 import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
 
 import { ObservableBlogAuthorsApi } from "./ObservableAPI";

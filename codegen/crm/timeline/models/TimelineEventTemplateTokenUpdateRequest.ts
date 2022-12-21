@@ -11,7 +11,6 @@
  */
 
 import { TimelineEventTemplateTokenOption } from '../models/TimelineEventTemplateTokenOption';
-import { HttpFile } from '../http/http';
 
 /**
 * State of the token definition for update requests.

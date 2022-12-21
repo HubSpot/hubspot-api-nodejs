@@ -11,7 +11,6 @@
  */
 
 import { PipelineStageInput } from '../models/PipelineStageInput';
-import { HttpFile } from '../http/http';
 
 /**
 * An input used to create or replace a pipeline's definition.

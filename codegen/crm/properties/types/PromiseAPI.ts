@@ -1,4 +1,3 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
@@ -7,22 +6,12 @@ import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName
 import { BatchResponseProperty } from '../models/BatchResponseProperty';
 import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
 import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
-import { ErrorCategory } from '../models/ErrorCategory';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Option } from '../models/Option';
-import { OptionInput } from '../models/OptionInput';
-import { Paging } from '../models/Paging';
 import { Property } from '../models/Property';
 import { PropertyCreate } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
-import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
-import { PropertyName } from '../models/PropertyName';
 import { PropertyUpdate } from '../models/PropertyUpdate';
-import { StandardError } from '../models/StandardError';
 import { ObservableBatchApi } from './ObservableAPI';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";

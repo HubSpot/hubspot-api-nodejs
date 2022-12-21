@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * Representation of payment terms that are defined in the external accounting system. One of 'dueDays' or 'dueDate' is required.

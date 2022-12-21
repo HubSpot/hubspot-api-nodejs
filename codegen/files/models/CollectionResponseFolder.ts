@@ -12,7 +12,6 @@
 
 import { Folder } from '../models/Folder';
 import { Paging } from '../models/Paging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseFolder {
     'results': Array<Folder>;

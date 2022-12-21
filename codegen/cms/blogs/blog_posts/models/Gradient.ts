@@ -13,7 +13,6 @@
 import { Angle } from '../models/Angle';
 import { ColorStop } from '../models/ColorStop';
 import { SideOrCorner } from '../models/SideOrCorner';
-import { HttpFile } from '../http/http';
 
 export class Gradient {
     'sideOrCorner': SideOrCorner;

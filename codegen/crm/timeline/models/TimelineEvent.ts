@@ -11,7 +11,6 @@
  */
 
 import { TimelineEventIFrame } from '../models/TimelineEventIFrame';
-import { HttpFile } from '../http/http';
 
 /**
 * The state of the timeline event.

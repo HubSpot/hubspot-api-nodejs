@@ -11,7 +11,6 @@
  */
 
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseHubDbTableRowV3 {
     'status'?: BatchResponseHubDbTableRowV3StatusEnum;

@@ -11,7 +11,6 @@
  */
 
 import { PerformanceView } from '../models/PerformanceView';
-import { HttpFile } from '../http/http';
 
 export class PublicPerformanceResponse {
     'data': Array<PerformanceView>;

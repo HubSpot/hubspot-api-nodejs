@@ -11,7 +11,6 @@
  */
 
 import { IndexedField } from '../models/IndexedField';
-import { HttpFile } from '../http/http';
 
 /**
 * The indexed data in HubSpot

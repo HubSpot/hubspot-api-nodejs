@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
     'results': Array<SimplePublicObjectWithAssociations>;

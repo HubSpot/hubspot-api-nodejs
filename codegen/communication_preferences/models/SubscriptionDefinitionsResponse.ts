@@ -11,7 +11,6 @@
  */
 
 import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
-import { HttpFile } from '../http/http';
 
 /**
 * A collection of subscription definitions for the portal.

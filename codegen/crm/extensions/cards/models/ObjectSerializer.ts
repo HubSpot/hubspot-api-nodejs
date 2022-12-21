@@ -21,25 +21,25 @@ export * from '../models/ObjectToken';
 export * from '../models/TopLevelActions';
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
-import { ActionHookActionBody, ActionHookActionBodyTypeEnum   , ActionHookActionBodyHttpMethodEnum      } from '../models/ActionHookActionBody';
+import { ActionHookActionBody      } from '../models/ActionHookActionBody';
 import { CardActions } from '../models/CardActions';
 import { CardCreateRequest } from '../models/CardCreateRequest';
 import { CardDisplayBody } from '../models/CardDisplayBody';
-import { CardDisplayProperty  , CardDisplayPropertyDataTypeEnum    } from '../models/CardDisplayProperty';
+import { CardDisplayProperty      } from '../models/CardDisplayProperty';
 import { CardFetchBody } from '../models/CardFetchBody';
 import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
 import { CardListResponse } from '../models/CardListResponse';
-import { CardObjectTypeBody, CardObjectTypeBodyNameEnum    } from '../models/CardObjectTypeBody';
+import { CardObjectTypeBody    } from '../models/CardObjectTypeBody';
 import { CardPatchRequest } from '../models/CardPatchRequest';
 import { CardResponse } from '../models/CardResponse';
-import { DisplayOption  , DisplayOptionTypeEnum   } from '../models/DisplayOption';
+import { DisplayOption     } from '../models/DisplayOption';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { IFrameActionBody, IFrameActionBodyTypeEnum        } from '../models/IFrameActionBody';
-import { IntegratorCardPayloadResponse     , IntegratorCardPayloadResponseResponseVersionEnum   } from '../models/IntegratorCardPayloadResponse';
+import { IFrameActionBody        } from '../models/IFrameActionBody';
+import { IntegratorCardPayloadResponse        } from '../models/IntegratorCardPayloadResponse';
 import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
-import { IntegratorObjectResultActionsInner, IntegratorObjectResultActionsInnerTypeEnum   , IntegratorObjectResultActionsInnerHttpMethodEnum        } from '../models/IntegratorObjectResultActionsInner';
+import { IntegratorObjectResultActionsInner        } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
-import { ObjectToken  , ObjectTokenDataTypeEnum    } from '../models/ObjectToken';
+import { ObjectToken      } from '../models/ObjectToken';
 import { TopLevelActions } from '../models/TopLevelActions';
 
 /* tslint:disable:no-unused-variable */

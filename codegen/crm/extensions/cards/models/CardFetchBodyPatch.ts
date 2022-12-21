@@ -11,7 +11,6 @@
  */
 
 import { CardObjectTypeBody } from '../models/CardObjectTypeBody';
-import { HttpFile } from '../http/http';
 
 /**
 * Variant of CardFetchBody with fields as optional for patches

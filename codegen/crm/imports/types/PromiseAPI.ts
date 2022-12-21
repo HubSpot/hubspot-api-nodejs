@@ -1,20 +1,10 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
 import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
 import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ImportRowCore } from '../models/ImportRowCore';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
-import { PublicImportError } from '../models/PublicImportError';
-import { PublicImportMetadata } from '../models/PublicImportMetadata';
 import { PublicImportResponse } from '../models/PublicImportResponse';
-import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 import { ObservableCoreApi } from './ObservableAPI';
 
 import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";

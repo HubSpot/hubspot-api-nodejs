@@ -11,7 +11,6 @@
  */
 
 import { Tax } from '../models/Tax';
-import { HttpFile } from '../http/http';
 
 /**
 * A response to a search for taxes.

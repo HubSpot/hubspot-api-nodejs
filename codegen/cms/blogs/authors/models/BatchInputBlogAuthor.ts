@@ -11,7 +11,6 @@
  */
 
 import { BlogAuthor } from '../models/BlogAuthor';
-import { HttpFile } from '../http/http';
 
 /**
 * Wrapper for providing an array of blog authors as inputs.

@@ -11,7 +11,6 @@
  */
 
 import { EventIdView } from '../models/EventIdView';
-import { HttpFile } from '../http/http';
 
 /**
 * Describes the status of an email send request.

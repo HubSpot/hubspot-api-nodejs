@@ -12,7 +12,6 @@
 
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseHubDbTableRowV3WithErrors {
     'status': BatchResponseHubDbTableRowV3WithErrorsStatusEnum;

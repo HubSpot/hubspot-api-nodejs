@@ -11,7 +11,6 @@
  */
 
 import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
-import { HttpFile } from '../http/http';
 
 /**
 * Defines attributes to update on an object type.

@@ -12,7 +12,6 @@
 
 import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
 import { ObjectToken } from '../models/ObjectToken';
-import { HttpFile } from '../http/http';
 
 export class IntegratorObjectResult {
     'id': string;

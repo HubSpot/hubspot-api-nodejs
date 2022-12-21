@@ -1,22 +1,14 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { AssociationDefinition } from '../models/AssociationDefinition';
 import { AssociationDefinitionEgg } from '../models/AssociationDefinitionEgg';
 import { CollectionResponseObjectSchemaNoPaging } from '../models/CollectionResponseObjectSchemaNoPaging';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
 import { ObjectSchema } from '../models/ObjectSchema';
 import { ObjectSchemaEgg } from '../models/ObjectSchemaEgg';
 import { ObjectTypeDefinition } from '../models/ObjectTypeDefinition';
-import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
-import { ObjectTypePropertyCreate } from '../models/ObjectTypePropertyCreate';
-import { Option } from '../models/Option';
-import { OptionInput } from '../models/OptionInput';
-import { Property } from '../models/Property';
-import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 
 import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi";
 export class ObservableCoreApi {

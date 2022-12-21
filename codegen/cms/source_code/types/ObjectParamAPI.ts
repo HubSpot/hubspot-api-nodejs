@@ -1,11 +1,9 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
 import { AssetFileMetadata } from '../models/AssetFileMetadata';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { FileExtractRequest } from '../models/FileExtractRequest';
-import { ModelError } from '../models/ModelError';
 import { TaskLocator } from '../models/TaskLocator';
 
 import { ObservableContentApi } from "./ObservableAPI";

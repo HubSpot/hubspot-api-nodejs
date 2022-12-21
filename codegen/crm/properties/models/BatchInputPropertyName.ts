@@ -11,7 +11,6 @@
  */
 
 import { PropertyName } from '../models/PropertyName';
-import { HttpFile } from '../http/http';
 
 export class BatchInputPropertyName {
     'inputs': Array<PropertyName>;

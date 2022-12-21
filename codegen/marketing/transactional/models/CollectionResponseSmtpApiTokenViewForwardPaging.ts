@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseSmtpApiTokenViewForwardPaging {
     'results': Array<SmtpApiTokenView>;

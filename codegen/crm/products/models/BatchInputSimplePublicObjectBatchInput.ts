@@ -11,7 +11,6 @@
  */
 
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
-import { HttpFile } from '../http/http';
 
 export class BatchInputSimplePublicObjectBatchInput {
     'inputs': Array<SimplePublicObjectBatchInput>;

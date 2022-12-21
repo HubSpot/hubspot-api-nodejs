@@ -11,7 +11,6 @@
  */
 
 import { BlogPost } from '../models/BlogPost';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for batch operations on blog posts.

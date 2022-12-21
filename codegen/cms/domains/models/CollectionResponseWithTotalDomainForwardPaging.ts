@@ -12,7 +12,6 @@
 
 import { Domain } from '../models/Domain';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalDomainForwardPaging {
     'total': number;

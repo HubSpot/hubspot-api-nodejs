@@ -11,7 +11,6 @@
  */
 
 import { CallbackCompletionBatchRequest } from '../models/CallbackCompletionBatchRequest';
-import { HttpFile } from '../http/http';
 
 export class BatchInputCallbackCompletionBatchRequest {
     'inputs': Array<CallbackCompletionBatchRequest>;

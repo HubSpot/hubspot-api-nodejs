@@ -11,7 +11,6 @@
  */
 
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
-import { HttpFile } from '../http/http';
 
 export class SimplePublicObject {
     'id': string;

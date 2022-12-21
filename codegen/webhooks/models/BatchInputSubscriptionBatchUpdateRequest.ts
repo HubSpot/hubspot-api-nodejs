@@ -11,7 +11,6 @@
  */
 
 import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
-import { HttpFile } from '../http/http';
 
 export class BatchInputSubscriptionBatchUpdateRequest {
     'inputs': Array<SubscriptionBatchUpdateRequest>;

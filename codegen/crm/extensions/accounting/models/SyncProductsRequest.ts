@@ -11,7 +11,6 @@
  */
 
 import { UpdatedProduct } from '../models/UpdatedProduct';
-import { HttpFile } from '../http/http';
 
 /**
 * A request to import external accounting product properties in HubSpot

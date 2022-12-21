@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { Tag } from '../models/Tag';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for collections of blog tags with pagination information.

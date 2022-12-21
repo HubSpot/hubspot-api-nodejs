@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { SimplePublicObject } from '../models/SimplePublicObject';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
     'total': number;

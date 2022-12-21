@@ -11,7 +11,6 @@
  */
 
 import { ImportRowCore } from '../models/ImportRowCore';
-import { HttpFile } from '../http/http';
 
 export class PublicImportError {
     'errorType': PublicImportErrorErrorTypeEnum;

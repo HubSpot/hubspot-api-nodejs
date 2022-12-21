@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -10,24 +10,14 @@ import { BatchResponseMarketingEventPublicDefaultResponse } from '../models/Batc
 import { BatchResponseSubscriberEmailResponse } from '../models/BatchResponseSubscriberEmailResponse';
 import { BatchResponseSubscriberVidResponse } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-import { ErrorCategory } from '../models/ErrorCategory';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
 import { MarketingEventCompleteRequestParams } from '../models/MarketingEventCompleteRequestParams';
 import { MarketingEventCreateRequestParams } from '../models/MarketingEventCreateRequestParams';
 import { MarketingEventDefaultResponse } from '../models/MarketingEventDefaultResponse';
-import { MarketingEventEmailSubscriber } from '../models/MarketingEventEmailSubscriber';
-import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
 import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPublicDefaultResponse';
 import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublicReadResponse';
-import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
-import { ModelError } from '../models/ModelError';
-import { PropertyValue } from '../models/PropertyValue';
-import { StandardError } from '../models/StandardError';
-import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
-import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
 
 import { AttendanceSubscriberStateChangesApiRequestFactory, AttendanceSubscriberStateChangesApiResponseProcessor} from "../apis/AttendanceSubscriberStateChangesApi";
 export class ObservableAttendanceSubscriberStateChangesApi {

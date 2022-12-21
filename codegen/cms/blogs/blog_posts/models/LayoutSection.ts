@@ -12,7 +12,6 @@
 
 import { RowMetaData } from '../models/RowMetaData';
 import { Styles } from '../models/Styles';
-import { HttpFile } from '../http/http';
 
 export class LayoutSection {
     'x': number;

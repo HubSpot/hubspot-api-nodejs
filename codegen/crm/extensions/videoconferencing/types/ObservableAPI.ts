@@ -1,10 +1,8 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { ExternalSettings } from '../models/ExternalSettings';
-import { ModelError } from '../models/ModelError';
 
 import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";
 export class ObservableSettingsApi {

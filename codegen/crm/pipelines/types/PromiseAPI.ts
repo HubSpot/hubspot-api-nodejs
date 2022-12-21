@@ -1,18 +1,14 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
 import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
 import { CollectionResponsePublicAuditInfoNoPaging } from '../models/CollectionResponsePublicAuditInfoNoPaging';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
 import { PipelineStage } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
-import { PublicAuditInfo } from '../models/PublicAuditInfo';
 import { ObservablePipelineAuditsApi } from './ObservableAPI';
 
 import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} from "../apis/PipelineAuditsApi";

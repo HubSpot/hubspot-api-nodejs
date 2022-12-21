@@ -6,7 +6,7 @@ export * from '../models/PublicPerformanceResponse';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { PerformanceView } from '../models/PerformanceView';
-import { PublicPerformanceResponse     , PublicPerformanceResponseIntervalEnum  , PublicPerformanceResponsePeriodEnum   } from '../models/PublicPerformanceResponse';
+import { PublicPerformanceResponse        } from '../models/PublicPerformanceResponse';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

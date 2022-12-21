@@ -11,7 +11,6 @@
  */
 
 import { AccountingExtensionInvoice } from '../models/AccountingExtensionInvoice';
-import { HttpFile } from '../http/http';
 
 /**
 * A response to a request for invoices.

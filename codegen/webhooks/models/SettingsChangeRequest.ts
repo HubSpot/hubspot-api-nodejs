@@ -11,7 +11,6 @@
  */
 
 import { ThrottlingSettings } from '../models/ThrottlingSettings';
-import { HttpFile } from '../http/http';
 
 /**
 * New or updated webhook settings for an app.

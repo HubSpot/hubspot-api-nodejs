@@ -1,12 +1,7 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseWithTotalDomainForwardPaging } from '../models/CollectionResponseWithTotalDomainForwardPaging';
 import { Domain } from '../models/Domain';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 
 import { ObservableDomainsApi } from "./ObservableAPI";
 import { DomainsApiRequestFactory, DomainsApiResponseProcessor} from "../apis/DomainsApi";

@@ -13,7 +13,6 @@
 import { BackgroundImage } from '../models/BackgroundImage';
 import { Gradient } from '../models/Gradient';
 import { RGBAColor } from '../models/RGBAColor';
-import { HttpFile } from '../http/http';
 
 export class Styles {
     'verticalAlignment': StylesVerticalAlignmentEnum;

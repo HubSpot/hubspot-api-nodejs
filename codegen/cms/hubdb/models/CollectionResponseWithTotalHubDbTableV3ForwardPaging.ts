@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableV3 } from '../models/HubDbTableV3';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalHubDbTableV3ForwardPaging {
     'total': number;

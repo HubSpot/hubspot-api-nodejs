@@ -12,7 +12,6 @@
 
 import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
 import { TopLevelActions } from '../models/TopLevelActions';
-import { HttpFile } from '../http/http';
 
 /**
 * The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.

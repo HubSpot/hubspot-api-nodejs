@@ -12,7 +12,6 @@
 
 import { IFrameActionBody } from '../models/IFrameActionBody';
 import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectResultActionsInner';
-import { HttpFile } from '../http/http';
 
 export class TopLevelActions {
     'settings'?: IFrameActionBody;

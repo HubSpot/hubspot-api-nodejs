@@ -11,7 +11,6 @@
  */
 
 import { MarketingEventEmailSubscriber } from '../models/MarketingEventEmailSubscriber';
-import { HttpFile } from '../http/http';
 
 /**
 * List of marketing event details to create or update

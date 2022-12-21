@@ -11,7 +11,6 @@
  */
 
 import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
-import { HttpFile } from '../http/http';
 
 /**
 * A request to send a single transactional email asynchronously.

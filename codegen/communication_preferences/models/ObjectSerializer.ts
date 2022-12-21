@@ -8,9 +8,9 @@ export * from '../models/SubscriptionDefinitionsResponse';
 
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { PublicSubscriptionStatus   , PublicSubscriptionStatusStatusEnum  , PublicSubscriptionStatusSourceOfStatusEnum    , PublicSubscriptionStatusLegalBasisEnum    } from '../models/PublicSubscriptionStatus';
+import { PublicSubscriptionStatus           } from '../models/PublicSubscriptionStatus';
 import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
-import { PublicUpdateSubscriptionStatusRequest  , PublicUpdateSubscriptionStatusRequestLegalBasisEnum    } from '../models/PublicUpdateSubscriptionStatusRequest';
+import { PublicUpdateSubscriptionStatusRequest      } from '../models/PublicUpdateSubscriptionStatusRequest';
 import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
 import { SubscriptionDefinitionsResponse } from '../models/SubscriptionDefinitionsResponse';
 

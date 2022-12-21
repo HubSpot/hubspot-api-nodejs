@@ -12,7 +12,6 @@
 
 import { AssociatedId } from '../models/AssociatedId';
 import { PublicObjectId } from '../models/PublicObjectId';
-import { HttpFile } from '../http/http';
 
 export class PublicAssociationMulti {
     '_from': PublicObjectId;

@@ -11,7 +11,6 @@
  */
 
 import { PublicPermissionSet } from '../models/PublicPermissionSet';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicPermissionSetNoPaging {
     'results': Array<PublicPermissionSet>;

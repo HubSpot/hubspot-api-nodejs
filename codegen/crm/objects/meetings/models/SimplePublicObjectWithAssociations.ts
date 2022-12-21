@@ -12,7 +12,6 @@
 
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
-import { HttpFile } from '../http/http';
 
 export class SimplePublicObjectWithAssociations {
     'id': string;

@@ -11,7 +11,6 @@
  */
 
 import { Product } from '../models/Product';
-import { HttpFile } from '../http/http';
 
 /**
 * A response to a search for products.

@@ -1,9 +1,5 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
-import { PerformanceView } from '../models/PerformanceView';
 import { PublicPerformanceResponse } from '../models/PublicPerformanceResponse';
 
 import { ObservablePublicPerformanceApi } from "./ObservableAPI";

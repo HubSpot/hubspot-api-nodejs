@@ -11,7 +11,6 @@
  */
 
 import { CreateInvoiceSubFeatures } from '../models/CreateInvoiceSubFeatures';
-import { HttpFile } from '../http/http';
 
 /**
 * Indicates what elements of creating invoices in HubSpot is supported for the integration.

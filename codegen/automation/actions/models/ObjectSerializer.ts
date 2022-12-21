@@ -23,8 +23,8 @@ export * from '../models/ObjectRequestOptions';
 export * from '../models/Option';
 export * from '../models/SingleFieldDependency';
 
-import { ActionFunction , ActionFunctionFunctionTypeEnum    } from '../models/ActionFunction';
-import { ActionFunctionIdentifier, ActionFunctionIdentifierFunctionTypeEnum    } from '../models/ActionFunctionIdentifier';
+import { ActionFunction     } from '../models/ActionFunction';
+import { ActionFunctionIdentifier    } from '../models/ActionFunctionIdentifier';
 import { ActionLabels } from '../models/ActionLabels';
 import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
@@ -33,20 +33,20 @@ import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
 import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
 import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ConditionalSingleFieldDependency, ConditionalSingleFieldDependencyDependencyTypeEnum      } from '../models/ConditionalSingleFieldDependency';
+import { ConditionalSingleFieldDependency      } from '../models/ConditionalSingleFieldDependency';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
 import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
 import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
-import { ExtensionActionDefinitionPatchInputFieldDependenciesInner, ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum      } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
-import { FieldTypeDefinition , FieldTypeDefinitionTypeEnum  , FieldTypeDefinitionFieldTypeEnum    , FieldTypeDefinitionReferencedObjectTypeEnum   } from '../models/FieldTypeDefinition';
+import { ExtensionActionDefinitionPatchInputFieldDependenciesInner      } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
+import { FieldTypeDefinition        } from '../models/FieldTypeDefinition';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { InputFieldDefinition , InputFieldDefinitionSupportedValueTypesEnum    } from '../models/InputFieldDefinition';
+import { InputFieldDefinition     } from '../models/InputFieldDefinition';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
 import { Option } from '../models/Option';
-import { SingleFieldDependency, SingleFieldDependencyDependencyTypeEnum     } from '../models/SingleFieldDependency';
+import { SingleFieldDependency     } from '../models/SingleFieldDependency';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

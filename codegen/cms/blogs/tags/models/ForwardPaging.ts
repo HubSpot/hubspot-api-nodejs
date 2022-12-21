@@ -11,7 +11,6 @@
  */
 
 import { NextPage } from '../models/NextPage';
-import { HttpFile } from '../http/http';
 
 /**
 * Model definition for forward paging.

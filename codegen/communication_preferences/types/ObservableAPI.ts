@@ -1,13 +1,10 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
 import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
 import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
 import { PublicUpdateSubscriptionStatusRequest } from '../models/PublicUpdateSubscriptionStatusRequest';
-import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
 import { SubscriptionDefinitionsResponse } from '../models/SubscriptionDefinitionsResponse';
 
 import { DefinitionApiRequestFactory, DefinitionApiResponseProcessor} from "../apis/DefinitionApi";

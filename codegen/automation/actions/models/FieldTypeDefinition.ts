@@ -11,7 +11,6 @@
  */
 
 import { Option } from '../models/Option';
-import { HttpFile } from '../http/http';
 
 /**
 * The data type expected by an input field.

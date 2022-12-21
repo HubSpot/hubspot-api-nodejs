@@ -11,7 +11,6 @@
  */
 
 import { PropertyCreate } from '../models/PropertyCreate';
-import { HttpFile } from '../http/http';
 
 export class BatchInputPropertyCreate {
     'inputs': Array<PropertyCreate>;

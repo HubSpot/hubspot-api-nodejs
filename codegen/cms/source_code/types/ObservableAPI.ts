@@ -4,9 +4,7 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { ActionResponse } from '../models/ActionResponse';
 import { AssetFileMetadata } from '../models/AssetFileMetadata';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { FileExtractRequest } from '../models/FileExtractRequest';
-import { ModelError } from '../models/ModelError';
 import { TaskLocator } from '../models/TaskLocator';
 
 import { ContentApiRequestFactory, ContentApiResponseProcessor} from "../apis/ContentApi";

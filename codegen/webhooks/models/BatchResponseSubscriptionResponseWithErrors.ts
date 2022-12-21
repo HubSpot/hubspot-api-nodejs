@@ -12,7 +12,6 @@
 
 import { StandardError } from '../models/StandardError';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseSubscriptionResponseWithErrors {
     'status': BatchResponseSubscriptionResponseWithErrorsStatusEnum;

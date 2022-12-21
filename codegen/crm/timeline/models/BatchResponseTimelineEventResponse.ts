@@ -11,7 +11,6 @@
  */
 
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
-import { HttpFile } from '../http/http';
 
 /**
 * The state of the batch event request.

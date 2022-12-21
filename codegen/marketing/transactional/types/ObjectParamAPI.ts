@@ -1,14 +1,7 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
 import { EmailSendStatusView } from '../models/EmailSendStatusView';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { EventIdView } from '../models/EventIdView';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { PublicSingleSendEmail } from '../models/PublicSingleSendEmail';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';

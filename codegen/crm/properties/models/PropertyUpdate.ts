@@ -11,7 +11,6 @@
  */
 
 import { OptionInput } from '../models/OptionInput';
-import { HttpFile } from '../http/http';
 
 export class PropertyUpdate {
     /**

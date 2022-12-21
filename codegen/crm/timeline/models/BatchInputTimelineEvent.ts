@@ -11,7 +11,6 @@
  */
 
 import { TimelineEvent } from '../models/TimelineEvent';
-import { HttpFile } from '../http/http';
 
 /**
 * Used to create timeline events in batches.

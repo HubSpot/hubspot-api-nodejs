@@ -1,12 +1,6 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicAuditLog } from '../models/CollectionResponsePublicAuditLog';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PublicAuditLog } from '../models/PublicAuditLog';
 
 import { ObservableAuditLogsApi } from "./ObservableAPI";
 import { AuditLogsApiRequestFactory, AuditLogsApiResponseProcessor} from "../apis/AuditLogsApi";

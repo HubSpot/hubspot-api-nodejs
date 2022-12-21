@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { PublicImportError } from '../models/PublicImportError';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicImportErrorForwardPaging {
     'results': Array<PublicImportError>;
