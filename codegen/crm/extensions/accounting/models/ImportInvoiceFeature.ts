@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * Indicates if importing invoices from the external account system into HubSpot is supported for the integration.

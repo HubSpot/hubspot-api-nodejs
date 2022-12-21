@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { UrlMapping } from '../models/UrlMapping';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseWithTotalUrlMappingForwardPaging {
     'total': number;

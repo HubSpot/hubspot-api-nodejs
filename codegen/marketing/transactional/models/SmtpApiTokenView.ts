@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * A SMTP API token provides both an ID and password that can be used to send email through the HubSpot SMTP API.

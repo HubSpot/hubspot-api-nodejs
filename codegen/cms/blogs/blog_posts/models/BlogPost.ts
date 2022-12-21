@@ -12,7 +12,6 @@
 
 import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
 import { LayoutSection } from '../models/LayoutSection';
-import { HttpFile } from '../http/http';
 
 /**
 * Model definition for a Blog Post.

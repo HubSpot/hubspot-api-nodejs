@@ -11,7 +11,6 @@
  */
 
 import { Styles } from '../models/Styles';
-import { HttpFile } from '../http/http';
 
 export class RowMetaData {
     'styles': Styles;

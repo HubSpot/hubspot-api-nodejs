@@ -16,12 +16,12 @@ export * from '../models/Tag';
 export * from '../models/TagCloneRequestVNext';
 export * from '../models/UpdateLanguagesRequestVNext';
 
-import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from '../models/AttachToLangPrimaryRequestVNext';
+import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchInputTag } from '../models/BatchInputTag';
-import { BatchResponseTag, BatchResponseTagStatusEnum        } from '../models/BatchResponseTag';
-import { BatchResponseTagWithErrors, BatchResponseTagWithErrorsStatusEnum          } from '../models/BatchResponseTagWithErrors';
+import { BatchResponseTag        } from '../models/BatchResponseTag';
+import { BatchResponseTagWithErrors          } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -30,9 +30,9 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
-import { Tag  , TagLanguageEnum       } from '../models/Tag';
+import { Tag         } from '../models/Tag';
 import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
-import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from '../models/UpdateLanguagesRequestVNext';
+import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

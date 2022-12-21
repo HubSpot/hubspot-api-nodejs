@@ -12,7 +12,6 @@
 
 import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
 import { Paging } from '../models/Paging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseExternalUnifiedEvent {
     'results': Array<ExternalUnifiedEvent>;

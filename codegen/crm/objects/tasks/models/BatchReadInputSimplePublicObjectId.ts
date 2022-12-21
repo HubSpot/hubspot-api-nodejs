@@ -11,7 +11,6 @@
  */
 
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
-import { HttpFile } from '../http/http';
 
 export class BatchReadInputSimplePublicObjectId {
     'properties': Array<string>;

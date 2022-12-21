@@ -11,7 +11,6 @@
  */
 
 import { Filter } from '../models/Filter';
-import { HttpFile } from '../http/http';
 
 export class FilterGroup {
     'filters': Array<Filter>;

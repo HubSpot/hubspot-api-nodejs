@@ -1,12 +1,8 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 import { UrlMapping } from '../models/UrlMapping';
 import { UrlMappingCreateRequestBody } from '../models/UrlMappingCreateRequestBody';
 

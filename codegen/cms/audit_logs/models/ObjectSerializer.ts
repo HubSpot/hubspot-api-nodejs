@@ -10,7 +10,7 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
-import { PublicAuditLog     , PublicAuditLogEventEnum  , PublicAuditLogObjectTypeEnum   } from '../models/PublicAuditLog';
+import { PublicAuditLog        } from '../models/PublicAuditLog';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

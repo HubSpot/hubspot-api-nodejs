@@ -11,7 +11,6 @@
  */
 
 import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
-import { HttpFile } from '../http/http';
 
 /**
 * An object detailing a summary of the import record outputs

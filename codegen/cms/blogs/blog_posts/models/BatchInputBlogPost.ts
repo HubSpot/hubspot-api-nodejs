@@ -11,7 +11,6 @@
  */
 
 import { BlogPost } from '../models/BlogPost';
-import { HttpFile } from '../http/http';
 
 /**
 * Wrapper for providing an array of blog posts as inputs.

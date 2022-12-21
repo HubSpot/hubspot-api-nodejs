@@ -11,7 +11,6 @@
  */
 
 import { Option } from '../models/Option';
-import { HttpFile } from '../http/http';
 
 export class ColumnRequest {
     /**

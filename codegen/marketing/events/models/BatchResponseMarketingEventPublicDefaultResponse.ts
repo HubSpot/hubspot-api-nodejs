@@ -12,7 +12,6 @@
 
 import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPublicDefaultResponse';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseMarketingEventPublicDefaultResponse {
     'status': BatchResponseMarketingEventPublicDefaultResponseStatusEnum;

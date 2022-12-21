@@ -1,9 +1,6 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ErrorDetail } from '../models/ErrorDetail';
 import { ExternalSettings } from '../models/ExternalSettings';
-import { ModelError } from '../models/ModelError';
 import { ObservableSettingsApi } from './ObservableAPI';
 
 import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";

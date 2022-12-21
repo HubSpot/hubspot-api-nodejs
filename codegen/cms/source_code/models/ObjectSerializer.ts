@@ -5,7 +5,7 @@ export * from '../models/FileExtractRequest';
 export * from '../models/ModelError';
 export * from '../models/TaskLocator';
 
-import { ActionResponse, ActionResponseStatusEnum       } from '../models/ActionResponse';
+import { ActionResponse       } from '../models/ActionResponse';
 import { AssetFileMetadata } from '../models/AssetFileMetadata';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { FileExtractRequest } from '../models/FileExtractRequest';

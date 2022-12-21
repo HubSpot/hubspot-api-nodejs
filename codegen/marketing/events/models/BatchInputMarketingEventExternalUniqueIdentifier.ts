@@ -11,7 +11,6 @@
  */
 
 import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
-import { HttpFile } from '../http/http';
 
 export class BatchInputMarketingEventExternalUniqueIdentifier {
     'inputs': Array<MarketingEventExternalUniqueIdentifier>;

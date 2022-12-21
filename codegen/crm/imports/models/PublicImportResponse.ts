@@ -11,7 +11,6 @@
  */
 
 import { PublicImportMetadata } from '../models/PublicImportMetadata';
-import { HttpFile } from '../http/http';
 
 /**
 * A current summary of the import, whether complete or not.

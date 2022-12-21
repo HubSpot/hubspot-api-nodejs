@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * The URLs of the various actions provided by the video conferencing application. All URLs must use the `https` protocol.

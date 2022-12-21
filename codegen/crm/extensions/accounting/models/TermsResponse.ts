@@ -11,7 +11,6 @@
  */
 
 import { AccountingExtensionTerm } from '../models/AccountingExtensionTerm';
-import { HttpFile } from '../http/http';
 
 /**
 * A response to a search for payment terms.

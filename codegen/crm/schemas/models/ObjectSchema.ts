@@ -13,7 +13,6 @@
 import { AssociationDefinition } from '../models/AssociationDefinition';
 import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { Property } from '../models/Property';
-import { HttpFile } from '../http/http';
 
 /**
 * Defines an object schema, including its properties and associations.

@@ -12,7 +12,6 @@
 
 import { StandardError } from '../models/StandardError';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseTimelineEventResponseWithErrors {
     'status': BatchResponseTimelineEventResponseWithErrorsStatusEnum;

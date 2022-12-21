@@ -11,7 +11,6 @@
  */
 
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
-import { HttpFile } from '../http/http';
 
 /**
 * List of event subscriptions for your app

@@ -12,7 +12,6 @@
 
 import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseExtensionActionDefinitionForwardPaging {
     'results': Array<ExtensionActionDefinition>;

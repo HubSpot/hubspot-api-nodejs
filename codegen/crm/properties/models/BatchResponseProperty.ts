@@ -12,7 +12,6 @@
 
 import { Property } from '../models/Property';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 export class BatchResponseProperty {
     'status': BatchResponsePropertyStatusEnum;

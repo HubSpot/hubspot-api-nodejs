@@ -11,7 +11,6 @@
  */
 
 import { AccountingExtensionCustomer } from '../models/AccountingExtensionCustomer';
-import { HttpFile } from '../http/http';
 
 /**
 * A response to a search for customers.

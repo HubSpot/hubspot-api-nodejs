@@ -1,23 +1,12 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { AssociatedId } from '../models/AssociatedId';
 import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
 import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
-import { ErrorCategory } from '../models/ErrorCategory';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PublicAssociation } from '../models/PublicAssociation';
-import { PublicAssociationDefiniton } from '../models/PublicAssociationDefiniton';
-import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
-import { PublicObjectId } from '../models/PublicObjectId';
-import { StandardError } from '../models/StandardError';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 export class ObservableBatchApi {

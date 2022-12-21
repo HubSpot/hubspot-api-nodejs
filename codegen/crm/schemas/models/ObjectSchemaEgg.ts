@@ -12,7 +12,6 @@
 
 import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { ObjectTypePropertyCreate } from '../models/ObjectTypePropertyCreate';
-import { HttpFile } from '../http/http';
 
 /**
 * Defines a new object type, its properties, and associations.

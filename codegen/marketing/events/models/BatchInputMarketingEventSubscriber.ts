@@ -11,7 +11,6 @@
  */
 
 import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
-import { HttpFile } from '../http/http';
 
 /**
 * List of HubSpot contacts to subscribe to the marketing event

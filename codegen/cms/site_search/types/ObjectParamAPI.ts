@@ -1,11 +1,6 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ContentSearchResult } from '../models/ContentSearchResult';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { IndexedData } from '../models/IndexedData';
-import { IndexedField } from '../models/IndexedField';
-import { ModelError } from '../models/ModelError';
 import { PublicSearchResults } from '../models/PublicSearchResults';
 
 import { ObservablePublicApi } from "./ObservableAPI";

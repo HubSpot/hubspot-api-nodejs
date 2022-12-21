@@ -11,7 +11,6 @@
  */
 
 import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseActionFunctionIdentifierNoPaging {
     'results': Array<ActionFunctionIdentifier>;

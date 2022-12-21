@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
@@ -8,22 +8,12 @@ import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableR
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
-import { Column } from '../models/Column';
-import { ColumnRequest } from '../models/ColumnRequest';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForeignId } from '../models/ForeignId';
-import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
 import { HubDbTableV3 } from '../models/HubDbTableV3';
 import { HubDbTableV3Request } from '../models/HubDbTableV3Request';
 import { ImportResult } from '../models/ImportResult';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Option } from '../models/Option';
-import { SimpleUser } from '../models/SimpleUser';
-import { StandardError } from '../models/StandardError';
 import { ObservableRowsApi } from './ObservableAPI';
 
 import { RowsApiRequestFactory, RowsApiResponseProcessor} from "../apis/RowsApi";

@@ -12,7 +12,6 @@
 
 import { Folder } from '../models/Folder';
 import { StandardError } from '../models/StandardError';
-import { HttpFile } from '../http/http';
 
 export class FolderActionResponse {
     /**

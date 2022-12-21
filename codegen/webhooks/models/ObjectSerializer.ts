@@ -15,20 +15,20 @@ export * from '../models/SubscriptionResponse';
 export * from '../models/ThrottlingSettings';
 
 import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
-import { BatchResponseSubscriptionResponse, BatchResponseSubscriptionResponseStatusEnum        } from '../models/BatchResponseSubscriptionResponse';
-import { BatchResponseSubscriptionResponseWithErrors, BatchResponseSubscriptionResponseWithErrorsStatusEnum          } from '../models/BatchResponseSubscriptionResponseWithErrors';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { BatchResponseSubscriptionResponse        } from '../models/BatchResponseSubscriptionResponse';
+import { BatchResponseSubscriptionResponseWithErrors          } from '../models/BatchResponseSubscriptionResponseWithErrors';
+import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { SettingsChangeRequest } from '../models/SettingsChangeRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
 import { StandardError } from '../models/StandardError';
 import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
-import { SubscriptionCreateRequest, SubscriptionCreateRequestEventTypeEnum     } from '../models/SubscriptionCreateRequest';
+import { SubscriptionCreateRequest     } from '../models/SubscriptionCreateRequest';
 import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionPatchRequest } from '../models/SubscriptionPatchRequest';
-import { SubscriptionResponse, SubscriptionResponseEventTypeEnum        } from '../models/SubscriptionResponse';
-import { ThrottlingSettings , ThrottlingSettingsPeriodEnum   } from '../models/ThrottlingSettings';
+import { SubscriptionResponse        } from '../models/SubscriptionResponse';
+import { ThrottlingSettings    } from '../models/ThrottlingSettings';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

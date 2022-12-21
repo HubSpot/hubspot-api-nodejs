@@ -16,13 +16,13 @@ export * from '../models/SetNewLanguagePrimaryRequestVNext';
 export * from '../models/StandardError';
 export * from '../models/UpdateLanguagesRequestVNext';
 
-import { AttachToLangPrimaryRequestVNext , AttachToLangPrimaryRequestVNextLanguageEnum   , AttachToLangPrimaryRequestVNextPrimaryLanguageEnum   } from '../models/AttachToLangPrimaryRequestVNext';
+import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
-import { BatchResponseBlogAuthor, BatchResponseBlogAuthorStatusEnum        } from '../models/BatchResponseBlogAuthor';
-import { BatchResponseBlogAuthorWithErrors, BatchResponseBlogAuthorWithErrorsStatusEnum          } from '../models/BatchResponseBlogAuthorWithErrors';
-import { BlogAuthor    , BlogAuthorLanguageEnum               } from '../models/BlogAuthor';
+import { BatchResponseBlogAuthor        } from '../models/BatchResponseBlogAuthor';
+import { BatchResponseBlogAuthorWithErrors          } from '../models/BatchResponseBlogAuthorWithErrors';
+import { BlogAuthor                   } from '../models/BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
 import { CollectionResponseWithTotalBlogAuthorForwardPaging } from '../models/CollectionResponseWithTotalBlogAuthorForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
@@ -32,7 +32,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
 import { StandardError } from '../models/StandardError';
-import { UpdateLanguagesRequestVNext , UpdateLanguagesRequestVNextLanguagesEnum   } from '../models/UpdateLanguagesRequestVNext';
+import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [

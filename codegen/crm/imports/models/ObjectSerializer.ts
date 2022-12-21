@@ -13,7 +13,7 @@ export * from '../models/PublicImportMetadata';
 export * from '../models/PublicImportResponse';
 export * from '../models/PublicObjectListRecord';
 
-import { ActionResponse, ActionResponseStatusEnum       } from '../models/ActionResponse';
+import { ActionResponse       } from '../models/ActionResponse';
 import { CollectionResponsePublicImportErrorForwardPaging } from '../models/CollectionResponsePublicImportErrorForwardPaging';
 import { CollectionResponsePublicImportResponse } from '../models/CollectionResponsePublicImportResponse';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -23,9 +23,9 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
-import { PublicImportError, PublicImportErrorErrorTypeEnum   , PublicImportErrorObjectTypeEnum         } from '../models/PublicImportError';
+import { PublicImportError         } from '../models/PublicImportError';
 import { PublicImportMetadata } from '../models/PublicImportMetadata';
-import { PublicImportResponse, PublicImportResponseStateEnum          } from '../models/PublicImportResponse';
+import { PublicImportResponse          } from '../models/PublicImportResponse';
 import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 
 /* tslint:disable:no-unused-variable */

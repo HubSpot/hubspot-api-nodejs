@@ -12,7 +12,6 @@
 
 import { ForwardPaging } from '../models/ForwardPaging';
 import { PublicOwner } from '../models/PublicOwner';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicOwnerForwardPaging {
     'results': Array<PublicOwner>;

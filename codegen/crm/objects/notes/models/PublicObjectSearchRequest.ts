@@ -11,7 +11,6 @@
  */
 
 import { FilterGroup } from '../models/FilterGroup';
-import { HttpFile } from '../http/http';
 
 export class PublicObjectSearchRequest {
     'filterGroups': Array<FilterGroup>;

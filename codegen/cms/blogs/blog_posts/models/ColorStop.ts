@@ -11,7 +11,6 @@
  */
 
 import { RGBAColor } from '../models/RGBAColor';
-import { HttpFile } from '../http/http';
 
 export class ColorStop {
     'color': RGBAColor;

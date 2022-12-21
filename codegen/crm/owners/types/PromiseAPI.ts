@@ -1,13 +1,7 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 import { PublicOwner } from '../models/PublicOwner';
-import { PublicTeam } from '../models/PublicTeam';
 import { ObservableOwnersApi } from './ObservableAPI';
 
 import { OwnersApiRequestFactory, OwnersApiResponseProcessor} from "../apis/OwnersApi";

@@ -11,7 +11,6 @@
  */
 
 import { Paging } from '../models/Paging';
-import { HttpFile } from '../http/http';
 
 /**
 * Collections of files

@@ -11,7 +11,6 @@
  */
 
 import { Address } from '../models/Address';
-import { HttpFile } from '../http/http';
 
 /**
 * Representation of a customer in the external accounting system.

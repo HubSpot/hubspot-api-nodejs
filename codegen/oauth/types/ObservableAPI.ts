@@ -1,10 +1,8 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ModelError } from '../models/ModelError';
 import { RefreshTokenInfoResponse } from '../models/RefreshTokenInfoResponse';
 import { TokenResponseIF } from '../models/TokenResponseIF';
 

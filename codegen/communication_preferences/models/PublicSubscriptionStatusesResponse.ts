@@ -11,7 +11,6 @@
  */
 
 import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
-import { HttpFile } from '../http/http';
 
 /**
 * A collection of subscription statuses for a contact.

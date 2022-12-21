@@ -12,7 +12,6 @@
 
 import { Paging } from '../models/Paging';
 import { PublicImportResponse } from '../models/PublicImportResponse';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePublicImportResponse {
     'results': Array<PublicImportResponse>;

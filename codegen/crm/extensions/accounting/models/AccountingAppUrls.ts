@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * The URL endpoints that HubSpot will send requests to an external accounting system for certain actions.

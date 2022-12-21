@@ -11,7 +11,6 @@
  */
 
 import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
-import { HttpFile } from '../http/http';
 
 export class BatchInputHubDbTableRowV3Request {
     'inputs': Array<HubDbTableRowV3Request>;

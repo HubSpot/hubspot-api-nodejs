@@ -11,7 +11,6 @@
  */
 
 import { PublicAssociation } from '../models/PublicAssociation';
-import { HttpFile } from '../http/http';
 
 export class BatchInputPublicAssociation {
     'inputs': Array<PublicAssociation>;

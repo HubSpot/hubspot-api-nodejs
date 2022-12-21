@@ -4,8 +4,6 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
-import { ErrorCategory } from '../models/ErrorCategory';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { FileActionResponse } from '../models/FileActionResponse';
 import { FileUpdateInput } from '../models/FileUpdateInput';
 import { Folder } from '../models/Folder';
@@ -15,13 +13,7 @@ import { FolderUpdateInput } from '../models/FolderUpdateInput';
 import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
 import { ImportFromUrlInput } from '../models/ImportFromUrlInput';
 import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
-import { ModelError } from '../models/ModelError';
-import { ModelFile } from '../models/ModelFile';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
 import { SignedUrl } from '../models/SignedUrl';
-import { StandardError } from '../models/StandardError';
 
 import { FilesApiRequestFactory, FilesApiResponseProcessor} from "../apis/FilesApi";
 export class ObservableFilesApi {

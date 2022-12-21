@@ -5,9 +5,9 @@ export * from '../models/IndexedField';
 export * from '../models/ModelError';
 export * from '../models/PublicSearchResults';
 
-import { ContentSearchResult  , ContentSearchResultTypeEnum     , ContentSearchResultLanguageEnum             } from '../models/ContentSearchResult';
+import { ContentSearchResult               } from '../models/ContentSearchResult';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { IndexedData , IndexedDataTypeEnum    } from '../models/IndexedData';
+import { IndexedData     } from '../models/IndexedData';
 import { IndexedField } from '../models/IndexedField';
 import { ModelError } from '../models/ModelError';
 import { PublicSearchResults } from '../models/PublicSearchResults';

@@ -11,7 +11,6 @@
  */
 
 import { DisplayOption } from '../models/DisplayOption';
-import { HttpFile } from '../http/http';
 
 /**
 * Definition for a card display property.

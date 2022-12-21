@@ -12,7 +12,6 @@
 
 import { AssociatedId } from '../models/AssociatedId';
 import { Paging } from '../models/Paging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseAssociatedId {
     'results': Array<AssociatedId>;

@@ -11,7 +11,6 @@
  */
 
 import { UpdatedContact } from '../models/UpdatedContact';
-import { HttpFile } from '../http/http';
 
 /**
 * A request to import external accounting contact properties in HubSpot

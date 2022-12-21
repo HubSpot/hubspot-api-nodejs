@@ -11,7 +11,6 @@
  */
 
 import { Tag } from '../models/Tag';
-import { HttpFile } from '../http/http';
 
 /**
 * Wrapper for providing an array of blog tags as inputs.

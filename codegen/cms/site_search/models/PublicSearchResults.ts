@@ -11,7 +11,6 @@
  */
 
 import { ContentSearchResult } from '../models/ContentSearchResult';
-import { HttpFile } from '../http/http';
 
 export class PublicSearchResults {
     'total': number;

@@ -11,7 +11,6 @@
  */
 
 import { PublicObjectId } from '../models/PublicObjectId';
-import { HttpFile } from '../http/http';
 
 export class PublicAssociation {
     '_from': PublicObjectId;

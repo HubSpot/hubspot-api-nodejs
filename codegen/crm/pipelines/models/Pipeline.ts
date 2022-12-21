@@ -11,7 +11,6 @@
  */
 
 import { PipelineStage } from '../models/PipelineStage';
-import { HttpFile } from '../http/http';
 
 /**
 * A pipeline definition.

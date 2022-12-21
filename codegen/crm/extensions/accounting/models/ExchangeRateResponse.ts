@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * A response to the request for an exchange rate value. It represents the exchange rate from the source currency to the target currency.

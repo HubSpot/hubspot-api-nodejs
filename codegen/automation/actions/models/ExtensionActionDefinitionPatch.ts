@@ -14,7 +14,6 @@ import { ActionLabels } from '../models/ActionLabels';
 import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 import { InputFieldDefinition } from '../models/InputFieldDefinition';
 import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
-import { HttpFile } from '../http/http';
 
 /**
 * Fields on custom workflow action to be updated.

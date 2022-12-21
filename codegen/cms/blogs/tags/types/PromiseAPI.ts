@@ -1,4 +1,3 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
@@ -9,12 +8,7 @@ import { BatchResponseTag } from '../models/BatchResponseTag';
 import { BatchResponseTagWithErrors } from '../models/BatchResponseTagWithErrors';
 import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
-import { StandardError } from '../models/StandardError';
 import { Tag } from '../models/Tag';
 import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
 import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';

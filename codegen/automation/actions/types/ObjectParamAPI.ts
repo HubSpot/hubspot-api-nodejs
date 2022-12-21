@@ -1,30 +1,16 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionFunction } from '../models/ActionFunction';
 import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { ActionLabels } from '../models/ActionLabels';
 import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
-import { CallbackCompletionBatchRequest } from '../models/CallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
 import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
 import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ConditionalSingleFieldDependency } from '../models/ConditionalSingleFieldDependency';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
 import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
 import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
-import { ExtensionActionDefinitionPatchInputFieldDependenciesInner } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
-import { FieldTypeDefinition } from '../models/FieldTypeDefinition';
-import { ForwardPaging } from '../models/ForwardPaging';
-import { InputFieldDefinition } from '../models/InputFieldDefinition';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
-import { Option } from '../models/Option';
-import { SingleFieldDependency } from '../models/SingleFieldDependency';
 
 import { ObservableCallbacksApi } from "./ObservableAPI";
 import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";

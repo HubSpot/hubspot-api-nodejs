@@ -12,7 +12,6 @@
 
 import { Paging } from '../models/Paging';
 import { PropertyGroup } from '../models/PropertyGroup';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponsePropertyGroup {
     'results': Array<PropertyGroup>;

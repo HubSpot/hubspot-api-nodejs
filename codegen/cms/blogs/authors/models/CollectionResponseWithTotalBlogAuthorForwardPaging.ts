@@ -12,7 +12,6 @@
 
 import { BlogAuthor } from '../models/BlogAuthor';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for collections of blog authors with pagination information.

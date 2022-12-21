@@ -1,12 +1,6 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
-import { ErrorDetail } from '../models/ErrorDetail';
-import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
-import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
 
 import { ObservableEventsApi } from "./ObservableAPI";
 import { EventsApiRequestFactory, EventsApiResponseProcessor} from "../apis/EventsApi";

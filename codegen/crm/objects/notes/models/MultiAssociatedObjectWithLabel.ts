@@ -11,7 +11,6 @@
  */
 
 import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
-import { HttpFile } from '../http/http';
 
 export class MultiAssociatedObjectWithLabel {
     'toObjectId': number;

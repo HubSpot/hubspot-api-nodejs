@@ -11,7 +11,6 @@
  */
 
 import { ObjectSchema } from '../models/ObjectSchema';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseObjectSchemaNoPaging {
     'results': Array<ObjectSchema>;

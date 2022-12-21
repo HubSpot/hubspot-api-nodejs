@@ -12,7 +12,6 @@
 
 import { Paging } from '../models/Paging';
 import { VersionBlogPost } from '../models/VersionBlogPost';
-import { HttpFile } from '../http/http';
 
 /**
 * Response object for collections of blog post versions with pagination information.

@@ -11,7 +11,6 @@
  */
 
 import { FieldTypeDefinition } from '../models/FieldTypeDefinition';
-import { HttpFile } from '../http/http';
 
 /**
 * Configuration for an input field on the custom action

@@ -12,7 +12,6 @@
 
 import { ErrorCategory } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { HttpFile } from '../http/http';
 
 export class StandardError {
     'status': string;

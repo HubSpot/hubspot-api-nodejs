@@ -11,7 +11,6 @@
  */
 
 import { CardResponse } from '../models/CardResponse';
-import { HttpFile } from '../http/http';
 
 /**
 * List of card definitions

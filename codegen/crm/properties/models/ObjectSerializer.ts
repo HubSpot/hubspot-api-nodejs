@@ -24,10 +24,10 @@ export * from '../models/StandardError';
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
-import { BatchResponseProperty, BatchResponsePropertyStatusEnum          } from '../models/BatchResponseProperty';
+import { BatchResponseProperty          } from '../models/BatchResponseProperty';
 import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
 import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
-import { ErrorCategory, ErrorCategoryHttpStatusEnum    } from '../models/ErrorCategory';
+import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
@@ -35,13 +35,13 @@ import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
 import { Paging } from '../models/Paging';
 import { Property } from '../models/Property';
-import { PropertyCreate  , PropertyCreateTypeEnum  , PropertyCreateFieldTypeEnum          } from '../models/PropertyCreate';
+import { PropertyCreate            } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 import { PropertyName } from '../models/PropertyName';
-import { PropertyUpdate , PropertyUpdateTypeEnum  , PropertyUpdateFieldTypeEnum         } from '../models/PropertyUpdate';
+import { PropertyUpdate          } from '../models/PropertyUpdate';
 import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */

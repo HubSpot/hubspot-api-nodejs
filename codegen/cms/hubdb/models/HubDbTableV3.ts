@@ -12,7 +12,6 @@
 
 import { Column } from '../models/Column';
 import { SimpleUser } from '../models/SimpleUser';
-import { HttpFile } from '../http/http';
 
 /**
 * Model for HubDB table

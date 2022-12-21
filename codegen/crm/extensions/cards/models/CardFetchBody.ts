@@ -11,7 +11,6 @@
  */
 
 import { CardObjectTypeBody } from '../models/CardObjectTypeBody';
-import { HttpFile } from '../http/http';
 
 /**
 * Configuration for this card's data fetch request.

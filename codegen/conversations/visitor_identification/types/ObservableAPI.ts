@@ -1,11 +1,9 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { ErrorDetail } from '../models/ErrorDetail';
 import { IdentificationTokenGenerationRequest } from '../models/IdentificationTokenGenerationRequest';
 import { IdentificationTokenResponse } from '../models/IdentificationTokenResponse';
-import { ModelError } from '../models/ModelError';
 
 import { GenerateApiRequestFactory, GenerateApiResponseProcessor} from "../apis/GenerateApi";
 export class ObservableGenerateApi {

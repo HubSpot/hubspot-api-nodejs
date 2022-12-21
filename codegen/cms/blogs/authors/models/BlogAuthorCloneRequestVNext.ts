@@ -11,7 +11,6 @@
  */
 
 import { BlogAuthor } from '../models/BlogAuthor';
-import { HttpFile } from '../http/http';
 
 /**
 * Request body object for cloning blog authors.

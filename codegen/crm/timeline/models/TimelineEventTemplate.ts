@@ -11,7 +11,6 @@
  */
 
 import { TimelineEventTemplateToken } from '../models/TimelineEventTemplateToken';
-import { HttpFile } from '../http/http';
 
 /**
 * The current state of the template definition.

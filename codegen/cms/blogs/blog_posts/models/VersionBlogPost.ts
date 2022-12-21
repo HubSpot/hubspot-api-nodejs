@@ -12,7 +12,6 @@
 
 import { BlogPost } from '../models/BlogPost';
 import { VersionUser } from '../models/VersionUser';
-import { HttpFile } from '../http/http';
 
 /**
 * Model definition of a version of a blog post.

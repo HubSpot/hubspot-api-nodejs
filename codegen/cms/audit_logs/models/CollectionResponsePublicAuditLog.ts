@@ -12,7 +12,6 @@
 
 import { Paging } from '../models/Paging';
 import { PublicAuditLog } from '../models/PublicAuditLog';
-import { HttpFile } from '../http/http';
 
 /**
 * The collection of audit logs.

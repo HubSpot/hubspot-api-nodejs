@@ -12,7 +12,6 @@
 
 import { Option } from '../models/Option';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
-import { HttpFile } from '../http/http';
 
 /**
 * Defines a property

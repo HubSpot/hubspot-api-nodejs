@@ -12,7 +12,6 @@
 
 import { TaxType } from '../models/TaxType';
 import { UnitPrice } from '../models/UnitPrice';
-import { HttpFile } from '../http/http';
 
 /**
 * Representation of a product in the external accounting system.

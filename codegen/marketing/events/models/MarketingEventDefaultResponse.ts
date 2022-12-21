@@ -11,7 +11,6 @@
  */
 
 import { PropertyValue } from '../models/PropertyValue';
-import { HttpFile } from '../http/http';
 
 export class MarketingEventDefaultResponse {
     /**
