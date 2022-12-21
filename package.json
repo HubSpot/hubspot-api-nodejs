@@ -18,7 +18,6 @@
   "license": "ISC",
   "dependencies": {
     "bottleneck": "^2.19.5",
-    "btoa": "^1.2.1",
     "es6-promise": "^4.2.4",
     "form-data": "^2.5.0",
     "lodash.get": "^4.4.2",
