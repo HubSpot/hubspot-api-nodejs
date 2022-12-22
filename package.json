@@ -23,6 +23,7 @@
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.2",
     "node-fetch": "^2.6.0",
+    "@types/node-fetch": "^2.5.7",
     "url-parse": "^1.4.3"
   },
   "devDependencies": {
@@ -30,7 +31,6 @@
     "@types/lodash.get": "^4.4.7",
     "@types/lodash.merge": "^4.6.7",
     "@types/node": "^12.12.21",
-    "@types/node-fetch": "^2.5.7",
     "@types/url-parse": "1.4.4",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
