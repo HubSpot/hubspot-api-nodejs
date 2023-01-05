@@ -1,7 +1,6 @@
 import get from 'lodash.get'
-import IConfiguration from '../configuration/IConfiguration'
 
-export default class MethodPatcher {
+export default class RetryWrapper {
   public static readonly tenSecondlyRolling = 'TEN_SECONDLY_ROLLING'
   public static readonly secondlyLimitMessage = 'You have reached your secondly limit.'
   public static readonly retryTimeout = {
@@ -10,35 +9,7 @@ export default class MethodPatcher {
     TOO_MANY_SEARCH_REQUESTS: 1000,
   }
 
-  public static patch<Configuration>(config: IConfiguration, apiDiscovery: any, configuration: Configuration) {
-    if (config.numberOfApiCallRetries !== undefined) {
-      const properties = Object.getOwnPropertyNames(apiDiscovery)
-
-      properties.forEach((property) => {
-        const clientPrototype = Object.getPrototypeOf(apiDiscovery[property])
-        const methodsNamesToPatch = Object.getOwnPropertyNames(clientPrototype)
-        const constructorIndex = methodsNamesToPatch.indexOf('constructor')
-
-        if (constructorIndex !== -1) {
-          methodsNamesToPatch.splice(constructorIndex, 1)
-        }
-
-        methodsNamesToPatch.forEach((methodName) => {
-          const methodToPatch = clientPrototype[methodName].bind(apiDiscovery[property])
-          const patchedMethod = this._getRetryWrappedMethod(methodToPatch, config.numberOfApiCallRetries)
-
-          clientPrototype[methodName] = patchedMethod
-        })
-
-        apiDiscovery[property] = new clientPrototype.constructor(configuration)
-      })
-    }
-  }
-
-  protected static _getRetryWrappedMethod(method: any, numberOfApiCallRetries?: number) {
-    if (numberOfApiCallRetries === undefined) {
-      return undefined
-    }
+  public static getWrappedMethod(method: any, numberOfApiCallRetries: number) {
     return async (...args: any) => {
       const numberOfRetries = numberOfApiCallRetries
       let resultSuccess: any

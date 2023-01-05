@@ -16,7 +16,7 @@ import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
 import { getAll } from '../../../services/getAll'
-import MethodPatcher from '../../../services/MethodPatcher'
+import MethodsPatcher from '../../../services/MethodsPatcher'
 
 export default class ContactsDiscovery {
   public associationsApi: AssociationsApi
@@ -44,7 +44,7 @@ export default class ContactsDiscovery {
     this.publicObjectApi = new PublicObjectApi(configuration)
     this.searchApi = new SearchApi(configuration)
 
-    MethodPatcher.patch<Configuration>(config, this, configuration)
+    MethodsPatcher.patch<Configuration>(config, this, configuration)
   }
 
   public async getAll(
