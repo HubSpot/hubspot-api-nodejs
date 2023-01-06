@@ -1,5 +1,5 @@
 import IConfiguration from '../configuration/IConfiguration'
-import RetryWrapper from './wrappers/RetryWrapper'
+import RetryDecorator from './decorators/RetryDecorator'
 
 export default class ApiDecoratorApplier {
   public static apply<APIClass, Configuration>(
@@ -19,7 +19,7 @@ export default class ApiDecoratorApplier {
       methodsNamesToPatch.forEach((methodName) => {
         let patchedMethod = clientPrototype[methodName].bind(api)
         if (config.numberOfApiCallRetries !== undefined) {
-          patchedMethod = RetryWrapper.getWrappedMethod(patchedMethod, config.numberOfApiCallRetries)
+          patchedMethod = RetryDecorator.decorate(patchedMethod, config.numberOfApiCallRetries)
         }
 
         clientPrototype[methodName] = patchedMethod

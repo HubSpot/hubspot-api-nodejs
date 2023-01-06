@@ -1,6 +1,6 @@
 import get from 'lodash.get'
 
-export default class RetryWrapper {
+export default class RetryDecorator {
   public static readonly tenSecondlyRolling = 'TEN_SECONDLY_ROLLING'
   public static readonly secondlyLimitMessage = 'You have reached your secondly limit.'
   public static readonly retryTimeout = {
@@ -14,7 +14,7 @@ export default class RetryWrapper {
     MAX_SERVER_ERROR: 599,
   }
 
-  public static getWrappedMethod(method: any, numberOfApiCallRetries: number) {
+  public static decorate(method: any, numberOfApiCallRetries: number) {
     return async (...args: any) => {
       const numberOfRetries = numberOfApiCallRetries
       let resultSuccess: any
