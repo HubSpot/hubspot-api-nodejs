@@ -30,10 +30,7 @@ export default class RetryDecorator {
 
           const statusCode: number = get(e, 'code', 0)
           console.error(statusCode)
-          if (
-            statusCode >= StatusCodes.minServerError &&
-            statusCode <= StatusCodes.maxServerError
-          ) {
+          if (statusCode >= StatusCodes.minServerError && statusCode <= StatusCodes.maxServerError) {
             await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.INTERNAL_SERVER_ERROR)
             continue
           }
