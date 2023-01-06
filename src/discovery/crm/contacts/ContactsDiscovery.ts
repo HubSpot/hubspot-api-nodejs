@@ -15,8 +15,8 @@ import {
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorApplier from '../../../services/ApiDecoratorApplier'
 import { getAll } from '../../../services/getAll'
-import MethodsPatcher from '../../../services/MethodsPatcher'
 
 export default class ContactsDiscovery {
   public associationsApi: AssociationsApi
@@ -37,14 +37,32 @@ export default class ContactsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = new AssociationsApi(configuration)
-    this.basicApi = new BasicApi(configuration)
-    this.batchApi = new BatchApi(configuration)
-    this.gdprApi = new GDPRApi(configuration)
-    this.publicObjectApi = new PublicObjectApi(configuration)
-    this.searchApi = new SearchApi(configuration)
-
-    MethodsPatcher.patch<Configuration>(config, this, configuration)
+    this.associationsApi = ApiDecoratorApplier.apply<AssociationsApi, Configuration>(
+      new AssociationsApi(configuration),
+      config,
+      configuration,
+    )
+    this.basicApi = ApiDecoratorApplier.apply<BasicApi, Configuration>(
+      new BasicApi(configuration),
+      config,
+      configuration,
+    )
+    this.batchApi = ApiDecoratorApplier.apply<BatchApi, Configuration>(
+      new BatchApi(configuration),
+      config,
+      configuration,
+    )
+    this.gdprApi = ApiDecoratorApplier.apply<GDPRApi, Configuration>(new GDPRApi(configuration), config, configuration)
+    this.publicObjectApi = ApiDecoratorApplier.apply<PublicObjectApi, Configuration>(
+      new PublicObjectApi(configuration),
+      config,
+      configuration,
+    )
+    this.searchApi = ApiDecoratorApplier.apply<SearchApi, Configuration>(
+      new SearchApi(configuration),
+      config,
+      configuration,
+    )
   }
 
   public async getAll(
