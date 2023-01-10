@@ -37,7 +37,7 @@ export class Client {
   }
 
   public init() {
-    let decorators = new Array()
+    const decorators = new Array()
     if (this.config.numberOfApiCallRetries) {
       decorators.push(new RetryDecorator(this.config.numberOfApiCallRetries))
     }
