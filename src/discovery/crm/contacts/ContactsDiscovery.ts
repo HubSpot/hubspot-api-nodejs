@@ -15,7 +15,7 @@ import {
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
-import ApiDecoratorApplier from '../../../services/ApiDecoratorApplier'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import { getAll } from '../../../services/getAll'
 
 export default class ContactsDiscovery {
@@ -37,30 +37,28 @@ export default class ContactsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorApplier.apply<AssociationsApi, Configuration>(
+    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi, Configuration>(
       new AssociationsApi(configuration),
-      config,
       configuration,
     )
-    this.basicApi = ApiDecoratorApplier.apply<BasicApi, Configuration>(
+    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi, Configuration>(
       new BasicApi(configuration),
-      config,
       configuration,
     )
-    this.batchApi = ApiDecoratorApplier.apply<BatchApi, Configuration>(
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
       new BatchApi(configuration),
-      config,
       configuration,
     )
-    this.gdprApi = ApiDecoratorApplier.apply<GDPRApi, Configuration>(new GDPRApi(configuration), config, configuration)
-    this.publicObjectApi = ApiDecoratorApplier.apply<PublicObjectApi, Configuration>(
+    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi, Configuration>(
+      new GDPRApi(configuration),
+      configuration,
+    )
+    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi, Configuration>(
       new PublicObjectApi(configuration),
-      config,
       configuration,
     )
-    this.searchApi = ApiDecoratorApplier.apply<SearchApi, Configuration>(
+    this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi, Configuration>(
       new SearchApi(configuration),
-      config,
       configuration,
     )
   }
