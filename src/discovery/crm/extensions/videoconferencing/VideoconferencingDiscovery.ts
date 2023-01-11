@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../../codegen/crm/extensions/videoconferencing/configuration'
 import {
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../../codegen/crm/extensions/videoconferencing/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class VideoconferencingDiscovery {
   public settingsApi: SettingsApi
@@ -23,6 +25,9 @@ export default class VideoconferencingDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = new SettingsApi(configuration)
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
+      new SettingsApi(configuration),
+      configuration,
+    )
   }
 }

@@ -1,8 +1,9 @@
-import { Configuration, createConfiguration } from '../../../../codegen/crm/tickets/configuration'
 import {
   AssociationsApi,
   BasicApi,
   BatchApi,
+  Configuration,
+  createConfiguration,
   PublicObjectApi,
   RequestContext,
   ResponseContext,

@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../../codegen/crm/extensions/accounting/configuration'
 import {
   CallbacksApi,
+  Configuration,
+  createConfiguration,
   InvoiceApi,
   RequestContext,
   ResponseContext,
@@ -12,6 +13,7 @@ import {
 import { Observable } from '../../../../../codegen/crm/extensions/accounting/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 /**
  * @deprecated
@@ -34,10 +36,25 @@ export default class AccountingDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.callbacksApi = new CallbacksApi(configuration)
-    this.invoiceApi = new InvoiceApi(configuration)
-    this.settingsApi = new SettingsApi(configuration)
-    this.syncApi = new SyncApi(configuration)
-    this.userAccountsApi = new UserAccountsApi(configuration)
+    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi, Configuration>(
+      new CallbacksApi(configuration),
+      configuration,
+    )
+    this.invoiceApi = ApiDecoratorService.getInstance().apply<InvoiceApi, Configuration>(
+      new InvoiceApi(configuration),
+      configuration,
+    )
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
+      new SettingsApi(configuration),
+      configuration,
+    )
+    this.syncApi = ApiDecoratorService.getInstance().apply<SyncApi, Configuration>(
+      new SyncApi(configuration),
+      configuration,
+    )
+    this.userAccountsApi = ApiDecoratorService.getInstance().apply<UserAccountsApi, Configuration>(
+      new UserAccountsApi(configuration),
+      configuration,
+    )
   }
 }

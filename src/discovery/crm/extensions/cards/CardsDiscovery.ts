@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../../codegen/crm/extensions/cards/configuration'
 import {
   CardsApi,
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   SampleResponseApi,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../../../codegen/crm/extensions/cards/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class CardsDiscovery {
   public cardsApi: CardsApi
@@ -25,7 +27,13 @@ export default class CardsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.cardsApi = new CardsApi(configuration)
-    this.sampleResponseApi = new SampleResponseApi(configuration)
+    this.cardsApi = ApiDecoratorService.getInstance().apply<CardsApi, Configuration>(
+      new CardsApi(configuration),
+      configuration,
+    )
+    this.sampleResponseApi = ApiDecoratorService.getInstance().apply<SampleResponseApi, Configuration>(
+      new SampleResponseApi(configuration),
+      configuration,
+    )
   }
 }

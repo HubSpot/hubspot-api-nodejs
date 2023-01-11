@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/crm/associations/configuration'
 import {
   BatchApi,
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../../codegen/crm/associations/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class AssociationsDiscovery {
   public batchApi: BatchApi
@@ -25,7 +27,13 @@ export default class AssociationsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.batchApi = new BatchApi(configuration)
-    this.typesApi = new TypesApi(configuration)
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
+      new BatchApi(configuration),
+      configuration,
+    )
+    this.typesApi = ApiDecoratorService.getInstance().apply<TypesApi, Configuration>(
+      new TypesApi(configuration),
+      configuration,
+    )
   }
 }

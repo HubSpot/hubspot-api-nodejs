@@ -1,8 +1,15 @@
-import { createConfiguration } from '../../../../codegen/crm/owners/configuration'
-import { OwnersApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../../codegen/crm/owners/index'
+import {
+  Configuration,
+  createConfiguration,
+  OwnersApi,
+  RequestContext,
+  ResponseContext,
+  ServerConfiguration,
+} from '../../../../codegen/crm/owners/index'
 import { Observable } from '../../../../codegen/crm/owners/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class OwnersDiscovery {
   public ownersApi: OwnersApi
@@ -18,6 +25,9 @@ export default class OwnersDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.ownersApi = new OwnersApi(configuration)
+    this.ownersApi = ApiDecoratorService.getInstance().apply<OwnersApi, Configuration>(
+      new OwnersApi(configuration),
+      configuration,
+    )
   }
 }

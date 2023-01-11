@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/crm/schemas/configuration'
 import {
+  Configuration,
   CoreApi,
+  createConfiguration,
   PublicObjectSchemasApi,
   RequestContext,
   ResponseContext,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../../codegen/crm/schemas/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class SchemasDiscovery {
   public coreApi: CoreApi
@@ -25,7 +27,13 @@ export default class SchemasDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.coreApi = new CoreApi(configuration)
-    this.publicObjectSchemasApi = new PublicObjectSchemasApi(configuration)
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
+      new CoreApi(configuration),
+      configuration,
+    )
+    this.publicObjectSchemasApi = ApiDecoratorService.getInstance().apply<PublicObjectSchemasApi, Configuration>(
+      new PublicObjectSchemasApi(configuration),
+      configuration,
+    )
   }
 }
