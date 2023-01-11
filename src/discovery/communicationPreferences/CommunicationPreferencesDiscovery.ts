@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../codegen/communication_preferences/configuration'
 import {
+  Configuration,
+  createConfiguration,
   DefinitionApi,
   RequestContext,
   ResponseContext,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import ApiDecoratorService from '../../services/ApiDecoratorService'
 
 export default class CommunicationPreferencesDiscovery {
   public definitionApi: DefinitionApi
@@ -25,7 +27,13 @@ export default class CommunicationPreferencesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.definitionApi = new DefinitionApi(configuration)
-    this.statusApi = new StatusApi(configuration)
+    this.definitionApi = ApiDecoratorService.getInstance().apply<DefinitionApi, Configuration>(
+      new DefinitionApi(configuration),
+      configuration,
+    )
+    this.statusApi = ApiDecoratorService.getInstance().apply<StatusApi, Configuration>(
+      new StatusApi(configuration),
+      configuration,
+    )
   }
 }

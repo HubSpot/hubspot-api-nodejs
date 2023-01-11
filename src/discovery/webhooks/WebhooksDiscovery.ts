@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../codegen/webhooks/configuration'
 import {
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import ApiDecoratorService from '../../services/ApiDecoratorService'
 import { validateSignature } from '../../services/validateSignature'
 
 export default class WebhooksDiscovery {
@@ -26,8 +28,14 @@ export default class WebhooksDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = new SettingsApi(configuration)
-    this.subscriptionsApi = new SubscriptionsApi(configuration)
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
+      new SettingsApi(configuration),
+      configuration,
+    )
+    this.subscriptionsApi = ApiDecoratorService.getInstance().apply<SubscriptionsApi, Configuration>(
+      new SubscriptionsApi(configuration),
+      configuration,
+    )
   }
 
   /**

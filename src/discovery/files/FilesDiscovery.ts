@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../codegen/files/configuration'
 import {
+  Configuration,
+  createConfiguration,
   FilesApi,
   FoldersApi,
   RequestContext,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../codegen/files/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import ApiDecoratorService from '../../services/ApiDecoratorService'
 
 export default class FilesDiscovery {
   public filesApi: FilesApi
@@ -25,7 +27,13 @@ export default class FilesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.filesApi = new FilesApi(configuration)
-    this.foldersApi = new FoldersApi(configuration)
+    this.filesApi = ApiDecoratorService.getInstance().apply<FilesApi, Configuration>(
+      new FilesApi(configuration),
+      configuration,
+    )
+    this.foldersApi = ApiDecoratorService.getInstance().apply<FoldersApi, Configuration>(
+      new FoldersApi(configuration),
+      configuration,
+    )
   }
 }

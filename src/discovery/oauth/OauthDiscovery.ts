@@ -1,7 +1,8 @@
 import * as qs from 'querystring'
-import { createConfiguration } from '../../../codegen/oauth/configuration'
 import {
   AccessTokensApi,
+  Configuration,
+  createConfiguration,
   RefreshTokensApi,
   RequestContext,
   ResponseContext,
@@ -11,6 +12,7 @@ import {
 import { Observable } from '../../../codegen/oauth/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import ApiDecoratorService from '../../services/ApiDecoratorService'
 
 export default class OauthDiscovery {
   public accessTokensApi: AccessTokensApi
@@ -28,9 +30,18 @@ export default class OauthDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.accessTokensApi = new AccessTokensApi(configuration)
-    this.refreshTokensApi = new RefreshTokensApi(configuration)
-    this.tokensApi = new TokensApi(configuration)
+    this.accessTokensApi = ApiDecoratorService.getInstance().apply<AccessTokensApi, Configuration>(
+      new AccessTokensApi(configuration),
+      configuration,
+    )
+    this.refreshTokensApi = ApiDecoratorService.getInstance().apply<RefreshTokensApi, Configuration>(
+      new RefreshTokensApi(configuration),
+      configuration,
+    )
+    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi, Configuration>(
+      new TokensApi(configuration),
+      configuration,
+    )
   }
 
   public getAuthorizationUrl(

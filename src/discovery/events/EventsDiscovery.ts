@@ -1,8 +1,15 @@
-import { createConfiguration } from '../../../codegen/events/configuration'
-import { EventsApi, RequestContext, ResponseContext, ServerConfiguration } from '../../../codegen/events/index'
+import {
+  Configuration,
+  createConfiguration,
+  EventsApi,
+  RequestContext,
+  ResponseContext,
+  ServerConfiguration,
+} from '../../../codegen/events/index'
 import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
+import ApiDecoratorService from '../../services/ApiDecoratorService'
 
 export default class EventsDiscovery {
   public eventsApi: EventsApi
@@ -18,6 +25,9 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.eventsApi = new EventsApi(configuration)
+    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi, Configuration>(
+      new EventsApi(configuration),
+      configuration,
+    )
   }
 }

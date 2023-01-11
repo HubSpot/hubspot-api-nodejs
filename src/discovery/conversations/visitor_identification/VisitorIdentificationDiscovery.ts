@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../codegen/conversations/visitor_identification/configuration'
 import {
+  Configuration,
+  createConfiguration,
   GenerateApi,
   RequestContext,
   ResponseContext,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class VisitorIdentificationDiscovery {
   public generateApi: GenerateApi
@@ -23,6 +25,9 @@ export default class VisitorIdentificationDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.generateApi = new GenerateApi(configuration)
+    this.generateApi = ApiDecoratorService.getInstance().apply<GenerateApi, Configuration>(
+      new GenerateApi(configuration),
+      configuration,
+    )
   }
 }
