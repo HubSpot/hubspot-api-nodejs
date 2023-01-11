@@ -37,12 +37,12 @@ export default class RetryDecorator implements IDecorator {
 
           const statusCode: number = get(e, 'code', 0)
           console.error(statusCode)
-          if (statusCode >= StatusCodes.minServerError && statusCode <= StatusCodes.maxServerError) {
+          if (statusCode >= StatusCodes.MinServerError && statusCode <= StatusCodes.MaxServerError) {
             await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.INTERNAL_SERVER_ERROR)
             continue
           }
 
-          if (statusCode === StatusCodes.tooManyRequests) {
+          if (statusCode === StatusCodes.TooManyRequests) {
             const policyName = get(e, 'body.policyName')
             if (policyName === this.tenSecondlyRolling) {
               await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.TOO_MANY_REQUESTS)

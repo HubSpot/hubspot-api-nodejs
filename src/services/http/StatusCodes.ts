@@ -1,5 +1,5 @@
 export enum StatusCodes {
-  tooManyRequests = 429,
-  minServerError = 500,
-  maxServerError = 599,
+  TooManyRequests = 429,
+  MinServerError = 500,
+  MaxServerError = 599,
 }
