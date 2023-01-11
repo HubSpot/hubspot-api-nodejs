@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/cms/source_code/configuration'
 import {
+  Configuration,
   ContentApi,
+  createConfiguration,
   ExtractApi,
   MetadataApi,
   RequestContext,
@@ -12,6 +13,7 @@ import {
 import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class SourceCodeDiscovery {
   public contentApi: ContentApi
@@ -31,10 +33,25 @@ export default class SourceCodeDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.contentApi = new ContentApi(configuration)
-    this.extractApi = new ExtractApi(configuration)
-    this.metadataApi = new MetadataApi(configuration)
-    this.sourceCodeExtractApi = new SourceCodeExtractApi(configuration)
-    this.validationApi = new ValidationApi(configuration)
+    this.contentApi = ApiDecoratorService.getInstance().apply<ContentApi, Configuration>(
+      new ContentApi(configuration),
+      configuration,
+    )
+    this.extractApi = ApiDecoratorService.getInstance().apply<ExtractApi, Configuration>(
+      new ExtractApi(configuration),
+      configuration,
+    )
+    this.metadataApi = ApiDecoratorService.getInstance().apply<MetadataApi, Configuration>(
+      new MetadataApi(configuration),
+      configuration,
+    )
+    this.sourceCodeExtractApi = ApiDecoratorService.getInstance().apply<SourceCodeExtractApi, Configuration>(
+      new SourceCodeExtractApi(configuration),
+      configuration,
+    )
+    this.validationApi = ApiDecoratorService.getInstance().apply<ValidationApi, Configuration>(
+      new ValidationApi(configuration),
+      configuration,
+    )
   }
 }

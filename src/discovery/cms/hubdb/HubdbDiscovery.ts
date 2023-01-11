@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../codegen/cms/hubdb/configuration'
 import {
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   RowsApi,
@@ -10,6 +11,7 @@ import {
 import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class HubdbDiscovery {
   public rowsApi: RowsApi
@@ -27,8 +29,17 @@ export default class HubdbDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.rowsApi = new RowsApi(configuration)
-    this.rowsBatchApi = new RowsBatchApi(configuration)
-    this.tablesApi = new TablesApi(configuration)
+    this.rowsApi = ApiDecoratorService.getInstance().apply<RowsApi, Configuration>(
+      new RowsApi(configuration),
+      configuration,
+    )
+    this.rowsBatchApi = ApiDecoratorService.getInstance().apply<RowsBatchApi, Configuration>(
+      new RowsBatchApi(configuration),
+      configuration,
+    )
+    this.tablesApi = ApiDecoratorService.getInstance().apply<TablesApi, Configuration>(
+      new TablesApi(configuration),
+      configuration,
+    )
   }
 }

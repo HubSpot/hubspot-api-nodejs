@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../codegen/cms/url_redirects/configuration'
 import {
+  Configuration,
+  createConfiguration,
   RedirectsApi,
   RequestContext,
   ResponseContext,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class UrlRedirectsDiscovery {
   public redirectsApi: RedirectsApi
@@ -23,6 +25,9 @@ export default class UrlRedirectsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.redirectsApi = new RedirectsApi(configuration)
+    this.redirectsApi = ApiDecoratorService.getInstance().apply<RedirectsApi, Configuration>(
+      new RedirectsApi(configuration),
+      configuration,
+    )
   }
 }

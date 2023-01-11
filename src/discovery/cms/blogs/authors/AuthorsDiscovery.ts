@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../../codegen/cms/blogs/authors/configuration'
 import {
   BlogAuthorsApi,
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../../codegen/cms/blogs/authors/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class AuthorsDiscovery {
   public blogAuthorsApi: BlogAuthorsApi
@@ -23,6 +25,9 @@ export default class AuthorsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogAuthorsApi = new BlogAuthorsApi(configuration)
+    this.blogAuthorsApi = ApiDecoratorService.getInstance().apply<BlogAuthorsApi, Configuration>(
+      new BlogAuthorsApi(configuration),
+      configuration,
+    )
   }
 }
