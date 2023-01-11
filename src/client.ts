@@ -38,7 +38,10 @@ export class Client {
 
   public init() {
     const decorators = new Array()
-    if (this.config.numberOfApiCallRetries) {
+    if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
+      if (this.config.numberOfApiCallRetries > 6) {
+        throw new Error('numberOfApiCallRetries can be set to a number from 0 - 6.')
+      }
       decorators.push(new RetryDecorator(this.config.numberOfApiCallRetries))
     }
     ApiDecoratorService.getInstance().setDecorators(decorators)
