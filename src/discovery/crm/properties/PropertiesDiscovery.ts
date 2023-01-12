@@ -1,7 +1,8 @@
-import { createConfiguration } from '../../../../codegen/crm/properties/configuration'
 import {
   BatchApi,
+  Configuration,
   CoreApi,
+  createConfiguration,
   GroupsApi,
   RequestContext,
   ResponseContext,
@@ -10,6 +11,7 @@ import {
 import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class PropertiesDiscovery {
   public batchApi: BatchApi
@@ -27,8 +29,17 @@ export default class PropertiesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.batchApi = new BatchApi(configuration)
-    this.coreApi = new CoreApi(configuration)
-    this.groupsApi = new GroupsApi(configuration)
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
+      new BatchApi(configuration),
+      configuration,
+    )
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
+      new CoreApi(configuration),
+      configuration,
+    )
+    this.groupsApi = ApiDecoratorService.getInstance().apply<GroupsApi, Configuration>(
+      new GroupsApi(configuration),
+      configuration,
+    )
   }
 }

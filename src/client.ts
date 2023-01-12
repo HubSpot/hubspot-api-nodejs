@@ -10,6 +10,8 @@ import type MarketingDiscovery from './discovery/marketing/MarketingDiscovery'
 import type OauthDiscovery from './discovery/oauth/OauthDiscovery'
 import type SettingsDiscovery from './discovery/settings/SettingsDiscovery'
 import type WebhooksDiscovery from './discovery/webhooks/WebhooksDiscovery'
+import ApiDecoratorService from './services/ApiDecoratorService'
+import RetryDecorator from './services/decorators/RetryDecorator'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
@@ -35,6 +37,15 @@ export class Client {
   }
 
   public init() {
+    const decorators = new Array()
+    if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
+      if (this.config.numberOfApiCallRetries > 6) {
+        throw new Error('numberOfApiCallRetries can be set to a number from 0 - 6.')
+      }
+      decorators.push(new RetryDecorator(this.config.numberOfApiCallRetries))
+    }
+    ApiDecoratorService.getInstance().setDecorators(decorators)
+
     this._automation = undefined
     this._cms = undefined
     this._communicationPreferences = undefined

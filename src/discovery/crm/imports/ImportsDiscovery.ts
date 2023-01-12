@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/crm/imports/configuration'
 import {
+  Configuration,
   CoreApi,
+  createConfiguration,
   PublicImportsApi,
   RequestContext,
   ResponseContext,
@@ -9,6 +10,7 @@ import {
 import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class ImportsDiscovery {
   public coreApi: CoreApi
@@ -25,7 +27,13 @@ export default class ImportsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.coreApi = new CoreApi(configuration)
-    this.publicImportsApi = new PublicImportsApi(configuration)
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
+      new CoreApi(configuration),
+      configuration,
+    )
+    this.publicImportsApi = ApiDecoratorService.getInstance().apply<PublicImportsApi, Configuration>(
+      new PublicImportsApi(configuration),
+      configuration,
+    )
   }
 }

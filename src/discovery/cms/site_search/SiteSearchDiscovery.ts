@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../codegen/cms/site_search/configuration'
 import {
+  Configuration,
+  createConfiguration,
   PublicApi,
   RequestContext,
   ResponseContext,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../codegen/cms/site_search/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class SiteSearchDiscovery {
   public publicApi: PublicApi
@@ -23,6 +25,9 @@ export default class SiteSearchDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicApi = new PublicApi(configuration)
+    this.publicApi = ApiDecoratorService.getInstance().apply<PublicApi, Configuration>(
+      new PublicApi(configuration),
+      configuration,
+    )
   }
 }

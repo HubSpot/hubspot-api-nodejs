@@ -4,4 +4,5 @@ export default interface IConfiguration {
   developerApiKey?: string
   basePath?: string
   defaultHeaders?: { [key: string]: string }
+  numberOfApiCallRetries?: number
 }

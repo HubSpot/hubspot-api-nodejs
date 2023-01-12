@@ -1,8 +1,9 @@
-import { Configuration, createConfiguration } from '../../../../codegen/crm/contacts/configuration'
 import {
   AssociationsApi,
   BasicApi,
   BatchApi,
+  Configuration,
+  createConfiguration,
   GDPRApi,
   PublicObjectApi,
   RequestContext,
@@ -14,6 +15,7 @@ import {
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import { getAll } from '../../../services/getAll'
 
 export default class ContactsDiscovery {
@@ -35,12 +37,30 @@ export default class ContactsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = new AssociationsApi(configuration)
-    this.basicApi = new BasicApi(configuration)
-    this.batchApi = new BatchApi(configuration)
-    this.gdprApi = new GDPRApi(configuration)
-    this.publicObjectApi = new PublicObjectApi(configuration)
-    this.searchApi = new SearchApi(configuration)
+    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi, Configuration>(
+      new AssociationsApi(configuration),
+      configuration,
+    )
+    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi, Configuration>(
+      new BasicApi(configuration),
+      configuration,
+    )
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
+      new BatchApi(configuration),
+      configuration,
+    )
+    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi, Configuration>(
+      new GDPRApi(configuration),
+      configuration,
+    )
+    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi, Configuration>(
+      new PublicObjectApi(configuration),
+      configuration,
+    )
+    this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi, Configuration>(
+      new SearchApi(configuration),
+      configuration,
+    )
   }
 
   public async getAll(

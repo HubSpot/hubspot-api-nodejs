@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/automation/actions/configuration'
 import {
   CallbacksApi,
+  Configuration,
+  createConfiguration,
   DefinitionsApi,
   FunctionsApi,
   RequestContext,
@@ -11,6 +12,7 @@ import {
 import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class ActionsDiscovery {
   public callbacksApi: CallbacksApi
@@ -29,9 +31,21 @@ export default class ActionsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.callbacksApi = new CallbacksApi(configuration)
-    this.definitionsApi = new DefinitionsApi(configuration)
-    this.functionsApi = new FunctionsApi(configuration)
-    this.revisionsApi = new RevisionsApi(configuration)
+    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi, Configuration>(
+      new CallbacksApi(configuration),
+      configuration,
+    )
+    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi, Configuration>(
+      new DefinitionsApi(configuration),
+      configuration,
+    )
+    this.functionsApi = ApiDecoratorService.getInstance().apply<FunctionsApi, Configuration>(
+      new FunctionsApi(configuration),
+      configuration,
+    )
+    this.revisionsApi = ApiDecoratorService.getInstance().apply<RevisionsApi, Configuration>(
+      new RevisionsApi(configuration),
+      configuration,
+    )
   }
 }

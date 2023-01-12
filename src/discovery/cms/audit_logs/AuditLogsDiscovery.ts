@@ -1,6 +1,7 @@
-import { createConfiguration } from '../../../../codegen/cms/audit_logs/configuration'
 import {
   AuditLogsApi,
+  Configuration,
+  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class AuditLogsDiscovery {
   public auditLogsApi: AuditLogsApi
@@ -23,6 +25,9 @@ export default class AuditLogsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.auditLogsApi = new AuditLogsApi(configuration)
+    this.auditLogsApi = ApiDecoratorService.getInstance().apply<AuditLogsApi, Configuration>(
+      new AuditLogsApi(configuration),
+      configuration,
+    )
   }
 }

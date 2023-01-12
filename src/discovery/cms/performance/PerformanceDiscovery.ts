@@ -1,5 +1,6 @@
-import { createConfiguration } from '../../../../codegen/cms/performance/configuration'
 import {
+  Configuration,
+  createConfiguration,
   PublicPerformanceApi,
   RequestContext,
   ResponseContext,
@@ -8,6 +9,7 @@ import {
 import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
+import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class PerformanceDiscovery {
   public publicPerformanceApi: PublicPerformanceApi
@@ -23,6 +25,9 @@ export default class PerformanceDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicPerformanceApi = new PublicPerformanceApi(configuration)
+    this.publicPerformanceApi = ApiDecoratorService.getInstance().apply<PublicPerformanceApi, Configuration>(
+      new PublicPerformanceApi(configuration),
+      configuration,
+    )
   }
 }
