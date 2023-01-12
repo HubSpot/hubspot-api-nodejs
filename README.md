@@ -51,7 +51,7 @@ const hubspotClient = new hubspot.Client({
 })
 ```
 
-It's possible to turn on retry for failed requests with statuses 429 or 5xx. To turn on/off configurable retries use numberOfApiCallRetries option on Client instance creation. numberOfApiCallRetries can be set to a number from 0 - 6. If numberOfApiCallRetries is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 * retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed numberOfApiCallRetries value.
+It's possible to turn on retry for failed requests with statuses 429 or 5xx. To turn on/off configurable retries use `numberOfApiCallRetries` option on Client instance creation. `numberOfApiCallRetries` can be set to a number from 0 - 6. If `numberOfApiCallRetries` is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 * retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed `numberOfApiCallRetries` value.
 
 ```javascript
 const hubspotClient = new hubspot.Client({
