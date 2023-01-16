@@ -8,7 +8,7 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
+import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
 /**
  * no description
@@ -77,13 +77,13 @@ export class TypesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePublicAssociationDefiniton > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponsePublicAssociationDefinitionNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponsePublicAssociationDefiniton = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicAssociationDefinitionNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePublicAssociationDefiniton", ""
-            ) as CollectionResponsePublicAssociationDefiniton;
+                "CollectionResponsePublicAssociationDefinitionNoPaging", ""
+            ) as CollectionResponsePublicAssociationDefinitionNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -96,10 +96,10 @@ export class TypesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponsePublicAssociationDefiniton = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicAssociationDefinitionNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePublicAssociationDefiniton", ""
-            ) as CollectionResponsePublicAssociationDefiniton;
+                "CollectionResponsePublicAssociationDefinitionNoPaging", ""
+            ) as CollectionResponsePublicAssociationDefinitionNoPaging;
             return body;
         }
 

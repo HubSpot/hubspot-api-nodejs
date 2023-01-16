@@ -11,6 +11,7 @@
  */
 
 import { AssociatedId } from '../models/AssociatedId';
+import { Paging } from '../models/Paging';
 import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationMulti {
@@ -19,6 +20,7 @@ export class PublicAssociationMulti {
     * The IDs of objects that are associated with the object identified by the ID in 'from'.
     */
     'to': Array<AssociatedId>;
+    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,6 +35,12 @@ export class PublicAssociationMulti {
             "name": "to",
             "baseName": "to",
             "type": "Array<AssociatedId>",
+            "format": ""
+        },
+        {
+            "name": "paging",
+            "baseName": "paging",
+            "type": "Paging",
             "format": ""
         }    ];
 

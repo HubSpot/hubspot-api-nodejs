@@ -4,7 +4,9 @@ import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociati
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
-import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
+import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
+import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
+import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -27,7 +29,7 @@ export interface BatchApiArchiveRequest {
      * @type BatchInputPublicAssociation
      * @memberof BatchApiarchive
      */
-    batchInputPublicAssociation?: BatchInputPublicAssociation
+    batchInputPublicAssociation: BatchInputPublicAssociation
 }
 
 export interface BatchApiCreateRequest {
@@ -48,7 +50,7 @@ export interface BatchApiCreateRequest {
      * @type BatchInputPublicAssociation
      * @memberof BatchApicreate
      */
-    batchInputPublicAssociation?: BatchInputPublicAssociation
+    batchInputPublicAssociation: BatchInputPublicAssociation
 }
 
 export interface BatchApiReadRequest {
@@ -69,7 +71,7 @@ export interface BatchApiReadRequest {
      * @type BatchInputPublicObjectId
      * @memberof BatchApiread
      */
-    batchInputPublicObjectId?: BatchInputPublicObjectId
+    batchInputPublicObjectId: BatchInputPublicObjectId
 }
 
 export class ObjectBatchApi {
@@ -93,7 +95,7 @@ export class ObjectBatchApi {
      * Create a batch of associations
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociation> {
+    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
     }
 
@@ -102,7 +104,7 @@ export class ObjectBatchApi {
      * Read a batch of associations
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMulti> {
+    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
         return this.api.read(param.fromObjectType, param.toObjectType, param.batchInputPublicObjectId,  options).toPromise();
     }
 
@@ -138,7 +140,7 @@ export class ObjectTypesApi {
      * List association types
      * @param param the request object
      */
-    public getAll(param: TypesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefiniton> {
+    public getAll(param: TypesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
         return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 

@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { PublicAssociation } from '../models/PublicAssociation';
+import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
+import { StandardError } from '../models/StandardError';
 
-export class BatchResponsePublicAssociation {
-    'status': BatchResponsePublicAssociationStatusEnum;
-    'results': Array<PublicAssociation>;
+export class BatchResponsePublicAssociationMultiWithErrors {
+    'status': BatchResponsePublicAssociationMultiWithErrorsStatusEnum;
+    'results': Array<PublicAssociationMulti>;
+    'numErrors'?: number;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -26,13 +29,25 @@ export class BatchResponsePublicAssociation {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponsePublicAssociationStatusEnum",
+            "type": "BatchResponsePublicAssociationMultiWithErrorsStatusEnum",
             "format": ""
         },
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<PublicAssociation>",
+            "type": "Array<PublicAssociationMulti>",
+            "format": ""
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
             "format": ""
         },
         {
@@ -61,7 +76,7 @@ export class BatchResponsePublicAssociation {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponsePublicAssociation.attributeTypeMap;
+        return BatchResponsePublicAssociationMultiWithErrors.attributeTypeMap;
     }
 
     public constructor() {
@@ -69,5 +84,5 @@ export class BatchResponsePublicAssociation {
 }
 
 
-export type BatchResponsePublicAssociationStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export type BatchResponsePublicAssociationMultiWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
 
