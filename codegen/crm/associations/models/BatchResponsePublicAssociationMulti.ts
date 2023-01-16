@@ -11,42 +11,28 @@
  */
 
 import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
-import { StandardError } from '../models/StandardError';
 
 export class BatchResponsePublicAssociationMulti {
-    'results': Array<PublicAssociationMulti>;
-    'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'status': BatchResponsePublicAssociationMultiStatusEnum;
+    'results': Array<PublicAssociationMulti>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
+    'links'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicAssociationMulti>",
-            "format": ""
-        },
-        {
-            "name": "numErrors",
-            "baseName": "numErrors",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
-        },
-        {
             "name": "status",
             "baseName": "status",
             "type": "BatchResponsePublicAssociationMultiStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationMulti>",
             "format": ""
         },
         {
@@ -66,6 +52,12 @@ export class BatchResponsePublicAssociationMulti {
             "baseName": "completedAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

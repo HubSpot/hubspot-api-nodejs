@@ -10,12 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { Paging } from '../models/Paging';
-import { PublicAssociationDefiniton } from '../models/PublicAssociationDefiniton';
+import { PublicAssociationDefinition } from '../models/PublicAssociationDefinition';
 
-export class CollectionResponsePublicAssociationDefiniton {
-    'results': Array<PublicAssociationDefiniton>;
-    'paging'?: Paging;
+export class CollectionResponsePublicAssociationDefinitionNoPaging {
+    'results': Array<PublicAssociationDefinition>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,18 +21,12 @@ export class CollectionResponsePublicAssociationDefiniton {
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<PublicAssociationDefiniton>",
-            "format": ""
-        },
-        {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "Paging",
+            "type": "Array<PublicAssociationDefinition>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponsePublicAssociationDefiniton.attributeTypeMap;
+        return CollectionResponsePublicAssociationDefinitionNoPaging.attributeTypeMap;
     }
 
     public constructor() {

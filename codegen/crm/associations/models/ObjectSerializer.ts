@@ -3,14 +3,17 @@ export * from '../models/BatchInputPublicAssociation';
 export * from '../models/BatchInputPublicObjectId';
 export * from '../models/BatchResponsePublicAssociation';
 export * from '../models/BatchResponsePublicAssociationMulti';
-export * from '../models/CollectionResponsePublicAssociationDefiniton';
+export * from '../models/BatchResponsePublicAssociationMultiWithErrors';
+export * from '../models/BatchResponsePublicAssociationWithErrors';
+export * from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
+export * from '../models/PreviousPage';
 export * from '../models/PublicAssociation';
-export * from '../models/PublicAssociationDefiniton';
+export * from '../models/PublicAssociationDefinition';
 export * from '../models/PublicAssociationMulti';
 export * from '../models/PublicObjectId';
 export * from '../models/StandardError';
@@ -18,16 +21,19 @@ export * from '../models/StandardError';
 import { AssociatedId } from '../models/AssociatedId';
 import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
-import { BatchResponsePublicAssociation         } from '../models/BatchResponsePublicAssociation';
-import { BatchResponsePublicAssociationMulti         } from '../models/BatchResponsePublicAssociationMulti';
-import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
+import { BatchResponsePublicAssociation        } from '../models/BatchResponsePublicAssociation';
+import { BatchResponsePublicAssociationMulti        } from '../models/BatchResponsePublicAssociationMulti';
+import { BatchResponsePublicAssociationMultiWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithErrors';
+import { BatchResponsePublicAssociationWithErrors          } from '../models/BatchResponsePublicAssociationWithErrors';
+import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociation } from '../models/PublicAssociation';
-import { PublicAssociationDefiniton } from '../models/PublicAssociationDefiniton';
+import { PublicAssociationDefinition } from '../models/PublicAssociationDefinition';
 import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
 import { PublicObjectId } from '../models/PublicObjectId';
 import { StandardError } from '../models/StandardError';
@@ -54,6 +60,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponsePublicAssociationStatusEnum",
     "BatchResponsePublicAssociationMultiStatusEnum",
+    "BatchResponsePublicAssociationMultiWithErrorsStatusEnum",
+    "BatchResponsePublicAssociationWithErrorsStatusEnum",
     "ErrorCategoryHttpStatusEnum",
 ]);
 
@@ -63,14 +71,17 @@ let typeMap: {[index: string]: any} = {
     "BatchInputPublicObjectId": BatchInputPublicObjectId,
     "BatchResponsePublicAssociation": BatchResponsePublicAssociation,
     "BatchResponsePublicAssociationMulti": BatchResponsePublicAssociationMulti,
-    "CollectionResponsePublicAssociationDefiniton": CollectionResponsePublicAssociationDefiniton,
+    "BatchResponsePublicAssociationMultiWithErrors": BatchResponsePublicAssociationMultiWithErrors,
+    "BatchResponsePublicAssociationWithErrors": BatchResponsePublicAssociationWithErrors,
+    "CollectionResponsePublicAssociationDefinitionNoPaging": CollectionResponsePublicAssociationDefinitionNoPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
+    "PreviousPage": PreviousPage,
     "PublicAssociation": PublicAssociation,
-    "PublicAssociationDefiniton": PublicAssociationDefiniton,
+    "PublicAssociationDefinition": PublicAssociationDefinition,
     "PublicAssociationMulti": PublicAssociationMulti,
     "PublicObjectId": PublicObjectId,
     "StandardError": StandardError,

@@ -6,7 +6,9 @@ import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociati
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
-import { CollectionResponsePublicAssociationDefiniton } from '../models/CollectionResponsePublicAssociationDefiniton';
+import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
+import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
+import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 export class ObservableBatchApi {
@@ -31,7 +33,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
         const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
@@ -57,7 +59,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation> {
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
         const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
@@ -83,7 +85,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMulti> {
+    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
         const requestContextPromise = this.requestFactory.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
 
         // build promise chain
@@ -126,7 +128,7 @@ export class ObservableTypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefiniton> {
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
         const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
 
         // build promise chain

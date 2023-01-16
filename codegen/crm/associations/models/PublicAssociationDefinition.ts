@@ -11,7 +11,7 @@
  */
 
 
-export class PublicAssociationDefiniton {
+export class PublicAssociationDefinition {
     'id': string;
     'name': string;
 
@@ -32,7 +32,7 @@ export class PublicAssociationDefiniton {
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicAssociationDefiniton.attributeTypeMap;
+        return PublicAssociationDefinition.attributeTypeMap;
     }
 
     public constructor() {

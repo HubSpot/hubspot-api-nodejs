@@ -12,6 +12,8 @@ import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociati
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
 import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
+import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
+import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
 
 /**
  * no description
@@ -25,7 +27,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public async archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
+    public async archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
@@ -39,6 +41,11 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("BatchApi", "archive", "toObjectType");
         }
 
+
+        // verify required parameter 'batchInputPublicAssociation' is not null or undefined
+        if (batchInputPublicAssociation === null || batchInputPublicAssociation === undefined) {
+            throw new RequiredError("BatchApi", "archive", "batchInputPublicAssociation");
+        }
 
 
         // Path Params
@@ -89,7 +96,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public async create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation?: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
+    public async create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
@@ -103,6 +110,11 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("BatchApi", "create", "toObjectType");
         }
 
+
+        // verify required parameter 'batchInputPublicAssociation' is not null or undefined
+        if (batchInputPublicAssociation === null || batchInputPublicAssociation === undefined) {
+            throw new RequiredError("BatchApi", "create", "batchInputPublicAssociation");
+        }
 
 
         // Path Params
@@ -153,7 +165,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public async read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId?: BatchInputPublicObjectId, _options?: Configuration): Promise<RequestContext> {
+    public async read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
@@ -167,6 +179,11 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("BatchApi", "read", "toObjectType");
         }
 
+
+        // verify required parameter 'batchInputPublicObjectId' is not null or undefined
+        if (batchInputPublicObjectId === null || batchInputPublicObjectId === undefined) {
+            throw new RequiredError("BatchApi", "read", "batchInputPublicObjectId");
+        }
 
 
         // Path Params
@@ -253,7 +270,7 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponsePublicAssociation > {
+     public async create(response: ResponseContext): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponsePublicAssociation = ObjectSerializer.deserialize(
@@ -263,10 +280,10 @@ export class BatchApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociation = ObjectSerializer.deserialize(
+            const body: BatchResponsePublicAssociationWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociation", ""
-            ) as BatchResponsePublicAssociation;
+                "BatchResponsePublicAssociationWithErrors", ""
+            ) as BatchResponsePublicAssociationWithErrors;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -279,10 +296,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponsePublicAssociation = ObjectSerializer.deserialize(
+            const body: BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociation", ""
-            ) as BatchResponsePublicAssociation;
+                "BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors", ""
+            ) as BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors;
             return body;
         }
 
@@ -296,7 +313,7 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to read
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async read(response: ResponseContext): Promise<BatchResponsePublicAssociationMulti > {
+     public async read(response: ResponseContext): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
@@ -306,10 +323,10 @@ export class BatchApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
+            const body: BatchResponsePublicAssociationMultiWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationMulti", ""
-            ) as BatchResponsePublicAssociationMulti;
+                "BatchResponsePublicAssociationMultiWithErrors", ""
+            ) as BatchResponsePublicAssociationMultiWithErrors;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -322,10 +339,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
+            const body: BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationMulti", ""
-            ) as BatchResponsePublicAssociationMulti;
+                "BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti", ""
+            ) as BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti;
             return body;
         }
 

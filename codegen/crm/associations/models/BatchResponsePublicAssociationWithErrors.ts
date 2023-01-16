@@ -11,10 +11,13 @@
  */
 
 import { PublicAssociation } from '../models/PublicAssociation';
+import { StandardError } from '../models/StandardError';
 
-export class BatchResponsePublicAssociation {
-    'status': BatchResponsePublicAssociationStatusEnum;
+export class BatchResponsePublicAssociationWithErrors {
+    'status': BatchResponsePublicAssociationWithErrorsStatusEnum;
     'results': Array<PublicAssociation>;
+    'numErrors'?: number;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -26,13 +29,25 @@ export class BatchResponsePublicAssociation {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponsePublicAssociationStatusEnum",
+            "type": "BatchResponsePublicAssociationWithErrorsStatusEnum",
             "format": ""
         },
         {
             "name": "results",
             "baseName": "results",
             "type": "Array<PublicAssociation>",
+            "format": ""
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
             "format": ""
         },
         {
@@ -61,7 +76,7 @@ export class BatchResponsePublicAssociation {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponsePublicAssociation.attributeTypeMap;
+        return BatchResponsePublicAssociationWithErrors.attributeTypeMap;
     }
 
     public constructor() {
@@ -69,5 +84,5 @@ export class BatchResponsePublicAssociation {
 }
 
 
-export type BatchResponsePublicAssociationStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export type BatchResponsePublicAssociationWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
 
