@@ -118,7 +118,12 @@ await hubspotClient.crm.companies.associationsApi.create(
     createCompanyResponse.id,
     'contacts',
     createContactResponse.id,
-    'company_to_contact'
+    [
+        {
+              "associationCategory": "HUBSPOT_DEFINED",
+              "associationTypeId": 280
+        }
+    ]
 )
 ```
 
