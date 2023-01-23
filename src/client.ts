@@ -15,7 +15,8 @@ import RetryDecorator from './services/decorators/RetryDecorator'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
-import { initObjectOld} from './services/initObjectOld'
+import { initObject } from './services/initObject'
+import { initObjectOld } from './services/initObjectOld'
 
 export class Client {
   public config: IConfiguration
