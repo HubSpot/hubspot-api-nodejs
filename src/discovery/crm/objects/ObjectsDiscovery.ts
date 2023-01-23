@@ -15,7 +15,7 @@ import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
-import { initObject } from '../../../services/initObject'
+import { initObjectOld} from '../../../services/initObjectOld'
 import BaseDiscovery from '../../BaseDiscovery'
 import type CallsDiscovery from './calls/CallsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
@@ -83,7 +83,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get calls() {
     if (!this._calls) {
-      this._calls = initObject<CallsDiscovery>('crm/objects/calls/CallsDiscovery', this.config)
+      this._calls = initObjectOld<CallsDiscovery>('crm/objects/calls/CallsDiscovery', this.config)
     }
 
     return this._calls
@@ -95,7 +95,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get emails() {
     if (!this._emails) {
-      this._emails = initObject<EmailsDiscovery>('crm/objects/emails/EmailsDiscovery', this.config)
+      this._emails = initObjectOld<EmailsDiscovery>('crm/objects/emails/EmailsDiscovery', this.config)
     }
 
     return this._emails
@@ -107,7 +107,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get feedbackSubmissions() {
     if (!this._feedbackSubmissions) {
-      this._feedbackSubmissions = initObject<FeedbackSubmissionsDiscovery>(
+      this._feedbackSubmissions = initObjectOld<FeedbackSubmissionsDiscovery>(
         'crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery',
         this.config,
       )
@@ -122,7 +122,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get meetings() {
     if (!this._meetings) {
-      this._meetings = initObject<MeetingsDiscovery>('crm/objects/meetings/MeetingsDiscovery', this.config)
+      this._meetings = initObjectOld<MeetingsDiscovery>('crm/objects/meetings/MeetingsDiscovery', this.config)
     }
 
     return this._meetings
@@ -134,7 +134,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get notes() {
     if (!this._notes) {
-      this._notes = initObject<NotesDiscovery>('crm/objects/notes/NotesDiscovery', this.config)
+      this._notes = initObjectOld<NotesDiscovery>('crm/objects/notes/NotesDiscovery', this.config)
     }
 
     return this._notes
@@ -146,7 +146,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get postalMail() {
     if (!this._postalMail) {
-      this._postalMail = initObject<PostalMailDiscovery>('crm/objects/postal_mail/PostalMailDiscovery', this.config)
+      this._postalMail = initObjectOld<PostalMailDiscovery>('crm/objects/postal_mail/PostalMailDiscovery', this.config)
     }
 
     return this._postalMail
@@ -158,7 +158,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get tasks() {
     if (!this._tasks) {
-      this._tasks = initObject<TasksDiscovery>('crm/objects/tasks/TasksDiscovery', this.config)
+      this._tasks = initObjectOld<TasksDiscovery>('crm/objects/tasks/TasksDiscovery', this.config)
     }
 
     return this._tasks

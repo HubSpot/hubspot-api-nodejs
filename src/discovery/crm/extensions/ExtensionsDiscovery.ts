@@ -1,4 +1,4 @@
-import { initObject } from '../../../services/initObject'
+import { initObjectOld} from '../../../services/initObjectOld'
 import BaseDiscovery from '../../BaseDiscovery'
 import type AccountingDiscovery from './accounting/AccountingDiscovery'
 import type CallingDiscovery from './calling/CallingDiscovery'
@@ -17,7 +17,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get accounting() {
     if (!this._accounting) {
-      this._accounting = initObject<AccountingDiscovery>('crm/extensions/accounting/AccountingDiscovery', this.config)
+      this._accounting = initObjectOld<AccountingDiscovery>('crm/extensions/accounting/AccountingDiscovery', this.config)
     }
     return this._accounting
   }
@@ -28,7 +28,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get calling() {
     if (!this._calling) {
-      this._calling = initObject<CallingDiscovery>('crm/extensions/calling/CallingDiscovery', this.config)
+      this._calling = initObjectOld<CallingDiscovery>('crm/extensions/calling/CallingDiscovery', this.config)
     }
     return this._calling
   }
@@ -39,7 +39,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get cards() {
     if (!this._cards) {
-      this._cards = initObject<CardsDiscovery>('crm/extensions/cards/CardsDiscovery', this.config)
+      this._cards = initObjectOld<CardsDiscovery>('crm/extensions/cards/CardsDiscovery', this.config)
     }
     return this._cards
   }
@@ -50,7 +50,7 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get videoconferencing() {
     if (!this._videoconferencing) {
-      this._videoconferencing = initObject<VideoconferencingDiscovery>(
+      this._videoconferencing = initObjectOld<VideoconferencingDiscovery>(
         'crm/extensions/videoconferencing/VideoconferencingDiscovery',
         this.config,
       )

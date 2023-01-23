@@ -15,7 +15,7 @@ import RetryDecorator from './services/decorators/RetryDecorator'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
-import { initObject } from './services/initObject'
+import { initObjectOld} from './services/initObjectOld'
 
 export class Client {
   public config: IConfiguration
@@ -65,7 +65,7 @@ export class Client {
    */
   get automation() {
     if (!this._automation) {
-      this._automation = initObject<AutomationDiscovery>('automation/AutomationDiscovery', this.config)
+      this._automation = initObjectOld<AutomationDiscovery>('automation/AutomationDiscovery', this.config)
     }
     return this._automation
   }
@@ -76,7 +76,7 @@ export class Client {
    */
   get cms() {
     if (!this._cms) {
-      this._cms = initObject<CmsDiscovery>('cms/CmsDiscovery', this.config)
+      this._cms = initObjectOld<CmsDiscovery>('cms/CmsDiscovery', this.config)
     }
     return this._cms
   }
@@ -87,7 +87,7 @@ export class Client {
    */
   get communicationPreferences() {
     if (!this._communicationPreferences) {
-      this._communicationPreferences = initObject<CommunicationPreferencesDiscovery>(
+      this._communicationPreferences = initObjectOld<CommunicationPreferencesDiscovery>(
         'communicationPreferences/CommunicationPreferencesDiscovery',
         this.config,
       )
@@ -101,7 +101,7 @@ export class Client {
    */
   get conversations() {
     if (!this._conversations) {
-      this._conversations = initObject<ConversationsDiscovery>('conversations/ConversationsDiscovery', this.config)
+      this._conversations = initObjectOld<ConversationsDiscovery>('conversations/ConversationsDiscovery', this.config)
     }
 
     return this._conversations
@@ -113,7 +113,7 @@ export class Client {
    */
   get crm() {
     if (!this._crm) {
-      this._crm = initObject<CrmDiscovery>('crm/CrmDiscovery', this.config)
+      this._crm = initObjectOld<CrmDiscovery>('crm/CrmDiscovery', this.config)
     }
     return this._crm
   }
@@ -124,7 +124,7 @@ export class Client {
    */
   get events() {
     if (!this._events) {
-      this._events = initObject<EventsDiscovery>('events/EventsDiscovery', this.config)
+      this._events = initObjectOld<EventsDiscovery>('events/EventsDiscovery', this.config)
     }
     return this._events
   }
@@ -135,7 +135,7 @@ export class Client {
    */
   get files() {
     if (!this._files) {
-      this._files = initObject<FilesDiscovery>('files/FilesDiscovery', this.config)
+      this._files = initObjectOld<FilesDiscovery>('files/FilesDiscovery', this.config)
     }
     return this._files
   }
@@ -146,7 +146,7 @@ export class Client {
    */
   get marketing() {
     if (!this._marketing) {
-      this._marketing = initObject<MarketingDiscovery>('marketing/MarketingDiscovery', this.config)
+      this._marketing = initObjectOld<MarketingDiscovery>('marketing/MarketingDiscovery', this.config)
     }
 
     return this._marketing
@@ -158,7 +158,7 @@ export class Client {
    */
   get oauth() {
     if (!this._oauth) {
-      this._oauth = initObject<OauthDiscovery>('oauth/OauthDiscovery', this.config)
+      this._oauth = initObjectOld<OauthDiscovery>('oauth/OauthDiscovery', this.config)
     }
 
     return this._oauth
@@ -170,7 +170,7 @@ export class Client {
    */
   get settings() {
     if (!this._settings) {
-      this._settings = initObject<SettingsDiscovery>('settings/SettingsDiscovery', this.config)
+      this._settings = initObjectOld<SettingsDiscovery>('settings/SettingsDiscovery', this.config)
     }
 
     return this._settings
@@ -182,7 +182,7 @@ export class Client {
    */
   get webhooks() {
     if (!this._webhooks) {
-      this._webhooks = initObject<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config)
+      this._webhooks = initObjectOld<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config)
     }
     return this._webhooks
   }

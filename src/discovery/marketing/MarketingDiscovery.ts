@@ -1,4 +1,4 @@
-import { initObject } from '../../services/initObject'
+import { initObjectOld} from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type EventsDiscovery from './events/EventsDiscovery'
 import type TransactionalDiscovery from './transactional/TransactionalDiscovery'
@@ -13,7 +13,7 @@ export default class MarketingDiscovery extends BaseDiscovery {
    */
   get events() {
     if (!this._events) {
-      this._events = initObject<EventsDiscovery>('marketing/events/EventsDiscovery', this.config)
+      this._events = initObjectOld<EventsDiscovery>('marketing/events/EventsDiscovery', this.config)
     }
 
     return this._events
@@ -25,7 +25,7 @@ export default class MarketingDiscovery extends BaseDiscovery {
    */
   get transactional() {
     if (!this._transactional) {
-      this._transactional = initObject<TransactionalDiscovery>(
+      this._transactional = initObjectOld<TransactionalDiscovery>(
         'marketing/transactional/TransactionalDiscovery',
         this.config,
       )

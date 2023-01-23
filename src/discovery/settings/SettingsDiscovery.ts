@@ -1,4 +1,4 @@
-import { initObject } from '../../services/initObject'
+import { initObjectOld} from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type UsersDiscovery from './users/UsersDiscovery'
 
@@ -11,7 +11,7 @@ export default class SettingsDiscovery extends BaseDiscovery {
    */
   get users() {
     if (!this._users) {
-      this._users = initObject<UsersDiscovery>('settings/users/UsersDiscovery', this.config)
+      this._users = initObjectOld<UsersDiscovery>('settings/users/UsersDiscovery', this.config)
     }
 
     return this._users

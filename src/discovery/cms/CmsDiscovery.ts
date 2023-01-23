@@ -1,4 +1,4 @@
-import { initObject } from '../../services/initObject'
+import { initObjectOld} from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import type BlogsDiscovery from './blogs/BlogsDiscovery'
@@ -25,7 +25,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get auditLogs() {
     if (!this._auditLogs) {
-      this._auditLogs = initObject<AuditLogsDiscovery>('cms/audit_logs/AuditLogsDiscovery', this.config)
+      this._auditLogs = initObjectOld<AuditLogsDiscovery>('cms/audit_logs/AuditLogsDiscovery', this.config)
     }
 
     return this._auditLogs
@@ -37,7 +37,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get blogs() {
     if (!this._blogs) {
-      this._blogs = initObject<BlogsDiscovery>('cms/blogs/BlogsDiscovery', this.config)
+      this._blogs = initObjectOld<BlogsDiscovery>('cms/blogs/BlogsDiscovery', this.config)
     }
 
     return this._blogs
@@ -49,7 +49,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get domains() {
     if (!this._domains) {
-      this._domains = initObject<DomainsDiscovery>('cms/domains/DomainsDiscovery', this.config)
+      this._domains = initObjectOld<DomainsDiscovery>('cms/domains/DomainsDiscovery', this.config)
     }
 
     return this._domains
@@ -61,7 +61,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get hubdb() {
     if (!this._hubdb) {
-      this._hubdb = initObject<HubdbDiscovery>('cms/hubdb/HubdbDiscovery', this.config)
+      this._hubdb = initObjectOld<HubdbDiscovery>('cms/hubdb/HubdbDiscovery', this.config)
     }
 
     return this._hubdb
@@ -73,7 +73,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get performance() {
     if (!this._performance) {
-      this._performance = initObject<PerformanceDiscovery>('cms/performance/PerformanceDiscovery', this.config)
+      this._performance = initObjectOld<PerformanceDiscovery>('cms/performance/PerformanceDiscovery', this.config)
     }
 
     return this._performance
@@ -85,7 +85,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get siteSearch() {
     if (!this._siteSearch) {
-      this._siteSearch = initObject<SiteSearchDiscovery>('cms/site_search/SiteSearchDiscovery', this.config)
+      this._siteSearch = initObjectOld<SiteSearchDiscovery>('cms/site_search/SiteSearchDiscovery', this.config)
     }
 
     return this._siteSearch
@@ -97,7 +97,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get sourceCode() {
     if (!this._sourceCode) {
-      this._sourceCode = initObject<SourceCodeDiscovery>('cms/source_code/SourceCodeDiscovery', this.config)
+      this._sourceCode = initObjectOld<SourceCodeDiscovery>('cms/source_code/SourceCodeDiscovery', this.config)
     }
 
     return this._sourceCode
@@ -109,7 +109,7 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get urlRedirects() {
     if (!this._urlRedirects) {
-      this._urlRedirects = initObject<UrlRedirectsDiscovery>('cms/url_redirects/UrlRedirectsDiscovery', this.config)
+      this._urlRedirects = initObjectOld<UrlRedirectsDiscovery>('cms/url_redirects/UrlRedirectsDiscovery', this.config)
     }
 
     return this._urlRedirects
