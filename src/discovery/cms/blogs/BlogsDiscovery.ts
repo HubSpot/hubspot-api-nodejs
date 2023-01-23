@@ -1,4 +1,3 @@
-import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 import type AuthorsDiscovery from './authors/AuthorsDiscovery'
 import type BlogPostsDiscovery from './blog_posts/BlogPostsDiscovery'
@@ -15,7 +14,8 @@ export default class BlogsDiscovery extends BaseDiscovery {
    */
   get authors() {
     if (!this._authors) {
-      this._authors = initObject<AuthorsDiscovery>('cms/blogs/authors/AuthorsDiscovery', this.config)
+      const requiredClass = require('./authors/AuthorsDiscovery')
+      this._authors = new requiredClass.default(this.config) as AuthorsDiscovery
     }
 
     return this._authors
@@ -27,7 +27,8 @@ export default class BlogsDiscovery extends BaseDiscovery {
    */
   get blogPosts() {
     if (!this._blogPosts) {
-      this._blogPosts = initObject<BlogPostsDiscovery>('cms/blogs/blog_posts/BlogPostsDiscovery', this.config)
+      const requiredClass = require('./blog_posts/BlogPostsDiscovery')
+      this._blogPosts = new requiredClass.default(this.config) as BlogPostsDiscovery
     }
 
     return this._blogPosts
@@ -39,7 +40,8 @@ export default class BlogsDiscovery extends BaseDiscovery {
    */
   get tags() {
     if (!this._tags) {
-      this._tags = initObject<TagsDiscovery>('cms/blogs/tags/TagsDiscovery', this.config)
+      const requiredClass = require('./tags/TagsDiscovery')
+      this._tags = new requiredClass.default(this.config) as TagsDiscovery
     }
 
     return this._tags
