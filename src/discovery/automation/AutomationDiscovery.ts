@@ -1,4 +1,4 @@
-import { initObjectOld} from '../../services/initObjectOld'
+import { initObjectOld } from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type ActionsDiscovery from './actions/ActionsDiscovery'
 

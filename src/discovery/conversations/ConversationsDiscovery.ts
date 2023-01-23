@@ -1,5 +1,5 @@
 import IConfiguration from '../../configuration/IConfiguration'
-import { initObjectOld} from '../../services/initObjectOld'
+import { initObjectOld } from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type VisitorIdentificationDiscovery from './visitor_identification/VisitorIdentificationDiscovery'
 

@@ -2,7 +2,7 @@ const hubspot = require('./lib/index.js')
 
 const hubspotClient = new hubspot.Client({ accessToken: 'pat-na1-8cde08dc-29cd-4a78-9ae5-f99c246ba0e2' })
 
-console.log(hubspotClient.crm.contacts)
+hubspotClient.crm.contacts
 
 const used = process.memoryUsage()
 for (let key in used) {

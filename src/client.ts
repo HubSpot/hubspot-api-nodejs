@@ -15,8 +15,6 @@ import RetryDecorator from './services/decorators/RetryDecorator'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
 import { Request } from './services/http/Request'
-import { initObject } from './services/initObject'
-import { initObjectOld } from './services/initObjectOld'
 
 export class Client {
   public config: IConfiguration
@@ -66,7 +64,8 @@ export class Client {
    */
   get automation() {
     if (!this._automation) {
-      this._automation = initObjectOld<AutomationDiscovery>('automation/AutomationDiscovery', this.config)
+      const requiredClass = require('./discovery/automation/AutomationDiscovery')
+      this._automation = new requiredClass.default(this.config) as AutomationDiscovery
     }
     return this._automation
   }
@@ -77,7 +76,8 @@ export class Client {
    */
   get cms() {
     if (!this._cms) {
-      this._cms = initObjectOld<CmsDiscovery>('cms/CmsDiscovery', this.config)
+      const requiredClass = require('./discovery/cms/CmsDiscovery')
+      this._cms = new requiredClass.default(this.config) as CmsDiscovery
     }
     return this._cms
   }
@@ -88,10 +88,8 @@ export class Client {
    */
   get communicationPreferences() {
     if (!this._communicationPreferences) {
-      this._communicationPreferences = initObjectOld<CommunicationPreferencesDiscovery>(
-        'communicationPreferences/CommunicationPreferencesDiscovery',
-        this.config,
-      )
+      const requiredClass = require('./discovery/communicationPreferences/CommunicationPreferencesDiscovery')
+      this._communicationPreferences = new requiredClass.default(this.config) as CommunicationPreferencesDiscovery
     }
     return this._communicationPreferences
   }
@@ -102,7 +100,8 @@ export class Client {
    */
   get conversations() {
     if (!this._conversations) {
-      this._conversations = initObjectOld<ConversationsDiscovery>('conversations/ConversationsDiscovery', this.config)
+      const requiredClass = require('./discovery/conversations/ConversationsDiscovery')
+      this._conversations = new requiredClass.default(this.config) as ConversationsDiscovery
     }
 
     return this._conversations
@@ -114,7 +113,8 @@ export class Client {
    */
   get crm() {
     if (!this._crm) {
-      this._crm = initObjectOld<CrmDiscovery>('crm/CrmDiscovery', this.config)
+      const requiredClass = require('./discovery/crm/CrmDiscovery')
+      this._crm = new requiredClass.default(this.config) as CrmDiscovery
     }
     return this._crm
   }
@@ -125,7 +125,8 @@ export class Client {
    */
   get events() {
     if (!this._events) {
-      this._events = initObjectOld<EventsDiscovery>('events/EventsDiscovery', this.config)
+      const requiredClass = require('./discovery/events/EventsDiscovery')
+      this._events = new requiredClass.default(this.config) as EventsDiscovery
     }
     return this._events
   }
@@ -136,7 +137,8 @@ export class Client {
    */
   get files() {
     if (!this._files) {
-      this._files = initObjectOld<FilesDiscovery>('files/FilesDiscovery', this.config)
+      const requiredClass = require('./discovery/files/FilesDiscovery')
+      this._files = new requiredClass.default(this.config) as FilesDiscovery
     }
     return this._files
   }
@@ -147,7 +149,8 @@ export class Client {
    */
   get marketing() {
     if (!this._marketing) {
-      this._marketing = initObjectOld<MarketingDiscovery>('marketing/MarketingDiscovery', this.config)
+      const requiredClass = require('./discovery/marketing/MarketingDiscovery')
+      this._marketing = new requiredClass.default(this.config) as MarketingDiscovery
     }
 
     return this._marketing
@@ -159,7 +162,8 @@ export class Client {
    */
   get oauth() {
     if (!this._oauth) {
-      this._oauth = initObjectOld<OauthDiscovery>('oauth/OauthDiscovery', this.config)
+      const requiredClass = require('./discovery/oauth/OauthDiscovery')
+      this._oauth = new requiredClass.default(this.config) as OauthDiscovery
     }
 
     return this._oauth
@@ -171,7 +175,8 @@ export class Client {
    */
   get settings() {
     if (!this._settings) {
-      this._settings = initObjectOld<SettingsDiscovery>('settings/SettingsDiscovery', this.config)
+      const requiredClass = require('./discovery/settings/SettingsDiscovery')
+      this._settings = new requiredClass.default(this.config) as SettingsDiscovery
     }
 
     return this._settings
@@ -183,7 +188,8 @@ export class Client {
    */
   get webhooks() {
     if (!this._webhooks) {
-      this._webhooks = initObjectOld<WebhooksDiscovery>('webhooks/WebhooksDiscovery', this.config)
+      const requiredClass = require('./discovery/webhooks/WebhooksDiscovery')
+      this._webhooks = new requiredClass.default(this.config) as WebhooksDiscovery
     }
     return this._webhooks
   }
