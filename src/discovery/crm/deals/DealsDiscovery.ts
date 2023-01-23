@@ -1,9 +1,11 @@
 import {
   AssociationsApi,
+  AssociationSpec,
   BasicApi,
   BatchApi,
   Configuration,
   createConfiguration,
+  LabelsBetweenObjectPair,
   PublicObjectApi,
   RequestContext,
   ResponseContext,
@@ -74,5 +76,9 @@ export default class DealsDiscovery {
       associations,
       archived,
     )
+  }
+
+  public async addDealOnContact(contactId: number, dealId: number, associationTypes: AssociationSpec[]): Promise<LabelsBetweenObjectPair> {
+    return this.associationsApi.create(contactId, 'contacts', dealId, associationTypes)
   }
 }
