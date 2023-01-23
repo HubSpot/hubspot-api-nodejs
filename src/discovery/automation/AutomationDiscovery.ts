@@ -1,4 +1,3 @@
-import { initObjectOld } from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type ActionsDiscovery from './actions/ActionsDiscovery'
 
@@ -11,8 +10,10 @@ export default class AutomationDiscovery extends BaseDiscovery {
    */
   get actions() {
     if (!this._actions) {
-      this._actions = initObjectOld<ActionsDiscovery>('automation/actions/ActionsDiscovery', this.config)
+      const requiredClass = require('./actions/ActionsDiscovery')
+      this._actions = new requiredClass.default(this.config) as ActionsDiscovery
     }
+
     return this._actions
   }
 }

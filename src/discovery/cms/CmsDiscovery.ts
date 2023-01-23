@@ -1,4 +1,3 @@
-import { initObjectOld } from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import type BlogsDiscovery from './blogs/BlogsDiscovery'
@@ -25,7 +24,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get auditLogs() {
     if (!this._auditLogs) {
-      this._auditLogs = initObjectOld<AuditLogsDiscovery>('cms/audit_logs/AuditLogsDiscovery', this.config)
+      const requiredClass = require('./audit_logs/AuditLogsDiscovery')
+      this._auditLogs = new requiredClass.default(this.config) as AuditLogsDiscovery
     }
 
     return this._auditLogs
@@ -37,7 +37,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get blogs() {
     if (!this._blogs) {
-      this._blogs = initObjectOld<BlogsDiscovery>('cms/blogs/BlogsDiscovery', this.config)
+      const requiredClass = require('./blogs/BlogsDiscovery')
+      this._blogs = new requiredClass.default(this.config) as BlogsDiscovery
     }
 
     return this._blogs
@@ -49,7 +50,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get domains() {
     if (!this._domains) {
-      this._domains = initObjectOld<DomainsDiscovery>('cms/domains/DomainsDiscovery', this.config)
+      const requiredClass = require('./domains/DomainsDiscovery')
+      this._domains = new requiredClass.default(this.config) as DomainsDiscovery
     }
 
     return this._domains
@@ -61,7 +63,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get hubdb() {
     if (!this._hubdb) {
-      this._hubdb = initObjectOld<HubdbDiscovery>('cms/hubdb/HubdbDiscovery', this.config)
+      const requiredClass = require('./hubdb/HubdbDiscovery')
+      this._hubdb = new requiredClass.default(this.config) as HubdbDiscovery
     }
 
     return this._hubdb
@@ -73,7 +76,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get performance() {
     if (!this._performance) {
-      this._performance = initObjectOld<PerformanceDiscovery>('cms/performance/PerformanceDiscovery', this.config)
+      const requiredClass = require('./performance/PerformanceDiscovery')
+      this._performance = new requiredClass.default(this.config) as PerformanceDiscovery
     }
 
     return this._performance
@@ -85,7 +89,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get siteSearch() {
     if (!this._siteSearch) {
-      this._siteSearch = initObjectOld<SiteSearchDiscovery>('cms/site_search/SiteSearchDiscovery', this.config)
+      const requiredClass = require('./site_search/SiteSearchDiscovery')
+      this._siteSearch = new requiredClass.default(this.config) as SiteSearchDiscovery
     }
 
     return this._siteSearch
@@ -97,7 +102,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get sourceCode() {
     if (!this._sourceCode) {
-      this._sourceCode = initObjectOld<SourceCodeDiscovery>('cms/source_code/SourceCodeDiscovery', this.config)
+      const requiredClass = require('./source_code/SourceCodeDiscovery')
+      this._sourceCode = new requiredClass.default(this.config) as SourceCodeDiscovery
     }
 
     return this._sourceCode
@@ -109,7 +115,8 @@ export default class CmsDiscovery extends BaseDiscovery {
    */
   get urlRedirects() {
     if (!this._urlRedirects) {
-      this._urlRedirects = initObjectOld<UrlRedirectsDiscovery>('cms/url_redirects/UrlRedirectsDiscovery', this.config)
+      const requiredClass = require('./url_redirects/UrlRedirectsDiscovery')
+      this._urlRedirects = new requiredClass.default(this.config) as UrlRedirectsDiscovery
     }
 
     return this._urlRedirects

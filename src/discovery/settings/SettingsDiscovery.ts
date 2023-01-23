@@ -1,4 +1,3 @@
-import { initObjectOld } from '../../services/initObjectOld'
 import BaseDiscovery from '../BaseDiscovery'
 import type UsersDiscovery from './users/UsersDiscovery'
 
@@ -11,7 +10,8 @@ export default class SettingsDiscovery extends BaseDiscovery {
    */
   get users() {
     if (!this._users) {
-      this._users = initObjectOld<UsersDiscovery>('settings/users/UsersDiscovery', this.config)
+      const requiredClass = require('./users/UsersDiscovery')
+      this._users = new requiredClass.default(this.config) as UsersDiscovery
     }
 
     return this._users
