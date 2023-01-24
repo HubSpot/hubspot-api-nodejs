@@ -1,4 +1,3 @@
-import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 import type AccountingDiscovery from './accounting/AccountingDiscovery'
 import type CallingDiscovery from './calling/CallingDiscovery'
@@ -17,7 +16,8 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get accounting() {
     if (!this._accounting) {
-      this._accounting = initObject<AccountingDiscovery>('crm/extensions/accounting/AccountingDiscovery', this.config)
+      const requiredClass = require('./accounting/AccountingDiscovery')
+      this._accounting = new requiredClass.default(this.config) as AccountingDiscovery
     }
     return this._accounting
   }
@@ -28,7 +28,8 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get calling() {
     if (!this._calling) {
-      this._calling = initObject<CallingDiscovery>('crm/extensions/calling/CallingDiscovery', this.config)
+      const requiredClass = require('./calling/CallingDiscovery')
+      this._calling = new requiredClass.default(this.config) as CallingDiscovery
     }
     return this._calling
   }
@@ -39,7 +40,8 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get cards() {
     if (!this._cards) {
-      this._cards = initObject<CardsDiscovery>('crm/extensions/cards/CardsDiscovery', this.config)
+      const requiredClass = require('./cards/CardsDiscovery')
+      this._cards = new requiredClass.default(this.config) as CardsDiscovery
     }
     return this._cards
   }
@@ -50,10 +52,8 @@ export default class ExtensionsDiscovery extends BaseDiscovery {
    */
   get videoconferencing() {
     if (!this._videoconferencing) {
-      this._videoconferencing = initObject<VideoconferencingDiscovery>(
-        'crm/extensions/videoconferencing/VideoconferencingDiscovery',
-        this.config,
-      )
+      const requiredClass = require('./videoconferencing/VideoconferencingDiscovery')
+      this._videoconferencing = new requiredClass.default(this.config) as VideoconferencingDiscovery
     }
     return this._videoconferencing
   }

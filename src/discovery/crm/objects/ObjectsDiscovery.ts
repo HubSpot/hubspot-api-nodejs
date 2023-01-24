@@ -15,7 +15,6 @@ import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
-import { initObject } from '../../../services/initObject'
 import BaseDiscovery from '../../BaseDiscovery'
 import type CallsDiscovery from './calls/CallsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
@@ -83,7 +82,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get calls() {
     if (!this._calls) {
-      this._calls = initObject<CallsDiscovery>('crm/objects/calls/CallsDiscovery', this.config)
+      const requiredClass = require('./calls/CallsDiscovery')
+      this._calls = new requiredClass.default(this.config) as CallsDiscovery
     }
 
     return this._calls
@@ -95,7 +95,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get emails() {
     if (!this._emails) {
-      this._emails = initObject<EmailsDiscovery>('crm/objects/emails/EmailsDiscovery', this.config)
+      const requiredClass = require('./emails/EmailsDiscovery')
+      this._emails = new requiredClass.default(this.config) as EmailsDiscovery
     }
 
     return this._emails
@@ -107,10 +108,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get feedbackSubmissions() {
     if (!this._feedbackSubmissions) {
-      this._feedbackSubmissions = initObject<FeedbackSubmissionsDiscovery>(
-        'crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery',
-        this.config,
-      )
+      const requiredClass = require('./feedback_submissions/FeedbackSubmissionsDiscovery')
+      this._feedbackSubmissions = new requiredClass.default(this.config) as FeedbackSubmissionsDiscovery
     }
 
     return this._feedbackSubmissions
@@ -122,7 +121,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get meetings() {
     if (!this._meetings) {
-      this._meetings = initObject<MeetingsDiscovery>('crm/objects/meetings/MeetingsDiscovery', this.config)
+      const requiredClass = require('./meetings/MeetingsDiscovery')
+      this._meetings = new requiredClass.default(this.config) as MeetingsDiscovery
     }
 
     return this._meetings
@@ -134,7 +134,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get notes() {
     if (!this._notes) {
-      this._notes = initObject<NotesDiscovery>('crm/objects/notes/NotesDiscovery', this.config)
+      const requiredClass = require('./notes/NotesDiscovery')
+      this._notes = new requiredClass.default(this.config) as NotesDiscovery
     }
 
     return this._notes
@@ -146,7 +147,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get postalMail() {
     if (!this._postalMail) {
-      this._postalMail = initObject<PostalMailDiscovery>('crm/objects/postal_mail/PostalMailDiscovery', this.config)
+      const requiredClass = require('./postal_mail/PostalMailDiscovery')
+      this._postalMail = new requiredClass.default(this.config) as PostalMailDiscovery
     }
 
     return this._postalMail
@@ -158,7 +160,8 @@ export default class ObjectsDiscovery extends BaseDiscovery {
    */
   get tasks() {
     if (!this._tasks) {
-      this._tasks = initObject<TasksDiscovery>('crm/objects/tasks/TasksDiscovery', this.config)
+      const requiredClass = require('./tasks/TasksDiscovery')
+      this._tasks = new requiredClass.default(this.config) as TasksDiscovery
     }
 
     return this._tasks
