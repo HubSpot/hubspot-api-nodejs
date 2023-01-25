@@ -1,4 +1,4 @@
-export enum AssociationTypesEnum {
+export enum AssociationTypes {
   primaryContactToCompany = 1,
   primaryCompanyToContact = 2,
   dealToContact = 3,

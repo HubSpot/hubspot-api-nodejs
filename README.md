@@ -121,8 +121,8 @@ await hubspotClient.crm.companies.associationsApi.create(
     [
         {
               "associationCategory": "HUBSPOT_DEFINED",
-              "associationTypeId": AssociationTypesEnum.companyToContact 
-              // AssociationTypesEnum contains the most popular HubSpot defined association types
+              "associationTypeId": AssociationTypes.companyToContact 
+              // AssociationTypes contains the most popular HubSpot defined association types
         }
     ]
 )
