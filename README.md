@@ -317,7 +317,7 @@ console.log(response);
 ## Reserved words
 
 The SDK has reserved words(e.g. `from`). [Full list of reserved words.](https://openapi-generator.tech/docs/generators/typescript#reserved-words)
-When you faced with a reserved word you have to add `_` before the word(e.g. `_from`).
+When you face with a reserved word you have to add `_` before the word(e.g. `_from`).
 
 ```javascript
 const BatchInputPublicAssociation = { 
