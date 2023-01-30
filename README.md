@@ -314,6 +314,33 @@ const response = await hubspotClient.apiRequest({
 console.log(response);
 ```
 
+## Reserved words
+
+The SDK has reserved words(e.g. `from`). [Full list of reserved words.](https://openapi-generator.tech/docs/generators/typescript#reserved-words)
+When you face with a reserved word you have to add `_` before the word(e.g. `_from`).
+
+```javascript
+const BatchInputPublicAssociation = { 
+    inputs: [
+        {
+            _from: {
+                id : 'contactID'
+            },
+            to: {
+                id: 'companyID'
+            },
+            type: 'contact_to_company'
+        }
+    ] 
+};
+
+const response = await hubspotClient.crm.associations.batchApi.create(
+    'contacts',
+    'companies',
+    BatchInputPublicAssociation
+);
+```
+
 ## Typescript
 
 You may use this library in your Typescript project via:
