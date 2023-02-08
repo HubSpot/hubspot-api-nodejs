@@ -228,7 +228,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Update (breaking changes)
 
-- Migrate from request to node-fetch
+- Migrate from request to node-fetch (Migrate to new code generator).
+- `from` is reserved word. Use `_from` instead of `from`.
 - Rewrite [Client](src/client.ts)
 - `crm.objects.feedbackSubmissions` => `crm.feedbackSubmissions`
 
