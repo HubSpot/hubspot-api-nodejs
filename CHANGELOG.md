@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/8.5.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/8.6.0...HEAD)
+
+## [8.6.0] - 2023-02-20
+
+## Added
+
+- `crm.associations.v4` API client
+
+## Fixed
+
+- Fix `oauth.refreshTokensApi.archiveRefreshToken()` method
 
 ## [8.5.0] - 2023-02-08
 
@@ -471,3 +481,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [8.4.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.4.1
 [8.4.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.4.2
 [8.5.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.5.0
+[8.6.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.6.0
