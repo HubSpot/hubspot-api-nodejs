@@ -265,7 +265,7 @@ return hubspotClient.oauth.tokensApi.createToken(
 #### Get audit logs
 
 ```javascript
-const auditLogsResponse = await hubspotClient.cms.auditLogs.defaultApi.getPage()
+const response = await hubspotClient.cms.auditLogs.auditLogsApi.getPage()
 ```
 
 ## Not wrapped endpoint(s)
