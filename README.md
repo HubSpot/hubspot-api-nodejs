@@ -68,6 +68,38 @@ hubspotClient.oauth.tokensApi
     })
 ```
 
+### Rate limiting
+
+[Bottleneck](https://github.com/SGrondin/bottleneck) is used for rate limiting. To turn on/off rate limiting use `limiterOptions` option on Client instance creation. Bottleneck options can be found [here](https://github.com/SGrondin/bottleneck#constructor).
+Please note that Apps using OAuth are only subject to a limit of 100 requests every 10 seconds. Limits related to the API Add-on don't apply.
+
+```javascript
+const hubspotClient = new hubspot.Client({
+    accessToken: YOUR_ACCESS_TOKEN,
+    limiterOptions: DEFAULT_LIMITER_OPTIONS,
+})
+```
+
+Default settings for the limiter are:
+
+```javascript
+const DEFAULT_LIMITER_OPTIONS = {
+    minTime: 1000 / 9,
+    maxConcurrent: 6,
+    id: 'hubspot-client-limiter',
+}
+```
+
+Search settings for the limiter are:
+
+```javascript
+const SEARCH_LIMITER_OPTIONS = {
+    minTime: 550,
+    maxConcurrent: 3,
+    id: 'search-hubspot-client-limiter',
+}
+```
+
 ### Retry mechanism
 
 It's possible to turn on retry for failed requests with statuses 429 or 5xx. To turn on/off configurable retries use `numberOfApiCallRetries` option on Client instance creation. `numberOfApiCallRetries` can be set to a number from 0 - 6. If `numberOfApiCallRetries` is set to a number greater than 0 it means that if any API Call receives ISE5xx this call will be retried after a delay 200 * retryNumber ms and if 429 (Rate limit is exceeded) is returned for "TEN_SECONDLY_ROLLING" the call will be retried after a delay 10 sec. Number of retries will not exceed `numberOfApiCallRetries` value.
