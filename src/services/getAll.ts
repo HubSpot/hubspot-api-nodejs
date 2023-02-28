@@ -1,4 +1,4 @@
-import { DEFAULT_OBJECTS_LIMIT } from '../configuration/constants'
+import { DEFAULT_OBJECTS_LIMIT } from '../configuration/privateConstants'
 
 interface IAPIType<CollectionType, ConfigurationType> {
   getPage(
