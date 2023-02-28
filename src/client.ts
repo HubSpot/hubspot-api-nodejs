@@ -11,6 +11,8 @@ import type OauthDiscovery from './discovery/oauth/OauthDiscovery'
 import type SettingsDiscovery from './discovery/settings/SettingsDiscovery'
 import type WebhooksDiscovery from './discovery/webhooks/WebhooksDiscovery'
 import ApiDecoratorService from './services/ApiDecoratorService'
+import IDecorator from './services/decorators/IDecorator'
+import LimiterDecorator from './services/decorators/LimiterDecorator'
 import RetryDecorator from './services/decorators/RetryDecorator'
 import { HttpClient } from './services/http/HttpClient'
 import { IHttpOptions } from './services/http/IHttpOptions'
@@ -36,14 +38,7 @@ export class Client {
   }
 
   public init() {
-    const decorators = new Array()
-    if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
-      if (this.config.numberOfApiCallRetries > 6) {
-        throw new Error('numberOfApiCallRetries can be set to a number from 0 - 6.')
-      }
-      decorators.push(new RetryDecorator(this.config.numberOfApiCallRetries))
-    }
-    ApiDecoratorService.getInstance().setDecorators(decorators)
+    ApiDecoratorService.getInstance().setDecorators(this.getDecorators())
 
     this._automation = undefined
     this._cms = undefined
@@ -213,5 +208,22 @@ export class Client {
     const request = new Request(this.config, opts)
 
     return await HttpClient.send(request)
+  }
+
+  protected getDecorators(): IDecorator[] {
+    const decorators = new Array()
+
+    if (this.config.limiterOptions) {
+      decorators.push(new LimiterDecorator(this.config.limiterOptions))
+    }
+
+    if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
+      if (this.config.numberOfApiCallRetries > 6) {
+        throw new Error('numberOfApiCallRetries can be set to a number from 0 - 6.')
+      }
+      decorators.push(new RetryDecorator(this.config.numberOfApiCallRetries))
+    }
+
+    return decorators
   }
 }
