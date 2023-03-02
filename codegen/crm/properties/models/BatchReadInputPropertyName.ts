@@ -13,22 +13,22 @@
 import { PropertyName } from '../models/PropertyName';
 
 export class BatchReadInputPropertyName {
-    'inputs': Array<PropertyName>;
     'archived': boolean;
+    'inputs': Array<PropertyName>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<PropertyName>",
-            "format": ""
-        },
-        {
             "name": "archived",
             "baseName": "archived",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<PropertyName>",
             "format": ""
         }    ];
 
