@@ -57,6 +57,18 @@ export class PropertyCreate {
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
+    /**
+    * Applicable only for 'enumeration' type properties.  Should be set to true in conjunction with a 'referencedObjectType' of 'OWNER'.  Otherwise false.
+    */
+    'externalOptions'?: boolean;
+    /**
+    * Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
+    */
+    'referencedObjectType'?: string;
+    /**
+    * Represents a formula that is used to compute a calculated property.
+    */
+    'calculationFormula'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -126,6 +138,24 @@ export class PropertyCreate {
             "baseName": "formField",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "externalOptions",
+            "baseName": "externalOptions",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "referencedObjectType",
+            "baseName": "referencedObjectType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -137,6 +167,6 @@ export class PropertyCreate {
 }
 
 
-export type PropertyCreateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" ;
-export type PropertyCreateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" ;
+export type PropertyCreateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
+export type PropertyCreateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
 
