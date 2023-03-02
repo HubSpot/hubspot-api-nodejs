@@ -97,10 +97,6 @@ export class Property {
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
-    /**
-    * Represents a formula that is used to compute a calculated property.
-    */
-    'calculationFormula'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -241,12 +237,6 @@ export class Property {
             "name": "formField",
             "baseName": "formField",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "calculationFormula",
-            "baseName": "calculationFormula",
-            "type": "string",
             "format": ""
         }    ];
 

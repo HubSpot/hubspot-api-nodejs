@@ -10,30 +10,31 @@
  * Do not edit the class manually.
  */
 
-import { PropertyName } from '../models/PropertyName';
+import { Paging } from '../models/Paging';
+import { PropertyGroup } from '../models/PropertyGroup';
 
-export class BatchReadInputPropertyName {
-    'inputs': Array<PropertyName>;
-    'archived': boolean;
+export class CollectionResponsePropertyGroup {
+    'results': Array<PropertyGroup>;
+    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<PropertyName>",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PropertyGroup>",
             "format": ""
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "paging",
+            "baseName": "paging",
+            "type": "Paging",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputPropertyName.attributeTypeMap;
+        return CollectionResponsePropertyGroup.attributeTypeMap;
     }
 
     public constructor() {

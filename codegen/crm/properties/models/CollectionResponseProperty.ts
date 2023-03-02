@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 
+import { Paging } from '../models/Paging';
 import { Property } from '../models/Property';
 
-export class CollectionResponsePropertyNoPaging {
+export class CollectionResponseProperty {
     'results': Array<Property>;
+    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,10 +25,16 @@ export class CollectionResponsePropertyNoPaging {
             "baseName": "results",
             "type": "Array<Property>",
             "format": ""
+        },
+        {
+            "name": "paging",
+            "baseName": "paging",
+            "type": "Paging",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponsePropertyNoPaging.attributeTypeMap;
+        return CollectionResponseProperty.attributeTypeMap;
     }
 
     public constructor() {
