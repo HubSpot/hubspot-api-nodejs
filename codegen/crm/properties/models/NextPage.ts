@@ -10,30 +10,29 @@
  * Do not edit the class manually.
  */
 
-import { PropertyName } from '../models/PropertyName';
 
-export class BatchReadInputPropertyName {
-    'inputs': Array<PropertyName>;
-    'archived': boolean;
+export class NextPage {
+    'after': string;
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<PropertyName>",
+            "name": "after",
+            "baseName": "after",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "link",
+            "baseName": "link",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputPropertyName.attributeTypeMap;
+        return NextPage.attributeTypeMap;
     }
 
     public constructor() {

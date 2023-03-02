@@ -10,23 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { PropertyGroup } from '../models/PropertyGroup';
+import { NextPage } from '../models/NextPage';
 
-export class CollectionResponsePropertyGroupNoPaging {
-    'results': Array<PropertyGroup>;
+export class Paging {
+    'next'?: NextPage;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PropertyGroup>",
+            "name": "next",
+            "baseName": "next",
+            "type": "NextPage",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponsePropertyGroupNoPaging.attributeTypeMap;
+        return Paging.attributeTypeMap;
     }
 
     public constructor() {

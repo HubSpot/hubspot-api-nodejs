@@ -4,9 +4,8 @@ import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
 import { BatchResponseProperty } from '../models/BatchResponseProperty';
-import { BatchResponsePropertyWithErrors } from '../models/BatchResponsePropertyWithErrors';
-import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
-import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
+import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
+import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
 import { Property } from '../models/Property';
 import { PropertyCreate } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
@@ -83,7 +82,7 @@ export class ObjectBatchApi {
      * Create a batch of properties
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseProperty> {
         return this.api.create(param.objectType, param.batchInputPropertyCreate,  options).toPromise();
     }
 
@@ -92,7 +91,7 @@ export class ObjectBatchApi {
      * Read a batch of properties
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseProperty> {
         return this.api.read(param.objectType, param.batchReadInputPropertyName,  options).toPromise();
     }
 
@@ -144,12 +143,6 @@ export interface CoreApiGetAllRequest {
      * @memberof CoreApigetAll
      */
     archived?: boolean
-    /**
-     * 
-     * @type string
-     * @memberof CoreApigetAll
-     */
-    properties?: string
 }
 
 export interface CoreApiGetByNameRequest {
@@ -171,12 +164,6 @@ export interface CoreApiGetByNameRequest {
      * @memberof CoreApigetByName
      */
     archived?: boolean
-    /**
-     * 
-     * @type string
-     * @memberof CoreApigetByName
-     */
-    properties?: string
 }
 
 export interface CoreApiUpdateRequest {
@@ -230,8 +217,8 @@ export class ObjectCoreApi {
      * Read all properties
      * @param param the request object
      */
-    public getAll(param: CoreApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyNoPaging> {
-        return this.api.getAll(param.objectType, param.archived, param.properties,  options).toPromise();
+    public getAll(param: CoreApiGetAllRequest, options?: Configuration): Promise<CollectionResponseProperty> {
+        return this.api.getAll(param.objectType, param.archived,  options).toPromise();
     }
 
     /**
@@ -240,7 +227,7 @@ export class ObjectCoreApi {
      * @param param the request object
      */
     public getByName(param: CoreApiGetByNameRequest, options?: Configuration): Promise<Property> {
-        return this.api.getByName(param.objectType, param.propertyName, param.archived, param.properties,  options).toPromise();
+        return this.api.getByName(param.objectType, param.propertyName, param.archived,  options).toPromise();
     }
 
     /**
@@ -362,7 +349,7 @@ export class ObjectGroupsApi {
      * Read all property groups
      * @param param the request object
      */
-    public getAll(param: GroupsApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyGroupNoPaging> {
+    public getAll(param: GroupsApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyGroup> {
         return this.api.getAll(param.objectType,  options).toPromise();
     }
 

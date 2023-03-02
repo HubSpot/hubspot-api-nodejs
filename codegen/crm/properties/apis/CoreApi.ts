@@ -8,7 +8,7 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
+import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
 import { Property } from '../models/Property';
 import { PropertyCreate } from '../models/PropertyCreate';
 import { PropertyUpdate } from '../models/PropertyUpdate';
@@ -135,16 +135,14 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
      * Read all properties
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
-     * @param properties 
      */
-    public async getAll(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
         if (objectType === null || objectType === undefined) {
             throw new RequiredError("CoreApi", "getAll", "objectType");
         }
-
 
 
 
@@ -159,11 +157,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-
-        // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "string", ""));
         }
 
 
@@ -193,9 +186,8 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
-     * @param properties 
      */
-    public async getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getByName(objectType: string, propertyName: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -211,7 +203,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
-
         // Path Params
         const localVarPath = '/crm/v3/properties/{objectType}/{propertyName}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -224,11 +215,6 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-
-        // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "string", ""));
         }
 
 
@@ -400,13 +386,13 @@ export class CoreApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePropertyNoPaging > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponseProperty > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponsePropertyNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseProperty = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePropertyNoPaging", ""
-            ) as CollectionResponsePropertyNoPaging;
+                "CollectionResponseProperty", ""
+            ) as CollectionResponseProperty;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -419,10 +405,10 @@ export class CoreApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponsePropertyNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponseProperty = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePropertyNoPaging", ""
-            ) as CollectionResponsePropertyNoPaging;
+                "CollectionResponseProperty", ""
+            ) as CollectionResponseProperty;
             return body;
         }
 

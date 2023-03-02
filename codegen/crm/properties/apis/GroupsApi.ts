@@ -8,7 +8,7 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
+import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
@@ -372,13 +372,13 @@ export class GroupsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePropertyGroupNoPaging > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponsePropertyGroup > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponsePropertyGroupNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePropertyGroup = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePropertyGroupNoPaging", ""
-            ) as CollectionResponsePropertyGroupNoPaging;
+                "CollectionResponsePropertyGroup", ""
+            ) as CollectionResponsePropertyGroup;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -391,10 +391,10 @@ export class GroupsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponsePropertyGroupNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePropertyGroup = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponsePropertyGroupNoPaging", ""
-            ) as CollectionResponsePropertyGroupNoPaging;
+                "CollectionResponsePropertyGroup", ""
+            ) as CollectionResponsePropertyGroup;
             return body;
         }
 
