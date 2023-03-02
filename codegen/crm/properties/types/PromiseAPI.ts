@@ -4,8 +4,9 @@ import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
 import { BatchResponseProperty } from '../models/BatchResponseProperty';
-import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
-import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
+import { BatchResponsePropertyWithErrors } from '../models/BatchResponsePropertyWithErrors';
+import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
+import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
 import { Property } from '../models/Property';
 import { PropertyCreate } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
@@ -43,7 +44,7 @@ export class PromiseBatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Promise<BatchResponseProperty> {
+    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         const result = this.api.create(objectType, batchInputPropertyCreate, _options);
         return result.toPromise();
     }
@@ -54,7 +55,7 @@ export class PromiseBatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Promise<BatchResponseProperty> {
+    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         const result = this.api.read(objectType, batchReadInputPropertyName, _options);
         return result.toPromise();
     }
@@ -105,9 +106,10 @@ export class PromiseCoreApi {
      * Read all properties
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
+     * @param properties 
      */
-    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponseProperty> {
-        const result = this.api.getAll(objectType, archived, _options);
+    public getAll(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<CollectionResponsePropertyNoPaging> {
+        const result = this.api.getAll(objectType, archived, properties, _options);
         return result.toPromise();
     }
 
@@ -117,9 +119,10 @@ export class PromiseCoreApi {
      * @param objectType 
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
+     * @param properties 
      */
-    public getByName(objectType: string, propertyName: string, archived?: boolean, _options?: Configuration): Promise<Property> {
-        const result = this.api.getByName(objectType, propertyName, archived, _options);
+    public getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<Property> {
+        const result = this.api.getByName(objectType, propertyName, archived, properties, _options);
         return result.toPromise();
     }
 
@@ -181,7 +184,7 @@ export class PromiseGroupsApi {
      * Read all property groups
      * @param objectType 
      */
-    public getAll(objectType: string, _options?: Configuration): Promise<CollectionResponsePropertyGroup> {
+    public getAll(objectType: string, _options?: Configuration): Promise<CollectionResponsePropertyGroupNoPaging> {
         const result = this.api.getAll(objectType, _options);
         return result.toPromise();
     }

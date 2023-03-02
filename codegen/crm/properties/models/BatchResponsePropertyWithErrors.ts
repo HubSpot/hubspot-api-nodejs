@@ -11,10 +11,13 @@
  */
 
 import { Property } from '../models/Property';
+import { StandardError } from '../models/StandardError';
 
-export class BatchResponseProperty {
-    'status': BatchResponsePropertyStatusEnum;
+export class BatchResponsePropertyWithErrors {
+    'status': BatchResponsePropertyWithErrorsStatusEnum;
     'results': Array<Property>;
+    'numErrors'?: number;
+    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
     'completedAt': Date;
@@ -26,13 +29,25 @@ export class BatchResponseProperty {
         {
             "name": "status",
             "baseName": "status",
-            "type": "BatchResponsePropertyStatusEnum",
+            "type": "BatchResponsePropertyWithErrorsStatusEnum",
             "format": ""
         },
         {
             "name": "results",
             "baseName": "results",
             "type": "Array<Property>",
+            "format": ""
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
             "format": ""
         },
         {
@@ -61,7 +76,7 @@ export class BatchResponseProperty {
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchResponseProperty.attributeTypeMap;
+        return BatchResponsePropertyWithErrors.attributeTypeMap;
     }
 
     public constructor() {
@@ -69,5 +84,5 @@ export class BatchResponseProperty {
 }
 
 
-export type BatchResponsePropertyStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export type BatchResponsePropertyWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
 

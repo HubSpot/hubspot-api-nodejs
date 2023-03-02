@@ -49,6 +49,10 @@ export class PropertyUpdate {
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
+    /**
+    * Represents a formula that is used to compute a calculated property.
+    */
+    'calculationFormula'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -106,6 +110,12 @@ export class PropertyUpdate {
             "baseName": "formField",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -117,6 +127,6 @@ export class PropertyUpdate {
 }
 
 
-export type PropertyUpdateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" ;
-export type PropertyUpdateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" ;
+export type PropertyUpdateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
+export type PropertyUpdateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
 
