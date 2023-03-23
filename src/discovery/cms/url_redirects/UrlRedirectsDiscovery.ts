@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   RedirectsApi,
   RequestContext,
@@ -25,9 +24,6 @@ export default class UrlRedirectsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.redirectsApi = ApiDecoratorService.getInstance().apply<RedirectsApi, Configuration>(
-      new RedirectsApi(configuration),
-      configuration,
-    )
+    this.redirectsApi = ApiDecoratorService.getInstance().apply<RedirectsApi>(new RedirectsApi(configuration))
   }
 }

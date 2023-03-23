@@ -37,30 +37,12 @@ export default class ContactsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi, Configuration>(
-      new AssociationsApi(configuration),
-      configuration,
-    )
-    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi, Configuration>(
-      new BasicApi(configuration),
-      configuration,
-    )
-    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
-      new BatchApi(configuration),
-      configuration,
-    )
-    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi, Configuration>(
-      new GDPRApi(configuration),
-      configuration,
-    )
-    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi, Configuration>(
-      new PublicObjectApi(configuration),
-      configuration,
-    )
-    this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi, Configuration>(
-      new SearchApi(configuration),
-      configuration,
-    )
+    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi>(new AssociationsApi(configuration))
+    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
+    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))
+    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
+    this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 
   public async getAll(

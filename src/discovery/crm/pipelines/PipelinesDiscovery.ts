@@ -31,21 +31,15 @@ export default class PipelinesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.pipelineAuditsApi = ApiDecoratorService.getInstance().apply<PipelineAuditsApi, Configuration>(
+    this.pipelineAuditsApi = ApiDecoratorService.getInstance().apply<PipelineAuditsApi>(
       new PipelineAuditsApi(configuration),
-      configuration,
     )
-    this.pipelineStageAuditsApi = ApiDecoratorService.getInstance().apply<PipelineStageAuditsApi, Configuration>(
+    this.pipelineStageAuditsApi = ApiDecoratorService.getInstance().apply<PipelineStageAuditsApi>(
       new PipelineStageAuditsApi(configuration),
-      configuration,
     )
-    this.pipelineStagesApi = ApiDecoratorService.getInstance().apply<PipelineStagesApi, Configuration>(
+    this.pipelineStagesApi = ApiDecoratorService.getInstance().apply<PipelineStagesApi>(
       new PipelineStagesApi(configuration),
-      configuration,
     )
-    this.pipelinesApi = ApiDecoratorService.getInstance().apply<PipelinesApi, Configuration>(
-      new PipelinesApi(configuration),
-      configuration,
-    )
+    this.pipelinesApi = ApiDecoratorService.getInstance().apply<PipelinesApi>(new PipelinesApi(configuration))
   }
 }

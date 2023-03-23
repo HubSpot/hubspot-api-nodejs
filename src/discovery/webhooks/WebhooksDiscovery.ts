@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -28,13 +27,9 @@ export default class WebhooksDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
-      new SettingsApi(configuration),
-      configuration,
-    )
-    this.subscriptionsApi = ApiDecoratorService.getInstance().apply<SubscriptionsApi, Configuration>(
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
+    this.subscriptionsApi = ApiDecoratorService.getInstance().apply<SubscriptionsApi>(
       new SubscriptionsApi(configuration),
-      configuration,
     )
   }
 

@@ -1,5 +1,4 @@
 import {
-  Configuration,
   ContentApi,
   createConfiguration,
   ExtractApi,
@@ -33,25 +32,12 @@ export default class SourceCodeDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.contentApi = ApiDecoratorService.getInstance().apply<ContentApi, Configuration>(
-      new ContentApi(configuration),
-      configuration,
-    )
-    this.extractApi = ApiDecoratorService.getInstance().apply<ExtractApi, Configuration>(
-      new ExtractApi(configuration),
-      configuration,
-    )
-    this.metadataApi = ApiDecoratorService.getInstance().apply<MetadataApi, Configuration>(
-      new MetadataApi(configuration),
-      configuration,
-    )
-    this.sourceCodeExtractApi = ApiDecoratorService.getInstance().apply<SourceCodeExtractApi, Configuration>(
+    this.contentApi = ApiDecoratorService.getInstance().apply<ContentApi>(new ContentApi(configuration))
+    this.extractApi = ApiDecoratorService.getInstance().apply<ExtractApi>(new ExtractApi(configuration))
+    this.metadataApi = ApiDecoratorService.getInstance().apply<MetadataApi>(new MetadataApi(configuration))
+    this.sourceCodeExtractApi = ApiDecoratorService.getInstance().apply<SourceCodeExtractApi>(
       new SourceCodeExtractApi(configuration),
-      configuration,
     )
-    this.validationApi = ApiDecoratorService.getInstance().apply<ValidationApi, Configuration>(
-      new ValidationApi(configuration),
-      configuration,
-    )
+    this.validationApi = ApiDecoratorService.getInstance().apply<ValidationApi>(new ValidationApi(configuration))
   }
 }

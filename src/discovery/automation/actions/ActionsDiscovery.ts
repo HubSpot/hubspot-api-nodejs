@@ -1,6 +1,5 @@
 import {
   CallbacksApi,
-  Configuration,
   createConfiguration,
   DefinitionsApi,
   FunctionsApi,
@@ -31,21 +30,9 @@ export default class ActionsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi, Configuration>(
-      new CallbacksApi(configuration),
-      configuration,
-    )
-    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi, Configuration>(
-      new DefinitionsApi(configuration),
-      configuration,
-    )
-    this.functionsApi = ApiDecoratorService.getInstance().apply<FunctionsApi, Configuration>(
-      new FunctionsApi(configuration),
-      configuration,
-    )
-    this.revisionsApi = ApiDecoratorService.getInstance().apply<RevisionsApi, Configuration>(
-      new RevisionsApi(configuration),
-      configuration,
-    )
+    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi>(new CallbacksApi(configuration))
+    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi>(new DefinitionsApi(configuration))
+    this.functionsApi = ApiDecoratorService.getInstance().apply<FunctionsApi>(new FunctionsApi(configuration))
+    this.revisionsApi = ApiDecoratorService.getInstance().apply<RevisionsApi>(new RevisionsApi(configuration))
   }
 }

@@ -1,6 +1,5 @@
 import {
   BatchApi,
-  Configuration,
   CoreApi,
   createConfiguration,
   GroupsApi,
@@ -29,17 +28,8 @@ export default class PropertiesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
-      new BatchApi(configuration),
-      configuration,
-    )
-    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
-      new CoreApi(configuration),
-      configuration,
-    )
-    this.groupsApi = ApiDecoratorService.getInstance().apply<GroupsApi, Configuration>(
-      new GroupsApi(configuration),
-      configuration,
-    )
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi>(new CoreApi(configuration))
+    this.groupsApi = ApiDecoratorService.getInstance().apply<GroupsApi>(new GroupsApi(configuration))
   }
 }

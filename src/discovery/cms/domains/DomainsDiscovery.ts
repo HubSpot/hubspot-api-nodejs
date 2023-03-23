@@ -25,9 +25,6 @@ export default class DomainsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.domainsApi = ApiDecoratorService.getInstance().apply<DomainsApi, Configuration>(
-      new DomainsApi(configuration),
-      configuration,
-    )
+    this.domainsApi = ApiDecoratorService.getInstance().apply<DomainsApi>(new DomainsApi(configuration))
   }
 }

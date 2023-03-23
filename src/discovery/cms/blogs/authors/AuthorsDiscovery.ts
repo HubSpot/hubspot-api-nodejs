@@ -1,6 +1,5 @@
 import {
   BlogAuthorsApi,
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -25,9 +24,6 @@ export default class AuthorsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogAuthorsApi = ApiDecoratorService.getInstance().apply<BlogAuthorsApi, Configuration>(
-      new BlogAuthorsApi(configuration),
-      configuration,
-    )
+    this.blogAuthorsApi = ApiDecoratorService.getInstance().apply<BlogAuthorsApi>(new BlogAuthorsApi(configuration))
   }
 }

@@ -29,17 +29,8 @@ export default class TimelineDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi, Configuration>(
-      new EventsApi(configuration),
-      configuration,
-    )
-    this.templatesApi = ApiDecoratorService.getInstance().apply<TemplatesApi, Configuration>(
-      new TemplatesApi(configuration),
-      configuration,
-    )
-    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi, Configuration>(
-      new TokensApi(configuration),
-      configuration,
-    )
+    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi>(new EventsApi(configuration))
+    this.templatesApi = ApiDecoratorService.getInstance().apply<TemplatesApi>(new TemplatesApi(configuration))
+    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi>(new TokensApi(configuration))
   }
 }

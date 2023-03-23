@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -25,9 +24,6 @@ export default class CallingDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
-      new SettingsApi(configuration),
-      configuration,
-    )
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
   }
 }

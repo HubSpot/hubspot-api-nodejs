@@ -25,9 +25,6 @@ export default class SiteSearchDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicApi = ApiDecoratorService.getInstance().apply<PublicApi, Configuration>(
-      new PublicApi(configuration),
-      configuration,
-    )
+    this.publicApi = ApiDecoratorService.getInstance().apply<PublicApi>(new PublicApi(configuration))
   }
 }

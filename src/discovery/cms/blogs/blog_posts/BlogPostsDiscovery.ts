@@ -1,6 +1,5 @@
 import {
   BlogPostsApi,
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -25,9 +24,6 @@ export default class BlogPostsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogPostsApi = ApiDecoratorService.getInstance().apply<BlogPostsApi, Configuration>(
-      new BlogPostsApi(configuration),
-      configuration,
-    )
+    this.blogPostsApi = ApiDecoratorService.getInstance().apply<BlogPostsApi>(new BlogPostsApi(configuration))
   }
 }

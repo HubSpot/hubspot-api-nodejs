@@ -1,6 +1,5 @@
 import {
   BlogTagsApi,
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -25,9 +24,6 @@ export default class TagsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogTagsApi = ApiDecoratorService.getInstance().apply<BlogTagsApi, Configuration>(
-      new BlogTagsApi(configuration),
-      configuration,
-    )
+    this.blogTagsApi = ApiDecoratorService.getInstance().apply<BlogTagsApi>(new BlogTagsApi(configuration))
   }
 }

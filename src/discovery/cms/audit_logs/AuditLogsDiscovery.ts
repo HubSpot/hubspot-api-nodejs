@@ -1,6 +1,5 @@
 import {
   AuditLogsApi,
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -25,9 +24,6 @@ export default class AuditLogsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.auditLogsApi = ApiDecoratorService.getInstance().apply<AuditLogsApi, Configuration>(
-      new AuditLogsApi(configuration),
-      configuration,
-    )
+    this.auditLogsApi = ApiDecoratorService.getInstance().apply<AuditLogsApi>(new AuditLogsApi(configuration))
   }
 }
