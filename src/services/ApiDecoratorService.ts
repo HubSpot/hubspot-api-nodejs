@@ -21,7 +21,7 @@ export default class ApiDecoratorService {
     this.decorators = decorators
   }
 
-  public apply<APIClass, Configuration>(api: APIClass, configuration: Configuration): APIClass {
+  public apply<APIClass>(api: any): APIClass {
     if (this.decorators.length > 0) {
       const clientPrototype = Object.getPrototypeOf(api)
       const methodsNamesToPatch = Object.getOwnPropertyNames(clientPrototype)
@@ -37,10 +37,10 @@ export default class ApiDecoratorService {
           patchedMethod = decorator.decorate(patchedMethod)
         }
 
-        clientPrototype[methodName] = patchedMethod
+        api[methodName] = patchedMethod
       })
 
-      return new clientPrototype.constructor(configuration)
+      return api
     }
 
     return api

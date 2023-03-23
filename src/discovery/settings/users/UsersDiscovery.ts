@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -29,17 +28,8 @@ export default class UsersDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.rolesApi = ApiDecoratorService.getInstance().apply<RolesApi, Configuration>(
-      new RolesApi(configuration),
-      configuration,
-    )
-    this.teamsApi = ApiDecoratorService.getInstance().apply<TeamsApi, Configuration>(
-      new TeamsApi(configuration),
-      configuration,
-    )
-    this.usersApi = ApiDecoratorService.getInstance().apply<UsersApi, Configuration>(
-      new UsersApi(configuration),
-      configuration,
-    )
+    this.rolesApi = ApiDecoratorService.getInstance().apply<RolesApi>(new RolesApi(configuration))
+    this.teamsApi = ApiDecoratorService.getInstance().apply<TeamsApi>(new TeamsApi(configuration))
+    this.usersApi = ApiDecoratorService.getInstance().apply<UsersApi>(new UsersApi(configuration))
   }
 }

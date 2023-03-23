@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   FilesApi,
   FoldersApi,
@@ -27,13 +26,7 @@ export default class FilesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.filesApi = ApiDecoratorService.getInstance().apply<FilesApi, Configuration>(
-      new FilesApi(configuration),
-      configuration,
-    )
-    this.foldersApi = ApiDecoratorService.getInstance().apply<FoldersApi, Configuration>(
-      new FoldersApi(configuration),
-      configuration,
-    )
+    this.filesApi = ApiDecoratorService.getInstance().apply<FilesApi>(new FilesApi(configuration))
+    this.foldersApi = ApiDecoratorService.getInstance().apply<FoldersApi>(new FoldersApi(configuration))
   }
 }

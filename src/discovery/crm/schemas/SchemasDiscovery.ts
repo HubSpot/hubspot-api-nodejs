@@ -27,13 +27,9 @@ export default class SchemasDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
-      new CoreApi(configuration),
-      configuration,
-    )
-    this.publicObjectSchemasApi = ApiDecoratorService.getInstance().apply<PublicObjectSchemasApi, Configuration>(
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi>(new CoreApi(configuration))
+    this.publicObjectSchemasApi = ApiDecoratorService.getInstance().apply<PublicObjectSchemasApi>(
       new PublicObjectSchemasApi(configuration),
-      configuration,
     )
   }
 }

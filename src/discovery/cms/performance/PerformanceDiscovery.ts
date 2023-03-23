@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   PublicPerformanceApi,
   RequestContext,
@@ -25,9 +24,8 @@ export default class PerformanceDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicPerformanceApi = ApiDecoratorService.getInstance().apply<PublicPerformanceApi, Configuration>(
+    this.publicPerformanceApi = ApiDecoratorService.getInstance().apply<PublicPerformanceApi>(
       new PublicPerformanceApi(configuration),
-      configuration,
     )
   }
 }

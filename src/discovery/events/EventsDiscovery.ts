@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   EventsApi,
   RequestContext,
@@ -25,9 +24,6 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi, Configuration>(
-      new EventsApi(configuration),
-      configuration,
-    )
+    this.eventsApi = ApiDecoratorService.getInstance().apply<EventsApi>(new EventsApi(configuration))
   }
 }

@@ -1,6 +1,5 @@
 import {
   CallbacksApi,
-  Configuration,
   createConfiguration,
   InvoiceApi,
   RequestContext,
@@ -36,25 +35,10 @@ export default class AccountingDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi, Configuration>(
-      new CallbacksApi(configuration),
-      configuration,
-    )
-    this.invoiceApi = ApiDecoratorService.getInstance().apply<InvoiceApi, Configuration>(
-      new InvoiceApi(configuration),
-      configuration,
-    )
-    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi, Configuration>(
-      new SettingsApi(configuration),
-      configuration,
-    )
-    this.syncApi = ApiDecoratorService.getInstance().apply<SyncApi, Configuration>(
-      new SyncApi(configuration),
-      configuration,
-    )
-    this.userAccountsApi = ApiDecoratorService.getInstance().apply<UserAccountsApi, Configuration>(
-      new UserAccountsApi(configuration),
-      configuration,
-    )
+    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi>(new CallbacksApi(configuration))
+    this.invoiceApi = ApiDecoratorService.getInstance().apply<InvoiceApi>(new InvoiceApi(configuration))
+    this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
+    this.syncApi = ApiDecoratorService.getInstance().apply<SyncApi>(new SyncApi(configuration))
+    this.userAccountsApi = ApiDecoratorService.getInstance().apply<UserAccountsApi>(new UserAccountsApi(configuration))
   }
 }

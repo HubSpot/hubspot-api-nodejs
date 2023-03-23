@@ -1,6 +1,5 @@
 import {
   BatchApi,
-  Configuration,
   createConfiguration,
   DefinitionsApi,
   RequestContext,
@@ -27,13 +26,7 @@ export default class AssociationsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi, Configuration>(
-      new BatchApi(configuration),
-      configuration,
-    )
-    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi, Configuration>(
-      new DefinitionsApi(configuration),
-      configuration,
-    )
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
+    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi>(new DefinitionsApi(configuration))
   }
 }

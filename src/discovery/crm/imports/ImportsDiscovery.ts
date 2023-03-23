@@ -27,13 +27,9 @@ export default class ImportsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi, Configuration>(
-      new CoreApi(configuration),
-      configuration,
-    )
-    this.publicImportsApi = ApiDecoratorService.getInstance().apply<PublicImportsApi, Configuration>(
+    this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi>(new CoreApi(configuration))
+    this.publicImportsApi = ApiDecoratorService.getInstance().apply<PublicImportsApi>(
       new PublicImportsApi(configuration),
-      configuration,
     )
   }
 }

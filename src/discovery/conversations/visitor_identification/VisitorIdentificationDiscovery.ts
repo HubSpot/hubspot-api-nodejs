@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   GenerateApi,
   RequestContext,
@@ -25,9 +24,6 @@ export default class VisitorIdentificationDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.generateApi = ApiDecoratorService.getInstance().apply<GenerateApi, Configuration>(
-      new GenerateApi(configuration),
-      configuration,
-    )
+    this.generateApi = ApiDecoratorService.getInstance().apply<GenerateApi>(new GenerateApi(configuration))
   }
 }

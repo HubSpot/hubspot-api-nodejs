@@ -1,6 +1,5 @@
 import {
   CardsApi,
-  Configuration,
   createConfiguration,
   RequestContext,
   ResponseContext,
@@ -27,13 +26,9 @@ export default class CardsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.cardsApi = ApiDecoratorService.getInstance().apply<CardsApi, Configuration>(
-      new CardsApi(configuration),
-      configuration,
-    )
-    this.sampleResponseApi = ApiDecoratorService.getInstance().apply<SampleResponseApi, Configuration>(
+    this.cardsApi = ApiDecoratorService.getInstance().apply<CardsApi>(new CardsApi(configuration))
+    this.sampleResponseApi = ApiDecoratorService.getInstance().apply<SampleResponseApi>(
       new SampleResponseApi(configuration),
-      configuration,
     )
   }
 }

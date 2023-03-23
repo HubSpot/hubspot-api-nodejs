@@ -1,6 +1,5 @@
 import {
   AttendanceSubscriberStateChangesApi,
-  Configuration,
   createConfiguration,
   MarketingEventsExternalApi,
   RequestContext,
@@ -29,17 +28,15 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.attendanceSubscriberStateChangesApi = ApiDecoratorService.getInstance().apply<
-      AttendanceSubscriberStateChangesApi,
-      Configuration
-    >(new AttendanceSubscriberStateChangesApi(configuration), configuration)
-    this.marketingEventsExternalApi = ApiDecoratorService.getInstance().apply<
-      MarketingEventsExternalApi,
-      Configuration
-    >(new MarketingEventsExternalApi(configuration), configuration)
-    this.settingsExternalApi = ApiDecoratorService.getInstance().apply<SettingsExternalApi, Configuration>(
+    this.attendanceSubscriberStateChangesApi =
+      ApiDecoratorService.getInstance().apply<AttendanceSubscriberStateChangesApi>(
+        new AttendanceSubscriberStateChangesApi(configuration),
+      )
+    this.marketingEventsExternalApi = ApiDecoratorService.getInstance().apply<MarketingEventsExternalApi>(
+      new MarketingEventsExternalApi(configuration),
+    )
+    this.settingsExternalApi = ApiDecoratorService.getInstance().apply<SettingsExternalApi>(
       new SettingsExternalApi(configuration),
-      configuration,
     )
   }
 }

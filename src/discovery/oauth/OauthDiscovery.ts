@@ -1,7 +1,6 @@
 import * as qs from 'querystring'
 import {
   AccessTokensApi,
-  Configuration,
   createConfiguration,
   RefreshTokensApi,
   RequestContext,
@@ -30,18 +29,11 @@ export default class OauthDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.accessTokensApi = ApiDecoratorService.getInstance().apply<AccessTokensApi, Configuration>(
-      new AccessTokensApi(configuration),
-      configuration,
-    )
-    this.refreshTokensApi = ApiDecoratorService.getInstance().apply<RefreshTokensApi, Configuration>(
+    this.accessTokensApi = ApiDecoratorService.getInstance().apply<AccessTokensApi>(new AccessTokensApi(configuration))
+    this.refreshTokensApi = ApiDecoratorService.getInstance().apply<RefreshTokensApi>(
       new RefreshTokensApi(configuration),
-      configuration,
     )
-    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi, Configuration>(
-      new TokensApi(configuration),
-      configuration,
-    )
+    this.tokensApi = ApiDecoratorService.getInstance().apply<TokensApi>(new TokensApi(configuration))
   }
 
   public getAuthorizationUrl(

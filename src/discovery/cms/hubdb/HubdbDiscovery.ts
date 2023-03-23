@@ -29,17 +29,8 @@ export default class HubdbDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.rowsApi = ApiDecoratorService.getInstance().apply<RowsApi, Configuration>(
-      new RowsApi(configuration),
-      configuration,
-    )
-    this.rowsBatchApi = ApiDecoratorService.getInstance().apply<RowsBatchApi, Configuration>(
-      new RowsBatchApi(configuration),
-      configuration,
-    )
-    this.tablesApi = ApiDecoratorService.getInstance().apply<TablesApi, Configuration>(
-      new TablesApi(configuration),
-      configuration,
-    )
+    this.rowsApi = ApiDecoratorService.getInstance().apply<RowsApi>(new RowsApi(configuration))
+    this.rowsBatchApi = ApiDecoratorService.getInstance().apply<RowsBatchApi>(new RowsBatchApi(configuration))
+    this.tablesApi = ApiDecoratorService.getInstance().apply<TablesApi>(new TablesApi(configuration))
   }
 }

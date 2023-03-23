@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   DefinitionApi,
   RequestContext,
@@ -27,13 +26,7 @@ export default class CommunicationPreferencesDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.definitionApi = ApiDecoratorService.getInstance().apply<DefinitionApi, Configuration>(
-      new DefinitionApi(configuration),
-      configuration,
-    )
-    this.statusApi = ApiDecoratorService.getInstance().apply<StatusApi, Configuration>(
-      new StatusApi(configuration),
-      configuration,
-    )
+    this.definitionApi = ApiDecoratorService.getInstance().apply<DefinitionApi>(new DefinitionApi(configuration))
+    this.statusApi = ApiDecoratorService.getInstance().apply<StatusApi>(new StatusApi(configuration))
   }
 }

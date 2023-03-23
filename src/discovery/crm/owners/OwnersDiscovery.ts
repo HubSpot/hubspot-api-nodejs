@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   OwnersApi,
   RequestContext,
@@ -25,9 +24,6 @@ export default class OwnersDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.ownersApi = ApiDecoratorService.getInstance().apply<OwnersApi, Configuration>(
-      new OwnersApi(configuration),
-      configuration,
-    )
+    this.ownersApi = ApiDecoratorService.getInstance().apply<OwnersApi>(new OwnersApi(configuration))
   }
 }
