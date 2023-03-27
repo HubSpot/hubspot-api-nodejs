@@ -11,6 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
 /**
@@ -23,153 +24,22 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Archive
      * @param feedbackSubmissionId 
      */
-    public async archive(feedbackSubmissionId: string, _options?: Configuration): Promise<RequestContext> {
+    public async deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(feedbackSubmissionId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'feedbackSubmissionId' is not null or undefined
         if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError("BasicApi", "archive", "feedbackSubmissionId");
+            throw new RequiredError("BasicApi", "deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId", "feedbackSubmissionId");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'
+        const localVarPath = '/crm/v3/objects/feedback submissions/{feedbackSubmissionId}'
             .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInput 
-     */
-    public async create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'simplePublicObjectInput' is not null or undefined
-        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
-            throw new RequiredError("BasicApi", "create", "simplePublicObjectInput");
-        }
-
-
-        // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions';
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(simplePublicObjectInput, "SimplePublicObjectInput", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
-     * @param feedbackSubmissionId 
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
-     */
-    public async getById(feedbackSubmissionId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'feedbackSubmissionId' is not null or undefined
-        if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError("BasicApi", "getById", "feedbackSubmissionId");
-        }
-
-
-
-
-
-
-
-        // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'
-            .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
-        }
-
-        // Query Params
-        if (propertiesWithHistory !== undefined) {
-            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
-        }
-
-        // Query Params
-        if (associations !== undefined) {
-            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
-        }
-
-        // Query Params
-        if (archived !== undefined) {
-            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
-        }
-
-        // Query Params
-        if (idProperty !== undefined) {
-            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
-        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -202,7 +72,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      */
-    public async getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getCrmV3ObjectsFeedbackSubmissions(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -212,7 +82,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions';
+        const localVarPath = '/crm/v3/objects/feedback submissions';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -270,30 +140,108 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param feedbackSubmissionId 
+     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param archived Whether to return only results that have been archived.
+     * @param idProperty The name of a property whose values are unique for this object type
+     */
+    public async getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(feedbackSubmissionId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'feedbackSubmissionId' is not null or undefined
+        if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
+            throw new RequiredError("BasicApi", "getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId", "feedbackSubmissionId");
+        }
+
+
+
+
+
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/objects/feedback submissions/{feedbackSubmissionId}'
+            .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (properties !== undefined) {
+            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (propertiesWithHistory !== undefined) {
+            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (associations !== undefined) {
+            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (archived !== undefined) {
+            requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (idProperty !== undefined) {
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param feedbackSubmissionId 
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async update(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'feedbackSubmissionId' is not null or undefined
         if (feedbackSubmissionId === null || feedbackSubmissionId === undefined) {
-            throw new RequiredError("BasicApi", "update", "feedbackSubmissionId");
+            throw new RequiredError("BasicApi", "patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId", "feedbackSubmissionId");
         }
 
 
         // verify required parameter 'simplePublicObjectInput' is not null or undefined
         if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
-            throw new RequiredError("BasicApi", "update", "simplePublicObjectInput");
+            throw new RequiredError("BasicApi", "patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId", "simplePublicObjectInput");
         }
 
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}'
+        const localVarPath = '/crm/v3/objects/feedback submissions/{feedbackSubmissionId}'
             .replace('{' + 'feedbackSubmissionId' + '}', encodeURIComponent(String(feedbackSubmissionId)));
 
         // Make Request Context
@@ -337,6 +285,59 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         return requestContext;
     }
 
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param simplePublicObjectInputForCreate 
+     */
+    public async postCrmV3ObjectsFeedbackSubmissions(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'simplePublicObjectInputForCreate' is not null or undefined
+        if (simplePublicObjectInputForCreate === null || simplePublicObjectInputForCreate === undefined) {
+            throw new RequiredError("BasicApi", "postCrmV3ObjectsFeedbackSubmissions", "simplePublicObjectInputForCreate");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/objects/feedback submissions';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(simplePublicObjectInputForCreate, "SimplePublicObjectInputForCreate", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
 }
 
 export class BasicApiResponseProcessor {
@@ -345,10 +346,10 @@ export class BasicApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to archive
+     * @params response Response returned by the server for a request to deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -377,120 +378,120 @@ export class BasicApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to create
+     * @params response Response returned by the server for a request to getCrmV3ObjectsFeedbackSubmissions
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<SimplePublicObject > {
+     public async getCrmV3ObjectsFeedbackSubmissions(response: ResponseContext): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging", ""
+            ) as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging", ""
+            ) as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(response: ResponseContext): Promise<SimplePublicObjectWithAssociations > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObjectWithAssociations", ""
+            ) as SimplePublicObjectWithAssociations;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObjectWithAssociations", ""
+            ) as SimplePublicObjectWithAssociations;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(response: ResponseContext): Promise<SimplePublicObject > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: SimplePublicObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObject", ""
+            ) as SimplePublicObject;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: SimplePublicObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "SimplePublicObject", ""
+            ) as SimplePublicObject;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to postCrmV3ObjectsFeedbackSubmissions
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async postCrmV3ObjectsFeedbackSubmissions(response: ResponseContext): Promise<SimplePublicObject > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: SimplePublicObject = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObject", ""
-            ) as SimplePublicObject;
-            return body;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SimplePublicObject = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObject", ""
-            ) as SimplePublicObject;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getById
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getById(response: ResponseContext): Promise<SimplePublicObjectWithAssociations > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObjectWithAssociations", ""
-            ) as SimplePublicObjectWithAssociations;
-            return body;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: SimplePublicObjectWithAssociations = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "SimplePublicObjectWithAssociations", ""
-            ) as SimplePublicObjectWithAssociations;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to getPage
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging", ""
-            ) as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging;
-            return body;
-        }
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseSimplePublicObjectWithAssociationsForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging", ""
-            ) as CollectionResponseSimplePublicObjectWithAssociationsForwardPaging;
-            return body;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to update
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async update(response: ResponseContext): Promise<SimplePublicObject > {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SimplePublicObject", ""

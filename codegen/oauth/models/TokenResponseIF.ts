@@ -13,8 +13,8 @@
 
 export class TokenResponseIF {
     'accessToken': string;
-    'refreshToken': string;
     'expiresIn': number;
+    'refreshToken': string;
     'tokenType': string;
     'idToken'?: string;
 
@@ -28,16 +28,16 @@ export class TokenResponseIF {
             "format": ""
         },
         {
-            "name": "refreshToken",
-            "baseName": "refresh_token",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "expiresIn",
             "baseName": "expires_in",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "refreshToken",
+            "baseName": "refresh_token",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "tokenType",

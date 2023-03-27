@@ -25,8 +25,8 @@ export class ObservableAccessTokensApi {
     /**
      * @param token 
      */
-    public getAccessToken(token: string, _options?: Configuration): Observable<AccessTokenInfoResponse> {
-        const requestContextPromise = this.requestFactory.getAccessToken(token, _options);
+    public get(token: string, _options?: Configuration): Observable<AccessTokenInfoResponse> {
+        const requestContextPromise = this.requestFactory.get(token, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -40,7 +40,7 @@ export class ObservableAccessTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAccessToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
             }));
     }
 
@@ -65,8 +65,8 @@ export class ObservableRefreshTokensApi {
     /**
      * @param token 
      */
-    public archiveRefreshToken(token: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archiveRefreshToken(token, _options);
+    public archive(token: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(token, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -80,15 +80,15 @@ export class ObservableRefreshTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveRefreshToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
 
     /**
      * @param token 
      */
-    public getRefreshToken(token: string, _options?: Configuration): Observable<RefreshTokenInfoResponse> {
-        const requestContextPromise = this.requestFactory.getRefreshToken(token, _options);
+    public get(token: string, _options?: Configuration): Observable<RefreshTokenInfoResponse> {
+        const requestContextPromise = this.requestFactory.get(token, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -102,7 +102,7 @@ export class ObservableRefreshTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getRefreshToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
             }));
     }
 
@@ -132,8 +132,8 @@ export class ObservableTokensApi {
      * @param clientSecret 
      * @param refreshToken 
      */
-    public createToken(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Observable<TokenResponseIF> {
-        const requestContextPromise = this.requestFactory.createToken(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Observable<TokenResponseIF> {
+        const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -147,7 +147,7 @@ export class ObservableTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
 

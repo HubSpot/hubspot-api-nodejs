@@ -26,6 +26,11 @@ export class Column {
     * Column Id
     */
     'id'?: string;
+    'deleted'?: boolean;
+    /**
+    * Options to choose for select and multi-select columns
+    */
+    'options'?: Array<Option>;
     /**
     * Column width for HubDB UI
     */
@@ -38,34 +43,27 @@ export class Column {
     * Foreign Column id
     */
     'foreignColumnId'?: number;
+    'description'?: string;
     /**
     * Foreign Ids
     */
     'foreignIds'?: Array<ForeignId>;
     /**
-    * Foreign ids
+    * Type of the column
     */
-    'foreignIdsById'?: { [key: string]: ForeignId; };
+    'type': ColumnTypeEnum;
     /**
     * Foreign ids by name
     */
     'foreignIdsByName'?: { [key: string]: ForeignId; };
     /**
-    * Type of the column
+    * Foreign ids
     */
-    'type': ColumnTypeEnum;
+    'foreignIdsById'?: { [key: string]: ForeignId; };
     /**
     * Number of options available
     */
     'optionCount'?: number;
-    /**
-    * Specifies whether the column is archived
-    */
-    'archived'?: boolean;
-    /**
-    * Options to choose for select and multi-select columns
-    */
-    'options'?: Array<Option>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -89,6 +87,18 @@ export class Column {
             "format": ""
         },
         {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<Option>",
+            "format": ""
+        },
+        {
             "name": "width",
             "baseName": "width",
             "type": "number",
@@ -107,21 +117,15 @@ export class Column {
             "format": "int32"
         },
         {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "foreignIds",
             "baseName": "foreignIds",
             "type": "Array<ForeignId>",
-            "format": ""
-        },
-        {
-            "name": "foreignIdsById",
-            "baseName": "foreignIdsById",
-            "type": "{ [key: string]: ForeignId; }",
-            "format": ""
-        },
-        {
-            "name": "foreignIdsByName",
-            "baseName": "foreignIdsByName",
-            "type": "{ [key: string]: ForeignId; }",
             "format": ""
         },
         {
@@ -131,22 +135,22 @@ export class Column {
             "format": ""
         },
         {
+            "name": "foreignIdsByName",
+            "baseName": "foreignIdsByName",
+            "type": "{ [key: string]: ForeignId; }",
+            "format": ""
+        },
+        {
+            "name": "foreignIdsById",
+            "baseName": "foreignIdsById",
+            "type": "{ [key: string]: ForeignId; }",
+            "format": ""
+        },
+        {
             "name": "optionCount",
             "baseName": "optionCount",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<Option>",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -158,5 +162,5 @@ export class Column {
 }
 
 
-export type ColumnTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" ;
+export type ColumnTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" | "FILE" ;
 

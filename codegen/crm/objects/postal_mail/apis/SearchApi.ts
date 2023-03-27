@@ -19,17 +19,17 @@ export class SearchApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * @param publicObjectSearchRequest 
      */
-    public async doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsPostalMailSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'publicObjectSearchRequest' is not null or undefined
         if (publicObjectSearchRequest === null || publicObjectSearchRequest === undefined) {
-            throw new RequiredError("SearchApi", "doSearch", "publicObjectSearchRequest");
+            throw new RequiredError("SearchApi", "postCrmV3ObjectsPostalMailSearch", "publicObjectSearchRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/postal_mail/search';
+        const localVarPath = '/crm/v3/objects/postal mail/search';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -75,10 +75,10 @@ export class SearchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to doSearch
+     * @params response Response returned by the server for a request to postCrmV3ObjectsPostalMailSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doSearch(response: ResponseContext): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging > {
+     public async postCrmV3ObjectsPostalMailSearch(response: ResponseContext): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalSimplePublicObjectForwardPaging = ObjectSerializer.deserialize(

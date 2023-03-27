@@ -1,254 +1,138 @@
 import { Configuration} from '../configuration'
 
-import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-
-import { ObservableAssociationsApi } from "./ObservableAPI";
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-
-export interface AssociationsApiArchiveRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    postalMail: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    toObjectId: number
-}
-
-export interface AssociationsApiCreateRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    postalMail: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    toObjectId: number
-    /**
-     * 
-     * @type Array&lt;AssociationSpec&gt;
-     * @memberof AssociationsApicreate
-     */
-    associationSpec: Array<AssociationSpec>
-}
-
-export interface AssociationsApiGetAllRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApigetAll
-     */
-    postalMail: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    toObjectType: string
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof AssociationsApigetAll
-     */
-    limit?: number
-}
-
-export class ObjectAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(configuration: Configuration, requestFactory?: AssociationsApiRequestFactory, responseProcessor?: AssociationsApiResponseProcessor) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * deletes all associations between two records.
-     * Delete
-     * @param param the request object
-     */
-    public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.postalMail, param.toObjectType, param.toObjectId,  options).toPromise();
-    }
-
-    /**
-     * Set association labels between two records.
-     * Create
-     * @param param the request object
-     */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        return this.api.create(param.postalMail, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
-    }
-
-    /**
-     * List all associations of a postal mail by object type. Limit 1000 per call.
-     * List
-     * @param param the request object
-     */
-    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        return this.api.getAll(param.postalMail, param.toObjectType, param.after, param.limit,  options).toPromise();
-    }
-
-}
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface BasicApiArchiveRequest {
+export interface BasicApiDeleteCrmV3ObjectsPostalMailPostalMailRequest {
     /**
      * 
      * @type string
-     * @memberof BasicApiarchive
+     * @memberof BasicApideleteCrmV3ObjectsPostalMailPostalMail
      */
     postalMail: string
 }
 
-export interface BasicApiCreateRequest {
-    /**
-     * 
-     * @type SimplePublicObjectInput
-     * @memberof BasicApicreate
-     */
-    simplePublicObjectInput: SimplePublicObjectInput
-}
-
-export interface BasicApiGetByIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof BasicApigetById
-     */
-    postalMail: string
-    /**
-     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    properties?: Array<string>
-    /**
-     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof BasicApigetById
-     */
-    archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object type
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
-}
-
-export interface BasicApiGetPageRequest {
+export interface BasicApiGetCrmV3ObjectsPostalMailRequest {
     /**
      * The maximum number of results to display per page.
      * @type number
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     after?: string
     /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     properties?: Array<string>
     /**
      * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     propertiesWithHistory?: Array<string>
     /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     associations?: Array<string>
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsPostalMail
      */
     archived?: boolean
 }
 
-export interface BasicApiUpdateRequest {
+export interface BasicApiGetCrmV3ObjectsPostalMailPostalMailRequest {
     /**
      * 
      * @type string
-     * @memberof BasicApiupdate
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    postalMail: string
+    /**
+     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    properties?: Array<string>
+    /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    propertiesWithHistory?: Array<string>
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    associations?: Array<string>
+    /**
+     * Whether to return only results that have been archived.
+     * @type boolean
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    archived?: boolean
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApigetCrmV3ObjectsPostalMailPostalMail
+     */
+    idProperty?: string
+}
+
+export interface BasicApiPatchCrmV3ObjectsPostalMailPostalMailRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApipatchCrmV3ObjectsPostalMailPostalMail
      */
     postalMail: string
     /**
      * 
      * @type SimplePublicObjectInput
-     * @memberof BasicApiupdate
+     * @memberof BasicApipatchCrmV3ObjectsPostalMailPostalMail
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
      * The name of a property whose values are unique for this object type
      * @type string
-     * @memberof BasicApiupdate
+     * @memberof BasicApipatchCrmV3ObjectsPostalMailPostalMail
      */
     idProperty?: string
+}
+
+export interface BasicApiPostCrmV3ObjectsPostalMailRequest {
+    /**
+     * 
+     * @type SimplePublicObjectInputForCreate
+     * @memberof BasicApipostCrmV3ObjectsPostalMail
+     */
+    simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate
 }
 
 export class ObjectBasicApi {
@@ -263,26 +147,8 @@ export class ObjectBasicApi {
      * Archive
      * @param param the request object
      */
-    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.postalMail,  options).toPromise();
-    }
-
-    /**
-     * Create a postal mail with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard postal mail is provided.
-     * Create
-     * @param param the request object
-     */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.create(param.simplePublicObjectInput,  options).toPromise();
-    }
-
-    /**
-     * Read an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
-     * @param param the request object
-     */
-    public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.postalMail, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+    public deleteCrmV3ObjectsPostalMailPostalMail(param: BasicApiDeleteCrmV3ObjectsPostalMailPostalMailRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteCrmV3ObjectsPostalMailPostalMail(param.postalMail,  options).toPromise();
     }
 
     /**
@@ -290,8 +156,17 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    public getCrmV3ObjectsPostalMail(param: BasicApiGetCrmV3ObjectsPostalMailRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+        return this.api.getCrmV3ObjectsPostalMail(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param param the request object
+     */
+    public getCrmV3ObjectsPostalMailPostalMail(param: BasicApiGetCrmV3ObjectsPostalMailPostalMailRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        return this.api.getCrmV3ObjectsPostalMailPostalMail(param.postalMail, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -299,8 +174,17 @@ export class ObjectBasicApi {
      * Update
      * @param param the request object
      */
-    public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.update(param.postalMail, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+    public patchCrmV3ObjectsPostalMailPostalMail(param: BasicApiPatchCrmV3ObjectsPostalMailPostalMailRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.patchCrmV3ObjectsPostalMailPostalMail(param.postalMail, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Create a postal mail with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard postal mail is provided.
+     * Create
+     * @param param the request object
+     */
+    public postCrmV3ObjectsPostalMail(param: BasicApiPostCrmV3ObjectsPostalMailRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.postCrmV3ObjectsPostalMail(param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
 }
@@ -308,44 +192,44 @@ export class ObjectBasicApi {
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 
-export interface BatchApiArchiveRequest {
+export interface BatchApiPostCrmV3ObjectsPostalMailBatchArchiveRequest {
     /**
      * 
      * @type BatchInputSimplePublicObjectId
-     * @memberof BatchApiarchive
+     * @memberof BatchApipostCrmV3ObjectsPostalMailBatchArchive
      */
     batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId
 }
 
-export interface BatchApiCreateRequest {
+export interface BatchApiPostCrmV3ObjectsPostalMailBatchCreateRequest {
     /**
      * 
-     * @type BatchInputSimplePublicObjectInput
-     * @memberof BatchApicreate
+     * @type BatchInputSimplePublicObjectInputForCreate
+     * @memberof BatchApipostCrmV3ObjectsPostalMailBatchCreate
      */
-    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+    batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate
 }
 
-export interface BatchApiReadRequest {
+export interface BatchApiPostCrmV3ObjectsPostalMailBatchReadRequest {
     /**
      * 
      * @type BatchReadInputSimplePublicObjectId
-     * @memberof BatchApiread
+     * @memberof BatchApipostCrmV3ObjectsPostalMailBatchRead
      */
     batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof BatchApiread
+     * @memberof BatchApipostCrmV3ObjectsPostalMailBatchRead
      */
     archived?: boolean
 }
 
-export interface BatchApiUpdateRequest {
+export interface BatchApiPostCrmV3ObjectsPostalMailBatchUpdateRequest {
     /**
      * 
      * @type BatchInputSimplePublicObjectBatchInput
-     * @memberof BatchApiupdate
+     * @memberof BatchApipostCrmV3ObjectsPostalMailBatchUpdate
      */
     batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput
 }
@@ -361,32 +245,32 @@ export class ObjectBatchApi {
      * Archive a batch of postal mail by ID
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.batchInputSimplePublicObjectId,  options).toPromise();
+    public postCrmV3ObjectsPostalMailBatchArchive(param: BatchApiPostCrmV3ObjectsPostalMailBatchArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.postCrmV3ObjectsPostalMailBatchArchive(param.batchInputSimplePublicObjectId,  options).toPromise();
     }
 
     /**
      * Create a batch of postal mail
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.create(param.batchInputSimplePublicObjectInput,  options).toPromise();
+    public postCrmV3ObjectsPostalMailBatchCreate(param: BatchApiPostCrmV3ObjectsPostalMailBatchCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsPostalMailBatchCreate(param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
      * Read a batch of postal mail by internal ID, or unique property values
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.read(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    public postCrmV3ObjectsPostalMailBatchRead(param: BatchApiPostCrmV3ObjectsPostalMailBatchReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsPostalMailBatchRead(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
     }
 
     /**
      * Update a batch of postal mail
      * @param param the request object
      */
-    public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    public postCrmV3ObjectsPostalMailBatchUpdate(param: BatchApiPostCrmV3ObjectsPostalMailBatchUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsPostalMailBatchUpdate(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
 }
@@ -394,11 +278,11 @@ export class ObjectBatchApi {
 import { ObservablePublicObjectApi } from "./ObservableAPI";
 import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
 
-export interface PublicObjectApiMergeRequest {
+export interface PublicObjectApiPostCrmV3ObjectsPostalMailMergeRequest {
     /**
      * 
      * @type PublicMergeInput
-     * @memberof PublicObjectApimerge
+     * @memberof PublicObjectApipostCrmV3ObjectsPostalMailMerge
      */
     publicMergeInput: PublicMergeInput
 }
@@ -414,8 +298,8 @@ export class ObjectPublicObjectApi {
      * Merge two postal mail with same type
      * @param param the request object
      */
-    public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.merge(param.publicMergeInput,  options).toPromise();
+    public postCrmV3ObjectsPostalMailMerge(param: PublicObjectApiPostCrmV3ObjectsPostalMailMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.postCrmV3ObjectsPostalMailMerge(param.publicMergeInput,  options).toPromise();
     }
 
 }
@@ -423,11 +307,11 @@ export class ObjectPublicObjectApi {
 import { ObservableSearchApi } from "./ObservableAPI";
 import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
 
-export interface SearchApiDoSearchRequest {
+export interface SearchApiPostCrmV3ObjectsPostalMailSearchRequest {
     /**
      * 
      * @type PublicObjectSearchRequest
-     * @memberof SearchApidoSearch
+     * @memberof SearchApipostCrmV3ObjectsPostalMailSearch
      */
     publicObjectSearchRequest: PublicObjectSearchRequest
 }
@@ -442,8 +326,8 @@ export class ObjectSearchApi {
     /**
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
-        return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
+    public postCrmV3ObjectsPostalMailSearch(param: SearchApiPostCrmV3ObjectsPostalMailSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+        return this.api.postCrmV3ObjectsPostalMailSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 
 }

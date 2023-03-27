@@ -10,7 +10,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -24,17 +24,17 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * Archive a batch of feedback submissions by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public async archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsFeedbackSubmissionsBatchArchive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputSimplePublicObjectId' is not null or undefined
         if (batchInputSimplePublicObjectId === null || batchInputSimplePublicObjectId === undefined) {
-            throw new RequiredError("BatchApi", "archive", "batchInputSimplePublicObjectId");
+            throw new RequiredError("BatchApi", "postCrmV3ObjectsFeedbackSubmissionsBatchArchive", "batchInputSimplePublicObjectId");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/batch/archive';
+        const localVarPath = '/crm/v3/objects/feedback submissions/batch/archive';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -74,19 +74,19 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create a batch of feedback submissions
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public async create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsFeedbackSubmissionsBatchCreate(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'batchInputSimplePublicObjectInput' is not null or undefined
-        if (batchInputSimplePublicObjectInput === null || batchInputSimplePublicObjectInput === undefined) {
-            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectInput");
+        // verify required parameter 'batchInputSimplePublicObjectInputForCreate' is not null or undefined
+        if (batchInputSimplePublicObjectInputForCreate === null || batchInputSimplePublicObjectInputForCreate === undefined) {
+            throw new RequiredError("BatchApi", "postCrmV3ObjectsFeedbackSubmissionsBatchCreate", "batchInputSimplePublicObjectInputForCreate");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/batch/create';
+        const localVarPath = '/crm/v3/objects/feedback submissions/batch/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -99,7 +99,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputSimplePublicObjectInput, "BatchInputSimplePublicObjectInput", ""),
+            ObjectSerializer.serialize(batchInputSimplePublicObjectInputForCreate, "BatchInputSimplePublicObjectInputForCreate", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -129,18 +129,18 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
-    public async read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsFeedbackSubmissionsBatchRead(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchReadInputSimplePublicObjectId' is not null or undefined
         if (batchReadInputSimplePublicObjectId === null || batchReadInputSimplePublicObjectId === undefined) {
-            throw new RequiredError("BatchApi", "read", "batchReadInputSimplePublicObjectId");
+            throw new RequiredError("BatchApi", "postCrmV3ObjectsFeedbackSubmissionsBatchRead", "batchReadInputSimplePublicObjectId");
         }
 
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/batch/read';
+        const localVarPath = '/crm/v3/objects/feedback submissions/batch/read';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -187,17 +187,17 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
      * Update a batch of feedback submissions
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsFeedbackSubmissionsBatchUpdate(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputSimplePublicObjectBatchInput' is not null or undefined
         if (batchInputSimplePublicObjectBatchInput === null || batchInputSimplePublicObjectBatchInput === undefined) {
-            throw new RequiredError("BatchApi", "update", "batchInputSimplePublicObjectBatchInput");
+            throw new RequiredError("BatchApi", "postCrmV3ObjectsFeedbackSubmissionsBatchUpdate", "batchInputSimplePublicObjectBatchInput");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/feedback_submissions/batch/update';
+        const localVarPath = '/crm/v3/objects/feedback submissions/batch/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -243,10 +243,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to archive
+     * @params response Response returned by the server for a request to postCrmV3ObjectsFeedbackSubmissionsBatchArchive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async postCrmV3ObjectsFeedbackSubmissionsBatchArchive(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -275,10 +275,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to create
+     * @params response Response returned by the server for a request to postCrmV3ObjectsFeedbackSubmissionsBatchCreate
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async postCrmV3ObjectsFeedbackSubmissionsBatchCreate(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
@@ -318,10 +318,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to read
+     * @params response Response returned by the server for a request to postCrmV3ObjectsFeedbackSubmissionsBatchRead
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async read(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async postCrmV3ObjectsFeedbackSubmissionsBatchRead(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
@@ -361,10 +361,10 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to update
+     * @params response Response returned by the server for a request to postCrmV3ObjectsFeedbackSubmissionsBatchUpdate
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async postCrmV3ObjectsFeedbackSubmissionsBatchUpdate(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(

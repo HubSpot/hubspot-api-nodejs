@@ -20,17 +20,17 @@ export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
      * Merge two line items with same type
      * @param publicMergeInput 
      */
-    public async merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<RequestContext> {
+    public async postCrmV3ObjectsLineItemsMerge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'publicMergeInput' is not null or undefined
         if (publicMergeInput === null || publicMergeInput === undefined) {
-            throw new RequiredError("PublicObjectApi", "merge", "publicMergeInput");
+            throw new RequiredError("PublicObjectApi", "postCrmV3ObjectsLineItemsMerge", "publicMergeInput");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/line_items/merge';
+        const localVarPath = '/crm/v3/objects/line items/merge';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -76,10 +76,10 @@ export class PublicObjectApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to merge
+     * @params response Response returned by the server for a request to postCrmV3ObjectsLineItemsMerge
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async merge(response: ResponseContext): Promise<SimplePublicObject > {
+     public async postCrmV3ObjectsLineItemsMerge(response: ResponseContext): Promise<SimplePublicObject > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SimplePublicObject = ObjectSerializer.deserialize(

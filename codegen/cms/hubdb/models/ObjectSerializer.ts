@@ -1,5 +1,5 @@
+export * from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 export * from '../models/BatchInputHubDbTableRowV3Request';
-export * from '../models/BatchInputJsonNode';
 export * from '../models/BatchInputString';
 export * from '../models/BatchResponseHubDbTableRowV3';
 export * from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -12,6 +12,7 @@ export * from '../models/ForeignId';
 export * from '../models/ForwardPaging';
 export * from '../models/HubDbTableCloneRequest';
 export * from '../models/HubDbTableRowV3';
+export * from '../models/HubDbTableRowV3BatchUpdateRequest';
 export * from '../models/HubDbTableRowV3Request';
 export * from '../models/HubDbTableV3';
 export * from '../models/HubDbTableV3Request';
@@ -22,20 +23,21 @@ export * from '../models/Option';
 export * from '../models/SimpleUser';
 export * from '../models/StandardError';
 
+import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3        } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors          } from '../models/BatchResponseHubDbTableRowV3WithErrors';
 import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
-import { Column               } from '../models/Column';
+import { Column                } from '../models/Column';
 import { ColumnRequest         } from '../models/ColumnRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForeignId } from '../models/ForeignId';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
+import { HubDbTableRowV3BatchUpdateRequest } from '../models/HubDbTableRowV3BatchUpdateRequest';
 import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
 import { HubDbTableV3 } from '../models/HubDbTableV3';
 import { HubDbTableV3Request } from '../models/HubDbTableV3Request';
@@ -73,8 +75,8 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "BatchInputHubDbTableRowV3BatchUpdateRequest": BatchInputHubDbTableRowV3BatchUpdateRequest,
     "BatchInputHubDbTableRowV3Request": BatchInputHubDbTableRowV3Request,
-    "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
     "BatchResponseHubDbTableRowV3": BatchResponseHubDbTableRowV3,
     "BatchResponseHubDbTableRowV3WithErrors": BatchResponseHubDbTableRowV3WithErrors,
@@ -87,6 +89,7 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "HubDbTableCloneRequest": HubDbTableCloneRequest,
     "HubDbTableRowV3": HubDbTableRowV3,
+    "HubDbTableRowV3BatchUpdateRequest": HubDbTableRowV3BatchUpdateRequest,
     "HubDbTableRowV3Request": HubDbTableRowV3Request,
     "HubDbTableV3": HubDbTableV3,
     "HubDbTableV3Request": HubDbTableV3Request,

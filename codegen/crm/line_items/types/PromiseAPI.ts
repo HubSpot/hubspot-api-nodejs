@@ -1,78 +1,19 @@
 import { Configuration} from '../configuration'
 
-import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-import { ObservableAssociationsApi } from './ObservableAPI';
-
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-export class PromiseAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: AssociationsApiRequestFactory,
-        responseProcessor?: AssociationsApiResponseProcessor
-    ) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * deletes all associations between two records.
-     * Delete
-     * @param lineItemId 
-     * @param toObjectType 
-     * @param toObjectId 
-     */
-    public archive(lineItemId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(lineItemId, toObjectType, toObjectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Set association labels between two records.
-     * Create
-     * @param lineItemId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationSpec 
-     */
-    public create(lineItemId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        const result = this.api.create(lineItemId, toObjectType, toObjectId, associationSpec, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * List all associations of a line item by object type. Limit 1000 per call.
-     * List
-     * @param lineItemId 
-     * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
-     */
-    public getAll(lineItemId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        const result = this.api.getAll(lineItemId, toObjectType, after, limit, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableBasicApi } from './ObservableAPI';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -92,33 +33,8 @@ export class PromiseBasicApi {
      * Archive
      * @param lineItemId 
      */
-    public archive(lineItemId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(lineItemId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a line item with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard line items is provided.
-     * Create
-     * @param simplePublicObjectInput 
-     */
-    public create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.create(simplePublicObjectInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Read an Object identified by `{lineItemId}`. `{lineItemId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
-     * @param lineItemId 
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
-     */
-    public getById(lineItemId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        const result = this.api.getById(lineItemId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
+    public deleteCrmV3ObjectsLineItemsLineItemId(lineItemId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteCrmV3ObjectsLineItemsLineItemId(lineItemId, _options);
         return result.toPromise();
     }
 
@@ -132,8 +48,23 @@ export class PromiseBasicApi {
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      */
-    public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        const result = this.api.getPage(limit, after, properties, propertiesWithHistory, associations, archived, _options);
+    public getCrmV3ObjectsLineItems(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+        const result = this.api.getCrmV3ObjectsLineItems(limit, after, properties, propertiesWithHistory, associations, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Read an Object identified by `{lineItemId}`. `{lineItemId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param lineItemId 
+     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param archived Whether to return only results that have been archived.
+     * @param idProperty The name of a property whose values are unique for this object type
+     */
+    public getCrmV3ObjectsLineItemsLineItemId(lineItemId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        const result = this.api.getCrmV3ObjectsLineItemsLineItemId(lineItemId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
         return result.toPromise();
     }
 
@@ -144,8 +75,18 @@ export class PromiseBasicApi {
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public update(lineItemId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.update(lineItemId, simplePublicObjectInput, idProperty, _options);
+    public patchCrmV3ObjectsLineItemsLineItemId(lineItemId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.patchCrmV3ObjectsLineItemsLineItemId(lineItemId, simplePublicObjectInput, idProperty, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a line item with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard line items is provided.
+     * Create
+     * @param simplePublicObjectInputForCreate 
+     */
+    public postCrmV3ObjectsLineItems(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.postCrmV3ObjectsLineItems(simplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 
@@ -172,17 +113,17 @@ export class PromiseBatchApi {
      * Archive a batch of line items by ID
      * @param batchInputSimplePublicObjectId 
      */
-    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(batchInputSimplePublicObjectId, _options);
+    public postCrmV3ObjectsLineItemsBatchArchive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
+        const result = this.api.postCrmV3ObjectsLineItemsBatchArchive(batchInputSimplePublicObjectId, _options);
         return result.toPromise();
     }
 
     /**
      * Create a batch of line items
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.create(batchInputSimplePublicObjectInput, _options);
+    public postCrmV3ObjectsLineItemsBatchCreate(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.postCrmV3ObjectsLineItemsBatchCreate(batchInputSimplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 
@@ -191,8 +132,8 @@ export class PromiseBatchApi {
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
-    public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.read(batchReadInputSimplePublicObjectId, archived, _options);
+    public postCrmV3ObjectsLineItemsBatchRead(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.postCrmV3ObjectsLineItemsBatchRead(batchReadInputSimplePublicObjectId, archived, _options);
         return result.toPromise();
     }
 
@@ -200,8 +141,8 @@ export class PromiseBatchApi {
      * Update a batch of line items
      * @param batchInputSimplePublicObjectBatchInput 
      */
-    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
+    public postCrmV3ObjectsLineItemsBatchUpdate(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.postCrmV3ObjectsLineItemsBatchUpdate(batchInputSimplePublicObjectBatchInput, _options);
         return result.toPromise();
     }
 
@@ -228,8 +169,8 @@ export class PromisePublicObjectApi {
      * Merge two line items with same type
      * @param publicMergeInput 
      */
-    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.merge(publicMergeInput, _options);
+    public postCrmV3ObjectsLineItemsMerge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.postCrmV3ObjectsLineItemsMerge(publicMergeInput, _options);
         return result.toPromise();
     }
 
@@ -255,8 +196,8 @@ export class PromiseSearchApi {
     /**
      * @param publicObjectSearchRequest 
      */
-    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
-        const result = this.api.doSearch(publicObjectSearchRequest, _options);
+    public postCrmV3ObjectsLineItemsSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+        const result = this.api.postCrmV3ObjectsLineItemsSearch(publicObjectSearchRequest, _options);
         return result.toPromise();
     }
 

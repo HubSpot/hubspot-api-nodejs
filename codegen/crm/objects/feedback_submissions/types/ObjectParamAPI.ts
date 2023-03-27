@@ -1,254 +1,138 @@
 import { Configuration} from '../configuration'
 
-import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-
-import { ObservableAssociationsApi } from "./ObservableAPI";
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-
-export interface AssociationsApiArchiveRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    feedbackSubmissionId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    toObjectId: number
-}
-
-export interface AssociationsApiCreateRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    feedbackSubmissionId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    toObjectId: number
-    /**
-     * 
-     * @type Array&lt;AssociationSpec&gt;
-     * @memberof AssociationsApicreate
-     */
-    associationSpec: Array<AssociationSpec>
-}
-
-export interface AssociationsApiGetPageRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApigetPage
-     */
-    feedbackSubmissionId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetPage
-     */
-    toObjectType: string
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof AssociationsApigetPage
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof AssociationsApigetPage
-     */
-    limit?: number
-}
-
-export class ObjectAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(configuration: Configuration, requestFactory?: AssociationsApiRequestFactory, responseProcessor?: AssociationsApiResponseProcessor) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * deletes all associations between two records.
-     * Delete
-     * @param param the request object
-     */
-    public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.feedbackSubmissionId, param.toObjectType, param.toObjectId,  options).toPromise();
-    }
-
-    /**
-     * Set association labels between two records.
-     * Create
-     * @param param the request object
-     */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        return this.api.create(param.feedbackSubmissionId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
-    }
-
-    /**
-     * List all associations of a feedback submission by object type. Limit 1000 per call.
-     * List
-     * @param param the request object
-     */
-    public getPage(param: AssociationsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        return this.api.getPage(param.feedbackSubmissionId, param.toObjectType, param.after, param.limit,  options).toPromise();
-    }
-
-}
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 
-export interface BasicApiArchiveRequest {
+export interface BasicApiDeleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest {
     /**
      * 
      * @type string
-     * @memberof BasicApiarchive
+     * @memberof BasicApideleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
      */
     feedbackSubmissionId: string
 }
 
-export interface BasicApiCreateRequest {
-    /**
-     * 
-     * @type SimplePublicObjectInput
-     * @memberof BasicApicreate
-     */
-    simplePublicObjectInput: SimplePublicObjectInput
-}
-
-export interface BasicApiGetByIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof BasicApigetById
-     */
-    feedbackSubmissionId: string
-    /**
-     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    properties?: Array<string>
-    /**
-     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    propertiesWithHistory?: Array<string>
-    /**
-     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @type Array&lt;string&gt;
-     * @memberof BasicApigetById
-     */
-    associations?: Array<string>
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof BasicApigetById
-     */
-    archived?: boolean
-    /**
-     * The name of a property whose values are unique for this object type
-     * @type string
-     * @memberof BasicApigetById
-     */
-    idProperty?: string
-}
-
-export interface BasicApiGetPageRequest {
+export interface BasicApiGetCrmV3ObjectsFeedbackSubmissionsRequest {
     /**
      * The maximum number of results to display per page.
      * @type number
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     after?: string
     /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     properties?: Array<string>
     /**
      * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     propertiesWithHistory?: Array<string>
     /**
      * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @type Array&lt;string&gt;
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     associations?: Array<string>
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof BasicApigetPage
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissions
      */
     archived?: boolean
 }
 
-export interface BasicApiUpdateRequest {
+export interface BasicApiGetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest {
     /**
      * 
      * @type string
-     * @memberof BasicApiupdate
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    feedbackSubmissionId: string
+    /**
+     * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    properties?: Array<string>
+    /**
+     * A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    propertiesWithHistory?: Array<string>
+    /**
+     * A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @type Array&lt;string&gt;
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    associations?: Array<string>
+    /**
+     * Whether to return only results that have been archived.
+     * @type boolean
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    archived?: boolean
+    /**
+     * The name of a property whose values are unique for this object type
+     * @type string
+     * @memberof BasicApigetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
+     */
+    idProperty?: string
+}
+
+export interface BasicApiPatchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApipatchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
      */
     feedbackSubmissionId: string
     /**
      * 
      * @type SimplePublicObjectInput
-     * @memberof BasicApiupdate
+     * @memberof BasicApipatchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
      * The name of a property whose values are unique for this object type
      * @type string
-     * @memberof BasicApiupdate
+     * @memberof BasicApipatchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId
      */
     idProperty?: string
+}
+
+export interface BasicApiPostCrmV3ObjectsFeedbackSubmissionsRequest {
+    /**
+     * 
+     * @type SimplePublicObjectInputForCreate
+     * @memberof BasicApipostCrmV3ObjectsFeedbackSubmissions
+     */
+    simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate
 }
 
 export class ObjectBasicApi {
@@ -263,26 +147,8 @@ export class ObjectBasicApi {
      * Archive
      * @param param the request object
      */
-    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.feedbackSubmissionId,  options).toPromise();
-    }
-
-    /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param param the request object
-     */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.create(param.simplePublicObjectInput,  options).toPromise();
-    }
-
-    /**
-     * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
-     * Read
-     * @param param the request object
-     */
-    public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.feedbackSubmissionId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+    public deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param: BasicApiDeleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param.feedbackSubmissionId,  options).toPromise();
     }
 
     /**
@@ -290,8 +156,17 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    public getCrmV3ObjectsFeedbackSubmissions(param: BasicApiGetCrmV3ObjectsFeedbackSubmissionsRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+        return this.api.getCrmV3ObjectsFeedbackSubmissions(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param param the request object
+     */
+    public getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param: BasicApiGetCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
+        return this.api.getCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param.feedbackSubmissionId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -299,8 +174,17 @@ export class ObjectBasicApi {
      * Update
      * @param param the request object
      */
-    public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.update(param.feedbackSubmissionId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+    public patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param: BasicApiPatchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionIdRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.patchCrmV3ObjectsFeedbackSubmissionsFeedbackSubmissionId(param.feedbackSubmissionId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
+     * Create
+     * @param param the request object
+     */
+    public postCrmV3ObjectsFeedbackSubmissions(param: BasicApiPostCrmV3ObjectsFeedbackSubmissionsRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissions(param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
 }
@@ -308,44 +192,44 @@ export class ObjectBasicApi {
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 
-export interface BatchApiArchiveRequest {
+export interface BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchArchiveRequest {
     /**
      * 
      * @type BatchInputSimplePublicObjectId
-     * @memberof BatchApiarchive
+     * @memberof BatchApipostCrmV3ObjectsFeedbackSubmissionsBatchArchive
      */
     batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId
 }
 
-export interface BatchApiCreateRequest {
+export interface BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchCreateRequest {
     /**
      * 
-     * @type BatchInputSimplePublicObjectInput
-     * @memberof BatchApicreate
+     * @type BatchInputSimplePublicObjectInputForCreate
+     * @memberof BatchApipostCrmV3ObjectsFeedbackSubmissionsBatchCreate
      */
-    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+    batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate
 }
 
-export interface BatchApiReadRequest {
+export interface BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchReadRequest {
     /**
      * 
      * @type BatchReadInputSimplePublicObjectId
-     * @memberof BatchApiread
+     * @memberof BatchApipostCrmV3ObjectsFeedbackSubmissionsBatchRead
      */
     batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId
     /**
      * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof BatchApiread
+     * @memberof BatchApipostCrmV3ObjectsFeedbackSubmissionsBatchRead
      */
     archived?: boolean
 }
 
-export interface BatchApiUpdateRequest {
+export interface BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchUpdateRequest {
     /**
      * 
      * @type BatchInputSimplePublicObjectBatchInput
-     * @memberof BatchApiupdate
+     * @memberof BatchApipostCrmV3ObjectsFeedbackSubmissionsBatchUpdate
      */
     batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput
 }
@@ -361,32 +245,32 @@ export class ObjectBatchApi {
      * Archive a batch of feedback submissions by ID
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.batchInputSimplePublicObjectId,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsBatchArchive(param: BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsBatchArchive(param.batchInputSimplePublicObjectId,  options).toPromise();
     }
 
     /**
      * Create a batch of feedback submissions
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.create(param.batchInputSimplePublicObjectInput,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsBatchCreate(param: BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsBatchCreate(param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.read(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsBatchRead(param: BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsBatchRead(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
     }
 
     /**
      * Update a batch of feedback submissions
      * @param param the request object
      */
-    public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsBatchUpdate(param: BatchApiPostCrmV3ObjectsFeedbackSubmissionsBatchUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsBatchUpdate(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
 }
@@ -394,11 +278,11 @@ export class ObjectBatchApi {
 import { ObservablePublicObjectApi } from "./ObservableAPI";
 import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
 
-export interface PublicObjectApiMergeRequest {
+export interface PublicObjectApiPostCrmV3ObjectsFeedbackSubmissionsMergeRequest {
     /**
      * 
      * @type PublicMergeInput
-     * @memberof PublicObjectApimerge
+     * @memberof PublicObjectApipostCrmV3ObjectsFeedbackSubmissionsMerge
      */
     publicMergeInput: PublicMergeInput
 }
@@ -414,8 +298,8 @@ export class ObjectPublicObjectApi {
      * Merge two feedback submissions with same type
      * @param param the request object
      */
-    public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.merge(param.publicMergeInput,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsMerge(param: PublicObjectApiPostCrmV3ObjectsFeedbackSubmissionsMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsMerge(param.publicMergeInput,  options).toPromise();
     }
 
 }
@@ -423,11 +307,11 @@ export class ObjectPublicObjectApi {
 import { ObservableSearchApi } from "./ObservableAPI";
 import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
 
-export interface SearchApiDoSearchRequest {
+export interface SearchApiPostCrmV3ObjectsFeedbackSubmissionsSearchRequest {
     /**
      * 
      * @type PublicObjectSearchRequest
-     * @memberof SearchApidoSearch
+     * @memberof SearchApipostCrmV3ObjectsFeedbackSubmissionsSearch
      */
     publicObjectSearchRequest: PublicObjectSearchRequest
 }
@@ -442,8 +326,8 @@ export class ObjectSearchApi {
     /**
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
-        return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
+    public postCrmV3ObjectsFeedbackSubmissionsSearch(param: SearchApiPostCrmV3ObjectsFeedbackSubmissionsSearchRequest, options?: Configuration): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+        return this.api.postCrmV3ObjectsFeedbackSubmissionsSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 
 }

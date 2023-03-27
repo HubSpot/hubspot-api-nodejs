@@ -1,8 +1,8 @@
 import { HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
+import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -160,8 +160,8 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString The JSON array of row ids
      */
-    public batchCloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3> {
-        const result = this.api.batchCloneDraftTableRows(tableIdOrName, batchInputString, _options);
+    public cloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3> {
+        const result = this.api.cloneDraftTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
 
@@ -171,8 +171,8 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const result = this.api.batchCreateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
+    public createDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const result = this.api.createDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
         return result.toPromise();
     }
 
@@ -182,8 +182,8 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public batchPurgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
-        const result = this.api.batchPurgeDraftTableRows(tableIdOrName, batchInputString, _options);
+    public purgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
+        const result = this.api.purgeDraftTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
 
@@ -193,8 +193,8 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public batchReadDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const result = this.api.batchReadDraftTableRows(tableIdOrName, batchInputString, _options);
+    public readDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const result = this.api.readDraftTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
 
@@ -204,8 +204,8 @@ export class PromiseRowsBatchApi {
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
      */
-    public batchReadTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const result = this.api.batchReadTableRows(tableIdOrName, batchInputString, _options);
+    public readTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const result = this.api.readTableRows(tableIdOrName, batchInputString, _options);
         return result.toPromise();
     }
 
@@ -213,10 +213,10 @@ export class PromiseRowsBatchApi {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const result = this.api.batchReplaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
+    public replaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const result = this.api.replaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3BatchUpdateRequest, _options);
         return result.toPromise();
     }
 
@@ -224,10 +224,10 @@ export class PromiseRowsBatchApi {
      * Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Update rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputJsonNode JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public batchUpdateDraftTableRows(tableIdOrName: string, batchInputJsonNode: BatchInputJsonNode, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const result = this.api.batchUpdateDraftTableRows(tableIdOrName, batchInputJsonNode, _options);
+    public updateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const result = this.api.updateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3BatchUpdateRequest, _options);
         return result.toPromise();
     }
 
@@ -345,11 +345,11 @@ export class PromiseTablesApi {
      * Get the details for the `draft` version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      */
-    public getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.getDraftTableDetailsById(tableIdOrName, archived, includeForeignIds, _options);
+    public getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.getDraftTableDetailsById(tableIdOrName, includeForeignIds, archived, _options);
         return result.toPromise();
     }
 
@@ -357,11 +357,11 @@ export class PromiseTablesApi {
      * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      */
-    public getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.getTableDetails(tableIdOrName, archived, includeForeignIds, _options);
+    public getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.getTableDetails(tableIdOrName, includeForeignIds, archived, _options);
         return result.toPromise();
     }
 
@@ -415,11 +415,11 @@ export class PromiseTablesApi {
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
      * @param hubDbTableV3Request The JSON schema for the table being updated.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Request, archived, includeForeignIds, _options);
+    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Request, includeForeignIds, archived, _options);
         return result.toPromise();
     }
 

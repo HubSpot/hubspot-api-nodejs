@@ -13,6 +13,7 @@
 
 export class Filter {
     'value'?: string;
+    'highValue'?: string;
     'values'?: Array<string>;
     'propertyName': string;
     /**
@@ -26,6 +27,12 @@ export class Filter {
         {
             "name": "value",
             "baseName": "value",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "highValue",
+            "baseName": "highValue",
             "type": "string",
             "format": ""
         },

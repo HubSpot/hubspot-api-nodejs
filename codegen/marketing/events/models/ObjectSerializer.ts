@@ -47,7 +47,7 @@ import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublic
 import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
 import { ModelError } from '../models/ModelError';
-import { PropertyValue               } from '../models/PropertyValue';
+import { PropertyValue                } from '../models/PropertyValue';
 import { StandardError } from '../models/StandardError';
 import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
 import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
