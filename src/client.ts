@@ -204,10 +204,14 @@ export class Client {
     this.init()
   }
 
-  public async apiRequest(opts: IHttpOptions = {}) {
+  public apiRequest(opts: IHttpOptions = {}) {
     const request = new Request(this.config, opts)
 
-    return await HttpClient.send(request)
+    let { send } = HttpClient
+    for (const decorator of this.getDecorators()) {
+      send = decorator.decorate(send)
+    }
+    return send(request)
   }
 
   protected getDecorators(): IDecorator[] {
