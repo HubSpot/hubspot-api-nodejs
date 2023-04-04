@@ -208,9 +208,8 @@ export class Client {
     const request = new Request(this.config, opts)
 
     let { send } = HttpClient
-    for (const decorator of this.getDecorators()) {
-      send = decorator.decorate(send)
-    }
+    send = ApiDecoratorService.getInstance().applyToMethod(send)
+
     return send(request)
   }
 
