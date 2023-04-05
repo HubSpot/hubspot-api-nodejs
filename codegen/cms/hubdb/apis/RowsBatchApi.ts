@@ -8,8 +8,8 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -25,18 +25,18 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString The JSON array of row ids
      */
-    public async batchCloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
+    public async cloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchCloneDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "cloneDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchCloneDraftTableRows", "batchInputString");
+            throw new RequiredError("RowsBatchApi", "cloneDraftTableRows", "batchInputString");
         }
 
 
@@ -86,18 +86,18 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public async batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
+    public async createDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchCreateDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "createDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
         if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchCreateDraftTableRows", "batchInputHubDbTableRowV3Request");
+            throw new RequiredError("RowsBatchApi", "createDraftTableRows", "batchInputHubDbTableRowV3Request");
         }
 
 
@@ -147,18 +147,18 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public async batchPurgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
+    public async purgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchPurgeDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "purgeDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchPurgeDraftTableRows", "batchInputString");
+            throw new RequiredError("RowsBatchApi", "purgeDraftTableRows", "batchInputString");
         }
 
 
@@ -208,18 +208,18 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public async batchReadDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
+    public async readDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReadDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "readDraftTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReadDraftTableRows", "batchInputString");
+            throw new RequiredError("RowsBatchApi", "readDraftTableRows", "batchInputString");
         }
 
 
@@ -269,18 +269,18 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
      */
-    public async batchReadTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
+    public async readTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReadTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "readTableRows", "tableIdOrName");
         }
 
 
         // verify required parameter 'batchInputString' is not null or undefined
         if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReadTableRows", "batchInputString");
+            throw new RequiredError("RowsBatchApi", "readTableRows", "batchInputString");
         }
 
 
@@ -328,20 +328,20 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public async batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
+    public async replaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReplaceDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "replaceDraftTableRows", "tableIdOrName");
         }
 
 
-        // verify required parameter 'batchInputHubDbTableRowV3Request' is not null or undefined
-        if (batchInputHubDbTableRowV3Request === null || batchInputHubDbTableRowV3Request === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchReplaceDraftTableRows", "batchInputHubDbTableRowV3Request");
+        // verify required parameter 'batchInputHubDbTableRowV3BatchUpdateRequest' is not null or undefined
+        if (batchInputHubDbTableRowV3BatchUpdateRequest === null || batchInputHubDbTableRowV3BatchUpdateRequest === undefined) {
+            throw new RequiredError("RowsBatchApi", "replaceDraftTableRows", "batchInputHubDbTableRowV3BatchUpdateRequest");
         }
 
 
@@ -360,7 +360,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputHubDbTableRowV3Request, "BatchInputHubDbTableRowV3Request", ""),
+            ObjectSerializer.serialize(batchInputHubDbTableRowV3BatchUpdateRequest, "BatchInputHubDbTableRowV3BatchUpdateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -389,20 +389,20 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
      * Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Update rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputJsonNode JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public async batchUpdateDraftTableRows(tableIdOrName: string, batchInputJsonNode: BatchInputJsonNode, _options?: Configuration): Promise<RequestContext> {
+    public async updateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchUpdateDraftTableRows", "tableIdOrName");
+            throw new RequiredError("RowsBatchApi", "updateDraftTableRows", "tableIdOrName");
         }
 
 
-        // verify required parameter 'batchInputJsonNode' is not null or undefined
-        if (batchInputJsonNode === null || batchInputJsonNode === undefined) {
-            throw new RequiredError("RowsBatchApi", "batchUpdateDraftTableRows", "batchInputJsonNode");
+        // verify required parameter 'batchInputHubDbTableRowV3BatchUpdateRequest' is not null or undefined
+        if (batchInputHubDbTableRowV3BatchUpdateRequest === null || batchInputHubDbTableRowV3BatchUpdateRequest === undefined) {
+            throw new RequiredError("RowsBatchApi", "updateDraftTableRows", "batchInputHubDbTableRowV3BatchUpdateRequest");
         }
 
 
@@ -421,7 +421,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputJsonNode, "BatchInputJsonNode", ""),
+            ObjectSerializer.serialize(batchInputHubDbTableRowV3BatchUpdateRequest, "BatchInputHubDbTableRowV3BatchUpdateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -454,10 +454,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchCloneDraftTableRows
+     * @params response Response returned by the server for a request to cloneDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchCloneDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 > {
+     public async cloneDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
@@ -490,10 +490,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchCreateDraftTableRows
+     * @params response Response returned by the server for a request to createDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchCreateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async createDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
@@ -533,10 +533,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchPurgeDraftTableRows
+     * @params response Response returned by the server for a request to purgeDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchPurgeDraftTableRows(response: ResponseContext): Promise<void > {
+     public async purgeDraftTableRows(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -565,10 +565,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchReadDraftTableRows
+     * @params response Response returned by the server for a request to readDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReadDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async readDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
@@ -608,10 +608,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchReadTableRows
+     * @params response Response returned by the server for a request to readTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReadTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async readTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
@@ -651,10 +651,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchReplaceDraftTableRows
+     * @params response Response returned by the server for a request to replaceDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchReplaceDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async replaceDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
@@ -694,10 +694,10 @@ export class RowsBatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to batchUpdateDraftTableRows
+     * @params response Response returned by the server for a request to updateDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async batchUpdateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async updateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(

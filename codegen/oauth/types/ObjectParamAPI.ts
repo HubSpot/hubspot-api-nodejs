@@ -7,11 +7,11 @@ import { TokenResponseIF } from '../models/TokenResponseIF';
 import { ObservableAccessTokensApi } from "./ObservableAPI";
 import { AccessTokensApiRequestFactory, AccessTokensApiResponseProcessor} from "../apis/AccessTokensApi";
 
-export interface AccessTokensApiGetAccessTokenRequest {
+export interface AccessTokensApiGetRequest {
     /**
      * 
      * @type string
-     * @memberof AccessTokensApigetAccessToken
+     * @memberof AccessTokensApiget
      */
     token: string
 }
@@ -26,8 +26,8 @@ export class ObjectAccessTokensApi {
     /**
      * @param param the request object
      */
-    public getAccessToken(param: AccessTokensApiGetAccessTokenRequest, options?: Configuration): Promise<AccessTokenInfoResponse> {
-        return this.api.getAccessToken(param.token,  options).toPromise();
+    public get(param: AccessTokensApiGetRequest, options?: Configuration): Promise<AccessTokenInfoResponse> {
+        return this.api.get(param.token,  options).toPromise();
     }
 
 }
@@ -35,20 +35,20 @@ export class ObjectAccessTokensApi {
 import { ObservableRefreshTokensApi } from "./ObservableAPI";
 import { RefreshTokensApiRequestFactory, RefreshTokensApiResponseProcessor} from "../apis/RefreshTokensApi";
 
-export interface RefreshTokensApiArchiveRefreshTokenRequest {
+export interface RefreshTokensApiArchiveRequest {
     /**
      * 
      * @type string
-     * @memberof RefreshTokensApiarchiveRefreshToken
+     * @memberof RefreshTokensApiarchive
      */
     token: string
 }
 
-export interface RefreshTokensApiGetRefreshTokenRequest {
+export interface RefreshTokensApiGetRequest {
     /**
      * 
      * @type string
-     * @memberof RefreshTokensApigetRefreshToken
+     * @memberof RefreshTokensApiget
      */
     token: string
 }
@@ -63,15 +63,15 @@ export class ObjectRefreshTokensApi {
     /**
      * @param param the request object
      */
-    public archiveRefreshToken(param: RefreshTokensApiArchiveRefreshTokenRequest, options?: Configuration): Promise<void> {
-        return this.api.archiveRefreshToken(param.token,  options).toPromise();
+    public archive(param: RefreshTokensApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.token,  options).toPromise();
     }
 
     /**
      * @param param the request object
      */
-    public getRefreshToken(param: RefreshTokensApiGetRefreshTokenRequest, options?: Configuration): Promise<RefreshTokenInfoResponse> {
-        return this.api.getRefreshToken(param.token,  options).toPromise();
+    public get(param: RefreshTokensApiGetRequest, options?: Configuration): Promise<RefreshTokenInfoResponse> {
+        return this.api.get(param.token,  options).toPromise();
     }
 
 }
@@ -79,41 +79,41 @@ export class ObjectRefreshTokensApi {
 import { ObservableTokensApi } from "./ObservableAPI";
 import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/TokensApi";
 
-export interface TokensApiCreateTokenRequest {
+export interface TokensApiCreateRequest {
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     grantType?: string
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     code?: string
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     redirectUri?: string
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     clientId?: string
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     clientSecret?: string
     /**
      * 
      * @type string
-     * @memberof TokensApicreateToken
+     * @memberof TokensApicreate
      */
     refreshToken?: string
 }
@@ -128,8 +128,8 @@ export class ObjectTokensApi {
     /**
      * @param param the request object
      */
-    public createToken(param: TokensApiCreateTokenRequest = {}, options?: Configuration): Promise<TokenResponseIF> {
-        return this.api.createToken(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
+    public create(param: TokensApiCreateRequest = {}, options?: Configuration): Promise<TokenResponseIF> {
+        return this.api.create(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
     }
 
 }

@@ -200,15 +200,6 @@ export interface MarketingEventsExternalApiDoEmailUpsertByIdRequest {
     batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber
 }
 
-export interface MarketingEventsExternalApiDoSearchRequest {
-    /**
-     * 
-     * @type string
-     * @memberof MarketingEventsExternalApidoSearch
-     */
-    q: string
-}
-
 export interface MarketingEventsExternalApiDoUpsertRequest {
     /**
      * 
@@ -348,13 +339,6 @@ export class ObjectMarketingEventsExternalApi {
     /**
      * @param param the request object
      */
-    public doSearch(param: MarketingEventsExternalApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging> {
-        return this.api.doSearch(param.q,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
     public doUpsert(param: MarketingEventsExternalApiDoUpsertRequest, options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
         return this.api.doUpsert(param.batchInputMarketingEventCreateRequestParams,  options).toPromise();
     }
@@ -385,6 +369,36 @@ export class ObjectMarketingEventsExternalApi {
      */
     public update(param: MarketingEventsExternalApiUpdateRequest, options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
         return this.api.update(param.externalEventId, param.externalAccountId, param.marketingEventUpdateRequestParams,  options).toPromise();
+    }
+
+}
+
+import { ObservableSearchApi } from "./ObservableAPI";
+import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
+
+export interface SearchApiDoSearchRequest {
+    /**
+     * The id of the marketing event in the external event application
+     * @type string
+     * @memberof SearchApidoSearch
+     */
+    q: string
+}
+
+export class ObjectSearchApi {
+    private api: ObservableSearchApi
+
+    public constructor(configuration: Configuration, requestFactory?: SearchApiRequestFactory, responseProcessor?: SearchApiResponseProcessor) {
+        this.api = new ObservableSearchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Search for marketing events that have an event id that starts with the query string
+     * Search for marketing events
+     * @param param the request object
+     */
+    public doSearch(param: SearchApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging> {
+        return this.api.doSearch(param.q,  options).toPromise();
     }
 
 }

@@ -12,6 +12,7 @@ import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
 import { BatchResponseProperty } from '../models/BatchResponseProperty';
+import { BatchResponsePropertyWithErrors } from '../models/BatchResponsePropertyWithErrors';
 
 /**
  * no description
@@ -244,7 +245,7 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponseProperty > {
+     public async create(response: ResponseContext): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseProperty = ObjectSerializer.deserialize(
@@ -254,10 +255,10 @@ export class BatchApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseProperty = ObjectSerializer.deserialize(
+            const body: BatchResponsePropertyWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseProperty", ""
-            ) as BatchResponseProperty;
+                "BatchResponsePropertyWithErrors", ""
+            ) as BatchResponsePropertyWithErrors;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -270,10 +271,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseProperty = ObjectSerializer.deserialize(
+            const body: BatchResponseProperty | BatchResponsePropertyWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseProperty", ""
-            ) as BatchResponseProperty;
+                "BatchResponseProperty | BatchResponsePropertyWithErrors", ""
+            ) as BatchResponseProperty | BatchResponsePropertyWithErrors;
             return body;
         }
 
@@ -287,7 +288,7 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to read
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async read(response: ResponseContext): Promise<BatchResponseProperty > {
+     public async read(response: ResponseContext): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseProperty = ObjectSerializer.deserialize(
@@ -297,10 +298,10 @@ export class BatchApiResponseProcessor {
             return body;
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseProperty = ObjectSerializer.deserialize(
+            const body: BatchResponsePropertyWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseProperty", ""
-            ) as BatchResponseProperty;
+                "BatchResponsePropertyWithErrors", ""
+            ) as BatchResponsePropertyWithErrors;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -313,10 +314,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseProperty = ObjectSerializer.deserialize(
+            const body: BatchResponseProperty | BatchResponsePropertyWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseProperty", ""
-            ) as BatchResponseProperty;
+                "BatchResponseProperty | BatchResponsePropertyWithErrors", ""
+            ) as BatchResponseProperty | BatchResponsePropertyWithErrors;
             return body;
         }
 

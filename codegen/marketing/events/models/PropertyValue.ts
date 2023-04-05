@@ -28,6 +28,7 @@ export class PropertyValue {
     'requestId': string;
     'updatedByUserId'?: number;
     'persistenceTimestamp'?: number;
+    'useTimestampAsPersistenceTimestamp'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -109,6 +110,12 @@ export class PropertyValue {
             "baseName": "persistenceTimestamp",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "useTimestampAsPersistenceTimestamp",
+            "baseName": "useTimestampAsPersistenceTimestamp",
+            "type": "boolean",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

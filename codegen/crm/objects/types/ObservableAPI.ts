@@ -4,7 +4,7 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -16,6 +16,7 @@ import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
 import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
@@ -162,10 +163,10 @@ export class ObservableBasicApi {
      * Create a CRM object with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard objects is provided.
      * Create
      * @param objectType 
-     * @param simplePublicObjectInput 
+     * @param simplePublicObjectInputForCreate 
      */
-    public create(objectType: string, simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Observable<SimplePublicObject> {
-        const requestContextPromise = this.requestFactory.create(objectType, simplePublicObjectInput, _options);
+    public create(objectType: string, simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Observable<SimplePublicObject> {
+        const requestContextPromise = this.requestFactory.create(objectType, simplePublicObjectInputForCreate, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -315,10 +316,10 @@ export class ObservableBatchApi {
     /**
      * Create a batch of objects
      * @param objectType 
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public create(objectType: string, batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const requestContextPromise = this.requestFactory.create(objectType, batchInputSimplePublicObjectInput, _options);
+    public create(objectType: string, batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const requestContextPromise = this.requestFactory.create(objectType, batchInputSimplePublicObjectInputForCreate, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

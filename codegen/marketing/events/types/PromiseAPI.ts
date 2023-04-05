@@ -131,14 +131,6 @@ export class PromiseMarketingEventsExternalApi {
     }
 
     /**
-     * @param q 
-     */
-    public doSearch(q: string, _options?: Configuration): Promise<CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging> {
-        const result = this.api.doSearch(q, _options);
-        return result.toPromise();
-    }
-
-    /**
      * @param batchInputMarketingEventCreateRequestParams 
      */
     public doUpsert(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
@@ -182,6 +174,35 @@ export class PromiseMarketingEventsExternalApi {
      */
     public update(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
         const result = this.api.update(externalEventId, externalAccountId, marketingEventUpdateRequestParams, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableSearchApi } from './ObservableAPI';
+
+import { SearchApiRequestFactory, SearchApiResponseProcessor} from "../apis/SearchApi";
+export class PromiseSearchApi {
+    private api: ObservableSearchApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SearchApiRequestFactory,
+        responseProcessor?: SearchApiResponseProcessor
+    ) {
+        this.api = new ObservableSearchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Search for marketing events that have an event id that starts with the query string
+     * Search for marketing events
+     * @param q The id of the marketing event in the external event application
+     */
+    public doSearch(q: string, _options?: Configuration): Promise<CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging> {
+        const result = this.api.doSearch(q, _options);
         return result.toPromise();
     }
 

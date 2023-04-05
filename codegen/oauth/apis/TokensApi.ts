@@ -25,7 +25,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
      * @param clientSecret 
      * @param refreshToken 
      */
-    public async createToken(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<RequestContext> {
+    public async create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -104,10 +104,10 @@ export class TokensApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createToken
+     * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createToken(response: ResponseContext): Promise<TokenResponseIF > {
+     public async create(response: ResponseContext): Promise<TokenResponseIF > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: TokenResponseIF = ObjectSerializer.deserialize(

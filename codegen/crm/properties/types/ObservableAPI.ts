@@ -6,8 +6,9 @@ import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
 import { BatchResponseProperty } from '../models/BatchResponseProperty';
-import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
-import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
+import { BatchResponsePropertyWithErrors } from '../models/BatchResponsePropertyWithErrors';
+import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
+import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
 import { Property } from '../models/Property';
 import { PropertyCreate } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
@@ -62,7 +63,7 @@ export class ObservableBatchApi {
      * @param objectType 
      * @param batchInputPropertyCreate 
      */
-    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Observable<BatchResponseProperty> {
+    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Observable<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         const requestContextPromise = this.requestFactory.create(objectType, batchInputPropertyCreate, _options);
 
         // build promise chain
@@ -87,7 +88,7 @@ export class ObservableBatchApi {
      * @param objectType 
      * @param batchReadInputPropertyName 
      */
-    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Observable<BatchResponseProperty> {
+    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Observable<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         const requestContextPromise = this.requestFactory.read(objectType, batchReadInputPropertyName, _options);
 
         // build promise chain
@@ -179,9 +180,10 @@ export class ObservableCoreApi {
      * Read all properties
      * @param objectType 
      * @param archived Whether to return only results that have been archived.
+     * @param properties 
      */
-    public getAll(objectType: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponseProperty> {
-        const requestContextPromise = this.requestFactory.getAll(objectType, archived, _options);
+    public getAll(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Observable<CollectionResponsePropertyNoPaging> {
+        const requestContextPromise = this.requestFactory.getAll(objectType, archived, properties, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -205,9 +207,10 @@ export class ObservableCoreApi {
      * @param objectType 
      * @param propertyName 
      * @param archived Whether to return only results that have been archived.
+     * @param properties 
      */
-    public getByName(objectType: string, propertyName: string, archived?: boolean, _options?: Configuration): Observable<Property> {
-        const requestContextPromise = this.requestFactory.getByName(objectType, propertyName, archived, _options);
+    public getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Observable<Property> {
+        const requestContextPromise = this.requestFactory.getByName(objectType, propertyName, archived, properties, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -324,7 +327,7 @@ export class ObservableGroupsApi {
      * Read all property groups
      * @param objectType 
      */
-    public getAll(objectType: string, _options?: Configuration): Observable<CollectionResponsePropertyGroup> {
+    public getAll(objectType: string, _options?: Configuration): Observable<CollectionResponsePropertyGroupNoPaging> {
         const requestContextPromise = this.requestFactory.getAll(objectType, _options);
 
         // build promise chain

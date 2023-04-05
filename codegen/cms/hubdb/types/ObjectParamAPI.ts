@@ -1,8 +1,8 @@
 import { HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 
+import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -294,109 +294,109 @@ export class ObjectRowsApi {
 import { ObservableRowsBatchApi } from "./ObservableAPI";
 import { RowsBatchApiRequestFactory, RowsBatchApiResponseProcessor} from "../apis/RowsBatchApi";
 
-export interface RowsBatchApiBatchCloneDraftTableRowsRequest {
+export interface RowsBatchApiCloneDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchCloneDraftTableRows
+     * @memberof RowsBatchApicloneDraftTableRows
      */
     tableIdOrName: string
     /**
      * The JSON array of row ids
      * @type BatchInputString
-     * @memberof RowsBatchApibatchCloneDraftTableRows
+     * @memberof RowsBatchApicloneDraftTableRows
      */
     batchInputString: BatchInputString
 }
 
-export interface RowsBatchApiBatchCreateDraftTableRowsRequest {
+export interface RowsBatchApiCreateDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchCreateDraftTableRows
+     * @memberof RowsBatchApicreateDraftTableRows
      */
     tableIdOrName: string
     /**
      * JSON array of row objects
      * @type BatchInputHubDbTableRowV3Request
-     * @memberof RowsBatchApibatchCreateDraftTableRows
+     * @memberof RowsBatchApicreateDraftTableRows
      */
     batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request
 }
 
-export interface RowsBatchApiBatchPurgeDraftTableRowsRequest {
+export interface RowsBatchApiPurgeDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchPurgeDraftTableRows
+     * @memberof RowsBatchApipurgeDraftTableRows
      */
     tableIdOrName: string
     /**
      * JSON array of row ids.
      * @type BatchInputString
-     * @memberof RowsBatchApibatchPurgeDraftTableRows
+     * @memberof RowsBatchApipurgeDraftTableRows
      */
     batchInputString: BatchInputString
 }
 
-export interface RowsBatchApiBatchReadDraftTableRowsRequest {
+export interface RowsBatchApiReadDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchReadDraftTableRows
+     * @memberof RowsBatchApireadDraftTableRows
      */
     tableIdOrName: string
     /**
      * JSON array of row ids.
      * @type BatchInputString
-     * @memberof RowsBatchApibatchReadDraftTableRows
+     * @memberof RowsBatchApireadDraftTableRows
      */
     batchInputString: BatchInputString
 }
 
-export interface RowsBatchApiBatchReadTableRowsRequest {
+export interface RowsBatchApiReadTableRowsRequest {
     /**
      * The ID or name of the table to query.
      * @type string
-     * @memberof RowsBatchApibatchReadTableRows
+     * @memberof RowsBatchApireadTableRows
      */
     tableIdOrName: string
     /**
      * The JSON array of row ids
      * @type BatchInputString
-     * @memberof RowsBatchApibatchReadTableRows
+     * @memberof RowsBatchApireadTableRows
      */
     batchInputString: BatchInputString
 }
 
-export interface RowsBatchApiBatchReplaceDraftTableRowsRequest {
+export interface RowsBatchApiReplaceDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchReplaceDraftTableRows
+     * @memberof RowsBatchApireplaceDraftTableRows
      */
     tableIdOrName: string
     /**
      * JSON array of row objects.
-     * @type BatchInputHubDbTableRowV3Request
-     * @memberof RowsBatchApibatchReplaceDraftTableRows
+     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
+     * @memberof RowsBatchApireplaceDraftTableRows
      */
-    batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request
+    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
 }
 
-export interface RowsBatchApiBatchUpdateDraftTableRowsRequest {
+export interface RowsBatchApiUpdateDraftTableRowsRequest {
     /**
      * The ID or name of the table
      * @type string
-     * @memberof RowsBatchApibatchUpdateDraftTableRows
+     * @memberof RowsBatchApiupdateDraftTableRows
      */
     tableIdOrName: string
     /**
      * JSON array of row objects.
-     * @type BatchInputJsonNode
-     * @memberof RowsBatchApibatchUpdateDraftTableRows
+     * @type BatchInputHubDbTableRowV3BatchUpdateRequest
+     * @memberof RowsBatchApiupdateDraftTableRows
      */
-    batchInputJsonNode: BatchInputJsonNode
+    batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest
 }
 
 export class ObjectRowsBatchApi {
@@ -411,8 +411,8 @@ export class ObjectRowsBatchApi {
      * Clone rows in batch
      * @param param the request object
      */
-    public batchCloneDraftTableRows(param: RowsBatchApiBatchCloneDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3> {
-        return this.api.batchCloneDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
+    public cloneDraftTableRows(param: RowsBatchApiCloneDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3> {
+        return this.api.cloneDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -420,8 +420,8 @@ export class ObjectRowsBatchApi {
      * Create rows in batch
      * @param param the request object
      */
-    public batchCreateDraftTableRows(param: RowsBatchApiBatchCreateDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.batchCreateDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
+    public createDraftTableRows(param: RowsBatchApiCreateDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.createDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
     }
 
     /**
@@ -429,8 +429,8 @@ export class ObjectRowsBatchApi {
      * Permanently deletes rows
      * @param param the request object
      */
-    public batchPurgeDraftTableRows(param: RowsBatchApiBatchPurgeDraftTableRowsRequest, options?: Configuration): Promise<void> {
-        return this.api.batchPurgeDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
+    public purgeDraftTableRows(param: RowsBatchApiPurgeDraftTableRowsRequest, options?: Configuration): Promise<void> {
+        return this.api.purgeDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -438,8 +438,8 @@ export class ObjectRowsBatchApi {
      * Get a set of rows from draft table
      * @param param the request object
      */
-    public batchReadDraftTableRows(param: RowsBatchApiBatchReadDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.batchReadDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
+    public readDraftTableRows(param: RowsBatchApiReadDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.readDraftTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -447,8 +447,8 @@ export class ObjectRowsBatchApi {
      * Get a set of rows
      * @param param the request object
      */
-    public batchReadTableRows(param: RowsBatchApiBatchReadTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.batchReadTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
+    public readTableRows(param: RowsBatchApiReadTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.readTableRows(param.tableIdOrName, param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -456,8 +456,8 @@ export class ObjectRowsBatchApi {
      * Replace rows in batch in draft table
      * @param param the request object
      */
-    public batchReplaceDraftTableRows(param: RowsBatchApiBatchReplaceDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.batchReplaceDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3Request,  options).toPromise();
+    public replaceDraftTableRows(param: RowsBatchApiReplaceDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.replaceDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
     }
 
     /**
@@ -465,8 +465,8 @@ export class ObjectRowsBatchApi {
      * Update rows in batch in draft table
      * @param param the request object
      */
-    public batchUpdateDraftTableRows(param: RowsBatchApiBatchUpdateDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        return this.api.batchUpdateDraftTableRows(param.tableIdOrName, param.batchInputJsonNode,  options).toPromise();
+    public updateDraftTableRows(param: RowsBatchApiUpdateDraftTableRowsRequest, options?: Configuration): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        return this.api.updateDraftTableRows(param.tableIdOrName, param.batchInputHubDbTableRowV3BatchUpdateRequest,  options).toPromise();
     }
 
 }
@@ -671,17 +671,17 @@ export interface TablesApiGetDraftTableDetailsByIdRequest {
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
-     * @type boolean
-     * @memberof TablesApigetDraftTableDetailsById
-     */
-    archived?: boolean
-    /**
      * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @type boolean
      * @memberof TablesApigetDraftTableDetailsById
      */
     includeForeignIds?: boolean
+    /**
+     * Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
+     * @type boolean
+     * @memberof TablesApigetDraftTableDetailsById
+     */
+    archived?: boolean
 }
 
 export interface TablesApiGetTableDetailsRequest {
@@ -692,17 +692,17 @@ export interface TablesApiGetTableDetailsRequest {
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
-     * @type boolean
-     * @memberof TablesApigetTableDetails
-     */
-    archived?: boolean
-    /**
      * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @type boolean
      * @memberof TablesApigetTableDetails
      */
     includeForeignIds?: boolean
+    /**
+     * Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
+     * @type boolean
+     * @memberof TablesApigetTableDetails
+     */
+    archived?: boolean
 }
 
 export interface TablesApiImportDraftTableRequest {
@@ -785,17 +785,17 @@ export interface TablesApiUpdateDraftTableRequest {
      */
     hubDbTableV3Request: HubDbTableV3Request
     /**
-     * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
-     * @type boolean
-     * @memberof TablesApiupdateDraftTable
-     */
-    archived?: boolean
-    /**
      * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @type boolean
      * @memberof TablesApiupdateDraftTable
      */
     includeForeignIds?: boolean
+    /**
+     * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @type boolean
+     * @memberof TablesApiupdateDraftTable
+     */
+    archived?: boolean
 }
 
 export class ObjectTablesApi {
@@ -874,7 +874,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsById(param: TablesApiGetDraftTableDetailsByIdRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.includeForeignIds, param.archived,  options).toPromise();
     }
 
     /**
@@ -883,7 +883,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetails(param: TablesApiGetTableDetailsRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.getTableDetails(param.tableIdOrName, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getTableDetails(param.tableIdOrName, param.includeForeignIds, param.archived,  options).toPromise();
     }
 
     /**
@@ -928,7 +928,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTable(param: TablesApiUpdateDraftTableRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.includeForeignIds, param.archived,  options).toPromise();
     }
 
 }

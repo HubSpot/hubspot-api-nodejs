@@ -2,8 +2,8 @@ import { ResponseContext, RequestContext, HttpFile } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
-import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3 } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseHubDbTableRowV3WithErrors';
@@ -289,8 +289,8 @@ export class ObservableRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString The JSON array of row ids
      */
-    public batchCloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3> {
-        const requestContextPromise = this.requestFactory.batchCloneDraftTableRows(tableIdOrName, batchInputString, _options);
+    public cloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3> {
+        const requestContextPromise = this.requestFactory.cloneDraftTableRows(tableIdOrName, batchInputString, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -304,7 +304,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchCloneDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.cloneDraftTableRows(rsp)));
             }));
     }
 
@@ -314,8 +314,8 @@ export class ObservableRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects
      */
-    public batchCreateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const requestContextPromise = this.requestFactory.batchCreateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
+    public createDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const requestContextPromise = this.requestFactory.createDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -329,7 +329,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchCreateDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDraftTableRows(rsp)));
             }));
     }
 
@@ -339,8 +339,8 @@ export class ObservableRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public batchPurgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.batchPurgeDraftTableRows(tableIdOrName, batchInputString, _options);
+    public purgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.purgeDraftTableRows(tableIdOrName, batchInputString, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -354,7 +354,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchPurgeDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purgeDraftTableRows(rsp)));
             }));
     }
 
@@ -364,8 +364,8 @@ export class ObservableRowsBatchApi {
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
      */
-    public batchReadDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const requestContextPromise = this.requestFactory.batchReadDraftTableRows(tableIdOrName, batchInputString, _options);
+    public readDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const requestContextPromise = this.requestFactory.readDraftTableRows(tableIdOrName, batchInputString, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -379,7 +379,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchReadDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readDraftTableRows(rsp)));
             }));
     }
 
@@ -389,8 +389,8 @@ export class ObservableRowsBatchApi {
      * @param tableIdOrName The ID or name of the table to query.
      * @param batchInputString The JSON array of row ids
      */
-    public batchReadTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const requestContextPromise = this.requestFactory.batchReadTableRows(tableIdOrName, batchInputString, _options);
+    public readTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const requestContextPromise = this.requestFactory.readTableRows(tableIdOrName, batchInputString, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -404,7 +404,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchReadTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readTableRows(rsp)));
             }));
     }
 
@@ -412,10 +412,10 @@ export class ObservableRowsBatchApi {
      * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3Request JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public batchReplaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const requestContextPromise = this.requestFactory.batchReplaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3Request, _options);
+    public replaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const requestContextPromise = this.requestFactory.replaceDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3BatchUpdateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -429,7 +429,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchReplaceDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replaceDraftTableRows(rsp)));
             }));
     }
 
@@ -437,10 +437,10 @@ export class ObservableRowsBatchApi {
      * Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Update rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputJsonNode JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
      */
-    public batchUpdateDraftTableRows(tableIdOrName: string, batchInputJsonNode: BatchInputJsonNode, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
-        const requestContextPromise = this.requestFactory.batchUpdateDraftTableRows(tableIdOrName, batchInputJsonNode, _options);
+    public updateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Observable<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors> {
+        const requestContextPromise = this.requestFactory.updateDraftTableRows(tableIdOrName, batchInputHubDbTableRowV3BatchUpdateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -454,7 +454,7 @@ export class ObservableRowsBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.batchUpdateDraftTableRows(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateDraftTableRows(rsp)));
             }));
     }
 
@@ -669,11 +669,11 @@ export class ObservableTablesApi {
      * Get the details for the `draft` version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      */
-    public getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
-        const requestContextPromise = this.requestFactory.getDraftTableDetailsById(tableIdOrName, archived, includeForeignIds, _options);
+    public getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
+        const requestContextPromise = this.requestFactory.getDraftTableDetailsById(tableIdOrName, includeForeignIds, archived, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -695,11 +695,11 @@ export class ObservableTablesApi {
      * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      */
-    public getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
-        const requestContextPromise = this.requestFactory.getTableDetails(tableIdOrName, archived, includeForeignIds, _options);
+    public getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
+        const requestContextPromise = this.requestFactory.getTableDetails(tableIdOrName, includeForeignIds, archived, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -823,11 +823,11 @@ export class ObservableTablesApi {
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
      * @param hubDbTableV3Request The JSON schema for the table being updated.
-     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
-        const requestContextPromise = this.requestFactory.updateDraftTable(tableIdOrName, hubDbTableV3Request, archived, includeForeignIds, _options);
+    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Observable<HubDbTableV3> {
+        const requestContextPromise = this.requestFactory.updateDraftTable(tableIdOrName, hubDbTableV3Request, includeForeignIds, archived, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

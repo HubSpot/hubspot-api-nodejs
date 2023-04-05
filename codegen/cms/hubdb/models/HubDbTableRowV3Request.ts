@@ -28,6 +28,7 @@ export class HubDbTableRowV3Request {
     * List of key value pairs with the column name and column value
     */
     'values': { [key: string]: any; };
+    'displayIndex'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -55,6 +56,12 @@ export class HubDbTableRowV3Request {
             "baseName": "values",
             "type": "{ [key: string]: any; }",
             "format": ""
+        },
+        {
+            "name": "displayIndex",
+            "baseName": "displayIndex",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

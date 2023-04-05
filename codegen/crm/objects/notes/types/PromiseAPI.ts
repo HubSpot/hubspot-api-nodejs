@@ -1,78 +1,19 @@
 import { Configuration} from '../configuration'
 
-import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-import { ObservableAssociationsApi } from './ObservableAPI';
-
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-export class PromiseAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: AssociationsApiRequestFactory,
-        responseProcessor?: AssociationsApiResponseProcessor
-    ) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * deletes all associations between two records.
-     * Delete
-     * @param noteId 
-     * @param toObjectType 
-     * @param toObjectId 
-     */
-    public archive(noteId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(noteId, toObjectType, toObjectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Set association labels between two records.
-     * Create
-     * @param noteId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationSpec 
-     */
-    public create(noteId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        const result = this.api.create(noteId, toObjectType, toObjectId, associationSpec, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * List all associations of a note by object type. Limit 1000 per call.
-     * List
-     * @param noteId 
-     * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
-     */
-    public getAll(noteId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        const result = this.api.getAll(noteId, toObjectType, after, limit, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableBasicApi } from './ObservableAPI';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -100,10 +41,10 @@ export class PromiseBasicApi {
     /**
      * Create a note with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard notes is provided.
      * Create
-     * @param simplePublicObjectInput 
+     * @param simplePublicObjectInputForCreate 
      */
-    public create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.create(simplePublicObjectInput, _options);
+    public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.create(simplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 
@@ -179,10 +120,10 @@ export class PromiseBatchApi {
 
     /**
      * Create a batch of notes
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.create(batchInputSimplePublicObjectInput, _options);
+    public create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.create(batchInputSimplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 
