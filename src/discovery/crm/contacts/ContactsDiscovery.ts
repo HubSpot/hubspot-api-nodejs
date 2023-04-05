@@ -1,5 +1,4 @@
 import {
-  AssociationsApi,
   BasicApi,
   BatchApi,
   Configuration,
@@ -19,7 +18,6 @@ import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import { getAll } from '../../../services/getAll'
 
 export default class ContactsDiscovery {
-  public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public gdprApi: GDPRApi
@@ -37,7 +35,6 @@ export default class ContactsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi>(new AssociationsApi(configuration))
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
     this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))

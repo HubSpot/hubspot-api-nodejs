@@ -1,6 +1,5 @@
 import { createConfiguration } from '../../../../../codegen/crm/objects/postal_mail/configuration'
 import {
-  AssociationsApi,
   BasicApi,
   BatchApi,
   PublicObjectApi,
@@ -15,7 +14,6 @@ import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class PostalMailDiscovery {
-  public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public publicObjectApi: PublicObjectApi
@@ -32,7 +30,6 @@ export default class PostalMailDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi>(new AssociationsApi(configuration))
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
     this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
