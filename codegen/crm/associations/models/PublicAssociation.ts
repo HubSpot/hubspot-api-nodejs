@@ -10,25 +10,37 @@
  * Do not edit the class manually.
  */
 
+import { PublicObjectId } from '../models/PublicObjectId';
 
-export class PublicObjectId {
-    /**
-    * The unique ID that identifies an object.
-    */
-    'id': string;
+export class PublicAssociation {
+    '_from': PublicObjectId;
+    'to': PublicObjectId;
+    'type': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "_from",
+            "baseName": "from",
+            "type": "PublicObjectId",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "PublicObjectId",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicObjectId.attributeTypeMap;
+        return PublicAssociation.attributeTypeMap;
     }
 
     public constructor() {

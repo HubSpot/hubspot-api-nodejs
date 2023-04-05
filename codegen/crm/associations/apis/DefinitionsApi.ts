@@ -8,48 +8,104 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
-import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
-import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
-import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
-import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
-import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
+import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
+import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
 
 /**
  * no description
  */
-export class BatchApiRequestFactory extends BaseAPIRequestFactory {
+export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Remove the associations between all pairs of objects identified in the request body.
-     * Archive a batch of associations
+     * Deletes an association definition
+     * Delete
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicAssociation 
+     * @param associationTypeId 
      */
-    public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
+    public async archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive", "fromObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive", "toObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "toObjectType");
         }
 
 
-        // verify required parameter 'batchInputPublicAssociation' is not null or undefined
-        if (batchInputPublicAssociation === null || batchInputPublicAssociation === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive", "batchInputPublicAssociation");
+        // verify required parameter 'associationTypeId' is not null or undefined
+        if (associationTypeId === null || associationTypeId === undefined) {
+            throw new RequiredError("DefinitionsApi", "archive", "associationTypeId");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/archive'
+        const localVarPath = '/crm/v4/associations/{fromObjectType}/{toObjectType}/labels/{associationTypeId}'
+            .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
+            .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)))
+            .replace('{' + 'associationTypeId' + '}', encodeURIComponent(String(associationTypeId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create a user defined association definition
+     * Create
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param publicAssociationDefinitionCreateRequest 
+     */
+    public async create(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'fromObjectType' is not null or undefined
+        if (fromObjectType === null || fromObjectType === undefined) {
+            throw new RequiredError("DefinitionsApi", "create", "fromObjectType");
+        }
+
+
+        // verify required parameter 'toObjectType' is not null or undefined
+        if (toObjectType === null || toObjectType === undefined) {
+            throw new RequiredError("DefinitionsApi", "create", "toObjectType");
+        }
+
+
+        // verify required parameter 'publicAssociationDefinitionCreateRequest' is not null or undefined
+        if (publicAssociationDefinitionCreateRequest === null || publicAssociationDefinitionCreateRequest === undefined) {
+            throw new RequiredError("DefinitionsApi", "create", "publicAssociationDefinitionCreateRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v4/associations/{fromObjectType}/{toObjectType}/labels'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
 
@@ -64,7 +120,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputPublicAssociation, "BatchInputPublicAssociation", ""),
+            ObjectSerializer.serialize(publicAssociationDefinitionCreateRequest, "PublicAssociationDefinitionCreateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -90,53 +146,35 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Associate all pairs of objects identified in the request body.
-     * Create a batch of associations
+     * Returns all association types between two object types
+     * Read
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicAssociation 
      */
-    public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate", "fromObjectType");
+            throw new RequiredError("DefinitionsApi", "getAll", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate", "toObjectType");
-        }
-
-
-        // verify required parameter 'batchInputPublicAssociation' is not null or undefined
-        if (batchInputPublicAssociation === null || batchInputPublicAssociation === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate", "batchInputPublicAssociation");
+            throw new RequiredError("DefinitionsApi", "getAll", "toObjectType");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/create'
+        const localVarPath = '/crm/v4/associations/{fromObjectType}/{toObjectType}/labels'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputPublicAssociation, "BatchInputPublicAssociation", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -159,40 +197,40 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
-     * Read a batch of associations
+     * Update a user defined association definition
+     * Update
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicObjectId 
+     * @param publicAssociationDefinitionUpdateRequest 
      */
-    public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<RequestContext> {
+    public async update(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead", "fromObjectType");
+            throw new RequiredError("DefinitionsApi", "update", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead", "toObjectType");
+            throw new RequiredError("DefinitionsApi", "update", "toObjectType");
         }
 
 
-        // verify required parameter 'batchInputPublicObjectId' is not null or undefined
-        if (batchInputPublicObjectId === null || batchInputPublicObjectId === undefined) {
-            throw new RequiredError("BatchApi", "postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead", "batchInputPublicObjectId");
+        // verify required parameter 'publicAssociationDefinitionUpdateRequest' is not null or undefined
+        if (publicAssociationDefinitionUpdateRequest === null || publicAssociationDefinitionUpdateRequest === undefined) {
+            throw new RequiredError("DefinitionsApi", "update", "publicAssociationDefinitionUpdateRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/associations/{fromObjectType}/{toObjectType}/batch/read'
+        const localVarPath = '/crm/v4/associations/{fromObjectType}/{toObjectType}/labels'
             .replace('{' + 'fromObjectType' + '}', encodeURIComponent(String(fromObjectType)))
             .replace('{' + 'toObjectType' + '}', encodeURIComponent(String(toObjectType)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
@@ -202,7 +240,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputPublicObjectId, "BatchInputPublicObjectId", ""),
+            ObjectSerializer.serialize(publicAssociationDefinitionUpdateRequest, "PublicAssociationDefinitionUpdateRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -229,16 +267,16 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class BatchApiResponseProcessor {
+export class DefinitionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive
+     * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(response: ResponseContext): Promise<void > {
+     public async archive(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -267,23 +305,16 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate
+     * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(response: ResponseContext): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors > {
+     public async create(response: ResponseContext): Promise<CollectionResponseAssociationSpecWithLabelNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociation = ObjectSerializer.deserialize(
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociation", ""
-            ) as BatchResponsePublicAssociation;
-            return body;
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociationWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationWithErrors", ""
-            ) as BatchResponsePublicAssociationWithErrors;
+                "CollectionResponseAssociationSpecWithLabelNoPaging", ""
+            ) as CollectionResponseAssociationSpecWithLabelNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -296,10 +327,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors = ObjectSerializer.deserialize(
+            const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors", ""
-            ) as BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors;
+                "CollectionResponseAssociationSpecWithLabelNoPaging", ""
+            ) as CollectionResponseAssociationSpecWithLabelNoPaging;
             return body;
         }
 
@@ -310,23 +341,16 @@ export class BatchApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead
+     * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(response: ResponseContext): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponseAssociationSpecWithLabelNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
+            const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationMulti", ""
-            ) as BatchResponsePublicAssociationMulti;
-            return body;
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponsePublicAssociationMultiWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationMultiWithErrors", ""
-            ) as BatchResponsePublicAssociationMultiWithErrors;
+                "CollectionResponseAssociationSpecWithLabelNoPaging", ""
+            ) as CollectionResponseAssociationSpecWithLabelNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -339,10 +363,42 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti = ObjectSerializer.deserialize(
+            const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti", ""
-            ) as BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti;
+                "CollectionResponseAssociationSpecWithLabelNoPaging", ""
+            ) as CollectionResponseAssociationSpecWithLabelNoPaging;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to update
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async update(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return body;
         }
 

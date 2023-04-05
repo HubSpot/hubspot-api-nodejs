@@ -11,11 +11,9 @@
  */
 
 
-export class PublicObjectId {
-    /**
-    * The unique ID that identifies an object.
-    */
+export class AssociatedId {
     'id': string;
+    'type': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,10 +23,16 @@ export class PublicObjectId {
             "baseName": "id",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicObjectId.attributeTypeMap;
+        return AssociatedId.attributeTypeMap;
     }
 
     public constructor() {

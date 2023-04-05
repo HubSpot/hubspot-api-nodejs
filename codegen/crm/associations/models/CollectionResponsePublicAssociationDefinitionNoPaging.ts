@@ -10,25 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicAssociationDefinition } from '../models/PublicAssociationDefinition';
 
-export class PublicObjectId {
-    /**
-    * The unique ID that identifies an object.
-    */
-    'id': string;
+export class CollectionResponsePublicAssociationDefinitionNoPaging {
+    'results': Array<PublicAssociationDefinition>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationDefinition>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicObjectId.attributeTypeMap;
+        return CollectionResponsePublicAssociationDefinitionNoPaging.attributeTypeMap;
     }
 
     public constructor() {

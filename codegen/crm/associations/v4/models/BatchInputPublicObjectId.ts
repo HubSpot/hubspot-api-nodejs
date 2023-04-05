@@ -10,25 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicObjectId } from '../models/PublicObjectId';
 
-export class PublicObjectId {
-    /**
-    * The unique ID that identifies an object.
-    */
-    'id': string;
+export class BatchInputPublicObjectId {
+    'inputs': Array<PublicObjectId>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<PublicObjectId>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicObjectId.attributeTypeMap;
+        return BatchInputPublicObjectId.attributeTypeMap;
     }
 
     public constructor() {
