@@ -18,12 +18,12 @@ export class AccessTokensApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * @param token 
      */
-    public async getAccessToken(token: string, _options?: Configuration): Promise<RequestContext> {
+    public async get(token: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'token' is not null or undefined
         if (token === null || token === undefined) {
-            throw new RequiredError("AccessTokensApi", "getAccessToken", "token");
+            throw new RequiredError("AccessTokensApi", "get", "token");
         }
 
 
@@ -53,10 +53,10 @@ export class AccessTokensApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getAccessToken
+     * @params response Response returned by the server for a request to get
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAccessToken(response: ResponseContext): Promise<AccessTokenInfoResponse > {
+     public async get(response: ResponseContext): Promise<AccessTokenInfoResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: AccessTokenInfoResponse = ObjectSerializer.deserialize(

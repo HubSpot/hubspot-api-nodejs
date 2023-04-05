@@ -18,12 +18,12 @@ export class RefreshTokensApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * @param token 
      */
-    public async archiveRefreshToken(token: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(token: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'token' is not null or undefined
         if (token === null || token === undefined) {
-            throw new RequiredError("RefreshTokensApi", "archiveRefreshToken", "token");
+            throw new RequiredError("RefreshTokensApi", "archive", "token");
         }
 
 
@@ -48,12 +48,12 @@ export class RefreshTokensApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * @param token 
      */
-    public async getRefreshToken(token: string, _options?: Configuration): Promise<RequestContext> {
+    public async get(token: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'token' is not null or undefined
         if (token === null || token === undefined) {
-            throw new RequiredError("RefreshTokensApi", "getRefreshToken", "token");
+            throw new RequiredError("RefreshTokensApi", "get", "token");
         }
 
 
@@ -83,10 +83,10 @@ export class RefreshTokensApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to archiveRefreshToken
+     * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveRefreshToken(response: ResponseContext): Promise<void > {
+     public async archive(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -115,10 +115,10 @@ export class RefreshTokensApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getRefreshToken
+     * @params response Response returned by the server for a request to get
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getRefreshToken(response: ResponseContext): Promise<RefreshTokenInfoResponse > {
+     public async get(response: ResponseContext): Promise<RefreshTokenInfoResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: RefreshTokenInfoResponse = ObjectSerializer.deserialize(

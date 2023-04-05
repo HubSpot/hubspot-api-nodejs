@@ -1,135 +1,19 @@
 import { Configuration} from '../configuration'
 
-import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-
-import { ObservableAssociationsApi } from "./ObservableAPI";
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-
-export interface AssociationsApiArchiveRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    companyId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApiarchive
-     */
-    toObjectId: number
-}
-
-export interface AssociationsApiCreateRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    companyId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApicreate
-     */
-    toObjectId: number
-    /**
-     * 
-     * @type Array&lt;AssociationSpec&gt;
-     * @memberof AssociationsApicreate
-     */
-    associationSpec: Array<AssociationSpec>
-}
-
-export interface AssociationsApiGetAllRequest {
-    /**
-     * 
-     * @type number
-     * @memberof AssociationsApigetAll
-     */
-    companyId: number
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    toObjectType: string
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof AssociationsApigetAll
-     */
-    limit?: number
-}
-
-export class ObjectAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(configuration: Configuration, requestFactory?: AssociationsApiRequestFactory, responseProcessor?: AssociationsApiResponseProcessor) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * deletes all associations between two records.
-     * Delete
-     * @param param the request object
-     */
-    public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.companyId, param.toObjectType, param.toObjectId,  options).toPromise();
-    }
-
-    /**
-     * Set association labels between two records.
-     * Create
-     * @param param the request object
-     */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        return this.api.create(param.companyId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
-    }
-
-    /**
-     * List all associations of a company by object type. Limit 1000 per call.
-     * List
-     * @param param the request object
-     */
-    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        return this.api.getAll(param.companyId, param.toObjectType, param.after, param.limit,  options).toPromise();
-    }
-
-}
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -146,10 +30,10 @@ export interface BasicApiArchiveRequest {
 export interface BasicApiCreateRequest {
     /**
      * 
-     * @type SimplePublicObjectInput
+     * @type SimplePublicObjectInputForCreate
      * @memberof BasicApicreate
      */
-    simplePublicObjectInput: SimplePublicObjectInput
+    simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate
 }
 
 export interface BasicApiGetByIdRequest {
@@ -273,7 +157,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public create(param: BasicApiCreateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.create(param.simplePublicObjectInput,  options).toPromise();
+        return this.api.create(param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -320,10 +204,10 @@ export interface BatchApiArchiveRequest {
 export interface BatchApiCreateRequest {
     /**
      * 
-     * @type BatchInputSimplePublicObjectInput
+     * @type BatchInputSimplePublicObjectInputForCreate
      * @memberof BatchApicreate
      */
-    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+    batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate
 }
 
 export interface BatchApiReadRequest {
@@ -370,7 +254,7 @@ export class ObjectBatchApi {
      * @param param the request object
      */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.create(param.batchInputSimplePublicObjectInput,  options).toPromise();
+        return this.api.create(param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**

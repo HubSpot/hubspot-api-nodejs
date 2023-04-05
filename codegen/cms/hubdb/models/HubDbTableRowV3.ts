@@ -17,6 +17,10 @@ export class HubDbTableRowV3 {
     */
     'id'?: string;
     /**
+    * List of key value pairs with the column name and column value
+    */
+    'values': { [key: string]: any; };
+    /**
     * Specifies the value for `hs_path` column, which will be used as slug in the dynamic pages
     */
     'path'?: string;
@@ -25,6 +29,10 @@ export class HubDbTableRowV3 {
     */
     'name'?: string;
     /**
+    * Specifies the value for the column child table id
+    */
+    'childTableId'?: string;
+    /**
     * Timestamp at which the row is created
     */
     'createdAt'?: Date;
@@ -32,14 +40,7 @@ export class HubDbTableRowV3 {
     * Timestamp at which the row is updated last time
     */
     'updatedAt'?: Date;
-    /**
-    * Specifies the value for the column child table id
-    */
-    'childTableId'?: string;
-    /**
-    * List of key value pairs with the column name and column value
-    */
-    'values': { [key: string]: any; };
+    'publishedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -51,6 +52,12 @@ export class HubDbTableRowV3 {
             "format": ""
         },
         {
+            "name": "values",
+            "baseName": "values",
+            "type": "{ [key: string]: any; }",
+            "format": ""
+        },
+        {
             "name": "path",
             "baseName": "path",
             "type": "string",
@@ -59,6 +66,12 @@ export class HubDbTableRowV3 {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "childTableId",
+            "baseName": "childTableId",
             "type": "string",
             "format": ""
         },
@@ -75,16 +88,10 @@ export class HubDbTableRowV3 {
             "format": "date-time"
         },
         {
-            "name": "childTableId",
-            "baseName": "childTableId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "values",
-            "baseName": "values",
-            "type": "{ [key: string]: any; }",
-            "format": ""
+            "name": "publishedAt",
+            "baseName": "publishedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

@@ -8,5 +8,5 @@ export * from "./servers";
 export { RequiredError } from "./apis/baseapi";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseAttendanceSubscriberStateChangesApi as AttendanceSubscriberStateChangesApi,  PromiseMarketingEventsExternalApi as MarketingEventsExternalApi,  PromiseSettingsExternalApi as SettingsExternalApi } from './types/PromiseAPI';
+export { PromiseAttendanceSubscriberStateChangesApi as AttendanceSubscriberStateChangesApi,  PromiseMarketingEventsExternalApi as MarketingEventsExternalApi,  PromiseSearchApi as SearchApi,  PromiseSettingsExternalApi as SettingsExternalApi } from './types/PromiseAPI';
 

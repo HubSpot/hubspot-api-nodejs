@@ -2,7 +2,7 @@ import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -14,6 +14,7 @@ import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
 import { ObservableAssociationsApi } from "./ObservableAPI";
@@ -178,10 +179,10 @@ export interface BasicApiCreateRequest {
     objectType: string
     /**
      * 
-     * @type SimplePublicObjectInput
+     * @type SimplePublicObjectInputForCreate
      * @memberof BasicApicreate
      */
-    simplePublicObjectInput: SimplePublicObjectInput
+    simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate
 }
 
 export interface BasicApiGetByIdRequest {
@@ -323,7 +324,7 @@ export class ObjectBasicApi {
      * @param param the request object
      */
     public create(param: BasicApiCreateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.create(param.objectType, param.simplePublicObjectInput,  options).toPromise();
+        return this.api.create(param.objectType, param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -382,10 +383,10 @@ export interface BatchApiCreateRequest {
     objectType: string
     /**
      * 
-     * @type BatchInputSimplePublicObjectInput
+     * @type BatchInputSimplePublicObjectInputForCreate
      * @memberof BatchApicreate
      */
-    batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput
+    batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate
 }
 
 export interface BatchApiReadRequest {
@@ -444,7 +445,7 @@ export class ObjectBatchApi {
      * @param param the request object
      */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.api.create(param.objectType, param.batchInputSimplePublicObjectInput,  options).toPromise();
+        return this.api.create(param.objectType, param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**

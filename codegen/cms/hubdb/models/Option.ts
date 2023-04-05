@@ -14,6 +14,7 @@
 export class Option {
     'id': string;
     'name': string;
+    'label'?: string;
     'type': string;
     'order': number;
 
@@ -29,6 +30,12 @@ export class Option {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
             "type": "string",
             "format": ""
         },

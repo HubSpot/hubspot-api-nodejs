@@ -20,8 +20,8 @@ export class PromiseAccessTokensApi {
     /**
      * @param token 
      */
-    public getAccessToken(token: string, _options?: Configuration): Promise<AccessTokenInfoResponse> {
-        const result = this.api.getAccessToken(token, _options);
+    public get(token: string, _options?: Configuration): Promise<AccessTokenInfoResponse> {
+        const result = this.api.get(token, _options);
         return result.toPromise();
     }
 
@@ -47,16 +47,16 @@ export class PromiseRefreshTokensApi {
     /**
      * @param token 
      */
-    public archiveRefreshToken(token: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveRefreshToken(token, _options);
+    public archive(token: string, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(token, _options);
         return result.toPromise();
     }
 
     /**
      * @param token 
      */
-    public getRefreshToken(token: string, _options?: Configuration): Promise<RefreshTokenInfoResponse> {
-        const result = this.api.getRefreshToken(token, _options);
+    public get(token: string, _options?: Configuration): Promise<RefreshTokenInfoResponse> {
+        const result = this.api.get(token, _options);
         return result.toPromise();
     }
 
@@ -87,8 +87,8 @@ export class PromiseTokensApi {
      * @param clientSecret 
      * @param refreshToken 
      */
-    public createToken(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<TokenResponseIF> {
-        const result = this.api.createToken(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<TokenResponseIF> {
+        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
         return result.toPromise();
     }
 

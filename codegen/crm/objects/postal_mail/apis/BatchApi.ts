@@ -10,7 +10,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -74,14 +74,14 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create a batch of postal mail
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public async create(batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
+    public async create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'batchInputSimplePublicObjectInput' is not null or undefined
-        if (batchInputSimplePublicObjectInput === null || batchInputSimplePublicObjectInput === undefined) {
-            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectInput");
+        // verify required parameter 'batchInputSimplePublicObjectInputForCreate' is not null or undefined
+        if (batchInputSimplePublicObjectInputForCreate === null || batchInputSimplePublicObjectInputForCreate === undefined) {
+            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectInputForCreate");
         }
 
 
@@ -99,7 +99,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputSimplePublicObjectInput, "BatchInputSimplePublicObjectInput", ""),
+            ObjectSerializer.serialize(batchInputSimplePublicObjectInputForCreate, "BatchInputSimplePublicObjectInputForCreate", ""),
             contentType
         );
         requestContext.setBody(serializedBody);

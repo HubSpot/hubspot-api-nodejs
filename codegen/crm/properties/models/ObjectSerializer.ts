@@ -2,15 +2,14 @@ export * from '../models/BatchInputPropertyCreate';
 export * from '../models/BatchInputPropertyName';
 export * from '../models/BatchReadInputPropertyName';
 export * from '../models/BatchResponseProperty';
-export * from '../models/CollectionResponseProperty';
-export * from '../models/CollectionResponsePropertyGroup';
+export * from '../models/BatchResponsePropertyWithErrors';
+export * from '../models/CollectionResponsePropertyGroupNoPaging';
+export * from '../models/CollectionResponsePropertyNoPaging';
 export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
-export * from '../models/NextPage';
 export * from '../models/Option';
 export * from '../models/OptionInput';
-export * from '../models/Paging';
 export * from '../models/Property';
 export * from '../models/PropertyCreate';
 export * from '../models/PropertyGroup';
@@ -24,24 +23,23 @@ export * from '../models/StandardError';
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
 import { BatchReadInputPropertyName } from '../models/BatchReadInputPropertyName';
-import { BatchResponseProperty          } from '../models/BatchResponseProperty';
-import { CollectionResponseProperty } from '../models/CollectionResponseProperty';
-import { CollectionResponsePropertyGroup } from '../models/CollectionResponsePropertyGroup';
+import { BatchResponseProperty        } from '../models/BatchResponseProperty';
+import { BatchResponsePropertyWithErrors          } from '../models/BatchResponsePropertyWithErrors';
+import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
+import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
 import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { NextPage } from '../models/NextPage';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
-import { Paging } from '../models/Paging';
 import { Property } from '../models/Property';
-import { PropertyCreate            } from '../models/PropertyCreate';
+import { PropertyCreate               } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 import { PropertyName } from '../models/PropertyName';
-import { PropertyUpdate          } from '../models/PropertyUpdate';
+import { PropertyUpdate           } from '../models/PropertyUpdate';
 import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
@@ -65,6 +63,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponsePropertyStatusEnum",
+    "BatchResponsePropertyWithErrorsStatusEnum",
     "ErrorCategoryHttpStatusEnum",
     "PropertyCreateTypeEnum",
     "PropertyCreateFieldTypeEnum",
@@ -77,15 +76,14 @@ let typeMap: {[index: string]: any} = {
     "BatchInputPropertyName": BatchInputPropertyName,
     "BatchReadInputPropertyName": BatchReadInputPropertyName,
     "BatchResponseProperty": BatchResponseProperty,
-    "CollectionResponseProperty": CollectionResponseProperty,
-    "CollectionResponsePropertyGroup": CollectionResponsePropertyGroup,
+    "BatchResponsePropertyWithErrors": BatchResponsePropertyWithErrors,
+    "CollectionResponsePropertyGroupNoPaging": CollectionResponsePropertyGroupNoPaging,
+    "CollectionResponsePropertyNoPaging": CollectionResponsePropertyNoPaging,
     "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
-    "NextPage": NextPage,
     "Option": Option,
     "OptionInput": OptionInput,
-    "Paging": Paging,
     "Property": Property,
     "PropertyCreate": PropertyCreate,
     "PropertyGroup": PropertyGroup,
@@ -142,8 +140,7 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            for (let date of data) {
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
             }
             return transformedData;
@@ -172,8 +169,7 @@ export class ObjectSerializer {
             // get the map for the correct type.
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             let instance: {[index: string]: any} = {};
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
+            for (let attributeType of attributeTypes) {
                 instance[attributeType.baseName] = ObjectSerializer.serialize(data[attributeType.name], attributeType.type, attributeType.format);
             }
             return instance;
@@ -191,8 +187,7 @@ export class ObjectSerializer {
             let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
             subType = subType.substring(0, subType.length - 1); // Type> => Type
             let transformedData: any[] = [];
-            for (let index in data) {
-                let date = data[index];
+            for (let date of data) {
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
             }
             return transformedData;
@@ -208,8 +203,7 @@ export class ObjectSerializer {
             }
             let instance = new typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
-            for (let index in attributeTypes) {
-                let attributeType = attributeTypes[index];
+            for (let attributeType of attributeTypes) {
                 let value = ObjectSerializer.deserialize(data[attributeType.baseName], attributeType.type, attributeType.format);
                 if (value !== undefined) {
                     instance[attributeType.name] = value;

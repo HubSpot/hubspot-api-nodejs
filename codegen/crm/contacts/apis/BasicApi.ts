@@ -11,6 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
 /**
@@ -64,14 +65,14 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Create a contact with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard contacts is provided.
      * Create
-     * @param simplePublicObjectInput 
+     * @param simplePublicObjectInputForCreate 
      */
-    public async create(simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<RequestContext> {
+    public async create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'simplePublicObjectInput' is not null or undefined
-        if (simplePublicObjectInput === null || simplePublicObjectInput === undefined) {
-            throw new RequiredError("BasicApi", "create", "simplePublicObjectInput");
+        // verify required parameter 'simplePublicObjectInputForCreate' is not null or undefined
+        if (simplePublicObjectInputForCreate === null || simplePublicObjectInputForCreate === undefined) {
+            throw new RequiredError("BasicApi", "create", "simplePublicObjectInputForCreate");
         }
 
 
@@ -89,7 +90,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(simplePublicObjectInput, "SimplePublicObjectInput", ""),
+            ObjectSerializer.serialize(simplePublicObjectInputForCreate, "SimplePublicObjectInputForCreate", ""),
             contentType
         );
         requestContext.setBody(serializedBody);

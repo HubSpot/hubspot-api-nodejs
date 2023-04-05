@@ -2,7 +2,7 @@ import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInput } from '../models/BatchInputSimplePublicObjectInput';
+import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -14,6 +14,7 @@ import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { ObservableAssociationsApi } from './ObservableAPI';
 
@@ -102,10 +103,10 @@ export class PromiseBasicApi {
      * Create a CRM object with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard objects is provided.
      * Create
      * @param objectType 
-     * @param simplePublicObjectInput 
+     * @param simplePublicObjectInputForCreate 
      */
-    public create(objectType: string, simplePublicObjectInput: SimplePublicObjectInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.create(objectType, simplePublicObjectInput, _options);
+    public create(objectType: string, simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<SimplePublicObject> {
+        const result = this.api.create(objectType, simplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 
@@ -186,10 +187,10 @@ export class PromiseBatchApi {
     /**
      * Create a batch of objects
      * @param objectType 
-     * @param batchInputSimplePublicObjectInput 
+     * @param batchInputSimplePublicObjectInputForCreate 
      */
-    public create(objectType: string, batchInputSimplePublicObjectInput: BatchInputSimplePublicObjectInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.create(objectType, batchInputSimplePublicObjectInput, _options);
+    public create(objectType: string, batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        const result = this.api.create(objectType, batchInputSimplePublicObjectInputForCreate, _options);
         return result.toPromise();
     }
 

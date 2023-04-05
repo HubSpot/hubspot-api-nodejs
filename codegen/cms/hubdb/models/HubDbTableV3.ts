@@ -34,6 +34,7 @@ export class HubDbTableV3 {
     */
     'columns'?: Array<Column>;
     'published'?: boolean;
+    'deleted'?: boolean;
     /**
     * Number of columns including deleted
     */
@@ -45,37 +46,34 @@ export class HubDbTableV3 {
     'createdBy'?: SimpleUser;
     'updatedBy'?: SimpleUser;
     /**
-    * Timestamp at which the table is published recently
+    * Specifies whether the table can be used for creation of dynamic pages
     */
-    'publishedAt'?: Date;
+    'useForPages'?: boolean;
+    /**
+    * Specifies whether child tables can be created
+    */
+    'allowChildTables'?: boolean;
+    /**
+    * Specifies creation of multi-level dynamic pages using child tables
+    */
+    'enableChildTablePages'?: boolean;
+    'isOrderedManually'?: boolean;
     /**
     * Specifies the key value pairs of the metadata fields with the associated column ids
     */
     'dynamicMetaTags'?: { [key: string]: number; };
     /**
-    * Timestamp at which the table is created
-    */
-    'createdAt'?: Date;
-    /**
-    * Specifies whether table is archived or not
-    */
-    'archived'?: boolean;
-    /**
     * Specifies whether the table can be read by public without authorization
     */
     'allowPublicApiAccess'?: boolean;
     /**
-    * Specifies whether the table can be used for creation of dynamic pages
+    * Timestamp at which the table is created
     */
-    'useForPages'?: boolean;
+    'createdAt'?: Date;
     /**
-    * Specifies creation of multi-level dynamic pages using child tables
+    * Timestamp at which the table is published recently
     */
-    'enableChildTablePages'?: boolean;
-    /**
-    * Specifies whether child tables can be created
-    */
-    'allowChildTables'?: boolean;
+    'publishedAt'?: Date;
     /**
     * Timestamp at which the table is updated recently
     */
@@ -115,6 +113,12 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
+            "name": "deleted",
+            "baseName": "deleted",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "columnCount",
             "baseName": "columnCount",
             "type": "number",
@@ -139,38 +143,14 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
-            "name": "publishedAt",
-            "baseName": "publishedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "dynamicMetaTags",
-            "baseName": "dynamicMetaTags",
-            "type": "{ [key: string]: number; }",
-            "format": "int32"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "allowPublicApiAccess",
-            "baseName": "allowPublicApiAccess",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "useForPages",
             "baseName": "useForPages",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "allowChildTables",
+            "baseName": "allowChildTables",
             "type": "boolean",
             "format": ""
         },
@@ -181,10 +161,34 @@ export class HubDbTableV3 {
             "format": ""
         },
         {
-            "name": "allowChildTables",
-            "baseName": "allowChildTables",
+            "name": "isOrderedManually",
+            "baseName": "isOrderedManually",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "dynamicMetaTags",
+            "baseName": "dynamicMetaTags",
+            "type": "{ [key: string]: number; }",
+            "format": "int32"
+        },
+        {
+            "name": "allowPublicApiAccess",
+            "baseName": "allowPublicApiAccess",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "publishedAt",
+            "baseName": "publishedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "updatedAt",
