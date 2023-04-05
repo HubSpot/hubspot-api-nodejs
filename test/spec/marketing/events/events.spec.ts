@@ -5,6 +5,7 @@ describe('api client', () => {
     const client = new Client().marketing.events
     expect(client.hasOwnProperty('attendanceSubscriberStateChangesApi')).toBeTruthy()
     expect(client.hasOwnProperty('marketingEventsExternalApi')).toBeTruthy()
+    expect(client.hasOwnProperty('searchApi')).toBeTruthy()
     expect(client.hasOwnProperty('settingsExternalApi')).toBeTruthy()
   })
 })

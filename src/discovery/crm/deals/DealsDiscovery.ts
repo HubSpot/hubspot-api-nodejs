@@ -1,5 +1,4 @@
 import {
-  AssociationsApi,
   BasicApi,
   BatchApi,
   Configuration,
@@ -18,7 +17,6 @@ import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import { getAll } from '../../../services/getAll'
 
 export default class DealsDiscovery {
-  public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public publicObjectApi: PublicObjectApi
@@ -35,7 +33,6 @@ export default class DealsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi>(new AssociationsApi(configuration))
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
     this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
