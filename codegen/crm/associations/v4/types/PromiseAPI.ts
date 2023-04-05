@@ -1,12 +1,17 @@
 import { Configuration} from '../configuration'
 
-import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
-import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
-import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAssociation';
-import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
-import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
-import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
-import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
+import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
+import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
+import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
+import { BatchInputPublicFetchAssociationsBatchRequest } from '../models/BatchInputPublicFetchAssociationsBatchRequest';
+import { BatchResponseLabelsBetweenObjectPair } from '../models/BatchResponseLabelsBetweenObjectPair';
+import { BatchResponseLabelsBetweenObjectPairWithErrors } from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
+import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchResponsePublicAssociationMultiWithLabel';
+import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
+import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
+import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
+import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
 import { ObservableBatchApi } from './ObservableAPI';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -22,38 +27,62 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Remove the associations between all pairs of objects identified in the request body.
-     * Archive a batch of associations
+     * Batch delete associations for objects
+     * Delete
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicAssociation 
+     * @param batchInputPublicAssociationMultiArchive 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<void> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
         return result.toPromise();
     }
 
     /**
-     * Associate all pairs of objects identified in the request body.
-     * Create a batch of associations
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicAssociation 
+     * @param batchInputPublicAssociationMultiPost 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<void> {
+        const result = this.api.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
         return result.toPromise();
     }
 
     /**
-     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
-     * Read a batch of associations
+     * Batch create associations for objects
+     * Create
      * @param fromObjectType 
      * @param toObjectType 
-     * @param batchInputPublicObjectId 
+     * @param batchInputPublicAssociationMultiPost 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
+        const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     *  Create Default Associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicDefaultAssociationMultiPost 
+     */
+    public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
+        const result = this.api.createDefault(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch read associations for objects to specific object type. The 'after' field in a returned paging object  can be added alongside the 'id' to retrieve the next page of associations from that objectId. The 'link' field is deprecated and should be ignored. 
+     * Read
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicFetchAssociationsBatchRequest 
+     */
+    public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
+        const result = this.api.getPage(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options);
         return result.toPromise();
     }
 
@@ -62,28 +91,64 @@ export class PromiseBatchApi {
 
 
 
-import { ObservableTypesApi } from './ObservableAPI';
+import { ObservableDefinitionsApi } from './ObservableAPI';
 
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-export class PromiseTypesApi {
-    private api: ObservableTypesApi
+import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
+export class PromiseDefinitionsApi {
+    private api: ObservableDefinitionsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: TypesApiRequestFactory,
-        responseProcessor?: TypesApiResponseProcessor
+        requestFactory?: DefinitionsApiRequestFactory,
+        responseProcessor?: DefinitionsApiResponseProcessor
     ) {
-        this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * List all the valid association types available between two object types
-     * List association types
+     * Deletes an association definition
+     * Delete
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param associationTypeId 
+     */
+    public archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(fromObjectType, toObjectType, associationTypeId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a user defined association definition
+     * Create
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param publicAssociationDefinitionCreateRequest 
+     */
+    public create(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+        const result = this.api.create(fromObjectType, toObjectType, publicAssociationDefinitionCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Returns all association types between two object types
+     * Read
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        const result = this.api.getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType, toObjectType, _options);
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+        const result = this.api.getAll(fromObjectType, toObjectType, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update a user defined association definition
+     * Update
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param publicAssociationDefinitionUpdateRequest 
+     */
+    public update(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.update(fromObjectType, toObjectType, publicAssociationDefinitionUpdateRequest, _options);
         return result.toPromise();
     }
 

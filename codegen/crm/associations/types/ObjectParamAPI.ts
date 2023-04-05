@@ -11,65 +11,65 @@ import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 
-export interface BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchiveRequest {
+export interface BatchApiArchiveRequest {
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive
+     * @memberof BatchApiarchive
      */
     fromObjectType: string
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive
+     * @memberof BatchApiarchive
      */
     toObjectType: string
     /**
      * 
      * @type BatchInputPublicAssociation
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive
+     * @memberof BatchApiarchive
      */
     batchInputPublicAssociation: BatchInputPublicAssociation
 }
 
-export interface BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreateRequest {
+export interface BatchApiCreateRequest {
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate
+     * @memberof BatchApicreate
      */
     fromObjectType: string
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate
+     * @memberof BatchApicreate
      */
     toObjectType: string
     /**
      * 
      * @type BatchInputPublicAssociation
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate
+     * @memberof BatchApicreate
      */
     batchInputPublicAssociation: BatchInputPublicAssociation
 }
 
-export interface BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchReadRequest {
+export interface BatchApiReadRequest {
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead
+     * @memberof BatchApiread
      */
     fromObjectType: string
     /**
      * 
      * @type string
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead
+     * @memberof BatchApiread
      */
     toObjectType: string
     /**
      * 
      * @type BatchInputPublicObjectId
-     * @memberof BatchApipostCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead
+     * @memberof BatchApiread
      */
     batchInputPublicObjectId: BatchInputPublicObjectId
 }
@@ -86,8 +86,8 @@ export class ObjectBatchApi {
      * Archive a batch of associations
      * @param param the request object
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(param: BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
+    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
     }
 
     /**
@@ -95,8 +95,8 @@ export class ObjectBatchApi {
      * Create a batch of associations
      * @param param the request object
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(param: BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
-        return this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
+    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
+        return this.api.create(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
     }
 
     /**
@@ -104,8 +104,8 @@ export class ObjectBatchApi {
      * Read a batch of associations
      * @param param the request object
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(param: BatchApiPostCrmV3AssociationsFromObjectTypeToObjectTypeBatchReadRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
-        return this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(param.fromObjectType, param.toObjectType, param.batchInputPublicObjectId,  options).toPromise();
+    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
+        return this.api.read(param.fromObjectType, param.toObjectType, param.batchInputPublicObjectId,  options).toPromise();
     }
 
 }
@@ -113,17 +113,17 @@ export class ObjectBatchApi {
 import { ObservableTypesApi } from "./ObservableAPI";
 import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
 
-export interface TypesApiGetCrmV3AssociationsFromObjectTypeToObjectTypeTypesRequest {
+export interface TypesApiGetAllRequest {
     /**
      * 
      * @type string
-     * @memberof TypesApigetCrmV3AssociationsFromObjectTypeToObjectTypeTypes
+     * @memberof TypesApigetAll
      */
     fromObjectType: string
     /**
      * 
      * @type string
-     * @memberof TypesApigetCrmV3AssociationsFromObjectTypeToObjectTypeTypes
+     * @memberof TypesApigetAll
      */
     toObjectType: string
 }
@@ -140,8 +140,8 @@ export class ObjectTypesApi {
      * List association types
      * @param param the request object
      */
-    public getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(param: TypesApiGetCrmV3AssociationsFromObjectTypeToObjectTypeTypesRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        return this.api.getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(param.fromObjectType, param.toObjectType,  options).toPromise();
+    public getAll(param: TypesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
+        return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
 }

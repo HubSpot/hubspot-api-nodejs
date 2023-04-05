@@ -33,8 +33,8 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -48,7 +48,7 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
 
@@ -59,8 +59,8 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
-        const requestContextPromise = this.requestFactory.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
+        const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -74,7 +74,7 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
             }));
     }
 
@@ -85,8 +85,8 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
-        const requestContextPromise = this.requestFactory.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
+    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
+        const requestContextPromise = this.requestFactory.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -100,7 +100,7 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
             }));
     }
 
@@ -128,8 +128,8 @@ export class ObservableTypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        const requestContextPromise = this.requestFactory.getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType, toObjectType, _options);
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
+        const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -143,7 +143,7 @@ export class ObservableTypesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
 

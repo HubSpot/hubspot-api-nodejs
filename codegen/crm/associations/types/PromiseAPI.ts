@@ -28,8 +28,8 @@ export class PromiseBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<void> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchArchive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
         return result.toPromise();
     }
 
@@ -40,8 +40,8 @@ export class PromiseBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchCreate(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
+        const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
         return result.toPromise();
     }
 
@@ -52,8 +52,8 @@ export class PromiseBatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
-        const result = this.api.postCrmV3AssociationsFromObjectTypeToObjectTypeBatchRead(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
+    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
+        const result = this.api.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
         return result.toPromise();
     }
 
@@ -82,8 +82,8 @@ export class PromiseTypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        const result = this.api.getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType, toObjectType, _options);
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
+        const result = this.api.getAll(fromObjectType, toObjectType, _options);
         return result.toPromise();
     }
 

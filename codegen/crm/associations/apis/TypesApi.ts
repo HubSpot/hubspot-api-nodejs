@@ -21,18 +21,18 @@ export class TypesApiRequestFactory extends BaseAPIRequestFactory {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public async getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("TypesApi", "getCrmV3AssociationsFromObjectTypeToObjectTypeTypes", "fromObjectType");
+            throw new RequiredError("TypesApi", "getAll", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("TypesApi", "getCrmV3AssociationsFromObjectTypeToObjectTypeTypes", "toObjectType");
+            throw new RequiredError("TypesApi", "getAll", "toObjectType");
         }
 
 
@@ -74,10 +74,10 @@ export class TypesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getCrmV3AssociationsFromObjectTypeToObjectTypeTypes
+     * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getCrmV3AssociationsFromObjectTypeToObjectTypeTypes(response: ResponseContext): Promise<CollectionResponsePublicAssociationDefinitionNoPaging > {
+     public async getAll(response: ResponseContext): Promise<CollectionResponsePublicAssociationDefinitionNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePublicAssociationDefinitionNoPaging = ObjectSerializer.deserialize(
