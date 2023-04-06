@@ -75,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added param `properties` to `crm.properties.coreApi.getAll`.
 - Added param `properties` to `crm.properties.coreApi.getByName`.
-- Added `highValue` parametr to all Filters.
+- Added param `highValue` to all Filter's model.
 
 ## [8.9.0] - 2023-04-05
 
