@@ -21,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
 - `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
 - `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
-- Added `highValue` parametr to all Filters.
 - Removed `crm.companies.associationsApi`.
 - Removed `crm.contacts.associationsApi`.
 - Removed `crm.deals.associationsApi`.
@@ -66,8 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `crm.objects.quotes.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
 - `crm.objects.tickets.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
 - `crm.objects.tickets.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
-- Added param `properties` to `crm.properties.coreApi.getAll`.
-- Added param `properties` to `crm.properties.coreApi.getByName`.
 - `marketing.events.marketingEventsExternalApi.doSearch()` => `marketing.events.searchApi.doSearch()`
 - Rename `oauth.accessTokensApi.getAccessToken` => `oauth.accessTokensApi.get`.
 - Rename `oauth.refreshTokensApi.archiveRefreshToken` => `oauth.refreshTokensApi.archive`.
@@ -75,6 +72,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `oauth.tokensApi.createToken` => `oauth.tokensApi.create`.
 
 ## Added
+
+- Added param `properties` to `crm.properties.coreApi.getAll`.
+- Added param `properties` to `crm.properties.coreApi.getByName`.
+- Added `highValue` parametr to all Filters.
 
 ## [8.9.0] - 2023-04-05
 
