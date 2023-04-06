@@ -5,7 +5,77 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/8.9.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.0-beta.0...HEAD)
+
+## [9.0.0-beta.0] - 2023-04-06
+
+## Updated
+
+- Rename `cms.hubdb.rowsBatchApi.batchCloneDraftTableRows()` => `cms.hubdb.rowsBatchApi.cloneDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchCreateDraftTableRows()` => `cms.hubdb.rowsBatchApi. createDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchPurgeDraftTableRows()` => `cms.hubdb.rowsBatchApi. purgeDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReadDraftTableRows()` => `cms.hubdb.rowsBatchApi. readDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReadTableRows()` => `cms.hubdb.rowsBatchApi. readTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReplaceDraftTableRows()` => `cms.hubdb.rowsBatchApi. replaceDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchUpdateDraftTableRows()` => `cms.hubdb.rowsBatchApi. updateDraftTableRows()`.
+- `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
+- `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
+- `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
+- Removed `crm.companies.associationsApi`.
+- Removed `crm.contacts.associationsApi`.
+- Removed `crm.deals.associationsApi`.
+- Removed `crm.line_items.associationsApi`.
+- Removed `crm.objects.calls.associationsApi`.
+- Removed `crm.objects.emails.associationsApi`.
+- Removed `crm.objects.feedbackSubmissions.associationsApi`.
+- Removed `crm.objects.meetings.associationsApi`.
+- Removed `crm.objects.notes.associationsApi`.
+- Removed `crm.objects.postalMail.associationsApi`.
+- Removed `crm.objects.tasks.associationsApi`.
+- Removed `crm.products.associationsApi`.
+- Removed `crm.quotes.associationsApi`.
+- Removed `crm.tickets.associationsApi`.
+- `crm.companies.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.companies.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.contacts.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.contacts.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.deals.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.deals.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.line_items.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.line_items.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.calls.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.calls.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.emails.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.emails.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.feedbackSubmissions.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.feedbackSubmissions.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.meetings.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.meetings.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.notes.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.notes.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.postalMail.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.postalMail.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.tasks.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.tasks.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.products.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.products.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.quotes.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.quotes.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `crm.objects.tickets.basicApi.create(SimplePublicObjectInput => SimplePublicObjectInputForCreate)`
+- `crm.objects.tickets.batchApi.create(BatchInputSimplePublicObjectInput => BatchInputSimplePublicObjectInputForCreate)`
+- `marketing.events.marketingEventsExternalApi.doSearch()` => `marketing.events.searchApi.doSearch()`
+- Rename `oauth.accessTokensApi.getAccessToken` => `oauth.accessTokensApi.get`.
+- Rename `oauth.refreshTokensApi.archiveRefreshToken` => `oauth.refreshTokensApi.archive`.
+- Rename `oauth.refreshTokensApi.getRefreshToken` => `oauth.refreshTokensApi.get`.
+- Rename `oauth.tokensApi.createToken` => `oauth.tokensApi.create`.
+
+## Added
+
+- Added param `properties` to `crm.properties.coreApi.getAll`.
+- Added param `properties` to `crm.properties.coreApi.getByName`.
+- Added `highValue` parametr to all Filters.
 
 ## [8.9.0] - 2023-04-05
 
@@ -510,3 +580,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [8.8.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.8.0
 [8.8.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.8.1
 [8.9.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.9.0
+[9.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.0
