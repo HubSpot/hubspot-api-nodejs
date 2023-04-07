@@ -15,7 +15,11 @@ export default class LimiterDecorator implements IDecorator {
       if (!this.limiter) {
         throw new Error('Limiter not defined')
       }
-      this.limiter.schedule(this.limiterJobOptions, () => method(...args))
+      if (this.limiterJobOptions) {
+        return this.limiter.schedule(this.limiterJobOptions, () => method(...args))
+      } else {
+        return this.limiter.wrap(method)
+      }
     }
   }
 }
