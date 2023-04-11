@@ -8,4 +8,5 @@ export default interface IConfiguration {
   defaultHeaders?: { [key: string]: string }
   numberOfApiCallRetries?: number
   limiterOptions?: Bottleneck.ConstructorOptions
+  limiterJobOptions?: Bottleneck.JobOptions
 }

@@ -217,7 +217,7 @@ export class Client {
     const decorators = new Array()
 
     if (this.config.limiterOptions) {
-      decorators.push(new LimiterDecorator(this.config.limiterOptions))
+      decorators.push(new LimiterDecorator(this.config.limiterOptions, this.config.limiterJobOptions))
     }
 
     if (this.config.numberOfApiCallRetries && this.config.numberOfApiCallRetries > 0) {
