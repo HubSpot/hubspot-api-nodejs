@@ -16,6 +16,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import BaseDiscovery from '../../BaseDiscovery'
 import type CallsDiscovery from './calls/CallsDiscovery'
+import type CommunicationsDiscovery from './communications/CommunicationsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
@@ -30,6 +31,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   public gdprApi: GDPRApi
   public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
+  protected _communications: CommunicationsDiscovery | undefined
   protected _calls: CallsDiscovery | undefined
   protected _emails: EmailsDiscovery | undefined
   protected _feedbackSubmissions: FeedbackSubmissionsDiscovery | undefined
@@ -57,6 +59,20 @@ export default class ObjectsDiscovery extends BaseDiscovery {
     this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
+
+  /**
+   * Getter
+   * @returns CommunicationsDiscovery
+   */
+  get communications() {
+    if (!this._communications) {
+      const requiredClass = require('./communications/CommunicationsDiscovery')
+      this._communications = new requiredClass.default(this.config) as CommunicationsDiscovery
+    }
+
+    return this._communications
+  }
+
   /**
    * Getter
    * @returns CallsDiscovery
