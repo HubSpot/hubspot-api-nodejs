@@ -1,4 +1,6 @@
 import Bottleneck from 'bottleneck'
+import * as http from 'http'
+import * as https from 'https'
 
 export default interface IConfiguration {
   apiKey?: string
@@ -9,4 +11,5 @@ export default interface IConfiguration {
   numberOfApiCallRetries?: number
   limiterOptions?: Bottleneck.ConstructorOptions
   limiterJobOptions?: Bottleneck.JobOptions
+  httpAgent?: http.Agent | https.Agent
 }
