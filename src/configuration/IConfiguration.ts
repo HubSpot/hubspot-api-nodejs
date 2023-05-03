@@ -1,6 +1,6 @@
 import Bottleneck from 'bottleneck'
-import * as http from 'http';
-import * as https from 'https';
+import * as http from 'http'
+import * as https from 'https'
 
 export default interface IConfiguration {
   apiKey?: string

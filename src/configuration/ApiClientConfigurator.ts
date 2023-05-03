@@ -20,13 +20,12 @@ export class ApiClientConfigurator {
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
     const params = {
-      middleware: 
-        this.getMiddleware<
-          RequestContextType,
-          ResponseContextType,
-          ObservableRequestContextType,
-          ObservableResponseContextType
-        >(config, observableRequestContextParam, observableResponseContextParam),
+      middleware: this.getMiddleware<
+        RequestContextType,
+        ResponseContextType,
+        ObservableRequestContextType,
+        ObservableResponseContextType
+      >(config, observableRequestContextParam, observableResponseContextParam),
       authMethods: this.getAuthMethods(config),
     }
 
@@ -103,12 +102,14 @@ export class ApiClientConfigurator {
     ]
 
     if (config.httpAgent) {
-      middleware.push(this.getHttpAgentMiddleware<
-        RequestContextType,
-        ResponseContextType,
-        ObservableRequestContextType,
-        ObservableResponseContextType
-      >(config, observableRequestContextParam, observableResponseContextParam))
+      middleware.push(
+        this.getHttpAgentMiddleware<
+          RequestContextType,
+          ResponseContextType,
+          ObservableRequestContextType,
+          ObservableResponseContextType
+        >(config, observableRequestContextParam, observableResponseContextParam),
+      )
     }
 
     return middleware
