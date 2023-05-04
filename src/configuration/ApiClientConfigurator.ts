@@ -20,14 +20,12 @@ export class ApiClientConfigurator {
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
     const params = {
-      middleware: [
-        this.getHeaderMiddleware<
-          RequestContextType,
-          ResponseContextType,
-          ObservableRequestContextType,
-          ObservableResponseContextType
-        >(config, observableRequestContextParam, observableResponseContextParam),
-      ],
+      middleware: this.getMiddleware<
+        RequestContextType,
+        ResponseContextType,
+        ObservableRequestContextType,
+        ObservableResponseContextType
+      >(config, observableRequestContextParam, observableResponseContextParam),
       authMethods: this.getAuthMethods(config),
     }
 
@@ -84,6 +82,39 @@ export class ApiClientConfigurator {
     return {}
   }
 
+  protected static getMiddleware<
+    RequestContextType extends IRequestContext,
+    ResponseContextType,
+    ObservableRequestContextType,
+    ObservableResponseContextType
+  >(
+    config: IConfiguration,
+    observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
+    observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
+  ) {
+    const middleware = [
+      this.getHeaderMiddleware<
+        RequestContextType,
+        ResponseContextType,
+        ObservableRequestContextType,
+        ObservableResponseContextType
+      >(config, observableRequestContextParam, observableResponseContextParam),
+    ]
+
+    if (config.httpAgent) {
+      middleware.push(
+        this.getHttpAgentMiddleware<
+          RequestContextType,
+          ResponseContextType,
+          ObservableRequestContextType,
+          ObservableResponseContextType
+        >(config, observableRequestContextParam, observableResponseContextParam),
+      )
+    }
+
+    return middleware
+  }
+
   protected static getHeaderMiddleware<
     RequestContextType extends IRequestContext,
     ResponseContextType,
@@ -101,6 +132,31 @@ export class ApiClientConfigurator {
         _.forIn(headers, (value, key) => {
           context.setHeaderParam(key, value)
         })
+        return new observableRequestContextParam(Promise.resolve(context))
+      },
+      post(context: ResponseContextType): ObservableResponseContextType {
+        return new observableResponseContextParam(Promise.resolve(context))
+      },
+    }
+  }
+
+  protected static getHttpAgentMiddleware<
+    RequestContextType extends IRequestContext,
+    ResponseContextType,
+    ObservableRequestContextType,
+    ObservableResponseContextType
+  >(
+    config: IConfiguration,
+    observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
+    observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
+  ) {
+    const httpAgent = config.httpAgent
+
+    return {
+      pre(context: RequestContextType): ObservableRequestContextType {
+        if (httpAgent) {
+          context.setAgent(httpAgent)
+        }
         return new observableRequestContextParam(Promise.resolve(context))
       },
       post(context: ResponseContextType): ObservableResponseContextType {
