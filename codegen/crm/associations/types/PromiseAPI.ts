@@ -6,7 +6,6 @@ import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAss
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
 import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
 import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
-import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 import { ObservableBatchApi } from './ObservableAPI';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -54,36 +53,6 @@ export class PromiseBatchApi {
      */
     public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
         const result = this.api.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableTypesApi } from './ObservableAPI';
-
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-export class PromiseTypesApi {
-    private api: ObservableTypesApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: TypesApiRequestFactory,
-        responseProcessor?: TypesApiResponseProcessor
-    ) {
-        this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * List all the valid association types available between two object types
-     * List association types
-     * @param fromObjectType 
-     * @param toObjectType 
-     */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        const result = this.api.getAll(fromObjectType, toObjectType, _options);
         return result.toPromise();
     }
 

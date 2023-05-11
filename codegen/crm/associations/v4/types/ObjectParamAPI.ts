@@ -1,5 +1,6 @@
 import { Configuration} from '../configuration'
 
+import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
 import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
 import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
@@ -9,9 +10,176 @@ import { BatchResponseLabelsBetweenObjectPairWithErrors } from '../models/BatchR
 import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchResponsePublicAssociationMultiWithLabel';
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
-import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
-import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+
+import { ObservableBasicApi } from "./ObservableAPI";
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+
+export interface BasicApiArchiveRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    objectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApiarchive
+     */
+    objectId: number
+    /**
+     * 
+     * @type string
+     * @memberof BasicApiarchive
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApiarchive
+     */
+    toObjectId: number
+}
+
+export interface BasicApiCreateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApicreate
+     */
+    objectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApicreate
+     */
+    objectId: number
+    /**
+     * 
+     * @type string
+     * @memberof BasicApicreate
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApicreate
+     */
+    toObjectId: number
+    /**
+     * 
+     * @type Array&lt;AssociationSpec&gt;
+     * @memberof BasicApicreate
+     */
+    associationSpec: Array<AssociationSpec>
+}
+
+export interface BasicApiCreateDefaultRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApicreateDefault
+     */
+    fromObjectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApicreateDefault
+     */
+    fromObjectId: number
+    /**
+     * 
+     * @type string
+     * @memberof BasicApicreateDefault
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApicreateDefault
+     */
+    toObjectId: number
+}
+
+export interface BasicApiGetPageRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BasicApigetPage
+     */
+    objectType: string
+    /**
+     * 
+     * @type number
+     * @memberof BasicApigetPage
+     */
+    objectId: number
+    /**
+     * 
+     * @type string
+     * @memberof BasicApigetPage
+     */
+    toObjectType: string
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @type string
+     * @memberof BasicApigetPage
+     */
+    after?: string
+    /**
+     * The maximum number of results to display per page.
+     * @type number
+     * @memberof BasicApigetPage
+     */
+    limit?: number
+}
+
+export class ObjectBasicApi {
+    private api: ObservableBasicApi
+
+    public constructor(configuration: Configuration, requestFactory?: BasicApiRequestFactory, responseProcessor?: BasicApiResponseProcessor) {
+        this.api = new ObservableBasicApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * deletes all associations between two records.
+     * Delete
+     * @param param the request object
+     */
+    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.objectType, param.objectId, param.toObjectType, param.toObjectId,  options).toPromise();
+    }
+
+    /**
+     * Set association labels between two records.
+     * Create
+     * @param param the request object
+     */
+    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+        return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     * Create Default
+     * @param param the request object
+     */
+    public createDefault(param: BasicApiCreateDefaultRequest, options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
+        return this.api.createDefault(param.fromObjectType, param.fromObjectId, param.toObjectType, param.toObjectId,  options).toPromise();
+    }
+
+    /**
+     * List all associations of an object by object type. Limit 1000 per call.
+     * List
+     * @param param the request object
+     */
+    public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+        return this.api.getPage(param.objectType, param.objectId, param.toObjectType, param.after, param.limit,  options).toPromise();
+    }
+
+}
 
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -171,132 +339,6 @@ export class ObjectBatchApi {
      */
     public getPage(param: BatchApiGetPageRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
         return this.api.getPage(param.fromObjectType, param.toObjectType, param.batchInputPublicFetchAssociationsBatchRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableDefinitionsApi } from "./ObservableAPI";
-import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
-
-export interface DefinitionsApiArchiveRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApiarchive
-     */
-    fromObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApiarchive
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type number
-     * @memberof DefinitionsApiarchive
-     */
-    associationTypeId: number
-}
-
-export interface DefinitionsApiCreateRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApicreate
-     */
-    fromObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApicreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type PublicAssociationDefinitionCreateRequest
-     * @memberof DefinitionsApicreate
-     */
-    publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest
-}
-
-export interface DefinitionsApiGetAllRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApigetAll
-     */
-    fromObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApigetAll
-     */
-    toObjectType: string
-}
-
-export interface DefinitionsApiUpdateRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApiupdate
-     */
-    fromObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApiupdate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type PublicAssociationDefinitionUpdateRequest
-     * @memberof DefinitionsApiupdate
-     */
-    publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest
-}
-
-export class ObjectDefinitionsApi {
-    private api: ObservableDefinitionsApi
-
-    public constructor(configuration: Configuration, requestFactory?: DefinitionsApiRequestFactory, responseProcessor?: DefinitionsApiResponseProcessor) {
-        this.api = new ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Deletes an association definition
-     * Delete
-     * @param param the request object
-     */
-    public archive(param: DefinitionsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
-    }
-
-    /**
-     * Create a user defined association definition
-     * Create
-     * @param param the request object
-     */
-    public create(param: DefinitionsApiCreateRequest, options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
-        return this.api.create(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest,  options).toPromise();
-    }
-
-    /**
-     * Returns all association types between two object types
-     * Read
-     * @param param the request object
-     */
-    public getAll(param: DefinitionsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
-        return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
-    }
-
-    /**
-     * Update a user defined association definition
-     * Update
-     * @param param the request object
-     */
-    public update(param: DefinitionsApiUpdateRequest, options?: Configuration): Promise<void> {
-        return this.api.update(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest,  options).toPromise();
     }
 
 }
