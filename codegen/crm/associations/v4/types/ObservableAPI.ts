@@ -2,6 +2,7 @@ import { ResponseContext, RequestContext } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
+import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
 import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
 import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
@@ -11,9 +12,136 @@ import { BatchResponseLabelsBetweenObjectPairWithErrors } from '../models/BatchR
 import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchResponsePublicAssociationMultiWithLabel';
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
-import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
-import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
+import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+
+import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
+export class ObservableBasicApi {
+    private requestFactory: BasicApiRequestFactory;
+    private responseProcessor: BasicApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: BasicApiRequestFactory,
+        responseProcessor?: BasicApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new BasicApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new BasicApiResponseProcessor();
+    }
+
+    /**
+     * deletes all associations between two records.
+     * Delete
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
+    public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(objectType, objectId, toObjectType, toObjectId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+            }));
+    }
+
+    /**
+     * Set association labels between two records.
+     * Create
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     * @param associationSpec 
+     */
+    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair> {
+        const requestContextPromise = this.requestFactory.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+            }));
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     * Create Default
+     * @param fromObjectType 
+     * @param fromObjectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
+    public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+        const requestContextPromise = this.requestFactory.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDefault(rsp)));
+            }));
+    }
+
+    /**
+     * List all associations of an object by object type. Limit 1000 per call.
+     * List
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
+     */
+    public getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+        const requestContextPromise = this.requestFactory.getPage(objectType, objectId, toObjectType, after, limit, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+            }));
+    }
+
+}
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 export class ObservableBatchApi {
@@ -158,127 +286,6 @@ export class ObservableBatchApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
-            }));
-    }
-
-}
-
-import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
-export class ObservableDefinitionsApi {
-    private requestFactory: DefinitionsApiRequestFactory;
-    private responseProcessor: DefinitionsApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: DefinitionsApiRequestFactory,
-        responseProcessor?: DefinitionsApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new DefinitionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new DefinitionsApiResponseProcessor();
-    }
-
-    /**
-     * Deletes an association definition
-     * Delete
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param associationTypeId 
-     */
-    public archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, associationTypeId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
-            }));
-    }
-
-    /**
-     * Create a user defined association definition
-     * Create
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param publicAssociationDefinitionCreateRequest 
-     */
-    public create(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
-        const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, publicAssociationDefinitionCreateRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
-            }));
-    }
-
-    /**
-     * Returns all association types between two object types
-     * Read
-     * @param fromObjectType 
-     * @param toObjectType 
-     */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
-        const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
-            }));
-    }
-
-    /**
-     * Update a user defined association definition
-     * Update
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param publicAssociationDefinitionUpdateRequest 
-     */
-    public update(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.update(fromObjectType, toObjectType, publicAssociationDefinitionUpdateRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
             }));
     }
 

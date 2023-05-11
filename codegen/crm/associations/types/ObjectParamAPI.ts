@@ -6,7 +6,6 @@ import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAss
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
 import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
 import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
-import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
 import { ObservableBatchApi } from "./ObservableAPI";
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
@@ -106,42 +105,6 @@ export class ObjectBatchApi {
      */
     public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
         return this.api.read(param.fromObjectType, param.toObjectType, param.batchInputPublicObjectId,  options).toPromise();
-    }
-
-}
-
-import { ObservableTypesApi } from "./ObservableAPI";
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-
-export interface TypesApiGetAllRequest {
-    /**
-     * 
-     * @type string
-     * @memberof TypesApigetAll
-     */
-    fromObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof TypesApigetAll
-     */
-    toObjectType: string
-}
-
-export class ObjectTypesApi {
-    private api: ObservableTypesApi
-
-    public constructor(configuration: Configuration, requestFactory?: TypesApiRequestFactory, responseProcessor?: TypesApiResponseProcessor) {
-        this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * List all the valid association types available between two object types
-     * List association types
-     * @param param the request object
-     */
-    public getAll(param: TypesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
 }

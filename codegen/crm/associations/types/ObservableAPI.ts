@@ -8,7 +8,6 @@ import { BatchResponsePublicAssociation } from '../models/BatchResponsePublicAss
 import { BatchResponsePublicAssociationMulti } from '../models/BatchResponsePublicAssociationMulti';
 import { BatchResponsePublicAssociationMultiWithErrors } from '../models/BatchResponsePublicAssociationMultiWithErrors';
 import { BatchResponsePublicAssociationWithErrors } from '../models/BatchResponsePublicAssociationWithErrors';
-import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
 import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchApi";
 export class ObservableBatchApi {
@@ -101,49 +100,6 @@ export class ObservableBatchApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
-            }));
-    }
-
-}
-
-import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesApi";
-export class ObservableTypesApi {
-    private requestFactory: TypesApiRequestFactory;
-    private responseProcessor: TypesApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: TypesApiRequestFactory,
-        responseProcessor?: TypesApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new TypesApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new TypesApiResponseProcessor();
-    }
-
-    /**
-     * List all the valid association types available between two object types
-     * List association types
-     * @param fromObjectType 
-     * @param toObjectType 
-     */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
-        const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
             }));
     }
 
