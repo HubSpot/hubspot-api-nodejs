@@ -10,7 +10,6 @@ import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
-import { validateSignature } from '../../services/validateSignature'
 
 export default class WebhooksDiscovery {
   public settingsApi: SettingsApi
@@ -31,20 +30,5 @@ export default class WebhooksDiscovery {
     this.subscriptionsApi = ApiDecoratorService.getInstance().apply<SubscriptionsApi>(
       new SubscriptionsApi(configuration),
     )
-  }
-
-  /**
-   *
-   * @deprecated
-   */
-  public validateSignature(
-    signature: string,
-    clientSecret: string,
-    requestBody: string,
-    signatureVersion = 'v1',
-    webhooksUrl?: string,
-    webhooksMethod = 'POST',
-  ): boolean {
-    return validateSignature(signature, clientSecret, requestBody, signatureVersion, webhooksUrl, webhooksMethod)
   }
 }
