@@ -4,18 +4,18 @@ import {
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  TypesApi,
 } from '../../../../codegen/crm/associations/index'
 import { Observable } from '../../../../codegen/crm/associations/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import BaseDiscovery from '../../BaseDiscovery'
+import type SchemaDiscovery from './schema/SchemaDiscovery'
 import type AssociationsV4Discovery from './v4/AssociationsDiscovery'
 
 export default class AssociationsDiscovery extends BaseDiscovery {
   public batchApi: BatchApi
-  public typesApi: TypesApi
+  protected _schema: SchemaDiscovery | undefined
   protected _v4: AssociationsV4Discovery | undefined
 
   constructor(config: IConfiguration) {
@@ -31,7 +31,19 @@ export default class AssociationsDiscovery extends BaseDiscovery {
     )
 
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.typesApi = ApiDecoratorService.getInstance().apply<TypesApi>(new TypesApi(configuration))
+  }
+
+  /**
+   * Getter
+   * @returns SchemaDiscovery
+   */
+  get schema() {
+    if (!this._schema) {
+      const requiredClass = require('./schema/SchemaDiscovery')
+      this._schema = new requiredClass.default(this.config) as SchemaDiscovery
+    }
+
+    return this._schema
   }
 
   /**
