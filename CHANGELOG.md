@@ -5,7 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.0-beta.2...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.0-beta.3...HEAD)
+
+## [9.0.0-beta.3] - 2023-05-11
+
+## Added
+
+- `crm.associations.v4.basicApi` Api.
+
+## Updated
+
+- `crm.associations.typesApi` => `crm.associations.schema.typesApi`.
+- `crm.associations.v4.definitionsApi` => `crm.associations.v4.schema.definitionsApi`.
+- Removed deprecated `webhooks.validateSignature()` method.
+
+## Added
+
+- Add ability to change http agent(`config.httpAgent`).
 
 ## [9.0.0-beta.2] - 2023-05-03
 
@@ -249,9 +265,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- crm()->quotes()->publicObjectApi()
-- crm()->feedbackSubmissions()->publicObjectApi()
-- added idProperty to update and getById methods of crm()->contacts()->basicApi()
+- crm.quotes.publicObjectApi()
+- crm.feedbackSubmissions.publicObjectApi()
+- added idProperty to update and getById methods of crm.contacts.basicApi
 - support text/html response
 
 ### Updated
@@ -369,7 +385,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed (breaking changes)
 
-- `oauth()` fully regenerated
+- `oauth` fully regenerated
 - `cms.auditLogs.defaultApi` => `cms.auditLogs.auditLogsApi`
 - `cms.blogs.authors.defaultApi` => `cms.blogs.authors.authorApi`
 - `cms.blogs.blogPosts.defaultApi` => `cms.blogs.blogPosts.blogPostApi`
@@ -598,3 +614,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [8.9.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/8.9.0
 [9.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.0
 [9.0.0-beta.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.1
+[9.0.0-beta.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.2
+[9.0.0-beta.3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.3
