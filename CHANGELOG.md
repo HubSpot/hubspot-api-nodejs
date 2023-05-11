@@ -19,10 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `crm.associations.v4.definitionsApi` => `crm.associations.v4.schema.definitionsApi`.
 - Removed deprecated `webhooks.validateSignature()` method.
 
-## Added
-
-- Add ability to change http agent(`config.httpAgent`).
-
 ## [9.0.0-beta.2] - 2023-05-03
 
 ## Added
