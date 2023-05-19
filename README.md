@@ -2,7 +2,7 @@
 
 NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files
 
-### Sample apps
+## Sample apps
 
 Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)
 
@@ -20,10 +20,12 @@ const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN })
 ```
 
 For ES modules
+
 ```javascript
 import { Client } from "@hubspot/api-client";
 const hubspotClient = new Client({ accessToken: YOUR_ACCESS_TOKEN });
 ```
+
 You'll need to create a [private app](https://developers.hubspot.com/docs/api/private-apps) to get your access token or you can obtain [OAuth2 access token](https://developers.hubspot.com/docs/api/working-with-oauth).
 
 You can provide developer API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.
@@ -56,7 +58,7 @@ details and a refresh_token:
 
 ```javascript
 hubspotClient.oauth.tokensApi
-    .createToken('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
+    .create('refresh_token', undefined, undefined, YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REFRESH_TOKEN)
     .then((results) => {
         console.log(results)
 
@@ -146,7 +148,8 @@ const companyObj = {
 
 const createContactResponse = await hubspotClient.crm.contacts.basicApi.create(contactObj)
 const createCompanyResponse = await hubspotClient.crm.companies.basicApi.create(companyObj)
-await hubspotClient.crm.companies.associationsApi.create(
+await hubspotClient.crm.associations.v4.basicApi.create(
+    'companies',
     createCompanyResponse.id,
     'contacts',
     createContactResponse.id,
@@ -180,7 +183,7 @@ const dealObj2 = {
 await hubspotClient.crm.deals.batchApi.update({ inputs: [dealObj, dealObj2] })
 ```
 
-### {EXAMPLE} Import Contacts:
+### {EXAMPLE} Import Contacts
 
 ```javascript
 const fs = require('fs')
@@ -221,7 +224,7 @@ const response = await  hubspotClient.crm.imports.coreApi.create(file, JSON.stri
 console.log(response)
 ```
 
-### {EXAMPLE} Search Contacts:
+### {EXAMPLE} Search Contacts
 
 Only 3 FilterGroups with max 3 Filters are supported.
 
@@ -259,12 +262,23 @@ const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectS
 console.log(JSON.stringify(result))
 ```
 
-### Get all:
+### Get all
 
 getAll method is available for all major objects (Companies, Contacts, Deals, LineItems, Products, Quotes & Tickets) and works like
 
 ```javascript
 const allContacts = await hubspotClient.crm.contacts.getAll()
+```
+
+### Get contacts
+
+```javascript
+const response = await hubspotClient.apiRequest({
+    method: 'get',
+    path: '/crm/v3/objects/contacts',
+})
+const json = await response.json()
+console.log(json)
 ```
 
 Please note that pagination is used under the hood to get all results.
@@ -283,7 +297,7 @@ const uri = hubspotClient.oauth.getAuthorizationUrl(clientId, redirectUri, scope
 #### Obtain an access token from an authorization_code
 
 ```javascript
-return hubspotClient.oauth.tokensApi.createToken(
+return hubspotClient.oauth.tokensApi.create(
         'authorization_code',
         code, // the code you received from the oauth flow
         YOUR_REDIRECT_URI,
@@ -314,18 +328,7 @@ hubspotClient.apiRequest({
 })
 ```
 
-#### get contacts 
-
-```javascript
-const response = await hubspotClient.apiRequest({
-    method: 'get',
-    path: '/crm/v3/objects/contacts',
-})
-const json = await response.json()
-console.log(json)
-```
-
-#### upload a file
+### Upload a file
 
 ```javascript
 const formData = new FormData();
@@ -389,22 +392,25 @@ Apache 2.0
 ## Contributing
 
 Install project dependencies with
+
 ```bash
 npm install
 ```
 
-
 You can run the tests by executing:
+
 ```bash
 npm run test
 ```
 
 You can check the TypeScript code by running:
-```
+
+```bash
 npm run lint
 ```
 
 If there is a linting error based on formatting, you can run the command below to auto-correct the formatting:
-```
+
+```bash
 npm run prettier:write
 ```
