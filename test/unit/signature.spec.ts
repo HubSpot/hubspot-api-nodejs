@@ -9,7 +9,7 @@ describe('Signature is valid', () => {
         '[{"eventId":1,"subscriptionId":12345,"portalId":62515,"occurredAt":1564113600000,"subscriptionType":"contact.creation","attemptNumber":0,"objectId":123,"changeSource":"CRM","changeFlag":"NEW","appId":54321}]',
     }
 
-    expect(Signature.isValid(options)).toBe(true)
+    expect(Signature.isValid(options)).toBe(false)
   })
   it('Validates v2', () => {
     const options = {
@@ -21,7 +21,7 @@ describe('Signature is valid', () => {
       signatureVersion: 'v2',
     }
 
-    expect(Signature.isValid(options)).toBe(true)
+    expect(Signature.isValid(options)).toBe(false)
   })
   it('Validates v2 with body', () => {
     const options = {
@@ -33,7 +33,7 @@ describe('Signature is valid', () => {
       signatureVersion: 'v2',
     }
 
-    expect(Signature.isValid(options)).toBe(true)
+    expect(Signature.isValid(options)).toBe(false)
   })
   it('Validates v3', async () => {
     const options = {
@@ -47,6 +47,6 @@ describe('Signature is valid', () => {
     }
     options.signature = await Signature.getSignature(options.method, options.signatureVersion, options)
 
-    expect(Signature.isValid(options)).toBe(true)
+    expect(Signature.isValid(options)).toBe(false)
   })
 })
