@@ -45,7 +45,7 @@ describe('Signature is valid', () => {
       signatureVersion: 'v3',
       timestamp: Date.now(),
     }
-    options.signature = await Signature.getSignature(options.method, options.signatureVersion, options)
+    options.signature = Signature.getSignature(options.method, options.signatureVersion, options)
 
     expect(Signature.isValid(options)).toBe(false)
   })
