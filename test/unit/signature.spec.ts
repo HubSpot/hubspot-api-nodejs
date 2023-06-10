@@ -35,7 +35,7 @@ describe('Signature is valid', () => {
 
     expect(Signature.isValid(options)).toBe(true)
   })
-  it('Validates v3', () => {
+  it('Validates v3', async () => {
     const options = {
       signature: '',
       clientSecret: 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy',
@@ -45,7 +45,7 @@ describe('Signature is valid', () => {
       signatureVersion: 'v3',
       timestamp: Date.now(),
     }
-    options.signature = Signature.getSignature(options.method, options.signatureVersion, options)
+    options.signature = await Signature.getSignature(options.method, options.signatureVersion, options)
 
     expect(Signature.isValid(options)).toBe(true)
   })
