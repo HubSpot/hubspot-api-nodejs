@@ -1,6 +1,6 @@
 // TODO: evaluate if we can easily get rid of this library
 import  FormData from "form-data";
-import { URL, URLSearchParams } from 'url';
+// import { URL, URLSearchParams } from 'url';
 import * as http from 'http';
 import * as https from 'https';
 import { Observable, from } from '../rxjsStub';

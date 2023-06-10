@@ -22,8 +22,7 @@
     "form-data": "^2.5.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.2",
-    "node-fetch": "^2.6.0",
-    "url-parse": "^1.4.3"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/jasmine": "^3.6.2",
