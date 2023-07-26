@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.1...HEAD)
+
+## [9.0.1] - 2023-07-26
+
+## Fixed
+
+- Remove console.error message indicating a response status code (Retry mechanism).
 
 ## [9.0.0] - 2023-06-08
 
@@ -619,3 +625,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [9.0.0-beta.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.2
 [9.0.0-beta.3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.3
 [9.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0
+[9.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.1
