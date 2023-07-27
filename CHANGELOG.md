@@ -5,7 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.0.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.1.0...HEAD)
+
+## [9.1.0] - 2023-07-27
+
+## Removed `hapikey` from
+
+- `automation.actions.callbacksApi` Api.
+- `cms` (all Api clients).
+- `communicationPreferences` (all Api clients).
+- `conversations` (all API clients).
+- `crm` (all Api clients).
+- `events` (all Api clients).
+- `files` (all Api clients).
+- `marketing.events.settingsExternalApi` Api.
+- `marketing.transactional` Api client.
+
+## Updated
+
+- Cnange type from `object` to `string` in `cms/hubdb/models/StandardError.category`.
+- Cnange type from `StandardError[]` to `StandardError1[]` in `crm/associations/v4/models/BatchResponseSimplePublicObjectWithErrors::errors`.
+- Cnange type from `ErrorCategory` to `string` in `crm/companies/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/contacts/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/deals/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/lineitems/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/calls/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/communications/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/emails/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/feedback_submissions/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/meetings/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/notes/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/postal_mail/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/objects/tasks/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/products/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/properties/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/quotes/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `crm/tickets/models/StandardError::category`.
+- Cnange type from `ErrorCategory` to `string` in `webhooks/models/StandardError::category`.
 
 ## [9.0.1] - 2023-07-26
 
@@ -626,3 +663,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [9.0.0-beta.3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0-beta.3
 [9.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0
 [9.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.1
+[9.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.1.0
