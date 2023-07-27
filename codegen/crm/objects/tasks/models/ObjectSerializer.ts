@@ -9,7 +9,6 @@ export * from '../models/BatchResponseSimplePublicObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/Filter';
 export * from '../models/FilterGroup';
@@ -42,7 +41,6 @@ import { BatchResponseSimplePublicObjectWithErrors          } from '../models/Ba
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter       } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
@@ -87,7 +85,6 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
     "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "FilterOperatorEnum",
 ]);
 
@@ -103,7 +100,6 @@ let typeMap: {[index: string]: any} = {
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,

@@ -59,11 +59,6 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
@@ -111,11 +106,6 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {

@@ -13,27 +13,21 @@
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 
 export class BatchResponseLabelsBetweenObjectPair {
-    'status': BatchResponseLabelsBetweenObjectPairStatusEnum;
-    'results': Array<LabelsBetweenObjectPair>;
+    'completedAt': Date;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<LabelsBetweenObjectPair>;
+    'status': BatchResponseLabelsBetweenObjectPairStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseLabelsBetweenObjectPairStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<LabelsBetweenObjectPair>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -48,15 +42,21 @@ export class BatchResponseLabelsBetweenObjectPair {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<LabelsBetweenObjectPair>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseLabelsBetweenObjectPairStatusEnum",
             "format": ""
         }    ];
 

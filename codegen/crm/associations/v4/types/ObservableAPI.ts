@@ -114,7 +114,7 @@ export class ObservableBasicApi {
     }
 
     /**
-     * List all associations of an object by object type. Limit 1000 per call.
+     * List all associations of an object by object type. Limit 500 per call.
      * List
      * @param objectType 
      * @param objectId 

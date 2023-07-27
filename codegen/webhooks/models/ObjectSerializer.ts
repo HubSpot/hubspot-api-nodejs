@@ -1,7 +1,6 @@
 export * from '../models/BatchInputSubscriptionBatchUpdateRequest';
 export * from '../models/BatchResponseSubscriptionResponse';
 export * from '../models/BatchResponseSubscriptionResponseWithErrors';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/SettingsChangeRequest';
@@ -17,7 +16,6 @@ export * from '../models/ThrottlingSettings';
 import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse        } from '../models/BatchResponseSubscriptionResponse';
 import { BatchResponseSubscriptionResponseWithErrors          } from '../models/BatchResponseSubscriptionResponseWithErrors';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { SettingsChangeRequest } from '../models/SettingsChangeRequest';
@@ -52,7 +50,6 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseSubscriptionResponseStatusEnum",
     "BatchResponseSubscriptionResponseWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "SubscriptionCreateRequestEventTypeEnum",
     "SubscriptionResponseEventTypeEnum",
     "ThrottlingSettingsPeriodEnum",
@@ -62,7 +59,6 @@ let typeMap: {[index: string]: any} = {
     "BatchInputSubscriptionBatchUpdateRequest": BatchInputSubscriptionBatchUpdateRequest,
     "BatchResponseSubscriptionResponse": BatchResponseSubscriptionResponse,
     "BatchResponseSubscriptionResponseWithErrors": BatchResponseSubscriptionResponseWithErrors,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "SettingsChangeRequest": SettingsChangeRequest,

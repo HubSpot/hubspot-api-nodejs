@@ -1,7 +1,6 @@
 export * from '../models/BatchInputSubscriptionBatchUpdateRequest'
 export * from '../models/BatchResponseSubscriptionResponse'
 export * from '../models/BatchResponseSubscriptionResponseWithErrors'
-export * from '../models/ErrorCategory'
 export * from '../models/ErrorDetail'
 export * from '../models/ModelError'
 export * from '../models/SettingsChangeRequest'

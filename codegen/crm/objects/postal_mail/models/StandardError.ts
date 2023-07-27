@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { ErrorCategory } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 
 export class StandardError {
     'status': string;
     'id'?: string;
-    'category': ErrorCategory;
+    'category': string;
     'subCategory'?: any;
     'message': string;
     'errors': Array<ErrorDetail>;
@@ -41,7 +40,7 @@ export class StandardError {
         {
             "name": "category",
             "baseName": "category",
-            "type": "ErrorCategory",
+            "type": "string",
             "format": ""
         },
         {

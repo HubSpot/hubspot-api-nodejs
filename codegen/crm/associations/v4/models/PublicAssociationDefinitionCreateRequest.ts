@@ -12,21 +12,21 @@
 
 
 export class PublicAssociationDefinitionCreateRequest {
-    'label': string;
     'name': string;
+    'label': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "label",
-            "baseName": "label",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "label",
+            "baseName": "label",
             "type": "string",
             "format": ""
         }    ];

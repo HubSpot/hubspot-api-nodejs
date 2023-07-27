@@ -14,13 +14,19 @@ import { AssociationSpec } from '../models/AssociationSpec';
 import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationMultiPost {
+    'types': Array<AssociationSpec>;
     '_from': PublicObjectId;
     'to': PublicObjectId;
-    'types': Array<AssociationSpec>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "types",
+            "baseName": "types",
+            "type": "Array<AssociationSpec>",
+            "format": ""
+        },
         {
             "name": "_from",
             "baseName": "from",
@@ -31,12 +37,6 @@ export class PublicAssociationMultiPost {
             "name": "to",
             "baseName": "to",
             "type": "PublicObjectId",
-            "format": ""
-        },
-        {
-            "name": "types",
-            "baseName": "types",
-            "type": "Array<AssociationSpec>",
             "format": ""
         }    ];
 

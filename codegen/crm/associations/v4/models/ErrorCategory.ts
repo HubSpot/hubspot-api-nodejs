@@ -12,22 +12,22 @@
 
 
 export class ErrorCategory {
-    'name': string;
     'httpStatus': ErrorCategoryHttpStatusEnum;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "httpStatus",
             "baseName": "httpStatus",
             "type": "ErrorCategoryHttpStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         }    ];
 

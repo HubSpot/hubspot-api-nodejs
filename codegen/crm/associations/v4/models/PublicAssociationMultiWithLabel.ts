@@ -16,8 +16,8 @@ import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationMultiWithLabel {
     '_from': PublicObjectId;
-    'to': Array<MultiAssociatedObjectWithLabel>;
     'paging'?: Paging;
+    'to': Array<MultiAssociatedObjectWithLabel>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,15 +29,15 @@ export class PublicAssociationMultiWithLabel {
             "format": ""
         },
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "Array<MultiAssociatedObjectWithLabel>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "Array<MultiAssociatedObjectWithLabel>",
             "format": ""
         }    ];
 
