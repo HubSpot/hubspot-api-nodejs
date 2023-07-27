@@ -47,6 +47,7 @@ export * from '../models/SimplePublicObjectInput';
 export * from '../models/SimplePublicObjectInputForCreate';
 export * from '../models/SimplePublicObjectWithAssociations';
 export * from '../models/StandardError';
+export * from '../models/StandardError1';
 export * from '../models/ValueWithTimestamp';
 
 import { AssociatedId } from '../models/AssociatedId';
@@ -98,6 +99,7 @@ import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { StandardError } from '../models/StandardError';
+import { StandardError1 } from '../models/StandardError1';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
@@ -182,6 +184,7 @@ let typeMap: {[index: string]: any} = {
     "SimplePublicObjectInputForCreate": SimplePublicObjectInputForCreate,
     "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
     "StandardError": StandardError,
+    "StandardError1": StandardError1,
     "ValueWithTimestamp": ValueWithTimestamp,
 }
 

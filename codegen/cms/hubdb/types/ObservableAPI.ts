@@ -284,7 +284,7 @@ export class ObservableRowsBatchApi {
     }
 
     /**
-     * Clones rows in the `draft` version of the specified table, given a set of row ids.
+     * Clones rows in the `draft` version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
      * Clone rows in batch
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString The JSON array of row ids
@@ -309,7 +309,7 @@ export class ObservableRowsBatchApi {
     }
 
     /**
-     * Creates rows in the `draft` version of the specified table, given an array of row objects. See the overview section for more details with an example.
+     * Creates rows in the `draft` version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
      * Create rows in batch
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3Request JSON array of row objects
@@ -334,7 +334,7 @@ export class ObservableRowsBatchApi {
     }
 
     /**
-     * Permanently deletes rows from the `draft` version of the table, given a set of row ids.
+     * Permanently deletes rows from the `draft` version of the table, given a set of row ids. Maximum of 100 row ids per call.
      * Permanently deletes rows
      * @param tableIdOrName The ID or name of the table
      * @param batchInputString JSON array of row ids.
@@ -409,7 +409,7 @@ export class ObservableRowsBatchApi {
     }
 
     /**
-     * Replaces multiple rows as a batch in the `draft` version of the table. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+     * Replaces multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
@@ -434,7 +434,7 @@ export class ObservableRowsBatchApi {
     }
 
     /**
-     * Updates multiple rows as a batch in the `draft` version of the table. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+     * Updates multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Update rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
      * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.

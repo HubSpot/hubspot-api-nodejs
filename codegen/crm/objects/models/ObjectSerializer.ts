@@ -10,7 +10,6 @@ export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseAssociatedIdForwardPaging';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/Filter';
 export * from '../models/FilterGroup';
@@ -45,7 +44,6 @@ import { CollectionResponseAssociatedId } from '../models/CollectionResponseAsso
 import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter       } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
@@ -91,7 +89,6 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
     "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "FilterOperatorEnum",
 ]);
 
@@ -108,7 +105,6 @@ let typeMap: {[index: string]: any} = {
     "CollectionResponseAssociatedIdForwardPaging": CollectionResponseAssociatedIdForwardPaging,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,

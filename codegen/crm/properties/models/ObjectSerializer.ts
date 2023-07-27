@@ -5,7 +5,6 @@ export * from '../models/BatchResponseProperty';
 export * from '../models/BatchResponsePropertyWithErrors';
 export * from '../models/CollectionResponsePropertyGroupNoPaging';
 export * from '../models/CollectionResponsePropertyNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/Option';
@@ -27,7 +26,6 @@ import { BatchResponseProperty        } from '../models/BatchResponseProperty';
 import { BatchResponsePropertyWithErrors          } from '../models/BatchResponsePropertyWithErrors';
 import { CollectionResponsePropertyGroupNoPaging } from '../models/CollectionResponsePropertyGroupNoPaging';
 import { CollectionResponsePropertyNoPaging } from '../models/CollectionResponsePropertyNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { Option } from '../models/Option';
@@ -64,7 +62,6 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponsePropertyStatusEnum",
     "BatchResponsePropertyWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "PropertyCreateTypeEnum",
     "PropertyCreateFieldTypeEnum",
     "PropertyUpdateTypeEnum",
@@ -79,7 +76,6 @@ let typeMap: {[index: string]: any} = {
     "BatchResponsePropertyWithErrors": BatchResponsePropertyWithErrors,
     "CollectionResponsePropertyGroupNoPaging": CollectionResponsePropertyGroupNoPaging,
     "CollectionResponsePropertyNoPaging": CollectionResponsePropertyNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "Option": Option,

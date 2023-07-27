@@ -12,19 +12,13 @@
 
 
 export class AssociationSpecWithLabel {
-    'category': AssociationSpecWithLabelCategoryEnum;
     'typeId': number;
     'label'?: string;
+    'category': AssociationSpecWithLabelCategoryEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "category",
-            "baseName": "category",
-            "type": "AssociationSpecWithLabelCategoryEnum",
-            "format": ""
-        },
         {
             "name": "typeId",
             "baseName": "typeId",
@@ -35,6 +29,12 @@ export class AssociationSpecWithLabel {
             "name": "label",
             "baseName": "label",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "category",
+            "baseName": "category",
+            "type": "AssociationSpecWithLabelCategoryEnum",
             "format": ""
         }    ];
 

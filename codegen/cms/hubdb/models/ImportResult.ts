@@ -20,10 +20,6 @@ export class ImportResult {
     */
     'errors': Array<Error>;
     /**
-    * Specifies number of rows imported
-    */
-    'rowsImported': number;
-    /**
     * Specifies number of duplicate rows
     */
     'duplicateRows': number;
@@ -31,6 +27,10 @@ export class ImportResult {
     * Specifies whether row limit exceeded during import
     */
     'rowLimitExceeded': boolean;
+    /**
+    * Specifies number of rows imported
+    */
+    'rowsImported': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,12 +40,6 @@ export class ImportResult {
             "baseName": "errors",
             "type": "Array<Error>",
             "format": ""
-        },
-        {
-            "name": "rowsImported",
-            "baseName": "rowsImported",
-            "type": "number",
-            "format": "int32"
         },
         {
             "name": "duplicateRows",
@@ -58,6 +52,12 @@ export class ImportResult {
             "baseName": "rowLimitExceeded",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "rowsImported",
+            "baseName": "rowsImported",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

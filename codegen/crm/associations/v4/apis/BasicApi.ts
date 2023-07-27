@@ -67,11 +67,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
@@ -152,11 +147,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
@@ -219,11 +209,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
@@ -238,7 +223,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * List all associations of an object by object type. Limit 1000 per call.
+     * List all associations of an object by object type. Limit 500 per call.
      * List
      * @param objectType 
      * @param objectId 
@@ -291,11 +276,6 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
         // Apply auth methods
         authMethod = _config.authMethods["oauth2"]
         if (authMethod?.applySecurityAuthentication) {

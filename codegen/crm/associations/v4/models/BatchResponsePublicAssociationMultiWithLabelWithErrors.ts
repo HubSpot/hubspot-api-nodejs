@@ -14,41 +14,29 @@ import { PublicAssociationMultiWithLabel } from '../models/PublicAssociationMult
 import { StandardError } from '../models/StandardError';
 
 export class BatchResponsePublicAssociationMultiWithLabelWithErrors {
-    'status': BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum;
-    'results': Array<PublicAssociationMultiWithLabel>;
+    'completedAt': Date;
     'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<PublicAssociationMultiWithLabel>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicAssociationMultiWithLabel>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -63,15 +51,27 @@ export class BatchResponsePublicAssociationMultiWithLabelWithErrors {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationMultiWithLabel>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum",
             "format": ""
         }    ];
 

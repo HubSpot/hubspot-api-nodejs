@@ -13,23 +13,23 @@
 import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 
 export class MultiAssociatedObjectWithLabel {
-    'toObjectId': number;
     'associationTypes': Array<AssociationSpecWithLabel>;
+    'toObjectId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "toObjectId",
-            "baseName": "toObjectId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "associationTypes",
             "baseName": "associationTypes",
             "type": "Array<AssociationSpecWithLabel>",
             "format": ""
+        },
+        {
+            "name": "toObjectId",
+            "baseName": "toObjectId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

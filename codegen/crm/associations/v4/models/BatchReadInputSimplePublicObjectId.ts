@@ -13,20 +13,14 @@
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 
 export class BatchReadInputSimplePublicObjectId {
-    'properties': Array<string>;
     'propertiesWithHistory': Array<string>;
     'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
+    'properties': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<string>",
-            "format": ""
-        },
         {
             "name": "propertiesWithHistory",
             "baseName": "propertiesWithHistory",
@@ -43,6 +37,12 @@ export class BatchReadInputSimplePublicObjectId {
             "name": "inputs",
             "baseName": "inputs",
             "type": "Array<SimplePublicObjectId>",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "Array<string>",
             "format": ""
         }    ];
 

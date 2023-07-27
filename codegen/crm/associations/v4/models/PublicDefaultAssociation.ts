@@ -14,13 +14,19 @@ import { AssociationSpec } from '../models/AssociationSpec';
 import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicDefaultAssociation {
+    'associationSpec': AssociationSpec;
     '_from': PublicObjectId;
     'to': PublicObjectId;
-    'associationSpec': AssociationSpec;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "associationSpec",
+            "baseName": "associationSpec",
+            "type": "AssociationSpec",
+            "format": ""
+        },
         {
             "name": "_from",
             "baseName": "from",
@@ -31,12 +37,6 @@ export class PublicDefaultAssociation {
             "name": "to",
             "baseName": "to",
             "type": "PublicObjectId",
-            "format": ""
-        },
-        {
-            "name": "associationSpec",
-            "baseName": "associationSpec",
-            "type": "AssociationSpec",
             "format": ""
         }    ];
 

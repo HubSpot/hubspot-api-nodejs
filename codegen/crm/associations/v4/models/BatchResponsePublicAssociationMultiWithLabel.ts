@@ -13,27 +13,21 @@
 import { PublicAssociationMultiWithLabel } from '../models/PublicAssociationMultiWithLabel';
 
 export class BatchResponsePublicAssociationMultiWithLabel {
-    'status': BatchResponsePublicAssociationMultiWithLabelStatusEnum;
-    'results': Array<PublicAssociationMultiWithLabel>;
+    'completedAt': Date;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<PublicAssociationMultiWithLabel>;
+    'status': BatchResponsePublicAssociationMultiWithLabelStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponsePublicAssociationMultiWithLabelStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicAssociationMultiWithLabel>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -48,15 +42,21 @@ export class BatchResponsePublicAssociationMultiWithLabel {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationMultiWithLabel>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponsePublicAssociationMultiWithLabelStatusEnum",
             "format": ""
         }    ];
 
