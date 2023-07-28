@@ -226,7 +226,7 @@ console.log(response)
 
 ### {EXAMPLE} Search Contacts
 
-Only 3 FilterGroups with max 3 Filters are supported.
+Only 3 `FilterGroups` with max 3 `Filters` are supported.
 
 Despite `sorts` is an array, however, currently, only one sort parameter is supported.
 
@@ -235,7 +235,7 @@ In JS `sorts` it's possible to set as:
 1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `'hs_object_id'``
 2. < direction > - returned results will be sorted by provided property name and sort direction. e.g: `{ propertyName: 'hs_object_id', direction: 'ASCENDING' }` or `{ propertyName: 'hs_object_id', direction: 'DESCENDING' }`
 
-In TS 'sort' it's possible to set as:
+In TS `sorts` it's possible to set as:
 
 1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `['hs_object_id']`
 2. < direction > - use `["-createdate"]` to sort in desc and sorts: `["createdate"]` in asc order.
