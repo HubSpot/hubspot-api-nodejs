@@ -263,8 +263,9 @@ const publicObjectSearchRequest = {
     after: 0,
 }
 
-const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
-console.log(result)
+const response = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
+
+console.log(response)
 ```
 
 Exapmle for TS:
