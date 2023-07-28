@@ -226,40 +226,72 @@ console.log(response)
 
 ### {EXAMPLE} Search Contacts
 
-Only 3 FilterGroups with max 3 Filters are supported.
+Only 3 `FilterGroups` with max 3 `Filters` are supported.
 
-Despite 'sorts' is an array, however, currently, only one sort parameter is supported.
+Despite `sorts` is an array, however, currently, only one sort parameter is supported.
 
-In JS 'sort' it's possible to set as:
+In JS `sorts` it's possible to set as:
 
-1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: 'hs_object_id'
-2. < stringified sort object > - returned results will be sorted by provided property name and sort direction. e.g: JSON.stringify({ propertyName: 'hs_object_id', direction: 'ASCENDING' }) or JSON.stringify({ propertyName: 'hs_object_id', direction: 'DESCENDING' })
-3. < sort object > - returned results will be sorted by provided property name and sort direction. e.g: { propertyName: 'hs_object_id', direction: 'ASCENDING' } or { propertyName: 'hs_object_id', direction: 'DESCENDING' }
+1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `'hs_object_id'``
+2. < direction > - returned results will be sorted by provided property name and sort direction. e.g: `{ propertyName: 'hs_object_id', direction: 'ASCENDING' }` or `{ propertyName: 'hs_object_id', direction: 'DESCENDING' }`
 
-In TS works only the first two options.
+In TS `sorts` it's possible to set as:
+
+1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `['hs_object_id']`
+2. < direction > - use `["-createdate"]` to sort in desc and sorts: `["createdate"]` in asc order.
 
 `after` for initial search should be set as 0
 
-```javascript
-const filter = { propertyName: 'createdate', operator: 'GTE', value: `${Date.now() - 30 * 60000}` }
-const filterGroup = { filters: [filter] }
-const sort = JSON.stringify({ propertyName: 'createdate', direction: 'DESCENDING' })
-const query = 'test'
-const properties = ['createdate', 'firstname', 'lastname']
-const limit = 100
-const after = 0
+Exapmle for JS:
 
+```javascript
 const publicObjectSearchRequest = {
-    filterGroups: [filterGroup],
-    sorts: [sort],
-    query,
-    properties,
-    limit,
-    after,
+    filterGroups: [
+    {
+        filters: [
+        {
+            propertyName: 'createdate',
+            operator: 'GTE',
+            value: `${Date.now() - 30 * 60000}`
+        }
+        ] 
+    }
+    ],
+    sorts: [{ propertyName: 'createdate', direction: 'DESCENDING' }],
+    properties: ['createdate', 'firstname', 'lastname'],
+    limit: 100,
+    after: 0,
 }
 
-const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
-console.log(JSON.stringify(result))
+const response = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
+
+console.log(response)
+```
+
+Exapmle for TS:
+
+```Typescript
+const objectSearchRequest: PublicObjectSearchRequest = {
+    filterGroups: [
+        {
+            filters: [
+                {
+                propertyName: "createdate",
+                operator: "GTE",
+                value: "1615709177000",
+                },
+            ],
+        },
+    ],
+    sorts: ["-createdate"],
+    properties: ["email", "createdate"],
+    limit: 100,
+    after: 0,
+};
+
+const response = await hubspotClient.crm.contacts.searchApi.doSearch(objectSearchRequest);
+
+console.log(response)
 ```
 
 ### Get all
