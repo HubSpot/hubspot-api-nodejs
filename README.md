@@ -228,19 +228,21 @@ console.log(response)
 
 Only 3 FilterGroups with max 3 Filters are supported.
 
-Despite 'sorts' is an array, however, currently, only one sort parameter is supported.
+Despite `sorts` is an array, however, currently, only one sort parameter is supported.
 
-In JS 'sort' it's possible to set as:
+In JS `sorts` it's possible to set as:
 
 1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `'hs_object_id'``
-2. < direction > - returned results will be sorted by provided property name and sort direction. e.g: `{ propertyName: 'hs_object_id', direction: 'ASCENDING' }` or `{ propertyName: 'hs_object_id', direction: 'DESCENDING' }``
+2. < direction > - returned results will be sorted by provided property name and sort direction. e.g: `{ propertyName: 'hs_object_id', direction: 'ASCENDING' }` or `{ propertyName: 'hs_object_id', direction: 'DESCENDING' }`
 
 In TS 'sort' it's possible to set as:
 
-1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: ['hs_object_id']
-2. < direction > - use ["-createdate"] to sort in desc and sorts: ["createdate"] in asc order.
+1. < propertyName > - returned results will be sorted by provided property name in 'ASCENDING' order. e.g: `['hs_object_id']`
+2. < direction > - use `["-createdate"]` to sort in desc and sorts: `["createdate"]` in asc order.
 
 `after` for initial search should be set as 0
+
+Exapmle for JS:
 
 ```javascript
 const publicObjectSearchRequest = {
@@ -263,6 +265,32 @@ const publicObjectSearchRequest = {
 
 const result = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjectSearchRequest)
 console.log(result)
+```
+
+Exapmle for TS:
+
+```Typescript
+const objectSearchRequest: PublicObjectSearchRequest = {
+    filterGroups: [
+        {
+            filters: [
+                {
+                propertyName: "createdate",
+                operator: "GTE",
+                value: "1615709177000",
+                },
+            ],
+        },
+    ],
+    sorts: ["-createdate"],
+    properties: ["email", "createdate"],
+    limit: 100,
+    after: 0,
+};
+
+const response = await hubspotClient.crm.contacts.searchApi.doSearch(objectSearchRequest);
+
+console.log(response)
 ```
 
 ### Get all
