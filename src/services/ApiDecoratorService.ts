@@ -47,10 +47,8 @@ export default class ApiDecoratorService {
   }
 
   public applyToMethod(method: any): any {
-    if (this.decorators.length > 0) {
-      for (const decorator of this.decorators) {
-        method = decorator.decorate(method)
-      }
+    for (const decorator of this.decorators) {
+      method = decorator.decorate(method)
     }
 
     return method
