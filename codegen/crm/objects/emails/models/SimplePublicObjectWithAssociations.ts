@@ -15,7 +15,7 @@ import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 export class SimplePublicObjectWithAssociations {
     'id': string;
-    'properties': { [key: string]: string; };
+    'properties': { [key: string]: string | null; };
     'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'createdAt': Date;
     'updatedAt': Date;
@@ -35,7 +35,7 @@ export class SimplePublicObjectWithAssociations {
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "{ [key: string]: string; }",
+            "type": "{ [key: string]: string | null; }",
             "format": ""
         },
         {
