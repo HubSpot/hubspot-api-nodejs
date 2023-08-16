@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.1.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.1.1...HEAD)
+
+## [9.1.1] - 2023-08-16
+
+## Fixed
+
+- Nullable `properties` in `SimplePublicObject` and `SimplePublicObjectWithAssociations` (all crm object's clients).
 
 ## [9.1.0] - 2023-07-27
 
@@ -664,3 +670,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [9.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.0
 [9.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.1
 [9.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.1.0
+[9.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.1.1
