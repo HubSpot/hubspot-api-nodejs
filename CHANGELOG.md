@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
-- Nullable `properties` in `SimplePublicObject` and `SimplePublicObjectWithAssociations` (all crm objects clients).
+- Nullable `properties` in `SimplePublicObject` and `SimplePublicObjectWithAssociations` (all crm object's clients).
 
 ## [9.1.0] - 2023-07-27
 
