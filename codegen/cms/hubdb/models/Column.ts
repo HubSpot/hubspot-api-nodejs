@@ -53,13 +53,13 @@ export class Column {
     */
     'type': ColumnTypeEnum;
     /**
-    * Foreign ids by name
-    */
-    'foreignIdsByName'?: { [key: string]: ForeignId; };
-    /**
     * Foreign ids
     */
     'foreignIdsById'?: { [key: string]: ForeignId; };
+    /**
+    * Foreign ids by name
+    */
+    'foreignIdsByName'?: { [key: string]: ForeignId; };
     /**
     * Number of options available
     */
@@ -135,14 +135,14 @@ export class Column {
             "format": ""
         },
         {
-            "name": "foreignIdsByName",
-            "baseName": "foreignIdsByName",
+            "name": "foreignIdsById",
+            "baseName": "foreignIdsById",
             "type": "{ [key: string]: ForeignId; }",
             "format": ""
         },
         {
-            "name": "foreignIdsById",
-            "baseName": "foreignIdsById",
+            "name": "foreignIdsByName",
+            "baseName": "foreignIdsByName",
             "type": "{ [key: string]: ForeignId; }",
             "format": ""
         },

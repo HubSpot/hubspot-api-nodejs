@@ -32,7 +32,7 @@ export class HubDbTableRowV3BatchUpdateRequest {
     /**
     * The id of the table row
     */
-    'id': number;
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -70,8 +70,8 @@ export class HubDbTableRowV3BatchUpdateRequest {
         {
             "name": "id",
             "baseName": "id",
-            "type": "number",
-            "format": "int64"
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
