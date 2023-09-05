@@ -25,9 +25,9 @@ export class StandardError {
     */
     'id'?: string;
     /**
-    * Model definition for an error category.
+    * Error category.
     */
-    'category': any;
+    'category': string;
     /**
     * Error subcategory.
     */
@@ -67,7 +67,7 @@ export class StandardError {
         {
             "name": "category",
             "baseName": "category",
-            "type": "any",
+            "type": "string",
             "format": ""
         },
         {

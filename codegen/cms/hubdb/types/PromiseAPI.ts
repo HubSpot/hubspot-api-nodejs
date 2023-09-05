@@ -345,11 +345,11 @@ export class PromiseTablesApi {
      * Get the details for the `draft` version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.getDraftTableDetailsById(tableIdOrName, includeForeignIds, archived, _options);
+    public getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.getDraftTableDetailsById(tableIdOrName, archived, includeForeignIds, _options);
         return result.toPromise();
     }
 
@@ -357,11 +357,11 @@ export class PromiseTablesApi {
      * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get details for a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.getTableDetails(tableIdOrName, includeForeignIds, archived, _options);
+    public getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.getTableDetails(tableIdOrName, archived, includeForeignIds, _options);
         return result.toPromise();
     }
 
@@ -415,11 +415,11 @@ export class PromiseTablesApi {
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
      * @param hubDbTableV3Request The JSON schema for the table being updated.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
-        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Request, includeForeignIds, archived, _options);
+    public updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<HubDbTableV3> {
+        const result = this.api.updateDraftTable(tableIdOrName, hubDbTableV3Request, archived, includeForeignIds, _options);
         return result.toPromise();
     }
 

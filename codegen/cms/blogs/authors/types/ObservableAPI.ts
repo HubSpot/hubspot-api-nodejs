@@ -205,9 +205,10 @@ export class ObservableBlogAuthorsApi {
      * Retrieve a Blog Author
      * @param objectId The Blog Author id.
      * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public getById(objectId: string, archived?: boolean, _options?: Configuration): Observable<BlogAuthor> {
-        const requestContextPromise = this.requestFactory.getById(objectId, archived, _options);
+    public getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Observable<BlogAuthor> {
+        const requestContextPromise = this.requestFactory.getById(objectId, archived, property, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -238,9 +239,10 @@ export class ObservableBlogAuthorsApi {
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 100.
      * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Observable<CollectionResponseWithTotalBlogAuthorForwardPaging> {
-        const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Observable<CollectionResponseWithTotalBlogAuthorForwardPaging> {
+        const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

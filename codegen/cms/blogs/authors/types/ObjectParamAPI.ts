@@ -98,6 +98,12 @@ export interface BlogAuthorsApiGetByIdRequest {
      * @memberof BlogAuthorsApigetById
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogAuthorsApigetById
+     */
+    property?: string
 }
 
 export interface BlogAuthorsApiGetPageRequest {
@@ -161,6 +167,12 @@ export interface BlogAuthorsApiGetPageRequest {
      * @memberof BlogAuthorsApigetPage
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogAuthorsApigetPage
+     */
+    property?: string
 }
 
 export interface BlogAuthorsApiReadBatchRequest {
@@ -308,7 +320,7 @@ export class ObjectBlogAuthorsApi {
      * @param param the request object
      */
     public getById(param: BlogAuthorsApiGetByIdRequest, options?: Configuration): Promise<BlogAuthor> {
-        return this.api.getById(param.objectId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
     /**
@@ -317,7 +329,7 @@ export class ObjectBlogAuthorsApi {
      * @param param the request object
      */
     public getPage(param: BlogAuthorsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
     /**

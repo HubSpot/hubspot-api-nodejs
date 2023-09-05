@@ -1,38 +1,96 @@
+export * from '../models/Angle';
 export * from '../models/AttachToLangPrimaryRequestVNext';
+export * from '../models/BackgroundImage';
 export * from '../models/BatchInputBlogAuthor';
+export * from '../models/BatchInputBlogPost';
 export * from '../models/BatchInputJsonNode';
 export * from '../models/BatchInputString';
+export * from '../models/BatchInputTag';
 export * from '../models/BatchResponseBlogAuthor';
 export * from '../models/BatchResponseBlogAuthorWithErrors';
+export * from '../models/BatchResponseBlogPost';
+export * from '../models/BatchResponseBlogPostWithErrors';
+export * from '../models/BatchResponseTag';
+export * from '../models/BatchResponseTagWithErrors';
 export * from '../models/BlogAuthor';
 export * from '../models/BlogAuthorCloneRequestVNext';
+export * from '../models/BlogPost';
+export * from '../models/BlogPostLanguageCloneRequestVNext';
 export * from '../models/CollectionResponseWithTotalBlogAuthorForwardPaging';
+export * from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
+export * from '../models/CollectionResponseWithTotalTagForwardPaging';
+export * from '../models/CollectionResponseWithTotalVersionBlogPost';
+export * from '../models/ColorStop';
+export * from '../models/ContentCloneRequestVNext';
+export * from '../models/ContentLanguageVariation';
+export * from '../models/ContentScheduleRequestVNext';
 export * from '../models/DetachFromLangGroupRequestVNext';
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
+export * from '../models/Gradient';
+export * from '../models/LayoutSection';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/RGBAColor';
+export * from '../models/RowMetaData';
 export * from '../models/SetNewLanguagePrimaryRequestVNext';
+export * from '../models/SideOrCorner';
 export * from '../models/StandardError';
+export * from '../models/Styles';
+export * from '../models/Tag';
+export * from '../models/TagCloneRequestVNext';
 export * from '../models/UpdateLanguagesRequestVNext';
+export * from '../models/VersionBlogPost';
+export * from '../models/VersionUser';
 
-import { AttachToLangPrimaryRequestVNext    } from '../models/AttachToLangPrimaryRequestVNext';
+import { Angle } from '../models/Angle';
+import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
+import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
+import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
 import { BatchInputString } from '../models/BatchInputString';
+import { BatchInputTag } from '../models/BatchInputTag';
 import { BatchResponseBlogAuthor        } from '../models/BatchResponseBlogAuthor';
 import { BatchResponseBlogAuthorWithErrors          } from '../models/BatchResponseBlogAuthorWithErrors';
+import { BatchResponseBlogPost        } from '../models/BatchResponseBlogPost';
+import { BatchResponseBlogPostWithErrors          } from '../models/BatchResponseBlogPostWithErrors';
+import { BatchResponseTag        } from '../models/BatchResponseTag';
+import { BatchResponseTagWithErrors          } from '../models/BatchResponseTagWithErrors';
 import { BlogAuthor                   } from '../models/BlogAuthor';
 import { BlogAuthorCloneRequestVNext } from '../models/BlogAuthorCloneRequestVNext';
+import { BlogPost                   } from '../models/BlogPost';
+import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
 import { CollectionResponseWithTotalBlogAuthorForwardPaging } from '../models/CollectionResponseWithTotalBlogAuthorForwardPaging';
+import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
+import { CollectionResponseWithTotalTagForwardPaging } from '../models/CollectionResponseWithTotalTagForwardPaging';
+import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
+import { ColorStop } from '../models/ColorStop';
+import { ContentCloneRequestVNext } from '../models/ContentCloneRequestVNext';
+import { ContentLanguageVariation } from '../models/ContentLanguageVariation';
+import { ContentScheduleRequestVNext } from '../models/ContentScheduleRequestVNext';
 import { DetachFromLangGroupRequestVNext } from '../models/DetachFromLangGroupRequestVNext';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
+import { Gradient } from '../models/Gradient';
+import { LayoutSection } from '../models/LayoutSection';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { RGBAColor } from '../models/RGBAColor';
+import { RowMetaData } from '../models/RowMetaData';
 import { SetNewLanguagePrimaryRequestVNext } from '../models/SetNewLanguagePrimaryRequestVNext';
+import { SideOrCorner } from '../models/SideOrCorner';
 import { StandardError } from '../models/StandardError';
-import { UpdateLanguagesRequestVNext    } from '../models/UpdateLanguagesRequestVNext';
+import { Styles } from '../models/Styles';
+import { Tag         } from '../models/Tag';
+import { TagCloneRequestVNext } from '../models/TagCloneRequestVNext';
+import { UpdateLanguagesRequestVNext } from '../models/UpdateLanguagesRequestVNext';
+import { VersionBlogPost } from '../models/VersionBlogPost';
+import { VersionUser } from '../models/VersionUser';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -54,32 +112,67 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "AttachToLangPrimaryRequestVNextLanguageEnum",
-    "AttachToLangPrimaryRequestVNextPrimaryLanguageEnum",
     "BatchResponseBlogAuthorStatusEnum",
     "BatchResponseBlogAuthorWithErrorsStatusEnum",
+    "BatchResponseBlogPostStatusEnum",
+    "BatchResponseBlogPostWithErrorsStatusEnum",
+    "BatchResponseTagStatusEnum",
+    "BatchResponseTagWithErrorsStatusEnum",
     "BlogAuthorLanguageEnum",
-    "UpdateLanguagesRequestVNextLanguagesEnum",
+    "BlogPostAbStatusEnum",
+    "BlogPostLanguageEnum",
+    "BlogPostCurrentStateEnum",
+    "BlogPostContentTypeCategoryEnum",
+    "TagLanguageEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "Angle": Angle,
     "AttachToLangPrimaryRequestVNext": AttachToLangPrimaryRequestVNext,
+    "BackgroundImage": BackgroundImage,
     "BatchInputBlogAuthor": BatchInputBlogAuthor,
+    "BatchInputBlogPost": BatchInputBlogPost,
     "BatchInputJsonNode": BatchInputJsonNode,
     "BatchInputString": BatchInputString,
+    "BatchInputTag": BatchInputTag,
     "BatchResponseBlogAuthor": BatchResponseBlogAuthor,
     "BatchResponseBlogAuthorWithErrors": BatchResponseBlogAuthorWithErrors,
+    "BatchResponseBlogPost": BatchResponseBlogPost,
+    "BatchResponseBlogPostWithErrors": BatchResponseBlogPostWithErrors,
+    "BatchResponseTag": BatchResponseTag,
+    "BatchResponseTagWithErrors": BatchResponseTagWithErrors,
     "BlogAuthor": BlogAuthor,
     "BlogAuthorCloneRequestVNext": BlogAuthorCloneRequestVNext,
+    "BlogPost": BlogPost,
+    "BlogPostLanguageCloneRequestVNext": BlogPostLanguageCloneRequestVNext,
     "CollectionResponseWithTotalBlogAuthorForwardPaging": CollectionResponseWithTotalBlogAuthorForwardPaging,
+    "CollectionResponseWithTotalBlogPostForwardPaging": CollectionResponseWithTotalBlogPostForwardPaging,
+    "CollectionResponseWithTotalTagForwardPaging": CollectionResponseWithTotalTagForwardPaging,
+    "CollectionResponseWithTotalVersionBlogPost": CollectionResponseWithTotalVersionBlogPost,
+    "ColorStop": ColorStop,
+    "ContentCloneRequestVNext": ContentCloneRequestVNext,
+    "ContentLanguageVariation": ContentLanguageVariation,
+    "ContentScheduleRequestVNext": ContentScheduleRequestVNext,
     "DetachFromLangGroupRequestVNext": DetachFromLangGroupRequestVNext,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
+    "Gradient": Gradient,
+    "LayoutSection": LayoutSection,
     "ModelError": ModelError,
     "NextPage": NextPage,
+    "Paging": Paging,
+    "PreviousPage": PreviousPage,
+    "RGBAColor": RGBAColor,
+    "RowMetaData": RowMetaData,
     "SetNewLanguagePrimaryRequestVNext": SetNewLanguagePrimaryRequestVNext,
+    "SideOrCorner": SideOrCorner,
     "StandardError": StandardError,
+    "Styles": Styles,
+    "Tag": Tag,
+    "TagCloneRequestVNext": TagCloneRequestVNext,
     "UpdateLanguagesRequestVNext": UpdateLanguagesRequestVNext,
+    "VersionBlogPost": VersionBlogPost,
+    "VersionUser": VersionUser,
 }
 
 export class ObjectSerializer {

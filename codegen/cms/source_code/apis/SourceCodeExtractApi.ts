@@ -38,7 +38,9 @@ export class SourceCodeExtractApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([]);
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(fileExtractRequest, "FileExtractRequest", ""),

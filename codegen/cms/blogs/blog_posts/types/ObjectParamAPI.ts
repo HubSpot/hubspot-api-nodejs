@@ -111,6 +111,12 @@ export interface BlogPostsApiGetByIdRequest {
      * @memberof BlogPostsApigetById
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogPostsApigetById
+     */
+    property?: string
 }
 
 export interface BlogPostsApiGetDraftByIdRequest {
@@ -183,6 +189,12 @@ export interface BlogPostsApiGetPageRequest {
      * @memberof BlogPostsApigetPage
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogPostsApigetPage
+     */
+    property?: string
 }
 
 export interface BlogPostsApiGetPreviousVersionRequest {
@@ -453,7 +465,7 @@ export class ObjectBlogPostsApi {
      * @param param the request object
      */
     public getById(param: BlogPostsApiGetByIdRequest, options?: Configuration): Promise<BlogPost> {
-        return this.api.getById(param.objectId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
     /**
@@ -471,7 +483,7 @@ export class ObjectBlogPostsApi {
      * @param param the request object
      */
     public getPage(param: BlogPostsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
     /**

@@ -671,17 +671,17 @@ export interface TablesApiGetDraftTableDetailsByIdRequest {
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-     * @type boolean
-     * @memberof TablesApigetDraftTableDetailsById
-     */
-    includeForeignIds?: boolean
-    /**
      * Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof TablesApigetDraftTableDetailsById
      */
     archived?: boolean
+    /**
+     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @type boolean
+     * @memberof TablesApigetDraftTableDetailsById
+     */
+    includeForeignIds?: boolean
 }
 
 export interface TablesApiGetTableDetailsRequest {
@@ -692,17 +692,17 @@ export interface TablesApiGetTableDetailsRequest {
      */
     tableIdOrName: string
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-     * @type boolean
-     * @memberof TablesApigetTableDetails
-     */
-    includeForeignIds?: boolean
-    /**
      * Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof TablesApigetTableDetails
      */
     archived?: boolean
+    /**
+     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @type boolean
+     * @memberof TablesApigetTableDetails
+     */
+    includeForeignIds?: boolean
 }
 
 export interface TablesApiImportDraftTableRequest {
@@ -785,17 +785,17 @@ export interface TablesApiUpdateDraftTableRequest {
      */
     hubDbTableV3Request: HubDbTableV3Request
     /**
-     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
-     * @type boolean
-     * @memberof TablesApiupdateDraftTable
-     */
-    includeForeignIds?: boolean
-    /**
      * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @type boolean
      * @memberof TablesApiupdateDraftTable
      */
     archived?: boolean
+    /**
+     * Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @type boolean
+     * @memberof TablesApiupdateDraftTable
+     */
+    includeForeignIds?: boolean
 }
 
 export class ObjectTablesApi {
@@ -874,7 +874,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsById(param: TablesApiGetDraftTableDetailsByIdRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.includeForeignIds, param.archived,  options).toPromise();
+        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.archived, param.includeForeignIds,  options).toPromise();
     }
 
     /**
@@ -883,7 +883,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetails(param: TablesApiGetTableDetailsRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.getTableDetails(param.tableIdOrName, param.includeForeignIds, param.archived,  options).toPromise();
+        return this.api.getTableDetails(param.tableIdOrName, param.archived, param.includeForeignIds,  options).toPromise();
     }
 
     /**
@@ -928,7 +928,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTable(param: TablesApiUpdateDraftTableRequest, options?: Configuration): Promise<HubDbTableV3> {
-        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.includeForeignIds, param.archived,  options).toPromise();
+        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds,  options).toPromise();
     }
 
 }
