@@ -13,6 +13,14 @@
 
 export class PublicAuditLog {
     /**
+    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+    */
+    'event': PublicAuditLogEventEnum;
+    /**
+    * The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+    */
+    'objectType': PublicAuditLogObjectTypeEnum;
+    /**
     * The ID of the object.
     */
     'objectId': string;
@@ -32,18 +40,23 @@ export class PublicAuditLog {
     * The name of the user who caused the event.
     */
     'fullName': string;
-    /**
-    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
-    */
-    'event': PublicAuditLogEventEnum;
-    /**
-    * The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
-    */
-    'objectType': PublicAuditLogObjectTypeEnum;
+    'meta'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "event",
+            "baseName": "event",
+            "type": "PublicAuditLogEventEnum",
+            "format": ""
+        },
+        {
+            "name": "objectType",
+            "baseName": "objectType",
+            "type": "PublicAuditLogObjectTypeEnum",
+            "format": ""
+        },
         {
             "name": "objectId",
             "baseName": "objectId",
@@ -75,15 +88,9 @@ export class PublicAuditLog {
             "format": ""
         },
         {
-            "name": "event",
-            "baseName": "event",
-            "type": "PublicAuditLogEventEnum",
-            "format": ""
-        },
-        {
-            "name": "objectType",
-            "baseName": "objectType",
-            "type": "PublicAuditLogObjectTypeEnum",
+            "name": "meta",
+            "baseName": "meta",
+            "type": "any",
             "format": ""
         }    ];
 
@@ -96,6 +103,6 @@ export class PublicAuditLog {
 }
 
 
-export type PublicAuditLogEventEnum = "CREATED" | "UPDATED" | "PUBLISHED" | "DELETED" | "UNPUBLISHED" ;
-export type PublicAuditLogObjectTypeEnum = "BLOG" | "BLOG_POST" | "LANDING_PAGE" | "WEBSITE_PAGE" | "TEMPLATE" | "MODULE" | "GLOBAL_MODULE" | "SERVERLESS_FUNCTION" | "DOMAIN" | "URL_MAPPING" | "EMAIL" | "CONTENT_SETTINGS" | "HUBDB_TABLE" | "KNOWLEDGE_BASE_ARTICLE" | "KNOWLEDGE_BASE" | "THEME" | "CSS" | "JS" ;
+export type PublicAuditLogEventEnum = "CREATED" | "UPDATED" | "PUBLISHED" | "DELETED" | "UNPUBLISHED" | "RESTORE" ;
+export type PublicAuditLogObjectTypeEnum = "BLOG" | "BLOG_POST" | "LANDING_PAGE" | "WEBSITE_PAGE" | "TEMPLATE" | "MODULE" | "GLOBAL_MODULE" | "SERVERLESS_FUNCTION" | "DOMAIN" | "URL_MAPPING" | "EMAIL" | "CONTENT_SETTINGS" | "HUBDB_TABLE" | "KNOWLEDGE_BASE_ARTICLE" | "KNOWLEDGE_BASE" | "THEME" | "CSS" | "JS" | "CTA" | "FILE" ;
 
