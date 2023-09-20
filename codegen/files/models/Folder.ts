@@ -13,7 +13,7 @@
 
 export class Folder {
     /**
-    * Id of the folder.
+    * ID of the folder.
     */
     'id': string;
     /**
@@ -29,11 +29,11 @@ export class Folder {
     */
     'updatedAt': Date;
     /**
-    * Marks weather the folder is deleted or not.
+    * Marks whether the folder is deleted or not.
     */
     'archived': boolean;
     /**
-    * Id of the parent folder.
+    * ID of the parent folder.
     */
     'parentFolderId'?: string;
     /**

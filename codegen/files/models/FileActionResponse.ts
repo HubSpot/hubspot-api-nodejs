@@ -43,7 +43,7 @@ export class FileActionResponse {
     */
     'links'?: { [key: string]: string; };
     /**
-    * If of the requested task.
+    * ID of the requested task.
     */
     'taskId': string;
 

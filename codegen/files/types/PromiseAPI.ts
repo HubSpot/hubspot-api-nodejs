@@ -4,6 +4,7 @@ import { Configuration} from '../configuration'
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
 import { FileActionResponse } from '../models/FileActionResponse';
+import { FileStat } from '../models/FileStat';
 import { FileUpdateInput } from '../models/FileUpdateInput';
 import { Folder } from '../models/Folder';
 import { FolderActionResponse } from '../models/FolderActionResponse';
@@ -30,7 +31,7 @@ export class PromiseFilesApi {
     /**
      * Delete file by ID
      * Delete file
-     * @param fileId File ID to delete
+     * @param fileId FileId to delete
      */
     public archive(fileId: string, _options?: Configuration): Promise<void> {
         const result = this.api.archive(fileId, _options);
@@ -74,7 +75,7 @@ export class PromiseFilesApi {
      * @param updatedAtGte 
      * @param name Search for files containing the given name.
      * @param path Search files by path.
-     * @param parentFolderId Search files within given folder ID.
+     * @param parentFolderId Search files within given folderId.
      * @param size Query by file size.
      * @param height Search files by height of image or video.
      * @param width Search files by width of image or video.
@@ -93,11 +94,20 @@ export class PromiseFilesApi {
     /**
      * Get file by ID.
      * Get file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param properties 
      */
     public getById(fileId: string, properties?: Array<string>, _options?: Configuration): Promise<any> {
         const result = this.api.getById(fileId, properties, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param path 
+     * @param properties 
+     */
+    public getMetadata(path: string, properties?: Array<string>, _options?: Configuration): Promise<FileStat> {
+        const result = this.api.getMetadata(path, properties, _options);
         return result.toPromise();
     }
 
@@ -127,7 +137,7 @@ export class PromiseFilesApi {
     /**
      * Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
      * Replace file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param file File data that will replace existing file in the file manager.
      * @param charsetHunch Character set of given file data.
      * @param options JSON String representing FileReplaceOptions
@@ -205,7 +215,7 @@ export class PromiseFoldersApi {
     /**
      * Check status of folder update. Folder updates happen asynchronously.
      * Check folder update status.
-     * @param taskId Task ID of folder update
+     * @param taskId TaskId of folder update
      */
     public checkUpdateStatus(taskId: string, _options?: Configuration): Promise<FolderActionResponse> {
         const result = this.api.checkUpdateStatus(taskId, _options);
@@ -239,7 +249,7 @@ export class PromiseFoldersApi {
      * @param updatedAtGte 
      * @param name Search for folders containing the specified name.
      * @param path Search for folders by path.
-     * @param parentFolderId Search for folders with the given parent folder ID.
+     * @param parentFolderId Search for folders with the given parent folderId.
      */
     public doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, id?: string, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderId?: number, _options?: Configuration): Promise<CollectionResponseFolder> {
         const result = this.api.doSearch(properties, after, before, limit, sort, id, createdAt, createdAtLte, createdAtGte, updatedAt, updatedAtLte, updatedAtGte, name, path, parentFolderId, _options);

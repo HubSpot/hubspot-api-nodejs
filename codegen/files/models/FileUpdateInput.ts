@@ -20,21 +20,22 @@ export class FileUpdateInput {
     */
     'name'?: string;
     /**
-    * Folder ID where the file should be moved to.  folderId and folderPath cannot be set at the same time.
+    * FolderId where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
     'parentFolderId'?: string;
     /**
-    * Folder path where the file should be moved to. folderId and folderPath cannot be set at the same time.
+    * Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
     'parentFolderPath'?: string;
     /**
-    * Mark weather the file should be used in new content or not.
+    * Mark whether the file should be used in new content or not.
     */
     'isUsableInContent'?: boolean;
     /**
     * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
     */
     'access'?: FileUpdateInputAccessEnum;
+    'expiresAt'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -68,6 +69,12 @@ export class FileUpdateInput {
             "baseName": "access",
             "type": "FileUpdateInputAccessEnum",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

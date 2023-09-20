@@ -20,7 +20,7 @@ export class FolderInput {
     */
     'name': string;
     /**
-    * Folder ID of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
+    * FolderId of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
     */
     'parentFolderId'?: string;
     /**

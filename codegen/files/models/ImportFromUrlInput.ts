@@ -17,7 +17,7 @@ export class ImportFromUrlInput {
     */
     'access': ImportFromUrlInputAccessEnum;
     /**
-    * Time to live. If specified the file will be deleted after the given time frame.
+    * Time to live. If specified the file will be deleted after the given time frame. If left unset, the file will exist indefinitely
     */
     'ttl'?: string;
     /**
@@ -29,7 +29,7 @@ export class ImportFromUrlInput {
     */
     'url': string;
     /**
-    * One of folderId or folderPath is required. Destination folder ID for the uploaded file.
+    * One of folderId or folderPath is required. Destination folderId for the uploaded file.
     */
     'folderId'?: string;
     /**
@@ -39,15 +39,15 @@ export class ImportFromUrlInput {
     /**
     * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
     */
-    'duplicateValidationStrategy': ImportFromUrlInputDuplicateValidationStrategyEnum;
+    'duplicateValidationStrategy'?: ImportFromUrlInputDuplicateValidationStrategyEnum;
     /**
     * ENTIRE_PORTAL: Look for a duplicate file in the entire account. EXACT_FOLDER: Look for a duplicate file in the provided folder. 
     */
-    'duplicateValidationScope': ImportFromUrlInputDuplicateValidationScopeEnum;
+    'duplicateValidationScope'?: ImportFromUrlInputDuplicateValidationScopeEnum;
     /**
-    * If true, it will overwrite existing files if a file with the same name exists in the given folder.
+    * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file's name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
     */
-    'overwrite': boolean;
+    'overwrite'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 

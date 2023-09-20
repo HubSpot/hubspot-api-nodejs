@@ -11,6 +11,9 @@
  */
 
 
+/**
+* Signed Url object with optional ancillary metadata of requested file
+*/
 export class SignedUrl {
     /**
     * Timestamp of when the URL will no longer grant access to the file.

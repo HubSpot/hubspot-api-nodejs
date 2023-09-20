@@ -99,7 +99,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Check status of folder update. Folder updates happen asynchronously.
      * Check folder update status.
-     * @param taskId Task ID of folder update
+     * @param taskId TaskId of folder update
      */
     public async checkUpdateStatus(taskId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -199,7 +199,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAtGte 
      * @param name Search for folders containing the specified name.
      * @param path Search for folders by path.
-     * @param parentFolderId Search for folders with the given parent folder ID.
+     * @param parentFolderId Search for folders with the given parent folderId.
      */
     public async doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, id?: string, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderId?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

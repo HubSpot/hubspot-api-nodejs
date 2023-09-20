@@ -36,7 +36,7 @@ export class ModelFile {
     */
     'archived': boolean;
     /**
-    * Id of the folder the file is in.
+    * ID of the folder the file is in.
     */
     'parentFolderId'?: string;
     /**
@@ -48,7 +48,7 @@ export class ModelFile {
     */
     'path'?: string;
     /**
-    * Size in bytes of the file.
+    * Size of the file in bytes.
     */
     'size'?: number;
     /**
@@ -68,7 +68,7 @@ export class ModelFile {
     */
     'type'?: string;
     /**
-    * Extension of the file. For example png.
+    * Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
     */
     'extension'?: string;
     /**
@@ -87,6 +87,7 @@ export class ModelFile {
     * File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
     */
     'access': ModelFileAccessEnum;
+    'expiresAt'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -198,6 +199,12 @@ export class ModelFile {
             "baseName": "access",
             "type": "ModelFileAccessEnum",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
