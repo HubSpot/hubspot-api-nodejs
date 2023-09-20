@@ -12,49 +12,38 @@
 
 
 export class PropertyValue {
-    'name': string;
-    'value': string;
-    'timestamp': number;
     'sourceId': string;
+    'selectedByUser': boolean;
     'sourceLabel': string;
     'source': PropertyValueSourceEnum;
-    'selectedByUser': boolean;
-    'selectedByUserTimestamp': number;
-    'sourceVid': Array<number>;
+    'updatedByUserId'?: number;
+    'persistenceTimestamp'?: number;
     /**
     * Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`
     */
     'sourceMetadata': string;
+    'sourceVid': Array<number>;
     'requestId': string;
-    'updatedByUserId'?: number;
-    'persistenceTimestamp'?: number;
+    'name': string;
     'useTimestampAsPersistenceTimestamp'?: boolean;
+    'value': string;
+    'selectedByUserTimestamp': number;
+    'timestamp': number;
+    'isLargeValue'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "number",
-            "format": "int64"
-        },
-        {
             "name": "sourceId",
             "baseName": "sourceId",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "selectedByUser",
+            "baseName": "selectedByUser",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -70,36 +59,6 @@ export class PropertyValue {
             "format": ""
         },
         {
-            "name": "selectedByUser",
-            "baseName": "selectedByUser",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "selectedByUserTimestamp",
-            "baseName": "selectedByUserTimestamp",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "sourceVid",
-            "baseName": "sourceVid",
-            "type": "Array<number>",
-            "format": "int64"
-        },
-        {
-            "name": "sourceMetadata",
-            "baseName": "sourceMetadata",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "requestId",
-            "baseName": "requestId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "updatedByUserId",
             "baseName": "updatedByUserId",
             "type": "number",
@@ -112,8 +71,56 @@ export class PropertyValue {
             "format": "int64"
         },
         {
+            "name": "sourceMetadata",
+            "baseName": "sourceMetadata",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sourceVid",
+            "baseName": "sourceVid",
+            "type": "Array<number>",
+            "format": "int64"
+        },
+        {
+            "name": "requestId",
+            "baseName": "requestId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "useTimestampAsPersistenceTimestamp",
             "baseName": "useTimestampAsPersistenceTimestamp",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "selectedByUserTimestamp",
+            "baseName": "selectedByUserTimestamp",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "isLargeValue",
+            "baseName": "isLargeValue",
             "type": "boolean",
             "format": ""
         }    ];

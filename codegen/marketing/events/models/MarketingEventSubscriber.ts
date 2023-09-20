@@ -12,21 +12,21 @@
 
 
 export class MarketingEventSubscriber {
+    'vid'?: number;
+    'properties'?: { [key: string]: string; };
     /**
     * The date and time at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
-    'properties'?: { [key: string]: string; };
-    'vid'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "interactionDateTime",
-            "baseName": "interactionDateTime",
+            "name": "vid",
+            "baseName": "vid",
             "type": "number",
-            "format": "int64"
+            "format": "int32"
         },
         {
             "name": "properties",
@@ -35,10 +35,10 @@ export class MarketingEventSubscriber {
             "format": ""
         },
         {
-            "name": "vid",
-            "baseName": "vid",
+            "name": "interactionDateTime",
+            "baseName": "interactionDateTime",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
