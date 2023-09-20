@@ -60,7 +60,7 @@ export class ObservableEventsApi {
      * Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
-    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Observable<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors> {
+    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Observable<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
         const requestContextPromise = this.requestFactory.createBatch(batchInputTimelineEvent, _options);
 
         // build promise chain

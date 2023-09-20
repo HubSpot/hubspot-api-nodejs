@@ -2,7 +2,6 @@ export * from '../models/BatchInputTimelineEvent';
 export * from '../models/BatchResponseTimelineEventResponse';
 export * from '../models/BatchResponseTimelineEventResponseWithErrors';
 export * from '../models/CollectionResponseTimelineEventTemplateNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/EventDetail';
 export * from '../models/ModelError';
@@ -21,7 +20,6 @@ import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse        } from '../models/BatchResponseTimelineEventResponse';
 import { BatchResponseTimelineEventResponseWithErrors          } from '../models/BatchResponseTimelineEventResponseWithErrors';
 import { CollectionResponseTimelineEventTemplateNoPaging } from '../models/CollectionResponseTimelineEventTemplateNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetail } from '../models/EventDetail';
 import { ModelError } from '../models/ModelError';
@@ -58,7 +56,6 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseTimelineEventResponseStatusEnum",
     "BatchResponseTimelineEventResponseWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "TimelineEventTemplateTokenTypeEnum",
 ]);
 
@@ -67,7 +64,6 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseTimelineEventResponse": BatchResponseTimelineEventResponse,
     "BatchResponseTimelineEventResponseWithErrors": BatchResponseTimelineEventResponseWithErrors,
     "CollectionResponseTimelineEventTemplateNoPaging": CollectionResponseTimelineEventTemplateNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "EventDetail": EventDetail,
     "ModelError": ModelError,

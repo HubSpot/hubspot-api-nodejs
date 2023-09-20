@@ -308,8 +308,11 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors > {
+     public async createBatch(response: ResponseContext): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return;
+        }
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseTimelineEventResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -334,10 +337,10 @@ export class EventsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors", ""
-            ) as BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors;
+                "BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors", ""
+            ) as BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors;
             return body;
         }
 
