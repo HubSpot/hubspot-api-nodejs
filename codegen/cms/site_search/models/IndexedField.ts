@@ -12,14 +12,20 @@
 
 
 export class IndexedField {
+    'values': Array<any>;
     'name': string;
     'value': any;
-    'values': Array<any>;
     'metadataField': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "values",
+            "baseName": "values",
+            "type": "Array<any>",
+            "format": ""
+        },
         {
             "name": "name",
             "baseName": "name",
@@ -30,12 +36,6 @@ export class IndexedField {
             "name": "value",
             "baseName": "value",
             "type": "any",
-            "format": ""
-        },
-        {
-            "name": "values",
-            "baseName": "values",
-            "type": "Array<any>",
             "format": ""
         },
         {
