@@ -13,23 +13,17 @@
 import { PerformanceView } from '../models/PerformanceView';
 
 export class PublicPerformanceResponse {
-    'data': Array<PerformanceView>;
     'domain'?: string;
     'path'?: string;
     'startInterval': number;
     'endInterval': number;
+    'data': Array<PerformanceView>;
     'interval': PublicPerformanceResponseIntervalEnum;
     'period'?: PublicPerformanceResponsePeriodEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "data",
-            "baseName": "data",
-            "type": "Array<PerformanceView>",
-            "format": ""
-        },
         {
             "name": "domain",
             "baseName": "domain",
@@ -53,6 +47,12 @@ export class PublicPerformanceResponse {
             "baseName": "endInterval",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "data",
+            "baseName": "data",
+            "type": "Array<PerformanceView>",
+            "format": ""
         },
         {
             "name": "interval",
