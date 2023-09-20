@@ -16,44 +16,44 @@
 */
 export class UserProvisionRequest {
     /**
-    * The created user's email
+    * The user's primary team
     */
-    'email': string;
+    'primaryTeamId'?: string;
+    /**
+    * Whether to send a welcome email
+    */
+    'sendWelcomeEmail'?: boolean;
     /**
     * The user's role
     */
     'roleId'?: string;
     /**
-    * The user's primary team
-    */
-    'primaryTeamId'?: string;
-    /**
     * The user's additional teams
     */
     'secondaryTeamIds'?: Array<string>;
     /**
-    * Whether to send a welcome email
+    * The created user's email
     */
-    'sendWelcomeEmail': boolean;
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "email",
-            "baseName": "email",
+            "name": "primaryTeamId",
+            "baseName": "primaryTeamId",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sendWelcomeEmail",
+            "baseName": "sendWelcomeEmail",
+            "type": "boolean",
             "format": ""
         },
         {
             "name": "roleId",
             "baseName": "roleId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "primaryTeamId",
-            "baseName": "primaryTeamId",
             "type": "string",
             "format": ""
         },
@@ -64,9 +64,9 @@ export class UserProvisionRequest {
             "format": ""
         },
         {
-            "name": "sendWelcomeEmail",
-            "baseName": "sendWelcomeEmail",
-            "type": "boolean",
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         }    ];
 
