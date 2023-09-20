@@ -172,6 +172,12 @@ export interface MetadataApiGetRequest {
      * @memberof MetadataApiget
      */
     path: string
+    /**
+     * 
+     * @type string
+     * @memberof MetadataApiget
+     */
+    properties?: string
 }
 
 export class ObjectMetadataApi {
@@ -187,7 +193,7 @@ export class ObjectMetadataApi {
      * @param param the request object
      */
     public get(param: MetadataApiGetRequest, options?: Configuration): Promise<AssetFileMetadata> {
-        return this.api.get(param.environment, param.path,  options).toPromise();
+        return this.api.get(param.environment, param.path, param.properties,  options).toPromise();
     }
 
 }

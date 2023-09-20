@@ -20,8 +20,9 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
+     * @param properties 
      */
-    public async get(environment: string, path: string, _options?: Configuration): Promise<RequestContext> {
+    public async get(environment: string, path: string, properties?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'environment' is not null or undefined
@@ -36,6 +37,7 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/cms/v3/source-code/{environment}/metadata/{path}'
             .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
@@ -44,6 +46,11 @@ export class MetadataApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (properties !== undefined) {
+            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "string", ""));
+        }
 
 
         let authMethod: SecurityAuthentication | undefined;

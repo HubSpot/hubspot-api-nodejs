@@ -190,9 +190,10 @@ export class ObservableMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
+     * @param properties 
      */
-    public get(environment: string, path: string, _options?: Configuration): Observable<AssetFileMetadata> {
-        const requestContextPromise = this.requestFactory.get(environment, path, _options);
+    public get(environment: string, path: string, properties?: string, _options?: Configuration): Observable<AssetFileMetadata> {
+        const requestContextPromise = this.requestFactory.get(environment, path, properties, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
