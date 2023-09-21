@@ -16,13 +16,13 @@
 */
 export class ImportFromUrlTaskLocator {
     /**
-    * The ID of the task
+    * ID of the task
     */
     'id': string;
     /**
     * Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
     */
-    'links'?: { [key: string]: string; };
+    'links': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 

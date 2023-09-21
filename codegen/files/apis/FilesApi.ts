@@ -12,6 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { FileActionResponse } from '../models/FileActionResponse';
+import { FileStat } from '../models/FileStat';
 import { FileUpdateInput } from '../models/FileUpdateInput';
 import { ImportFromUrlInput } from '../models/ImportFromUrlInput';
 import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
@@ -25,7 +26,7 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Delete file by ID
      * Delete file
-     * @param fileId File ID to delete
+     * @param fileId FileId to delete
      */
     public async archive(fileId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -153,7 +154,7 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAtGte 
      * @param name Search for files containing the given name.
      * @param path Search files by path.
-     * @param parentFolderId Search files within given folder ID.
+     * @param parentFolderId Search files within given folderId.
      * @param size Query by file size.
      * @param height Search files by height of image or video.
      * @param width Search files by width of image or video.
@@ -337,7 +338,7 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Get file by ID.
      * Get file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param properties 
      */
     public async getById(fileId: string, properties?: Array<string>, _options?: Configuration): Promise<RequestContext> {
@@ -353,6 +354,49 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
         // Path Params
         const localVarPath = '/files/v3/files/{fileId}'
             .replace('{' + 'fileId' + '}', encodeURIComponent(String(fileId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (properties !== undefined) {
+            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+        }
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * @param path 
+     * @param properties 
+     */
+    public async getMetadata(path: string, properties?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'path' is not null or undefined
+        if (path === null || path === undefined) {
+            throw new RequiredError("FilesApi", "getMetadata", "path");
+        }
+
+
+
+        // Path Params
+        const localVarPath = '/files/v3/files/stat/{path}'
+            .replace('{' + 'path' + '}', encodeURIComponent(String(path)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -489,7 +533,7 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
      * Replace file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param file File data that will replace existing file in the file manager.
      * @param charsetHunch Character set of given file data.
      * @param options JSON String representing FileReplaceOptions
@@ -880,6 +924,42 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getMetadata
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getMetadata(response: ResponseContext): Promise<FileStat > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: FileStat = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "FileStat", ""
+            ) as FileStat;
+            return body;
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: FileStat = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "FileStat", ""
+            ) as FileStat;
             return body;
         }
 

@@ -27,7 +27,7 @@ export class TimelineEventTemplateToken {
     /**
     * If type is `enumeration`, we should have a list of options to choose from.
     */
-    'options': Array<TimelineEventTemplateTokenOption>;
+    'options'?: Array<TimelineEventTemplateTokenOption>;
     /**
     * The name of the token referenced in the templates. This must be unique for the specific template. It may only contain alphanumeric characters, periods, dashes, or underscores (. - _).
     */

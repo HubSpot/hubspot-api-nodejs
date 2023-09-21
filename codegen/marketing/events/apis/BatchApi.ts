@@ -8,29 +8,31 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { ActionResponse } from '../models/ActionResponse';
-import { FileExtractRequest } from '../models/FileExtractRequest';
-import { TaskLocator } from '../models/TaskLocator';
+import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
+import { BatchInputMarketingEventExternalUniqueIdentifier } from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
+import { BatchResponseMarketingEventPublicDefaultResponse } from '../models/BatchResponseMarketingEventPublicDefaultResponse';
 
 /**
  * no description
  */
-export class SourceCodeExtractApiRequestFactory extends BaseAPIRequestFactory {
+export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * @param fileExtractRequest 
+     * Bulk delete a number of marketing events in HubSpot
+     * Delete multiple marketing events
+     * @param batchInputMarketingEventExternalUniqueIdentifier The details of the marketing events to delete
      */
-    public async doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<RequestContext> {
+    public async archiveBatch(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'fileExtractRequest' is not null or undefined
-        if (fileExtractRequest === null || fileExtractRequest === undefined) {
-            throw new RequiredError("SourceCodeExtractApi", "doAsync", "fileExtractRequest");
+        // verify required parameter 'batchInputMarketingEventExternalUniqueIdentifier' is not null or undefined
+        if (batchInputMarketingEventExternalUniqueIdentifier === null || batchInputMarketingEventExternalUniqueIdentifier === undefined) {
+            throw new RequiredError("BatchApi", "archiveBatch", "batchInputMarketingEventExternalUniqueIdentifier");
         }
 
 
         // Path Params
-        const localVarPath = '/cms/v3/source-code/extract/async';
+        const localVarPath = '/marketing/v3/marketing-events/events/delete';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -43,7 +45,7 @@ export class SourceCodeExtractApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(fileExtractRequest, "FileExtractRequest", ""),
+            ObjectSerializer.serialize(batchInputMarketingEventExternalUniqueIdentifier, "BatchInputMarketingEventExternalUniqueIdentifier", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -64,25 +66,37 @@ export class SourceCodeExtractApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param taskId 
+     * Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
+     * Create or update multiple marketing events
+     * @param batchInputMarketingEventCreateRequestParams The details of the marketing events to upsert
      */
-    public async getAsyncStatus(taskId: number, _options?: Configuration): Promise<RequestContext> {
+    public async doUpsert(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'taskId' is not null or undefined
-        if (taskId === null || taskId === undefined) {
-            throw new RequiredError("SourceCodeExtractApi", "getAsyncStatus", "taskId");
+        // verify required parameter 'batchInputMarketingEventCreateRequestParams' is not null or undefined
+        if (batchInputMarketingEventCreateRequestParams === null || batchInputMarketingEventCreateRequestParams === undefined) {
+            throw new RequiredError("BatchApi", "doUpsert", "batchInputMarketingEventCreateRequestParams");
         }
 
 
         // Path Params
-        const localVarPath = '/cms/v3/source-code/extract/async/tasks/{taskId}/status'
-            .replace('{' + 'taskId' + '}', encodeURIComponent(String(taskId)));
+        const localVarPath = '/marketing/v3/marketing-events/events/upsert';
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(batchInputMarketingEventCreateRequestParams, "BatchInputMarketingEventCreateRequestParams", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -101,24 +115,17 @@ export class SourceCodeExtractApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class SourceCodeExtractApiResponseProcessor {
+export class BatchApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to doAsync
+     * @params response Response returned by the server for a request to archiveBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doAsync(response: ResponseContext): Promise<TaskLocator > {
+     public async archiveBatch(response: ResponseContext): Promise< void> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("202", response.httpStatusCode)) {
-            const body: TaskLocator = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "TaskLocator", ""
-            ) as TaskLocator;
-            return body;
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -129,11 +136,7 @@ export class SourceCodeExtractApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: TaskLocator = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "TaskLocator", ""
-            ) as TaskLocator;
-            return body;
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -143,16 +146,16 @@ export class SourceCodeExtractApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getAsyncStatus
+     * @params response Response returned by the server for a request to doUpsert
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAsyncStatus(response: ResponseContext): Promise<ActionResponse > {
+     public async doUpsert(response: ResponseContext): Promise<BatchResponseMarketingEventPublicDefaultResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionResponse = ObjectSerializer.deserialize(
+            const body: BatchResponseMarketingEventPublicDefaultResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionResponse", ""
-            ) as ActionResponse;
+                "BatchResponseMarketingEventPublicDefaultResponse", ""
+            ) as BatchResponseMarketingEventPublicDefaultResponse;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -165,10 +168,10 @@ export class SourceCodeExtractApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionResponse = ObjectSerializer.deserialize(
+            const body: BatchResponseMarketingEventPublicDefaultResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionResponse", ""
-            ) as ActionResponse;
+                "BatchResponseMarketingEventPublicDefaultResponse", ""
+            ) as BatchResponseMarketingEventPublicDefaultResponse;
             return body;
         }
 

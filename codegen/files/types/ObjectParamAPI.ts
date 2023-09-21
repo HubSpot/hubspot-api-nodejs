@@ -4,6 +4,7 @@ import { Configuration} from '../configuration'
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
 import { FileActionResponse } from '../models/FileActionResponse';
+import { FileStat } from '../models/FileStat';
 import { FileUpdateInput } from '../models/FileUpdateInput';
 import { Folder } from '../models/Folder';
 import { FolderActionResponse } from '../models/FolderActionResponse';
@@ -19,7 +20,7 @@ import { FilesApiRequestFactory, FilesApiResponseProcessor} from "../apis/FilesA
 
 export interface FilesApiArchiveRequest {
     /**
-     * File ID to delete
+     * FileId to delete
      * @type string
      * @memberof FilesApiarchive
      */
@@ -130,7 +131,7 @@ export interface FilesApiDoSearchRequest {
      */
     path?: string
     /**
-     * Search files within given folder ID.
+     * Search files within given folderId.
      * @type number
      * @memberof FilesApidoSearch
      */
@@ -193,7 +194,7 @@ export interface FilesApiDoSearchRequest {
 
 export interface FilesApiGetByIdRequest {
     /**
-     * Id of the desired file.
+     * ID of the desired file.
      * @type string
      * @memberof FilesApigetById
      */
@@ -202,6 +203,21 @@ export interface FilesApiGetByIdRequest {
      * 
      * @type Array&lt;string&gt;
      * @memberof FilesApigetById
+     */
+    properties?: Array<string>
+}
+
+export interface FilesApiGetMetadataRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FilesApigetMetadata
+     */
+    path: string
+    /**
+     * 
+     * @type Array&lt;string&gt;
+     * @memberof FilesApigetMetadata
      */
     properties?: Array<string>
 }
@@ -244,7 +260,7 @@ export interface FilesApiImportFromUrlRequest {
 
 export interface FilesApiReplaceRequest {
     /**
-     * Id of the desired file.
+     * ID of the desired file.
      * @type string
      * @memberof FilesApireplace
      */
@@ -376,6 +392,13 @@ export class ObjectFilesApi {
     }
 
     /**
+     * @param param the request object
+     */
+    public getMetadata(param: FilesApiGetMetadataRequest, options?: Configuration): Promise<FileStat> {
+        return this.api.getMetadata(param.path, param.properties,  options).toPromise();
+    }
+
+    /**
      * Generates signed URL that allows temporary access to a private file.
      * Get signed URL to access private file.
      * @param param the request object
@@ -445,7 +468,7 @@ export interface FoldersApiArchiveByPathRequest {
 
 export interface FoldersApiCheckUpdateStatusRequest {
     /**
-     * Task ID of folder update
+     * TaskId of folder update
      * @type string
      * @memberof FoldersApicheckUpdateStatus
      */
@@ -547,7 +570,7 @@ export interface FoldersApiDoSearchRequest {
      */
     path?: string
     /**
-     * Search for folders with the given parent folder ID.
+     * Search for folders with the given parent folderId.
      * @type number
      * @memberof FoldersApidoSearch
      */

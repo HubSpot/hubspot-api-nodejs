@@ -14,41 +14,29 @@ import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPub
 import { StandardError } from '../models/StandardError';
 
 export class BatchResponseMarketingEventPublicDefaultResponse {
-    'status': BatchResponseMarketingEventPublicDefaultResponseStatusEnum;
-    'results': Array<MarketingEventPublicDefaultResponse>;
+    'completedAt': Date;
     'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<MarketingEventPublicDefaultResponse>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponseMarketingEventPublicDefaultResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<MarketingEventPublicDefaultResponse>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -63,15 +51,27 @@ export class BatchResponseMarketingEventPublicDefaultResponse {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<MarketingEventPublicDefaultResponse>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
             "format": ""
         }    ];
 

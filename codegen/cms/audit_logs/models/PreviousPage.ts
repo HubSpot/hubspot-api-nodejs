@@ -1,6 +1,6 @@
 /**
- * Users
- * Add, manage, and remove users from your account
+ * CMS Audit Logs
+ * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
  *
  * OpenAPI spec version: v3
  * 
@@ -11,28 +11,28 @@
  */
 
 
-export class NextPage {
+export class PreviousPage {
+    'before': string;
     'link'?: string;
-    'after': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "before",
+            "baseName": "before",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return PreviousPage.attributeTypeMap;
     }
 
     public constructor() {

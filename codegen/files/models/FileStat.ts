@@ -1,6 +1,6 @@
 /**
- * Users
- * Add, manage, and remove users from your account
+ * Files
+ * Upload and manage files.
  *
  * OpenAPI spec version: v3
  * 
@@ -10,29 +10,30 @@
  * Do not edit the class manually.
  */
 
+import { Folder } from '../models/Folder';
 
-export class NextPage {
-    'link'?: string;
-    'after': string;
+export class FileStat {
+    'file'?: any;
+    'folder'?: Folder;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
-            "type": "string",
+            "name": "file",
+            "baseName": "file",
+            "type": "any",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
-            "type": "string",
+            "name": "folder",
+            "baseName": "folder",
+            "type": "Folder",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return FileStat.attributeTypeMap;
     }
 
     public constructor() {

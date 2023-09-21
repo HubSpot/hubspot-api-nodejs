@@ -6,7 +6,6 @@ export * from '../models/BatchResponseMarketingEventPublicDefaultResponse';
 export * from '../models/BatchResponseSubscriberEmailResponse';
 export * from '../models/BatchResponseSubscriberVidResponse';
 export * from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/EventDetailSettings';
 export * from '../models/EventDetailSettingsUrl';
@@ -33,7 +32,6 @@ import { BatchResponseMarketingEventPublicDefaultResponse          } from '../mo
 import { BatchResponseSubscriberEmailResponse          } from '../models/BatchResponseSubscriberEmailResponse';
 import { BatchResponseSubscriberVidResponse          } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
@@ -47,7 +45,7 @@ import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublic
 import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
 import { ModelError } from '../models/ModelError';
-import { PropertyValue                } from '../models/PropertyValue';
+import { PropertyValue                 } from '../models/PropertyValue';
 import { StandardError } from '../models/StandardError';
 import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
 import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
@@ -75,7 +73,6 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
     "BatchResponseSubscriberEmailResponseStatusEnum",
     "BatchResponseSubscriberVidResponseStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
     "PropertyValueSourceEnum",
 ]);
 
@@ -88,7 +85,6 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSubscriberEmailResponse": BatchResponseSubscriberEmailResponse,
     "BatchResponseSubscriberVidResponse": BatchResponseSubscriberVidResponse,
     "CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging": CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "EventDetailSettings": EventDetailSettings,
     "EventDetailSettingsUrl": EventDetailSettingsUrl,

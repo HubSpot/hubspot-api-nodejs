@@ -43,6 +43,7 @@ export class AssetFileMetadata {
     * Timestamp of when the object was archived (deleted).
     */
     'archivedAt'?: number;
+    'hash'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -88,6 +89,12 @@ export class AssetFileMetadata {
             "baseName": "archivedAt",
             "type": "number",
             "format": "int64"
+        },
+        {
+            "name": "hash",
+            "baseName": "hash",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

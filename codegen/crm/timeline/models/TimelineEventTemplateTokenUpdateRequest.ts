@@ -27,7 +27,7 @@ export class TimelineEventTemplateTokenUpdateRequest {
     /**
     * If type is `enumeration`, we should have a list of options to choose from.
     */
-    'options': Array<TimelineEventTemplateTokenOption>;
+    'options'?: Array<TimelineEventTemplateTokenOption>;
 
     static readonly discriminator: string | undefined = undefined;
 

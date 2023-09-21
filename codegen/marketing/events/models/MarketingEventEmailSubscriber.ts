@@ -12,25 +12,25 @@
 
 
 export class MarketingEventEmailSubscriber {
+    'contactProperties'?: { [key: string]: string; };
+    'properties'?: { [key: string]: string; };
+    /**
+    * The email address of the contact in HubSpot to associate with the event.
+    */
+    'email': string;
     /**
     * The date and time at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
-    'properties'?: { [key: string]: string; };
-    /**
-    * The email address of the contact in HubSpot to associate with the event. Note that the contact must already exist in HubSpot; a contact will not be created.
-    */
-    'email': string;
-    'contactProperties'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "interactionDateTime",
-            "baseName": "interactionDateTime",
-            "type": "number",
-            "format": "int64"
+            "name": "contactProperties",
+            "baseName": "contactProperties",
+            "type": "{ [key: string]: string; }",
+            "format": ""
         },
         {
             "name": "properties",
@@ -45,10 +45,10 @@ export class MarketingEventEmailSubscriber {
             "format": ""
         },
         {
-            "name": "contactProperties",
-            "baseName": "contactProperties",
-            "type": "{ [key: string]: string; }",
-            "format": ""
+            "name": "interactionDateTime",
+            "baseName": "interactionDateTime",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {

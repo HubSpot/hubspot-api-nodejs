@@ -16,39 +16,48 @@
 */
 export class PublicUser {
     /**
-    * The user's unique ID
+    * The user's primary team
     */
-    'id': string;
-    /**
-    * The user's email
-    */
-    'email': string;
+    'primaryTeamId'?: string;
+    'roleIds'?: Array<string>;
+    'sendWelcomeEmail'?: boolean;
     /**
     * The user's role
     */
     'roleId'?: string;
     /**
-    * The user's primary team
-    */
-    'primaryTeamId'?: string;
-    /**
     * The user's additional teams
     */
     'secondaryTeamIds'?: Array<string>;
+    /**
+    * The user's unique ID
+    */
+    'id': string;
+    'superAdmin'?: boolean;
+    /**
+    * The user's email
+    */
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "primaryTeamId",
+            "baseName": "primaryTeamId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
+            "name": "roleIds",
+            "baseName": "roleIds",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "sendWelcomeEmail",
+            "baseName": "sendWelcomeEmail",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -58,15 +67,27 @@ export class PublicUser {
             "format": ""
         },
         {
-            "name": "primaryTeamId",
-            "baseName": "primaryTeamId",
+            "name": "secondaryTeamIds",
+            "baseName": "secondaryTeamIds",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "secondaryTeamIds",
-            "baseName": "secondaryTeamIds",
-            "type": "Array<string>",
+            "name": "superAdmin",
+            "baseName": "superAdmin",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
             "format": ""
         }    ];
 

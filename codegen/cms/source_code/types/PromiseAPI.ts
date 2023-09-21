@@ -118,9 +118,10 @@ export class PromiseMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
+     * @param properties 
      */
-    public get(environment: string, path: string, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.get(environment, path, _options);
+    public get(environment: string, path: string, properties?: string, _options?: Configuration): Promise<AssetFileMetadata> {
+        const result = this.api.get(environment, path, properties, _options);
         return result.toPromise();
     }
 

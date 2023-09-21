@@ -39,8 +39,8 @@ export class PerformanceView {
     * The timestamp in milliseconds of the end of this interval.
     */
     'endTimestamp': number;
-    'startDatetime': string;
-    'endDatetime': string;
+    'startDatetime'?: string;
+    'endDatetime'?: string;
     /**
     * The total number of requests received in this period.
     */
@@ -53,7 +53,7 @@ export class PerformanceView {
     * The percentage of requests that were served cached responses.
     */
     'cacheHitRate': number;
-    'totalRequestTime': number;
+    'totalRequestTime'?: number;
     /**
     * The average response time in milliseconds from the origin to the edge.
     */

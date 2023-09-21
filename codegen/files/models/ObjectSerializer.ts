@@ -1,8 +1,8 @@
 export * from '../models/CollectionResponseFile';
 export * from '../models/CollectionResponseFolder';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/FileActionResponse';
+export * from '../models/FileStat';
 export * from '../models/FileUpdateInput';
 export * from '../models/Folder';
 export * from '../models/FolderActionResponse';
@@ -21,10 +21,10 @@ export * from '../models/StandardError';
 
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { FileActionResponse           } from '../models/FileActionResponse';
-import { FileUpdateInput       } from '../models/FileUpdateInput';
+import { FileStat } from '../models/FileStat';
+import { FileUpdateInput        } from '../models/FileUpdateInput';
 import { Folder } from '../models/Folder';
 import { FolderActionResponse           } from '../models/FolderActionResponse';
 import { FolderInput } from '../models/FolderInput';
@@ -33,7 +33,7 @@ import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
 import { ImportFromUrlInput      } from '../models/ImportFromUrlInput';
 import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
 import { ModelError } from '../models/ModelError';
-import { ModelFile                    } from '../models/ModelFile';
+import { ModelFile                     } from '../models/ModelFile';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
@@ -60,7 +60,6 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "ErrorCategoryHttpStatusEnum",
     "FileActionResponseStatusEnum",
     "FileUpdateInputAccessEnum",
     "FolderActionResponseStatusEnum",
@@ -73,9 +72,9 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "CollectionResponseFile": CollectionResponseFile,
     "CollectionResponseFolder": CollectionResponseFolder,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "FileActionResponse": FileActionResponse,
+    "FileStat": FileStat,
     "FileUpdateInput": FileUpdateInput,
     "Folder": Folder,
     "FolderActionResponse": FolderActionResponse,
