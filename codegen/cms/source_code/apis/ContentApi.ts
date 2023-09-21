@@ -139,70 +139,24 @@ export class ContentApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-     * @param path The file system location of the file.
-     */
-    public async get(environment: string, path: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'environment' is not null or undefined
-        if (environment === null || environment === undefined) {
-            throw new RequiredError("ContentApi", "get", "environment");
-        }
-
-
-        // verify required parameter 'path' is not null or undefined
-        if (path === null || path === undefined) {
-            throw new RequiredError("ContentApi", "get", "path");
-        }
-
-
-        // Path Params
-        const localVarPath = '/cms/v3/source-code/{environment}/content/{path}'
-            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
-            .replace('{' + 'path' + '}', encodeURIComponent(String(path)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
      * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
-    public async replace(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
+    public async createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'environment' is not null or undefined
         if (environment === null || environment === undefined) {
-            throw new RequiredError("ContentApi", "replace", "environment");
+            throw new RequiredError("ContentApi", "createOrUpdate", "environment");
         }
 
 
         // verify required parameter 'path' is not null or undefined
         if (path === null || path === undefined) {
-            throw new RequiredError("ContentApi", "replace", "path");
+            throw new RequiredError("ContentApi", "createOrUpdate", "path");
         }
 
 
@@ -243,6 +197,52 @@ export class ContentApiRequestFactory extends BaseAPIRequestFactory {
             ]);
             requestContext.setHeaderParam("Content-Type", contentType);
         }
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public async download(environment: string, path: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'environment' is not null or undefined
+        if (environment === null || environment === undefined) {
+            throw new RequiredError("ContentApi", "download", "environment");
+        }
+
+
+        // verify required parameter 'path' is not null or undefined
+        if (path === null || path === undefined) {
+            throw new RequiredError("ContentApi", "download", "path");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/source-code/{environment}/content/{path}'
+            .replace('{' + 'environment' + '}', encodeURIComponent(String(environment)))
+            .replace('{' + 'path' + '}', encodeURIComponent(String(path)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -335,35 +335,10 @@ export class ContentApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to get
+     * @params response Response returned by the server for a request to createOrUpdate
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async get(response: ResponseContext): Promise< void> {
-        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("0", response.httpStatusCode)) {
-            const body: Error = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
-            ) as Error;
-            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
-        }
-
-        // Work around for missing responses in specification, e.g. for petstore.yaml
-        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
-        }
-
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
-    }
-
-    /**
-     * Unwraps the actual response sent by the server from the response context and deserializes the response content
-     * to the expected objects
-     *
-     * @params response Response returned by the server for a request to replace
-     * @throws ApiException if the response code was not in [200, 299]
-     */
-     public async replace(response: ResponseContext): Promise<AssetFileMetadata > {
+     public async createOrUpdate(response: ResponseContext): Promise<AssetFileMetadata > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: AssetFileMetadata = ObjectSerializer.deserialize(
@@ -387,6 +362,31 @@ export class ContentApiResponseProcessor {
                 "AssetFileMetadata", ""
             ) as AssetFileMetadata;
             return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to download
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async download(response: ResponseContext): Promise< void> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
