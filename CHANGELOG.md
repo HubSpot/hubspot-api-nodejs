@@ -5,7 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/9.1.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/10.0.0...HEAD)
+
+## [10.0.0] - 2023-09-25
+
+## Updated
+
+- `cms.auditLogs.auditLogsApi.getPage(objectId?: Array<string>, userId?: Array<string>, after?: string, before?: string, sort?: Array<string>, eventType?: Array<string>, limit?: number, objectType?: Array<string>, _options?: Configuration)` => `cms.auditLogs.auditLogsApi.getPage(userId?: Array<string>, eventType?: Array<string>, objectType?: Array<string>, objectId?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration)`
+- Cnange type from `number` to `string` in `cms/hubdb/models/HubDbTableRowV3BatchUpdateRequest.id`.
+- Nullable `startDatetime`, `endDatetime` and `totalRequestTime` in `cms/performance/models/PerformanceView`.
+- Rename `cms.sourceCode.contentApi.get()` => `cms.sourceCode.contentApi.download()`
+- Rename `cms.sourceCode.contentApi.replace()` => `cms.sourceCode.contentApi.createOrUpdate()`
+- `crm.timeline.eventsApi.createBatch() BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors` => `crm.timeline.eventsApi.createBatch() BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors`
+- Cnange type from `ErrorCategory` to `string` in `crm/timeline/models/StandardError::category`.
+- Nullable `options` in `crm/timeline/models/TimelineEventTemplateToken` and `codegen/crm/timeline/models/TimelineEventTemplateTokenUpdateRequest`.
+- Required `links` in `files/models/FolderUpdateTaskLocator` and `files/models/ImportFromUrlTaskLocator`.
+- Nullable `duplicateValidationStrategy`, `duplicateValidationScope` and `overwrite` in `files/models/ImportFromUrlInput`.
+- Cnange type from `ErrorCategory` to `string` in `files/models/StandardError::category`.
+- Move method `archive` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `create` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `doCancel` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `getById` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `replace` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `update` from `marketing.events.marketingEventsExternalApi` to `marketing.events.basicApi`.
+- Move method `archiveBatch` from `marketing.events.marketingEventsExternalApi` to `marketing.events.batchApi`.
+- Move method `doUpsert` from `marketing.events.marketingEventsExternalApi` to `marketing.events.batchApi`.
+- Move method `doEmailUpsertById` from `marketing.events.marketingEventsExternalApi` to `marketing.events.subscriberStateChanges`.
+- Move method `doUpsertById` from `marketing.events.marketingEventsExternalApi` to `marketing.events.subscriberStateChanges`.
+- Rename `marketing.events.settingsExternalApi` => `marketing.events.settingsApi`
+- Cnange type from `ErrorCategory` to `string` in `marketing/events/models/StandardError::category`.
+
+## Added
+
+- Added param `prev` to `cms/audit_logs/models/PreviousPage`.
+- Added param `properties` to `cms.sourceCode.metadataApi.get()`.
+- Added param `hash` to `cms/source_code/models/AssetFileMetadata`.
+- Added method `getMetadata` to `files.filesApi`.
+- Added param `expiresAt` to `files/models/FileUpdateInput` and `files/models/ModelFile`.
+- Added params `roleIds`, `sendWelcomeEmail` and `superAdmin` to `settings/users/models/PublicUser`
 
 ## [9.1.1] - 2023-08-16
 
@@ -671,3 +708,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [9.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.0.1
 [9.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.1.0
 [9.1.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/9.1.1
+[10.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.0.0
