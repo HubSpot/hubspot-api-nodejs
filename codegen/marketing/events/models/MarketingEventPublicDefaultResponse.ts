@@ -13,6 +13,31 @@
 import { PropertyValue } from '../models/PropertyValue';
 
 export class MarketingEventPublicDefaultResponse {
+    'createdAt': Date;
+    /**
+    * The start date and time of the marketing event.
+    */
+    'startDateTime'?: Date;
+    /**
+    * A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set. In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
+    */
+    'customProperties'?: Array<PropertyValue>;
+    /**
+    * Indicates if the marketing event has been cancelled.
+    */
+    'eventCancelled'?: boolean;
+    /**
+    * The name of the organizer of the marketing event.
+    */
+    'eventOrganizer': string;
+    /**
+    * A URL in the external event application where the marketing event can be managed.
+    */
+    'eventUrl'?: string;
+    /**
+    * The description of the marketing event.
+    */
+    'eventDescription'?: string;
     /**
     * The name of the marketing event.
     */
@@ -21,41 +46,58 @@ export class MarketingEventPublicDefaultResponse {
     * The type of the marketing event.
     */
     'eventType'?: string;
-    /**
-    * The start date and time of the marketing event.
-    */
-    'startDateTime'?: Date;
+    'id': string;
     /**
     * The end date and time of the marketing event.
     */
     'endDateTime'?: Date;
-    /**
-    * The name of the organizer of the marketing event.
-    */
-    'eventOrganizer': string;
-    /**
-    * The description of the marketing event.
-    */
-    'eventDescription'?: string;
-    /**
-    * A URL in the external event application where the marketing event can be managed.
-    */
-    'eventUrl'?: string;
-    /**
-    * Indicates if the marketing event has been cancelled.
-    */
-    'eventCancelled'?: boolean;
-    /**
-    * A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set. In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
-    */
-    'customProperties'?: Array<PropertyValue>;
-    'id': string;
-    'createdAt': Date;
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "startDateTime",
+            "baseName": "startDateTime",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "customProperties",
+            "baseName": "customProperties",
+            "type": "Array<PropertyValue>",
+            "format": ""
+        },
+        {
+            "name": "eventCancelled",
+            "baseName": "eventCancelled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "eventOrganizer",
+            "baseName": "eventOrganizer",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "eventUrl",
+            "baseName": "eventUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "eventDescription",
+            "baseName": "eventDescription",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "eventName",
             "baseName": "eventName",
@@ -69,56 +111,14 @@ export class MarketingEventPublicDefaultResponse {
             "format": ""
         },
         {
-            "name": "startDateTime",
-            "baseName": "startDateTime",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "endDateTime",
-            "baseName": "endDateTime",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "eventOrganizer",
-            "baseName": "eventOrganizer",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventDescription",
-            "baseName": "eventDescription",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventUrl",
-            "baseName": "eventUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventCancelled",
-            "baseName": "eventCancelled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "customProperties",
-            "baseName": "customProperties",
-            "type": "Array<PropertyValue>",
-            "format": ""
-        },
-        {
             "name": "id",
             "baseName": "id",
             "type": "string",
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
+            "name": "endDateTime",
+            "baseName": "endDateTime",
             "type": "Date",
             "format": "date-time"
         },

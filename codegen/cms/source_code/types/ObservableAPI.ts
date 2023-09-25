@@ -75,39 +75,14 @@ export class ObservableContentApi {
     }
 
     /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-     * @param path The file system location of the file.
-     */
-    public get(environment: string, path: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.get(environment, path, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
-            }));
-    }
-
-    /**
      * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
-    public replace(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
-        const requestContextPromise = this.requestFactory.replace(environment, path, file, _options);
+    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
+        const requestContextPromise = this.requestFactory.createOrUpdate(environment, path, file, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -121,7 +96,32 @@ export class ObservableContentApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.replace(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrUpdate(rsp)));
+            }));
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public download(environment: string, path: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.download(environment, path, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.download(rsp)));
             }));
     }
 
@@ -190,9 +190,10 @@ export class ObservableMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
+     * @param properties 
      */
-    public get(environment: string, path: string, _options?: Configuration): Observable<AssetFileMetadata> {
-        const requestContextPromise = this.requestFactory.get(environment, path, _options);
+    public get(environment: string, path: string, properties?: string, _options?: Configuration): Observable<AssetFileMetadata> {
+        const requestContextPromise = this.requestFactory.get(environment, path, properties, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

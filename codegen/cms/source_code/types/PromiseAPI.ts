@@ -43,25 +43,25 @@ export class PromiseContentApi {
     }
 
     /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-     * @param path The file system location of the file.
-     */
-    public get(environment: string, path: string, _options?: Configuration): Promise<void> {
-        const result = this.api.get(environment, path, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
-    public replace(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.replace(environment, path, file, _options);
+    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
+        const result = this.api.createOrUpdate(environment, path, file, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public download(environment: string, path: string, _options?: Configuration): Promise<void> {
+        const result = this.api.download(environment, path, _options);
         return result.toPromise();
     }
 
@@ -118,9 +118,10 @@ export class PromiseMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
+     * @param properties 
      */
-    public get(environment: string, path: string, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.get(environment, path, _options);
+    public get(environment: string, path: string, properties?: string, _options?: Configuration): Promise<AssetFileMetadata> {
+        const result = this.api.get(environment, path, properties, _options);
         return result.toPromise();
     }
 

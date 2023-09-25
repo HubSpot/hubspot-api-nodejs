@@ -14,24 +14,26 @@ import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
 /**
  * no description
  */
-export class SettingsExternalApiRequestFactory extends BaseAPIRequestFactory {
+export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * @param appId 
-     * @param eventDetailSettingsUrl 
+     * Create or update the current settings for the application.
+     * Update the application settings
+     * @param appId The id of the application to update the settings for.
+     * @param eventDetailSettingsUrl The new application settings
      */
     public async create(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("SettingsExternalApi", "create", "appId");
+            throw new RequiredError("SettingsApi", "create", "appId");
         }
 
 
         // verify required parameter 'eventDetailSettingsUrl' is not null or undefined
         if (eventDetailSettingsUrl === null || eventDetailSettingsUrl === undefined) {
-            throw new RequiredError("SettingsExternalApi", "create", "eventDetailSettingsUrl");
+            throw new RequiredError("SettingsApi", "create", "eventDetailSettingsUrl");
         }
 
 
@@ -71,14 +73,16 @@ export class SettingsExternalApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Retrieve the current settings for the application.
+     * Retrieve the application settings
+     * @param appId The id of the application to retrieve the settings for.
      */
     public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("SettingsExternalApi", "getAll", "appId");
+            throw new RequiredError("SettingsApi", "getAll", "appId");
         }
 
 
@@ -108,7 +112,7 @@ export class SettingsExternalApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class SettingsExternalApiResponseProcessor {
+export class SettingsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

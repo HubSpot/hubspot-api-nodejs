@@ -106,7 +106,7 @@ export class ObjectEventsApi {
      * Creates multiple events
      * @param param the request object
      */
-    public createBatch(param: EventsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors> {
+    public createBatch(param: EventsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
         return this.api.createBatch(param.batchInputTimelineEvent,  options).toPromise();
     }
 

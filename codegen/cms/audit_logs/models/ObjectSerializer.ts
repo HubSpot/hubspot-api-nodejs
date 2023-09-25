@@ -3,6 +3,7 @@ export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
+export * from '../models/PreviousPage';
 export * from '../models/PublicAuditLog';
 
 import { CollectionResponsePublicAuditLog } from '../models/CollectionResponsePublicAuditLog';
@@ -10,7 +11,8 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
-import { PublicAuditLog        } from '../models/PublicAuditLog';
+import { PreviousPage } from '../models/PreviousPage';
+import { PublicAuditLog         } from '../models/PublicAuditLog';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -42,6 +44,7 @@ let typeMap: {[index: string]: any} = {
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
+    "PreviousPage": PreviousPage,
     "PublicAuditLog": PublicAuditLog,
 }
 

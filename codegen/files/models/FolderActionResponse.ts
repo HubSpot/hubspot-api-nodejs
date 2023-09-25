@@ -44,7 +44,7 @@ export class FolderActionResponse {
     */
     'links'?: { [key: string]: string; };
     /**
-    * Id of the task.
+    * ID of the task.
     */
     'taskId': string;
 

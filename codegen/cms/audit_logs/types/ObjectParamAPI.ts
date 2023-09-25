@@ -7,17 +7,29 @@ import { AuditLogsApiRequestFactory, AuditLogsApiResponseProcessor} from "../api
 
 export interface AuditLogsApiGetPageRequest {
     /**
-     * Comma separated list of object ids to filter by.
-     * @type Array&lt;string&gt;
-     * @memberof AuditLogsApigetPage
-     */
-    objectId?: Array<string>
-    /**
      * Comma separated list of user ids to filter by.
      * @type Array&lt;string&gt;
      * @memberof AuditLogsApigetPage
      */
     userId?: Array<string>
+    /**
+     * Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+     * @type Array&lt;string&gt;
+     * @memberof AuditLogsApigetPage
+     */
+    eventType?: Array<string>
+    /**
+     * Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+     * @type Array&lt;string&gt;
+     * @memberof AuditLogsApigetPage
+     */
+    objectType?: Array<string>
+    /**
+     * Comma separated list of object ids to filter by.
+     * @type Array&lt;string&gt;
+     * @memberof AuditLogsApigetPage
+     */
+    objectId?: Array<string>
     /**
      * Timestamp after which audit logs will be returned
      * @type string
@@ -31,29 +43,17 @@ export interface AuditLogsApiGetPageRequest {
      */
     before?: string
     /**
-     * The sort direction for the audit logs. (Can only sort by timestamp).
-     * @type Array&lt;string&gt;
-     * @memberof AuditLogsApigetPage
-     */
-    sort?: Array<string>
-    /**
-     * Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
-     * @type Array&lt;string&gt;
-     * @memberof AuditLogsApigetPage
-     */
-    eventType?: Array<string>
-    /**
      * The number of logs to return.
      * @type number
      * @memberof AuditLogsApigetPage
      */
     limit?: number
     /**
-     * Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+     * The sort direction for the audit logs. (Can only sort by timestamp).
      * @type Array&lt;string&gt;
      * @memberof AuditLogsApigetPage
      */
-    objectType?: Array<string>
+    sort?: Array<string>
 }
 
 export class ObjectAuditLogsApi {
@@ -69,7 +69,7 @@ export class ObjectAuditLogsApi {
      * @param param the request object
      */
     public getPage(param: AuditLogsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicAuditLog> {
-        return this.api.getPage(param.objectId, param.userId, param.after, param.before, param.sort, param.eventType, param.limit, param.objectType,  options).toPromise();
+        return this.api.getPage(param.userId, param.eventType, param.objectType, param.objectId, param.after, param.before, param.limit, param.sort,  options).toPromise();
     }
 
 }

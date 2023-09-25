@@ -45,40 +45,40 @@ export interface ContentApiCreateRequest {
     file?: HttpFile
 }
 
-export interface ContentApiGetRequest {
+export interface ContentApiCreateOrUpdateRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @type string
-     * @memberof ContentApiget
+     * @memberof ContentApicreateOrUpdate
      */
     environment: string
     /**
      * The file system location of the file.
      * @type string
-     * @memberof ContentApiget
-     */
-    path: string
-}
-
-export interface ContentApiReplaceRequest {
-    /**
-     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
-     * @type string
-     * @memberof ContentApireplace
-     */
-    environment: string
-    /**
-     * The file system location of the file.
-     * @type string
-     * @memberof ContentApireplace
+     * @memberof ContentApicreateOrUpdate
      */
     path: string
     /**
      * The file to upload.
      * @type HttpFile
-     * @memberof ContentApireplace
+     * @memberof ContentApicreateOrUpdate
      */
     file?: HttpFile
+}
+
+export interface ContentApiDownloadRequest {
+    /**
+     * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @type string
+     * @memberof ContentApidownload
+     */
+    environment: string
+    /**
+     * The file system location of the file.
+     * @type string
+     * @memberof ContentApidownload
+     */
+    path: string
 }
 
 export class ObjectContentApi {
@@ -107,21 +107,21 @@ export class ObjectContentApi {
     }
 
     /**
-     * Downloads the byte contents of the file at the specified path in the specified environment.
-     * Download a file
-     * @param param the request object
-     */
-    public get(param: ContentApiGetRequest, options?: Configuration): Promise<void> {
-        return this.api.get(param.environment, param.path,  options).toPromise();
-    }
-
-    /**
      * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
      * Create or update a file
      * @param param the request object
      */
-    public replace(param: ContentApiReplaceRequest, options?: Configuration): Promise<AssetFileMetadata> {
-        return this.api.replace(param.environment, param.path, param.file,  options).toPromise();
+    public createOrUpdate(param: ContentApiCreateOrUpdateRequest, options?: Configuration): Promise<AssetFileMetadata> {
+        return this.api.createOrUpdate(param.environment, param.path, param.file,  options).toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param param the request object
+     */
+    public download(param: ContentApiDownloadRequest, options?: Configuration): Promise<void> {
+        return this.api.download(param.environment, param.path,  options).toPromise();
     }
 
 }
@@ -172,6 +172,12 @@ export interface MetadataApiGetRequest {
      * @memberof MetadataApiget
      */
     path: string
+    /**
+     * 
+     * @type string
+     * @memberof MetadataApiget
+     */
+    properties?: string
 }
 
 export class ObjectMetadataApi {
@@ -187,7 +193,7 @@ export class ObjectMetadataApi {
      * @param param the request object
      */
     public get(param: MetadataApiGetRequest, options?: Configuration): Promise<AssetFileMetadata> {
-        return this.api.get(param.environment, param.path,  options).toPromise();
+        return this.api.get(param.environment, param.path, param.properties,  options).toPromise();
     }
 
 }

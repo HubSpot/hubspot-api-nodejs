@@ -10,117 +10,49 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { BatchInputMarketingEventEmailSubscriber } from '../models/BatchInputMarketingEventEmailSubscriber';
 import { BatchInputMarketingEventSubscriber } from '../models/BatchInputMarketingEventSubscriber';
-import { BatchResponseSubscriberEmailResponse } from '../models/BatchResponseSubscriberEmailResponse';
-import { BatchResponseSubscriberVidResponse } from '../models/BatchResponseSubscriberVidResponse';
 
 /**
  * no description
  */
-export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRequestFactory {
+export class SubscriberStateChangesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created.
      * Record
      * @param externalEventId The id of the marketing event
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-     * @param batchInputMarketingEventSubscriber The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event
      * @param externalAccountId The account id associated with the marketing event
+     * @param batchInputMarketingEventEmailSubscriber The details of the contacts to subscribe to the event
      */
-    public async create(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: Configuration): Promise<RequestContext> {
+    public async doEmailUpsertById(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'externalEventId' is not null or undefined
         if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "create", "externalEventId");
+            throw new RequiredError("SubscriberStateChangesApi", "doEmailUpsertById", "externalEventId");
         }
 
 
         // verify required parameter 'subscriberState' is not null or undefined
         if (subscriberState === null || subscriberState === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "create", "subscriberState");
+            throw new RequiredError("SubscriberStateChangesApi", "doEmailUpsertById", "subscriberState");
         }
 
 
-        // verify required parameter 'batchInputMarketingEventSubscriber' is not null or undefined
-        if (batchInputMarketingEventSubscriber === null || batchInputMarketingEventSubscriber === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "create", "batchInputMarketingEventSubscriber");
-        }
-
-
-
-        // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create'
-            .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)))
-            .replace('{' + 'subscriberState' + '}', encodeURIComponent(String(subscriberState)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (externalAccountId !== undefined) {
-            requestContext.setQueryParam("externalAccountId", ObjectSerializer.serialize(externalAccountId, "string", ""));
-        }
-
-
-        // Body Params
-        const contentType = ObjectSerializer.getPreferredMediaType([
-            "application/json"
-        ]);
-        requestContext.setHeaderParam("Content-Type", contentType);
-        const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputMarketingEventSubscriber, "BatchInputMarketingEventSubscriber", ""),
-            contentType
-        );
-        requestContext.setBody(serializedBody);
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
-     * Record
-     * @param externalEventId The id of the marketing event
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
-     * @param batchInputMarketingEventEmailSubscriber The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
-     * @param externalAccountId The account id associated with the marketing event
-     */
-    public async createByEmail(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'externalEventId' is not null or undefined
-        if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "createByEmail", "externalEventId");
-        }
-
-
-        // verify required parameter 'subscriberState' is not null or undefined
-        if (subscriberState === null || subscriberState === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "createByEmail", "subscriberState");
+        // verify required parameter 'externalAccountId' is not null or undefined
+        if (externalAccountId === null || externalAccountId === undefined) {
+            throw new RequiredError("SubscriberStateChangesApi", "doEmailUpsertById", "externalAccountId");
         }
 
 
         // verify required parameter 'batchInputMarketingEventEmailSubscriber' is not null or undefined
         if (batchInputMarketingEventEmailSubscriber === null || batchInputMarketingEventEmailSubscriber === undefined) {
-            throw new RequiredError("AttendanceSubscriberStateChangesApi", "createByEmail", "batchInputMarketingEventEmailSubscriber");
+            throw new RequiredError("SubscriberStateChangesApi", "doEmailUpsertById", "batchInputMarketingEventEmailSubscriber");
         }
 
 
-
         // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create'
+        const localVarPath = '/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert'
             .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)))
             .replace('{' + 'subscriberState' + '}', encodeURIComponent(String(subscriberState)));
 
@@ -160,26 +92,95 @@ export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRe
         return requestContext;
     }
 
+    /**
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids. Note that the contact must already exist in HubSpot; a contact will not be create.
+     * Record
+     * @param externalEventId The id of the marketing event
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event
+     * @param externalAccountId The account id associated with the marketing event
+     * @param batchInputMarketingEventSubscriber The details of the contacts to subscribe to the event
+     */
+    public async doUpsertById(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'externalEventId' is not null or undefined
+        if (externalEventId === null || externalEventId === undefined) {
+            throw new RequiredError("SubscriberStateChangesApi", "doUpsertById", "externalEventId");
+        }
+
+
+        // verify required parameter 'subscriberState' is not null or undefined
+        if (subscriberState === null || subscriberState === undefined) {
+            throw new RequiredError("SubscriberStateChangesApi", "doUpsertById", "subscriberState");
+        }
+
+
+        // verify required parameter 'externalAccountId' is not null or undefined
+        if (externalAccountId === null || externalAccountId === undefined) {
+            throw new RequiredError("SubscriberStateChangesApi", "doUpsertById", "externalAccountId");
+        }
+
+
+        // verify required parameter 'batchInputMarketingEventSubscriber' is not null or undefined
+        if (batchInputMarketingEventSubscriber === null || batchInputMarketingEventSubscriber === undefined) {
+            throw new RequiredError("SubscriberStateChangesApi", "doUpsertById", "batchInputMarketingEventSubscriber");
+        }
+
+
+        // Path Params
+        const localVarPath = '/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert'
+            .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)))
+            .replace('{' + 'subscriberState' + '}', encodeURIComponent(String(subscriberState)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (externalAccountId !== undefined) {
+            requestContext.setQueryParam("externalAccountId", ObjectSerializer.serialize(externalAccountId, "string", ""));
+        }
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(batchInputMarketingEventSubscriber, "BatchInputMarketingEventSubscriber", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
 }
 
-export class AttendanceSubscriberStateChangesApiResponseProcessor {
+export class SubscriberStateChangesApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to create
+     * @params response Response returned by the server for a request to doEmailUpsertById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponseSubscriberVidResponse > {
+     public async doEmailUpsertById(response: ResponseContext): Promise< void> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BatchResponseSubscriberVidResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSubscriberVidResponse", ""
-            ) as BatchResponseSubscriberVidResponse;
-            return body;
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -190,11 +191,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSubscriberVidResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSubscriberVidResponse", ""
-            ) as BatchResponseSubscriberVidResponse;
-            return body;
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -204,18 +201,11 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to createByEmail
+     * @params response Response returned by the server for a request to doUpsertById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createByEmail(response: ResponseContext): Promise<BatchResponseSubscriberEmailResponse > {
+     public async doUpsertById(response: ResponseContext): Promise< void> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BatchResponseSubscriberEmailResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSubscriberEmailResponse", ""
-            ) as BatchResponseSubscriberEmailResponse;
-            return body;
-        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -226,11 +216,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSubscriberEmailResponse = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSubscriberEmailResponse", ""
-            ) as BatchResponseSubscriberEmailResponse;
-            return body;
+            return;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -16,17 +16,17 @@
 */
 export class PublicTeam {
     /**
-    * The team's unique ID
+    * Primary members of this team
     */
-    'id': string;
+    'userIds': Array<string>;
     /**
     * The team's name
     */
     'name': string;
     /**
-    * Primary members of this team
+    * The team's unique ID
     */
-    'userIds': Array<string>;
+    'id': string;
     /**
     * Secondary or additional members of this team
     */
@@ -36,9 +36,9 @@ export class PublicTeam {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "userIds",
+            "baseName": "userIds",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -48,9 +48,9 @@ export class PublicTeam {
             "format": ""
         },
         {
-            "name": "userIds",
-            "baseName": "userIds",
-            "type": "Array<string>",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {

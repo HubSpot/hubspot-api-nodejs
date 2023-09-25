@@ -5,6 +5,7 @@ import {mergeMap, map} from  '../rxjsStub';
 import { CollectionResponseFile } from '../models/CollectionResponseFile';
 import { CollectionResponseFolder } from '../models/CollectionResponseFolder';
 import { FileActionResponse } from '../models/FileActionResponse';
+import { FileStat } from '../models/FileStat';
 import { FileUpdateInput } from '../models/FileUpdateInput';
 import { Folder } from '../models/Folder';
 import { FolderActionResponse } from '../models/FolderActionResponse';
@@ -34,7 +35,7 @@ export class ObservableFilesApi {
     /**
      * Delete file by ID
      * Delete file
-     * @param fileId File ID to delete
+     * @param fileId FileId to delete
      */
     public archive(fileId: string, _options?: Configuration): Observable<void> {
         const requestContextPromise = this.requestFactory.archive(fileId, _options);
@@ -120,7 +121,7 @@ export class ObservableFilesApi {
      * @param updatedAtGte 
      * @param name Search for files containing the given name.
      * @param path Search files by path.
-     * @param parentFolderId Search files within given folder ID.
+     * @param parentFolderId Search files within given folderId.
      * @param size Query by file size.
      * @param height Search files by height of image or video.
      * @param width Search files by width of image or video.
@@ -153,7 +154,7 @@ export class ObservableFilesApi {
     /**
      * Get file by ID.
      * Get file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param properties 
      */
     public getById(fileId: string, properties?: Array<string>, _options?: Configuration): Observable<any> {
@@ -172,6 +173,29 @@ export class ObservableFilesApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+            }));
+    }
+
+    /**
+     * @param path 
+     * @param properties 
+     */
+    public getMetadata(path: string, properties?: Array<string>, _options?: Configuration): Observable<FileStat> {
+        const requestContextPromise = this.requestFactory.getMetadata(path, properties, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getMetadata(rsp)));
             }));
     }
 
@@ -229,7 +253,7 @@ export class ObservableFilesApi {
     /**
      * Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
      * Replace file.
-     * @param fileId Id of the desired file.
+     * @param fileId ID of the desired file.
      * @param file File data that will replace existing file in the file manager.
      * @param charsetHunch Character set of given file data.
      * @param options JSON String representing FileReplaceOptions
@@ -376,7 +400,7 @@ export class ObservableFoldersApi {
     /**
      * Check status of folder update. Folder updates happen asynchronously.
      * Check folder update status.
-     * @param taskId Task ID of folder update
+     * @param taskId TaskId of folder update
      */
     public checkUpdateStatus(taskId: string, _options?: Configuration): Observable<FolderActionResponse> {
         const requestContextPromise = this.requestFactory.checkUpdateStatus(taskId, _options);
@@ -438,7 +462,7 @@ export class ObservableFoldersApi {
      * @param updatedAtGte 
      * @param name Search for folders containing the specified name.
      * @param path Search for folders by path.
-     * @param parentFolderId Search for folders with the given parent folder ID.
+     * @param parentFolderId Search for folders with the given parent folderId.
      */
     public doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, id?: string, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderId?: number, _options?: Configuration): Observable<CollectionResponseFolder> {
         const requestContextPromise = this.requestFactory.doSearch(properties, after, before, limit, sort, id, createdAt, createdAtLte, createdAtGte, updatedAt, updatedAtLte, updatedAtGte, name, path, parentFolderId, _options);

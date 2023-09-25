@@ -16,25 +16,25 @@
 */
 export class PublicPermissionSet {
     /**
-    * The role's unique ID
+    * Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
     */
-    'id': string;
+    'requiresBillingWrite': boolean;
     /**
     * The role's name
     */
     'name': string;
     /**
-    * Whether this role has a paid seat and requires the billing-write scope to assign/unassign to users
+    * The role's unique ID
     */
-    'requiresBillingWrite': boolean;
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "requiresBillingWrite",
+            "baseName": "requiresBillingWrite",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -44,9 +44,9 @@ export class PublicPermissionSet {
             "format": ""
         },
         {
-            "name": "requiresBillingWrite",
-            "baseName": "requiresBillingWrite",
-            "type": "boolean",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 

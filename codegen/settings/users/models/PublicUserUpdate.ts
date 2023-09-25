@@ -16,13 +16,13 @@
 */
 export class PublicUserUpdate {
     /**
-    * The user's role
-    */
-    'roleId'?: string;
-    /**
     * The user's primary team
     */
     'primaryTeamId'?: string;
+    /**
+    * The user's role
+    */
+    'roleId'?: string;
     /**
     * The user's additional teams
     */
@@ -32,14 +32,14 @@ export class PublicUserUpdate {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "roleId",
-            "baseName": "roleId",
+            "name": "primaryTeamId",
+            "baseName": "primaryTeamId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "primaryTeamId",
-            "baseName": "primaryTeamId",
+            "name": "roleId",
+            "baseName": "roleId",
             "type": "string",
             "format": ""
         },

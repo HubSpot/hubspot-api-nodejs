@@ -41,7 +41,7 @@ export class PromiseEventsApi {
      * Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
-    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Promise<BatchResponseTimelineEventResponse | BatchResponseTimelineEventResponseWithErrors> {
+    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
         const result = this.api.createBatch(batchInputTimelineEvent, _options);
         return result.toPromise();
     }

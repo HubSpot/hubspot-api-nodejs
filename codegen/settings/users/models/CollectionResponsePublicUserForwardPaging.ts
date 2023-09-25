@@ -14,22 +14,22 @@ import { ForwardPaging } from '../models/ForwardPaging';
 import { PublicUser } from '../models/PublicUser';
 
 export class CollectionResponsePublicUserForwardPaging {
-    'results': Array<PublicUser>;
     'paging'?: ForwardPaging;
+    'results': Array<PublicUser>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicUser>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicUser>",
             "format": ""
         }    ];
 

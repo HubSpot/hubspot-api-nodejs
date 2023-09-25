@@ -13,10 +13,6 @@
 
 export class MarketingEventExternalUniqueIdentifier {
     /**
-    * The id of the application that created the marketing event in HubSpot.
-    */
-    'appId': number;
-    /**
     * The accountId that is associated with this marketing event in the external event application.
     */
     'externalAccountId': string;
@@ -24,16 +20,14 @@ export class MarketingEventExternalUniqueIdentifier {
     * The id of the marketing event in the external event application.
     */
     'externalEventId': string;
+    /**
+    * The id of the application that created the marketing event in HubSpot.
+    */
+    'appId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "appId",
-            "baseName": "appId",
-            "type": "number",
-            "format": "int32"
-        },
         {
             "name": "externalAccountId",
             "baseName": "externalAccountId",
@@ -45,6 +39,12 @@ export class MarketingEventExternalUniqueIdentifier {
             "baseName": "externalEventId",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "appId",
+            "baseName": "appId",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

@@ -18,16 +18,16 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns audit logs based on filters.
      * Query audit logs
-     * @param objectId Comma separated list of object ids to filter by.
      * @param userId Comma separated list of user ids to filter by.
+     * @param eventType Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+     * @param objectType Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+     * @param objectId Comma separated list of object ids to filter by.
      * @param after Timestamp after which audit logs will be returned
      * @param before Timestamp before which audit logs will be returned
-     * @param sort The sort direction for the audit logs. (Can only sort by timestamp).
-     * @param eventType Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
      * @param limit The number of logs to return.
-     * @param objectType Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+     * @param sort The sort direction for the audit logs. (Can only sort by timestamp).
      */
-    public async getPage(objectId?: Array<string>, userId?: Array<string>, after?: string, before?: string, sort?: Array<string>, eventType?: Array<string>, limit?: number, objectType?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(userId?: Array<string>, eventType?: Array<string>, objectType?: Array<string>, objectId?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -46,13 +46,23 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (objectId !== undefined) {
-            requestContext.setQueryParam("objectId", ObjectSerializer.serialize(objectId, "Array<string>", ""));
+        if (userId !== undefined) {
+            requestContext.setQueryParam("userId", ObjectSerializer.serialize(userId, "Array<string>", ""));
         }
 
         // Query Params
-        if (userId !== undefined) {
-            requestContext.setQueryParam("userId", ObjectSerializer.serialize(userId, "Array<string>", ""));
+        if (eventType !== undefined) {
+            requestContext.setQueryParam("eventType", ObjectSerializer.serialize(eventType, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (objectType !== undefined) {
+            requestContext.setQueryParam("objectType", ObjectSerializer.serialize(objectType, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (objectId !== undefined) {
+            requestContext.setQueryParam("objectId", ObjectSerializer.serialize(objectId, "Array<string>", ""));
         }
 
         // Query Params
@@ -66,23 +76,13 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (sort !== undefined) {
-            requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
-        }
-
-        // Query Params
-        if (eventType !== undefined) {
-            requestContext.setQueryParam("eventType", ObjectSerializer.serialize(eventType, "Array<string>", ""));
-        }
-
-        // Query Params
         if (limit !== undefined) {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
         // Query Params
-        if (objectType !== undefined) {
-            requestContext.setQueryParam("objectType", ObjectSerializer.serialize(objectType, "Array<string>", ""));
+        if (sort !== undefined) {
+            requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
         }
 
 
