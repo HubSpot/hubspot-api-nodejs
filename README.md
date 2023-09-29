@@ -302,7 +302,8 @@ getAll method is available for all major objects (Companies, Contacts, Deals, Li
 const allContacts = await hubspotClient.crm.contacts.getAll()
 ```
 
-Please note that pagination is used under the hood to get all results.
+> [!NOTE]
+> Please note that pagination is used under the hood to get all results.
 
 ### Upload a file (via the SDK)
 
