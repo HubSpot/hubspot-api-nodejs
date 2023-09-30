@@ -302,18 +302,31 @@ getAll method is available for all major objects (Companies, Contacts, Deals, Li
 const allContacts = await hubspotClient.crm.contacts.getAll()
 ```
 
-### Get contacts
+> [!NOTE]
+> Please note that pagination is used under the hood to get all results.
+
+### Upload a file (via the SDK)
 
 ```javascript
-const response = await hubspotClient.apiRequest({
-    method: 'get',
-    path: '/crm/v3/objects/contacts',
-})
-const json = await response.json()
-console.log(json)
-```
+const response = await hubspotClient.files.filesApi.upload(
+    {
+        data: fs.createReadStream('./photo.jpg'),
+        name: 'photo.jpg'
+    },
+    undefined,
+    '/folder',
+    'photo.jpg',
+    undefined,
+    JSON.stringify({ 
+        access: 'PRIVATE',
+        overwrite: false,
+        duplicateValidationStrategy: 'NONE',
+        duplicateValidationScope: 'ENTIRE_PORTAL',
+    })
+)
 
-Please note that pagination is used under the hood to get all results.
+console.log(response)
+```
 
 ### OAuth
 
@@ -358,6 +371,16 @@ hubspotClient.apiRequest({
     path: '/some/api/not/wrapped/yet',
     body: { key: 'value' },
 })
+```
+
+### Get contacts
+
+```javascript
+const response = await hubspotClient.apiRequest({
+    path: '/crm/v3/objects/contacts',
+})
+const json = await response.json()
+console.log(json)
 ```
 
 ### Upload a file
