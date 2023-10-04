@@ -6,6 +6,10 @@ NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Cl
 
 Please, take a look at our [Sample apps](https://github.com/HubSpot/sample-apps-list)
 
+## Method references docs
+
+[Method references docs](https://github.hubspot.com/hubspot-api-nodejs/)
+
 ## Installing
 
 ```shell
