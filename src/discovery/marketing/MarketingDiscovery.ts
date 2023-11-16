@@ -1,9 +1,11 @@
 import BaseDiscovery from '../BaseDiscovery'
 import type EventsDiscovery from './events/EventsDiscovery'
+import type FormsDiscovery from './forms/FormsDiscovery'
 import type TransactionalDiscovery from './transactional/TransactionalDiscovery'
 
 export default class MarketingDiscovery extends BaseDiscovery {
   protected _events: EventsDiscovery | undefined
+  protected _forms: FormsDiscovery | undefined
   protected _transactional: TransactionalDiscovery | undefined
 
   /**
@@ -17,6 +19,19 @@ export default class MarketingDiscovery extends BaseDiscovery {
     }
 
     return this._events
+  }
+
+  /**
+   * Getter
+   * @returns FormsDiscovery
+   */
+  get forms() {
+    if (!this._forms) {
+      const requiredClass = require('./forms/FormsDiscovery')
+      this._forms = new requiredClass.default(this.config) as FormsDiscovery
+    }
+
+    return this._forms
   }
 
   /**
