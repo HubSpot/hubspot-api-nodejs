@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/10.0.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/10.1.0...HEAD)
+
+## [10.1.0] - 2023-11-23
+
+## Added
+
+- `marketing.forms` Api client.
 
 ## [10.0.0] - 2023-09-25
 
@@ -293,7 +299,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Updated
 
 - Replace Lodash to navite code in part of code
-- Load only merge and get methods form Lodash 
+- Load only merge and get methods form Lodash
 
 ## [8.1.0] - 2022-11-28
 
@@ -312,7 +318,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Updated
 
 - Optimization memory usage
-- Regenerate all clients 
+- Regenerate all clients
 - Added Private App access token to `cms.performance`, `crm.schemas` , `crm.imports` and `crm.objects.feedbackSubmissions`
 - Updated `marketing.events` API client
 - Deprecated `crm.extensions.accounting` API client
@@ -337,7 +343,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Sinature Utill 
+- Sinature Utill
 
 ### Deprecated
 
@@ -439,7 +445,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.0.1-beta2] - 2022-02-09
 
-### Fixed 
+### Fixed
 
 - autification configuration
 
@@ -453,7 +459,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Iterable middlewares 
+- Iterable middlewares
 
 ## [6.0.0-beta] - 2022-01-27
 
@@ -543,15 +549,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-  - crm.objects and crm.schemas clients  
+  - crm.objects and crm.schemas clients
   - cms.hubdb clients
   - cms.blogs.authors, cms.blogs.blogPosts and cms.blogs.tags clients
 
 ## [3.0.0] - 2020-08-28
-  
+
 ### Added
-  
-  - differentiation between Developer API key and API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.  
+
+  - differentiation between Developer API key and API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.
 
 ### Updated
 
@@ -562,9 +568,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - response types extended for all crm.**.batchApi.create/read/update methods
 
 ## [2.1.1] - 2020-07-24
-  
+
 ### Added
-  
+
   - trello-integration-app sample
   - 'Search Contacts' example to README.MD
 
@@ -576,9 +582,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 'Create Contact, Company and associate created objects' example in README.md
 
 ## [2.1.0] - 2020-06-18
-  
+
 ### Added
-  
+
   - auditLogs, domains, performance, urlRedirects and siteSearch cms clients
   - imports-contacts-app sample
   - limiter for search methods
@@ -587,13 +593,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
   - default limiter options: increased `maxConcurrent` to 6, added `id` - 'hubspot-client-limiter'
-  - retry functionality to overcome secondly search limit failures 
+  - retry functionality to overcome secondly search limit failures
 
 ## [2.0.1] - 2020-05-25
 
 ### Added:
 
-- validateSignature method to webhooks 
+- validateSignature method to webhooks
 
 ## [2.0.0] - 2020-05-06
 
@@ -602,9 +608,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated crm.imports.coreApi client method names: getAll => getPage
 
 ## [1.1.0-beta] - 2020-04-24
-  
+
 ### Added
-  
+
   - New updateBatch method to webhooks.subscriptionsApi
   - updated timelineModels
 
@@ -612,7 +618,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   - extended webhooks-sample-app to setup application webhooks configuration after successful authorization
   - documents path in sample-app
-  
+
 ### Fixed
 
   - 'apiKey' authorization for webhooks clients
