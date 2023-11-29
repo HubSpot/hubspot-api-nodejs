@@ -246,7 +246,7 @@ In TS `sorts` it's possible to set as:
 
 `after` for initial search should be set as 0
 
-Exapmle for JS:
+Example for JS:
 
 ```javascript
 const publicObjectSearchRequest = {
@@ -272,7 +272,7 @@ const response = await hubspotClient.crm.contacts.searchApi.doSearch(publicObjec
 console.log(response)
 ```
 
-Exapmle for TS:
+Example for TS:
 
 ```Typescript
 const objectSearchRequest: PublicObjectSearchRequest = {
