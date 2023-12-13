@@ -26,16 +26,6 @@ export class PromiseListsApi {
     }
 
     /**
-     * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
-     * Delete a List
-     * @param listId The **ILS ID** of the list to delete.
-     */
-    public _delete(listId: number, _options?: Configuration): Promise<void> {
-        const result = this.api._delete(listId, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Create a new list with the provided object list definition.
      * Create List
      * @param listCreateRequest 
@@ -86,6 +76,16 @@ export class PromiseListsApi {
      */
     public getByName(listName: string, objectTypeId: string, includeFilters?: boolean, _options?: Configuration): Promise<ListFetchResponse> {
         const result = this.api.getByName(listName, objectTypeId, includeFilters, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
+     * Delete a List
+     * @param listId The **ILS ID** of the list to delete.
+     */
+    public remove(listId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.remove(listId, _options);
         return result.toPromise();
     }
 
@@ -176,16 +176,6 @@ export class PromiseMembershipsApi {
     }
 
     /**
-     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
-     * Delete All Records from a List
-     * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     */
-    public deleteAll(listId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.deleteAll(listId, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Fetch the memberships of a list in order sorted by the `recordId` of the records in the list.  The `recordId`s are sorted in *ascending* order if an `after` offset or no offset is provided. If only a `before` offset is provided, then the records are sorted in *descending* order.  The `after` offset parameter will take precedence over the `before` offset in a case where both are provided.
      * Fetch List Memberships Ordered by ID
      * @param listId The **ILS ID** of the list.
@@ -206,6 +196,16 @@ export class PromiseMembershipsApi {
      */
     public remove(listId: number, requestBody: Array<number>, _options?: Configuration): Promise<MembershipsUpdateResponse> {
         const result = this.api.remove(listId, requestBody, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
+     * Delete All Records from a List
+     * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     */
+    public removeAll(listId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.removeAll(listId, _options);
         return result.toPromise();
     }
 

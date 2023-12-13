@@ -15,15 +15,6 @@ import { MembershipsUpdateResponse } from '../models/MembershipsUpdateResponse';
 import { ObservableListsApi } from "./ObservableAPI";
 import { ListsApiRequestFactory, ListsApiResponseProcessor} from "../apis/ListsApi";
 
-export interface ListsApiDeleteRequest {
-    /**
-     * The **ILS ID** of the list to delete.
-     * @type number
-     * @memberof ListsApi_delete
-     */
-    listId: number
-}
-
 export interface ListsApiCreateRequest {
     /**
      * 
@@ -93,6 +84,15 @@ export interface ListsApiGetByNameRequest {
     includeFilters?: boolean
 }
 
+export interface ListsApiRemoveRequest {
+    /**
+     * The **ILS ID** of the list to delete.
+     * @type number
+     * @memberof ListsApiremove
+     */
+    listId: number
+}
+
 export interface ListsApiRestoreRequest {
     /**
      * The **ILS ID** of the list to restore.
@@ -152,15 +152,6 @@ export class ObjectListsApi {
     }
 
     /**
-     * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
-     * Delete a List
-     * @param param the request object
-     */
-    public _delete(param: ListsApiDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api._delete(param.listId,  options).toPromise();
-    }
-
-    /**
      * Create a new list with the provided object list definition.
      * Create List
      * @param param the request object
@@ -203,6 +194,15 @@ export class ObjectListsApi {
      */
     public getByName(param: ListsApiGetByNameRequest, options?: Configuration): Promise<ListFetchResponse> {
         return this.api.getByName(param.listName, param.objectTypeId, param.includeFilters,  options).toPromise();
+    }
+
+    /**
+     * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
+     * Delete a List
+     * @param param the request object
+     */
+    public remove(param: ListsApiRemoveRequest, options?: Configuration): Promise<void> {
+        return this.api.remove(param.listId,  options).toPromise();
     }
 
     /**
@@ -282,15 +282,6 @@ export interface MembershipsApiAddAndRemoveRequest {
     membershipChangeRequest: MembershipChangeRequest
 }
 
-export interface MembershipsApiDeleteAllRequest {
-    /**
-     * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @type number
-     * @memberof MembershipsApideleteAll
-     */
-    listId: number
-}
-
 export interface MembershipsApiGetPageRequest {
     /**
      * The **ILS ID** of the list.
@@ -333,6 +324,15 @@ export interface MembershipsApiRemoveRequest {
     requestBody: Array<number>
 }
 
+export interface MembershipsApiRemoveAllRequest {
+    /**
+     * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     * @type number
+     * @memberof MembershipsApiremoveAll
+     */
+    listId: number
+}
+
 export class ObjectMembershipsApi {
     private api: ObservableMembershipsApi
 
@@ -368,15 +368,6 @@ export class ObjectMembershipsApi {
     }
 
     /**
-     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
-     * Delete All Records from a List
-     * @param param the request object
-     */
-    public deleteAll(param: MembershipsApiDeleteAllRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteAll(param.listId,  options).toPromise();
-    }
-
-    /**
      * Fetch the memberships of a list in order sorted by the `recordId` of the records in the list.  The `recordId`s are sorted in *ascending* order if an `after` offset or no offset is provided. If only a `before` offset is provided, then the records are sorted in *descending* order.  The `after` offset parameter will take precedence over the `before` offset in a case where both are provided.
      * Fetch List Memberships Ordered by ID
      * @param param the request object
@@ -392,6 +383,15 @@ export class ObjectMembershipsApi {
      */
     public remove(param: MembershipsApiRemoveRequest, options?: Configuration): Promise<MembershipsUpdateResponse> {
         return this.api.remove(param.listId, param.requestBody,  options).toPromise();
+    }
+
+    /**
+     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
+     * Delete All Records from a List
+     * @param param the request object
+     */
+    public removeAll(param: MembershipsApiRemoveAllRequest, options?: Configuration): Promise<void> {
+        return this.api.removeAll(param.listId,  options).toPromise();
     }
 
 }
