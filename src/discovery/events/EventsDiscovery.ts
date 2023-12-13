@@ -1,5 +1,3 @@
-import BaseDiscovery from '../BaseDiscovery'
-import type SendDiscovery from './send/SendDiscovery'
 import {
   createConfiguration,
   EventsApi,
@@ -11,10 +9,12 @@ import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import BaseDiscovery from '../BaseDiscovery'
+import type SendDiscovery from './send/SendDiscovery'
 
 export default class EventsDiscovery extends BaseDiscovery {
-  protected _send: SendDiscovery | undefined
   public eventsApi: EventsApi
+  protected _send: SendDiscovery | undefined
 
   constructor(config: IConfiguration = {}) {
     super(config)
