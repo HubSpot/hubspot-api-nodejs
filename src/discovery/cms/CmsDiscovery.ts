@@ -3,6 +3,7 @@ import type AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import type BlogsDiscovery from './blogs/BlogsDiscovery'
 import type DomainsDiscovery from './domains/DomainsDiscovery'
 import type HubdbDiscovery from './hubdb/HubdbDiscovery'
+import type PagesDiscovery from './pages/PagesDiscovery'
 import type PerformanceDiscovery from './performance/PerformanceDiscovery'
 import type SiteSearchDiscovery from './site_search/SiteSearchDiscovery'
 import type SourceCodeDiscovery from './source_code/SourceCodeDiscovery'
@@ -13,6 +14,7 @@ export default class CmsDiscovery extends BaseDiscovery {
   protected _blogs: BlogsDiscovery | undefined
   protected _domains: DomainsDiscovery | undefined
   protected _hubdb: HubdbDiscovery | undefined
+  protected _pages: PagesDiscovery | undefined
   protected _performance: PerformanceDiscovery | undefined
   protected _siteSearch: SiteSearchDiscovery | undefined
   protected _sourceCode: SourceCodeDiscovery | undefined
@@ -68,6 +70,19 @@ export default class CmsDiscovery extends BaseDiscovery {
     }
 
     return this._hubdb
+  }
+
+  /**
+   * Getter
+   * @returns PagesDiscovery
+   */
+  get pages() {
+    if (!this._pages) {
+      const requiredClass = require('./pages/PagesDiscovery')
+      this._pages = new requiredClass.default(this.config) as PagesDiscovery
+    }
+
+    return this._pages
   }
 
   /**
