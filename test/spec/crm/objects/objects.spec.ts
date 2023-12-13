@@ -3,10 +3,12 @@ import CallsDiscovery from '../../../../src/discovery/crm/objects/calls/CallsDis
 import CommunicationsDiscovery from '../../../../src/discovery/crm/objects/communications/CommunicationsDiscovery'
 import EmailsDiscovery from '../../../../src/discovery/crm/objects/emails/EmailsDiscovery'
 import FeedbackSubmissionsDiscovery from '../../../../src/discovery/crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery'
+import GoalsDiscovery from '../../../../src/discovery/crm/objects/goals/GoalsDiscovery'
 import MeetingsDiscovery from '../../../../src/discovery/crm/objects/meetings/MeetingsDiscovery'
 import NotesDiscovery from '../../../../src/discovery/crm/objects/notes/NotesDiscovery'
 import PostalMailDiscovery from '../../../../src/discovery/crm/objects/postal_mail/PostalMailDiscovery'
 import TasksDiscovery from '../../../../src/discovery/crm/objects/tasks/TasksDiscovery'
+import TaxesDiscovery from '../../../../src/discovery/crm/objects/taxes/TaxesDiscovery'
 
 describe('api client', () => {
   it('is discoverable', () => {
@@ -15,10 +17,12 @@ describe('api client', () => {
     expect(CallsDiscovery.name).toBe(client.calls.constructor.name)
     expect(EmailsDiscovery.name).toBe(client.emails.constructor.name)
     expect(FeedbackSubmissionsDiscovery.name).toBe(client.feedbackSubmissions.constructor.name)
+    expect(GoalsDiscovery.name).toBe(client.goals.constructor.name)
     expect(MeetingsDiscovery.name).toBe(client.meetings.constructor.name)
     expect(NotesDiscovery.name).toBe(client.notes.constructor.name)
     expect(PostalMailDiscovery.name).toBe(client.postalMail.constructor.name)
     expect(TasksDiscovery.name).toBe(client.tasks.constructor.name)
+    expect(TaxesDiscovery.name).toBe(client.taxes.constructor.name)
     expect(client.hasOwnProperty('associationsApi')).toBeTruthy()
     expect(client.hasOwnProperty('basicApi')).toBeTruthy()
     expect(client.hasOwnProperty('batchApi')).toBeTruthy()

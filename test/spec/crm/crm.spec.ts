@@ -6,6 +6,7 @@ import DealsDiscovery from '../../../src/discovery/crm/deals/DealsDiscovery'
 import ExtensionsDiscovery from '../../../src/discovery/crm/extensions/ExtensionsDiscovery'
 import ImportsDiscovery from '../../../src/discovery/crm/imports/ImportsDiscovery'
 import LineItemsDiscovery from '../../../src/discovery/crm/line_items/LineItemsDiscovery'
+import ListsDiscovery from '../../../src/discovery/crm/lists/ListsDiscovery'
 import ObjectsDiscovery from '../../../src/discovery/crm/objects/ObjectsDiscovery'
 import OwnersDiscovery from '../../../src/discovery/crm/owners/OwnersDiscovery'
 import PipelinesDiscovery from '../../../src/discovery/crm/pipelines/PipelinesDiscovery'
@@ -26,6 +27,7 @@ describe('api client', () => {
     expect(ExtensionsDiscovery.name).toBe(client.extensions.constructor.name)
     expect(ImportsDiscovery.name).toBe(client.imports.constructor.name)
     expect(LineItemsDiscovery.name).toBe(client.lineItems.constructor.name)
+    expect(ListsDiscovery.name).toBe(client.lists.constructor.name)
     expect(ObjectsDiscovery.name).toBe(client.objects.constructor.name)
     expect(OwnersDiscovery.name).toBe(client.owners.constructor.name)
     expect(PipelinesDiscovery.name).toBe(client.pipelines.constructor.name)

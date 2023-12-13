@@ -6,6 +6,7 @@ import type DealsDiscovery from './deals/DealsDiscovery'
 import type ExtensionsDiscovery from './extensions/ExtensionsDiscovery'
 import type ImportsDiscovery from './imports/ImportsDiscovery'
 import type LineItemsDiscovery from './line_items/LineItemsDiscovery'
+import type ListsDiscovery from './lists/ListsDiscovery'
 import type ObjectsDiscovery from './objects/ObjectsDiscovery'
 import type OwnersDiscovery from './owners/OwnersDiscovery'
 import type PipelinesDiscovery from './pipelines/PipelinesDiscovery'
@@ -24,6 +25,7 @@ export default class CrmDiscovery extends BaseDiscovery {
   protected _extensions: ExtensionsDiscovery | undefined
   protected _imports: ImportsDiscovery | undefined
   protected _lineItems: LineItemsDiscovery | undefined
+  protected _lists: ListsDiscovery | undefined
   protected _objects: ObjectsDiscovery | undefined
   protected _owners: OwnersDiscovery | undefined
   protected _pipelines: PipelinesDiscovery | undefined
@@ -123,6 +125,19 @@ export default class CrmDiscovery extends BaseDiscovery {
     }
 
     return this._lineItems
+  }
+
+  /**
+   * Getter
+   * @returns ListsDiscovery
+   */
+  get lists() {
+    if (!this._lists) {
+      const requiredClass = require('./lists/ListsDiscovery')
+      this._lists = new requiredClass.default(this.config) as ListsDiscovery
+    }
+
+    return this._lists
   }
 
   /**
