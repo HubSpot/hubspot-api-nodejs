@@ -19,6 +19,7 @@ import type CallsDiscovery from './calls/CallsDiscovery'
 import type CommunicationsDiscovery from './communications/CommunicationsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
+import type GoalsDiscovery from './goals/GoalsDiscovery'
 import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
 import type NotesDiscovery from './notes/NotesDiscovery'
 import type PostalMailDiscovery from './postal_mail/PostalMailDiscovery'
@@ -35,6 +36,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   protected _calls: CallsDiscovery | undefined
   protected _emails: EmailsDiscovery | undefined
   protected _feedbackSubmissions: FeedbackSubmissionsDiscovery | undefined
+  protected _goals: GoalsDiscovery | undefined
   protected _meetings: MeetingsDiscovery | undefined
   protected _notes: NotesDiscovery | undefined
   protected _postalMail: PostalMailDiscovery | undefined
@@ -110,6 +112,19 @@ export default class ObjectsDiscovery extends BaseDiscovery {
     }
 
     return this._feedbackSubmissions
+  }
+
+  /**
+   * Getter
+   * @returns GoalsDiscovery
+   */
+  get goals() {
+    if (!this._goals) {
+      const requiredClass = require('./goals/GoalsDiscovery')
+      this._goals = new requiredClass.default(this.config) as GoalsDiscovery
+    }
+
+    return this._goals
   }
 
   /**
