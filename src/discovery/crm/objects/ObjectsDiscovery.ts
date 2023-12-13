@@ -24,6 +24,7 @@ import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
 import type NotesDiscovery from './notes/NotesDiscovery'
 import type PostalMailDiscovery from './postal_mail/PostalMailDiscovery'
 import type TasksDiscovery from './tasks/TasksDiscovery'
+import type TaxesDiscovery from './taxes/TaxesDiscovery'
 
 export default class ObjectsDiscovery extends BaseDiscovery {
   public associationsApi: AssociationsApi
@@ -41,6 +42,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   protected _notes: NotesDiscovery | undefined
   protected _postalMail: PostalMailDiscovery | undefined
   protected _tasks: TasksDiscovery | undefined
+  protected _taxes: TaxesDiscovery | undefined
 
   constructor(config: IConfiguration) {
     super(config)
@@ -177,5 +179,18 @@ export default class ObjectsDiscovery extends BaseDiscovery {
     }
 
     return this._tasks
+  }
+
+  /**
+   * Getter
+   * @returns TasksDiscovery
+   */
+  get taxes() {
+    if (!this._taxes) {
+      const requiredClass = require('./taxes/TaxesDiscovery')
+      this._taxes = new requiredClass.default(this.config) as TaxesDiscovery
+    }
+
+    return this._taxes
   }
 }
