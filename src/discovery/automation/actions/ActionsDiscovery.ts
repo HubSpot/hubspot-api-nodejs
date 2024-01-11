@@ -1,11 +1,11 @@
 import {
-  CallbacksApi,
   createConfiguration,
-  DefinitionsApi,
-  FunctionsApi,
+  PublicActionDefinitionsApi,
+  PublicActionFunctionsApi,
+  PublicActionRevisionsApi,
+  PublicCallbacksApi,
   RequestContext,
   ResponseContext,
-  RevisionsApi,
   ServerConfiguration,
 } from '../../../../codegen/automation/actions/index'
 import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
@@ -14,10 +14,10 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class ActionsDiscovery {
-  public callbacksApi: CallbacksApi
-  public definitionsApi: DefinitionsApi
-  public functionsApi: FunctionsApi
-  public revisionsApi: RevisionsApi
+  public publicActionDefinitionsApi: PublicActionDefinitionsApi
+  public publicActionRevisionsApi: PublicActionRevisionsApi
+  public publicActionFunctionsApi: PublicActionFunctionsApi
+  public publicCallbacksApi: PublicCallbacksApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -30,9 +30,17 @@ export default class ActionsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.callbacksApi = ApiDecoratorService.getInstance().apply<CallbacksApi>(new CallbacksApi(configuration))
-    this.definitionsApi = ApiDecoratorService.getInstance().apply<DefinitionsApi>(new DefinitionsApi(configuration))
-    this.functionsApi = ApiDecoratorService.getInstance().apply<FunctionsApi>(new FunctionsApi(configuration))
-    this.revisionsApi = ApiDecoratorService.getInstance().apply<RevisionsApi>(new RevisionsApi(configuration))
+    this.publicActionDefinitionsApi = ApiDecoratorService.getInstance().apply<PublicActionDefinitionsApi>(
+      new PublicActionDefinitionsApi(configuration),
+    )
+    this.publicActionRevisionsApi = ApiDecoratorService.getInstance().apply<PublicActionRevisionsApi>(
+      new PublicActionRevisionsApi(configuration),
+    )
+    this.publicActionFunctionsApi = ApiDecoratorService.getInstance().apply<PublicActionFunctionsApi>(
+      new PublicActionFunctionsApi(configuration),
+    )
+    this.publicCallbacksApi = ApiDecoratorService.getInstance().apply<PublicCallbacksApi>(
+      new PublicCallbacksApi(configuration),
+    )
   }
 }
