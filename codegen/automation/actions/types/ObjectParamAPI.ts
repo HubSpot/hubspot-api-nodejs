@@ -1,547 +1,515 @@
 import { Configuration} from '../configuration'
 
-import { ActionFunction } from '../models/ActionFunction';
-import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
-import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+import { PublicActionDefinition } from '../models/PublicActionDefinition';
+import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
+import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionFunction } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
+import { PublicActionRevision } from '../models/PublicActionRevision';
 
-import { ObservableCallbacksApi } from "./ObservableAPI";
-import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
+import { ObservablePublicActionDefinitionsApi } from "./ObservableAPI";
+import { PublicActionDefinitionsApiRequestFactory, PublicActionDefinitionsApiResponseProcessor} from "../apis/PublicActionDefinitionsApi";
 
-export interface CallbacksApiCompleteRequest {
+export interface PublicActionDefinitionsApiArchiveRequest {
     /**
-     * The ID of the target app.
+     * 
      * @type string
-     * @memberof CallbacksApicomplete
-     */
-    callbackId: string
-    /**
-     * The result of the completed action.
-     * @type CallbackCompletionRequest
-     * @memberof CallbacksApicomplete
-     */
-    callbackCompletionRequest: CallbackCompletionRequest
-}
-
-export interface CallbacksApiCompleteBatchRequest {
-    /**
-     * The result of the completed action.
-     * @type BatchInputCallbackCompletionBatchRequest
-     * @memberof CallbacksApicompleteBatch
-     */
-    batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest
-}
-
-export class ObjectCallbacksApi {
-    private api: ObservableCallbacksApi
-
-    public constructor(configuration: Configuration, requestFactory?: CallbacksApiRequestFactory, responseProcessor?: CallbacksApiResponseProcessor) {
-        this.api = new ObservableCallbacksApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Completes the given action callback.
-     * Complete a callback
-     * @param param the request object
-     */
-    public complete(param: CallbacksApiCompleteRequest, options?: Configuration): Promise<void> {
-        return this.api.complete(param.callbackId, param.callbackCompletionRequest,  options).toPromise();
-    }
-
-    /**
-     * Completes the given action callbacks.
-     * Complete a batch of callbacks
-     * @param param the request object
-     */
-    public completeBatch(param: CallbacksApiCompleteBatchRequest, options?: Configuration): Promise<void> {
-        return this.api.completeBatch(param.batchInputCallbackCompletionBatchRequest,  options).toPromise();
-    }
-
-}
-
-import { ObservableDefinitionsApi } from "./ObservableAPI";
-import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
-
-export interface DefinitionsApiArchiveRequest {
-    /**
-     * The ID of the custom workflow action.
-     * @type string
-     * @memberof DefinitionsApiarchive
+     * @memberof PublicActionDefinitionsApiarchive
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof DefinitionsApiarchive
+     * @memberof PublicActionDefinitionsApiarchive
      */
     appId: number
 }
 
-export interface DefinitionsApiCreateRequest {
+export interface PublicActionDefinitionsApiCreateRequest {
     /**
      * 
      * @type number
-     * @memberof DefinitionsApicreate
+     * @memberof PublicActionDefinitionsApicreate
      */
     appId: number
     /**
-     * The custom workflow action to create.
-     * @type ExtensionActionDefinitionInput
-     * @memberof DefinitionsApicreate
+     * 
+     * @type PublicActionDefinitionEgg
+     * @memberof PublicActionDefinitionsApicreate
      */
-    extensionActionDefinitionInput: ExtensionActionDefinitionInput
+    publicActionDefinitionEgg: PublicActionDefinitionEgg
 }
 
-export interface DefinitionsApiGetByIdRequest {
+export interface PublicActionDefinitionsApiGetByIdRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof DefinitionsApigetById
+     * @memberof PublicActionDefinitionsApigetById
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof DefinitionsApigetById
+     * @memberof PublicActionDefinitionsApigetById
      */
     appId: number
     /**
-     * Whether to include archived custom actions.
+     * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefinitionsApigetById
+     * @memberof PublicActionDefinitionsApigetById
      */
     archived?: boolean
 }
 
-export interface DefinitionsApiGetPageRequest {
+export interface PublicActionDefinitionsApiGetPageRequest {
     /**
      * 
      * @type number
-     * @memberof DefinitionsApigetPage
+     * @memberof PublicActionDefinitionsApigetPage
      */
     appId: number
     /**
-     * Maximum number of results per page.
+     * The maximum number of results to display per page.
      * @type number
-     * @memberof DefinitionsApigetPage
+     * @memberof PublicActionDefinitionsApigetPage
      */
     limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof DefinitionsApigetPage
+     * @memberof PublicActionDefinitionsApigetPage
      */
     after?: string
     /**
-     * Whether to include archived custom actions.
+     * Whether to return only results that have been archived.
      * @type boolean
-     * @memberof DefinitionsApigetPage
+     * @memberof PublicActionDefinitionsApigetPage
      */
     archived?: boolean
 }
 
-export interface DefinitionsApiUpdateRequest {
+export interface PublicActionDefinitionsApiUpdateRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof DefinitionsApiupdate
+     * @memberof PublicActionDefinitionsApiupdate
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof DefinitionsApiupdate
+     * @memberof PublicActionDefinitionsApiupdate
      */
     appId: number
     /**
-     * The custom workflow action fields to be updated.
-     * @type ExtensionActionDefinitionPatch
-     * @memberof DefinitionsApiupdate
+     * 
+     * @type PublicActionDefinitionPatch
+     * @memberof PublicActionDefinitionsApiupdate
      */
-    extensionActionDefinitionPatch: ExtensionActionDefinitionPatch
+    publicActionDefinitionPatch: PublicActionDefinitionPatch
 }
 
-export class ObjectDefinitionsApi {
-    private api: ObservableDefinitionsApi
+export class ObjectPublicActionDefinitionsApi {
+    private api: ObservablePublicActionDefinitionsApi
 
-    public constructor(configuration: Configuration, requestFactory?: DefinitionsApiRequestFactory, responseProcessor?: DefinitionsApiResponseProcessor) {
-        this.api = new ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicActionDefinitionsApiRequestFactory, responseProcessor?: PublicActionDefinitionsApiResponseProcessor) {
+        this.api = new ObservablePublicActionDefinitionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
-     * Archive a custom action
      * @param param the request object
      */
-    public archive(param: DefinitionsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: PublicActionDefinitionsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.definitionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Creates a new custom workflow action.
-     * Create new custom action
      * @param param the request object
      */
-    public create(param: DefinitionsApiCreateRequest, options?: Configuration): Promise<ExtensionActionDefinition> {
-        return this.api.create(param.appId, param.extensionActionDefinitionInput,  options).toPromise();
+    public create(param: PublicActionDefinitionsApiCreateRequest, options?: Configuration): Promise<PublicActionDefinition> {
+        return this.api.create(param.appId, param.publicActionDefinitionEgg,  options).toPromise();
     }
 
     /**
-     * Returns a single custom workflow action with the specified ID.
-     * Get a custom action
      * @param param the request object
      */
-    public getById(param: DefinitionsApiGetByIdRequest, options?: Configuration): Promise<ExtensionActionDefinition> {
+    public getById(param: PublicActionDefinitionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionDefinition> {
         return this.api.getById(param.definitionId, param.appId, param.archived,  options).toPromise();
     }
 
     /**
-     * Returns a list of all custom workflow actions.
-     * Get all custom actions
      * @param param the request object
      */
-    public getPage(param: DefinitionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseExtensionActionDefinitionForwardPaging> {
+    public getPage(param: PublicActionDefinitionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
         return this.api.getPage(param.appId, param.limit, param.after, param.archived,  options).toPromise();
     }
 
     /**
-     * Updates a custom workflow action with new values for the specified fields.
-     * Update a custom action
      * @param param the request object
      */
-    public update(param: DefinitionsApiUpdateRequest, options?: Configuration): Promise<ExtensionActionDefinition> {
-        return this.api.update(param.definitionId, param.appId, param.extensionActionDefinitionPatch,  options).toPromise();
+    public update(param: PublicActionDefinitionsApiUpdateRequest, options?: Configuration): Promise<PublicActionDefinition> {
+        return this.api.update(param.definitionId, param.appId, param.publicActionDefinitionPatch,  options).toPromise();
     }
 
 }
 
-import { ObservableFunctionsApi } from "./ObservableAPI";
-import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
+import { ObservablePublicActionFunctionsApi } from "./ObservableAPI";
+import { PublicActionFunctionsApiRequestFactory, PublicActionFunctionsApiResponseProcessor} from "../apis/PublicActionFunctionsApi";
 
-export interface FunctionsApiArchiveRequest {
+export interface PublicActionFunctionsApiArchiveRequest {
     /**
-     * The ID of the custom workflow action
+     * 
      * @type string
-     * @memberof FunctionsApiarchive
+     * @memberof PublicActionFunctionsApiarchive
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApiarchive
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApiarchive
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
-     * The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * 
      * @type string
-     * @memberof FunctionsApiarchive
+     * @memberof PublicActionFunctionsApiarchive
      */
     functionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApiarchive
+     * @memberof PublicActionFunctionsApiarchive
      */
     appId: number
 }
 
-export interface FunctionsApiArchiveByFunctionTypeRequest {
+export interface PublicActionFunctionsApiArchiveByFunctionTypeRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApiarchiveByFunctionType
+     * @memberof PublicActionFunctionsApiarchiveByFunctionType
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApiarchiveByFunctionType
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApiarchiveByFunctionType
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type number
-     * @memberof FunctionsApiarchiveByFunctionType
+     * @memberof PublicActionFunctionsApiarchiveByFunctionType
      */
     appId: number
 }
 
-export interface FunctionsApiCreateOrReplaceRequest {
+export interface PublicActionFunctionsApiCreateOrReplaceRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApicreateOrReplace
+     * @memberof PublicActionFunctionsApicreateOrReplace
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApicreateOrReplace
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApicreateOrReplace
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
-     * The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * 
      * @type string
-     * @memberof FunctionsApicreateOrReplace
+     * @memberof PublicActionFunctionsApicreateOrReplace
      */
     functionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApicreateOrReplace
+     * @memberof PublicActionFunctionsApicreateOrReplace
      */
     appId: number
     /**
-     * The function source code. Must be valid JavaScript code.
+     * 
      * @type string
-     * @memberof FunctionsApicreateOrReplace
+     * @memberof PublicActionFunctionsApicreateOrReplace
      */
     body: string
 }
 
-export interface FunctionsApiCreateOrReplaceByFunctionTypeRequest {
+export interface PublicActionFunctionsApiCreateOrReplaceByFunctionTypeRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApicreateOrReplaceByFunctionType
+     * @memberof PublicActionFunctionsApicreateOrReplaceByFunctionType
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApicreateOrReplaceByFunctionType
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApicreateOrReplaceByFunctionType
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type number
-     * @memberof FunctionsApicreateOrReplaceByFunctionType
+     * @memberof PublicActionFunctionsApicreateOrReplaceByFunctionType
      */
     appId: number
     /**
-     * The function source code. Must be valid JavaScript code.
+     * 
      * @type string
-     * @memberof FunctionsApicreateOrReplaceByFunctionType
+     * @memberof PublicActionFunctionsApicreateOrReplaceByFunctionType
      */
     body: string
 }
 
-export interface FunctionsApiGetByFunctionTypeRequest {
+export interface PublicActionFunctionsApiGetByFunctionTypeRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApigetByFunctionType
+     * @memberof PublicActionFunctionsApigetByFunctionType
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApigetByFunctionType
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApigetByFunctionType
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type number
-     * @memberof FunctionsApigetByFunctionType
+     * @memberof PublicActionFunctionsApigetByFunctionType
      */
     appId: number
 }
 
-export interface FunctionsApiGetByIdRequest {
+export interface PublicActionFunctionsApiGetByIdRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApigetById
+     * @memberof PublicActionFunctionsApigetById
      */
     definitionId: string
     /**
-     * The type of function. This determines when the function will be called.
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39;
-     * @memberof FunctionsApigetById
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof PublicActionFunctionsApigetById
      */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS'
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
-     * The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * 
      * @type string
-     * @memberof FunctionsApigetById
+     * @memberof PublicActionFunctionsApigetById
      */
     functionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApigetById
+     * @memberof PublicActionFunctionsApigetById
      */
     appId: number
 }
 
-export interface FunctionsApiGetPageRequest {
+export interface PublicActionFunctionsApiGetPageRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof FunctionsApigetPage
+     * @memberof PublicActionFunctionsApigetPage
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApigetPage
+     * @memberof PublicActionFunctionsApigetPage
      */
     appId: number
 }
 
-export class ObjectFunctionsApi {
-    private api: ObservableFunctionsApi
+export class ObjectPublicActionFunctionsApi {
+    private api: ObservablePublicActionFunctionsApi
 
-    public constructor(configuration: Configuration, requestFactory?: FunctionsApiRequestFactory, responseProcessor?: FunctionsApiResponseProcessor) {
-        this.api = new ObservableFunctionsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicActionFunctionsApiRequestFactory, responseProcessor?: PublicActionFunctionsApiResponseProcessor) {
+        this.api = new ObservablePublicActionFunctionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
      * @param param the request object
      */
-    public archive(param: FunctionsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: PublicActionFunctionsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
      * @param param the request object
      */
-    public archiveByFunctionType(param: FunctionsApiArchiveByFunctionTypeRequest, options?: Configuration): Promise<void> {
+    public archiveByFunctionType(param: PublicActionFunctionsApiArchiveByFunctionTypeRequest, options?: Configuration): Promise<void> {
         return this.api.archiveByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
      * @param param the request object
      */
-    public createOrReplace(param: FunctionsApiCreateOrReplaceRequest, options?: Configuration): Promise<ActionFunctionIdentifier> {
+    public createOrReplace(param: PublicActionFunctionsApiCreateOrReplaceRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
         return this.api.createOrReplace(param.definitionId, param.functionType, param.functionId, param.appId, param.body,  options).toPromise();
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
      * @param param the request object
      */
-    public createOrReplaceByFunctionType(param: FunctionsApiCreateOrReplaceByFunctionTypeRequest, options?: Configuration): Promise<ActionFunctionIdentifier> {
+    public createOrReplaceByFunctionType(param: PublicActionFunctionsApiCreateOrReplaceByFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
         return this.api.createOrReplaceByFunctionType(param.definitionId, param.functionType, param.appId, param.body,  options).toPromise();
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
      * @param param the request object
      */
-    public getByFunctionType(param: FunctionsApiGetByFunctionTypeRequest, options?: Configuration): Promise<ActionFunction> {
+    public getByFunctionType(param: PublicActionFunctionsApiGetByFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunction> {
         return this.api.getByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
      * @param param the request object
      */
-    public getById(param: FunctionsApiGetByIdRequest, options?: Configuration): Promise<ActionFunction> {
+    public getById(param: PublicActionFunctionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionFunction> {
         return this.api.getById(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Returns a list of all functions that are associated with the given custom workflow action.
-     * Get all custom action functions
      * @param param the request object
      */
-    public getPage(param: FunctionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseActionFunctionIdentifierNoPaging> {
+    public getPage(param: PublicActionFunctionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
         return this.api.getPage(param.definitionId, param.appId,  options).toPromise();
     }
 
 }
 
-import { ObservableRevisionsApi } from "./ObservableAPI";
-import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
+import { ObservablePublicActionRevisionsApi } from "./ObservableAPI";
+import { PublicActionRevisionsApiRequestFactory, PublicActionRevisionsApiResponseProcessor} from "../apis/PublicActionRevisionsApi";
 
-export interface RevisionsApiGetByIdRequest {
+export interface PublicActionRevisionsApiGetByIdRequest {
     /**
-     * The ID of the custom workflow action.
+     * 
      * @type string
-     * @memberof RevisionsApigetById
+     * @memberof PublicActionRevisionsApigetById
      */
     definitionId: string
     /**
-     * The version of the custom workflow action.
+     * 
      * @type string
-     * @memberof RevisionsApigetById
+     * @memberof PublicActionRevisionsApigetById
      */
     revisionId: string
     /**
      * 
      * @type number
-     * @memberof RevisionsApigetById
+     * @memberof PublicActionRevisionsApigetById
      */
     appId: number
 }
 
-export interface RevisionsApiGetPageRequest {
+export interface PublicActionRevisionsApiGetPageRequest {
     /**
-     * The ID of the custom workflow action
+     * 
      * @type string
-     * @memberof RevisionsApigetPage
+     * @memberof PublicActionRevisionsApigetPage
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof RevisionsApigetPage
+     * @memberof PublicActionRevisionsApigetPage
      */
     appId: number
     /**
-     * Maximum number of results per page.
+     * The maximum number of results to display per page.
      * @type number
-     * @memberof RevisionsApigetPage
+     * @memberof PublicActionRevisionsApigetPage
      */
     limit?: number
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
-     * @memberof RevisionsApigetPage
+     * @memberof PublicActionRevisionsApigetPage
      */
     after?: string
 }
 
-export class ObjectRevisionsApi {
-    private api: ObservableRevisionsApi
+export class ObjectPublicActionRevisionsApi {
+    private api: ObservablePublicActionRevisionsApi
 
-    public constructor(configuration: Configuration, requestFactory?: RevisionsApiRequestFactory, responseProcessor?: RevisionsApiResponseProcessor) {
-        this.api = new ObservableRevisionsApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicActionRevisionsApiRequestFactory, responseProcessor?: PublicActionRevisionsApiResponseProcessor) {
+        this.api = new ObservablePublicActionRevisionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Returns the given version of a custom workflow action.
-     * Get a revision for a custom action
      * @param param the request object
      */
-    public getById(param: RevisionsApiGetByIdRequest, options?: Configuration): Promise<ActionRevision> {
+    public getById(param: PublicActionRevisionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionRevision> {
         return this.api.getById(param.definitionId, param.revisionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Returns a list of revisions for a custom workflow action.
-     * Get all revisions for a custom action
      * @param param the request object
      */
-    public getPage(param: RevisionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseActionRevisionForwardPaging> {
+    public getPage(param: PublicActionRevisionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
         return this.api.getPage(param.definitionId, param.appId, param.limit, param.after,  options).toPromise();
+    }
+
+}
+
+import { ObservablePublicCallbacksApi } from "./ObservableAPI";
+import { PublicCallbacksApiRequestFactory, PublicCallbacksApiResponseProcessor} from "../apis/PublicCallbacksApi";
+
+export interface PublicCallbacksApiCompleteRequest {
+    /**
+     * 
+     * @type string
+     * @memberof PublicCallbacksApicomplete
+     */
+    callbackId: string
+    /**
+     * 
+     * @type CallbackCompletionRequest
+     * @memberof PublicCallbacksApicomplete
+     */
+    callbackCompletionRequest: CallbackCompletionRequest
+}
+
+export interface PublicCallbacksApiCompleteBatchRequest {
+    /**
+     * 
+     * @type BatchInputCallbackCompletionBatchRequest
+     * @memberof PublicCallbacksApicompleteBatch
+     */
+    batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest
+}
+
+export class ObjectPublicCallbacksApi {
+    private api: ObservablePublicCallbacksApi
+
+    public constructor(configuration: Configuration, requestFactory?: PublicCallbacksApiRequestFactory, responseProcessor?: PublicCallbacksApiResponseProcessor) {
+        this.api = new ObservablePublicCallbacksApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public complete(param: PublicCallbacksApiCompleteRequest, options?: Configuration): Promise<void> {
+        return this.api.complete(param.callbackId, param.callbackCompletionRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public completeBatch(param: PublicCallbacksApiCompleteBatchRequest, options?: Configuration): Promise<void> {
+        return this.api.completeBatch(param.batchInputCallbackCompletionBatchRequest,  options).toPromise();
     }
 
 }

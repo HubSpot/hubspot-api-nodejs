@@ -8,20 +8,18 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+import { PublicActionDefinition } from '../models/PublicActionDefinition';
+import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
+import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
 
 /**
  * no description
  */
-export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
+export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
-     * Archive a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * @param definitionId 
      * @param appId 
      */
     public async archive(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -29,13 +27,13 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("DefinitionsApi", "archive", "definitionId");
+            throw new RequiredError("PublicActionDefinitionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("DefinitionsApi", "archive", "appId");
+            throw new RequiredError("PublicActionDefinitionsApi", "archive", "appId");
         }
 
 
@@ -65,23 +63,21 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates a new custom workflow action.
-     * Create new custom action
      * @param appId 
-     * @param extensionActionDefinitionInput The custom workflow action to create.
+     * @param publicActionDefinitionEgg 
      */
-    public async create(appId: number, extensionActionDefinitionInput: ExtensionActionDefinitionInput, _options?: Configuration): Promise<RequestContext> {
+    public async create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("DefinitionsApi", "create", "appId");
+            throw new RequiredError("PublicActionDefinitionsApi", "create", "appId");
         }
 
 
-        // verify required parameter 'extensionActionDefinitionInput' is not null or undefined
-        if (extensionActionDefinitionInput === null || extensionActionDefinitionInput === undefined) {
-            throw new RequiredError("DefinitionsApi", "create", "extensionActionDefinitionInput");
+        // verify required parameter 'publicActionDefinitionEgg' is not null or undefined
+        if (publicActionDefinitionEgg === null || publicActionDefinitionEgg === undefined) {
+            throw new RequiredError("PublicActionDefinitionsApi", "create", "publicActionDefinitionEgg");
         }
 
 
@@ -100,7 +96,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(extensionActionDefinitionInput, "ExtensionActionDefinitionInput", ""),
+            ObjectSerializer.serialize(publicActionDefinitionEgg, "PublicActionDefinitionEgg", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -121,24 +117,22 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a single custom workflow action with the specified ID.
-     * Get a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * @param definitionId 
      * @param appId 
-     * @param archived Whether to include archived custom actions.
+     * @param archived Whether to return only results that have been archived.
      */
     public async getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("DefinitionsApi", "getById", "definitionId");
+            throw new RequiredError("PublicActionDefinitionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("DefinitionsApi", "getById", "appId");
+            throw new RequiredError("PublicActionDefinitionsApi", "getById", "appId");
         }
 
 
@@ -174,19 +168,17 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of all custom workflow actions.
-     * Get all custom actions
      * @param appId 
-     * @param limit Maximum number of results per page.
+     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Whether to include archived custom actions.
+     * @param archived Whether to return only results that have been archived.
      */
     public async getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("DefinitionsApi", "getPage", "appId");
+            throw new RequiredError("PublicActionDefinitionsApi", "getPage", "appId");
         }
 
 
@@ -233,30 +225,28 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates a custom workflow action with new values for the specified fields.
-     * Update a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * @param definitionId 
      * @param appId 
-     * @param extensionActionDefinitionPatch The custom workflow action fields to be updated.
+     * @param publicActionDefinitionPatch 
      */
-    public async update(definitionId: string, appId: number, extensionActionDefinitionPatch: ExtensionActionDefinitionPatch, _options?: Configuration): Promise<RequestContext> {
+    public async update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("DefinitionsApi", "update", "definitionId");
+            throw new RequiredError("PublicActionDefinitionsApi", "update", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("DefinitionsApi", "update", "appId");
+            throw new RequiredError("PublicActionDefinitionsApi", "update", "appId");
         }
 
 
-        // verify required parameter 'extensionActionDefinitionPatch' is not null or undefined
-        if (extensionActionDefinitionPatch === null || extensionActionDefinitionPatch === undefined) {
-            throw new RequiredError("DefinitionsApi", "update", "extensionActionDefinitionPatch");
+        // verify required parameter 'publicActionDefinitionPatch' is not null or undefined
+        if (publicActionDefinitionPatch === null || publicActionDefinitionPatch === undefined) {
+            throw new RequiredError("PublicActionDefinitionsApi", "update", "publicActionDefinitionPatch");
         }
 
 
@@ -276,7 +266,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(extensionActionDefinitionPatch, "ExtensionActionDefinitionPatch", ""),
+            ObjectSerializer.serialize(publicActionDefinitionPatch, "PublicActionDefinitionPatch", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -298,7 +288,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class DefinitionsApiResponseProcessor {
+export class PublicActionDefinitionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -339,13 +329,13 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<ExtensionActionDefinition > {
+     public async create(response: ResponseContext): Promise<PublicActionDefinition > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -358,10 +348,10 @@ export class DefinitionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
 
@@ -375,13 +365,13 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<ExtensionActionDefinition > {
+     public async getById(response: ResponseContext): Promise<PublicActionDefinition > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -394,10 +384,10 @@ export class DefinitionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
 
@@ -411,13 +401,13 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseExtensionActionDefinitionForwardPaging > {
+     public async getPage(response: ResponseContext): Promise<CollectionResponsePublicActionDefinitionForwardPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseExtensionActionDefinitionForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionDefinitionForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseExtensionActionDefinitionForwardPaging", ""
-            ) as CollectionResponseExtensionActionDefinitionForwardPaging;
+                "CollectionResponsePublicActionDefinitionForwardPaging", ""
+            ) as CollectionResponsePublicActionDefinitionForwardPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -430,10 +420,10 @@ export class DefinitionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseExtensionActionDefinitionForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionDefinitionForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseExtensionActionDefinitionForwardPaging", ""
-            ) as CollectionResponseExtensionActionDefinitionForwardPaging;
+                "CollectionResponsePublicActionDefinitionForwardPaging", ""
+            ) as CollectionResponsePublicActionDefinitionForwardPaging;
             return body;
         }
 
@@ -447,13 +437,13 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<ExtensionActionDefinition > {
+     public async update(response: ResponseContext): Promise<PublicActionDefinition > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -466,10 +456,10 @@ export class DefinitionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ExtensionActionDefinition = ObjectSerializer.deserialize(
+            const body: PublicActionDefinition = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ExtensionActionDefinition", ""
-            ) as ExtensionActionDefinition;
+                "PublicActionDefinition", ""
+            ) as PublicActionDefinition;
             return body;
         }
 

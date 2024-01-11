@@ -1,52 +1,56 @@
-export * from '../models/ActionFunction';
-export * from '../models/ActionFunctionIdentifier';
-export * from '../models/ActionLabels';
-export * from '../models/ActionRevision';
 export * from '../models/BatchInputCallbackCompletionBatchRequest';
 export * from '../models/CallbackCompletionBatchRequest';
 export * from '../models/CallbackCompletionRequest';
-export * from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
-export * from '../models/CollectionResponseActionRevisionForwardPaging';
-export * from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-export * from '../models/ConditionalSingleFieldDependency';
+export * from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+export * from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+export * from '../models/CollectionResponsePublicActionRevisionForwardPaging';
 export * from '../models/ErrorDetail';
-export * from '../models/ExtensionActionDefinition';
-export * from '../models/ExtensionActionDefinitionInput';
-export * from '../models/ExtensionActionDefinitionPatch';
-export * from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 export * from '../models/FieldTypeDefinition';
 export * from '../models/ForwardPaging';
 export * from '../models/InputFieldDefinition';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
-export * from '../models/ObjectRequestOptions';
 export * from '../models/Option';
-export * from '../models/SingleFieldDependency';
+export * from '../models/OutputFieldDefinition';
+export * from '../models/PublicActionDefinition';
+export * from '../models/PublicActionDefinitionEgg';
+export * from '../models/PublicActionDefinitionInputFieldDependenciesInner';
+export * from '../models/PublicActionDefinitionPatch';
+export * from '../models/PublicActionFunction';
+export * from '../models/PublicActionFunctionIdentifier';
+export * from '../models/PublicActionLabels';
+export * from '../models/PublicActionRevision';
+export * from '../models/PublicConditionalSingleFieldDependency';
+export * from '../models/PublicExecutionTranslationRule';
+export * from '../models/PublicObjectRequestOptions';
+export * from '../models/PublicSingleFieldDependency';
 
-import { ActionFunction     } from '../models/ActionFunction';
-import { ActionFunctionIdentifier    } from '../models/ActionFunctionIdentifier';
-import { ActionLabels } from '../models/ActionLabels';
-import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
 import { CallbackCompletionBatchRequest } from '../models/CallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
-import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ConditionalSingleFieldDependency      } from '../models/ConditionalSingleFieldDependency';
+import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
-import { ExtensionActionDefinitionPatchInputFieldDependenciesInner      } from '../models/ExtensionActionDefinitionPatchInputFieldDependenciesInner';
 import { FieldTypeDefinition        } from '../models/FieldTypeDefinition';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { InputFieldDefinition     } from '../models/InputFieldDefinition';
+import { InputFieldDefinition      } from '../models/InputFieldDefinition';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { ObjectRequestOptions } from '../models/ObjectRequestOptions';
 import { Option } from '../models/Option';
-import { SingleFieldDependency     } from '../models/SingleFieldDependency';
+import { OutputFieldDefinition } from '../models/OutputFieldDefinition';
+import { PublicActionDefinition } from '../models/PublicActionDefinition';
+import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
+import { PublicActionDefinitionInputFieldDependenciesInner      } from '../models/PublicActionDefinitionInputFieldDependenciesInner';
+import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionFunction     } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier    } from '../models/PublicActionFunctionIdentifier';
+import { PublicActionLabels } from '../models/PublicActionLabels';
+import { PublicActionRevision } from '../models/PublicActionRevision';
+import { PublicConditionalSingleFieldDependency      } from '../models/PublicConditionalSingleFieldDependency';
+import { PublicExecutionTranslationRule } from '../models/PublicExecutionTranslationRule';
+import { PublicObjectRequestOptions } from '../models/PublicObjectRequestOptions';
+import { PublicSingleFieldDependency     } from '../models/PublicSingleFieldDependency';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -68,42 +72,44 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "ActionFunctionFunctionTypeEnum",
-    "ActionFunctionIdentifierFunctionTypeEnum",
-    "ConditionalSingleFieldDependencyDependencyTypeEnum",
-    "ExtensionActionDefinitionPatchInputFieldDependenciesInnerDependencyTypeEnum",
+    "FieldTypeDefinitionReferencedObjectTypeEnum",
     "FieldTypeDefinitionTypeEnum",
     "FieldTypeDefinitionFieldTypeEnum",
-    "FieldTypeDefinitionReferencedObjectTypeEnum",
     "InputFieldDefinitionSupportedValueTypesEnum",
-    "SingleFieldDependencyDependencyTypeEnum",
+    "PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
+    "PublicActionFunctionFunctionTypeEnum",
+    "PublicActionFunctionIdentifierFunctionTypeEnum",
+    "PublicConditionalSingleFieldDependencyDependencyTypeEnum",
+    "PublicSingleFieldDependencyDependencyTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "ActionFunction": ActionFunction,
-    "ActionFunctionIdentifier": ActionFunctionIdentifier,
-    "ActionLabels": ActionLabels,
-    "ActionRevision": ActionRevision,
     "BatchInputCallbackCompletionBatchRequest": BatchInputCallbackCompletionBatchRequest,
     "CallbackCompletionBatchRequest": CallbackCompletionBatchRequest,
     "CallbackCompletionRequest": CallbackCompletionRequest,
-    "CollectionResponseActionFunctionIdentifierNoPaging": CollectionResponseActionFunctionIdentifierNoPaging,
-    "CollectionResponseActionRevisionForwardPaging": CollectionResponseActionRevisionForwardPaging,
-    "CollectionResponseExtensionActionDefinitionForwardPaging": CollectionResponseExtensionActionDefinitionForwardPaging,
-    "ConditionalSingleFieldDependency": ConditionalSingleFieldDependency,
+    "CollectionResponsePublicActionDefinitionForwardPaging": CollectionResponsePublicActionDefinitionForwardPaging,
+    "CollectionResponsePublicActionFunctionIdentifierNoPaging": CollectionResponsePublicActionFunctionIdentifierNoPaging,
+    "CollectionResponsePublicActionRevisionForwardPaging": CollectionResponsePublicActionRevisionForwardPaging,
     "ErrorDetail": ErrorDetail,
-    "ExtensionActionDefinition": ExtensionActionDefinition,
-    "ExtensionActionDefinitionInput": ExtensionActionDefinitionInput,
-    "ExtensionActionDefinitionPatch": ExtensionActionDefinitionPatch,
-    "ExtensionActionDefinitionPatchInputFieldDependenciesInner": ExtensionActionDefinitionPatchInputFieldDependenciesInner,
     "FieldTypeDefinition": FieldTypeDefinition,
     "ForwardPaging": ForwardPaging,
     "InputFieldDefinition": InputFieldDefinition,
     "ModelError": ModelError,
     "NextPage": NextPage,
-    "ObjectRequestOptions": ObjectRequestOptions,
     "Option": Option,
-    "SingleFieldDependency": SingleFieldDependency,
+    "OutputFieldDefinition": OutputFieldDefinition,
+    "PublicActionDefinition": PublicActionDefinition,
+    "PublicActionDefinitionEgg": PublicActionDefinitionEgg,
+    "PublicActionDefinitionInputFieldDependenciesInner": PublicActionDefinitionInputFieldDependenciesInner,
+    "PublicActionDefinitionPatch": PublicActionDefinitionPatch,
+    "PublicActionFunction": PublicActionFunction,
+    "PublicActionFunctionIdentifier": PublicActionFunctionIdentifier,
+    "PublicActionLabels": PublicActionLabels,
+    "PublicActionRevision": PublicActionRevision,
+    "PublicConditionalSingleFieldDependency": PublicConditionalSingleFieldDependency,
+    "PublicExecutionTranslationRule": PublicExecutionTranslationRule,
+    "PublicObjectRequestOptions": PublicObjectRequestOptions,
+    "PublicSingleFieldDependency": PublicSingleFieldDependency,
 }
 
 export class ObjectSerializer {

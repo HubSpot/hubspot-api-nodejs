@@ -8,47 +8,45 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { ActionFunction } from '../models/ActionFunction';
-import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { PublicActionFunction } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 
 /**
  * no description
  */
-export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
+export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public async archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "archive", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "functionId");
+            throw new RequiredError("PublicActionFunctionsApi", "archive", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "archive", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "archive", "appId");
         }
 
 
@@ -80,30 +78,28 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "appId");
         }
 
 
@@ -134,44 +130,42 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "functionId");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplace", "body");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "body");
         }
 
 
@@ -214,37 +208,35 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "body");
+            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "body");
         }
 
 
@@ -286,30 +278,28 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "getByFunctionType", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "getByFunctionType", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "getByFunctionType", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "appId");
         }
 
 
@@ -340,37 +330,35 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "functionType");
+            throw new RequiredError("PublicActionFunctionsApi", "getById", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "functionId");
+            throw new RequiredError("PublicActionFunctionsApi", "getById", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "getById", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "getById", "appId");
         }
 
 
@@ -402,9 +390,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of all functions that are associated with the given custom workflow action.
-     * Get all custom action functions
-     * @param definitionId The ID of the custom workflow action.
+     * @param definitionId 
      * @param appId 
      */
     public async getPage(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -412,13 +398,13 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("FunctionsApi", "getPage", "definitionId");
+            throw new RequiredError("PublicActionFunctionsApi", "getPage", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("FunctionsApi", "getPage", "appId");
+            throw new RequiredError("PublicActionFunctionsApi", "getPage", "appId");
         }
 
 
@@ -449,7 +435,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class FunctionsApiResponseProcessor {
+export class PublicActionFunctionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -522,13 +508,13 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplace
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplace(response: ResponseContext): Promise<ActionFunctionIdentifier > {
+     public async createOrReplace(response: ResponseContext): Promise<PublicActionFunctionIdentifier > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -541,10 +527,10 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
             return body;
         }
 
@@ -558,13 +544,13 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplaceByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplaceByFunctionType(response: ResponseContext): Promise<ActionFunctionIdentifier > {
+     public async createOrReplaceByFunctionType(response: ResponseContext): Promise<PublicActionFunctionIdentifier > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -577,10 +563,10 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
             return body;
         }
 
@@ -594,13 +580,13 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getByFunctionType(response: ResponseContext): Promise<ActionFunction > {
+     public async getByFunctionType(response: ResponseContext): Promise<PublicActionFunction > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -613,10 +599,10 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
             return body;
         }
 
@@ -630,13 +616,13 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<ActionFunction > {
+     public async getById(response: ResponseContext): Promise<PublicActionFunction > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -649,10 +635,10 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
             return body;
         }
 
@@ -666,13 +652,13 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseActionFunctionIdentifierNoPaging > {
+     public async getPage(response: ResponseContext): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionFunctionIdentifierNoPaging", ""
-            ) as CollectionResponseActionFunctionIdentifierNoPaging;
+                "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
+            ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -685,10 +671,10 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionFunctionIdentifierNoPaging", ""
-            ) as CollectionResponseActionFunctionIdentifierNoPaging;
+                "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
+            ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
             return body;
         }
 

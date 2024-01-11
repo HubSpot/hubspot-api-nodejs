@@ -11,31 +11,34 @@
  */
 
 
-export class CallbackCompletionBatchRequest {
-    'outputFields': { [key: string]: string; };
-    'callbackId': string;
+export class PublicActionFunctionIdentifier {
+    'functionType': PublicActionFunctionIdentifierFunctionTypeEnum;
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "outputFields",
-            "baseName": "outputFields",
-            "type": "{ [key: string]: string; }",
+            "name": "functionType",
+            "baseName": "functionType",
+            "type": "PublicActionFunctionIdentifierFunctionTypeEnum",
             "format": ""
         },
         {
-            "name": "callbackId",
-            "baseName": "callbackId",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CallbackCompletionBatchRequest.attributeTypeMap;
+        return PublicActionFunctionIdentifier.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type PublicActionFunctionIdentifierFunctionTypeEnum = "PRE_ACTION_EXECUTION" | "PRE_FETCH_OPTIONS" | "POST_FETCH_OPTIONS" | "POST_ACTION_EXECUTION" ;
 
