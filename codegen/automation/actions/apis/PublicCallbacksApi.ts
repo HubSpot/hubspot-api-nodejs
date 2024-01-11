@@ -14,26 +14,24 @@ import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 /**
  * no description
  */
-export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
+export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Completes the given action callback.
-     * Complete a callback
-     * @param callbackId The ID of the target app.
-     * @param callbackCompletionRequest The result of the completed action.
+     * @param callbackId 
+     * @param callbackCompletionRequest 
      */
     public async complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'callbackId' is not null or undefined
         if (callbackId === null || callbackId === undefined) {
-            throw new RequiredError("CallbacksApi", "complete", "callbackId");
+            throw new RequiredError("PublicCallbacksApi", "complete", "callbackId");
         }
 
 
         // verify required parameter 'callbackCompletionRequest' is not null or undefined
         if (callbackCompletionRequest === null || callbackCompletionRequest === undefined) {
-            throw new RequiredError("CallbacksApi", "complete", "callbackCompletionRequest");
+            throw new RequiredError("PublicCallbacksApi", "complete", "callbackCompletionRequest");
         }
 
 
@@ -73,16 +71,14 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Completes the given action callbacks.
-     * Complete a batch of callbacks
-     * @param batchInputCallbackCompletionBatchRequest The result of the completed action.
+     * @param batchInputCallbackCompletionBatchRequest 
      */
     public async completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputCallbackCompletionBatchRequest' is not null or undefined
         if (batchInputCallbackCompletionBatchRequest === null || batchInputCallbackCompletionBatchRequest === undefined) {
-            throw new RequiredError("CallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
+            throw new RequiredError("PublicCallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
         }
 
 
@@ -122,7 +118,7 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class CallbacksApiResponseProcessor {
+export class PublicCallbacksApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

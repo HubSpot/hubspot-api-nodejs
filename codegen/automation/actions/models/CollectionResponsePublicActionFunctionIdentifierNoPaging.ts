@@ -10,29 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 
-export class CallbackCompletionBatchRequest {
-    'outputFields': { [key: string]: string; };
-    'callbackId': string;
+export class CollectionResponsePublicActionFunctionIdentifierNoPaging {
+    'results': Array<PublicActionFunctionIdentifier>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "outputFields",
-            "baseName": "outputFields",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
-            "name": "callbackId",
-            "baseName": "callbackId",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicActionFunctionIdentifier>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CallbackCompletionBatchRequest.attributeTypeMap;
+        return CollectionResponsePublicActionFunctionIdentifierNoPaging.attributeTypeMap;
     }
 
     public constructor() {
