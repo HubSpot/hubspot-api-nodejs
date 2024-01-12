@@ -160,7 +160,7 @@ await hubspotClient.crm.associations.v4.basicApi.create(
     [
         {
               "associationCategory": "HUBSPOT_DEFINED",
-              "associationTypeId": AssociationTypes.companyToContact 
+              "associationTypeId": AssociationTypes.companyToContact
               // AssociationTypes contains the most popular HubSpot defined association types
         }
     ]
@@ -258,7 +258,7 @@ const publicObjectSearchRequest = {
             operator: 'GTE',
             value: `${Date.now() - 30 * 60000}`
         }
-        ] 
+        ]
     }
     ],
     sorts: [{ propertyName: 'createdate', direction: 'DESCENDING' }],
@@ -321,7 +321,7 @@ const response = await hubspotClient.files.filesApi.upload(
     '/folder',
     'photo.jpg',
     undefined,
-    JSON.stringify({ 
+    JSON.stringify({
         access: 'PRIVATE',
         overwrite: false,
         duplicateValidationStrategy: 'NONE',
@@ -410,11 +410,11 @@ console.log(response);
 
 ## Reserved words
 
-The SDK has reserved words(e.g. `from`). [Full list of reserved words.](https://openapi-generator.tech/docs/generators/typescript#reserved-words)
-When you face with a reserved word you have to add `_` before the word(e.g. `_from`).
+The SDK has reserved words(e.g. `from`, `in`). [Full list of reserved words.](https://openapi-generator.tech/docs/generators/typescript#reserved-words)
+When you face with a reserved word you have to add `_` before the word(e.g. `_from`, `_in`).
 
 ```javascript
-const BatchInputPublicAssociation = { 
+const BatchInputPublicAssociation = {
     inputs: [
         {
             _from: {
@@ -425,7 +425,7 @@ const BatchInputPublicAssociation = {
             },
             type: 'contact_to_company'
         }
-    ] 
+    ]
 };
 
 const response = await hubspotClient.crm.associations.batchApi.create(

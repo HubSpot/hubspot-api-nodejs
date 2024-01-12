@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/10.2.0...HEAD)
 
+## [11.0.0] - 2024-01-18
+
+## Updated
+
+- Rename `automation.actions.callbacksApi` => `automation.actions.publicCallbacksApi`.
+- Rename `automation.actions.definitionsAPI` => `automation.actions.publicActionDefinitionsAPI`.
+- Rename `automation.actions.functionsApi` => `automation.actions.publicActionFunctionsApi`.
+- Rename `automation.actions.revisionsApi` => `automation.actions.publicActionRevisionsApi`.
+- `automation.actions.definitionsAPI.create(appId: number, extensionActionDefinitionInput: ExtensionActionDefinitionInput):Promise<ExtensionActionDefinition>` => `automation.actions.publicActionDefinitionsAPI.create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg):Promise<PublicActionDefinition>`.
+- `automation.actions.definitionsAPI.getById():Promise<ExtensionActionDefinition>` => `automation.actions.publicActionDefinitionsAPI.getById():Promise<PublicActionDefinition>`.
+- `automation.actions.definitionsAPI.update(definitionId: string, appId: number, extensionActionDefinitionPatch: ExtensionActionDefinitionPatch):Promise<ExtensionActionDefinition>` => `automation.actions.publicActionDefinitionsAPI.update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch):Promise<PublicActionDefinition>`.
+- `automation.actions.definitionsAPI.getPage():Promise<CollectionResponseExtensionActionDefinitionForwardPaging>` => `automation.actions.publicActionDefinitionsAPI.getPage():Promise<CollectionResponsePublicActionDefinitionForwardPaging>`.
+- Added new function type `POST_ACTION_EXECUTION` to all methods of `automation.actions.publicActionFunctionsApi`.
+- `automation.actions.functionsApi.createOrReplace():Promise<ActionFunctionIdentifier>` => `automation.actions.publicActionFunctionsApi.createOrReplace():Promise<PublicActionFunctionIdentifier >`.
+- `automation.actions.functionsApi.createOrReplaceByFunctionType():Promise<ActionFunctionIdentifier>` => `automation.actions.publicActionFunctionsApi.createOrReplaceByFunctionType():Promise<PublicActionFunctionIdentifier >`.
+- `automation.actions.functionsApi.getByFunctionType():Promise<ActionFunction>` => `automation.actions.publicActionFunctionsApi.getByFunctionType():Promise<PublicActionFunction>`.
+- `automation.actions.functionsApi.getById():Promise<ActionFunction>` => `automation.actions.publicActionFunctionsApi.getById():Promise<PublicActionFunction>`.
+- `automation.actions.functionsApi.getPage():Promise<CollectionResponseActionFunctionIdentifierNoPaging>` => `automation.actions.publicActionFunctionsApi.getPage():Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging>`.
+- `automation.actions.revisionsApi.getById():Promise<ActionRevision>` => `automation.actions.publicActionRevisionsApi.getById():Promise<PublicActionRevision>`.
+- `automation.actions.revisionsApi.getPage():Promise<CollectionResponseActionRevisionForwardPaging>` => `automation.actions.publicActionRevisionsApi.getPage():Promise<CollectionResponsePublicActionRevisionForwardPaging>`.
+
+
+
 ## [10.2.0] - 2023-12-13
 
 ## Added
