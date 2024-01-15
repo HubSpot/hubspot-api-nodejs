@@ -102,9 +102,10 @@ export class PromiseBlogAuthorsApi {
      * Retrieve a Blog Author
      * @param objectId The Blog Author id.
      * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public getById(objectId: string, archived?: boolean, _options?: Configuration): Promise<BlogAuthor> {
-        const result = this.api.getById(objectId, archived, _options);
+    public getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<BlogAuthor> {
+        const result = this.api.getById(objectId, archived, property, _options);
         return result.toPromise();
     }
 
@@ -121,9 +122,10 @@ export class PromiseBlogAuthorsApi {
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 100.
      * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
+        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
         return result.toPromise();
     }
 

@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -13,22 +13,22 @@
 import { Styles } from '../models/Styles';
 
 export class RowMetaData {
-    'styles': Styles;
     'cssClass': string;
+    'styles': Styles;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "styles",
-            "baseName": "styles",
-            "type": "Styles",
-            "format": ""
-        },
-        {
             "name": "cssClass",
             "baseName": "cssClass",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "styles",
+            "baseName": "styles",
+            "type": "Styles",
             "format": ""
         }    ];
 

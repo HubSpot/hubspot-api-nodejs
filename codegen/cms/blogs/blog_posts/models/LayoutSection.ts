@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -14,9 +14,7 @@ import { RowMetaData } from '../models/RowMetaData';
 import { Styles } from '../models/Styles';
 
 export class LayoutSection {
-    'x': number;
-    'w': number;
-    'name': string;
+    'cssStyle': string;
     'label': string;
     'type': string;
     /**
@@ -27,28 +25,18 @@ export class LayoutSection {
     'rowMetaData': Array<RowMetaData>;
     'cells': Array<LayoutSection>;
     'cssClass': string;
-    'cssStyle': string;
+    'w': number;
     'cssId': string;
+    'x': number;
+    'name': string;
     'styles': Styles;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "x",
-            "baseName": "x",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "w",
-            "baseName": "w",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
+            "name": "cssStyle",
+            "baseName": "cssStyle",
             "type": "string",
             "format": ""
         },
@@ -95,14 +83,26 @@ export class LayoutSection {
             "format": ""
         },
         {
-            "name": "cssStyle",
-            "baseName": "cssStyle",
-            "type": "string",
-            "format": ""
+            "name": "w",
+            "baseName": "w",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "cssId",
             "baseName": "cssId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "x",
+            "baseName": "x",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },

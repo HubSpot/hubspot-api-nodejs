@@ -98,6 +98,12 @@ export interface BlogTagsApiGetByIdRequest {
      * @memberof BlogTagsApigetById
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogTagsApigetById
+     */
+    property?: string
 }
 
 export interface BlogTagsApiGetPageRequest {
@@ -161,6 +167,12 @@ export interface BlogTagsApiGetPageRequest {
      * @memberof BlogTagsApigetPage
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogTagsApigetPage
+     */
+    property?: string
 }
 
 export interface BlogTagsApiReadBatchRequest {
@@ -308,7 +320,7 @@ export class ObjectBlogTagsApi {
      * @param param the request object
      */
     public getById(param: BlogTagsApiGetByIdRequest, options?: Configuration): Promise<Tag> {
-        return this.api.getById(param.objectId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
     /**
@@ -317,7 +329,7 @@ export class ObjectBlogTagsApi {
      * @param param the request object
      */
     public getPage(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
     /**

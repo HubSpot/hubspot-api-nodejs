@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -16,26 +16,26 @@
 */
 export class ContentCloneRequestVNext {
     /**
-    * ID of the object to be cloned.
-    */
-    'id': string;
-    /**
     * Name of the cloned object.
     */
     'cloneName'?: string;
+    /**
+    * ID of the object to be cloned.
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "cloneName",
+            "baseName": "cloneName",
             "type": "string",
             "format": ""
         },
         {
-            "name": "cloneName",
-            "baseName": "cloneName",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];

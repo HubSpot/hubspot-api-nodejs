@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -21,11 +21,11 @@ export class CollectionResponseWithTotalBlogPostForwardPaging {
     * Total number of blog posts.
     */
     'total': number;
+    'paging'?: ForwardPaging;
     /**
     * Collection of blog posts.
     */
     'results': Array<BlogPost>;
-    'paging'?: ForwardPaging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,15 +37,15 @@ export class CollectionResponseWithTotalBlogPostForwardPaging {
             "format": "int32"
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<BlogPost>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<BlogPost>",
             "format": ""
         }    ];
 

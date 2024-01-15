@@ -364,14 +364,16 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve a Blog Tag
      * @param objectId The Blog Tag id.
      * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public async getById(objectId: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectId' is not null or undefined
         if (objectId === null || objectId === undefined) {
             throw new RequiredError("BlogTagsApi", "getById", "objectId");
         }
+
 
 
 
@@ -386,6 +388,11 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (property !== undefined) {
+            requestContext.setQueryParam("property", ObjectSerializer.serialize(property, "string", ""));
         }
 
 
@@ -417,9 +424,11 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to return. Default is 100.
      * @param archived Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * @param property 
      */
-    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -486,6 +495,11 @@ export class BlogTagsApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (property !== undefined) {
+            requestContext.setQueryParam("property", ObjectSerializer.serialize(property, "string", ""));
         }
 
 
@@ -848,8 +862,11 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to attachToLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async attachToLangGroup(response: ResponseContext): Promise< void> {
+     public async attachToLangGroup(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return;
+        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -860,7 +877,11 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -988,8 +1009,11 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to detachFromLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detachFromLangGroup(response: ResponseContext): Promise< void> {
+     public async detachFromLangGroup(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return;
+        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -1000,7 +1024,11 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1239,8 +1267,11 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateLangs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateLangs(response: ResponseContext): Promise< void> {
+     public async updateLangs(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            return;
+        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -1251,7 +1282,11 @@ export class BlogTagsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return;
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

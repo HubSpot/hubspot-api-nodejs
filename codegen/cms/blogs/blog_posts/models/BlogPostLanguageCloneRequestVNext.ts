@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -16,26 +16,26 @@
 */
 export class BlogPostLanguageCloneRequestVNext {
     /**
-    * ID of blog post to clone.
-    */
-    'id': string;
-    /**
     * Target language of new variant.
     */
     'language'?: string;
+    /**
+    * ID of blog post to clone.
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "language",
+            "baseName": "language",
             "type": "string",
             "format": ""
         },
         {
-            "name": "language",
-            "baseName": "language",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];

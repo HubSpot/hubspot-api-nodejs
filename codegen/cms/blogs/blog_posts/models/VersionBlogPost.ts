@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -17,21 +17,21 @@ import { VersionUser } from '../models/VersionUser';
 * Model definition of a version of a blog post.
 */
 export class VersionBlogPost {
-    'object': BlogPost;
-    'user': VersionUser;
     /**
     * The id of the version.
     */
     'id': string;
+    'user': VersionUser;
+    'object': BlogPost;
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "object",
-            "baseName": "object",
-            "type": "BlogPost",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
@@ -41,9 +41,9 @@ export class VersionBlogPost {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "object",
+            "baseName": "object",
+            "type": "BlogPost",
             "format": ""
         },
         {
