@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -12,22 +12,22 @@
 
 
 export class Angle {
+    'units': string;
     'value': number;
-    'units': AngleUnitsEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "value",
-            "baseName": "value",
-            "type": "number",
+            "name": "units",
+            "baseName": "units",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "units",
-            "baseName": "units",
-            "type": "AngleUnitsEnum",
+            "name": "value",
+            "baseName": "value",
+            "type": "number",
             "format": ""
         }    ];
 
@@ -38,7 +38,4 @@ export class Angle {
     public constructor() {
     }
 }
-
-
-export type AngleUnitsEnum = "deg" | "grad" | "rad" | "turn" ;
 

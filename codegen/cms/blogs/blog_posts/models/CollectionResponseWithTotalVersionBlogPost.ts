@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -21,11 +21,11 @@ export class CollectionResponseWithTotalVersionBlogPost {
     * Total number of blog post versions.
     */
     'total': number;
+    'paging'?: Paging;
     /**
     * Collection of blog post versions.
     */
     'results': Array<VersionBlogPost>;
-    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -37,15 +37,15 @@ export class CollectionResponseWithTotalVersionBlogPost {
             "format": "int32"
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<VersionBlogPost>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<VersionBlogPost>",
             "format": ""
         }    ];
 

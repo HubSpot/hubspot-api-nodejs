@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -15,27 +15,27 @@ import { Gradient } from '../models/Gradient';
 import { RGBAColor } from '../models/RGBAColor';
 
 export class Styles {
-    'verticalAlignment': StylesVerticalAlignmentEnum;
     'backgroundColor': RGBAColor;
+    'flexboxPositioning': string;
     'backgroundImage': BackgroundImage;
-    'backgroundGradient': Gradient;
-    'maxWidthSectionCentering': number;
     'forceFullWidthSection': boolean;
-    'flexboxPositioning': StylesFlexboxPositioningEnum;
+    'verticalAlignment': string;
+    'maxWidthSectionCentering': number;
+    'backgroundGradient': Gradient;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "verticalAlignment",
-            "baseName": "verticalAlignment",
-            "type": "StylesVerticalAlignmentEnum",
-            "format": ""
-        },
-        {
             "name": "backgroundColor",
             "baseName": "backgroundColor",
             "type": "RGBAColor",
+            "format": ""
+        },
+        {
+            "name": "flexboxPositioning",
+            "baseName": "flexboxPositioning",
+            "type": "string",
             "format": ""
         },
         {
@@ -45,9 +45,15 @@ export class Styles {
             "format": ""
         },
         {
-            "name": "backgroundGradient",
-            "baseName": "backgroundGradient",
-            "type": "Gradient",
+            "name": "forceFullWidthSection",
+            "baseName": "forceFullWidthSection",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "verticalAlignment",
+            "baseName": "verticalAlignment",
+            "type": "string",
             "format": ""
         },
         {
@@ -57,15 +63,9 @@ export class Styles {
             "format": "int32"
         },
         {
-            "name": "forceFullWidthSection",
-            "baseName": "forceFullWidthSection",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "flexboxPositioning",
-            "baseName": "flexboxPositioning",
-            "type": "StylesFlexboxPositioningEnum",
+            "name": "backgroundGradient",
+            "baseName": "backgroundGradient",
+            "type": "Gradient",
             "format": ""
         }    ];
 
@@ -76,8 +76,4 @@ export class Styles {
     public constructor() {
     }
 }
-
-
-export type StylesVerticalAlignmentEnum = "TOP" | "MIDDLE" | "BOTTOM" ;
-export type StylesFlexboxPositioningEnum = "TOP_LEFT" | "TOP_CENTER" | "TOP_RIGHT" | "MIDDLE_LEFT" | "MIDDLE_CENTER" | "MIDDLE_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_CENTER" | "BOTTOM_RIGHT" ;
 

@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -12,84 +12,24 @@
 
 
 export class ContentLanguageVariation {
-    'id': number;
-    'name': string;
-    'slug': string;
-    'state': string;
-    'authorName': string;
-    'password': string;
-    'publicAccessRulesEnabled': boolean;
-    'publicAccessRules': Array<any>;
-    'campaign': string;
-    'tagIds'?: Array<number>;
     'archivedInDashboard': boolean;
     'created': Date;
-    'updated': Date;
+    'tagIds'?: Array<number>;
     'publishDate': Date;
+    'publicAccessRules': Array<any>;
+    'password': string;
+    'authorName': string;
+    'publicAccessRulesEnabled': boolean;
+    'name': string;
+    'campaign': string;
+    'id': number;
+    'state': string;
+    'updated': Date;
+    'slug': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "slug",
-            "baseName": "slug",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "state",
-            "baseName": "state",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "authorName",
-            "baseName": "authorName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "password",
-            "baseName": "password",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "publicAccessRulesEnabled",
-            "baseName": "publicAccessRulesEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "publicAccessRules",
-            "baseName": "publicAccessRules",
-            "type": "Array<any>",
-            "format": ""
-        },
-        {
-            "name": "campaign",
-            "baseName": "campaign",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tagIds",
-            "baseName": "tagIds",
-            "type": "Array<number>",
-            "format": "int64"
-        },
         {
             "name": "archivedInDashboard",
             "baseName": "archivedInDashboard",
@@ -103,16 +43,76 @@ export class ContentLanguageVariation {
             "format": "date-time"
         },
         {
-            "name": "updated",
-            "baseName": "updated",
-            "type": "Date",
-            "format": "date-time"
+            "name": "tagIds",
+            "baseName": "tagIds",
+            "type": "Array<number>",
+            "format": "int64"
         },
         {
             "name": "publishDate",
             "baseName": "publishDate",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "publicAccessRules",
+            "baseName": "publicAccessRules",
+            "type": "Array<any>",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "authorName",
+            "baseName": "authorName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publicAccessRulesEnabled",
+            "baseName": "publicAccessRulesEnabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaign",
+            "baseName": "campaign",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "state",
+            "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "slug",
+            "baseName": "slug",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

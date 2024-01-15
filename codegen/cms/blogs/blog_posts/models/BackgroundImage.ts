@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -14,7 +14,7 @@
 export class BackgroundImage {
     'imageUrl': string;
     'backgroundSize': string;
-    'backgroundPosition': BackgroundImageBackgroundPositionEnum;
+    'backgroundPosition': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -34,7 +34,7 @@ export class BackgroundImage {
         {
             "name": "backgroundPosition",
             "baseName": "backgroundPosition",
-            "type": "BackgroundImageBackgroundPositionEnum",
+            "type": "string",
             "format": ""
         }    ];
 
@@ -45,7 +45,4 @@ export class BackgroundImage {
     public constructor() {
     }
 }
-
-
-export type BackgroundImageBackgroundPositionEnum = "TOP_LEFT" | "TOP_CENTER" | "TOP_RIGHT" | "MIDDLE_LEFT" | "MIDDLE_CENTER" | "MIDDLE_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_CENTER" | "BOTTOM_RIGHT" ;
 

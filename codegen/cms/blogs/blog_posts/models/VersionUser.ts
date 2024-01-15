@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -16,6 +16,10 @@
 */
 export class VersionUser {
     /**
+    * The first and last name of the User.
+    */
+    'fullName': string;
+    /**
     * The unique ID of the User.
     */
     'id': string;
@@ -23,14 +27,16 @@ export class VersionUser {
     * The email address of the user.
     */
     'email': string;
-    /**
-    * The first and last name of the User.
-    */
-    'fullName': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "fullName",
+            "baseName": "fullName",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "id",
             "baseName": "id",
@@ -40,12 +46,6 @@ export class VersionUser {
         {
             "name": "email",
             "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "fullName",
-            "baseName": "fullName",
             "type": "string",
             "format": ""
         }    ];
