@@ -7,23 +7,23 @@ import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssoci
 import { ObservableDefinitionsApi } from "./ObservableAPI";
 import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
 
-export interface DefinitionsApiDeleteRequest {
+export interface DefinitionsApiArchiveRequest {
     /**
      * 
      * @type string
-     * @memberof DefinitionsApi_delete
+     * @memberof DefinitionsApiarchive
      */
     fromObjectType: string
     /**
      * 
      * @type string
-     * @memberof DefinitionsApi_delete
+     * @memberof DefinitionsApiarchive
      */
     toObjectType: string
     /**
      * 
      * @type number
-     * @memberof DefinitionsApi_delete
+     * @memberof DefinitionsApiarchive
      */
     associationTypeId: number
 }
@@ -97,8 +97,8 @@ export class ObjectDefinitionsApi {
      * Delete
      * @param param the request object
      */
-    public _delete(param: DefinitionsApiDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api._delete(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
+    public archive(param: DefinitionsApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
     }
 
     /**

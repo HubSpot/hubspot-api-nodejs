@@ -7,7 +7,6 @@ export * from '../models/BatchReadInputSimplePublicObjectId';
 export * from '../models/BatchResponseSimplePublicObject';
 export * from '../models/BatchResponseSimplePublicObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
-export * from '../models/CollectionResponseAssociatedIdForwardPaging';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 export * from '../models/ErrorDetail';
@@ -41,7 +40,6 @@ import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimp
 import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -102,7 +100,6 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
-    "CollectionResponseAssociatedIdForwardPaging": CollectionResponseAssociatedIdForwardPaging,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
     "ErrorDetail": ErrorDetail,

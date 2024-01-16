@@ -13,22 +13,25 @@
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
 export class SimplePublicObjectInputForCreate {
-    'properties': { [key: string]: string; };
-    'associations': Array<PublicAssociationsForObject>;
+    'associations'?: Array<PublicAssociationsForObject>;
+    /**
+    * 
+    */
+    'properties'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "associations",
             "baseName": "associations",
             "type": "Array<PublicAssociationsForObject>",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 

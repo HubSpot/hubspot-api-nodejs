@@ -24,7 +24,7 @@ import { ObjectSchemaEgg } from '../models/ObjectSchemaEgg';
 import { ObjectTypeDefinition } from '../models/ObjectTypeDefinition';
 import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels';
 import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
-import { ObjectTypePropertyCreate            } from '../models/ObjectTypePropertyCreate';
+import { ObjectTypePropertyCreate      } from '../models/ObjectTypePropertyCreate';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
 import { Property } from '../models/Property';
@@ -50,7 +50,10 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "ObjectTypePropertyCreateOptionSortStrategyEnum",
     "ObjectTypePropertyCreateTypeEnum",
+    "ObjectTypePropertyCreateTextDisplayHintEnum",
+    "ObjectTypePropertyCreateNumberDisplayHintEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

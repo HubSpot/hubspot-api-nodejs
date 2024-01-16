@@ -12,37 +12,25 @@
 
 
 export class ValueWithTimestamp {
-    'value': string;
-    'timestamp': Date;
-    'sourceType': string;
     'sourceId'?: string;
+    'sourceType': string;
     'sourceLabel'?: string;
     'updatedByUserId'?: number;
+    'value': string;
+    'timestamp': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "value",
-            "baseName": "value",
+            "name": "sourceId",
+            "baseName": "sourceId",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "Date",
-            "format": "date-time"
         },
         {
             "name": "sourceType",
             "baseName": "sourceType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "sourceId",
-            "baseName": "sourceId",
             "type": "string",
             "format": ""
         },
@@ -57,6 +45,18 @@ export class ValueWithTimestamp {
             "baseName": "updatedByUserId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "value",
+            "baseName": "value",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

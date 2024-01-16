@@ -14,22 +14,22 @@ import { AssociationSpec } from '../models/AssociationSpec';
 import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationsForObject {
-    'to': PublicObjectId;
     'types': Array<AssociationSpec>;
+    'to': PublicObjectId;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "PublicObjectId",
-            "format": ""
-        },
-        {
             "name": "types",
             "baseName": "types",
             "type": "Array<AssociationSpec>",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "PublicObjectId",
             "format": ""
         }    ];
 

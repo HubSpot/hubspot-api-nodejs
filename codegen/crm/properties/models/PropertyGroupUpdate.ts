@@ -13,28 +13,28 @@
 
 export class PropertyGroupUpdate {
     /**
-    * A human-readable label that will be shown in HubSpot.
-    */
-    'label'?: string;
-    /**
     * Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
     */
     'displayOrder'?: number;
+    /**
+    * A human-readable label that will be shown in HubSpot.
+    */
+    'label'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "displayOrder",
             "baseName": "displayOrder",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

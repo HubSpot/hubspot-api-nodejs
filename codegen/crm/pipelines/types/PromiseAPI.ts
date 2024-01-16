@@ -181,9 +181,10 @@ export class PromisePipelinesApi {
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, pipelineId, validateReferencesBeforeDelete, _options);
+    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(objectType, pipelineId, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
         return result.toPromise();
     }
 
@@ -226,9 +227,10 @@ export class PromisePipelinesApi {
      * @param pipelineId 
      * @param pipelineInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, _options);
+    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
         return result.toPromise();
     }
 
@@ -239,9 +241,10 @@ export class PromisePipelinesApi {
      * @param pipelineId 
      * @param pipelinePatchInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
-        const result = this.api.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, _options);
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<Pipeline> {
+        const result = this.api.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
         return result.toPromise();
     }
 

@@ -24,8 +24,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -41,6 +42,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -53,6 +55,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 
@@ -218,8 +225,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param pipelineInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -241,6 +249,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -253,6 +262,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 
@@ -289,8 +303,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param pipelinePatchInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -312,6 +327,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -324,6 +340,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 

@@ -14,22 +14,22 @@ import { AssociatedId } from '../models/AssociatedId';
 import { Paging } from '../models/Paging';
 
 export class CollectionResponseAssociatedId {
-    'results': Array<AssociatedId>;
     'paging'?: Paging;
+    'results': Array<AssociatedId>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<AssociatedId>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<AssociatedId>",
             "format": ""
         }    ];
 

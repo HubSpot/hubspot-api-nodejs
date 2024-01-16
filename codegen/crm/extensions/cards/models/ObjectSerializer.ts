@@ -1,15 +1,14 @@
 export * from '../models/ActionConfirmationBody';
 export * from '../models/ActionHookActionBody';
 export * from '../models/CardActions';
+export * from '../models/CardAuditResponse';
 export * from '../models/CardCreateRequest';
 export * from '../models/CardDisplayBody';
 export * from '../models/CardDisplayProperty';
 export * from '../models/CardFetchBody';
 export * from '../models/CardFetchBodyPatch';
-export * from '../models/CardListResponse';
 export * from '../models/CardObjectTypeBody';
 export * from '../models/CardPatchRequest';
-export * from '../models/CardResponse';
 export * from '../models/DisplayOption';
 export * from '../models/ErrorDetail';
 export * from '../models/IFrameActionBody';
@@ -18,20 +17,22 @@ export * from '../models/IntegratorObjectResult';
 export * from '../models/IntegratorObjectResultActionsInner';
 export * from '../models/ModelError';
 export * from '../models/ObjectToken';
+export * from '../models/PublicCardFetchBody';
+export * from '../models/PublicCardListResponse';
+export * from '../models/PublicCardResponse';
 export * from '../models/TopLevelActions';
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 import { ActionHookActionBody      } from '../models/ActionHookActionBody';
 import { CardActions } from '../models/CardActions';
+import { CardAuditResponse      } from '../models/CardAuditResponse';
 import { CardCreateRequest } from '../models/CardCreateRequest';
 import { CardDisplayBody } from '../models/CardDisplayBody';
 import { CardDisplayProperty      } from '../models/CardDisplayProperty';
-import { CardFetchBody } from '../models/CardFetchBody';
-import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
-import { CardListResponse } from '../models/CardListResponse';
+import { CardFetchBody      } from '../models/CardFetchBody';
+import { CardFetchBodyPatch      } from '../models/CardFetchBodyPatch';
 import { CardObjectTypeBody    } from '../models/CardObjectTypeBody';
 import { CardPatchRequest } from '../models/CardPatchRequest';
-import { CardResponse } from '../models/CardResponse';
 import { DisplayOption     } from '../models/DisplayOption';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { IFrameActionBody        } from '../models/IFrameActionBody';
@@ -40,6 +41,9 @@ import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
 import { IntegratorObjectResultActionsInner        } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
 import { ObjectToken      } from '../models/ObjectToken';
+import { PublicCardFetchBody } from '../models/PublicCardFetchBody';
+import { PublicCardListResponse } from '../models/PublicCardListResponse';
+import { PublicCardResponse } from '../models/PublicCardResponse';
 import { TopLevelActions } from '../models/TopLevelActions';
 
 /* tslint:disable:no-unused-variable */
@@ -64,7 +68,11 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "ActionHookActionBodyTypeEnum",
     "ActionHookActionBodyHttpMethodEnum",
+    "CardAuditResponseActionTypeEnum",
+    "CardAuditResponseAuthSourceEnum",
     "CardDisplayPropertyDataTypeEnum",
+    "CardFetchBodyCardTypeEnum",
+    "CardFetchBodyPatchCardTypeEnum",
     "CardObjectTypeBodyNameEnum",
     "DisplayOptionTypeEnum",
     "IFrameActionBodyTypeEnum",
@@ -78,15 +86,14 @@ let typeMap: {[index: string]: any} = {
     "ActionConfirmationBody": ActionConfirmationBody,
     "ActionHookActionBody": ActionHookActionBody,
     "CardActions": CardActions,
+    "CardAuditResponse": CardAuditResponse,
     "CardCreateRequest": CardCreateRequest,
     "CardDisplayBody": CardDisplayBody,
     "CardDisplayProperty": CardDisplayProperty,
     "CardFetchBody": CardFetchBody,
     "CardFetchBodyPatch": CardFetchBodyPatch,
-    "CardListResponse": CardListResponse,
     "CardObjectTypeBody": CardObjectTypeBody,
     "CardPatchRequest": CardPatchRequest,
-    "CardResponse": CardResponse,
     "DisplayOption": DisplayOption,
     "ErrorDetail": ErrorDetail,
     "IFrameActionBody": IFrameActionBody,
@@ -95,6 +102,9 @@ let typeMap: {[index: string]: any} = {
     "IntegratorObjectResultActionsInner": IntegratorObjectResultActionsInner,
     "ModelError": ModelError,
     "ObjectToken": ObjectToken,
+    "PublicCardFetchBody": PublicCardFetchBody,
+    "PublicCardListResponse": PublicCardListResponse,
+    "PublicCardResponse": PublicCardResponse,
     "TopLevelActions": TopLevelActions,
 }
 

@@ -19,7 +19,7 @@ import { ModelError } from '../models/ModelError';
 import { Pipeline } from '../models/Pipeline';
 import { PipelineInput } from '../models/PipelineInput';
 import { PipelinePatchInput } from '../models/PipelinePatchInput';
-import { PipelineStage } from '../models/PipelineStage';
+import { PipelineStage           } from '../models/PipelineStage';
 import { PipelineStageInput } from '../models/PipelineStageInput';
 import { PipelineStagePatchInput } from '../models/PipelineStagePatchInput';
 import { PublicAuditInfo } from '../models/PublicAuditInfo';
@@ -44,6 +44,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "PipelineStageWritePermissionsEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

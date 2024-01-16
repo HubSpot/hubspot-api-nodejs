@@ -3,10 +3,10 @@ import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CardCreateRequest } from '../models/CardCreateRequest';
-import { CardListResponse } from '../models/CardListResponse';
 import { CardPatchRequest } from '../models/CardPatchRequest';
-import { CardResponse } from '../models/CardResponse';
 import { IntegratorCardPayloadResponse } from '../models/IntegratorCardPayloadResponse';
+import { PublicCardListResponse } from '../models/PublicCardListResponse';
+import { PublicCardResponse } from '../models/PublicCardResponse';
 
 import { CardsApiRequestFactory, CardsApiResponseProcessor} from "../apis/CardsApi";
 export class ObservableCardsApi {
@@ -27,11 +27,11 @@ export class ObservableCardsApi {
     /**
      * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
      * Delete a card
-     * @param appId The ID of the target app.
      * @param cardId The ID of the card to delete.
+     * @param appId The ID of the target app.
      */
-    public archive(appId: number, cardId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(appId, cardId, _options);
+    public archive(cardId: string, appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(cardId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -55,7 +55,7 @@ export class ObservableCardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Observable<CardResponse> {
+    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Observable<PublicCardResponse> {
         const requestContextPromise = this.requestFactory.create(appId, cardCreateRequest, _options);
 
         // build promise chain
@@ -79,7 +79,7 @@ export class ObservableCardsApi {
      * Get all cards
      * @param appId The ID of the target app.
      */
-    public getAll(appId: number, _options?: Configuration): Observable<CardListResponse> {
+    public getAll(appId: number, _options?: Configuration): Observable<PublicCardListResponse> {
         const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
@@ -101,11 +101,11 @@ export class ObservableCardsApi {
     /**
      * Returns the definition for a card with the given ID.
      * Get a card.
-     * @param appId The ID of the target app.
      * @param cardId The ID of the target card.
+     * @param appId The ID of the target app.
      */
-    public getById(appId: number, cardId: string, _options?: Configuration): Observable<CardResponse> {
-        const requestContextPromise = this.requestFactory.getById(appId, cardId, _options);
+    public getById(cardId: string, appId: number, _options?: Configuration): Observable<PublicCardResponse> {
+        const requestContextPromise = this.requestFactory.getById(cardId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -126,12 +126,12 @@ export class ObservableCardsApi {
     /**
      * Update a card definition with new details.
      * Update a card
-     * @param appId The ID of the target app.
      * @param cardId The ID of the card to update.
+     * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public update(appId: number, cardId: string, cardPatchRequest: CardPatchRequest, _options?: Configuration): Observable<CardResponse> {
-        const requestContextPromise = this.requestFactory.update(appId, cardId, cardPatchRequest, _options);
+    public update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Observable<PublicCardResponse> {
+        const requestContextPromise = this.requestFactory.update(cardId, appId, cardPatchRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

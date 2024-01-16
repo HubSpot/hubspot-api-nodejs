@@ -16,7 +16,10 @@ import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels
 * Defines attributes to update on an object type.
 */
 export class ObjectTypeDefinitionPatch {
-    'labels'?: ObjectTypeDefinitionLabels;
+    /**
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
@@ -29,19 +32,17 @@ export class ObjectTypeDefinitionPatch {
     * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
     */
     'primaryDisplayProperty'?: string;
-    /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-    */
-    'secondaryDisplayProperties'?: Array<string>;
+    'description'?: string;
     'restorable'?: boolean;
+    'labels'?: ObjectTypeDefinitionLabels;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -63,15 +64,21 @@ export class ObjectTypeDefinitionPatch {
             "format": ""
         },
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
             "name": "restorable",
             "baseName": "restorable",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
             "format": ""
         }    ];
 

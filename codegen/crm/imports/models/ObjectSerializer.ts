@@ -4,6 +4,7 @@ export * from '../models/CollectionResponsePublicImportResponse';
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/ImportRowCore';
+export * from '../models/ImportTemplate';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
@@ -19,11 +20,12 @@ import { CollectionResponsePublicImportResponse } from '../models/CollectionResp
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ImportRowCore } from '../models/ImportRowCore';
+import { ImportTemplate    } from '../models/ImportTemplate';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
-import { PublicImportError         } from '../models/PublicImportError';
+import { PublicImportError       } from '../models/PublicImportError';
 import { PublicImportMetadata } from '../models/PublicImportMetadata';
 import { PublicImportResponse          } from '../models/PublicImportResponse';
 import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
@@ -49,8 +51,10 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "ActionResponseStatusEnum",
+    "ImportTemplateTemplateTypeEnum",
     "PublicImportErrorErrorTypeEnum",
     "PublicImportErrorObjectTypeEnum",
+    "PublicImportResponseImportSourceEnum",
     "PublicImportResponseStateEnum",
 ]);
 
@@ -61,6 +65,7 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "ImportRowCore": ImportRowCore,
+    "ImportTemplate": ImportTemplate,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,

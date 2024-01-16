@@ -18,6 +18,7 @@ export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/PublicAssociationsForObject';
+export * from '../models/PublicGdprDeleteInput';
 export * from '../models/PublicMergeInput';
 export * from '../models/PublicObjectId';
 export * from '../models/PublicObjectSearchRequest';
@@ -50,6 +51,7 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectId } from '../models/PublicObjectId';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
@@ -109,6 +111,7 @@ let typeMap: {[index: string]: any} = {
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "PublicAssociationsForObject": PublicAssociationsForObject,
+    "PublicGdprDeleteInput": PublicGdprDeleteInput,
     "PublicMergeInput": PublicMergeInput,
     "PublicObjectId": PublicObjectId,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,

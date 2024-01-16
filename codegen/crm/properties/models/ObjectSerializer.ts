@@ -31,7 +31,7 @@ import { ModelError } from '../models/ModelError';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
 import { Property } from '../models/Property';
-import { PropertyCreate               } from '../models/PropertyCreate';
+import { PropertyCreate        } from '../models/PropertyCreate';
 import { PropertyGroup } from '../models/PropertyGroup';
 import { PropertyGroupCreate } from '../models/PropertyGroupCreate';
 import { PropertyGroupUpdate } from '../models/PropertyGroupUpdate';

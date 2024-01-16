@@ -1,11 +1,17 @@
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
+export * from '../models/RecordingSettingsPatchRequest';
+export * from '../models/RecordingSettingsRequest';
+export * from '../models/RecordingSettingsResponse';
 export * from '../models/SettingsPatchRequest';
 export * from '../models/SettingsRequest';
 export * from '../models/SettingsResponse';
 
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
+import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
+import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
+import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
 import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
@@ -35,6 +41,9 @@ let enumsMap: Set<string> = new Set<string>([
 let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
+    "RecordingSettingsPatchRequest": RecordingSettingsPatchRequest,
+    "RecordingSettingsRequest": RecordingSettingsRequest,
+    "RecordingSettingsResponse": RecordingSettingsResponse,
     "SettingsPatchRequest": SettingsPatchRequest,
     "SettingsRequest": SettingsRequest,
     "SettingsResponse": SettingsResponse,

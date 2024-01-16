@@ -1,8 +1,56 @@
 import { Configuration} from '../configuration'
 
+import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
+import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
+import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
 import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
+import { ObservableRecordingSettingsApi } from './ObservableAPI';
+
+import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcessor} from "../apis/RecordingSettingsApi";
+export class PromiseRecordingSettingsApi {
+    private api: ObservableRecordingSettingsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: RecordingSettingsApiRequestFactory,
+        responseProcessor?: RecordingSettingsApiResponseProcessor
+    ) {
+        this.api = new ObservableRecordingSettingsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param appId 
+     */
+    public getUrlFormat(appId: number, _options?: Configuration): Promise<RecordingSettingsResponse> {
+        const result = this.api.getUrlFormat(appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param appId 
+     * @param recordingSettingsRequest 
+     */
+    public registerUrlFormat(appId: number, recordingSettingsRequest: RecordingSettingsRequest, _options?: Configuration): Promise<RecordingSettingsResponse> {
+        const result = this.api.registerUrlFormat(appId, recordingSettingsRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param appId 
+     * @param recordingSettingsPatchRequest 
+     */
+    public updateUrlFormat(appId: number, recordingSettingsPatchRequest: RecordingSettingsPatchRequest, _options?: Configuration): Promise<RecordingSettingsResponse> {
+        const result = this.api.updateUrlFormat(appId, recordingSettingsPatchRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservableSettingsApi } from './ObservableAPI';
 
 import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";

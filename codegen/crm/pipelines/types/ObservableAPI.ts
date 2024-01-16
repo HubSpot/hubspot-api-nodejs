@@ -295,9 +295,10 @@ export class ObservablePipelinesApi {
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, validateReferencesBeforeDelete, _options);
+    public archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(objectType, pipelineId, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -396,9 +397,10 @@ export class ObservablePipelinesApi {
      * @param pipelineId 
      * @param pipelineInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
-        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, _options);
+    public replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
+        const requestContextPromise = this.requestFactory.replace(objectType, pipelineId, pipelineInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -423,9 +425,10 @@ export class ObservablePipelinesApi {
      * @param pipelineId 
      * @param pipelinePatchInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
-        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, _options);
+    public update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Observable<Pipeline> {
+        const requestContextPromise = this.requestFactory.update(objectType, pipelineId, pipelinePatchInput, validateReferencesBeforeDelete, validateDealStageUsagesBeforeDelete, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
