@@ -17,7 +17,7 @@ import { SimplePublicObject } from '../models/SimplePublicObject';
 export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Merge two Communications with same type
+     * Merge two communications with same type
      * @param publicMergeInput 
      */
     public async merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<RequestContext> {
@@ -30,7 +30,7 @@ export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/merge';
+        const localVarPath = '/crm/v3/objects/communications/merge';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);

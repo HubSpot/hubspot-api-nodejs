@@ -24,24 +24,24 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param associationTypeId 
      */
-    public async _delete(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "fromObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "toObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "toObjectType");
         }
 
 
         // verify required parameter 'associationTypeId' is not null or undefined
         if (associationTypeId === null || associationTypeId === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "associationTypeId");
+            throw new RequiredError("DefinitionsApi", "archive", "associationTypeId");
         }
 
 
@@ -253,10 +253,10 @@ export class DefinitionsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to _delete
+     * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async _delete(response: ResponseContext): Promise<void > {
+     public async archive(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;

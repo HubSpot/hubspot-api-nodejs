@@ -24,8 +24,8 @@ export class PromiseDefinitionsApi {
      * @param toObjectType 
      * @param associationTypeId 
      */
-    public _delete(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<void> {
-        const result = this.api._delete(fromObjectType, toObjectType, associationTypeId, _options);
+    public archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(fromObjectType, toObjectType, associationTypeId, _options);
         return result.toPromise();
     }
 

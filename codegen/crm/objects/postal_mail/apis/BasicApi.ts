@@ -20,22 +20,22 @@ import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObject
 export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Move an Object identified by `{postalMail}` to the recycling bin.
+     * Move an Object identified by `{postalMailId}` to the recycling bin.
      * Archive
-     * @param postalMail 
+     * @param postalMailId 
      */
-    public async archive(postalMail: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(postalMailId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'postalMail' is not null or undefined
-        if (postalMail === null || postalMail === undefined) {
-            throw new RequiredError("BasicApi", "archive", "postalMail");
+        // verify required parameter 'postalMailId' is not null or undefined
+        if (postalMailId === null || postalMailId === undefined) {
+            throw new RequiredError("BasicApi", "archive", "postalMailId");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/postal_mail/{postalMail}'
-            .replace('{' + 'postalMail' + '}', encodeURIComponent(String(postalMail)));
+        const localVarPath = '/crm/v3/objects/postal_mail/{postalMailId}'
+            .replace('{' + 'postalMailId' + '}', encodeURIComponent(String(postalMailId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -106,21 +106,21 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
-     * @param postalMail 
+     * @param postalMailId 
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async getById(postalMail: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getById(postalMailId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'postalMail' is not null or undefined
-        if (postalMail === null || postalMail === undefined) {
-            throw new RequiredError("BasicApi", "getById", "postalMail");
+        // verify required parameter 'postalMailId' is not null or undefined
+        if (postalMailId === null || postalMailId === undefined) {
+            throw new RequiredError("BasicApi", "getById", "postalMailId");
         }
 
 
@@ -130,8 +130,8 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/postal_mail/{postalMail}'
-            .replace('{' + 'postalMail' + '}', encodeURIComponent(String(postalMail)));
+        const localVarPath = '/crm/v3/objects/postal_mail/{postalMailId}'
+            .replace('{' + 'postalMailId' + '}', encodeURIComponent(String(postalMailId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -251,18 +251,18 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
-     * @param postalMail 
+     * @param postalMailId 
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object type
      */
-    public async update(postalMail: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async update(postalMailId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'postalMail' is not null or undefined
-        if (postalMail === null || postalMail === undefined) {
-            throw new RequiredError("BasicApi", "update", "postalMail");
+        // verify required parameter 'postalMailId' is not null or undefined
+        if (postalMailId === null || postalMailId === undefined) {
+            throw new RequiredError("BasicApi", "update", "postalMailId");
         }
 
 
@@ -274,8 +274,8 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/postal_mail/{postalMail}'
-            .replace('{' + 'postalMail' + '}', encodeURIComponent(String(postalMail)));
+        const localVarPath = '/crm/v3/objects/postal_mail/{postalMailId}'
+            .replace('{' + 'postalMailId' + '}', encodeURIComponent(String(postalMailId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);

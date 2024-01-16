@@ -8,6 +8,7 @@ import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePu
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -24,7 +25,7 @@ export interface BasicApiArchiveRequest {
      * @type string
      * @memberof BasicApiarchive
      */
-    postalMail: string
+    postalMailId: string
 }
 
 export interface BasicApiCreateRequest {
@@ -42,7 +43,7 @@ export interface BasicApiGetByIdRequest {
      * @type string
      * @memberof BasicApigetById
      */
-    postalMail: string
+    postalMailId: string
     /**
      * A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @type Array&lt;string&gt;
@@ -120,7 +121,7 @@ export interface BasicApiUpdateRequest {
      * @type string
      * @memberof BasicApiupdate
      */
-    postalMail: string
+    postalMailId: string
     /**
      * 
      * @type SimplePublicObjectInput
@@ -143,12 +144,12 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Move an Object identified by `{postalMail}` to the recycling bin.
+     * Move an Object identified by `{postalMailId}` to the recycling bin.
      * Archive
      * @param param the request object
      */
     public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.postalMail,  options).toPromise();
+        return this.api.archive(param.postalMailId,  options).toPromise();
     }
 
     /**
@@ -161,12 +162,12 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Read an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param param the request object
      */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.getById(param.postalMail, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+        return this.api.getById(param.postalMailId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -179,12 +180,12 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{postalMail}`. `{postalMail}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{postalMailId}`. `{postalMailId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
      * Update
      * @param param the request object
      */
     public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<SimplePublicObject> {
-        return this.api.update(param.postalMail, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
+        return this.api.update(param.postalMailId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
 }
@@ -271,6 +272,36 @@ export class ObjectBatchApi {
      */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservableGDPRApi } from "./ObservableAPI";
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+
+export interface GDPRApiPurgeRequest {
+    /**
+     * 
+     * @type PublicGdprDeleteInput
+     * @memberof GDPRApipurge
+     */
+    publicGdprDeleteInput: PublicGdprDeleteInput
+}
+
+export class ObjectGDPRApi {
+    private api: ObservableGDPRApi
+
+    public constructor(configuration: Configuration, requestFactory?: GDPRApiRequestFactory, responseProcessor?: GDPRApiResponseProcessor) {
+        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param param the request object
+     */
+    public purge(param: GDPRApiPurgeRequest, options?: Configuration): Promise<void> {
+        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
     }
 
 }

@@ -16,7 +16,19 @@ import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels
 * Defines an object type.
 */
 export class ObjectTypeDefinition {
+    /**
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
+    'objectTypeId'?: string;
+    'description'?: string;
+    'fullyQualifiedName'?: string;
     'labels': ObjectTypeDefinitionLabels;
+    'archived'?: boolean;
+    /**
+    * When the object type was created.
+    */
+    'createdAt'?: Date;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
@@ -24,47 +36,72 @@ export class ObjectTypeDefinition {
     /**
     * Names of properties that will be indexed for this object type in by HubSpot's product search.
     */
-    'searchableProperties': Array<string>;
+    'searchableProperties'?: Array<string>;
+    /**
+    * The ID of the account that this object type is specific to.
+    */
+    'portalId'?: number;
     /**
     * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
     */
     'primaryDisplayProperty'?: string;
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-    */
-    'secondaryDisplayProperties': Array<string>;
-    'archived': boolean;
-    /**
-    * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
-    */
-    'id': string;
-    'fullyQualifiedName': string;
-    /**
-    * When the object type was created.
-    */
-    'createdAt'?: Date;
-    /**
-    * When the object type was last updated.
-    */
-    'updatedAt'?: Date;
-    'objectTypeId': string;
-    /**
     * A unique name for this object. For internal use only.
     */
     'name': string;
     /**
-    * The ID of the account that this object type is specific to.
+    * A unique ID for this object type. Will be defined as {meta-type}-{unique ID}.
     */
-    'portalId'?: number;
+    'id': string;
+    /**
+    * When the object type was last updated.
+    */
+    'updatedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fullyQualifiedName",
+            "baseName": "fullyQualifiedName",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "labels",
             "baseName": "labels",
             "type": "ObjectTypeDefinitionLabels",
             "format": ""
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requiredProperties",
@@ -79,50 +116,14 @@ export class ObjectTypeDefinition {
             "format": ""
         },
         {
+            "name": "portalId",
+            "baseName": "portalId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "primaryDisplayProperty",
             "baseName": "primaryDisplayProperty",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "fullyQualifiedName",
-            "baseName": "fullyQualifiedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
             "type": "string",
             "format": ""
         },
@@ -133,10 +134,16 @@ export class ObjectTypeDefinition {
             "format": ""
         },
         {
-            "name": "portalId",
-            "baseName": "portalId",
-            "type": "number",
-            "format": "int32"
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

@@ -1,8 +1,83 @@
 import { Configuration} from '../configuration'
 
+import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
+import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
+import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
 import { SettingsPatchRequest } from '../models/SettingsPatchRequest';
 import { SettingsRequest } from '../models/SettingsRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
+
+import { ObservableRecordingSettingsApi } from "./ObservableAPI";
+import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcessor} from "../apis/RecordingSettingsApi";
+
+export interface RecordingSettingsApiGetUrlFormatRequest {
+    /**
+     * 
+     * @type number
+     * @memberof RecordingSettingsApigetUrlFormat
+     */
+    appId: number
+}
+
+export interface RecordingSettingsApiRegisterUrlFormatRequest {
+    /**
+     * 
+     * @type number
+     * @memberof RecordingSettingsApiregisterUrlFormat
+     */
+    appId: number
+    /**
+     * 
+     * @type RecordingSettingsRequest
+     * @memberof RecordingSettingsApiregisterUrlFormat
+     */
+    recordingSettingsRequest: RecordingSettingsRequest
+}
+
+export interface RecordingSettingsApiUpdateUrlFormatRequest {
+    /**
+     * 
+     * @type number
+     * @memberof RecordingSettingsApiupdateUrlFormat
+     */
+    appId: number
+    /**
+     * 
+     * @type RecordingSettingsPatchRequest
+     * @memberof RecordingSettingsApiupdateUrlFormat
+     */
+    recordingSettingsPatchRequest: RecordingSettingsPatchRequest
+}
+
+export class ObjectRecordingSettingsApi {
+    private api: ObservableRecordingSettingsApi
+
+    public constructor(configuration: Configuration, requestFactory?: RecordingSettingsApiRequestFactory, responseProcessor?: RecordingSettingsApiResponseProcessor) {
+        this.api = new ObservableRecordingSettingsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getUrlFormat(param: RecordingSettingsApiGetUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
+        return this.api.getUrlFormat(param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public registerUrlFormat(param: RecordingSettingsApiRegisterUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
+        return this.api.registerUrlFormat(param.appId, param.recordingSettingsRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public updateUrlFormat(param: RecordingSettingsApiUpdateUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
+        return this.api.updateUrlFormat(param.appId, param.recordingSettingsPatchRequest,  options).toPromise();
+    }
+
+}
 
 import { ObservableSettingsApi } from "./ObservableAPI";
 import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/SettingsApi";

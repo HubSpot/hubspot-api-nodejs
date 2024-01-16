@@ -15,32 +15,32 @@
 * An ID for a group of properties
 */
 export class PropertyGroup {
+    'archived': boolean;
     /**
     * The internal property group name, which must be used when referencing the property group via the API.
     */
     'name': string;
     /**
-    * A human-readable label that will be shown in HubSpot.
-    */
-    'label': string;
-    /**
     * Property groups are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property group to be displayed after any positive values.
     */
     'displayOrder': number;
-    'archived': boolean;
+    /**
+    * A human-readable label that will be shown in HubSpot.
+    */
+    'label': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -51,9 +51,9 @@ export class PropertyGroup {
             "format": "int32"
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         }    ];
 

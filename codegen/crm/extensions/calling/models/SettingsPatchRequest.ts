@@ -1,5 +1,5 @@
 /**
- * Calling Extensions API
+ * Calling Extensions
  * Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
  *
  * OpenAPI spec version: v3
@@ -16,9 +16,21 @@
 */
 export class SettingsPatchRequest {
     /**
+    * When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+    */
+    'supportsCustomObjects'?: boolean;
+    /**
+    * When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
+    */
+    'isReady'?: boolean;
+    /**
     * The name of your calling service to display to users.
     */
     'name'?: string;
+    /**
+    * The target width of the iframe that will contain your phone/calling UI.
+    */
+    'width'?: number;
     /**
     * The URL to your phone/calling UI, built with the [Calling SDK](#).
     */
@@ -27,27 +39,33 @@ export class SettingsPatchRequest {
     * The target height of the iframe that will contain your phone/calling UI.
     */
     'height'?: number;
-    /**
-    * The target width of the iframe that will contain your phone/calling UI.
-    */
-    'width'?: number;
-    /**
-    * When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
-    */
-    'isReady'?: boolean;
-    /**
-    * When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
-    */
-    'supportsCustomObjects'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "supportsCustomObjects",
+            "baseName": "supportsCustomObjects",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isReady",
+            "baseName": "isReady",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "name",
             "baseName": "name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "width",
+            "baseName": "width",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "url",
@@ -60,24 +78,6 @@ export class SettingsPatchRequest {
             "baseName": "height",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "width",
-            "baseName": "width",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "isReady",
-            "baseName": "isReady",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "supportsCustomObjects",
-            "baseName": "supportsCustomObjects",
-            "type": "boolean",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

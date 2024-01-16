@@ -5,15 +5,12 @@ export * from '../models/BatchResponsePublicAssociation';
 export * from '../models/BatchResponsePublicAssociationMulti';
 export * from '../models/BatchResponsePublicAssociationMultiWithErrors';
 export * from '../models/BatchResponsePublicAssociationWithErrors';
-export * from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/PublicAssociation';
-export * from '../models/PublicAssociationDefinition';
 export * from '../models/PublicAssociationMulti';
 export * from '../models/PublicObjectId';
 export * from '../models/StandardError';
@@ -25,15 +22,12 @@ import { BatchResponsePublicAssociation        } from '../models/BatchResponsePu
 import { BatchResponsePublicAssociationMulti        } from '../models/BatchResponsePublicAssociationMulti';
 import { BatchResponsePublicAssociationMultiWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithErrors';
 import { BatchResponsePublicAssociationWithErrors          } from '../models/BatchResponsePublicAssociationWithErrors';
-import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociation } from '../models/PublicAssociation';
-import { PublicAssociationDefinition } from '../models/PublicAssociationDefinition';
 import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
 import { PublicObjectId } from '../models/PublicObjectId';
 import { StandardError } from '../models/StandardError';
@@ -62,7 +56,6 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponsePublicAssociationMultiStatusEnum",
     "BatchResponsePublicAssociationMultiWithErrorsStatusEnum",
     "BatchResponsePublicAssociationWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -73,15 +66,12 @@ let typeMap: {[index: string]: any} = {
     "BatchResponsePublicAssociationMulti": BatchResponsePublicAssociationMulti,
     "BatchResponsePublicAssociationMultiWithErrors": BatchResponsePublicAssociationMultiWithErrors,
     "BatchResponsePublicAssociationWithErrors": BatchResponsePublicAssociationWithErrors,
-    "CollectionResponsePublicAssociationDefinitionNoPaging": CollectionResponsePublicAssociationDefinitionNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "PublicAssociation": PublicAssociation,
-    "PublicAssociationDefinition": PublicAssociationDefinition,
     "PublicAssociationMulti": PublicAssociationMulti,
     "PublicObjectId": PublicObjectId,
     "StandardError": StandardError,

@@ -14,45 +14,27 @@ import { CollectionResponseAssociatedId } from '../models/CollectionResponseAsso
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 export class SimplePublicObjectWithAssociations {
-    'id': string;
-    'properties': { [key: string]: string | null; };
-    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
     'createdAt': Date;
-    'updatedAt': Date;
     'archived'?: boolean;
     'archivedAt'?: Date;
-    'associations'?: { [key: string]: CollectionResponseAssociatedId; };
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    'id': string;
+    'properties': { [key: string]: string | null; };
+    'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "{ [key: string]: string | null; }",
-            "format": ""
-        },
-        {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "{ [key: string]: CollectionResponseAssociatedId; }",
             "format": ""
         },
         {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
             "type": "Date",
             "format": "date-time"
         },
@@ -69,10 +51,28 @@ export class SimplePublicObjectWithAssociations {
             "format": "date-time"
         },
         {
-            "name": "associations",
-            "baseName": "associations",
-            "type": "{ [key: string]: CollectionResponseAssociatedId; }",
+            "name": "propertiesWithHistory",
+            "baseName": "propertiesWithHistory",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string | null; }",
+            "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

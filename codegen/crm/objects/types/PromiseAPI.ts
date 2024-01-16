@@ -6,7 +6,6 @@ import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInput
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
@@ -16,64 +15,6 @@ import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-import { ObservableAssociationsApi } from './ObservableAPI';
-
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-export class PromiseAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: AssociationsApiRequestFactory,
-        responseProcessor?: AssociationsApiResponseProcessor
-    ) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Remove an association between two objects
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationType 
-     */
-    public archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, objectId, toObjectType, toObjectId, associationType, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Associate an object with another object
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationType 
-     */
-    public create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationType: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        const result = this.api.create(objectType, objectId, toObjectType, toObjectId, associationType, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * List associations of an object by type
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
-     */
-    public getAll(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
-        const result = this.api.getAll(objectType, objectId, toObjectType, after, limit, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableBasicApi } from './ObservableAPI';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";

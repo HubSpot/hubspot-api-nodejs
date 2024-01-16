@@ -11,7 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 
 /**
  * no description
@@ -333,13 +333,13 @@ export class BasicApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<LabelsBetweenObjectPair > {
+     public async create(response: ResponseContext): Promise<LabelsBetweenObjectPair1 > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
+            const body: LabelsBetweenObjectPair1 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "LabelsBetweenObjectPair", ""
-            ) as LabelsBetweenObjectPair;
+                "LabelsBetweenObjectPair1", ""
+            ) as LabelsBetweenObjectPair1;
             return body;
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -352,10 +352,10 @@ export class BasicApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
+            const body: LabelsBetweenObjectPair1 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "LabelsBetweenObjectPair", ""
-            ) as LabelsBetweenObjectPair;
+                "LabelsBetweenObjectPair1", ""
+            ) as LabelsBetweenObjectPair1;
             return body;
         }
 

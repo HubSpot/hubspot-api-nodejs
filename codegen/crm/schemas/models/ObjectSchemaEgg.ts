@@ -17,7 +17,10 @@ import { ObjectTypePropertyCreate } from '../models/ObjectTypePropertyCreate';
 * Defines a new object type, its properties, and associations.
 */
 export class ObjectSchemaEgg {
-    'labels': ObjectTypeDefinitionLabels;
+    /**
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
@@ -25,35 +28,33 @@ export class ObjectSchemaEgg {
     /**
     * Names of properties that will be indexed for this object type in by HubSpot's product search.
     */
-    'searchableProperties': Array<string>;
+    'searchableProperties'?: Array<string>;
     /**
     * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
     */
     'primaryDisplayProperty'?: string;
     /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    * A unique name for this object. For internal use only.
     */
-    'secondaryDisplayProperties': Array<string>;
-    /**
-    * Properties defined for this object type.
-    */
-    'properties': Array<ObjectTypePropertyCreate>;
+    'name': string;
+    'description'?: string;
     /**
     * Associations defined for this object type.
     */
     'associatedObjects': Array<string>;
     /**
-    * A unique name for this object. For internal use only.
+    * Properties defined for this object type.
     */
-    'name': string;
+    'properties': Array<ObjectTypePropertyCreate>;
+    'labels': ObjectTypeDefinitionLabels;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -75,8 +76,20 @@ export class ObjectSchemaEgg {
             "format": ""
         },
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "associatedObjects",
+            "baseName": "associatedObjects",
             "type": "Array<string>",
             "format": ""
         },
@@ -87,15 +100,9 @@ export class ObjectSchemaEgg {
             "format": ""
         },
         {
-            "name": "associatedObjects",
-            "baseName": "associatedObjects",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
             "format": ""
         }    ];
 

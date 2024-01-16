@@ -302,6 +302,12 @@ export interface PipelinesApiArchiveRequest {
      * @memberof PipelinesApiarchive
      */
     validateReferencesBeforeDelete?: boolean
+    /**
+     * 
+     * @type boolean
+     * @memberof PipelinesApiarchive
+     */
+    validateDealStageUsagesBeforeDelete?: boolean
 }
 
 export interface PipelinesApiCreateRequest {
@@ -368,6 +374,12 @@ export interface PipelinesApiReplaceRequest {
      * @memberof PipelinesApireplace
      */
     validateReferencesBeforeDelete?: boolean
+    /**
+     * 
+     * @type boolean
+     * @memberof PipelinesApireplace
+     */
+    validateDealStageUsagesBeforeDelete?: boolean
 }
 
 export interface PipelinesApiUpdateRequest {
@@ -395,6 +407,12 @@ export interface PipelinesApiUpdateRequest {
      * @memberof PipelinesApiupdate
      */
     validateReferencesBeforeDelete?: boolean
+    /**
+     * 
+     * @type boolean
+     * @memberof PipelinesApiupdate
+     */
+    validateDealStageUsagesBeforeDelete?: boolean
 }
 
 export class ObjectPipelinesApi {
@@ -410,7 +428,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public archive(param: PipelinesApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.objectType, param.pipelineId, param.validateReferencesBeforeDelete,  options).toPromise();
+        return this.api.archive(param.objectType, param.pipelineId, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
     /**
@@ -446,7 +464,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public replace(param: PipelinesApiReplaceRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.replace(param.objectType, param.pipelineId, param.pipelineInput, param.validateReferencesBeforeDelete,  options).toPromise();
+        return this.api.replace(param.objectType, param.pipelineId, param.pipelineInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
     /**
@@ -455,7 +473,7 @@ export class ObjectPipelinesApi {
      * @param param the request object
      */
     public update(param: PipelinesApiUpdateRequest, options?: Configuration): Promise<Pipeline> {
-        return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.validateReferencesBeforeDelete,  options).toPromise();
+        return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
 }

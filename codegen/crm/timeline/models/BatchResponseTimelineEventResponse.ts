@@ -1,5 +1,5 @@
 /**
- * Timeline events
+ * CRM Timeline
  * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
@@ -17,13 +17,9 @@ import { TimelineEventResponse } from '../models/TimelineEventResponse';
 */
 export class BatchResponseTimelineEventResponse {
     /**
-    * The status of the batch response. Should always be COMPLETED if processed.
+    * The time the request was completed.
     */
-    'status': BatchResponseTimelineEventResponseStatusEnum;
-    /**
-    * Successfully created events.
-    */
-    'results': Array<TimelineEventResponse>;
+    'completedAt': Date;
     /**
     * The time the request occurred.
     */
@@ -32,26 +28,24 @@ export class BatchResponseTimelineEventResponse {
     * The time the request began processing.
     */
     'startedAt': Date;
-    /**
-    * The time the request was completed.
-    */
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    /**
+    * Successfully created events.
+    */
+    'results': Array<TimelineEventResponse>;
+    /**
+    * The status of the batch response. Should always be COMPLETED if processed.
+    */
+    'status': BatchResponseTimelineEventResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseTimelineEventResponseStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<TimelineEventResponse>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -66,15 +60,21 @@ export class BatchResponseTimelineEventResponse {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<TimelineEventResponse>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseTimelineEventResponseStatusEnum",
             "format": ""
         }    ];
 

@@ -10,6 +10,7 @@ import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePu
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -273,6 +274,48 @@ export class ObservableBatchApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+            }));
+    }
+
+}
+
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+export class ObservableGDPRApi {
+    private requestFactory: GDPRApiRequestFactory;
+    private responseProcessor: GDPRApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: GDPRApiRequestFactory,
+        responseProcessor?: GDPRApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new GDPRApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new GDPRApiResponseProcessor();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param publicGdprDeleteInput 
+     */
+    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.purge(publicGdprDeleteInput, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purge(rsp)));
             }));
     }
 

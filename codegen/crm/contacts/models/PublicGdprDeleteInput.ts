@@ -12,21 +12,21 @@
 
 
 export class PublicGdprDeleteInput {
-    'objectId': string;
     'idProperty'?: string;
+    'objectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "objectId",
-            "baseName": "objectId",
+            "name": "idProperty",
+            "baseName": "idProperty",
             "type": "string",
             "format": ""
         },
         {
-            "name": "idProperty",
-            "baseName": "idProperty",
+            "name": "objectId",
+            "baseName": "objectId",
             "type": "string",
             "format": ""
         }    ];

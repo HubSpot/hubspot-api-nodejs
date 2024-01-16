@@ -8,6 +8,7 @@ import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePu
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -152,7 +153,7 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard Communications is provided.
+     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard communications is provided.
      * Create
      * @param param the request object
      */
@@ -170,7 +171,7 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Read a page of Communications. Control what is returned via the `properties` query param.
+     * Read a page of communications. Control what is returned via the `properties` query param.
      * List
      * @param param the request object
      */
@@ -242,7 +243,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Archive a batch of Communications by ID
+     * Archive a batch of communications by ID
      * @param param the request object
      */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
@@ -250,7 +251,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Create a batch of Communications
+     * Create a batch of communications
      * @param param the request object
      */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -258,7 +259,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Read a batch of Communications by internal ID, or unique property values
+     * Read a batch of communications by internal ID, or unique property values
      * @param param the request object
      */
     public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -266,11 +267,41 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Update a batch of Communications
+     * Update a batch of communications
      * @param param the request object
      */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservableGDPRApi } from "./ObservableAPI";
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+
+export interface GDPRApiPurgeRequest {
+    /**
+     * 
+     * @type PublicGdprDeleteInput
+     * @memberof GDPRApipurge
+     */
+    publicGdprDeleteInput: PublicGdprDeleteInput
+}
+
+export class ObjectGDPRApi {
+    private api: ObservableGDPRApi
+
+    public constructor(configuration: Configuration, requestFactory?: GDPRApiRequestFactory, responseProcessor?: GDPRApiResponseProcessor) {
+        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param param the request object
+     */
+    public purge(param: GDPRApiPurgeRequest, options?: Configuration): Promise<void> {
+        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
     }
 
 }
@@ -295,7 +326,7 @@ export class ObjectPublicObjectApi {
     }
 
     /**
-     * Merge two Communications with same type
+     * Merge two communications with same type
      * @param param the request object
      */
     public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {

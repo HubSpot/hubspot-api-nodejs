@@ -12,21 +12,21 @@
 
 
 export class PublicMergeInput {
-    'primaryObjectId': string;
     'objectIdToMerge': string;
+    'primaryObjectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "primaryObjectId",
-            "baseName": "primaryObjectId",
+            "name": "objectIdToMerge",
+            "baseName": "objectIdToMerge",
             "type": "string",
             "format": ""
         },
         {
-            "name": "objectIdToMerge",
-            "baseName": "objectIdToMerge",
+            "name": "primaryObjectId",
+            "baseName": "primaryObjectId",
             "type": "string",
             "format": ""
         }    ];

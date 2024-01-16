@@ -1,64 +1,16 @@
-export * from '../models/AssociationSpec';
 export * from '../models/AssociationSpecWithLabel';
-export * from '../models/BatchInputPublicAssociationMultiArchive';
-export * from '../models/BatchInputPublicAssociationMultiPost';
-export * from '../models/BatchInputPublicDefaultAssociationMultiPost';
-export * from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-export * from '../models/BatchResponseLabelsBetweenObjectPair';
-export * from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
-export * from '../models/BatchResponsePublicAssociationMultiWithLabel';
-export * from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
-export * from '../models/BatchResponsePublicDefaultAssociation';
 export * from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
-export * from '../models/LabelsBetweenObjectPair';
 export * from '../models/ModelError';
-export * from '../models/MultiAssociatedObjectWithLabel';
-export * from '../models/NextPage';
-export * from '../models/Paging';
-export * from '../models/PreviousPage';
 export * from '../models/PublicAssociationDefinitionCreateRequest';
 export * from '../models/PublicAssociationDefinitionUpdateRequest';
-export * from '../models/PublicAssociationMultiArchive';
-export * from '../models/PublicAssociationMultiPost';
-export * from '../models/PublicAssociationMultiWithLabel';
-export * from '../models/PublicDefaultAssociation';
-export * from '../models/PublicDefaultAssociationMultiPost';
-export * from '../models/PublicFetchAssociationsBatchRequest';
-export * from '../models/PublicObjectId';
-export * from '../models/StandardError';
 
-import { AssociationSpec    } from '../models/AssociationSpec';
 import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
-import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
-import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
-import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
-import { BatchInputPublicFetchAssociationsBatchRequest } from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-import { BatchResponseLabelsBetweenObjectPair        } from '../models/BatchResponseLabelsBetweenObjectPair';
-import { BatchResponseLabelsBetweenObjectPairWithErrors          } from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
-import { BatchResponsePublicAssociationMultiWithLabel        } from '../models/BatchResponsePublicAssociationMultiWithLabel';
-import { BatchResponsePublicAssociationMultiWithLabelWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
-import { BatchResponsePublicDefaultAssociation          } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
-import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
 import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
-import { PublicAssociationMultiArchive } from '../models/PublicAssociationMultiArchive';
-import { PublicAssociationMultiPost } from '../models/PublicAssociationMultiPost';
-import { PublicAssociationMultiWithLabel } from '../models/PublicAssociationMultiWithLabel';
-import { PublicDefaultAssociation } from '../models/PublicDefaultAssociation';
-import { PublicDefaultAssociationMultiPost } from '../models/PublicDefaultAssociationMultiPost';
-import { PublicFetchAssociationsBatchRequest } from '../models/PublicFetchAssociationsBatchRequest';
-import { PublicObjectId } from '../models/PublicObjectId';
-import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -80,47 +32,16 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "AssociationSpecAssociationCategoryEnum",
     "AssociationSpecWithLabelCategoryEnum",
-    "BatchResponseLabelsBetweenObjectPairStatusEnum",
-    "BatchResponseLabelsBetweenObjectPairWithErrorsStatusEnum",
-    "BatchResponsePublicAssociationMultiWithLabelStatusEnum",
-    "BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum",
-    "BatchResponsePublicDefaultAssociationStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "AssociationSpec": AssociationSpec,
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
-    "BatchInputPublicAssociationMultiArchive": BatchInputPublicAssociationMultiArchive,
-    "BatchInputPublicAssociationMultiPost": BatchInputPublicAssociationMultiPost,
-    "BatchInputPublicDefaultAssociationMultiPost": BatchInputPublicDefaultAssociationMultiPost,
-    "BatchInputPublicFetchAssociationsBatchRequest": BatchInputPublicFetchAssociationsBatchRequest,
-    "BatchResponseLabelsBetweenObjectPair": BatchResponseLabelsBetweenObjectPair,
-    "BatchResponseLabelsBetweenObjectPairWithErrors": BatchResponseLabelsBetweenObjectPairWithErrors,
-    "BatchResponsePublicAssociationMultiWithLabel": BatchResponsePublicAssociationMultiWithLabel,
-    "BatchResponsePublicAssociationMultiWithLabelWithErrors": BatchResponsePublicAssociationMultiWithLabelWithErrors,
-    "BatchResponsePublicDefaultAssociation": BatchResponsePublicDefaultAssociation,
     "CollectionResponseAssociationSpecWithLabelNoPaging": CollectionResponseAssociationSpecWithLabelNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
-    "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
     "ModelError": ModelError,
-    "MultiAssociatedObjectWithLabel": MultiAssociatedObjectWithLabel,
-    "NextPage": NextPage,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "PublicAssociationDefinitionCreateRequest": PublicAssociationDefinitionCreateRequest,
     "PublicAssociationDefinitionUpdateRequest": PublicAssociationDefinitionUpdateRequest,
-    "PublicAssociationMultiArchive": PublicAssociationMultiArchive,
-    "PublicAssociationMultiPost": PublicAssociationMultiPost,
-    "PublicAssociationMultiWithLabel": PublicAssociationMultiWithLabel,
-    "PublicDefaultAssociation": PublicDefaultAssociation,
-    "PublicDefaultAssociationMultiPost": PublicDefaultAssociationMultiPost,
-    "PublicFetchAssociationsBatchRequest": PublicFetchAssociationsBatchRequest,
-    "PublicObjectId": PublicObjectId,
-    "StandardError": StandardError,
 }
 
 export class ObjectSerializer {

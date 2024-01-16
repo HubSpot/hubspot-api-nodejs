@@ -1,106 +1,62 @@
-export * from '../models/AssociatedId';
 export * from '../models/AssociationSpec';
 export * from '../models/AssociationSpecWithLabel';
 export * from '../models/BatchInputPublicAssociationMultiArchive';
 export * from '../models/BatchInputPublicAssociationMultiPost';
 export * from '../models/BatchInputPublicDefaultAssociationMultiPost';
 export * from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-export * from '../models/BatchInputSimplePublicObjectBatchInput';
-export * from '../models/BatchInputSimplePublicObjectId';
-export * from '../models/BatchInputSimplePublicObjectInputForCreate';
-export * from '../models/BatchReadInputSimplePublicObjectId';
 export * from '../models/BatchResponseLabelsBetweenObjectPair';
 export * from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
 export * from '../models/BatchResponsePublicAssociationMultiWithLabel';
 export * from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 export * from '../models/BatchResponsePublicDefaultAssociation';
-export * from '../models/BatchResponseSimplePublicObject';
-export * from '../models/BatchResponseSimplePublicObjectWithErrors';
-export * from '../models/CollectionResponseAssociatedId';
-export * from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
 export * from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/LabelsBetweenObjectPair';
+export * from '../models/LabelsBetweenObjectPair1';
 export * from '../models/ModelError';
 export * from '../models/MultiAssociatedObjectWithLabel';
 export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
-export * from '../models/PublicAssociationDefinitionCreateRequest';
-export * from '../models/PublicAssociationDefinitionUpdateRequest';
 export * from '../models/PublicAssociationMultiArchive';
 export * from '../models/PublicAssociationMultiPost';
 export * from '../models/PublicAssociationMultiWithLabel';
-export * from '../models/PublicAssociationsForObject';
 export * from '../models/PublicDefaultAssociation';
 export * from '../models/PublicDefaultAssociationMultiPost';
 export * from '../models/PublicFetchAssociationsBatchRequest';
-export * from '../models/PublicGdprDeleteInput';
 export * from '../models/PublicObjectId';
-export * from '../models/SimplePublicObject';
-export * from '../models/SimplePublicObjectBatchInput';
-export * from '../models/SimplePublicObjectId';
-export * from '../models/SimplePublicObjectInput';
-export * from '../models/SimplePublicObjectInputForCreate';
-export * from '../models/SimplePublicObjectWithAssociations';
 export * from '../models/StandardError';
-export * from '../models/StandardError1';
-export * from '../models/ValueWithTimestamp';
 
-import { AssociatedId } from '../models/AssociatedId';
 import { AssociationSpec    } from '../models/AssociationSpec';
 import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
 import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
 import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
 import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
 import { BatchInputPublicFetchAssociationsBatchRequest } from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
-import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
-import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseLabelsBetweenObjectPair        } from '../models/BatchResponseLabelsBetweenObjectPair';
 import { BatchResponseLabelsBetweenObjectPairWithErrors          } from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
 import { BatchResponsePublicAssociationMultiWithLabel        } from '../models/BatchResponsePublicAssociationMultiWithLabel';
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation          } from '../models/BatchResponsePublicDefaultAssociation';
-import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
-import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 import { ModelError } from '../models/ModelError';
 import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
-import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
-import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
 import { PublicAssociationMultiArchive } from '../models/PublicAssociationMultiArchive';
 import { PublicAssociationMultiPost } from '../models/PublicAssociationMultiPost';
 import { PublicAssociationMultiWithLabel } from '../models/PublicAssociationMultiWithLabel';
-import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 import { PublicDefaultAssociation } from '../models/PublicDefaultAssociation';
 import { PublicDefaultAssociationMultiPost } from '../models/PublicDefaultAssociationMultiPost';
 import { PublicFetchAssociationsBatchRequest } from '../models/PublicFetchAssociationsBatchRequest';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicObjectId } from '../models/PublicObjectId';
-import { SimplePublicObject } from '../models/SimplePublicObject';
-import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
-import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
-import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
-import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
-import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { StandardError } from '../models/StandardError';
-import { StandardError1 } from '../models/StandardError1';
-import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -129,63 +85,38 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponsePublicAssociationMultiWithLabelStatusEnum",
     "BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum",
     "BatchResponsePublicDefaultAssociationStatusEnum",
-    "BatchResponseSimplePublicObjectStatusEnum",
-    "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "AssociatedId": AssociatedId,
     "AssociationSpec": AssociationSpec,
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
     "BatchInputPublicAssociationMultiArchive": BatchInputPublicAssociationMultiArchive,
     "BatchInputPublicAssociationMultiPost": BatchInputPublicAssociationMultiPost,
     "BatchInputPublicDefaultAssociationMultiPost": BatchInputPublicDefaultAssociationMultiPost,
     "BatchInputPublicFetchAssociationsBatchRequest": BatchInputPublicFetchAssociationsBatchRequest,
-    "BatchInputSimplePublicObjectBatchInput": BatchInputSimplePublicObjectBatchInput,
-    "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
-    "BatchInputSimplePublicObjectInputForCreate": BatchInputSimplePublicObjectInputForCreate,
-    "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseLabelsBetweenObjectPair": BatchResponseLabelsBetweenObjectPair,
     "BatchResponseLabelsBetweenObjectPairWithErrors": BatchResponseLabelsBetweenObjectPairWithErrors,
     "BatchResponsePublicAssociationMultiWithLabel": BatchResponsePublicAssociationMultiWithLabel,
     "BatchResponsePublicAssociationMultiWithLabelWithErrors": BatchResponsePublicAssociationMultiWithLabelWithErrors,
     "BatchResponsePublicDefaultAssociation": BatchResponsePublicDefaultAssociation,
-    "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
-    "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
-    "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
-    "CollectionResponseAssociationSpecWithLabelNoPaging": CollectionResponseAssociationSpecWithLabelNoPaging,
     "CollectionResponseMultiAssociatedObjectWithLabelForwardPaging": CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
-    "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
+    "LabelsBetweenObjectPair1": LabelsBetweenObjectPair1,
     "ModelError": ModelError,
     "MultiAssociatedObjectWithLabel": MultiAssociatedObjectWithLabel,
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
-    "PublicAssociationDefinitionCreateRequest": PublicAssociationDefinitionCreateRequest,
-    "PublicAssociationDefinitionUpdateRequest": PublicAssociationDefinitionUpdateRequest,
     "PublicAssociationMultiArchive": PublicAssociationMultiArchive,
     "PublicAssociationMultiPost": PublicAssociationMultiPost,
     "PublicAssociationMultiWithLabel": PublicAssociationMultiWithLabel,
-    "PublicAssociationsForObject": PublicAssociationsForObject,
     "PublicDefaultAssociation": PublicDefaultAssociation,
     "PublicDefaultAssociationMultiPost": PublicDefaultAssociationMultiPost,
     "PublicFetchAssociationsBatchRequest": PublicFetchAssociationsBatchRequest,
-    "PublicGdprDeleteInput": PublicGdprDeleteInput,
     "PublicObjectId": PublicObjectId,
-    "SimplePublicObject": SimplePublicObject,
-    "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,
-    "SimplePublicObjectId": SimplePublicObjectId,
-    "SimplePublicObjectInput": SimplePublicObjectInput,
-    "SimplePublicObjectInputForCreate": SimplePublicObjectInputForCreate,
-    "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
     "StandardError": StandardError,
-    "StandardError1": StandardError1,
-    "ValueWithTimestamp": ValueWithTimestamp,
 }
 
 export class ObjectSerializer {

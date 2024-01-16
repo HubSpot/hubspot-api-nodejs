@@ -13,7 +13,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 export class ObservableBasicApi {
@@ -67,7 +67,7 @@ export class ObservableBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair> {
+    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair1> {
         const requestContextPromise = this.requestFactory.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
 
         // build promise chain

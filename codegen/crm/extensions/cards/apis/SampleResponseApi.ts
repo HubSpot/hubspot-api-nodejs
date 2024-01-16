@@ -23,7 +23,7 @@ export class SampleResponseApiRequestFactory extends BaseAPIRequestFactory {
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/sample-response';
+        const localVarPath = '/crm/v3/extensions/cards-dev/sample-response';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);

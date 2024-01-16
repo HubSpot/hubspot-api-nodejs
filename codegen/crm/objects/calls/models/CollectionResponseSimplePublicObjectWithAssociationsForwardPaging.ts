@@ -14,22 +14,22 @@ import { ForwardPaging } from '../models/ForwardPaging';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 
 export class CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
-    'results': Array<SimplePublicObjectWithAssociations>;
     'paging'?: ForwardPaging;
+    'results': Array<SimplePublicObjectWithAssociations>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<SimplePublicObjectWithAssociations>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicObjectWithAssociations>",
             "format": ""
         }    ];
 

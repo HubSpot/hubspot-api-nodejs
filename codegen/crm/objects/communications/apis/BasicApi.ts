@@ -34,7 +34,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/{communicationId}'
+        const localVarPath = '/crm/v3/objects/communications/{communicationId}'
             .replace('{' + 'communicationId' + '}', encodeURIComponent(String(communicationId)));
 
         // Make Request Context
@@ -58,7 +58,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard Communications is provided.
+     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard communications is provided.
      * Create
      * @param simplePublicObjectInputForCreate 
      */
@@ -72,7 +72,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications';
+        const localVarPath = '/crm/v3/objects/communications';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -130,7 +130,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/{communicationId}'
+        const localVarPath = '/crm/v3/objects/communications/{communicationId}'
             .replace('{' + 'communicationId' + '}', encodeURIComponent(String(communicationId)));
 
         // Make Request Context
@@ -179,7 +179,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read a page of Communications. Control what is returned via the `properties` query param.
+     * Read a page of communications. Control what is returned via the `properties` query param.
      * List
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -198,7 +198,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications';
+        const localVarPath = '/crm/v3/objects/communications';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -274,7 +274,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/{communicationId}'
+        const localVarPath = '/crm/v3/objects/communications/{communicationId}'
             .replace('{' + 'communicationId' + '}', encodeURIComponent(String(communicationId)));
 
         // Make Request Context

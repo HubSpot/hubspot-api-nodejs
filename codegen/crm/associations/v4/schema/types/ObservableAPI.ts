@@ -29,8 +29,8 @@ export class ObservableDefinitionsApi {
      * @param toObjectType 
      * @param associationTypeId 
      */
-    public _delete(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory._delete(fromObjectType, toObjectType, associationTypeId, _options);
+    public archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, associationTypeId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -44,7 +44,7 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor._delete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
             }));
     }
 

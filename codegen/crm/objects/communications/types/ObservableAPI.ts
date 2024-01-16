@@ -10,6 +10,7 @@ import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePu
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -58,7 +59,7 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard Communications is provided.
+     * Create a communication with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard communications is provided.
      * Create
      * @param simplePublicObjectInputForCreate 
      */
@@ -111,7 +112,7 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Read a page of Communications. Control what is returned via the `properties` query param.
+     * Read a page of communications. Control what is returned via the `properties` query param.
      * List
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -184,7 +185,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Archive a batch of Communications by ID
+     * Archive a batch of communications by ID
      * @param batchInputSimplePublicObjectId 
      */
     public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Observable<void> {
@@ -207,7 +208,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Create a batch of Communications
+     * Create a batch of communications
      * @param batchInputSimplePublicObjectInputForCreate 
      */
     public create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -230,7 +231,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Read a batch of Communications by internal ID, or unique property values
+     * Read a batch of communications by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
@@ -254,7 +255,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Update a batch of Communications
+     * Update a batch of communications
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -278,6 +279,48 @@ export class ObservableBatchApi {
 
 }
 
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+export class ObservableGDPRApi {
+    private requestFactory: GDPRApiRequestFactory;
+    private responseProcessor: GDPRApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: GDPRApiRequestFactory,
+        responseProcessor?: GDPRApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new GDPRApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new GDPRApiResponseProcessor();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param publicGdprDeleteInput 
+     */
+    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.purge(publicGdprDeleteInput, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purge(rsp)));
+            }));
+    }
+
+}
+
 import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
 export class ObservablePublicObjectApi {
     private requestFactory: PublicObjectApiRequestFactory;
@@ -295,7 +338,7 @@ export class ObservablePublicObjectApi {
     }
 
     /**
-     * Merge two Communications with same type
+     * Merge two communications with same type
      * @param publicMergeInput 
      */
     public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {

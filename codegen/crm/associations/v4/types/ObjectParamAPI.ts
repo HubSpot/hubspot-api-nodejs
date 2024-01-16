@@ -11,7 +11,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -157,7 +157,7 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair1> {
         return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 

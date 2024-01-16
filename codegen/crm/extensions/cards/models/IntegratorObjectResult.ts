@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -14,27 +14,15 @@ import { IntegratorObjectResultActionsInner } from '../models/IntegratorObjectRe
 import { ObjectToken } from '../models/ObjectToken';
 
 export class IntegratorObjectResult {
-    'id': string;
-    'title': string;
     'linkUrl'?: string;
     'tokens': Array<ObjectToken>;
+    'id': string;
+    'title': string;
     'actions': Array<IntegratorObjectResultActionsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "linkUrl",
             "baseName": "linkUrl",
@@ -45,6 +33,18 @@ export class IntegratorObjectResult {
             "name": "tokens",
             "baseName": "tokens",
             "type": "Array<ObjectToken>",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "title",
+            "baseName": "title",
+            "type": "string",
             "format": ""
         },
         {

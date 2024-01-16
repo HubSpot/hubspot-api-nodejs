@@ -12,22 +12,22 @@
 
 
 export class SimplePublicObjectBatchInput {
-    'properties': { [key: string]: string; };
     'id': string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "{ [key: string]: string; }",
-            "format": ""
-        },
-        {
             "name": "id",
             "baseName": "id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
