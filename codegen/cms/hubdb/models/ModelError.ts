@@ -1,5 +1,5 @@
 /**
- * HubDB endpoints
+ * Hubdb
  * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * OpenAPI spec version: v3
@@ -14,65 +14,41 @@ import { ErrorDetail } from '../models/ErrorDetail';
 
 export class ModelError {
     /**
-    * A human readable message describing the error along with remediation steps where appropriate
-    */
-    'message': string;
-    /**
-    * A unique identifier for the request. Include this value with any error reports or support tickets
-    */
-    'correlationId': string;
-    /**
-    * The error category
-    */
-    'category': string;
-    /**
     * A specific category that contains more specific detail about the error
     */
     'subCategory'?: string;
-    /**
-    * further information about the error
-    */
-    'errors'?: Array<ErrorDetail>;
     /**
     * Context about the error condition
     */
     'context'?: { [key: string]: Array<string>; };
     /**
+    * A unique identifier for the request. Include this value with any error reports or support tickets
+    */
+    'correlationId': string;
+    /**
     * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
     */
     'links'?: { [key: string]: string; };
+    /**
+    * A human readable message describing the error along with remediation steps where appropriate
+    */
+    'message': string;
+    /**
+    * The error category
+    */
+    'category': string;
+    /**
+    * further information about the error
+    */
+    'errors'?: Array<ErrorDetail>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "correlationId",
-            "baseName": "correlationId",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
-            "name": "category",
-            "baseName": "category",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "subCategory",
             "baseName": "subCategory",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
             "format": ""
         },
         {
@@ -82,9 +58,33 @@ export class ModelError {
             "format": ""
         },
         {
+            "name": "correlationId",
+            "baseName": "correlationId",
+            "type": "string",
+            "format": "uuid"
+        },
+        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
             "format": ""
         }    ];
 

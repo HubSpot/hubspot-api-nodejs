@@ -1,5 +1,5 @@
 /**
- * URL redirects
+ * CMS Url Redirects
  * URL redirect operations
  *
  * OpenAPI spec version: v3

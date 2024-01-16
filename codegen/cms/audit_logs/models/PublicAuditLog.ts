@@ -1,5 +1,5 @@
 /**
- * CMS Audit Logs
+ * CMS Cms Content Audit
  * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
  *
  * OpenAPI spec version: v3
@@ -12,26 +12,7 @@
 
 
 export class PublicAuditLog {
-    /**
-    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
-    */
-    'event': PublicAuditLogEventEnum;
-    /**
-    * The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
-    */
-    'objectType': PublicAuditLogObjectTypeEnum;
-    /**
-    * The ID of the object.
-    */
-    'objectId': string;
-    /**
-    * The ID of the user who caused the event.
-    */
-    'userId': string;
-    /**
-    * The timestamp at which the event occurred.
-    */
-    'timestamp': Date;
+    'meta'?: any;
     /**
     * The internal name of the object in HubSpot.
     */
@@ -40,40 +21,35 @@ export class PublicAuditLog {
     * The name of the user who caused the event.
     */
     'fullName': string;
-    'meta'?: any;
+    /**
+    * The type of event that took place (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+    */
+    'event': PublicAuditLogEventEnum;
+    /**
+    * The ID of the user who caused the event.
+    */
+    'userId': string;
+    /**
+    * The ID of the object.
+    */
+    'objectId': string;
+    /**
+    * The type of the object (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+    */
+    'objectType': PublicAuditLogObjectTypeEnum;
+    /**
+    * The timestamp at which the event occurred.
+    */
+    'timestamp': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "event",
-            "baseName": "event",
-            "type": "PublicAuditLogEventEnum",
+            "name": "meta",
+            "baseName": "meta",
+            "type": "any",
             "format": ""
-        },
-        {
-            "name": "objectType",
-            "baseName": "objectType",
-            "type": "PublicAuditLogObjectTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "objectId",
-            "baseName": "objectId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "Date",
-            "format": "date-time"
         },
         {
             "name": "objectName",
@@ -88,10 +64,34 @@ export class PublicAuditLog {
             "format": ""
         },
         {
-            "name": "meta",
-            "baseName": "meta",
-            "type": "any",
+            "name": "event",
+            "baseName": "event",
+            "type": "PublicAuditLogEventEnum",
             "format": ""
+        },
+        {
+            "name": "userId",
+            "baseName": "userId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectType",
+            "baseName": "objectType",
+            "type": "PublicAuditLogObjectTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

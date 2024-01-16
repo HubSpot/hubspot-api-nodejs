@@ -12,22 +12,22 @@
 
 
 export class TaskLocator {
-    'id': string;
     'links'?: { [key: string]: string; };
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 
