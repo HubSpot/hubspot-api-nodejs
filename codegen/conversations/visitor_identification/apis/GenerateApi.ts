@@ -31,7 +31,7 @@ export class GenerateApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/visitor-identification/v3/tokens/create';
+        const localVarPath = '/conversations/v3/visitor-identification/tokens/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);

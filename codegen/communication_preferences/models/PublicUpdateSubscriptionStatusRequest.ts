@@ -20,13 +20,13 @@ export class PublicUpdateSubscriptionStatusRequest {
     */
     'emailAddress': string;
     /**
-    * ID of the subscription being updated for the contact.
-    */
-    'subscriptionId': string;
-    /**
     * Legal basis for updating the contact's status (required for GDPR enabled portals).
     */
     'legalBasis'?: PublicUpdateSubscriptionStatusRequestLegalBasisEnum;
+    /**
+    * ID of the subscription being updated for the contact.
+    */
+    'subscriptionId': string;
     /**
     * A more detailed explanation to go with the legal basis (required for GDPR enabled portals).
     */
@@ -42,15 +42,15 @@ export class PublicUpdateSubscriptionStatusRequest {
             "format": ""
         },
         {
-            "name": "subscriptionId",
-            "baseName": "subscriptionId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "legalBasis",
             "baseName": "legalBasis",
             "type": "PublicUpdateSubscriptionStatusRequestLegalBasisEnum",
+            "format": ""
+        },
+        {
+            "name": "subscriptionId",
+            "baseName": "subscriptionId",
+            "type": "string",
             "format": ""
         },
         {

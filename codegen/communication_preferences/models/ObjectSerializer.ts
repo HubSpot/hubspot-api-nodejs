@@ -8,7 +8,7 @@ export * from '../models/SubscriptionDefinitionsResponse';
 
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
-import { PublicSubscriptionStatus           } from '../models/PublicSubscriptionStatus';
+import { PublicSubscriptionStatus        } from '../models/PublicSubscriptionStatus';
 import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
 import { PublicUpdateSubscriptionStatusRequest      } from '../models/PublicUpdateSubscriptionStatusRequest';
 import { SubscriptionDefinition } from '../models/SubscriptionDefinition';
@@ -34,9 +34,9 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "PublicSubscriptionStatusLegalBasisEnum",
     "PublicSubscriptionStatusStatusEnum",
     "PublicSubscriptionStatusSourceOfStatusEnum",
-    "PublicSubscriptionStatusLegalBasisEnum",
     "PublicUpdateSubscriptionStatusRequestLegalBasisEnum",
 ]);
 

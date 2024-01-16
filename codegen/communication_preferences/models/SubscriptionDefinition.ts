@@ -13,9 +13,25 @@
 
 export class SubscriptionDefinition {
     /**
-    * The ID of the definition.
+    * A default description that is used by some HubSpot tools and cannot be edited.
     */
-    'id': string;
+    'isInternal': boolean;
+    /**
+    * Time at which the definition was created.
+    */
+    'createdAt': Date;
+    /**
+    * A subscription definition created by HubSpot.
+    */
+    'isDefault': boolean;
+    /**
+    * The method or technology used to contact.
+    */
+    'communicationMethod'?: string;
+    /**
+    * The purpose of this subscription or the department in your organization that uses it.
+    */
+    'purpose'?: string;
     /**
     * The name of the subscription.
     */
@@ -25,29 +41,13 @@ export class SubscriptionDefinition {
     */
     'description': string;
     /**
-    * The purpose of this subscription or the department in your organization that uses it.
+    * The ID of the definition.
     */
-    'purpose'?: string;
-    /**
-    * The method or technology used to contact.
-    */
-    'communicationMethod'?: string;
+    'id': string;
     /**
     * Whether the definition is active or archived.
     */
     'isActive': boolean;
-    /**
-    * A subscription definition created by HubSpot.
-    */
-    'isDefault': boolean;
-    /**
-    * A default description that is used by some HubSpot tools and cannot be edited.
-    */
-    'isInternal': boolean;
-    /**
-    * Time at which the definition was created.
-    */
-    'createdAt': Date;
     /**
     * Time at which the definition was last updated.
     */
@@ -57,8 +57,32 @@ export class SubscriptionDefinition {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "isInternal",
+            "baseName": "isInternal",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "isDefault",
+            "baseName": "isDefault",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "communicationMethod",
+            "baseName": "communicationMethod",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "purpose",
+            "baseName": "purpose",
             "type": "string",
             "format": ""
         },
@@ -75,14 +99,8 @@ export class SubscriptionDefinition {
             "format": ""
         },
         {
-            "name": "purpose",
-            "baseName": "purpose",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "communicationMethod",
-            "baseName": "communicationMethod",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -91,24 +109,6 @@ export class SubscriptionDefinition {
             "baseName": "isActive",
             "type": "boolean",
             "format": ""
-        },
-        {
-            "name": "isDefault",
-            "baseName": "isDefault",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isInternal",
-            "baseName": "isInternal",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
         },
         {
             "name": "updatedAt",
