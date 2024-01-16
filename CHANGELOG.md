@@ -28,6 +28,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `automation.actions.revisionsApi.getById():Promise<ActionRevision>` => `automation.actions.publicActionRevisionsApi.getById():Promise<PublicActionRevision>`.
 - `automation.actions.revisionsApi.getPage():Promise<CollectionResponseActionRevisionForwardPaging>` => `automation.actions.publicActionRevisionsApi.getPage():Promise<CollectionResponsePublicActionRevisionForwardPaging>`.
 
+- Added param `property` to `cms.blogs.authors.blogAuthorsApi.getById()`.
+- Added param `property` to `cms.blogs.authors.blogAuthorsApi.getPage()`.
+- Changed type from laguages enum to `string` in `cms/blogs/authors/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/authors/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
+- Added param `property` to `cms.blogs.blogPosts.blogPostsApi.getById()`.
+- Added param `property` to `cms.blogs.blogPosts.blogPostsApi.getPage()`.
+- Changed type from laguages enum to `string` in `cms/blogs/blog_posts/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/blog_posts/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
+- Cnange type from `SideOrCornerVerticalSideEnum` to `string` in `cms/blogs/blog_posts/models/SideOrCorner::verticalSide`.
+- Cnange type from `SideOrCornerHorizontalSideEnum` to `string` in `cms/blogs/blog_posts/models/SideOrCorner::horizontalSide`.
+- Cnange type from `StylesVerticalAlignmentEnum` to `string` in `cms/blogs/blog_posts/models/Styles::verticalAlignment`.
+- Cnange type from `StylesFlexboxPositioningEnum` to `string` in `cms/blogs/blog_posts/models/Styles::flexboxPositioning`.
+- Added param `property` to `cms.blogs.tags.blogTagsApi.getById()`.
+- Added param `property` to `cms.blogs.tags.blogTagsApi.getPage()`.
+- Changed type from laguages enum to `string` in `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
 
 
 ## [10.2.0] - 2023-12-13
