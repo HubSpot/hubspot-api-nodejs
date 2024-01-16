@@ -5,7 +5,7 @@ export * from '../models/IndexedField';
 export * from '../models/ModelError';
 export * from '../models/PublicSearchResults';
 
-import { ContentSearchResult               } from '../models/ContentSearchResult';
+import { ContentSearchResult                  } from '../models/ContentSearchResult';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { IndexedData     } from '../models/IndexedData';
 import { IndexedField } from '../models/IndexedField';
@@ -32,8 +32,8 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
-    "ContentSearchResultTypeEnum",
     "ContentSearchResultLanguageEnum",
+    "ContentSearchResultTypeEnum",
     "IndexedDataTypeEnum",
 ]);
 

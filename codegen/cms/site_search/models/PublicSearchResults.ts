@@ -14,11 +14,11 @@ import { ContentSearchResult } from '../models/ContentSearchResult';
 
 export class PublicSearchResults {
     'total': number;
+    'searchTerm'?: string;
     'offset': number;
     'limit': number;
-    'results': Array<ContentSearchResult>;
-    'searchTerm'?: string;
     'page': number;
+    'results': Array<ContentSearchResult>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,6 +28,12 @@ export class PublicSearchResults {
             "baseName": "total",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "searchTerm",
+            "baseName": "searchTerm",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "offset",
@@ -42,22 +48,16 @@ export class PublicSearchResults {
             "format": "int32"
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<ContentSearchResult>",
-            "format": ""
-        },
-        {
-            "name": "searchTerm",
-            "baseName": "searchTerm",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "page",
             "baseName": "page",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<ContentSearchResult>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

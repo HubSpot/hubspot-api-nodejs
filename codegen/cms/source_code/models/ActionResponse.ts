@@ -12,20 +12,20 @@
 
 
 export class ActionResponse {
-    'status': ActionResponseStatusEnum;
+    'completedAt': Date;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'status': ActionResponseStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "ActionResponseStatusEnum",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -40,15 +40,15 @@ export class ActionResponse {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "ActionResponseStatusEnum",
             "format": ""
         }    ];
 

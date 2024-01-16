@@ -12,7 +12,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
-import { PublicAuditLog         } from '../models/PublicAuditLog';
+import { PublicAuditLog       } from '../models/PublicAuditLog';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
