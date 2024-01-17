@@ -2,6 +2,7 @@ import {
   createConfiguration,
   RequestContext,
   ResponseContext,
+  RecordingSettingsApi,
   ServerConfiguration,
   SettingsApi,
 } from '../../../../../codegen/crm/extensions/calling/index'
@@ -12,6 +13,7 @@ import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class CallingDiscovery {
   public settingsApi: SettingsApi
+  public recordingSettingsApi: RecordingSettingsApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -25,5 +27,8 @@ export default class CallingDiscovery {
     )
 
     this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
+    this.recordingSettingsApi = ApiDecoratorService.getInstance().apply<RecordingSettingsApi>(
+      new RecordingSettingsApi(configuration),
+    )
   }
 }
