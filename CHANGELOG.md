@@ -27,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `automation.actions.functionsApi.getPage():Promise<CollectionResponseActionFunctionIdentifierNoPaging>` => `automation.actions.publicActionFunctionsApi.getPage():Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging>`.
 - `automation.actions.revisionsApi.getById():Promise<ActionRevision>` => `automation.actions.publicActionRevisionsApi.getById():Promise<PublicActionRevision>`.
 - `automation.actions.revisionsApi.getPage():Promise<CollectionResponseActionRevisionForwardPaging>` => `automation.actions.publicActionRevisionsApi.getPage():Promise<CollectionResponsePublicActionRevisionForwardPaging>`.
-
 - Added param `property` to `cms.blogs.authors.blogAuthorsApi.getById()`.
 - Added param `property` to `cms.blogs.authors.blogAuthorsApi.getPage()`.
 - Changed type from laguages enum to `string` in `cms/blogs/authors/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/authors/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
@@ -41,6 +40,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added param `property` to `cms.blogs.tags.blogTagsApi.getById()`.
 - Added param `property` to `cms.blogs.tags.blogTagsApi.getPage()`.
 - Changed type from laguages enum to `string` in `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
+- Cnange type from `ErrorCategory` to `string` in `crm/associations/models/StandardError::category`.
+- `crm.associations.v4.basicApi.create(): Promise<LabelsBetweenObjectPair>` => `crm.associations.v4.basicApi.create(): Promise<LabelsBetweenObjectPair1>`
+- Cnange type from `StandardError1[]` to `StandardError[]` in `crm/associations/v4/models/BatchResponseSimplePublicObjectWithErrors::errors`.
+- Cnange type from `ErrorCategory` to `string` in `crm/associations/v4/models/StandardError::category`.
+- Rename `crm.associations.v4.schema.definitionsApi._delete()` => `crm.associations.v4.schema.definitionsApi.archive()`.
+- Cnange type from `number` to `string` in `crm/companies/models/PublicObjectSearchRequest::after`.
+- Cnange type from `number` to `string` in `crm/deals/models/PublicObjectSearchRequest::after`.
+- Cnange type from `number` to `string` in `crm/line_items/models/PublicObjectSearchRequest::after`.
+- Removed `crm.objects.associationsApi`.
+
+
+## Added
+
+- `crm.companies.gdprApi` API client.
+- `crm.deals.gdprApi` API client.
+- `crm.extensions.calling.gdprApi` API client.
+- `crm.line_items.gdprApi` API client.
+- `crm.companies.recordingSettingsApi` API client.
+- `crm.objects.calls.gdprApi` API client.
+
 
 
 ## [10.2.0] - 2023-12-13
@@ -87,6 +106,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move method `doUpsertById` from `marketing.events.marketingEventsExternalApi` to `marketing.events.subscriberStateChanges`.
 - Rename `marketing.events.settingsExternalApi` => `marketing.events.settingsApi`
 - Cnange type from `ErrorCategory` to `string` in `marketing/events/models/StandardError::category`.
+- `crm.extensions.cards.cardsApi.archive(appId: number, cardId: string, _options?: Configuration)` => `crm.extensions.cards.cardsApi.archive(cardId: string, appId: number, _options?: Configuration)`
+- `crm.extensions.cards.cardsApi.getById(appId: number, cardId: string, _options?: Configuration): Promise<CardResponse >` => `crm.extensions.cards.cardsApi.getById(cardId: string, appId: number, _options?: Configuration): Promise<PublicCardResponse >`
+- `crm.extensions.cards.cardsApi.update(appId: number, cardId: string, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<CardResponse >` => `crm.extensions.cards.cardsApi.update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<PublicCardResponse >`
+- `crm.extensions.cards.cardsApi.create(): Promise<CardResponse >` => `crm.extensions.cards.cardsApi.create(): Promise<PublicCardResponse >`
+- `crm.extensions.cards.cardsApi.getAll(): Promise<CardListResponse >` => `crm.extensions.cards.cardsApi.getAll(): Promise<PublicCardListResponse >`:
+
 
 ## Added
 
@@ -185,12 +210,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Updated
 
 - Rename `cms.hubdb.rowsBatchApi.batchCloneDraftTableRows()` => `cms.hubdb.rowsBatchApi.cloneDraftTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchCreateDraftTableRows()` => `cms.hubdb.rowsBatchApi. createDraftTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchPurgeDraftTableRows()` => `cms.hubdb.rowsBatchApi. purgeDraftTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchReadDraftTableRows()` => `cms.hubdb.rowsBatchApi. readDraftTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchReadTableRows()` => `cms.hubdb.rowsBatchApi. readTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchReplaceDraftTableRows()` => `cms.hubdb.rowsBatchApi. replaceDraftTableRows()`.
-- Rename `cms.hubdb.rowsBatchApi.batchUpdateDraftTableRows()` => `cms.hubdb.rowsBatchApi. updateDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchCreateDraftTableRows()` => `cms.hubdb.rowsBatchApi.createDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchPurgeDraftTableRows()` => `cms.hubdb.rowsBatchApi.purgeDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReadDraftTableRows()` => `cms.hubdb.rowsBatchApi.readDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReadTableRows()` => `cms.hubdb.rowsBatchApi.readTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchReplaceDraftTableRows()` => `cms.hubdb.rowsBatchApi.replaceDraftTableRows()`.
+- Rename `cms.hubdb.rowsBatchApi.batchUpdateDraftTableRows()` => `cms.hubdb.rowsBatchApi.updateDraftTableRows()`.
 - `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
 - `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
 - `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration)` => `cms.hubdb.tablesApi.updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration)`
