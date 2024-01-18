@@ -45,22 +45,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cnange type from `StandardError1[]` to `StandardError[]` in `crm/associations/v4/models/BatchResponseSimplePublicObjectWithErrors::errors`.
 - Cnange type from `ErrorCategory` to `string` in `crm/associations/v4/models/StandardError::category`.
 - Rename `crm.associations.v4.schema.definitionsApi._delete()` => `crm.associations.v4.schema.definitionsApi.archive()`.
-- Cnange type from `number` to `string` in `crm/companies/models/PublicObjectSearchRequest::after`.
-- Cnange type from `number` to `string` in `crm/deals/models/PublicObjectSearchRequest::after`.
-- Cnange type from `number` to `string` in `crm/line_items/models/PublicObjectSearchRequest::after`.
 - Removed `crm.objects.associationsApi`.
+- Cnange type from `number` to `string` in `PublicObjectSearchRequest::after` in all CRM clients.
+- `crm.objects.postalMail.basicApi.archive(postalMail: string, _options?: Configuration)` => `crm.objects.postalMail.basicApi.archive(postalMailId: string, _options?: Configuration)`.
+- `crm.objects.postalMail.basicApi.getById(postalMail: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration)` => `crm.objects.postalMail.basicApi.getById(postalMailId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration)`.
+- `crm.objects.postalMail.basicApi.update(postalMail: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration)` => `crm.objects.postalMail.basicApi.update(postalMailId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration)`.
+- Added param `validateDealStageUsagesBeforeDelete` to `cms.pipelines.pipelinesApi.archive()`, `cms.pipelines.pipelinesApi.replace()` and `cms.pipelines.pipelinesApi.update()`.
+
 
 
 ## Added
 
 - `crm.companies.gdprApi` API client.
 - `crm.deals.gdprApi` API client.
-- `crm.extensions.calling.gdprApi` API client.
+- `crm.extensions.calling.recordingSettingsApi` API client.
 - `crm.line_items.gdprApi` API client.
-- `crm.companies.recordingSettingsApi` API client.
 - `crm.objects.calls.gdprApi` API client.
-
-
+- `crm.objects.communications.gdprApi` API client.
+- `crm.objects.emails.gdprApi` API client.
+- `crm.objects.feedbackSubmissions.gdprApi` API client.
+- `crm.objects.meetings.gdprApi` API client.
+- `crm.objects.notes.gdprApi` API client.
+- `crm.objects.postalMail.gdprApi` API client.
+- `crm.objects.tasks.gdprApi` API client.
+- `crm.products.gdprApi` API client.
+- `crm.quotes.gdprApi` API client.
+- `crm.tickets.gdprApi` API client.
 
 ## [10.2.0] - 2023-12-13
 
