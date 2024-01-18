@@ -1,8 +1,8 @@
 import {
   createConfiguration,
+  RecordingSettingsApi,
   RequestContext,
   ResponseContext,
-  RecordingSettingsApi,
   ServerConfiguration,
   SettingsApi,
 } from '../../../../../codegen/crm/extensions/calling/index'
