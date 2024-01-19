@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -14,22 +14,25 @@ import { Folder } from '../models/Folder';
 import { Paging } from '../models/Paging';
 
 export class CollectionResponseFolder {
-    'results': Array<Folder>;
     'paging'?: Paging;
+    /**
+    * 
+    */
+    'results': Array<Folder>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<Folder>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<Folder>",
             "format": ""
         }    ];
 

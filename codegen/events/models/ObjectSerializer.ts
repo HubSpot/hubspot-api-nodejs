@@ -4,6 +4,7 @@ export * from '../models/ExternalUnifiedEvent';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
+export * from '../models/PreviousPage';
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -11,6 +12,7 @@ import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -41,6 +43,7 @@ let typeMap: {[index: string]: any} = {
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Paging": Paging,
+    "PreviousPage": PreviousPage,
 }
 
 export class ObjectSerializer {

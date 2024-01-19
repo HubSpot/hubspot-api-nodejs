@@ -1,5 +1,5 @@
 /**
- * Events Send Event Completions
+ * Send Event Completions
  * HTTP API for triggering instances of custom behavioral events
  *
  * OpenAPI spec version: v3

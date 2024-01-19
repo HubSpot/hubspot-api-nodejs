@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,10 +16,6 @@
 */
 export class FolderInput {
     /**
-    * Desired name for the folder.
-    */
-    'name': string;
-    /**
     * FolderId of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
     */
     'parentFolderId'?: string;
@@ -27,16 +23,14 @@ export class FolderInput {
     * Path of the parent of the created folder. If not specified the folder will be created at the root level. parentFolderPath and parentFolderId cannot be set at the same time.
     */
     'parentPath'?: string;
+    /**
+    * Desired name for the folder.
+    */
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "parentFolderId",
             "baseName": "parentFolderId",
@@ -46,6 +40,12 @@ export class FolderInput {
         {
             "name": "parentPath",
             "baseName": "parentPath",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         }    ];

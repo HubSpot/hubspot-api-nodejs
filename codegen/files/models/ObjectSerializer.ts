@@ -30,7 +30,7 @@ import { FolderActionResponse           } from '../models/FolderActionResponse';
 import { FolderInput } from '../models/FolderInput';
 import { FolderUpdateInput } from '../models/FolderUpdateInput';
 import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
-import { ImportFromUrlInput      } from '../models/ImportFromUrlInput';
+import { ImportFromUrlInput           } from '../models/ImportFromUrlInput';
 import { ImportFromUrlTaskLocator } from '../models/ImportFromUrlTaskLocator';
 import { ModelError } from '../models/ModelError';
 import { ModelFile                     } from '../models/ModelFile';
@@ -64,8 +64,8 @@ let enumsMap: Set<string> = new Set<string>([
     "FileUpdateInputAccessEnum",
     "FolderActionResponseStatusEnum",
     "ImportFromUrlInputAccessEnum",
-    "ImportFromUrlInputDuplicateValidationStrategyEnum",
     "ImportFromUrlInputDuplicateValidationScopeEnum",
+    "ImportFromUrlInputDuplicateValidationStrategyEnum",
     "ModelFileAccessEnum",
 ]);
 

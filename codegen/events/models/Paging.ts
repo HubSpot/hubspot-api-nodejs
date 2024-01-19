@@ -1,5 +1,5 @@
 /**
- * HubSpot Events API
+ * Events
  * API for accessing CRM object events.
  *
  * OpenAPI spec version: v3
@@ -11,9 +11,11 @@
  */
 
 import { NextPage } from '../models/NextPage';
+import { PreviousPage } from '../models/PreviousPage';
 
 export class Paging {
     'next'?: NextPage;
+    'prev'?: PreviousPage;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,6 +24,12 @@ export class Paging {
             "name": "next",
             "baseName": "next",
             "type": "NextPage",
+            "format": ""
+        },
+        {
+            "name": "prev",
+            "baseName": "prev",
+            "type": "PreviousPage",
             "format": ""
         }    ];
 
