@@ -1,5 +1,5 @@
 /**
- * Webhooks API
+ * Webhooks Webhooks
  * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
  *
  * OpenAPI spec version: v3
@@ -16,10 +16,6 @@
 */
 export class SubscriptionCreateRequest {
     /**
-    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-    */
-    'eventType': SubscriptionCreateRequestEventTypeEnum;
-    /**
     * The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
     */
     'propertyName'?: string;
@@ -27,16 +23,14 @@ export class SubscriptionCreateRequest {
     * Determines if the subscription is active or paused. Defaults to false.
     */
     'active'?: boolean;
+    /**
+    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+    */
+    'eventType': SubscriptionCreateRequestEventTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "eventType",
-            "baseName": "eventType",
-            "type": "SubscriptionCreateRequestEventTypeEnum",
-            "format": ""
-        },
         {
             "name": "propertyName",
             "baseName": "propertyName",
@@ -47,6 +41,12 @@ export class SubscriptionCreateRequest {
             "name": "active",
             "baseName": "active",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "eventType",
+            "baseName": "eventType",
+            "type": "SubscriptionCreateRequestEventTypeEnum",
             "format": ""
         }    ];
 

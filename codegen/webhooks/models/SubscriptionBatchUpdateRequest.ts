@@ -1,5 +1,5 @@
 /**
- * Webhooks API
+ * Webhooks Webhooks
  * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
  *
  * OpenAPI spec version: v3
@@ -12,23 +12,23 @@
 
 
 export class SubscriptionBatchUpdateRequest {
-    'id': number;
     'active': boolean;
+    'id': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "active",
             "baseName": "active",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

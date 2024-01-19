@@ -1,5 +1,5 @@
 /**
- * Business Units Business Units
+ * Business Units
  * Retrieve Business Unit information.
  *
  * OpenAPI spec version: v3
