@@ -20,8 +20,8 @@ export class PromiseBehavioralEventsTrackingApi {
      * Sends Custom Behavioral Event
      * @param behavioralEventHttpCompletionRequest 
      */
-    public postEventsV3Send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.postEventsV3Send(behavioralEventHttpCompletionRequest, _options);
+    public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.send(behavioralEventHttpCompletionRequest, _options);
         return result.toPromise();
     }
 
