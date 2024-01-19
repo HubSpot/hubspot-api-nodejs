@@ -11,34 +11,34 @@
  */
 
 
-export class NextPage {
+export class LifecycleStage {
     /**
-    * 
+    * The objectTypeId for both contact and company
     */
-    'link'?: string;
+    'objectTypeId': string;
     /**
-    * 
+    * The internal name of the contact's lifecycle stage set when submitting a form
     */
-    'after': string;
+    'value': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return LifecycleStage.attributeTypeMap;
     }
 
     public constructor() {

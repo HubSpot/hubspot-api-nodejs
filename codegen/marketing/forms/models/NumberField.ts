@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { NumberFieldValidation } from '../models/NumberFieldValidation';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field used for collecting a numeric value.
