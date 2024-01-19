@@ -5,11 +5,11 @@ import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventH
 import { ObservableBehavioralEventsTrackingApi } from "./ObservableAPI";
 import { BehavioralEventsTrackingApiRequestFactory, BehavioralEventsTrackingApiResponseProcessor} from "../apis/BehavioralEventsTrackingApi";
 
-export interface BehavioralEventsTrackingApiPostEventsV3SendRequest {
+export interface BehavioralEventsTrackingApiSendRequest {
     /**
      * 
      * @type BehavioralEventHttpCompletionRequest
-     * @memberof BehavioralEventsTrackingApipostEventsV3Send
+     * @memberof BehavioralEventsTrackingApisend
      */
     behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest
 }
@@ -26,8 +26,8 @@ export class ObjectBehavioralEventsTrackingApi {
      * Sends Custom Behavioral Event
      * @param param the request object
      */
-    public postEventsV3Send(param: BehavioralEventsTrackingApiPostEventsV3SendRequest, options?: Configuration): Promise<void> {
-        return this.api.postEventsV3Send(param.behavioralEventHttpCompletionRequest,  options).toPromise();
+    public send(param: BehavioralEventsTrackingApiSendRequest, options?: Configuration): Promise<void> {
+        return this.api.send(param.behavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
 }

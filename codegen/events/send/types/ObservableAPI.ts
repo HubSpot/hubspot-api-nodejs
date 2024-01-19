@@ -25,8 +25,8 @@ export class ObservableBehavioralEventsTrackingApi {
      * Sends Custom Behavioral Event
      * @param behavioralEventHttpCompletionRequest 
      */
-    public postEventsV3Send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.postEventsV3Send(behavioralEventHttpCompletionRequest, _options);
+    public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.send(behavioralEventHttpCompletionRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -40,7 +40,7 @@ export class ObservableBehavioralEventsTrackingApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postEventsV3Send(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.send(rsp)));
             }));
     }
 
