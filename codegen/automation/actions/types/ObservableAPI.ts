@@ -14,28 +14,94 @@ import { PublicActionFunction } from '../models/PublicActionFunction';
 import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 import { PublicActionRevision } from '../models/PublicActionRevision';
 
-import { PublicActionDefinitionsApiRequestFactory, PublicActionDefinitionsApiResponseProcessor} from "../apis/PublicActionDefinitionsApi";
-export class ObservablePublicActionDefinitionsApi {
-    private requestFactory: PublicActionDefinitionsApiRequestFactory;
-    private responseProcessor: PublicActionDefinitionsApiResponseProcessor;
+import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
+export class ObservableCallbacksApi {
+    private requestFactory: CallbacksApiRequestFactory;
+    private responseProcessor: CallbacksApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionDefinitionsApiRequestFactory,
-        responseProcessor?: PublicActionDefinitionsApiResponseProcessor
+        requestFactory?: CallbacksApiRequestFactory,
+        responseProcessor?: CallbacksApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionDefinitionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionDefinitionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new CallbacksApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new CallbacksApiResponseProcessor();
     }
 
     /**
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
+     */
+    public postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId, callbackCompletionRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postAutomationV4ActionsCallbacksCallbackIdComplete(rsp)));
+            }));
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postAutomationV4ActionsCallbacksComplete(rsp)));
+            }));
+    }
+
+}
+
+import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
+export class ObservableDefinitionsApi {
+    private requestFactory: DefinitionsApiRequestFactory;
+    private responseProcessor: DefinitionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DefinitionsApiRequestFactory,
+        responseProcessor?: DefinitionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new DefinitionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new DefinitionsApiResponseProcessor();
+    }
+
+    /**
+     * Archive an extension definition
      * @param definitionId 
      * @param appId 
      */
-    public archive(definitionId: string, appId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(definitionId, appId, _options);
+    public deleteAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteAutomationV4ActionsAppIdDefinitionId(definitionId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -49,65 +115,19 @@ export class ObservablePublicActionDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteAutomationV4ActionsAppIdDefinitionId(rsp)));
             }));
     }
 
     /**
-     * @param appId 
-     * @param publicActionDefinitionEgg 
-     */
-    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Observable<PublicActionDefinition> {
-        const requestContextPromise = this.requestFactory.create(appId, publicActionDefinitionEgg, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
-            }));
-    }
-
-    /**
-     * @param definitionId 
-     * @param appId 
-     * @param archived Whether to return only results that have been archived.
-     */
-    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Observable<PublicActionDefinition> {
-        const requestContextPromise = this.requestFactory.getById(definitionId, appId, archived, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
-            }));
-    }
-
-    /**
+     * Get paged extension definitions
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param archived Whether to return only results that have been archived.
      */
-    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePublicActionDefinitionForwardPaging> {
-        const requestContextPromise = this.requestFactory.getPage(appId, limit, after, archived, _options);
+    public getAutomationV4ActionsAppId(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePublicActionDefinitionForwardPaging> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppId(appId, limit, after, archived, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -121,17 +141,43 @@ export class ObservablePublicActionDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppId(rsp)));
             }));
     }
 
     /**
+     * Get extension definition by Id
+     * @param definitionId 
+     * @param appId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Observable<PublicActionDefinition> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionId(definitionId, appId, archived, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionId(rsp)));
+            }));
+    }
+
+    /**
+     * Patch an existing extension definition
      * @param definitionId 
      * @param appId 
      * @param publicActionDefinitionPatch 
      */
-    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Observable<PublicActionDefinition> {
-        const requestContextPromise = this.requestFactory.update(definitionId, appId, publicActionDefinitionPatch, _options);
+    public patchAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Observable<PublicActionDefinition> {
+        const requestContextPromise = this.requestFactory.patchAutomationV4ActionsAppIdDefinitionId(definitionId, appId, publicActionDefinitionPatch, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -145,36 +191,86 @@ export class ObservablePublicActionDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.patchAutomationV4ActionsAppIdDefinitionId(rsp)));
+            }));
+    }
+
+    /**
+     * Create a new extension definition
+     * @param appId 
+     * @param publicActionDefinitionEgg 
+     */
+    public postAutomationV4ActionsAppId(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Observable<PublicActionDefinition> {
+        const requestContextPromise = this.requestFactory.postAutomationV4ActionsAppId(appId, publicActionDefinitionEgg, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.postAutomationV4ActionsAppId(rsp)));
             }));
     }
 
 }
 
-import { PublicActionFunctionsApiRequestFactory, PublicActionFunctionsApiResponseProcessor} from "../apis/PublicActionFunctionsApi";
-export class ObservablePublicActionFunctionsApi {
-    private requestFactory: PublicActionFunctionsApiRequestFactory;
-    private responseProcessor: PublicActionFunctionsApiResponseProcessor;
+import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
+export class ObservableFunctionsApi {
+    private requestFactory: FunctionsApiRequestFactory;
+    private responseProcessor: FunctionsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionFunctionsApiRequestFactory,
-        responseProcessor?: PublicActionFunctionsApiResponseProcessor
+        requestFactory?: FunctionsApiRequestFactory,
+        responseProcessor?: FunctionsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionFunctionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionFunctionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new FunctionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new FunctionsApiResponseProcessor();
     }
 
     /**
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     */
+    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(rsp)));
+            }));
+    }
+
+    /**
+     * Archive a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
      * @param appId 
      */
-    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archive(definitionId, functionType, functionId, appId, _options);
+    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -188,17 +284,42 @@ export class ObservablePublicActionFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(rsp)));
             }));
     }
 
     /**
+     * Get all functions for a given definition
+     * @param definitionId 
+     * @param appId 
+     */
+    public getAutomationV4ActionsAppIdDefinitionIdFunctions(definitionId: string, appId: number, _options?: Configuration): Observable<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionIdFunctions(definitionId, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionIdFunctions(rsp)));
+            }));
+    }
+
+    /**
+     * Get all functions by a type for a given definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
      */
-    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.archiveByFunctionType(definitionId, functionType, appId, _options);
+    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<PublicActionFunction> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -212,19 +333,72 @@ export class ObservablePublicActionFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveByFunctionType(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(rsp)));
             }));
     }
 
     /**
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     */
+    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<PublicActionFunction> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(rsp)));
+            }));
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     * @param body 
+     */
+    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
+        const requestContextPromise = this.requestFactory.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, body, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(rsp)));
+            }));
+    }
+
+    /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
      * @param appId 
      * @param body 
      */
-    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
-        const requestContextPromise = this.requestFactory.createOrReplace(definitionId, functionType, functionId, appId, body, _options);
+    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
+        const requestContextPromise = this.requestFactory.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, body, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -238,157 +412,37 @@ export class ObservablePublicActionFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplace(rsp)));
-            }));
-    }
-
-    /**
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
-     * @param body 
-     */
-    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
-        const requestContextPromise = this.requestFactory.createOrReplaceByFunctionType(definitionId, functionType, appId, body, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplaceByFunctionType(rsp)));
-            }));
-    }
-
-    /**
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
-     */
-    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<PublicActionFunction> {
-        const requestContextPromise = this.requestFactory.getByFunctionType(definitionId, functionType, appId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByFunctionType(rsp)));
-            }));
-    }
-
-    /**
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
-     */
-    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<PublicActionFunction> {
-        const requestContextPromise = this.requestFactory.getById(definitionId, functionType, functionId, appId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
-            }));
-    }
-
-    /**
-     * @param definitionId 
-     * @param appId 
-     */
-    public getPage(definitionId: string, appId: number, _options?: Configuration): Observable<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
-        const requestContextPromise = this.requestFactory.getPage(definitionId, appId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(rsp)));
             }));
     }
 
 }
 
-import { PublicActionRevisionsApiRequestFactory, PublicActionRevisionsApiResponseProcessor} from "../apis/PublicActionRevisionsApi";
-export class ObservablePublicActionRevisionsApi {
-    private requestFactory: PublicActionRevisionsApiRequestFactory;
-    private responseProcessor: PublicActionRevisionsApiResponseProcessor;
+import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
+export class ObservableRevisionsApi {
+    private requestFactory: RevisionsApiRequestFactory;
+    private responseProcessor: RevisionsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionRevisionsApiRequestFactory,
-        responseProcessor?: PublicActionRevisionsApiResponseProcessor
+        requestFactory?: RevisionsApiRequestFactory,
+        responseProcessor?: RevisionsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionRevisionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionRevisionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new RevisionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new RevisionsApiResponseProcessor();
     }
 
     /**
-     * @param definitionId 
-     * @param revisionId 
-     * @param appId 
-     */
-    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Observable<PublicActionRevision> {
-        const requestContextPromise = this.requestFactory.getById(definitionId, revisionId, appId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
-            }));
-    }
-
-    /**
+     * Get all revisions for a given definition
      * @param definitionId 
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Observable<CollectionResponsePublicActionRevisionForwardPaging> {
-        const requestContextPromise = this.requestFactory.getPage(definitionId, appId, limit, after, _options);
+    public getAutomationV4ActionsAppIdDefinitionIdRevisions(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Observable<CollectionResponsePublicActionRevisionForwardPaging> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionIdRevisions(definitionId, appId, limit, after, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -402,56 +456,18 @@ export class ObservablePublicActionRevisionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
-            }));
-    }
-
-}
-
-import { PublicCallbacksApiRequestFactory, PublicCallbacksApiResponseProcessor} from "../apis/PublicCallbacksApi";
-export class ObservablePublicCallbacksApi {
-    private requestFactory: PublicCallbacksApiRequestFactory;
-    private responseProcessor: PublicCallbacksApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicCallbacksApiRequestFactory,
-        responseProcessor?: PublicCallbacksApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicCallbacksApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicCallbacksApiResponseProcessor();
-    }
-
-    /**
-     * @param callbackId 
-     * @param callbackCompletionRequest 
-     */
-    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.complete(callbackId, callbackCompletionRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.complete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionIdRevisions(rsp)));
             }));
     }
 
     /**
-     * @param batchInputCallbackCompletionBatchRequest 
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
+     * @param appId 
      */
-    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
+    public getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Observable<PublicActionRevision> {
+        const requestContextPromise = this.requestFactory.getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(definitionId, revisionId, appId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -465,7 +481,7 @@ export class ObservablePublicCallbacksApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatch(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(rsp)));
             }));
     }
 

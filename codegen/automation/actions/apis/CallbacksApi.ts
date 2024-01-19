@@ -14,24 +14,25 @@ import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 /**
  * no description
  */
-export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
+export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Completes a single callback
      * @param callbackId 
      * @param callbackCompletionRequest 
      */
-    public async complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'callbackId' is not null or undefined
         if (callbackId === null || callbackId === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "complete", "callbackId");
+            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksCallbackIdComplete", "callbackId");
         }
 
 
         // verify required parameter 'callbackCompletionRequest' is not null or undefined
         if (callbackCompletionRequest === null || callbackCompletionRequest === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "complete", "callbackCompletionRequest");
+            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksCallbackIdComplete", "callbackCompletionRequest");
         }
 
 
@@ -71,14 +72,15 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Completes a batch of callbacks
      * @param batchInputCallbackCompletionBatchRequest 
      */
-    public async completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
+    public async postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputCallbackCompletionBatchRequest' is not null or undefined
         if (batchInputCallbackCompletionBatchRequest === null || batchInputCallbackCompletionBatchRequest === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
+            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksComplete", "batchInputCallbackCompletionBatchRequest");
         }
 
 
@@ -118,16 +120,16 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class PublicCallbacksApiResponseProcessor {
+export class CallbacksApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to complete
+     * @params response Response returned by the server for a request to postAutomationV4ActionsCallbacksCallbackIdComplete
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async complete(response: ResponseContext): Promise<void > {
+     public async postAutomationV4ActionsCallbacksCallbackIdComplete(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -156,10 +158,10 @@ export class PublicCallbacksApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to completeBatch
+     * @params response Response returned by the server for a request to postAutomationV4ActionsCallbacksComplete
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async completeBatch(response: ResponseContext): Promise<void > {
+     public async postAutomationV4ActionsCallbacksComplete(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
