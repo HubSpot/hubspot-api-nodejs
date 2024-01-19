@@ -21,18 +21,18 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
      * @param callbackId 
      * @param callbackCompletionRequest 
      */
-    public async postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'callbackId' is not null or undefined
         if (callbackId === null || callbackId === undefined) {
-            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksCallbackIdComplete", "callbackId");
+            throw new RequiredError("CallbacksApi", "complete", "callbackId");
         }
 
 
         // verify required parameter 'callbackCompletionRequest' is not null or undefined
         if (callbackCompletionRequest === null || callbackCompletionRequest === undefined) {
-            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksCallbackIdComplete", "callbackCompletionRequest");
+            throw new RequiredError("CallbacksApi", "complete", "callbackCompletionRequest");
         }
 
 
@@ -75,12 +75,12 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
      * Completes a batch of callbacks
      * @param batchInputCallbackCompletionBatchRequest 
      */
-    public async postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
+    public async completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'batchInputCallbackCompletionBatchRequest' is not null or undefined
         if (batchInputCallbackCompletionBatchRequest === null || batchInputCallbackCompletionBatchRequest === undefined) {
-            throw new RequiredError("CallbacksApi", "postAutomationV4ActionsCallbacksComplete", "batchInputCallbackCompletionBatchRequest");
+            throw new RequiredError("CallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
         }
 
 
@@ -126,10 +126,10 @@ export class CallbacksApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postAutomationV4ActionsCallbacksCallbackIdComplete
+     * @params response Response returned by the server for a request to complete
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async postAutomationV4ActionsCallbacksCallbackIdComplete(response: ResponseContext): Promise<void > {
+     public async complete(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -158,10 +158,10 @@ export class CallbacksApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to postAutomationV4ActionsCallbacksComplete
+     * @params response Response returned by the server for a request to completeBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async postAutomationV4ActionsCallbacksComplete(response: ResponseContext): Promise<void > {
+     public async completeBatch(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;

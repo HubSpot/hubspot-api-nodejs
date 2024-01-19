@@ -15,26 +15,26 @@ import { PublicActionRevision } from '../models/PublicActionRevision';
 import { ObservableCallbacksApi } from "./ObservableAPI";
 import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
 
-export interface CallbacksApiPostAutomationV4ActionsCallbacksCallbackIdCompleteRequest {
+export interface CallbacksApiCompleteRequest {
     /**
      * 
      * @type string
-     * @memberof CallbacksApipostAutomationV4ActionsCallbacksCallbackIdComplete
+     * @memberof CallbacksApicomplete
      */
     callbackId: string
     /**
      * 
      * @type CallbackCompletionRequest
-     * @memberof CallbacksApipostAutomationV4ActionsCallbacksCallbackIdComplete
+     * @memberof CallbacksApicomplete
      */
     callbackCompletionRequest: CallbackCompletionRequest
 }
 
-export interface CallbacksApiPostAutomationV4ActionsCallbacksCompleteRequest {
+export interface CallbacksApiCompleteBatchRequest {
     /**
      * 
      * @type BatchInputCallbackCompletionBatchRequest
-     * @memberof CallbacksApipostAutomationV4ActionsCallbacksComplete
+     * @memberof CallbacksApicompleteBatch
      */
     batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest
 }
@@ -50,16 +50,16 @@ export class ObjectCallbacksApi {
      * Completes a single callback
      * @param param the request object
      */
-    public postAutomationV4ActionsCallbacksCallbackIdComplete(param: CallbacksApiPostAutomationV4ActionsCallbacksCallbackIdCompleteRequest, options?: Configuration): Promise<void> {
-        return this.api.postAutomationV4ActionsCallbacksCallbackIdComplete(param.callbackId, param.callbackCompletionRequest,  options).toPromise();
+    public complete(param: CallbacksApiCompleteRequest, options?: Configuration): Promise<void> {
+        return this.api.complete(param.callbackId, param.callbackCompletionRequest,  options).toPromise();
     }
 
     /**
      * Completes a batch of callbacks
      * @param param the request object
      */
-    public postAutomationV4ActionsCallbacksComplete(param: CallbacksApiPostAutomationV4ActionsCallbacksCompleteRequest, options?: Configuration): Promise<void> {
-        return this.api.postAutomationV4ActionsCallbacksComplete(param.batchInputCallbackCompletionBatchRequest,  options).toPromise();
+    public completeBatch(param: CallbacksApiCompleteBatchRequest, options?: Configuration): Promise<void> {
+        return this.api.completeBatch(param.batchInputCallbackCompletionBatchRequest,  options).toPromise();
     }
 
 }
@@ -67,103 +67,103 @@ export class ObjectCallbacksApi {
 import { ObservableDefinitionsApi } from "./ObservableAPI";
 import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
 
-export interface DefinitionsApiDeleteAutomationV4ActionsAppIdDefinitionIdRequest {
+export interface DefinitionsApiArchiveRequest {
     /**
      * 
      * @type string
-     * @memberof DefinitionsApideleteAutomationV4ActionsAppIdDefinitionId
+     * @memberof DefinitionsApiarchive
      */
     definitionId: string
     /**
      * 
      * @type number
-     * @memberof DefinitionsApideleteAutomationV4ActionsAppIdDefinitionId
+     * @memberof DefinitionsApiarchive
      */
     appId: number
 }
 
-export interface DefinitionsApiGetAutomationV4ActionsAppIdRequest {
+export interface DefinitionsApiCreateRequest {
     /**
      * 
      * @type number
-     * @memberof DefinitionsApigetAutomationV4ActionsAppId
-     */
-    appId: number
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof DefinitionsApigetAutomationV4ActionsAppId
-     */
-    limit?: number
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof DefinitionsApigetAutomationV4ActionsAppId
-     */
-    after?: string
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof DefinitionsApigetAutomationV4ActionsAppId
-     */
-    archived?: boolean
-}
-
-export interface DefinitionsApiGetAutomationV4ActionsAppIdDefinitionIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApigetAutomationV4ActionsAppIdDefinitionId
-     */
-    definitionId: string
-    /**
-     * 
-     * @type number
-     * @memberof DefinitionsApigetAutomationV4ActionsAppIdDefinitionId
-     */
-    appId: number
-    /**
-     * Whether to return only results that have been archived.
-     * @type boolean
-     * @memberof DefinitionsApigetAutomationV4ActionsAppIdDefinitionId
-     */
-    archived?: boolean
-}
-
-export interface DefinitionsApiPatchAutomationV4ActionsAppIdDefinitionIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof DefinitionsApipatchAutomationV4ActionsAppIdDefinitionId
-     */
-    definitionId: string
-    /**
-     * 
-     * @type number
-     * @memberof DefinitionsApipatchAutomationV4ActionsAppIdDefinitionId
-     */
-    appId: number
-    /**
-     * 
-     * @type PublicActionDefinitionPatch
-     * @memberof DefinitionsApipatchAutomationV4ActionsAppIdDefinitionId
-     */
-    publicActionDefinitionPatch: PublicActionDefinitionPatch
-}
-
-export interface DefinitionsApiPostAutomationV4ActionsAppIdRequest {
-    /**
-     * 
-     * @type number
-     * @memberof DefinitionsApipostAutomationV4ActionsAppId
+     * @memberof DefinitionsApicreate
      */
     appId: number
     /**
      * 
      * @type PublicActionDefinitionEgg
-     * @memberof DefinitionsApipostAutomationV4ActionsAppId
+     * @memberof DefinitionsApicreate
      */
     publicActionDefinitionEgg: PublicActionDefinitionEgg
+}
+
+export interface DefinitionsApiGetByIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefinitionsApigetById
+     */
+    definitionId: string
+    /**
+     * 
+     * @type number
+     * @memberof DefinitionsApigetById
+     */
+    appId: number
+    /**
+     * Whether to return only results that have been archived.
+     * @type boolean
+     * @memberof DefinitionsApigetById
+     */
+    archived?: boolean
+}
+
+export interface DefinitionsApiGetPageRequest {
+    /**
+     * 
+     * @type number
+     * @memberof DefinitionsApigetPage
+     */
+    appId: number
+    /**
+     * The maximum number of results to display per page.
+     * @type number
+     * @memberof DefinitionsApigetPage
+     */
+    limit?: number
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @type string
+     * @memberof DefinitionsApigetPage
+     */
+    after?: string
+    /**
+     * Whether to return only results that have been archived.
+     * @type boolean
+     * @memberof DefinitionsApigetPage
+     */
+    archived?: boolean
+}
+
+export interface DefinitionsApiUpdateRequest {
+    /**
+     * 
+     * @type string
+     * @memberof DefinitionsApiupdate
+     */
+    definitionId: string
+    /**
+     * 
+     * @type number
+     * @memberof DefinitionsApiupdate
+     */
+    appId: number
+    /**
+     * 
+     * @type PublicActionDefinitionPatch
+     * @memberof DefinitionsApiupdate
+     */
+    publicActionDefinitionPatch: PublicActionDefinitionPatch
 }
 
 export class ObjectDefinitionsApi {
@@ -177,40 +177,40 @@ export class ObjectDefinitionsApi {
      * Archive an extension definition
      * @param param the request object
      */
-    public deleteAutomationV4ActionsAppIdDefinitionId(param: DefinitionsApiDeleteAutomationV4ActionsAppIdDefinitionIdRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteAutomationV4ActionsAppIdDefinitionId(param.definitionId, param.appId,  options).toPromise();
-    }
-
-    /**
-     * Get paged extension definitions
-     * @param param the request object
-     */
-    public getAutomationV4ActionsAppId(param: DefinitionsApiGetAutomationV4ActionsAppIdRequest, options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
-        return this.api.getAutomationV4ActionsAppId(param.appId, param.limit, param.after, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Get extension definition by Id
-     * @param param the request object
-     */
-    public getAutomationV4ActionsAppIdDefinitionId(param: DefinitionsApiGetAutomationV4ActionsAppIdDefinitionIdRequest, options?: Configuration): Promise<PublicActionDefinition> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionId(param.definitionId, param.appId, param.archived,  options).toPromise();
-    }
-
-    /**
-     * Patch an existing extension definition
-     * @param param the request object
-     */
-    public patchAutomationV4ActionsAppIdDefinitionId(param: DefinitionsApiPatchAutomationV4ActionsAppIdDefinitionIdRequest, options?: Configuration): Promise<PublicActionDefinition> {
-        return this.api.patchAutomationV4ActionsAppIdDefinitionId(param.definitionId, param.appId, param.publicActionDefinitionPatch,  options).toPromise();
+    public archive(param: DefinitionsApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.definitionId, param.appId,  options).toPromise();
     }
 
     /**
      * Create a new extension definition
      * @param param the request object
      */
-    public postAutomationV4ActionsAppId(param: DefinitionsApiPostAutomationV4ActionsAppIdRequest, options?: Configuration): Promise<PublicActionDefinition> {
-        return this.api.postAutomationV4ActionsAppId(param.appId, param.publicActionDefinitionEgg,  options).toPromise();
+    public create(param: DefinitionsApiCreateRequest, options?: Configuration): Promise<PublicActionDefinition> {
+        return this.api.create(param.appId, param.publicActionDefinitionEgg,  options).toPromise();
+    }
+
+    /**
+     * Get extension definition by Id
+     * @param param the request object
+     */
+    public getById(param: DefinitionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionDefinition> {
+        return this.api.getById(param.definitionId, param.appId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Get paged extension definitions
+     * @param param the request object
+     */
+    public getPage(param: DefinitionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
+        return this.api.getPage(param.appId, param.limit, param.after, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Patch an existing extension definition
+     * @param param the request object
+     */
+    public update(param: DefinitionsApiUpdateRequest, options?: Configuration): Promise<PublicActionDefinition> {
+        return this.api.update(param.definitionId, param.appId, param.publicActionDefinitionPatch,  options).toPromise();
     }
 
 }
@@ -218,175 +218,175 @@ export class ObjectDefinitionsApi {
 import { ObservableFunctionsApi } from "./ObservableAPI";
 import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
 
-export interface FunctionsApiDeleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest {
+export interface FunctionsApiArchiveRequest {
     /**
      * 
      * @type string
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApiarchive
      */
     definitionId: string
     /**
      * 
      * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * 
-     * @type number
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
-     */
-    appId: number
-}
-
-export interface FunctionsApiDeleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
-     */
-    definitionId: string
-    /**
-     * 
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApiarchive
      */
     functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type string
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApiarchive
      */
     functionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApideleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApiarchive
      */
     appId: number
 }
 
-export interface FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsRequest {
+export interface FunctionsApiArchiveByFunctionTypeRequest {
     /**
      * 
      * @type string
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctions
-     */
-    definitionId: string
-    /**
-     * 
-     * @type number
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctions
-     */
-    appId: number
-}
-
-export interface FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest {
-    /**
-     * 
-     * @type string
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApiarchiveByFunctionType
      */
     definitionId: string
     /**
      * 
      * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApiarchiveByFunctionType
      */
     functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type number
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApiarchiveByFunctionType
      */
     appId: number
 }
 
-export interface FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest {
+export interface FunctionsApiCreateOrReplaceRequest {
     /**
      * 
      * @type string
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplace
      */
     definitionId: string
     /**
      * 
      * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplace
      */
     functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
      * @type string
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplace
      */
     functionId: string
     /**
      * 
      * @type number
-     * @memberof FunctionsApigetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
-     */
-    appId: number
-}
-
-export interface FunctionsApiPutAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest {
-    /**
-     * 
-     * @type string
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
-     */
-    definitionId: string
-    /**
-     * 
-     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
-     */
-    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
-    /**
-     * 
-     * @type number
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApicreateOrReplace
      */
     appId: number
     /**
      * 
      * @type string
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType
+     * @memberof FunctionsApicreateOrReplace
      */
     body: string
 }
 
-export interface FunctionsApiPutAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest {
+export interface FunctionsApiCreateOrReplaceByFunctionTypeRequest {
     /**
      * 
      * @type string
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
     definitionId: string
     /**
      * 
      * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
     functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
     /**
      * 
-     * @type string
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
-     */
-    functionId: string
-    /**
-     * 
      * @type number
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
     appId: number
     /**
      * 
      * @type string
-     * @memberof FunctionsApiputAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId
+     * @memberof FunctionsApicreateOrReplaceByFunctionType
      */
     body: string
+}
+
+export interface FunctionsApiGetByFunctionTypeRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FunctionsApigetByFunctionType
+     */
+    definitionId: string
+    /**
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof FunctionsApigetByFunctionType
+     */
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
+    /**
+     * 
+     * @type number
+     * @memberof FunctionsApigetByFunctionType
+     */
+    appId: number
+}
+
+export interface FunctionsApiGetByIdRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FunctionsApigetById
+     */
+    definitionId: string
+    /**
+     * 
+     * @type &#39;PRE_ACTION_EXECUTION&#39; | &#39;PRE_FETCH_OPTIONS&#39; | &#39;POST_FETCH_OPTIONS&#39; | &#39;POST_ACTION_EXECUTION&#39;
+     * @memberof FunctionsApigetById
+     */
+    functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION'
+    /**
+     * 
+     * @type string
+     * @memberof FunctionsApigetById
+     */
+    functionId: string
+    /**
+     * 
+     * @type number
+     * @memberof FunctionsApigetById
+     */
+    appId: number
+}
+
+export interface FunctionsApiGetPageRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FunctionsApigetPage
+     */
+    definitionId: string
+    /**
+     * 
+     * @type number
+     * @memberof FunctionsApigetPage
+     */
+    appId: number
 }
 
 export class ObjectFunctionsApi {
@@ -397,59 +397,59 @@ export class ObjectFunctionsApi {
     }
 
     /**
-     * Delete a function for a definition
-     * @param param the request object
-     */
-    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param: FunctionsApiDeleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
-    }
-
-    /**
      * Archive a function for a definition
      * @param param the request object
      */
-    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param: FunctionsApiDeleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest, options?: Configuration): Promise<void> {
-        return this.api.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+    public archive(param: FunctionsApiArchiveRequest, options?: Configuration): Promise<void> {
+        return this.api.archive(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Get all functions for a given definition
+     * Delete a function for a definition
      * @param param the request object
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctions(param: FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsRequest, options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionIdFunctions(param.definitionId, param.appId,  options).toPromise();
+    public archiveByFunctionType(param: FunctionsApiArchiveByFunctionTypeRequest, options?: Configuration): Promise<void> {
+        return this.api.archiveByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param param the request object
+     */
+    public createOrReplace(param: FunctionsApiCreateOrReplaceRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
+        return this.api.createOrReplace(param.definitionId, param.functionType, param.functionId, param.appId, param.body,  options).toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param param the request object
+     */
+    public createOrReplaceByFunctionType(param: FunctionsApiCreateOrReplaceByFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
+        return this.api.createOrReplaceByFunctionType(param.definitionId, param.functionType, param.appId, param.body,  options).toPromise();
     }
 
     /**
      * Get all functions by a type for a given definition
      * @param param the request object
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param: FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunction> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
+    public getByFunctionType(param: FunctionsApiGetByFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunction> {
+        return this.api.getByFunctionType(param.definitionId, param.functionType, param.appId,  options).toPromise();
     }
 
     /**
      * Get a function for a given definition
      * @param param the request object
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param: FunctionsApiGetAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest, options?: Configuration): Promise<PublicActionFunction> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
+    public getById(param: FunctionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionFunction> {
+        return this.api.getById(param.definitionId, param.functionType, param.functionId, param.appId,  options).toPromise();
     }
 
     /**
-     * Insert a function for a definition
+     * Get all functions for a given definition
      * @param param the request object
      */
-    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param: FunctionsApiPutAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        return this.api.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(param.definitionId, param.functionType, param.appId, param.body,  options).toPromise();
-    }
-
-    /**
-     * Insert a function for a definition
-     * @param param the request object
-     */
-    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param: FunctionsApiPutAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionIdRequest, options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        return this.api.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(param.definitionId, param.functionType, param.functionId, param.appId, param.body,  options).toPromise();
+    public getPage(param: FunctionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
+        return this.api.getPage(param.definitionId, param.appId,  options).toPromise();
     }
 
 }
@@ -457,52 +457,52 @@ export class ObjectFunctionsApi {
 import { ObservableRevisionsApi } from "./ObservableAPI";
 import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
 
-export interface RevisionsApiGetAutomationV4ActionsAppIdDefinitionIdRevisionsRequest {
+export interface RevisionsApiGetByIdRequest {
     /**
      * 
      * @type string
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisions
-     */
-    definitionId: string
-    /**
-     * 
-     * @type number
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisions
-     */
-    appId: number
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisions
-     */
-    limit?: number
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisions
-     */
-    after?: string
-}
-
-export interface RevisionsApiGetAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionIdRequest {
-    /**
-     * 
-     * @type string
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId
+     * @memberof RevisionsApigetById
      */
     definitionId: string
     /**
      * 
      * @type string
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId
+     * @memberof RevisionsApigetById
      */
     revisionId: string
     /**
      * 
      * @type number
-     * @memberof RevisionsApigetAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId
+     * @memberof RevisionsApigetById
      */
     appId: number
+}
+
+export interface RevisionsApiGetPageRequest {
+    /**
+     * 
+     * @type string
+     * @memberof RevisionsApigetPage
+     */
+    definitionId: string
+    /**
+     * 
+     * @type number
+     * @memberof RevisionsApigetPage
+     */
+    appId: number
+    /**
+     * The maximum number of results to display per page.
+     * @type number
+     * @memberof RevisionsApigetPage
+     */
+    limit?: number
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @type string
+     * @memberof RevisionsApigetPage
+     */
+    after?: string
 }
 
 export class ObjectRevisionsApi {
@@ -513,19 +513,19 @@ export class ObjectRevisionsApi {
     }
 
     /**
-     * Get all revisions for a given definition
-     * @param param the request object
-     */
-    public getAutomationV4ActionsAppIdDefinitionIdRevisions(param: RevisionsApiGetAutomationV4ActionsAppIdDefinitionIdRevisionsRequest, options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionIdRevisions(param.definitionId, param.appId, param.limit, param.after,  options).toPromise();
-    }
-
-    /**
      * Gets a revision for a given definition by revision id
      * @param param the request object
      */
-    public getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(param: RevisionsApiGetAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionIdRequest, options?: Configuration): Promise<PublicActionRevision> {
-        return this.api.getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(param.definitionId, param.revisionId, param.appId,  options).toPromise();
+    public getById(param: RevisionsApiGetByIdRequest, options?: Configuration): Promise<PublicActionRevision> {
+        return this.api.getById(param.definitionId, param.revisionId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * Get all revisions for a given definition
+     * @param param the request object
+     */
+    public getPage(param: RevisionsApiGetPageRequest, options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
+        return this.api.getPage(param.definitionId, param.appId, param.limit, param.after,  options).toPromise();
     }
 
 }

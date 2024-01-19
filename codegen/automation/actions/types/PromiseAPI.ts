@@ -30,8 +30,8 @@ export class PromiseCallbacksApi {
      * @param callbackId 
      * @param callbackCompletionRequest 
      */
-    public postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.postAutomationV4ActionsCallbacksCallbackIdComplete(callbackId, callbackCompletionRequest, _options);
+    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.complete(callbackId, callbackCompletionRequest, _options);
         return result.toPromise();
     }
 
@@ -39,8 +39,8 @@ export class PromiseCallbacksApi {
      * Completes a batch of callbacks
      * @param batchInputCallbackCompletionBatchRequest 
      */
-    public postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.postAutomationV4ActionsCallbacksComplete(batchInputCallbackCompletionBatchRequest, _options);
+    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
         return result.toPromise();
     }
 
@@ -68,8 +68,29 @@ export class PromiseDefinitionsApi {
      * @param definitionId 
      * @param appId 
      */
-    public deleteAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.deleteAutomationV4ActionsAppIdDefinitionId(definitionId, appId, _options);
+    public archive(definitionId: string, appId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(definitionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a new extension definition
+     * @param appId 
+     * @param publicActionDefinitionEgg 
+     */
+    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<PublicActionDefinition> {
+        const result = this.api.create(appId, publicActionDefinitionEgg, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get extension definition by Id
+     * @param definitionId 
+     * @param appId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<PublicActionDefinition> {
+        const result = this.api.getById(definitionId, appId, archived, _options);
         return result.toPromise();
     }
 
@@ -80,19 +101,8 @@ export class PromiseDefinitionsApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param archived Whether to return only results that have been archived.
      */
-    public getAutomationV4ActionsAppId(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
-        const result = this.api.getAutomationV4ActionsAppId(appId, limit, after, archived, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Get extension definition by Id
-     * @param definitionId 
-     * @param appId 
-     * @param archived Whether to return only results that have been archived.
-     */
-    public getAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionId(definitionId, appId, archived, _options);
+    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
+        const result = this.api.getPage(appId, limit, after, archived, _options);
         return result.toPromise();
     }
 
@@ -102,18 +112,8 @@ export class PromiseDefinitionsApi {
      * @param appId 
      * @param publicActionDefinitionPatch 
      */
-    public patchAutomationV4ActionsAppIdDefinitionId(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.patchAutomationV4ActionsAppIdDefinitionId(definitionId, appId, publicActionDefinitionPatch, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a new extension definition
-     * @param appId 
-     * @param publicActionDefinitionEgg 
-     */
-    public postAutomationV4ActionsAppId(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.postAutomationV4ActionsAppId(appId, publicActionDefinitionEgg, _options);
+    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<PublicActionDefinition> {
+        const result = this.api.update(definitionId, appId, publicActionDefinitionPatch, _options);
         return result.toPromise();
     }
 
@@ -137,35 +137,50 @@ export class PromiseFunctionsApi {
     }
 
     /**
-     * Delete a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
-     */
-    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Archive a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
      * @param appId 
      */
-    public deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.deleteAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, _options);
+    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archive(definitionId, functionType, functionId, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Get all functions for a given definition
+     * Delete a function for a definition
      * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctions(definitionId: string, appId: number, _options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionIdFunctions(definitionId, appId, _options);
+    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<void> {
+        const result = this.api.archiveByFunctionType(definitionId, functionType, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
+        const result = this.api.createOrReplace(definitionId, functionType, functionId, appId, body, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
+        const result = this.api.createOrReplaceByFunctionType(definitionId, functionType, appId, body, _options);
         return result.toPromise();
     }
 
@@ -175,8 +190,8 @@ export class PromiseFunctionsApi {
      * @param functionType 
      * @param appId 
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<PublicActionFunction> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, _options);
+    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<PublicActionFunction> {
+        const result = this.api.getByFunctionType(definitionId, functionType, appId, _options);
         return result.toPromise();
     }
 
@@ -187,33 +202,18 @@ export class PromiseFunctionsApi {
      * @param functionId 
      * @param appId 
      */
-    public getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<PublicActionFunction> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, _options);
+    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<PublicActionFunction> {
+        const result = this.api.getById(definitionId, functionType, functionId, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Insert a function for a definition
+     * Get all functions for a given definition
      * @param definitionId 
-     * @param functionType 
      * @param appId 
-     * @param body 
      */
-    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        const result = this.api.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionType(definitionId, functionType, appId, body, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
-     * @param body 
-     */
-    public putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        const result = this.api.putAutomationV4ActionsAppIdDefinitionIdFunctionsFunctionTypeFunctionId(definitionId, functionType, functionId, appId, body, _options);
+    public getPage(definitionId: string, appId: number, _options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
+        const result = this.api.getPage(definitionId, appId, _options);
         return result.toPromise();
     }
 
@@ -237,25 +237,25 @@ export class PromiseRevisionsApi {
     }
 
     /**
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
+     * @param appId 
+     */
+    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<PublicActionRevision> {
+        const result = this.api.getById(definitionId, revisionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Get all revisions for a given definition
      * @param definitionId 
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getAutomationV4ActionsAppIdDefinitionIdRevisions(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionIdRevisions(definitionId, appId, limit, after, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Gets a revision for a given definition by revision id
-     * @param definitionId 
-     * @param revisionId 
-     * @param appId 
-     */
-    public getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<PublicActionRevision> {
-        const result = this.api.getAutomationV4ActionsAppIdDefinitionIdRevisionsRevisionId(definitionId, revisionId, appId, _options);
+    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
+        const result = this.api.getPage(definitionId, appId, limit, after, _options);
         return result.toPromise();
     }
 
