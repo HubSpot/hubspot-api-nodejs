@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field consisting of a set of radio options, out of which one can be selected at a time.

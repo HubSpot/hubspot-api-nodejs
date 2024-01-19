@@ -11,7 +11,7 @@
  */
 
 import { FormPostSubmitAction } from '../models/FormPostSubmitAction';
-import { HttpFile } from '../http/http';
+import { LifecycleStage } from '../models/LifecycleStage';
 
 export class HubSpotFormConfiguration {
     /**
@@ -26,6 +26,7 @@ export class HubSpotFormConfiguration {
     * Whether to add a reset link to the form. This removes any pre-populated content on the form and creates a new contact on submission.
     */
     'allowLinkToResetKnownValues': boolean;
+    'lifecycleStages'?: Array<LifecycleStage>;
     'postSubmitAction': FormPostSubmitAction;
     /**
     * The language of the form.
@@ -75,6 +76,12 @@ export class HubSpotFormConfiguration {
             "name": "allowLinkToResetKnownValues",
             "baseName": "allowLinkToResetKnownValues",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "lifecycleStages",
+            "baseName": "lifecycleStages",
+            "type": "Array<LifecycleStage>",
             "format": ""
         },
         {

@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
-import { HttpFile } from '../http/http';
 
 export class PaymentLinkRadioField {
     'fieldType': PaymentLinkRadioFieldFieldTypeEnum;

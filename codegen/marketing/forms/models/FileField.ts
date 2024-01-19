@@ -11,7 +11,6 @@
  */
 
 import { DependentField } from '../models/DependentField';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field used for uploading one or more files.

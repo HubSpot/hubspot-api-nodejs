@@ -29,6 +29,7 @@ export * from '../models/LegalConsentOptionsExplicitConsentToProcess';
 export * from '../models/LegalConsentOptionsImplicitConsentToProcess';
 export * from '../models/LegalConsentOptionsLegitimateInterest';
 export * from '../models/LegalConsentOptionsNone';
+export * from '../models/LifecycleStage';
 export * from '../models/MobilePhoneField';
 export * from '../models/ModelError';
 export * from '../models/MultiLineTextField';
@@ -44,49 +45,50 @@ export * from '../models/SingleCheckboxField';
 export * from '../models/SingleLineTextField';
 
 import { CollectionResponseFormDefinitionBaseForwardPaging } from '../models/CollectionResponseFormDefinitionBaseForwardPaging';
-import { CollectionResponseFormDefinitionBaseForwardPagingResultsInner, CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum             } from '../models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner';
-import { DatepickerField, DatepickerFieldFieldTypeEnum            } from '../models/DatepickerField';
+import { CollectionResponseFormDefinitionBaseForwardPagingResultsInner             } from '../models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner';
+import { DatepickerField            } from '../models/DatepickerField';
 import { DependentField } from '../models/DependentField';
-import { DependentFieldDependentField, DependentFieldDependentFieldFieldTypeEnum                 } from '../models/DependentFieldDependentField';
-import { DependentFieldFilter, DependentFieldFilterOperatorEnum       } from '../models/DependentFieldFilter';
-import { DropdownField, DropdownFieldFieldTypeEnum             } from '../models/DropdownField';
-import { EmailField, EmailFieldFieldTypeEnum             } from '../models/EmailField';
+import { DependentFieldDependentField                 } from '../models/DependentFieldDependentField';
+import { DependentFieldFilter       } from '../models/DependentFieldFilter';
+import { DropdownField             } from '../models/DropdownField';
+import { EmailField             } from '../models/EmailField';
 import { EmailFieldValidation } from '../models/EmailFieldValidation';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { FieldGroup, FieldGroupGroupTypeEnum  , FieldGroupRichTextTypeEnum     } from '../models/FieldGroup';
-import { FileField, FileFieldFieldTypeEnum             } from '../models/FileField';
-import { FormDefinitionBase, FormDefinitionBaseFormTypeEnum             } from '../models/FormDefinitionBase';
-import { FormDefinitionCreateRequestBase, FormDefinitionCreateRequestBaseFormTypeEnum            } from '../models/FormDefinitionCreateRequestBase';
-import { FormDisplayOptions  , FormDisplayOptionsThemeEnum     } from '../models/FormDisplayOptions';
-import { FormPostSubmitAction, FormPostSubmitActionTypeEnum    } from '../models/FormPostSubmitAction';
-import { FormStyle        , FormStyleSubmitAlignmentEnum      } from '../models/FormStyle';
+import { FieldGroup     } from '../models/FieldGroup';
+import { FileField             } from '../models/FileField';
+import { FormDefinitionBase             } from '../models/FormDefinitionBase';
+import { FormDefinitionCreateRequestBase            } from '../models/FormDefinitionCreateRequestBase';
+import { FormDisplayOptions       } from '../models/FormDisplayOptions';
+import { FormPostSubmitAction    } from '../models/FormPostSubmitAction';
+import { FormStyle              } from '../models/FormStyle';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HubSpotFormConfiguration    , HubSpotFormConfigurationLanguageEnum         } from '../models/HubSpotFormConfiguration';
-import { HubSpotFormDefinition, HubSpotFormDefinitionFormTypeEnum             } from '../models/HubSpotFormDefinition';
-import { HubSpotFormDefinitionAllOf, HubSpotFormDefinitionAllOfFormTypeEnum             } from '../models/HubSpotFormDefinitionAllOf';
-import { HubSpotFormDefinitionCreateRequest, HubSpotFormDefinitionCreateRequestFormTypeEnum            } from '../models/HubSpotFormDefinitionCreateRequest';
-import { HubSpotFormDefinitionCreateRequestAllOf, HubSpotFormDefinitionCreateRequestAllOfFormTypeEnum            } from '../models/HubSpotFormDefinitionCreateRequestAllOf';
+import { HubSpotFormConfiguration              } from '../models/HubSpotFormConfiguration';
+import { HubSpotFormDefinition             } from '../models/HubSpotFormDefinition';
+import { HubSpotFormDefinitionAllOf             } from '../models/HubSpotFormDefinitionAllOf';
+import { HubSpotFormDefinitionCreateRequest            } from '../models/HubSpotFormDefinitionCreateRequest';
+import { HubSpotFormDefinitionCreateRequestAllOf            } from '../models/HubSpotFormDefinitionCreateRequestAllOf';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
-import { HubSpotFormDefinitionPatchRequestLegalConsentOptions, HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum   , HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum         } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
+import { HubSpotFormDefinitionPatchRequestLegalConsentOptions         } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { LegalConsentOptionsExplicitConsentToProcess, LegalConsentOptionsExplicitConsentToProcessTypeEnum         } from '../models/LegalConsentOptionsExplicitConsentToProcess';
-import { LegalConsentOptionsImplicitConsentToProcess, LegalConsentOptionsImplicitConsentToProcessTypeEnum       } from '../models/LegalConsentOptionsImplicitConsentToProcess';
-import { LegalConsentOptionsLegitimateInterest, LegalConsentOptionsLegitimateInterestTypeEnum   , LegalConsentOptionsLegitimateInterestLawfulBasisEnum    } from '../models/LegalConsentOptionsLegitimateInterest';
-import { LegalConsentOptionsNone, LegalConsentOptionsNoneTypeEnum   } from '../models/LegalConsentOptionsNone';
-import { MobilePhoneField, MobilePhoneFieldFieldTypeEnum             } from '../models/MobilePhoneField';
+import { LegalConsentOptionsExplicitConsentToProcess         } from '../models/LegalConsentOptionsExplicitConsentToProcess';
+import { LegalConsentOptionsImplicitConsentToProcess       } from '../models/LegalConsentOptionsImplicitConsentToProcess';
+import { LegalConsentOptionsLegitimateInterest    } from '../models/LegalConsentOptionsLegitimateInterest';
+import { LegalConsentOptionsNone   } from '../models/LegalConsentOptionsNone';
+import { LifecycleStage } from '../models/LifecycleStage';
+import { MobilePhoneField             } from '../models/MobilePhoneField';
 import { ModelError } from '../models/ModelError';
-import { MultiLineTextField, MultiLineTextFieldFieldTypeEnum            } from '../models/MultiLineTextField';
-import { MultipleCheckboxesField, MultipleCheckboxesFieldFieldTypeEnum            } from '../models/MultipleCheckboxesField';
+import { MultiLineTextField            } from '../models/MultiLineTextField';
+import { MultipleCheckboxesField            } from '../models/MultipleCheckboxesField';
 import { NextPage } from '../models/NextPage';
-import { NumberField, NumberFieldFieldTypeEnum             } from '../models/NumberField';
+import { NumberField             } from '../models/NumberField';
 import { NumberFieldValidation } from '../models/NumberFieldValidation';
-import { PaymentLinkRadioField, PaymentLinkRadioFieldFieldTypeEnum            } from '../models/PaymentLinkRadioField';
-import { PhoneField, PhoneFieldFieldTypeEnum              } from '../models/PhoneField';
+import { PaymentLinkRadioField            } from '../models/PaymentLinkRadioField';
+import { PhoneField              } from '../models/PhoneField';
 import { PhoneFieldValidation } from '../models/PhoneFieldValidation';
-import { RadioField, RadioFieldFieldTypeEnum             } from '../models/RadioField';
-import { SingleCheckboxField, SingleCheckboxFieldFieldTypeEnum           } from '../models/SingleCheckboxField';
-import { SingleLineTextField, SingleLineTextFieldFieldTypeEnum            } from '../models/SingleLineTextField';
+import { RadioField             } from '../models/RadioField';
+import { SingleCheckboxField           } from '../models/SingleCheckboxField';
+import { SingleLineTextField            } from '../models/SingleLineTextField';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -177,6 +179,7 @@ let typeMap: {[index: string]: any} = {
     "LegalConsentOptionsImplicitConsentToProcess": LegalConsentOptionsImplicitConsentToProcess,
     "LegalConsentOptionsLegitimateInterest": LegalConsentOptionsLegitimateInterest,
     "LegalConsentOptionsNone": LegalConsentOptionsNone,
+    "LifecycleStage": LifecycleStage,
     "MobilePhoneField": MobilePhoneField,
     "ModelError": ModelError,
     "MultiLineTextField": MultiLineTextField,

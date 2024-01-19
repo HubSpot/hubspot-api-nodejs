@@ -11,7 +11,7 @@ export * from '../models/SmtpApiTokenRequestEgg';
 export * from '../models/SmtpApiTokenView';
 
 import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
-import { EmailSendStatusView     } from '../models/EmailSendStatusView';
+import { EmailSendStatusView      } from '../models/EmailSendStatusView';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventIdView } from '../models/EventIdView';
 import { ForwardPaging } from '../models/ForwardPaging';

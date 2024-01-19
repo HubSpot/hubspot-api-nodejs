@@ -11,7 +11,6 @@
  */
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { HttpFile } from '../http/http';
 
 export class LegalConsentOptionsImplicitConsentToProcess {
     'type': LegalConsentOptionsImplicitConsentToProcessTypeEnum;

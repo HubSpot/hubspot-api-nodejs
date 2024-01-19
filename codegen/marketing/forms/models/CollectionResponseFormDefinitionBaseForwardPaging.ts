@@ -12,7 +12,6 @@
 
 import { CollectionResponseFormDefinitionBaseForwardPagingResultsInner } from '../models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HttpFile } from '../http/http';
 
 export class CollectionResponseFormDefinitionBaseForwardPaging {
     'paging'?: ForwardPaging;

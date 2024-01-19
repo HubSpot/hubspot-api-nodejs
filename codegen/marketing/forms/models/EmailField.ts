@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { EmailFieldValidation } from '../models/EmailFieldValidation';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field used for collecting an email address.

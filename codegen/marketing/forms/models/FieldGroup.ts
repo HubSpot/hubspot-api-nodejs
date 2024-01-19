@@ -11,7 +11,6 @@
  */
 
 import { DependentFieldDependentField } from '../models/DependentFieldDependentField';
-import { HttpFile } from '../http/http';
 
 /**
 * A collection of up to three form fields usually displayed in a row.

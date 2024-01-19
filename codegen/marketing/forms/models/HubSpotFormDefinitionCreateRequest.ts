@@ -13,7 +13,6 @@
 import { FieldGroup } from '../models/FieldGroup';
 import { FormDisplayOptions } from '../models/FormDisplayOptions';
 import { HubSpotFormConfiguration } from '../models/HubSpotFormConfiguration';
-import { HttpFile } from '../http/http';
 
 export class HubSpotFormDefinitionCreateRequest {
     'formType': HubSpotFormDefinitionCreateRequestFormTypeEnum;

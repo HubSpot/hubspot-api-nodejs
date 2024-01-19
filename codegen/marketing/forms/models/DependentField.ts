@@ -12,7 +12,6 @@
 
 import { DependentFieldDependentField } from '../models/DependentFieldDependentField';
 import { DependentFieldFilter } from '../models/DependentFieldFilter';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field that will be displayed based on what the customer entered in another field.

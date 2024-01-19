@@ -11,11 +11,6 @@
  */
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { LegalConsentOptionsExplicitConsentToProcess } from '../models/LegalConsentOptionsExplicitConsentToProcess';
-import { LegalConsentOptionsImplicitConsentToProcess } from '../models/LegalConsentOptionsImplicitConsentToProcess';
-import { LegalConsentOptionsLegitimateInterest } from '../models/LegalConsentOptionsLegitimateInterest';
-import { LegalConsentOptionsNone } from '../models/LegalConsentOptionsNone';
-import { HttpFile } from '../http/http';
 
 export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
     'type': HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum;

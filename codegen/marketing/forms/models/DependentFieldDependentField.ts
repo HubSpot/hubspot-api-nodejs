@@ -10,23 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { DatepickerField } from '../models/DatepickerField';
 import { DependentField } from '../models/DependentField';
-import { DropdownField } from '../models/DropdownField';
-import { EmailField } from '../models/EmailField';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
-import { FileField } from '../models/FileField';
-import { MobilePhoneField } from '../models/MobilePhoneField';
-import { MultiLineTextField } from '../models/MultiLineTextField';
-import { MultipleCheckboxesField } from '../models/MultipleCheckboxesField';
-import { NumberField } from '../models/NumberField';
 import { NumberFieldValidation } from '../models/NumberFieldValidation';
-import { PaymentLinkRadioField } from '../models/PaymentLinkRadioField';
-import { PhoneField } from '../models/PhoneField';
-import { RadioField } from '../models/RadioField';
-import { SingleCheckboxField } from '../models/SingleCheckboxField';
-import { SingleLineTextField } from '../models/SingleLineTextField';
-import { HttpFile } from '../http/http';
 
 export class DependentFieldDependentField {
     'fieldType': DependentFieldDependentFieldFieldTypeEnum;

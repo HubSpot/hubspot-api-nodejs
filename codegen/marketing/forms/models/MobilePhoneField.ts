@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { PhoneFieldValidation } from '../models/PhoneFieldValidation';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field used for collecting a mobile phone number.

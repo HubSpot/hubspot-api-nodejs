@@ -11,7 +11,6 @@
  */
 
 import { FormStyle } from '../models/FormStyle';
-import { HttpFile } from '../http/http';
 
 /**
 * Options for styling the form.
