@@ -1,5 +1,5 @@
 /**
- * HubSpot Events API
+ * Events
  * API for accessing CRM object events.
  *
  * OpenAPI spec version: v3
@@ -14,22 +14,25 @@ import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
 import { Paging } from '../models/Paging';
 
 export class CollectionResponseExternalUnifiedEvent {
-    'results': Array<ExternalUnifiedEvent>;
     'paging'?: Paging;
+    /**
+    * 
+    */
+    'results': Array<ExternalUnifiedEvent>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<ExternalUnifiedEvent>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<ExternalUnifiedEvent>",
             "format": ""
         }    ];
 

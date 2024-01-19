@@ -1,6 +1,6 @@
 /**
- * Files Files
- * Upload and manage files.
+ * Events
+ * API for accessing CRM object events.
  *
  * OpenAPI spec version: v3
  * 
@@ -11,28 +11,28 @@
  */
 
 
-export class NextPage {
+export class PreviousPage {
+    'before': string;
     'link'?: string;
-    'after': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "before",
+            "baseName": "before",
             "type": "string",
             "format": ""
         },
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return NextPage.attributeTypeMap;
+        return PreviousPage.attributeTypeMap;
     }
 
     public constructor() {

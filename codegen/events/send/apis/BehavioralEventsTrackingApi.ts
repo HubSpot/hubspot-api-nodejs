@@ -20,12 +20,12 @@ export class BehavioralEventsTrackingApiRequestFactory extends BaseAPIRequestFac
      * Sends Custom Behavioral Event
      * @param behavioralEventHttpCompletionRequest 
      */
-    public async send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async postEventsV3Send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'behavioralEventHttpCompletionRequest' is not null or undefined
         if (behavioralEventHttpCompletionRequest === null || behavioralEventHttpCompletionRequest === undefined) {
-            throw new RequiredError("BehavioralEventsTrackingApi", "send", "behavioralEventHttpCompletionRequest");
+            throw new RequiredError("BehavioralEventsTrackingApi", "postEventsV3Send", "behavioralEventHttpCompletionRequest");
         }
 
 
@@ -71,10 +71,10 @@ export class BehavioralEventsTrackingApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to send
+     * @params response Response returned by the server for a request to postEventsV3Send
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async send(response: ResponseContext): Promise<void > {
+     public async postEventsV3Send(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;

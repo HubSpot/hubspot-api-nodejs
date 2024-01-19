@@ -1,5 +1,5 @@
 /**
- * HubSpot Events API
+ * Events
  * API for accessing CRM object events.
  *
  * OpenAPI spec version: v3
@@ -16,33 +16,45 @@
 */
 export class ExternalUnifiedEvent {
     /**
-    * The objectType for the object which did the event.
+    * An ISO 8601 timestamp when the event occurred.
     */
-    'objectType': string;
-    /**
-    * The objectId of the object which did the event.
-    */
-    'objectId': string;
+    'occurredAt': Date;
     /**
     * The format of the `eventType` string is `ae{appId}_{eventTypeLabel}`, `pe{portalId}_{eventTypeLabel}`, or just `e_{eventTypeLabel}` for HubSpot events.
     */
     'eventType': string;
     /**
-    * An ISO 8601 timestamp when the event occurred.
-    */
-    'occurredAt': Date;
-    /**
     * A unique identifier for the event.
     */
     'id': string;
-    'properties': { [key: string]: string; };
+    /**
+    * The objectId of the object which did the event.
+    */
+    'objectId': string;
+    'properties'?: { [key: string]: string; };
+    /**
+    * The objectType for the object which did the event.
+    */
+    'objectType': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "objectType",
-            "baseName": "objectType",
+            "name": "occurredAt",
+            "baseName": "occurredAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "eventType",
+            "baseName": "eventType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -53,27 +65,15 @@ export class ExternalUnifiedEvent {
             "format": ""
         },
         {
-            "name": "eventType",
-            "baseName": "eventType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "occurredAt",
-            "baseName": "occurredAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "objectType",
+            "baseName": "objectType",
+            "type": "string",
             "format": ""
         }    ];
 
