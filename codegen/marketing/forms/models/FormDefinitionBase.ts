@@ -106,5 +106,7 @@ export class FormDefinitionBase {
 }
 
 
-export type FormDefinitionBaseFormTypeEnum = "hubspot" ;
+export enum FormDefinitionBaseFormTypeEnum {
+    Hubspot = 'hubspot'
+}
 

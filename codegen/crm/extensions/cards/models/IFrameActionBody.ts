@@ -68,5 +68,7 @@ export class IFrameActionBody {
 }
 
 
-export type IFrameActionBodyTypeEnum = "IFRAME" ;
+export enum IFrameActionBodyTypeEnum {
+    Iframe = 'IFRAME'
+}
 

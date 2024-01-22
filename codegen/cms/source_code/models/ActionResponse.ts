@@ -61,5 +61,10 @@ export class ActionResponse {
 }
 
 
-export type ActionResponseStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum ActionResponseStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

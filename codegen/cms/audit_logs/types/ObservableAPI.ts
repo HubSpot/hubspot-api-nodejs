@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -32,7 +32,7 @@ export class ObservableAuditLogsApi {
      * @param limit The number of logs to return.
      * @param sort The sort direction for the audit logs. (Can only sort by timestamp).
      */
-    public getPage(userId?: Array<string>, eventType?: Array<string>, objectType?: Array<string>, objectId?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Observable<CollectionResponsePublicAuditLog> {
+    public getPageWithHttpInfo(userId?: Array<string>, eventType?: Array<string>, objectType?: Array<string>, objectId?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicAuditLog>> {
         const requestContextPromise = this.requestFactory.getPage(userId, eventType, objectType, objectId, after, before, limit, sort, _options);
 
         // build promise chain
@@ -47,8 +47,24 @@ export class ObservableAuditLogsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Returns audit logs based on filters.
+     * Query audit logs
+     * @param userId Comma separated list of user ids to filter by.
+     * @param eventType Comma separated list of event types to filter by (CREATED, UPDATED, PUBLISHED, DELETED, UNPUBLISHED).
+     * @param objectType Comma separated list of object types to filter by (BLOG, LANDING_PAGE, DOMAIN, HUBDB_TABLE etc.)
+     * @param objectId Comma separated list of object ids to filter by.
+     * @param after Timestamp after which audit logs will be returned
+     * @param before Timestamp before which audit logs will be returned
+     * @param limit The number of logs to return.
+     * @param sort The sort direction for the audit logs. (Can only sort by timestamp).
+     */
+    public getPage(userId?: Array<string>, eventType?: Array<string>, objectType?: Array<string>, objectId?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Observable<CollectionResponsePublicAuditLog> {
+        return this.getPageWithHttpInfo(userId, eventType, objectType, objectId, after, before, limit, sort, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAuditLog>) => apiResponse.data));
     }
 
 }

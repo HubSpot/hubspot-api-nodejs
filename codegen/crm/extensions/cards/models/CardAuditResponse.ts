@@ -68,6 +68,14 @@ export class CardAuditResponse {
 }
 
 
-export type CardAuditResponseActionTypeEnum = "CREATE" | "UPDATE" | "DELETE" ;
-export type CardAuditResponseAuthSourceEnum = "INTERNAL" | "APP" | "EXTERNAL" ;
+export enum CardAuditResponseActionTypeEnum {
+    Create = 'CREATE',
+    Update = 'UPDATE',
+    Delete = 'DELETE'
+}
+export enum CardAuditResponseAuthSourceEnum {
+    Internal = 'INTERNAL',
+    App = 'APP',
+    External = 'EXTERNAL'
+}
 

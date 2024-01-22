@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -22,7 +22,7 @@ export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRe
      * Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
      * Record
      * @param externalEventId The id of the marketing event
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param batchInputMarketingEventSubscriber The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
      * @param externalAccountId The account id associated with the marketing event
      */
@@ -93,7 +93,7 @@ export class AttendanceSubscriberStateChangesApiRequestFactory extends BaseAPIRe
      * Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
      * Record
      * @param externalEventId The id of the marketing event
-     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
+     * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param batchInputMarketingEventEmailSubscriber The details of the contacts to subscribe to the event. Parameters of join and left time if state is Attended.
      * @param externalAccountId The account id associated with the marketing event
      */
@@ -171,14 +171,14 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponseSubscriberVidResponse > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSubscriberVidResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSubscriberVidResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberVidResponse", ""
             ) as BatchResponseSubscriberVidResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -194,7 +194,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberVidResponse", ""
             ) as BatchResponseSubscriberVidResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -207,14 +207,14 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
      * @params response Response returned by the server for a request to createByEmail
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createByEmail(response: ResponseContext): Promise<BatchResponseSubscriberEmailResponse > {
+     public async createByEmailWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSubscriberEmailResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSubscriberEmailResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberEmailResponse", ""
             ) as BatchResponseSubscriberEmailResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -230,7 +230,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberEmailResponse", ""
             ) as BatchResponseSubscriberEmailResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

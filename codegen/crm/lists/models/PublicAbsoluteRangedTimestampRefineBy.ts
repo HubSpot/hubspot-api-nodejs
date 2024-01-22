@@ -54,5 +54,7 @@ export class PublicAbsoluteRangedTimestampRefineBy {
 }
 
 
-export type PublicAbsoluteRangedTimestampRefineByTypeEnum = "ABSOLUTE_RANGED" ;
+export enum PublicAbsoluteRangedTimestampRefineByTypeEnum {
+    AbsoluteRanged = 'ABSOLUTE_RANGED'
+}
 

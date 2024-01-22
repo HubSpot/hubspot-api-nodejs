@@ -18,7 +18,7 @@ export class PublicAssociationMulti {
     '_from': PublicObjectId;
     'paging'?: Paging;
     /**
-    * The IDs of objects that are associated with the object identified by the ID in 'from'.
+    * The IDs of objects that are associated with the object identified by the ID in \'from\'.
     */
     'to': Array<AssociatedId>;
 

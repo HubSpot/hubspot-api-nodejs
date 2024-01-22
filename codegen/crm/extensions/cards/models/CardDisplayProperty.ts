@@ -29,7 +29,7 @@ export class CardDisplayProperty {
     */
     'options': Array<DisplayOption>;
     /**
-    * The label for this property as you'd like it displayed to users.
+    * The label for this property as you\'d like it displayed to users.
     */
     'label': string;
 
@@ -70,5 +70,15 @@ export class CardDisplayProperty {
 }
 
 
-export type CardDisplayPropertyDataTypeEnum = "BOOLEAN" | "CURRENCY" | "DATE" | "DATETIME" | "EMAIL" | "LINK" | "NUMERIC" | "STRING" | "STATUS" ;
+export enum CardDisplayPropertyDataTypeEnum {
+    Boolean = 'BOOLEAN',
+    Currency = 'CURRENCY',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Email = 'EMAIL',
+    Link = 'LINK',
+    Numeric = 'NUMERIC',
+    String = 'STRING',
+    Status = 'STATUS'
+}
 

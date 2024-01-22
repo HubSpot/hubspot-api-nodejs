@@ -47,5 +47,7 @@ export class PublicPrivacyAnalyticsFilter {
 }
 
 
-export type PublicPrivacyAnalyticsFilterFilterTypeEnum = "PRIVACY" ;
+export enum PublicPrivacyAnalyticsFilterFilterTypeEnum {
+    Privacy = 'PRIVACY'
+}
 

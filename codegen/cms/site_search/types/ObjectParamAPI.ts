@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { IndexedData } from '../models/IndexedData';
@@ -113,7 +114,7 @@ export interface PublicApiSearchRequest {
      */
     property?: Array<string>
     /**
-     * Specifies the length of the search results. Can be set to &#x60;LONG&#x60; or &#x60;SHORT&#x60;. &#x60;SHORT&#x60; will return the first 128 characters of the content&#39;s meta description. &#x60;LONG&#x60; will build a more detailed content snippet based on the html/content of the page.
+     * Specifies the length of the search results. Can be set to &#x60;LONG&#x60; or &#x60;SHORT&#x60;. &#x60;SHORT&#x60; will return the first 128 characters of the content\&#39;s meta description. &#x60;LONG&#x60; will build a more detailed content snippet based on the html/content of the page.
      * @type &#39;SHORT&#39; | &#39;LONG&#39;
      * @memberof PublicApisearch
      */
@@ -138,8 +139,26 @@ export class ObjectPublicApi {
      * Get indexed properties.
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: PublicApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<IndexedData>> {
+        return this.api.getByIdWithHttpInfo(param.contentId, param.type,  options).toPromise();
+    }
+
+    /**
+     * For a given account and document ID (page ID, blog post ID, HubDB row ID, etc.), return all indexed data for that document. This is useful when debugging why a particular document is not returned from a custom search.
+     * Get indexed properties.
+     * @param param the request object
+     */
     public getById(param: PublicApiGetByIdRequest, options?: Configuration): Promise<IndexedData> {
         return this.api.getById(param.contentId, param.type,  options).toPromise();
+    }
+
+    /**
+     * Returns any website content matching the given search criteria for a given HubSpot account. Searches can be filtered by content type, domain, or URL path.
+     * Search your site.
+     * @param param the request object
+     */
+    public searchWithHttpInfo(param: PublicApiSearchRequest = {}, options?: Configuration): Promise<HttpInfo<PublicSearchResults>> {
+        return this.api.searchWithHttpInfo(param.q, param.limit, param.offset, param.language, param.matchPrefix, param.autocomplete, param.popularityBoost, param.boostLimit, param.boostRecent, param.tableId, param.hubdbQuery, param.domain, param.type, param.pathPrefix, param.property, param.length, param.groupId,  options).toPromise();
     }
 
     /**

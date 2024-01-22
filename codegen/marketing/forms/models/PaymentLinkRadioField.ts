@@ -98,5 +98,7 @@ export class PaymentLinkRadioField {
 }
 
 
-export type PaymentLinkRadioFieldFieldTypeEnum = "payment_link_radio" ;
+export enum PaymentLinkRadioFieldFieldTypeEnum {
+    PaymentLinkRadio = 'payment_link_radio'
+}
 

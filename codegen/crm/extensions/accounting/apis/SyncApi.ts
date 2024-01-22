@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -18,7 +18,7 @@ import { SyncProductsRequest } from '../models/SyncProductsRequest';
 export class SyncApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Imports contacts' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Imports contacts\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
      * Import contacts
      * @param appId The ID of the accounting app. This is the identifier of the application created in your HubSpot developer portal.
      * @param syncContactsRequest 
@@ -74,7 +74,7 @@ export class SyncApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Imports products' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Imports products\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
      * Import products
      * @param appId The ID of the accounting app. This is the identifier of the application created in your HubSpot developer portal.
      * @param syncProductsRequest 
@@ -140,14 +140,14 @@ export class SyncApiResponseProcessor {
      * @params response Response returned by the server for a request to createContact
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createContact(response: ResponseContext): Promise<ActionResponse > {
+     public async createContactWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ActionResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ActionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -163,7 +163,7 @@ export class SyncApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -176,14 +176,14 @@ export class SyncApiResponseProcessor {
      * @params response Response returned by the server for a request to createProduct
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createProduct(response: ResponseContext): Promise<ActionResponse > {
+     public async createProductWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ActionResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ActionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -199,7 +199,7 @@ export class SyncApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

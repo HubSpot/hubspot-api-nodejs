@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicBusinessUnitNoPaging } from '../models/CollectionResponsePublicBusinessUnitNoPaging';
@@ -31,6 +32,15 @@ export class ObjectBusinessUnitApi {
 
     public constructor(configuration: Configuration, requestFactory?: BusinessUnitApiRequestFactory, responseProcessor?: BusinessUnitApiResponseProcessor) {
         this.api = new ObservableBusinessUnitApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
+     * Get Business Units for a user
+     * @param param the request object
+     */
+    public getByUserIDWithHttpInfo(param: BusinessUnitApiGetByUserIDRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
+        return this.api.getByUserIDWithHttpInfo(param.userId, param.properties, param.name,  options).toPromise();
     }
 
     /**

@@ -54,5 +54,7 @@ export class PublicEmailSubscriptionFilter {
 }
 
 
-export type PublicEmailSubscriptionFilterFilterTypeEnum = "EMAIL_SUBSCRIPTION" ;
+export enum PublicEmailSubscriptionFilterFilterTypeEnum {
+    EmailSubscription = 'EMAIL_SUBSCRIPTION'
+}
 

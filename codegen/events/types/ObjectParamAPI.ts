@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
@@ -97,6 +98,13 @@ export class ObjectEventsApi {
 
     public constructor(configuration: Configuration, requestFactory?: EventsApiRequestFactory, responseProcessor?: EventsApiResponseProcessor) {
         this.api = new ObservableEventsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: EventsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseExternalUnifiedEvent>> {
+        return this.api.getPageWithHttpInfo(param.objectType, param.eventType, param.occurredAfter, param.occurredBefore, param.objectId, param.indexTableName, param.indexSpecificMetadata, param.after, param.before, param.limit, param.sort, param.objectPropertyPropname, param.propertyPropname, param.id,  options).toPromise();
     }
 
     /**

@@ -59,5 +59,11 @@ export class DisplayOption {
 }
 
 
-export type DisplayOptionTypeEnum = "DEFAULT" | "SUCCESS" | "WARNING" | "DANGER" | "INFO" ;
+export enum DisplayOptionTypeEnum {
+    Default = 'DEFAULT',
+    Success = 'SUCCESS',
+    Warning = 'WARNING',
+    Danger = 'DANGER',
+    Info = 'INFO'
+}
 

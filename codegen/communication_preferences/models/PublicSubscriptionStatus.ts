@@ -119,7 +119,22 @@ export class PublicSubscriptionStatus {
 }
 
 
-export type PublicSubscriptionStatusLegalBasisEnum = "LEGITIMATE_INTEREST_PQL" | "LEGITIMATE_INTEREST_CLIENT" | "PERFORMANCE_OF_CONTRACT" | "CONSENT_WITH_NOTICE" | "NON_GDPR" | "PROCESS_AND_STORE" | "LEGITIMATE_INTEREST_OTHER" ;
-export type PublicSubscriptionStatusStatusEnum = "SUBSCRIBED" | "NOT_SUBSCRIBED" ;
-export type PublicSubscriptionStatusSourceOfStatusEnum = "PORTAL_WIDE_STATUS" | "BRAND_WIDE_STATUS" | "SUBSCRIPTION_STATUS" ;
+export enum PublicSubscriptionStatusLegalBasisEnum {
+    LegitimateInterestPql = 'LEGITIMATE_INTEREST_PQL',
+    LegitimateInterestClient = 'LEGITIMATE_INTEREST_CLIENT',
+    PerformanceOfContract = 'PERFORMANCE_OF_CONTRACT',
+    ConsentWithNotice = 'CONSENT_WITH_NOTICE',
+    NonGdpr = 'NON_GDPR',
+    ProcessAndStore = 'PROCESS_AND_STORE',
+    LegitimateInterestOther = 'LEGITIMATE_INTEREST_OTHER'
+}
+export enum PublicSubscriptionStatusStatusEnum {
+    Subscribed = 'SUBSCRIBED',
+    NotSubscribed = 'NOT_SUBSCRIBED'
+}
+export enum PublicSubscriptionStatusSourceOfStatusEnum {
+    PortalWideStatus = 'PORTAL_WIDE_STATUS',
+    BrandWideStatus = 'BRAND_WIDE_STATUS',
+    SubscriptionStatus = 'SUBSCRIPTION_STATUS'
+}
 

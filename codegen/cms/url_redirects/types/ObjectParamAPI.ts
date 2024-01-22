@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseWithTotalUrlMappingForwardPaging } from '../models/CollectionResponseWithTotalUrlMappingForwardPaging';
@@ -124,8 +125,26 @@ export class ObjectRedirectsApi {
      * Delete a redirect
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: RedirectsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.urlRedirectId,  options).toPromise();
+    }
+
+    /**
+     * Delete one existing redirect, so it is no longer mapped.
+     * Delete a redirect
+     * @param param the request object
+     */
     public archive(param: RedirectsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.urlRedirectId,  options).toPromise();
+    }
+
+    /**
+     * Creates and configures a new URL redirect.
+     * Create a redirect
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: RedirectsApiCreateRequest, options?: Configuration): Promise<HttpInfo<UrlMapping>> {
+        return this.api.createWithHttpInfo(param.urlMappingCreateRequestBody,  options).toPromise();
     }
 
     /**
@@ -142,6 +161,15 @@ export class ObjectRedirectsApi {
      * Get details for a redirect
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: RedirectsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<UrlMapping>> {
+        return this.api.getByIdWithHttpInfo(param.urlRedirectId,  options).toPromise();
+    }
+
+    /**
+     * Returns the details for a single existing URL redirect by ID.
+     * Get details for a redirect
+     * @param param the request object
+     */
     public getById(param: RedirectsApiGetByIdRequest, options?: Configuration): Promise<UrlMapping> {
         return this.api.getById(param.urlRedirectId,  options).toPromise();
     }
@@ -151,8 +179,26 @@ export class ObjectRedirectsApi {
      * Get current redirects
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: RedirectsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalUrlMappingForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Returns all existing URL redirects. Results can be limited and filtered by creation or updated date.
+     * Get current redirects
+     * @param param the request object
+     */
     public getPage(param: RedirectsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalUrlMappingForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Updates the settings for an existing URL redirect.
+     * Update a redirect
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: RedirectsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<UrlMapping>> {
+        return this.api.updateWithHttpInfo(param.urlRedirectId, param.urlMapping,  options).toPromise();
     }
 
     /**

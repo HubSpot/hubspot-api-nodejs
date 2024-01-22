@@ -54,5 +54,7 @@ export class PublicRollingPropertyUpdatedOperation {
 }
 
 
-export type PublicRollingPropertyUpdatedOperationOperationTypeEnum = "ROLLING_PROPERTY_UPDATED" ;
+export enum PublicRollingPropertyUpdatedOperationOperationTypeEnum {
+    RollingPropertyUpdated = 'ROLLING_PROPERTY_UPDATED'
+}
 

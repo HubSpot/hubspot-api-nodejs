@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
@@ -25,6 +26,15 @@ export class ObjectTypesApi {
 
     public constructor(configuration: Configuration, requestFactory?: TypesApiRequestFactory, responseProcessor?: TypesApiResponseProcessor) {
         this.api = new ObservableTypesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * List all the valid association types available between two object types
+     * List association types
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: TypesApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
     /**

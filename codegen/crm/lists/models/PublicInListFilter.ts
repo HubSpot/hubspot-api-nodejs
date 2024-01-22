@@ -55,5 +55,7 @@ export class PublicInListFilter {
 }
 
 
-export type PublicInListFilterFilterTypeEnum = "IN_LIST" ;
+export enum PublicInListFilterFilterTypeEnum {
+    InList = 'IN_LIST'
+}
 

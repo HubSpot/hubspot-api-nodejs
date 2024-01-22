@@ -1,6 +1,6 @@
 /**
  * CRM Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -22,7 +22,7 @@ export class TimelineEventResponse {
     'eventTemplateId': string;
     'createdAt'?: Date;
     /**
-    * Additional event-specific data that can be interpreted by the template's markdown.
+    * Additional event-specific data that can be interpreted by the template\'s markdown.
     */
     'extraData'?: any;
     'timelineIFrame'?: TimelineEventIFrame;
@@ -39,7 +39,7 @@ export class TimelineEventResponse {
     */
     'id': string;
     /**
-    * Use the `utk` parameter to associate an event with a contact by `usertoken`. This is recommended if you don't know a user's email, but have an identifying user token in your cookie.
+    * Use the `utk` parameter to associate an event with a contact by `usertoken`. This is recommended if you don\'t know a user\'s email, but have an identifying user token in your cookie.
     */
     'utk'?: string;
     /**
@@ -51,7 +51,7 @@ export class TimelineEventResponse {
     */
     'objectId'?: string;
     /**
-    * The time the event occurred. If not passed in, the curren time will be assumed. This is used to determine where an event is shown on a CRM object's timeline.
+    * The time the event occurred. If not passed in, the curren time will be assumed. This is used to determine where an event is shown on a CRM object\'s timeline.
     */
     'timestamp'?: Date;
     /**

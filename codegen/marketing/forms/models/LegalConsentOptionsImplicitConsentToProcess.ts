@@ -62,5 +62,7 @@ export class LegalConsentOptionsImplicitConsentToProcess {
 }
 
 
-export type LegalConsentOptionsImplicitConsentToProcessTypeEnum = "implicit_consent_to_process" ;
+export enum LegalConsentOptionsImplicitConsentToProcessTypeEnum {
+    ImplicitConsentToProcess = 'implicit_consent_to_process'
+}
 

@@ -107,6 +107,21 @@ export class PublicImportResponse {
 }
 
 
-export type PublicImportResponseImportSourceEnum = "API" | "CRM_UI" | "IMPORT" | "MOBILE_ANDROID" | "MOBILE_IOS" | "SALESFORCE" ;
-export type PublicImportResponseStateEnum = "STARTED" | "PROCESSING" | "DONE" | "FAILED" | "CANCELED" | "DEFERRED" | "REVERTED" ;
+export enum PublicImportResponseImportSourceEnum {
+    Api = 'API',
+    CrmUi = 'CRM_UI',
+    Import = 'IMPORT',
+    MobileAndroid = 'MOBILE_ANDROID',
+    MobileIos = 'MOBILE_IOS',
+    Salesforce = 'SALESFORCE'
+}
+export enum PublicImportResponseStateEnum {
+    Started = 'STARTED',
+    Processing = 'PROCESSING',
+    Done = 'DONE',
+    Failed = 'FAILED',
+    Canceled = 'CANCELED',
+    Deferred = 'DEFERRED',
+    Reverted = 'REVERTED'
+}
 

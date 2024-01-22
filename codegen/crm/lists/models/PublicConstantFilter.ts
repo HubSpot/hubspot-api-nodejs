@@ -47,5 +47,7 @@ export class PublicConstantFilter {
 }
 
 
-export type PublicConstantFilterFilterTypeEnum = "CONSTANT" ;
+export enum PublicConstantFilterFilterTypeEnum {
+    Constant = 'CONSTANT'
+}
 

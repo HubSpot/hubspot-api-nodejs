@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -72,14 +72,14 @@ export class PipelineAuditsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAudit
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAudit(response: ResponseContext): Promise<CollectionResponsePublicAuditInfoNoPaging > {
+     public async getAuditWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePublicAuditInfoNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePublicAuditInfoNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicAuditInfoNoPaging", ""
             ) as CollectionResponsePublicAuditInfoNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -95,7 +95,7 @@ export class PipelineAuditsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicAuditInfoNoPaging", ""
             ) as CollectionResponsePublicAuditInfoNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

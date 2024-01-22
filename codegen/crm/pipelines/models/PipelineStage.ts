@@ -37,7 +37,7 @@ export class PipelineStage {
     'displayOrder': number;
     'writePermissions'?: PipelineStageWritePermissionsEnum;
     /**
-    * A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
+    * A label used to organize pipeline stages in HubSpot\'s UI. Each pipeline stage\'s label must be unique within that pipeline.
     */
     'label': string;
     /**
@@ -116,5 +116,9 @@ export class PipelineStage {
 }
 
 
-export type PipelineStageWritePermissionsEnum = "CRM_PERMISSIONS_ENFORCEMENT" | "READ_ONLY" | "INTERNAL_ONLY" ;
+export enum PipelineStageWritePermissionsEnum {
+    CrmPermissionsEnforcement = 'CRM_PERMISSIONS_ENFORCEMENT',
+    ReadOnly = 'READ_ONLY',
+    InternalOnly = 'INTERNAL_ONLY'
+}
 

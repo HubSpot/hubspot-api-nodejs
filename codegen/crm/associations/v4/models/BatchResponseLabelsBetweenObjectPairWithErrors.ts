@@ -84,5 +84,10 @@ export class BatchResponseLabelsBetweenObjectPairWithErrors {
 }
 
 
-export type BatchResponseLabelsBetweenObjectPairWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseLabelsBetweenObjectPairWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

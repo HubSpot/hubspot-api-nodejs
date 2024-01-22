@@ -75,5 +75,7 @@ export class PublicQuarterReference {
 }
 
 
-export type PublicQuarterReferenceReferenceTypeEnum = "QUARTER" ;
+export enum PublicQuarterReferenceReferenceTypeEnum {
+    Quarter = 'QUARTER'
+}
 

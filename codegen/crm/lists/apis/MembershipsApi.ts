@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -339,14 +339,14 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to add
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async add(response: ResponseContext): Promise<MembershipsUpdateResponse > {
+     public async addWithHttpInfo(response: ResponseContext): Promise<HttpInfo<MembershipsUpdateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: MembershipsUpdateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -362,7 +362,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -375,10 +375,10 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to addAllFromList
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async addAllFromList(response: ResponseContext): Promise<void > {
+     public async addAllFromListWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -394,7 +394,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -407,14 +407,14 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to addAndRemove
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async addAndRemove(response: ResponseContext): Promise<MembershipsUpdateResponse > {
+     public async addAndRemoveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<MembershipsUpdateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: MembershipsUpdateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -430,7 +430,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -443,14 +443,14 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseLong > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseLong >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseLong = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseLong", ""
             ) as CollectionResponseLong;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -466,7 +466,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseLong", ""
             ) as CollectionResponseLong;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -479,14 +479,14 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to remove
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async remove(response: ResponseContext): Promise<MembershipsUpdateResponse > {
+     public async removeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<MembershipsUpdateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: MembershipsUpdateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -502,7 +502,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "MembershipsUpdateResponse", ""
             ) as MembershipsUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -515,10 +515,10 @@ export class MembershipsApiResponseProcessor {
      * @params response Response returned by the server for a request to removeAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async removeAll(response: ResponseContext): Promise<void > {
+     public async removeAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -534,7 +534,7 @@ export class MembershipsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

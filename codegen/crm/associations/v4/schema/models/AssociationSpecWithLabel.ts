@@ -47,5 +47,9 @@ export class AssociationSpecWithLabel {
 }
 
 
-export type AssociationSpecWithLabelCategoryEnum = "HUBSPOT_DEFINED" | "USER_DEFINED" | "INTEGRATOR_DEFINED" ;
+export enum AssociationSpecWithLabelCategoryEnum {
+    HubspotDefined = 'HUBSPOT_DEFINED',
+    UserDefined = 'USER_DEFINED',
+    IntegratorDefined = 'INTEGRATOR_DEFINED'
+}
 

@@ -37,7 +37,7 @@ export class Pipeline {
     */
     'stages': Array<PipelineStage>;
     /**
-    * A unique label used to organize pipelines in HubSpot's UI
+    * A unique label used to organize pipelines in HubSpot\'s UI
     */
     'label': string;
     /**

@@ -69,5 +69,10 @@ export class BatchResponseSubscriptionResponse {
 }
 
 
-export type BatchResponseSubscriptionResponseStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseSubscriptionResponseStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

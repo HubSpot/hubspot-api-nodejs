@@ -75,6 +75,21 @@ export class PublicCalendarDatePropertyOperation {
 }
 
 
-export type PublicCalendarDatePropertyOperationOperationTypeEnum = "CALENDAR_DATE" ;
-export type PublicCalendarDatePropertyOperationFiscalYearStartEnum = "JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER" ;
+export enum PublicCalendarDatePropertyOperationOperationTypeEnum {
+    CalendarDate = 'CALENDAR_DATE'
+}
+export enum PublicCalendarDatePropertyOperationFiscalYearStartEnum {
+    January = 'JANUARY',
+    February = 'FEBRUARY',
+    March = 'MARCH',
+    April = 'APRIL',
+    May = 'MAY',
+    June = 'JUNE',
+    July = 'JULY',
+    August = 'AUGUST',
+    September = 'SEPTEMBER',
+    October = 'OCTOBER',
+    November = 'NOVEMBER',
+    December = 'DECEMBER'
+}
 

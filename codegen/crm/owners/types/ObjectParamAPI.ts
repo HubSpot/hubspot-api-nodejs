@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicOwnerForwardPaging } from '../models/CollectionResponsePublicOwnerForwardPaging';
@@ -65,8 +66,24 @@ export class ObjectOwnersApi {
      * Read an owner by given `id` or `userId`
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: OwnersApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicOwner>> {
+        return this.api.getByIdWithHttpInfo(param.ownerId, param.idProperty, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read an owner by given `id` or `userId`
+     * @param param the request object
+     */
     public getById(param: OwnersApiGetByIdRequest, options?: Configuration): Promise<PublicOwner> {
         return this.api.getById(param.ownerId, param.idProperty, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Get a page of owners
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: OwnersApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicOwnerForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.email, param.after, param.limit, param.archived,  options).toPromise();
     }
 
     /**

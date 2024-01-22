@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -798,10 +798,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -817,7 +817,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -830,10 +830,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveBatch(response: ResponseContext): Promise<void > {
+     public async archiveBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -849,7 +849,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -862,10 +862,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to attachToLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async attachToLangGroup(response: ResponseContext): Promise<void > {
+     public async attachToLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -881,7 +881,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -894,14 +894,14 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<Tag > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Tag >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: Tag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -917,7 +917,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -930,21 +930,21 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
+     public async createBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag", ""
             ) as BatchResponseTag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTagWithErrors", ""
             ) as BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -960,7 +960,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag | BatchResponseTagWithErrors", ""
             ) as BatchResponseTag | BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -973,14 +973,14 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to createLangVariation
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createLangVariation(response: ResponseContext): Promise<Tag > {
+     public async createLangVariationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Tag >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Tag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -996,7 +996,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1009,10 +1009,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to detachFromLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detachFromLangGroup(response: ResponseContext): Promise<void > {
+     public async detachFromLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1028,7 +1028,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1041,14 +1041,14 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<Tag > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Tag >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Tag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1064,7 +1064,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1077,14 +1077,14 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalTagForwardPaging > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalTagForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalTagForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalTagForwardPaging", ""
             ) as CollectionResponseWithTotalTagForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1100,7 +1100,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalTagForwardPaging", ""
             ) as CollectionResponseWithTotalTagForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1113,21 +1113,21 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to readBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
+     public async readBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag", ""
             ) as BatchResponseTag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTagWithErrors", ""
             ) as BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1143,7 +1143,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag | BatchResponseTagWithErrors", ""
             ) as BatchResponseTag | BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1156,10 +1156,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to setLangPrimary
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async setLangPrimary(response: ResponseContext): Promise<void > {
+     public async setLangPrimaryWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1175,7 +1175,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1188,14 +1188,14 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<Tag > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Tag >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Tag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1211,7 +1211,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Tag", ""
             ) as Tag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1224,21 +1224,21 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateBatch(response: ResponseContext): Promise<BatchResponseTag | BatchResponseTagWithErrors > {
+     public async updateBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseTag = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag", ""
             ) as BatchResponseTag;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseTagWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTagWithErrors", ""
             ) as BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1254,7 +1254,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTag | BatchResponseTagWithErrors", ""
             ) as BatchResponseTag | BatchResponseTagWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1267,10 +1267,10 @@ export class BlogTagsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateLangs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateLangs(response: ResponseContext): Promise<void > {
+     public async updateLangsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1286,7 +1286,7 @@ export class BlogTagsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

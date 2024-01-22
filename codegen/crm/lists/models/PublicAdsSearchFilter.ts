@@ -68,5 +68,7 @@ export class PublicAdsSearchFilter {
 }
 
 
-export type PublicAdsSearchFilterFilterTypeEnum = "ADS_SEARCH" ;
+export enum PublicAdsSearchFilterFilterTypeEnum {
+    AdsSearch = 'ADS_SEARCH'
+}
 

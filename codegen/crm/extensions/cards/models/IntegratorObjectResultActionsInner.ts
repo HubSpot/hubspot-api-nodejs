@@ -83,6 +83,19 @@ export class IntegratorObjectResultActionsInner {
 }
 
 
-export type IntegratorObjectResultActionsInnerTypeEnum = "IFRAME" ;
-export type IntegratorObjectResultActionsInnerHttpMethodEnum = "CONNECT" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT" | "TRACE" ;
+export enum IntegratorObjectResultActionsInnerTypeEnum {
+    ActionHook = 'ACTION_HOOK',
+    Iframe = 'IFRAME'
+}
+export enum IntegratorObjectResultActionsInnerHttpMethodEnum {
+    Connect = 'CONNECT',
+    Delete = 'DELETE',
+    Get = 'GET',
+    Head = 'HEAD',
+    Options = 'OPTIONS',
+    Patch = 'PATCH',
+    Post = 'POST',
+    Put = 'PUT',
+    Trace = 'TRACE'
+}
 

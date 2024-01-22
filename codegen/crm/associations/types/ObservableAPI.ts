@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -32,7 +32,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
@@ -47,8 +47,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Remove the associations between all pairs of objects identified in the request body.
+     * Archive a batch of associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociation 
+     */
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -58,7 +69,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociation 
      */
-    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
+    public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors>> {
         const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, batchInputPublicAssociation, _options);
 
         // build promise chain
@@ -73,8 +84,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Associate all pairs of objects identified in the request body.
+     * Create a batch of associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociation 
+     */
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociation: BatchInputPublicAssociation, _options?: Configuration): Observable<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
+        return this.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociation, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors>) => apiResponse.data));
     }
 
     /**
@@ -84,7 +106,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicObjectId 
      */
-    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
+    public readWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti>> {
         const requestContextPromise = this.requestFactory.read(fromObjectType, toObjectType, batchInputPublicObjectId, _options);
 
         // build promise chain
@@ -99,8 +121,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.read(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
+     * Read a batch of associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicObjectId 
+     */
+    public read(fromObjectType: string, toObjectType: string, batchInputPublicObjectId: BatchInputPublicObjectId, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti> {
+        return this.readWithHttpInfo(fromObjectType, toObjectType, batchInputPublicObjectId, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti>) => apiResponse.data));
     }
 
 }

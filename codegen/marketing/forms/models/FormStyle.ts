@@ -149,5 +149,9 @@ export class FormStyle {
 }
 
 
-export type FormStyleSubmitAlignmentEnum = "left" | "right" | "center" ;
+export enum FormStyleSubmitAlignmentEnum {
+    Left = 'left',
+    Right = 'right',
+    Center = 'center'
+}
 

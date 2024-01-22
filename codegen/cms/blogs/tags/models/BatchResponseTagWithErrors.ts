@@ -111,5 +111,10 @@ export class BatchResponseTagWithErrors {
 }
 
 
-export type BatchResponseTagWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseTagWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

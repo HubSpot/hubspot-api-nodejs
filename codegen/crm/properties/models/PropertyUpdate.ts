@@ -18,7 +18,7 @@ export class PropertyUpdate {
     */
     'groupName'?: string;
     /**
-    * If true, the property won't be visible and can't be used in HubSpot.
+    * If true, the property won\'t be visible and can\'t be used in HubSpot.
     */
     'hidden'?: boolean;
     /**
@@ -127,6 +127,24 @@ export class PropertyUpdate {
 }
 
 
-export type PropertyUpdateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
-export type PropertyUpdateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
+export enum PropertyUpdateTypeEnum {
+    String = 'string',
+    Number = 'number',
+    Date = 'date',
+    Datetime = 'datetime',
+    Enumeration = 'enumeration',
+    Bool = 'bool'
+}
+export enum PropertyUpdateFieldTypeEnum {
+    Textarea = 'textarea',
+    Text = 'text',
+    Date = 'date',
+    File = 'file',
+    Number = 'number',
+    Select = 'select',
+    Radio = 'radio',
+    Checkbox = 'checkbox',
+    Booleancheckbox = 'booleancheckbox',
+    CalculationEquation = 'calculation_equation'
+}
 

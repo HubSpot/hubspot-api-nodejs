@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -408,7 +408,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
+     * Update properties of folder by given ID. This action happens asynchronously and will update all of the folder\'s children as well.
      * Update folder properties
      * @param folderUpdateInput Properties to change in the folder
      */
@@ -466,10 +466,10 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -485,7 +485,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -498,10 +498,10 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveByPath
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveByPath(response: ResponseContext): Promise<void > {
+     public async archiveByPathWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -517,7 +517,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -530,14 +530,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to checkUpdateStatus
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async checkUpdateStatus(response: ResponseContext): Promise<FolderActionResponse > {
+     public async checkUpdateStatusWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FolderActionResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: FolderActionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FolderActionResponse", ""
             ) as FolderActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -553,7 +553,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FolderActionResponse", ""
             ) as FolderActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -566,14 +566,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<Folder > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Folder >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: Folder = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -589,7 +589,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -602,14 +602,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to doSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doSearch(response: ResponseContext): Promise<CollectionResponseFolder > {
+     public async doSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseFolder >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseFolder = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseFolder", ""
             ) as CollectionResponseFolder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -625,7 +625,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseFolder", ""
             ) as CollectionResponseFolder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -638,14 +638,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<Folder > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Folder >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Folder = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -661,7 +661,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -674,14 +674,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to getByPath
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getByPath(response: ResponseContext): Promise<Folder > {
+     public async getByPathWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Folder >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Folder = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -697,7 +697,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Folder", ""
             ) as Folder;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -710,14 +710,14 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to updateProperties
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateProperties(response: ResponseContext): Promise<FolderUpdateTaskLocator > {
+     public async updatePropertiesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FolderUpdateTaskLocator >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
             const body: FolderUpdateTaskLocator = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FolderUpdateTaskLocator", ""
             ) as FolderUpdateTaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -733,7 +733,7 @@ export class FoldersApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FolderUpdateTaskLocator", ""
             ) as FolderUpdateTaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

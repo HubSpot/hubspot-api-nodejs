@@ -61,5 +61,7 @@ export class PublicPropertyReferencedTime {
 }
 
 
-export type PublicPropertyReferencedTimeTimeTypeEnum = "PROPERTY_REFERENCED" ;
+export enum PublicPropertyReferencedTimeTimeTypeEnum {
+    PropertyReferenced = 'PROPERTY_REFERENCED'
+}
 

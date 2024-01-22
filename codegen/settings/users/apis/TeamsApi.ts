@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -17,7 +17,7 @@ export class TeamsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * View teams for this account
-     * See details about this account's teams
+     * See details about this account\'s teams
      */
     public async getAll(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -56,14 +56,14 @@ export class TeamsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePublicTeamNoPaging > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePublicTeamNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePublicTeamNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicTeamNoPaging", ""
             ) as CollectionResponsePublicTeamNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -79,7 +79,7 @@ export class TeamsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicTeamNoPaging", ""
             ) as CollectionResponsePublicTeamNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

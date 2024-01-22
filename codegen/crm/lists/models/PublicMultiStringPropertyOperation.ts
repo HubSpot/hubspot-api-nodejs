@@ -54,5 +54,7 @@ export class PublicMultiStringPropertyOperation {
 }
 
 
-export type PublicMultiStringPropertyOperationOperationTypeEnum = "MULTISTRING" ;
+export enum PublicMultiStringPropertyOperationOperationTypeEnum {
+    Multistring = 'MULTISTRING'
+}
 

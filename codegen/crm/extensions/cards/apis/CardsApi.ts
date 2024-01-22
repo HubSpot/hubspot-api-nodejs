@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -19,7 +19,7 @@ import { PublicCardResponse } from '../models/PublicCardResponse';
 export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
+     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can\'t be undone.
      * Delete a card
      * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
@@ -279,10 +279,10 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -298,7 +298,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -311,14 +311,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<PublicCardResponse > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -334,7 +334,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -347,14 +347,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<PublicCardListResponse > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardListResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicCardListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardListResponse", ""
             ) as PublicCardListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -370,7 +370,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardListResponse", ""
             ) as PublicCardListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -383,14 +383,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<PublicCardResponse > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -406,7 +406,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -419,14 +419,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<PublicCardResponse > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -442,7 +442,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicCardResponse", ""
             ) as PublicCardResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

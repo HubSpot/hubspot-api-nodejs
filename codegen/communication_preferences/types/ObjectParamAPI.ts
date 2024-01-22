@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
@@ -16,6 +17,15 @@ export class ObjectDefinitionApi {
 
     public constructor(configuration: Configuration, requestFactory?: DefinitionApiRequestFactory, responseProcessor?: DefinitionApiResponseProcessor) {
         this.api = new ObservableDefinitionApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Get a list of all subscription definitions for the portal
+     * Get subscription definitions
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: DefinitionApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<SubscriptionDefinitionsResponse>> {
+        return this.api.getPageWithHttpInfo( options).toPromise();
     }
 
     /**
@@ -71,6 +81,15 @@ export class ObjectStatusApi {
      * Get subscription statuses for a contact
      * @param param the request object
      */
+    public getEmailStatusWithHttpInfo(param: StatusApiGetEmailStatusRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatusesResponse>> {
+        return this.api.getEmailStatusWithHttpInfo(param.emailAddress,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of subscriptions and their status for a given contact.
+     * Get subscription statuses for a contact
+     * @param param the request object
+     */
     public getEmailStatus(param: StatusApiGetEmailStatusRequest, options?: Configuration): Promise<PublicSubscriptionStatusesResponse> {
         return this.api.getEmailStatus(param.emailAddress,  options).toPromise();
     }
@@ -80,8 +99,26 @@ export class ObjectStatusApi {
      * Subscribe a contact
      * @param param the request object
      */
+    public subscribeWithHttpInfo(param: StatusApiSubscribeRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatus>> {
+        return this.api.subscribeWithHttpInfo(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
+    }
+
+    /**
+     * Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
+     * Subscribe a contact
+     * @param param the request object
+     */
     public subscribe(param: StatusApiSubscribeRequest, options?: Configuration): Promise<PublicSubscriptionStatus> {
         return this.api.subscribe(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
+    }
+
+    /**
+     * Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
+     * Unsubscribe a contact
+     * @param param the request object
+     */
+    public unsubscribeWithHttpInfo(param: StatusApiUnsubscribeRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatus>> {
+        return this.api.unsubscribeWithHttpInfo(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
     }
 
     /**

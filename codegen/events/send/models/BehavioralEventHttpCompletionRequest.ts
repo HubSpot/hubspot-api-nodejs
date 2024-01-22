@@ -13,7 +13,7 @@
 
 export class BehavioralEventHttpCompletionRequest {
     /**
-    * The time when this event occurred (if any). If this isn't set, the current time will be used
+    * The time when this event occurred (if any). If this isn\'t set, the current time will be used
     */
     'occurredAt'?: Date;
     /**

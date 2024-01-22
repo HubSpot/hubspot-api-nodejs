@@ -111,5 +111,10 @@ export class BatchResponseBlogPostWithErrors {
 }
 
 
-export type BatchResponseBlogPostWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseBlogPostWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

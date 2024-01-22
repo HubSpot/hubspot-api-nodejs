@@ -1,4 +1,4 @@
-import { HttpFile } from '../http/http';
+import { HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
@@ -25,8 +25,31 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
+    public archiveWithHttpInfo(environment: string, path: string, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(environment, path, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deletes the file at the specified path in the specified environment.
+     * Delete a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
     public archive(environment: string, path: string, _options?: Configuration): Promise<void> {
         const result = this.api.archive(environment, path, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Creates a file at the specified path in the specified environment. Accepts multipart/form-data content type. Throws an error if a file already exists at the specified path.
+     * Create a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param file The file to upload.
+     */
+    public createWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        const result = this.api.createWithHttpInfo(environment, path, file, _options);
         return result.toPromise();
     }
 
@@ -49,8 +72,31 @@ export class PromiseContentApi {
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
+    public createOrUpdateWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        const result = this.api.createOrUpdateWithHttpInfo(environment, path, file, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
+     * Create or update a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param file The file to upload.
+     */
     public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
         const result = this.api.createOrUpdate(environment, path, file, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public downloadWithHttpInfo(environment: string, path: string, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.downloadWithHttpInfo(environment, path, _options);
         return result.toPromise();
     }
 
@@ -89,6 +135,16 @@ export class PromiseExtractApi {
      * Extracts a zip file
      * @param path The file system location of the zip file.
      */
+    public extractByPathWithHttpInfo(path: string, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.extractByPathWithHttpInfo(path, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
+     * Extracts a zip file
+     * @param path The file system location of the zip file.
+     */
     public extractByPath(path: string, _options?: Configuration): Promise<void> {
         const result = this.api.extractByPath(path, _options);
         return result.toPromise();
@@ -111,6 +167,18 @@ export class PromiseMetadataApi {
         responseProcessor?: MetadataApiResponseProcessor
     ) {
         this.api = new ObservableMetadataApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Gets the metadata object for the file at the specified path in the specified environment.
+     * Get the metadata for a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param properties 
+     */
+    public getWithHttpInfo(environment: string, path: string, properties?: string, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        const result = this.api.getWithHttpInfo(environment, path, properties, _options);
+        return result.toPromise();
     }
 
     /**
@@ -147,8 +215,24 @@ export class PromiseSourceCodeExtractApi {
     /**
      * @param fileExtractRequest 
      */
+    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+        const result = this.api.doAsyncWithHttpInfo(fileExtractRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param fileExtractRequest 
+     */
     public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<TaskLocator> {
         const result = this.api.doAsync(fileExtractRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param taskId 
+     */
+    public getAsyncStatusWithHttpInfo(taskId: number, _options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        const result = this.api.getAsyncStatusWithHttpInfo(taskId, _options);
         return result.toPromise();
     }
 
@@ -177,6 +261,17 @@ export class PromiseValidationApi {
         responseProcessor?: ValidationApiResponseProcessor
     ) {
         this.api = new ObservableValidationApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
+     * Validate the contents of a file
+     * @param path The file system location of the file.
+     * @param file The file to validate.
+     */
+    public doValidateWithHttpInfo(path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.doValidateWithHttpInfo(path, file, _options);
+        return result.toPromise();
     }
 
     /**

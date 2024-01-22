@@ -1,6 +1,6 @@
 /**
  * CRM Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -84,5 +84,10 @@ export class BatchResponseTimelineEventResponseWithErrors {
 }
 
 
-export type BatchResponseTimelineEventResponseWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseTimelineEventResponseWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

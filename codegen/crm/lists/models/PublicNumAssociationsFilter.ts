@@ -55,5 +55,7 @@ export class PublicNumAssociationsFilter {
 }
 
 
-export type PublicNumAssociationsFilterFilterTypeEnum = "NUM_ASSOCIATIONS" ;
+export enum PublicNumAssociationsFilterFilterTypeEnum {
+    NumAssociations = 'NUM_ASSOCIATIONS'
+}
 

@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -462,14 +462,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<ListCreateResponse > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListCreateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListCreateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListCreateResponse", ""
             ) as ListCreateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -485,7 +485,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListCreateResponse", ""
             ) as ListCreateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -498,14 +498,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to doSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doSearch(response: ResponseContext): Promise<ListSearchResponse > {
+     public async doSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListSearchResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListSearchResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListSearchResponse", ""
             ) as ListSearchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -521,7 +521,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListSearchResponse", ""
             ) as ListSearchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -534,14 +534,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<ListsByIdResponse > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListsByIdResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListsByIdResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListsByIdResponse", ""
             ) as ListsByIdResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -557,7 +557,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListsByIdResponse", ""
             ) as ListsByIdResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -570,14 +570,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<ListFetchResponse > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListFetchResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListFetchResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListFetchResponse", ""
             ) as ListFetchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -593,7 +593,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListFetchResponse", ""
             ) as ListFetchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -606,14 +606,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to getByName
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getByName(response: ResponseContext): Promise<ListFetchResponse > {
+     public async getByNameWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListFetchResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListFetchResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListFetchResponse", ""
             ) as ListFetchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -629,7 +629,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListFetchResponse", ""
             ) as ListFetchResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -642,10 +642,10 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to remove
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async remove(response: ResponseContext): Promise<void > {
+     public async removeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -661,7 +661,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -674,10 +674,10 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to restore
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async restore(response: ResponseContext): Promise<void > {
+     public async restoreWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -693,7 +693,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -706,14 +706,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateListFilters
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateListFilters(response: ResponseContext): Promise<ListUpdateResponse > {
+     public async updateListFiltersWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListUpdateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListUpdateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListUpdateResponse", ""
             ) as ListUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -729,7 +729,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListUpdateResponse", ""
             ) as ListUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -742,14 +742,14 @@ export class ListsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateName
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateName(response: ResponseContext): Promise<ListUpdateResponse > {
+     public async updateNameWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ListUpdateResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ListUpdateResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListUpdateResponse", ""
             ) as ListUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -765,7 +765,7 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ListUpdateResponse", ""
             ) as ListUpdateResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

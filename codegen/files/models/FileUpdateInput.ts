@@ -86,5 +86,12 @@ export class FileUpdateInput {
 }
 
 
-export type FileUpdateInputAccessEnum = "PUBLIC_INDEXABLE" | "PUBLIC_NOT_INDEXABLE" | "HIDDEN_INDEXABLE" | "HIDDEN_NOT_INDEXABLE" | "HIDDEN_PRIVATE" | "PRIVATE" ;
+export enum FileUpdateInputAccessEnum {
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
+    HiddenIndexable = 'HIDDEN_INDEXABLE',
+    HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
+    HiddenPrivate = 'HIDDEN_PRIVATE',
+    Private = 'PRIVATE'
+}
 

@@ -84,5 +84,10 @@ export class BatchResponsePropertyWithErrors {
 }
 
 
-export type BatchResponsePropertyWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponsePropertyWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

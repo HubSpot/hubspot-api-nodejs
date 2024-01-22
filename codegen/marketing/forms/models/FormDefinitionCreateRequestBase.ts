@@ -99,5 +99,7 @@ export class FormDefinitionCreateRequestBase {
 }
 
 
-export type FormDefinitionCreateRequestBaseFormTypeEnum = "hubspot" ;
+export enum FormDefinitionCreateRequestBaseFormTypeEnum {
+    Hubspot = 'hubspot'
+}
 

@@ -70,6 +70,13 @@ export class FieldGroup {
 }
 
 
-export type FieldGroupGroupTypeEnum = "default_group" | "progressive" | "queued" ;
-export type FieldGroupRichTextTypeEnum = "text" | "image" ;
+export enum FieldGroupGroupTypeEnum {
+    DefaultGroup = 'default_group',
+    Progressive = 'progressive',
+    Queued = 'queued'
+}
+export enum FieldGroupRichTextTypeEnum {
+    Text = 'text',
+    Image = 'image'
+}
 

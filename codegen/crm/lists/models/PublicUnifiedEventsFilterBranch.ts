@@ -70,6 +70,11 @@ export class PublicUnifiedEventsFilterBranch {
 }
 
 
-export type PublicUnifiedEventsFilterBranchFilterBranchTypeEnum = "UNIFIED_EVENTS" ;
-export type PublicUnifiedEventsFilterBranchOperatorEnum = "HAS_COMPLETED" | "HAS_NOT_COMPLETED" ;
+export enum PublicUnifiedEventsFilterBranchFilterBranchTypeEnum {
+    UnifiedEvents = 'UNIFIED_EVENTS'
+}
+export enum PublicUnifiedEventsFilterBranchOperatorEnum {
+    Completed = 'HAS_COMPLETED',
+    NotCompleted = 'HAS_NOT_COMPLETED'
+}
 

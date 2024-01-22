@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -26,7 +26,7 @@ export class ObservableGenerateApi {
      * Generate a token
      * @param identificationTokenGenerationRequest 
      */
-    public generateToken(identificationTokenGenerationRequest: IdentificationTokenGenerationRequest, _options?: Configuration): Observable<IdentificationTokenResponse> {
+    public generateTokenWithHttpInfo(identificationTokenGenerationRequest: IdentificationTokenGenerationRequest, _options?: Configuration): Observable<HttpInfo<IdentificationTokenResponse>> {
         const requestContextPromise = this.requestFactory.generateToken(identificationTokenGenerationRequest, _options);
 
         // build promise chain
@@ -41,8 +41,17 @@ export class ObservableGenerateApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.generateToken(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.generateTokenWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
+     * Generate a token
+     * @param identificationTokenGenerationRequest 
+     */
+    public generateToken(identificationTokenGenerationRequest: IdentificationTokenGenerationRequest, _options?: Configuration): Observable<IdentificationTokenResponse> {
+        return this.generateTokenWithHttpInfo(identificationTokenGenerationRequest, _options).pipe(map((apiResponse: HttpInfo<IdentificationTokenResponse>) => apiResponse.data));
     }
 
 }

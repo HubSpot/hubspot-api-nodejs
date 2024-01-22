@@ -19,7 +19,7 @@ import { TopLevelActions } from '../models/TopLevelActions';
 export class IntegratorCardPayloadResponse {
     'responseVersion'?: IntegratorCardPayloadResponseResponseVersionEnum;
     /**
-    * The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets'). If not provided, this falls back to the card's title.
+    * The label to be used for the `allItemsLinkUrl` link (e.g. \'See more tickets\'). If not provided, this falls back to the card\'s title.
     */
     'cardLabel'?: string;
     /**
@@ -85,5 +85,8 @@ export class IntegratorCardPayloadResponse {
 }
 
 
-export type IntegratorCardPayloadResponseResponseVersionEnum = "v1" | "v3" ;
+export enum IntegratorCardPayloadResponseResponseVersionEnum {
+    V1 = 'v1',
+    V3 = 'v3'
+}
 

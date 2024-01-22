@@ -1,6 +1,6 @@
 /**
  * Accounting Extension
- * These APIs allow you to interact with HubSpot's Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
+ * These APIs allow you to interact with HubSpot\'s Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
  *
  * OpenAPI spec version: v3
  * 
@@ -12,7 +12,7 @@
 
 
 /**
-* Representation of payment terms that are defined in the external accounting system. One of 'dueDays' or 'dueDate' is required.
+* Representation of payment terms that are defined in the external accounting system. One of \'dueDays\' or \'dueDate\' is required.
 */
 export class AccountingExtensionTerm {
     /**

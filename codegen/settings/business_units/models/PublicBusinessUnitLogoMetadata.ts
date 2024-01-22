@@ -12,19 +12,19 @@
 
 
 /**
-* A Business Unit's logo metadata
+* A Business Unit\'s logo metadata
 */
 export class PublicBusinessUnitLogoMetadata {
     /**
-    * The logo's alt text
+    * The logo\'s alt text
     */
     'logoAltText'?: string;
     /**
-    * The logo's resized url
+    * The logo\'s resized url
     */
     'resizedUrl'?: string;
     /**
-    * The logo's url
+    * The logo\'s url
     */
     'logoUrl'?: string;
 

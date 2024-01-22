@@ -84,5 +84,10 @@ export class BatchResponsePublicAssociationWithErrors {
 }
 
 
-export type BatchResponsePublicAssociationWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponsePublicAssociationWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

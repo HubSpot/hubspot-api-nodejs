@@ -90,5 +90,7 @@ export class PublicRangedTimeOperation {
 }
 
 
-export type PublicRangedTimeOperationTypeEnum = "TIME_RANGED" ;
+export enum PublicRangedTimeOperationTypeEnum {
+    TimeRanged = 'TIME_RANGED'
+}
 

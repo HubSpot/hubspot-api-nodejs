@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -31,7 +31,7 @@ export class ObservableSettingsApi {
     /**
      * @param appId 
      */
-    public clear(appId: number, _options?: Configuration): Observable<void> {
+    public clearWithHttpInfo(appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.clear(appId, _options);
 
         // build promise chain
@@ -46,15 +46,22 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.clear(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.clearWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param appId 
+     */
+    public clear(appId: number, _options?: Configuration): Observable<void> {
+        return this.clearWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
      * @param appId 
      * @param settingsChangeRequest 
      */
-    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
+    public configureWithHttpInfo(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<HttpInfo<SettingsResponse>> {
         const requestContextPromise = this.requestFactory.configure(appId, settingsChangeRequest, _options);
 
         // build promise chain
@@ -69,14 +76,22 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.configure(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.configureWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * @param appId 
+     * @param settingsChangeRequest 
      */
-    public getAll(appId: number, _options?: Configuration): Observable<SettingsResponse> {
+    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Observable<SettingsResponse> {
+        return this.configureWithHttpInfo(appId, settingsChangeRequest, _options).pipe(map((apiResponse: HttpInfo<SettingsResponse>) => apiResponse.data));
+    }
+
+    /**
+     * @param appId 
+     */
+    public getAllWithHttpInfo(appId: number, _options?: Configuration): Observable<HttpInfo<SettingsResponse>> {
         const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
@@ -91,8 +106,15 @@ export class ObservableSettingsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param appId 
+     */
+    public getAll(appId: number, _options?: Configuration): Observable<SettingsResponse> {
+        return this.getAllWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<SettingsResponse>) => apiResponse.data));
     }
 
 }
@@ -117,7 +139,7 @@ export class ObservableSubscriptionsApi {
      * @param subscriptionId 
      * @param appId 
      */
-    public archive(subscriptionId: number, appId: number, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(subscriptionId, appId, _options);
 
         // build promise chain
@@ -132,15 +154,23 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param subscriptionId 
+     * @param appId 
+     */
+    public archive(subscriptionId: number, appId: number, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(subscriptionId, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
      * @param appId 
      * @param subscriptionCreateRequest 
      */
-    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+    public createWithHttpInfo(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<HttpInfo<SubscriptionResponse>> {
         const requestContextPromise = this.requestFactory.create(appId, subscriptionCreateRequest, _options);
 
         // build promise chain
@@ -155,14 +185,22 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * @param appId 
+     * @param subscriptionCreateRequest 
      */
-    public getAll(appId: number, _options?: Configuration): Observable<SubscriptionListResponse> {
+    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        return this.createWithHttpInfo(appId, subscriptionCreateRequest, _options).pipe(map((apiResponse: HttpInfo<SubscriptionResponse>) => apiResponse.data));
+    }
+
+    /**
+     * @param appId 
+     */
+    public getAllWithHttpInfo(appId: number, _options?: Configuration): Observable<HttpInfo<SubscriptionListResponse>> {
         const requestContextPromise = this.requestFactory.getAll(appId, _options);
 
         // build promise chain
@@ -177,15 +215,22 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param appId 
+     */
+    public getAll(appId: number, _options?: Configuration): Observable<SubscriptionListResponse> {
+        return this.getAllWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<SubscriptionListResponse>) => apiResponse.data));
     }
 
     /**
      * @param subscriptionId 
      * @param appId 
      */
-    public getById(subscriptionId: number, appId: number, _options?: Configuration): Observable<SubscriptionResponse> {
+    public getByIdWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Observable<HttpInfo<SubscriptionResponse>> {
         const requestContextPromise = this.requestFactory.getById(subscriptionId, appId, _options);
 
         // build promise chain
@@ -200,8 +245,16 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param subscriptionId 
+     * @param appId 
+     */
+    public getById(subscriptionId: number, appId: number, _options?: Configuration): Observable<SubscriptionResponse> {
+        return this.getByIdWithHttpInfo(subscriptionId, appId, _options).pipe(map((apiResponse: HttpInfo<SubscriptionResponse>) => apiResponse.data));
     }
 
     /**
@@ -209,7 +262,7 @@ export class ObservableSubscriptionsApi {
      * @param appId 
      * @param subscriptionPatchRequest 
      */
-    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+    public updateWithHttpInfo(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<HttpInfo<SubscriptionResponse>> {
         const requestContextPromise = this.requestFactory.update(subscriptionId, appId, subscriptionPatchRequest, _options);
 
         // build promise chain
@@ -224,15 +277,24 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param subscriptionId 
+     * @param appId 
+     * @param subscriptionPatchRequest 
+     */
+    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Observable<SubscriptionResponse> {
+        return this.updateWithHttpInfo(subscriptionId, appId, subscriptionPatchRequest, _options).pipe(map((apiResponse: HttpInfo<SubscriptionResponse>) => apiResponse.data));
     }
 
     /**
      * @param appId 
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
-    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+    public updateBatchWithHttpInfo(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
         const requestContextPromise = this.requestFactory.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
 
         // build promise chain
@@ -247,8 +309,16 @@ export class ObservableSubscriptionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatch(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatchWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param appId 
+     * @param batchInputSubscriptionBatchUpdateRequest 
+     */
+    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Observable<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        return this.updateBatchWithHttpInfo(appId, batchInputSubscriptionBatchUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>) => apiResponse.data));
     }
 
 }

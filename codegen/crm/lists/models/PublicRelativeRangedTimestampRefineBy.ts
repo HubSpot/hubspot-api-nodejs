@@ -55,5 +55,7 @@ export class PublicRelativeRangedTimestampRefineBy {
 }
 
 
-export type PublicRelativeRangedTimestampRefineByTypeEnum = "RELATIVE_RANGED" ;
+export enum PublicRelativeRangedTimestampRefineByTypeEnum {
+    RelativeRanged = 'RELATIVE_RANGED'
+}
 

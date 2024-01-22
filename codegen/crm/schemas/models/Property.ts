@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -68,7 +68,7 @@ export class Property {
     */
     'groupName': string;
     /**
-    * If this property is related to other object(s), they'll be listed here.
+    * If this property is related to other object(s), they\'ll be listed here.
     */
     'referencedObjectType'?: string;
     /**
@@ -81,7 +81,7 @@ export class Property {
     'options': Array<Option>;
     'calculationFormula'?: string;
     /**
-    * Whether or not the property's value must be unique. Once set, this can't be changed.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
     'hasUniqueValue'?: boolean;
     /**

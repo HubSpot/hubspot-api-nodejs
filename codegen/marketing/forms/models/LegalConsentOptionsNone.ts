@@ -33,5 +33,7 @@ export class LegalConsentOptionsNone {
 }
 
 
-export type LegalConsentOptionsNoneTypeEnum = "none" ;
+export enum LegalConsentOptionsNoneTypeEnum {
+    None = 'none'
+}
 
