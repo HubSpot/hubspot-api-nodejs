@@ -106,5 +106,7 @@ export class HubSpotFormDefinition {
 }
 
 
-export type HubSpotFormDefinitionFormTypeEnum = "hubspot" ;
+export enum HubSpotFormDefinitionFormTypeEnum {
+    Hubspot = 'hubspot'
+}
 

@@ -97,6 +97,55 @@ export class EmailSendStatusView {
 }
 
 
-export type EmailSendStatusViewSendResultEnum = "SENT" | "IDEMPOTENT_IGNORE" | "QUEUED" | "IDEMPOTENT_FAIL" | "THROTTLED" | "EMAIL_DISABLED" | "PORTAL_SUSPENDED" | "INVALID_TO_ADDRESS" | "BLOCKED_DOMAIN" | "PREVIOUSLY_BOUNCED" | "EMAIL_UNCONFIRMED" | "PREVIOUS_SPAM" | "PREVIOUSLY_UNSUBSCRIBED_MESSAGE" | "PREVIOUSLY_UNSUBSCRIBED_PORTAL" | "INVALID_FROM_ADDRESS" | "CAMPAIGN_CANCELLED" | "VALIDATION_FAILED" | "MTA_IGNORE" | "BLOCKED_ADDRESS" | "PORTAL_OVER_LIMIT" | "PORTAL_EXPIRED" | "PORTAL_MISSING_MARKETING_SCOPE" | "MISSING_TEMPLATE_PROPERTIES" | "MISSING_REQUIRED_PARAMETER" | "PORTAL_AUTHENTICATION_FAILURE" | "MISSING_CONTENT" | "CORRUPT_INPUT" | "TEMPLATE_RENDER_EXCEPTION" | "GRAYMAIL_SUPPRESSED" | "UNCONFIGURED_SENDING_DOMAIN" | "UNDELIVERABLE" | "CANCELLED_ABUSE" | "QUARANTINED_ADDRESS" | "ADDRESS_ONLY_ACCEPTED_ON_PROD" | "PORTAL_NOT_AUTHORIZED_FOR_APPLICATION" | "ADDRESS_LIST_BOMBED" | "ADDRESS_OPTED_OUT" | "RECIPIENT_FATIGUE_SUPPRESSED" | "TOO_MANY_RECIPIENTS" | "PREVIOUSLY_UNSUBSCRIBED_BRAND" | "NON_MARKETABLE_CONTACT" | "PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT" | "GDPR_DOI_ENABLED" ;
-export type EmailSendStatusViewStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum EmailSendStatusViewSendResultEnum {
+    Sent = 'SENT',
+    IdempotentIgnore = 'IDEMPOTENT_IGNORE',
+    Queued = 'QUEUED',
+    IdempotentFail = 'IDEMPOTENT_FAIL',
+    Throttled = 'THROTTLED',
+    EmailDisabled = 'EMAIL_DISABLED',
+    PortalSuspended = 'PORTAL_SUSPENDED',
+    InvalidToAddress = 'INVALID_TO_ADDRESS',
+    BlockedDomain = 'BLOCKED_DOMAIN',
+    PreviouslyBounced = 'PREVIOUSLY_BOUNCED',
+    EmailUnconfirmed = 'EMAIL_UNCONFIRMED',
+    PreviousSpam = 'PREVIOUS_SPAM',
+    PreviouslyUnsubscribedMessage = 'PREVIOUSLY_UNSUBSCRIBED_MESSAGE',
+    PreviouslyUnsubscribedPortal = 'PREVIOUSLY_UNSUBSCRIBED_PORTAL',
+    InvalidFromAddress = 'INVALID_FROM_ADDRESS',
+    CampaignCancelled = 'CAMPAIGN_CANCELLED',
+    ValidationFailed = 'VALIDATION_FAILED',
+    MtaIgnore = 'MTA_IGNORE',
+    BlockedAddress = 'BLOCKED_ADDRESS',
+    PortalOverLimit = 'PORTAL_OVER_LIMIT',
+    PortalExpired = 'PORTAL_EXPIRED',
+    PortalMissingMarketingScope = 'PORTAL_MISSING_MARKETING_SCOPE',
+    MissingTemplateProperties = 'MISSING_TEMPLATE_PROPERTIES',
+    MissingRequiredParameter = 'MISSING_REQUIRED_PARAMETER',
+    PortalAuthenticationFailure = 'PORTAL_AUTHENTICATION_FAILURE',
+    MissingContent = 'MISSING_CONTENT',
+    CorruptInput = 'CORRUPT_INPUT',
+    TemplateRenderException = 'TEMPLATE_RENDER_EXCEPTION',
+    GraymailSuppressed = 'GRAYMAIL_SUPPRESSED',
+    UnconfiguredSendingDomain = 'UNCONFIGURED_SENDING_DOMAIN',
+    Undeliverable = 'UNDELIVERABLE',
+    CancelledAbuse = 'CANCELLED_ABUSE',
+    QuarantinedAddress = 'QUARANTINED_ADDRESS',
+    AddressOnlyAcceptedOnProd = 'ADDRESS_ONLY_ACCEPTED_ON_PROD',
+    PortalNotAuthorizedForApplication = 'PORTAL_NOT_AUTHORIZED_FOR_APPLICATION',
+    AddressListBombed = 'ADDRESS_LIST_BOMBED',
+    AddressOptedOut = 'ADDRESS_OPTED_OUT',
+    RecipientFatigueSuppressed = 'RECIPIENT_FATIGUE_SUPPRESSED',
+    TooManyRecipients = 'TOO_MANY_RECIPIENTS',
+    PreviouslyUnsubscribedBrand = 'PREVIOUSLY_UNSUBSCRIBED_BRAND',
+    NonMarketableContact = 'NON_MARKETABLE_CONTACT',
+    PreviouslyUnsubscribedBusinessUnit = 'PREVIOUSLY_UNSUBSCRIBED_BUSINESS_UNIT',
+    GdprDoiEnabled = 'GDPR_DOI_ENABLED'
+}
+export enum EmailSendStatusViewStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

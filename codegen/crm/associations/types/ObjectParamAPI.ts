@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputPublicAssociation } from '../models/BatchInputPublicAssociation';
@@ -85,6 +86,15 @@ export class ObjectBatchApi {
      * Archive a batch of associations
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
+    }
+
+    /**
+     * Remove the associations between all pairs of objects identified in the request body.
+     * Archive a batch of associations
+     * @param param the request object
+     */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
     }
@@ -94,8 +104,26 @@ export class ObjectBatchApi {
      * Create a batch of associations
      * @param param the request object
      */
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors>> {
+        return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
+    }
+
+    /**
+     * Associate all pairs of objects identified in the request body.
+     * Create a batch of associations
+     * @param param the request object
+     */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociation | BatchResponsePublicAssociationWithErrors> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociation,  options).toPromise();
+    }
+
+    /**
+     * Get the IDs of all `{toObjectType}` objects associated with those specified in the request body.
+     * Read a batch of associations
+     * @param param the request object
+     */
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithErrors | BatchResponsePublicAssociationMulti>> {
+        return this.api.readWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicObjectId,  options).toPromise();
     }
 
     /**

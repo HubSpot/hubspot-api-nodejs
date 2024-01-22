@@ -21,7 +21,7 @@ export class DatepickerField {
     */
     'fieldType': DatepickerFieldFieldTypeEnum;
     /**
-    * A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
+    * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
     /**
@@ -41,7 +41,7 @@ export class DatepickerField {
     */
     'required': boolean;
     /**
-    * Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
+    * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
@@ -49,7 +49,7 @@ export class DatepickerField {
     */
     'dependentFields': Array<DependentField>;
     /**
-    * The prompt text showing when the field isn't filled in.
+    * The prompt text showing when the field isn\'t filled in.
     */
     'placeholder'?: string;
     /**
@@ -130,5 +130,7 @@ export class DatepickerField {
 }
 
 
-export type DatepickerFieldFieldTypeEnum = "datepicker" ;
+export enum DatepickerFieldFieldTypeEnum {
+    Datepicker = 'datepicker'
+}
 

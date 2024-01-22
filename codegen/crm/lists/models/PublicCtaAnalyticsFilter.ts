@@ -62,5 +62,7 @@ export class PublicCtaAnalyticsFilter {
 }
 
 
-export type PublicCtaAnalyticsFilterFilterTypeEnum = "CTA" ;
+export enum PublicCtaAnalyticsFilterFilterTypeEnum {
+    Cta = 'CTA'
+}
 

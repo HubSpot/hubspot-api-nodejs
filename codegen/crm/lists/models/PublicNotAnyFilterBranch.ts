@@ -56,5 +56,7 @@ export class PublicNotAnyFilterBranch {
 }
 
 
-export type PublicNotAnyFilterBranchFilterBranchTypeEnum = "NOT_ANY" ;
+export enum PublicNotAnyFilterBranchFilterBranchTypeEnum {
+    NotAny = 'NOT_ANY'
+}
 

@@ -54,5 +54,7 @@ export class PublicNumberPropertyOperation {
 }
 
 
-export type PublicNumberPropertyOperationOperationTypeEnum = "NUMBER" ;
+export enum PublicNumberPropertyOperationOperationTypeEnum {
+    Number = 'NUMBER'
+}
 

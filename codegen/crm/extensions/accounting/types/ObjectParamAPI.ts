@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AccountingAppSettings } from '../models/AccountingAppSettings';
@@ -184,8 +185,26 @@ export class ObjectCallbacksApi {
      * Endpoint for customer creation response
      * @param param the request object
      */
+    public createCustomerWithHttpInfo(param: CallbacksApiCreateCustomerRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.createCustomerWithHttpInfo(param.requestId, param.resultIdAccountingResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a customer creation request.
+     * Endpoint for customer creation response
+     * @param param the request object
+     */
     public createCustomer(param: CallbacksApiCreateCustomerRequest, options?: Configuration): Promise<void> {
         return this.api.createCustomer(param.requestId, param.resultIdAccountingResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to an exchange rate request.
+     * Endpoint for exchange rate response
+     * @param param the request object
+     */
+    public createExchangeRateWithHttpInfo(param: CallbacksApiCreateExchangeRateRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.createExchangeRateWithHttpInfo(param.requestId, param.exchangeRateResponse,  options).toPromise();
     }
 
     /**
@@ -202,8 +221,26 @@ export class ObjectCallbacksApi {
      * Endpoint for invoice creation response
      * @param param the request object
      */
+    public createInvoiceWithHttpInfo(param: CallbacksApiCreateInvoiceRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.createInvoiceWithHttpInfo(param.requestId, param.resultIdAccountingResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a invoice creation request.
+     * Endpoint for invoice creation response
+     * @param param the request object
+     */
     public createInvoice(param: CallbacksApiCreateInvoiceRequest, options?: Configuration): Promise<void> {
         return this.api.createInvoice(param.requestId, param.resultIdAccountingResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a terms search request.
+     * Endpoint for terms search response
+     * @param param the request object
+     */
+    public createTermWithHttpInfo(param: CallbacksApiCreateTermRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.createTermWithHttpInfo(param.requestId, param.termsResponse,  options).toPromise();
     }
 
     /**
@@ -220,8 +257,26 @@ export class ObjectCallbacksApi {
      * Endpoint for customer search response
      * @param param the request object
      */
+    public doCustomerSearchWithHttpInfo(param: CallbacksApiDoCustomerSearchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doCustomerSearchWithHttpInfo(param.requestId, param.customerSearchResponseExternal,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a customer search request.
+     * Endpoint for customer search response
+     * @param param the request object
+     */
     public doCustomerSearch(param: CallbacksApiDoCustomerSearchRequest, options?: Configuration): Promise<void> {
         return this.api.doCustomerSearch(param.requestId, param.customerSearchResponseExternal,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a invoice search request.
+     * Endpoint for invoice search response
+     * @param param the request object
+     */
+    public doInvoiceSearchWithHttpInfo(param: CallbacksApiDoInvoiceSearchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doInvoiceSearchWithHttpInfo(param.requestId, param.invoiceSearchResponse,  options).toPromise();
     }
 
     /**
@@ -238,8 +293,26 @@ export class ObjectCallbacksApi {
      * Endpoint for product search response
      * @param param the request object
      */
+    public doProductSearchWithHttpInfo(param: CallbacksApiDoProductSearchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doProductSearchWithHttpInfo(param.requestId, param.productSearchResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a product search request.
+     * Endpoint for product search response
+     * @param param the request object
+     */
     public doProductSearch(param: CallbacksApiDoProductSearchRequest, options?: Configuration): Promise<void> {
         return this.api.doProductSearch(param.requestId, param.productSearchResponse,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a taxes search request.
+     * Endpoint for taxes search response
+     * @param param the request object
+     */
+    public doTaxSearchWithHttpInfo(param: CallbacksApiDoTaxSearchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doTaxSearchWithHttpInfo(param.requestId, param.taxSearchResponse,  options).toPromise();
     }
 
     /**
@@ -256,8 +329,26 @@ export class ObjectCallbacksApi {
      * Endpoint for invoice get-by-id response
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: CallbacksApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.getByIdWithHttpInfo(param.requestId, param.invoicesResponseExternal,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the response to a invoice get-by-id request.
+     * Endpoint for invoice get-by-id response
+     * @param param the request object
+     */
     public getById(param: CallbacksApiGetByIdRequest, options?: Configuration): Promise<void> {
         return this.api.getById(param.requestId, param.invoicesResponseExternal,  options).toPromise();
+    }
+
+    /**
+     * Call this endpoint with the PDF content of a requested invoice.
+     * Endpoint for PDF content of invoice
+     * @param param the request object
+     */
+    public invoicePdfWithHttpInfo(param: CallbacksApiInvoicePdfRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.invoicePdfWithHttpInfo(param.requestId, param.invoicePdfResponse,  options).toPromise();
     }
 
     /**
@@ -343,6 +434,15 @@ export class ObjectInvoiceApi {
      * Records an invoice payment
      * @param param the request object
      */
+    public createPaymentWithHttpInfo(param: InvoiceApiCreatePaymentRequest, options?: Configuration): Promise<HttpInfo<InvoiceUpdateResponse>> {
+        return this.api.createPaymentWithHttpInfo(param.invoiceId, param.invoiceCreatePaymentRequest, param.accountId,  options).toPromise();
+    }
+
+    /**
+     * Records an payment against an invoice.
+     * Records an invoice payment
+     * @param param the request object
+     */
     public createPayment(param: InvoiceApiCreatePaymentRequest, options?: Configuration): Promise<InvoiceUpdateResponse> {
         return this.api.createPayment(param.invoiceId, param.invoiceCreatePaymentRequest, param.accountId,  options).toPromise();
     }
@@ -352,8 +452,26 @@ export class ObjectInvoiceApi {
      * Get invoice data
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: InvoiceApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<InvoiceReadResponse>> {
+        return this.api.getByIdWithHttpInfo(param.invoiceId, param.accountId,  options).toPromise();
+    }
+
+    /**
+     * Returns invoice data for an Accounting account from the specified ID
+     * Get invoice data
+     * @param param the request object
+     */
     public getById(param: InvoiceApiGetByIdRequest, options?: Configuration): Promise<InvoiceReadResponse> {
         return this.api.getById(param.invoiceId, param.accountId,  options).toPromise();
+    }
+
+    /**
+     * Updates an Invoice by the given ID.
+     * Update an invoice
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: InvoiceApiUpdateRequest, options?: Configuration): Promise<HttpInfo<InvoiceUpdateResponse>> {
+        return this.api.updateWithHttpInfo(param.invoiceId, param.accountId, param.invoiceUpdateRequest,  options).toPromise();
     }
 
     /**
@@ -406,8 +524,26 @@ export class ObjectSettingsApi {
      * Get URL settings
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: SettingsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<AccountingAppSettings>> {
+        return this.api.getByIdWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Returns the URL settings for an accounting app with the specified ID.
+     * Get URL settings
+     * @param param the request object
+     */
     public getById(param: SettingsApiGetByIdRequest, options?: Configuration): Promise<AccountingAppSettings> {
         return this.api.getById(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Add/Update the URL settings for an accounting app with the specified ID.  All URLs must use the `https` protocol.
+     * Add/Update URL Settings
+     * @param param the request object
+     */
+    public replaceWithHttpInfo(param: SettingsApiReplaceRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.replaceWithHttpInfo(param.appId, param.accountingAppSettings,  options).toPromise();
     }
 
     /**
@@ -462,7 +598,16 @@ export class ObjectSyncApi {
     }
 
     /**
-     * Imports contacts' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Imports contacts\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Import contacts
+     * @param param the request object
+     */
+    public createContactWithHttpInfo(param: SyncApiCreateContactRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        return this.api.createContactWithHttpInfo(param.appId, param.syncContactsRequest,  options).toPromise();
+    }
+
+    /**
+     * Imports contacts\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
      * Import contacts
      * @param param the request object
      */
@@ -471,7 +616,16 @@ export class ObjectSyncApi {
     }
 
     /**
-     * Imports products' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Imports products\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
+     * Import products
+     * @param param the request object
+     */
+    public createProductWithHttpInfo(param: SyncApiCreateProductRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        return this.api.createProductWithHttpInfo(param.appId, param.syncProductsRequest,  options).toPromise();
+    }
+
+    /**
+     * Imports products\' properties from an external accounting system to HubSpot. Import details, including property mappings, must be configured previously in HubSpot infrastructure.
      * Import products
      * @param param the request object
      */
@@ -514,8 +668,26 @@ export class ObjectUserAccountsApi {
      * Delete user account
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: UserAccountsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.accountId,  options).toPromise();
+    }
+
+    /**
+     * Deletes a user account from HubSpot, meaning that HubSpot will no longer send requests to the external accounting system for this user.
+     * Delete user account
+     * @param param the request object
+     */
     public archive(param: UserAccountsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.accountId,  options).toPromise();
+    }
+
+    /**
+     * Creates an account which contains the information about the account in the external accounting system.  This *must* be called after a user connects their HubSpot account to the external accounting system, as there is no other way for HubSpot to obtain the external account details.
+     * Create a user account
+     * @param param the request object
+     */
+    public replaceWithHttpInfo(param: UserAccountsApiReplaceRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.replaceWithHttpInfo(param.createUserAccountRequestExternal,  options).toPromise();
     }
 
     /**

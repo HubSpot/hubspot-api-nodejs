@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
@@ -74,6 +75,15 @@ export class ObjectBatchApi {
      * Archive a batch of properties
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.batchInputPropertyName,  options).toPromise();
+    }
+
+    /**
+     * Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
+     * Archive a batch of properties
+     * @param param the request object
+     */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.batchInputPropertyName,  options).toPromise();
     }
@@ -83,8 +93,26 @@ export class ObjectBatchApi {
      * Create a batch of properties
      * @param param the request object
      */
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+        return this.api.createWithHttpInfo(param.objectType, param.batchInputPropertyCreate,  options).toPromise();
+    }
+
+    /**
+     * Create a batch of properties using the same rules as when creating an individual property.
+     * Create a batch of properties
+     * @param param the request object
+     */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         return this.api.create(param.objectType, param.batchInputPropertyCreate,  options).toPromise();
+    }
+
+    /**
+     * Read a provided list of properties.
+     * Read a batch of properties
+     * @param param the request object
+     */
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+        return this.api.readWithHttpInfo(param.objectType, param.batchReadInputPropertyName,  options).toPromise();
     }
 
     /**
@@ -212,8 +240,26 @@ export class ObjectCoreApi {
      * Archive a property
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: CoreApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.propertyName,  options).toPromise();
+    }
+
+    /**
+     * Move a property identified by {propertyName} to the recycling bin.
+     * Archive a property
+     * @param param the request object
+     */
     public archive(param: CoreApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.propertyName,  options).toPromise();
+    }
+
+    /**
+     * Create and return a copy of a new property for the specified object type.
+     * Create a property
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: CoreApiCreateRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+        return this.api.createWithHttpInfo(param.objectType, param.propertyCreate,  options).toPromise();
     }
 
     /**
@@ -230,6 +276,15 @@ export class ObjectCoreApi {
      * Read all properties
      * @param param the request object
      */
+    public getAllWithHttpInfo(param: CoreApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.objectType, param.archived, param.properties,  options).toPromise();
+    }
+
+    /**
+     * Read all existing properties for the specified object type and HubSpot account.
+     * Read all properties
+     * @param param the request object
+     */
     public getAll(param: CoreApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyNoPaging> {
         return this.api.getAll(param.objectType, param.archived, param.properties,  options).toPromise();
     }
@@ -239,8 +294,26 @@ export class ObjectCoreApi {
      * Read a property
      * @param param the request object
      */
+    public getByNameWithHttpInfo(param: CoreApiGetByNameRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+        return this.api.getByNameWithHttpInfo(param.objectType, param.propertyName, param.archived, param.properties,  options).toPromise();
+    }
+
+    /**
+     * Read a property identified by {propertyName}.
+     * Read a property
+     * @param param the request object
+     */
     public getByName(param: CoreApiGetByNameRequest, options?: Configuration): Promise<Property> {
         return this.api.getByName(param.objectType, param.propertyName, param.archived, param.properties,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
+     * Update a property
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: CoreApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+        return this.api.updateWithHttpInfo(param.objectType, param.propertyName, param.propertyUpdate,  options).toPromise();
     }
 
     /**
@@ -344,8 +417,26 @@ export class ObjectGroupsApi {
      * Archive a property group
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: GroupsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.groupName,  options).toPromise();
+    }
+
+    /**
+     * Move a property group identified by {groupName} to the recycling bin.
+     * Archive a property group
+     * @param param the request object
+     */
     public archive(param: GroupsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.groupName,  options).toPromise();
+    }
+
+    /**
+     * Create and return a copy of a new property group.
+     * Create a property group
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: GroupsApiCreateRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+        return this.api.createWithHttpInfo(param.objectType, param.propertyGroupCreate,  options).toPromise();
     }
 
     /**
@@ -362,6 +453,15 @@ export class ObjectGroupsApi {
      * Read all property groups
      * @param param the request object
      */
+    public getAllWithHttpInfo(param: GroupsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyGroupNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.objectType,  options).toPromise();
+    }
+
+    /**
+     * Read all existing property groups for the specified object type and HubSpot account.
+     * Read all property groups
+     * @param param the request object
+     */
     public getAll(param: GroupsApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyGroupNoPaging> {
         return this.api.getAll(param.objectType,  options).toPromise();
     }
@@ -371,8 +471,26 @@ export class ObjectGroupsApi {
      * Read a property group
      * @param param the request object
      */
+    public getByNameWithHttpInfo(param: GroupsApiGetByNameRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+        return this.api.getByNameWithHttpInfo(param.objectType, param.groupName,  options).toPromise();
+    }
+
+    /**
+     * Read a property group identified by {groupName}.
+     * Read a property group
+     * @param param the request object
+     */
     public getByName(param: GroupsApiGetByNameRequest, options?: Configuration): Promise<PropertyGroup> {
         return this.api.getByName(param.objectType, param.groupName,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
+     * Update a property group
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: GroupsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+        return this.api.updateWithHttpInfo(param.objectType, param.groupName, param.propertyGroupUpdate,  options).toPromise();
     }
 
     /**

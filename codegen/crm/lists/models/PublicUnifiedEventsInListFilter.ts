@@ -62,5 +62,7 @@ export class PublicUnifiedEventsInListFilter {
 }
 
 
-export type PublicUnifiedEventsInListFilterFilterTypeEnum = "UNIFIED_EVENTS_IN_LIST" ;
+export enum PublicUnifiedEventsInListFilterFilterTypeEnum {
+    UnifiedEventsInList = 'UNIFIED_EVENTS_IN_LIST'
+}
 

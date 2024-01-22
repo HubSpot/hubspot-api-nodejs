@@ -12,7 +12,7 @@
 
 
 /**
-* An input used to create or replace a pipeline stage's definition.
+* An input used to create or replace a pipeline stage\'s definition.
 */
 export class PipelineStageInput {
     /**
@@ -24,7 +24,7 @@ export class PipelineStageInput {
     */
     'displayOrder': number;
     /**
-    * A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
+    * A label used to organize pipeline stages in HubSpot\'s UI. Each pipeline stage\'s label must be unique within that pipeline.
     */
     'label': string;
 

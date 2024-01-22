@@ -75,5 +75,7 @@ export class PublicYearReference {
 }
 
 
-export type PublicYearReferenceReferenceTypeEnum = "YEAR" ;
+export enum PublicYearReferenceReferenceTypeEnum {
+    Year = 'YEAR'
+}
 

@@ -54,5 +54,7 @@ export class PublicStringPropertyOperation {
 }
 
 
-export type PublicStringPropertyOperationOperationTypeEnum = "STRING" ;
+export enum PublicStringPropertyOperationOperationTypeEnum {
+    String = 'STRING'
+}
 

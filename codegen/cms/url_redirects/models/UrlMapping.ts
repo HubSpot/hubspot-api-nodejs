@@ -34,7 +34,7 @@ export class UrlMapping {
     */
     'destination': string;
     /**
-    * Whether the URL redirect mapping should apply only if a live page on the URL isn't found. If False, the URL redirect mapping will take precedence over any existing page.
+    * Whether the URL redirect mapping should apply only if a live page on the URL isn\'t found. If False, the URL redirect mapping will take precedence over any existing page.
     */
     'isOnlyAfterNotFound': boolean;
     /**

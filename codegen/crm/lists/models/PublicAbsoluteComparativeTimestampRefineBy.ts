@@ -47,5 +47,7 @@ export class PublicAbsoluteComparativeTimestampRefineBy {
 }
 
 
-export type PublicAbsoluteComparativeTimestampRefineByTypeEnum = "ABSOLUTE_COMPARATIVE" ;
+export enum PublicAbsoluteComparativeTimestampRefineByTypeEnum {
+    AbsoluteComparative = 'ABSOLUTE_COMPARATIVE'
+}
 

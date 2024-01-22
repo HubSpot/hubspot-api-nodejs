@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
@@ -443,7 +444,7 @@ export interface LandingPagesApiGetPreviousVersionsRequest {
 
 export interface LandingPagesApiPushLiveRequest {
     /**
-     * The id of the Landing Page for which it&#39;s draft will be pushed live.
+     * The id of the Landing Page for which it\&#39;s draft will be pushed live.
      * @type string
      * @memberof LandingPagesApipushLive
      */
@@ -491,7 +492,7 @@ export interface LandingPagesApiRerunPreviousABTestRequest {
 
 export interface LandingPagesApiResetDraftRequest {
     /**
-     * The id of the Landing Page for which it&#39;s draft will be reset.
+     * The id of the Landing Page for which it\&#39;s draft will be reset.
      * @type string
      * @memberof LandingPagesApiresetDraft
      */
@@ -669,8 +670,26 @@ export class ObjectLandingPagesApi {
      * Delete a Landing Page
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: LandingPagesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Landing Page object identified by the id in the path.
+     * Delete a Landing Page
+     * @param param the request object
+     */
     public archive(param: LandingPagesApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Landing Page objects identified in the request body. Note: This is not the same as the dashboard `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to true.
+     * Delete a batch of Landing Pages
+     * @param param the request object
+     */
+    public archiveBatchWithHttpInfo(param: LandingPagesApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -687,8 +706,26 @@ export class ObjectLandingPagesApi {
      * Delete a Folder
      * @param param the request object
      */
+    public archiveFolderWithHttpInfo(param: LandingPagesApiArchiveFolderRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveFolderWithHttpInfo(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Folder object identified by the id in the path.
+     * Delete a Folder
+     * @param param the request object
+     */
     public archiveFolder(param: LandingPagesApiArchiveFolderRequest, options?: Configuration): Promise<void> {
         return this.api.archiveFolder(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Folder objects identified in the request body.
+     * Delete a batch of Folders
+     * @param param the request object
+     */
+    public archiveFoldersWithHttpInfo(param: LandingPagesApiArchiveFoldersRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveFoldersWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -705,8 +742,26 @@ export class ObjectLandingPagesApi {
      * Attach a landing page to a multi-language group
      * @param param the request object
      */
+    public attachToLangGroupWithHttpInfo(param: LandingPagesApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Attach a landing page to a multi-language group.
+     * Attach a landing page to a multi-language group
+     * @param param the request object
+     */
     public attachToLangGroup(param: LandingPagesApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Clone a Landing Page
+     * Clone a Landing Page
+     * @param param the request object
+     */
+    public cloneWithHttpInfo(param: LandingPagesApiCloneRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
     /**
@@ -723,8 +778,26 @@ export class ObjectLandingPagesApi {
      * Create a new Landing Page
      * @param param the request object
      */
+    public createWithHttpInfo(param: LandingPagesApiCreateRequest, options?: Configuration): Promise<HttpInfo<void | Page>> {
+        return this.api.createWithHttpInfo(param.page,  options).toPromise();
+    }
+
+    /**
+     * Create a new Landing Page
+     * Create a new Landing Page
+     * @param param the request object
+     */
     public create(param: LandingPagesApiCreateRequest, options?: Configuration): Promise<void | Page> {
         return this.api.create(param.page,  options).toPromise();
+    }
+
+    /**
+     * Create a new A/B test variation based on the information provided in the request body. 
+     * Create a new A/B test variation
+     * @param param the request object
+     */
+    public createABTestVariationWithHttpInfo(param: LandingPagesApiCreateABTestVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.createABTestVariationWithHttpInfo(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
     /**
@@ -741,8 +814,26 @@ export class ObjectLandingPagesApi {
      * Create a batch of Landing Pages
      * @param param the request object
      */
+    public createBatchWithHttpInfo(param: LandingPagesApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.createBatchWithHttpInfo(param.batchInputPage,  options).toPromise();
+    }
+
+    /**
+     * Create the Landing Page objects detailed in the request body.
+     * Create a batch of Landing Pages
+     * @param param the request object
+     */
     public createBatch(param: LandingPagesApiCreateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.createBatch(param.batchInputPage,  options).toPromise();
+    }
+
+    /**
+     * Create a new Folder
+     * Create a new Folder
+     * @param param the request object
+     */
+    public createFolderWithHttpInfo(param: LandingPagesApiCreateFolderRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+        return this.api.createFolderWithHttpInfo(param.contentFolder,  options).toPromise();
     }
 
     /**
@@ -759,8 +850,26 @@ export class ObjectLandingPagesApi {
      * Create a batch of Folders
      * @param param the request object
      */
+    public createFoldersWithHttpInfo(param: LandingPagesApiCreateFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        return this.api.createFoldersWithHttpInfo(param.batchInputContentFolder,  options).toPromise();
+    }
+
+    /**
+     * Create the Folder objects detailed in the request body.
+     * Create a batch of Folders
+     * @param param the request object
+     */
     public createFolders(param: LandingPagesApiCreateFoldersRequest, options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
         return this.api.createFolders(param.batchInputContentFolder,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing landing page
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariationWithHttpInfo(param: LandingPagesApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.createLangVariationWithHttpInfo(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
     /**
@@ -777,8 +886,26 @@ export class ObjectLandingPagesApi {
      * Detach a landing page from a multi-language group
      * @param param the request object
      */
+    public detachFromLangGroupWithHttpInfo(param: LandingPagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a landing page from a multi-language group.
+     * Detach a landing page from a multi-language group
+     * @param param the request object
+     */
     public detachFromLangGroup(param: LandingPagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * End an active A/B test and designate a winner.
+     * End an active A/B test
+     * @param param the request object
+     */
+    public endActiveABTestWithHttpInfo(param: LandingPagesApiEndActiveABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.endActiveABTestWithHttpInfo(param.abTestEndRequestVNext,  options).toPromise();
     }
 
     /**
@@ -795,8 +922,26 @@ export class ObjectLandingPagesApi {
      * Retrieve a Landing Page
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: LandingPagesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Landing Page object identified by the id in the path.
+     * Retrieve a Landing Page
+     * @param param the request object
+     */
     public getById(param: LandingPagesApiGetByIdRequest, options?: Configuration): Promise<Page> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the full draft version of the Landing Page.
+     * Retrieve the full draft version of the Landing Page
+     * @param param the request object
+     */
+    public getDraftByIdWithHttpInfo(param: LandingPagesApiGetDraftByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.getDraftByIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
     /**
@@ -813,8 +958,26 @@ export class ObjectLandingPagesApi {
      * Retrieve a Folder
      * @param param the request object
      */
+    public getFolderByIdWithHttpInfo(param: LandingPagesApiGetFolderByIdRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+        return this.api.getFolderByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Folder object identified by the id in the path.
+     * Retrieve a Folder
+     * @param param the request object
+     */
     public getFolderById(param: LandingPagesApiGetFolderByIdRequest, options?: Configuration): Promise<ContentFolder> {
         return this.api.getFolderById(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a previous version of a Folder
+     * Retrieves a previous version of a Folder
+     * @param param the request object
+     */
+    public getFolderPreviousVersionWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionContentFolder>> {
+        return this.api.getFolderPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -831,8 +994,26 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Folder
      * @param param the request object
      */
+    public getFolderPreviousVersionsWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionContentFolder>> {
+        return this.api.getFolderPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Retrieves all the previous versions of a Folder.
+     * Retrieves all the previous versions of a Folder
+     * @param param the request object
+     */
     public getFolderPreviousVersions(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionContentFolder> {
         return this.api.getFolderPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Get the list of Landing Page Folders. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
+     * Get all Landing Page Folders
+     * @param param the request object
+     */
+    public getFoldersPageWithHttpInfo(param: LandingPagesApiGetFoldersPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalContentFolderForwardPaging>> {
+        return this.api.getFoldersPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
     /**
@@ -849,8 +1030,26 @@ export class ObjectLandingPagesApi {
      * Get all Landing Pages
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: LandingPagesApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Get the list of landing pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
+     * Get all Landing Pages
+     * @param param the request object
+     */
     public getPage(param: LandingPagesApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a previous version of a Landing Page
+     * Retrieves a previous version of a Landing Page
+     * @param param the request object
+     */
+    public getPreviousVersionWithHttpInfo(param: LandingPagesApiGetPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionPage>> {
+        return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -867,8 +1066,26 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Landing Page
      * @param param the request object
      */
+    public getPreviousVersionsWithHttpInfo(param: LandingPagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+        return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Retrieves all the previous versions of a Landing Page.
+     * Retrieves all the previous versions of a Landing Page
+     * @param param the request object
+     */
     public getPreviousVersions(param: LandingPagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Take any changes from the draft version of the Landing Page and apply them to the live version.
+     * Push Landing Page draft edits live
+     * @param param the request object
+     */
+    public pushLiveWithHttpInfo(param: LandingPagesApiPushLiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.pushLiveWithHttpInfo(param.objectId,  options).toPromise();
     }
 
     /**
@@ -885,8 +1102,26 @@ export class ObjectLandingPagesApi {
      * Retrieve a batch of Landing Pages
      * @param param the request object
      */
+    public readBatchWithHttpInfo(param: LandingPagesApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Landing Page objects identified in the request body.
+     * Retrieve a batch of Landing Pages
+     * @param param the request object
+     */
     public readBatch(param: LandingPagesApiReadBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update the Folder objects identified in the request body.
+     * Retrieve a batch of Folders
+     * @param param the request object
+     */
+    public readFoldersWithHttpInfo(param: LandingPagesApiReadFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        return this.api.readFoldersWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
     /**
@@ -903,8 +1138,26 @@ export class ObjectLandingPagesApi {
      * Rerun a previous A/B test
      * @param param the request object
      */
+    public rerunPreviousABTestWithHttpInfo(param: LandingPagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.rerunPreviousABTestWithHttpInfo(param.abTestRerunRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Rerun a previous A/B test.
+     * Rerun a previous A/B test
+     * @param param the request object
+     */
     public rerunPreviousABTest(param: LandingPagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<void> {
         return this.api.rerunPreviousABTest(param.abTestRerunRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Discards any edits and resets the draft to the live version.
+     * Reset the Landing Page draft to the live version
+     * @param param the request object
+     */
+    public resetDraftWithHttpInfo(param: LandingPagesApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.resetDraftWithHttpInfo(param.objectId,  options).toPromise();
     }
 
     /**
@@ -921,8 +1174,26 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Folder
      * @param param the request object
      */
+    public restoreFolderPreviousVersionWithHttpInfo(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+        return this.api.restoreFolderPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a Folder and restores it.
+     * Restore a previous version of a Folder
+     * @param param the request object
+     */
     public restoreFolderPreviousVersion(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: Configuration): Promise<ContentFolder> {
         return this.api.restoreFolderPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a Landing Page and restores it.
+     * Restore a previous version of a Landing Page
+     * @param param the request object
+     */
+    public restorePreviousVersionWithHttpInfo(param: LandingPagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -939,8 +1210,26 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Landing Page, to the draft version of the Landing Page
      * @param param the request object
      */
+    public restorePreviousVersionToDraftWithHttpInfo(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a Landing Page, sets it as the new draft version of the Landing Page.
+     * Restore a previous version of a Landing Page, to the draft version of the Landing Page
+     * @param param the request object
+     */
     public restorePreviousVersionToDraft(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<Page> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Schedule a Landing Page to be Published
+     * Schedule a Landing Page to be Published
+     * @param param the request object
+     */
+    public scheduleWithHttpInfo(param: LandingPagesApiScheduleRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.scheduleWithHttpInfo(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
     /**
@@ -957,8 +1246,26 @@ export class ObjectLandingPagesApi {
      * Set a new primary language
      * @param param the request object
      */
+    public setLangPrimaryWithHttpInfo(param: LandingPagesApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Set a landing page as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param param the request object
+     */
     public setLangPrimary(param: LandingPagesApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates a single Landing Page object identified by the id in the path. You only need to specify the column values that you are modifying. 
+     * Update a Landing Page
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: LandingPagesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.updateWithHttpInfo(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
     /**
@@ -975,8 +1282,26 @@ export class ObjectLandingPagesApi {
      * Update a batch of Landing Pages
      * @param param the request object
      */
+    public updateBatchWithHttpInfo(param: LandingPagesApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update the Landing Page objects identified in the request body.
+     * Update a batch of Landing Pages
+     * @param param the request object
+     */
     public updateBatch(param: LandingPagesApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates the draft version of a single Landing Page object identified by the id in the path. You only need to specify the column values that you are modifying. 
+     * Update a Landing Page draft
+     * @param param the request object
+     */
+    public updateDraftWithHttpInfo(param: LandingPagesApiUpdateDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.updateDraftWithHttpInfo(param.objectId, param.page,  options).toPromise();
     }
 
     /**
@@ -993,6 +1318,15 @@ export class ObjectLandingPagesApi {
      * Update a Folder
      * @param param the request object
      */
+    public updateFolderWithHttpInfo(param: LandingPagesApiUpdateFolderRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+        return this.api.updateFolderWithHttpInfo(param.objectId, param.contentFolder, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates a single Folder object identified by the id in the path. You only need to specify the column values that you are modifying. 
+     * Update a Folder
+     * @param param the request object
+     */
     public updateFolder(param: LandingPagesApiUpdateFolderRequest, options?: Configuration): Promise<ContentFolder> {
         return this.api.updateFolder(param.objectId, param.contentFolder, param.archived,  options).toPromise();
     }
@@ -1002,8 +1336,26 @@ export class ObjectLandingPagesApi {
      * Update a batch of Folders
      * @param param the request object
      */
+    public updateFoldersWithHttpInfo(param: LandingPagesApiUpdateFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        return this.api.updateFoldersWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update the Folder objects identified in the request body.
+     * Update a batch of Folders
+     * @param param the request object
+     */
     public updateFolders(param: LandingPagesApiUpdateFoldersRequest, options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
         return this.api.updateFolders(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each landing page in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangsWithHttpInfo(param: LandingPagesApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1259,7 +1611,7 @@ export interface SitePagesApiGetPreviousVersionsRequest {
 
 export interface SitePagesApiPushLiveRequest {
     /**
-     * The id of the Site Page for which it&#39;s draft will be pushed live.
+     * The id of the Site Page for which it\&#39;s draft will be pushed live.
      * @type string
      * @memberof SitePagesApipushLive
      */
@@ -1292,7 +1644,7 @@ export interface SitePagesApiRerunPreviousABTestRequest {
 
 export interface SitePagesApiResetDraftRequest {
     /**
-     * The id of the Site Page for which it&#39;s draft will be reset.
+     * The id of the Site Page for which it\&#39;s draft will be reset.
      * @type string
      * @memberof SitePagesApiresetDraft
      */
@@ -1419,8 +1771,26 @@ export class ObjectSitePagesApi {
      * Delete a Site Page
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: SitePagesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Site Page object identified by the id in the path.
+     * Delete a Site Page
+     * @param param the request object
+     */
     public archive(param: SitePagesApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Site Page objects identified in the request body. Note: This is not the same as the dashboard `archive` function. To perform a dashboard `archive` send an normal update with the `archivedInDashboard` field set to true.
+     * Delete a batch of Site Pages
+     * @param param the request object
+     */
+    public archiveBatchWithHttpInfo(param: SitePagesApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -1437,8 +1807,26 @@ export class ObjectSitePagesApi {
      * Attach a site page to a multi-language group
      * @param param the request object
      */
+    public attachToLangGroupWithHttpInfo(param: SitePagesApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Attach a site page to a multi-language group.
+     * Attach a site page to a multi-language group
+     * @param param the request object
+     */
     public attachToLangGroup(param: SitePagesApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Clone a Site Page
+     * Clone a Site Page
+     * @param param the request object
+     */
+    public cloneWithHttpInfo(param: SitePagesApiCloneRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1455,8 +1843,26 @@ export class ObjectSitePagesApi {
      * Create a new Site Page
      * @param param the request object
      */
+    public createWithHttpInfo(param: SitePagesApiCreateRequest, options?: Configuration): Promise<HttpInfo<void | Page>> {
+        return this.api.createWithHttpInfo(param.page,  options).toPromise();
+    }
+
+    /**
+     * Create a new Site Page
+     * Create a new Site Page
+     * @param param the request object
+     */
     public create(param: SitePagesApiCreateRequest, options?: Configuration): Promise<void | Page> {
         return this.api.create(param.page,  options).toPromise();
+    }
+
+    /**
+     * Create a new A/B test variation based on the information provided in the request body. 
+     * Create a new A/B test variation
+     * @param param the request object
+     */
+    public createABTestVariationWithHttpInfo(param: SitePagesApiCreateABTestVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.createABTestVariationWithHttpInfo(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1473,8 +1879,26 @@ export class ObjectSitePagesApi {
      * Create a batch of Site Pages
      * @param param the request object
      */
+    public createBatchWithHttpInfo(param: SitePagesApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.createBatchWithHttpInfo(param.batchInputPage,  options).toPromise();
+    }
+
+    /**
+     * Create the Site Page objects detailed in the request body.
+     * Create a batch of Site Pages
+     * @param param the request object
+     */
     public createBatch(param: SitePagesApiCreateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.createBatch(param.batchInputPage,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing site page
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariationWithHttpInfo(param: SitePagesApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.createLangVariationWithHttpInfo(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1491,8 +1915,26 @@ export class ObjectSitePagesApi {
      * Detach a site page from a multi-language group
      * @param param the request object
      */
+    public detachFromLangGroupWithHttpInfo(param: SitePagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a site page from a multi-language group.
+     * Detach a site page from a multi-language group
+     * @param param the request object
+     */
     public detachFromLangGroup(param: SitePagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * End an active A/B test and designate a winner.
+     * End an active A/B test
+     * @param param the request object
+     */
+    public endActiveABTestWithHttpInfo(param: SitePagesApiEndActiveABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.endActiveABTestWithHttpInfo(param.abTestEndRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1509,8 +1951,26 @@ export class ObjectSitePagesApi {
      * Retrieve a Site Page
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: SitePagesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Site Page object identified by the id in the path.
+     * Retrieve a Site Page
+     * @param param the request object
+     */
     public getById(param: SitePagesApiGetByIdRequest, options?: Configuration): Promise<Page> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the full draft version of the Site Page.
+     * Retrieve the full draft version of the Site Page
+     * @param param the request object
+     */
+    public getDraftByIdWithHttpInfo(param: SitePagesApiGetDraftByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.getDraftByIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
     /**
@@ -1527,8 +1987,26 @@ export class ObjectSitePagesApi {
      * Get all Site Pages
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: SitePagesApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Get the list of site pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
+     * Get all Site Pages
+     * @param param the request object
+     */
     public getPage(param: SitePagesApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a previous version of a Site Page
+     * Retrieves a previous version of a Site Page
+     * @param param the request object
+     */
+    public getPreviousVersionWithHttpInfo(param: SitePagesApiGetPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionPage>> {
+        return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -1545,8 +2023,26 @@ export class ObjectSitePagesApi {
      * Retrieves all the previous versions of a Site Page
      * @param param the request object
      */
+    public getPreviousVersionsWithHttpInfo(param: SitePagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+        return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Retrieves all the previous versions of a Site Page.
+     * Retrieves all the previous versions of a Site Page
+     * @param param the request object
+     */
     public getPreviousVersions(param: SitePagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Take any changes from the draft version of the Site Page and apply them to the live version.
+     * Push Site Page draft edits live
+     * @param param the request object
+     */
+    public pushLiveWithHttpInfo(param: SitePagesApiPushLiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.pushLiveWithHttpInfo(param.objectId,  options).toPromise();
     }
 
     /**
@@ -1563,8 +2059,26 @@ export class ObjectSitePagesApi {
      * Retrieve a batch of Site Pages
      * @param param the request object
      */
+    public readBatchWithHttpInfo(param: SitePagesApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Site Page objects identified in the request body.
+     * Retrieve a batch of Site Pages
+     * @param param the request object
+     */
     public readBatch(param: SitePagesApiReadBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Rerun a previous A/B test.
+     * Rerun a previous A/B test
+     * @param param the request object
+     */
+    public rerunPreviousABTestWithHttpInfo(param: SitePagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.rerunPreviousABTestWithHttpInfo(param.abTestRerunRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1581,8 +2095,26 @@ export class ObjectSitePagesApi {
      * Reset the Site Page draft to the live version
      * @param param the request object
      */
+    public resetDraftWithHttpInfo(param: SitePagesApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.resetDraftWithHttpInfo(param.objectId,  options).toPromise();
+    }
+
+    /**
+     * Discards any edits and resets the draft to the live version.
+     * Reset the Site Page draft to the live version
+     * @param param the request object
+     */
     public resetDraft(param: SitePagesApiResetDraftRequest, options?: Configuration): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a Site Page and restores it.
+     * Restore a previous version of a Site Page
+     * @param param the request object
+     */
+    public restorePreviousVersionWithHttpInfo(param: SitePagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
     /**
@@ -1599,8 +2131,26 @@ export class ObjectSitePagesApi {
      * Restore a previous version of a Site Page, to the draft version of the Site Page
      * @param param the request object
      */
+    public restorePreviousVersionToDraftWithHttpInfo(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Takes a specified version of a Site Page, sets it as the new draft version of the Site Page.
+     * Restore a previous version of a Site Page, to the draft version of the Site Page
+     * @param param the request object
+     */
     public restorePreviousVersionToDraft(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<Page> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
+    }
+
+    /**
+     * Schedule a Site Page to be Published
+     * Schedule a Site Page to be Published
+     * @param param the request object
+     */
+    public scheduleWithHttpInfo(param: SitePagesApiScheduleRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.scheduleWithHttpInfo(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
     /**
@@ -1617,8 +2167,26 @@ export class ObjectSitePagesApi {
      * Set a new primary language
      * @param param the request object
      */
+    public setLangPrimaryWithHttpInfo(param: SitePagesApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Set a site page as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param param the request object
+     */
     public setLangPrimary(param: SitePagesApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates a single Site Page object identified by the id in the path. You only need to specify the column values that you are modifying. 
+     * Update a Site Page
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: SitePagesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.updateWithHttpInfo(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
     /**
@@ -1635,6 +2203,15 @@ export class ObjectSitePagesApi {
      * Update a batch of Site Pages
      * @param param the request object
      */
+    public updateBatchWithHttpInfo(param: SitePagesApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update the Site Page objects identified in the request body.
+     * Update a batch of Site Pages
+     * @param param the request object
+     */
     public updateBatch(param: SitePagesApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
@@ -1644,8 +2221,26 @@ export class ObjectSitePagesApi {
      * Update a Site Page draft
      * @param param the request object
      */
+    public updateDraftWithHttpInfo(param: SitePagesApiUpdateDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+        return this.api.updateDraftWithHttpInfo(param.objectId, param.page,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates the draft version of a single Site Page object identified by the id in the path. You only need to specify the column values that you are modifying. 
+     * Update a Site Page draft
+     * @param param the request object
+     */
     public updateDraft(param: SitePagesApiUpdateDraftRequest, options?: Configuration): Promise<Page> {
         return this.api.updateDraft(param.objectId, param.page,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each site page in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangsWithHttpInfo(param: SitePagesApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
     /**

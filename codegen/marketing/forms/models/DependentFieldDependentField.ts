@@ -24,7 +24,7 @@ export class DependentFieldDependentField {
     'hidden': boolean;
     'dependentFields': Array<DependentField>;
     /**
-    * The prompt text showing when the field isn't filled in.
+    * The prompt text showing when the field isn\'t filled in.
     */
     'placeholder'?: string;
     /**
@@ -146,5 +146,7 @@ export class DependentFieldDependentField {
 }
 
 
-export type DependentFieldDependentFieldFieldTypeEnum = "payment_link_radio" ;
+export enum DependentFieldDependentFieldFieldTypeEnum {
+    PaymentLinkRadio = 'payment_link_radio'
+}
 

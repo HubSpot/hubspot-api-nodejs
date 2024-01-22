@@ -83,5 +83,7 @@ export class PublicAssociationInListFilter {
 }
 
 
-export type PublicAssociationInListFilterFilterTypeEnum = "ASSOCIATION" ;
+export enum PublicAssociationInListFilterFilterTypeEnum {
+    Association = 'ASSOCIATION'
+}
 

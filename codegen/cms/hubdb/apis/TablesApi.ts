@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import  FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
@@ -846,10 +846,10 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveTable(response: ResponseContext): Promise<void > {
+     public async archiveTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -865,7 +865,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -878,14 +878,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to cloneDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async cloneDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async cloneDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -901,7 +901,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -914,14 +914,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to createTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async createTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -937,7 +937,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -950,11 +950,11 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to exportDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportDraftTable(response: ResponseContext): Promise<HttpFile > {
+     public async exportDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HttpFile >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -970,7 +970,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HttpFile", "binary"
             ) as HttpFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -983,11 +983,11 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to exportTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async exportTable(response: ResponseContext): Promise<HttpFile > {
+     public async exportTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HttpFile >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1003,7 +1003,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HttpFile", "binary"
             ) as HttpFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1016,14 +1016,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAllDraftTables
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAllDraftTables(response: ResponseContext): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging > {
+     public async getAllDraftTablesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalHubDbTableV3ForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalHubDbTableV3ForwardPaging", ""
             ) as CollectionResponseWithTotalHubDbTableV3ForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1039,7 +1039,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalHubDbTableV3ForwardPaging", ""
             ) as CollectionResponseWithTotalHubDbTableV3ForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1052,14 +1052,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAllTables
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAllTables(response: ResponseContext): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging > {
+     public async getAllTablesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalHubDbTableV3ForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalHubDbTableV3ForwardPaging", ""
             ) as CollectionResponseWithTotalHubDbTableV3ForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1075,7 +1075,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalHubDbTableV3ForwardPaging", ""
             ) as CollectionResponseWithTotalHubDbTableV3ForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1088,14 +1088,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to getDraftTableDetailsById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDraftTableDetailsById(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async getDraftTableDetailsByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1111,7 +1111,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1124,14 +1124,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to getTableDetails
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getTableDetails(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async getTableDetailsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1147,7 +1147,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1160,14 +1160,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to importDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async importDraftTable(response: ResponseContext): Promise<ImportResult > {
+     public async importDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ImportResult >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ImportResult = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ImportResult", ""
             ) as ImportResult;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1183,7 +1183,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ImportResult", ""
             ) as ImportResult;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1196,14 +1196,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to publishDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async publishDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async publishDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1219,7 +1219,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1232,14 +1232,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to resetDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async resetDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async resetDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1255,7 +1255,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1268,14 +1268,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to unpublishTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async unpublishTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async unpublishTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1291,7 +1291,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1304,14 +1304,14 @@ export class TablesApiResponseProcessor {
      * @params response Response returned by the server for a request to updateDraftTable
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateDraftTable(response: ResponseContext): Promise<HubDbTableV3 > {
+     public async updateDraftTableWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HubDbTableV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HubDbTableV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1327,7 +1327,7 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

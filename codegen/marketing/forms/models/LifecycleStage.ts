@@ -17,7 +17,7 @@ export class LifecycleStage {
     */
     'objectTypeId': string;
     /**
-    * The internal name of the contact's lifecycle stage set when submitting a form
+    * The internal name of the contact\'s lifecycle stage set when submitting a form
     */
     'value': string;
 

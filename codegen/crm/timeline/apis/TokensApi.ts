@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -17,7 +17,7 @@ import { TimelineEventTemplateTokenUpdateRequest } from '../models/TimelineEvent
 export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it's still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
+     * This will remove the token from an existing template. Existing events and CRM objects will still retain the token and its mapped object properties, but new ones will not.  The timeline will still display this property for older CRM objects if it\'s still referenced in the template `Markdown`. New events will not.  Any lists or reports referencing deleted tokens will no longer return new contacts, but old ones will still exist in the lists.
      * Removes a token from the event template
      * @param eventTemplateId The event template ID.
      * @param tokenName The token name.
@@ -71,7 +71,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Once you've defined an event template, it's likely that you'll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
+     * Once you\'ve defined an event template, it\'s likely that you\'ll want to define tokens for it as well. You can do this on the event template itself or update individual tokens here.  Event type tokens allow you to attach custom data to events displayed in a timeline or used for list segmentation.  You can also use `objectPropertyName` to associate any CRM object properties. This will allow you to fully build out CRM objects.  Token names should be unique across the template.
      * Adds a token to an existing event template
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
@@ -135,7 +135,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This will update the existing token on an event template. Name and type can't be changed on existing tokens.
+     * This will update the existing token on an event template. Name and type can\'t be changed on existing tokens.
      * Updates an existing token on an event template
      * @param eventTemplateId The event template ID.
      * @param tokenName The token name.
@@ -217,10 +217,10 @@ export class TokensApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -236,7 +236,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -249,14 +249,14 @@ export class TokensApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<TimelineEventTemplateToken > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<TimelineEventTemplateToken >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventTemplateToken", ""
             ) as TimelineEventTemplateToken;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -272,7 +272,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventTemplateToken", ""
             ) as TimelineEventTemplateToken;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -285,14 +285,14 @@ export class TokensApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<TimelineEventTemplateToken > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<TimelineEventTemplateToken >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: TimelineEventTemplateToken = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventTemplateToken", ""
             ) as TimelineEventTemplateToken;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -308,7 +308,7 @@ export class TokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventTemplateToken", ""
             ) as TimelineEventTemplateToken;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

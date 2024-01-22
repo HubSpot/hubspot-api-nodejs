@@ -13,7 +13,7 @@
 import { PipelineStageInput } from '../models/PipelineStageInput';
 
 /**
-* An input used to create or replace a pipeline's definition.
+* An input used to create or replace a pipeline\'s definition.
 */
 export class PipelineInput {
     /**
@@ -25,7 +25,7 @@ export class PipelineInput {
     */
     'stages': Array<PipelineStageInput>;
     /**
-    * A unique label used to organize pipelines in HubSpot's UI
+    * A unique label used to organize pipelines in HubSpot\'s UI
     */
     'label': string;
 

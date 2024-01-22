@@ -21,7 +21,7 @@ export class PublicSubscriptionStatusesResponse {
     */
     'recipient': string;
     /**
-    * A list of all of the contact's subscriptions statuses.
+    * A list of all of the contact\'s subscriptions statuses.
     */
     'subscriptionStatuses': Array<PublicSubscriptionStatus>;
 

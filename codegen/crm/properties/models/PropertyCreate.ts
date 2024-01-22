@@ -14,7 +14,7 @@ import { OptionInput } from '../models/OptionInput';
 
 export class PropertyCreate {
     /**
-    * If true, the property won't be visible and can't be used in HubSpot.
+    * If true, the property won\'t be visible and can\'t be used in HubSpot.
     */
     'hidden'?: boolean;
     /**
@@ -42,7 +42,7 @@ export class PropertyCreate {
     */
     'groupName': string;
     /**
-    * Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
+    * Should be set to \'OWNER\' when \'externalOptions\' is true, which causes the property to dynamically pull option values from the current HubSpot users.
     */
     'referencedObjectType'?: string;
     /**
@@ -58,7 +58,7 @@ export class PropertyCreate {
     */
     'calculationFormula'?: string;
     /**
-    * Whether or not the property's value must be unique. Once set, this can't be changed.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
     'hasUniqueValue'?: boolean;
     /**
@@ -66,7 +66,7 @@ export class PropertyCreate {
     */
     'fieldType': PropertyCreateFieldTypeEnum;
     /**
-    * Applicable only for 'enumeration' type properties.  Should be set to true in conjunction with a 'referencedObjectType' of 'OWNER'.  Otherwise false.
+    * Applicable only for \'enumeration\' type properties.  Should be set to true in conjunction with a \'referencedObjectType\' of \'OWNER\'.  Otherwise false.
     */
     'externalOptions'?: boolean;
 
@@ -167,6 +167,24 @@ export class PropertyCreate {
 }
 
 
-export type PropertyCreateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
-export type PropertyCreateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
+export enum PropertyCreateTypeEnum {
+    String = 'string',
+    Number = 'number',
+    Date = 'date',
+    Datetime = 'datetime',
+    Enumeration = 'enumeration',
+    Bool = 'bool'
+}
+export enum PropertyCreateFieldTypeEnum {
+    Textarea = 'textarea',
+    Text = 'text',
+    Date = 'date',
+    File = 'file',
+    Number = 'number',
+    Select = 'select',
+    Radio = 'radio',
+    Checkbox = 'checkbox',
+    Booleancheckbox = 'booleancheckbox',
+    CalculationEquation = 'calculation_equation'
+}
 

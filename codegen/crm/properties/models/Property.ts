@@ -19,7 +19,7 @@ export class Property {
     */
     'createdUserId'?: string;
     /**
-    * Whether or not the property will be hidden from the HubSpot UI. It's recommended this be set to false for custom properties.
+    * Whether or not the property will be hidden from the HubSpot UI. It\'s recommended this be set to false for custom properties.
     */
     'hidden'?: boolean;
     'modificationMetadata'?: PropertyModificationMetadata;
@@ -68,7 +68,7 @@ export class Property {
     */
     'groupName': string;
     /**
-    * If this property is related to other object(s), they'll be listed here.
+    * If this property is related to other object(s), they\'ll be listed here.
     */
     'referencedObjectType'?: string;
     /**
@@ -84,7 +84,7 @@ export class Property {
     */
     'calculationFormula'?: string;
     /**
-    * Whether or not the property's value must be unique. Once set, this can't be changed.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
     'hasUniqueValue'?: boolean;
     /**

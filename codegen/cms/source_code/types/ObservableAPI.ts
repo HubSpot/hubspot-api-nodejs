@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext, HttpFile } from '../http/http';
+import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -29,7 +29,7 @@ export class ObservableContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public archive(environment: string, path: string, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(environment: string, path: string, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(environment, path, _options);
 
         // build promise chain
@@ -44,8 +44,18 @@ export class ObservableContentApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Deletes the file at the specified path in the specified environment.
+     * Delete a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public archive(environment: string, path: string, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(environment, path, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -55,7 +65,7 @@ export class ObservableContentApi {
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
-    public create(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
+    public createWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<HttpInfo<AssetFileMetadata>> {
         const requestContextPromise = this.requestFactory.create(environment, path, file, _options);
 
         // build promise chain
@@ -70,8 +80,19 @@ export class ObservableContentApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Creates a file at the specified path in the specified environment. Accepts multipart/form-data content type. Throws an error if a file already exists at the specified path.
+     * Create a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param file The file to upload.
+     */
+    public create(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
+        return this.createWithHttpInfo(environment, path, file, _options).pipe(map((apiResponse: HttpInfo<AssetFileMetadata>) => apiResponse.data));
     }
 
     /**
@@ -81,7 +102,7 @@ export class ObservableContentApi {
      * @param path The file system location of the file.
      * @param file The file to upload.
      */
-    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
+    public createOrUpdateWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<HttpInfo<AssetFileMetadata>> {
         const requestContextPromise = this.requestFactory.createOrUpdate(environment, path, file, _options);
 
         // build promise chain
@@ -96,8 +117,19 @@ export class ObservableContentApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrUpdate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrUpdateWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
+     * Create or update a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param file The file to upload.
+     */
+    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Observable<AssetFileMetadata> {
+        return this.createOrUpdateWithHttpInfo(environment, path, file, _options).pipe(map((apiResponse: HttpInfo<AssetFileMetadata>) => apiResponse.data));
     }
 
     /**
@@ -106,7 +138,7 @@ export class ObservableContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public download(environment: string, path: string, _options?: Configuration): Observable<void> {
+    public downloadWithHttpInfo(environment: string, path: string, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.download(environment, path, _options);
 
         // build promise chain
@@ -121,8 +153,18 @@ export class ObservableContentApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.download(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.downloadWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     */
+    public download(environment: string, path: string, _options?: Configuration): Observable<void> {
+        return this.downloadWithHttpInfo(environment, path, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }
@@ -148,7 +190,7 @@ export class ObservableExtractApi {
      * Extracts a zip file
      * @param path The file system location of the zip file.
      */
-    public extractByPath(path: string, _options?: Configuration): Observable<void> {
+    public extractByPathWithHttpInfo(path: string, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.extractByPath(path, _options);
 
         // build promise chain
@@ -163,8 +205,17 @@ export class ObservableExtractApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.extractByPath(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.extractByPathWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
+     * Extracts a zip file
+     * @param path The file system location of the zip file.
+     */
+    public extractByPath(path: string, _options?: Configuration): Observable<void> {
+        return this.extractByPathWithHttpInfo(path, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }
@@ -192,7 +243,7 @@ export class ObservableMetadataApi {
      * @param path The file system location of the file.
      * @param properties 
      */
-    public get(environment: string, path: string, properties?: string, _options?: Configuration): Observable<AssetFileMetadata> {
+    public getWithHttpInfo(environment: string, path: string, properties?: string, _options?: Configuration): Observable<HttpInfo<AssetFileMetadata>> {
         const requestContextPromise = this.requestFactory.get(environment, path, properties, _options);
 
         // build promise chain
@@ -207,8 +258,19 @@ export class ObservableMetadataApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Gets the metadata object for the file at the specified path in the specified environment.
+     * Get the metadata for a file
+     * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * @param path The file system location of the file.
+     * @param properties 
+     */
+    public get(environment: string, path: string, properties?: string, _options?: Configuration): Observable<AssetFileMetadata> {
+        return this.getWithHttpInfo(environment, path, properties, _options).pipe(map((apiResponse: HttpInfo<AssetFileMetadata>) => apiResponse.data));
     }
 
 }
@@ -232,7 +294,7 @@ export class ObservableSourceCodeExtractApi {
     /**
      * @param fileExtractRequest 
      */
-    public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Observable<TaskLocator> {
+    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: Configuration): Observable<HttpInfo<TaskLocator>> {
         const requestContextPromise = this.requestFactory.doAsync(fileExtractRequest, _options);
 
         // build promise chain
@@ -247,14 +309,21 @@ export class ObservableSourceCodeExtractApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doAsync(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doAsyncWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param fileExtractRequest 
+     */
+    public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Observable<TaskLocator> {
+        return this.doAsyncWithHttpInfo(fileExtractRequest, _options).pipe(map((apiResponse: HttpInfo<TaskLocator>) => apiResponse.data));
     }
 
     /**
      * @param taskId 
      */
-    public getAsyncStatus(taskId: number, _options?: Configuration): Observable<ActionResponse> {
+    public getAsyncStatusWithHttpInfo(taskId: number, _options?: Configuration): Observable<HttpInfo<ActionResponse>> {
         const requestContextPromise = this.requestFactory.getAsyncStatus(taskId, _options);
 
         // build promise chain
@@ -269,8 +338,15 @@ export class ObservableSourceCodeExtractApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAsyncStatus(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAsyncStatusWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param taskId 
+     */
+    public getAsyncStatus(taskId: number, _options?: Configuration): Observable<ActionResponse> {
+        return this.getAsyncStatusWithHttpInfo(taskId, _options).pipe(map((apiResponse: HttpInfo<ActionResponse>) => apiResponse.data));
     }
 
 }
@@ -297,7 +373,7 @@ export class ObservableValidationApi {
      * @param path The file system location of the file.
      * @param file The file to validate.
      */
-    public doValidate(path: string, file?: HttpFile, _options?: Configuration): Observable<void> {
+    public doValidateWithHttpInfo(path: string, file?: HttpFile, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.doValidate(path, file, _options);
 
         // build promise chain
@@ -312,8 +388,18 @@ export class ObservableValidationApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doValidate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doValidateWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
+     * Validate the contents of a file
+     * @param path The file system location of the file.
+     * @param file The file to validate.
+     */
+    public doValidate(path: string, file?: HttpFile, _options?: Configuration): Observable<void> {
+        return this.doValidateWithHttpInfo(path, file, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }

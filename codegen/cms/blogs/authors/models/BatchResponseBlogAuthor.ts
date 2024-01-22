@@ -90,5 +90,10 @@ export class BatchResponseBlogAuthor {
 }
 
 
-export type BatchResponseBlogAuthorStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseBlogAuthorStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

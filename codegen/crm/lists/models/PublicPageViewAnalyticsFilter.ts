@@ -69,5 +69,7 @@ export class PublicPageViewAnalyticsFilter {
 }
 
 
-export type PublicPageViewAnalyticsFilterFilterTypeEnum = "PAGE_VIEW" ;
+export enum PublicPageViewAnalyticsFilterFilterTypeEnum {
+    PageView = 'PAGE_VIEW'
+}
 

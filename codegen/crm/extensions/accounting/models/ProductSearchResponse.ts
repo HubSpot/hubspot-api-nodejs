@@ -1,6 +1,6 @@
 /**
  * Accounting Extension
- * These APIs allow you to interact with HubSpot's Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
+ * These APIs allow you to interact with HubSpot\'s Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
  *
  * OpenAPI spec version: v3
  * 
@@ -17,7 +17,7 @@ import { Product } from '../models/Product';
 */
 export class ProductSearchResponse {
     /**
-    * Designates if the response is a success ('OK') or failure ('ERR').
+    * Designates if the response is a success (\'OK\') or failure (\'ERR\').
     */
     'result'?: ProductSearchResponseResultEnum;
     /**
@@ -50,5 +50,8 @@ export class ProductSearchResponse {
 }
 
 
-export type ProductSearchResponseResultEnum = "OK" | "ERR" ;
+export enum ProductSearchResponseResultEnum {
+    Ok = 'OK',
+    Err = 'ERR'
+}
 

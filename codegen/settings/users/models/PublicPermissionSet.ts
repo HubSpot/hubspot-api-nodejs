@@ -20,11 +20,11 @@ export class PublicPermissionSet {
     */
     'requiresBillingWrite': boolean;
     /**
-    * The role's name
+    * The role\'s name
     */
     'name': string;
     /**
-    * The role's unique ID
+    * The role\'s unique ID
     */
     'id': string;
 

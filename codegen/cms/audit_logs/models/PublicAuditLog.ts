@@ -103,6 +103,34 @@ export class PublicAuditLog {
 }
 
 
-export type PublicAuditLogEventEnum = "CREATED" | "UPDATED" | "PUBLISHED" | "DELETED" | "UNPUBLISHED" | "RESTORE" ;
-export type PublicAuditLogObjectTypeEnum = "BLOG" | "BLOG_POST" | "LANDING_PAGE" | "WEBSITE_PAGE" | "TEMPLATE" | "MODULE" | "GLOBAL_MODULE" | "SERVERLESS_FUNCTION" | "DOMAIN" | "URL_MAPPING" | "EMAIL" | "CONTENT_SETTINGS" | "HUBDB_TABLE" | "KNOWLEDGE_BASE_ARTICLE" | "KNOWLEDGE_BASE" | "THEME" | "CSS" | "JS" | "CTA" | "FILE" ;
+export enum PublicAuditLogEventEnum {
+    Created = 'CREATED',
+    Updated = 'UPDATED',
+    Published = 'PUBLISHED',
+    Deleted = 'DELETED',
+    Unpublished = 'UNPUBLISHED',
+    Restore = 'RESTORE'
+}
+export enum PublicAuditLogObjectTypeEnum {
+    Blog = 'BLOG',
+    BlogPost = 'BLOG_POST',
+    LandingPage = 'LANDING_PAGE',
+    WebsitePage = 'WEBSITE_PAGE',
+    Template = 'TEMPLATE',
+    Module = 'MODULE',
+    GlobalModule = 'GLOBAL_MODULE',
+    ServerlessFunction = 'SERVERLESS_FUNCTION',
+    Domain = 'DOMAIN',
+    UrlMapping = 'URL_MAPPING',
+    Email = 'EMAIL',
+    ContentSettings = 'CONTENT_SETTINGS',
+    HubdbTable = 'HUBDB_TABLE',
+    KnowledgeBaseArticle = 'KNOWLEDGE_BASE_ARTICLE',
+    KnowledgeBase = 'KNOWLEDGE_BASE',
+    Theme = 'THEME',
+    Css = 'CSS',
+    Js = 'JS',
+    Cta = 'CTA',
+    File = 'FILE'
+}
 

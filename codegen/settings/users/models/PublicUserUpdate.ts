@@ -16,15 +16,15 @@
 */
 export class PublicUserUpdate {
     /**
-    * The user's primary team
+    * The user\'s primary team
     */
     'primaryTeamId'?: string;
     /**
-    * The user's role
+    * The user\'s role
     */
     'roleId'?: string;
     /**
-    * The user's additional teams
+    * The user\'s additional teams
     */
     'secondaryTeamIds'?: Array<string>;
 

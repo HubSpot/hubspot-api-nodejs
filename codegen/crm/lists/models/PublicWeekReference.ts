@@ -68,6 +68,16 @@ export class PublicWeekReference {
 }
 
 
-export type PublicWeekReferenceReferenceTypeEnum = "WEEK" ;
-export type PublicWeekReferenceDayOfWeekEnum = "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY" ;
+export enum PublicWeekReferenceReferenceTypeEnum {
+    Week = 'WEEK'
+}
+export enum PublicWeekReferenceDayOfWeekEnum {
+    Monday = 'MONDAY',
+    Tuesday = 'TUESDAY',
+    Wednesday = 'WEDNESDAY',
+    Thursday = 'THURSDAY',
+    Friday = 'FRIDAY',
+    Saturday = 'SATURDAY',
+    Sunday = 'SUNDAY'
+}
 

@@ -16,11 +16,11 @@
 */
 export class FolderUpdateInput {
     /**
-    * New parent folderId. If changed, the folder and all it's children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
+    * New parent folderId. If changed, the folder and all it\'s children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
     */
     'parentFolderId'?: number;
     /**
-    * New name. If specified the folder's name and fullPath will change. All children of the folder will be updated accordingly.
+    * New name. If specified the folder\'s name and fullPath will change. All children of the folder will be updated accordingly.
     */
     'name'?: string;
     /**

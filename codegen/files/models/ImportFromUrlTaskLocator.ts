@@ -12,7 +12,7 @@
 
 
 /**
-* Information on the task that has been started, and where to check it's status.
+* Information on the task that has been started, and where to check it\'s status.
 */
 export class ImportFromUrlTaskLocator {
     /**

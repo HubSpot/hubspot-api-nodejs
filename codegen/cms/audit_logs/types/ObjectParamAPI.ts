@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicAuditLog } from '../models/CollectionResponsePublicAuditLog';
@@ -61,6 +62,15 @@ export class ObjectAuditLogsApi {
 
     public constructor(configuration: Configuration, requestFactory?: AuditLogsApiRequestFactory, responseProcessor?: AuditLogsApiResponseProcessor) {
         this.api = new ObservableAuditLogsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Returns audit logs based on filters.
+     * Query audit logs
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: AuditLogsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAuditLog>> {
+        return this.api.getPageWithHttpInfo(param.userId, param.eventType, param.objectType, param.objectId, param.after, param.before, param.limit, param.sort,  options).toPromise();
     }
 
     /**

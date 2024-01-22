@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponsePublicPermissionSetNoPaging } from '../models/CollectionResponsePublicPermissionSetNoPaging';
@@ -18,6 +19,15 @@ export class ObjectRolesApi {
 
     public constructor(configuration: Configuration, requestFactory?: RolesApiRequestFactory, responseProcessor?: RolesApiResponseProcessor) {
         this.api = new ObservableRolesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Retrieves the roles on an account
+     * Retrieves the roles on an account
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: RolesApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicPermissionSetNoPaging>> {
+        return this.api.getAllWithHttpInfo( options).toPromise();
     }
 
     /**
@@ -46,7 +56,16 @@ export class ObjectTeamsApi {
 
     /**
      * View teams for this account
-     * See details about this account's teams
+     * See details about this account\'s teams
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: TeamsApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicTeamNoPaging>> {
+        return this.api.getAllWithHttpInfo( options).toPromise();
+    }
+
+    /**
+     * View teams for this account
+     * See details about this account\'s teams
      * @param param the request object
      */
     public getAll(param: TeamsApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponsePublicTeamNoPaging> {
@@ -141,7 +160,16 @@ export class ObjectUsersApi {
     }
 
     /**
-     * Removes a user identified by `userId`. `userId` refers to the user's ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Removes a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Removes a user
+     * @param param the request object
+     */
+    public archiveWithHttpInfo(param: UsersApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.userId, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Removes a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Removes a user
      * @param param the request object
      */
@@ -154,12 +182,30 @@ export class ObjectUsersApi {
      * Adds a user
      * @param param the request object
      */
+    public createWithHttpInfo(param: UsersApiCreateRequest, options?: Configuration): Promise<HttpInfo<PublicUser>> {
+        return this.api.createWithHttpInfo(param.userProvisionRequest,  options).toPromise();
+    }
+
+    /**
+     * New users will only have minimal permissions, which is contacts-base. A welcome email will prompt them to set a password and log in to HubSpot.
+     * Adds a user
+     * @param param the request object
+     */
     public create(param: UsersApiCreateRequest, options?: Configuration): Promise<PublicUser> {
         return this.api.create(param.userProvisionRequest,  options).toPromise();
     }
 
     /**
-     * Retrieves a user identified by `userId`. `userId` refers to the user's ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Retrieves a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Retrieves a user
+     * @param param the request object
+     */
+    public getByIdWithHttpInfo(param: UsersApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicUser>> {
+        return this.api.getByIdWithHttpInfo(param.userId, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Retrieves a user
      * @param param the request object
      */
@@ -172,12 +218,30 @@ export class ObjectUsersApi {
      * Retrieves a list of users from an account
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: UsersApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicUserForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.limit, param.after,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a list of users from an account
+     * Retrieves a list of users from an account
+     * @param param the request object
+     */
     public getPage(param: UsersApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponsePublicUserForwardPaging> {
         return this.api.getPage(param.limit, param.after,  options).toPromise();
     }
 
     /**
-     * Modifies a user identified by `userId`. `userId` refers to the user's ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
+     * Modifies a user
+     * @param param the request object
+     */
+    public replaceWithHttpInfo(param: UsersApiReplaceRequest, options?: Configuration): Promise<HttpInfo<PublicUser>> {
+        return this.api.replaceWithHttpInfo(param.userId, param.publicUserUpdate, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Modifies a user identified by `userId`. `userId` refers to the user\'s ID by default, or optionally email as specified by the `IdProperty` query param.
      * Modifies a user
      * @param param the request object
      */

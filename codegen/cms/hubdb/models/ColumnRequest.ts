@@ -97,5 +97,23 @@ export class ColumnRequest {
 }
 
 
-export type ColumnRequestTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" | "FILE" ;
+export enum ColumnRequestTypeEnum {
+    Null = 'NULL',
+    Text = 'TEXT',
+    Number = 'NUMBER',
+    Url = 'URL',
+    Image = 'IMAGE',
+    Select = 'SELECT',
+    Multiselect = 'MULTISELECT',
+    Boolean = 'BOOLEAN',
+    Location = 'LOCATION',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Currency = 'CURRENCY',
+    Richtext = 'RICHTEXT',
+    ForeignId = 'FOREIGN_ID',
+    Video = 'VIDEO',
+    Cta = 'CTA',
+    File = 'FILE'
+}
 

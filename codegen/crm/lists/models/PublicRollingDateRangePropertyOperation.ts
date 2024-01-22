@@ -61,5 +61,7 @@ export class PublicRollingDateRangePropertyOperation {
 }
 
 
-export type PublicRollingDateRangePropertyOperationOperationTypeEnum = "ROLLING_DATE_RANGE" ;
+export enum PublicRollingDateRangePropertyOperationOperationTypeEnum {
+    RollingDateRange = 'ROLLING_DATE_RANGE'
+}
 

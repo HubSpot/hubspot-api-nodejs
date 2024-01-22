@@ -75,5 +75,7 @@ export class PublicFiscalQuarterReference {
 }
 
 
-export type PublicFiscalQuarterReferenceReferenceTypeEnum = "FISCAL_QUARTER" ;
+export enum PublicFiscalQuarterReferenceReferenceTypeEnum {
+    FiscalQuarter = 'FISCAL_QUARTER'
+}
 

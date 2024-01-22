@@ -76,5 +76,7 @@ export class PublicSurveyMonkeyValueFilter {
 }
 
 
-export type PublicSurveyMonkeyValueFilterFilterTypeEnum = "SURVEY_MONKEY_VALUE" ;
+export enum PublicSurveyMonkeyValueFilterFilterTypeEnum {
+    SurveyMonkeyValue = 'SURVEY_MONKEY_VALUE'
+}
 

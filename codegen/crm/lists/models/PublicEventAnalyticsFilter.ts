@@ -62,5 +62,7 @@ export class PublicEventAnalyticsFilter {
 }
 
 
-export type PublicEventAnalyticsFilterFilterTypeEnum = "EVENT" ;
+export enum PublicEventAnalyticsFilterFilterTypeEnum {
+    Event = 'EVENT'
+}
 

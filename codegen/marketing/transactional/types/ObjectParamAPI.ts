@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseSmtpApiTokenViewForwardPaging } from '../models/CollectionResponseSmtpApiTokenViewForwardPaging';
@@ -84,8 +85,26 @@ export class ObjectPublicSmtpTokensApi {
      * Delete a single token by ID.
      * @param param the request object
      */
+    public archiveTokenWithHttpInfo(param: PublicSmtpTokensApiArchiveTokenRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveTokenWithHttpInfo(param.tokenId,  options).toPromise();
+    }
+
+    /**
+     * Delete a single token by ID.
+     * Delete a single token by ID.
+     * @param param the request object
+     */
     public archiveToken(param: PublicSmtpTokensApiArchiveTokenRequest, options?: Configuration): Promise<void> {
         return this.api.archiveToken(param.tokenId,  options).toPromise();
+    }
+
+    /**
+     * Create a SMTP API token.
+     * Create a SMTP API token.
+     * @param param the request object
+     */
+    public createTokenWithHttpInfo(param: PublicSmtpTokensApiCreateTokenRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+        return this.api.createTokenWithHttpInfo(param.smtpApiTokenRequestEgg,  options).toPromise();
     }
 
     /**
@@ -102,6 +121,15 @@ export class ObjectPublicSmtpTokensApi {
      * Query a single token by ID.
      * @param param the request object
      */
+    public getTokenByIdWithHttpInfo(param: PublicSmtpTokensApiGetTokenByIdRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+        return this.api.getTokenByIdWithHttpInfo(param.tokenId,  options).toPromise();
+    }
+
+    /**
+     * Query a single token by ID.
+     * Query a single token by ID.
+     * @param param the request object
+     */
     public getTokenById(param: PublicSmtpTokensApiGetTokenByIdRequest, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.getTokenById(param.tokenId,  options).toPromise();
     }
@@ -111,8 +139,26 @@ export class ObjectPublicSmtpTokensApi {
      * Query SMTP API tokens by campaign name or an emailCampaignId.
      * @param param the request object
      */
+    public getTokensPageWithHttpInfo(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
+        return this.api.getTokensPageWithHttpInfo(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Query multiple SMTP API tokens by campaign name or a single token by emailCampaignId.
+     * Query SMTP API tokens by campaign name or an emailCampaignId.
+     * @param param the request object
+     */
     public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
         return this.api.getTokensPage(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Allows the creation of a replacement password for a given token. Once the password is successfully reset, the old password for the token will be invalid.
+     * Reset the password of an existing token.
+     * @param param the request object
+     */
+    public resetPasswordWithHttpInfo(param: PublicSmtpTokensApiResetPasswordRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+        return this.api.resetPasswordWithHttpInfo(param.tokenId,  options).toPromise();
     }
 
     /**
@@ -143,6 +189,15 @@ export class ObjectSingleSendApi {
 
     public constructor(configuration: Configuration, requestFactory?: SingleSendApiRequestFactory, responseProcessor?: SingleSendApiResponseProcessor) {
         this.api = new ObservableSingleSendApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Asynchronously send a transactional email. Returns the status of the email send with a statusId that can be used to continuously query for the status using the Email Send Status API.
+     * Send a single transactional email asynchronously.
+     * @param param the request object
+     */
+    public sendEmailWithHttpInfo(param: SingleSendApiSendEmailRequest, options?: Configuration): Promise<HttpInfo<EmailSendStatusView>> {
+        return this.api.sendEmailWithHttpInfo(param.publicSingleSendRequestEgg,  options).toPromise();
     }
 
     /**

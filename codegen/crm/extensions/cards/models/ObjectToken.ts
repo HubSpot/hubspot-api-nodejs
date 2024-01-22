@@ -54,5 +54,15 @@ export class ObjectToken {
 }
 
 
-export type ObjectTokenDataTypeEnum = "BOOLEAN" | "CURRENCY" | "DATE" | "DATETIME" | "EMAIL" | "LINK" | "NUMERIC" | "STRING" | "STATUS" ;
+export enum ObjectTokenDataTypeEnum {
+    Boolean = 'BOOLEAN',
+    Currency = 'CURRENCY',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Email = 'EMAIL',
+    Link = 'LINK',
+    Numeric = 'NUMERIC',
+    String = 'STRING',
+    Status = 'STATUS'
+}
 

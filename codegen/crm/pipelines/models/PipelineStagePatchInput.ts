@@ -28,7 +28,7 @@ export class PipelineStagePatchInput {
     */
     'displayOrder'?: number;
     /**
-    * A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
+    * A label used to organize pipeline stages in HubSpot\'s UI. Each pipeline stage\'s label must be unique within that pipeline.
     */
     'label'?: string;
 

@@ -21,7 +21,7 @@ export class SingleCheckboxField {
     */
     'fieldType': SingleCheckboxFieldFieldTypeEnum;
     /**
-    * A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
+    * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
     /**
@@ -41,7 +41,7 @@ export class SingleCheckboxField {
     */
     'required': boolean;
     /**
-    * Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
+    * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
@@ -120,5 +120,7 @@ export class SingleCheckboxField {
 }
 
 
-export type SingleCheckboxFieldFieldTypeEnum = "single_checkbox" ;
+export enum SingleCheckboxFieldFieldTypeEnum {
+    SingleCheckbox = 'single_checkbox'
+}
 

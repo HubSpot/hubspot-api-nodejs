@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -422,14 +422,14 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to cloneDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async cloneDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 > {
+     public async cloneDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -445,7 +445,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -458,21 +458,21 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to createDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async createDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -488,7 +488,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -501,10 +501,10 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to purgeDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async purgeDraftTableRows(response: ResponseContext): Promise<void > {
+     public async purgeDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -520,7 +520,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -533,21 +533,21 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to readDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async readDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -563,7 +563,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -576,21 +576,21 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to readTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async readTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -606,7 +606,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -619,21 +619,21 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to replaceDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async replaceDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async replaceDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -649,7 +649,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -662,21 +662,21 @@ export class RowsBatchApiResponseProcessor {
      * @params response Response returned by the server for a request to updateDraftTableRows
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateDraftTableRows(response: ResponseContext): Promise<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors > {
+     public async updateDraftTableRowsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3 = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3", ""
             ) as BatchResponseHubDbTableRowV3;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseHubDbTableRowV3WithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -692,7 +692,7 @@ export class RowsBatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors", ""
             ) as BatchResponseHubDbTableRowV3 | BatchResponseHubDbTableRowV3WithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

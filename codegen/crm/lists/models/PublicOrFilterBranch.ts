@@ -56,5 +56,7 @@ export class PublicOrFilterBranch {
 }
 
 
-export type PublicOrFilterBranchFilterBranchTypeEnum = "OR" ;
+export enum PublicOrFilterBranchFilterBranchTypeEnum {
+    Or = 'OR'
+}
 

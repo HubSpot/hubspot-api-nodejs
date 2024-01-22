@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -815,7 +815,7 @@ export class SitePagesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Take any changes from the draft version of the Site Page and apply them to the live version.
      * Push Site Page draft edits live
-     * @param objectId The id of the Site Page for which it&#39;s draft will be pushed live.
+     * @param objectId The id of the Site Page for which it\&#39;s draft will be pushed live.
      */
     public async pushLive(objectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -956,7 +956,7 @@ export class SitePagesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Discards any edits and resets the draft to the live version.
      * Reset the Site Page draft to the live version
-     * @param objectId The id of the Site Page for which it&#39;s draft will be reset.
+     * @param objectId The id of the Site Page for which it\&#39;s draft will be reset.
      */
     public async resetDraft(objectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -1412,10 +1412,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1431,7 +1431,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1444,10 +1444,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveBatch(response: ResponseContext): Promise<void > {
+     public async archiveBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1463,7 +1463,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1476,10 +1476,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to attachToLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async attachToLangGroup(response: ResponseContext): Promise<void > {
+     public async attachToLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1495,7 +1495,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1508,14 +1508,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to clone
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async clone(response: ResponseContext): Promise<Page > {
+     public async cloneWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1531,7 +1531,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1544,17 +1544,17 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<void | Page > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void | Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1570,7 +1570,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void | Page", ""
             ) as void | Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1583,14 +1583,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to createABTestVariation
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createABTestVariation(response: ResponseContext): Promise<Page > {
+     public async createABTestVariationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1606,7 +1606,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1619,21 +1619,21 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponsePage | BatchResponsePageWithErrors > {
+     public async createBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponsePage = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage", ""
             ) as BatchResponsePage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponsePageWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePageWithErrors", ""
             ) as BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1649,7 +1649,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage | BatchResponsePageWithErrors", ""
             ) as BatchResponsePage | BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1662,14 +1662,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to createLangVariation
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createLangVariation(response: ResponseContext): Promise<Page > {
+     public async createLangVariationWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1685,7 +1685,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1698,10 +1698,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to detachFromLangGroup
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detachFromLangGroup(response: ResponseContext): Promise<void > {
+     public async detachFromLangGroupWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1717,7 +1717,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1730,10 +1730,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to endActiveABTest
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async endActiveABTest(response: ResponseContext): Promise<void > {
+     public async endActiveABTestWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1749,7 +1749,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1762,14 +1762,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<Page > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1785,7 +1785,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1798,14 +1798,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getDraftById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDraftById(response: ResponseContext): Promise<Page > {
+     public async getDraftByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1821,7 +1821,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1834,14 +1834,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseWithTotalPageForwardPaging > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalPageForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalPageForwardPaging", ""
             ) as CollectionResponseWithTotalPageForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1857,7 +1857,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalPageForwardPaging", ""
             ) as CollectionResponseWithTotalPageForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1870,14 +1870,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getPreviousVersion
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPreviousVersion(response: ResponseContext): Promise<VersionPage > {
+     public async getPreviousVersionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<VersionPage >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: VersionPage = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "VersionPage", ""
             ) as VersionPage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1893,7 +1893,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "VersionPage", ""
             ) as VersionPage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1906,14 +1906,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to getPreviousVersions
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPreviousVersions(response: ResponseContext): Promise<CollectionResponseWithTotalVersionPage > {
+     public async getPreviousVersionsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalVersionPage >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseWithTotalVersionPage = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalVersionPage", ""
             ) as CollectionResponseWithTotalVersionPage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1929,7 +1929,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseWithTotalVersionPage", ""
             ) as CollectionResponseWithTotalVersionPage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1942,10 +1942,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to pushLive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async pushLive(response: ResponseContext): Promise<void > {
+     public async pushLiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1961,7 +1961,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1974,21 +1974,21 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to readBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readBatch(response: ResponseContext): Promise<BatchResponsePage | BatchResponsePageWithErrors > {
+     public async readBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponsePage = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage", ""
             ) as BatchResponsePage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponsePageWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePageWithErrors", ""
             ) as BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2004,7 +2004,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage | BatchResponsePageWithErrors", ""
             ) as BatchResponsePage | BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2017,10 +2017,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to rerunPreviousABTest
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async rerunPreviousABTest(response: ResponseContext): Promise<void > {
+     public async rerunPreviousABTestWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2036,7 +2036,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2049,10 +2049,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to resetDraft
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async resetDraft(response: ResponseContext): Promise<void > {
+     public async resetDraftWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2068,7 +2068,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2081,14 +2081,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to restorePreviousVersion
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async restorePreviousVersion(response: ResponseContext): Promise<Page > {
+     public async restorePreviousVersionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2104,7 +2104,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2117,14 +2117,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to restorePreviousVersionToDraft
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async restorePreviousVersionToDraft(response: ResponseContext): Promise<Page > {
+     public async restorePreviousVersionToDraftWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2140,7 +2140,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2153,10 +2153,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to schedule
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async schedule(response: ResponseContext): Promise<void > {
+     public async scheduleWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2172,7 +2172,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2185,10 +2185,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to setLangPrimary
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async setLangPrimary(response: ResponseContext): Promise<void > {
+     public async setLangPrimaryWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2204,7 +2204,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2217,14 +2217,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<Page > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2240,7 +2240,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2253,21 +2253,21 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to updateBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateBatch(response: ResponseContext): Promise<BatchResponsePage | BatchResponsePageWithErrors > {
+     public async updateBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponsePage = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage", ""
             ) as BatchResponsePage;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponsePageWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePageWithErrors", ""
             ) as BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2283,7 +2283,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponsePage | BatchResponsePageWithErrors", ""
             ) as BatchResponsePage | BatchResponsePageWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2296,14 +2296,14 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to updateDraft
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateDraft(response: ResponseContext): Promise<Page > {
+     public async updateDraftWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Page >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Page = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2319,7 +2319,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Page", ""
             ) as Page;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -2332,10 +2332,10 @@ export class SitePagesApiResponseProcessor {
      * @params response Response returned by the server for a request to updateLangs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateLangs(response: ResponseContext): Promise<void > {
+     public async updateLangsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -2351,7 +2351,7 @@ export class SitePagesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

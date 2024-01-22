@@ -40,5 +40,7 @@ export class PublicCampaignInfluencedFilter {
 }
 
 
-export type PublicCampaignInfluencedFilterFilterTypeEnum = "CAMPAIGN_INFLUENCED" ;
+export enum PublicCampaignInfluencedFilterFilterTypeEnum {
+    CampaignInfluenced = 'CAMPAIGN_INFLUENCED'
+}
 

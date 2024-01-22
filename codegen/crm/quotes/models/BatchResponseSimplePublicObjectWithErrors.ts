@@ -84,5 +84,10 @@ export class BatchResponseSimplePublicObjectWithErrors {
 }
 
 
-export type BatchResponseSimplePublicObjectWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseSimplePublicObjectWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

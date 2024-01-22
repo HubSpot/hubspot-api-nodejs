@@ -40,5 +40,9 @@ export class ImportTemplate {
 }
 
 
-export type ImportTemplateTemplateTypeEnum = "admin_defined" | "previous_import" | "user_file" ;
+export enum ImportTemplateTemplateTypeEnum {
+    AdminDefined = 'admin_defined',
+    PreviousImport = 'previous_import',
+    UserFile = 'user_file'
+}
 

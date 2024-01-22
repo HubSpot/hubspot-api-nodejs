@@ -69,6 +69,18 @@ export class ActionHookActionBody {
 }
 
 
-export type ActionHookActionBodyTypeEnum = "ACTION_HOOK" ;
-export type ActionHookActionBodyHttpMethodEnum = "CONNECT" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT" | "TRACE" ;
+export enum ActionHookActionBodyTypeEnum {
+    ActionHook = 'ACTION_HOOK'
+}
+export enum ActionHookActionBodyHttpMethodEnum {
+    Connect = 'CONNECT',
+    Delete = 'DELETE',
+    Get = 'GET',
+    Head = 'HEAD',
+    Options = 'OPTIONS',
+    Patch = 'PATCH',
+    Post = 'POST',
+    Put = 'PUT',
+    Trace = 'TRACE'
+}
 

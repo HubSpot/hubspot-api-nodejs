@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
@@ -21,6 +22,13 @@ export class ObjectAccessTokensApi {
 
     public constructor(configuration: Configuration, requestFactory?: AccessTokensApiRequestFactory, responseProcessor?: AccessTokensApiResponseProcessor) {
         this.api = new ObservableAccessTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getWithHttpInfo(param: AccessTokensApiGetRequest, options?: Configuration): Promise<HttpInfo<AccessTokenInfoResponse>> {
+        return this.api.getWithHttpInfo(param.token,  options).toPromise();
     }
 
     /**
@@ -63,8 +71,22 @@ export class ObjectRefreshTokensApi {
     /**
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: RefreshTokensApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.token,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public archive(param: RefreshTokensApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.token,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getWithHttpInfo(param: RefreshTokensApiGetRequest, options?: Configuration): Promise<HttpInfo<RefreshTokenInfoResponse>> {
+        return this.api.getWithHttpInfo(param.token,  options).toPromise();
     }
 
     /**
@@ -123,6 +145,13 @@ export class ObjectTokensApi {
 
     public constructor(configuration: Configuration, requestFactory?: TokensApiRequestFactory, responseProcessor?: TokensApiResponseProcessor) {
         this.api = new ObservableTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: TokensApiCreateRequest = {}, options?: Configuration): Promise<HttpInfo<TokenResponseIF>> {
+        return this.api.createWithHttpInfo(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
     }
 
     /**

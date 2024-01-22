@@ -126,5 +126,7 @@ export class PublicTimePointOperationTimePoint {
 }
 
 
-export type PublicTimePointOperationTimePointTimeTypeEnum = "PROPERTY_REFERENCED" ;
+export enum PublicTimePointOperationTimePointTimeTypeEnum {
+    PropertyReferenced = 'PROPERTY_REFERENCED'
+}
 

@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AssociationSpec } from '../models/AssociationSpec';
@@ -34,8 +35,35 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
+    public archiveWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * deletes all associations between two records.
+     * Delete
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
     public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<void> {
         const result = this.api.archive(objectType, objectId, toObjectType, toObjectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Set association labels between two records.
+     * Create
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     * @param associationSpec 
+     */
+    public createWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair1>> {
+        const result = this.api.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
         return result.toPromise();
     }
 
@@ -61,8 +89,35 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
+    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        const result = this.api.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     * Create Default
+     * @param fromObjectType 
+     * @param fromObjectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
     public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
         const result = this.api.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * List all associations of an object by object type. Limit 500 per call.
+     * List
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
+     */
+    public getPageWithHttpInfo(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+        const result = this.api.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, _options);
         return result.toPromise();
     }
 
@@ -106,8 +161,32 @@ export class PromiseBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive 
      */
+    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch delete associations for objects
+     * Delete
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiArchive 
+     */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<void> {
         const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
         return result.toPromise();
     }
 
@@ -130,8 +209,32 @@ export class PromiseBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost 
      */
+    public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
+        const result = this.api.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch create associations for objects
+     * Create
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
     public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
         const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     *  Create Default Associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicDefaultAssociationMultiPost 
+     */
+    public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        const result = this.api.createDefaultWithHttpInfo(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options);
         return result.toPromise();
     }
 
@@ -148,7 +251,19 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The 'after' field in a returned paging object  can be added alongside the 'id' to retrieve the next page of associations from that objectId. The 'link' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Read
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicFetchAssociationsBatchRequest 
+     */
+    public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
+        const result = this.api.getPageWithHttpInfo(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
      * Read
      * @param fromObjectType 
      * @param toObjectType 

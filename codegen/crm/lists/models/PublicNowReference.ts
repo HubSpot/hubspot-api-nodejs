@@ -61,5 +61,7 @@ export class PublicNowReference {
 }
 
 
-export type PublicNowReferenceReferenceTypeEnum = "NOW" ;
+export enum PublicNowReferenceReferenceTypeEnum {
+    Now = 'NOW'
+}
 

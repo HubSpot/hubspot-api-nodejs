@@ -1,6 +1,6 @@
 /**
  * CRM Timeline
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -100,5 +100,10 @@ export class TimelineEventTemplateToken {
 }
 
 
-export type TimelineEventTemplateTokenTypeEnum = "date" | "enumeration" | "number" | "string" ;
+export enum TimelineEventTemplateTokenTypeEnum {
+    Date = 'date',
+    Enumeration = 'enumeration',
+    Number = 'number',
+    String = 'string'
+}
 

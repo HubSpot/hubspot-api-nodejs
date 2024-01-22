@@ -108,5 +108,10 @@ export class BatchResponseHubDbTableRowV3WithErrors {
 }
 
 
-export type BatchResponseHubDbTableRowV3WithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseHubDbTableRowV3WithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

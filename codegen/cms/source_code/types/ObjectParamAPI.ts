@@ -1,4 +1,4 @@
-import { HttpFile } from '../http/http';
+import { HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
@@ -93,8 +93,26 @@ export class ObjectContentApi {
      * Delete a file
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: ContentApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.environment, param.path,  options).toPromise();
+    }
+
+    /**
+     * Deletes the file at the specified path in the specified environment.
+     * Delete a file
+     * @param param the request object
+     */
     public archive(param: ContentApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.environment, param.path,  options).toPromise();
+    }
+
+    /**
+     * Creates a file at the specified path in the specified environment. Accepts multipart/form-data content type. Throws an error if a file already exists at the specified path.
+     * Create a file
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: ContentApiCreateRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        return this.api.createWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
     }
 
     /**
@@ -111,8 +129,26 @@ export class ObjectContentApi {
      * Create or update a file
      * @param param the request object
      */
+    public createOrUpdateWithHttpInfo(param: ContentApiCreateOrUpdateRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        return this.api.createOrUpdateWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
+    }
+
+    /**
+     * Upserts a file at the specified path in the specified environment. Accepts multipart/form-data content type.
+     * Create or update a file
+     * @param param the request object
+     */
     public createOrUpdate(param: ContentApiCreateOrUpdateRequest, options?: Configuration): Promise<AssetFileMetadata> {
         return this.api.createOrUpdate(param.environment, param.path, param.file,  options).toPromise();
+    }
+
+    /**
+     * Downloads the byte contents of the file at the specified path in the specified environment.
+     * Download a file
+     * @param param the request object
+     */
+    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.downloadWithHttpInfo(param.environment, param.path,  options).toPromise();
     }
 
     /**
@@ -143,6 +179,15 @@ export class ObjectExtractApi {
 
     public constructor(configuration: Configuration, requestFactory?: ExtractApiRequestFactory, responseProcessor?: ExtractApiResponseProcessor) {
         this.api = new ObservableExtractApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
+     * Extracts a zip file
+     * @param param the request object
+     */
+    public extractByPathWithHttpInfo(param: ExtractApiExtractByPathRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.extractByPathWithHttpInfo(param.path,  options).toPromise();
     }
 
     /**
@@ -192,6 +237,15 @@ export class ObjectMetadataApi {
      * Get the metadata for a file
      * @param param the request object
      */
+    public getWithHttpInfo(param: MetadataApiGetRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+        return this.api.getWithHttpInfo(param.environment, param.path, param.properties,  options).toPromise();
+    }
+
+    /**
+     * Gets the metadata object for the file at the specified path in the specified environment.
+     * Get the metadata for a file
+     * @param param the request object
+     */
     public get(param: MetadataApiGetRequest, options?: Configuration): Promise<AssetFileMetadata> {
         return this.api.get(param.environment, param.path, param.properties,  options).toPromise();
     }
@@ -229,8 +283,22 @@ export class ObjectSourceCodeExtractApi {
     /**
      * @param param the request object
      */
+    public doAsyncWithHttpInfo(param: SourceCodeExtractApiDoAsyncRequest, options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+        return this.api.doAsyncWithHttpInfo(param.fileExtractRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public doAsync(param: SourceCodeExtractApiDoAsyncRequest, options?: Configuration): Promise<TaskLocator> {
         return this.api.doAsync(param.fileExtractRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getAsyncStatusWithHttpInfo(param: SourceCodeExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        return this.api.getAsyncStatusWithHttpInfo(param.taskId,  options).toPromise();
     }
 
     /**
@@ -265,6 +333,15 @@ export class ObjectValidationApi {
 
     public constructor(configuration: Configuration, requestFactory?: ValidationApiRequestFactory, responseProcessor?: ValidationApiResponseProcessor) {
         this.api = new ObservableValidationApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
+     * Validate the contents of a file
+     * @param param the request object
+     */
+    public doValidateWithHttpInfo(param: ValidationApiDoValidateRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doValidateWithHttpInfo(param.path, param.file,  options).toPromise();
     }
 
     /**

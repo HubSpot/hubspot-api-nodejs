@@ -47,5 +47,7 @@ export class PublicAllPropertyTypesOperation {
 }
 
 
-export type PublicAllPropertyTypesOperationOperationTypeEnum = "ALL_PROPERTY" ;
+export enum PublicAllPropertyTypesOperationOperationTypeEnum {
+    AllProperty = 'ALL_PROPERTY'
+}
 

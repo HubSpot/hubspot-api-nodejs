@@ -68,5 +68,7 @@ export class PublicRangedDatePropertyOperation {
 }
 
 
-export type PublicRangedDatePropertyOperationOperationTypeEnum = "RANGED_DATE" ;
+export enum PublicRangedDatePropertyOperationOperationTypeEnum {
+    RangedDate = 'RANGED_DATE'
+}
 

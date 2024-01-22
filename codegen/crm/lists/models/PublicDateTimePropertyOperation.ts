@@ -61,5 +61,7 @@ export class PublicDateTimePropertyOperation {
 }
 
 
-export type PublicDateTimePropertyOperationOperationTypeEnum = "DATETIME" ;
+export enum PublicDateTimePropertyOperationOperationTypeEnum {
+    Datetime = 'DATETIME'
+}
 

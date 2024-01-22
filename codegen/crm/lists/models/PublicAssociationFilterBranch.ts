@@ -84,5 +84,7 @@ export class PublicAssociationFilterBranch {
 }
 
 
-export type PublicAssociationFilterBranchFilterBranchTypeEnum = "ASSOCIATION" ;
+export enum PublicAssociationFilterBranchFilterBranchTypeEnum {
+    Association = 'ASSOCIATION'
+}
 

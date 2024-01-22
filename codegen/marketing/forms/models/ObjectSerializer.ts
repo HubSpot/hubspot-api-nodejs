@@ -19,9 +19,7 @@ export * from '../models/FormStyle';
 export * from '../models/ForwardPaging';
 export * from '../models/HubSpotFormConfiguration';
 export * from '../models/HubSpotFormDefinition';
-export * from '../models/HubSpotFormDefinitionAllOf';
 export * from '../models/HubSpotFormDefinitionCreateRequest';
-export * from '../models/HubSpotFormDefinitionCreateRequestAllOf';
 export * from '../models/HubSpotFormDefinitionPatchRequest';
 export * from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 export * from '../models/LegalConsentCheckbox';
@@ -65,9 +63,7 @@ import { FormStyle              } from '../models/FormStyle';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubSpotFormConfiguration              } from '../models/HubSpotFormConfiguration';
 import { HubSpotFormDefinition             } from '../models/HubSpotFormDefinition';
-import { HubSpotFormDefinitionAllOf             } from '../models/HubSpotFormDefinitionAllOf';
 import { HubSpotFormDefinitionCreateRequest            } from '../models/HubSpotFormDefinitionCreateRequest';
-import { HubSpotFormDefinitionCreateRequestAllOf            } from '../models/HubSpotFormDefinitionCreateRequestAllOf';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
 import { HubSpotFormDefinitionPatchRequestLegalConsentOptions         } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
@@ -102,13 +98,6 @@ let primitives = [
                     "any"
                  ];
 
-const supportedMediaTypes: { [mediaType: string]: number } = {
-  "application/json": Infinity,
-  "application/octet-stream": 0,
-  "application/x-www-form-urlencoded": 0
-}
-
-
 let enumsMap: Set<string> = new Set<string>([
     "CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum",
     "DatepickerFieldFieldTypeEnum",
@@ -126,9 +115,7 @@ let enumsMap: Set<string> = new Set<string>([
     "FormStyleSubmitAlignmentEnum",
     "HubSpotFormConfigurationLanguageEnum",
     "HubSpotFormDefinitionFormTypeEnum",
-    "HubSpotFormDefinitionAllOfFormTypeEnum",
     "HubSpotFormDefinitionCreateRequestFormTypeEnum",
-    "HubSpotFormDefinitionCreateRequestAllOfFormTypeEnum",
     "HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum",
     "HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum",
     "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
@@ -169,9 +156,7 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "HubSpotFormConfiguration": HubSpotFormConfiguration,
     "HubSpotFormDefinition": HubSpotFormDefinition,
-    "HubSpotFormDefinitionAllOf": HubSpotFormDefinitionAllOf,
     "HubSpotFormDefinitionCreateRequest": HubSpotFormDefinitionCreateRequest,
-    "HubSpotFormDefinitionCreateRequestAllOf": HubSpotFormDefinitionCreateRequestAllOf,
     "HubSpotFormDefinitionPatchRequest": HubSpotFormDefinitionPatchRequest,
     "HubSpotFormDefinitionPatchRequestLegalConsentOptions": HubSpotFormDefinitionPatchRequestLegalConsentOptions,
     "LegalConsentCheckbox": LegalConsentCheckbox,
@@ -194,6 +179,58 @@ let typeMap: {[index: string]: any} = {
     "SingleCheckboxField": SingleCheckboxField,
     "SingleLineTextField": SingleLineTextField,
 }
+
+type MimeTypeDescriptor = {
+    type: string;
+    subtype: string;
+    subtypeTokens: string[];
+};
+
+/**
+ * Every mime-type consists of a type, subtype, and optional parameters.
+ * The subtype can be composite, including information about the content format.
+ * For example: `application/json-patch+json`, `application/merge-patch+json`.
+ *
+ * This helper transforms a string mime-type into an internal representation.
+ * This simplifies the implementation of predicates that in turn define common rules for parsing or stringifying
+ * the payload.
+ */
+const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
+    const [type, subtype] = mimeType.split('/');
+    return {
+        type,
+        subtype,
+        subtypeTokens: subtype.split('+'),
+    };
+};
+
+type MimeTypePredicate = (mimeType: string) => boolean;
+
+// This factory creates a predicate function that checks a string mime-type against defined rules.
+const mimeTypePredicateFactory = (predicate: (descriptor: MimeTypeDescriptor) => boolean): MimeTypePredicate => (mimeType) => predicate(parseMimeType(mimeType));
+
+// Use this factory when you need to define a simple predicate based only on type and, if applicable, subtype.
+const mimeTypeSimplePredicateFactory = (type: string, subtype?: string): MimeTypePredicate => mimeTypePredicateFactory((descriptor) => {
+    if (descriptor.type !== type) return false;
+    if (subtype != null && descriptor.subtype !== subtype) return false;
+    return true;
+});
+
+// Creating a set of named predicates that will help us determine how to handle different mime-types
+const isTextLikeMimeType = mimeTypeSimplePredicateFactory('text');
+const isJsonMimeType = mimeTypeSimplePredicateFactory('application', 'json');
+const isJsonLikeMimeType = mimeTypePredicateFactory((descriptor) => descriptor.type === 'application' && descriptor.subtypeTokens.some((item) => item === 'json'));
+const isOctetStreamMimeType = mimeTypeSimplePredicateFactory('application', 'octet-stream');
+const isFormUrlencodedMimeType = mimeTypeSimplePredicateFactory('application', 'x-www-form-urlencoded');
+
+// Defining a list of mime-types in the order of prioritization for handling.
+const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
+    isJsonMimeType,
+    isJsonLikeMimeType,
+    isTextLikeMimeType,
+    isOctetStreamMimeType,
+    isFormUrlencodedMimeType,
+];
 
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
@@ -335,36 +372,32 @@ export class ObjectSerializer {
      */
     public static getPreferredMediaType(mediaTypes: Array<string>): string {
         /** According to OAS 3 we should default to json */
-        if (!mediaTypes) {
+        if (mediaTypes.length === 0) {
             return "application/json";
         }
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
-        let selectedMediaType: string | undefined = undefined;
-        let selectedRank: number = -Infinity;
-        for (const mediaType of normalMediaTypes) {
-            if (supportedMediaTypes[mediaType!] > selectedRank) {
-                selectedMediaType = mediaType;
-                selectedRank = supportedMediaTypes[mediaType!];
+
+        for (const predicate of supportedMimeTypePredicatesWithPriority) {
+            for (const mediaType of normalMediaTypes) {
+                if (mediaType != null && predicate(mediaType)) {
+                    return mediaType;
+                }
             }
         }
 
-        if (selectedMediaType === undefined) {
-            throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
-        }
-
-        return selectedMediaType!;
+        throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
     }
 
     /**
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return String(data);
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.stringify(data);
         }
 
@@ -379,16 +412,12 @@ export class ObjectSerializer {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
 
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return rawData;
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.parse(rawData);
-        }
-
-        if (mediaType === "text/html") {
-            return rawData;
         }
 
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");

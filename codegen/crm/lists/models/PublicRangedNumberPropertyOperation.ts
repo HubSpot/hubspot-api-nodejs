@@ -61,5 +61,7 @@ export class PublicRangedNumberPropertyOperation {
 }
 
 
-export type PublicRangedNumberPropertyOperationOperationTypeEnum = "NUMBER_RANGED" ;
+export enum PublicRangedNumberPropertyOperationOperationTypeEnum {
+    NumberRanged = 'NUMBER_RANGED'
+}
 

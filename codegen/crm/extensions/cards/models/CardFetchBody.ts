@@ -13,7 +13,7 @@
 import { CardObjectTypeBody } from '../models/CardObjectTypeBody';
 
 /**
-* Configuration for this card's data fetch request.
+* Configuration for this card\'s data fetch request.
 */
 export class CardFetchBody {
     'serverlessFunction'?: string;
@@ -64,5 +64,8 @@ export class CardFetchBody {
 }
 
 
-export type CardFetchBodyCardTypeEnum = "EXTERNAL" | "SERVERLESS" ;
+export enum CardFetchBodyCardTypeEnum {
+    External = 'EXTERNAL',
+    Serverless = 'SERVERLESS'
+}
 

@@ -1,4 +1,4 @@
-import { HttpFile } from '../http/http';
+import { HttpFile, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
@@ -75,8 +75,26 @@ export class ObjectCoreApi {
      * Cancel an active import
      * @param param the request object
      */
+    public cancelWithHttpInfo(param: CoreApiCancelRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        return this.api.cancelWithHttpInfo(param.importId,  options).toPromise();
+    }
+
+    /**
+     * This allows a developer to cancel an active import.
+     * Cancel an active import
+     * @param param the request object
+     */
     public cancel(param: CoreApiCancelRequest, options?: Configuration): Promise<ActionResponse> {
         return this.api.cancel(param.importId,  options).toPromise();
+    }
+
+    /**
+     * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
+     * Start a new import
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: CoreApiCreateRequest = {}, options?: Configuration): Promise<HttpInfo<PublicImportResponse>> {
+        return this.api.createWithHttpInfo(param.files, param.importRequest,  options).toPromise();
     }
 
     /**
@@ -93,8 +111,26 @@ export class ObjectCoreApi {
      * Get the information on any import
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: CoreApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicImportResponse>> {
+        return this.api.getByIdWithHttpInfo(param.importId,  options).toPromise();
+    }
+
+    /**
+     * A complete summary of an import record, including any updates.
+     * Get the information on any import
+     * @param param the request object
+     */
     public getById(param: CoreApiGetByIdRequest, options?: Configuration): Promise<PublicImportResponse> {
         return this.api.getById(param.importId,  options).toPromise();
+    }
+
+    /**
+     * Returns a paged list of active imports for this account.
+     * Get active imports
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: CoreApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicImportResponse>> {
+        return this.api.getPageWithHttpInfo(param.after, param.before, param.limit,  options).toPromise();
     }
 
     /**
@@ -137,6 +173,13 @@ export class ObjectPublicImportsApi {
 
     public constructor(configuration: Configuration, requestFactory?: PublicImportsApiRequestFactory, responseProcessor?: PublicImportsApiResponseProcessor) {
         this.api = new ObservablePublicImportsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getErrorsWithHttpInfo(param: PublicImportsApiGetErrorsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
+        return this.api.getErrorsWithHttpInfo(param.importId, param.after, param.limit,  options).toPromise();
     }
 
     /**

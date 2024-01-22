@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
@@ -56,6 +57,13 @@ export class ObjectSettingsApi {
     /**
      * @param param the request object
      */
+    public clearWithHttpInfo(param: SettingsApiClearRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.clearWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public clear(param: SettingsApiClearRequest, options?: Configuration): Promise<void> {
         return this.api.clear(param.appId,  options).toPromise();
     }
@@ -63,8 +71,22 @@ export class ObjectSettingsApi {
     /**
      * @param param the request object
      */
+    public configureWithHttpInfo(param: SettingsApiConfigureRequest, options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
+        return this.api.configureWithHttpInfo(param.appId, param.settingsChangeRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public configure(param: SettingsApiConfigureRequest, options?: Configuration): Promise<SettingsResponse> {
         return this.api.configure(param.appId, param.settingsChangeRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
+        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
     /**
@@ -179,8 +201,22 @@ export class ObjectSubscriptionsApi {
     /**
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.subscriptionId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public archive(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.subscriptionId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: SubscriptionsApiCreateRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+        return this.api.createWithHttpInfo(param.appId, param.subscriptionCreateRequest,  options).toPromise();
     }
 
     /**
@@ -193,8 +229,22 @@ export class ObjectSubscriptionsApi {
     /**
      * @param param the request object
      */
+    public getAllWithHttpInfo(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<SubscriptionListResponse>> {
+        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public getAll(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<SubscriptionListResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public getByIdWithHttpInfo(param: SubscriptionsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+        return this.api.getByIdWithHttpInfo(param.subscriptionId, param.appId,  options).toPromise();
     }
 
     /**
@@ -207,8 +257,22 @@ export class ObjectSubscriptionsApi {
     /**
      * @param param the request object
      */
+    public updateWithHttpInfo(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+        return this.api.updateWithHttpInfo(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public update(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<SubscriptionResponse> {
         return this.api.update(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
+    public updateBatchWithHttpInfo(param: SubscriptionsApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
+        return this.api.updateBatchWithHttpInfo(param.appId, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
     }
 
     /**

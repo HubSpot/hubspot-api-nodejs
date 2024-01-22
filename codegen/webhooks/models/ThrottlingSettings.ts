@@ -49,5 +49,8 @@ export class ThrottlingSettings {
 }
 
 
-export type ThrottlingSettingsPeriodEnum = "SECONDLY" | "ROLLING_MINUTE" ;
+export enum ThrottlingSettingsPeriodEnum {
+    Secondly = 'SECONDLY',
+    RollingMinute = 'ROLLING_MINUTE'
+}
 

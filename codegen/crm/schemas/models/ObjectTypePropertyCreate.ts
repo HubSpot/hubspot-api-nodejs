@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -74,7 +74,7 @@ export class ObjectTypePropertyCreate {
     */
     'numberDisplayHint'?: ObjectTypePropertyCreateNumberDisplayHintEnum;
     /**
-    * Whether or not the property's value must be unique. Once set, this can't be changed.
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
     'hasUniqueValue'?: boolean;
     /**
@@ -197,8 +197,34 @@ export class ObjectTypePropertyCreate {
 }
 
 
-export type ObjectTypePropertyCreateOptionSortStrategyEnum = "DISPLAY_ORDER" | "ALPHABETICAL" ;
-export type ObjectTypePropertyCreateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
-export type ObjectTypePropertyCreateTextDisplayHintEnum = "unformatted_single_line" | "multi_line" | "email" | "phone_number" | "domain_name" | "ip_address" | "physical_address" | "postal_code" ;
-export type ObjectTypePropertyCreateNumberDisplayHintEnum = "unformatted" | "formatted" | "currency" | "percentage" | "duration" | "probability" ;
+export enum ObjectTypePropertyCreateOptionSortStrategyEnum {
+    DisplayOrder = 'DISPLAY_ORDER',
+    Alphabetical = 'ALPHABETICAL'
+}
+export enum ObjectTypePropertyCreateTypeEnum {
+    String = 'string',
+    Number = 'number',
+    Date = 'date',
+    Datetime = 'datetime',
+    Enumeration = 'enumeration',
+    Bool = 'bool'
+}
+export enum ObjectTypePropertyCreateTextDisplayHintEnum {
+    UnformattedSingleLine = 'unformatted_single_line',
+    MultiLine = 'multi_line',
+    Email = 'email',
+    PhoneNumber = 'phone_number',
+    DomainName = 'domain_name',
+    IpAddress = 'ip_address',
+    PhysicalAddress = 'physical_address',
+    PostalCode = 'postal_code'
+}
+export enum ObjectTypePropertyCreateNumberDisplayHintEnum {
+    Unformatted = 'unformatted',
+    Formatted = 'formatted',
+    Currency = 'currency',
+    Percentage = 'percentage',
+    Duration = 'duration',
+    Probability = 'probability'
+}
 

@@ -16,7 +16,7 @@
 */
 export class PipelinePatchInput {
     /**
-    * Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it's provided in any other call, the request will fail and a `400 Bad Request` will be returned.
+    * Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it\'s provided in any other call, the request will fail and a `400 Bad Request` will be returned.
     */
     'archived'?: boolean;
     /**
@@ -24,7 +24,7 @@ export class PipelinePatchInput {
     */
     'displayOrder'?: number;
     /**
-    * A unique label used to organize pipelines in HubSpot's UI
+    * A unique label used to organize pipelines in HubSpot\'s UI
     */
     'label'?: string;
 

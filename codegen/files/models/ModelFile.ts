@@ -77,7 +77,7 @@ export class ModelFile {
     */
     'id': string;
     /**
-    * Default hosting URL of the file. This will use one of HubSpot's provided URLs to serve the file.
+    * Default hosting URL of the file. This will use one of HubSpot\'s provided URLs to serve the file.
     */
     'defaultHostingUrl'?: string;
     /**
@@ -216,5 +216,12 @@ export class ModelFile {
 }
 
 
-export type ModelFileAccessEnum = "PUBLIC_INDEXABLE" | "PUBLIC_NOT_INDEXABLE" | "HIDDEN_INDEXABLE" | "HIDDEN_NOT_INDEXABLE" | "HIDDEN_PRIVATE" | "PRIVATE" ;
+export enum ModelFileAccessEnum {
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
+    HiddenIndexable = 'HIDDEN_INDEXABLE',
+    HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
+    HiddenPrivate = 'HIDDEN_PRIVATE',
+    Private = 'PRIVATE'
+}
 

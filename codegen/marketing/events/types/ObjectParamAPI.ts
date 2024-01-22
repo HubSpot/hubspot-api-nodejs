@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
@@ -28,7 +29,7 @@ export interface AttendanceSubscriberStateChangesApiCreateRequest {
      */
     externalEventId: string
     /**
-     * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
+     * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @type string
      * @memberof AttendanceSubscriberStateChangesApicreate
      */
@@ -55,7 +56,7 @@ export interface AttendanceSubscriberStateChangesApiCreateByEmailRequest {
      */
     externalEventId: string
     /**
-     * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: &#39;register&#39;, &#39;attend&#39; or &#39;cancel&#39;.
+     * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @type string
      * @memberof AttendanceSubscriberStateChangesApicreateByEmail
      */
@@ -86,8 +87,26 @@ export class ObjectAttendanceSubscriberStateChangesApi {
      * Record
      * @param param the request object
      */
+    public createWithHttpInfo(param: AttendanceSubscriberStateChangesApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+        return this.api.createWithHttpInfo(param.externalEventId, param.subscriberState, param.batchInputMarketingEventSubscriber, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
+     * Record
+     * @param param the request object
+     */
     public create(param: AttendanceSubscriberStateChangesApiCreateRequest, options?: Configuration): Promise<BatchResponseSubscriberVidResponse> {
         return this.api.create(param.externalEventId, param.subscriberState, param.batchInputMarketingEventSubscriber, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
+     * Record
+     * @param param the request object
+     */
+    public createByEmailWithHttpInfo(param: AttendanceSubscriberStateChangesApiCreateByEmailRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+        return this.api.createByEmailWithHttpInfo(param.externalEventId, param.subscriberState, param.batchInputMarketingEventEmailSubscriber, param.externalAccountId,  options).toPromise();
     }
 
     /**
@@ -206,8 +225,26 @@ export class ObjectBasicApi {
      * Delete a marketing event
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Deletes an existing Marketing Event with the specified id, if one exists.
+     * Delete a marketing event
+     * @param param the request object
+     */
     public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.externalEventId, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Creates a new marketing event in HubSpot
+     * Create a marketing event
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        return this.api.createWithHttpInfo(param.marketingEventCreateRequestParams,  options).toPromise();
     }
 
     /**
@@ -224,8 +261,26 @@ export class ObjectBasicApi {
      * Mark a marketing event as cancelled
      * @param param the request object
      */
+    public doCancelWithHttpInfo(param: BasicApiDoCancelRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        return this.api.doCancelWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Mark a marketing event as cancelled.
+     * Mark a marketing event as cancelled
+     * @param param the request object
+     */
     public doCancel(param: BasicApiDoCancelRequest, options?: Configuration): Promise<MarketingEventDefaultResponse> {
         return this.api.doCancel(param.externalEventId, param.externalAccountId,  options).toPromise();
+    }
+
+    /**
+     * Returns the details of the Marketing Event with the specified id, if one exists.
+     * Get a marketing event
+     * @param param the request object
+     */
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicReadResponse>> {
+        return this.api.getByIdWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
     /**
@@ -242,8 +297,26 @@ export class ObjectBasicApi {
      * Create or update a marketing event
      * @param param the request object
      */
+    public replaceWithHttpInfo(param: BasicApiReplaceRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+        return this.api.replaceWithHttpInfo(param.externalEventId, param.marketingEventCreateRequestParams,  options).toPromise();
+    }
+
+    /**
+     * Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
+     * Create or update a marketing event
+     * @param param the request object
+     */
     public replace(param: BasicApiReplaceRequest, options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
         return this.api.replace(param.externalEventId, param.marketingEventCreateRequestParams,  options).toPromise();
+    }
+
+    /**
+     * Updates an existing Marketing Event with the specified id, if one exists.
+     * Update a marketing event
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+        return this.api.updateWithHttpInfo(param.externalEventId, param.externalAccountId, param.marketingEventUpdateRequestParams,  options).toPromise();
     }
 
     /**
@@ -290,8 +363,26 @@ export class ObjectBatchApi {
      * Delete multiple marketing events
      * @param param the request object
      */
+    public archiveBatchWithHttpInfo(param: BatchApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveBatchWithHttpInfo(param.batchInputMarketingEventExternalUniqueIdentifier,  options).toPromise();
+    }
+
+    /**
+     * Bulk delete a number of marketing events in HubSpot
+     * Delete multiple marketing events
+     * @param param the request object
+     */
     public archiveBatch(param: BatchApiArchiveBatchRequest, options?: Configuration): Promise<void> {
         return this.api.archiveBatch(param.batchInputMarketingEventExternalUniqueIdentifier,  options).toPromise();
+    }
+
+    /**
+     * Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
+     * Create or update multiple marketing events
+     * @param param the request object
+     */
+    public doUpsertWithHttpInfo(param: BatchApiDoUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
+        return this.api.doUpsertWithHttpInfo(param.batchInputMarketingEventCreateRequestParams,  options).toPromise();
     }
 
     /**
@@ -339,6 +430,13 @@ export class ObjectMarketingEventsExternalApi {
     /**
      * @param param the request object
      */
+    public completeWithHttpInfo(param: MarketingEventsExternalApiCompleteRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        return this.api.completeWithHttpInfo(param.externalEventId, param.externalAccountId, param.marketingEventCompleteRequestParams,  options).toPromise();
+    }
+
+    /**
+     * @param param the request object
+     */
     public complete(param: MarketingEventsExternalApiCompleteRequest, options?: Configuration): Promise<MarketingEventDefaultResponse> {
         return this.api.complete(param.externalEventId, param.externalAccountId, param.marketingEventCompleteRequestParams,  options).toPromise();
     }
@@ -362,6 +460,15 @@ export class ObjectSearchApi {
 
     public constructor(configuration: Configuration, requestFactory?: SearchApiRequestFactory, responseProcessor?: SearchApiResponseProcessor) {
         this.api = new ObservableSearchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Search for marketing events that have an event id that starts with the query string
+     * Search for marketing events
+     * @param param the request object
+     */
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging>> {
+        return this.api.doSearchWithHttpInfo(param.q,  options).toPromise();
     }
 
     /**
@@ -414,8 +521,26 @@ export class ObjectSettingsApi {
      * Update the application settings
      * @param param the request object
      */
+    public createWithHttpInfo(param: SettingsApiCreateRequest, options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
+        return this.api.createWithHttpInfo(param.appId, param.eventDetailSettingsUrl,  options).toPromise();
+    }
+
+    /**
+     * Create or update the current settings for the application.
+     * Update the application settings
+     * @param param the request object
+     */
     public create(param: SettingsApiCreateRequest, options?: Configuration): Promise<EventDetailSettings> {
         return this.api.create(param.appId, param.eventDetailSettingsUrl,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the current settings for the application.
+     * Retrieve the application settings
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
+        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
     /**
@@ -498,8 +623,26 @@ export class ObjectSubscriberStateChangesApi {
      * Record
      * @param param the request object
      */
+    public doEmailUpsertByIdWithHttpInfo(param: SubscriberStateChangesApiDoEmailUpsertByIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doEmailUpsertByIdWithHttpInfo(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
+    }
+
+    /**
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created.
+     * Record
+     * @param param the request object
+     */
     public doEmailUpsertById(param: SubscriberStateChangesApiDoEmailUpsertByIdRequest, options?: Configuration): Promise<void> {
         return this.api.doEmailUpsertById(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
+    }
+
+    /**
+     * Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids. Note that the contact must already exist in HubSpot; a contact will not be create.
+     * Record
+     * @param param the request object
+     */
+    public doUpsertByIdWithHttpInfo(param: SubscriberStateChangesApiDoUpsertByIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.doUpsertByIdWithHttpInfo(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventSubscriber,  options).toPromise();
     }
 
     /**

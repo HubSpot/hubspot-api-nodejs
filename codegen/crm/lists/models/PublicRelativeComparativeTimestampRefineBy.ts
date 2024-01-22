@@ -48,5 +48,7 @@ export class PublicRelativeComparativeTimestampRefineBy {
 }
 
 
-export type PublicRelativeComparativeTimestampRefineByTypeEnum = "RELATIVE_COMPARATIVE" ;
+export enum PublicRelativeComparativeTimestampRefineByTypeEnum {
+    RelativeComparative = 'RELATIVE_COMPARATIVE'
+}
 

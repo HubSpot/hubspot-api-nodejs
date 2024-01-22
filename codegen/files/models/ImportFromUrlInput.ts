@@ -17,7 +17,7 @@ export class ImportFromUrlInput {
     */
     'folderPath'?: string;
     /**
-    * PUBLIC_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines can index the file. PUBLIC_NOT_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines *can't* index the file. PRIVATE: File is NOT publicly accessible. Requires a signed URL to see content. Search engines *can't* index the file. 
+    * PUBLIC_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines can index the file. PUBLIC_NOT_INDEXABLE: File is publicly accessible by anyone who has the URL. Search engines *can\'t* index the file. PRIVATE: File is NOT publicly accessible. Requires a signed URL to see content. Search engines *can\'t* index the file. 
     */
     'access': ImportFromUrlInputAccessEnum;
     /**
@@ -37,7 +37,7 @@ export class ImportFromUrlInput {
     */
     'ttl'?: string;
     /**
-    * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file's name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
+    * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file\'s name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
     */
     'overwrite'?: boolean;
     /**
@@ -116,7 +116,21 @@ export class ImportFromUrlInput {
 }
 
 
-export type ImportFromUrlInputAccessEnum = "PUBLIC_INDEXABLE" | "PUBLIC_NOT_INDEXABLE" | "HIDDEN_INDEXABLE" | "HIDDEN_NOT_INDEXABLE" | "HIDDEN_PRIVATE" | "PRIVATE" ;
-export type ImportFromUrlInputDuplicateValidationScopeEnum = "ENTIRE_PORTAL" | "EXACT_FOLDER" ;
-export type ImportFromUrlInputDuplicateValidationStrategyEnum = "NONE" | "REJECT" | "RETURN_EXISTING" ;
+export enum ImportFromUrlInputAccessEnum {
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
+    HiddenIndexable = 'HIDDEN_INDEXABLE',
+    HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
+    HiddenPrivate = 'HIDDEN_PRIVATE',
+    Private = 'PRIVATE'
+}
+export enum ImportFromUrlInputDuplicateValidationScopeEnum {
+    EntirePortal = 'ENTIRE_PORTAL',
+    ExactFolder = 'EXACT_FOLDER'
+}
+export enum ImportFromUrlInputDuplicateValidationStrategyEnum {
+    None = 'NONE',
+    Reject = 'REJECT',
+    ReturnExisting = 'RETURN_EXISTING'
+}
 

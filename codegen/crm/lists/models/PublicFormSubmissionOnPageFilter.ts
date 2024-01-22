@@ -69,6 +69,11 @@ export class PublicFormSubmissionOnPageFilter {
 }
 
 
-export type PublicFormSubmissionOnPageFilterFilterTypeEnum = "FORM_SUBMISSION_ON_PAGE" ;
-export type PublicFormSubmissionOnPageFilterOperatorEnum = "FILLED_OUT" | "NOT_FILLED_OUT" ;
+export enum PublicFormSubmissionOnPageFilterFilterTypeEnum {
+    FormSubmissionOnPage = 'FORM_SUBMISSION_ON_PAGE'
+}
+export enum PublicFormSubmissionOnPageFilterOperatorEnum {
+    FilledOut = 'FILLED_OUT',
+    NotFilledOut = 'NOT_FILLED_OUT'
+}
 

@@ -1,6 +1,6 @@
 /**
  * CMS Performance
- * Use these endpoints to get a time series view of your website's performance.
+ * Use these endpoints to get a time series view of your website\'s performance.
  *
  * OpenAPI spec version: v3
  * 
@@ -76,6 +76,28 @@ export class PublicPerformanceResponse {
 }
 
 
-export type PublicPerformanceResponsePeriodEnum = "ONE_MINUTE" | "FIVE_MINUTES" | "TEN_MINUTES" | "FIFTEEN_MINUTES" | "THIRTY_MINUTES" | "ONE_HOUR" | "FOUR_HOURS" | "TWELVE_HOURS" | "ONE_DAY" | "ONE_WEEK" ;
-export type PublicPerformanceResponseIntervalEnum = "ONE_MINUTE" | "FIVE_MINUTES" | "TEN_MINUTES" | "FIFTEEN_MINUTES" | "THIRTY_MINUTES" | "ONE_HOUR" | "FOUR_HOURS" | "TWELVE_HOURS" | "ONE_DAY" | "ONE_WEEK" ;
+export enum PublicPerformanceResponsePeriodEnum {
+    OneMinute = 'ONE_MINUTE',
+    FiveMinutes = 'FIVE_MINUTES',
+    TenMinutes = 'TEN_MINUTES',
+    FifteenMinutes = 'FIFTEEN_MINUTES',
+    ThirtyMinutes = 'THIRTY_MINUTES',
+    OneHour = 'ONE_HOUR',
+    FourHours = 'FOUR_HOURS',
+    TwelveHours = 'TWELVE_HOURS',
+    OneDay = 'ONE_DAY',
+    OneWeek = 'ONE_WEEK'
+}
+export enum PublicPerformanceResponseIntervalEnum {
+    OneMinute = 'ONE_MINUTE',
+    FiveMinutes = 'FIVE_MINUTES',
+    TenMinutes = 'TEN_MINUTES',
+    FifteenMinutes = 'FIFTEEN_MINUTES',
+    ThirtyMinutes = 'THIRTY_MINUTES',
+    OneHour = 'ONE_HOUR',
+    FourHours = 'FOUR_HOURS',
+    TwelveHours = 'TWELVE_HOURS',
+    OneDay = 'ONE_DAY',
+    OneWeek = 'ONE_WEEK'
+}
 

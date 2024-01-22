@@ -54,6 +54,12 @@ export class LegalConsentOptionsLegitimateInterest {
 }
 
 
-export type LegalConsentOptionsLegitimateInterestTypeEnum = "legitimate_interest" ;
-export type LegalConsentOptionsLegitimateInterestLawfulBasisEnum = "lead" | "client" | "other" ;
+export enum LegalConsentOptionsLegitimateInterestTypeEnum {
+    LegitimateInterest = 'legitimate_interest'
+}
+export enum LegalConsentOptionsLegitimateInterestLawfulBasisEnum {
+    Lead = 'lead',
+    Client = 'client',
+    Other = 'other'
+}
 

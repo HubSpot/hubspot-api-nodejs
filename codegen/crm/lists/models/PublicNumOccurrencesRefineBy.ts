@@ -47,5 +47,7 @@ export class PublicNumOccurrencesRefineBy {
 }
 
 
-export type PublicNumOccurrencesRefineByTypeEnum = "NUM_OCCURRENCES" ;
+export enum PublicNumOccurrencesRefineByTypeEnum {
+    NumOccurrences = 'NUM_OCCURRENCES'
+}
 

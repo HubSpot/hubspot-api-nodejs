@@ -90,6 +90,15 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
 }
 
 
-export type HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum = "implicit_consent_to_process" ;
-export type HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum = "lead" | "client" | "other" ;
+export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum {
+    None = 'none',
+    LegitimateInterest = 'legitimate_interest',
+    ExplicitConsentToProcess = 'explicit_consent_to_process',
+    ImplicitConsentToProcess = 'implicit_consent_to_process'
+}
+export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum {
+    Lead = 'lead',
+    Client = 'client',
+    Other = 'other'
+}
 

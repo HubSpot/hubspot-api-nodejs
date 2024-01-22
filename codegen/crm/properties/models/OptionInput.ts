@@ -13,7 +13,7 @@
 
 export class OptionInput {
     /**
-    * Hidden options won't be shown in HubSpot.
+    * Hidden options won\'t be shown in HubSpot.
     */
     'hidden': boolean;
     /**

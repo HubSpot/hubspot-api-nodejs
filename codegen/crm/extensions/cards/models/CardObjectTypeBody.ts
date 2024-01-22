@@ -17,7 +17,7 @@ export class CardObjectTypeBody {
     */
     'name': CardObjectTypeBodyNameEnum;
     /**
-    * An array of properties that should be sent to this card's target URL when the data fetch request is made. Must be valid properties for the corresponding CRM object type.
+    * An array of properties that should be sent to this card\'s target URL when the data fetch request is made. Must be valid properties for the corresponding CRM object type.
     */
     'propertiesToSend': Array<string>;
 
@@ -46,5 +46,11 @@ export class CardObjectTypeBody {
 }
 
 
-export type CardObjectTypeBodyNameEnum = "contacts" | "deals" | "companies" | "tickets" | "marketing_events" ;
+export enum CardObjectTypeBodyNameEnum {
+    Contacts = 'contacts',
+    Deals = 'deals',
+    Companies = 'companies',
+    Tickets = 'tickets',
+    MarketingEvents = 'marketing_events'
+}
 

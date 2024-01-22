@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { PublicPerformanceResponse } from '../models/PublicPerformanceResponse';
@@ -116,7 +117,16 @@ export class ObjectPublicPerformanceApi {
 
     /**
      * Returns time series data website performance data for the given domain and/or path.
-     * View your website's performance.
+     * View your website\'s performance.
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: PublicPerformanceApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<PublicPerformanceResponse>> {
+        return this.api.getPageWithHttpInfo(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
+    }
+
+    /**
+     * Returns time series data website performance data for the given domain and/or path.
+     * View your website\'s performance.
      * @param param the request object
      */
     public getPage(param: PublicPerformanceApiGetPageRequest = {}, options?: Configuration): Promise<PublicPerformanceResponse> {
@@ -125,7 +135,16 @@ export class ObjectPublicPerformanceApi {
 
     /**
      * Returns uptime time series website performance data for the given domain.
-     * View your website's uptime.
+     * View your website\'s uptime.
+     * @param param the request object
+     */
+    public getUptimeWithHttpInfo(param: PublicPerformanceApiGetUptimeRequest = {}, options?: Configuration): Promise<HttpInfo<PublicPerformanceResponse>> {
+        return this.api.getUptimeWithHttpInfo(param.domain, param.path, param.pad, param.sum, param.period, param.interval, param.start, param.end,  options).toPromise();
+    }
+
+    /**
+     * Returns uptime time series website performance data for the given domain.
+     * View your website\'s uptime.
      * @param param the request object
      */
     public getUptime(param: PublicPerformanceApiGetUptimeRequest = {}, options?: Configuration): Promise<PublicPerformanceResponse> {

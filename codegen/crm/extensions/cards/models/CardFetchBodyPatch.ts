@@ -64,5 +64,8 @@ export class CardFetchBodyPatch {
 }
 
 
-export type CardFetchBodyPatchCardTypeEnum = "EXTERNAL" | "SERVERLESS" ;
+export enum CardFetchBodyPatchCardTypeEnum {
+    External = 'EXTERNAL',
+    Serverless = 'SERVERLESS'
+}
 

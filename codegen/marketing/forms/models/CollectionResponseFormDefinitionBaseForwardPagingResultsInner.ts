@@ -106,5 +106,7 @@ export class CollectionResponseFormDefinitionBaseForwardPagingResultsInner {
 }
 
 
-export type CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum = "hubspot" ;
+export enum CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum {
+    Hubspot = 'hubspot'
+}
 

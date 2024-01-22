@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
@@ -13,6 +14,16 @@ export class PromiseBehavioralEventsTrackingApi {
         responseProcessor?: BehavioralEventsTrackingApiResponseProcessor
     ) {
         this.api = new ObservableBehavioralEventsTrackingApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Endpoint to send an instance of a behavioral event
+     * Sends Custom Behavioral Event
+     * @param behavioralEventHttpCompletionRequest 
+     */
+    public sendWithHttpInfo(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.sendWithHttpInfo(behavioralEventHttpCompletionRequest, _options);
+        return result.toPromise();
     }
 
     /**
