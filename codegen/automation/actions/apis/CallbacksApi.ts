@@ -14,9 +14,10 @@ import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 /**
  * no description
  */
-export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
+export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Completes a single callback
      * @param callbackId 
      * @param callbackCompletionRequest 
      */
@@ -25,13 +26,13 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'callbackId' is not null or undefined
         if (callbackId === null || callbackId === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "complete", "callbackId");
+            throw new RequiredError("CallbacksApi", "complete", "callbackId");
         }
 
 
         // verify required parameter 'callbackCompletionRequest' is not null or undefined
         if (callbackCompletionRequest === null || callbackCompletionRequest === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "complete", "callbackCompletionRequest");
+            throw new RequiredError("CallbacksApi", "complete", "callbackCompletionRequest");
         }
 
 
@@ -71,6 +72,7 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Completes a batch of callbacks
      * @param batchInputCallbackCompletionBatchRequest 
      */
     public async completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
@@ -78,7 +80,7 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'batchInputCallbackCompletionBatchRequest' is not null or undefined
         if (batchInputCallbackCompletionBatchRequest === null || batchInputCallbackCompletionBatchRequest === undefined) {
-            throw new RequiredError("PublicCallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
+            throw new RequiredError("CallbacksApi", "completeBatch", "batchInputCallbackCompletionBatchRequest");
         }
 
 
@@ -118,7 +120,7 @@ export class PublicCallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class PublicCallbacksApiResponseProcessor {
+export class CallbacksApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

@@ -16,9 +16,10 @@ import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPat
 /**
  * no description
  */
-export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFactory {
+export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive an extension definition
      * @param definitionId 
      * @param appId 
      */
@@ -27,13 +28,13 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "archive", "definitionId");
+            throw new RequiredError("DefinitionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "archive", "appId");
+            throw new RequiredError("DefinitionsApi", "archive", "appId");
         }
 
 
@@ -63,6 +64,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
     }
 
     /**
+     * Create a new extension definition
      * @param appId 
      * @param publicActionDefinitionEgg 
      */
@@ -71,13 +73,13 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "create", "appId");
+            throw new RequiredError("DefinitionsApi", "create", "appId");
         }
 
 
         // verify required parameter 'publicActionDefinitionEgg' is not null or undefined
         if (publicActionDefinitionEgg === null || publicActionDefinitionEgg === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "create", "publicActionDefinitionEgg");
+            throw new RequiredError("DefinitionsApi", "create", "publicActionDefinitionEgg");
         }
 
 
@@ -117,6 +119,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
     }
 
     /**
+     * Get extension definition by Id
      * @param definitionId 
      * @param appId 
      * @param archived Whether to return only results that have been archived.
@@ -126,13 +129,13 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "getById", "definitionId");
+            throw new RequiredError("DefinitionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "getById", "appId");
+            throw new RequiredError("DefinitionsApi", "getById", "appId");
         }
 
 
@@ -168,6 +171,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
     }
 
     /**
+     * Get paged extension definitions
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -178,7 +182,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "getPage", "appId");
+            throw new RequiredError("DefinitionsApi", "getPage", "appId");
         }
 
 
@@ -225,6 +229,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
     }
 
     /**
+     * Patch an existing extension definition
      * @param definitionId 
      * @param appId 
      * @param publicActionDefinitionPatch 
@@ -234,19 +239,19 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "update", "definitionId");
+            throw new RequiredError("DefinitionsApi", "update", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "update", "appId");
+            throw new RequiredError("DefinitionsApi", "update", "appId");
         }
 
 
         // verify required parameter 'publicActionDefinitionPatch' is not null or undefined
         if (publicActionDefinitionPatch === null || publicActionDefinitionPatch === undefined) {
-            throw new RequiredError("PublicActionDefinitionsApi", "update", "publicActionDefinitionPatch");
+            throw new RequiredError("DefinitionsApi", "update", "publicActionDefinitionPatch");
         }
 
 
@@ -288,7 +293,7 @@ export class PublicActionDefinitionsApiRequestFactory extends BaseAPIRequestFact
 
 }
 
-export class PublicActionDefinitionsApiResponseProcessor {
+export class DefinitionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
