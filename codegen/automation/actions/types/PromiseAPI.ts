@@ -11,21 +11,60 @@ import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPat
 import { PublicActionFunction } from '../models/PublicActionFunction';
 import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 import { PublicActionRevision } from '../models/PublicActionRevision';
-import { ObservablePublicActionDefinitionsApi } from './ObservableAPI';
+import { ObservableCallbacksApi } from './ObservableAPI';
 
-import { PublicActionDefinitionsApiRequestFactory, PublicActionDefinitionsApiResponseProcessor} from "../apis/PublicActionDefinitionsApi";
-export class PromisePublicActionDefinitionsApi {
-    private api: ObservablePublicActionDefinitionsApi
+import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
+export class PromiseCallbacksApi {
+    private api: ObservableCallbacksApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionDefinitionsApiRequestFactory,
-        responseProcessor?: PublicActionDefinitionsApiResponseProcessor
+        requestFactory?: CallbacksApiRequestFactory,
+        responseProcessor?: CallbacksApiResponseProcessor
     ) {
-        this.api = new ObservablePublicActionDefinitionsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableCallbacksApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
+     */
+    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.complete(callbackId, callbackCompletionRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableDefinitionsApi } from './ObservableAPI';
+
+import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
+export class PromiseDefinitionsApi {
+    private api: ObservableDefinitionsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DefinitionsApiRequestFactory,
+        responseProcessor?: DefinitionsApiResponseProcessor
+    ) {
+        this.api = new ObservableDefinitionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Archive an extension definition
      * @param definitionId 
      * @param appId 
      */
@@ -35,6 +74,7 @@ export class PromisePublicActionDefinitionsApi {
     }
 
     /**
+     * Create a new extension definition
      * @param appId 
      * @param publicActionDefinitionEgg 
      */
@@ -44,6 +84,7 @@ export class PromisePublicActionDefinitionsApi {
     }
 
     /**
+     * Get extension definition by Id
      * @param definitionId 
      * @param appId 
      * @param archived Whether to return only results that have been archived.
@@ -54,6 +95,7 @@ export class PromisePublicActionDefinitionsApi {
     }
 
     /**
+     * Get paged extension definitions
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -65,6 +107,7 @@ export class PromisePublicActionDefinitionsApi {
     }
 
     /**
+     * Patch an existing extension definition
      * @param definitionId 
      * @param appId 
      * @param publicActionDefinitionPatch 
@@ -79,21 +122,22 @@ export class PromisePublicActionDefinitionsApi {
 
 
 
-import { ObservablePublicActionFunctionsApi } from './ObservableAPI';
+import { ObservableFunctionsApi } from './ObservableAPI';
 
-import { PublicActionFunctionsApiRequestFactory, PublicActionFunctionsApiResponseProcessor} from "../apis/PublicActionFunctionsApi";
-export class PromisePublicActionFunctionsApi {
-    private api: ObservablePublicActionFunctionsApi
+import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
+export class PromiseFunctionsApi {
+    private api: ObservableFunctionsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionFunctionsApiRequestFactory,
-        responseProcessor?: PublicActionFunctionsApiResponseProcessor
+        requestFactory?: FunctionsApiRequestFactory,
+        responseProcessor?: FunctionsApiResponseProcessor
     ) {
-        this.api = new ObservablePublicActionFunctionsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableFunctionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
+     * Archive a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -105,6 +149,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Delete a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -115,6 +160,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -127,6 +173,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -138,6 +185,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Get all functions by a type for a given definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -148,6 +196,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Get a function for a given definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -159,6 +208,7 @@ export class PromisePublicActionFunctionsApi {
     }
 
     /**
+     * Get all functions for a given definition
      * @param definitionId 
      * @param appId 
      */
@@ -172,21 +222,22 @@ export class PromisePublicActionFunctionsApi {
 
 
 
-import { ObservablePublicActionRevisionsApi } from './ObservableAPI';
+import { ObservableRevisionsApi } from './ObservableAPI';
 
-import { PublicActionRevisionsApiRequestFactory, PublicActionRevisionsApiResponseProcessor} from "../apis/PublicActionRevisionsApi";
-export class PromisePublicActionRevisionsApi {
-    private api: ObservablePublicActionRevisionsApi
+import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
+export class PromiseRevisionsApi {
+    private api: ObservableRevisionsApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionRevisionsApiRequestFactory,
-        responseProcessor?: PublicActionRevisionsApiResponseProcessor
+        requestFactory?: RevisionsApiRequestFactory,
+        responseProcessor?: RevisionsApiResponseProcessor
     ) {
-        this.api = new ObservablePublicActionRevisionsApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableRevisionsApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
+     * Gets a revision for a given definition by revision id
      * @param definitionId 
      * @param revisionId 
      * @param appId 
@@ -197,6 +248,7 @@ export class PromisePublicActionRevisionsApi {
     }
 
     /**
+     * Get all revisions for a given definition
      * @param definitionId 
      * @param appId 
      * @param limit The maximum number of results to display per page.
@@ -204,42 +256,6 @@ export class PromisePublicActionRevisionsApi {
      */
     public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
         const result = this.api.getPage(definitionId, appId, limit, after, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservablePublicCallbacksApi } from './ObservableAPI';
-
-import { PublicCallbacksApiRequestFactory, PublicCallbacksApiResponseProcessor} from "../apis/PublicCallbacksApi";
-export class PromisePublicCallbacksApi {
-    private api: ObservablePublicCallbacksApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicCallbacksApiRequestFactory,
-        responseProcessor?: PublicCallbacksApiResponseProcessor
-    ) {
-        this.api = new ObservablePublicCallbacksApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param callbackId 
-     * @param callbackCompletionRequest 
-     */
-    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.complete(callbackId, callbackCompletionRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param batchInputCallbackCompletionBatchRequest 
-     */
-    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
         return result.toPromise();
     }
 

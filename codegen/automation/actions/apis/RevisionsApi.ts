@@ -14,9 +14,10 @@ import { PublicActionRevision } from '../models/PublicActionRevision';
 /**
  * no description
  */
-export class PublicActionRevisionsApiRequestFactory extends BaseAPIRequestFactory {
+export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Gets a revision for a given definition by revision id
      * @param definitionId 
      * @param revisionId 
      * @param appId 
@@ -26,19 +27,19 @@ export class PublicActionRevisionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionRevisionsApi", "getById", "definitionId");
+            throw new RequiredError("RevisionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'revisionId' is not null or undefined
         if (revisionId === null || revisionId === undefined) {
-            throw new RequiredError("PublicActionRevisionsApi", "getById", "revisionId");
+            throw new RequiredError("RevisionsApi", "getById", "revisionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionRevisionsApi", "getById", "appId");
+            throw new RequiredError("RevisionsApi", "getById", "appId");
         }
 
 
@@ -69,6 +70,7 @@ export class PublicActionRevisionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Get all revisions for a given definition
      * @param definitionId 
      * @param appId 
      * @param limit The maximum number of results to display per page.
@@ -79,13 +81,13 @@ export class PublicActionRevisionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionRevisionsApi", "getPage", "definitionId");
+            throw new RequiredError("RevisionsApi", "getPage", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionRevisionsApi", "getPage", "appId");
+            throw new RequiredError("RevisionsApi", "getPage", "appId");
         }
 
 
@@ -128,7 +130,7 @@ export class PublicActionRevisionsApiRequestFactory extends BaseAPIRequestFactor
 
 }
 
-export class PublicActionRevisionsApiResponseProcessor {
+export class RevisionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

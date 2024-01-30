@@ -15,9 +15,10 @@ import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionId
 /**
  * no description
  */
-export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactory {
+export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -28,25 +29,25 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archive", "definitionId");
+            throw new RequiredError("FunctionsApi", "archive", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archive", "functionType");
+            throw new RequiredError("FunctionsApi", "archive", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archive", "functionId");
+            throw new RequiredError("FunctionsApi", "archive", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archive", "appId");
+            throw new RequiredError("FunctionsApi", "archive", "appId");
         }
 
 
@@ -78,6 +79,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Delete a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -87,19 +89,19 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "definitionId");
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "functionType");
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "archiveByFunctionType", "appId");
+            throw new RequiredError("FunctionsApi", "archiveByFunctionType", "appId");
         }
 
 
@@ -130,6 +132,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -141,31 +144,31 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "definitionId");
+            throw new RequiredError("FunctionsApi", "createOrReplace", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "functionType");
+            throw new RequiredError("FunctionsApi", "createOrReplace", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "functionId");
+            throw new RequiredError("FunctionsApi", "createOrReplace", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "appId");
+            throw new RequiredError("FunctionsApi", "createOrReplace", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplace", "body");
+            throw new RequiredError("FunctionsApi", "createOrReplace", "body");
         }
 
 
@@ -208,6 +211,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -218,25 +222,25 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "definitionId");
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "functionType");
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "appId");
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "appId");
         }
 
 
         // verify required parameter 'body' is not null or undefined
         if (body === null || body === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "createOrReplaceByFunctionType", "body");
+            throw new RequiredError("FunctionsApi", "createOrReplaceByFunctionType", "body");
         }
 
 
@@ -278,6 +282,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Get all functions by a type for a given definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -287,19 +292,19 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "definitionId");
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "functionType");
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "functionType");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getByFunctionType", "appId");
+            throw new RequiredError("FunctionsApi", "getByFunctionType", "appId");
         }
 
 
@@ -330,6 +335,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Get a function for a given definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -340,25 +346,25 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getById", "definitionId");
+            throw new RequiredError("FunctionsApi", "getById", "definitionId");
         }
 
 
         // verify required parameter 'functionType' is not null or undefined
         if (functionType === null || functionType === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getById", "functionType");
+            throw new RequiredError("FunctionsApi", "getById", "functionType");
         }
 
 
         // verify required parameter 'functionId' is not null or undefined
         if (functionId === null || functionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getById", "functionId");
+            throw new RequiredError("FunctionsApi", "getById", "functionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getById", "appId");
+            throw new RequiredError("FunctionsApi", "getById", "appId");
         }
 
 
@@ -390,6 +396,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
     }
 
     /**
+     * Get all functions for a given definition
      * @param definitionId 
      * @param appId 
      */
@@ -398,13 +405,13 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
         // verify required parameter 'definitionId' is not null or undefined
         if (definitionId === null || definitionId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getPage", "definitionId");
+            throw new RequiredError("FunctionsApi", "getPage", "definitionId");
         }
 
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("PublicActionFunctionsApi", "getPage", "appId");
+            throw new RequiredError("FunctionsApi", "getPage", "appId");
         }
 
 
@@ -435,7 +442,7 @@ export class PublicActionFunctionsApiRequestFactory extends BaseAPIRequestFactor
 
 }
 
-export class PublicActionFunctionsApiResponseProcessor {
+export class FunctionsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

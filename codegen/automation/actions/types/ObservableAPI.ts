@@ -14,23 +14,89 @@ import { PublicActionFunction } from '../models/PublicActionFunction';
 import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 import { PublicActionRevision } from '../models/PublicActionRevision';
 
-import { PublicActionDefinitionsApiRequestFactory, PublicActionDefinitionsApiResponseProcessor} from "../apis/PublicActionDefinitionsApi";
-export class ObservablePublicActionDefinitionsApi {
-    private requestFactory: PublicActionDefinitionsApiRequestFactory;
-    private responseProcessor: PublicActionDefinitionsApiResponseProcessor;
+import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
+export class ObservableCallbacksApi {
+    private requestFactory: CallbacksApiRequestFactory;
+    private responseProcessor: CallbacksApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionDefinitionsApiRequestFactory,
-        responseProcessor?: PublicActionDefinitionsApiResponseProcessor
+        requestFactory?: CallbacksApiRequestFactory,
+        responseProcessor?: CallbacksApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionDefinitionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionDefinitionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new CallbacksApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new CallbacksApiResponseProcessor();
     }
 
     /**
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
+     */
+    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.complete(callbackId, callbackCompletionRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.complete(rsp)));
+            }));
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatch(rsp)));
+            }));
+    }
+
+}
+
+import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "../apis/DefinitionsApi";
+export class ObservableDefinitionsApi {
+    private requestFactory: DefinitionsApiRequestFactory;
+    private responseProcessor: DefinitionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DefinitionsApiRequestFactory,
+        responseProcessor?: DefinitionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new DefinitionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new DefinitionsApiResponseProcessor();
+    }
+
+    /**
+     * Archive an extension definition
      * @param definitionId 
      * @param appId 
      */
@@ -54,6 +120,7 @@ export class ObservablePublicActionDefinitionsApi {
     }
 
     /**
+     * Create a new extension definition
      * @param appId 
      * @param publicActionDefinitionEgg 
      */
@@ -77,6 +144,7 @@ export class ObservablePublicActionDefinitionsApi {
     }
 
     /**
+     * Get extension definition by Id
      * @param definitionId 
      * @param appId 
      * @param archived Whether to return only results that have been archived.
@@ -101,6 +169,7 @@ export class ObservablePublicActionDefinitionsApi {
     }
 
     /**
+     * Get paged extension definitions
      * @param appId 
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -126,6 +195,7 @@ export class ObservablePublicActionDefinitionsApi {
     }
 
     /**
+     * Patch an existing extension definition
      * @param definitionId 
      * @param appId 
      * @param publicActionDefinitionPatch 
@@ -151,23 +221,24 @@ export class ObservablePublicActionDefinitionsApi {
 
 }
 
-import { PublicActionFunctionsApiRequestFactory, PublicActionFunctionsApiResponseProcessor} from "../apis/PublicActionFunctionsApi";
-export class ObservablePublicActionFunctionsApi {
-    private requestFactory: PublicActionFunctionsApiRequestFactory;
-    private responseProcessor: PublicActionFunctionsApiResponseProcessor;
+import { FunctionsApiRequestFactory, FunctionsApiResponseProcessor} from "../apis/FunctionsApi";
+export class ObservableFunctionsApi {
+    private requestFactory: FunctionsApiRequestFactory;
+    private responseProcessor: FunctionsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionFunctionsApiRequestFactory,
-        responseProcessor?: PublicActionFunctionsApiResponseProcessor
+        requestFactory?: FunctionsApiRequestFactory,
+        responseProcessor?: FunctionsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionFunctionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionFunctionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new FunctionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new FunctionsApiResponseProcessor();
     }
 
     /**
+     * Archive a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -193,6 +264,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Delete a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -217,6 +289,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -243,6 +316,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Insert a function for a definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -268,6 +342,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Get all functions by a type for a given definition
      * @param definitionId 
      * @param functionType 
      * @param appId 
@@ -292,6 +367,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Get a function for a given definition
      * @param definitionId 
      * @param functionType 
      * @param functionId 
@@ -317,6 +393,7 @@ export class ObservablePublicActionFunctionsApi {
     }
 
     /**
+     * Get all functions for a given definition
      * @param definitionId 
      * @param appId 
      */
@@ -341,23 +418,24 @@ export class ObservablePublicActionFunctionsApi {
 
 }
 
-import { PublicActionRevisionsApiRequestFactory, PublicActionRevisionsApiResponseProcessor} from "../apis/PublicActionRevisionsApi";
-export class ObservablePublicActionRevisionsApi {
-    private requestFactory: PublicActionRevisionsApiRequestFactory;
-    private responseProcessor: PublicActionRevisionsApiResponseProcessor;
+import { RevisionsApiRequestFactory, RevisionsApiResponseProcessor} from "../apis/RevisionsApi";
+export class ObservableRevisionsApi {
+    private requestFactory: RevisionsApiRequestFactory;
+    private responseProcessor: RevisionsApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicActionRevisionsApiRequestFactory,
-        responseProcessor?: PublicActionRevisionsApiResponseProcessor
+        requestFactory?: RevisionsApiRequestFactory,
+        responseProcessor?: RevisionsApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicActionRevisionsApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicActionRevisionsApiResponseProcessor();
+        this.requestFactory = requestFactory || new RevisionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new RevisionsApiResponseProcessor();
     }
 
     /**
+     * Gets a revision for a given definition by revision id
      * @param definitionId 
      * @param revisionId 
      * @param appId 
@@ -382,6 +460,7 @@ export class ObservablePublicActionRevisionsApi {
     }
 
     /**
+     * Get all revisions for a given definition
      * @param definitionId 
      * @param appId 
      * @param limit The maximum number of results to display per page.
@@ -403,69 +482,6 @@ export class ObservablePublicActionRevisionsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
-            }));
-    }
-
-}
-
-import { PublicCallbacksApiRequestFactory, PublicCallbacksApiResponseProcessor} from "../apis/PublicCallbacksApi";
-export class ObservablePublicCallbacksApi {
-    private requestFactory: PublicCallbacksApiRequestFactory;
-    private responseProcessor: PublicCallbacksApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicCallbacksApiRequestFactory,
-        responseProcessor?: PublicCallbacksApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicCallbacksApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicCallbacksApiResponseProcessor();
-    }
-
-    /**
-     * @param callbackId 
-     * @param callbackCompletionRequest 
-     */
-    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.complete(callbackId, callbackCompletionRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.complete(rsp)));
-            }));
-    }
-
-    /**
-     * @param batchInputCallbackCompletionBatchRequest 
-     */
-    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatch(rsp)));
             }));
     }
 
