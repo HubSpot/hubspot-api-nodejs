@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -451,10 +451,10 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -470,7 +470,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -483,10 +483,10 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveByFunctionType(response: ResponseContext): Promise<void > {
+     public async archiveByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -502,7 +502,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -515,14 +515,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplace
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplace(response: ResponseContext): Promise<PublicActionFunctionIdentifier > {
+     public async createOrReplaceWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunctionIdentifier >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunctionIdentifier", ""
             ) as PublicActionFunctionIdentifier;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -538,7 +538,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunctionIdentifier", ""
             ) as PublicActionFunctionIdentifier;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -551,14 +551,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplaceByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplaceByFunctionType(response: ResponseContext): Promise<PublicActionFunctionIdentifier > {
+     public async createOrReplaceByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunctionIdentifier >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunctionIdentifier", ""
             ) as PublicActionFunctionIdentifier;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -574,7 +574,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunctionIdentifier", ""
             ) as PublicActionFunctionIdentifier;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -587,14 +587,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getByFunctionType(response: ResponseContext): Promise<PublicActionFunction > {
+     public async getByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunction >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunction", ""
             ) as PublicActionFunction;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -610,7 +610,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunction", ""
             ) as PublicActionFunction;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -623,14 +623,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<PublicActionFunction > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunction >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunction", ""
             ) as PublicActionFunction;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -646,7 +646,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicActionFunction", ""
             ) as PublicActionFunction;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -659,14 +659,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePublicActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
             ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -682,7 +682,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
             ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

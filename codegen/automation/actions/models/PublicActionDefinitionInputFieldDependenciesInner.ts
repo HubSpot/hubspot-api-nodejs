@@ -54,5 +54,7 @@ export class PublicActionDefinitionInputFieldDependenciesInner {
 }
 
 
-export type PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum = "CONDITIONAL_SINGLE_FIELD" ;
+export enum PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum {
+    ConditionalSingleField = 'CONDITIONAL_SINGLE_FIELD'
+}
 

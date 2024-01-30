@@ -55,5 +55,11 @@ export class InputFieldDefinition {
 }
 
 
-export type InputFieldDefinitionSupportedValueTypesEnum = "STATIC_VALUE" | "OBJECT_PROPERTY" | "FIELD_DATA" | "FETCHED_OBJECT_PROPERTY" | "ENROLLMENT_EVENT_PROPERTY" ;
+export enum InputFieldDefinitionSupportedValueTypesEnum {
+    StaticValue = 'STATIC_VALUE',
+    ObjectProperty = 'OBJECT_PROPERTY',
+    FieldData = 'FIELD_DATA',
+    FetchedObjectProperty = 'FETCHED_OBJECT_PROPERTY',
+    EnrollmentEventProperty = 'ENROLLMENT_EVENT_PROPERTY'
+}
 

@@ -47,5 +47,7 @@ export class PublicSingleFieldDependency {
 }
 
 
-export type PublicSingleFieldDependencyDependencyTypeEnum = "SINGLE_FIELD" ;
+export enum PublicSingleFieldDependencyDependencyTypeEnum {
+    SingleField = 'SINGLE_FIELD'
+}
 
