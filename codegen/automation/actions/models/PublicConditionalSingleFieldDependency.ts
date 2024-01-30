@@ -54,5 +54,7 @@ export class PublicConditionalSingleFieldDependency {
 }
 
 
-export type PublicConditionalSingleFieldDependencyDependencyTypeEnum = "CONDITIONAL_SINGLE_FIELD" ;
+export enum PublicConditionalSingleFieldDependencyDependencyTypeEnum {
+    ConditionalSingleField = 'CONDITIONAL_SINGLE_FIELD'
+}
 

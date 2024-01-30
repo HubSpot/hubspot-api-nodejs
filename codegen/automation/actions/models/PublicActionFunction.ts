@@ -47,5 +47,10 @@ export class PublicActionFunction {
 }
 
 
-export type PublicActionFunctionFunctionTypeEnum = "PRE_ACTION_EXECUTION" | "PRE_FETCH_OPTIONS" | "POST_FETCH_OPTIONS" | "POST_ACTION_EXECUTION" ;
+export enum PublicActionFunctionFunctionTypeEnum {
+    PreActionExecution = 'PRE_ACTION_EXECUTION',
+    PreFetchOptions = 'PRE_FETCH_OPTIONS',
+    PostFetchOptions = 'POST_FETCH_OPTIONS',
+    PostActionExecution = 'POST_ACTION_EXECUTION'
+}
 
