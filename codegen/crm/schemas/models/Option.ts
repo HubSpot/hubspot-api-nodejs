@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -16,6 +16,18 @@
 */
 export class Option {
     /**
+    * Hidden options will not be displayed in HubSpot.
+    */
+    'hidden': boolean;
+    /**
+    * Options are displayed in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
+    */
+    'displayOrder'?: number;
+    /**
+    * A description of the option.
+    */
+    'description'?: string;
+    /**
     * A human-readable option label that will be shown in HubSpot.
     */
     'label': string;
@@ -23,22 +35,28 @@ export class Option {
     * The internal value of the option, which must be used when setting the property value through the API.
     */
     'value': string;
-    /**
-    * A description of the option.
-    */
-    'description'?: string;
-    /**
-    * Options are displayed in order starting with the lowest positive integer value. Values of -1 will cause the option to be displayed after any positive values.
-    */
-    'displayOrder'?: number;
-    /**
-    * Hidden options will not be displayed in HubSpot.
-    */
-    'hidden': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "label",
             "baseName": "label",
@@ -49,24 +67,6 @@ export class Option {
             "name": "value",
             "baseName": "value",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
             "format": ""
         }    ];
 

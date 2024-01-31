@@ -48,5 +48,7 @@ export class PublicIntegrationEventFilter {
 }
 
 
-export type PublicIntegrationEventFilterFilterTypeEnum = "INTEGRATION_EVENT" ;
+export enum PublicIntegrationEventFilterFilterTypeEnum {
+    IntegrationEvent = 'INTEGRATION_EVENT'
+}
 

@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AssociationSpec } from '../models/AssociationSpec';
@@ -11,7 +12,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -148,6 +149,15 @@ export class ObjectBasicApi {
      * Delete
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.toObjectId,  options).toPromise();
+    }
+
+    /**
+     * deletes all associations between two records.
+     * Delete
+     * @param param the request object
+     */
     public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.objectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
@@ -157,8 +167,26 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair1>> {
+        return this.api.createWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
+    }
+
+    /**
+     * Set association labels between two records.
+     * Create
+     * @param param the request object
+     */
+    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair1> {
         return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     * Create Default
+     * @param param the request object
+     */
+    public createDefaultWithHttpInfo(param: BasicApiCreateDefaultRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        return this.api.createDefaultWithHttpInfo(param.fromObjectType, param.fromObjectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
     /**
@@ -168,6 +196,15 @@ export class ObjectBasicApi {
      */
     public createDefault(param: BasicApiCreateDefaultRequest, options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
         return this.api.createDefault(param.fromObjectType, param.fromObjectId, param.toObjectType, param.toObjectId,  options).toPromise();
+    }
+
+    /**
+     * List all associations of an object by object type. Limit 500 per call.
+     * List
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: BasicApiGetPageRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.after, param.limit,  options).toPromise();
     }
 
     /**
@@ -301,8 +338,26 @@ export class ObjectBatchApi {
      * Delete
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiArchive,  options).toPromise();
+    }
+
+    /**
+     * Batch delete associations for objects
+     * Delete
+     * @param param the request object
+     */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiArchive,  options).toPromise();
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param param the request object
+     */
+    public archiveLabelsWithHttpInfo(param: BatchApiArchiveLabelsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveLabelsWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
     /**
@@ -319,8 +374,26 @@ export class ObjectBatchApi {
      * Create
      * @param param the request object
      */
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
+        return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
+    }
+
+    /**
+     * Batch create associations for objects
+     * Create
+     * @param param the request object
+     */
     public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     *  Create Default Associations
+     * @param param the request object
+     */
+    public createDefaultWithHttpInfo(param: BatchApiCreateDefaultRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        return this.api.createDefaultWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicDefaultAssociationMultiPost,  options).toPromise();
     }
 
     /**
@@ -333,7 +406,16 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The 'after' field in a returned paging object  can be added alongside the 'id' to retrieve the next page of associations from that objectId. The 'link' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Read
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: BatchApiGetPageRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
+        return this.api.getPageWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicFetchAssociationsBatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
      * Read
      * @param param the request object
      */

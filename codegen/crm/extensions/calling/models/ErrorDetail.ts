@@ -1,5 +1,5 @@
 /**
- * Calling Extensions API
+ * Calling Extensions
  * Provides a way for apps to add custom calling options to a contact record. This works in conjunction with the [Calling SDK](#), which is used to build your phone/calling UI. The endpoints here allow your service to appear as an option to HubSpot users when they access the *Call* action on a contact record. Once accessed, your custom phone/calling UI will be displayed in an iframe at the specified URL with the specified dimensions on that record.
  *
  * OpenAPI spec version: v3
@@ -13,38 +13,32 @@
 
 export class ErrorDetail {
     /**
-    * A human readable message describing the error along with remediation steps where appropriate
+    * A specific category that contains more specific detail about the error
     */
-    'message': string;
-    /**
-    * The name of the field or parameter in which the error was found.
-    */
-    '_in'?: string;
+    'subCategory'?: string;
     /**
     * The status code associated with the error detail
     */
     'code'?: string;
     /**
-    * A specific category that contains more specific detail about the error
+    * The name of the field or parameter in which the error was found.
     */
-    'subCategory'?: string;
+    '_in'?: string;
     /**
     * Context about the error condition
     */
     'context'?: { [key: string]: Array<string>; };
+    /**
+    * A human readable message describing the error along with remediation steps where appropriate
+    */
+    'message': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "_in",
-            "baseName": "in",
+            "name": "subCategory",
+            "baseName": "subCategory",
             "type": "string",
             "format": ""
         },
@@ -55,8 +49,8 @@ export class ErrorDetail {
             "format": ""
         },
         {
-            "name": "subCategory",
-            "baseName": "subCategory",
+            "name": "_in",
+            "baseName": "in",
             "type": "string",
             "format": ""
         },
@@ -64,6 +58,12 @@ export class ErrorDetail {
             "name": "context",
             "baseName": "context",
             "type": "{ [key: string]: Array<string>; }",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
             "format": ""
         }    ];
 

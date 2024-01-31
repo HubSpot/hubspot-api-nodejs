@@ -15,6 +15,9 @@
 * The identification token to be passed to the Conversations JS API to identify the visitor
 */
 export class IdentificationTokenResponse {
+    /**
+    * 
+    */
     'token': string;
 
     static readonly discriminator: string | undefined = undefined;

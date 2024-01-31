@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -17,37 +17,25 @@ import { DisplayOption } from '../models/DisplayOption';
 */
 export class CardDisplayProperty {
     /**
-    * An internal identifier for this property. This value must be unique TODO.
-    */
-    'name': string;
-    /**
-    * The label for this property as you'd like it displayed to users.
-    */
-    'label': string;
-    /**
     * Type of data represented by this property.
     */
     'dataType': CardDisplayPropertyDataTypeEnum;
     /**
+    * An internal identifier for this property. This value must be unique TODO.
+    */
+    'name': string;
+    /**
     * An array of available options that can be displayed. Only used in when `dataType` is `STATUS`.
     */
     'options': Array<DisplayOption>;
+    /**
+    * The label for this property as you\'d like it displayed to users.
+    */
+    'label': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "dataType",
             "baseName": "dataType",
@@ -55,9 +43,21 @@ export class CardDisplayProperty {
             "format": ""
         },
         {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "options",
             "baseName": "options",
             "type": "Array<DisplayOption>",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         }    ];
 
@@ -70,5 +70,15 @@ export class CardDisplayProperty {
 }
 
 
-export type CardDisplayPropertyDataTypeEnum = "BOOLEAN" | "CURRENCY" | "DATE" | "DATETIME" | "EMAIL" | "LINK" | "NUMERIC" | "STRING" | "STATUS" ;
+export enum CardDisplayPropertyDataTypeEnum {
+    Boolean = 'BOOLEAN',
+    Currency = 'CURRENCY',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Email = 'EMAIL',
+    Link = 'LINK',
+    Numeric = 'NUMERIC',
+    String = 'STRING',
+    Status = 'STATUS'
+}
 

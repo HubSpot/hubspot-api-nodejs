@@ -1,6 +1,6 @@
 /**
- * Marketing Events Extension
- * These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
+ * Marketing Events
+ * These APIs allow you to interact with HubSpot\'s Marketing Events Extension. It allows you to: * Create, Read or update Marketing Event information in HubSpot * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event. * Specify a URL that can be called to get the details of a Marketing Event. 
  *
  * OpenAPI spec version: v3
  * 
@@ -12,9 +12,21 @@
 
 
 export class PropertyValue {
+    /**
+    * 
+    */
     'sourceId': string;
+    /**
+    * 
+    */
     'selectedByUser': boolean;
+    /**
+    * 
+    */
     'sourceLabel': string;
+    /**
+    * 
+    */
     'source': PropertyValueSourceEnum;
     'updatedByUserId'?: number;
     'persistenceTimestamp'?: number;
@@ -22,12 +34,30 @@ export class PropertyValue {
     * Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`
     */
     'sourceMetadata': string;
+    /**
+    * 
+    */
     'sourceVid': Array<number>;
+    /**
+    * 
+    */
     'requestId': string;
+    /**
+    * 
+    */
     'name': string;
     'useTimestampAsPersistenceTimestamp'?: boolean;
+    /**
+    * 
+    */
     'value': string;
+    /**
+    * 
+    */
     'selectedByUserTimestamp': number;
+    /**
+    * 
+    */
     'timestamp': number;
     'isLargeValue'?: boolean;
 
@@ -134,5 +164,85 @@ export class PropertyValue {
 }
 
 
-export type PropertyValueSourceEnum = "IMPORT" | "API" | "FORM" | "ANALYTICS" | "MIGRATION" | "SALESFORCE" | "INTEGRATION" | "CONTACTS_WEB" | "WAL_INCREMENTAL" | "TASK" | "EMAIL" | "WORKFLOWS" | "CALCULATED" | "SOCIAL" | "BATCH_UPDATE" | "SIGNALS" | "BIDEN" | "DEFAULT" | "COMPANIES" | "DEALS" | "ASSISTS" | "PRESENTATIONS" | "TALLY" | "SIDEKICK" | "CRM_UI" | "MERGE_CONTACTS" | "PORTAL_USER_ASSOCIATOR" | "INTEGRATIONS_PLATFORM" | "BCC_TO_CRM" | "FORWARD_TO_CRM" | "ENGAGEMENTS" | "SALES" | "HEISENBERG" | "LEADIN" | "GMAIL_INTEGRATION" | "ACADEMY" | "SALES_MESSAGES" | "AVATARS_SERVICE" | "MERGE_COMPANIES" | "SEQUENCES" | "COMPANY_FAMILIES" | "MOBILE_IOS" | "MOBILE_ANDROID" | "CONTACTS" | "ASSOCIATIONS" | "EXTENSION" | "SUCCESS" | "BOT" | "INTEGRATIONS_SYNC" | "AUTOMATION_PLATFORM" | "CONVERSATIONS" | "EMAIL_INTEGRATION" | "CONTENT_MEMBERSHIP" | "QUOTES" | "BET_ASSIGNMENT" | "QUOTAS" | "BET_CRM_CONNECTOR" | "MEETINGS" | "MERGE_OBJECTS" | "RECYCLING_BIN" | "ADS" | "AI_GROUP" | "COMMUNICATOR" | "SETTINGS" | "PROPERTY_SETTINGS" | "PIPELINE_SETTINGS" | "COMPANY_INSIGHTS" | "BEHAVIORAL_EVENTS" | "PAYMENTS" | "GOALS" | "PORTAL_OBJECT_SYNC" | "APPROVALS" | "FILE_MANAGER" | "MARKETPLACE" | "INTERNAL_PROCESSING" | "FORECASTING" | "SLACK_INTEGRATION" | "CRM_UI_BULK_ACTION" | "WORKFLOW_CONTACT_DELETE_ACTION" ;
+export enum PropertyValueSourceEnum {
+    Import = 'IMPORT',
+    Api = 'API',
+    Form = 'FORM',
+    Analytics = 'ANALYTICS',
+    Migration = 'MIGRATION',
+    Salesforce = 'SALESFORCE',
+    Integration = 'INTEGRATION',
+    ContactsWeb = 'CONTACTS_WEB',
+    WalIncremental = 'WAL_INCREMENTAL',
+    Task = 'TASK',
+    Email = 'EMAIL',
+    Workflows = 'WORKFLOWS',
+    Calculated = 'CALCULATED',
+    Social = 'SOCIAL',
+    BatchUpdate = 'BATCH_UPDATE',
+    Signals = 'SIGNALS',
+    Biden = 'BIDEN',
+    Default = 'DEFAULT',
+    Companies = 'COMPANIES',
+    Deals = 'DEALS',
+    Assists = 'ASSISTS',
+    Presentations = 'PRESENTATIONS',
+    Tally = 'TALLY',
+    Sidekick = 'SIDEKICK',
+    CrmUi = 'CRM_UI',
+    MergeContacts = 'MERGE_CONTACTS',
+    PortalUserAssociator = 'PORTAL_USER_ASSOCIATOR',
+    IntegrationsPlatform = 'INTEGRATIONS_PLATFORM',
+    BccToCrm = 'BCC_TO_CRM',
+    ForwardToCrm = 'FORWARD_TO_CRM',
+    Engagements = 'ENGAGEMENTS',
+    Sales = 'SALES',
+    Heisenberg = 'HEISENBERG',
+    Leadin = 'LEADIN',
+    GmailIntegration = 'GMAIL_INTEGRATION',
+    Academy = 'ACADEMY',
+    SalesMessages = 'SALES_MESSAGES',
+    AvatarsService = 'AVATARS_SERVICE',
+    MergeCompanies = 'MERGE_COMPANIES',
+    Sequences = 'SEQUENCES',
+    CompanyFamilies = 'COMPANY_FAMILIES',
+    MobileIos = 'MOBILE_IOS',
+    MobileAndroid = 'MOBILE_ANDROID',
+    Contacts = 'CONTACTS',
+    Associations = 'ASSOCIATIONS',
+    Extension = 'EXTENSION',
+    Success = 'SUCCESS',
+    Bot = 'BOT',
+    IntegrationsSync = 'INTEGRATIONS_SYNC',
+    AutomationPlatform = 'AUTOMATION_PLATFORM',
+    Conversations = 'CONVERSATIONS',
+    EmailIntegration = 'EMAIL_INTEGRATION',
+    ContentMembership = 'CONTENT_MEMBERSHIP',
+    Quotes = 'QUOTES',
+    BetAssignment = 'BET_ASSIGNMENT',
+    Quotas = 'QUOTAS',
+    BetCrmConnector = 'BET_CRM_CONNECTOR',
+    Meetings = 'MEETINGS',
+    MergeObjects = 'MERGE_OBJECTS',
+    RecyclingBin = 'RECYCLING_BIN',
+    Ads = 'ADS',
+    AiGroup = 'AI_GROUP',
+    Communicator = 'COMMUNICATOR',
+    Settings = 'SETTINGS',
+    PropertySettings = 'PROPERTY_SETTINGS',
+    PipelineSettings = 'PIPELINE_SETTINGS',
+    CompanyInsights = 'COMPANY_INSIGHTS',
+    BehavioralEvents = 'BEHAVIORAL_EVENTS',
+    Payments = 'PAYMENTS',
+    Goals = 'GOALS',
+    PortalObjectSync = 'PORTAL_OBJECT_SYNC',
+    Approvals = 'APPROVALS',
+    FileManager = 'FILE_MANAGER',
+    Marketplace = 'MARKETPLACE',
+    InternalProcessing = 'INTERNAL_PROCESSING',
+    Forecasting = 'FORECASTING',
+    SlackIntegration = 'SLACK_INTEGRATION',
+    CrmUiBulkAction = 'CRM_UI_BULK_ACTION',
+    WorkflowContactDeleteAction = 'WORKFLOW_CONTACT_DELETE_ACTION'
+}
 

@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -12,31 +12,31 @@
 
 
 /**
-* Information on the task that has been started, and where to check it's status.
+* Information on the task that has been started, and where to check it\'s status.
 */
 export class ImportFromUrlTaskLocator {
-    /**
-    * ID of the task
-    */
-    'id': string;
     /**
     * Links for where to check information related to the task. The `status` link gives the URL for where to check the status of the task.
     */
     'links': { [key: string]: string; };
+    /**
+    * ID of the task
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 

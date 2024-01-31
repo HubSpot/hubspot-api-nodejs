@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * CRM Timeline
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -14,41 +14,29 @@ import { StandardError } from '../models/StandardError';
 import { TimelineEventResponse } from '../models/TimelineEventResponse';
 
 export class BatchResponseTimelineEventResponseWithErrors {
-    'status': BatchResponseTimelineEventResponseWithErrorsStatusEnum;
-    'results': Array<TimelineEventResponse>;
+    'completedAt': Date;
     'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<TimelineEventResponse>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponseTimelineEventResponseWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseTimelineEventResponseWithErrorsStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<TimelineEventResponse>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -63,15 +51,27 @@ export class BatchResponseTimelineEventResponseWithErrors {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<TimelineEventResponse>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseTimelineEventResponseWithErrorsStatusEnum",
             "format": ""
         }    ];
 
@@ -84,5 +84,10 @@ export class BatchResponseTimelineEventResponseWithErrors {
 }
 
 
-export type BatchResponseTimelineEventResponseWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseTimelineEventResponseWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

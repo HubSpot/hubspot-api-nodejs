@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -12,14 +12,20 @@
 
 
 export class ObjectToken {
+    'dataType'?: ObjectTokenDataTypeEnum;
     'name'?: string;
     'label'?: string;
-    'dataType'?: ObjectTokenDataTypeEnum;
     'value': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "dataType",
+            "baseName": "dataType",
+            "type": "ObjectTokenDataTypeEnum",
+            "format": ""
+        },
         {
             "name": "name",
             "baseName": "name",
@@ -30,12 +36,6 @@ export class ObjectToken {
             "name": "label",
             "baseName": "label",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "dataType",
-            "baseName": "dataType",
-            "type": "ObjectTokenDataTypeEnum",
             "format": ""
         },
         {
@@ -54,5 +54,15 @@ export class ObjectToken {
 }
 
 
-export type ObjectTokenDataTypeEnum = "BOOLEAN" | "CURRENCY" | "DATE" | "DATETIME" | "EMAIL" | "LINK" | "NUMERIC" | "STRING" | "STATUS" ;
+export enum ObjectTokenDataTypeEnum {
+    Boolean = 'BOOLEAN',
+    Currency = 'CURRENCY',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Email = 'EMAIL',
+    Link = 'LINK',
+    Numeric = 'NUMERIC',
+    String = 'STRING',
+    Status = 'STATUS'
+}
 

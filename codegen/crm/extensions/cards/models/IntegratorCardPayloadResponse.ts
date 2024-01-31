@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -17,33 +17,39 @@ import { TopLevelActions } from '../models/TopLevelActions';
 * The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
 */
 export class IntegratorCardPayloadResponse {
+    'responseVersion'?: IntegratorCardPayloadResponseResponseVersionEnum;
     /**
-    * The total number of card properties that will be sent in this response.
+    * The label to be used for the `allItemsLinkUrl` link (e.g. \'See more tickets\'). If not provided, this falls back to the card\'s title.
     */
-    'totalCount': number;
+    'cardLabel'?: string;
     /**
     * URL to a page the integrator has built that displays all details for this card. This URL will be displayed to users under a `See more [x]` link if there are more than five items in your response, where `[x]` is the value of `itemLabel`.
     */
     'allItemsLinkUrl'?: string;
     /**
-    * The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets'). If not provided, this falls back to the card's title.
+    * The total number of card properties that will be sent in this response.
     */
-    'cardLabel'?: string;
+    'totalCount': number;
     'topLevelActions'?: TopLevelActions;
     /**
     * A list of up to five valid card sub categories.
     */
     'sections'?: Array<IntegratorObjectResult>;
-    'responseVersion'?: IntegratorCardPayloadResponseResponseVersionEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "totalCount",
-            "baseName": "totalCount",
-            "type": "number",
-            "format": "int32"
+            "name": "responseVersion",
+            "baseName": "responseVersion",
+            "type": "IntegratorCardPayloadResponseResponseVersionEnum",
+            "format": ""
+        },
+        {
+            "name": "cardLabel",
+            "baseName": "cardLabel",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "allItemsLinkUrl",
@@ -52,10 +58,10 @@ export class IntegratorCardPayloadResponse {
             "format": ""
         },
         {
-            "name": "cardLabel",
-            "baseName": "cardLabel",
-            "type": "string",
-            "format": ""
+            "name": "totalCount",
+            "baseName": "totalCount",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "topLevelActions",
@@ -68,12 +74,6 @@ export class IntegratorCardPayloadResponse {
             "baseName": "sections",
             "type": "Array<IntegratorObjectResult>",
             "format": ""
-        },
-        {
-            "name": "responseVersion",
-            "baseName": "responseVersion",
-            "type": "IntegratorCardPayloadResponseResponseVersionEnum",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -85,5 +85,8 @@ export class IntegratorCardPayloadResponse {
 }
 
 
-export type IntegratorCardPayloadResponseResponseVersionEnum = "v1" | "v3" ;
+export enum IntegratorCardPayloadResponseResponseVersionEnum {
+    V1 = 'v1',
+    V3 = 'v3'
+}
 

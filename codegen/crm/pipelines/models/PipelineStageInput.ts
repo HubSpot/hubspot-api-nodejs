@@ -1,5 +1,5 @@
 /**
- * CRM Pipelines
+ * Pipelines
  * Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
  *
  * OpenAPI spec version: v3
@@ -12,29 +12,29 @@
 
 
 /**
-* An input used to create or replace a pipeline stage's definition.
+* An input used to create or replace a pipeline stage\'s definition.
 */
 export class PipelineStageInput {
     /**
-    * A label used to organize pipeline stages in HubSpot's UI. Each pipeline stage's label must be unique within that pipeline.
+    * A JSON object containing properties that are not present on all object pipelines.  For `deals` pipelines, the `probability` field is required (`{ \"probability\": 0.5 }`), and represents the likelihood a deal will close. Possible values are between 0.0 and 1.0 in increments of 0.1.  For `tickets` pipelines, the `ticketState` field is optional (`{ \"ticketState\": \"OPEN\" }`), and represents whether the ticket remains open or has been closed by a member of your Support team. Possible values are `OPEN` or `CLOSED`.
     */
-    'label': string;
+    'metadata': { [key: string]: string; };
     /**
     * The order for displaying this pipeline stage. If two pipeline stages have a matching `displayOrder`, they will be sorted alphabetically by label.
     */
     'displayOrder': number;
     /**
-    * A JSON object containing properties that are not present on all object pipelines.  For `deals` pipelines, the `probability` field is required (`{ \"probability\": 0.5 }`), and represents the likelihood a deal will close. Possible values are between 0.0 and 1.0 in increments of 0.1.  For `tickets` pipelines, the `ticketState` field is optional (`{ \"ticketState\": \"OPEN\" }`), and represents whether the ticket remains open or has been closed by a member of your Support team. Possible values are `OPEN` or `CLOSED`.
+    * A label used to organize pipeline stages in HubSpot\'s UI. Each pipeline stage\'s label must be unique within that pipeline.
     */
-    'metadata': { [key: string]: string; };
+    'label': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "metadata",
+            "baseName": "metadata",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
@@ -44,9 +44,9 @@ export class PipelineStageInput {
             "format": "int32"
         },
         {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "{ [key: string]: string; }",
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         }    ];
 

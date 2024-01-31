@@ -1,5 +1,5 @@
 /**
- * URL redirects
+ * CMS Url Redirects
  * URL redirect operations
  *
  * OpenAPI spec version: v3
@@ -15,8 +15,8 @@ import { UrlMapping } from '../models/UrlMapping';
 
 export class CollectionResponseWithTotalUrlMappingForwardPaging {
     'total': number;
-    'results': Array<UrlMapping>;
     'paging'?: ForwardPaging;
+    'results': Array<UrlMapping>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,15 +28,15 @@ export class CollectionResponseWithTotalUrlMappingForwardPaging {
             "format": "int32"
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<UrlMapping>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<UrlMapping>",
             "format": ""
         }    ];
 

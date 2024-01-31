@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
@@ -6,7 +7,6 @@ import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInput
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { CollectionResponseAssociatedIdForwardPaging } from '../models/CollectionResponseAssociatedIdForwardPaging';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
@@ -16,141 +16,6 @@ import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
-
-import { ObservableAssociationsApi } from "./ObservableAPI";
-import { AssociationsApiRequestFactory, AssociationsApiResponseProcessor} from "../apis/AssociationsApi";
-
-export interface AssociationsApiArchiveRequest {
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    objectType: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    objectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    toObjectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApiarchive
-     */
-    associationType: string
-}
-
-export interface AssociationsApiCreateRequest {
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    objectType: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    objectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    toObjectType: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    toObjectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApicreate
-     */
-    associationType: string
-}
-
-export interface AssociationsApiGetAllRequest {
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    objectType: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    objectId: string
-    /**
-     * 
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    toObjectType: string
-    /**
-     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @type string
-     * @memberof AssociationsApigetAll
-     */
-    after?: string
-    /**
-     * The maximum number of results to display per page.
-     * @type number
-     * @memberof AssociationsApigetAll
-     */
-    limit?: number
-}
-
-export class ObjectAssociationsApi {
-    private api: ObservableAssociationsApi
-
-    public constructor(configuration: Configuration, requestFactory?: AssociationsApiRequestFactory, responseProcessor?: AssociationsApiResponseProcessor) {
-        this.api = new ObservableAssociationsApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Remove an association between two objects
-     * @param param the request object
-     */
-    public archive(param: AssociationsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
-    }
-
-    /**
-     * Associate an object with another object
-     * @param param the request object
-     */
-    public create(param: AssociationsApiCreateRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
-        return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationType,  options).toPromise();
-    }
-
-    /**
-     * List associations of an object by type
-     * @param param the request object
-     */
-    public getAll(param: AssociationsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociatedIdForwardPaging> {
-        return this.api.getAll(param.objectType, param.objectId, param.toObjectType, param.after, param.limit,  options).toPromise();
-    }
-
-}
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -314,8 +179,26 @@ export class ObjectBasicApi {
      * Archive
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.objectId,  options).toPromise();
+    }
+
+    /**
+     * Move an Object identified by `{objectId}` to the recycling bin.
+     * Archive
+     * @param param the request object
+     */
     public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.objectId,  options).toPromise();
+    }
+
+    /**
+     * Create a CRM object with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard objects is provided.
+     * Create
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.createWithHttpInfo(param.objectType, param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -332,6 +215,15 @@ export class ObjectBasicApi {
      * Read
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
+        return this.api.getByIdWithHttpInfo(param.objectType, param.objectId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Read an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param param the request object
+     */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
         return this.api.getById(param.objectType, param.objectId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
@@ -341,8 +233,26 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: BasicApiGetPageRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.objectType, param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read a page of objects. Control what is returned via the `properties` query param.
+     * List
+     * @param param the request object
+     */
     public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.api.getPage(param.objectType, param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of an Object identified by `{objectId}`. `{objectId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Update
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.updateWithHttpInfo(param.objectType, param.objectId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -436,8 +346,24 @@ export class ObjectBatchApi {
      * Archive a batch of objects by ID
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Archive a batch of objects by ID
+     * @param param the request object
+     */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Create a batch of objects
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.createWithHttpInfo(param.objectType, param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -452,8 +378,24 @@ export class ObjectBatchApi {
      * Read a batch of objects by internal ID, or unique property values
      * @param param the request object
      */
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.readWithHttpInfo(param.objectType, param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read a batch of objects by internal ID, or unique property values
+     * @param param the request object
+     */
     public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.read(param.objectType, param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update a batch of objects
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.updateWithHttpInfo(param.objectType, param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
     /**
@@ -492,7 +434,16 @@ export class ObjectGDPRApi {
     }
 
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property 'idProperty' set to 'email' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param param the request object
+     */
+    public purgeWithHttpInfo(param: GDPRApiPurgeRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.purgeWithHttpInfo(param.objectType, param.publicGdprDeleteInput,  options).toPromise();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
      * GDPR DELETE
      * @param param the request object
      */
@@ -531,6 +482,14 @@ export class ObjectPublicObjectApi {
      * Merge two objects with same type
      * @param param the request object
      */
+    public mergeWithHttpInfo(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.mergeWithHttpInfo(param.objectType, param.publicMergeInput,  options).toPromise();
+    }
+
+    /**
+     * Merge two objects with same type
+     * @param param the request object
+     */
     public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
         return this.api.merge(param.objectType, param.publicMergeInput,  options).toPromise();
     }
@@ -560,6 +519,13 @@ export class ObjectSearchApi {
 
     public constructor(configuration: Configuration, requestFactory?: SearchApiRequestFactory, responseProcessor?: SearchApiResponseProcessor) {
         this.api = new ObservableSearchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+        return this.api.doSearchWithHttpInfo(param.objectType, param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**

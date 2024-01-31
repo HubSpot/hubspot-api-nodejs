@@ -54,5 +54,7 @@ export class PublicEnumerationPropertyOperation {
 }
 
 
-export type PublicEnumerationPropertyOperationOperationTypeEnum = "ENUMERATION" ;
+export enum PublicEnumerationPropertyOperationOperationTypeEnum {
+    Enumeration = 'ENUMERATION'
+}
 

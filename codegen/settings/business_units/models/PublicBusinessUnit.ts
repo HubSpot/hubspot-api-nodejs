@@ -1,5 +1,5 @@
 /**
- * Business Units Business Units
+ * Business Units
  * Retrieve Business Unit information.
  *
  * OpenAPI spec version: v3
@@ -18,11 +18,11 @@ import { PublicBusinessUnitLogoMetadata } from '../models/PublicBusinessUnitLogo
 export class PublicBusinessUnit {
     'logoMetadata'?: PublicBusinessUnitLogoMetadata;
     /**
-    * The Business Unit's name
+    * The Business Unit\'s name
     */
     'name': string;
     /**
-    * The Business Unit's unique ID
+    * The Business Unit\'s unique ID
     */
     'id': string;
 

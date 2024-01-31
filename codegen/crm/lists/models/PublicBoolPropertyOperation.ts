@@ -54,5 +54,7 @@ export class PublicBoolPropertyOperation {
 }
 
 
-export type PublicBoolPropertyOperationOperationTypeEnum = "BOOL" ;
+export enum PublicBoolPropertyOperationOperationTypeEnum {
+    Bool = 'BOOL'
+}
 

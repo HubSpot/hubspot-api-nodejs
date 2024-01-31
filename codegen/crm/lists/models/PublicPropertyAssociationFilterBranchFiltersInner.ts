@@ -345,5 +345,7 @@ export class PublicPropertyAssociationFilterBranchFiltersInner {
 }
 
 
-export type PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum = "UNIFIED_EVENTS_IN_LIST" ;
+export enum PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum {
+    UnifiedEventsInList = 'UNIFIED_EVENTS_IN_LIST'
+}
 

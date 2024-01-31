@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -23,7 +23,7 @@ export class SampleResponseApiRequestFactory extends BaseAPIRequestFactory {
         let _config = _options || this.configuration;
 
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/sample-response';
+        const localVarPath = '/crm/v3/extensions/cards-dev/sample-response';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -50,14 +50,14 @@ export class SampleResponseApiResponseProcessor {
      * @params response Response returned by the server for a request to getCardsSampleResponse
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getCardsSampleResponse(response: ResponseContext): Promise<IntegratorCardPayloadResponse > {
+     public async getCardsSampleResponseWithHttpInfo(response: ResponseContext): Promise<HttpInfo<IntegratorCardPayloadResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: IntegratorCardPayloadResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "IntegratorCardPayloadResponse", ""
             ) as IntegratorCardPayloadResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -73,7 +73,7 @@ export class SampleResponseApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "IntegratorCardPayloadResponse", ""
             ) as IntegratorCardPayloadResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -12,17 +12,35 @@
 
 
 export class PropertyModificationMetadata {
-    'archivable': boolean;
-    'readOnlyDefinition': boolean;
+    /**
+    * 
+    */
     'readOnlyOptions'?: boolean;
+    /**
+    * 
+    */
     'readOnlyValue': boolean;
+    /**
+    * 
+    */
+    'readOnlyDefinition': boolean;
+    /**
+    * 
+    */
+    'archivable': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "archivable",
-            "baseName": "archivable",
+            "name": "readOnlyOptions",
+            "baseName": "readOnlyOptions",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "readOnlyValue",
+            "baseName": "readOnlyValue",
             "type": "boolean",
             "format": ""
         },
@@ -33,14 +51,8 @@ export class PropertyModificationMetadata {
             "format": ""
         },
         {
-            "name": "readOnlyOptions",
-            "baseName": "readOnlyOptions",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "readOnlyValue",
-            "baseName": "readOnlyValue",
+            "name": "archivable",
+            "baseName": "archivable",
             "type": "boolean",
             "format": ""
         }    ];

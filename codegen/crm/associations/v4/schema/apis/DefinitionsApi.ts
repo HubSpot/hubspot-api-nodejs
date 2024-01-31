@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -24,24 +24,24 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param associationTypeId 
      */
-    public async _delete(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
         if (fromObjectType === null || fromObjectType === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "fromObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "fromObjectType");
         }
 
 
         // verify required parameter 'toObjectType' is not null or undefined
         if (toObjectType === null || toObjectType === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "toObjectType");
+            throw new RequiredError("DefinitionsApi", "archive", "toObjectType");
         }
 
 
         // verify required parameter 'associationTypeId' is not null or undefined
         if (associationTypeId === null || associationTypeId === undefined) {
-            throw new RequiredError("DefinitionsApi", "_delete", "associationTypeId");
+            throw new RequiredError("DefinitionsApi", "archive", "associationTypeId");
         }
 
 
@@ -253,13 +253,13 @@ export class DefinitionsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to _delete
+     * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async _delete(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -275,7 +275,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -288,14 +288,14 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<CollectionResponseAssociationSpecWithLabelNoPaging > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseAssociationSpecWithLabelNoPaging", ""
             ) as CollectionResponseAssociationSpecWithLabelNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -311,7 +311,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseAssociationSpecWithLabelNoPaging", ""
             ) as CollectionResponseAssociationSpecWithLabelNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -324,14 +324,14 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponseAssociationSpecWithLabelNoPaging > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseAssociationSpecWithLabelNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseAssociationSpecWithLabelNoPaging", ""
             ) as CollectionResponseAssociationSpecWithLabelNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -347,7 +347,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseAssociationSpecWithLabelNoPaging", ""
             ) as CollectionResponseAssociationSpecWithLabelNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -360,10 +360,10 @@ export class DefinitionsApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<void > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -379,7 +379,7 @@ export class DefinitionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -1,16 +1,16 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { ActionFunction } from '../models/ActionFunction';
-import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { PublicActionFunction } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
 
 /**
  * no description
@@ -18,14 +18,13 @@ import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/Co
 export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Archive a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public async archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -80,13 +79,12 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -134,15 +132,14 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -214,14 +211,13 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
+    public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -286,13 +282,12 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Get all functions by a type for a given definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -340,14 +335,13 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
+    public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'definitionId' is not null or undefined
@@ -402,9 +396,8 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of all functions that are associated with the given custom workflow action.
-     * Get all custom action functions
-     * @param definitionId The ID of the custom workflow action.
+     * Get all functions for a given definition
+     * @param definitionId 
      * @param appId 
      */
     public async getPage(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -458,10 +451,10 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -477,7 +470,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -490,10 +483,10 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveByFunctionType(response: ResponseContext): Promise<void > {
+     public async archiveByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -509,7 +502,7 @@ export class FunctionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -522,14 +515,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplace
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplace(response: ResponseContext): Promise<ActionFunctionIdentifier > {
+     public async createOrReplaceWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunctionIdentifier >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
-            return body;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -541,11 +534,11 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
-            return body;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -558,14 +551,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createOrReplaceByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createOrReplaceByFunctionType(response: ResponseContext): Promise<ActionFunctionIdentifier > {
+     public async createOrReplaceByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunctionIdentifier >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
-            return body;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -577,11 +570,11 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunctionIdentifier = ObjectSerializer.deserialize(
+            const body: PublicActionFunctionIdentifier = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunctionIdentifier", ""
-            ) as ActionFunctionIdentifier;
-            return body;
+                "PublicActionFunctionIdentifier", ""
+            ) as PublicActionFunctionIdentifier;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -594,14 +587,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getByFunctionType
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getByFunctionType(response: ResponseContext): Promise<ActionFunction > {
+     public async getByFunctionTypeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunction >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
-            return body;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -613,11 +606,11 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
-            return body;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -630,14 +623,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<ActionFunction > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionFunction >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
-            return body;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -649,11 +642,11 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionFunction = ObjectSerializer.deserialize(
+            const body: PublicActionFunction = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionFunction", ""
-            ) as ActionFunction;
-            return body;
+                "PublicActionFunction", ""
+            ) as PublicActionFunction;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -666,14 +659,14 @@ export class FunctionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseActionFunctionIdentifierNoPaging > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionFunctionIdentifierNoPaging", ""
-            ) as CollectionResponseActionFunctionIdentifierNoPaging;
-            return body;
+                "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
+            ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -685,11 +678,11 @@ export class FunctionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionFunctionIdentifierNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionFunctionIdentifierNoPaging", ""
-            ) as CollectionResponseActionFunctionIdentifierNoPaging;
-            return body;
+                "CollectionResponsePublicActionFunctionIdentifierNoPaging", ""
+            ) as CollectionResponsePublicActionFunctionIdentifierNoPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

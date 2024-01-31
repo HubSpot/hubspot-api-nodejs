@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -21,7 +21,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive a batch of Communications by ID
+     * Archive a batch of communications by ID
      * @param batchInputSimplePublicObjectId 
      */
     public async archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
@@ -34,7 +34,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/batch/archive';
+        const localVarPath = '/crm/v3/objects/communications/batch/archive';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -68,7 +68,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a batch of Communications
+     * Create a batch of communications
      * @param batchInputSimplePublicObjectInputForCreate 
      */
     public async create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
@@ -81,7 +81,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/batch/create';
+        const localVarPath = '/crm/v3/objects/communications/batch/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -115,7 +115,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read a batch of Communications by internal ID, or unique property values
+     * Read a batch of communications by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
@@ -130,7 +130,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/batch/read';
+        const localVarPath = '/crm/v3/objects/communications/batch/read';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -169,7 +169,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update a batch of Communications
+     * Update a batch of communications
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
@@ -182,7 +182,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/Communications/batch/update';
+        const localVarPath = '/crm/v3/objects/communications/batch/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -226,10 +226,10 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -245,7 +245,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -258,21 +258,21 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -288,7 +288,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -301,21 +301,21 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to read
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async read(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async readWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -331,7 +331,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -344,21 +344,21 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -374,7 +374,7 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

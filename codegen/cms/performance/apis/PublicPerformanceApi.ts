@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -17,7 +17,7 @@ export class PublicPerformanceApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns time series data website performance data for the given domain and/or path.
-     * View your website's performance.
+     * View your website\'s performance.
      * @param domain The domain to search return data for.
      * @param path The url path of the domain to return data for.
      * @param pad Specifies whether the time series data should have empty intervals if performance data is not present to create a continuous set.
@@ -103,7 +103,7 @@ export class PublicPerformanceApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns uptime time series website performance data for the given domain.
-     * View your website's uptime.
+     * View your website\'s uptime.
      * @param domain The domain to search return data for.
      * @param path 
      * @param pad Specifies whether the time series data should have empty intervals if performance data is not present to create a continuous set.
@@ -198,14 +198,14 @@ export class PublicPerformanceApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<PublicPerformanceResponse > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicPerformanceResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicPerformanceResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicPerformanceResponse", ""
             ) as PublicPerformanceResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -221,7 +221,7 @@ export class PublicPerformanceApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicPerformanceResponse", ""
             ) as PublicPerformanceResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -234,14 +234,14 @@ export class PublicPerformanceApiResponseProcessor {
      * @params response Response returned by the server for a request to getUptime
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getUptime(response: ResponseContext): Promise<PublicPerformanceResponse > {
+     public async getUptimeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicPerformanceResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicPerformanceResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicPerformanceResponse", ""
             ) as PublicPerformanceResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -257,7 +257,7 @@ export class PublicPerformanceApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicPerformanceResponse", ""
             ) as PublicPerformanceResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

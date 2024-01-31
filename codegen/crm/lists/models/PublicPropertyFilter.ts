@@ -48,5 +48,7 @@ export class PublicPropertyFilter {
 }
 
 
-export type PublicPropertyFilterFilterTypeEnum = "PROPERTY" ;
+export enum PublicPropertyFilterFilterTypeEnum {
+    Property = 'PROPERTY'
+}
 

@@ -1,6 +1,6 @@
 /**
  * Accounting Extension
- * These APIs allow you to interact with HubSpot's Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
+ * These APIs allow you to interact with HubSpot\'s Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
  *
  * OpenAPI spec version: v3
  * 
@@ -183,5 +183,14 @@ export class InvoiceReadResponse {
 }
 
 
-export type InvoiceReadResponseInvoiceStatusEnum = "CREATED" | "SENT" | "PAID" | "CLOSED" | "OVERDUE" | "VOIDED" | "NONE" | "UNPAID" ;
+export enum InvoiceReadResponseInvoiceStatusEnum {
+    Created = 'CREATED',
+    Sent = 'SENT',
+    Paid = 'PAID',
+    Closed = 'CLOSED',
+    Overdue = 'OVERDUE',
+    Voided = 'VOIDED',
+    None = 'NONE',
+    Unpaid = 'UNPAID'
+}
 

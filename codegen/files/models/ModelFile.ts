@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,49 +16,17 @@
 */
 export class ModelFile {
     /**
-    * File ID.
+    * Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
     */
-    'id': string;
+    'extension'?: string;
     /**
-    * Creation time of the file object.
+    * File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
     */
-    'createdAt': Date;
-    /**
-    * Deletion time of the file object.
-    */
-    'archivedAt'?: Date;
-    /**
-    * Timestamp of the latest update to the file.
-    */
-    'updatedAt': Date;
-    /**
-    * If the file is deleted.
-    */
-    'archived': boolean;
+    'access': ModelFileAccessEnum;
     /**
     * ID of the folder the file is in.
     */
     'parentFolderId'?: string;
-    /**
-    * Name of the file.
-    */
-    'name'?: string;
-    /**
-    * Path of the file in the file manager.
-    */
-    'path'?: string;
-    /**
-    * Size of the file in bytes.
-    */
-    'size'?: number;
-    /**
-    * For image and video files, the height of the content.
-    */
-    'height'?: number;
-    /**
-    * For image and video files, the width of the content.
-    */
-    'width'?: number;
     /**
     * Encoding of the file.
     */
@@ -68,35 +36,109 @@ export class ModelFile {
     */
     'type'?: string;
     /**
-    * Extension of the file. ex: .jpg, .png, .gif, .pdf, etc.
-    */
-    'extension'?: string;
-    /**
-    * Default hosting URL of the file. This will use one of HubSpot's provided URLs to serve the file.
-    */
-    'defaultHostingUrl'?: string;
-    /**
-    * URL of the given file. This URL can change depending on the domain settings of the account. Will use the select file hosting domain.
-    */
-    'url'?: string;
-    /**
     * Previously \"archied\". Indicates if the file should be used when creating new content like web pages.
     */
     'isUsableInContent'?: boolean;
     /**
-    * File access. Can be PUBLIC_INDEXABLE, PUBLIC_NOT_INDEXABLE, PRIVATE.
+    * URL of the given file. This URL can change depending on the domain settings of the account. Will use the select file hosting domain.
     */
-    'access': ModelFileAccessEnum;
+    'url'?: string;
     'expiresAt'?: number;
+    /**
+    * Creation time of the file object.
+    */
+    'createdAt': Date;
+    /**
+    * Deletion time of the file object.
+    */
+    'archivedAt'?: Date;
+    /**
+    * If the file is deleted.
+    */
+    'archived': boolean;
+    /**
+    * Path of the file in the file manager.
+    */
+    'path'?: string;
+    /**
+    * Size of the file in bytes.
+    */
+    'size'?: number;
+    /**
+    * Name of the file.
+    */
+    'name'?: string;
+    /**
+    * For image and video files, the width of the content.
+    */
+    'width'?: number;
+    /**
+    * File ID.
+    */
+    'id': string;
+    /**
+    * Default hosting URL of the file. This will use one of HubSpot\'s provided URLs to serve the file.
+    */
+    'defaultHostingUrl'?: string;
+    /**
+    * Timestamp of the latest update to the file.
+    */
+    'updatedAt': Date;
+    /**
+    * For image and video files, the height of the content.
+    */
+    'height'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "extension",
+            "baseName": "extension",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "access",
+            "baseName": "access",
+            "type": "ModelFileAccessEnum",
+            "format": ""
+        },
+        {
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "encoding",
+            "baseName": "encoding",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "isUsableInContent",
+            "baseName": "isUsableInContent",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "createdAt",
@@ -111,27 +153,9 @@ export class ModelFile {
             "format": "date-time"
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "archived",
             "baseName": "archived",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "parentFolderId",
-            "baseName": "parentFolderId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
             "format": ""
         },
         {
@@ -147,10 +171,10 @@ export class ModelFile {
             "format": "int64"
         },
         {
-            "name": "height",
-            "baseName": "height",
-            "type": "number",
-            "format": "int32"
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "width",
@@ -159,20 +183,8 @@ export class ModelFile {
             "format": "int32"
         },
         {
-            "name": "encoding",
-            "baseName": "encoding",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "extension",
-            "baseName": "extension",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -183,28 +195,16 @@ export class ModelFile {
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "isUsableInContent",
-            "baseName": "isUsableInContent",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "access",
-            "baseName": "access",
-            "type": "ModelFileAccessEnum",
-            "format": ""
-        },
-        {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
+            "name": "height",
+            "baseName": "height",
             "type": "number",
-            "format": "int64"
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
@@ -216,5 +216,12 @@ export class ModelFile {
 }
 
 
-export type ModelFileAccessEnum = "PUBLIC_INDEXABLE" | "PUBLIC_NOT_INDEXABLE" | "HIDDEN_INDEXABLE" | "HIDDEN_NOT_INDEXABLE" | "HIDDEN_PRIVATE" | "PRIVATE" ;
+export enum ModelFileAccessEnum {
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
+    HiddenIndexable = 'HIDDEN_INDEXABLE',
+    HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
+    HiddenPrivate = 'HIDDEN_PRIVATE',
+    Private = 'PRIVATE'
+}
 

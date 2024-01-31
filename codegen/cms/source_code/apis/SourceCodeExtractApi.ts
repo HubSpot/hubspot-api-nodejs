@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -110,14 +110,14 @@ export class SourceCodeExtractApiResponseProcessor {
      * @params response Response returned by the server for a request to doAsync
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doAsync(response: ResponseContext): Promise<TaskLocator > {
+     public async doAsyncWithHttpInfo(response: ResponseContext): Promise<HttpInfo<TaskLocator >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
             const body: TaskLocator = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TaskLocator", ""
             ) as TaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -133,7 +133,7 @@ export class SourceCodeExtractApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TaskLocator", ""
             ) as TaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -146,14 +146,14 @@ export class SourceCodeExtractApiResponseProcessor {
      * @params response Response returned by the server for a request to getAsyncStatus
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAsyncStatus(response: ResponseContext): Promise<ActionResponse > {
+     public async getAsyncStatusWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ActionResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ActionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -169,7 +169,7 @@ export class SourceCodeExtractApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ActionResponse", ""
             ) as ActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

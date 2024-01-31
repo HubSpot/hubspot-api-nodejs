@@ -15,8 +15,8 @@ import { SimplePublicObject } from '../models/SimplePublicObject';
 
 export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
     'total': number;
-    'results': Array<SimplePublicObject>;
     'paging'?: ForwardPaging;
+    'results': Array<SimplePublicObject>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,15 +28,15 @@ export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
             "format": "int32"
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<SimplePublicObject>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicObject>",
             "format": ""
         }    ];
 

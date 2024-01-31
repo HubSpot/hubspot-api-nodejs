@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -18,23 +18,17 @@ import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
 * Body for a patch with optional fields
 */
 export class CardPatchRequest {
+    'fetch'?: CardFetchBodyPatch;
+    'display'?: CardDisplayBody;
     /**
     * The top-level title for this card. Displayed to users in the CRM UI.
     */
     'title'?: string;
-    'fetch'?: CardFetchBodyPatch;
-    'display'?: CardDisplayBody;
     'actions'?: CardActions;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "title",
-            "baseName": "title",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "fetch",
             "baseName": "fetch",
@@ -45,6 +39,12 @@ export class CardPatchRequest {
             "name": "display",
             "baseName": "display",
             "type": "CardDisplayBody",
+            "format": ""
+        },
+        {
+            "name": "title",
+            "baseName": "title",
+            "type": "string",
             "format": ""
         },
         {

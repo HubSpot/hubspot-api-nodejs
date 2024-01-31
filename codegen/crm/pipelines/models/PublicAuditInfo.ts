@@ -1,5 +1,5 @@
 /**
- * CRM Pipelines
+ * Pipelines
  * Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
  *
  * OpenAPI spec version: v3
@@ -12,44 +12,20 @@
 
 
 export class PublicAuditInfo {
-    'portalId': number;
     'identifier': string;
-    'action': string;
-    'timestamp'?: Date;
-    'message'?: string;
     'rawObject'?: any;
     'fromUserId'?: number;
+    'portalId': number;
+    'action': string;
+    'message'?: string;
+    'timestamp'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "portalId",
-            "baseName": "portalId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "identifier",
             "baseName": "identifier",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "action",
-            "baseName": "action",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "timestamp",
-            "baseName": "timestamp",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
             "type": "string",
             "format": ""
         },
@@ -64,6 +40,30 @@ export class PublicAuditInfo {
             "baseName": "fromUserId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "portalId",
+            "baseName": "portalId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "action",
+            "baseName": "action",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "timestamp",
+            "baseName": "timestamp",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

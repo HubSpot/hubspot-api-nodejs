@@ -1,64 +1,16 @@
-export * from '../models/AssociationSpec';
 export * from '../models/AssociationSpecWithLabel';
-export * from '../models/BatchInputPublicAssociationMultiArchive';
-export * from '../models/BatchInputPublicAssociationMultiPost';
-export * from '../models/BatchInputPublicDefaultAssociationMultiPost';
-export * from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-export * from '../models/BatchResponseLabelsBetweenObjectPair';
-export * from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
-export * from '../models/BatchResponsePublicAssociationMultiWithLabel';
-export * from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
-export * from '../models/BatchResponsePublicDefaultAssociation';
 export * from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-export * from '../models/ErrorCategory';
 export * from '../models/ErrorDetail';
-export * from '../models/LabelsBetweenObjectPair';
 export * from '../models/ModelError';
-export * from '../models/MultiAssociatedObjectWithLabel';
-export * from '../models/NextPage';
-export * from '../models/Paging';
-export * from '../models/PreviousPage';
 export * from '../models/PublicAssociationDefinitionCreateRequest';
 export * from '../models/PublicAssociationDefinitionUpdateRequest';
-export * from '../models/PublicAssociationMultiArchive';
-export * from '../models/PublicAssociationMultiPost';
-export * from '../models/PublicAssociationMultiWithLabel';
-export * from '../models/PublicDefaultAssociation';
-export * from '../models/PublicDefaultAssociationMultiPost';
-export * from '../models/PublicFetchAssociationsBatchRequest';
-export * from '../models/PublicObjectId';
-export * from '../models/StandardError';
 
-import { AssociationSpec    } from '../models/AssociationSpec';
 import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
-import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
-import { BatchInputPublicAssociationMultiPost } from '../models/BatchInputPublicAssociationMultiPost';
-import { BatchInputPublicDefaultAssociationMultiPost } from '../models/BatchInputPublicDefaultAssociationMultiPost';
-import { BatchInputPublicFetchAssociationsBatchRequest } from '../models/BatchInputPublicFetchAssociationsBatchRequest';
-import { BatchResponseLabelsBetweenObjectPair        } from '../models/BatchResponseLabelsBetweenObjectPair';
-import { BatchResponseLabelsBetweenObjectPairWithErrors          } from '../models/BatchResponseLabelsBetweenObjectPairWithErrors';
-import { BatchResponsePublicAssociationMultiWithLabel        } from '../models/BatchResponsePublicAssociationMultiWithLabel';
-import { BatchResponsePublicAssociationMultiWithLabelWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
-import { BatchResponsePublicDefaultAssociation          } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
-import { ErrorCategory    } from '../models/ErrorCategory';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ModelError } from '../models/ModelError';
-import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
-import { NextPage } from '../models/NextPage';
-import { Paging } from '../models/Paging';
-import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
 import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
-import { PublicAssociationMultiArchive } from '../models/PublicAssociationMultiArchive';
-import { PublicAssociationMultiPost } from '../models/PublicAssociationMultiPost';
-import { PublicAssociationMultiWithLabel } from '../models/PublicAssociationMultiWithLabel';
-import { PublicDefaultAssociation } from '../models/PublicDefaultAssociation';
-import { PublicDefaultAssociationMultiPost } from '../models/PublicDefaultAssociationMultiPost';
-import { PublicFetchAssociationsBatchRequest } from '../models/PublicFetchAssociationsBatchRequest';
-import { PublicObjectId } from '../models/PublicObjectId';
-import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -72,56 +24,70 @@ let primitives = [
                     "any"
                  ];
 
-const supportedMediaTypes: { [mediaType: string]: number } = {
-  "application/json": Infinity,
-  "application/octet-stream": 0,
-  "application/x-www-form-urlencoded": 0
-}
-
-
 let enumsMap: Set<string> = new Set<string>([
-    "AssociationSpecAssociationCategoryEnum",
     "AssociationSpecWithLabelCategoryEnum",
-    "BatchResponseLabelsBetweenObjectPairStatusEnum",
-    "BatchResponseLabelsBetweenObjectPairWithErrorsStatusEnum",
-    "BatchResponsePublicAssociationMultiWithLabelStatusEnum",
-    "BatchResponsePublicAssociationMultiWithLabelWithErrorsStatusEnum",
-    "BatchResponsePublicDefaultAssociationStatusEnum",
-    "ErrorCategoryHttpStatusEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
-    "AssociationSpec": AssociationSpec,
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
-    "BatchInputPublicAssociationMultiArchive": BatchInputPublicAssociationMultiArchive,
-    "BatchInputPublicAssociationMultiPost": BatchInputPublicAssociationMultiPost,
-    "BatchInputPublicDefaultAssociationMultiPost": BatchInputPublicDefaultAssociationMultiPost,
-    "BatchInputPublicFetchAssociationsBatchRequest": BatchInputPublicFetchAssociationsBatchRequest,
-    "BatchResponseLabelsBetweenObjectPair": BatchResponseLabelsBetweenObjectPair,
-    "BatchResponseLabelsBetweenObjectPairWithErrors": BatchResponseLabelsBetweenObjectPairWithErrors,
-    "BatchResponsePublicAssociationMultiWithLabel": BatchResponsePublicAssociationMultiWithLabel,
-    "BatchResponsePublicAssociationMultiWithLabelWithErrors": BatchResponsePublicAssociationMultiWithLabelWithErrors,
-    "BatchResponsePublicDefaultAssociation": BatchResponsePublicDefaultAssociation,
     "CollectionResponseAssociationSpecWithLabelNoPaging": CollectionResponseAssociationSpecWithLabelNoPaging,
-    "ErrorCategory": ErrorCategory,
     "ErrorDetail": ErrorDetail,
-    "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
     "ModelError": ModelError,
-    "MultiAssociatedObjectWithLabel": MultiAssociatedObjectWithLabel,
-    "NextPage": NextPage,
-    "Paging": Paging,
-    "PreviousPage": PreviousPage,
     "PublicAssociationDefinitionCreateRequest": PublicAssociationDefinitionCreateRequest,
     "PublicAssociationDefinitionUpdateRequest": PublicAssociationDefinitionUpdateRequest,
-    "PublicAssociationMultiArchive": PublicAssociationMultiArchive,
-    "PublicAssociationMultiPost": PublicAssociationMultiPost,
-    "PublicAssociationMultiWithLabel": PublicAssociationMultiWithLabel,
-    "PublicDefaultAssociation": PublicDefaultAssociation,
-    "PublicDefaultAssociationMultiPost": PublicDefaultAssociationMultiPost,
-    "PublicFetchAssociationsBatchRequest": PublicFetchAssociationsBatchRequest,
-    "PublicObjectId": PublicObjectId,
-    "StandardError": StandardError,
 }
+
+type MimeTypeDescriptor = {
+    type: string;
+    subtype: string;
+    subtypeTokens: string[];
+};
+
+/**
+ * Every mime-type consists of a type, subtype, and optional parameters.
+ * The subtype can be composite, including information about the content format.
+ * For example: `application/json-patch+json`, `application/merge-patch+json`.
+ *
+ * This helper transforms a string mime-type into an internal representation.
+ * This simplifies the implementation of predicates that in turn define common rules for parsing or stringifying
+ * the payload.
+ */
+const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
+    const [type, subtype] = mimeType.split('/');
+    return {
+        type,
+        subtype,
+        subtypeTokens: subtype.split('+'),
+    };
+};
+
+type MimeTypePredicate = (mimeType: string) => boolean;
+
+// This factory creates a predicate function that checks a string mime-type against defined rules.
+const mimeTypePredicateFactory = (predicate: (descriptor: MimeTypeDescriptor) => boolean): MimeTypePredicate => (mimeType) => predicate(parseMimeType(mimeType));
+
+// Use this factory when you need to define a simple predicate based only on type and, if applicable, subtype.
+const mimeTypeSimplePredicateFactory = (type: string, subtype?: string): MimeTypePredicate => mimeTypePredicateFactory((descriptor) => {
+    if (descriptor.type !== type) return false;
+    if (subtype != null && descriptor.subtype !== subtype) return false;
+    return true;
+});
+
+// Creating a set of named predicates that will help us determine how to handle different mime-types
+const isTextLikeMimeType = mimeTypeSimplePredicateFactory('text');
+const isJsonMimeType = mimeTypeSimplePredicateFactory('application', 'json');
+const isJsonLikeMimeType = mimeTypePredicateFactory((descriptor) => descriptor.type === 'application' && descriptor.subtypeTokens.some((item) => item === 'json'));
+const isOctetStreamMimeType = mimeTypeSimplePredicateFactory('application', 'octet-stream');
+const isFormUrlencodedMimeType = mimeTypeSimplePredicateFactory('application', 'x-www-form-urlencoded');
+
+// Defining a list of mime-types in the order of prioritization for handling.
+const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
+    isJsonMimeType,
+    isJsonLikeMimeType,
+    isTextLikeMimeType,
+    isOctetStreamMimeType,
+    isFormUrlencodedMimeType,
+];
 
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
@@ -263,36 +229,32 @@ export class ObjectSerializer {
      */
     public static getPreferredMediaType(mediaTypes: Array<string>): string {
         /** According to OAS 3 we should default to json */
-        if (!mediaTypes) {
+        if (mediaTypes.length === 0) {
             return "application/json";
         }
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
-        let selectedMediaType: string | undefined = undefined;
-        let selectedRank: number = -Infinity;
-        for (const mediaType of normalMediaTypes) {
-            if (supportedMediaTypes[mediaType!] > selectedRank) {
-                selectedMediaType = mediaType;
-                selectedRank = supportedMediaTypes[mediaType!];
+
+        for (const predicate of supportedMimeTypePredicatesWithPriority) {
+            for (const mediaType of normalMediaTypes) {
+                if (mediaType != null && predicate(mediaType)) {
+                    return mediaType;
+                }
             }
         }
 
-        if (selectedMediaType === undefined) {
-            throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
-        }
-
-        return selectedMediaType!;
+        throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
     }
 
     /**
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return String(data);
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.stringify(data);
         }
 
@@ -307,16 +269,12 @@ export class ObjectSerializer {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
 
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return rawData;
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.parse(rawData);
-        }
-
-        if (mediaType === "text/html") {
-            return rawData;
         }
 
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");

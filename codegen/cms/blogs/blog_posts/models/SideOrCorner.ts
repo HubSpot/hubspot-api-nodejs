@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -12,22 +12,22 @@
 
 
 export class SideOrCorner {
-    'verticalSide': SideOrCornerVerticalSideEnum;
-    'horizontalSide': SideOrCornerHorizontalSideEnum;
+    'horizontalSide': string;
+    'verticalSide': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "verticalSide",
-            "baseName": "verticalSide",
-            "type": "SideOrCornerVerticalSideEnum",
+            "name": "horizontalSide",
+            "baseName": "horizontalSide",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "horizontalSide",
-            "baseName": "horizontalSide",
-            "type": "SideOrCornerHorizontalSideEnum",
+            "name": "verticalSide",
+            "baseName": "verticalSide",
+            "type": "string",
             "format": ""
         }    ];
 
@@ -38,8 +38,4 @@ export class SideOrCorner {
     public constructor() {
     }
 }
-
-
-export type SideOrCornerVerticalSideEnum = "TOP" | "MIDDLE" | "BOTTOM" ;
-export type SideOrCornerHorizontalSideEnum = "LEFT" | "CENTER" | "RIGHT" ;
 

@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -16,32 +16,33 @@ import { ObjectTypeDefinitionLabels } from '../models/ObjectTypeDefinitionLabels
 * Defines attributes to update on an object type.
 */
 export class ObjectTypeDefinitionPatch {
-    'labels'?: ObjectTypeDefinitionLabels;
+    /**
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
     /**
     * The names of properties that should be **required** when creating an object of this type.
     */
     'requiredProperties'?: Array<string>;
     /**
-    * Names of properties that will be indexed for this object type in by HubSpot's product search.
+    * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
     */
     'searchableProperties'?: Array<string>;
     /**
     * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
     */
     'primaryDisplayProperty'?: string;
-    /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-    */
-    'secondaryDisplayProperties'?: Array<string>;
+    'description'?: string;
     'restorable'?: boolean;
+    'labels'?: ObjectTypeDefinitionLabels;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "labels",
-            "baseName": "labels",
-            "type": "ObjectTypeDefinitionLabels",
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -63,15 +64,21 @@ export class ObjectTypeDefinitionPatch {
             "format": ""
         },
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
             "name": "restorable",
             "baseName": "restorable",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "labels",
+            "baseName": "labels",
+            "type": "ObjectTypeDefinitionLabels",
             "format": ""
         }    ];
 

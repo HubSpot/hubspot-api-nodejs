@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -29,8 +29,8 @@ export class ObservableDefinitionsApi {
      * @param toObjectType 
      * @param associationTypeId 
      */
-    public _delete(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory._delete(fromObjectType, toObjectType, associationTypeId, _options);
+    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<HttpInfo<void>> {
+        const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, associationTypeId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -44,8 +44,19 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor._delete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Deletes an association definition
+     * Delete
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param associationTypeId 
+     */
+    public archive(fromObjectType: string, toObjectType: string, associationTypeId: number, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(fromObjectType, toObjectType, associationTypeId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -55,7 +66,7 @@ export class ObservableDefinitionsApi {
      * @param toObjectType 
      * @param publicAssociationDefinitionCreateRequest 
      */
-    public create(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
+    public createWithHttpInfo(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Observable<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
         const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, publicAssociationDefinitionCreateRequest, _options);
 
         // build promise chain
@@ -70,8 +81,19 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Create a user defined association definition
+     * Create
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param publicAssociationDefinitionCreateRequest 
+     */
+    public create(fromObjectType: string, toObjectType: string, publicAssociationDefinitionCreateRequest: PublicAssociationDefinitionCreateRequest, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
+        return this.createWithHttpInfo(fromObjectType, toObjectType, publicAssociationDefinitionCreateRequest, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>) => apiResponse.data));
     }
 
     /**
@@ -80,7 +102,7 @@ export class ObservableDefinitionsApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
+    public getAllWithHttpInfo(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
         const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
 
         // build promise chain
@@ -95,8 +117,18 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Returns all association types between two object types
+     * Read
+     * @param fromObjectType 
+     * @param toObjectType 
+     */
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponseAssociationSpecWithLabelNoPaging> {
+        return this.getAllWithHttpInfo(fromObjectType, toObjectType, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>) => apiResponse.data));
     }
 
     /**
@@ -106,7 +138,7 @@ export class ObservableDefinitionsApi {
      * @param toObjectType 
      * @param publicAssociationDefinitionUpdateRequest 
      */
-    public update(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Observable<void> {
+    public updateWithHttpInfo(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.update(fromObjectType, toObjectType, publicAssociationDefinitionUpdateRequest, _options);
 
         // build promise chain
@@ -121,8 +153,19 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Update a user defined association definition
+     * Update
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param publicAssociationDefinitionUpdateRequest 
+     */
+    public update(fromObjectType: string, toObjectType: string, publicAssociationDefinitionUpdateRequest: PublicAssociationDefinitionUpdateRequest, _options?: Configuration): Observable<void> {
+        return this.updateWithHttpInfo(fromObjectType, toObjectType, publicAssociationDefinitionUpdateRequest, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }

@@ -13,7 +13,6 @@
 import { FieldGroup } from '../models/FieldGroup';
 import { FormDisplayOptions } from '../models/FormDisplayOptions';
 import { HubSpotFormConfiguration } from '../models/HubSpotFormConfiguration';
-import { HttpFile } from '../http/http';
 
 export class HubSpotFormDefinition {
     'formType': HubSpotFormDefinitionFormTypeEnum;
@@ -107,5 +106,7 @@ export class HubSpotFormDefinition {
 }
 
 
-export type HubSpotFormDefinitionFormTypeEnum = "hubspot" ;
+export enum HubSpotFormDefinitionFormTypeEnum {
+    Hubspot = 'hubspot'
+}
 

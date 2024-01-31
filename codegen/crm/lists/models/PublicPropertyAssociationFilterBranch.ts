@@ -77,5 +77,7 @@ export class PublicPropertyAssociationFilterBranch {
 }
 
 
-export type PublicPropertyAssociationFilterBranchFilterBranchTypeEnum = "PROPERTY_ASSOCIATION" ;
+export enum PublicPropertyAssociationFilterBranchFilterBranchTypeEnum {
+    PropertyAssociation = 'PROPERTY_ASSOCIATION'
+}
 

@@ -13,38 +13,20 @@
 import { FilterGroup } from '../models/FilterGroup';
 
 export class PublicObjectSearchRequest {
-    'filterGroups': Array<FilterGroup>;
-    'sorts': Array<string>;
     'query'?: string;
-    'properties': Array<string>;
     'limit': number;
-    'after': number;
+    'after': string;
+    'sorts': Array<string>;
+    'properties': Array<string>;
+    'filterGroups': Array<FilterGroup>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "filterGroups",
-            "baseName": "filterGroups",
-            "type": "Array<FilterGroup>",
-            "format": ""
-        },
-        {
-            "name": "sorts",
-            "baseName": "sorts",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "query",
             "baseName": "query",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<string>",
             "format": ""
         },
         {
@@ -56,8 +38,26 @@ export class PublicObjectSearchRequest {
         {
             "name": "after",
             "baseName": "after",
-            "type": "number",
-            "format": "int32"
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sorts",
+            "baseName": "sorts",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "filterGroups",
+            "baseName": "filterGroups",
+            "type": "Array<FilterGroup>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

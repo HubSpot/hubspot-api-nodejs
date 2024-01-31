@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AccessTokenInfoResponse } from '../models/AccessTokenInfoResponse';
@@ -15,6 +16,14 @@ export class PromiseAccessTokensApi {
         responseProcessor?: AccessTokensApiResponseProcessor
     ) {
         this.api = new ObservableAccessTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param token 
+     */
+    public getWithHttpInfo(token: string, _options?: Configuration): Promise<HttpInfo<AccessTokenInfoResponse>> {
+        const result = this.api.getWithHttpInfo(token, _options);
+        return result.toPromise();
     }
 
     /**
@@ -47,8 +56,24 @@ export class PromiseRefreshTokensApi {
     /**
      * @param token 
      */
+    public archiveWithHttpInfo(token: string, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(token, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param token 
+     */
     public archive(token: string, _options?: Configuration): Promise<void> {
         const result = this.api.archive(token, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * @param token 
+     */
+    public getWithHttpInfo(token: string, _options?: Configuration): Promise<HttpInfo<RefreshTokenInfoResponse>> {
+        const result = this.api.getWithHttpInfo(token, _options);
         return result.toPromise();
     }
 
@@ -77,6 +102,19 @@ export class PromiseTokensApi {
         responseProcessor?: TokensApiResponseProcessor
     ) {
         this.api = new ObservableTokensApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param grantType 
+     * @param code 
+     * @param redirectUri 
+     * @param clientId 
+     * @param clientSecret 
+     * @param refreshToken 
+     */
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<HttpInfo<TokenResponseIF>> {
+        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
+        return result.toPromise();
     }
 
     /**

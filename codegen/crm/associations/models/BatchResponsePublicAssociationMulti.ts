@@ -13,27 +13,21 @@
 import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
 
 export class BatchResponsePublicAssociationMulti {
-    'status': BatchResponsePublicAssociationMultiStatusEnum;
-    'results': Array<PublicAssociationMulti>;
+    'completedAt': Date;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<PublicAssociationMulti>;
+    'status': BatchResponsePublicAssociationMultiStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponsePublicAssociationMultiStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicAssociationMulti>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -48,15 +42,21 @@ export class BatchResponsePublicAssociationMulti {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationMulti>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponsePublicAssociationMultiStatusEnum",
             "format": ""
         }    ];
 
@@ -69,5 +69,10 @@ export class BatchResponsePublicAssociationMulti {
 }
 
 
-export type BatchResponsePublicAssociationMultiStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponsePublicAssociationMultiStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

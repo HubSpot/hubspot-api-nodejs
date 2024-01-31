@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * CRM Timeline
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -14,65 +14,41 @@ import { ErrorDetail } from '../models/ErrorDetail';
 
 export class ModelError {
     /**
-    * A human readable message describing the error along with remediation steps where appropriate
-    */
-    'message': string;
-    /**
-    * A unique identifier for the request. Include this value with any error reports or support tickets
-    */
-    'correlationId': string;
-    /**
-    * The error category
-    */
-    'category': string;
-    /**
     * A specific category that contains more specific detail about the error
     */
     'subCategory'?: string;
-    /**
-    * further information about the error
-    */
-    'errors'?: Array<ErrorDetail>;
     /**
     * Context about the error condition
     */
     'context'?: { [key: string]: Array<string>; };
     /**
+    * A unique identifier for the request. Include this value with any error reports or support tickets
+    */
+    'correlationId': string;
+    /**
     * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
     */
     'links'?: { [key: string]: string; };
+    /**
+    * A human readable message describing the error along with remediation steps where appropriate
+    */
+    'message': string;
+    /**
+    * The error category
+    */
+    'category': string;
+    /**
+    * further information about the error
+    */
+    'errors'?: Array<ErrorDetail>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "message",
-            "baseName": "message",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "correlationId",
-            "baseName": "correlationId",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
-            "name": "category",
-            "baseName": "category",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "subCategory",
             "baseName": "subCategory",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<ErrorDetail>",
             "format": ""
         },
         {
@@ -82,9 +58,33 @@ export class ModelError {
             "format": ""
         },
         {
+            "name": "correlationId",
+            "baseName": "correlationId",
+            "type": "string",
+            "format": "uuid"
+        },
+        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "category",
+            "baseName": "category",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<ErrorDetail>",
             "format": ""
         }    ];
 

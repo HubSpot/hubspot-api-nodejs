@@ -47,5 +47,7 @@ export class PublicWebinarFilter {
 }
 
 
-export type PublicWebinarFilterFilterTypeEnum = "WEBINAR" ;
+export enum PublicWebinarFilterFilterTypeEnum {
+    Webinar = 'WEBINAR'
+}
 

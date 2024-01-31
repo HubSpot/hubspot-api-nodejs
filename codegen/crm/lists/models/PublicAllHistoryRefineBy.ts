@@ -33,5 +33,7 @@ export class PublicAllHistoryRefineBy {
 }
 
 
-export type PublicAllHistoryRefineByTypeEnum = "ALL_HISTORY" ;
+export enum PublicAllHistoryRefineByTypeEnum {
+    AllHistory = 'ALL_HISTORY'
+}
 

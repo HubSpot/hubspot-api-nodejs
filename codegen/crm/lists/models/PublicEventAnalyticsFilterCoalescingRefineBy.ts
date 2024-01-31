@@ -14,7 +14,7 @@ import { PublicTimeOffset } from '../models/PublicTimeOffset';
 import { PublicTimePointOperationTimePoint } from '../models/PublicTimePointOperationTimePoint';
 
 export class PublicEventAnalyticsFilterCoalescingRefineBy {
-    'type': PublicEventAnalyticsFilterCoalescingRefineByTypeEnum;
+    'type': string;
     'minOccurrences'?: number;
     'maxOccurrences'?: number;
     'setType': string;
@@ -43,7 +43,7 @@ export class PublicEventAnalyticsFilterCoalescingRefineBy {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PublicEventAnalyticsFilterCoalescingRefineByTypeEnum",
+            "type": "string",
             "format": ""
         },
         {
@@ -180,7 +180,4 @@ export class PublicEventAnalyticsFilterCoalescingRefineBy {
     public constructor() {
     }
 }
-
-
-export type PublicEventAnalyticsFilterCoalescingRefineByTypeEnum = "TIME_RANGED" ;
 

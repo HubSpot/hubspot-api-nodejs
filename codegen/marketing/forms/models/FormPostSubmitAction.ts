@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * What should happen after the customer submits the form.
@@ -50,5 +49,8 @@ export class FormPostSubmitAction {
 }
 
 
-export type FormPostSubmitActionTypeEnum = "thank_you" | "redirect_url" ;
+export enum FormPostSubmitActionTypeEnum {
+    ThankYou = 'thank_you',
+    RedirectUrl = 'redirect_url'
+}
 

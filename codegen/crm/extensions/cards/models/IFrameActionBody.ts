@@ -1,5 +1,5 @@
 /**
- * CRM cards
+ * Public App Crm Cards
  * Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
  *
  * OpenAPI spec version: v3
@@ -12,20 +12,20 @@
 
 
 export class IFrameActionBody {
-    'type': IFrameActionBodyTypeEnum;
-    'width': number;
-    'height': number;
-    'url': string;
-    'label'?: string;
     'propertyNamesIncluded': Array<string>;
+    'width': number;
+    'label'?: string;
+    'type': IFrameActionBodyTypeEnum;
+    'url': string;
+    'height': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "IFrameActionBodyTypeEnum",
+            "name": "propertyNamesIncluded",
+            "baseName": "propertyNamesIncluded",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -35,10 +35,16 @@ export class IFrameActionBody {
             "format": "int32"
         },
         {
-            "name": "height",
-            "baseName": "height",
-            "type": "number",
-            "format": "int32"
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "IFrameActionBodyTypeEnum",
+            "format": ""
         },
         {
             "name": "url",
@@ -47,16 +53,10 @@ export class IFrameActionBody {
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
-            "format": ""
+            "name": "height",
+            "baseName": "height",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
@@ -68,5 +68,7 @@ export class IFrameActionBody {
 }
 
 
-export type IFrameActionBodyTypeEnum = "IFRAME" ;
+export enum IFrameActionBodyTypeEnum {
+    Iframe = 'IFRAME'
+}
 

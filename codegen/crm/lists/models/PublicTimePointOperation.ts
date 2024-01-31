@@ -76,5 +76,7 @@ export class PublicTimePointOperation {
 }
 
 
-export type PublicTimePointOperationOperationTypeEnum = "TIME_POINT" ;
+export enum PublicTimePointOperationOperationTypeEnum {
+    TimePoint = 'TIME_POINT'
+}
 

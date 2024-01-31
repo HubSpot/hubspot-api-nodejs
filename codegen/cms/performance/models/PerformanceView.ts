@@ -1,6 +1,6 @@
 /**
- * CMS Performance API
- * Use these endpoints to get a time series view of your website's performance.
+ * CMS Performance
+ * Use these endpoints to get a time series view of your website\'s performance.
  *
  * OpenAPI spec version: v3
  * 
@@ -31,41 +31,40 @@ export class PerformanceView {
     * The number of responses that had an http status code of 504.
     */
     '_504': number;
-    /**
-    * The timestamp in milliseconds of the start of this interval.
-    */
-    'startTimestamp': number;
-    /**
-    * The timestamp in milliseconds of the end of this interval.
-    */
-    'endTimestamp': number;
     'startDatetime'?: string;
-    'endDatetime'?: string;
-    /**
-    * The total number of requests received in this period.
-    */
-    'totalRequests': number;
-    /**
-    * The total number of requests that were served cached responses.
-    */
-    'cacheHits': number;
-    /**
-    * The percentage of requests that were served cached responses.
-    */
-    'cacheHitRate': number;
-    'totalRequestTime'?: number;
-    /**
-    * The average response time in milliseconds from the origin to the edge.
-    */
-    'avgOriginResponseTime': number;
     /**
     * The average response time in milliseconds.
     */
     'responseTimeMs': number;
     /**
+    * The 95th percentile response time.
+    */
+    '_95th': number;
+    /**
+    * The total number of requests received in this period.
+    */
+    'totalRequests': number;
+    /**
+    * The percentage of requests that were served cached responses.
+    */
+    'cacheHitRate': number;
+    /**
+    * The 99th percentile response time.
+    */
+    '_99th': number;
+    'totalRequestTime'?: number;
+    /**
     * The number of responses that had an http status code between 1000-1999.
     */
     '_100x': number;
+    /**
+    * The 50th percentile response time.
+    */
+    '_50th': number;
+    /**
+    * The total number of requests that were served cached responses.
+    */
+    'cacheHits': number;
     /**
     * The number of responses that had an http status code between 200-299.
     */
@@ -79,21 +78,22 @@ export class PerformanceView {
     */
     '_40x': number;
     /**
+    * The timestamp in milliseconds of the end of this interval.
+    */
+    'endTimestamp': number;
+    /**
     * The number of responses that had an http status code between 500-599.
     */
     '_50x': number;
     /**
-    * The 50th percentile response time.
+    * The timestamp in milliseconds of the start of this interval.
     */
-    '_50th': number;
+    'startTimestamp': number;
+    'endDatetime'?: string;
     /**
-    * The 95th percentile response time.
+    * The average response time in milliseconds from the origin to the edge.
     */
-    '_95th': number;
-    /**
-    * The 99th percentile response time.
-    */
-    '_99th': number;
+    'avgOriginResponseTime': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -123,38 +123,26 @@ export class PerformanceView {
             "format": "int32"
         },
         {
-            "name": "startTimestamp",
-            "baseName": "startTimestamp",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "endTimestamp",
-            "baseName": "endTimestamp",
-            "type": "number",
-            "format": "int64"
-        },
-        {
             "name": "startDatetime",
             "baseName": "startDatetime",
             "type": "string",
             "format": ""
         },
         {
-            "name": "endDatetime",
-            "baseName": "endDatetime",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "totalRequests",
-            "baseName": "totalRequests",
+            "name": "responseTimeMs",
+            "baseName": "responseTimeMs",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "cacheHits",
-            "baseName": "cacheHits",
+            "name": "_95th",
+            "baseName": "95th",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "totalRequests",
+            "baseName": "totalRequests",
             "type": "number",
             "format": "int32"
         },
@@ -165,26 +153,32 @@ export class PerformanceView {
             "format": ""
         },
         {
+            "name": "_99th",
+            "baseName": "99th",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "totalRequestTime",
             "baseName": "totalRequestTime",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "avgOriginResponseTime",
-            "baseName": "avgOriginResponseTime",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "responseTimeMs",
-            "baseName": "responseTimeMs",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "_100x",
             "baseName": "100X",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "_50th",
+            "baseName": "50th",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "cacheHits",
+            "baseName": "cacheHits",
             "type": "number",
             "format": "int32"
         },
@@ -207,26 +201,32 @@ export class PerformanceView {
             "format": "int32"
         },
         {
+            "name": "endTimestamp",
+            "baseName": "endTimestamp",
+            "type": "number",
+            "format": "int64"
+        },
+        {
             "name": "_50x",
             "baseName": "50X",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "_50th",
-            "baseName": "50th",
+            "name": "startTimestamp",
+            "baseName": "startTimestamp",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
-            "name": "_95th",
-            "baseName": "95th",
-            "type": "number",
-            "format": "int32"
+            "name": "endDatetime",
+            "baseName": "endDatetime",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "_99th",
-            "baseName": "99th",
+            "name": "avgOriginResponseTime",
+            "baseName": "avgOriginResponseTime",
             "type": "number",
             "format": "int32"
         }    ];

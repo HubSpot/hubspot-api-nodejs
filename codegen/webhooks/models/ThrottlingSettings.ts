@@ -1,5 +1,5 @@
 /**
- * Webhooks API
+ * Webhooks Webhooks
  * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
  *
  * OpenAPI spec version: v3
@@ -16,28 +16,28 @@
 */
 export class ThrottlingSettings {
     /**
-    * The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
-    */
-    'maxConcurrentRequests': number;
-    /**
     * Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
     */
     'period': ThrottlingSettingsPeriodEnum;
+    /**
+    * The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
+    */
+    'maxConcurrentRequests': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "maxConcurrentRequests",
-            "baseName": "maxConcurrentRequests",
-            "type": "number",
-            "format": "int32"
-        },
-        {
             "name": "period",
             "baseName": "period",
             "type": "ThrottlingSettingsPeriodEnum",
             "format": ""
+        },
+        {
+            "name": "maxConcurrentRequests",
+            "baseName": "maxConcurrentRequests",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
@@ -49,5 +49,8 @@ export class ThrottlingSettings {
 }
 
 
-export type ThrottlingSettingsPeriodEnum = "SECONDLY" | "ROLLING_MINUTE" ;
+export enum ThrottlingSettingsPeriodEnum {
+    Secondly = 'SECONDLY',
+    RollingMinute = 'ROLLING_MINUTE'
+}
 

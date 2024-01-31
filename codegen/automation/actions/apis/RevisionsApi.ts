@@ -1,15 +1,15 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { ActionRevision } from '../models/ActionRevision';
-import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
+import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+import { PublicActionRevision } from '../models/PublicActionRevision';
 
 /**
  * no description
@@ -17,10 +17,9 @@ import { CollectionResponseActionRevisionForwardPaging } from '../models/Collect
 export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Returns the given version of a custom workflow action.
-     * Get a revision for a custom action
-     * @param definitionId The ID of the custom workflow action.
-     * @param revisionId The version of the custom workflow action.
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
      * @param appId 
      */
     public async getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -71,11 +70,10 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns a list of revisions for a custom workflow action.
-     * Get all revisions for a custom action
-     * @param definitionId The ID of the custom workflow action
+     * Get all revisions for a given definition
+     * @param definitionId 
      * @param appId 
-     * @param limit Maximum number of results per page.
+     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
     public async getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<RequestContext> {
@@ -141,14 +139,14 @@ export class RevisionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<ActionRevision > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicActionRevision >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: ActionRevision = ObjectSerializer.deserialize(
+            const body: PublicActionRevision = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionRevision", ""
-            ) as ActionRevision;
-            return body;
+                "PublicActionRevision", ""
+            ) as PublicActionRevision;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -160,11 +158,11 @@ export class RevisionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: ActionRevision = ObjectSerializer.deserialize(
+            const body: PublicActionRevision = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "ActionRevision", ""
-            ) as ActionRevision;
-            return body;
+                "PublicActionRevision", ""
+            ) as PublicActionRevision;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -177,14 +175,14 @@ export class RevisionsApiResponseProcessor {
      * @params response Response returned by the server for a request to getPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getPage(response: ResponseContext): Promise<CollectionResponseActionRevisionForwardPaging > {
+     public async getPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseActionRevisionForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionRevisionForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionRevisionForwardPaging", ""
-            ) as CollectionResponseActionRevisionForwardPaging;
-            return body;
+                "CollectionResponsePublicActionRevisionForwardPaging", ""
+            ) as CollectionResponsePublicActionRevisionForwardPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -196,11 +194,11 @@ export class RevisionsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseActionRevisionForwardPaging = ObjectSerializer.deserialize(
+            const body: CollectionResponsePublicActionRevisionForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseActionRevisionForwardPaging", ""
-            ) as CollectionResponseActionRevisionForwardPaging;
-            return body;
+                "CollectionResponsePublicActionRevisionForwardPaging", ""
+            ) as CollectionResponsePublicActionRevisionForwardPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

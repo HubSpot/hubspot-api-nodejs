@@ -1,6 +1,6 @@
 /**
  * Accounting Extension
- * These APIs allow you to interact with HubSpot's Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
+ * These APIs allow you to interact with HubSpot\'s Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
  *
  * OpenAPI spec version: v3
  * 
@@ -16,7 +16,7 @@
 */
 export class InvoicePdfResponse {
     /**
-    * Designates if the response is a success ('OK') or failure ('ERR').
+    * Designates if the response is a success (\'OK\') or failure (\'ERR\').
     */
     'result'?: InvoicePdfResponseResultEnum;
     /**
@@ -49,5 +49,8 @@ export class InvoicePdfResponse {
 }
 
 
-export type InvoicePdfResponseResultEnum = "OK" | "ERR" ;
+export enum InvoicePdfResponseResultEnum {
+    Ok = 'OK',
+    Err = 'ERR'
+}
 

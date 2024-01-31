@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -16,13 +16,13 @@
 */
 export class AssociationDefinition {
     /**
+    * When the association was defined.
+    */
+    'createdAt'?: Date;
+    /**
     * ID of the primary object type to link from.
     */
     'fromObjectTypeId': string;
-    /**
-    * ID of the target object type ID to link to.
-    */
-    'toObjectTypeId': string;
     /**
     * A unique name for this association.
     */
@@ -32,9 +32,9 @@ export class AssociationDefinition {
     */
     'id': string;
     /**
-    * When the association was defined.
+    * ID of the target object type ID to link to.
     */
-    'createdAt'?: Date;
+    'toObjectTypeId': string;
     /**
     * When the association was last updated.
     */
@@ -44,14 +44,14 @@ export class AssociationDefinition {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fromObjectTypeId",
-            "baseName": "fromObjectTypeId",
-            "type": "string",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
-            "name": "toObjectTypeId",
-            "baseName": "toObjectTypeId",
+            "name": "fromObjectTypeId",
+            "baseName": "fromObjectTypeId",
             "type": "string",
             "format": ""
         },
@@ -68,10 +68,10 @@ export class AssociationDefinition {
             "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "toObjectTypeId",
+            "baseName": "toObjectTypeId",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "updatedAt",

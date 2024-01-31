@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 export class LegalConsentOptionsNone {
     'type': LegalConsentOptionsNoneTypeEnum;
@@ -34,5 +33,7 @@ export class LegalConsentOptionsNone {
 }
 
 
-export type LegalConsentOptionsNoneTypeEnum = "none" ;
+export enum LegalConsentOptionsNoneTypeEnum {
+    None = 'none'
+}
 

@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -13,7 +13,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 export class ObservableBasicApi {
@@ -39,7 +39,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(objectType, objectId, toObjectType, toObjectId, _options);
 
         // build promise chain
@@ -54,8 +54,20 @@ export class ObservableBasicApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * deletes all associations between two records.
+     * Delete
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
+    public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -67,7 +79,7 @@ export class ObservableBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair> {
+    public createWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<HttpInfo<LabelsBetweenObjectPair1>> {
         const requestContextPromise = this.requestFactory.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
 
         // build promise chain
@@ -82,8 +94,21 @@ export class ObservableBasicApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Set association labels between two records.
+     * Create
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     * @param associationSpec 
+     */
+    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair1> {
+        return this.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options).pipe(map((apiResponse: HttpInfo<LabelsBetweenObjectPair1>) => apiResponse.data));
     }
 
     /**
@@ -94,7 +119,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         const requestContextPromise = this.requestFactory.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
 
         // build promise chain
@@ -109,8 +134,20 @@ export class ObservableBasicApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDefault(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDefaultWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Create the default (most generic) association type between two object types
+     * Create Default
+     * @param fromObjectType 
+     * @param fromObjectId 
+     * @param toObjectType 
+     * @param toObjectId 
+     */
+    public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+        return this.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicDefaultAssociation>) => apiResponse.data));
     }
 
     /**
@@ -122,7 +159,7 @@ export class ObservableBasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+    public getPageWithHttpInfo(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
         const requestContextPromise = this.requestFactory.getPage(objectType, objectId, toObjectType, after, limit, _options);
 
         // build promise chain
@@ -137,8 +174,21 @@ export class ObservableBasicApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * List all associations of an object by object type. Limit 500 per call.
+     * List
+     * @param objectType 
+     * @param objectId 
+     * @param toObjectType 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param limit The maximum number of results to display per page.
+     */
+    public getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+        return this.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>) => apiResponse.data));
     }
 
 }
@@ -166,7 +216,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiArchive 
      */
-    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
 
         // build promise chain
@@ -181,8 +231,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Batch delete associations for objects
+     * Delete
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiArchive 
+     */
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -192,7 +253,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost 
      */
-    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<void> {
+    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
 
         // build promise chain
@@ -207,8 +268,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveLabels(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveLabelsWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<void> {
+        return this.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -218,7 +290,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicAssociationMultiPost 
      */
-    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
+    public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
         const requestContextPromise = this.requestFactory.create(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
 
         // build promise chain
@@ -233,8 +305,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Batch create associations for objects
+     * Create
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
+        return this.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options).pipe(map((apiResponse: HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>) => apiResponse.data));
     }
 
     /**
@@ -244,7 +327,7 @@ export class ObservableBatchApi {
      * @param toObjectType 
      * @param batchInputPublicDefaultAssociationMultiPost 
      */
-    public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+    public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         const requestContextPromise = this.requestFactory.createDefault(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options);
 
         // build promise chain
@@ -259,18 +342,29 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDefault(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDefaultWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Batch read associations for objects to specific object type. The 'after' field in a returned paging object  can be added alongside the 'id' to retrieve the next page of associations from that objectId. The 'link' field is deprecated and should be ignored. 
+     * Create the default (most generic) association type between two object types
+     *  Create Default Associations
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicDefaultAssociationMultiPost 
+     */
+    public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+        return this.createDefaultWithHttpInfo(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicDefaultAssociation>) => apiResponse.data));
+    }
+
+    /**
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
      * Read
      * @param fromObjectType 
      * @param toObjectType 
      * @param batchInputPublicFetchAssociationsBatchRequest 
      */
-    public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
+    public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
         const requestContextPromise = this.requestFactory.getPage(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options);
 
         // build promise chain
@@ -285,8 +379,19 @@ export class ObservableBatchApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Read
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicFetchAssociationsBatchRequest 
+     */
+    public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
+        return this.getPageWithHttpInfo(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>) => apiResponse.data));
     }
 
 }

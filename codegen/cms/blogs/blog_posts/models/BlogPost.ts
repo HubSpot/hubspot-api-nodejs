@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -18,205 +18,298 @@ import { LayoutSection } from '../models/LayoutSection';
 */
 export class BlogPost {
     /**
+    * The date (ISO8601 format) the blog post is to be published at.
+    */
+    'publishDate': Date;
+    /**
+    * The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
+    */
+    'language': BlogPostLanguageEnum;
+    /**
+    * Boolean to determine whether or not the styles from the template should be applied.
+    */
+    'enableLayoutStylesheets': boolean;
+    /**
+    * A description that goes in <meta> tag on the page.
+    */
+    'metaDescription': string;
+    /**
+    * List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
+    */
+    'attachedStylesheets': Array<{ [key: string]: any; }>;
+    /**
+    * Set this to create a password protected page. Entering the password will be required to view the page.
+    */
+    'password': string;
+    /**
+    * The html title of this Blog Post.
+    */
+    'htmlTitle': string;
+    /**
+    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
+    */
+    'publishImmediately': boolean;
+    'translations': { [key: string]: ContentLanguageVariation; };
+    /**
     * The unique ID of the Blog Post.
     */
     'id': string;
-    /**
-    * The path of the this blog post. This field is appended to the domain to construct the url of this post.
-    */
-    'slug': string;
-    /**
-    * The ID of the parent Blog this Blog Post is associated with.
-    */
-    'contentGroupId': string;
-    /**
-    * The GUID of the marketing campaign this Blog Post is a part of.
-    */
-    'campaign': string;
-    /**
-    * ID of the type of object this is. Should always .
-    */
-    'categoryId': number;
     /**
     * An ENUM descibing the current state of this Blog Post.
     */
     'state': string;
     /**
-    * The internal name of the Blog Post.
+    * The path of the this blog post. This field is appended to the domain to construct the url of this post.
     */
-    'name': string;
-    'mabExperimentId': string;
-    'archived': boolean;
-    /**
-    * The name of the user that updated this Blog Post.
-    */
-    'authorName': string;
-    'abTestId': string;
+    'slug': string;
     /**
     * The ID of the user that created this Blog Post.
     */
     'createdById': string;
     /**
+    * The contents of the RSS body for this Blog Post.
+    */
+    'rssBody': string;
+    'currentlyPublished': boolean;
+    /**
+    * If True, the post will not show up in your dashboard, although the post could still be live.
+    */
+    'archivedInDashboard': boolean;
+    'created': Date;
+    /**
+    * An ENUM descibing the type of this object. Should always be BLOG_POST.
+    */
+    'contentTypeCategory': BlogPostContentTypeCategoryEnum;
+    /**
+    * 
+    */
+    'mabExperimentId': string;
+    /**
     * The ID of the user that updated this Blog Post.
     */
     'updatedById': string;
     /**
-    * The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
+    * ID of the primary blog post this object was translated from.
     */
-    'domain': string;
-    'abStatus': BlogPostAbStatusEnum;
+    'translatedFromId': string;
+    /**
+    * 
+    */
     'folderId': string;
     /**
     * A data structure containing the data for all the modules inside the containers for this post. This will only be populated if the page has widget containers.
     */
     'widgetContainers': { [key: string]: any; };
     /**
-    * A data structure containing the data for all the modules for this page.
+    * 
     */
-    'widgets': { [key: string]: any; };
-    /**
-    * The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
-    */
-    'language': BlogPostLanguageEnum;
-    /**
-    * ID of the primary blog post this object was translated from.
-    */
-    'translatedFromId': string;
-    'translations': { [key: string]: ContentLanguageVariation; };
-    'dynamicPageDataSourceType': number;
-    'dynamicPageDataSourceId': string;
-    /**
-    * The ID of the Blog Author associated with this Blog Post.
-    */
-    'blogAuthorId': string;
-    /**
-    * List of IDs for the tags associated with this Blog Post.
-    */
-    'tagIds': Array<number>;
-    /**
-    * The html title of this Blog Post.
-    */
-    'htmlTitle': string;
-    /**
-    * Boolean to allow overriding the AMP settings for the blog.
-    */
-    'enableGoogleAmpOutputOverride': boolean;
-    /**
-    * Boolean to determine if this post should use a featuredImage.
-    */
-    'useFeaturedImage': boolean;
-    /**
-    * The HTML of the main post body.
-    */
-    'postBody': string;
-    /**
-    * The summary of the blog post that will appear on the main listing page.
-    */
-    'postSummary': string;
-    /**
-    * The contents of the RSS body for this Blog Post.
-    */
-    'rssBody': string;
-    /**
-    * The contents of the RSS summary for this Blog Post.
-    */
-    'rssSummary': string;
-    'currentlyPublished': boolean;
-    'pageExpiryEnabled': boolean;
     'pageExpiryRedirectId': number;
-    'pageExpiryRedirectUrl': string;
-    'pageExpiryDate': number;
-    /**
-    * Boolean to determine whether or not the Primary CSS Files should be applied.
-    */
-    'includeDefaultCustomCss': boolean;
-    /**
-    * Boolean to determine whether or not the styles from the template should be applied.
-    */
-    'enableLayoutStylesheets': boolean;
-    /**
-    * Boolean to determine whether or not the styles from the template should be applied.
-    */
-    'enableDomainStylesheets': boolean;
-    /**
-    * Set this to true if you want to be published immediately when the schedule publish endpoint is called, and to ignore the publish_date setting.
-    */
-    'publishImmediately': boolean;
+    'dynamicPageDataSourceType': number;
     /**
     * The featuredImage of this Blog Post.
     */
     'featuredImage': string;
     /**
-    * Alt Text of the featuredImage.
+    * The name of the user that updated this Blog Post.
     */
-    'featuredImageAltText': string;
+    'authorName': string;
     /**
-    * Optional override to set the URL to be used in the rel=canonical link tag on the page.
+    * The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
     */
-    'linkRelCanonicalUrl': string;
+    'domain': string;
     /**
-    * An ENUM descibing the type of this object. Should always be BLOG_POST.
+    * The internal name of the Blog Post.
     */
-    'contentTypeCategory': BlogPostContentTypeCategoryEnum;
+    'name': string;
     /**
-    * List of stylesheets to attach to this blog post. These stylesheets are attached to just this page. Order of precedence is bottom to top, just like in the HTML.
+    * The ID of the HubDB table this Blog Post references, if applicable
     */
-    'attachedStylesheets': Array<{ [key: string]: any; }>;
+    'dynamicPageHubDbTableId': string;
     /**
-    * A description that goes in <meta> tag on the page.
+    * The GUID of the marketing campaign this Blog Post is a part of.
     */
-    'metaDescription': string;
+    'campaign': string;
+    'dynamicPageDataSourceId': string;
     /**
-    * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
+    * Boolean to determine whether or not the styles from the template should be applied.
     */
-    'headHtml': string;
+    'enableDomainStylesheets': boolean;
+    /**
+    * Boolean to determine whether or not the Primary CSS Files should be applied.
+    */
+    'includeDefaultCustomCss': boolean;
+    /**
+    * 
+    */
+    'layoutSections': { [key: string]: LayoutSection; };
+    'updated': Date;
     /**
     * Custom HTML for embed codes, javascript that should be placed before the </body> tag of the page.
     */
     'footerHtml': string;
     /**
-    * If True, the post will not show up in your dashboard, although the post could still be live.
+    * List of IDs for the tags associated with this Blog Post.
     */
-    'archivedInDashboard': boolean;
+    'tagIds': Array<number>;
     /**
-    * Boolean to determine whether or not to respect publicAccessRules.
+    * A data structure containing the data for all the modules for this page.
     */
-    'publicAccessRulesEnabled': boolean;
+    'widgets': { [key: string]: any; };
     /**
-    * Rules for require member registration to access private content.
+    * The summary of the blog post that will appear on the main listing page.
     */
-    'publicAccessRules': Array<any>;
-    'layoutSections': { [key: string]: LayoutSection; };
-    'themeSettingsValues': { [key: string]: any; };
+    'postSummary': string;
+    /**
+    * Custom HTML for embed codes, javascript, etc. that goes in the <head> tag of the page.
+    */
+    'headHtml': string;
+    /**
+    * 
+    */
+    'pageExpiryRedirectUrl': string;
+    /**
+    * 
+    */
+    'abStatus': BlogPostAbStatusEnum;
+    /**
+    * Boolean to determine if this post should use a featuredImage.
+    */
+    'useFeaturedImage': boolean;
+    /**
+    * 
+    */
+    'abTestId': string;
+    /**
+    * Alt Text of the featuredImage.
+    */
+    'featuredImageAltText': string;
+    /**
+    * The ID of the Blog Author associated with this Blog Post.
+    */
+    'blogAuthorId': string;
+    /**
+    * The ID of the parent Blog this Blog Post is associated with.
+    */
+    'contentGroupId': string;
+    /**
+    * The contents of the RSS summary for this Blog Post.
+    */
+    'rssSummary': string;
+    /**
+    * 
+    */
+    'pageExpiryEnabled': boolean;
     /**
     * A generated field representing the URL of this blog post.
     */
     'url': string;
     /**
-    * Set this to create a password protected page. Entering the password will be required to view the page.
+    * Rules for require member registration to access private content.
     */
-    'password': string;
+    'publicAccessRules': Array<any>;
+    /**
+    * Boolean to allow overriding the AMP settings for the blog.
+    */
+    'enableGoogleAmpOutputOverride': boolean;
+    /**
+    * The timestamp (ISO8601 format) when this Blog Post was deleted.
+    */
+    'archivedAt': number;
+    /**
+    * The HTML of the main post body.
+    */
+    'postBody': string;
+    /**
+    * 
+    */
+    'themeSettingsValues': { [key: string]: any; };
+    /**
+    * 
+    */
+    'pageExpiryDate': number;
+    /**
+    * Boolean to determine whether or not to respect publicAccessRules.
+    */
+    'publicAccessRulesEnabled': boolean;
     /**
     * A generated ENUM descibing the current state of this Blog Post. Should always match state.
     */
     'currentState': BlogPostCurrentStateEnum;
     /**
-    * The date (ISO8601 format) the blog post is to be published at.
+    * ID of the type of object this is. Should always .
     */
-    'publishDate': Date;
-    'created': Date;
-    'updated': Date;
+    'categoryId': number;
     /**
-    * The timestamp (ISO8601 format) when this Blog Post was deleted.
+    * Optional override to set the URL to be used in the rel=canonical link tag on the page.
     */
-    'deletedAt': Date;
+    'linkRelCanonicalUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "publishDate",
+            "baseName": "publishDate",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "language",
+            "baseName": "language",
+            "type": "BlogPostLanguageEnum",
+            "format": ""
+        },
+        {
+            "name": "enableLayoutStylesheets",
+            "baseName": "enableLayoutStylesheets",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "metaDescription",
+            "baseName": "metaDescription",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "attachedStylesheets",
+            "baseName": "attachedStylesheets",
+            "type": "Array<{ [key: string]: any; }>",
+            "format": ""
+        },
+        {
+            "name": "password",
+            "baseName": "password",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "htmlTitle",
+            "baseName": "htmlTitle",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "publishImmediately",
+            "baseName": "publishImmediately",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "translations",
+            "baseName": "translations",
+            "type": "{ [key: string]: ContentLanguageVariation; }",
+            "format": ""
+        },
+        {
             "name": "id",
             "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "state",
+            "baseName": "state",
             "type": "string",
             "format": ""
         },
@@ -227,62 +320,44 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "contentGroupId",
-            "baseName": "contentGroupId",
+            "name": "createdById",
+            "baseName": "createdById",
             "type": "string",
             "format": ""
         },
         {
-            "name": "campaign",
-            "baseName": "campaign",
+            "name": "rssBody",
+            "baseName": "rssBody",
             "type": "string",
             "format": ""
         },
         {
-            "name": "categoryId",
-            "baseName": "categoryId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "state",
-            "baseName": "state",
-            "type": "string",
+            "name": "currentlyPublished",
+            "baseName": "currentlyPublished",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "archivedInDashboard",
+            "baseName": "archivedInDashboard",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "contentTypeCategory",
+            "baseName": "contentTypeCategory",
+            "type": "BlogPostContentTypeCategoryEnum",
             "format": ""
         },
         {
             "name": "mabExperimentId",
             "baseName": "mabExperimentId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "authorName",
-            "baseName": "authorName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "abTestId",
-            "baseName": "abTestId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdById",
-            "baseName": "createdById",
             "type": "string",
             "format": ""
         },
@@ -293,15 +368,9 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "domain",
-            "baseName": "domain",
+            "name": "translatedFromId",
+            "baseName": "translatedFromId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "abStatus",
-            "baseName": "abStatus",
-            "type": "BlogPostAbStatusEnum",
             "format": ""
         },
         {
@@ -317,28 +386,10 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "widgets",
-            "baseName": "widgets",
-            "type": "{ [key: string]: any; }",
-            "format": ""
-        },
-        {
-            "name": "language",
-            "baseName": "language",
-            "type": "BlogPostLanguageEnum",
-            "format": ""
-        },
-        {
-            "name": "translatedFromId",
-            "baseName": "translatedFromId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "translations",
-            "baseName": "translations",
-            "type": "{ [key: string]: ContentLanguageVariation; }",
-            "format": ""
+            "name": "pageExpiryRedirectId",
+            "baseName": "pageExpiryRedirectId",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "dynamicPageDataSourceType",
@@ -347,14 +398,74 @@ export class BlogPost {
             "format": "int32"
         },
         {
+            "name": "featuredImage",
+            "baseName": "featuredImage",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "authorName",
+            "baseName": "authorName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "domain",
+            "baseName": "domain",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dynamicPageHubDbTableId",
+            "baseName": "dynamicPageHubDbTableId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaign",
+            "baseName": "campaign",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "dynamicPageDataSourceId",
             "baseName": "dynamicPageDataSourceId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "blogAuthorId",
-            "baseName": "blogAuthorId",
+            "name": "enableDomainStylesheets",
+            "baseName": "enableDomainStylesheets",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "includeDefaultCustomCss",
+            "baseName": "includeDefaultCustomCss",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "layoutSections",
+            "baseName": "layoutSections",
+            "type": "{ [key: string]: LayoutSection; }",
+            "format": ""
+        },
+        {
+            "name": "updated",
+            "baseName": "updated",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "footerHtml",
+            "baseName": "footerHtml",
             "type": "string",
             "format": ""
         },
@@ -365,134 +476,14 @@ export class BlogPost {
             "format": "int64"
         },
         {
-            "name": "htmlTitle",
-            "baseName": "htmlTitle",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "enableGoogleAmpOutputOverride",
-            "baseName": "enableGoogleAmpOutputOverride",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "useFeaturedImage",
-            "baseName": "useFeaturedImage",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "postBody",
-            "baseName": "postBody",
-            "type": "string",
+            "name": "widgets",
+            "baseName": "widgets",
+            "type": "{ [key: string]: any; }",
             "format": ""
         },
         {
             "name": "postSummary",
             "baseName": "postSummary",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "rssBody",
-            "baseName": "rssBody",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "rssSummary",
-            "baseName": "rssSummary",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "currentlyPublished",
-            "baseName": "currentlyPublished",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "pageExpiryEnabled",
-            "baseName": "pageExpiryEnabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "pageExpiryRedirectId",
-            "baseName": "pageExpiryRedirectId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "pageExpiryRedirectUrl",
-            "baseName": "pageExpiryRedirectUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pageExpiryDate",
-            "baseName": "pageExpiryDate",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "includeDefaultCustomCss",
-            "baseName": "includeDefaultCustomCss",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "enableLayoutStylesheets",
-            "baseName": "enableLayoutStylesheets",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "enableDomainStylesheets",
-            "baseName": "enableDomainStylesheets",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "publishImmediately",
-            "baseName": "publishImmediately",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "featuredImage",
-            "baseName": "featuredImage",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "featuredImageAltText",
-            "baseName": "featuredImageAltText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "linkRelCanonicalUrl",
-            "baseName": "linkRelCanonicalUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "contentTypeCategory",
-            "baseName": "contentTypeCategory",
-            "type": "BlogPostContentTypeCategoryEnum",
-            "format": ""
-        },
-        {
-            "name": "attachedStylesheets",
-            "baseName": "attachedStylesheets",
-            "type": "Array<{ [key: string]: any; }>",
-            "format": ""
-        },
-        {
-            "name": "metaDescription",
-            "baseName": "metaDescription",
             "type": "string",
             "format": ""
         },
@@ -503,39 +494,57 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "footerHtml",
-            "baseName": "footerHtml",
+            "name": "pageExpiryRedirectUrl",
+            "baseName": "pageExpiryRedirectUrl",
             "type": "string",
             "format": ""
         },
         {
-            "name": "archivedInDashboard",
-            "baseName": "archivedInDashboard",
+            "name": "abStatus",
+            "baseName": "abStatus",
+            "type": "BlogPostAbStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "useFeaturedImage",
+            "baseName": "useFeaturedImage",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "publicAccessRulesEnabled",
-            "baseName": "publicAccessRulesEnabled",
+            "name": "abTestId",
+            "baseName": "abTestId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "featuredImageAltText",
+            "baseName": "featuredImageAltText",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "blogAuthorId",
+            "baseName": "blogAuthorId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contentGroupId",
+            "baseName": "contentGroupId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "rssSummary",
+            "baseName": "rssSummary",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "pageExpiryEnabled",
+            "baseName": "pageExpiryEnabled",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "publicAccessRules",
-            "baseName": "publicAccessRules",
-            "type": "Array<any>",
-            "format": ""
-        },
-        {
-            "name": "layoutSections",
-            "baseName": "layoutSections",
-            "type": "{ [key: string]: LayoutSection; }",
-            "format": ""
-        },
-        {
-            "name": "themeSettingsValues",
-            "baseName": "themeSettingsValues",
-            "type": "{ [key: string]: any; }",
             "format": ""
         },
         {
@@ -545,9 +554,45 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "password",
-            "baseName": "password",
+            "name": "publicAccessRules",
+            "baseName": "publicAccessRules",
+            "type": "Array<any>",
+            "format": ""
+        },
+        {
+            "name": "enableGoogleAmpOutputOverride",
+            "baseName": "enableGoogleAmpOutputOverride",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "postBody",
+            "baseName": "postBody",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "themeSettingsValues",
+            "baseName": "themeSettingsValues",
+            "type": "{ [key: string]: any; }",
+            "format": ""
+        },
+        {
+            "name": "pageExpiryDate",
+            "baseName": "pageExpiryDate",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "publicAccessRulesEnabled",
+            "baseName": "publicAccessRulesEnabled",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -557,28 +602,16 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "publishDate",
-            "baseName": "publishDate",
-            "type": "Date",
-            "format": "date-time"
+            "name": "categoryId",
+            "baseName": "categoryId",
+            "type": "number",
+            "format": "int32"
         },
         {
-            "name": "created",
-            "baseName": "created",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "updated",
-            "baseName": "updated",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date",
-            "format": "date-time"
+            "name": "linkRelCanonicalUrl",
+            "baseName": "linkRelCanonicalUrl",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -590,8 +623,818 @@ export class BlogPost {
 }
 
 
-export type BlogPostAbStatusEnum = "master" | "variant" | "loser_variant" | "mab_master" | "mab_variant" | "automated_master" | "automated_variant" | "automated_loser_variant" ;
-export type BlogPostLanguageEnum = "af" | "af-na" | "af-za" | "agq" | "agq-cm" | "ak" | "ak-gh" | "am" | "am-et" | "ar" | "ar-001" | "ar-ae" | "ar-bh" | "ar-dj" | "ar-dz" | "ar-eg" | "ar-eh" | "ar-er" | "ar-il" | "ar-iq" | "ar-jo" | "ar-km" | "ar-kw" | "ar-lb" | "ar-ly" | "ar-ma" | "ar-mr" | "ar-om" | "ar-ps" | "ar-qa" | "ar-sa" | "ar-sd" | "ar-so" | "ar-ss" | "ar-sy" | "ar-td" | "ar-tn" | "ar-ye" | "as" | "as-in" | "asa" | "asa-tz" | "ast" | "ast-es" | "az" | "az-az" | "bas" | "bas-cm" | "be" | "be-by" | "bem" | "bem-zm" | "bez" | "bez-tz" | "bg" | "bg-bg" | "bm" | "bm-ml" | "bn" | "bn-bd" | "bn-in" | "bo" | "bo-cn" | "bo-in" | "br" | "br-fr" | "brx" | "brx-in" | "bs" | "bs-ba" | "ca" | "ca-ad" | "ca-es" | "ca-fr" | "ca-it" | "ccp" | "ccp-bd" | "ccp-in" | "ce" | "ce-ru" | "cgg" | "cgg-ug" | "chr" | "chr-us" | "ckb" | "ckb-iq" | "ckb-ir" | "cs" | "cs-cz" | "cu" | "cu-ru" | "cy" | "cy-gb" | "da" | "da-dk" | "da-gl" | "dav" | "dav-ke" | "de" | "de-at" | "de-be" | "de-ch" | "de-de" | "de-gr" | "de-it" | "de-li" | "de-lu" | "dje" | "dje-ne" | "dsb" | "dsb-de" | "dua" | "dua-cm" | "dyo" | "dyo-sn" | "dz" | "dz-bt" | "ebu" | "ebu-ke" | "ee" | "ee-gh" | "ee-tg" | "el" | "el-cy" | "el-gr" | "en" | "en-001" | "en-150" | "en-ae" | "en-ag" | "en-ai" | "en-as" | "en-at" | "en-au" | "en-bb" | "en-be" | "en-bi" | "en-bm" | "en-bs" | "en-bw" | "en-bz" | "en-ca" | "en-cc" | "en-ch" | "en-ck" | "en-cm" | "en-cx" | "en-cy" | "en-de" | "en-dg" | "en-dk" | "en-dm" | "en-er" | "en-fi" | "en-fj" | "en-fk" | "en-fm" | "en-gb" | "en-gd" | "en-gg" | "en-gh" | "en-gi" | "en-gm" | "en-gu" | "en-gy" | "en-hk" | "en-ie" | "en-il" | "en-im" | "en-in" | "en-io" | "en-je" | "en-jm" | "en-ke" | "en-ki" | "en-kn" | "en-ky" | "en-lc" | "en-lr" | "en-ls" | "en-lu" | "en-mg" | "en-mh" | "en-mo" | "en-mp" | "en-ms" | "en-mt" | "en-mu" | "en-mw" | "en-my" | "en-na" | "en-nf" | "en-ng" | "en-nl" | "en-nr" | "en-nu" | "en-nz" | "en-pg" | "en-ph" | "en-pk" | "en-pn" | "en-pr" | "en-pw" | "en-rw" | "en-sb" | "en-sc" | "en-sd" | "en-se" | "en-sg" | "en-sh" | "en-si" | "en-sl" | "en-ss" | "en-sx" | "en-sz" | "en-tc" | "en-tk" | "en-to" | "en-tt" | "en-tv" | "en-tz" | "en-ug" | "en-um" | "en-us" | "en-vc" | "en-vg" | "en-vi" | "en-vu" | "en-ws" | "en-za" | "en-zm" | "en-zw" | "eo" | "eo-001" | "es" | "es-419" | "es-ar" | "es-bo" | "es-br" | "es-bz" | "es-cl" | "es-co" | "es-cr" | "es-cu" | "es-do" | "es-ea" | "es-ec" | "es-es" | "es-gq" | "es-gt" | "es-hn" | "es-ic" | "es-mx" | "es-ni" | "es-pa" | "es-pe" | "es-ph" | "es-pr" | "es-py" | "es-sv" | "es-us" | "es-uy" | "es-ve" | "et" | "et-ee" | "eu" | "eu-es" | "ewo" | "ewo-cm" | "fa" | "fa-af" | "fa-ir" | "ff" | "ff-cm" | "ff-gn" | "ff-mr" | "ff-sn" | "fi" | "fi-fi" | "fil" | "fil-ph" | "fo" | "fo-dk" | "fo-fo" | "fr" | "fr-be" | "fr-bf" | "fr-bi" | "fr-bj" | "fr-bl" | "fr-ca" | "fr-cd" | "fr-cf" | "fr-cg" | "fr-ch" | "fr-ci" | "fr-cm" | "fr-dj" | "fr-dz" | "fr-fr" | "fr-ga" | "fr-gf" | "fr-gn" | "fr-gp" | "fr-gq" | "fr-ht" | "fr-km" | "fr-lu" | "fr-ma" | "fr-mc" | "fr-mf" | "fr-mg" | "fr-ml" | "fr-mq" | "fr-mr" | "fr-mu" | "fr-nc" | "fr-ne" | "fr-pf" | "fr-pm" | "fr-re" | "fr-rw" | "fr-sc" | "fr-sn" | "fr-sy" | "fr-td" | "fr-tg" | "fr-tn" | "fr-vu" | "fr-wf" | "fr-yt" | "fur" | "fur-it" | "fy" | "fy-nl" | "ga" | "ga-ie" | "gd" | "gd-gb" | "gl" | "gl-es" | "gsw" | "gsw-ch" | "gsw-fr" | "gsw-li" | "gu" | "gu-in" | "guz" | "guz-ke" | "gv" | "gv-im" | "ha" | "ha-gh" | "ha-ne" | "ha-ng" | "haw" | "haw-us" | "he" | "hi" | "hi-in" | "hr" | "hr-ba" | "hr-hr" | "hsb" | "hsb-de" | "hu" | "hu-hu" | "hy" | "hy-am" | "id" | "ig" | "ig-ng" | "ii" | "ii-cn" | "id-id" | "is" | "is-is" | "it" | "it-ch" | "it-it" | "it-sm" | "it-va" | "he-il" | "ja" | "ja-jp" | "jgo" | "jgo-cm" | "yi" | "yi-001" | "jmc" | "jmc-tz" | "ka" | "ka-ge" | "kab" | "kab-dz" | "kam" | "kam-ke" | "kde" | "kde-tz" | "kea" | "kea-cv" | "khq" | "khq-ml" | "ki" | "ki-ke" | "kk" | "kk-kz" | "kkj" | "kkj-cm" | "kl" | "kl-gl" | "kln" | "kln-ke" | "km" | "km-kh" | "kn" | "kn-in" | "ko" | "ko-kp" | "ko-kr" | "kok" | "kok-in" | "ks" | "ks-in" | "ksb" | "ksb-tz" | "ksf" | "ksf-cm" | "ksh" | "ksh-de" | "kw" | "kw-gb" | "ky" | "ky-kg" | "lag" | "lag-tz" | "lb" | "lb-lu" | "lg" | "lg-ug" | "lkt" | "lkt-us" | "ln" | "ln-ao" | "ln-cd" | "ln-cf" | "ln-cg" | "lo" | "lo-la" | "lrc" | "lrc-iq" | "lrc-ir" | "lt" | "lt-lt" | "lu" | "lu-cd" | "luo" | "luo-ke" | "luy" | "luy-ke" | "lv" | "lv-lv" | "mas" | "mas-ke" | "mas-tz" | "mer" | "mer-ke" | "mfe" | "mfe-mu" | "mg" | "mg-mg" | "mgh" | "mgh-mz" | "mgo" | "mgo-cm" | "mk" | "mk-mk" | "ml" | "ml-in" | "mn" | "mn-mn" | "mr" | "mr-in" | "ms" | "ms-bn" | "ms-my" | "ms-sg" | "mt" | "mt-mt" | "mua" | "mua-cm" | "my" | "my-mm" | "mzn" | "mzn-ir" | "naq" | "naq-na" | "nb" | "nb-no" | "nb-sj" | "nd" | "nd-zw" | "nds" | "nds-de" | "nds-nl" | "ne" | "ne-in" | "ne-np" | "nl" | "nl-aw" | "nl-be" | "nl-ch" | "nl-bq" | "nl-cw" | "nl-lu" | "nl-nl" | "nl-sr" | "nl-sx" | "nmg" | "nmg-cm" | "nn" | "nn-no" | "nnh" | "nnh-cm" | "no" | "no-no" | "nus" | "nus-ss" | "nyn" | "nyn-ug" | "om" | "om-et" | "om-ke" | "or" | "or-in" | "os" | "os-ge" | "os-ru" | "pa" | "pa-in" | "pa-pk" | "pl" | "pl-pl" | "prg" | "prg-001" | "ps" | "ps-af" | "pt" | "pt-ao" | "pt-br" | "pt-ch" | "pt-cv" | "pt-gq" | "pt-gw" | "pt-lu" | "pt-mo" | "pt-mz" | "pt-pt" | "pt-st" | "pt-tl" | "qu" | "qu-bo" | "qu-ec" | "qu-pe" | "rm" | "rm-ch" | "rn" | "rn-bi" | "ro" | "ro-md" | "ro-ro" | "rof" | "rof-tz" | "ru" | "ru-by" | "ru-kg" | "ru-kz" | "ru-md" | "ru-ru" | "ru-ua" | "rw" | "rw-rw" | "rwk" | "rwk-tz" | "sa" | "sah" | "sah-ru" | "saq" | "saq-ke" | "sbp" | "sbp-tz" | "sd" | "sd-pk" | "se" | "se-fi" | "se-no" | "se-se" | "seh" | "seh-mz" | "ses" | "ses-ml" | "sg" | "sg-cf" | "shi" | "shi-ma" | "si" | "si-lk" | "sk" | "sk-sk" | "sl" | "sl-si" | "smn" | "smn-fi" | "sn" | "sn-zw" | "so" | "so-dj" | "so-et" | "so-ke" | "so-so" | "sq" | "sq-al" | "sq-mk" | "sq-xk" | "sr" | "sr-ba" | "sr-cs" | "sr-me" | "sr-rs" | "sr-xk" | "sv" | "sv-ax" | "sv-fi" | "sv-se" | "sw" | "sw-cd" | "sw-ke" | "sw-tz" | "sw-ug" | "sy" | "ta" | "ta-in" | "ta-lk" | "ta-my" | "ta-sg" | "te" | "te-in" | "teo" | "teo-ke" | "teo-ug" | "tg" | "tg-tj" | "th" | "th-th" | "ti" | "ti-er" | "ti-et" | "tk" | "tk-tm" | "to" | "to-to" | "tr" | "tr-cy" | "tr-tr" | "tt" | "tt-ru" | "twq" | "twq-ne" | "tzm" | "tzm-ma" | "ug" | "ug-cn" | "uk" | "uk-ua" | "ur" | "ur-in" | "ur-pk" | "uz" | "uz-af" | "uz-uz" | "vai" | "vai-lr" | "vi" | "vi-vn" | "vo" | "vo-001" | "vun" | "vun-tz" | "wae" | "wae-ch" | "wo" | "wo-sn" | "xog" | "xog-ug" | "yav" | "yav-cm" | "yo" | "yo-bj" | "yo-ng" | "yue" | "yue-cn" | "yue-hk" | "zgh" | "zgh-ma" | "zh" | "zh-cn" | "zh-hk" | "zh-mo" | "zh-sg" | "zh-tw" | "zh-hans" | "zh-hant" | "zu" | "zu-za" ;
-export type BlogPostContentTypeCategoryEnum = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
-export type BlogPostCurrentStateEnum = "AUTOMATED" | "AUTOMATED_DRAFT" | "AUTOMATED_SENDING" | "AUTOMATED_FOR_FORM" | "AUTOMATED_FOR_FORM_BUFFER" | "AUTOMATED_FOR_FORM_DRAFT" | "AUTOMATED_FOR_FORM_LEGACY" | "BLOG_EMAIL_DRAFT" | "BLOG_EMAIL_PUBLISHED" | "DRAFT" | "DRAFT_AB" | "DRAFT_AB_VARIANT" | "ERROR" | "LOSER_AB_VARIANT" | "PAGE_STUB" | "PRE_PROCESSING" | "PROCESSING" | "PUBLISHED" | "PUBLISHED_AB" | "PUBLISHED_AB_VARIANT" | "PUBLISHED_OR_SCHEDULED" | "RSS_TO_EMAIL_DRAFT" | "RSS_TO_EMAIL_PUBLISHED" | "SCHEDULED" | "SCHEDULED_AB" | "SCHEDULED_OR_PUBLISHED" | "AUTOMATED_AB" | "AUTOMATED_AB_VARIANT" | "AUTOMATED_DRAFT_AB" | "AUTOMATED_DRAFT_ABVARIANT" | "AUTOMATED_LOSER_ABVARIANT" ;
+export enum BlogPostLanguageEnum {
+    Af = 'af',
+    AfNa = 'af-na',
+    AfZa = 'af-za',
+    Agq = 'agq',
+    AgqCm = 'agq-cm',
+    Ak = 'ak',
+    AkGh = 'ak-gh',
+    Am = 'am',
+    AmEt = 'am-et',
+    Ar = 'ar',
+    Ar001 = 'ar-001',
+    ArAe = 'ar-ae',
+    ArBh = 'ar-bh',
+    ArDj = 'ar-dj',
+    ArDz = 'ar-dz',
+    ArEg = 'ar-eg',
+    ArEh = 'ar-eh',
+    ArEr = 'ar-er',
+    ArIl = 'ar-il',
+    ArIq = 'ar-iq',
+    ArJo = 'ar-jo',
+    ArKm = 'ar-km',
+    ArKw = 'ar-kw',
+    ArLb = 'ar-lb',
+    ArLy = 'ar-ly',
+    ArMa = 'ar-ma',
+    ArMr = 'ar-mr',
+    ArOm = 'ar-om',
+    ArPs = 'ar-ps',
+    ArQa = 'ar-qa',
+    ArSa = 'ar-sa',
+    ArSd = 'ar-sd',
+    ArSo = 'ar-so',
+    ArSs = 'ar-ss',
+    ArSy = 'ar-sy',
+    ArTd = 'ar-td',
+    ArTn = 'ar-tn',
+    ArYe = 'ar-ye',
+    As = 'as',
+    AsIn = 'as-in',
+    Asa = 'asa',
+    AsaTz = 'asa-tz',
+    Ast = 'ast',
+    AstEs = 'ast-es',
+    Az = 'az',
+    AzAz = 'az-az',
+    Bas = 'bas',
+    BasCm = 'bas-cm',
+    Be = 'be',
+    BeBy = 'be-by',
+    Bem = 'bem',
+    BemZm = 'bem-zm',
+    Bez = 'bez',
+    BezTz = 'bez-tz',
+    Bg = 'bg',
+    BgBg = 'bg-bg',
+    Bm = 'bm',
+    BmMl = 'bm-ml',
+    Bn = 'bn',
+    BnBd = 'bn-bd',
+    BnIn = 'bn-in',
+    Bo = 'bo',
+    BoCn = 'bo-cn',
+    BoIn = 'bo-in',
+    Br = 'br',
+    BrFr = 'br-fr',
+    Brx = 'brx',
+    BrxIn = 'brx-in',
+    Bs = 'bs',
+    BsBa = 'bs-ba',
+    Ca = 'ca',
+    CaAd = 'ca-ad',
+    CaEs = 'ca-es',
+    CaFr = 'ca-fr',
+    CaIt = 'ca-it',
+    Ccp = 'ccp',
+    CcpBd = 'ccp-bd',
+    CcpIn = 'ccp-in',
+    Ce = 'ce',
+    CeRu = 'ce-ru',
+    Ceb = 'ceb',
+    CebPh = 'ceb-ph',
+    Cgg = 'cgg',
+    CggUg = 'cgg-ug',
+    Chr = 'chr',
+    ChrUs = 'chr-us',
+    Ckb = 'ckb',
+    CkbIq = 'ckb-iq',
+    CkbIr = 'ckb-ir',
+    Cs = 'cs',
+    CsCz = 'cs-cz',
+    Cu = 'cu',
+    CuRu = 'cu-ru',
+    Cy = 'cy',
+    CyGb = 'cy-gb',
+    Da = 'da',
+    DaDk = 'da-dk',
+    DaGl = 'da-gl',
+    Dav = 'dav',
+    DavKe = 'dav-ke',
+    De = 'de',
+    DeAt = 'de-at',
+    DeBe = 'de-be',
+    DeCh = 'de-ch',
+    DeDe = 'de-de',
+    DeGr = 'de-gr',
+    DeIt = 'de-it',
+    DeLi = 'de-li',
+    DeLu = 'de-lu',
+    Dje = 'dje',
+    DjeNe = 'dje-ne',
+    Doi = 'doi',
+    DoiIn = 'doi-in',
+    Dsb = 'dsb',
+    DsbDe = 'dsb-de',
+    Dua = 'dua',
+    DuaCm = 'dua-cm',
+    Dyo = 'dyo',
+    DyoSn = 'dyo-sn',
+    Dz = 'dz',
+    DzBt = 'dz-bt',
+    Ebu = 'ebu',
+    EbuKe = 'ebu-ke',
+    Ee = 'ee',
+    EeGh = 'ee-gh',
+    EeTg = 'ee-tg',
+    El = 'el',
+    ElCy = 'el-cy',
+    ElGr = 'el-gr',
+    En = 'en',
+    En001 = 'en-001',
+    En150 = 'en-150',
+    EnAe = 'en-ae',
+    EnAg = 'en-ag',
+    EnAi = 'en-ai',
+    EnAs = 'en-as',
+    EnAt = 'en-at',
+    EnAu = 'en-au',
+    EnBb = 'en-bb',
+    EnBe = 'en-be',
+    EnBi = 'en-bi',
+    EnBm = 'en-bm',
+    EnBs = 'en-bs',
+    EnBw = 'en-bw',
+    EnBz = 'en-bz',
+    EnCa = 'en-ca',
+    EnCc = 'en-cc',
+    EnCh = 'en-ch',
+    EnCk = 'en-ck',
+    EnCm = 'en-cm',
+    EnCn = 'en-cn',
+    EnCx = 'en-cx',
+    EnCy = 'en-cy',
+    EnDe = 'en-de',
+    EnDg = 'en-dg',
+    EnDk = 'en-dk',
+    EnDm = 'en-dm',
+    EnEr = 'en-er',
+    EnFi = 'en-fi',
+    EnFj = 'en-fj',
+    EnFk = 'en-fk',
+    EnFm = 'en-fm',
+    EnGb = 'en-gb',
+    EnGd = 'en-gd',
+    EnGg = 'en-gg',
+    EnGh = 'en-gh',
+    EnGi = 'en-gi',
+    EnGm = 'en-gm',
+    EnGu = 'en-gu',
+    EnGy = 'en-gy',
+    EnHk = 'en-hk',
+    EnIe = 'en-ie',
+    EnIl = 'en-il',
+    EnIm = 'en-im',
+    EnIn = 'en-in',
+    EnIo = 'en-io',
+    EnJe = 'en-je',
+    EnJm = 'en-jm',
+    EnKe = 'en-ke',
+    EnKi = 'en-ki',
+    EnKn = 'en-kn',
+    EnKy = 'en-ky',
+    EnLc = 'en-lc',
+    EnLr = 'en-lr',
+    EnLs = 'en-ls',
+    EnLu = 'en-lu',
+    EnMg = 'en-mg',
+    EnMh = 'en-mh',
+    EnMo = 'en-mo',
+    EnMp = 'en-mp',
+    EnMs = 'en-ms',
+    EnMt = 'en-mt',
+    EnMu = 'en-mu',
+    EnMw = 'en-mw',
+    EnMx = 'en-mx',
+    EnMy = 'en-my',
+    EnNa = 'en-na',
+    EnNf = 'en-nf',
+    EnNg = 'en-ng',
+    EnNl = 'en-nl',
+    EnNr = 'en-nr',
+    EnNu = 'en-nu',
+    EnNz = 'en-nz',
+    EnPg = 'en-pg',
+    EnPh = 'en-ph',
+    EnPk = 'en-pk',
+    EnPn = 'en-pn',
+    EnPr = 'en-pr',
+    EnPw = 'en-pw',
+    EnRw = 'en-rw',
+    EnSb = 'en-sb',
+    EnSc = 'en-sc',
+    EnSd = 'en-sd',
+    EnSe = 'en-se',
+    EnSg = 'en-sg',
+    EnSh = 'en-sh',
+    EnSi = 'en-si',
+    EnSl = 'en-sl',
+    EnSs = 'en-ss',
+    EnSx = 'en-sx',
+    EnSz = 'en-sz',
+    EnTc = 'en-tc',
+    EnTk = 'en-tk',
+    EnTo = 'en-to',
+    EnTt = 'en-tt',
+    EnTv = 'en-tv',
+    EnTz = 'en-tz',
+    EnUg = 'en-ug',
+    EnUm = 'en-um',
+    EnUs = 'en-us',
+    EnVc = 'en-vc',
+    EnVg = 'en-vg',
+    EnVi = 'en-vi',
+    EnVu = 'en-vu',
+    EnWs = 'en-ws',
+    EnZa = 'en-za',
+    EnZm = 'en-zm',
+    EnZw = 'en-zw',
+    Eo = 'eo',
+    Eo001 = 'eo-001',
+    Es = 'es',
+    Es419 = 'es-419',
+    EsAr = 'es-ar',
+    EsBo = 'es-bo',
+    EsBr = 'es-br',
+    EsBz = 'es-bz',
+    EsCl = 'es-cl',
+    EsCo = 'es-co',
+    EsCr = 'es-cr',
+    EsCu = 'es-cu',
+    EsDo = 'es-do',
+    EsEa = 'es-ea',
+    EsEc = 'es-ec',
+    EsEs = 'es-es',
+    EsGq = 'es-gq',
+    EsGt = 'es-gt',
+    EsHn = 'es-hn',
+    EsIc = 'es-ic',
+    EsMx = 'es-mx',
+    EsNi = 'es-ni',
+    EsPa = 'es-pa',
+    EsPe = 'es-pe',
+    EsPh = 'es-ph',
+    EsPr = 'es-pr',
+    EsPy = 'es-py',
+    EsSv = 'es-sv',
+    EsUs = 'es-us',
+    EsUy = 'es-uy',
+    EsVe = 'es-ve',
+    Et = 'et',
+    EtEe = 'et-ee',
+    Eu = 'eu',
+    EuEs = 'eu-es',
+    Ewo = 'ewo',
+    EwoCm = 'ewo-cm',
+    Fa = 'fa',
+    FaAf = 'fa-af',
+    FaIr = 'fa-ir',
+    Ff = 'ff',
+    FfBf = 'ff-bf',
+    FfCm = 'ff-cm',
+    FfGh = 'ff-gh',
+    FfGm = 'ff-gm',
+    FfGn = 'ff-gn',
+    FfGw = 'ff-gw',
+    FfLr = 'ff-lr',
+    FfMr = 'ff-mr',
+    FfNe = 'ff-ne',
+    FfNg = 'ff-ng',
+    FfSl = 'ff-sl',
+    FfSn = 'ff-sn',
+    Fi = 'fi',
+    FiFi = 'fi-fi',
+    Fil = 'fil',
+    FilPh = 'fil-ph',
+    Fo = 'fo',
+    FoDk = 'fo-dk',
+    FoFo = 'fo-fo',
+    Fr = 'fr',
+    FrBe = 'fr-be',
+    FrBf = 'fr-bf',
+    FrBi = 'fr-bi',
+    FrBj = 'fr-bj',
+    FrBl = 'fr-bl',
+    FrCa = 'fr-ca',
+    FrCd = 'fr-cd',
+    FrCf = 'fr-cf',
+    FrCg = 'fr-cg',
+    FrCh = 'fr-ch',
+    FrCi = 'fr-ci',
+    FrCm = 'fr-cm',
+    FrDj = 'fr-dj',
+    FrDz = 'fr-dz',
+    FrFr = 'fr-fr',
+    FrGa = 'fr-ga',
+    FrGf = 'fr-gf',
+    FrGn = 'fr-gn',
+    FrGp = 'fr-gp',
+    FrGq = 'fr-gq',
+    FrHt = 'fr-ht',
+    FrKm = 'fr-km',
+    FrLu = 'fr-lu',
+    FrMa = 'fr-ma',
+    FrMc = 'fr-mc',
+    FrMf = 'fr-mf',
+    FrMg = 'fr-mg',
+    FrMl = 'fr-ml',
+    FrMq = 'fr-mq',
+    FrMr = 'fr-mr',
+    FrMu = 'fr-mu',
+    FrNc = 'fr-nc',
+    FrNe = 'fr-ne',
+    FrPf = 'fr-pf',
+    FrPm = 'fr-pm',
+    FrRe = 'fr-re',
+    FrRw = 'fr-rw',
+    FrSc = 'fr-sc',
+    FrSn = 'fr-sn',
+    FrSy = 'fr-sy',
+    FrTd = 'fr-td',
+    FrTg = 'fr-tg',
+    FrTn = 'fr-tn',
+    FrVu = 'fr-vu',
+    FrWf = 'fr-wf',
+    FrYt = 'fr-yt',
+    Fur = 'fur',
+    FurIt = 'fur-it',
+    Fy = 'fy',
+    FyNl = 'fy-nl',
+    Ga = 'ga',
+    GaGb = 'ga-gb',
+    GaIe = 'ga-ie',
+    Gd = 'gd',
+    GdGb = 'gd-gb',
+    Gl = 'gl',
+    GlEs = 'gl-es',
+    Gsw = 'gsw',
+    GswCh = 'gsw-ch',
+    GswFr = 'gsw-fr',
+    GswLi = 'gsw-li',
+    Gu = 'gu',
+    GuIn = 'gu-in',
+    Guz = 'guz',
+    GuzKe = 'guz-ke',
+    Gv = 'gv',
+    GvIm = 'gv-im',
+    Ha = 'ha',
+    HaGh = 'ha-gh',
+    HaNe = 'ha-ne',
+    HaNg = 'ha-ng',
+    Haw = 'haw',
+    HawUs = 'haw-us',
+    He = 'he',
+    Hi = 'hi',
+    HiIn = 'hi-in',
+    Hr = 'hr',
+    HrBa = 'hr-ba',
+    HrHr = 'hr-hr',
+    Hsb = 'hsb',
+    HsbDe = 'hsb-de',
+    Hu = 'hu',
+    HuHu = 'hu-hu',
+    Hy = 'hy',
+    HyAm = 'hy-am',
+    Ia = 'ia',
+    Ia001 = 'ia-001',
+    Id = 'id',
+    Ig = 'ig',
+    IgNg = 'ig-ng',
+    Ii = 'ii',
+    IiCn = 'ii-cn',
+    IdId = 'id-id',
+    Is = 'is',
+    IsIs = 'is-is',
+    It = 'it',
+    ItCh = 'it-ch',
+    ItIt = 'it-it',
+    ItSm = 'it-sm',
+    ItVa = 'it-va',
+    HeIl = 'he-il',
+    Ja = 'ja',
+    JaJp = 'ja-jp',
+    Jgo = 'jgo',
+    JgoCm = 'jgo-cm',
+    Yi = 'yi',
+    Yi001 = 'yi-001',
+    Jmc = 'jmc',
+    JmcTz = 'jmc-tz',
+    Jv = 'jv',
+    JvId = 'jv-id',
+    Ka = 'ka',
+    KaGe = 'ka-ge',
+    Kab = 'kab',
+    KabDz = 'kab-dz',
+    Kam = 'kam',
+    KamKe = 'kam-ke',
+    Kde = 'kde',
+    KdeTz = 'kde-tz',
+    Kea = 'kea',
+    KeaCv = 'kea-cv',
+    Khq = 'khq',
+    KhqMl = 'khq-ml',
+    Ki = 'ki',
+    KiKe = 'ki-ke',
+    Kk = 'kk',
+    KkKz = 'kk-kz',
+    Kkj = 'kkj',
+    KkjCm = 'kkj-cm',
+    Kl = 'kl',
+    KlGl = 'kl-gl',
+    Kln = 'kln',
+    KlnKe = 'kln-ke',
+    Km = 'km',
+    KmKh = 'km-kh',
+    Kn = 'kn',
+    KnIn = 'kn-in',
+    Ko = 'ko',
+    KoKp = 'ko-kp',
+    KoKr = 'ko-kr',
+    Kok = 'kok',
+    KokIn = 'kok-in',
+    Ks = 'ks',
+    KsIn = 'ks-in',
+    Ksb = 'ksb',
+    KsbTz = 'ksb-tz',
+    Ksf = 'ksf',
+    KsfCm = 'ksf-cm',
+    Ksh = 'ksh',
+    KshDe = 'ksh-de',
+    Kw = 'kw',
+    KwGb = 'kw-gb',
+    Ku = 'ku',
+    KuTr = 'ku-tr',
+    Ky = 'ky',
+    KyKg = 'ky-kg',
+    Lag = 'lag',
+    LagTz = 'lag-tz',
+    Lb = 'lb',
+    LbLu = 'lb-lu',
+    Lg = 'lg',
+    LgUg = 'lg-ug',
+    Lkt = 'lkt',
+    LktUs = 'lkt-us',
+    Ln = 'ln',
+    LnAo = 'ln-ao',
+    LnCd = 'ln-cd',
+    LnCf = 'ln-cf',
+    LnCg = 'ln-cg',
+    Lo = 'lo',
+    LoLa = 'lo-la',
+    Lrc = 'lrc',
+    LrcIq = 'lrc-iq',
+    LrcIr = 'lrc-ir',
+    Lt = 'lt',
+    LtLt = 'lt-lt',
+    Lu = 'lu',
+    LuCd = 'lu-cd',
+    Luo = 'luo',
+    LuoKe = 'luo-ke',
+    Luy = 'luy',
+    LuyKe = 'luy-ke',
+    Lv = 'lv',
+    LvLv = 'lv-lv',
+    Mai = 'mai',
+    MaiIn = 'mai-in',
+    Mas = 'mas',
+    MasKe = 'mas-ke',
+    MasTz = 'mas-tz',
+    Mer = 'mer',
+    MerKe = 'mer-ke',
+    Mfe = 'mfe',
+    MfeMu = 'mfe-mu',
+    Mg = 'mg',
+    MgMg = 'mg-mg',
+    Mgh = 'mgh',
+    MghMz = 'mgh-mz',
+    Mgo = 'mgo',
+    MgoCm = 'mgo-cm',
+    Mi = 'mi',
+    MiNz = 'mi-nz',
+    Mk = 'mk',
+    MkMk = 'mk-mk',
+    Ml = 'ml',
+    MlIn = 'ml-in',
+    Mn = 'mn',
+    MnMn = 'mn-mn',
+    Mni = 'mni',
+    MniIn = 'mni-in',
+    Mr = 'mr',
+    MrIn = 'mr-in',
+    Ms = 'ms',
+    MsBn = 'ms-bn',
+    MsId = 'ms-id',
+    MsMy = 'ms-my',
+    MsSg = 'ms-sg',
+    Mt = 'mt',
+    MtMt = 'mt-mt',
+    Mua = 'mua',
+    MuaCm = 'mua-cm',
+    My = 'my',
+    MyMm = 'my-mm',
+    Mzn = 'mzn',
+    MznIr = 'mzn-ir',
+    Naq = 'naq',
+    NaqNa = 'naq-na',
+    Nb = 'nb',
+    NbNo = 'nb-no',
+    NbSj = 'nb-sj',
+    Nd = 'nd',
+    NdZw = 'nd-zw',
+    Nds = 'nds',
+    NdsDe = 'nds-de',
+    NdsNl = 'nds-nl',
+    Ne = 'ne',
+    NeIn = 'ne-in',
+    NeNp = 'ne-np',
+    Nl = 'nl',
+    NlAw = 'nl-aw',
+    NlBe = 'nl-be',
+    NlCh = 'nl-ch',
+    NlBq = 'nl-bq',
+    NlCw = 'nl-cw',
+    NlLu = 'nl-lu',
+    NlNl = 'nl-nl',
+    NlSr = 'nl-sr',
+    NlSx = 'nl-sx',
+    Nmg = 'nmg',
+    NmgCm = 'nmg-cm',
+    Nn = 'nn',
+    NnNo = 'nn-no',
+    Nnh = 'nnh',
+    NnhCm = 'nnh-cm',
+    No = 'no',
+    NoNo = 'no-no',
+    Nus = 'nus',
+    NusSs = 'nus-ss',
+    Nyn = 'nyn',
+    NynUg = 'nyn-ug',
+    Om = 'om',
+    OmEt = 'om-et',
+    OmKe = 'om-ke',
+    Or = 'or',
+    OrIn = 'or-in',
+    Os = 'os',
+    OsGe = 'os-ge',
+    OsRu = 'os-ru',
+    Pa = 'pa',
+    PaIn = 'pa-in',
+    PaPk = 'pa-pk',
+    Pcm = 'pcm',
+    PcmNg = 'pcm-ng',
+    Pl = 'pl',
+    PlPl = 'pl-pl',
+    Prg = 'prg',
+    Prg001 = 'prg-001',
+    Ps = 'ps',
+    PsAf = 'ps-af',
+    PsPk = 'ps-pk',
+    Pt = 'pt',
+    PtAo = 'pt-ao',
+    PtBr = 'pt-br',
+    PtCh = 'pt-ch',
+    PtCv = 'pt-cv',
+    PtGq = 'pt-gq',
+    PtGw = 'pt-gw',
+    PtLu = 'pt-lu',
+    PtMo = 'pt-mo',
+    PtMz = 'pt-mz',
+    PtPt = 'pt-pt',
+    PtSt = 'pt-st',
+    PtTl = 'pt-tl',
+    Qu = 'qu',
+    QuBo = 'qu-bo',
+    QuEc = 'qu-ec',
+    QuPe = 'qu-pe',
+    Rm = 'rm',
+    RmCh = 'rm-ch',
+    Rn = 'rn',
+    RnBi = 'rn-bi',
+    Ro = 'ro',
+    RoMd = 'ro-md',
+    RoRo = 'ro-ro',
+    Rof = 'rof',
+    RofTz = 'rof-tz',
+    Ru = 'ru',
+    RuBy = 'ru-by',
+    RuKg = 'ru-kg',
+    RuKz = 'ru-kz',
+    RuMd = 'ru-md',
+    RuRu = 'ru-ru',
+    RuUa = 'ru-ua',
+    Rw = 'rw',
+    RwRw = 'rw-rw',
+    Rwk = 'rwk',
+    RwkTz = 'rwk-tz',
+    Sa = 'sa',
+    SaIn = 'sa-in',
+    Sah = 'sah',
+    SahRu = 'sah-ru',
+    Saq = 'saq',
+    SaqKe = 'saq-ke',
+    Sat = 'sat',
+    SatIn = 'sat-in',
+    Sbp = 'sbp',
+    SbpTz = 'sbp-tz',
+    Sd = 'sd',
+    SdIn = 'sd-in',
+    SdPk = 'sd-pk',
+    Se = 'se',
+    SeFi = 'se-fi',
+    SeNo = 'se-no',
+    SeSe = 'se-se',
+    Seh = 'seh',
+    SehMz = 'seh-mz',
+    Ses = 'ses',
+    SesMl = 'ses-ml',
+    Sg = 'sg',
+    SgCf = 'sg-cf',
+    Shi = 'shi',
+    ShiMa = 'shi-ma',
+    Si = 'si',
+    SiLk = 'si-lk',
+    Sk = 'sk',
+    SkSk = 'sk-sk',
+    Sl = 'sl',
+    SlSi = 'sl-si',
+    Smn = 'smn',
+    SmnFi = 'smn-fi',
+    Sn = 'sn',
+    SnZw = 'sn-zw',
+    So = 'so',
+    SoDj = 'so-dj',
+    SoEt = 'so-et',
+    SoKe = 'so-ke',
+    SoSo = 'so-so',
+    Sq = 'sq',
+    SqAl = 'sq-al',
+    SqMk = 'sq-mk',
+    SqXk = 'sq-xk',
+    Sr = 'sr',
+    SrBa = 'sr-ba',
+    SrCs = 'sr-cs',
+    SrMe = 'sr-me',
+    SrRs = 'sr-rs',
+    SrXk = 'sr-xk',
+    Su = 'su',
+    SuId = 'su-id',
+    Sv = 'sv',
+    SvAx = 'sv-ax',
+    SvFi = 'sv-fi',
+    SvSe = 'sv-se',
+    Sw = 'sw',
+    SwCd = 'sw-cd',
+    SwKe = 'sw-ke',
+    SwTz = 'sw-tz',
+    SwUg = 'sw-ug',
+    Sy = 'sy',
+    Ta = 'ta',
+    TaIn = 'ta-in',
+    TaLk = 'ta-lk',
+    TaMy = 'ta-my',
+    TaSg = 'ta-sg',
+    Te = 'te',
+    TeIn = 'te-in',
+    Teo = 'teo',
+    TeoKe = 'teo-ke',
+    TeoUg = 'teo-ug',
+    Tg = 'tg',
+    TgTj = 'tg-tj',
+    Th = 'th',
+    ThTh = 'th-th',
+    Ti = 'ti',
+    TiEr = 'ti-er',
+    TiEt = 'ti-et',
+    Tk = 'tk',
+    TkTm = 'tk-tm',
+    Tl = 'tl',
+    To = 'to',
+    ToTo = 'to-to',
+    Tr = 'tr',
+    TrCy = 'tr-cy',
+    TrTr = 'tr-tr',
+    Tt = 'tt',
+    TtRu = 'tt-ru',
+    Twq = 'twq',
+    TwqNe = 'twq-ne',
+    Tzm = 'tzm',
+    TzmMa = 'tzm-ma',
+    Ug = 'ug',
+    UgCn = 'ug-cn',
+    Uk = 'uk',
+    UkUa = 'uk-ua',
+    Ur = 'ur',
+    UrIn = 'ur-in',
+    UrPk = 'ur-pk',
+    Uz = 'uz',
+    UzAf = 'uz-af',
+    UzUz = 'uz-uz',
+    Vai = 'vai',
+    VaiLr = 'vai-lr',
+    Vi = 'vi',
+    ViVn = 'vi-vn',
+    Vo = 'vo',
+    Vo001 = 'vo-001',
+    Vun = 'vun',
+    VunTz = 'vun-tz',
+    Wae = 'wae',
+    WaeCh = 'wae-ch',
+    Wo = 'wo',
+    WoSn = 'wo-sn',
+    Xh = 'xh',
+    XhZa = 'xh-za',
+    Xog = 'xog',
+    XogUg = 'xog-ug',
+    Yav = 'yav',
+    YavCm = 'yav-cm',
+    Yo = 'yo',
+    YoBj = 'yo-bj',
+    YoNg = 'yo-ng',
+    Yue = 'yue',
+    YueCn = 'yue-cn',
+    YueHk = 'yue-hk',
+    Zgh = 'zgh',
+    ZghMa = 'zgh-ma',
+    Zh = 'zh',
+    ZhCn = 'zh-cn',
+    ZhHk = 'zh-hk',
+    ZhMo = 'zh-mo',
+    ZhSg = 'zh-sg',
+    ZhTw = 'zh-tw',
+    ZhHans = 'zh-hans',
+    ZhHant = 'zh-hant',
+    Zu = 'zu',
+    ZuZa = 'zu-za'
+}
+export enum BlogPostContentTypeCategoryEnum {
+    _0 = '0',
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9',
+    _10 = '10',
+    _11 = '11',
+    _12 = '12'
+}
+export enum BlogPostAbStatusEnum {
+    Master = 'master',
+    Variant = 'variant',
+    LoserVariant = 'loser_variant',
+    MabMaster = 'mab_master',
+    MabVariant = 'mab_variant',
+    AutomatedMaster = 'automated_master',
+    AutomatedVariant = 'automated_variant',
+    AutomatedLoserVariant = 'automated_loser_variant'
+}
+export enum BlogPostCurrentStateEnum {
+    Automated = 'AUTOMATED',
+    AutomatedDraft = 'AUTOMATED_DRAFT',
+    AutomatedSending = 'AUTOMATED_SENDING',
+    AutomatedForForm = 'AUTOMATED_FOR_FORM',
+    AutomatedForFormBuffer = 'AUTOMATED_FOR_FORM_BUFFER',
+    AutomatedForFormDraft = 'AUTOMATED_FOR_FORM_DRAFT',
+    AutomatedForFormLegacy = 'AUTOMATED_FOR_FORM_LEGACY',
+    BlogEmailDraft = 'BLOG_EMAIL_DRAFT',
+    BlogEmailPublished = 'BLOG_EMAIL_PUBLISHED',
+    Draft = 'DRAFT',
+    DraftAb = 'DRAFT_AB',
+    DraftAbVariant = 'DRAFT_AB_VARIANT',
+    Error = 'ERROR',
+    LoserAbVariant = 'LOSER_AB_VARIANT',
+    PageStub = 'PAGE_STUB',
+    PreProcessing = 'PRE_PROCESSING',
+    Processing = 'PROCESSING',
+    Published = 'PUBLISHED',
+    PublishedAb = 'PUBLISHED_AB',
+    PublishedAbVariant = 'PUBLISHED_AB_VARIANT',
+    PublishedOrScheduled = 'PUBLISHED_OR_SCHEDULED',
+    RssToEmailDraft = 'RSS_TO_EMAIL_DRAFT',
+    RssToEmailPublished = 'RSS_TO_EMAIL_PUBLISHED',
+    Scheduled = 'SCHEDULED',
+    ScheduledAb = 'SCHEDULED_AB',
+    ScheduledOrPublished = 'SCHEDULED_OR_PUBLISHED',
+    AutomatedAb = 'AUTOMATED_AB',
+    AutomatedAbVariant = 'AUTOMATED_AB_VARIANT',
+    AutomatedDraftAb = 'AUTOMATED_DRAFT_AB',
+    AutomatedDraftAbvariant = 'AUTOMATED_DRAFT_ABVARIANT',
+    AutomatedLoserAbvariant = 'AUTOMATED_LOSER_ABVARIANT'
+}
 

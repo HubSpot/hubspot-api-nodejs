@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -27,7 +27,7 @@ export class ObservableBusinessUnitApi {
      * @param properties The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
      * @param name The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
      */
-    public getByUserID(userId: string, properties?: Array<string>, name?: Array<string>, _options?: Configuration): Observable<CollectionResponsePublicBusinessUnitNoPaging> {
+    public getByUserIDWithHttpInfo(userId: string, properties?: Array<string>, name?: Array<string>, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
         const requestContextPromise = this.requestFactory.getByUserID(userId, properties, name, _options);
 
         // build promise chain
@@ -42,8 +42,19 @@ export class ObservableBusinessUnitApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByUserID(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByUserIDWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Get Business Units identified by `userId`. The `userId` refers to the user’s ID.
+     * Get Business Units for a user
+     * @param userId Identifier of user to retrieve.
+     * @param properties The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
+     * @param name The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     */
+    public getByUserID(userId: string, properties?: Array<string>, name?: Array<string>, _options?: Configuration): Observable<CollectionResponsePublicBusinessUnitNoPaging> {
+        return this.getByUserIDWithHttpInfo(userId, properties, name, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>) => apiResponse.data));
     }
 
 }

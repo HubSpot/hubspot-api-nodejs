@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -21,19 +21,23 @@ export class ObservableEventsApi {
     }
 
     /**
-     * Returns a collection of events matching a query.
-     * @param occurredAfter The starting time as an ISO 8601 timestamp.
-     * @param occurredBefore The ending time as an ISO 8601 timestamp.
-     * @param objectType The type of object being selected. Valid values are hubspot named object types (e.g. &#x60;contact&#x60;).
-     * @param objectId The id of the selected object. If not present, then the &#x60;objectProperty&#x60; parameter is required.
-     * @param eventType Limits the response to the specified event type.  For example &#x60;&amp;eventType&#x3D;e_visited_page&#x60; returns only &#x60;e_visited_page&#x60; events.  If not present all event types are returned.
-     * @param after An additional parameter that may be used to get the next &#x60;limit&#x60; set of results.
+     * @param objectType 
+     * @param eventType 
+     * @param occurredAfter 
+     * @param occurredBefore 
+     * @param objectId 
+     * @param indexTableName 
+     * @param indexSpecificMetadata 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param before 
-     * @param limit The maximum number of events to return, defaults to 20.
-     * @param sort Selects the sort field and order. Defaults to ascending, prefix with &#x60;-&#x60; for descending order. &#x60;occurredAt&#x60; is the only field supported for sorting.
+     * @param limit The maximum number of results to display per page.
+     * @param sort 
+     * @param objectPropertyPropname 
+     * @param propertyPropname 
+     * @param id 
      */
-    public getPage(occurredAfter?: Date, occurredBefore?: Date, objectType?: string, objectId?: number, eventType?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration): Observable<CollectionResponseExternalUnifiedEvent> {
-        const requestContextPromise = this.requestFactory.getPage(occurredAfter, occurredBefore, objectType, objectId, eventType, after, before, limit, sort, _options);
+    public getPageWithHttpInfo(objectType?: string, eventType?: string, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, indexTableName?: string, indexSpecificMetadata?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>, _options?: Configuration): Observable<HttpInfo<CollectionResponseExternalUnifiedEvent>> {
+        const requestContextPromise = this.requestFactory.getPage(objectType, eventType, occurredAfter, occurredBefore, objectId, indexTableName, indexSpecificMetadata, after, before, limit, sort, objectPropertyPropname, propertyPropname, id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -47,8 +51,28 @@ export class ObservableEventsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param objectType 
+     * @param eventType 
+     * @param occurredAfter 
+     * @param occurredBefore 
+     * @param objectId 
+     * @param indexTableName 
+     * @param indexSpecificMetadata 
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param before 
+     * @param limit The maximum number of results to display per page.
+     * @param sort 
+     * @param objectPropertyPropname 
+     * @param propertyPropname 
+     * @param id 
+     */
+    public getPage(objectType?: string, eventType?: string, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, indexTableName?: string, indexSpecificMetadata?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>, _options?: Configuration): Observable<CollectionResponseExternalUnifiedEvent> {
+        return this.getPageWithHttpInfo(objectType, eventType, occurredAfter, occurredBefore, objectId, indexTableName, indexSpecificMetadata, after, before, limit, sort, objectPropertyPropname, propertyPropname, id, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseExternalUnifiedEvent>) => apiResponse.data));
     }
 
 }

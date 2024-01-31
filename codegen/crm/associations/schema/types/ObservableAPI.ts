@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -26,7 +26,7 @@ export class ObservableTypesApi {
      * @param fromObjectType 
      * @param toObjectType 
      */
-    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
+    public getAllWithHttpInfo(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
         const requestContextPromise = this.requestFactory.getAll(fromObjectType, toObjectType, _options);
 
         // build promise chain
@@ -41,8 +41,18 @@ export class ObservableTypesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAll(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * List all the valid association types available between two object types
+     * List association types
+     * @param fromObjectType 
+     * @param toObjectType 
+     */
+    public getAll(fromObjectType: string, toObjectType: string, _options?: Configuration): Observable<CollectionResponsePublicAssociationDefinitionNoPaging> {
+        return this.getAllWithHttpInfo(fromObjectType, toObjectType, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>) => apiResponse.data));
     }
 
 }

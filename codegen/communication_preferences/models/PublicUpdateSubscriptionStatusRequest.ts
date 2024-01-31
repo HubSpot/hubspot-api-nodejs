@@ -12,21 +12,21 @@
 
 
 /**
-* A request to change the status of a contact's subscription.
+* A request to change the status of a contact\'s subscription.
 */
 export class PublicUpdateSubscriptionStatusRequest {
     /**
-    * Contact's email address.
+    * Contact\'s email address.
     */
     'emailAddress': string;
+    /**
+    * Legal basis for updating the contact\'s status (required for GDPR enabled portals).
+    */
+    'legalBasis'?: PublicUpdateSubscriptionStatusRequestLegalBasisEnum;
     /**
     * ID of the subscription being updated for the contact.
     */
     'subscriptionId': string;
-    /**
-    * Legal basis for updating the contact's status (required for GDPR enabled portals).
-    */
-    'legalBasis'?: PublicUpdateSubscriptionStatusRequestLegalBasisEnum;
     /**
     * A more detailed explanation to go with the legal basis (required for GDPR enabled portals).
     */
@@ -42,15 +42,15 @@ export class PublicUpdateSubscriptionStatusRequest {
             "format": ""
         },
         {
-            "name": "subscriptionId",
-            "baseName": "subscriptionId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "legalBasis",
             "baseName": "legalBasis",
             "type": "PublicUpdateSubscriptionStatusRequestLegalBasisEnum",
+            "format": ""
+        },
+        {
+            "name": "subscriptionId",
+            "baseName": "subscriptionId",
+            "type": "string",
             "format": ""
         },
         {
@@ -69,5 +69,13 @@ export class PublicUpdateSubscriptionStatusRequest {
 }
 
 
-export type PublicUpdateSubscriptionStatusRequestLegalBasisEnum = "LEGITIMATE_INTEREST_PQL" | "LEGITIMATE_INTEREST_CLIENT" | "PERFORMANCE_OF_CONTRACT" | "CONSENT_WITH_NOTICE" | "NON_GDPR" | "PROCESS_AND_STORE" | "LEGITIMATE_INTEREST_OTHER" ;
+export enum PublicUpdateSubscriptionStatusRequestLegalBasisEnum {
+    LegitimateInterestPql = 'LEGITIMATE_INTEREST_PQL',
+    LegitimateInterestClient = 'LEGITIMATE_INTEREST_CLIENT',
+    PerformanceOfContract = 'PERFORMANCE_OF_CONTRACT',
+    ConsentWithNotice = 'CONSENT_WITH_NOTICE',
+    NonGdpr = 'NON_GDPR',
+    ProcessAndStore = 'PROCESS_AND_STORE',
+    LegitimateInterestOther = 'LEGITIMATE_INTEREST_OTHER'
+}
 

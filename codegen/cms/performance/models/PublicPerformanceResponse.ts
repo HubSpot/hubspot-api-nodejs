@@ -1,6 +1,6 @@
 /**
- * CMS Performance API
- * Use these endpoints to get a time series view of your website's performance.
+ * CMS Performance
+ * Use these endpoints to get a time series view of your website\'s performance.
  *
  * OpenAPI spec version: v3
  * 
@@ -13,23 +13,17 @@
 import { PerformanceView } from '../models/PerformanceView';
 
 export class PublicPerformanceResponse {
-    'domain'?: string;
     'path'?: string;
-    'startInterval': number;
-    'endInterval': number;
-    'data': Array<PerformanceView>;
-    'interval': PublicPerformanceResponseIntervalEnum;
     'period'?: PublicPerformanceResponsePeriodEnum;
+    'startInterval': number;
+    'data': Array<PerformanceView>;
+    'domain'?: string;
+    'interval': PublicPerformanceResponseIntervalEnum;
+    'endInterval': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "domain",
-            "baseName": "domain",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "path",
             "baseName": "path",
@@ -37,14 +31,14 @@ export class PublicPerformanceResponse {
             "format": ""
         },
         {
-            "name": "startInterval",
-            "baseName": "startInterval",
-            "type": "number",
-            "format": "int64"
+            "name": "period",
+            "baseName": "period",
+            "type": "PublicPerformanceResponsePeriodEnum",
+            "format": ""
         },
         {
-            "name": "endInterval",
-            "baseName": "endInterval",
+            "name": "startInterval",
+            "baseName": "startInterval",
             "type": "number",
             "format": "int64"
         },
@@ -55,16 +49,22 @@ export class PublicPerformanceResponse {
             "format": ""
         },
         {
+            "name": "domain",
+            "baseName": "domain",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "interval",
             "baseName": "interval",
             "type": "PublicPerformanceResponseIntervalEnum",
             "format": ""
         },
         {
-            "name": "period",
-            "baseName": "period",
-            "type": "PublicPerformanceResponsePeriodEnum",
-            "format": ""
+            "name": "endInterval",
+            "baseName": "endInterval",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
@@ -76,6 +76,28 @@ export class PublicPerformanceResponse {
 }
 
 
-export type PublicPerformanceResponseIntervalEnum = "ONE_MINUTE" | "FIVE_MINUTES" | "TEN_MINUTES" | "FIFTEEN_MINUTES" | "THIRTY_MINUTES" | "ONE_HOUR" | "FOUR_HOURS" | "TWELVE_HOURS" | "ONE_DAY" | "ONE_WEEK" ;
-export type PublicPerformanceResponsePeriodEnum = "ONE_MINUTE" | "FIVE_MINUTES" | "TEN_MINUTES" | "FIFTEEN_MINUTES" | "THIRTY_MINUTES" | "ONE_HOUR" | "FOUR_HOURS" | "TWELVE_HOURS" | "ONE_DAY" | "ONE_WEEK" ;
+export enum PublicPerformanceResponsePeriodEnum {
+    OneMinute = 'ONE_MINUTE',
+    FiveMinutes = 'FIVE_MINUTES',
+    TenMinutes = 'TEN_MINUTES',
+    FifteenMinutes = 'FIFTEEN_MINUTES',
+    ThirtyMinutes = 'THIRTY_MINUTES',
+    OneHour = 'ONE_HOUR',
+    FourHours = 'FOUR_HOURS',
+    TwelveHours = 'TWELVE_HOURS',
+    OneDay = 'ONE_DAY',
+    OneWeek = 'ONE_WEEK'
+}
+export enum PublicPerformanceResponseIntervalEnum {
+    OneMinute = 'ONE_MINUTE',
+    FiveMinutes = 'FIVE_MINUTES',
+    TenMinutes = 'TEN_MINUTES',
+    FifteenMinutes = 'FIFTEEN_MINUTES',
+    ThirtyMinutes = 'THIRTY_MINUTES',
+    OneHour = 'ONE_HOUR',
+    FourHours = 'FOUR_HOURS',
+    TwelveHours = 'TWELVE_HOURS',
+    OneDay = 'ONE_DAY',
+    OneWeek = 'ONE_WEEK'
+}
 

@@ -1,16 +1,17 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { ActionFunction } from '../models/ActionFunction';
-import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
-import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+import { PublicActionDefinition } from '../models/PublicActionDefinition';
+import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
+import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionFunction } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
+import { PublicActionRevision } from '../models/PublicActionRevision';
 import { ObservableCallbacksApi } from './ObservableAPI';
 
 import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
@@ -26,10 +27,19 @@ export class PromiseCallbacksApi {
     }
 
     /**
-     * Completes the given action callback.
-     * Complete a callback
-     * @param callbackId The ID of the target app.
-     * @param callbackCompletionRequest The result of the completed action.
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
+     */
+    public completeWithHttpInfo(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.completeWithHttpInfo(callbackId, callbackCompletionRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
      */
     public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
         const result = this.api.complete(callbackId, callbackCompletionRequest, _options);
@@ -37,9 +47,17 @@ export class PromiseCallbacksApi {
     }
 
     /**
-     * Completes the given action callbacks.
-     * Complete a batch of callbacks
-     * @param batchInputCallbackCompletionBatchRequest The result of the completed action.
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
      */
     public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
         const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
@@ -66,9 +84,18 @@ export class PromiseDefinitionsApi {
     }
 
     /**
-     * Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
-     * Archive a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Archive an extension definition
+     * @param definitionId 
+     * @param appId 
+     */
+    public archiveWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(definitionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Archive an extension definition
+     * @param definitionId 
      * @param appId 
      */
     public archive(definitionId: string, appId: number, _options?: Configuration): Promise<void> {
@@ -77,50 +104,90 @@ export class PromiseDefinitionsApi {
     }
 
     /**
-     * Creates a new custom workflow action.
-     * Create new custom action
+     * Create a new extension definition
      * @param appId 
-     * @param extensionActionDefinitionInput The custom workflow action to create.
+     * @param publicActionDefinitionEgg 
      */
-    public create(appId: number, extensionActionDefinitionInput: ExtensionActionDefinitionInput, _options?: Configuration): Promise<ExtensionActionDefinition> {
-        const result = this.api.create(appId, extensionActionDefinitionInput, _options);
+    public createWithHttpInfo(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
+        const result = this.api.createWithHttpInfo(appId, publicActionDefinitionEgg, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns a single custom workflow action with the specified ID.
-     * Get a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Create a new extension definition
      * @param appId 
-     * @param archived Whether to include archived custom actions.
+     * @param publicActionDefinitionEgg 
      */
-    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<ExtensionActionDefinition> {
+    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<PublicActionDefinition> {
+        const result = this.api.create(appId, publicActionDefinitionEgg, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get extension definition by Id
+     * @param definitionId 
+     * @param appId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getByIdWithHttpInfo(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
+        const result = this.api.getByIdWithHttpInfo(definitionId, appId, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get extension definition by Id
+     * @param definitionId 
+     * @param appId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<PublicActionDefinition> {
         const result = this.api.getById(definitionId, appId, archived, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns a list of all custom workflow actions.
-     * Get all custom actions
+     * Get paged extension definitions
      * @param appId 
-     * @param limit Maximum number of results per page.
+     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Whether to include archived custom actions.
+     * @param archived Whether to return only results that have been archived.
      */
-    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponseExtensionActionDefinitionForwardPaging> {
+    public getPageWithHttpInfo(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>> {
+        const result = this.api.getPageWithHttpInfo(appId, limit, after, archived, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get paged extension definitions
+     * @param appId 
+     * @param limit The maximum number of results to display per page.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
         const result = this.api.getPage(appId, limit, after, archived, _options);
         return result.toPromise();
     }
 
     /**
-     * Updates a custom workflow action with new values for the specified fields.
-     * Update a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Patch an existing extension definition
+     * @param definitionId 
      * @param appId 
-     * @param extensionActionDefinitionPatch The custom workflow action fields to be updated.
+     * @param publicActionDefinitionPatch 
      */
-    public update(definitionId: string, appId: number, extensionActionDefinitionPatch: ExtensionActionDefinitionPatch, _options?: Configuration): Promise<ExtensionActionDefinition> {
-        const result = this.api.update(definitionId, appId, extensionActionDefinitionPatch, _options);
+    public updateWithHttpInfo(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
+        const result = this.api.updateWithHttpInfo(definitionId, appId, publicActionDefinitionPatch, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Patch an existing extension definition
+     * @param definitionId 
+     * @param appId 
+     * @param publicActionDefinitionPatch 
+     */
+    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<PublicActionDefinition> {
+        const result = this.api.update(definitionId, appId, publicActionDefinitionPatch, _options);
         return result.toPromise();
     }
 
@@ -144,89 +211,163 @@ export class PromiseFunctionsApi {
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Archive a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<void> {
+    public archiveWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveWithHttpInfo(definitionId, functionType, functionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Archive a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     */
+    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<void> {
         const result = this.api.archive(definitionId, functionType, functionId, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<void> {
+    public archiveByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     */
+    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<void> {
         const result = this.api.archiveByFunctionType(definitionId, functionType, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, body: string, _options?: Configuration): Promise<ActionFunctionIdentifier> {
+    public createOrReplaceWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
+        const result = this.api.createOrReplaceWithHttpInfo(definitionId, functionType, functionId, appId, body, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
         const result = this.api.createOrReplace(definitionId, functionType, functionId, appId, body, _options);
         return result.toPromise();
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, body: string, _options?: Configuration): Promise<ActionFunctionIdentifier> {
+    public createOrReplaceByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
+        const result = this.api.createOrReplaceByFunctionTypeWithHttpInfo(definitionId, functionType, appId, body, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
         const result = this.api.createOrReplaceByFunctionType(definitionId, functionType, appId, body, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Get all functions by a type for a given definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Promise<ActionFunction> {
+    public getByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionFunction>> {
+        const result = this.api.getByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all functions by a type for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     */
+    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<PublicActionFunction> {
         const result = this.api.getByFunctionType(definitionId, functionType, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Promise<ActionFunction> {
+    public getByIdWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionFunction>> {
+        const result = this.api.getByIdWithHttpInfo(definitionId, functionType, functionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     */
+    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<PublicActionFunction> {
         const result = this.api.getById(definitionId, functionType, functionId, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns a list of all functions that are associated with the given custom workflow action.
-     * Get all custom action functions
-     * @param definitionId The ID of the custom workflow action.
+     * Get all functions for a given definition
+     * @param definitionId 
      * @param appId 
      */
-    public getPage(definitionId: string, appId: number, _options?: Configuration): Promise<CollectionResponseActionFunctionIdentifierNoPaging> {
+    public getPageWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>> {
+        const result = this.api.getPageWithHttpInfo(definitionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all functions for a given definition
+     * @param definitionId 
+     * @param appId 
+     */
+    public getPage(definitionId: string, appId: number, _options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
         const result = this.api.getPage(definitionId, appId, _options);
         return result.toPromise();
     }
@@ -251,26 +392,47 @@ export class PromiseRevisionsApi {
     }
 
     /**
-     * Returns the given version of a custom workflow action.
-     * Get a revision for a custom action
-     * @param definitionId The ID of the custom workflow action.
-     * @param revisionId The version of the custom workflow action.
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
      * @param appId 
      */
-    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<ActionRevision> {
+    public getByIdWithHttpInfo(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionRevision>> {
+        const result = this.api.getByIdWithHttpInfo(definitionId, revisionId, appId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
+     * @param appId 
+     */
+    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<PublicActionRevision> {
         const result = this.api.getById(definitionId, revisionId, appId, _options);
         return result.toPromise();
     }
 
     /**
-     * Returns a list of revisions for a custom workflow action.
-     * Get all revisions for a custom action
-     * @param definitionId The ID of the custom workflow action
+     * Get all revisions for a given definition
+     * @param definitionId 
      * @param appId 
-     * @param limit Maximum number of results per page.
+     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponseActionRevisionForwardPaging> {
+    public getPageWithHttpInfo(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>> {
+        const result = this.api.getPageWithHttpInfo(definitionId, appId, limit, after, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all revisions for a given definition
+     * @param definitionId 
+     * @param appId 
+     * @param limit The maximum number of results to display per page.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     */
+    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
         const result = this.api.getPage(definitionId, appId, limit, after, _options);
         return result.toPromise();
     }

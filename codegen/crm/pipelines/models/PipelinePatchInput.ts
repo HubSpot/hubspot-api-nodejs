@@ -1,5 +1,5 @@
 /**
- * CRM Pipelines
+ * Pipelines
  * Pipelines represent distinct stages in a workflow, like closing a deal or servicing a support ticket. These endpoints provide access to read and modify pipelines in HubSpot. Pipelines support `deals` and `tickets` object types.  ## Pipeline ID validation  When calling endpoints that take pipelineId as a parameter, that ID must correspond to an existing, un-archived pipeline. Otherwise the request will fail with a `404 Not Found` response.
  *
  * OpenAPI spec version: v3
@@ -16,25 +16,25 @@
 */
 export class PipelinePatchInput {
     /**
-    * A unique label used to organize pipelines in HubSpot's UI
+    * Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it\'s provided in any other call, the request will fail and a `400 Bad Request` will be returned.
     */
-    'label'?: string;
+    'archived'?: boolean;
     /**
     * The order for displaying this pipeline. If two pipelines have a matching `displayOrder`, they will be sorted alphabetically by label.
     */
     'displayOrder'?: number;
     /**
-    * Whether the pipeline is archived. This property should only be provided when restoring an archived pipeline. If it's provided in any other call, the request will fail and a `400 Bad Request` will be returned.
+    * A unique label used to organize pipelines in HubSpot\'s UI
     */
-    'archived'?: boolean;
+    'label'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -44,9 +44,9 @@ export class PipelinePatchInput {
             "format": "int32"
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         }    ];
 

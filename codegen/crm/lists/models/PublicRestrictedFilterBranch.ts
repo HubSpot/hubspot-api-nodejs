@@ -56,5 +56,7 @@ export class PublicRestrictedFilterBranch {
 }
 
 
-export type PublicRestrictedFilterBranchFilterBranchTypeEnum = "RESTRICTED" ;
+export enum PublicRestrictedFilterBranchFilterBranchTypeEnum {
+    Restricted = 'RESTRICTED'
+}
 

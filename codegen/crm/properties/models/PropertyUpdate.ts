@@ -14,6 +14,30 @@ import { OptionInput } from '../models/OptionInput';
 
 export class PropertyUpdate {
     /**
+    * The name of the property group the property belongs to.
+    */
+    'groupName'?: string;
+    /**
+    * If true, the property won\'t be visible and can\'t be used in HubSpot.
+    */
+    'hidden'?: boolean;
+    /**
+    * A list of valid options for the property.
+    */
+    'options'?: Array<OptionInput>;
+    /**
+    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
+    */
+    'displayOrder'?: number;
+    /**
+    * A description of the property that will be shown as help text in HubSpot.
+    */
+    'description'?: string;
+    /**
+    * Represents a formula that is used to compute a calculated property.
+    */
+    'calculationFormula'?: string;
+    /**
     * A human-readable property label that will be shown in HubSpot.
     */
     'label'?: string;
@@ -26,37 +50,49 @@ export class PropertyUpdate {
     */
     'fieldType'?: PropertyUpdateFieldTypeEnum;
     /**
-    * The name of the property group the property belongs to.
-    */
-    'groupName'?: string;
-    /**
-    * A description of the property that will be shown as help text in HubSpot.
-    */
-    'description'?: string;
-    /**
-    * A list of valid options for the property.
-    */
-    'options'?: Array<OptionInput>;
-    /**
-    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the Property to be displayed after any positive values.
-    */
-    'displayOrder'?: number;
-    /**
-    * If true, the property won't be visible and can't be used in HubSpot.
-    */
-    'hidden'?: boolean;
-    /**
     * Whether or not the property can be used in a HubSpot form.
     */
     'formField'?: boolean;
-    /**
-    * Represents a formula that is used to compute a calculated property.
-    */
-    'calculationFormula'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "groupName",
+            "baseName": "groupName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<OptionInput>",
+            "format": ""
+        },
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "label",
             "baseName": "label",
@@ -76,45 +112,9 @@ export class PropertyUpdate {
             "format": ""
         },
         {
-            "name": "groupName",
-            "baseName": "groupName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<OptionInput>",
-            "format": ""
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "formField",
             "baseName": "formField",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "calculationFormula",
-            "baseName": "calculationFormula",
-            "type": "string",
             "format": ""
         }    ];
 
@@ -127,6 +127,24 @@ export class PropertyUpdate {
 }
 
 
-export type PropertyUpdateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
-export type PropertyUpdateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
+export enum PropertyUpdateTypeEnum {
+    String = 'string',
+    Number = 'number',
+    Date = 'date',
+    Datetime = 'datetime',
+    Enumeration = 'enumeration',
+    Bool = 'bool'
+}
+export enum PropertyUpdateFieldTypeEnum {
+    Textarea = 'textarea',
+    Text = 'text',
+    Date = 'date',
+    File = 'file',
+    Number = 'number',
+    Select = 'select',
+    Radio = 'radio',
+    Checkbox = 'checkbox',
+    Booleancheckbox = 'booleancheckbox',
+    CalculationEquation = 'calculation_equation'
+}
 

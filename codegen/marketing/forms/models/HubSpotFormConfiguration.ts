@@ -11,7 +11,7 @@
  */
 
 import { FormPostSubmitAction } from '../models/FormPostSubmitAction';
-import { HttpFile } from '../http/http';
+import { LifecycleStage } from '../models/LifecycleStage';
 
 export class HubSpotFormConfiguration {
     /**
@@ -26,6 +26,7 @@ export class HubSpotFormConfiguration {
     * Whether to add a reset link to the form. This removes any pre-populated content on the form and creates a new contact on submission.
     */
     'allowLinkToResetKnownValues': boolean;
+    'lifecycleStages'?: Array<LifecycleStage>;
     'postSubmitAction': FormPostSubmitAction;
     /**
     * The language of the form.
@@ -75,6 +76,12 @@ export class HubSpotFormConfiguration {
             "name": "allowLinkToResetKnownValues",
             "baseName": "allowLinkToResetKnownValues",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "lifecycleStages",
+            "baseName": "lifecycleStages",
+            "type": "Array<LifecycleStage>",
             "format": ""
         },
         {
@@ -135,5 +142,48 @@ export class HubSpotFormConfiguration {
 }
 
 
-export type HubSpotFormConfigurationLanguageEnum = "af" | "ar-eg" | "bg" | "bn" | "ca-es" | "cs" | "da" | "de" | "el" | "en" | "es" | "es-mx" | "fi" | "fr" | "fr-ca" | "he-il" | "hr" | "hu" | "id" | "it" | "ja" | "ko" | "lt" | "ms" | "nl" | "no-no" | "pl" | "pt" | "pt-br" | "ro" | "ru" | "sk" | "sl" | "sv" | "th" | "tl" | "tr" | "uk" | "vi" | "zh-cn" | "zh-hk" | "zh-tw" ;
+export enum HubSpotFormConfigurationLanguageEnum {
+    Af = 'af',
+    ArEg = 'ar-eg',
+    Bg = 'bg',
+    Bn = 'bn',
+    CaEs = 'ca-es',
+    Cs = 'cs',
+    Da = 'da',
+    De = 'de',
+    El = 'el',
+    En = 'en',
+    Es = 'es',
+    EsMx = 'es-mx',
+    Fi = 'fi',
+    Fr = 'fr',
+    FrCa = 'fr-ca',
+    HeIl = 'he-il',
+    Hr = 'hr',
+    Hu = 'hu',
+    Id = 'id',
+    It = 'it',
+    Ja = 'ja',
+    Ko = 'ko',
+    Lt = 'lt',
+    Ms = 'ms',
+    Nl = 'nl',
+    NoNo = 'no-no',
+    Pl = 'pl',
+    Pt = 'pt',
+    PtBr = 'pt-br',
+    Ro = 'ro',
+    Ru = 'ru',
+    Sk = 'sk',
+    Sl = 'sl',
+    Sv = 'sv',
+    Th = 'th',
+    Tl = 'tl',
+    Tr = 'tr',
+    Uk = 'uk',
+    Vi = 'vi',
+    ZhCn = 'zh-cn',
+    ZhHk = 'zh-hk',
+    ZhTw = 'zh-tw'
+}
 

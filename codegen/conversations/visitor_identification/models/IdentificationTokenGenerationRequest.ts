@@ -16,10 +16,6 @@
 */
 export class IdentificationTokenGenerationRequest {
     /**
-    * The email of the visitor that you wish to identify
-    */
-    'email': string;
-    /**
     * The first name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where first name is unknown. Optional.
     */
     'firstName'?: string;
@@ -27,16 +23,14 @@ export class IdentificationTokenGenerationRequest {
     * The last name of the visitor that you wish to identify. This value will only be set in HubSpot for new contacts and existing contacts where last name is unknown. Optional.
     */
     'lastName'?: string;
+    /**
+    * The email of the visitor that you wish to identify
+    */
+    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "firstName",
             "baseName": "firstName",
@@ -46,6 +40,12 @@ export class IdentificationTokenGenerationRequest {
         {
             "name": "lastName",
             "baseName": "lastName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email",
+            "baseName": "email",
             "type": "string",
             "format": ""
         }    ];

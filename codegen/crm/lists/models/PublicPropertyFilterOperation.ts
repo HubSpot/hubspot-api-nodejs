@@ -35,7 +35,7 @@ export class PublicPropertyFilterOperation {
     'timePoint': PublicTimePointOperationTimePoint;
     'endpointBehavior'?: string;
     'propertyParser'?: string;
-    'type': PublicPropertyFilterOperationTypeEnum;
+    'type': string;
     'lowerBoundEndpointBehavior'?: string;
     'upperBoundEndpointBehavior'?: string;
     'lowerBoundTimePoint': PublicTimePointOperationTimePoint;
@@ -179,7 +179,7 @@ export class PublicPropertyFilterOperation {
         {
             "name": "type",
             "baseName": "type",
-            "type": "PublicPropertyFilterOperationTypeEnum",
+            "type": "string",
             "format": ""
         },
         {
@@ -216,6 +216,18 @@ export class PublicPropertyFilterOperation {
 }
 
 
-export type PublicPropertyFilterOperationFiscalYearStartEnum = "JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER" ;
-export type PublicPropertyFilterOperationTypeEnum = "TIME_RANGED" ;
+export enum PublicPropertyFilterOperationFiscalYearStartEnum {
+    January = 'JANUARY',
+    February = 'FEBRUARY',
+    March = 'MARCH',
+    April = 'APRIL',
+    May = 'MAY',
+    June = 'JUNE',
+    July = 'JULY',
+    August = 'AUGUST',
+    September = 'SEPTEMBER',
+    October = 'OCTOBER',
+    November = 'NOVEMBER',
+    December = 'DECEMBER'
+}
 

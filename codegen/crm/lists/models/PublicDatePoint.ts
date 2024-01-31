@@ -96,5 +96,7 @@ export class PublicDatePoint {
 }
 
 
-export type PublicDatePointTimeTypeEnum = "DATE" ;
+export enum PublicDatePointTimeTypeEnum {
+    Date = 'DATE'
+}
 

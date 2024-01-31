@@ -1,5 +1,5 @@
 /**
- * Webhooks API
+ * Webhooks Webhooks
  * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
  *
  * OpenAPI spec version: v3
@@ -14,41 +14,29 @@ import { StandardError } from '../models/StandardError';
 import { SubscriptionResponse } from '../models/SubscriptionResponse';
 
 export class BatchResponseSubscriptionResponseWithErrors {
-    'status': BatchResponseSubscriptionResponseWithErrorsStatusEnum;
-    'results': Array<SubscriptionResponse>;
+    'completedAt': Date;
     'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<SubscriptionResponse>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponseSubscriptionResponseWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseSubscriptionResponseWithErrorsStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<SubscriptionResponse>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -63,15 +51,27 @@ export class BatchResponseSubscriptionResponseWithErrors {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SubscriptionResponse>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseSubscriptionResponseWithErrorsStatusEnum",
             "format": ""
         }    ];
 
@@ -84,5 +84,10 @@ export class BatchResponseSubscriptionResponseWithErrors {
 }
 
 
-export type BatchResponseSubscriptionResponseWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseSubscriptionResponseWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

@@ -1,5 +1,6 @@
 import {
   createConfiguration,
+  RecordingSettingsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -12,6 +13,7 @@ import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 
 export default class CallingDiscovery {
   public settingsApi: SettingsApi
+  public recordingSettingsApi: RecordingSettingsApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -25,5 +27,8 @@ export default class CallingDiscovery {
     )
 
     this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
+    this.recordingSettingsApi = ApiDecoratorService.getInstance().apply<RecordingSettingsApi>(
+      new RecordingSettingsApi(configuration),
+    )
   }
 }

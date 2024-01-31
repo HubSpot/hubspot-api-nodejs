@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -162,14 +162,14 @@ export class StatusApiResponseProcessor {
      * @params response Response returned by the server for a request to getEmailStatus
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getEmailStatus(response: ResponseContext): Promise<PublicSubscriptionStatusesResponse > {
+     public async getEmailStatusWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicSubscriptionStatusesResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicSubscriptionStatusesResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatusesResponse", ""
             ) as PublicSubscriptionStatusesResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -185,7 +185,7 @@ export class StatusApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatusesResponse", ""
             ) as PublicSubscriptionStatusesResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -198,14 +198,20 @@ export class StatusApiResponseProcessor {
      * @params response Response returned by the server for a request to subscribe
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async subscribe(response: ResponseContext): Promise<PublicSubscriptionStatus > {
+     public async subscribeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicSubscriptionStatus >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicSubscriptionStatus = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatus", ""
             ) as PublicSubscriptionStatus;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -221,7 +227,7 @@ export class StatusApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatus", ""
             ) as PublicSubscriptionStatus;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -234,14 +240,20 @@ export class StatusApiResponseProcessor {
      * @params response Response returned by the server for a request to unsubscribe
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async unsubscribe(response: ResponseContext): Promise<PublicSubscriptionStatus > {
+     public async unsubscribeWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicSubscriptionStatus >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: PublicSubscriptionStatus = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatus", ""
             ) as PublicSubscriptionStatus;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "", undefined, response.headers);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -257,7 +269,7 @@ export class StatusApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "PublicSubscriptionStatus", ""
             ) as PublicSubscriptionStatus;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

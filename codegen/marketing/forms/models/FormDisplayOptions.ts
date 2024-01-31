@@ -11,7 +11,6 @@
  */
 
 import { FormStyle } from '../models/FormStyle';
-import { HttpFile } from '../http/http';
 
 /**
 * Options for styling the form.
@@ -78,5 +77,12 @@ export class FormDisplayOptions {
 }
 
 
-export type FormDisplayOptionsThemeEnum = "default_style" | "canvas" | "linear" | "round" | "sharp" | "legacy" ;
+export enum FormDisplayOptionsThemeEnum {
+    DefaultStyle = 'default_style',
+    Canvas = 'canvas',
+    Linear = 'linear',
+    Round = 'round',
+    Sharp = 'sharp',
+    Legacy = 'legacy'
+}
 

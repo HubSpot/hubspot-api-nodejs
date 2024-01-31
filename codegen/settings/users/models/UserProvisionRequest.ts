@@ -1,5 +1,5 @@
 /**
- * Users
+ * Settings User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3
@@ -16,7 +16,7 @@
 */
 export class UserProvisionRequest {
     /**
-    * The user's primary team
+    * The user\'s primary team
     */
     'primaryTeamId'?: string;
     /**
@@ -24,15 +24,15 @@ export class UserProvisionRequest {
     */
     'sendWelcomeEmail'?: boolean;
     /**
-    * The user's role
+    * The user\'s role
     */
     'roleId'?: string;
     /**
-    * The user's additional teams
+    * The user\'s additional teams
     */
     'secondaryTeamIds'?: Array<string>;
     /**
-    * The created user's email
+    * The created user\'s email
     */
     'email': string;
 

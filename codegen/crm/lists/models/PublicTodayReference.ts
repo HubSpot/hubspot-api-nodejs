@@ -61,5 +61,7 @@ export class PublicTodayReference {
 }
 
 
-export type PublicTodayReferenceReferenceTypeEnum = "TODAY" ;
+export enum PublicTodayReferenceReferenceTypeEnum {
+    Today = 'TODAY'
+}
 

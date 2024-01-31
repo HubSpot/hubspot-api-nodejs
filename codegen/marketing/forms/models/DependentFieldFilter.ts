@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * A condition based on customer input
@@ -65,5 +64,27 @@ export class DependentFieldFilter {
 }
 
 
-export type DependentFieldFilterOperatorEnum = "eq" | "neq" | "contains" | "doesnt_contain" | "str_starts_with" | "str_ends_with" | "lt" | "lte" | "gt" | "gte" | "between" | "not_between" | "within_time_reverse" | "within_time" | "set_any" | "set_not_any" | "set_all" | "set_not_all" | "set_eq" | "set_neq" | "is_not_empty" ;
+export enum DependentFieldFilterOperatorEnum {
+    Eq = 'eq',
+    Neq = 'neq',
+    Contains = 'contains',
+    DoesntContain = 'doesnt_contain',
+    StrStartsWith = 'str_starts_with',
+    StrEndsWith = 'str_ends_with',
+    Lt = 'lt',
+    Lte = 'lte',
+    Gt = 'gt',
+    Gte = 'gte',
+    Between = 'between',
+    NotBetween = 'not_between',
+    WithinTimeReverse = 'within_time_reverse',
+    WithinTime = 'within_time',
+    SetAny = 'set_any',
+    SetNotAny = 'set_not_any',
+    SetAll = 'set_all',
+    SetNotAll = 'set_not_all',
+    SetEq = 'set_eq',
+    SetNeq = 'set_neq',
+    IsNotEmpty = 'is_not_empty'
+}
 

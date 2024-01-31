@@ -1,5 +1,5 @@
 /**
- * URL redirects
+ * CMS Url Redirects
  * URL redirect operations
  *
  * OpenAPI spec version: v3
@@ -12,35 +12,23 @@
 
 
 export class UrlMappingCreateRequestBody {
-    'precedence'?: number;
-    'isOnlyAfterNotFound'?: boolean;
-    'isMatchFullUrl'?: boolean;
-    'isMatchQueryString'?: boolean;
-    'isPattern'?: boolean;
     'isTrailingSlashOptional'?: boolean;
-    'isProtocolAgnostic'?: boolean;
-    'routePrefix': string;
-    'destination': string;
+    'isMatchQueryString'?: boolean;
     'redirectStyle': number;
+    'routePrefix': string;
+    'isMatchFullUrl'?: boolean;
+    'isProtocolAgnostic'?: boolean;
+    'destination': string;
+    'isOnlyAfterNotFound'?: boolean;
+    'isPattern'?: boolean;
+    'precedence'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "precedence",
-            "baseName": "precedence",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "isOnlyAfterNotFound",
-            "baseName": "isOnlyAfterNotFound",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "isMatchFullUrl",
-            "baseName": "isMatchFullUrl",
+            "name": "isTrailingSlashOptional",
+            "baseName": "isTrailingSlashOptional",
             "type": "boolean",
             "format": ""
         },
@@ -51,14 +39,20 @@ export class UrlMappingCreateRequestBody {
             "format": ""
         },
         {
-            "name": "isPattern",
-            "baseName": "isPattern",
-            "type": "boolean",
+            "name": "redirectStyle",
+            "baseName": "redirectStyle",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "routePrefix",
+            "baseName": "routePrefix",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "isTrailingSlashOptional",
-            "baseName": "isTrailingSlashOptional",
+            "name": "isMatchFullUrl",
+            "baseName": "isMatchFullUrl",
             "type": "boolean",
             "format": ""
         },
@@ -69,20 +63,26 @@ export class UrlMappingCreateRequestBody {
             "format": ""
         },
         {
-            "name": "routePrefix",
-            "baseName": "routePrefix",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "destination",
             "baseName": "destination",
             "type": "string",
             "format": ""
         },
         {
-            "name": "redirectStyle",
-            "baseName": "redirectStyle",
+            "name": "isOnlyAfterNotFound",
+            "baseName": "isOnlyAfterNotFound",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "isPattern",
+            "baseName": "isPattern",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "precedence",
+            "baseName": "precedence",
             "type": "number",
             "format": "int32"
         }    ];

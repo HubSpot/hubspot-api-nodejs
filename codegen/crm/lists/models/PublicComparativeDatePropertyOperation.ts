@@ -61,5 +61,7 @@ export class PublicComparativeDatePropertyOperation {
 }
 
 
-export type PublicComparativeDatePropertyOperationOperationTypeEnum = "COMPARATIVE_DATE" ;
+export enum PublicComparativeDatePropertyOperationOperationTypeEnum {
+    ComparativeDate = 'COMPARATIVE_DATE'
+}
 

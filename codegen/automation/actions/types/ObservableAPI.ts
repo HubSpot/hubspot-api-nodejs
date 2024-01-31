@@ -1,18 +1,18 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
-import { ActionFunction } from '../models/ActionFunction';
-import { ActionFunctionIdentifier } from '../models/ActionFunctionIdentifier';
-import { ActionRevision } from '../models/ActionRevision';
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
-import { CollectionResponseActionFunctionIdentifierNoPaging } from '../models/CollectionResponseActionFunctionIdentifierNoPaging';
-import { CollectionResponseActionRevisionForwardPaging } from '../models/CollectionResponseActionRevisionForwardPaging';
-import { CollectionResponseExtensionActionDefinitionForwardPaging } from '../models/CollectionResponseExtensionActionDefinitionForwardPaging';
-import { ExtensionActionDefinition } from '../models/ExtensionActionDefinition';
-import { ExtensionActionDefinitionInput } from '../models/ExtensionActionDefinitionInput';
-import { ExtensionActionDefinitionPatch } from '../models/ExtensionActionDefinitionPatch';
+import { CollectionResponsePublicActionDefinitionForwardPaging } from '../models/CollectionResponsePublicActionDefinitionForwardPaging';
+import { CollectionResponsePublicActionFunctionIdentifierNoPaging } from '../models/CollectionResponsePublicActionFunctionIdentifierNoPaging';
+import { CollectionResponsePublicActionRevisionForwardPaging } from '../models/CollectionResponsePublicActionRevisionForwardPaging';
+import { PublicActionDefinition } from '../models/PublicActionDefinition';
+import { PublicActionDefinitionEgg } from '../models/PublicActionDefinitionEgg';
+import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPatch';
+import { PublicActionFunction } from '../models/PublicActionFunction';
+import { PublicActionFunctionIdentifier } from '../models/PublicActionFunctionIdentifier';
+import { PublicActionRevision } from '../models/PublicActionRevision';
 
 import { CallbacksApiRequestFactory, CallbacksApiResponseProcessor} from "../apis/CallbacksApi";
 export class ObservableCallbacksApi {
@@ -31,12 +31,11 @@ export class ObservableCallbacksApi {
     }
 
     /**
-     * Completes the given action callback.
-     * Complete a callback
-     * @param callbackId The ID of the target app.
-     * @param callbackCompletionRequest The result of the completed action.
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
      */
-    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
+    public completeWithHttpInfo(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.complete(callbackId, callbackCompletionRequest, _options);
 
         // build promise chain
@@ -51,16 +50,24 @@ export class ObservableCallbacksApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.complete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Completes the given action callbacks.
-     * Complete a batch of callbacks
-     * @param batchInputCallbackCompletionBatchRequest The result of the completed action.
+     * Completes a single callback
+     * @param callbackId 
+     * @param callbackCompletionRequest 
      */
-    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
+    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Observable<void> {
+        return this.completeWithHttpInfo(callbackId, callbackCompletionRequest, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
 
         // build promise chain
@@ -75,8 +82,16 @@ export class ObservableCallbacksApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatch(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.completeBatchWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Completes a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest 
+     */
+    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Observable<void> {
+        return this.completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }
@@ -98,12 +113,11 @@ export class ObservableDefinitionsApi {
     }
 
     /**
-     * Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
-     * Archive a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Archive an extension definition
+     * @param definitionId 
      * @param appId 
      */
-    public archive(definitionId: string, appId: number, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(definitionId, appId, _options);
 
         // build promise chain
@@ -118,18 +132,26 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Creates a new custom workflow action.
-     * Create new custom action
+     * Archive an extension definition
+     * @param definitionId 
      * @param appId 
-     * @param extensionActionDefinitionInput The custom workflow action to create.
      */
-    public create(appId: number, extensionActionDefinitionInput: ExtensionActionDefinitionInput, _options?: Configuration): Observable<ExtensionActionDefinition> {
-        const requestContextPromise = this.requestFactory.create(appId, extensionActionDefinitionInput, _options);
+    public archive(definitionId: string, appId: number, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(definitionId, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Create a new extension definition
+     * @param appId 
+     * @param publicActionDefinitionEgg 
+     */
+    public createWithHttpInfo(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Observable<HttpInfo<PublicActionDefinition>> {
+        const requestContextPromise = this.requestFactory.create(appId, publicActionDefinitionEgg, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -143,18 +165,26 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns a single custom workflow action with the specified ID.
-     * Get a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Create a new extension definition
      * @param appId 
-     * @param archived Whether to include archived custom actions.
+     * @param publicActionDefinitionEgg 
      */
-    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Observable<ExtensionActionDefinition> {
+    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Observable<PublicActionDefinition> {
+        return this.createWithHttpInfo(appId, publicActionDefinitionEgg, _options).pipe(map((apiResponse: HttpInfo<PublicActionDefinition>) => apiResponse.data));
+    }
+
+    /**
+     * Get extension definition by Id
+     * @param definitionId 
+     * @param appId 
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getByIdWithHttpInfo(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Observable<HttpInfo<PublicActionDefinition>> {
         const requestContextPromise = this.requestFactory.getById(definitionId, appId, archived, _options);
 
         // build promise chain
@@ -169,19 +199,28 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns a list of all custom workflow actions.
-     * Get all custom actions
+     * Get extension definition by Id
+     * @param definitionId 
      * @param appId 
-     * @param limit Maximum number of results per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Whether to include archived custom actions.
+     * @param archived Whether to return only results that have been archived.
      */
-    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponseExtensionActionDefinitionForwardPaging> {
+    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Observable<PublicActionDefinition> {
+        return this.getByIdWithHttpInfo(definitionId, appId, archived, _options).pipe(map((apiResponse: HttpInfo<PublicActionDefinition>) => apiResponse.data));
+    }
+
+    /**
+     * Get paged extension definitions
+     * @param appId 
+     * @param limit The maximum number of results to display per page.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param archived Whether to return only results that have been archived.
+     */
+    public getPageWithHttpInfo(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>> {
         const requestContextPromise = this.requestFactory.getPage(appId, limit, after, archived, _options);
 
         // build promise chain
@@ -196,19 +235,29 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Updates a custom workflow action with new values for the specified fields.
-     * Update a custom action
-     * @param definitionId The ID of the custom workflow action.
+     * Get paged extension definitions
      * @param appId 
-     * @param extensionActionDefinitionPatch The custom workflow action fields to be updated.
+     * @param limit The maximum number of results to display per page.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param archived Whether to return only results that have been archived.
      */
-    public update(definitionId: string, appId: number, extensionActionDefinitionPatch: ExtensionActionDefinitionPatch, _options?: Configuration): Observable<ExtensionActionDefinition> {
-        const requestContextPromise = this.requestFactory.update(definitionId, appId, extensionActionDefinitionPatch, _options);
+    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Observable<CollectionResponsePublicActionDefinitionForwardPaging> {
+        return this.getPageWithHttpInfo(appId, limit, after, archived, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>) => apiResponse.data));
+    }
+
+    /**
+     * Patch an existing extension definition
+     * @param definitionId 
+     * @param appId 
+     * @param publicActionDefinitionPatch 
+     */
+    public updateWithHttpInfo(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Observable<HttpInfo<PublicActionDefinition>> {
+        const requestContextPromise = this.requestFactory.update(definitionId, appId, publicActionDefinitionPatch, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -222,8 +271,18 @@ export class ObservableDefinitionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.update(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Patch an existing extension definition
+     * @param definitionId 
+     * @param appId 
+     * @param publicActionDefinitionPatch 
+     */
+    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Observable<PublicActionDefinition> {
+        return this.updateWithHttpInfo(definitionId, appId, publicActionDefinitionPatch, _options).pipe(map((apiResponse: HttpInfo<PublicActionDefinition>) => apiResponse.data));
     }
 
 }
@@ -245,14 +304,13 @@ export class ObservableFunctionsApi {
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Archive a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(definitionId, functionType, functionId, appId, _options);
 
         // build promise chain
@@ -267,18 +325,28 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
-     * Delete a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Archive a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Observable<void> {
+    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(definitionId, functionType, functionId, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     */
+    public archiveByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archiveByFunctionType(definitionId, functionType, appId, _options);
 
         // build promise chain
@@ -293,20 +361,29 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveByFunctionType(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveByFunctionTypeWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Delete a function for a definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
      */
-    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, body: string, _options?: Configuration): Observable<ActionFunctionIdentifier> {
+    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<void> {
+        return this.archiveByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplaceWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Observable<HttpInfo<PublicActionFunctionIdentifier>> {
         const requestContextPromise = this.requestFactory.createOrReplace(definitionId, functionType, functionId, appId, body, _options);
 
         // build promise chain
@@ -321,19 +398,30 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplace(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplaceWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Creates or replaces a function for a custom workflow action.
-     * Create or replace a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
-     * @param body The function source code. Must be valid JavaScript code.
+     * @param body 
      */
-    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, body: string, _options?: Configuration): Observable<ActionFunctionIdentifier> {
+    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
+        return this.createOrReplaceWithHttpInfo(definitionId, functionType, functionId, appId, body, _options).pipe(map((apiResponse: HttpInfo<PublicActionFunctionIdentifier>) => apiResponse.data));
+    }
+
+    /**
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplaceByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Observable<HttpInfo<PublicActionFunctionIdentifier>> {
         const requestContextPromise = this.requestFactory.createOrReplaceByFunctionType(definitionId, functionType, appId, body, _options);
 
         // build promise chain
@@ -348,18 +436,28 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplaceByFunctionType(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createOrReplaceByFunctionTypeWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
+     * Insert a function for a definition
+     * @param definitionId 
+     * @param functionType 
+     * @param appId 
+     * @param body 
+     */
+    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Observable<PublicActionFunctionIdentifier> {
+        return this.createOrReplaceByFunctionTypeWithHttpInfo(definitionId, functionType, appId, body, _options).pipe(map((apiResponse: HttpInfo<PublicActionFunctionIdentifier>) => apiResponse.data));
+    }
+
+    /**
+     * Get all functions by a type for a given definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', appId: number, _options?: Configuration): Observable<ActionFunction> {
+    public getByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<HttpInfo<PublicActionFunction>> {
         const requestContextPromise = this.requestFactory.getByFunctionType(definitionId, functionType, appId, _options);
 
         // build promise chain
@@ -374,19 +472,28 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByFunctionType(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByFunctionTypeWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns the given function for a custom workflow action.
-     * Get a custom action function
-     * @param definitionId The ID of the custom workflow action.
-     * @param functionType The type of function. This determines when the function will be called.
-     * @param functionId The ID qualifier for the function. This is used to specify which input field a function is associated with for &#x60;PRE_FETCH_OPTIONS&#x60; and &#x60;POST_FETCH_OPTIONS&#x60; function types.
+     * Get all functions by a type for a given definition
+     * @param definitionId 
+     * @param functionType 
      * @param appId 
      */
-    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS', functionId: string, appId: number, _options?: Configuration): Observable<ActionFunction> {
+    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Observable<PublicActionFunction> {
+        return this.getByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options).pipe(map((apiResponse: HttpInfo<PublicActionFunction>) => apiResponse.data));
+    }
+
+    /**
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
+     * @param appId 
+     */
+    public getByIdWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<HttpInfo<PublicActionFunction>> {
         const requestContextPromise = this.requestFactory.getById(definitionId, functionType, functionId, appId, _options);
 
         // build promise chain
@@ -401,17 +508,27 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns a list of all functions that are associated with the given custom workflow action.
-     * Get all custom action functions
-     * @param definitionId The ID of the custom workflow action.
+     * Get a function for a given definition
+     * @param definitionId 
+     * @param functionType 
+     * @param functionId 
      * @param appId 
      */
-    public getPage(definitionId: string, appId: number, _options?: Configuration): Observable<CollectionResponseActionFunctionIdentifierNoPaging> {
+    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Observable<PublicActionFunction> {
+        return this.getByIdWithHttpInfo(definitionId, functionType, functionId, appId, _options).pipe(map((apiResponse: HttpInfo<PublicActionFunction>) => apiResponse.data));
+    }
+
+    /**
+     * Get all functions for a given definition
+     * @param definitionId 
+     * @param appId 
+     */
+    public getPageWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>> {
         const requestContextPromise = this.requestFactory.getPage(definitionId, appId, _options);
 
         // build promise chain
@@ -426,8 +543,17 @@ export class ObservableFunctionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Get all functions for a given definition
+     * @param definitionId 
+     * @param appId 
+     */
+    public getPage(definitionId: string, appId: number, _options?: Configuration): Observable<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
+        return this.getPageWithHttpInfo(definitionId, appId, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>) => apiResponse.data));
     }
 
 }
@@ -449,13 +575,12 @@ export class ObservableRevisionsApi {
     }
 
     /**
-     * Returns the given version of a custom workflow action.
-     * Get a revision for a custom action
-     * @param definitionId The ID of the custom workflow action.
-     * @param revisionId The version of the custom workflow action.
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
      * @param appId 
      */
-    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Observable<ActionRevision> {
+    public getByIdWithHttpInfo(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Observable<HttpInfo<PublicActionRevision>> {
         const requestContextPromise = this.requestFactory.getById(definitionId, revisionId, appId, _options);
 
         // build promise chain
@@ -470,19 +595,28 @@ export class ObservableRevisionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getById(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
             }));
     }
 
     /**
-     * Returns a list of revisions for a custom workflow action.
-     * Get all revisions for a custom action
-     * @param definitionId The ID of the custom workflow action
+     * Gets a revision for a given definition by revision id
+     * @param definitionId 
+     * @param revisionId 
      * @param appId 
-     * @param limit Maximum number of results per page.
+     */
+    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Observable<PublicActionRevision> {
+        return this.getByIdWithHttpInfo(definitionId, revisionId, appId, _options).pipe(map((apiResponse: HttpInfo<PublicActionRevision>) => apiResponse.data));
+    }
+
+    /**
+     * Get all revisions for a given definition
+     * @param definitionId 
+     * @param appId 
+     * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Observable<CollectionResponseActionRevisionForwardPaging> {
+    public getPageWithHttpInfo(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>> {
         const requestContextPromise = this.requestFactory.getPage(definitionId, appId, limit, after, _options);
 
         // build promise chain
@@ -497,8 +631,19 @@ export class ObservableRevisionsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPage(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Get all revisions for a given definition
+     * @param definitionId 
+     * @param appId 
+     * @param limit The maximum number of results to display per page.
+     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     */
+    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Observable<CollectionResponsePublicActionRevisionForwardPaging> {
+        return this.getPageWithHttpInfo(definitionId, appId, limit, after, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>) => apiResponse.data));
     }
 
 }

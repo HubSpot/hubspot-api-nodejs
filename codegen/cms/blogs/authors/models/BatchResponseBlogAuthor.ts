@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Authors
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -17,13 +17,9 @@ import { BlogAuthor } from '../models/BlogAuthor';
 */
 export class BatchResponseBlogAuthor {
     /**
-    * Status of batch operation.
+    * Time of batch operation completion.
     */
-    'status': BatchResponseBlogAuthorStatusEnum;
-    /**
-    * Results of batch operation.
-    */
-    'results': Array<BlogAuthor>;
+    'completedAt': Date;
     /**
     * Time of batch operation request.
     */
@@ -33,28 +29,26 @@ export class BatchResponseBlogAuthor {
     */
     'startedAt': Date;
     /**
-    * Time of batch operation completion.
-    */
-    'completedAt': Date;
-    /**
     * Links associated with batch operation.
     */
     'links'?: { [key: string]: string; };
+    /**
+    * Results of batch operation.
+    */
+    'results': Array<BlogAuthor>;
+    /**
+    * Status of batch operation.
+    */
+    'status': BatchResponseBlogAuthorStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseBlogAuthorStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<BlogAuthor>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requestedAt",
@@ -69,15 +63,21 @@ export class BatchResponseBlogAuthor {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<BlogAuthor>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseBlogAuthorStatusEnum",
             "format": ""
         }    ];
 
@@ -90,5 +90,10 @@ export class BatchResponseBlogAuthor {
 }
 
 
-export type BatchResponseBlogAuthorStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseBlogAuthorStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

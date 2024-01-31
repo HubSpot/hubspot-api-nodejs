@@ -14,41 +14,29 @@ import { PublicAssociationMulti } from '../models/PublicAssociationMulti';
 import { StandardError } from '../models/StandardError';
 
 export class BatchResponsePublicAssociationMultiWithErrors {
-    'status': BatchResponsePublicAssociationMultiWithErrorsStatusEnum;
-    'results': Array<PublicAssociationMulti>;
+    'completedAt': Date;
     'numErrors'?: number;
-    'errors'?: Array<StandardError>;
     'requestedAt'?: Date;
     'startedAt': Date;
-    'completedAt': Date;
     'links'?: { [key: string]: string; };
+    'results': Array<PublicAssociationMulti>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponsePublicAssociationMultiWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponsePublicAssociationMultiWithErrorsStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<PublicAssociationMulti>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -63,15 +51,27 @@ export class BatchResponsePublicAssociationMultiWithErrors {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationMulti>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponsePublicAssociationMultiWithErrorsStatusEnum",
             "format": ""
         }    ];
 
@@ -84,5 +84,10 @@ export class BatchResponsePublicAssociationMultiWithErrors {
 }
 
 
-export type BatchResponsePublicAssociationMultiWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponsePublicAssociationMultiWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

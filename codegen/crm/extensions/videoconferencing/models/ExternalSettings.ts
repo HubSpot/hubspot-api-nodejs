@@ -1,5 +1,5 @@
 /**
- * Video Conference Extension
+ * Video Conferencing Extension
  * These APIs allow you to specify URLs that can be used to interact with a video conferencing application, to allow HubSpot to add video conference links to meeting requests with contacts.
  *
  * OpenAPI spec version: v3
@@ -16,6 +16,11 @@
 */
 export class ExternalSettings {
     /**
+    * The URL that HubSpot will use to verify that a user exists in the video conference application.
+    */
+    'userVerifyUrl'?: string;
+    'fetchAccountsUri'?: string;
+    /**
     * The URL that HubSpot will send requests to create a new video conference.
     */
     'createMeetingUrl': string;
@@ -27,14 +32,22 @@ export class ExternalSettings {
     * The URL that HubSpot will send notifications of meetings that have been deleted in HubSpot.
     */
     'deleteMeetingUrl'?: string;
-    /**
-    * The URL that HubSpot will use to verify that a user exists in the video conference application.
-    */
-    'userVerifyUrl'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "userVerifyUrl",
+            "baseName": "userVerifyUrl",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fetchAccountsUri",
+            "baseName": "fetchAccountsUri",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "createMeetingUrl",
             "baseName": "createMeetingUrl",
@@ -50,12 +63,6 @@ export class ExternalSettings {
         {
             "name": "deleteMeetingUrl",
             "baseName": "deleteMeetingUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "userVerifyUrl",
-            "baseName": "userVerifyUrl",
             "type": "string",
             "format": ""
         }    ];

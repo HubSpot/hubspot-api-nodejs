@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -20,13 +20,13 @@ export class AssociationDefinitionEgg {
     */
     'fromObjectTypeId': string;
     /**
-    * ID of the target object type ID to link to.
-    */
-    'toObjectTypeId': string;
-    /**
     * A unique name for this association.
     */
     'name'?: string;
+    /**
+    * ID of the target object type ID to link to.
+    */
+    'toObjectTypeId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -38,14 +38,14 @@ export class AssociationDefinitionEgg {
             "format": ""
         },
         {
-            "name": "toObjectTypeId",
-            "baseName": "toObjectTypeId",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "toObjectTypeId",
+            "baseName": "toObjectTypeId",
             "type": "string",
             "format": ""
         }    ];

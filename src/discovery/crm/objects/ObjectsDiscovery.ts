@@ -1,5 +1,4 @@
 import {
-  AssociationsApi,
   BasicApi,
   BatchApi,
   createConfiguration,
@@ -27,7 +26,6 @@ import type TasksDiscovery from './tasks/TasksDiscovery'
 import type TaxesDiscovery from './taxes/TaxesDiscovery'
 
 export default class ObjectsDiscovery extends BaseDiscovery {
-  public associationsApi: AssociationsApi
   public basicApi: BasicApi
   public batchApi: BatchApi
   public gdprApi: GDPRApi
@@ -56,7 +54,6 @@ export default class ObjectsDiscovery extends BaseDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.associationsApi = ApiDecoratorService.getInstance().apply<AssociationsApi>(new AssociationsApi(configuration))
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
     this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))

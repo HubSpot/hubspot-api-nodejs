@@ -1,5 +1,5 @@
 /**
- * HubDB endpoints
+ * Hubdb
  * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * OpenAPI spec version: v3
@@ -14,13 +14,21 @@ import { Option } from '../models/Option';
 
 export class ColumnRequest {
     /**
-    * Column Id
+    * The id of another table to which the column refers/points to.
     */
-    'id': number;
+    'foreignTableId'?: number;
     /**
     * Name of the column
     */
     'name': string;
+    /**
+    * Options to choose for select and multi-select columns
+    */
+    'options': Array<Option>;
+    /**
+    * Column Id
+    */
+    'id': number;
     /**
     * Label of the column
     */
@@ -30,14 +38,6 @@ export class ColumnRequest {
     */
     'type': ColumnRequestTypeEnum;
     /**
-    * Options to choose for select and multi-select columns
-    */
-    'options': Array<Option>;
-    /**
-    * The id of another table to which the column refers/points to.
-    */
-    'foreignTableId'?: number;
-    /**
     * The id of the column from another table to which the column refers/points to.
     */
     'foreignColumnId'?: number;
@@ -46,16 +46,28 @@ export class ColumnRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "foreignTableId",
+            "baseName": "foreignTableId",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
             "name": "name",
             "baseName": "name",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<Option>",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "label",
@@ -68,18 +80,6 @@ export class ColumnRequest {
             "baseName": "type",
             "type": "ColumnRequestTypeEnum",
             "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<Option>",
-            "format": ""
-        },
-        {
-            "name": "foreignTableId",
-            "baseName": "foreignTableId",
-            "type": "number",
-            "format": "int64"
         },
         {
             "name": "foreignColumnId",
@@ -97,5 +97,23 @@ export class ColumnRequest {
 }
 
 
-export type ColumnRequestTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" | "FILE" ;
+export enum ColumnRequestTypeEnum {
+    Null = 'NULL',
+    Text = 'TEXT',
+    Number = 'NUMBER',
+    Url = 'URL',
+    Image = 'IMAGE',
+    Select = 'SELECT',
+    Multiselect = 'MULTISELECT',
+    Boolean = 'BOOLEAN',
+    Location = 'LOCATION',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Currency = 'CURRENCY',
+    Richtext = 'RICHTEXT',
+    ForeignId = 'FOREIGN_ID',
+    Video = 'VIDEO',
+    Cta = 'CTA',
+    File = 'FILE'
+}
 

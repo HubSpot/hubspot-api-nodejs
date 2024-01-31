@@ -16,11 +16,11 @@ import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationMulti {
     '_from': PublicObjectId;
+    'paging'?: Paging;
     /**
-    * The IDs of objects that are associated with the object identified by the ID in 'from'.
+    * The IDs of objects that are associated with the object identified by the ID in \'from\'.
     */
     'to': Array<AssociatedId>;
-    'paging'?: Paging;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,15 +32,15 @@ export class PublicAssociationMulti {
             "format": ""
         },
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "Array<AssociatedId>",
-            "format": ""
-        },
-        {
             "name": "paging",
             "baseName": "paging",
             "type": "Paging",
+            "format": ""
+        },
+        {
+            "name": "to",
+            "baseName": "to",
+            "type": "Array<AssociatedId>",
             "format": ""
         }    ];
 

@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -16,13 +16,17 @@
 */
 export class FileUpdateInput {
     /**
-    * New name for the file.
+    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
     */
-    'name'?: string;
+    'access'?: FileUpdateInputAccessEnum;
     /**
     * FolderId where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
     'parentFolderId'?: string;
+    /**
+    * New name for the file.
+    */
+    'name'?: string;
     /**
     * Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
@@ -31,24 +35,26 @@ export class FileUpdateInput {
     * Mark whether the file should be used in new content or not.
     */
     'isUsableInContent'?: boolean;
-    /**
-    * NONE: Do not run any duplicate validation. REJECT: Reject the upload if a duplicate is found. RETURN_EXISTING: If a duplicate file is found, do not upload a new file and return the found duplicate instead. 
-    */
-    'access'?: FileUpdateInputAccessEnum;
     'expiresAt'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "access",
+            "baseName": "access",
+            "type": "FileUpdateInputAccessEnum",
             "format": ""
         },
         {
             "name": "parentFolderId",
             "baseName": "parentFolderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -62,12 +68,6 @@ export class FileUpdateInput {
             "name": "isUsableInContent",
             "baseName": "isUsableInContent",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "access",
-            "baseName": "access",
-            "type": "FileUpdateInputAccessEnum",
             "format": ""
         },
         {
@@ -86,5 +86,12 @@ export class FileUpdateInput {
 }
 
 
-export type FileUpdateInputAccessEnum = "PUBLIC_INDEXABLE" | "PUBLIC_NOT_INDEXABLE" | "HIDDEN_INDEXABLE" | "HIDDEN_NOT_INDEXABLE" | "HIDDEN_PRIVATE" | "PRIVATE" ;
+export enum FileUpdateInputAccessEnum {
+    PublicIndexable = 'PUBLIC_INDEXABLE',
+    PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
+    HiddenIndexable = 'HIDDEN_INDEXABLE',
+    HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
+    HiddenPrivate = 'HIDDEN_PRIVATE',
+    Private = 'PRIVATE'
+}
 

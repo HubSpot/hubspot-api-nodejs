@@ -12,10 +12,10 @@
 
 
 export class Filter {
-    'value'?: string;
     'highValue'?: string;
-    'values'?: Array<string>;
     'propertyName': string;
+    'values'?: Array<string>;
+    'value'?: string;
     /**
     * null
     */
@@ -25,14 +25,14 @@ export class Filter {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "value",
-            "baseName": "value",
+            "name": "highValue",
+            "baseName": "highValue",
             "type": "string",
             "format": ""
         },
         {
-            "name": "highValue",
-            "baseName": "highValue",
+            "name": "propertyName",
+            "baseName": "propertyName",
             "type": "string",
             "format": ""
         },
@@ -43,8 +43,8 @@ export class Filter {
             "format": ""
         },
         {
-            "name": "propertyName",
-            "baseName": "propertyName",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         },
@@ -64,5 +64,19 @@ export class Filter {
 }
 
 
-export type FilterOperatorEnum = "EQ" | "NEQ" | "LT" | "LTE" | "GT" | "GTE" | "BETWEEN" | "IN" | "NOT_IN" | "HAS_PROPERTY" | "NOT_HAS_PROPERTY" | "CONTAINS_TOKEN" | "NOT_CONTAINS_TOKEN" ;
+export enum FilterOperatorEnum {
+    Eq = 'EQ',
+    Neq = 'NEQ',
+    Lt = 'LT',
+    Lte = 'LTE',
+    Gt = 'GT',
+    Gte = 'GTE',
+    Between = 'BETWEEN',
+    In = 'IN',
+    NotIn = 'NOT_IN',
+    HasProperty = 'HAS_PROPERTY',
+    NotHasProperty = 'NOT_HAS_PROPERTY',
+    ContainsToken = 'CONTAINS_TOKEN',
+    NotContainsToken = 'NOT_CONTAINS_TOKEN'
+}
 

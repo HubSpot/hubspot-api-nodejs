@@ -63,5 +63,7 @@ export class PublicIndexedTimePoint {
 }
 
 
-export type PublicIndexedTimePointTimeTypeEnum = "INDEXED" ;
+export enum PublicIndexedTimePointTimeTypeEnum {
+    Indexed = 'INDEXED'
+}
 

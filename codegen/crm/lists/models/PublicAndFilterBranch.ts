@@ -56,5 +56,7 @@ export class PublicAndFilterBranch {
 }
 
 
-export type PublicAndFilterBranchFilterBranchTypeEnum = "AND" ;
+export enum PublicAndFilterBranchFilterBranchTypeEnum {
+    And = 'AND'
+}
 

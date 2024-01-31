@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -15,23 +15,23 @@ import { ColorStop } from '../models/ColorStop';
 import { SideOrCorner } from '../models/SideOrCorner';
 
 export class Gradient {
-    'sideOrCorner': SideOrCorner;
     'angle': Angle;
+    'sideOrCorner': SideOrCorner;
     'colors': Array<ColorStop>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "sideOrCorner",
-            "baseName": "sideOrCorner",
-            "type": "SideOrCorner",
-            "format": ""
-        },
-        {
             "name": "angle",
             "baseName": "angle",
             "type": "Angle",
+            "format": ""
+        },
+        {
+            "name": "sideOrCorner",
+            "baseName": "sideOrCorner",
+            "type": "SideOrCorner",
             "format": ""
         },
         {

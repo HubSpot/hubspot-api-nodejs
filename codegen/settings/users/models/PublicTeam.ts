@@ -1,5 +1,5 @@
 /**
- * Users
+ * Settings User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3
@@ -20,11 +20,11 @@ export class PublicTeam {
     */
     'userIds': Array<string>;
     /**
-    * The team's name
+    * The team\'s name
     */
     'name': string;
     /**
-    * The team's unique ID
+    * The team\'s unique ID
     */
     'id': string;
     /**

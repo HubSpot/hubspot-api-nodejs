@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
@@ -8,6 +9,7 @@ import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePu
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -147,8 +149,26 @@ export class ObjectBasicApi {
      * Archive
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.taskId,  options).toPromise();
+    }
+
+    /**
+     * Move an Object identified by `{taskId}` to the recycling bin.
+     * Archive
+     * @param param the request object
+     */
     public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.taskId,  options).toPromise();
+    }
+
+    /**
+     * Create a task with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard tasks is provided.
+     * Create
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.createWithHttpInfo(param.simplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -165,6 +185,15 @@ export class ObjectBasicApi {
      * Read
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
+        return this.api.getByIdWithHttpInfo(param.taskId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
+    }
+
+    /**
+     * Read an Object identified by `{taskId}`. `{taskId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
+     * Read
+     * @param param the request object
+     */
     public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
         return this.api.getById(param.taskId, param.properties, param.propertiesWithHistory, param.associations, param.archived, param.idProperty,  options).toPromise();
     }
@@ -174,8 +203,26 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
+    public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read a page of tasks. Control what is returned via the `properties` query param.
+     * List
+     * @param param the request object
+     */
     public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.api.getPage(param.limit, param.after, param.properties, param.propertiesWithHistory, param.associations, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Perform a partial update of an Object identified by `{taskId}`. `{taskId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Update
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.updateWithHttpInfo(param.taskId, param.simplePublicObjectInput, param.idProperty,  options).toPromise();
     }
 
     /**
@@ -245,8 +292,24 @@ export class ObjectBatchApi {
      * Archive a batch of tasks by ID
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Archive a batch of tasks by ID
+     * @param param the request object
+     */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.batchInputSimplePublicObjectId,  options).toPromise();
+    }
+
+    /**
+     * Create a batch of tasks
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.createWithHttpInfo(param.batchInputSimplePublicObjectInputForCreate,  options).toPromise();
     }
 
     /**
@@ -261,6 +324,14 @@ export class ObjectBatchApi {
      * Read a batch of tasks by internal ID, or unique property values
      * @param param the request object
      */
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.readWithHttpInfo(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Read a batch of tasks by internal ID, or unique property values
+     * @param param the request object
+     */
     public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.read(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
     }
@@ -269,8 +340,55 @@ export class ObjectBatchApi {
      * Update a batch of tasks
      * @param param the request object
      */
+    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+        return this.api.updateWithHttpInfo(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+    /**
+     * Update a batch of tasks
+     * @param param the request object
+     */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
+    }
+
+}
+
+import { ObservableGDPRApi } from "./ObservableAPI";
+import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
+
+export interface GDPRApiPurgeRequest {
+    /**
+     * 
+     * @type PublicGdprDeleteInput
+     * @memberof GDPRApipurge
+     */
+    publicGdprDeleteInput: PublicGdprDeleteInput
+}
+
+export class ObjectGDPRApi {
+    private api: ObservableGDPRApi
+
+    public constructor(configuration: Configuration, requestFactory?: GDPRApiRequestFactory, responseProcessor?: GDPRApiResponseProcessor) {
+        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param param the request object
+     */
+    public purgeWithHttpInfo(param: GDPRApiPurgeRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.purgeWithHttpInfo(param.publicGdprDeleteInput,  options).toPromise();
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
+     * GDPR DELETE
+     * @param param the request object
+     */
+    public purge(param: GDPRApiPurgeRequest, options?: Configuration): Promise<void> {
+        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
     }
 
 }
@@ -292,6 +410,14 @@ export class ObjectPublicObjectApi {
 
     public constructor(configuration: Configuration, requestFactory?: PublicObjectApiRequestFactory, responseProcessor?: PublicObjectApiResponseProcessor) {
         this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Merge two tasks with same type
+     * @param param the request object
+     */
+    public mergeWithHttpInfo(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+        return this.api.mergeWithHttpInfo(param.publicMergeInput,  options).toPromise();
     }
 
     /**
@@ -321,6 +447,13 @@ export class ObjectSearchApi {
 
     public constructor(configuration: Configuration, requestFactory?: SearchApiRequestFactory, responseProcessor?: SearchApiResponseProcessor) {
         this.api = new ObservableSearchApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+        return this.api.doSearchWithHttpInfo(param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**

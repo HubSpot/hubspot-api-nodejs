@@ -14,9 +14,17 @@ import { OptionInput } from '../models/OptionInput';
 
 export class PropertyCreate {
     /**
-    * The internal property name, which must be used when referencing the property via the API.
+    * If true, the property won\'t be visible and can\'t be used in HubSpot.
     */
-    'name': string;
+    'hidden'?: boolean;
+    /**
+    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property to be displayed after any positive values.
+    */
+    'displayOrder'?: number;
+    /**
+    * A description of the property that will be shown as help text in HubSpot.
+    */
+    'description'?: string;
     /**
     * A human-readable property label that will be shown in HubSpot.
     */
@@ -26,56 +34,60 @@ export class PropertyCreate {
     */
     'type': PropertyCreateTypeEnum;
     /**
-    * Controls how the property appears in HubSpot.
+    * Whether or not the property can be used in a HubSpot form.
     */
-    'fieldType': PropertyCreateFieldTypeEnum;
+    'formField'?: boolean;
     /**
     * The name of the property group the property belongs to.
     */
     'groupName': string;
     /**
-    * A description of the property that will be shown as help text in HubSpot.
+    * Should be set to \'OWNER\' when \'externalOptions\' is true, which causes the property to dynamically pull option values from the current HubSpot users.
     */
-    'description'?: string;
+    'referencedObjectType'?: string;
+    /**
+    * The internal property name, which must be used when referencing the property via the API.
+    */
+    'name': string;
     /**
     * A list of valid options for the property. This field is required for enumerated properties.
     */
     'options'?: Array<OptionInput>;
     /**
-    * Properties are displayed in order starting with the lowest positive integer value. Values of -1 will cause the property to be displayed after any positive values.
-    */
-    'displayOrder'?: number;
-    /**
-    * Whether or not the property's value must be unique. Once set, this can't be changed.
-    */
-    'hasUniqueValue'?: boolean;
-    /**
-    * If true, the property won't be visible and can't be used in HubSpot.
-    */
-    'hidden'?: boolean;
-    /**
-    * Whether or not the property can be used in a HubSpot form.
-    */
-    'formField'?: boolean;
-    /**
-    * Applicable only for 'enumeration' type properties.  Should be set to true in conjunction with a 'referencedObjectType' of 'OWNER'.  Otherwise false.
-    */
-    'externalOptions'?: boolean;
-    /**
-    * Should be set to 'OWNER' when 'externalOptions' is true, which causes the property to dynamically pull option values from the current HubSpot users.
-    */
-    'referencedObjectType'?: string;
-    /**
     * Represents a formula that is used to compute a calculated property.
     */
     'calculationFormula'?: string;
+    /**
+    * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
+    */
+    'hasUniqueValue'?: boolean;
+    /**
+    * Controls how the property appears in HubSpot.
+    */
+    'fieldType': PropertyCreateFieldTypeEnum;
+    /**
+    * Applicable only for \'enumeration\' type properties.  Should be set to true in conjunction with a \'referencedObjectType\' of \'OWNER\'.  Otherwise false.
+    */
+    'externalOptions'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "description",
+            "baseName": "description",
             "type": "string",
             "format": ""
         },
@@ -92,9 +104,9 @@ export class PropertyCreate {
             "format": ""
         },
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "PropertyCreateFieldTypeEnum",
+            "name": "formField",
+            "baseName": "formField",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -104,8 +116,14 @@ export class PropertyCreate {
             "format": ""
         },
         {
-            "name": "description",
-            "baseName": "description",
+            "name": "referencedObjectType",
+            "baseName": "referencedObjectType",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -116,10 +134,10 @@ export class PropertyCreate {
             "format": ""
         },
         {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
+            "name": "calculationFormula",
+            "baseName": "calculationFormula",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "hasUniqueValue",
@@ -128,33 +146,15 @@ export class PropertyCreate {
             "format": ""
         },
         {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "formField",
-            "baseName": "formField",
-            "type": "boolean",
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "PropertyCreateFieldTypeEnum",
             "format": ""
         },
         {
             "name": "externalOptions",
             "baseName": "externalOptions",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "referencedObjectType",
-            "baseName": "referencedObjectType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "calculationFormula",
-            "baseName": "calculationFormula",
-            "type": "string",
             "format": ""
         }    ];
 
@@ -167,6 +167,24 @@ export class PropertyCreate {
 }
 
 
-export type PropertyCreateTypeEnum = "string" | "number" | "date" | "datetime" | "enumeration" | "bool" ;
-export type PropertyCreateFieldTypeEnum = "textarea" | "text" | "date" | "file" | "number" | "select" | "radio" | "checkbox" | "booleancheckbox" | "calculation_equation" ;
+export enum PropertyCreateTypeEnum {
+    String = 'string',
+    Number = 'number',
+    Date = 'date',
+    Datetime = 'datetime',
+    Enumeration = 'enumeration',
+    Bool = 'bool'
+}
+export enum PropertyCreateFieldTypeEnum {
+    Textarea = 'textarea',
+    Text = 'text',
+    Date = 'date',
+    File = 'file',
+    Number = 'number',
+    Select = 'select',
+    Radio = 'radio',
+    Checkbox = 'checkbox',
+    Booleancheckbox = 'booleancheckbox',
+    CalculationEquation = 'calculation_equation'
+}
 

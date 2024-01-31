@@ -1,5 +1,5 @@
 /**
- * Files
+ * Files Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -12,21 +12,21 @@
 
 
 export class NextPage {
-    'after': string;
     'link'?: string;
+    'after': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "after",
-            "baseName": "after",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         },
         {
-            "name": "link",
-            "baseName": "link",
+            "name": "after",
+            "baseName": "after",
             "type": "string",
             "format": ""
         }    ];

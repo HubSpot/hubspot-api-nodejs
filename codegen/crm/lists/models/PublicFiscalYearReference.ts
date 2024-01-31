@@ -75,5 +75,7 @@ export class PublicFiscalYearReference {
 }
 
 
-export type PublicFiscalYearReferenceReferenceTypeEnum = "FISCAL_YEAR" ;
+export enum PublicFiscalYearReferenceReferenceTypeEnum {
+    FiscalYear = 'FISCAL_YEAR'
+}
 

@@ -11,7 +11,6 @@
  */
 
 import { DependentField } from '../models/DependentField';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field consisting of a multiple-line text box.
@@ -22,7 +21,7 @@ export class MultiLineTextField {
     */
     'fieldType': MultiLineTextFieldFieldTypeEnum;
     /**
-    * A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
+    * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
     /**
@@ -42,7 +41,7 @@ export class MultiLineTextField {
     */
     'required': boolean;
     /**
-    * Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
+    * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
@@ -50,7 +49,7 @@ export class MultiLineTextField {
     */
     'dependentFields': Array<DependentField>;
     /**
-    * The prompt text showing when the field isn't filled in.
+    * The prompt text showing when the field isn\'t filled in.
     */
     'placeholder'?: string;
     /**
@@ -131,5 +130,7 @@ export class MultiLineTextField {
 }
 
 
-export type MultiLineTextFieldFieldTypeEnum = "multi_line_text" ;
+export enum MultiLineTextFieldFieldTypeEnum {
+    MultiLineText = 'multi_line_text'
+}
 

@@ -1,5 +1,5 @@
 /**
- * Webhooks API
+ * Webhooks Webhooks
  * Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
  *
  * OpenAPI spec version: v3
@@ -16,10 +16,6 @@
 */
 export class SubscriptionCreateRequest {
     /**
-    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
-    */
-    'eventType': SubscriptionCreateRequestEventTypeEnum;
-    /**
     * The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
     */
     'propertyName'?: string;
@@ -27,16 +23,14 @@ export class SubscriptionCreateRequest {
     * Determines if the subscription is active or paused. Defaults to false.
     */
     'active'?: boolean;
+    /**
+    * Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
+    */
+    'eventType': SubscriptionCreateRequestEventTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "eventType",
-            "baseName": "eventType",
-            "type": "SubscriptionCreateRequestEventTypeEnum",
-            "format": ""
-        },
         {
             "name": "propertyName",
             "baseName": "propertyName",
@@ -47,6 +41,12 @@ export class SubscriptionCreateRequest {
             "name": "active",
             "baseName": "active",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "eventType",
+            "baseName": "eventType",
+            "type": "SubscriptionCreateRequestEventTypeEnum",
             "format": ""
         }    ];
 
@@ -59,5 +59,47 @@ export class SubscriptionCreateRequest {
 }
 
 
-export type SubscriptionCreateRequestEventTypeEnum = "contact.propertyChange" | "company.propertyChange" | "deal.propertyChange" | "ticket.propertyChange" | "product.propertyChange" | "line_item.propertyChange" | "contact.creation" | "contact.deletion" | "contact.privacyDeletion" | "company.creation" | "company.deletion" | "deal.creation" | "deal.deletion" | "ticket.creation" | "ticket.deletion" | "product.creation" | "product.deletion" | "line_item.creation" | "line_item.deletion" | "conversation.creation" | "conversation.deletion" | "conversation.newMessage" | "conversation.privacyDeletion" | "conversation.propertyChange" | "contact.merge" | "company.merge" | "deal.merge" | "ticket.merge" | "product.merge" | "line_item.merge" | "contact.restore" | "company.restore" | "deal.restore" | "ticket.restore" | "product.restore" | "line_item.restore" | "contact.associationChange" | "company.associationChange" | "deal.associationChange" | "ticket.associationChange" | "line_item.associationChange" ;
+export enum SubscriptionCreateRequestEventTypeEnum {
+    ContactPropertyChange = 'contact.propertyChange',
+    CompanyPropertyChange = 'company.propertyChange',
+    DealPropertyChange = 'deal.propertyChange',
+    TicketPropertyChange = 'ticket.propertyChange',
+    ProductPropertyChange = 'product.propertyChange',
+    LineItemPropertyChange = 'line_item.propertyChange',
+    ContactCreation = 'contact.creation',
+    ContactDeletion = 'contact.deletion',
+    ContactPrivacyDeletion = 'contact.privacyDeletion',
+    CompanyCreation = 'company.creation',
+    CompanyDeletion = 'company.deletion',
+    DealCreation = 'deal.creation',
+    DealDeletion = 'deal.deletion',
+    TicketCreation = 'ticket.creation',
+    TicketDeletion = 'ticket.deletion',
+    ProductCreation = 'product.creation',
+    ProductDeletion = 'product.deletion',
+    LineItemCreation = 'line_item.creation',
+    LineItemDeletion = 'line_item.deletion',
+    ConversationCreation = 'conversation.creation',
+    ConversationDeletion = 'conversation.deletion',
+    ConversationNewMessage = 'conversation.newMessage',
+    ConversationPrivacyDeletion = 'conversation.privacyDeletion',
+    ConversationPropertyChange = 'conversation.propertyChange',
+    ContactMerge = 'contact.merge',
+    CompanyMerge = 'company.merge',
+    DealMerge = 'deal.merge',
+    TicketMerge = 'ticket.merge',
+    ProductMerge = 'product.merge',
+    LineItemMerge = 'line_item.merge',
+    ContactRestore = 'contact.restore',
+    CompanyRestore = 'company.restore',
+    DealRestore = 'deal.restore',
+    TicketRestore = 'ticket.restore',
+    ProductRestore = 'product.restore',
+    LineItemRestore = 'line_item.restore',
+    ContactAssociationChange = 'contact.associationChange',
+    CompanyAssociationChange = 'company.associationChange',
+    DealAssociationChange = 'deal.associationChange',
+    TicketAssociationChange = 'ticket.associationChange',
+    LineItemAssociationChange = 'line_item.associationChange'
+}
 

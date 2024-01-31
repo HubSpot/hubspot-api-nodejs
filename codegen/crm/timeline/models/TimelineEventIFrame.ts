@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * CRM Timeline
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -21,13 +21,13 @@ export class TimelineEventIFrame {
     */
     'headerLabel': string;
     /**
-    * The URI of the iframe contents.
-    */
-    'url': string;
-    /**
     * The width of the modal window in pixels.
     */
     'width': number;
+    /**
+    * The URI of the iframe contents.
+    */
+    'url': string;
     /**
     * The height of the modal window in pixels.
     */
@@ -49,16 +49,16 @@ export class TimelineEventIFrame {
             "format": ""
         },
         {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "width",
             "baseName": "width",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "url",
+            "baseName": "url",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "height",

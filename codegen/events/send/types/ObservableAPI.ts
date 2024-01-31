@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -25,7 +25,7 @@ export class ObservableBehavioralEventsTrackingApi {
      * Sends Custom Behavioral Event
      * @param behavioralEventHttpCompletionRequest 
      */
-    public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<void> {
+    public sendWithHttpInfo(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.send(behavioralEventHttpCompletionRequest, _options);
 
         // build promise chain
@@ -40,8 +40,17 @@ export class ObservableBehavioralEventsTrackingApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.send(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sendWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * Endpoint to send an instance of a behavioral event
+     * Sends Custom Behavioral Event
+     * @param behavioralEventHttpCompletionRequest 
+     */
+    public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<void> {
+        return this.sendWithHttpInfo(behavioralEventHttpCompletionRequest, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Tags
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -17,21 +17,25 @@ import { ErrorDetail } from '../models/ErrorDetail';
 */
 export class StandardError {
     /**
-    * Error status.
+    * Error subcategory.
     */
-    'status': string;
+    'subCategory'?: any;
+    /**
+    * Error context.
+    */
+    'context': { [key: string]: Array<string>; };
+    /**
+    * Error links.
+    */
+    'links': { [key: string]: string; };
     /**
     * Error ID.
     */
     'id'?: string;
     /**
-    * Model definition for an error category.
+    * Error category.
     */
-    'category': any;
-    /**
-    * Error subcategory.
-    */
-    'subCategory'?: any;
+    'category': string;
     /**
     * Error message.
     */
@@ -41,21 +45,29 @@ export class StandardError {
     */
     'errors': Array<ErrorDetail>;
     /**
-    * Error context.
+    * Error status.
     */
-    'context': { [key: string]: Array<string>; };
-    /**
-    * Error links.
-    */
-    'links': { [key: string]: string; };
+    'status': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "string",
+            "name": "subCategory",
+            "baseName": "subCategory",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "context",
+            "baseName": "context",
+            "type": "{ [key: string]: Array<string>; }",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
@@ -67,13 +79,7 @@ export class StandardError {
         {
             "name": "category",
             "baseName": "category",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "subCategory",
-            "baseName": "subCategory",
-            "type": "any",
+            "type": "string",
             "format": ""
         },
         {
@@ -89,15 +95,9 @@ export class StandardError {
             "format": ""
         },
         {
-            "name": "context",
-            "baseName": "context",
-            "type": "{ [key: string]: Array<string>; }",
-            "format": ""
-        },
-        {
-            "name": "links",
-            "baseName": "links",
-            "type": "{ [key: string]: string; }",
+            "name": "status",
+            "baseName": "status",
+            "type": "string",
             "format": ""
         }    ];
 

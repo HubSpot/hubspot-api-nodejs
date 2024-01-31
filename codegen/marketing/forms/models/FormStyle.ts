@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
 
 /**
 * Styling options for the form
@@ -150,5 +149,9 @@ export class FormStyle {
 }
 
 
-export type FormStyleSubmitAlignmentEnum = "left" | "right" | "center" ;
+export enum FormStyleSubmitAlignmentEnum {
+    Left = 'left',
+    Right = 'right',
+    Center = 'center'
+}
 

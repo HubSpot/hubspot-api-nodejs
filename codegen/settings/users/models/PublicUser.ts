@@ -1,5 +1,5 @@
 /**
- * Users
+ * Settings User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3
@@ -16,26 +16,26 @@
 */
 export class PublicUser {
     /**
-    * The user's primary team
+    * The user\'s primary team
     */
     'primaryTeamId'?: string;
     'roleIds'?: Array<string>;
     'sendWelcomeEmail'?: boolean;
     /**
-    * The user's role
+    * The user\'s role
     */
     'roleId'?: string;
     /**
-    * The user's additional teams
+    * The user\'s additional teams
     */
     'secondaryTeamIds'?: Array<string>;
     /**
-    * The user's unique ID
+    * The user\'s unique ID
     */
     'id': string;
     'superAdmin'?: boolean;
     /**
-    * The user's email
+    * The user\'s email
     */
     'email': string;
 

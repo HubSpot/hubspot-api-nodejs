@@ -76,6 +76,22 @@ export class PublicEmailEventFilter {
 }
 
 
-export type PublicEmailEventFilterFilterTypeEnum = "EMAIL_EVENT" ;
-export type PublicEmailEventFilterOperatorEnum = "LINK_CLICKED" | "MARKED_SPAM" | "OPENED" | "OPENED_BUT_LINK_NOT_CLICKED" | "OPENED_BUT_NOT_REPLIED" | "REPLIED" | "UNSUBSCRIBED" | "BOUNCED" | "RECEIVED" | "RECEIVED_BUT_NOT_OPENED" | "SENT" | "SENT_BUT_LINK_NOT_CLICKED" | "SENT_BUT_NOT_RECEIVED" ;
+export enum PublicEmailEventFilterFilterTypeEnum {
+    EmailEvent = 'EMAIL_EVENT'
+}
+export enum PublicEmailEventFilterOperatorEnum {
+    LinkClicked = 'LINK_CLICKED',
+    MarkedSpam = 'MARKED_SPAM',
+    Opened = 'OPENED',
+    OpenedButLinkNotClicked = 'OPENED_BUT_LINK_NOT_CLICKED',
+    OpenedButNotReplied = 'OPENED_BUT_NOT_REPLIED',
+    Replied = 'REPLIED',
+    Unsubscribed = 'UNSUBSCRIBED',
+    Bounced = 'BOUNCED',
+    Received = 'RECEIVED',
+    ReceivedButNotOpened = 'RECEIVED_BUT_NOT_OPENED',
+    Sent = 'SENT',
+    SentButLinkNotClicked = 'SENT_BUT_LINK_NOT_CLICKED',
+    SentButNotReceived = 'SENT_BUT_NOT_RECEIVED'
+}
 

@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Authors
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -18,21 +18,13 @@ import { StandardError } from '../models/StandardError';
 */
 export class BatchResponseBlogAuthorWithErrors {
     /**
-    * Status of batch operation.
+    * Time of batch operation completion.
     */
-    'status': BatchResponseBlogAuthorWithErrorsStatusEnum;
-    /**
-    * Results of batch operation.
-    */
-    'results': Array<BlogAuthor>;
+    'completedAt': Date;
     /**
     * Number of errors.
     */
     'numErrors'?: number;
-    /**
-    * Errors in batch operation.
-    */
-    'errors'?: Array<StandardError>;
     /**
     * Time of batch operation request.
     */
@@ -42,40 +34,36 @@ export class BatchResponseBlogAuthorWithErrors {
     */
     'startedAt': Date;
     /**
-    * Time of batch operation completion.
-    */
-    'completedAt': Date;
-    /**
     * Links associated with batch operation.
     */
     'links'?: { [key: string]: string; };
+    /**
+    * Results of batch operation.
+    */
+    'results': Array<BlogAuthor>;
+    /**
+    * Errors in batch operation.
+    */
+    'errors'?: Array<StandardError>;
+    /**
+    * Status of batch operation.
+    */
+    'status': BatchResponseBlogAuthorWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "status",
-            "baseName": "status",
-            "type": "BatchResponseBlogAuthorWithErrorsStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<BlogAuthor>",
-            "format": ""
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "numErrors",
             "baseName": "numErrors",
             "type": "number",
             "format": "int32"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<StandardError>",
-            "format": ""
         },
         {
             "name": "requestedAt",
@@ -90,15 +78,27 @@ export class BatchResponseBlogAuthorWithErrors {
             "format": "date-time"
         },
         {
-            "name": "completedAt",
-            "baseName": "completedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<BlogAuthor>",
+            "format": ""
+        },
+        {
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseBlogAuthorWithErrorsStatusEnum",
             "format": ""
         }    ];
 
@@ -111,5 +111,10 @@ export class BatchResponseBlogAuthorWithErrors {
 }
 
 
-export type BatchResponseBlogAuthorWithErrorsStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseBlogAuthorWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 

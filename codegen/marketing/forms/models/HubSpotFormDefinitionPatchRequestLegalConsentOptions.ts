@@ -11,11 +11,6 @@
  */
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { LegalConsentOptionsExplicitConsentToProcess } from '../models/LegalConsentOptionsExplicitConsentToProcess';
-import { LegalConsentOptionsImplicitConsentToProcess } from '../models/LegalConsentOptionsImplicitConsentToProcess';
-import { LegalConsentOptionsLegitimateInterest } from '../models/LegalConsentOptionsLegitimateInterest';
-import { LegalConsentOptionsNone } from '../models/LegalConsentOptionsNone';
-import { HttpFile } from '../http/http';
 
 export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
     'type': HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum;
@@ -95,6 +90,15 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
 }
 
 
-export type HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum = "implicit_consent_to_process" ;
-export type HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum = "lead" | "client" | "other" ;
+export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum {
+    None = 'none',
+    LegitimateInterest = 'legitimate_interest',
+    ExplicitConsentToProcess = 'explicit_consent_to_process',
+    ImplicitConsentToProcess = 'implicit_consent_to_process'
+}
+export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum {
+    Lead = 'lead',
+    Client = 'client',
+    Other = 'other'
+}
 

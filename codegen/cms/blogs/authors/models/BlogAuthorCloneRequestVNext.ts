@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Authors
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -17,13 +17,13 @@ import { BlogAuthor } from '../models/BlogAuthor';
 */
 export class BlogAuthorCloneRequestVNext {
     /**
-    * ID of the object to be cloned.
-    */
-    'id': string;
-    /**
     * Language of newly cloned object.
     */
     'language'?: string;
+    /**
+    * ID of the object to be cloned.
+    */
+    'id': string;
     /**
     * Primary language in multi-language group.
     */
@@ -34,14 +34,14 @@ export class BlogAuthorCloneRequestVNext {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "language",
+            "baseName": "language",
             "type": "string",
             "format": ""
         },
         {
-            "name": "language",
-            "baseName": "language",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },

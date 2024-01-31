@@ -40,5 +40,7 @@ export class PublicSetOccurrencesRefineBy {
 }
 
 
-export type PublicSetOccurrencesRefineByTypeEnum = "SET_OCCURRENCES" ;
+export enum PublicSetOccurrencesRefineByTypeEnum {
+    SetOccurrences = 'SET_OCCURRENCES'
+}
 

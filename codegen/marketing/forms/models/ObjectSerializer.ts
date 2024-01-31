@@ -19,9 +19,7 @@ export * from '../models/FormStyle';
 export * from '../models/ForwardPaging';
 export * from '../models/HubSpotFormConfiguration';
 export * from '../models/HubSpotFormDefinition';
-export * from '../models/HubSpotFormDefinitionAllOf';
 export * from '../models/HubSpotFormDefinitionCreateRequest';
-export * from '../models/HubSpotFormDefinitionCreateRequestAllOf';
 export * from '../models/HubSpotFormDefinitionPatchRequest';
 export * from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 export * from '../models/LegalConsentCheckbox';
@@ -29,6 +27,7 @@ export * from '../models/LegalConsentOptionsExplicitConsentToProcess';
 export * from '../models/LegalConsentOptionsImplicitConsentToProcess';
 export * from '../models/LegalConsentOptionsLegitimateInterest';
 export * from '../models/LegalConsentOptionsNone';
+export * from '../models/LifecycleStage';
 export * from '../models/MobilePhoneField';
 export * from '../models/ModelError';
 export * from '../models/MultiLineTextField';
@@ -44,49 +43,48 @@ export * from '../models/SingleCheckboxField';
 export * from '../models/SingleLineTextField';
 
 import { CollectionResponseFormDefinitionBaseForwardPaging } from '../models/CollectionResponseFormDefinitionBaseForwardPaging';
-import { CollectionResponseFormDefinitionBaseForwardPagingResultsInner, CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum             } from '../models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner';
-import { DatepickerField, DatepickerFieldFieldTypeEnum            } from '../models/DatepickerField';
+import { CollectionResponseFormDefinitionBaseForwardPagingResultsInner             } from '../models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner';
+import { DatepickerField            } from '../models/DatepickerField';
 import { DependentField } from '../models/DependentField';
-import { DependentFieldDependentField, DependentFieldDependentFieldFieldTypeEnum                 } from '../models/DependentFieldDependentField';
-import { DependentFieldFilter, DependentFieldFilterOperatorEnum       } from '../models/DependentFieldFilter';
-import { DropdownField, DropdownFieldFieldTypeEnum             } from '../models/DropdownField';
-import { EmailField, EmailFieldFieldTypeEnum             } from '../models/EmailField';
+import { DependentFieldDependentField                 } from '../models/DependentFieldDependentField';
+import { DependentFieldFilter       } from '../models/DependentFieldFilter';
+import { DropdownField             } from '../models/DropdownField';
+import { EmailField             } from '../models/EmailField';
 import { EmailFieldValidation } from '../models/EmailFieldValidation';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 import { ErrorDetail } from '../models/ErrorDetail';
-import { FieldGroup, FieldGroupGroupTypeEnum  , FieldGroupRichTextTypeEnum     } from '../models/FieldGroup';
-import { FileField, FileFieldFieldTypeEnum             } from '../models/FileField';
-import { FormDefinitionBase, FormDefinitionBaseFormTypeEnum             } from '../models/FormDefinitionBase';
-import { FormDefinitionCreateRequestBase, FormDefinitionCreateRequestBaseFormTypeEnum            } from '../models/FormDefinitionCreateRequestBase';
-import { FormDisplayOptions  , FormDisplayOptionsThemeEnum     } from '../models/FormDisplayOptions';
-import { FormPostSubmitAction, FormPostSubmitActionTypeEnum    } from '../models/FormPostSubmitAction';
-import { FormStyle        , FormStyleSubmitAlignmentEnum      } from '../models/FormStyle';
+import { FieldGroup     } from '../models/FieldGroup';
+import { FileField             } from '../models/FileField';
+import { FormDefinitionBase             } from '../models/FormDefinitionBase';
+import { FormDefinitionCreateRequestBase            } from '../models/FormDefinitionCreateRequestBase';
+import { FormDisplayOptions       } from '../models/FormDisplayOptions';
+import { FormPostSubmitAction    } from '../models/FormPostSubmitAction';
+import { FormStyle              } from '../models/FormStyle';
 import { ForwardPaging } from '../models/ForwardPaging';
-import { HubSpotFormConfiguration    , HubSpotFormConfigurationLanguageEnum         } from '../models/HubSpotFormConfiguration';
-import { HubSpotFormDefinition, HubSpotFormDefinitionFormTypeEnum             } from '../models/HubSpotFormDefinition';
-import { HubSpotFormDefinitionAllOf, HubSpotFormDefinitionAllOfFormTypeEnum             } from '../models/HubSpotFormDefinitionAllOf';
-import { HubSpotFormDefinitionCreateRequest, HubSpotFormDefinitionCreateRequestFormTypeEnum            } from '../models/HubSpotFormDefinitionCreateRequest';
-import { HubSpotFormDefinitionCreateRequestAllOf, HubSpotFormDefinitionCreateRequestAllOfFormTypeEnum            } from '../models/HubSpotFormDefinitionCreateRequestAllOf';
+import { HubSpotFormConfiguration              } from '../models/HubSpotFormConfiguration';
+import { HubSpotFormDefinition             } from '../models/HubSpotFormDefinition';
+import { HubSpotFormDefinitionCreateRequest            } from '../models/HubSpotFormDefinitionCreateRequest';
 import { HubSpotFormDefinitionPatchRequest } from '../models/HubSpotFormDefinitionPatchRequest';
-import { HubSpotFormDefinitionPatchRequestLegalConsentOptions, HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum   , HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum         } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
+import { HubSpotFormDefinitionPatchRequestLegalConsentOptions         } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { LegalConsentOptionsExplicitConsentToProcess, LegalConsentOptionsExplicitConsentToProcessTypeEnum         } from '../models/LegalConsentOptionsExplicitConsentToProcess';
-import { LegalConsentOptionsImplicitConsentToProcess, LegalConsentOptionsImplicitConsentToProcessTypeEnum       } from '../models/LegalConsentOptionsImplicitConsentToProcess';
-import { LegalConsentOptionsLegitimateInterest, LegalConsentOptionsLegitimateInterestTypeEnum   , LegalConsentOptionsLegitimateInterestLawfulBasisEnum    } from '../models/LegalConsentOptionsLegitimateInterest';
-import { LegalConsentOptionsNone, LegalConsentOptionsNoneTypeEnum   } from '../models/LegalConsentOptionsNone';
-import { MobilePhoneField, MobilePhoneFieldFieldTypeEnum             } from '../models/MobilePhoneField';
+import { LegalConsentOptionsExplicitConsentToProcess         } from '../models/LegalConsentOptionsExplicitConsentToProcess';
+import { LegalConsentOptionsImplicitConsentToProcess       } from '../models/LegalConsentOptionsImplicitConsentToProcess';
+import { LegalConsentOptionsLegitimateInterest    } from '../models/LegalConsentOptionsLegitimateInterest';
+import { LegalConsentOptionsNone   } from '../models/LegalConsentOptionsNone';
+import { LifecycleStage } from '../models/LifecycleStage';
+import { MobilePhoneField             } from '../models/MobilePhoneField';
 import { ModelError } from '../models/ModelError';
-import { MultiLineTextField, MultiLineTextFieldFieldTypeEnum            } from '../models/MultiLineTextField';
-import { MultipleCheckboxesField, MultipleCheckboxesFieldFieldTypeEnum            } from '../models/MultipleCheckboxesField';
+import { MultiLineTextField            } from '../models/MultiLineTextField';
+import { MultipleCheckboxesField            } from '../models/MultipleCheckboxesField';
 import { NextPage } from '../models/NextPage';
-import { NumberField, NumberFieldFieldTypeEnum             } from '../models/NumberField';
+import { NumberField             } from '../models/NumberField';
 import { NumberFieldValidation } from '../models/NumberFieldValidation';
-import { PaymentLinkRadioField, PaymentLinkRadioFieldFieldTypeEnum            } from '../models/PaymentLinkRadioField';
-import { PhoneField, PhoneFieldFieldTypeEnum              } from '../models/PhoneField';
+import { PaymentLinkRadioField            } from '../models/PaymentLinkRadioField';
+import { PhoneField              } from '../models/PhoneField';
 import { PhoneFieldValidation } from '../models/PhoneFieldValidation';
-import { RadioField, RadioFieldFieldTypeEnum             } from '../models/RadioField';
-import { SingleCheckboxField, SingleCheckboxFieldFieldTypeEnum           } from '../models/SingleCheckboxField';
-import { SingleLineTextField, SingleLineTextFieldFieldTypeEnum            } from '../models/SingleLineTextField';
+import { RadioField             } from '../models/RadioField';
+import { SingleCheckboxField           } from '../models/SingleCheckboxField';
+import { SingleLineTextField            } from '../models/SingleLineTextField';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -99,13 +97,6 @@ let primitives = [
                     "number",
                     "any"
                  ];
-
-const supportedMediaTypes: { [mediaType: string]: number } = {
-  "application/json": Infinity,
-  "application/octet-stream": 0,
-  "application/x-www-form-urlencoded": 0
-}
-
 
 let enumsMap: Set<string> = new Set<string>([
     "CollectionResponseFormDefinitionBaseForwardPagingResultsInnerFormTypeEnum",
@@ -124,9 +115,7 @@ let enumsMap: Set<string> = new Set<string>([
     "FormStyleSubmitAlignmentEnum",
     "HubSpotFormConfigurationLanguageEnum",
     "HubSpotFormDefinitionFormTypeEnum",
-    "HubSpotFormDefinitionAllOfFormTypeEnum",
     "HubSpotFormDefinitionCreateRequestFormTypeEnum",
-    "HubSpotFormDefinitionCreateRequestAllOfFormTypeEnum",
     "HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum",
     "HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum",
     "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
@@ -167,9 +156,7 @@ let typeMap: {[index: string]: any} = {
     "ForwardPaging": ForwardPaging,
     "HubSpotFormConfiguration": HubSpotFormConfiguration,
     "HubSpotFormDefinition": HubSpotFormDefinition,
-    "HubSpotFormDefinitionAllOf": HubSpotFormDefinitionAllOf,
     "HubSpotFormDefinitionCreateRequest": HubSpotFormDefinitionCreateRequest,
-    "HubSpotFormDefinitionCreateRequestAllOf": HubSpotFormDefinitionCreateRequestAllOf,
     "HubSpotFormDefinitionPatchRequest": HubSpotFormDefinitionPatchRequest,
     "HubSpotFormDefinitionPatchRequestLegalConsentOptions": HubSpotFormDefinitionPatchRequestLegalConsentOptions,
     "LegalConsentCheckbox": LegalConsentCheckbox,
@@ -177,6 +164,7 @@ let typeMap: {[index: string]: any} = {
     "LegalConsentOptionsImplicitConsentToProcess": LegalConsentOptionsImplicitConsentToProcess,
     "LegalConsentOptionsLegitimateInterest": LegalConsentOptionsLegitimateInterest,
     "LegalConsentOptionsNone": LegalConsentOptionsNone,
+    "LifecycleStage": LifecycleStage,
     "MobilePhoneField": MobilePhoneField,
     "ModelError": ModelError,
     "MultiLineTextField": MultiLineTextField,
@@ -191,6 +179,58 @@ let typeMap: {[index: string]: any} = {
     "SingleCheckboxField": SingleCheckboxField,
     "SingleLineTextField": SingleLineTextField,
 }
+
+type MimeTypeDescriptor = {
+    type: string;
+    subtype: string;
+    subtypeTokens: string[];
+};
+
+/**
+ * Every mime-type consists of a type, subtype, and optional parameters.
+ * The subtype can be composite, including information about the content format.
+ * For example: `application/json-patch+json`, `application/merge-patch+json`.
+ *
+ * This helper transforms a string mime-type into an internal representation.
+ * This simplifies the implementation of predicates that in turn define common rules for parsing or stringifying
+ * the payload.
+ */
+const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
+    const [type, subtype] = mimeType.split('/');
+    return {
+        type,
+        subtype,
+        subtypeTokens: subtype.split('+'),
+    };
+};
+
+type MimeTypePredicate = (mimeType: string) => boolean;
+
+// This factory creates a predicate function that checks a string mime-type against defined rules.
+const mimeTypePredicateFactory = (predicate: (descriptor: MimeTypeDescriptor) => boolean): MimeTypePredicate => (mimeType) => predicate(parseMimeType(mimeType));
+
+// Use this factory when you need to define a simple predicate based only on type and, if applicable, subtype.
+const mimeTypeSimplePredicateFactory = (type: string, subtype?: string): MimeTypePredicate => mimeTypePredicateFactory((descriptor) => {
+    if (descriptor.type !== type) return false;
+    if (subtype != null && descriptor.subtype !== subtype) return false;
+    return true;
+});
+
+// Creating a set of named predicates that will help us determine how to handle different mime-types
+const isTextLikeMimeType = mimeTypeSimplePredicateFactory('text');
+const isJsonMimeType = mimeTypeSimplePredicateFactory('application', 'json');
+const isJsonLikeMimeType = mimeTypePredicateFactory((descriptor) => descriptor.type === 'application' && descriptor.subtypeTokens.some((item) => item === 'json'));
+const isOctetStreamMimeType = mimeTypeSimplePredicateFactory('application', 'octet-stream');
+const isFormUrlencodedMimeType = mimeTypeSimplePredicateFactory('application', 'x-www-form-urlencoded');
+
+// Defining a list of mime-types in the order of prioritization for handling.
+const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
+    isJsonMimeType,
+    isJsonLikeMimeType,
+    isTextLikeMimeType,
+    isOctetStreamMimeType,
+    isFormUrlencodedMimeType,
+];
 
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
@@ -332,36 +372,32 @@ export class ObjectSerializer {
      */
     public static getPreferredMediaType(mediaTypes: Array<string>): string {
         /** According to OAS 3 we should default to json */
-        if (!mediaTypes) {
+        if (mediaTypes.length === 0) {
             return "application/json";
         }
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
-        let selectedMediaType: string | undefined = undefined;
-        let selectedRank: number = -Infinity;
-        for (const mediaType of normalMediaTypes) {
-            if (supportedMediaTypes[mediaType!] > selectedRank) {
-                selectedMediaType = mediaType;
-                selectedRank = supportedMediaTypes[mediaType!];
+
+        for (const predicate of supportedMimeTypePredicatesWithPriority) {
+            for (const mediaType of normalMediaTypes) {
+                if (mediaType != null && predicate(mediaType)) {
+                    return mediaType;
+                }
             }
         }
 
-        if (selectedMediaType === undefined) {
-            throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
-        }
-
-        return selectedMediaType!;
+        throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
     }
 
     /**
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return String(data);
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.stringify(data);
         }
 
@@ -376,16 +412,12 @@ export class ObjectSerializer {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
 
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return rawData;
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.parse(rawData);
-        }
-
-        if (mediaType === "text/html") {
-            return rawData;
         }
 
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");

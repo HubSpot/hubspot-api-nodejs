@@ -16,9 +16,9 @@
 */
 export class PublicSubscriptionStatus {
     /**
-    * The ID for the subscription.
+    * The ID of the brand that the subscription is associated with, if there is one.
     */
-    'id': string;
+    'brandId'?: number;
     /**
     * The name of the subscription.
     */
@@ -28,6 +28,22 @@ export class PublicSubscriptionStatus {
     */
     'description': string;
     /**
+    * The legal reason for the current status of the subscription.
+    */
+    'legalBasis'?: PublicSubscriptionStatusLegalBasisEnum;
+    /**
+    * The name of the preferences group that the subscription is associated with.
+    */
+    'preferenceGroupName'?: string;
+    /**
+    * The ID for the subscription.
+    */
+    'id': string;
+    /**
+    * A more detailed explanation to go with the legal basis.
+    */
+    'legalBasisExplanation'?: string;
+    /**
     * Whether the contact is subscribed.
     */
     'status': PublicSubscriptionStatusStatusEnum;
@@ -35,31 +51,15 @@ export class PublicSubscriptionStatus {
     * Where the status is determined from e.g. PORTAL_WIDE_STATUS if the contact opted out from the portal.
     */
     'sourceOfStatus': PublicSubscriptionStatusSourceOfStatusEnum;
-    /**
-    * The ID of the brand that the subscription is associated with, if there is one.
-    */
-    'brandId'?: number;
-    /**
-    * The name of the preferences group that the subscription is associated with.
-    */
-    'preferenceGroupName'?: string;
-    /**
-    * The legal reason for the current status of the subscription.
-    */
-    'legalBasis'?: PublicSubscriptionStatusLegalBasisEnum;
-    /**
-    * A more detailed explanation to go with the legal basis.
-    */
-    'legalBasisExplanation'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
+            "name": "brandId",
+            "baseName": "brandId",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "name",
@@ -74,6 +74,30 @@ export class PublicSubscriptionStatus {
             "format": ""
         },
         {
+            "name": "legalBasis",
+            "baseName": "legalBasis",
+            "type": "PublicSubscriptionStatusLegalBasisEnum",
+            "format": ""
+        },
+        {
+            "name": "preferenceGroupName",
+            "baseName": "preferenceGroupName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "legalBasisExplanation",
+            "baseName": "legalBasisExplanation",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "status",
             "baseName": "status",
             "type": "PublicSubscriptionStatusStatusEnum",
@@ -83,30 +107,6 @@ export class PublicSubscriptionStatus {
             "name": "sourceOfStatus",
             "baseName": "sourceOfStatus",
             "type": "PublicSubscriptionStatusSourceOfStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "brandId",
-            "baseName": "brandId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "preferenceGroupName",
-            "baseName": "preferenceGroupName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "legalBasis",
-            "baseName": "legalBasis",
-            "type": "PublicSubscriptionStatusLegalBasisEnum",
-            "format": ""
-        },
-        {
-            "name": "legalBasisExplanation",
-            "baseName": "legalBasisExplanation",
-            "type": "string",
             "format": ""
         }    ];
 
@@ -119,7 +119,22 @@ export class PublicSubscriptionStatus {
 }
 
 
-export type PublicSubscriptionStatusStatusEnum = "SUBSCRIBED" | "NOT_SUBSCRIBED" ;
-export type PublicSubscriptionStatusSourceOfStatusEnum = "PORTAL_WIDE_STATUS" | "BRAND_WIDE_STATUS" | "SUBSCRIPTION_STATUS" ;
-export type PublicSubscriptionStatusLegalBasisEnum = "LEGITIMATE_INTEREST_PQL" | "LEGITIMATE_INTEREST_CLIENT" | "PERFORMANCE_OF_CONTRACT" | "CONSENT_WITH_NOTICE" | "NON_GDPR" | "PROCESS_AND_STORE" | "LEGITIMATE_INTEREST_OTHER" ;
+export enum PublicSubscriptionStatusLegalBasisEnum {
+    LegitimateInterestPql = 'LEGITIMATE_INTEREST_PQL',
+    LegitimateInterestClient = 'LEGITIMATE_INTEREST_CLIENT',
+    PerformanceOfContract = 'PERFORMANCE_OF_CONTRACT',
+    ConsentWithNotice = 'CONSENT_WITH_NOTICE',
+    NonGdpr = 'NON_GDPR',
+    ProcessAndStore = 'PROCESS_AND_STORE',
+    LegitimateInterestOther = 'LEGITIMATE_INTEREST_OTHER'
+}
+export enum PublicSubscriptionStatusStatusEnum {
+    Subscribed = 'SUBSCRIBED',
+    NotSubscribed = 'NOT_SUBSCRIBED'
+}
+export enum PublicSubscriptionStatusSourceOfStatusEnum {
+    PortalWideStatus = 'PORTAL_WIDE_STATUS',
+    BrandWideStatus = 'BRAND_WIDE_STATUS',
+    SubscriptionStatus = 'SUBSCRIPTION_STATUS'
+}
 

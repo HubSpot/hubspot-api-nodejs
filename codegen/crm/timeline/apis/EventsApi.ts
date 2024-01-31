@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -21,7 +21,7 @@ import { TimelineEventResponse } from '../models/TimelineEventResponse';
 export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don't exist.
+     * Creates an instance of a timeline event based on an event template. Once created, this event is immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
      * Create a single event
      * @param timelineEvent The timeline event definition.
      */
@@ -69,7 +69,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don't exist.
+     * Creates multiple instances of timeline events based on an event template. Once created, these event are immutable on the object timeline and cannot be modified. If the event template was configured to update object properties via `objectPropertyName`, this call will also attempt to updates those properties, or add them if they don\'t exist.
      * Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
@@ -163,7 +163,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn't found in the event, it will be ignored and we'll render without it.
+     * This will take the `detailTemplate` from the event template and return an object rendering the specified event. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
      * Gets the detailTemplate as rendered
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
@@ -209,11 +209,11 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn't found in the event, it will be ignored and we'll render without it.
+     * This will take either the `headerTemplate` or `detailTemplate` from the event template and render for the specified event as HTML. If the template references `extraData` that isn\'t found in the event, it will be ignored and we\'ll render without it.
      * Renders the header or detail as HTML
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
-     * @param detail Set to &#39;true&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
+     * @param detail Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
      */
     public async getRenderById(eventTemplateId: string, eventId: string, detail?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -272,14 +272,14 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<TimelineEventResponse > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<TimelineEventResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: TimelineEventResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventResponse", ""
             ) as TimelineEventResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -295,7 +295,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventResponse", ""
             ) as TimelineEventResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -308,24 +308,24 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to createBatch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createBatch(response: ResponseContext): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors > {
+     public async createBatchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: BatchResponseTimelineEventResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTimelineEventResponse", ""
             ) as BatchResponseTimelineEventResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
             const body: BatchResponseTimelineEventResponseWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTimelineEventResponseWithErrors", ""
             ) as BatchResponseTimelineEventResponseWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -341,7 +341,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors", ""
             ) as BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -354,14 +354,14 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<TimelineEventResponse > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<TimelineEventResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: TimelineEventResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventResponse", ""
             ) as TimelineEventResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -377,7 +377,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "TimelineEventResponse", ""
             ) as TimelineEventResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -390,14 +390,14 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to getDetailById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getDetailById(response: ResponseContext): Promise<EventDetail > {
+     public async getDetailByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<EventDetail >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: EventDetail = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "EventDetail", ""
             ) as EventDetail;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -413,7 +413,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "EventDetail", ""
             ) as EventDetail;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -426,14 +426,14 @@ export class EventsApiResponseProcessor {
      * @params response Response returned by the server for a request to getRenderById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getRenderById(response: ResponseContext): Promise<string > {
+     public async getRenderByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<string >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: string = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "string", ""
             ) as string;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -449,7 +449,7 @@ export class EventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "string", ""
             ) as string;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

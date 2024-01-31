@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -248,10 +248,10 @@ export class PublicSmtpTokensApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveToken
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveToken(response: ResponseContext): Promise<void > {
+     public async archiveTokenWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -267,7 +267,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -280,14 +280,14 @@ export class PublicSmtpTokensApiResponseProcessor {
      * @params response Response returned by the server for a request to createToken
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createToken(response: ResponseContext): Promise<SmtpApiTokenView > {
+     public async createTokenWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SmtpApiTokenView >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: SmtpApiTokenView = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -303,7 +303,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -316,14 +316,14 @@ export class PublicSmtpTokensApiResponseProcessor {
      * @params response Response returned by the server for a request to getTokenById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getTokenById(response: ResponseContext): Promise<SmtpApiTokenView > {
+     public async getTokenByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SmtpApiTokenView >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SmtpApiTokenView = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -339,7 +339,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -352,14 +352,14 @@ export class PublicSmtpTokensApiResponseProcessor {
      * @params response Response returned by the server for a request to getTokensPage
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getTokensPage(response: ResponseContext): Promise<CollectionResponseSmtpApiTokenViewForwardPaging > {
+     public async getTokensPageWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseSmtpApiTokenViewForwardPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseSmtpApiTokenViewForwardPaging", ""
             ) as CollectionResponseSmtpApiTokenViewForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -375,7 +375,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseSmtpApiTokenViewForwardPaging", ""
             ) as CollectionResponseSmtpApiTokenViewForwardPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -388,14 +388,14 @@ export class PublicSmtpTokensApiResponseProcessor {
      * @params response Response returned by the server for a request to resetPassword
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async resetPassword(response: ResponseContext): Promise<SmtpApiTokenView > {
+     public async resetPasswordWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SmtpApiTokenView >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SmtpApiTokenView = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -411,7 +411,7 @@ export class PublicSmtpTokensApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SmtpApiTokenView", ""
             ) as SmtpApiTokenView;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

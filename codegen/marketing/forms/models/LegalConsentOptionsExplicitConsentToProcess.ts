@@ -11,7 +11,6 @@
  */
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
-import { HttpFile } from '../http/http';
 
 export class LegalConsentOptionsExplicitConsentToProcess {
     'type': LegalConsentOptionsExplicitConsentToProcessTypeEnum;
@@ -77,5 +76,7 @@ export class LegalConsentOptionsExplicitConsentToProcess {
 }
 
 
-export type LegalConsentOptionsExplicitConsentToProcessTypeEnum = "explicit_consent_to_process" ;
+export enum LegalConsentOptionsExplicitConsentToProcessTypeEnum {
+    ExplicitConsentToProcess = 'explicit_consent_to_process'
+}
 

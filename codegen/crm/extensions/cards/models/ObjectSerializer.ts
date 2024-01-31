@@ -1,15 +1,14 @@
 export * from '../models/ActionConfirmationBody';
 export * from '../models/ActionHookActionBody';
 export * from '../models/CardActions';
+export * from '../models/CardAuditResponse';
 export * from '../models/CardCreateRequest';
 export * from '../models/CardDisplayBody';
 export * from '../models/CardDisplayProperty';
 export * from '../models/CardFetchBody';
 export * from '../models/CardFetchBodyPatch';
-export * from '../models/CardListResponse';
 export * from '../models/CardObjectTypeBody';
 export * from '../models/CardPatchRequest';
-export * from '../models/CardResponse';
 export * from '../models/DisplayOption';
 export * from '../models/ErrorDetail';
 export * from '../models/IFrameActionBody';
@@ -18,20 +17,22 @@ export * from '../models/IntegratorObjectResult';
 export * from '../models/IntegratorObjectResultActionsInner';
 export * from '../models/ModelError';
 export * from '../models/ObjectToken';
+export * from '../models/PublicCardFetchBody';
+export * from '../models/PublicCardListResponse';
+export * from '../models/PublicCardResponse';
 export * from '../models/TopLevelActions';
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 import { ActionHookActionBody      } from '../models/ActionHookActionBody';
 import { CardActions } from '../models/CardActions';
+import { CardAuditResponse      } from '../models/CardAuditResponse';
 import { CardCreateRequest } from '../models/CardCreateRequest';
 import { CardDisplayBody } from '../models/CardDisplayBody';
 import { CardDisplayProperty      } from '../models/CardDisplayProperty';
-import { CardFetchBody } from '../models/CardFetchBody';
-import { CardFetchBodyPatch } from '../models/CardFetchBodyPatch';
-import { CardListResponse } from '../models/CardListResponse';
+import { CardFetchBody      } from '../models/CardFetchBody';
+import { CardFetchBodyPatch      } from '../models/CardFetchBodyPatch';
 import { CardObjectTypeBody    } from '../models/CardObjectTypeBody';
 import { CardPatchRequest } from '../models/CardPatchRequest';
-import { CardResponse } from '../models/CardResponse';
 import { DisplayOption     } from '../models/DisplayOption';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { IFrameActionBody        } from '../models/IFrameActionBody';
@@ -40,6 +41,9 @@ import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
 import { IntegratorObjectResultActionsInner        } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
 import { ObjectToken      } from '../models/ObjectToken';
+import { PublicCardFetchBody } from '../models/PublicCardFetchBody';
+import { PublicCardListResponse } from '../models/PublicCardListResponse';
+import { PublicCardResponse } from '../models/PublicCardResponse';
 import { TopLevelActions } from '../models/TopLevelActions';
 
 /* tslint:disable:no-unused-variable */
@@ -54,17 +58,14 @@ let primitives = [
                     "any"
                  ];
 
-const supportedMediaTypes: { [mediaType: string]: number } = {
-  "application/json": Infinity,
-  "application/octet-stream": 0,
-  "application/x-www-form-urlencoded": 0
-}
-
-
 let enumsMap: Set<string> = new Set<string>([
     "ActionHookActionBodyTypeEnum",
     "ActionHookActionBodyHttpMethodEnum",
+    "CardAuditResponseActionTypeEnum",
+    "CardAuditResponseAuthSourceEnum",
     "CardDisplayPropertyDataTypeEnum",
+    "CardFetchBodyCardTypeEnum",
+    "CardFetchBodyPatchCardTypeEnum",
     "CardObjectTypeBodyNameEnum",
     "DisplayOptionTypeEnum",
     "IFrameActionBodyTypeEnum",
@@ -78,15 +79,14 @@ let typeMap: {[index: string]: any} = {
     "ActionConfirmationBody": ActionConfirmationBody,
     "ActionHookActionBody": ActionHookActionBody,
     "CardActions": CardActions,
+    "CardAuditResponse": CardAuditResponse,
     "CardCreateRequest": CardCreateRequest,
     "CardDisplayBody": CardDisplayBody,
     "CardDisplayProperty": CardDisplayProperty,
     "CardFetchBody": CardFetchBody,
     "CardFetchBodyPatch": CardFetchBodyPatch,
-    "CardListResponse": CardListResponse,
     "CardObjectTypeBody": CardObjectTypeBody,
     "CardPatchRequest": CardPatchRequest,
-    "CardResponse": CardResponse,
     "DisplayOption": DisplayOption,
     "ErrorDetail": ErrorDetail,
     "IFrameActionBody": IFrameActionBody,
@@ -95,8 +95,63 @@ let typeMap: {[index: string]: any} = {
     "IntegratorObjectResultActionsInner": IntegratorObjectResultActionsInner,
     "ModelError": ModelError,
     "ObjectToken": ObjectToken,
+    "PublicCardFetchBody": PublicCardFetchBody,
+    "PublicCardListResponse": PublicCardListResponse,
+    "PublicCardResponse": PublicCardResponse,
     "TopLevelActions": TopLevelActions,
 }
+
+type MimeTypeDescriptor = {
+    type: string;
+    subtype: string;
+    subtypeTokens: string[];
+};
+
+/**
+ * Every mime-type consists of a type, subtype, and optional parameters.
+ * The subtype can be composite, including information about the content format.
+ * For example: `application/json-patch+json`, `application/merge-patch+json`.
+ *
+ * This helper transforms a string mime-type into an internal representation.
+ * This simplifies the implementation of predicates that in turn define common rules for parsing or stringifying
+ * the payload.
+ */
+const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
+    const [type, subtype] = mimeType.split('/');
+    return {
+        type,
+        subtype,
+        subtypeTokens: subtype.split('+'),
+    };
+};
+
+type MimeTypePredicate = (mimeType: string) => boolean;
+
+// This factory creates a predicate function that checks a string mime-type against defined rules.
+const mimeTypePredicateFactory = (predicate: (descriptor: MimeTypeDescriptor) => boolean): MimeTypePredicate => (mimeType) => predicate(parseMimeType(mimeType));
+
+// Use this factory when you need to define a simple predicate based only on type and, if applicable, subtype.
+const mimeTypeSimplePredicateFactory = (type: string, subtype?: string): MimeTypePredicate => mimeTypePredicateFactory((descriptor) => {
+    if (descriptor.type !== type) return false;
+    if (subtype != null && descriptor.subtype !== subtype) return false;
+    return true;
+});
+
+// Creating a set of named predicates that will help us determine how to handle different mime-types
+const isTextLikeMimeType = mimeTypeSimplePredicateFactory('text');
+const isJsonMimeType = mimeTypeSimplePredicateFactory('application', 'json');
+const isJsonLikeMimeType = mimeTypePredicateFactory((descriptor) => descriptor.type === 'application' && descriptor.subtypeTokens.some((item) => item === 'json'));
+const isOctetStreamMimeType = mimeTypeSimplePredicateFactory('application', 'octet-stream');
+const isFormUrlencodedMimeType = mimeTypeSimplePredicateFactory('application', 'x-www-form-urlencoded');
+
+// Defining a list of mime-types in the order of prioritization for handling.
+const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
+    isJsonMimeType,
+    isJsonLikeMimeType,
+    isTextLikeMimeType,
+    isOctetStreamMimeType,
+    isFormUrlencodedMimeType,
+];
 
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
@@ -238,36 +293,32 @@ export class ObjectSerializer {
      */
     public static getPreferredMediaType(mediaTypes: Array<string>): string {
         /** According to OAS 3 we should default to json */
-        if (!mediaTypes) {
+        if (mediaTypes.length === 0) {
             return "application/json";
         }
 
         const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
-        let selectedMediaType: string | undefined = undefined;
-        let selectedRank: number = -Infinity;
-        for (const mediaType of normalMediaTypes) {
-            if (supportedMediaTypes[mediaType!] > selectedRank) {
-                selectedMediaType = mediaType;
-                selectedRank = supportedMediaTypes[mediaType!];
+
+        for (const predicate of supportedMimeTypePredicatesWithPriority) {
+            for (const mediaType of normalMediaTypes) {
+                if (mediaType != null && predicate(mediaType)) {
+                    return mediaType;
+                }
             }
         }
 
-        if (selectedMediaType === undefined) {
-            throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
-        }
-
-        return selectedMediaType!;
+        throw new Error("None of the given media types are supported: " + mediaTypes.join(", "));
     }
 
     /**
      * Convert data to a string according the given media type
      */
     public static stringify(data: any, mediaType: string): string {
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return String(data);
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.stringify(data);
         }
 
@@ -282,16 +333,12 @@ export class ObjectSerializer {
             throw new Error("Cannot parse content. No Content-Type defined.");
         }
 
-        if (mediaType === "text/plain") {
+        if (isTextLikeMimeType(mediaType)) {
             return rawData;
         }
 
-        if (mediaType === "application/json") {
+        if (isJsonLikeMimeType(mediaType)) {
             return JSON.parse(rawData);
-        }
-
-        if (mediaType === "text/html") {
-            return rawData;
         }
 
         throw new Error("The mediaType " + mediaType + " is not supported by ObjectSerializer.parse.");

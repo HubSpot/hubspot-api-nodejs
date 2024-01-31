@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
@@ -7,37 +8,49 @@ import { EventsApiRequestFactory, EventsApiResponseProcessor} from "../apis/Even
 
 export interface EventsApiGetPageRequest {
     /**
-     * The starting time as an ISO 8601 timestamp.
-     * @type Date
-     * @memberof EventsApigetPage
-     */
-    occurredAfter?: Date
-    /**
-     * The ending time as an ISO 8601 timestamp.
-     * @type Date
-     * @memberof EventsApigetPage
-     */
-    occurredBefore?: Date
-    /**
-     * The type of object being selected. Valid values are hubspot named object types (e.g. &#x60;contact&#x60;).
+     * 
      * @type string
      * @memberof EventsApigetPage
      */
     objectType?: string
     /**
-     * The id of the selected object. If not present, then the &#x60;objectProperty&#x60; parameter is required.
-     * @type number
-     * @memberof EventsApigetPage
-     */
-    objectId?: number
-    /**
-     * Limits the response to the specified event type.  For example &#x60;&amp;eventType&#x3D;e_visited_page&#x60; returns only &#x60;e_visited_page&#x60; events.  If not present all event types are returned.
+     * 
      * @type string
      * @memberof EventsApigetPage
      */
     eventType?: string
     /**
-     * An additional parameter that may be used to get the next &#x60;limit&#x60; set of results.
+     * 
+     * @type Date
+     * @memberof EventsApigetPage
+     */
+    occurredAfter?: Date
+    /**
+     * 
+     * @type Date
+     * @memberof EventsApigetPage
+     */
+    occurredBefore?: Date
+    /**
+     * 
+     * @type number
+     * @memberof EventsApigetPage
+     */
+    objectId?: number
+    /**
+     * 
+     * @type string
+     * @memberof EventsApigetPage
+     */
+    indexTableName?: string
+    /**
+     * 
+     * @type string
+     * @memberof EventsApigetPage
+     */
+    indexSpecificMetadata?: string
+    /**
+     * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @type string
      * @memberof EventsApigetPage
      */
@@ -49,17 +62,35 @@ export interface EventsApiGetPageRequest {
      */
     before?: string
     /**
-     * The maximum number of events to return, defaults to 20.
+     * The maximum number of results to display per page.
      * @type number
      * @memberof EventsApigetPage
      */
     limit?: number
     /**
-     * Selects the sort field and order. Defaults to ascending, prefix with &#x60;-&#x60; for descending order. &#x60;occurredAt&#x60; is the only field supported for sorting.
+     * 
      * @type Array&lt;string&gt;
      * @memberof EventsApigetPage
      */
     sort?: Array<string>
+    /**
+     * 
+     * @type any
+     * @memberof EventsApigetPage
+     */
+    objectPropertyPropname?: any
+    /**
+     * 
+     * @type any
+     * @memberof EventsApigetPage
+     */
+    propertyPropname?: any
+    /**
+     * 
+     * @type Array&lt;string&gt;
+     * @memberof EventsApigetPage
+     */
+    id?: Array<string>
 }
 
 export class ObjectEventsApi {
@@ -70,11 +101,17 @@ export class ObjectEventsApi {
     }
 
     /**
-     * Returns a collection of events matching a query.
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: EventsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseExternalUnifiedEvent>> {
+        return this.api.getPageWithHttpInfo(param.objectType, param.eventType, param.occurredAfter, param.occurredBefore, param.objectId, param.indexTableName, param.indexSpecificMetadata, param.after, param.before, param.limit, param.sort, param.objectPropertyPropname, param.propertyPropname, param.id,  options).toPromise();
+    }
+
+    /**
      * @param param the request object
      */
     public getPage(param: EventsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseExternalUnifiedEvent> {
-        return this.api.getPage(param.occurredAfter, param.occurredBefore, param.objectType, param.objectId, param.eventType, param.after, param.before, param.limit, param.sort,  options).toPromise();
+        return this.api.getPage(param.objectType, param.eventType, param.occurredAfter, param.occurredBefore, param.objectId, param.indexTableName, param.indexSpecificMetadata, param.after, param.before, param.limit, param.sort, param.objectPropertyPropname, param.propertyPropname, param.id,  options).toPromise();
     }
 
 }

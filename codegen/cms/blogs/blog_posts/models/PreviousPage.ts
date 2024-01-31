@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -15,7 +15,13 @@
 * Model definition for a previous page
 */
 export class PreviousPage {
+    /**
+    * 
+    */
     'before': string;
+    /**
+    * 
+    */
     'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;

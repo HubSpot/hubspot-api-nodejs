@@ -68,5 +68,7 @@ export class PublicCommunicationSubscriptionFilter {
 }
 
 
-export type PublicCommunicationSubscriptionFilterFilterTypeEnum = "COMMUNICATION_SUBSCRIPTION" ;
+export enum PublicCommunicationSubscriptionFilterFilterTypeEnum {
+    CommunicationSubscription = 'COMMUNICATION_SUBSCRIPTION'
+}
 

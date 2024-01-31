@@ -60,5 +60,11 @@ export class IndexedData {
 }
 
 
-export type IndexedDataTypeEnum = "LANDING_PAGE" | "BLOG_POST" | "SITE_PAGE" | "KNOWLEDGE_ARTICLE" | "LISTING_PAGE" ;
+export enum IndexedDataTypeEnum {
+    LandingPage = 'LANDING_PAGE',
+    BlogPost = 'BLOG_POST',
+    SitePage = 'SITE_PAGE',
+    KnowledgeArticle = 'KNOWLEDGE_ARTICLE',
+    ListingPage = 'LISTING_PAGE'
+}
 

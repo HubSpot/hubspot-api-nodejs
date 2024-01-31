@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -16,34 +16,34 @@
 */
 export class RGBAColor {
     /**
+    * Alpha.
+    */
+    'a': number;
+    /**
     * Red.
     */
     'r': number;
-    /**
-    * Green.
-    */
-    'g': number;
     /**
     * Blue.
     */
     'b': number;
     /**
-    * Alpha.
+    * Green.
     */
-    'a': number;
+    'g': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "r",
-            "baseName": "r",
+            "name": "a",
+            "baseName": "a",
             "type": "number",
-            "format": "int32"
+            "format": ""
         },
         {
-            "name": "g",
-            "baseName": "g",
+            "name": "r",
+            "baseName": "r",
             "type": "number",
             "format": "int32"
         },
@@ -54,10 +54,10 @@ export class RGBAColor {
             "format": "int32"
         },
         {
-            "name": "a",
-            "baseName": "a",
+            "name": "g",
+            "baseName": "g",
             "type": "number",
-            "format": ""
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

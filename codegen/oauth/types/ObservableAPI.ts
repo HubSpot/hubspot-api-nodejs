@@ -1,4 +1,4 @@
-import { ResponseContext, RequestContext } from '../http/http';
+import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
@@ -25,7 +25,7 @@ export class ObservableAccessTokensApi {
     /**
      * @param token 
      */
-    public get(token: string, _options?: Configuration): Observable<AccessTokenInfoResponse> {
+    public getWithHttpInfo(token: string, _options?: Configuration): Observable<HttpInfo<AccessTokenInfoResponse>> {
         const requestContextPromise = this.requestFactory.get(token, _options);
 
         // build promise chain
@@ -40,8 +40,15 @@ export class ObservableAccessTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param token 
+     */
+    public get(token: string, _options?: Configuration): Observable<AccessTokenInfoResponse> {
+        return this.getWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<AccessTokenInfoResponse>) => apiResponse.data));
     }
 
 }
@@ -65,7 +72,7 @@ export class ObservableRefreshTokensApi {
     /**
      * @param token 
      */
-    public archive(token: string, _options?: Configuration): Observable<void> {
+    public archiveWithHttpInfo(token: string, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(token, _options);
 
         // build promise chain
@@ -80,14 +87,21 @@ export class ObservableRefreshTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archive(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
             }));
     }
 
     /**
      * @param token 
      */
-    public get(token: string, _options?: Configuration): Observable<RefreshTokenInfoResponse> {
+    public archive(token: string, _options?: Configuration): Observable<void> {
+        return this.archiveWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * @param token 
+     */
+    public getWithHttpInfo(token: string, _options?: Configuration): Observable<HttpInfo<RefreshTokenInfoResponse>> {
         const requestContextPromise = this.requestFactory.get(token, _options);
 
         // build promise chain
@@ -102,8 +116,15 @@ export class ObservableRefreshTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.get(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param token 
+     */
+    public get(token: string, _options?: Configuration): Observable<RefreshTokenInfoResponse> {
+        return this.getWithHttpInfo(token, _options).pipe(map((apiResponse: HttpInfo<RefreshTokenInfoResponse>) => apiResponse.data));
     }
 
 }
@@ -132,7 +153,7 @@ export class ObservableTokensApi {
      * @param clientSecret 
      * @param refreshToken 
      */
-    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Observable<TokenResponseIF> {
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Observable<HttpInfo<TokenResponseIF>> {
         const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options);
 
         // build promise chain
@@ -147,8 +168,20 @@ export class ObservableTokensApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.create(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
             }));
+    }
+
+    /**
+     * @param grantType 
+     * @param code 
+     * @param redirectUri 
+     * @param clientId 
+     * @param clientSecret 
+     * @param refreshToken 
+     */
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Observable<TokenResponseIF> {
+        return this.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options).pipe(map((apiResponse: HttpInfo<TokenResponseIF>) => apiResponse.data));
     }
 
 }

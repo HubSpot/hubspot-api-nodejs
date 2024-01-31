@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -9,9 +9,9 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { CardCreateRequest } from '../models/CardCreateRequest';
-import { CardListResponse } from '../models/CardListResponse';
 import { CardPatchRequest } from '../models/CardPatchRequest';
-import { CardResponse } from '../models/CardResponse';
+import { PublicCardListResponse } from '../models/PublicCardListResponse';
+import { PublicCardResponse } from '../models/PublicCardResponse';
 
 /**
  * no description
@@ -19,19 +19,13 @@ import { CardResponse } from '../models/CardResponse';
 export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
+     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can\'t be undone.
      * Delete a card
-     * @param appId The ID of the target app.
      * @param cardId The ID of the card to delete.
+     * @param appId The ID of the target app.
      */
-    public async archive(appId: number, cardId: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(cardId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("CardsApi", "archive", "appId");
-        }
-
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
@@ -39,10 +33,16 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("CardsApi", "archive", "appId");
+        }
+
+
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
+        const localVarPath = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
@@ -86,7 +86,7 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/{appId}'
+        const localVarPath = '/crm/v3/extensions/cards-dev/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
         // Make Request Context
@@ -135,7 +135,7 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/{appId}'
+        const localVarPath = '/crm/v3/extensions/cards-dev/{appId}'
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
         // Make Request Context
@@ -161,17 +161,11 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns the definition for a card with the given ID.
      * Get a card.
-     * @param appId The ID of the target app.
      * @param cardId The ID of the target card.
+     * @param appId The ID of the target app.
      */
-    public async getById(appId: number, cardId: string, _options?: Configuration): Promise<RequestContext> {
+    public async getById(cardId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("CardsApi", "getById", "appId");
-        }
-
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
@@ -179,10 +173,16 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("CardsApi", "getById", "appId");
+        }
+
+
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
+        const localVarPath = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -207,22 +207,22 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Update a card definition with new details.
      * Update a card
-     * @param appId The ID of the target app.
      * @param cardId The ID of the card to update.
+     * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public async update(appId: number, cardId: string, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<RequestContext> {
+    public async update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
-
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("CardsApi", "update", "appId");
-        }
-
 
         // verify required parameter 'cardId' is not null or undefined
         if (cardId === null || cardId === undefined) {
             throw new RequiredError("CardsApi", "update", "cardId");
+        }
+
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("CardsApi", "update", "appId");
         }
 
 
@@ -233,9 +233,9 @@ export class CardsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/extensions/cards/{appId}/{cardId}'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)))
-            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)));
+        const localVarPath = '/crm/v3/extensions/cards-dev/{appId}/{cardId}'
+            .replace('{' + 'cardId' + '}', encodeURIComponent(String(cardId)))
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
@@ -279,10 +279,10 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -298,7 +298,7 @@ export class CardsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -311,14 +311,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<CardResponse > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -330,11 +330,11 @@ export class CardsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -347,14 +347,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CardListResponse > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardListResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CardListResponse = ObjectSerializer.deserialize(
+            const body: PublicCardListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardListResponse", ""
-            ) as CardListResponse;
-            return body;
+                "PublicCardListResponse", ""
+            ) as PublicCardListResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -366,11 +366,11 @@ export class CardsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CardListResponse = ObjectSerializer.deserialize(
+            const body: PublicCardListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardListResponse", ""
-            ) as CardListResponse;
-            return body;
+                "PublicCardListResponse", ""
+            ) as PublicCardListResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -383,14 +383,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<CardResponse > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -402,11 +402,11 @@ export class CardsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -419,14 +419,14 @@ export class CardsApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<CardResponse > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicCardResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -438,11 +438,11 @@ export class CardsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CardResponse = ObjectSerializer.deserialize(
+            const body: PublicCardResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CardResponse", ""
-            ) as CardResponse;
-            return body;
+                "PublicCardResponse", ""
+            ) as PublicCardResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

@@ -61,5 +61,7 @@ export class PublicComparativePropertyUpdatedOperation {
 }
 
 
-export type PublicComparativePropertyUpdatedOperationOperationTypeEnum = "COMPARATIVE_PROPERTY_UPDATED" ;
+export enum PublicComparativePropertyUpdatedOperationOperationTypeEnum {
+    ComparativePropertyUpdated = 'COMPARATIVE_PROPERTY_UPDATED'
+}
 

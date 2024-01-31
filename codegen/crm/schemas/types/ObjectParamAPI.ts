@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AssociationDefinition } from '../models/AssociationDefinition';
@@ -110,8 +111,26 @@ export class ObjectCoreApi {
      * Delete a schema
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: CoreApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectType, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
+     * Delete a schema
+     * @param param the request object
+     */
     public archive(param: CoreApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectType, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Removes an existing association from a schema.
+     * Remove an association
+     * @param param the request object
+     */
+    public archiveAssociationWithHttpInfo(param: CoreApiArchiveAssociationRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveAssociationWithHttpInfo(param.objectType, param.associationIdentifier,  options).toPromise();
     }
 
     /**
@@ -128,17 +147,44 @@ export class ObjectCoreApi {
      * Create a new schema
      * @param param the request object
      */
+    public createWithHttpInfo(param: CoreApiCreateRequest, options?: Configuration): Promise<HttpInfo<ObjectSchema>> {
+        return this.api.createWithHttpInfo(param.objectSchemaEgg,  options).toPromise();
+    }
+
+    /**
+     * Define a new object schema, along with custom properties and associations. The entire object schema, including its object type ID, properties, and associations will be returned in the response.
+     * Create a new schema
+     * @param param the request object
+     */
     public create(param: CoreApiCreateRequest, options?: Configuration): Promise<ObjectSchema> {
         return this.api.create(param.objectSchemaEgg,  options).toPromise();
     }
 
     /**
-     * Defines a new association between the primary schema's object type and other object types.
+     * Defines a new association between the primary schema\'s object type and other object types.
+     * Create an association
+     * @param param the request object
+     */
+    public createAssociationWithHttpInfo(param: CoreApiCreateAssociationRequest, options?: Configuration): Promise<HttpInfo<AssociationDefinition>> {
+        return this.api.createAssociationWithHttpInfo(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    }
+
+    /**
+     * Defines a new association between the primary schema\'s object type and other object types.
      * Create an association
      * @param param the request object
      */
     public createAssociation(param: CoreApiCreateAssociationRequest, options?: Configuration): Promise<AssociationDefinition> {
         return this.api.createAssociation(param.objectType, param.associationDefinitionEgg,  options).toPromise();
+    }
+
+    /**
+     * Returns all object schemas that have been defined for your account.
+     * Get all schemas
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: CoreApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
+        return this.api.getAllWithHttpInfo(param.archived,  options).toPromise();
     }
 
     /**
@@ -155,8 +201,26 @@ export class ObjectCoreApi {
      * Get an existing schema
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: CoreApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<ObjectSchema>> {
+        return this.api.getByIdWithHttpInfo(param.objectType,  options).toPromise();
+    }
+
+    /**
+     * Returns an existing object schema.
+     * Get an existing schema
+     * @param param the request object
+     */
     public getById(param: CoreApiGetByIdRequest, options?: Configuration): Promise<ObjectSchema> {
         return this.api.getById(param.objectType,  options).toPromise();
+    }
+
+    /**
+     * Update the details for an existing object schema.
+     * Update a schema
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: CoreApiUpdateRequest, options?: Configuration): Promise<HttpInfo<ObjectTypeDefinition>> {
+        return this.api.updateWithHttpInfo(param.objectType, param.objectTypeDefinitionPatch,  options).toPromise();
     }
 
     /**
@@ -187,6 +251,13 @@ export class ObjectPublicObjectSchemasApi {
 
     public constructor(configuration: Configuration, requestFactory?: PublicObjectSchemasApiRequestFactory, responseProcessor?: PublicObjectSchemasApiResponseProcessor) {
         this.api = new ObservablePublicObjectSchemasApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * @param param the request object
+     */
+    public purgeWithHttpInfo(param: PublicObjectSchemasApiPurgeRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.purgeWithHttpInfo(param.objectType,  options).toPromise();
     }
 
     /**

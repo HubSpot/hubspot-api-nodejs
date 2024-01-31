@@ -41,5 +41,7 @@ export class PublicAdsTimeFilter {
 }
 
 
-export type PublicAdsTimeFilterFilterTypeEnum = "ADS_TIME" ;
+export enum PublicAdsTimeFilterFilterTypeEnum {
+    AdsTime = 'ADS_TIME'
+}
 

@@ -1,6 +1,6 @@
 /**
  * Accounting Extension
- * These APIs allow you to interact with HubSpot's Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
+ * These APIs allow you to interact with HubSpot\'s Accounting Extension. It allows you to: * Specify the URLs that HubSpot will use when making webhook requests to your external accounting system. * Respond to webhook calls made to your external accounting system by HubSpot 
  *
  * OpenAPI spec version: v3
  * 
@@ -24,7 +24,7 @@ export class UpdatedContact {
     */
     'updatedAt': Date;
     /**
-    * The customer's email address
+    * The customer\'s email address
     */
     'emailAddress': string;
     /**
@@ -79,6 +79,13 @@ export class UpdatedContact {
 }
 
 
-export type UpdatedContactSyncActionEnum = "CREATE" | "UPDATE" | "DELETE" ;
-export type UpdatedContactCustomerTypeEnum = "CONTACT" | "COMPANY" ;
+export enum UpdatedContactSyncActionEnum {
+    Create = 'CREATE',
+    Update = 'UPDATE',
+    Delete = 'DELETE'
+}
+export enum UpdatedContactCustomerTypeEnum {
+    Contact = 'CONTACT',
+    Company = 'COMPANY'
+}
 

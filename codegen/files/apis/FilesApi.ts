@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import  FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
@@ -163,7 +163,7 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
      * @param extension Search files by given extension.
      * @param url Search for given URL
      * @param isUsableInContent If true shows files that have been marked to be used in new content. It false shows files that should not be used in new content.
-     * @param allowsAnonymousAccess If &#39;true&#39; will show private files; if &#39;false&#39; will show public files
+     * @param allowsAnonymousAccess If \&#39;true\&#39; will show private files; if \&#39;false\&#39; will show public files
      */
     public async doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, id?: string, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderId?: number, size?: number, height?: number, width?: number, encoding?: string, type?: string, extension?: string, url?: string, isUsableInContent?: boolean, allowsAnonymousAccess?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -669,8 +669,8 @@ export class FilesApiRequestFactory extends BaseAPIRequestFactory {
      * Upload a single file with content specified in request body.
      * Upload file
      * @param file File to be uploaded.
-     * @param folderId Either &#39;folderId&#39; or &#39;folderPath&#39; is required. folderId is the ID of the folder the file will be uploaded to.
-     * @param folderPath Either &#39;folderPath&#39; or &#39;folderId&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn&#39;t exist, the system will try to create one.
+     * @param folderId Either \\\&#39;folderId\\\&#39; or \\\&#39;folderPath\\\&#39; is required. folderId is the ID of the folder the file will be uploaded to.
+     * @param folderPath Either \\\&#39;folderPath\\\&#39; or \\\&#39;folderId\\\&#39; is required. This field represents the destination folder path for the uploaded file. If a path doesn\\\&#39;t exist, the system will try to create one.
      * @param fileName Desired name for the uploaded file.
      * @param charsetHunch Character set of the uploaded file.
      * @param options JSON string representing FileUploadOptions.
@@ -765,10 +765,10 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -784,7 +784,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -797,10 +797,10 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to archiveGDPR
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archiveGDPR(response: ResponseContext): Promise<void > {
+     public async archiveGDPRWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -816,7 +816,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -829,14 +829,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to checkImport
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async checkImport(response: ResponseContext): Promise<FileActionResponse > {
+     public async checkImportWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FileActionResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: FileActionResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FileActionResponse", ""
             ) as FileActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -852,7 +852,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FileActionResponse", ""
             ) as FileActionResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -865,14 +865,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to doSearch
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async doSearch(response: ResponseContext): Promise<CollectionResponseFile > {
+     public async doSearchWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseFile >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponseFile = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseFile", ""
             ) as CollectionResponseFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -888,7 +888,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponseFile", ""
             ) as CollectionResponseFile;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -901,14 +901,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<any > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -924,7 +924,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -937,14 +937,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to getMetadata
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getMetadata(response: ResponseContext): Promise<FileStat > {
+     public async getMetadataWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FileStat >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: FileStat = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FileStat", ""
             ) as FileStat;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -960,7 +960,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "FileStat", ""
             ) as FileStat;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -973,14 +973,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to getSignedUrl
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getSignedUrl(response: ResponseContext): Promise<SignedUrl > {
+     public async getSignedUrlWithHttpInfo(response: ResponseContext): Promise<HttpInfo<SignedUrl >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: SignedUrl = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SignedUrl", ""
             ) as SignedUrl;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -996,7 +996,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "SignedUrl", ""
             ) as SignedUrl;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1009,14 +1009,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to importFromUrl
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async importFromUrl(response: ResponseContext): Promise<ImportFromUrlTaskLocator > {
+     public async importFromUrlWithHttpInfo(response: ResponseContext): Promise<HttpInfo<ImportFromUrlTaskLocator >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
             const body: ImportFromUrlTaskLocator = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ImportFromUrlTaskLocator", ""
             ) as ImportFromUrlTaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1032,7 +1032,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "ImportFromUrlTaskLocator", ""
             ) as ImportFromUrlTaskLocator;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1045,14 +1045,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to replace
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async replace(response: ResponseContext): Promise<any > {
+     public async replaceWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1068,7 +1068,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1081,14 +1081,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to updateProperties
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateProperties(response: ResponseContext): Promise<any > {
+     public async updatePropertiesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1104,7 +1104,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -1117,14 +1117,14 @@ export class FilesApiResponseProcessor {
      * @params response Response returned by the server for a request to upload
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async upload(response: ResponseContext): Promise<any > {
+     public async uploadWithHttpInfo(response: ResponseContext): Promise<HttpInfo<any >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -1140,7 +1140,7 @@ export class FilesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

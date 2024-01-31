@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -16,26 +16,26 @@
 */
 export class ObjectTypeDefinitionLabels {
     /**
-    * The word for one object. (There’s no way to change this later.)
-    */
-    'singular'?: string;
-    /**
     * The word for multiple objects. (There’s no way to change this later.)
     */
     'plural'?: string;
+    /**
+    * The word for one object. (There’s no way to change this later.)
+    */
+    'singular'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "singular",
-            "baseName": "singular",
+            "name": "plural",
+            "baseName": "plural",
             "type": "string",
             "format": ""
         },
         {
-            "name": "plural",
-            "baseName": "plural",
+            "name": "singular",
+            "baseName": "singular",
             "type": "string",
             "format": ""
         }    ];

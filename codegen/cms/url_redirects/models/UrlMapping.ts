@@ -1,5 +1,5 @@
 /**
- * URL redirects
+ * CMS Url Redirects
  * URL redirect operations
  *
  * OpenAPI spec version: v3
@@ -13,71 +13,59 @@
 
 export class UrlMapping {
     /**
-    * The unique ID of this URL redirect.
+    * Whether a trailing slash will be ignored.
     */
-    'id': string;
-    /**
-    * The target incoming URL, path, or pattern to match for redirection.
-    */
-    'routePrefix': string;
-    /**
-    * The destination URL, where the target URL should be redirected if it matches the `routePrefix`.
-    */
-    'destination': string;
+    'isTrailingSlashOptional': boolean;
     /**
     * The type of redirect to create. Options include: 301 (permanent), 302 (temporary), or 305 (proxy). Find more details [here](https://knowledge.hubspot.com/cos-general/how-to-redirect-a-hubspot-page).
     */
     'redirectStyle': number;
     /**
-    * Whether the URL redirect mapping should apply only if a live page on the URL isn't found. If False, the URL redirect mapping will take precedence over any existing page.
+    * Whether the `routePrefix` should match on the entire URL path, including the query string.
     */
-    'isOnlyAfterNotFound': boolean;
+    'isMatchQueryString': boolean;
+    'created'?: Date;
     /**
     * Whether the `routePrefix` should match on the entire URL, including the domain.
     */
     'isMatchFullUrl': boolean;
     /**
-    * Whether the `routePrefix` should match on the entire URL path, including the query string.
+    * The destination URL, where the target URL should be redirected if it matches the `routePrefix`.
     */
-    'isMatchQueryString': boolean;
+    'destination': string;
+    /**
+    * Whether the URL redirect mapping should apply only if a live page on the URL isn\'t found. If False, the URL redirect mapping will take precedence over any existing page.
+    */
+    'isOnlyAfterNotFound': boolean;
     /**
     * Whether the `routePrefix` should match based on pattern.
     */
     'isPattern': boolean;
     /**
-    * Whether a trailing slash will be ignored.
+    * Used to prioritize URL redirection. If a given URL matches more than one redirect, the one with the **lower** precedence will be used.
     */
-    'isTrailingSlashOptional': boolean;
+    'precedence': number;
+    /**
+    * The target incoming URL, path, or pattern to match for redirection.
+    */
+    'routePrefix': string;
     /**
     * Whether the `routePrefix` should match both HTTP and HTTPS protocols.
     */
     'isProtocolAgnostic': boolean;
     /**
-    * Used to prioritize URL redirection. If a given URL matches more than one redirect, the one with the **lower** precedence will be used.
+    * The unique ID of this URL redirect.
     */
-    'precedence': number;
-    'created'?: Date;
+    'id': string;
     'updated'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "routePrefix",
-            "baseName": "routePrefix",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "destination",
-            "baseName": "destination",
-            "type": "string",
+            "name": "isTrailingSlashOptional",
+            "baseName": "isTrailingSlashOptional",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -87,10 +75,16 @@ export class UrlMapping {
             "format": "int32"
         },
         {
-            "name": "isOnlyAfterNotFound",
-            "baseName": "isOnlyAfterNotFound",
+            "name": "isMatchQueryString",
+            "baseName": "isMatchQueryString",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "created",
+            "baseName": "created",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "isMatchFullUrl",
@@ -99,8 +93,14 @@ export class UrlMapping {
             "format": ""
         },
         {
-            "name": "isMatchQueryString",
-            "baseName": "isMatchQueryString",
+            "name": "destination",
+            "baseName": "destination",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "isOnlyAfterNotFound",
+            "baseName": "isOnlyAfterNotFound",
             "type": "boolean",
             "format": ""
         },
@@ -111,9 +111,15 @@ export class UrlMapping {
             "format": ""
         },
         {
-            "name": "isTrailingSlashOptional",
-            "baseName": "isTrailingSlashOptional",
-            "type": "boolean",
+            "name": "precedence",
+            "baseName": "precedence",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "routePrefix",
+            "baseName": "routePrefix",
+            "type": "string",
             "format": ""
         },
         {
@@ -123,16 +129,10 @@ export class UrlMapping {
             "format": ""
         },
         {
-            "name": "precedence",
-            "baseName": "precedence",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "created",
-            "baseName": "created",
-            "type": "Date",
-            "format": "date-time"
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "updated",

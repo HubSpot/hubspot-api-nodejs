@@ -1,27 +1,28 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { CardCreateRequest } from '../models/CardCreateRequest';
-import { CardListResponse } from '../models/CardListResponse';
 import { CardPatchRequest } from '../models/CardPatchRequest';
-import { CardResponse } from '../models/CardResponse';
 import { IntegratorCardPayloadResponse } from '../models/IntegratorCardPayloadResponse';
+import { PublicCardListResponse } from '../models/PublicCardListResponse';
+import { PublicCardResponse } from '../models/PublicCardResponse';
 
 import { ObservableCardsApi } from "./ObservableAPI";
 import { CardsApiRequestFactory, CardsApiResponseProcessor} from "../apis/CardsApi";
 
 export interface CardsApiArchiveRequest {
     /**
-     * The ID of the target app.
-     * @type number
-     * @memberof CardsApiarchive
-     */
-    appId: number
-    /**
      * The ID of the card to delete.
      * @type string
      * @memberof CardsApiarchive
      */
     cardId: string
+    /**
+     * The ID of the target app.
+     * @type number
+     * @memberof CardsApiarchive
+     */
+    appId: number
 }
 
 export interface CardsApiCreateRequest {
@@ -50,32 +51,32 @@ export interface CardsApiGetAllRequest {
 
 export interface CardsApiGetByIdRequest {
     /**
-     * The ID of the target app.
-     * @type number
-     * @memberof CardsApigetById
-     */
-    appId: number
-    /**
      * The ID of the target card.
      * @type string
      * @memberof CardsApigetById
      */
     cardId: string
-}
-
-export interface CardsApiUpdateRequest {
     /**
      * The ID of the target app.
      * @type number
-     * @memberof CardsApiupdate
+     * @memberof CardsApigetById
      */
     appId: number
+}
+
+export interface CardsApiUpdateRequest {
     /**
      * The ID of the card to update.
      * @type string
      * @memberof CardsApiupdate
      */
     cardId: string
+    /**
+     * The ID of the target app.
+     * @type number
+     * @memberof CardsApiupdate
+     */
+    appId: number
     /**
      * Card definition fields to be updated.
      * @type CardPatchRequest
@@ -92,12 +93,21 @@ export class ObjectCardsApi {
     }
 
     /**
-     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
+     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can\'t be undone.
+     * Delete a card
+     * @param param the request object
+     */
+    public archiveWithHttpInfo(param: CardsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.cardId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can\'t be undone.
      * Delete a card
      * @param param the request object
      */
     public archive(param: CardsApiArchiveRequest, options?: Configuration): Promise<void> {
-        return this.api.archive(param.appId, param.cardId,  options).toPromise();
+        return this.api.archive(param.cardId, param.appId,  options).toPromise();
     }
 
     /**
@@ -105,7 +115,16 @@ export class ObjectCardsApi {
      * Create a new card
      * @param param the request object
      */
-    public create(param: CardsApiCreateRequest, options?: Configuration): Promise<CardResponse> {
+    public createWithHttpInfo(param: CardsApiCreateRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+        return this.api.createWithHttpInfo(param.appId, param.cardCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Defines a new card that will become active on an account when this app is installed.
+     * Create a new card
+     * @param param the request object
+     */
+    public create(param: CardsApiCreateRequest, options?: Configuration): Promise<PublicCardResponse> {
         return this.api.create(param.appId, param.cardCreateRequest,  options).toPromise();
     }
 
@@ -114,7 +133,16 @@ export class ObjectCardsApi {
      * Get all cards
      * @param param the request object
      */
-    public getAll(param: CardsApiGetAllRequest, options?: Configuration): Promise<CardListResponse> {
+    public getAllWithHttpInfo(param: CardsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<PublicCardListResponse>> {
+        return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
+    }
+
+    /**
+     * Returns a list of cards for a given app.
+     * Get all cards
+     * @param param the request object
+     */
+    public getAll(param: CardsApiGetAllRequest, options?: Configuration): Promise<PublicCardListResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -123,8 +151,17 @@ export class ObjectCardsApi {
      * Get a card.
      * @param param the request object
      */
-    public getById(param: CardsApiGetByIdRequest, options?: Configuration): Promise<CardResponse> {
-        return this.api.getById(param.appId, param.cardId,  options).toPromise();
+    public getByIdWithHttpInfo(param: CardsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+        return this.api.getByIdWithHttpInfo(param.cardId, param.appId,  options).toPromise();
+    }
+
+    /**
+     * Returns the definition for a card with the given ID.
+     * Get a card.
+     * @param param the request object
+     */
+    public getById(param: CardsApiGetByIdRequest, options?: Configuration): Promise<PublicCardResponse> {
+        return this.api.getById(param.cardId, param.appId,  options).toPromise();
     }
 
     /**
@@ -132,8 +169,17 @@ export class ObjectCardsApi {
      * Update a card
      * @param param the request object
      */
-    public update(param: CardsApiUpdateRequest, options?: Configuration): Promise<CardResponse> {
-        return this.api.update(param.appId, param.cardId, param.cardPatchRequest,  options).toPromise();
+    public updateWithHttpInfo(param: CardsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+        return this.api.updateWithHttpInfo(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Update a card definition with new details.
+     * Update a card
+     * @param param the request object
+     */
+    public update(param: CardsApiUpdateRequest, options?: Configuration): Promise<PublicCardResponse> {
+        return this.api.update(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
     }
 
 }
@@ -149,6 +195,15 @@ export class ObjectSampleResponseApi {
 
     public constructor(configuration: Configuration, requestFactory?: SampleResponseApiRequestFactory, responseProcessor?: SampleResponseApiResponseProcessor) {
         this.api = new ObservableSampleResponseApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
+     * Get sample card detail response
+     * @param param the request object
+     */
+    public getCardsSampleResponseWithHttpInfo(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: Configuration): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
+        return this.api.getCardsSampleResponseWithHttpInfo( options).toPromise();
     }
 
     /**

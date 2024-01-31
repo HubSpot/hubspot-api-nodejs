@@ -1,6 +1,6 @@
 /**
- * Timeline events
- * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You'll find multiple use cases for this API in the sections below.
+ * CRM Timeline
+ * This feature allows an app to create and configure custom events that can show up in the timelines of certain CRM objects like contacts, companies, tickets, or deals. You\'ll find multiple use cases for this API in the sections below.
  *
  * OpenAPI spec version: v3
  * 
@@ -17,6 +17,10 @@ import { TimelineEventTemplateTokenOption } from '../models/TimelineEventTemplat
 */
 export class TimelineEventTemplateTokenUpdateRequest {
     /**
+    * If type is `enumeration`, we should have a list of options to choose from.
+    */
+    'options'?: Array<TimelineEventTemplateTokenOption>;
+    /**
     * Used for list segmentation and reporting.
     */
     'label': string;
@@ -24,14 +28,16 @@ export class TimelineEventTemplateTokenUpdateRequest {
     * The name of the CRM object property. This will populate the CRM object property associated with the event. With enough of these, you can fully build CRM objects via the Timeline API.
     */
     'objectPropertyName'?: string;
-    /**
-    * If type is `enumeration`, we should have a list of options to choose from.
-    */
-    'options'?: Array<TimelineEventTemplateTokenOption>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<TimelineEventTemplateTokenOption>",
+            "format": ""
+        },
         {
             "name": "label",
             "baseName": "label",
@@ -42,12 +48,6 @@ export class TimelineEventTemplateTokenUpdateRequest {
             "name": "objectPropertyName",
             "baseName": "objectPropertyName",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<TimelineEventTemplateTokenOption>",
             "format": ""
         }    ];
 

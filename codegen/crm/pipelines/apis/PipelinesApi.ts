@@ -1,7 +1,7 @@
 // TODO: better import syntax?
 import {BaseAPIRequestFactory, RequiredError} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpInfo} from '../http/http';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import { isCodeInRange} from '../util';
@@ -24,8 +24,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param objectType 
      * @param pipelineId 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async archive(objectType: string, pipelineId: string, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -41,6 +42,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -53,6 +55,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 
@@ -218,8 +225,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param pipelineInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async replace(objectType: string, pipelineId: string, pipelineInput: PipelineInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -241,6 +249,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -253,6 +262,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 
@@ -289,8 +303,9 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
      * @param pipelineId 
      * @param pipelinePatchInput 
      * @param validateReferencesBeforeDelete 
+     * @param validateDealStageUsagesBeforeDelete 
      */
-    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async update(objectType: string, pipelineId: string, pipelinePatchInput: PipelinePatchInput, validateReferencesBeforeDelete?: boolean, validateDealStageUsagesBeforeDelete?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -312,6 +327,7 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/crm/v3/pipelines/{objectType}/{pipelineId}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
@@ -324,6 +340,11 @@ export class PipelinesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (validateReferencesBeforeDelete !== undefined) {
             requestContext.setQueryParam("validateReferencesBeforeDelete", ObjectSerializer.serialize(validateReferencesBeforeDelete, "boolean", ""));
+        }
+
+        // Query Params
+        if (validateDealStageUsagesBeforeDelete !== undefined) {
+            requestContext.setQueryParam("validateDealStageUsagesBeforeDelete", ObjectSerializer.serialize(validateDealStageUsagesBeforeDelete, "boolean", ""));
         }
 
 
@@ -364,10 +385,10 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to archive
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async archive(response: ResponseContext): Promise<void > {
+     public async archiveWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -383,7 +404,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -396,14 +417,14 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async create(response: ResponseContext): Promise<Pipeline > {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Pipeline >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: Pipeline = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -419,7 +440,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -432,14 +453,14 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAll(response: ResponseContext): Promise<CollectionResponsePipelineNoPaging > {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponsePipelineNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: CollectionResponsePipelineNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePipelineNoPaging", ""
             ) as CollectionResponsePipelineNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -455,7 +476,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "CollectionResponsePipelineNoPaging", ""
             ) as CollectionResponsePipelineNoPaging;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -468,14 +489,14 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to getById
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getById(response: ResponseContext): Promise<Pipeline > {
+     public async getByIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Pipeline >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Pipeline = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -491,7 +512,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -504,14 +525,14 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to replace
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async replace(response: ResponseContext): Promise<Pipeline > {
+     public async replaceWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Pipeline >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Pipeline = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -527,7 +548,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
@@ -540,14 +561,14 @@ export class PipelinesApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async update(response: ResponseContext): Promise<Pipeline > {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Pipeline >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Pipeline = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -563,7 +584,7 @@ export class PipelinesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "Pipeline", ""
             ) as Pipeline;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);

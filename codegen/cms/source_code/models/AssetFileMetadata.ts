@@ -16,13 +16,13 @@
 */
 export class AssetFileMetadata {
     /**
-    * The path of the file in the CMS Developer File System.
+    * Timestamp of when the object was first created.
     */
-    'id': string;
+    'createdAt': number;
     /**
-    * The name of the file.
+    * Timestamp of when the object was archived (deleted).
     */
-    'name': string;
+    'archivedAt'?: number;
     /**
     * Determines whether or not this path points to a folder.
     */
@@ -32,33 +32,33 @@ export class AssetFileMetadata {
     */
     'children'?: Array<string>;
     /**
+    * The name of the file.
+    */
+    'name': string;
+    /**
+    * The path of the file in the CMS Developer File System.
+    */
+    'id': string;
+    'hash'?: string;
+    /**
     * Timestamp of when the object was last updated.
     */
     'updatedAt': number;
-    /**
-    * Timestamp of when the object was first created.
-    */
-    'createdAt': number;
-    /**
-    * Timestamp of when the object was archived (deleted).
-    */
-    'archivedAt'?: number;
-    'hash'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "number",
+            "format": "int32"
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "number",
+            "format": "int64"
         },
         {
             "name": "folder",
@@ -73,28 +73,28 @@ export class AssetFileMetadata {
             "format": ""
         },
         {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "number",
-            "format": "int32"
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
         },
         {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
-            "type": "number",
-            "format": "int64"
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "hash",
             "baseName": "hash",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

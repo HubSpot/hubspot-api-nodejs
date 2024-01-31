@@ -12,7 +12,6 @@
 
 import { DependentField } from '../models/DependentField';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
-import { HttpFile } from '../http/http';
 
 /**
 * A form field consisting of a set of checkboxes allowing multiple choices to be selected at one time.
@@ -23,7 +22,7 @@ export class MultipleCheckboxesField {
     */
     'fieldType': MultipleCheckboxesFieldFieldTypeEnum;
     /**
-    * A unique ID for this field's CRM object type. For example a CONTACT field will have the object type ID 0-1.
+    * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
     /**
@@ -43,7 +42,7 @@ export class MultipleCheckboxesField {
     */
     'required': boolean;
     /**
-    * Whether a field should be hidden or not. Hidden fields won't appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
+    * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
@@ -132,5 +131,7 @@ export class MultipleCheckboxesField {
 }
 
 
-export type MultipleCheckboxesFieldFieldTypeEnum = "multiple_checkboxes" ;
+export enum MultipleCheckboxesFieldFieldTypeEnum {
+    MultipleCheckboxes = 'multiple_checkboxes'
+}
 

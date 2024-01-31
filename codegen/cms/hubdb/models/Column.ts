@@ -1,5 +1,5 @@
 /**
- * HubDB endpoints
+ * Hubdb
  * HubDB is a relational data store that presents data as rows, columns, and cells in a table, much like a spreadsheet. HubDB tables can be added or modified [in the HubSpot CMS](https://knowledge.hubspot.com/cos-general/how-to-edit-hubdb-tables), but you can also use the API endpoints documented here. For more information on HubDB tables and using their data on a HubSpot site, see the [CMS developers site](https://designers.hubspot.com/docs/tools/hubdb). You can also see the [documentation for dynamic pages](https://designers.hubspot.com/docs/tutorials/how-to-build-dynamic-pages-with-hubdb) for more details about the `useForPages` field.  HubDB tables support `draft` and `published` versions. This allows you to update data in the table, either for testing or to allow for a manual approval process, without affecting any live pages using the existing data. Draft data can be reviewed, and published by a user working in HubSpot or published via the API. Draft data can also be discarded, allowing users to go back to the published version of the data without disrupting it. If a table is set to be `allowed for public access`, you can access the published version of the table and rows without any authentication by specifying the portal id via the query parameter `portalId`.
  *
  * OpenAPI spec version: v3
@@ -15,18 +15,31 @@ import { Option } from '../models/Option';
 
 export class Column {
     /**
-    * Name of the column
+    * Foreign table id referenced
     */
-    'name': string;
+    'foreignTableId'?: number;
+    'description'?: string;
     /**
     * Label of the column
     */
     'label': string;
     /**
-    * Column Id
+    * Type of the column
     */
-    'id'?: string;
+    'type': ColumnTypeEnum;
+    /**
+    * Number of options available
+    */
+    'optionCount'?: number;
+    /**
+    * Foreign Ids
+    */
+    'foreignIds'?: Array<ForeignId>;
     'deleted'?: boolean;
+    /**
+    * Name of the column
+    */
+    'name': string;
     /**
     * Options to choose for select and multi-select columns
     */
@@ -36,41 +49,34 @@ export class Column {
     */
     'width'?: number;
     /**
-    * Foreign table id referenced
+    * Column Id
     */
-    'foreignTableId'?: number;
-    /**
-    * Foreign Column id
-    */
-    'foreignColumnId'?: number;
-    'description'?: string;
-    /**
-    * Foreign Ids
-    */
-    'foreignIds'?: Array<ForeignId>;
-    /**
-    * Type of the column
-    */
-    'type': ColumnTypeEnum;
-    /**
-    * Foreign ids by name
-    */
-    'foreignIdsByName'?: { [key: string]: ForeignId; };
+    'id'?: string;
     /**
     * Foreign ids
     */
     'foreignIdsById'?: { [key: string]: ForeignId; };
     /**
-    * Number of options available
+    * Foreign Column id
     */
-    'optionCount'?: number;
+    'foreignColumnId'?: number;
+    /**
+    * Foreign ids by name
+    */
+    'foreignIdsByName'?: { [key: string]: ForeignId; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "foreignTableId",
+            "baseName": "foreignTableId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "description",
+            "baseName": "description",
             "type": "string",
             "format": ""
         },
@@ -81,15 +87,33 @@ export class Column {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "type",
+            "baseName": "type",
+            "type": "ColumnTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "optionCount",
+            "baseName": "optionCount",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "foreignIds",
+            "baseName": "foreignIds",
+            "type": "Array<ForeignId>",
             "format": ""
         },
         {
             "name": "deleted",
             "baseName": "deleted",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
@@ -105,39 +129,9 @@ export class Column {
             "format": "int32"
         },
         {
-            "name": "foreignTableId",
-            "baseName": "foreignTableId",
-            "type": "number",
-            "format": "int64"
-        },
-        {
-            "name": "foreignColumnId",
-            "baseName": "foreignColumnId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "description",
-            "baseName": "description",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "foreignIds",
-            "baseName": "foreignIds",
-            "type": "Array<ForeignId>",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "ColumnTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "foreignIdsByName",
-            "baseName": "foreignIdsByName",
-            "type": "{ [key: string]: ForeignId; }",
             "format": ""
         },
         {
@@ -147,10 +141,16 @@ export class Column {
             "format": ""
         },
         {
-            "name": "optionCount",
-            "baseName": "optionCount",
+            "name": "foreignColumnId",
+            "baseName": "foreignColumnId",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "foreignIdsByName",
+            "baseName": "foreignIdsByName",
+            "type": "{ [key: string]: ForeignId; }",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -162,5 +162,23 @@ export class Column {
 }
 
 
-export type ColumnTypeEnum = "NULL" | "TEXT" | "NUMBER" | "URL" | "IMAGE" | "SELECT" | "MULTISELECT" | "BOOLEAN" | "LOCATION" | "DATE" | "DATETIME" | "CURRENCY" | "RICHTEXT" | "FOREIGN_ID" | "VIDEO" | "CTA" | "FILE" ;
+export enum ColumnTypeEnum {
+    Null = 'NULL',
+    Text = 'TEXT',
+    Number = 'NUMBER',
+    Url = 'URL',
+    Image = 'IMAGE',
+    Select = 'SELECT',
+    Multiselect = 'MULTISELECT',
+    Boolean = 'BOOLEAN',
+    Location = 'LOCATION',
+    Date = 'DATE',
+    Datetime = 'DATETIME',
+    Currency = 'CURRENCY',
+    Richtext = 'RICHTEXT',
+    ForeignId = 'FOREIGN_ID',
+    Video = 'VIDEO',
+    Cta = 'CTA',
+    File = 'FILE'
+}
 

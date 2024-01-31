@@ -1,6 +1,6 @@
 /**
  * Schemas
- * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object's type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
+ * The CRM uses schemas to define how custom objects should store and represent information in the HubSpot CRM. Schemas define details about an object\'s type, properties, and associations. The schema can be uniquely identified by its **object type ID**.
  *
  * OpenAPI spec version: v3
  * 
@@ -18,62 +18,105 @@ import { Property } from '../models/Property';
 * Defines an object schema, including its properties and associations.
 */
 export class ObjectSchema {
-    'labels': ObjectTypeDefinitionLabels;
-    /**
-    * The names of properties that should be **required** when creating an object of this type.
-    */
-    'requiredProperties': Array<string>;
-    /**
-    * Names of properties that will be indexed for this object type in by HubSpot's product search.
-    */
-    'searchableProperties': Array<string>;
-    /**
-    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
-    */
-    'primaryDisplayProperty'?: string;
-    /**
-    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
-    */
-    'secondaryDisplayProperties': Array<string>;
-    'archived': boolean;
-    /**
-    * A unique ID for this schema's object type. Will be defined as {meta-type}-{unique ID}.
-    */
-    'id': string;
-    /**
-    * An assigned unique ID for the object, including portal ID and object name.
-    */
-    'fullyQualifiedName': string;
-    /**
-    * When the object schema was created.
-    */
-    'createdAt'?: Date;
-    /**
-    * When the object schema was last updated.
-    */
-    'updatedAt'?: Date;
-    'objectTypeId': string;
-    /**
-    * Properties defined for this object type.
-    */
-    'properties': Array<Property>;
     /**
     * Associations defined for a given object type.
     */
     'associations': Array<AssociationDefinition>;
     /**
-    * A unique name for the schema's object type.
+    * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
+    */
+    'secondaryDisplayProperties'?: Array<string>;
+    'objectTypeId'?: string;
+    'description'?: string;
+    /**
+    * An assigned unique ID for the object, including portal ID and object name.
+    */
+    'fullyQualifiedName'?: string;
+    'labels': ObjectTypeDefinitionLabels;
+    'archived'?: boolean;
+    /**
+    * When the object schema was created.
+    */
+    'createdAt'?: Date;
+    /**
+    * The names of properties that should be **required** when creating an object of this type.
+    */
+    'requiredProperties': Array<string>;
+    /**
+    * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
+    */
+    'searchableProperties'?: Array<string>;
+    /**
+    * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
+    */
+    'primaryDisplayProperty'?: string;
+    /**
+    * A unique name for the schema\'s object type.
     */
     'name': string;
+    /**
+    * A unique ID for this schema\'s object type. Will be defined as {meta-type}-{unique ID}.
+    */
+    'id': string;
+    /**
+    * Properties defined for this object type.
+    */
+    'properties': Array<Property>;
+    /**
+    * When the object schema was last updated.
+    */
+    'updatedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<AssociationDefinition>",
+            "format": ""
+        },
+        {
+            "name": "secondaryDisplayProperties",
+            "baseName": "secondaryDisplayProperties",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fullyQualifiedName",
+            "baseName": "fullyQualifiedName",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "labels",
             "baseName": "labels",
             "type": "ObjectTypeDefinitionLabels",
             "format": ""
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "requiredProperties",
@@ -94,44 +137,14 @@ export class ObjectSchema {
             "format": ""
         },
         {
-            "name": "secondaryDisplayProperties",
-            "baseName": "secondaryDisplayProperties",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
             "name": "id",
             "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "fullyQualifiedName",
-            "baseName": "fullyQualifiedName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
             "type": "string",
             "format": ""
         },
@@ -142,16 +155,10 @@ export class ObjectSchema {
             "format": ""
         },
         {
-            "name": "associations",
-            "baseName": "associations",
-            "type": "Array<AssociationDefinition>",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {

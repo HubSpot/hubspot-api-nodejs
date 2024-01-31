@@ -1,3 +1,4 @@
+import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
@@ -98,6 +99,12 @@ export interface BlogTagsApiGetByIdRequest {
      * @memberof BlogTagsApigetById
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogTagsApigetById
+     */
+    property?: string
 }
 
 export interface BlogTagsApiGetPageRequest {
@@ -161,6 +168,12 @@ export interface BlogTagsApiGetPageRequest {
      * @memberof BlogTagsApigetPage
      */
     archived?: boolean
+    /**
+     * 
+     * @type string
+     * @memberof BlogTagsApigetPage
+     */
+    property?: string
 }
 
 export interface BlogTagsApiReadBatchRequest {
@@ -244,8 +257,26 @@ export class ObjectBlogTagsApi {
      * Delete a Blog Tag
      * @param param the request object
      */
+    public archiveWithHttpInfo(param: BlogTagsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Blog Tag object identified by the id in the path.
+     * Delete a Blog Tag
+     * @param param the request object
+     */
     public archive(param: BlogTagsApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Delete the Blog Tag objects identified in the request body.
+     * Delete a batch of Blog Tags
+     * @param param the request object
+     */
+    public archiveBatchWithHttpInfo(param: BlogTagsApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
     /**
@@ -262,8 +293,26 @@ export class ObjectBlogTagsApi {
      * Attach a Blog Tag to a multi-language group
      * @param param the request object
      */
+    public attachToLangGroupWithHttpInfo(param: BlogTagsApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Attach a Blog Tag to a multi-language group.
+     * Attach a Blog Tag to a multi-language group
+     * @param param the request object
+     */
     public attachToLangGroup(param: BlogTagsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Create a new Blog Tag.
+     * Create a new Blog Tag
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: BlogTagsApiCreateRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+        return this.api.createWithHttpInfo(param.tag,  options).toPromise();
     }
 
     /**
@@ -280,8 +329,26 @@ export class ObjectBlogTagsApi {
      * Create a batch of Blog Tags
      * @param param the request object
      */
+    public createBatchWithHttpInfo(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+        return this.api.createBatchWithHttpInfo(param.batchInputTag,  options).toPromise();
+    }
+
+    /**
+     * Create the Blog Tag objects detailed in the request body.
+     * Create a batch of Blog Tags
+     * @param param the request object
+     */
     public createBatch(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.createBatch(param.batchInputTag,  options).toPromise();
+    }
+
+    /**
+     * Create a new language variation from an existing Blog Tag
+     * Create a new language variation
+     * @param param the request object
+     */
+    public createLangVariationWithHttpInfo(param: BlogTagsApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+        return this.api.createLangVariationWithHttpInfo(param.tagCloneRequestVNext,  options).toPromise();
     }
 
     /**
@@ -298,6 +365,15 @@ export class ObjectBlogTagsApi {
      * Detach a Blog Tag from a multi-language group
      * @param param the request object
      */
+    public detachFromLangGroupWithHttpInfo(param: BlogTagsApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Detach a Blog Tag from a multi-language group.
+     * Detach a Blog Tag from a multi-language group
+     * @param param the request object
+     */
     public detachFromLangGroup(param: BlogTagsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
@@ -307,8 +383,26 @@ export class ObjectBlogTagsApi {
      * Retrieve a Blog Tag
      * @param param the request object
      */
+    public getByIdWithHttpInfo(param: BlogTagsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+        return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Blog Tag object identified by the id in the path.
+     * Retrieve a Blog Tag
+     * @param param the request object
+     */
     public getById(param: BlogTagsApiGetByIdRequest, options?: Configuration): Promise<Tag> {
-        return this.api.getById(param.objectId, param.archived,  options).toPromise();
+        return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Get the list of blog tags. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
+     * Get all Blog Tags
+     * @param param the request object
+     */
+    public getPageWithHttpInfo(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalTagForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
     /**
@@ -317,7 +411,16 @@ export class ObjectBlogTagsApi {
      * @param param the request object
      */
     public getPage(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived,  options).toPromise();
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the Blog Tag objects identified in the request body.
+     * Retrieve a batch of Blog Tags
+     * @param param the request object
+     */
+    public readBatchWithHttpInfo(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+        return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
     /**
@@ -334,8 +437,26 @@ export class ObjectBlogTagsApi {
      * Set a new primary language
      * @param param the request object
      */
+    public setLangPrimaryWithHttpInfo(param: BlogTagsApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Set a Blog Tag as the primary language of a multi-language group.
+     * Set a new primary language
+     * @param param the request object
+     */
     public setLangPrimary(param: BlogTagsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
+    }
+
+    /**
+     * Sparse updates a single Blog Tag object identified by the id in the path. All the column values need not be specified. Only the that need to be modified can be specified. 
+     * Update a Blog Tag
+     * @param param the request object
+     */
+    public updateWithHttpInfo(param: BlogTagsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+        return this.api.updateWithHttpInfo(param.objectId, param.tag, param.archived,  options).toPromise();
     }
 
     /**
@@ -352,8 +473,26 @@ export class ObjectBlogTagsApi {
      * Update a batch of Blog Tags
      * @param param the request object
      */
+    public updateBatchWithHttpInfo(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+        return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Update the Blog Tag objects identified in the request body.
+     * Update a batch of Blog Tags
+     * @param param the request object
+     */
     public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
+    }
+
+    /**
+     * Explicitly set new languages for each Blog Tag in a multi-language group.
+     * Update languages of multi-language group
+     * @param param the request object
+     */
+    public updateLangsWithHttpInfo(param: BlogTagsApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
     /**

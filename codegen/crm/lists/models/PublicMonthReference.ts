@@ -68,5 +68,7 @@ export class PublicMonthReference {
 }
 
 
-export type PublicMonthReferenceReferenceTypeEnum = "MONTH" ;
+export enum PublicMonthReferenceReferenceTypeEnum {
+    Month = 'MONTH'
+}
 

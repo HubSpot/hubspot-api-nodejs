@@ -1,5 +1,5 @@
 /**
- * Blog Post endpoints
+ * Posts
  * Use these endpoints for interacting with Blog Posts, Blog Authors, and Blog Tags
  *
  * OpenAPI spec version: v3
@@ -16,28 +16,28 @@
 */
 export class ContentScheduleRequestVNext {
     /**
-    * The ID of the object to be scheduled.
-    */
-    'id': string;
-    /**
     * The date the object should transition from scheduled to published.
     */
     'publishDate': Date;
+    /**
+    * The ID of the object to be scheduled.
+    */
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "publishDate",
             "baseName": "publishDate",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

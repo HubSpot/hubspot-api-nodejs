@@ -72,5 +72,10 @@ export class BatchResponseContentFolder {
 }
 
 
-export type BatchResponseContentFolderStatusEnum = "PENDING" | "PROCESSING" | "CANCELED" | "COMPLETE" ;
+export enum BatchResponseContentFolderStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
+}
 
