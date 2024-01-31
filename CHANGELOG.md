@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/10.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.0.0-beta.0...HEAD)
 
-## [11.0.0] - 2024-02-01
+## [11.0.0-beta.0] - 2024-01-31
 
 ## Updated
 
@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added param `validateDealStageUsagesBeforeDelete` to `cms.pipelines.pipelinesApi.archive()`, `cms.pipelines.pipelinesApi.replace()` and `cms.pipelines.pipelinesApi.update()`.
 - `events.eventsApi.getPage(occurredAfter?: Date, occurredBefore?: Date, objectType?: string, objectId?: number, eventType?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, _options?: Configuration)` => `events.eventsApi.getPage(objectType?: string, eventType?: string, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, indexTableName?: string, indexSpecificMetadata?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>, _options?: Configuration)`
 - Rewrite all enums from type to enum.
+
 ```typescript
 export type Enum = "OPTION1" | "OPTION2";
 // =>
@@ -803,3 +804,4 @@ export enum Enum {
 [10.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.0.0
 [10.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.1.0
 [10.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.2.0
+[11.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0-beta.0
