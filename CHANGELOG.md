@@ -38,7 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed type from laguages enum to `string` in `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::language` and `cms/blogs/tags/models/AttachToLangPrimaryRequestVNext::primaryLanguage`.
 - Cnange type from `ErrorCategory` to `string` in `crm/associations/models/StandardError::category`.
 - `crm.associations.v4.basicApi.create(): Promise<LabelsBetweenObjectPair>` => `crm.associations.v4.basicApi.create(): Promise<LabelsBetweenObjectPair1>`
-- Cnange type from `StandardError1[]` to `StandardError[]` in `crm/associations/v4/models/BatchResponseSimplePublicObjectWithErrors::errors`.
 - Cnange type from `ErrorCategory` to `string` in `crm/associations/v4/models/StandardError::category`.
 - Rename `crm.associations.v4.schema.definitionsApi._delete()` => `crm.associations.v4.schema.definitionsApi.archive()`.
 - Removed `crm.objects.associationsApi`.
