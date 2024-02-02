@@ -167,7 +167,7 @@ await hubspotClient.crm.associations.v4.basicApi.create(
 )
 ```
 
-### {EXAMPLE} Get Companies by Contact
+### {EXAMPLE} Get associated Companies by Contact
 
 ```javascript
 const companies = await hubspotClient.crm.associations.v4.basicApi.getPage(
