@@ -167,6 +167,18 @@ await hubspotClient.crm.associations.v4.basicApi.create(
 )
 ```
 
+### {EXAMPLE} Get associated Companies by Contact
+
+```javascript
+const companies = await hubspotClient.crm.associations.v4.basicApi.getPage(
+    'contact',
+    hubspotContactId,
+    'company',
+    after,
+    pageSize,
+  );
+```
+
 ### {EXAMPLE} Update multiple objects in batch mode
 
 ```javascript
