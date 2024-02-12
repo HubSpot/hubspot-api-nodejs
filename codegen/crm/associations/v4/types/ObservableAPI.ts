@@ -13,7 +13,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 export class ObservableBasicApi {
@@ -39,7 +39,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public archiveWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<HttpInfo<void>> {
+    public archiveWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(objectType, objectId, toObjectType, toObjectId, _options);
 
         // build promise chain
@@ -66,7 +66,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<void> {
+    public archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Observable<void> {
         return this.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -79,7 +79,7 @@ export class ObservableBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public createWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<HttpInfo<LabelsBetweenObjectPair1>> {
+    public createWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<HttpInfo<LabelsBetweenObjectPair>> {
         const requestContextPromise = this.requestFactory.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
 
         // build promise chain
@@ -107,8 +107,8 @@ export class ObservableBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair1> {
-        return this.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options).pipe(map((apiResponse: HttpInfo<LabelsBetweenObjectPair1>) => apiResponse.data));
+    public create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Observable<LabelsBetweenObjectPair> {
+        return this.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options).pipe(map((apiResponse: HttpInfo<LabelsBetweenObjectPair>) => apiResponse.data));
     }
 
     /**
@@ -119,7 +119,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Observable<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         const requestContextPromise = this.requestFactory.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
 
         // build promise chain
@@ -146,7 +146,7 @@ export class ObservableBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
+    public createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Observable<BatchResponsePublicDefaultAssociation> {
         return this.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicDefaultAssociation>) => apiResponse.data));
     }
 
@@ -159,7 +159,7 @@ export class ObservableBasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getPageWithHttpInfo(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+    public getPageWithHttpInfo(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
         const requestContextPromise = this.requestFactory.getPage(objectType, objectId, toObjectType, after, limit, _options);
 
         // build promise chain
@@ -187,7 +187,7 @@ export class ObservableBasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+    public getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         return this.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>) => apiResponse.data));
     }
 
@@ -244,43 +244,6 @@ export class ObservableBatchApi {
      */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Observable<void> {
         return this.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
-    }
-
-    /**
-     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
-     * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
-     */
-    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveLabelsWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
-     * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
-     */
-    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<void> {
-        return this.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**

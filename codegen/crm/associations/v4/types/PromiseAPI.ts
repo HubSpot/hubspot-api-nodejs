@@ -12,7 +12,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 import { ObservableBasicApi } from './ObservableAPI';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -35,7 +35,7 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public archiveWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
         const result = this.api.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, _options);
         return result.toPromise();
     }
@@ -48,7 +48,7 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<void> {
+    public archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<void> {
         const result = this.api.archive(objectType, objectId, toObjectType, toObjectId, _options);
         return result.toPromise();
     }
@@ -62,7 +62,7 @@ export class PromiseBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public createWithHttpInfo(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair1>> {
+    public createWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair>> {
         const result = this.api.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
         return result.toPromise();
     }
@@ -76,7 +76,7 @@ export class PromiseBasicApi {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair1> {
+    public create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair> {
         const result = this.api.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
         return result.toPromise();
     }
@@ -89,7 +89,7 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         const result = this.api.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
         return result.toPromise();
     }
@@ -102,7 +102,7 @@ export class PromiseBasicApi {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
+    public createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
         const result = this.api.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
         return result.toPromise();
     }
@@ -116,7 +116,7 @@ export class PromiseBasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getPageWithHttpInfo(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+    public getPageWithHttpInfo(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
         const result = this.api.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, _options);
         return result.toPromise();
     }
@@ -130,7 +130,7 @@ export class PromiseBasicApi {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+    public getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         const result = this.api.getPage(objectType, objectId, toObjectType, after, limit, _options);
         return result.toPromise();
     }
@@ -175,30 +175,6 @@ export class PromiseBatchApi {
      */
     public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<void> {
         const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
-     * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
-     */
-    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
-     * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
-     */
-    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
         return result.toPromise();
     }
 

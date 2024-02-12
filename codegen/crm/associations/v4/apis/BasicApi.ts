@@ -11,7 +11,7 @@ import {SecurityAuthentication} from '../auth/auth';
 import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 
 /**
  * no description
@@ -26,7 +26,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public async archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<RequestContext> {
+    public async archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -89,7 +89,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectId 
      * @param associationSpec 
      */
-    public async create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<RequestContext> {
+    public async create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -168,7 +168,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param toObjectType 
      * @param toObjectId 
      */
-    public async createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration): Promise<RequestContext> {
+    public async createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'fromObjectType' is not null or undefined
@@ -231,7 +231,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
      */
-    public async getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'objectType' is not null or undefined
@@ -333,13 +333,13 @@ export class BasicApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<LabelsBetweenObjectPair1 >> {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<LabelsBetweenObjectPair >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
-            const body: LabelsBetweenObjectPair1 = ObjectSerializer.deserialize(
+            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "LabelsBetweenObjectPair1", ""
-            ) as LabelsBetweenObjectPair1;
+                "LabelsBetweenObjectPair", ""
+            ) as LabelsBetweenObjectPair;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -352,10 +352,10 @@ export class BasicApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: LabelsBetweenObjectPair1 = ObjectSerializer.deserialize(
+            const body: LabelsBetweenObjectPair = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "LabelsBetweenObjectPair1", ""
-            ) as LabelsBetweenObjectPair1;
+                "LabelsBetweenObjectPair", ""
+            ) as LabelsBetweenObjectPair;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

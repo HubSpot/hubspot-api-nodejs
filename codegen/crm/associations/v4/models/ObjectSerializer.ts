@@ -13,7 +13,6 @@ export * from '../models/CollectionResponseMultiAssociatedObjectWithLabelForward
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/LabelsBetweenObjectPair';
-export * from '../models/LabelsBetweenObjectPair1';
 export * from '../models/ModelError';
 export * from '../models/MultiAssociatedObjectWithLabel';
 export * from '../models/NextPage';
@@ -43,7 +42,6 @@ import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '.
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
-import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
 import { ModelError } from '../models/ModelError';
 import { MultiAssociatedObjectWithLabel } from '../models/MultiAssociatedObjectWithLabel';
 import { NextPage } from '../models/NextPage';
@@ -96,7 +94,6 @@ let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
-    "LabelsBetweenObjectPair1": LabelsBetweenObjectPair1,
     "ModelError": ModelError,
     "MultiAssociatedObjectWithLabel": MultiAssociatedObjectWithLabel,
     "NextPage": NextPage,
