@@ -242,6 +242,27 @@ export interface BatchApiArchiveRequest {
     batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive
 }
 
+export interface BatchApiArchiveLabelsRequest {
+    /**
+     * 
+     * @type string
+     * @memberof BatchApiarchiveLabels
+     */
+    fromObjectType: string
+    /**
+     * 
+     * @type string
+     * @memberof BatchApiarchiveLabels
+     */
+    toObjectType: string
+    /**
+     * 
+     * @type BatchInputPublicAssociationMultiPost
+     * @memberof BatchApiarchiveLabels
+     */
+    batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost
+}
+
 export interface BatchApiCreateRequest {
     /**
      * 
@@ -328,6 +349,24 @@ export class ObjectBatchApi {
      */
     public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
         return this.api.archive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiArchive,  options).toPromise();
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param param the request object
+     */
+    public archiveLabelsWithHttpInfo(param: BatchApiArchiveLabelsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.archiveLabelsWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param param the request object
+     */
+    public archiveLabels(param: BatchApiArchiveLabelsRequest, options?: Configuration): Promise<void> {
+        return this.api.archiveLabels(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
     /**

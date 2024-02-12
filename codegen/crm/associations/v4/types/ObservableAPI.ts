@@ -247,6 +247,43 @@ export class ObservableBatchApi {
     }
 
     /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<HttpInfo<void>> {
+        const requestContextPromise = this.requestFactory.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveLabelsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Observable<void> {
+        return this.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
      * Batch create associations for objects
      * Create
      * @param fromObjectType 

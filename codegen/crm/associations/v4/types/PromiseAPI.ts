@@ -179,6 +179,30 @@ export class PromiseBatchApi {
     }
 
     /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<void>> {
+        const result = this.api.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
+     * Delete Specific Labels
+     * @param fromObjectType 
+     * @param toObjectType 
+     * @param batchInputPublicAssociationMultiPost 
+     */
+    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<void> {
+        const result = this.api.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Batch create associations for objects
      * Create
      * @param fromObjectType 
