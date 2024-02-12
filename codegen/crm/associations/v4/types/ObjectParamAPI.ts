@@ -12,7 +12,7 @@ import { BatchResponsePublicAssociationMultiWithLabel } from '../models/BatchRes
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
-import { LabelsBetweenObjectPair1 } from '../models/LabelsBetweenObjectPair1';
+import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -26,10 +26,10 @@ export interface BasicApiArchiveRequest {
     objectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApiarchive
      */
-    objectId: number
+    objectId: string
     /**
      * 
      * @type string
@@ -38,10 +38,10 @@ export interface BasicApiArchiveRequest {
     toObjectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApiarchive
      */
-    toObjectId: number
+    toObjectId: string
 }
 
 export interface BasicApiCreateRequest {
@@ -53,10 +53,10 @@ export interface BasicApiCreateRequest {
     objectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApicreate
      */
-    objectId: number
+    objectId: string
     /**
      * 
      * @type string
@@ -65,10 +65,10 @@ export interface BasicApiCreateRequest {
     toObjectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApicreate
      */
-    toObjectId: number
+    toObjectId: string
     /**
      * 
      * @type Array&lt;AssociationSpec&gt;
@@ -86,10 +86,10 @@ export interface BasicApiCreateDefaultRequest {
     fromObjectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApicreateDefault
      */
-    fromObjectId: number
+    fromObjectId: string
     /**
      * 
      * @type string
@@ -98,10 +98,10 @@ export interface BasicApiCreateDefaultRequest {
     toObjectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApicreateDefault
      */
-    toObjectId: number
+    toObjectId: string
 }
 
 export interface BasicApiGetPageRequest {
@@ -113,10 +113,10 @@ export interface BasicApiGetPageRequest {
     objectType: string
     /**
      * 
-     * @type number
+     * @type string
      * @memberof BasicApigetPage
      */
-    objectId: number
+    objectId: string
     /**
      * 
      * @type string
@@ -167,7 +167,7 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair1>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair>> {
         return this.api.createWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 
@@ -176,7 +176,7 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair1> {
+    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
         return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 

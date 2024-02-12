@@ -14,7 +14,7 @@ import { AssociationSpecWithLabel } from '../models/AssociationSpecWithLabel';
 
 export class MultiAssociatedObjectWithLabel {
     'associationTypes': Array<AssociationSpecWithLabel>;
-    'toObjectId': number;
+    'toObjectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,8 +28,8 @@ export class MultiAssociatedObjectWithLabel {
         {
             "name": "toObjectId",
             "baseName": "toObjectId",
-            "type": "number",
-            "format": "int32"
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

@@ -13,9 +13,9 @@
 
 export class LabelsBetweenObjectPair {
     'fromObjectTypeId': string;
-    'toObjectId': number;
+    'toObjectId': string;
     'toObjectTypeId': string;
-    'fromObjectId': number;
+    'fromObjectId': string;
     'labels': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -30,8 +30,8 @@ export class LabelsBetweenObjectPair {
         {
             "name": "toObjectId",
             "baseName": "toObjectId",
-            "type": "number",
-            "format": "int32"
+            "type": "string",
+            "format": ""
         },
         {
             "name": "toObjectTypeId",
@@ -42,8 +42,8 @@ export class LabelsBetweenObjectPair {
         {
             "name": "fromObjectId",
             "baseName": "fromObjectId",
-            "type": "number",
-            "format": "int32"
+            "type": "string",
+            "format": ""
         },
         {
             "name": "labels",

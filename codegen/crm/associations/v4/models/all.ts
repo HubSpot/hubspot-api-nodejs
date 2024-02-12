@@ -13,7 +13,6 @@ export * from '../models/CollectionResponseMultiAssociatedObjectWithLabelForward
 export * from '../models/ErrorDetail'
 export * from '../models/ForwardPaging'
 export * from '../models/LabelsBetweenObjectPair'
-export * from '../models/LabelsBetweenObjectPair1'
 export * from '../models/ModelError'
 export * from '../models/MultiAssociatedObjectWithLabel'
 export * from '../models/NextPage'
