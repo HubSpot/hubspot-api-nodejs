@@ -5,7 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.0.0-beta.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.0.0...HEAD)
+
+## [11.0.0] - 2024-02-13
+
+## Updated
+
+- `crm.associations.v4.basicApi.archive(objectType: string, objectId: number, toObjectType: string, toObjectId: number, _options?: Configuration)` => `crm.associations.v4.basicApi.archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration)`
+- `crm.associations.v4.basicApi.create(objectType: string, objectId: number, toObjectType: string, toObjectId: number, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair1>` => `crm.associations.v4.basicApi.create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair>`
+- `crm.associations.v4.basicApi.createDefault(fromObjectType: string, fromObjectId: number, toObjectType: string, toObjectId: number, _options?: Configuration)` => `crm.associations.v4.basicApi.createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration)`
+- `crm.associations.v4.basicApi.getPage(objectType: string, objectId: number, toObjectType: string, after?: string, limit?: number, _options?: Configuration)` => `crm.associations.v4.basicApi.getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration)`
+- Cnange type from `number` to `string` in `crm/associations/v4/models/MultiAssociatedObjectWithLabel::toObjectId`.
+- Added param `'inverseLabel'?: string` to `crm/associations/v4/schema/models/PublicAssociationDefinitionCreateRequest` and `crm/associations/v4/schema/models/PublicAssociationDefinitionUpdateRequest`.
+- Added new association types to `enums/AssociationTypes`.
 
 ## [11.0.0-beta.0] - 2024-01-31
 
@@ -804,3 +816,4 @@ export enum Enum {
 [10.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.1.0
 [10.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.2.0
 [11.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0-beta.0
+[11.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0
