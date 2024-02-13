@@ -816,3 +816,4 @@ export enum Enum {
 [10.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.1.0
 [10.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/10.2.0
 [11.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0-beta.0
+[11.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0
