@@ -302,7 +302,7 @@ const objectSearchRequest: PublicObjectSearchRequest = {
     sorts: ["-createdate"],
     properties: ["email", "createdate"],
     limit: 100,
-    after: 0,
+    after: '0',
 };
 
 const response = await hubspotClient.crm.contacts.searchApi.doSearch(objectSearchRequest);
