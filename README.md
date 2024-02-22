@@ -24,7 +24,7 @@ const hubspotClient = new hubspot.Client({ accessToken: YOUR_ACCESS_TOKEN })
 ```
 
 > [!NOTE]
-> Please note that all code examples are written in JavaScript. Some them won’t work in Typescript without changes.
+> Please note that all code examples are written in JavaScript. Some of them won’t work in Typescript without changes.
 
 For ES modules
 
