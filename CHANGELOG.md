@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Added
 
-- Added param `id_property` to `SimplePublicObjectBatchInput` in all CRM clients.
+- Added param `idProperty` to `SimplePublicObjectBatchInput` in all CRM clients.
 
 ## [11.0.0] - 2024-02-13
 
