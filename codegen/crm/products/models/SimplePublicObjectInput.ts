@@ -12,7 +12,10 @@
 
 
 export class SimplePublicObjectInput {
-    'properties': { [key: string]: string; };
+    /**
+    * 
+    */
+    'properties'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 

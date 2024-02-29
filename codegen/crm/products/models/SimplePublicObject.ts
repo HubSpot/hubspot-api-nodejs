@@ -18,7 +18,7 @@ export class SimplePublicObject {
     'archivedAt'?: Date;
     'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'id': string;
-    'properties': { [key: string]: string | null; };
+    'properties'?: { [key: string]: string | null; };
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
