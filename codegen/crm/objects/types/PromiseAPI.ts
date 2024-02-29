@@ -246,7 +246,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of objects
+     * Update a batch of objects by internal ID, or unique property values
      * @param objectType 
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -256,7 +256,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of objects
+     * Update a batch of objects by internal ID, or unique property values
      * @param objectType 
      * @param batchInputSimplePublicObjectBatchInput 
      */

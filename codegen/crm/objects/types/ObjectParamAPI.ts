@@ -391,7 +391,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Update a batch of objects
+     * Update a batch of objects by internal ID, or unique property values
      * @param param the request object
      */
     public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -399,7 +399,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Update a batch of objects
+     * Update a batch of objects by internal ID, or unique property values
      * @param param the request object
      */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
