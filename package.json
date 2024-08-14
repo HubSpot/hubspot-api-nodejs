@@ -1,6 +1,6 @@
 {
   "name": "@hubspot/api-client",
-  "version": "11.1.0",
+  "version": "11.2.0",
   "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
