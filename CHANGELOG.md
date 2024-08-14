@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.1.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.2.0...HEAD)
+
+## [11.2.0] - 2024-08-14
+
+## Added
+
+- Added `crm.objects.leads` Api client.
 
 ## [11.1.0] - 2024-02-29
 
@@ -707,7 +713,7 @@ export enum Enum {
 
 ## [2.0.0] - 2020-05-06
 
-### Breaking changes:
+### Breaking changes
 
 - Updated crm.imports.coreApi client method names: getAll => getPage
 
@@ -763,7 +769,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/11.1.0...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/11.2.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -824,3 +830,4 @@ export enum Enum {
 [11.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0-beta.0
 [11.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0
 [11.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.1.0
+[11.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.2.0
