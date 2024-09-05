@@ -1,5 +1,5 @@
 /**
- * CMS Cms Content Audit
+ * Cms Content Audit
  * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
  *
  * OpenAPI spec version: v3
