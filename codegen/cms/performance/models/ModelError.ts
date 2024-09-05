@@ -1,5 +1,5 @@
 /**
- * CMS Performance
+ * Performance
  * Use these endpoints to get a time series view of your website\'s performance.
  *
  * OpenAPI spec version: v3
