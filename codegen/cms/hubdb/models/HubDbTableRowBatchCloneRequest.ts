@@ -11,36 +11,16 @@
  */
 
 
-export class SimpleUser {
-    /**
-    * 
-    */
-    'firstName': string;
-    /**
-    * 
-    */
-    'lastName': string;
-    /**
-    * 
-    */
+export class HubDbTableRowBatchCloneRequest {
+    'name'?: string;
     'id': string;
-    /**
-    * 
-    */
-    'email': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "firstName",
-            "baseName": "firstName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "lastName",
-            "baseName": "lastName",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -49,16 +29,10 @@ export class SimpleUser {
             "baseName": "id",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SimpleUser.attributeTypeMap;
+        return HubDbTableRowBatchCloneRequest.attributeTypeMap;
     }
 
     public constructor() {

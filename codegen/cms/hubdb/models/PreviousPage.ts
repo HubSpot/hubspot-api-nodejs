@@ -11,54 +11,28 @@
  */
 
 
-export class SimpleUser {
-    /**
-    * 
-    */
-    'firstName': string;
-    /**
-    * 
-    */
-    'lastName': string;
-    /**
-    * 
-    */
-    'id': string;
-    /**
-    * 
-    */
-    'email': string;
+export class PreviousPage {
+    'before': string;
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "firstName",
-            "baseName": "firstName",
+            "name": "before",
+            "baseName": "before",
             "type": "string",
             "format": ""
         },
         {
-            "name": "lastName",
-            "baseName": "lastName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
+            "name": "link",
+            "baseName": "link",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SimpleUser.attributeTypeMap;
+        return PreviousPage.attributeTypeMap;
     }
 
     public constructor() {

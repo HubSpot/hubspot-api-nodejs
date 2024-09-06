@@ -10,25 +10,31 @@
  * Do not edit the class manually.
  */
 
+import { NextPage } from '../models/NextPage';
+import { PreviousPage } from '../models/PreviousPage';
 
-export class BatchInputString {
-    /**
-    * 
-    */
-    'inputs': Array<string>;
+export class Paging {
+    'next'?: NextPage;
+    'prev'?: PreviousPage;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<string>",
+            "name": "next",
+            "baseName": "next",
+            "type": "NextPage",
+            "format": ""
+        },
+        {
+            "name": "prev",
+            "baseName": "prev",
+            "type": "PreviousPage",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchInputString.attributeTypeMap;
+        return Paging.attributeTypeMap;
     }
 
     public constructor() {

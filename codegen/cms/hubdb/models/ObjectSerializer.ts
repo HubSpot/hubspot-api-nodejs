@@ -1,9 +1,11 @@
+export * from '../models/BatchInputHubDbTableRowBatchCloneRequest';
 export * from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 export * from '../models/BatchInputHubDbTableRowV3Request';
 export * from '../models/BatchInputString';
 export * from '../models/BatchResponseHubDbTableRowV3';
 export * from '../models/BatchResponseHubDbTableRowV3WithErrors';
-export * from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
+export * from '../models/BoundedNextPage';
+export * from '../models/BoundedPaging';
 export * from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
 export * from '../models/Column';
 export * from '../models/ColumnRequest';
@@ -11,6 +13,7 @@ export * from '../models/ErrorDetail';
 export * from '../models/ForeignId';
 export * from '../models/ForwardPaging';
 export * from '../models/HubDbTableCloneRequest';
+export * from '../models/HubDbTableRowBatchCloneRequest';
 export * from '../models/HubDbTableRowV3';
 export * from '../models/HubDbTableRowV3BatchUpdateRequest';
 export * from '../models/HubDbTableRowV3Request';
@@ -20,22 +23,30 @@ export * from '../models/ImportResult';
 export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Option';
+export * from '../models/Paging';
+export * from '../models/PreviousPage';
+export * from '../models/RandomAccessCollectionResponseWithTotalHubDbTableRowV3';
 export * from '../models/SimpleUser';
 export * from '../models/StandardError';
+export * from '../models/StreamingCollectionResponseWithTotalHubDbTableRowV3';
+export * from '../models/UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3';
 
+import { BatchInputHubDbTableRowBatchCloneRequest } from '../models/BatchInputHubDbTableRowBatchCloneRequest';
 import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputString } from '../models/BatchInputString';
 import { BatchResponseHubDbTableRowV3        } from '../models/BatchResponseHubDbTableRowV3';
 import { BatchResponseHubDbTableRowV3WithErrors          } from '../models/BatchResponseHubDbTableRowV3WithErrors';
-import { CollectionResponseWithTotalHubDbTableRowV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableRowV3ForwardPaging';
+import { BoundedNextPage } from '../models/BoundedNextPage';
+import { BoundedPaging } from '../models/BoundedPaging';
 import { CollectionResponseWithTotalHubDbTableV3ForwardPaging } from '../models/CollectionResponseWithTotalHubDbTableV3ForwardPaging';
-import { Column                } from '../models/Column';
+import { Column                      } from '../models/Column';
 import { ColumnRequest         } from '../models/ColumnRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForeignId } from '../models/ForeignId';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { HubDbTableCloneRequest } from '../models/HubDbTableCloneRequest';
+import { HubDbTableRowBatchCloneRequest } from '../models/HubDbTableRowBatchCloneRequest';
 import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 import { HubDbTableRowV3BatchUpdateRequest } from '../models/HubDbTableRowV3BatchUpdateRequest';
 import { HubDbTableRowV3Request } from '../models/HubDbTableRowV3Request';
@@ -45,8 +56,13 @@ import { ImportResult } from '../models/ImportResult';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Option } from '../models/Option';
+import { Paging } from '../models/Paging';
+import { PreviousPage } from '../models/PreviousPage';
+import { RandomAccessCollectionResponseWithTotalHubDbTableRowV3      } from '../models/RandomAccessCollectionResponseWithTotalHubDbTableRowV3';
 import { SimpleUser } from '../models/SimpleUser';
 import { StandardError } from '../models/StandardError';
+import { StreamingCollectionResponseWithTotalHubDbTableRowV3      } from '../models/StreamingCollectionResponseWithTotalHubDbTableRowV3';
+import { UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3      } from '../models/UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -65,15 +81,20 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseHubDbTableRowV3WithErrorsStatusEnum",
     "ColumnTypeEnum",
     "ColumnRequestTypeEnum",
+    "RandomAccessCollectionResponseWithTotalHubDbTableRowV3TypeEnum",
+    "StreamingCollectionResponseWithTotalHubDbTableRowV3TypeEnum",
+    "UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3TypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "BatchInputHubDbTableRowBatchCloneRequest": BatchInputHubDbTableRowBatchCloneRequest,
     "BatchInputHubDbTableRowV3BatchUpdateRequest": BatchInputHubDbTableRowV3BatchUpdateRequest,
     "BatchInputHubDbTableRowV3Request": BatchInputHubDbTableRowV3Request,
     "BatchInputString": BatchInputString,
     "BatchResponseHubDbTableRowV3": BatchResponseHubDbTableRowV3,
     "BatchResponseHubDbTableRowV3WithErrors": BatchResponseHubDbTableRowV3WithErrors,
-    "CollectionResponseWithTotalHubDbTableRowV3ForwardPaging": CollectionResponseWithTotalHubDbTableRowV3ForwardPaging,
+    "BoundedNextPage": BoundedNextPage,
+    "BoundedPaging": BoundedPaging,
     "CollectionResponseWithTotalHubDbTableV3ForwardPaging": CollectionResponseWithTotalHubDbTableV3ForwardPaging,
     "Column": Column,
     "ColumnRequest": ColumnRequest,
@@ -81,6 +102,7 @@ let typeMap: {[index: string]: any} = {
     "ForeignId": ForeignId,
     "ForwardPaging": ForwardPaging,
     "HubDbTableCloneRequest": HubDbTableCloneRequest,
+    "HubDbTableRowBatchCloneRequest": HubDbTableRowBatchCloneRequest,
     "HubDbTableRowV3": HubDbTableRowV3,
     "HubDbTableRowV3BatchUpdateRequest": HubDbTableRowV3BatchUpdateRequest,
     "HubDbTableRowV3Request": HubDbTableRowV3Request,
@@ -90,8 +112,13 @@ let typeMap: {[index: string]: any} = {
     "ModelError": ModelError,
     "NextPage": NextPage,
     "Option": Option,
+    "Paging": Paging,
+    "PreviousPage": PreviousPage,
+    "RandomAccessCollectionResponseWithTotalHubDbTableRowV3": RandomAccessCollectionResponseWithTotalHubDbTableRowV3,
     "SimpleUser": SimpleUser,
     "StandardError": StandardError,
+    "StreamingCollectionResponseWithTotalHubDbTableRowV3": StreamingCollectionResponseWithTotalHubDbTableRowV3,
+    "UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3": UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3,
 }
 
 type MimeTypeDescriptor = {

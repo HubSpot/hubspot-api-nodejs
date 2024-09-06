@@ -10,12 +10,10 @@
  * Do not edit the class manually.
  */
 
+import { HubDbTableRowBatchCloneRequest } from '../models/HubDbTableRowBatchCloneRequest';
 
-export class BatchInputString {
-    /**
-    * 
-    */
-    'inputs': Array<string>;
+export class BatchInputHubDbTableRowBatchCloneRequest {
+    'inputs': Array<HubDbTableRowBatchCloneRequest>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,12 +21,12 @@ export class BatchInputString {
         {
             "name": "inputs",
             "baseName": "inputs",
-            "type": "Array<string>",
+            "type": "Array<HubDbTableRowBatchCloneRequest>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchInputString.attributeTypeMap;
+        return BatchInputHubDbTableRowBatchCloneRequest.attributeTypeMap;
     }
 
     public constructor() {

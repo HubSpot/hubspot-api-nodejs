@@ -10,19 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from '../models/ForwardPaging';
-import { HubDbTableV3 } from '../models/HubDbTableV3';
+import { BoundedPaging } from '../models/BoundedPaging';
+import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
 
-export class CollectionResponseWithTotalHubDbTableV3ForwardPaging {
-    /**
-    * 
-    */
+export class RandomAccessCollectionResponseWithTotalHubDbTableRowV3 {
     'total': number;
-    'paging'?: ForwardPaging;
-    /**
-    * 
-    */
-    'results': Array<HubDbTableV3>;
+    'paging'?: BoundedPaging;
+    'type': RandomAccessCollectionResponseWithTotalHubDbTableRowV3TypeEnum;
+    'results': Array<HubDbTableRowV3>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -36,21 +31,32 @@ export class CollectionResponseWithTotalHubDbTableV3ForwardPaging {
         {
             "name": "paging",
             "baseName": "paging",
-            "type": "ForwardPaging",
+            "type": "BoundedPaging",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "RandomAccessCollectionResponseWithTotalHubDbTableRowV3TypeEnum",
             "format": ""
         },
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<HubDbTableV3>",
+            "type": "Array<HubDbTableRowV3>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseWithTotalHubDbTableV3ForwardPaging.attributeTypeMap;
+        return RandomAccessCollectionResponseWithTotalHubDbTableRowV3.attributeTypeMap;
     }
 
     public constructor() {
     }
+}
+
+
+export enum RandomAccessCollectionResponseWithTotalHubDbTableRowV3TypeEnum {
+    RandomAccess = 'RANDOM_ACCESS'
 }
 

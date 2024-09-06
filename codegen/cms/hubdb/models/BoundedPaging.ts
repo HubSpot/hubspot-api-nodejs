@@ -10,25 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { BoundedNextPage } from '../models/BoundedNextPage';
 
-export class BatchInputString {
-    /**
-    * 
-    */
-    'inputs': Array<string>;
+export class BoundedPaging {
+    'next'?: BoundedNextPage;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<string>",
+            "name": "next",
+            "baseName": "next",
+            "type": "BoundedNextPage",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchInputString.attributeTypeMap;
+        return BoundedPaging.attributeTypeMap;
     }
 
     public constructor() {

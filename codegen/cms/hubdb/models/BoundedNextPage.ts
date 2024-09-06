@@ -11,24 +11,28 @@
  */
 
 
-export class BatchInputString {
-    /**
-    * 
-    */
-    'inputs': Array<string>;
+export class BoundedNextPage {
+    'offset': number;
+    'link'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<string>",
+            "name": "offset",
+            "baseName": "offset",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "link",
+            "baseName": "link",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchInputString.attributeTypeMap;
+        return BoundedNextPage.attributeTypeMap;
     }
 
     public constructor() {
