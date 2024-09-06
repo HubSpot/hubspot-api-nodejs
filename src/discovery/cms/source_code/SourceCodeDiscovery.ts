@@ -6,7 +6,6 @@ import {
   RequestContext,
   ResponseContext,
   ServerConfiguration,
-  SourceCodeExtractApi,
   ValidationApi,
 } from '../../../../codegen/cms/source_code/index'
 import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
@@ -18,7 +17,6 @@ export default class SourceCodeDiscovery {
   public contentApi: ContentApi
   public extractApi: ExtractApi
   public metadataApi: MetadataApi
-  public sourceCodeExtractApi: SourceCodeExtractApi
   public validationApi: ValidationApi
 
   constructor(config: IConfiguration) {
@@ -35,9 +33,6 @@ export default class SourceCodeDiscovery {
     this.contentApi = ApiDecoratorService.getInstance().apply<ContentApi>(new ContentApi(configuration))
     this.extractApi = ApiDecoratorService.getInstance().apply<ExtractApi>(new ExtractApi(configuration))
     this.metadataApi = ApiDecoratorService.getInstance().apply<MetadataApi>(new MetadataApi(configuration))
-    this.sourceCodeExtractApi = ApiDecoratorService.getInstance().apply<SourceCodeExtractApi>(
-      new SourceCodeExtractApi(configuration),
-    )
     this.validationApi = ApiDecoratorService.getInstance().apply<ValidationApi>(new ValidationApi(configuration))
   }
 }
