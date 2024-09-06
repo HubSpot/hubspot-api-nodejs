@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.2.0...HEAD)
 
+## [11.3.0] - 2024-09-08
+
+## Updated
+
+- Changed type from `string` to laguages enum in `cms/blogs/blog_posts/models/AttachToLangPrimaryRequestVNext::language`.
+- Added param `campaignName` to `cms/blogs/blog_posts/models/ContentLanguageVariation`.
+- Added param `breakpointStyles` to `cms/blogs/blog_posts/models/Styles`.
+- Added param `name` to `cms.hubdb.rowsApi.cloneDraftTableRow()`.
+- Added param `archived` to `cms.hubdb.rowsApi.getDraftTableRowById()` and `cms.hubdb.rowsApi.getTableRow()`.
+- Added params `offset` and `archived` to `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
+- Change response object `CollectionResponseWithTotalHubDbTableRowV3ForwardPaging` to `UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3` of `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
+- Change param `batchInputString: BatchInputString` to `batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest` in `cms.hubdb.rowsApi.cloneDraftTableRow()`.
+- Added param `contentType` before `archived` param to `cms.hubdb.tablesApi.getAllTables()`.
+- Change params from `tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.getDraftTableDetailsById()` and `cms.hubdb.tablesApi.getTableDetails()`.
+- Change params from `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.updateDraftTable()`.
+- Added params `createdByUserId`, `updatedBy`, `updatedByUserId`, `createdAt`, `createdBy` and `updatedAt` to `cms/hubdb/models/Column` and `cms/hubdb/models/Option`.
+- Added param `isHubspotDefined` to `cms/hubdb/models/HubDbTableCloneRequest`.
+
+
 ## [11.2.0] - 2024-08-14
 
 ## Added
