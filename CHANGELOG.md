@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [11.3.0] - 2024-09-08
 
-## Updated
+## CMS
 
 - Changed type from `string` to laguages enum in `cms/blogs/blog_posts/models/AttachToLangPrimaryRequestVNext::language`.
 - Added param `campaignName` to `cms/blogs/blog_posts/models/ContentLanguageVariation`.
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added param `name` to `cms.hubdb.rowsApi.cloneDraftTableRow()`.
 - Added param `archived` to `cms.hubdb.rowsApi.getDraftTableRowById()` and `cms.hubdb.rowsApi.getTableRow()`.
 - Added params `offset` and `archived` to `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
-- Change response object `CollectionResponseWithTotalHubDbTableRowV3ForwardPaging` to `UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3` of `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
+- Change response object type `CollectionResponseWithTotalHubDbTableRowV3ForwardPaging` to `UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3` of `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
 - Change param `batchInputString: BatchInputString` to `batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest` in `cms.hubdb.rowsApi.cloneDraftTableRow()`.
 - Added param `contentType` before `archived` param to `cms.hubdb.tablesApi.getAllTables()`.
 - Change params from `tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.getDraftTableDetailsById()` and `cms.hubdb.tablesApi.getTableDetails()`.
@@ -27,6 +27,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed `cms.source_code.ExtractApi.extractByPath()` method.
 - Added `doAsync()` and `getAsyncStatus()` methods to `cms.source_code.ExtractApi`.
 - Removed `cms.source_code.sourceCodeExtractApi`.
+
+
+## CRM
+
+- Added `foldersApi`.
+- Changed `listIds` type from `Array<number>` to `Array<string>` in `crm.lists.listsApi.getAll()`.
+- Changed `listId` type from `number` to `string` in `crm.lists.listsApi.getById()`, `crm.lists.listsApi.remove()`, `crm.lists.listsApi.restore()`, `crm.lists.listsApi.updateListFilters()` and `crm.lists.listsApi.updateName()`.
+- Added `crm.lists.mappingApi`.
+- Changed `listIds` type from `number` to `string` and `requestBody` type from `Array<number>` to `Array<string>` in `crm.lists.membershipsApi.add()` and `crm.lists.membershipsApi.remove()`.
+- Changed `listIds` and `sourceListId` types from `number` to `string` in `crm.lists.membershipsApi.addAllFromList()`.
+- Changed `listId` type from `number` to `string` in `crm.lists.membershipsApi.addAndRemove()`, `crm.lists.membershipsApi.getPage()` and `crm.lists.membershipsApi.removeAll()`.
+- Added `crm.lists.membershipsApi.getLists()` and `crm.lists.membershipsApi.getPageOrderedByAddedToListDate()`.
+- Change response object type `CollectionResponseLong` to `ApiCollectionResponseJoinTimeAndRecordId` of `crm.lists.membershipsApi.getPage()`.
+- Added param `customProperties` to `crm/lists/models/ListCreateRequest`.
+- Added param `listIds`, `processingTypes` and `sort` to `crm/lists/models/ListSearchRequest`.
+- Made `offset` and `additionalProperties` params nullable in `crm/lists/models/ListSearchRequest`.
+- Changed `recordIdsToRemove` and `recordIdsToAdd` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipChangeRequest`.
+- Changed `recordIdsRemoved`, `recordsIdsAdded` and `recordIdsMissing` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipsUpdateResponse`.
+- Changed `listId` type from `number` to `string` and  `coalescingRefineBy` from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicAssociationInListFilter`.
+- Changed `businessUnitId` type from `number` to `string` and `subscriptionIds` from `Array<number>` to `Array<string>` in `crm/lists/models/PublicCommunicationSubscriptionFilter`.
+
+
+
 
 
 ## [11.2.0] - 2024-08-14
