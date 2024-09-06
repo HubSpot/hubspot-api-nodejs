@@ -38,7 +38,7 @@ export interface ContentApiCreateRequest {
      */
     path: string
     /**
-     * The file to upload.
+     * 
      * @type HttpFile
      * @memberof ContentApicreate
      */
@@ -59,7 +59,7 @@ export interface ContentApiCreateOrUpdateRequest {
      */
     path: string
     /**
-     * The file to upload.
+     * 
      * @type HttpFile
      * @memberof ContentApicreateOrUpdate
      */
@@ -165,13 +165,22 @@ export class ObjectContentApi {
 import { ObservableExtractApi } from "./ObservableAPI";
 import { ExtractApiRequestFactory, ExtractApiResponseProcessor} from "../apis/ExtractApi";
 
-export interface ExtractApiExtractByPathRequest {
+export interface ExtractApiDoAsyncRequest {
     /**
-     * The file system location of the zip file.
-     * @type string
-     * @memberof ExtractApiextractByPath
+     * 
+     * @type FileExtractRequest
+     * @memberof ExtractApidoAsync
      */
-    path: string
+    fileExtractRequest: FileExtractRequest
+}
+
+export interface ExtractApiGetAsyncStatusRequest {
+    /**
+     * The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
+     * @type number
+     * @memberof ExtractApigetAsyncStatus
+     */
+    taskId: number
 }
 
 export class ObjectExtractApi {
@@ -182,21 +191,39 @@ export class ObjectExtractApi {
     }
 
     /**
-     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
-     * Extracts a zip file
+     * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
+     * Extract a zip file
      * @param param the request object
      */
-    public extractByPathWithHttpInfo(param: ExtractApiExtractByPathRequest, options?: Configuration): Promise<HttpInfo<void>> {
-        return this.api.extractByPathWithHttpInfo(param.path,  options).toPromise();
+    public doAsyncWithHttpInfo(param: ExtractApiDoAsyncRequest, options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+        return this.api.doAsyncWithHttpInfo(param.fileExtractRequest,  options).toPromise();
     }
 
     /**
-     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
-     * Extracts a zip file
+     * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
+     * Extract a zip file
      * @param param the request object
      */
-    public extractByPath(param: ExtractApiExtractByPathRequest, options?: Configuration): Promise<void> {
-        return this.api.extractByPath(param.path,  options).toPromise();
+    public doAsync(param: ExtractApiDoAsyncRequest, options?: Configuration): Promise<TaskLocator> {
+        return this.api.doAsync(param.fileExtractRequest,  options).toPromise();
+    }
+
+    /**
+     * Get the status of an extraction by the `taskId` returned from the initial `extract/async` request.
+     * Get extraction status
+     * @param param the request object
+     */
+    public getAsyncStatusWithHttpInfo(param: ExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        return this.api.getAsyncStatusWithHttpInfo(param.taskId,  options).toPromise();
+    }
+
+    /**
+     * Get the status of an extraction by the `taskId` returned from the initial `extract/async` request.
+     * Get extraction status
+     * @param param the request object
+     */
+    public getAsyncStatus(param: ExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<ActionResponse> {
+        return this.api.getAsyncStatus(param.taskId,  options).toPromise();
     }
 
 }
@@ -252,64 +279,6 @@ export class ObjectMetadataApi {
 
 }
 
-import { ObservableSourceCodeExtractApi } from "./ObservableAPI";
-import { SourceCodeExtractApiRequestFactory, SourceCodeExtractApiResponseProcessor} from "../apis/SourceCodeExtractApi";
-
-export interface SourceCodeExtractApiDoAsyncRequest {
-    /**
-     * 
-     * @type FileExtractRequest
-     * @memberof SourceCodeExtractApidoAsync
-     */
-    fileExtractRequest: FileExtractRequest
-}
-
-export interface SourceCodeExtractApiGetAsyncStatusRequest {
-    /**
-     * 
-     * @type number
-     * @memberof SourceCodeExtractApigetAsyncStatus
-     */
-    taskId: number
-}
-
-export class ObjectSourceCodeExtractApi {
-    private api: ObservableSourceCodeExtractApi
-
-    public constructor(configuration: Configuration, requestFactory?: SourceCodeExtractApiRequestFactory, responseProcessor?: SourceCodeExtractApiResponseProcessor) {
-        this.api = new ObservableSourceCodeExtractApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param param the request object
-     */
-    public doAsyncWithHttpInfo(param: SourceCodeExtractApiDoAsyncRequest, options?: Configuration): Promise<HttpInfo<TaskLocator>> {
-        return this.api.doAsyncWithHttpInfo(param.fileExtractRequest,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public doAsync(param: SourceCodeExtractApiDoAsyncRequest, options?: Configuration): Promise<TaskLocator> {
-        return this.api.doAsync(param.fileExtractRequest,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getAsyncStatusWithHttpInfo(param: SourceCodeExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
-        return this.api.getAsyncStatusWithHttpInfo(param.taskId,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public getAsyncStatus(param: SourceCodeExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<ActionResponse> {
-        return this.api.getAsyncStatus(param.taskId,  options).toPromise();
-    }
-
-}
-
 import { ObservableValidationApi } from "./ObservableAPI";
 import { ValidationApiRequestFactory, ValidationApiResponseProcessor} from "../apis/ValidationApi";
 
@@ -321,7 +290,7 @@ export interface ValidationApiDoValidateRequest {
      */
     path: string
     /**
-     * The file to validate.
+     * 
      * @type HttpFile
      * @memberof ValidationApidoValidate
      */
