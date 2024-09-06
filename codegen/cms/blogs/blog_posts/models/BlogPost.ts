@@ -204,13 +204,13 @@ export class BlogPost {
     */
     'url': string;
     /**
-    * Rules for require member registration to access private content.
-    */
-    'publicAccessRules': Array<any>;
-    /**
     * Boolean to allow overriding the AMP settings for the blog.
     */
     'enableGoogleAmpOutputOverride': boolean;
+    /**
+    * Rules for require member registration to access private content.
+    */
+    'publicAccessRules': Array<any>;
     /**
     * The timestamp (ISO8601 format) when this Blog Post was deleted.
     */
@@ -236,7 +236,7 @@ export class BlogPost {
     */
     'currentState': BlogPostCurrentStateEnum;
     /**
-    * ID of the type of object this is. Should always .
+    * ID of the type of object this is. 
     */
     'categoryId': number;
     /**
@@ -554,15 +554,15 @@ export class BlogPost {
             "format": ""
         },
         {
-            "name": "publicAccessRules",
-            "baseName": "publicAccessRules",
-            "type": "Array<any>",
-            "format": ""
-        },
-        {
             "name": "enableGoogleAmpOutputOverride",
             "baseName": "enableGoogleAmpOutputOverride",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "publicAccessRules",
+            "baseName": "publicAccessRules",
+            "type": "Array<any>",
             "format": ""
         },
         {
@@ -781,7 +781,9 @@ export enum BlogPostLanguageEnum {
     EnDg = 'en-dg',
     EnDk = 'en-dk',
     EnDm = 'en-dm',
+    EnEe = 'en-ee',
     EnEr = 'en-er',
+    EnFr = 'en-fr',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
@@ -1392,7 +1394,10 @@ export enum BlogPostContentTypeCategoryEnum {
     _9 = '9',
     _10 = '10',
     _11 = '11',
-    _12 = '12'
+    _12 = '12',
+    _13 = '13',
+    _14 = '14',
+    _15 = '15'
 }
 export enum BlogPostAbStatusEnum {
     Master = 'master',

@@ -68,7 +68,7 @@ export class ContentApiRequestFactory extends BaseAPIRequestFactory {
      * Create a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public async create(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -143,7 +143,7 @@ export class ContentApiRequestFactory extends BaseAPIRequestFactory {
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public async createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
