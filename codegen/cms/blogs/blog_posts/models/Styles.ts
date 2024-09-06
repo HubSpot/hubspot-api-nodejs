@@ -11,6 +11,7 @@
  */
 
 import { BackgroundImage } from '../models/BackgroundImage';
+import { BreakpointStyles } from '../models/BreakpointStyles';
 import { Gradient } from '../models/Gradient';
 import { RGBAColor } from '../models/RGBAColor';
 
@@ -19,6 +20,7 @@ export class Styles {
     'flexboxPositioning': string;
     'backgroundImage': BackgroundImage;
     'forceFullWidthSection': boolean;
+    'breakpointStyles'?: { [key: string]: BreakpointStyles; };
     'verticalAlignment': string;
     'maxWidthSectionCentering': number;
     'backgroundGradient': Gradient;
@@ -48,6 +50,12 @@ export class Styles {
             "name": "forceFullWidthSection",
             "baseName": "forceFullWidthSection",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "breakpointStyles",
+            "baseName": "breakpointStyles",
+            "type": "{ [key: string]: BreakpointStyles; }",
             "format": ""
         },
         {

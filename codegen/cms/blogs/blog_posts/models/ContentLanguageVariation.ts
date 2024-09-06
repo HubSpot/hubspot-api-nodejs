@@ -24,6 +24,7 @@ export class ContentLanguageVariation {
     'campaign': string;
     'id': number;
     'state': string;
+    'campaignName': string;
     'updated': Date;
     'slug': string;
 
@@ -99,6 +100,12 @@ export class ContentLanguageVariation {
         {
             "name": "state",
             "baseName": "state",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "campaignName",
+            "baseName": "campaignName",
             "type": "string",
             "format": ""
         },

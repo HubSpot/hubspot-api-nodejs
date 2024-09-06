@@ -8,6 +8,7 @@ export * from '../models/BatchResponseBlogPost';
 export * from '../models/BatchResponseBlogPostWithErrors';
 export * from '../models/BlogPost';
 export * from '../models/BlogPostLanguageCloneRequestVNext';
+export * from '../models/BreakpointStyles';
 export * from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
 export * from '../models/CollectionResponseWithTotalVersionBlogPost';
 export * from '../models/ColorStop';
@@ -34,7 +35,7 @@ export * from '../models/VersionBlogPost';
 export * from '../models/VersionUser';
 
 import { Angle } from '../models/Angle';
-import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
+import { AttachToLangPrimaryRequestVNext      } from '../models/AttachToLangPrimaryRequestVNext';
 import { BackgroundImage } from '../models/BackgroundImage';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
@@ -43,6 +44,7 @@ import { BatchResponseBlogPost        } from '../models/BatchResponseBlogPost';
 import { BatchResponseBlogPostWithErrors          } from '../models/BatchResponseBlogPostWithErrors';
 import { BlogPost      } from '../models/BlogPost';
 import { BlogPostLanguageCloneRequestVNext } from '../models/BlogPostLanguageCloneRequestVNext';
+import { BreakpointStyles } from '../models/BreakpointStyles';
 import { CollectionResponseWithTotalBlogPostForwardPaging } from '../models/CollectionResponseWithTotalBlogPostForwardPaging';
 import { CollectionResponseWithTotalVersionBlogPost } from '../models/CollectionResponseWithTotalVersionBlogPost';
 import { ColorStop } from '../models/ColorStop';
@@ -81,6 +83,7 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AttachToLangPrimaryRequestVNextLanguageEnum",
     "BatchResponseBlogPostStatusEnum",
     "BatchResponseBlogPostWithErrorsStatusEnum",
     "BlogPostLanguageEnum",
@@ -100,6 +103,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseBlogPostWithErrors": BatchResponseBlogPostWithErrors,
     "BlogPost": BlogPost,
     "BlogPostLanguageCloneRequestVNext": BlogPostLanguageCloneRequestVNext,
+    "BreakpointStyles": BreakpointStyles,
     "CollectionResponseWithTotalBlogPostForwardPaging": CollectionResponseWithTotalBlogPostForwardPaging,
     "CollectionResponseWithTotalVersionBlogPost": CollectionResponseWithTotalVersionBlogPost,
     "ColorStop": ColorStop,
