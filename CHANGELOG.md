@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change params from `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.updateDraftTable()`.
 - Added params `createdByUserId`, `updatedBy`, `updatedByUserId`, `createdAt`, `createdBy` and `updatedAt` to `cms/hubdb/models/Column` and `cms/hubdb/models/Option`.
 - Added param `isHubspotDefined` to `cms/hubdb/models/HubDbTableCloneRequest`.
+- Removed `cms.source_code.ExtractApi.extractByPath()` method.
+- Added `doAsync()` and `getAsyncStatus()` methods to `cms.source_code.ExtractApi`.
+- Removed `cms.source_code.sourceCodeExtractApi`.
 
 
 ## [11.2.0] - 2024-08-14
