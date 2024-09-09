@@ -34,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed `listIds` type from `Array<number>` to `Array<string>` in `crm.lists.listsApi.getAll()`.
 - Changed `listId` type from `number` to `string` in `crm.lists.listsApi.getById()`, `crm.lists.listsApi.remove()`, `crm.lists.listsApi.restore()`, `crm.lists.listsApi.updateListFilters()` and `crm.lists.listsApi.updateName()`.
 - Added `crm.lists.mappingApi`.
-- Changed `listIds` type from `number` to `string` and `requestBody` type from `Array<number>` to `Array<string>` in `crm.lists.membershipsApi.add()` and `crm.lists.membershipsApi.remove()`.
+- Changed `listId` type from `number` to `string` and `requestBody` type from `Array<number>` to `Array<string>` in `crm.lists.membershipsApi.add()` and `crm.lists.membershipsApi.remove()`.
 - Changed `listIds` and `sourceListId` types from `number` to `string` in `crm.lists.membershipsApi.addAllFromList()`.
 - Changed `listId` type from `number` to `string` in `crm.lists.membershipsApi.addAndRemove()`, `crm.lists.membershipsApi.getPage()` and `crm.lists.membershipsApi.removeAll()`.
 - Added `crm.lists.membershipsApi.getLists()` and `crm.lists.membershipsApi.getPageOrderedByAddedToListDate()`.
