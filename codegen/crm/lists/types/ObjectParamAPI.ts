@@ -1,17 +1,210 @@
 import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { CollectionResponseLong } from '../models/CollectionResponseLong';
+import { ApiCollectionResponseJoinTimeAndRecordId } from '../models/ApiCollectionResponseJoinTimeAndRecordId';
+import { ApiCollectionResponseRecordListMembershipNoPaging } from '../models/ApiCollectionResponseRecordListMembershipNoPaging';
 import { ListCreateRequest } from '../models/ListCreateRequest';
 import { ListCreateResponse } from '../models/ListCreateResponse';
 import { ListFetchResponse } from '../models/ListFetchResponse';
 import { ListFilterUpdateRequest } from '../models/ListFilterUpdateRequest';
+import { ListFolderCreateRequest } from '../models/ListFolderCreateRequest';
+import { ListFolderCreateResponse } from '../models/ListFolderCreateResponse';
+import { ListFolderFetchResponse } from '../models/ListFolderFetchResponse';
+import { ListMoveRequest } from '../models/ListMoveRequest';
 import { ListSearchRequest } from '../models/ListSearchRequest';
 import { ListSearchResponse } from '../models/ListSearchResponse';
 import { ListUpdateResponse } from '../models/ListUpdateResponse';
 import { ListsByIdResponse } from '../models/ListsByIdResponse';
 import { MembershipChangeRequest } from '../models/MembershipChangeRequest';
 import { MembershipsUpdateResponse } from '../models/MembershipsUpdateResponse';
+import { PublicBatchMigrationMapping } from '../models/PublicBatchMigrationMapping';
+import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
+
+import { ObservableFoldersApi } from "./ObservableAPI";
+import { FoldersApiRequestFactory, FoldersApiResponseProcessor} from "../apis/FoldersApi";
+
+export interface FoldersApiCreateRequest {
+    /**
+     * 
+     * @type ListFolderCreateRequest
+     * @memberof FoldersApicreate
+     */
+    listFolderCreateRequest: ListFolderCreateRequest
+}
+
+export interface FoldersApiGetAllRequest {
+    /**
+     * The Id of the folder to retrieve.
+     * @type string
+     * @memberof FoldersApigetAll
+     */
+    folderId?: string
+}
+
+export interface FoldersApiMoveRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FoldersApimove
+     */
+    folderId: string
+    /**
+     * 
+     * @type string
+     * @memberof FoldersApimove
+     */
+    newParentFolderId: string
+}
+
+export interface FoldersApiMoveListRequest {
+    /**
+     * 
+     * @type ListMoveRequest
+     * @memberof FoldersApimoveList
+     */
+    listMoveRequest: ListMoveRequest
+}
+
+export interface FoldersApiRemoveRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FoldersApiremove
+     */
+    folderId: string
+}
+
+export interface FoldersApiRenameRequest {
+    /**
+     * 
+     * @type string
+     * @memberof FoldersApirename
+     */
+    folderId: string
+    /**
+     * 
+     * @type string
+     * @memberof FoldersApirename
+     */
+    newFolderName?: string
+}
+
+export class ObjectFoldersApi {
+    private api: ObservableFoldersApi
+
+    public constructor(configuration: Configuration, requestFactory?: FoldersApiRequestFactory, responseProcessor?: FoldersApiResponseProcessor) {
+        this.api = new ObservableFoldersApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Creates a folder with the given information.
+     * Creates a folder
+     * @param param the request object
+     */
+    public createWithHttpInfo(param: FoldersApiCreateRequest, options?: Configuration): Promise<HttpInfo<ListFolderCreateResponse>> {
+        return this.api.createWithHttpInfo(param.listFolderCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Creates a folder with the given information.
+     * Creates a folder
+     * @param param the request object
+     */
+    public create(param: FoldersApiCreateRequest, options?: Configuration): Promise<ListFolderCreateResponse> {
+        return this.api.create(param.listFolderCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a folder and recursively includes all folders via the childNodes attribute.  The child lists field will be empty in all child nodes. Only the folder retrieved will include the child lists in that folder.
+     * Retrieves a folder.
+     * @param param the request object
+     */
+    public getAllWithHttpInfo(param: FoldersApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+        return this.api.getAllWithHttpInfo(param.folderId,  options).toPromise();
+    }
+
+    /**
+     * Retrieves a folder and recursively includes all folders via the childNodes attribute.  The child lists field will be empty in all child nodes. Only the folder retrieved will include the child lists in that folder.
+     * Retrieves a folder.
+     * @param param the request object
+     */
+    public getAll(param: FoldersApiGetAllRequest = {}, options?: Configuration): Promise<ListFolderFetchResponse> {
+        return this.api.getAll(param.folderId,  options).toPromise();
+    }
+
+    /**
+     * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
+     * Moves a folder
+     * @param param the request object
+     */
+    public moveWithHttpInfo(param: FoldersApiMoveRequest, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+        return this.api.moveWithHttpInfo(param.folderId, param.newParentFolderId,  options).toPromise();
+    }
+
+    /**
+     * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
+     * Moves a folder
+     * @param param the request object
+     */
+    public move(param: FoldersApiMoveRequest, options?: Configuration): Promise<ListFolderFetchResponse> {
+        return this.api.move(param.folderId, param.newParentFolderId,  options).toPromise();
+    }
+
+    /**
+     * Given a list and a folder, the list will be moved to that folder.
+     * Moves a list to a given folder
+     * @param param the request object
+     */
+    public moveListWithHttpInfo(param: FoldersApiMoveListRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.moveListWithHttpInfo(param.listMoveRequest,  options).toPromise();
+    }
+
+    /**
+     * Given a list and a folder, the list will be moved to that folder.
+     * Moves a list to a given folder
+     * @param param the request object
+     */
+    public moveList(param: FoldersApiMoveListRequest, options?: Configuration): Promise<void> {
+        return this.api.moveList(param.listMoveRequest,  options).toPromise();
+    }
+
+    /**
+     * Deletes the folder with the given Id.
+     * Deletes a folder
+     * @param param the request object
+     */
+    public removeWithHttpInfo(param: FoldersApiRemoveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.removeWithHttpInfo(param.folderId,  options).toPromise();
+    }
+
+    /**
+     * Deletes the folder with the given Id.
+     * Deletes a folder
+     * @param param the request object
+     */
+    public remove(param: FoldersApiRemoveRequest, options?: Configuration): Promise<void> {
+        return this.api.remove(param.folderId,  options).toPromise();
+    }
+
+    /**
+     * Renames the given folderId with a new name.
+     * Rename a folder
+     * @param param the request object
+     */
+    public renameWithHttpInfo(param: FoldersApiRenameRequest, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+        return this.api.renameWithHttpInfo(param.folderId, param.newFolderName,  options).toPromise();
+    }
+
+    /**
+     * Renames the given folderId with a new name.
+     * Rename a folder
+     * @param param the request object
+     */
+    public rename(param: FoldersApiRenameRequest, options?: Configuration): Promise<ListFolderFetchResponse> {
+        return this.api.rename(param.folderId, param.newFolderName,  options).toPromise();
+    }
+
+}
 
 import { ObservableListsApi } from "./ObservableAPI";
 import { ListsApiRequestFactory, ListsApiResponseProcessor} from "../apis/ListsApi";
@@ -27,7 +220,7 @@ export interface ListsApiCreateRequest {
 
 export interface ListsApiDoSearchRequest {
     /**
-     * The IDs of the records to add and/or remove from the list.
+     * 
      * @type ListSearchRequest
      * @memberof ListsApidoSearch
      */
@@ -37,10 +230,10 @@ export interface ListsApiDoSearchRequest {
 export interface ListsApiGetAllRequest {
     /**
      * The **ILS IDs** of the lists to fetch.
-     * @type Array&lt;number&gt;
+     * @type Array&lt;string&gt;
      * @memberof ListsApigetAll
      */
-    listIds?: Array<number>
+    listIds?: Array<string>
     /**
      * A flag indicating whether or not the response object list definitions should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
      * @type boolean
@@ -52,10 +245,10 @@ export interface ListsApiGetAllRequest {
 export interface ListsApiGetByIdRequest {
     /**
      * The **ILS ID** of the list to fetch.
-     * @type number
+     * @type string
      * @memberof ListsApigetById
      */
-    listId: number
+    listId: string
     /**
      * A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
      * @type boolean
@@ -88,28 +281,28 @@ export interface ListsApiGetByNameRequest {
 export interface ListsApiRemoveRequest {
     /**
      * The **ILS ID** of the list to delete.
-     * @type number
+     * @type string
      * @memberof ListsApiremove
      */
-    listId: number
+    listId: string
 }
 
 export interface ListsApiRestoreRequest {
     /**
      * The **ILS ID** of the list to restore.
-     * @type number
+     * @type string
      * @memberof ListsApirestore
      */
-    listId: number
+    listId: string
 }
 
 export interface ListsApiUpdateListFiltersRequest {
     /**
      * The **ILS ID** of the list to update.
-     * @type number
+     * @type string
      * @memberof ListsApiupdateListFilters
      */
-    listId: number
+    listId: string
     /**
      * 
      * @type ListFilterUpdateRequest
@@ -127,10 +320,10 @@ export interface ListsApiUpdateListFiltersRequest {
 export interface ListsApiUpdateNameRequest {
     /**
      * The **ILS ID** of the list to update.
-     * @type number
+     * @type string
      * @memberof ListsApiupdateName
      */
-    listId: number
+    listId: string
     /**
      * The name to update the list to.
      * @type string
@@ -316,61 +509,142 @@ export class ObjectListsApi {
 
 }
 
+import { ObservableMappingApi } from "./ObservableAPI";
+import { MappingApiRequestFactory, MappingApiResponseProcessor} from "../apis/MappingApi";
+
+export interface MappingApiTranslateLegacyListIdToListIdRequest {
+    /**
+     * The legacy list id from lists v1 API.
+     * @type string
+     * @memberof MappingApitranslateLegacyListIdToListId
+     */
+    legacyListId?: string
+}
+
+export interface MappingApiTranslateLegacyListIdToListIdBatchRequest {
+    /**
+     * 
+     * @type Array&lt;string&gt;
+     * @memberof MappingApitranslateLegacyListIdToListIdBatch
+     */
+    requestBody: Array<string>
+}
+
+export class ObjectMappingApi {
+    private api: ObservableMappingApi
+
+    public constructor(configuration: Configuration, requestFactory?: MappingApiRequestFactory, responseProcessor?: MappingApiResponseProcessor) {
+        this.api = new ObservableMappingApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * This API allows translation of legacy list id to list id. This is a temporary API allowed for mapping old id\'s to new id\'s and will expire on May 30th, 2025.
+     * Translate Legacy List Id to Modern List Id
+     * @param param the request object
+     */
+    public translateLegacyListIdToListIdWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: Configuration): Promise<HttpInfo<PublicMigrationMapping>> {
+        return this.api.translateLegacyListIdToListIdWithHttpInfo(param.legacyListId,  options).toPromise();
+    }
+
+    /**
+     * This API allows translation of legacy list id to list id. This is a temporary API allowed for mapping old id\'s to new id\'s and will expire on May 30th, 2025.
+     * Translate Legacy List Id to Modern List Id
+     * @param param the request object
+     */
+    public translateLegacyListIdToListId(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: Configuration): Promise<PublicMigrationMapping> {
+        return this.api.translateLegacyListIdToListId(param.legacyListId,  options).toPromise();
+    }
+
+    /**
+     * This API allows translation of a batch of legacy list id\'s to list id\'s. This allows for a maximum of 10,000 id\'s. This is a temporary API allowed for mapping old id\'s to new id\'s and will expire on May 30th, 2025.
+     * Translate Legacy List Id to Modern List Id in Batch
+     * @param param the request object
+     */
+    public translateLegacyListIdToListIdBatchWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: Configuration): Promise<HttpInfo<PublicBatchMigrationMapping>> {
+        return this.api.translateLegacyListIdToListIdBatchWithHttpInfo(param.requestBody,  options).toPromise();
+    }
+
+    /**
+     * This API allows translation of a batch of legacy list id\'s to list id\'s. This allows for a maximum of 10,000 id\'s. This is a temporary API allowed for mapping old id\'s to new id\'s and will expire on May 30th, 2025.
+     * Translate Legacy List Id to Modern List Id in Batch
+     * @param param the request object
+     */
+    public translateLegacyListIdToListIdBatch(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: Configuration): Promise<PublicBatchMigrationMapping> {
+        return this.api.translateLegacyListIdToListIdBatch(param.requestBody,  options).toPromise();
+    }
+
+}
+
 import { ObservableMembershipsApi } from "./ObservableAPI";
 import { MembershipsApiRequestFactory, MembershipsApiResponseProcessor} from "../apis/MembershipsApi";
 
 export interface MembershipsApiAddRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @type number
+     * @type string
      * @memberof MembershipsApiadd
      */
-    listId: number
+    listId: string
     /**
-     * The IDs of the records to add to the list.
-     * @type Array&lt;number&gt;
+     * 
+     * @type Array&lt;string&gt;
      * @memberof MembershipsApiadd
      */
-    requestBody: Array<number>
+    requestBody: Array<string>
 }
 
 export interface MembershipsApiAddAllFromListRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; *destination list*, which the *source list* records are added to.
-     * @type number
+     * @type string
      * @memberof MembershipsApiaddAllFromList
      */
-    listId: number
+    listId: string
     /**
      * The **ILS ID** of the *source list* to grab the records from, which are then added to the *destination list*.
-     * @type number
+     * @type string
      * @memberof MembershipsApiaddAllFromList
      */
-    sourceListId: number
+    sourceListId: string
 }
 
 export interface MembershipsApiAddAndRemoveRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @type number
+     * @type string
      * @memberof MembershipsApiaddAndRemove
      */
-    listId: number
+    listId: string
     /**
-     * The IDs of the records to add and/or remove from the list.
+     * 
      * @type MembershipChangeRequest
      * @memberof MembershipsApiaddAndRemove
      */
     membershipChangeRequest: MembershipChangeRequest
 }
 
+export interface MembershipsApiGetListsRequest {
+    /**
+     * Object type id of the record
+     * @type string
+     * @memberof MembershipsApigetLists
+     */
+    objectTypeId: string
+    /**
+     * Id of the record
+     * @type string
+     * @memberof MembershipsApigetLists
+     */
+    recordId: string
+}
+
 export interface MembershipsApiGetPageRequest {
     /**
      * The **ILS ID** of the list.
-     * @type number
+     * @type string
      * @memberof MembershipsApigetPage
      */
-    listId: number
+    listId: string
     /**
      * The paging offset token for the page that comes &#x60;after&#x60; the previously requested records.  If provided, then the records in the response will be the records following the offset, sorted in *ascending* order. Takes precedence over the &#x60;before&#x60; offset.
      * @type string
@@ -391,28 +665,55 @@ export interface MembershipsApiGetPageRequest {
     limit?: number
 }
 
+export interface MembershipsApiGetPageOrderedByAddedToListDateRequest {
+    /**
+     * The **ILS ID** of the list.
+     * @type string
+     * @memberof MembershipsApigetPageOrderedByAddedToListDate
+     */
+    listId: string
+    /**
+     * The paging offset token for the page that comes &#x60;after&#x60; the previously requested records.  If provided, then the records in the response will be the records following the offset, sorted in *ascending* order. Takes precedence over the &#x60;before&#x60; offset.
+     * @type string
+     * @memberof MembershipsApigetPageOrderedByAddedToListDate
+     */
+    after?: string
+    /**
+     * The paging offset token for the page that comes &#x60;before&#x60; the previously requested records.  If provided, then the records in the response will be the records preceding the offset, sorted in *descending* order.
+     * @type string
+     * @memberof MembershipsApigetPageOrderedByAddedToListDate
+     */
+    before?: string
+    /**
+     * The number of records to return in the response. The maximum &#x60;limit&#x60; is 250.
+     * @type number
+     * @memberof MembershipsApigetPageOrderedByAddedToListDate
+     */
+    limit?: number
+}
+
 export interface MembershipsApiRemoveRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @type number
+     * @type string
      * @memberof MembershipsApiremove
      */
-    listId: number
+    listId: string
     /**
-     * The IDs of the records to remove from the list.
-     * @type Array&lt;number&gt;
+     * 
+     * @type Array&lt;string&gt;
      * @memberof MembershipsApiremove
      */
-    requestBody: Array<number>
+    requestBody: Array<string>
 }
 
 export interface MembershipsApiRemoveAllRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @type number
+     * @type string
      * @memberof MembershipsApiremoveAll
      */
-    listId: number
+    listId: string
 }
 
 export class ObjectMembershipsApi {
@@ -441,7 +742,7 @@ export class ObjectMembershipsApi {
     }
 
     /**
-     * Add all of the records from a *source list* (specified by the `sourceListId`) to a *destination list* (specified by the `listId`). Records that are already members of the *destination list* will be ignored. The *destination* and *source list* IDs must be different. The *destination* and *source lists* must contain records of the same type (e.g. contacts, companies, etc.).  This endpoint only works for *destination lists* that have a `processingType` of `MANUAL` or `SNAPSHOT`. The *source list* can have any `processingType`.
+     * Add all of the records from a *source list* (specified by the `sourceListId`) to a *destination list* (specified by the `listId`). Records that are already members of the *destination list* will be ignored. The *destination* and *source list* IDs must be different. The *destination* and *source lists* must contain records of the same type (e.g. contacts, companies, etc.).  This endpoint only works for *destination lists* that have a `processingType` of `MANUAL` or `SNAPSHOT`. The *source list* can have any `processingType`.  This endpoint only supports a `sourceListId` for lists with less than 100,000 memberships.
      * Add All Records from a Source List to a Destination List
      * @param param the request object
      */
@@ -450,7 +751,7 @@ export class ObjectMembershipsApi {
     }
 
     /**
-     * Add all of the records from a *source list* (specified by the `sourceListId`) to a *destination list* (specified by the `listId`). Records that are already members of the *destination list* will be ignored. The *destination* and *source list* IDs must be different. The *destination* and *source lists* must contain records of the same type (e.g. contacts, companies, etc.).  This endpoint only works for *destination lists* that have a `processingType` of `MANUAL` or `SNAPSHOT`. The *source list* can have any `processingType`.
+     * Add all of the records from a *source list* (specified by the `sourceListId`) to a *destination list* (specified by the `listId`). Records that are already members of the *destination list* will be ignored. The *destination* and *source list* IDs must be different. The *destination* and *source lists* must contain records of the same type (e.g. contacts, companies, etc.).  This endpoint only works for *destination lists* that have a `processingType` of `MANUAL` or `SNAPSHOT`. The *source list* can have any `processingType`.  This endpoint only supports a `sourceListId` for lists with less than 100,000 memberships.
      * Add All Records from a Source List to a Destination List
      * @param param the request object
      */
@@ -477,11 +778,29 @@ export class ObjectMembershipsApi {
     }
 
     /**
+     * For given record provide lists this record is member of.
+     * Get lists record is member of
+     * @param param the request object
+     */
+    public getListsWithHttpInfo(param: MembershipsApiGetListsRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseRecordListMembershipNoPaging>> {
+        return this.api.getListsWithHttpInfo(param.objectTypeId, param.recordId,  options).toPromise();
+    }
+
+    /**
+     * For given record provide lists this record is member of.
+     * Get lists record is member of
+     * @param param the request object
+     */
+    public getLists(param: MembershipsApiGetListsRequest, options?: Configuration): Promise<ApiCollectionResponseRecordListMembershipNoPaging> {
+        return this.api.getLists(param.objectTypeId, param.recordId,  options).toPromise();
+    }
+
+    /**
      * Fetch the memberships of a list in order sorted by the `recordId` of the records in the list.  The `recordId`s are sorted in *ascending* order if an `after` offset or no offset is provided. If only a `before` offset is provided, then the records are sorted in *descending* order.  The `after` offset parameter will take precedence over the `before` offset in a case where both are provided.
      * Fetch List Memberships Ordered by ID
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseLong>> {
+    public getPageWithHttpInfo(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
         return this.api.getPageWithHttpInfo(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -490,8 +809,26 @@ export class ObjectMembershipsApi {
      * Fetch List Memberships Ordered by ID
      * @param param the request object
      */
-    public getPage(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<CollectionResponseLong> {
+    public getPage(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
         return this.api.getPage(param.listId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Fetch the memberships of a list in order sorted by the time the records were added to the list.  The `recordId`s are sorted in *ascending* order if an `after` offset or no offset is provided. If only a `before` offset is provided, then the records are sorted in *descending* order.  The `after` offset parameter will take precedence over the `before` offset in a case where both are provided.
+     * Fetch List Memberships Ordered by Added to List Date
+     * @param param the request object
+     */
+    public getPageOrderedByAddedToListDateWithHttpInfo(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
+        return this.api.getPageOrderedByAddedToListDateWithHttpInfo(param.listId, param.after, param.before, param.limit,  options).toPromise();
+    }
+
+    /**
+     * Fetch the memberships of a list in order sorted by the time the records were added to the list.  The `recordId`s are sorted in *ascending* order if an `after` offset or no offset is provided. If only a `before` offset is provided, then the records are sorted in *descending* order.  The `after` offset parameter will take precedence over the `before` offset in a case where both are provided.
+     * Fetch List Memberships Ordered by Added to List Date
+     * @param param the request object
+     */
+    public getPageOrderedByAddedToListDate(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: Configuration): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
+        return this.api.getPageOrderedByAddedToListDate(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
     /**
@@ -513,7 +850,7 @@ export class ObjectMembershipsApi {
     }
 
     /**
-     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
+     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.  This endpoint only supports lists that have less than 100,000 memberships.
      * Delete All Records from a List
      * @param param the request object
      */
@@ -522,7 +859,7 @@ export class ObjectMembershipsApi {
     }
 
     /**
-     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
+     * Remove **all** of the records from a list. ***Note:*** *The list is not deleted.*  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.  This endpoint only supports lists that have less than 100,000 memberships.
      * Delete All Records from a List
      * @param param the request object
      */
