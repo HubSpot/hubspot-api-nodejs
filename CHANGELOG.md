@@ -28,10 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `doAsync()` and `getAsyncStatus()` methods to `cms.source_code.ExtractApi`.
 - Removed `cms.source_code.sourceCodeExtractApi`.
 
+## CRM Lists
 
-## CRM
-
-- Added `foldersApi`.
+- Added `crm.lists.foldersApi`.
 - Changed `listIds` type from `Array<number>` to `Array<string>` in `crm.lists.listsApi.getAll()`.
 - Changed `listId` type from `number` to `string` in `crm.lists.listsApi.getById()`, `crm.lists.listsApi.remove()`, `crm.lists.listsApi.restore()`, `crm.lists.listsApi.updateListFilters()` and `crm.lists.listsApi.updateName()`.
 - Added `crm.lists.mappingApi`.
@@ -45,8 +44,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Made `offset` and `additionalProperties` params nullable in `crm/lists/models/ListSearchRequest`.
 - Changed `recordIdsToRemove` and `recordIdsToAdd` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipChangeRequest`.
 - Changed `recordIdsRemoved`, `recordsIdsAdded` and `recordIdsMissing` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipsUpdateResponse`.
-- Changed `listId` type from `number` to `string` and  `coalescingRefineBy` from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicAssociationInListFilter`.
-- Changed `businessUnitId` type from `number` to `string` and `subscriptionIds` from `Array<number>` to `Array<string>` in `crm/lists/models/PublicCommunicationSubscriptionFilter`.
+- Changed `listId` type from `number` to `string` in `crm/lists/models/PublicAssociationInListFilter`, `crm/lists/models/PublicInListFilter`, `crm/lists/models/PublicObjectListSearchResult`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicPropertyAssociationInListFilter`.
+- Changed `coalescingRefineBy` type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicAssociationInListFilter`, `crm/lists/models/PublicNumAssociationsFilter`, `crm/lists/models/PublicObjectList` and `crm/lists/models/PublicPropertyAssociationInListFilter`.
+- Changed `businessUnitId` type from `number` to `string` and `subscriptionIds` from `Array<number>` to `Array<string>` in `crm/lists/models/PublicCommunicationSubscriptionFilter` and `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`.
+- Changed `coalescingRefineBy` and `pruningRefineBy` params type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicCtaAnalyticsFilter`, `crm/lists/models/PublicEventAnalyticsFilter`, `crm/lists/models/PublicFormSubmissionFilter`, `crm/lists/models/PublicFormSubmissionOnPageFilter`, `crm/lists/models/PublicPageViewAnalyticsFilter`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicUnifiedEventsFilter`.
+- Changed `pruningRefineBy` type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicEmailEventFilter`.
+- Changed `subscriptionIds` type from `Array<number>` to `Array<string>` in `crm/lists/models/PublicEmailSubscriptionFilter`.
+- Changed `operation` type from `PublicPropertyFilterOperation` to `PublicSurveyMonkeyValueFilterValueComparison` in `crm/lists/models/PublicEventFilterMetadata` and `crm/lists/models/PublicPropertyFilter`.
+- Changed `valueComparison` type from `PublicPropertyFilterOperation` to `PublicSurveyMonkeyValueFilterValueComparison` in `crm/lists/models/PublicSurveyMonkeyValueFilter`.
+- Added param `size` to `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicObjectList`.
+- Changed `createdById` and `updatedById` type from `number` to `string` in `crm/lists/models/PublicObjectList` and `crm/lists/models/PublicObjectListSearchResult`.
+- Added param `coalescingRefineBy` to `crm/lists/models/PublicPropertyAssociationFilterBranchFilterBranchesInner` and `crm/lists/models/PublicUnifiedEventsFilterBranch`.
+- Changed `emailId` and `appId` type from `number` to `string` in `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`.
+- Renamed  from `crm/lists/models/PublicPropertyFilterOperation` to `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison`.
+- Changed `fiscalYearStart` type from `PublicPropertyFilterOperationFiscalYearStartEnum` to `PublicSurveyMonkeyValueFilterValueComparisonFiscalYearStartEnum` in `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison`.
+
+
+
 
 
 
