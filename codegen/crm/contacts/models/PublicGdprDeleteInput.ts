@@ -12,6 +12,9 @@
 
 
 export class PublicGdprDeleteInput {
+    /**
+    * The name of a property whose values are unique for this object
+    */
     'idProperty'?: string;
     'objectId': string;
 
