@@ -3,7 +3,6 @@ import {
   BatchApi,
   Configuration,
   createConfiguration,
-  GDPRApi,
   PublicObjectApi,
   RequestContext,
   ResponseContext,
@@ -20,7 +19,6 @@ import { getAll } from '../../../services/getAll'
 export default class DealsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public gdprApi: GDPRApi
   public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
 
@@ -37,7 +35,6 @@ export default class DealsDiscovery {
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))
     this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
