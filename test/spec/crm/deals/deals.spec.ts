@@ -1,4 +1,4 @@
-import { BasicApi, BatchApi, GDPRApi, PublicObjectApi, SearchApi } from '../../../../codegen/crm/deals/index'
+import { BasicApi, BatchApi, PublicObjectApi, SearchApi } from '../../../../codegen/crm/deals/index'
 import { Client } from '../../../../index'
 
 describe('api client', () => {
@@ -8,8 +8,6 @@ describe('api client', () => {
     expect(BasicApi.name).toBe(client.basicApi.constructor.name)
     expect(client.hasOwnProperty('batchApi')).toBeTruthy()
     expect(BatchApi.name).toBe(client.batchApi.constructor.name)
-    expect(client.hasOwnProperty('gdprApi')).toBeTruthy()
-    expect(GDPRApi.name).toBe(client.gdprApi.constructor.name)
     expect(client.hasOwnProperty('publicObjectApi')).toBeTruthy()
     expect(PublicObjectApi.name).toBe(client.publicObjectApi.constructor.name)
     expect(client.hasOwnProperty('searchApi')).toBeTruthy()
