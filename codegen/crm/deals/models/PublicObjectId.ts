@@ -12,7 +12,7 @@
 
 
 export class PublicObjectId {
-    'id': string;
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 

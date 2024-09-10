@@ -2,14 +2,16 @@ import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -70,7 +72,7 @@ export interface BasicApiGetByIdRequest {
      */
     archived?: boolean
     /**
-     * The name of a property whose values are unique for this object type
+     * The name of a property whose values are unique for this object
      * @type string
      * @memberof BasicApigetById
      */
@@ -130,7 +132,7 @@ export interface BasicApiUpdateRequest {
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
-     * The name of a property whose values are unique for this object type
+     * The name of a property whose values are unique for this object
      * @type string
      * @memberof BasicApiupdate
      */
@@ -217,7 +219,7 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{companyId}`. `{companyId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{companyId}`or optionally a unique property value as specified by the `idProperty` query param. `{companyId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
      * @param param the request object
      */
@@ -226,7 +228,7 @@ export class ObjectBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{companyId}`. `{companyId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{companyId}`or optionally a unique property value as specified by the `idProperty` query param. `{companyId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
      * @param param the request object
      */
@@ -279,6 +281,15 @@ export interface BatchApiUpdateRequest {
      * @memberof BatchApiupdate
      */
     batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput
+}
+
+export interface BatchApiUpsertRequest {
+    /**
+     * 
+     * @type BatchInputSimplePublicObjectBatchInputUpsert
+     * @memberof BatchApiupsert
+     */
+    batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert
 }
 
 export class ObjectBatchApi {
@@ -337,7 +348,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Update a batch of companies
+     * Update a batch of companies by internal ID, or unique property values
      * @param param the request object
      */
     public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -345,50 +356,29 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Update a batch of companies
+     * Update a batch of companies by internal ID, or unique property values
      * @param param the request object
      */
     public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
-}
-
-import { ObservableGDPRApi } from "./ObservableAPI";
-import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
-
-export interface GDPRApiPurgeRequest {
     /**
-     * 
-     * @type PublicGdprDeleteInput
-     * @memberof GDPRApipurge
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of companies by unique property values
+     * @param param the request object
      */
-    publicGdprDeleteInput: PublicGdprDeleteInput
-}
-
-export class ObjectGDPRApi {
-    private api: ObservableGDPRApi
-
-    public constructor(configuration: Configuration, requestFactory?: GDPRApiRequestFactory, responseProcessor?: GDPRApiResponseProcessor) {
-        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
+    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
+        return this.api.upsertWithHttpInfo(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of companies by unique property values
      * @param param the request object
      */
-    public purgeWithHttpInfo(param: GDPRApiPurgeRequest, options?: Configuration): Promise<HttpInfo<void>> {
-        return this.api.purgeWithHttpInfo(param.publicGdprDeleteInput,  options).toPromise();
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param param the request object
-     */
-    public purge(param: GDPRApiPurgeRequest, options?: Configuration): Promise<void> {
-        return this.api.purge(param.publicGdprDeleteInput,  options).toPromise();
+    public upsert(param: BatchApiUpsertRequest, options?: Configuration): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
+        return this.api.upsert(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
 }

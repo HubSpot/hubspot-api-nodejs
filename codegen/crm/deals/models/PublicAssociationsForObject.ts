@@ -14,8 +14,8 @@ import { AssociationSpec } from '../models/AssociationSpec';
 import { PublicObjectId } from '../models/PublicObjectId';
 
 export class PublicAssociationsForObject {
-    'types': Array<AssociationSpec>;
-    'to': PublicObjectId;
+    'types'?: Array<AssociationSpec>;
+    'to'?: PublicObjectId;
 
     static readonly discriminator: string | undefined = undefined;
 
