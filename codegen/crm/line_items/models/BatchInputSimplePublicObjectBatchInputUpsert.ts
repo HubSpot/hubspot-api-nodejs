@@ -10,29 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { SimplePublicObjectBatchInputUpsert } from '../models/SimplePublicObjectBatchInputUpsert';
 
-export class PublicMergeInput {
-    'objectIdToMerge': string;
-    'primaryObjectId': string;
+export class BatchInputSimplePublicObjectBatchInputUpsert {
+    'inputs': Array<SimplePublicObjectBatchInputUpsert>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "objectIdToMerge",
-            "baseName": "objectIdToMerge",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "primaryObjectId",
-            "baseName": "primaryObjectId",
-            "type": "string",
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<SimplePublicObjectBatchInputUpsert>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicMergeInput.attributeTypeMap;
+        return BatchInputSimplePublicObjectBatchInputUpsert.attributeTypeMap;
     }
 
     public constructor() {
