@@ -20,7 +20,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Deletes this calling extension. This will remove your service as an option for all connected accounts.
      * Delete calling settings
-     * @param appId The ID of the target app.
+     * @param appId The ID of the app.
      */
     public async archive(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -58,8 +58,8 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Used to set the menu label, target iframe URL, and dimensions for your calling extension.
      * Configure a calling extension
-     * @param appId The ID of the target app.
-     * @param settingsRequest Settings state to create with.
+     * @param appId The ID of the app.
+     * @param settingsRequest 
      */
     public async create(appId: number, settingsRequest: SettingsRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -114,7 +114,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Returns the calling extension settings configured for your app.
      * Get calling settings
-     * @param appId The ID of the target app.
+     * @param appId The ID of the app.
      */
     public async getById(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -152,8 +152,8 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Updates existing calling extension settings.
      * Update settings
-     * @param appId The ID of the target app.
-     * @param settingsPatchRequest Updated details for the settings.
+     * @param appId The ID of the app.
+     * @param settingsPatchRequest 
      */
     public async update(appId: number, settingsPatchRequest: SettingsPatchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

@@ -11,21 +11,21 @@
  */
 
 
-export class RecordingSettingsPatchRequest {
-    'urlToRetrieveAuthedRecording'?: string;
+export class MarkRecordingAsReadyRequest {
+    'engagementId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "urlToRetrieveAuthedRecording",
-            "baseName": "urlToRetrieveAuthedRecording",
-            "type": "string",
-            "format": ""
+            "name": "engagementId",
+            "baseName": "engagementId",
+            "type": "number",
+            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
-        return RecordingSettingsPatchRequest.attributeTypeMap;
+        return MarkRecordingAsReadyRequest.attributeTypeMap;
     }
 
     public constructor() {

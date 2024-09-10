@@ -23,7 +23,7 @@ export * from '../models/PublicCardResponse';
 export * from '../models/TopLevelActions';
 
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
-import { ActionHookActionBody      } from '../models/ActionHookActionBody';
+import { ActionHookActionBody       } from '../models/ActionHookActionBody';
 import { CardActions } from '../models/CardActions';
 import { CardAuditResponse      } from '../models/CardAuditResponse';
 import { CardCreateRequest } from '../models/CardCreateRequest';
@@ -38,7 +38,7 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { IFrameActionBody        } from '../models/IFrameActionBody';
 import { IntegratorCardPayloadResponse        } from '../models/IntegratorCardPayloadResponse';
 import { IntegratorObjectResult } from '../models/IntegratorObjectResult';
-import { IntegratorObjectResultActionsInner        } from '../models/IntegratorObjectResultActionsInner';
+import { IntegratorObjectResultActionsInner         } from '../models/IntegratorObjectResultActionsInner';
 import { ModelError } from '../models/ModelError';
 import { ObjectToken      } from '../models/ObjectToken';
 import { PublicCardFetchBody } from '../models/PublicCardFetchBody';

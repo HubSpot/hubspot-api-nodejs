@@ -1,4 +1,5 @@
 export * from '../models/ErrorDetail';
+export * from '../models/MarkRecordingAsReadyRequest';
 export * from '../models/ModelError';
 export * from '../models/RecordingSettingsPatchRequest';
 export * from '../models/RecordingSettingsRequest';
@@ -8,6 +9,7 @@ export * from '../models/SettingsRequest';
 export * from '../models/SettingsResponse';
 
 import { ErrorDetail } from '../models/ErrorDetail';
+import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { ModelError } from '../models/ModelError';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
@@ -33,6 +35,7 @@ let enumsMap: Set<string> = new Set<string>([
 
 let typeMap: {[index: string]: any} = {
     "ErrorDetail": ErrorDetail,
+    "MarkRecordingAsReadyRequest": MarkRecordingAsReadyRequest,
     "ModelError": ModelError,
     "RecordingSettingsPatchRequest": RecordingSettingsPatchRequest,
     "RecordingSettingsRequest": RecordingSettingsRequest,
