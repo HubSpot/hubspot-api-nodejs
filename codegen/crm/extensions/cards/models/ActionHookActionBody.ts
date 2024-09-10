@@ -13,26 +13,38 @@
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 
 export class ActionHookActionBody {
-    'type': ActionHookActionBodyTypeEnum;
+    'propertyNamesIncluded': Array<string>;
     'confirmation'?: ActionConfirmationBody;
+    'label'?: string;
+    'type': ActionHookActionBodyTypeEnum;
     'httpMethod': ActionHookActionBodyHttpMethodEnum;
     'url': string;
-    'label'?: string;
-    'propertyNamesIncluded': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "ActionHookActionBodyTypeEnum",
+            "name": "propertyNamesIncluded",
+            "baseName": "propertyNamesIncluded",
+            "type": "Array<string>",
             "format": ""
         },
         {
             "name": "confirmation",
             "baseName": "confirmation",
             "type": "ActionConfirmationBody",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "ActionHookActionBodyTypeEnum",
             "format": ""
         },
         {
@@ -45,18 +57,6 @@ export class ActionHookActionBody {
             "name": "url",
             "baseName": "url",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
             "format": ""
         }    ];
 

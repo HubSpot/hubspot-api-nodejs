@@ -12,19 +12,13 @@
 
 
 export class ActionConfirmationBody {
-    'prompt': string;
     'confirmButtonLabel': string;
     'cancelButtonLabel': string;
+    'prompt': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "prompt",
-            "baseName": "prompt",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "confirmButtonLabel",
             "baseName": "confirmButtonLabel",
@@ -34,6 +28,12 @@ export class ActionConfirmationBody {
         {
             "name": "cancelButtonLabel",
             "baseName": "cancelButtonLabel",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "prompt",
+            "baseName": "prompt",
             "type": "string",
             "format": ""
         }    ];
