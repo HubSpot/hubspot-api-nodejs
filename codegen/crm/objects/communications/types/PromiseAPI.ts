@@ -2,15 +2,16 @@ import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
-import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -78,7 +79,7 @@ export class PromiseBasicApi {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public getByIdWithHttpInfo(communicationId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
         const result = this.api.getByIdWithHttpInfo(communicationId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
@@ -93,7 +94,7 @@ export class PromiseBasicApi {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public getById(communicationId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
         const result = this.api.getById(communicationId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
@@ -131,11 +132,11 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{communicationId}`. `{communicationId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{communicationId}`or optionally a unique property value as specified by the `idProperty` query param. `{communicationId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
      * @param communicationId 
      * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public updateWithHttpInfo(communicationId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
         const result = this.api.updateWithHttpInfo(communicationId, simplePublicObjectInput, idProperty, _options);
@@ -143,11 +144,11 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{communicationId}`. `{communicationId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
+     * Perform a partial update of an Object identified by `{communicationId}`or optionally a unique property value as specified by the `idProperty` query param. `{communicationId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
      * @param communicationId 
      * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public update(communicationId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
         const result = this.api.update(communicationId, simplePublicObjectInput, idProperty, _options);
@@ -230,7 +231,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of communications
+     * Update a batch of communications by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -239,7 +240,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of communications
+     * Update a batch of communications by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -247,79 +248,23 @@ export class PromiseBatchApi {
         return result.toPromise();
     }
 
-
-}
-
-
-
-import { ObservableGDPRApi } from './ObservableAPI';
-
-import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
-export class PromiseGDPRApi {
-    private api: ObservableGDPRApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: GDPRApiRequestFactory,
-        responseProcessor?: GDPRApiResponseProcessor
-    ) {
-        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
-    }
-
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of communications by unique property values
+     * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
-    public purgeWithHttpInfo(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.purgeWithHttpInfo(publicGdprDeleteInput, _options);
+    public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
+        const result = this.api.upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert, _options);
         return result.toPromise();
     }
 
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of communications by unique property values
+     * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
-    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
-        const result = this.api.purge(publicGdprDeleteInput, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservablePublicObjectApi } from './ObservableAPI';
-
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class PromisePublicObjectApi {
-    private api: ObservablePublicObjectApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
-    ) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Merge two communications with same type
-     * @param publicMergeInput 
-     */
-    public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
-        const result = this.api.mergeWithHttpInfo(publicMergeInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Merge two communications with same type
-     * @param publicMergeInput 
-     */
-    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.merge(publicMergeInput, _options);
+    public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
+        const result = this.api.upsert(batchInputSimplePublicObjectBatchInputUpsert, _options);
         return result.toPromise();
     }
 

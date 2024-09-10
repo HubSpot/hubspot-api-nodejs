@@ -1,20 +1,12 @@
 import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
-import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
-import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
-import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
-import { SimplePublicObject } from '../models/SimplePublicObject';
-import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
-import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
 import { ObservableBasicApi } from './ObservableAPI';
 
@@ -31,46 +23,6 @@ export class PromiseBasicApi {
     }
 
     /**
-     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-     * Archive
-     * @param feedbackSubmissionId 
-     */
-    public archiveWithHttpInfo(feedbackSubmissionId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(feedbackSubmissionId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Move an Object identified by `{feedbackSubmissionId}` to the recycling bin.
-     * Archive
-     * @param feedbackSubmissionId 
-     */
-    public archive(feedbackSubmissionId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(feedbackSubmissionId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInputForCreate 
-     */
-    public createWithHttpInfo(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
-        const result = this.api.createWithHttpInfo(simplePublicObjectInputForCreate, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a feedback submission with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard feedback submissions is provided.
-     * Create
-     * @param simplePublicObjectInputForCreate 
-     */
-    public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.create(simplePublicObjectInputForCreate, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Read an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
      * @param feedbackSubmissionId 
@@ -78,7 +30,7 @@ export class PromiseBasicApi {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public getByIdWithHttpInfo(feedbackSubmissionId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
         const result = this.api.getByIdWithHttpInfo(feedbackSubmissionId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
@@ -93,7 +45,7 @@ export class PromiseBasicApi {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * @param idProperty The name of a property whose values are unique for this object
      */
     public getById(feedbackSubmissionId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<SimplePublicObjectWithAssociations> {
         const result = this.api.getById(feedbackSubmissionId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
@@ -130,30 +82,6 @@ export class PromiseBasicApi {
         return result.toPromise();
     }
 
-    /**
-     * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-     * Update
-     * @param feedbackSubmissionId 
-     * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
-     */
-    public updateWithHttpInfo(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
-        const result = this.api.updateWithHttpInfo(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Perform a partial update of an Object identified by `{feedbackSubmissionId}`. `{feedbackSubmissionId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param. Provided property values will be overwritten. Read-only and non-existent properties will be ignored. Properties values can be cleared by passing an empty string.
-     * Update
-     * @param feedbackSubmissionId 
-     * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
-     */
-    public update(feedbackSubmissionId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.update(feedbackSubmissionId, simplePublicObjectInput, idProperty, _options);
-        return result.toPromise();
-    }
-
 
 }
 
@@ -174,42 +102,6 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Archive a batch of feedback submissions by ID
-     * @param batchInputSimplePublicObjectId 
-     */
-    public archiveWithHttpInfo(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(batchInputSimplePublicObjectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Archive a batch of feedback submissions by ID
-     * @param batchInputSimplePublicObjectId 
-     */
-    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(batchInputSimplePublicObjectId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a batch of feedback submissions
-     * @param batchInputSimplePublicObjectInputForCreate 
-     */
-    public createWithHttpInfo(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
-        const result = this.api.createWithHttpInfo(batchInputSimplePublicObjectInputForCreate, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a batch of feedback submissions
-     * @param batchInputSimplePublicObjectInputForCreate 
-     */
-    public create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.create(batchInputSimplePublicObjectInputForCreate, _options);
-        return result.toPromise();
-    }
-
-    /**
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -226,100 +118,6 @@ export class PromiseBatchApi {
      */
     public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         const result = this.api.read(batchReadInputSimplePublicObjectId, archived, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Update a batch of feedback submissions
-     * @param batchInputSimplePublicObjectBatchInput 
-     */
-    public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
-        const result = this.api.updateWithHttpInfo(batchInputSimplePublicObjectBatchInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Update a batch of feedback submissions
-     * @param batchInputSimplePublicObjectBatchInput 
-     */
-    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        const result = this.api.update(batchInputSimplePublicObjectBatchInput, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservableGDPRApi } from './ObservableAPI';
-
-import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
-export class PromiseGDPRApi {
-    private api: ObservableGDPRApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: GDPRApiRequestFactory,
-        responseProcessor?: GDPRApiResponseProcessor
-    ) {
-        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
-     */
-    public purgeWithHttpInfo(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.purgeWithHttpInfo(publicGdprDeleteInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
-     */
-    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
-        const result = this.api.purge(publicGdprDeleteInput, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservablePublicObjectApi } from './ObservableAPI';
-
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class PromisePublicObjectApi {
-    private api: ObservablePublicObjectApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
-    ) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Merge two feedback submissions with same type
-     * @param publicMergeInput 
-     */
-    public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
-        const result = this.api.mergeWithHttpInfo(publicMergeInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Merge two feedback submissions with same type
-     * @param publicMergeInput 
-     */
-    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.merge(publicMergeInput, _options);
         return result.toPromise();
     }
 
