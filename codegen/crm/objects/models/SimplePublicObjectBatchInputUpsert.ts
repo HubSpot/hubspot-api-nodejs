@@ -10,26 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 
-export class BatchReadInputSimplePublicObjectId {
-    'propertiesWithHistory': Array<string>;
+export class SimplePublicObjectBatchInputUpsert {
     /**
     * The name of a property whose values are unique for this object
     */
     'idProperty'?: string;
-    'inputs': Array<SimplePublicObjectId>;
-    'properties': Array<string>;
+    'objectWriteTraceId'?: string;
+    'id': string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "Array<string>",
-            "format": ""
-        },
         {
             "name": "idProperty",
             "baseName": "idProperty",
@@ -37,20 +30,26 @@ export class BatchReadInputSimplePublicObjectId {
             "format": ""
         },
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<SimplePublicObjectId>",
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         },
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "Array<string>",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputSimplePublicObjectId.attributeTypeMap;
+        return SimplePublicObjectBatchInputUpsert.attributeTypeMap;
     }
 
     public constructor() {

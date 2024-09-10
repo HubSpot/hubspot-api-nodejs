@@ -10,47 +10,72 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
+import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
-export class BatchReadInputSimplePublicObjectId {
-    'propertiesWithHistory': Array<string>;
-    /**
-    * The name of a property whose values are unique for this object
-    */
-    'idProperty'?: string;
-    'inputs': Array<SimplePublicObjectId>;
-    'properties': Array<string>;
+export class SimplePublicUpsertObject {
+    'createdAt': Date;
+    'archived'?: boolean;
+    'archivedAt'?: Date;
+    '_new': boolean;
+    'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
+    'id': string;
+    'properties': { [key: string]: string; };
+    'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
+            "name": "createdAt",
+            "baseName": "createdAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "_new",
+            "baseName": "new",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "propertiesWithHistory",
             "baseName": "propertiesWithHistory",
-            "type": "Array<string>",
+            "type": "{ [key: string]: Array<ValueWithTimestamp>; }",
             "format": ""
         },
         {
-            "name": "idProperty",
-            "baseName": "idProperty",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<SimplePublicObjectId>",
             "format": ""
         },
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "Array<string>",
+            "type": "{ [key: string]: string; }",
             "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputSimplePublicObjectId.attributeTypeMap;
+        return SimplePublicUpsertObject.attributeTypeMap;
     }
 
     public constructor() {

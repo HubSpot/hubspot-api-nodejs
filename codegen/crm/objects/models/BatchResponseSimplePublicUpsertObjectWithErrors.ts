@@ -10,50 +10,84 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
+import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
+import { StandardError } from '../models/StandardError';
 
-export class BatchReadInputSimplePublicObjectId {
-    'propertiesWithHistory': Array<string>;
-    /**
-    * The name of a property whose values are unique for this object
-    */
-    'idProperty'?: string;
-    'inputs': Array<SimplePublicObjectId>;
-    'properties': Array<string>;
+export class BatchResponseSimplePublicUpsertObjectWithErrors {
+    'completedAt': Date;
+    'numErrors'?: number;
+    'requestedAt'?: Date;
+    'startedAt': Date;
+    'links'?: { [key: string]: string; };
+    'results': Array<SimplePublicUpsertObject>;
+    'errors'?: Array<StandardError>;
+    'status': BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "Array<string>",
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "numErrors",
+            "baseName": "numErrors",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
-            "name": "idProperty",
-            "baseName": "idProperty",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicUpsertObject>",
             "format": ""
         },
         {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<SimplePublicObjectId>",
+            "name": "errors",
+            "baseName": "errors",
+            "type": "Array<StandardError>",
             "format": ""
         },
         {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "Array<string>",
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputSimplePublicObjectId.attributeTypeMap;
+        return BatchResponseSimplePublicUpsertObjectWithErrors.attributeTypeMap;
     }
 
     public constructor() {
     }
+}
+
+
+export enum BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
 }
 

@@ -10,32 +10,69 @@
  * Do not edit the class manually.
  */
 
+import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
 
-export class PublicMergeInput {
-    'objectIdToMerge': string;
-    'primaryObjectId': string;
+export class BatchResponseSimplePublicUpsertObject {
+    'completedAt': Date;
+    'requestedAt'?: Date;
+    'startedAt': Date;
+    'links'?: { [key: string]: string; };
+    'results': Array<SimplePublicUpsertObject>;
+    'status': BatchResponseSimplePublicUpsertObjectStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "objectIdToMerge",
-            "baseName": "objectIdToMerge",
-            "type": "string",
+            "name": "completedAt",
+            "baseName": "completedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "requestedAt",
+            "baseName": "requestedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "startedAt",
+            "baseName": "startedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
-            "name": "primaryObjectId",
-            "baseName": "primaryObjectId",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicUpsertObject>",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "BatchResponseSimplePublicUpsertObjectStatusEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicMergeInput.attributeTypeMap;
+        return BatchResponseSimplePublicUpsertObject.attributeTypeMap;
     }
 
     public constructor() {
     }
+}
+
+
+export enum BatchResponseSimplePublicUpsertObjectStatusEnum {
+    Pending = 'PENDING',
+    Processing = 'PROCESSING',
+    Canceled = 'CANCELED',
+    Complete = 'COMPLETE'
 }
 
