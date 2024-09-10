@@ -2,8 +2,6 @@ import { createConfiguration } from '../../../../../codegen/crm/objects/goals/co
 import {
   BasicApi,
   BatchApi,
-  GDPRApi,
-  PublicObjectApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -17,8 +15,6 @@ import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 export default class GoalsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public gdprApi: GDPRApi
-  public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -34,8 +30,6 @@ export default class GoalsDiscovery {
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))
-    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 }
