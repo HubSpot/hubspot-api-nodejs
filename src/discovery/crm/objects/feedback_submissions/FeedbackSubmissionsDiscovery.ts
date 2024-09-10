@@ -2,8 +2,6 @@ import { createConfiguration } from '../../../../../codegen/crm/objects/feedback
 import {
   BasicApi,
   BatchApi,
-  GDPRApi,
-  PublicObjectApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -17,8 +15,6 @@ import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 export default class FeedbackSubmissionsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public gdprApi: GDPRApi
-  public publicObjectApi: PublicObjectApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
