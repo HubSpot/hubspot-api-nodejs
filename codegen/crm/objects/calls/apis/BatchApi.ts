@@ -9,11 +9,14 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 
 /**
  * no description
@@ -169,7 +172,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update a batch of calls
+     * Update a batch of calls by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
@@ -196,6 +199,54 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
             ObjectSerializer.serialize(batchInputSimplePublicObjectBatchInput, "BatchInputSimplePublicObjectBatchInput", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of calls by unique property values
+     * @param batchInputSimplePublicObjectBatchInputUpsert 
+     */
+    public async upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'batchInputSimplePublicObjectBatchInputUpsert' is not null or undefined
+        if (batchInputSimplePublicObjectBatchInputUpsert === null || batchInputSimplePublicObjectBatchInputUpsert === undefined) {
+            throw new RequiredError("BatchApi", "upsert", "batchInputSimplePublicObjectBatchInputUpsert");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/objects/calls/batch/upsert';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(batchInputSimplePublicObjectBatchInputUpsert, "BatchInputSimplePublicObjectBatchInputUpsert", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -374,6 +425,49 @@ export class BatchApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
             ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to upsert
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BatchResponseSimplePublicUpsertObject", ""
+            ) as BatchResponseSimplePublicUpsertObject;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("207", response.httpStatusCode)) {
+            const body: BatchResponseSimplePublicUpsertObjectWithErrors = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BatchResponseSimplePublicUpsertObjectWithErrors", ""
+            ) as BatchResponseSimplePublicUpsertObjectWithErrors;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject", ""
+            ) as BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
