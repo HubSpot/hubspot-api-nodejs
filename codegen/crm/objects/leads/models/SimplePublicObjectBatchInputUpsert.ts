@@ -16,6 +16,7 @@ export class SimplePublicObjectBatchInputUpsert {
     * The name of a property whose values are unique for this object
     */
     'idProperty'?: string;
+    'objectWriteTraceId'?: string;
     'id': string;
     'properties': { [key: string]: string; };
 
@@ -25,6 +26,12 @@ export class SimplePublicObjectBatchInputUpsert {
         {
             "name": "idProperty",
             "baseName": "idProperty",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
             "type": "string",
             "format": ""
         },
