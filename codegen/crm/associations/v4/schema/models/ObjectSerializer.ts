@@ -1,16 +1,42 @@
 export * from '../models/AssociationSpecWithLabel';
+export * from '../models/BatchInputPublicAssociationDefinitionConfigurationCreateRequest';
+export * from '../models/BatchInputPublicAssociationDefinitionConfigurationUpdateRequest';
+export * from '../models/BatchInputPublicAssociationSpec';
+export * from '../models/BatchResponsePublicAssociationDefinitionUserConfiguration';
+export * from '../models/BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors';
+export * from '../models/BatchResponseVoid';
+export * from '../models/BatchResponseVoidWithErrors';
 export * from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+export * from '../models/CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
+export * from '../models/PublicAssociationDefinitionConfigurationCreateRequest';
+export * from '../models/PublicAssociationDefinitionConfigurationUpdateRequest';
 export * from '../models/PublicAssociationDefinitionCreateRequest';
 export * from '../models/PublicAssociationDefinitionUpdateRequest';
+export * from '../models/PublicAssociationDefinitionUserConfiguration';
+export * from '../models/PublicAssociationSpec';
+export * from '../models/StandardError';
 
 import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
+import { BatchInputPublicAssociationDefinitionConfigurationCreateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationCreateRequest';
+import { BatchInputPublicAssociationDefinitionConfigurationUpdateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationUpdateRequest';
+import { BatchInputPublicAssociationSpec } from '../models/BatchInputPublicAssociationSpec';
+import { BatchResponsePublicAssociationDefinitionUserConfiguration        } from '../models/BatchResponsePublicAssociationDefinitionUserConfiguration';
+import { BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors          } from '../models/BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors';
+import { BatchResponseVoid        } from '../models/BatchResponseVoid';
+import { BatchResponseVoidWithErrors          } from '../models/BatchResponseVoidWithErrors';
 import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+import { CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
+import { PublicAssociationDefinitionConfigurationCreateRequest     } from '../models/PublicAssociationDefinitionConfigurationCreateRequest';
+import { PublicAssociationDefinitionConfigurationUpdateRequest     } from '../models/PublicAssociationDefinitionConfigurationUpdateRequest';
 import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
 import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
+import { PublicAssociationDefinitionUserConfiguration      } from '../models/PublicAssociationDefinitionUserConfiguration';
+import { PublicAssociationSpec } from '../models/PublicAssociationSpec';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -26,15 +52,35 @@ let primitives = [
 
 let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecWithLabelCategoryEnum",
+    "BatchResponsePublicAssociationDefinitionUserConfigurationStatusEnum",
+    "BatchResponsePublicAssociationDefinitionUserConfigurationWithErrorsStatusEnum",
+    "BatchResponseVoidStatusEnum",
+    "BatchResponseVoidWithErrorsStatusEnum",
+    "PublicAssociationDefinitionConfigurationCreateRequestCategoryEnum",
+    "PublicAssociationDefinitionConfigurationUpdateRequestCategoryEnum",
+    "PublicAssociationDefinitionUserConfigurationCategoryEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
+    "BatchInputPublicAssociationDefinitionConfigurationCreateRequest": BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
+    "BatchInputPublicAssociationDefinitionConfigurationUpdateRequest": BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
+    "BatchInputPublicAssociationSpec": BatchInputPublicAssociationSpec,
+    "BatchResponsePublicAssociationDefinitionUserConfiguration": BatchResponsePublicAssociationDefinitionUserConfiguration,
+    "BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors": BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
+    "BatchResponseVoid": BatchResponseVoid,
+    "BatchResponseVoidWithErrors": BatchResponseVoidWithErrors,
     "CollectionResponseAssociationSpecWithLabelNoPaging": CollectionResponseAssociationSpecWithLabelNoPaging,
+    "CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging": CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
+    "PublicAssociationDefinitionConfigurationCreateRequest": PublicAssociationDefinitionConfigurationCreateRequest,
+    "PublicAssociationDefinitionConfigurationUpdateRequest": PublicAssociationDefinitionConfigurationUpdateRequest,
     "PublicAssociationDefinitionCreateRequest": PublicAssociationDefinitionCreateRequest,
     "PublicAssociationDefinitionUpdateRequest": PublicAssociationDefinitionUpdateRequest,
+    "PublicAssociationDefinitionUserConfiguration": PublicAssociationDefinitionUserConfiguration,
+    "PublicAssociationSpec": PublicAssociationSpec,
+    "StandardError": StandardError,
 }
 
 type MimeTypeDescriptor = {
