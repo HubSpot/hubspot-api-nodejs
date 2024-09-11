@@ -26,8 +26,10 @@ export class ObjectSchema {
     * The names of secondary properties for this object. These will be displayed as secondary on the HubSpot record page for this object type.
     */
     'secondaryDisplayProperties'?: Array<string>;
+    'createdByUserId'?: number;
     'objectTypeId'?: string;
     'description'?: string;
+    'updatedByUserId'?: number;
     /**
     * An assigned unique ID for the object, including portal ID and object name.
     */
@@ -83,6 +85,12 @@ export class ObjectSchema {
             "format": ""
         },
         {
+            "name": "createdByUserId",
+            "baseName": "createdByUserId",
+            "type": "number",
+            "format": "int32"
+        },
+        {
             "name": "objectTypeId",
             "baseName": "objectTypeId",
             "type": "string",
@@ -93,6 +101,12 @@ export class ObjectSchema {
             "baseName": "description",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "updatedByUserId",
+            "baseName": "updatedByUserId",
+            "type": "number",
+            "format": "int32"
         },
         {
             "name": "fullyQualifiedName",

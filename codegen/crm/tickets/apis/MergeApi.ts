@@ -14,10 +14,10 @@ import { SimplePublicObject } from '../models/SimplePublicObject';
 /**
  * no description
  */
-export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
+export class MergeApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Merge two quotes with same type
+     * Merge two tickets with same type
      * @param publicMergeInput 
      */
     public async merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<RequestContext> {
@@ -25,12 +25,12 @@ export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'publicMergeInput' is not null or undefined
         if (publicMergeInput === null || publicMergeInput === undefined) {
-            throw new RequiredError("PublicObjectApi", "merge", "publicMergeInput");
+            throw new RequiredError("MergeApi", "merge", "publicMergeInput");
         }
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/quotes/merge';
+        const localVarPath = '/crm/v3/objects/tickets/merge';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -65,7 +65,7 @@ export class PublicObjectApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class PublicObjectApiResponseProcessor {
+export class MergeApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

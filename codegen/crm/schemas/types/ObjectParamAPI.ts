@@ -233,38 +233,3 @@ export class ObjectCoreApi {
     }
 
 }
-
-import { ObservablePublicObjectSchemasApi } from "./ObservableAPI";
-import { PublicObjectSchemasApiRequestFactory, PublicObjectSchemasApiResponseProcessor} from "../apis/PublicObjectSchemasApi";
-
-export interface PublicObjectSchemasApiPurgeRequest {
-    /**
-     * 
-     * @type string
-     * @memberof PublicObjectSchemasApipurge
-     */
-    objectType: string
-}
-
-export class ObjectPublicObjectSchemasApi {
-    private api: ObservablePublicObjectSchemasApi
-
-    public constructor(configuration: Configuration, requestFactory?: PublicObjectSchemasApiRequestFactory, responseProcessor?: PublicObjectSchemasApiResponseProcessor) {
-        this.api = new ObservablePublicObjectSchemasApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param param the request object
-     */
-    public purgeWithHttpInfo(param: PublicObjectSchemasApiPurgeRequest, options?: Configuration): Promise<HttpInfo<void>> {
-        return this.api.purgeWithHttpInfo(param.objectType,  options).toPromise();
-    }
-
-    /**
-     * @param param the request object
-     */
-    public purge(param: PublicObjectSchemasApiPurgeRequest, options?: Configuration): Promise<void> {
-        return this.api.purge(param.objectType,  options).toPromise();
-    }
-
-}

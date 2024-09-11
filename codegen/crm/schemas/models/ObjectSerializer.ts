@@ -27,7 +27,7 @@ import { ObjectTypeDefinitionPatch } from '../models/ObjectTypeDefinitionPatch';
 import { ObjectTypePropertyCreate      } from '../models/ObjectTypePropertyCreate';
 import { Option } from '../models/Option';
 import { OptionInput } from '../models/OptionInput';
-import { Property } from '../models/Property';
+import { Property                            } from '../models/Property';
 import { PropertyModificationMetadata } from '../models/PropertyModificationMetadata';
 
 /* tslint:disable:no-unused-variable */
@@ -47,6 +47,7 @@ let enumsMap: Set<string> = new Set<string>([
     "ObjectTypePropertyCreateTypeEnum",
     "ObjectTypePropertyCreateTextDisplayHintEnum",
     "ObjectTypePropertyCreateNumberDisplayHintEnum",
+    "PropertyDataSensitivityEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

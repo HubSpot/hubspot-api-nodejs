@@ -2,7 +2,6 @@ import {
   Configuration,
   CoreApi,
   createConfiguration,
-  PublicObjectSchemasApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -14,7 +13,6 @@ import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class SchemasDiscovery {
   public coreApi: CoreApi
-  public publicObjectSchemasApi: PublicObjectSchemasApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -28,8 +26,5 @@ export default class SchemasDiscovery {
     )
 
     this.coreApi = ApiDecoratorService.getInstance().apply<CoreApi>(new CoreApi(configuration))
-    this.publicObjectSchemasApi = ApiDecoratorService.getInstance().apply<PublicObjectSchemasApi>(
-      new PublicObjectSchemasApi(configuration),
-    )
   }
 }

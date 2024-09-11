@@ -17,12 +17,7 @@ import { PropertyModificationMetadata } from '../models/PropertyModificationMeta
 * Defines a property
 */
 export class Property {
-    /**
-    * The internal ID of the user who created the property in HubSpot. This field may not exist if the property was created outside of HubSpot.
-    */
-    'createdUserId'?: string;
     'hidden'?: boolean;
-    'modificationMetadata'?: PropertyModificationMetadata;
     /**
     * The order that this property should be displayed in the HubSpot UI relative to other properties for this object type. Properties are displayed in order starting with the lowest positive integer value. A value of -1 will cause the property to be displayed **after** any positive values.
     */
@@ -36,10 +31,6 @@ export class Property {
     */
     'showCurrencySymbol'?: boolean;
     /**
-    * A human-readable property label that will be shown in HubSpot.
-    */
-    'label': string;
-    /**
     * The property data type.
     */
     'type': string;
@@ -48,50 +39,21 @@ export class Property {
     */
     'hubspotDefined'?: boolean;
     /**
-    * Whether or not the property can be used in a HubSpot form.
-    */
-    'formField'?: boolean;
-    /**
     * When the property was created
     */
     'createdAt'?: Date;
-    /**
-    * When the property was archived.
-    */
-    'archivedAt'?: Date;
     /**
     * Whether or not the property is archived.
     */
     'archived'?: boolean;
     /**
-    * The name of the property group the property belongs to.
-    */
-    'groupName': string;
-    /**
-    * If this property is related to other object(s), they\'ll be listed here.
-    */
-    'referencedObjectType'?: string;
-    /**
-    * The internal property name, which must be used when referencing the property via the API.
-    */
-    'name': string;
-    /**
     * A list of valid options for the property. This field is required for enumerated properties, but will be empty for other property types.
     */
     'options': Array<Option>;
-    'calculationFormula'?: string;
     /**
     * Whether or not the property\'s value must be unique. Once set, this can\'t be changed.
     */
     'hasUniqueValue'?: boolean;
-    /**
-    * Controls how the property appears in HubSpot.
-    */
-    'fieldType': string;
-    /**
-    * The internal user ID of the user who updated the property in HubSpot. This field may not exist if the property was updated outside of HubSpot.
-    */
-    'updatedUserId'?: string;
     /**
     * For default properties, true indicates that the property is calculated by a HubSpot process. It has no effect for custom properties.
     */
@@ -104,26 +66,54 @@ export class Property {
     * 
     */
     'updatedAt'?: Date;
+    /**
+    * The internal ID of the user who created the property in HubSpot. This field may not exist if the property was created outside of HubSpot.
+    */
+    'createdUserId'?: string;
+    'modificationMetadata'?: PropertyModificationMetadata;
+    'sensitiveDataCategories'?: Array<string>;
+    /**
+    * A human-readable property label that will be shown in HubSpot.
+    */
+    'label': string;
+    /**
+    * Whether or not the property can be used in a HubSpot form.
+    */
+    'formField'?: boolean;
+    'dataSensitivity'?: PropertyDataSensitivityEnum;
+    /**
+    * When the property was archived.
+    */
+    'archivedAt'?: Date;
+    /**
+    * The name of the property group the property belongs to.
+    */
+    'groupName': string;
+    /**
+    * If this property is related to other object(s), they\'ll be listed here.
+    */
+    'referencedObjectType'?: string;
+    /**
+    * The internal property name, which must be used when referencing the property via the API.
+    */
+    'name': string;
+    'calculationFormula'?: string;
+    /**
+    * Controls how the property appears in HubSpot.
+    */
+    'fieldType': string;
+    /**
+    * The internal user ID of the user who updated the property in HubSpot. This field may not exist if the property was updated outside of HubSpot.
+    */
+    'updatedUserId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "createdUserId",
-            "baseName": "createdUserId",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "hidden",
             "baseName": "hidden",
             "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "modificationMetadata",
-            "baseName": "modificationMetadata",
-            "type": "PropertyModificationMetadata",
             "format": ""
         },
         {
@@ -145,12 +135,6 @@ export class Property {
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "type",
             "baseName": "type",
             "type": "string",
@@ -163,20 +147,8 @@ export class Property {
             "format": ""
         },
         {
-            "name": "formField",
-            "baseName": "formField",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "createdAt",
             "baseName": "createdAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
-            "name": "archivedAt",
-            "baseName": "archivedAt",
             "type": "Date",
             "format": "date-time"
         },
@@ -185,6 +157,78 @@ export class Property {
             "baseName": "archived",
             "type": "boolean",
             "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<Option>",
+            "format": ""
+        },
+        {
+            "name": "hasUniqueValue",
+            "baseName": "hasUniqueValue",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "calculated",
+            "baseName": "calculated",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "externalOptions",
+            "baseName": "externalOptions",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "updatedAt",
+            "baseName": "updatedAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
+            "name": "createdUserId",
+            "baseName": "createdUserId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "modificationMetadata",
+            "baseName": "modificationMetadata",
+            "type": "PropertyModificationMetadata",
+            "format": ""
+        },
+        {
+            "name": "sensitiveDataCategories",
+            "baseName": "sensitiveDataCategories",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "formField",
+            "baseName": "formField",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "dataSensitivity",
+            "baseName": "dataSensitivity",
+            "type": "PropertyDataSensitivityEnum",
+            "format": ""
+        },
+        {
+            "name": "archivedAt",
+            "baseName": "archivedAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "groupName",
@@ -205,21 +249,9 @@ export class Property {
             "format": ""
         },
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<Option>",
-            "format": ""
-        },
-        {
             "name": "calculationFormula",
             "baseName": "calculationFormula",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "hasUniqueValue",
-            "baseName": "hasUniqueValue",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -233,24 +265,6 @@ export class Property {
             "baseName": "updatedUserId",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "calculated",
-            "baseName": "calculated",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "externalOptions",
-            "baseName": "externalOptions",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -259,5 +273,12 @@ export class Property {
 
     public constructor() {
     }
+}
+
+
+export enum PropertyDataSensitivityEnum {
+    NonSensitive = 'non_sensitive',
+    Sensitive = 'sensitive',
+    HighlySensitive = 'highly_sensitive'
 }
 
