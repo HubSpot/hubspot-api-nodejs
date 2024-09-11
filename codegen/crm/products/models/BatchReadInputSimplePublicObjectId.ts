@@ -14,6 +14,9 @@ import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 
 export class BatchReadInputSimplePublicObjectId {
     'propertiesWithHistory': Array<string>;
+    /**
+    * The name of a property whose values are unique for this object.
+    */
     'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
     'properties': Array<string>;
