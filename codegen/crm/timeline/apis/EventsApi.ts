@@ -35,7 +35,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/events';
+        const localVarPath = '/integrators/timeline/v3/events';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -83,7 +83,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/events/batch/create';
+        const localVarPath = '/integrators/timeline/v3/events/batch/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -138,7 +138,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/events/{eventTemplateId}/{eventId}'
+        const localVarPath = '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
 
@@ -184,7 +184,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/events/{eventTemplateId}/{eventId}/detail'
+        const localVarPath = '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}/detail'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
 
@@ -232,7 +232,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/events/{eventTemplateId}/{eventId}/render'
+        const localVarPath = '/integrators/timeline/v3/events/{eventTemplateId}/{eventId}/render'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'eventId' + '}', encodeURIComponent(String(eventId)));
 
