@@ -28,6 +28,7 @@ export class ObjectTypeDefinitionPatch {
     * Names of properties that will be indexed for this object type in by HubSpot\'s product search.
     */
     'searchableProperties'?: Array<string>;
+    'clearDescription'?: boolean;
     /**
     * The name of the primary property for this object. This will be displayed as primary on the HubSpot record page for this object type.
     */
@@ -55,6 +56,12 @@ export class ObjectTypeDefinitionPatch {
             "name": "searchableProperties",
             "baseName": "searchableProperties",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "clearDescription",
+            "baseName": "clearDescription",
+            "type": "boolean",
             "format": ""
         },
         {

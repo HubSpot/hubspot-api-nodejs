@@ -24,7 +24,7 @@ export class AssociationDefinitionEgg {
     */
     'name'?: string;
     /**
-    * ID of the target object type ID to link to.
+    * ID of the target object type to link to.
     */
     'toObjectTypeId': string;
 

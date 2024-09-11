@@ -175,38 +175,3 @@ export class PromiseCoreApi {
 
 
 
-import { ObservablePublicObjectSchemasApi } from './ObservableAPI';
-
-import { PublicObjectSchemasApiRequestFactory, PublicObjectSchemasApiResponseProcessor} from "../apis/PublicObjectSchemasApi";
-export class PromisePublicObjectSchemasApi {
-    private api: ObservablePublicObjectSchemasApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicObjectSchemasApiRequestFactory,
-        responseProcessor?: PublicObjectSchemasApiResponseProcessor
-    ) {
-        this.api = new ObservablePublicObjectSchemasApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param objectType 
-     */
-    public purgeWithHttpInfo(objectType: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.purgeWithHttpInfo(objectType, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param objectType 
-     */
-    public purge(objectType: string, _options?: Configuration): Promise<void> {
-        const result = this.api.purge(objectType, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
