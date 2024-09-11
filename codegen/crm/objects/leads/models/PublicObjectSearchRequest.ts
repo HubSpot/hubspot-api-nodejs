@@ -14,11 +14,11 @@ import { FilterGroup } from '../models/FilterGroup';
 
 export class PublicObjectSearchRequest {
     'query'?: string;
-    'limit': number;
-    'after': string;
-    'sorts': Array<string>;
-    'properties': Array<string>;
-    'filterGroups': Array<FilterGroup>;
+    'limit'?: number;
+    'after'?: string;
+    'sorts'?: Array<string>;
+    'properties'?: Array<string>;
+    'filterGroups'?: Array<FilterGroup>;
 
     static readonly discriminator: string | undefined = undefined;
 

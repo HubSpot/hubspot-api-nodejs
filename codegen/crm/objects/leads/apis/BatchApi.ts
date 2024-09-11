@@ -15,6 +15,8 @@ import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInput
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 
 /**
  * no description
@@ -217,7 +219,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create or update records identified by `{leadsId}` or optionally a unique property value as specified by the `idProperty` query param. `{leadsId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
      * Create or update a batch of leads by unique property values
      * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
@@ -436,20 +438,20 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to upsert
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
+     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObject", ""
-            ) as BatchResponseSimplePublicObject;
+                "BatchResponseSimplePublicUpsertObject", ""
+            ) as BatchResponseSimplePublicUpsertObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicUpsertObjectWithErrors = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObjectWithErrors;
+                "BatchResponseSimplePublicUpsertObjectWithErrors", ""
+            ) as BatchResponseSimplePublicUpsertObjectWithErrors;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -462,10 +464,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
+                "BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject", ""
+            ) as BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

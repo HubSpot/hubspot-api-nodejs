@@ -8,6 +8,8 @@ import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInput
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
@@ -361,20 +363,20 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Create or update records identified by `{leadsId}` or optionally a unique property value as specified by the `idProperty` query param. `{leadsId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
      * Create or update a batch of leads by unique property values
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
         return this.api.upsertWithHttpInfo(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
     /**
-     * Create or update records identified by `{leadsId}` or optionally a unique property value as specified by the `idProperty` query param. `{leadsId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
      * Create or update a batch of leads by unique property values
      * @param param the request object
      */
-    public upsert(param: BatchApiUpsertRequest, options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public upsert(param: BatchApiUpsertRequest, options?: Configuration): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
         return this.api.upsert(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
