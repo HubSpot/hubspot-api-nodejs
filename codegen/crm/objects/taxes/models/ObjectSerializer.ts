@@ -1,11 +1,14 @@
 export * from '../models/AssociatedId';
 export * from '../models/AssociationSpec';
 export * from '../models/BatchInputSimplePublicObjectBatchInput';
+export * from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 export * from '../models/BatchInputSimplePublicObjectId';
 export * from '../models/BatchInputSimplePublicObjectInputForCreate';
 export * from '../models/BatchReadInputSimplePublicObjectId';
 export * from '../models/BatchResponseSimplePublicObject';
 export * from '../models/BatchResponseSimplePublicObjectWithErrors';
+export * from '../models/BatchResponseSimplePublicUpsertObject';
+export * from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
@@ -18,27 +21,30 @@ export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
 export * from '../models/PublicAssociationsForObject';
-export * from '../models/PublicGdprDeleteInput';
-export * from '../models/PublicMergeInput';
 export * from '../models/PublicObjectId';
 export * from '../models/PublicObjectSearchRequest';
 export * from '../models/SimplePublicObject';
 export * from '../models/SimplePublicObjectBatchInput';
+export * from '../models/SimplePublicObjectBatchInputUpsert';
 export * from '../models/SimplePublicObjectId';
 export * from '../models/SimplePublicObjectInput';
 export * from '../models/SimplePublicObjectInputForCreate';
 export * from '../models/SimplePublicObjectWithAssociations';
+export * from '../models/SimplePublicUpsertObject';
 export * from '../models/StandardError';
 export * from '../models/ValueWithTimestamp';
 
 import { AssociatedId } from '../models/AssociatedId';
 import { AssociationSpec    } from '../models/AssociationSpec';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject        } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors          } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
@@ -51,16 +57,16 @@ import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
-import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectId } from '../models/PublicObjectId';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
+import { SimplePublicObjectBatchInputUpsert } from '../models/SimplePublicObjectBatchInputUpsert';
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
 import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
+import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
 import { StandardError } from '../models/StandardError';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
@@ -80,6 +86,8 @@ let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
     "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
+    "BatchResponseSimplePublicUpsertObjectStatusEnum",
+    "BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum",
     "FilterOperatorEnum",
 ]);
 
@@ -87,11 +95,14 @@ let typeMap: {[index: string]: any} = {
     "AssociatedId": AssociatedId,
     "AssociationSpec": AssociationSpec,
     "BatchInputSimplePublicObjectBatchInput": BatchInputSimplePublicObjectBatchInput,
+    "BatchInputSimplePublicObjectBatchInputUpsert": BatchInputSimplePublicObjectBatchInputUpsert,
     "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
     "BatchInputSimplePublicObjectInputForCreate": BatchInputSimplePublicObjectInputForCreate,
     "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
+    "BatchResponseSimplePublicUpsertObject": BatchResponseSimplePublicUpsertObject,
+    "BatchResponseSimplePublicUpsertObjectWithErrors": BatchResponseSimplePublicUpsertObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
@@ -104,16 +115,16 @@ let typeMap: {[index: string]: any} = {
     "Paging": Paging,
     "PreviousPage": PreviousPage,
     "PublicAssociationsForObject": PublicAssociationsForObject,
-    "PublicGdprDeleteInput": PublicGdprDeleteInput,
-    "PublicMergeInput": PublicMergeInput,
     "PublicObjectId": PublicObjectId,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,
     "SimplePublicObject": SimplePublicObject,
     "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,
+    "SimplePublicObjectBatchInputUpsert": SimplePublicObjectBatchInputUpsert,
     "SimplePublicObjectId": SimplePublicObjectId,
     "SimplePublicObjectInput": SimplePublicObjectInput,
     "SimplePublicObjectInputForCreate": SimplePublicObjectInputForCreate,
     "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
+    "SimplePublicUpsertObject": SimplePublicUpsertObject,
     "StandardError": StandardError,
     "ValueWithTimestamp": ValueWithTimestamp,
 }
