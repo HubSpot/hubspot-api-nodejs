@@ -11,28 +11,42 @@
  */
 
 
-export class SubscriberEmailResponse {
-    'vid': number;
+export class ContactAssociation {
+    'firstname'?: string;
+    'contactId': string;
     'email': string;
+    'lastname'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
-            "type": "number",
-            "format": "int32"
+            "name": "firstname",
+            "baseName": "firstname",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "contactId",
+            "baseName": "contactId",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "email",
             "baseName": "email",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "lastname",
+            "baseName": "lastname",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriberEmailResponse.attributeTypeMap;
+        return ContactAssociation.attributeTypeMap;
     }
 
     public constructor() {

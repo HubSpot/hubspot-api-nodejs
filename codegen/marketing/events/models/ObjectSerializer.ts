@@ -1,3 +1,4 @@
+export * from '../models/AttendanceCounters';
 export * from '../models/BatchInputMarketingEventCreateRequestParams';
 export * from '../models/BatchInputMarketingEventEmailSubscriber';
 export * from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
@@ -6,9 +7,13 @@ export * from '../models/BatchResponseMarketingEventPublicDefaultResponse';
 export * from '../models/BatchResponseSubscriberEmailResponse';
 export * from '../models/BatchResponseSubscriberVidResponse';
 export * from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+export * from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
+export * from '../models/ContactAssociation';
 export * from '../models/ErrorDetail';
 export * from '../models/EventDetailSettings';
 export * from '../models/EventDetailSettingsUrl';
+export * from '../models/ForwardPaging';
+export * from '../models/MarketingEventAssociation';
 export * from '../models/MarketingEventCompleteRequestParams';
 export * from '../models/MarketingEventCreateRequestParams';
 export * from '../models/MarketingEventDefaultResponse';
@@ -19,11 +24,16 @@ export * from '../models/MarketingEventPublicReadResponse';
 export * from '../models/MarketingEventSubscriber';
 export * from '../models/MarketingEventUpdateRequestParams';
 export * from '../models/ModelError';
+export * from '../models/NextPage';
+export * from '../models/ParticipationAssociations';
+export * from '../models/ParticipationBreakdown';
+export * from '../models/ParticipationProperties';
 export * from '../models/PropertyValue';
 export * from '../models/StandardError';
 export * from '../models/SubscriberEmailResponse';
 export * from '../models/SubscriberVidResponse';
 
+import { AttendanceCounters } from '../models/AttendanceCounters';
 import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
 import { BatchInputMarketingEventEmailSubscriber } from '../models/BatchInputMarketingEventEmailSubscriber';
 import { BatchInputMarketingEventExternalUniqueIdentifier } from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
@@ -32,9 +42,13 @@ import { BatchResponseMarketingEventPublicDefaultResponse          } from '../mo
 import { BatchResponseSubscriberEmailResponse          } from '../models/BatchResponseSubscriberEmailResponse';
 import { BatchResponseSubscriberVidResponse          } from '../models/BatchResponseSubscriberVidResponse';
 import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
+import { ContactAssociation } from '../models/ContactAssociation';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
+import { ForwardPaging } from '../models/ForwardPaging';
+import { MarketingEventAssociation } from '../models/MarketingEventAssociation';
 import { MarketingEventCompleteRequestParams } from '../models/MarketingEventCompleteRequestParams';
 import { MarketingEventCreateRequestParams } from '../models/MarketingEventCreateRequestParams';
 import { MarketingEventDefaultResponse } from '../models/MarketingEventDefaultResponse';
@@ -45,7 +59,11 @@ import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublic
 import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
 import { ModelError } from '../models/ModelError';
-import { PropertyValue                 } from '../models/PropertyValue';
+import { NextPage } from '../models/NextPage';
+import { ParticipationAssociations } from '../models/ParticipationAssociations';
+import { ParticipationBreakdown } from '../models/ParticipationBreakdown';
+import { ParticipationProperties      } from '../models/ParticipationProperties';
+import { PropertyValue                } from '../models/PropertyValue';
 import { StandardError } from '../models/StandardError';
 import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
 import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
@@ -66,10 +84,13 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
     "BatchResponseSubscriberEmailResponseStatusEnum",
     "BatchResponseSubscriberVidResponseStatusEnum",
+    "ParticipationPropertiesAttendanceStateEnum",
     "PropertyValueSourceEnum",
+    "PropertyValueDataSensitivityEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AttendanceCounters": AttendanceCounters,
     "BatchInputMarketingEventCreateRequestParams": BatchInputMarketingEventCreateRequestParams,
     "BatchInputMarketingEventEmailSubscriber": BatchInputMarketingEventEmailSubscriber,
     "BatchInputMarketingEventExternalUniqueIdentifier": BatchInputMarketingEventExternalUniqueIdentifier,
@@ -78,9 +99,13 @@ let typeMap: {[index: string]: any} = {
     "BatchResponseSubscriberEmailResponse": BatchResponseSubscriberEmailResponse,
     "BatchResponseSubscriberVidResponse": BatchResponseSubscriberVidResponse,
     "CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging": CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging,
+    "CollectionResponseWithTotalParticipationBreakdownForwardPaging": CollectionResponseWithTotalParticipationBreakdownForwardPaging,
+    "ContactAssociation": ContactAssociation,
     "ErrorDetail": ErrorDetail,
     "EventDetailSettings": EventDetailSettings,
     "EventDetailSettingsUrl": EventDetailSettingsUrl,
+    "ForwardPaging": ForwardPaging,
+    "MarketingEventAssociation": MarketingEventAssociation,
     "MarketingEventCompleteRequestParams": MarketingEventCompleteRequestParams,
     "MarketingEventCreateRequestParams": MarketingEventCreateRequestParams,
     "MarketingEventDefaultResponse": MarketingEventDefaultResponse,
@@ -91,6 +116,10 @@ let typeMap: {[index: string]: any} = {
     "MarketingEventSubscriber": MarketingEventSubscriber,
     "MarketingEventUpdateRequestParams": MarketingEventUpdateRequestParams,
     "ModelError": ModelError,
+    "NextPage": NextPage,
+    "ParticipationAssociations": ParticipationAssociations,
+    "ParticipationBreakdown": ParticipationBreakdown,
+    "ParticipationProperties": ParticipationProperties,
     "PropertyValue": PropertyValue,
     "StandardError": StandardError,
     "SubscriberEmailResponse": SubscriberEmailResponse,

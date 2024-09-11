@@ -10,22 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { NextPage } from '../models/NextPage';
 
-export class SubscriberVidResponse {
-    'vid': number;
+export class ForwardPaging {
+    'next'?: NextPage;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
-            "type": "number",
-            "format": "int32"
+            "name": "next",
+            "baseName": "next",
+            "type": "NextPage",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriberVidResponse.attributeTypeMap;
+        return ForwardPaging.attributeTypeMap;
     }
 
     public constructor() {

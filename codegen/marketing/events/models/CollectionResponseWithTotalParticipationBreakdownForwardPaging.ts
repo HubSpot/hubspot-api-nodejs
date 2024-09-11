@@ -10,29 +10,38 @@
  * Do not edit the class manually.
  */
 
+import { ForwardPaging } from '../models/ForwardPaging';
+import { ParticipationBreakdown } from '../models/ParticipationBreakdown';
 
-export class SubscriberEmailResponse {
-    'vid': number;
-    'email': string;
+export class CollectionResponseWithTotalParticipationBreakdownForwardPaging {
+    'total': number;
+    'paging'?: ForwardPaging;
+    'results': Array<ParticipationBreakdown>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
+            "name": "total",
+            "baseName": "total",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
+            "name": "paging",
+            "baseName": "paging",
+            "type": "ForwardPaging",
+            "format": ""
+        },
+        {
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<ParticipationBreakdown>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriberEmailResponse.attributeTypeMap;
+        return CollectionResponseWithTotalParticipationBreakdownForwardPaging.attributeTypeMap;
     }
 
     public constructor() {
