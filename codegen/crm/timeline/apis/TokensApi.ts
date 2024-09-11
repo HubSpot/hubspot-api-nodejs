@@ -45,7 +45,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+        const localVarPath = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
@@ -99,7 +99,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens'
+        const localVarPath = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
 
@@ -170,7 +170,7 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/timeline/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
+        const localVarPath = '/integrators/timeline/v3/{appId}/event-templates/{eventTemplateId}/tokens/{tokenName}'
             .replace('{' + 'eventTemplateId' + '}', encodeURIComponent(String(eventTemplateId)))
             .replace('{' + 'tokenName' + '}', encodeURIComponent(String(tokenName)))
             .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
