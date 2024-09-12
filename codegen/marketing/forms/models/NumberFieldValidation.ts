@@ -15,7 +15,13 @@
 * Describes how a numeric value should be validated.
 */
 export class NumberFieldValidation {
+    /**
+    * 
+    */
     'minAllowedDigits': number;
+    /**
+    * 
+    */
     'maxAllowedDigits': number;
 
     static readonly discriminator: string | undefined = undefined;

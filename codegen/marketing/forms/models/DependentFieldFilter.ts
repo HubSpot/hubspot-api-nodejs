@@ -15,24 +15,33 @@
 * A condition based on customer input
 */
 export class DependentFieldFilter {
-    'operator': DependentFieldFilterOperatorEnum;
-    'value': string;
-    'values': Array<string>;
+    /**
+    * 
+    */
     'rangeStart': string;
+    /**
+    * 
+    */
+    'values': Array<string>;
+    /**
+    * 
+    */
+    'value': string;
+    /**
+    * 
+    */
+    'operator': DependentFieldFilterOperatorEnum;
+    /**
+    * 
+    */
     'rangeEnd': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "DependentFieldFilterOperatorEnum",
-            "format": ""
-        },
-        {
-            "name": "value",
-            "baseName": "value",
+            "name": "rangeStart",
+            "baseName": "rangeStart",
             "type": "string",
             "format": ""
         },
@@ -43,9 +52,15 @@ export class DependentFieldFilter {
             "format": ""
         },
         {
-            "name": "rangeStart",
-            "baseName": "rangeStart",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "operator",
+            "baseName": "operator",
+            "type": "DependentFieldFilterOperatorEnum",
             "format": ""
         },
         {

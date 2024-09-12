@@ -17,59 +17,53 @@ import { DependentField } from '../models/DependentField';
 */
 export class FileField {
     /**
-    * Determines how the field will be displayed and validated.
-    */
-    'fieldType': FileFieldFieldTypeEnum;
-    /**
     * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
     /**
-    * The identifier of the field. In combination with the object type ID, it must be unique.
+    * Whether to allow the upload of multiple files.
     */
-    'name': string;
-    /**
-    * The main label for the form field.
-    */
-    'label': string;
-    /**
-    * Additional text helping the customer to complete the field.
-    */
-    'description'?: string;
-    /**
-    * Whether a value for this field is required when submitting the form.
-    */
-    'required': boolean;
+    'allowMultipleFiles': boolean;
     /**
     * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
+    * The value filled in by default. This value will be submitted unless the customer modifies it.
+    */
+    'defaultValue'?: string;
+    /**
+    * The identifier of the field. In combination with the object type ID, it must be unique.
+    */
+    'name': string;
+    /**
+    * Additional text helping the customer to complete the field.
+    */
+    'description'?: string;
+    /**
     * A list of other fields to make visible based on the value filled in for this field.
     */
     'dependentFields': Array<DependentField>;
+    /**
+    * The main label for the form field.
+    */
+    'label': string;
     /**
     * The prompt text showing when the field isn\'t filled in.
     */
     'placeholder'?: string;
     /**
-    * The value filled in by default. This value will be submitted unless the customer modifies it.
+    * Determines how the field will be displayed and validated.
     */
-    'defaultValue'?: string;
+    'fieldType': FileFieldFieldTypeEnum;
     /**
-    * Whether to allow the upload of multiple files.
+    * Whether a value for this field is required when submitting the form.
     */
-    'allowMultipleFiles': boolean;
+    'required': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "FileFieldFieldTypeEnum",
-            "format": ""
-        },
         {
             "name": "objectTypeId",
             "baseName": "objectTypeId",
@@ -77,26 +71,8 @@ export class FileField {
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
+            "name": "allowMultipleFiles",
+            "baseName": "allowMultipleFiles",
             "type": "boolean",
             "format": ""
         },
@@ -107,9 +83,33 @@ export class FileField {
             "format": ""
         },
         {
+            "name": "defaultValue",
+            "baseName": "defaultValue",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "dependentFields",
             "baseName": "dependentFields",
             "type": "Array<DependentField>",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
             "format": ""
         },
         {
@@ -119,14 +119,14 @@ export class FileField {
             "format": ""
         },
         {
-            "name": "defaultValue",
-            "baseName": "defaultValue",
-            "type": "string",
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "FileFieldFieldTypeEnum",
             "format": ""
         },
         {
-            "name": "allowMultipleFiles",
-            "baseName": "allowMultipleFiles",
+            "name": "required",
+            "baseName": "required",
             "type": "boolean",
             "format": ""
         }    ];

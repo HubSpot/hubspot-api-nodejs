@@ -12,20 +12,26 @@
 
 
 export class LegalConsentOptionsLegitimateInterest {
-    'type': LegalConsentOptionsLegitimateInterestTypeEnum;
+    /**
+    * 
+    */
     'subscriptionTypeIds': Array<number>;
+    /**
+    * 
+    */
     'lawfulBasis': LegalConsentOptionsLegitimateInterestLawfulBasisEnum;
+    /**
+    * 
+    */
+    'type': LegalConsentOptionsLegitimateInterestTypeEnum;
+    /**
+    * 
+    */
     'privacyText': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "LegalConsentOptionsLegitimateInterestTypeEnum",
-            "format": ""
-        },
         {
             "name": "subscriptionTypeIds",
             "baseName": "subscriptionTypeIds",
@@ -36,6 +42,12 @@ export class LegalConsentOptionsLegitimateInterest {
             "name": "lawfulBasis",
             "baseName": "lawfulBasis",
             "type": "LegalConsentOptionsLegitimateInterestLawfulBasisEnum",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "LegalConsentOptionsLegitimateInterestTypeEnum",
             "format": ""
         },
         {
@@ -54,12 +66,12 @@ export class LegalConsentOptionsLegitimateInterest {
 }
 
 
-export enum LegalConsentOptionsLegitimateInterestTypeEnum {
-    LegitimateInterest = 'legitimate_interest'
-}
 export enum LegalConsentOptionsLegitimateInterestLawfulBasisEnum {
     Lead = 'lead',
     Client = 'client',
     Other = 'other'
+}
+export enum LegalConsentOptionsLegitimateInterestTypeEnum {
+    LegitimateInterest = 'legitimate_interest'
 }
 

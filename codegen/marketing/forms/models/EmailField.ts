@@ -18,59 +18,65 @@ import { EmailFieldValidation } from '../models/EmailFieldValidation';
 */
 export class EmailField {
     /**
-    * Determines how the field will be displayed and validated.
-    */
-    'fieldType': EmailFieldFieldTypeEnum;
-    /**
     * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
-    /**
-    * The identifier of the field. In combination with the object type ID, it must be unique.
-    */
-    'name': string;
-    /**
-    * The main label for the form field.
-    */
-    'label': string;
-    /**
-    * Additional text helping the customer to complete the field.
-    */
-    'description'?: string;
-    /**
-    * Whether a value for this field is required when submitting the form.
-    */
-    'required': boolean;
     /**
     * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
+    * The value filled in by default. This value will be submitted unless the customer modifies it.
+    */
+    'defaultValue'?: string;
+    /**
+    * The identifier of the field. In combination with the object type ID, it must be unique.
+    */
+    'name': string;
+    /**
+    * Additional text helping the customer to complete the field.
+    */
+    'description'?: string;
+    /**
     * A list of other fields to make visible based on the value filled in for this field.
     */
     'dependentFields': Array<DependentField>;
+    /**
+    * The main label for the form field.
+    */
+    'label': string;
     /**
     * The prompt text showing when the field isn\'t filled in.
     */
     'placeholder'?: string;
     /**
-    * The value filled in by default. This value will be submitted unless the customer modifies it.
+    * Determines how the field will be displayed and validated.
     */
-    'defaultValue'?: string;
+    'fieldType': EmailFieldFieldTypeEnum;
+    /**
+    * Whether a value for this field is required when submitting the form.
+    */
+    'required': boolean;
     'validation': EmailFieldValidation;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "EmailFieldFieldTypeEnum",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "defaultValue",
+            "baseName": "defaultValue",
             "type": "string",
             "format": ""
         },
@@ -81,27 +87,9 @@ export class EmailField {
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "description",
             "baseName": "description",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -111,15 +99,27 @@ export class EmailField {
             "format": ""
         },
         {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "placeholder",
             "baseName": "placeholder",
             "type": "string",
             "format": ""
         },
         {
-            "name": "defaultValue",
-            "baseName": "defaultValue",
-            "type": "string",
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "EmailFieldFieldTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "required",
+            "baseName": "required",
+            "type": "boolean",
             "format": ""
         },
         {

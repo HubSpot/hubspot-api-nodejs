@@ -16,27 +16,27 @@
 */
 export class EmailFieldValidation {
     /**
-    * A list of email domains to block.
-    */
-    'blockedEmailDomains': Array<string>;
-    /**
     * Whether to block the free email providers.
     */
     'useDefaultBlockList': boolean;
+    /**
+    * A list of email domains to block.
+    */
+    'blockedEmailDomains': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "blockedEmailDomains",
-            "baseName": "blockedEmailDomains",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "useDefaultBlockList",
             "baseName": "useDefaultBlockList",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "blockedEmailDomains",
+            "baseName": "blockedEmailDomains",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
