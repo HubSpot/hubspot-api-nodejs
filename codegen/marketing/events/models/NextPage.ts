@@ -11,21 +11,28 @@
  */
 
 
-export class SubscriberVidResponse {
-    'vid': number;
+export class NextPage {
+    'link'?: string;
+    'after': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
-            "type": "number",
-            "format": "int32"
+            "name": "link",
+            "baseName": "link",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "after",
+            "baseName": "after",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriberVidResponse.attributeTypeMap;
+        return NextPage.attributeTypeMap;
     }
 
     public constructor() {

@@ -11,28 +11,42 @@
  */
 
 
-export class SubscriberEmailResponse {
-    'vid': number;
-    'email': string;
+export class AttendanceCounters {
+    'attended': number;
+    'registered': number;
+    'cancelled': number;
+    'noShows': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
+            "name": "attended",
+            "baseName": "attended",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
+            "name": "registered",
+            "baseName": "registered",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "cancelled",
+            "baseName": "cancelled",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "noShows",
+            "baseName": "noShows",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return SubscriberEmailResponse.attributeTypeMap;
+        return AttendanceCounters.attributeTypeMap;
     }
 
     public constructor() {

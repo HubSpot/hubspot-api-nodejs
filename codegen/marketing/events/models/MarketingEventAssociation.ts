@@ -11,19 +11,11 @@
  */
 
 
-export class MarketingEventExternalUniqueIdentifier {
-    /**
-    * The accountId that is associated with this marketing event in the external event application.
-    */
-    'externalAccountId': string;
-    /**
-    * The id of the marketing event in the external event application.
-    */
-    'externalEventId': string;
-    /**
-    * The id of the application that created the marketing event in HubSpot.
-    */
-    'appId': number;
+export class MarketingEventAssociation {
+    'externalAccountId'?: string;
+    'marketingEventId': string;
+    'externalEventId'?: string;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -35,20 +27,26 @@ export class MarketingEventExternalUniqueIdentifier {
             "format": ""
         },
         {
+            "name": "marketingEventId",
+            "baseName": "marketingEventId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "externalEventId",
             "baseName": "externalEventId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "appId",
-            "baseName": "appId",
-            "type": "number",
-            "format": "int32"
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MarketingEventExternalUniqueIdentifier.attributeTypeMap;
+        return MarketingEventAssociation.attributeTypeMap;
     }
 
     public constructor() {
