@@ -1,6 +1,6 @@
 import {
   createConfiguration,
-  PublicSmtpTokensApi,
+  PublicSMTPTokensApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -12,7 +12,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class TransactionalDiscovery {
-  public publicSmtpTokensApi: PublicSmtpTokensApi
+  public publicSMTPTokensApi: PublicSMTPTokensApi
   public singleSendApi: SingleSendApi
 
   constructor(config: IConfiguration) {
@@ -26,8 +26,8 @@ export default class TransactionalDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.publicSmtpTokensApi = ApiDecoratorService.getInstance().apply<PublicSmtpTokensApi>(
-      new PublicSmtpTokensApi(configuration),
+    this.publicSMTPTokensApi = ApiDecoratorService.getInstance().apply<PublicSMTPTokensApi>(
+      new PublicSMTPTokensApi(configuration),
     )
     this.singleSendApi = ApiDecoratorService.getInstance().apply<SingleSendApi>(new SingleSendApi(configuration))
   }

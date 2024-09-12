@@ -8,20 +8,20 @@ import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 
-import { PublicSmtpTokensApiRequestFactory, PublicSmtpTokensApiResponseProcessor} from "../apis/PublicSmtpTokensApi";
-export class ObservablePublicSmtpTokensApi {
-    private requestFactory: PublicSmtpTokensApiRequestFactory;
-    private responseProcessor: PublicSmtpTokensApiResponseProcessor;
+import { PublicSMTPTokensApiRequestFactory, PublicSMTPTokensApiResponseProcessor} from "../apis/PublicSMTPTokensApi";
+export class ObservablePublicSMTPTokensApi {
+    private requestFactory: PublicSMTPTokensApiRequestFactory;
+    private responseProcessor: PublicSMTPTokensApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicSmtpTokensApiRequestFactory,
-        responseProcessor?: PublicSmtpTokensApiResponseProcessor
+        requestFactory?: PublicSMTPTokensApiRequestFactory,
+        responseProcessor?: PublicSMTPTokensApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicSmtpTokensApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicSmtpTokensApiResponseProcessor();
+        this.requestFactory = requestFactory || new PublicSMTPTokensApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new PublicSMTPTokensApiResponseProcessor();
     }
 
     /**

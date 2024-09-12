@@ -6,18 +6,18 @@ import { EmailSendStatusView } from '../models/EmailSendStatusView';
 import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg';
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
-import { ObservablePublicSmtpTokensApi } from './ObservableAPI';
+import { ObservablePublicSMTPTokensApi } from './ObservableAPI';
 
-import { PublicSmtpTokensApiRequestFactory, PublicSmtpTokensApiResponseProcessor} from "../apis/PublicSmtpTokensApi";
-export class PromisePublicSmtpTokensApi {
-    private api: ObservablePublicSmtpTokensApi
+import { PublicSMTPTokensApiRequestFactory, PublicSMTPTokensApiResponseProcessor} from "../apis/PublicSMTPTokensApi";
+export class PromisePublicSMTPTokensApi {
+    private api: ObservablePublicSMTPTokensApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicSmtpTokensApiRequestFactory,
-        responseProcessor?: PublicSmtpTokensApiResponseProcessor
+        requestFactory?: PublicSMTPTokensApiRequestFactory,
+        responseProcessor?: PublicSMTPTokensApiResponseProcessor
     ) {
-        this.api = new ObservablePublicSmtpTokensApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservablePublicSMTPTokensApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

@@ -8,5 +8,5 @@ export * from "./servers";
 export { RequiredError } from "./apis/baseapi";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromisePublicSmtpTokensApi as PublicSmtpTokensApi,  PromiseSingleSendApi as SingleSendApi } from './types/PromiseAPI';
+export { PromisePublicSMTPTokensApi as PublicSMTPTokensApi,  PromiseSingleSendApi as SingleSendApi } from './types/PromiseAPI';
 

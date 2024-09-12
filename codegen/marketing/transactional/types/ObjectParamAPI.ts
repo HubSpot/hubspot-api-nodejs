@@ -7,77 +7,77 @@ import { PublicSingleSendRequestEgg } from '../models/PublicSingleSendRequestEgg
 import { SmtpApiTokenRequestEgg } from '../models/SmtpApiTokenRequestEgg';
 import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 
-import { ObservablePublicSmtpTokensApi } from "./ObservableAPI";
-import { PublicSmtpTokensApiRequestFactory, PublicSmtpTokensApiResponseProcessor} from "../apis/PublicSmtpTokensApi";
+import { ObservablePublicSMTPTokensApi } from "./ObservableAPI";
+import { PublicSMTPTokensApiRequestFactory, PublicSMTPTokensApiResponseProcessor} from "../apis/PublicSMTPTokensApi";
 
-export interface PublicSmtpTokensApiArchiveTokenRequest {
+export interface PublicSMTPTokensApiArchiveTokenRequest {
     /**
      * Identifier generated when a token is created.
      * @type string
-     * @memberof PublicSmtpTokensApiarchiveToken
+     * @memberof PublicSMTPTokensApiarchiveToken
      */
     tokenId: string
 }
 
-export interface PublicSmtpTokensApiCreateTokenRequest {
+export interface PublicSMTPTokensApiCreateTokenRequest {
     /**
      * A request object that includes the campaign name tied to the token and whether contacts should be created for email recipients.
      * @type SmtpApiTokenRequestEgg
-     * @memberof PublicSmtpTokensApicreateToken
+     * @memberof PublicSMTPTokensApicreateToken
      */
     smtpApiTokenRequestEgg: SmtpApiTokenRequestEgg
 }
 
-export interface PublicSmtpTokensApiGetTokenByIdRequest {
+export interface PublicSMTPTokensApiGetTokenByIdRequest {
     /**
      * Identifier generated when a token is created.
      * @type string
-     * @memberof PublicSmtpTokensApigetTokenById
+     * @memberof PublicSMTPTokensApigetTokenById
      */
     tokenId: string
 }
 
-export interface PublicSmtpTokensApiGetTokensPageRequest {
+export interface PublicSMTPTokensApiGetTokensPageRequest {
     /**
      * A name for the campaign tied to the SMTP API token.
      * @type string
-     * @memberof PublicSmtpTokensApigetTokensPage
+     * @memberof PublicSMTPTokensApigetTokensPage
      */
     campaignName?: string
     /**
      * Identifier assigned to the campaign provided during the token creation.
      * @type string
-     * @memberof PublicSmtpTokensApigetTokensPage
+     * @memberof PublicSMTPTokensApigetTokensPage
      */
     emailCampaignId?: string
     /**
      * Starting point to get the next set of results.
      * @type string
-     * @memberof PublicSmtpTokensApigetTokensPage
+     * @memberof PublicSMTPTokensApigetTokensPage
      */
     after?: string
     /**
      * Maximum number of tokens to return.
      * @type number
-     * @memberof PublicSmtpTokensApigetTokensPage
+     * @memberof PublicSMTPTokensApigetTokensPage
      */
     limit?: number
 }
 
-export interface PublicSmtpTokensApiResetPasswordRequest {
+export interface PublicSMTPTokensApiResetPasswordRequest {
     /**
      * Identifier generated when a token is created.
      * @type string
-     * @memberof PublicSmtpTokensApiresetPassword
+     * @memberof PublicSMTPTokensApiresetPassword
      */
     tokenId: string
 }
 
-export class ObjectPublicSmtpTokensApi {
-    private api: ObservablePublicSmtpTokensApi
+export class ObjectPublicSMTPTokensApi {
+    private api: ObservablePublicSMTPTokensApi
 
-    public constructor(configuration: Configuration, requestFactory?: PublicSmtpTokensApiRequestFactory, responseProcessor?: PublicSmtpTokensApiResponseProcessor) {
-        this.api = new ObservablePublicSmtpTokensApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: PublicSMTPTokensApiRequestFactory, responseProcessor?: PublicSMTPTokensApiResponseProcessor) {
+        this.api = new ObservablePublicSMTPTokensApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
@@ -85,7 +85,7 @@ export class ObjectPublicSmtpTokensApi {
      * Delete a single token by ID.
      * @param param the request object
      */
-    public archiveTokenWithHttpInfo(param: PublicSmtpTokensApiArchiveTokenRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveTokenWithHttpInfo(param: PublicSMTPTokensApiArchiveTokenRequest, options?: Configuration): Promise<HttpInfo<void>> {
         return this.api.archiveTokenWithHttpInfo(param.tokenId,  options).toPromise();
     }
 
@@ -94,7 +94,7 @@ export class ObjectPublicSmtpTokensApi {
      * Delete a single token by ID.
      * @param param the request object
      */
-    public archiveToken(param: PublicSmtpTokensApiArchiveTokenRequest, options?: Configuration): Promise<void> {
+    public archiveToken(param: PublicSMTPTokensApiArchiveTokenRequest, options?: Configuration): Promise<void> {
         return this.api.archiveToken(param.tokenId,  options).toPromise();
     }
 
@@ -103,7 +103,7 @@ export class ObjectPublicSmtpTokensApi {
      * Create a SMTP API token.
      * @param param the request object
      */
-    public createTokenWithHttpInfo(param: PublicSmtpTokensApiCreateTokenRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+    public createTokenWithHttpInfo(param: PublicSMTPTokensApiCreateTokenRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
         return this.api.createTokenWithHttpInfo(param.smtpApiTokenRequestEgg,  options).toPromise();
     }
 
@@ -112,7 +112,7 @@ export class ObjectPublicSmtpTokensApi {
      * Create a SMTP API token.
      * @param param the request object
      */
-    public createToken(param: PublicSmtpTokensApiCreateTokenRequest, options?: Configuration): Promise<SmtpApiTokenView> {
+    public createToken(param: PublicSMTPTokensApiCreateTokenRequest, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.createToken(param.smtpApiTokenRequestEgg,  options).toPromise();
     }
 
@@ -121,7 +121,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query a single token by ID.
      * @param param the request object
      */
-    public getTokenByIdWithHttpInfo(param: PublicSmtpTokensApiGetTokenByIdRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+    public getTokenByIdWithHttpInfo(param: PublicSMTPTokensApiGetTokenByIdRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
         return this.api.getTokenByIdWithHttpInfo(param.tokenId,  options).toPromise();
     }
 
@@ -130,7 +130,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query a single token by ID.
      * @param param the request object
      */
-    public getTokenById(param: PublicSmtpTokensApiGetTokenByIdRequest, options?: Configuration): Promise<SmtpApiTokenView> {
+    public getTokenById(param: PublicSMTPTokensApiGetTokenByIdRequest, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.getTokenById(param.tokenId,  options).toPromise();
     }
 
@@ -139,7 +139,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query SMTP API tokens by campaign name or an emailCampaignId.
      * @param param the request object
      */
-    public getTokensPageWithHttpInfo(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
+    public getTokensPageWithHttpInfo(param: PublicSMTPTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseSmtpApiTokenViewForwardPaging>> {
         return this.api.getTokensPageWithHttpInfo(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
     }
 
@@ -148,7 +148,7 @@ export class ObjectPublicSmtpTokensApi {
      * Query SMTP API tokens by campaign name or an emailCampaignId.
      * @param param the request object
      */
-    public getTokensPage(param: PublicSmtpTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
+    public getTokensPage(param: PublicSMTPTokensApiGetTokensPageRequest = {}, options?: Configuration): Promise<CollectionResponseSmtpApiTokenViewForwardPaging> {
         return this.api.getTokensPage(param.campaignName, param.emailCampaignId, param.after, param.limit,  options).toPromise();
     }
 
@@ -157,7 +157,7 @@ export class ObjectPublicSmtpTokensApi {
      * Reset the password of an existing token.
      * @param param the request object
      */
-    public resetPasswordWithHttpInfo(param: PublicSmtpTokensApiResetPasswordRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
+    public resetPasswordWithHttpInfo(param: PublicSMTPTokensApiResetPasswordRequest, options?: Configuration): Promise<HttpInfo<SmtpApiTokenView>> {
         return this.api.resetPasswordWithHttpInfo(param.tokenId,  options).toPromise();
     }
 
@@ -166,7 +166,7 @@ export class ObjectPublicSmtpTokensApi {
      * Reset the password of an existing token.
      * @param param the request object
      */
-    public resetPassword(param: PublicSmtpTokensApiResetPasswordRequest, options?: Configuration): Promise<SmtpApiTokenView> {
+    public resetPassword(param: PublicSMTPTokensApiResetPasswordRequest, options?: Configuration): Promise<SmtpApiTokenView> {
         return this.api.resetPassword(param.tokenId,  options).toPromise();
     }
 
