@@ -1,9 +1,12 @@
+import { PublicSMTPTokensApi, SingleSendApi } from '../../../../codegen/marketing/transactional/index'
 import { Client } from '../../../../index'
 
 describe('api client', () => {
   it('is discoverable', () => {
     const client = new Client().marketing.transactional
-    expect(client.hasOwnProperty('publicSmtpTokensApi')).toBeTruthy()
+    expect(client.hasOwnProperty('publicSMTPTokensApi')).toBeTruthy()
+    expect(PublicSMTPTokensApi.name).toBe(client.publicSMTPTokensApi.constructor.name)
     expect(client.hasOwnProperty('singleSendApi')).toBeTruthy()
+    expect(SingleSendApi.name).toBe(client.singleSendApi.constructor.name)
   })
 })
