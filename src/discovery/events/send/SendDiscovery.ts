@@ -1,6 +1,6 @@
 import {
-  BehavioralEventsTrackingApi,
   createConfiguration,
+  CustomEventDataApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +11,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
 export default class EventsDiscovery {
-  public behavioralEventsTrackingApi: BehavioralEventsTrackingApi
+  public customEventDataApi: CustomEventDataApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,8 +24,8 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.behavioralEventsTrackingApi = ApiDecoratorService.getInstance().apply<BehavioralEventsTrackingApi>(
-      new BehavioralEventsTrackingApi(configuration),
+    this.customEventDataApi = ApiDecoratorService.getInstance().apply<CustomEventDataApi>(
+      new CustomEventDataApi(configuration),
     )
   }
 }
