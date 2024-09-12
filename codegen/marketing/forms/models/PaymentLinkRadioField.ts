@@ -14,54 +14,24 @@ import { DependentField } from '../models/DependentField';
 import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 
 export class PaymentLinkRadioField {
-    'fieldType': PaymentLinkRadioFieldFieldTypeEnum;
     'objectTypeId': string;
-    'name': string;
-    'label': string;
-    'description'?: string;
-    'required': boolean;
     'hidden': boolean;
-    'dependentFields': Array<DependentField>;
-    'defaultValues': Array<string>;
+    'name': string;
     'options': Array<EnumeratedFieldOption>;
+    'description'?: string;
+    'defaultValues': Array<string>;
+    'dependentFields': Array<DependentField>;
+    'label': string;
+    'fieldType': PaymentLinkRadioFieldFieldTypeEnum;
+    'required': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "PaymentLinkRadioFieldFieldTypeEnum",
-            "format": ""
-        },
-        {
             "name": "objectTypeId",
             "baseName": "objectTypeId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -71,9 +41,21 @@ export class PaymentLinkRadioField {
             "format": ""
         },
         {
-            "name": "dependentFields",
-            "baseName": "dependentFields",
-            "type": "Array<DependentField>",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<EnumeratedFieldOption>",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
@@ -83,9 +65,27 @@ export class PaymentLinkRadioField {
             "format": ""
         },
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<EnumeratedFieldOption>",
+            "name": "dependentFields",
+            "baseName": "dependentFields",
+            "type": "Array<DependentField>",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "PaymentLinkRadioFieldFieldTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "required",
+            "baseName": "required",
+            "type": "boolean",
             "format": ""
         }    ];
 

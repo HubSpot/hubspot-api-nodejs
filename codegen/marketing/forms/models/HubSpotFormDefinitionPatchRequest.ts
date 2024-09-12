@@ -13,7 +13,7 @@
 import { FieldGroup } from '../models/FieldGroup';
 import { FormDisplayOptions } from '../models/FormDisplayOptions';
 import { HubSpotFormConfiguration } from '../models/HubSpotFormConfiguration';
-import { HubSpotFormDefinitionPatchRequestLegalConsentOptions } from '../models/HubSpotFormDefinitionPatchRequestLegalConsentOptions';
+import { HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions } from '../models/HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions';
 
 export class HubSpotFormDefinitionPatchRequest {
     /**
@@ -29,7 +29,7 @@ export class HubSpotFormDefinitionPatchRequest {
     * The name of the form. Expected to be unique for a hub.
     */
     'name'?: string;
-    'legalConsentOptions'?: HubSpotFormDefinitionPatchRequestLegalConsentOptions;
+    'legalConsentOptions'?: HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions;
     'displayOptions'?: FormDisplayOptions;
 
     static readonly discriminator: string | undefined = undefined;
@@ -62,7 +62,7 @@ export class HubSpotFormDefinitionPatchRequest {
         {
             "name": "legalConsentOptions",
             "baseName": "legalConsentOptions",
-            "type": "HubSpotFormDefinitionPatchRequestLegalConsentOptions",
+            "type": "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions",
             "format": ""
         },
         {

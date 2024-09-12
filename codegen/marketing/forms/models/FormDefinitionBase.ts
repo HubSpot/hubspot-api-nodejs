@@ -13,6 +13,7 @@
 import { FieldGroup } from '../models/FieldGroup';
 import { FormDisplayOptions } from '../models/FormDisplayOptions';
 import { HubSpotFormConfiguration } from '../models/HubSpotFormConfiguration';
+import { HubSpotFormDefinitionAllOfLegalConsentOptions } from '../models/HubSpotFormDefinitionAllOfLegalConsentOptions';
 
 export class FormDefinitionBase {
     'formType': FormDefinitionBaseFormTypeEnum;
@@ -25,7 +26,7 @@ export class FormDefinitionBase {
     'fieldGroups': Array<FieldGroup>;
     'configuration': HubSpotFormConfiguration;
     'displayOptions': FormDisplayOptions;
-    'legalConsentOptions': any;
+    'legalConsentOptions': HubSpotFormDefinitionAllOfLegalConsentOptions;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -93,7 +94,7 @@ export class FormDefinitionBase {
         {
             "name": "legalConsentOptions",
             "baseName": "legalConsentOptions",
-            "type": "any",
+            "type": "HubSpotFormDefinitionAllOfLegalConsentOptions",
             "format": ""
         }    ];
 

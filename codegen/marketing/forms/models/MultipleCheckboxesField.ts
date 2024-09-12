@@ -18,83 +18,53 @@ import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 */
 export class MultipleCheckboxesField {
     /**
-    * Determines how the field will be displayed and validated.
-    */
-    'fieldType': MultipleCheckboxesFieldFieldTypeEnum;
-    /**
     * A unique ID for this field\'s CRM object type. For example a CONTACT field will have the object type ID 0-1.
     */
     'objectTypeId': string;
-    /**
-    * The identifier of the field. In combination with the object type ID, it must be unique.
-    */
-    'name': string;
-    /**
-    * The main label for the form field.
-    */
-    'label': string;
-    /**
-    * Additional text helping the customer to complete the field.
-    */
-    'description'?: string;
-    /**
-    * Whether a value for this field is required when submitting the form.
-    */
-    'required': boolean;
     /**
     * Whether a field should be hidden or not. Hidden fields won\'t appear on the form, but can be used to pass a value to a property without requiring the customer to fill it in.
     */
     'hidden': boolean;
     /**
-    * A list of other fields to make visible based on the value filled in for this field.
+    * The identifier of the field. In combination with the object type ID, it must be unique.
     */
-    'dependentFields': Array<DependentField>;
+    'name': string;
+    /**
+    * The list of available choices for this field.
+    */
+    'options': Array<EnumeratedFieldOption>;
+    /**
+    * Additional text helping the customer to complete the field.
+    */
+    'description'?: string;
     /**
     * The values selected by default. Those values will be submitted unless the customer modifies them.
     */
     'defaultValues': Array<string>;
     /**
-    * The list of available choices for this field.
+    * A list of other fields to make visible based on the value filled in for this field.
     */
-    'options': Array<EnumeratedFieldOption>;
+    'dependentFields': Array<DependentField>;
+    /**
+    * The main label for the form field.
+    */
+    'label': string;
+    /**
+    * Determines how the field will be displayed and validated.
+    */
+    'fieldType': MultipleCheckboxesFieldFieldTypeEnum;
+    /**
+    * Whether a value for this field is required when submitting the form.
+    */
+    'required': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "MultipleCheckboxesFieldFieldTypeEnum",
-            "format": ""
-        },
-        {
             "name": "objectTypeId",
             "baseName": "objectTypeId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -104,9 +74,21 @@ export class MultipleCheckboxesField {
             "format": ""
         },
         {
-            "name": "dependentFields",
-            "baseName": "dependentFields",
-            "type": "Array<DependentField>",
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "options",
+            "baseName": "options",
+            "type": "Array<EnumeratedFieldOption>",
+            "format": ""
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
             "format": ""
         },
         {
@@ -116,9 +98,27 @@ export class MultipleCheckboxesField {
             "format": ""
         },
         {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<EnumeratedFieldOption>",
+            "name": "dependentFields",
+            "baseName": "dependentFields",
+            "type": "Array<DependentField>",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "MultipleCheckboxesFieldFieldTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "required",
+            "baseName": "required",
+            "type": "boolean",
             "format": ""
         }    ];
 

@@ -12,16 +12,43 @@
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 
-export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
-    'type': HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum;
+export class HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions {
+    /**
+    * 
+    */
+    'type': HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum;
+    /**
+    * 
+    */
     'subscriptionTypeIds': Array<number>;
-    'lawfulBasis': HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum;
+    /**
+    * 
+    */
+    'lawfulBasis': HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum;
+    /**
+    * 
+    */
     'privacyText': string;
-    'communicationConsentText'?: string;
+    /**
+    * 
+    */
     'communicationsCheckboxes': Array<LegalConsentCheckbox>;
-    'consentToProcessText'?: string;
+    /**
+    * 
+    */
+    'communicationConsentText'?: string;
+    /**
+    * 
+    */
     'consentToProcessCheckboxLabel'?: string;
+    /**
+    * 
+    */
     'consentToProcessFooterText'?: string;
+    /**
+    * 
+    */
+    'consentToProcessText'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -29,7 +56,7 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
         {
             "name": "type",
             "baseName": "type",
-            "type": "HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum",
+            "type": "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum",
             "format": ""
         },
         {
@@ -41,18 +68,12 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
         {
             "name": "lawfulBasis",
             "baseName": "lawfulBasis",
-            "type": "HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum",
+            "type": "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum",
             "format": ""
         },
         {
             "name": "privacyText",
             "baseName": "privacyText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "communicationConsentText",
-            "baseName": "communicationConsentText",
             "type": "string",
             "format": ""
         },
@@ -63,8 +84,8 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
             "format": ""
         },
         {
-            "name": "consentToProcessText",
-            "baseName": "consentToProcessText",
+            "name": "communicationConsentText",
+            "baseName": "communicationConsentText",
             "type": "string",
             "format": ""
         },
@@ -79,10 +100,16 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
             "baseName": "consentToProcessFooterText",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "consentToProcessText",
+            "baseName": "consentToProcessText",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return HubSpotFormDefinitionPatchRequestLegalConsentOptions.attributeTypeMap;
+        return HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions.attributeTypeMap;
     }
 
     public constructor() {
@@ -90,13 +117,13 @@ export class HubSpotFormDefinitionPatchRequestLegalConsentOptions {
 }
 
 
-export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsTypeEnum {
+export enum HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum {
     None = 'none',
     LegitimateInterest = 'legitimate_interest',
     ExplicitConsentToProcess = 'explicit_consent_to_process',
     ImplicitConsentToProcess = 'implicit_consent_to_process'
 }
-export enum HubSpotFormDefinitionPatchRequestLegalConsentOptionsLawfulBasisEnum {
+export enum HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum {
     Lead = 'lead',
     Client = 'client',
     Other = 'other'

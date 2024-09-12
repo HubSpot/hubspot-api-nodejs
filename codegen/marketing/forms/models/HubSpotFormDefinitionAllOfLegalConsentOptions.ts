@@ -12,7 +12,23 @@
 
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 
-export class LegalConsentOptionsExplicitConsentToProcess {
+export class HubSpotFormDefinitionAllOfLegalConsentOptions {
+    /**
+    * 
+    */
+    'type': HubSpotFormDefinitionAllOfLegalConsentOptionsTypeEnum;
+    /**
+    * 
+    */
+    'subscriptionTypeIds': Array<number>;
+    /**
+    * 
+    */
+    'lawfulBasis': HubSpotFormDefinitionAllOfLegalConsentOptionsLawfulBasisEnum;
+    /**
+    * 
+    */
+    'privacyText': string;
     /**
     * 
     */
@@ -32,19 +48,35 @@ export class LegalConsentOptionsExplicitConsentToProcess {
     /**
     * 
     */
-    'type': LegalConsentOptionsExplicitConsentToProcessTypeEnum;
-    /**
-    * 
-    */
-    'privacyText': string;
-    /**
-    * 
-    */
     'consentToProcessText'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "HubSpotFormDefinitionAllOfLegalConsentOptionsTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "subscriptionTypeIds",
+            "baseName": "subscriptionTypeIds",
+            "type": "Array<number>",
+            "format": "int64"
+        },
+        {
+            "name": "lawfulBasis",
+            "baseName": "lawfulBasis",
+            "type": "HubSpotFormDefinitionAllOfLegalConsentOptionsLawfulBasisEnum",
+            "format": ""
+        },
+        {
+            "name": "privacyText",
+            "baseName": "privacyText",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "communicationsCheckboxes",
             "baseName": "communicationsCheckboxes",
@@ -70,18 +102,6 @@ export class LegalConsentOptionsExplicitConsentToProcess {
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "privacyText",
-            "baseName": "privacyText",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "consentToProcessText",
             "baseName": "consentToProcessText",
             "type": "string",
@@ -89,7 +109,7 @@ export class LegalConsentOptionsExplicitConsentToProcess {
         }    ];
 
     static getAttributeTypeMap() {
-        return LegalConsentOptionsExplicitConsentToProcess.attributeTypeMap;
+        return HubSpotFormDefinitionAllOfLegalConsentOptions.attributeTypeMap;
     }
 
     public constructor() {
@@ -97,7 +117,15 @@ export class LegalConsentOptionsExplicitConsentToProcess {
 }
 
 
-export enum LegalConsentOptionsExplicitConsentToProcessTypeEnum {
-    ExplicitConsentToProcess = 'explicit_consent_to_process'
+export enum HubSpotFormDefinitionAllOfLegalConsentOptionsTypeEnum {
+    None = 'none',
+    LegitimateInterest = 'legitimate_interest',
+    ExplicitConsentToProcess = 'explicit_consent_to_process',
+    ImplicitConsentToProcess = 'implicit_consent_to_process'
+}
+export enum HubSpotFormDefinitionAllOfLegalConsentOptionsLawfulBasisEnum {
+    Lead = 'lead',
+    Client = 'client',
+    Other = 'other'
 }
 

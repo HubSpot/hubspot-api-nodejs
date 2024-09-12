@@ -13,24 +13,21 @@
 
 export class LegalConsentCheckbox {
     /**
-    * Whether this checkbox is required when submitting the form.
+    * 
     */
-    'required': boolean;
     'subscriptionTypeId': number;
     /**
     * The main label for the form field.
     */
     'label': string;
+    /**
+    * Whether this checkbox is required when submitting the form.
+    */
+    'required': boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
-            "format": ""
-        },
         {
             "name": "subscriptionTypeId",
             "baseName": "subscriptionTypeId",
@@ -41,6 +38,12 @@ export class LegalConsentCheckbox {
             "name": "label",
             "baseName": "label",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "required",
+            "baseName": "required",
+            "type": "boolean",
             "format": ""
         }    ];
 
