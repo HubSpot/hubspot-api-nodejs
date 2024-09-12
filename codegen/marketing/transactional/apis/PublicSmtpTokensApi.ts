@@ -15,7 +15,7 @@ import { SmtpApiTokenView } from '../models/SmtpApiTokenView';
 /**
  * no description
  */
-export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
+export class PublicSMTPTokensApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Delete a single token by ID.
@@ -27,7 +27,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError("PublicSmtpTokensApi", "archiveToken", "tokenId");
+            throw new RequiredError("PublicSMTPTokensApi", "archiveToken", "tokenId");
         }
 
 
@@ -65,7 +65,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'smtpApiTokenRequestEgg' is not null or undefined
         if (smtpApiTokenRequestEgg === null || smtpApiTokenRequestEgg === undefined) {
-            throw new RequiredError("PublicSmtpTokensApi", "createToken", "smtpApiTokenRequestEgg");
+            throw new RequiredError("PublicSMTPTokensApi", "createToken", "smtpApiTokenRequestEgg");
         }
 
 
@@ -113,7 +113,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError("PublicSmtpTokensApi", "getTokenById", "tokenId");
+            throw new RequiredError("PublicSMTPTokensApi", "getTokenById", "tokenId");
         }
 
 
@@ -209,7 +209,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'tokenId' is not null or undefined
         if (tokenId === null || tokenId === undefined) {
-            throw new RequiredError("PublicSmtpTokensApi", "resetPassword", "tokenId");
+            throw new RequiredError("PublicSMTPTokensApi", "resetPassword", "tokenId");
         }
 
 
@@ -239,7 +239,7 @@ export class PublicSmtpTokensApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class PublicSmtpTokensApiResponseProcessor {
+export class PublicSMTPTokensApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
