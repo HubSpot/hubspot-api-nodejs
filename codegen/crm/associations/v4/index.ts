@@ -8,5 +8,5 @@ export * from "./servers";
 export { RequiredError } from "./apis/baseapi";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi } from './types/PromiseAPI';
+export { PromiseBasicApi as BasicApi,  PromiseBatchApi as BatchApi,  PromiseReportApi as ReportApi } from './types/PromiseAPI';
 

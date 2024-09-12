@@ -13,6 +13,7 @@ import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../model
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { ReportCreationResponse } from '../models/ReportCreationResponse';
 
 import { ObservableBasicApi } from "./ObservableAPI";
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
@@ -406,7 +407,7 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
      * @param param the request object
      */
@@ -415,12 +416,51 @@ export class ObjectBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
      * @param param the request object
      */
     public getPage(param: BatchApiGetPageRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
         return this.api.getPage(param.fromObjectType, param.toObjectType, param.batchInputPublicFetchAssociationsBatchRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableReportApi } from "./ObservableAPI";
+import { ReportApiRequestFactory, ReportApiResponseProcessor} from "../apis/ReportApi";
+
+export interface ReportApiRequestRequest {
+    /**
+     * 
+     * @type number
+     * @memberof ReportApirequest
+     */
+    userId: number
+}
+
+export class ObjectReportApi {
+    private api: ObservableReportApi
+
+    public constructor(configuration: Configuration, requestFactory?: ReportApiRequestFactory, responseProcessor?: ReportApiResponseProcessor) {
+        this.api = new ObservableReportApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Requests a report of all objects in the portal which have a high usage of associations
+     * Report
+     * @param param the request object
+     */
+    public requestWithHttpInfo(param: ReportApiRequestRequest, options?: Configuration): Promise<HttpInfo<ReportCreationResponse>> {
+        return this.api.requestWithHttpInfo(param.userId,  options).toPromise();
+    }
+
+    /**
+     * Requests a report of all objects in the portal which have a high usage of associations
+     * Report
+     * @param param the request object
+     */
+    public request(param: ReportApiRequestRequest, options?: Configuration): Promise<ReportCreationResponse> {
+        return this.api.request(param.userId,  options).toPromise();
     }
 
 }
