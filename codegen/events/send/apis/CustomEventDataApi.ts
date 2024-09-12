@@ -13,11 +13,11 @@ import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventH
 /**
  * no description
  */
-export class BehavioralEventsTrackingApiRequestFactory extends BaseAPIRequestFactory {
+export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public async send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -25,7 +25,7 @@ export class BehavioralEventsTrackingApiRequestFactory extends BaseAPIRequestFac
 
         // verify required parameter 'behavioralEventHttpCompletionRequest' is not null or undefined
         if (behavioralEventHttpCompletionRequest === null || behavioralEventHttpCompletionRequest === undefined) {
-            throw new RequiredError("BehavioralEventsTrackingApi", "send", "behavioralEventHttpCompletionRequest");
+            throw new RequiredError("CustomEventDataApi", "send", "behavioralEventHttpCompletionRequest");
         }
 
 
@@ -65,7 +65,7 @@ export class BehavioralEventsTrackingApiRequestFactory extends BaseAPIRequestFac
 
 }
 
-export class BehavioralEventsTrackingApiResponseProcessor {
+export class CustomEventDataApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

@@ -10,34 +10,25 @@
  * Do not edit the class manually.
  */
 
-import { ExternalUnifiedEvent } from '../models/ExternalUnifiedEvent';
-import { Paging } from '../models/Paging';
 
-export class CollectionResponseExternalUnifiedEvent {
-    'paging'?: Paging;
+export class VisibleExternalEventTypeNames {
     /**
-    * 
+    * List of event type names.
     */
-    'results': Array<ExternalUnifiedEvent>;
+    'eventTypes': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "Paging",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<ExternalUnifiedEvent>",
+            "name": "eventTypes",
+            "baseName": "eventTypes",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseExternalUnifiedEvent.attributeTypeMap;
+        return VisibleExternalEventTypeNames.attributeTypeMap;
     }
 
     public constructor() {

@@ -8,5 +8,5 @@ export * from "./servers";
 export { RequiredError } from "./apis/baseapi";
 
 export { PromiseMiddleware as Middleware } from './middleware';
-export { PromiseBehavioralEventsTrackingApi as BehavioralEventsTrackingApi } from './types/PromiseAPI';
+export { PromiseCustomEventDataApi as CustomEventDataApi } from './types/PromiseAPI';
 

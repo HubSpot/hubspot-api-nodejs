@@ -4,25 +4,25 @@ import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
 
-import { BehavioralEventsTrackingApiRequestFactory, BehavioralEventsTrackingApiResponseProcessor} from "../apis/BehavioralEventsTrackingApi";
-export class ObservableBehavioralEventsTrackingApi {
-    private requestFactory: BehavioralEventsTrackingApiRequestFactory;
-    private responseProcessor: BehavioralEventsTrackingApiResponseProcessor;
+import { CustomEventDataApiRequestFactory, CustomEventDataApiResponseProcessor} from "../apis/CustomEventDataApi";
+export class ObservableCustomEventDataApi {
+    private requestFactory: CustomEventDataApiRequestFactory;
+    private responseProcessor: CustomEventDataApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BehavioralEventsTrackingApiRequestFactory,
-        responseProcessor?: BehavioralEventsTrackingApiResponseProcessor
+        requestFactory?: CustomEventDataApiRequestFactory,
+        responseProcessor?: CustomEventDataApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new BehavioralEventsTrackingApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new BehavioralEventsTrackingApiResponseProcessor();
+        this.requestFactory = requestFactory || new CustomEventDataApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new CustomEventDataApiResponseProcessor();
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public sendWithHttpInfo(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<HttpInfo<void>> {
@@ -45,8 +45,8 @@ export class ObservableBehavioralEventsTrackingApi {
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Observable<void> {

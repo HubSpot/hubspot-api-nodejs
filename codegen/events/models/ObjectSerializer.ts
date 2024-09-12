@@ -5,6 +5,7 @@ export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
+export * from '../models/VisibleExternalEventTypeNames';
 
 import { CollectionResponseExternalUnifiedEvent } from '../models/CollectionResponseExternalUnifiedEvent';
 import { ErrorDetail } from '../models/ErrorDetail';
@@ -13,6 +14,7 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { VisibleExternalEventTypeNames } from '../models/VisibleExternalEventTypeNames';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -37,6 +39,7 @@ let typeMap: {[index: string]: any} = {
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
+    "VisibleExternalEventTypeNames": VisibleExternalEventTypeNames,
 }
 
 type MimeTypeDescriptor = {
