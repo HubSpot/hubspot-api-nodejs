@@ -22,8 +22,10 @@ import { SubscriptionResponse } from '../models/SubscriptionResponse';
 export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Delete an existing event subscription by ID.
+     * Delete event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public async archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -66,7 +68,9 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Create new event subscription for the specified app.
+     * Create an event subscription
+     * @param appId The ID of the app.
      * @param subscriptionCreateRequest 
      */
     public async create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<RequestContext> {
@@ -120,7 +124,9 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Retrieve event subscriptions for the specified app.
+     * Read event subscriptions
+     * @param appId The ID of the app.
      */
     public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -156,8 +162,10 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Retrieve a specific event subscription by ID.
+     * Read an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public async getById(subscriptionId: number, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -200,8 +208,10 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Update an existing event subscription by ID.
+     * Update an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      * @param subscriptionPatchRequest 
      */
     public async update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<RequestContext> {
@@ -262,7 +272,9 @@ export class SubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Batch create event subscriptions for the specified app.
+     * Batch create event subscriptions
+     * @param appId The ID of the app.
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
     public async updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {

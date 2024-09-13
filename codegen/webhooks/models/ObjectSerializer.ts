@@ -22,11 +22,11 @@ import { SettingsChangeRequest } from '../models/SettingsChangeRequest';
 import { SettingsResponse } from '../models/SettingsResponse';
 import { StandardError } from '../models/StandardError';
 import { SubscriptionBatchUpdateRequest } from '../models/SubscriptionBatchUpdateRequest';
-import { SubscriptionCreateRequest     } from '../models/SubscriptionCreateRequest';
+import { SubscriptionCreateRequest      } from '../models/SubscriptionCreateRequest';
 import { SubscriptionListResponse } from '../models/SubscriptionListResponse';
 import { SubscriptionPatchRequest } from '../models/SubscriptionPatchRequest';
-import { SubscriptionResponse        } from '../models/SubscriptionResponse';
-import { ThrottlingSettings    } from '../models/ThrottlingSettings';
+import { SubscriptionResponse         } from '../models/SubscriptionResponse';
+import { ThrottlingSettings } from '../models/ThrottlingSettings';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -45,7 +45,6 @@ let enumsMap: Set<string> = new Set<string>([
     "BatchResponseSubscriptionResponseWithErrorsStatusEnum",
     "SubscriptionCreateRequestEventTypeEnum",
     "SubscriptionResponseEventTypeEnum",
-    "ThrottlingSettingsPeriodEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

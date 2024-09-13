@@ -16,23 +16,13 @@
 */
 export class ThrottlingSettings {
     /**
-    * Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
-    */
-    'period': ThrottlingSettingsPeriodEnum;
-    /**
-    * The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
+    * The maximum number of concurrent HTTP requests HubSpot will attempt to make to your app.
     */
     'maxConcurrentRequests': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "period",
-            "baseName": "period",
-            "type": "ThrottlingSettingsPeriodEnum",
-            "format": ""
-        },
         {
             "name": "maxConcurrentRequests",
             "baseName": "maxConcurrentRequests",
@@ -46,11 +36,5 @@ export class ThrottlingSettings {
 
     public constructor() {
     }
-}
-
-
-export enum ThrottlingSettingsPeriodEnum {
-    Secondly = 'SECONDLY',
-    RollingMinute = 'ROLLING_MINUTE'
 }
 

@@ -15,6 +15,7 @@
 * New webhook settings for an app.
 */
 export class SubscriptionCreateRequest {
+    'objectTypeId'?: string;
     /**
     * The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
     */
@@ -31,6 +32,12 @@ export class SubscriptionCreateRequest {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "propertyName",
             "baseName": "propertyName",
@@ -100,6 +107,12 @@ export enum SubscriptionCreateRequestEventTypeEnum {
     CompanyAssociationChange = 'company.associationChange',
     DealAssociationChange = 'deal.associationChange',
     TicketAssociationChange = 'ticket.associationChange',
-    LineItemAssociationChange = 'line_item.associationChange'
+    LineItemAssociationChange = 'line_item.associationChange',
+    ObjectPropertyChange = 'object.propertyChange',
+    ObjectCreation = 'object.creation',
+    ObjectDeletion = 'object.deletion',
+    ObjectMerge = 'object.merge',
+    ObjectRestore = 'object.restore',
+    ObjectAssociationChange = 'object.associationChange'
 }
 
