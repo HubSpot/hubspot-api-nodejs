@@ -86,10 +86,10 @@ export interface UsersApiArchiveRequest {
     userId: string
     /**
      * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
-     * @type string
+     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
      * @memberof UsersApiarchive
      */
-    idProperty?: string
+    idProperty?: 'USER_ID' | 'EMAIL'
 }
 
 export interface UsersApiCreateRequest {
@@ -110,10 +110,10 @@ export interface UsersApiGetByIdRequest {
     userId: string
     /**
      * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
-     * @type string
+     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
      * @memberof UsersApigetById
      */
-    idProperty?: string
+    idProperty?: 'USER_ID' | 'EMAIL'
 }
 
 export interface UsersApiGetPageRequest {
@@ -146,10 +146,10 @@ export interface UsersApiReplaceRequest {
     publicUserUpdate: PublicUserUpdate
     /**
      * The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
-     * @type string
+     * @type &#39;USER_ID&#39; | &#39;EMAIL&#39;
      * @memberof UsersApireplace
      */
-    idProperty?: string
+    idProperty?: 'USER_ID' | 'EMAIL'
 }
 
 export class ObjectUsersApi {
