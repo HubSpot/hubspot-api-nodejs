@@ -274,22 +274,22 @@ export class PromiseBatchApi {
 
 
 
-import { ObservablePublicObjectApi } from './ObservableAPI';
+import { ObservableMergeApi } from './ObservableAPI';
 
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class PromisePublicObjectApi {
-    private api: ObservablePublicObjectApi
+import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
+export class PromiseMergeApi {
+    private api: ObservableMergeApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
+        requestFactory?: MergeApiRequestFactory,
+        responseProcessor?: MergeApiResponseProcessor
     ) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableMergeApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Merge two deals with same type
+     * Merge two deals
      * @param publicMergeInput 
      */
     public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
@@ -298,7 +298,7 @@ export class PromisePublicObjectApi {
     }
 
     /**
-     * Merge two deals with same type
+     * Merge two deals
      * @param publicMergeInput 
      */
     public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {

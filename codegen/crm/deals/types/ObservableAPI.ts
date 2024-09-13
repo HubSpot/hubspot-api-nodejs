@@ -404,24 +404,24 @@ export class ObservableBatchApi {
 
 }
 
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class ObservablePublicObjectApi {
-    private requestFactory: PublicObjectApiRequestFactory;
-    private responseProcessor: PublicObjectApiResponseProcessor;
+import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
+export class ObservableMergeApi {
+    private requestFactory: MergeApiRequestFactory;
+    private responseProcessor: MergeApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
+        requestFactory?: MergeApiRequestFactory,
+        responseProcessor?: MergeApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicObjectApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicObjectApiResponseProcessor();
+        this.requestFactory = requestFactory || new MergeApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new MergeApiResponseProcessor();
     }
 
     /**
-     * Merge two deals with same type
+     * Merge two deals
      * @param publicMergeInput 
      */
     public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<HttpInfo<SimplePublicObject>> {
@@ -444,7 +444,7 @@ export class ObservablePublicObjectApi {
     }
 
     /**
-     * Merge two deals with same type
+     * Merge two deals
      * @param publicMergeInput 
      */
     public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {

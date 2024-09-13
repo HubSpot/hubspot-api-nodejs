@@ -423,30 +423,30 @@ export class ObjectGDPRApi {
 
 }
 
-import { ObservablePublicObjectApi } from "./ObservableAPI";
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
+import { ObservableMergeApi } from "./ObservableAPI";
+import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
 
-export interface PublicObjectApiMergeRequest {
+export interface MergeApiMergeRequest {
     /**
      * 
      * @type PublicMergeInput
-     * @memberof PublicObjectApimerge
+     * @memberof MergeApimerge
      */
     publicMergeInput: PublicMergeInput
 }
 
-export class ObjectPublicObjectApi {
-    private api: ObservablePublicObjectApi
+export class ObjectMergeApi {
+    private api: ObservableMergeApi
 
-    public constructor(configuration: Configuration, requestFactory?: PublicObjectApiRequestFactory, responseProcessor?: PublicObjectApiResponseProcessor) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: MergeApiRequestFactory, responseProcessor?: MergeApiResponseProcessor) {
+        this.api = new ObservableMergeApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
      * Merge two contacts with same type
      * @param param the request object
      */
-    public mergeWithHttpInfo(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
+    public mergeWithHttpInfo(param: MergeApiMergeRequest, options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
         return this.api.mergeWithHttpInfo(param.publicMergeInput,  options).toPromise();
     }
 
@@ -454,7 +454,7 @@ export class ObjectPublicObjectApi {
      * Merge two contacts with same type
      * @param param the request object
      */
-    public merge(param: PublicObjectApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
+    public merge(param: MergeApiMergeRequest, options?: Configuration): Promise<SimplePublicObject> {
         return this.api.merge(param.publicMergeInput,  options).toPromise();
     }
 

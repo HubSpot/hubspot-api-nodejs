@@ -456,20 +456,20 @@ export class ObservableGDPRApi {
 
 }
 
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class ObservablePublicObjectApi {
-    private requestFactory: PublicObjectApiRequestFactory;
-    private responseProcessor: PublicObjectApiResponseProcessor;
+import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
+export class ObservableMergeApi {
+    private requestFactory: MergeApiRequestFactory;
+    private responseProcessor: MergeApiResponseProcessor;
     private configuration: Configuration;
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
+        requestFactory?: MergeApiRequestFactory,
+        responseProcessor?: MergeApiResponseProcessor
     ) {
         this.configuration = configuration;
-        this.requestFactory = requestFactory || new PublicObjectApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new PublicObjectApiResponseProcessor();
+        this.requestFactory = requestFactory || new MergeApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new MergeApiResponseProcessor();
     }
 
     /**
