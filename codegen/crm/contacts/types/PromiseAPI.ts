@@ -314,18 +314,18 @@ export class PromiseGDPRApi {
 
 
 
-import { ObservablePublicObjectApi } from './ObservableAPI';
+import { ObservableMergeApi } from './ObservableAPI';
 
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class PromisePublicObjectApi {
-    private api: ObservablePublicObjectApi
+import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
+export class PromiseMergeApi {
+    private api: ObservableMergeApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
+        requestFactory?: MergeApiRequestFactory,
+        responseProcessor?: MergeApiResponseProcessor
     ) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableMergeApi(configuration, requestFactory, responseProcessor);
     }
 
     /**

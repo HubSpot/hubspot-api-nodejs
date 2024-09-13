@@ -12,9 +12,6 @@
 
 
 export class SimplePublicObjectBatchInputUpsert {
-    /**
-    * The name of a property whose values are unique for this object
-    */
     'idProperty'?: string;
     'objectWriteTraceId'?: string;
     'id': string;
