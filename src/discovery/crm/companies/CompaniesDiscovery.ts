@@ -3,7 +3,7 @@ import {
   BatchApi,
   Configuration,
   createConfiguration,
-  PublicObjectApi,
+  MergeApi,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -19,7 +19,7 @@ import { getAll } from '../../../services/getAll'
 export default class CompaniesDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public publicObjectApi: PublicObjectApi
+  public mergeApi: MergeApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -35,7 +35,7 @@ export default class CompaniesDiscovery {
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.publicObjectApi = ApiDecoratorService.getInstance().apply<PublicObjectApi>(new PublicObjectApi(configuration))
+    this.mergeApi = ApiDecoratorService.getInstance().apply<MergeApi>(new MergeApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 
