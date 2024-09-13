@@ -1,5 +1,5 @@
 /**
- * Settings User Provisioning
+ * User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3
@@ -15,6 +15,8 @@
 * A user
 */
 export class PublicUser {
+    'firstName'?: string;
+    'lastName'?: string;
     /**
     * The user\'s primary team
     */
@@ -42,6 +44,18 @@ export class PublicUser {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "firstName",
+            "baseName": "firstName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "lastName",
+            "baseName": "lastName",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "primaryTeamId",
             "baseName": "primaryTeamId",

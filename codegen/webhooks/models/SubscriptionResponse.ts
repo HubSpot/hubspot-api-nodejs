@@ -19,6 +19,7 @@ export class SubscriptionResponse {
     * When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
     */
     'createdAt': Date;
+    'objectTypeId'?: string;
     /**
     * The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
     */
@@ -48,6 +49,12 @@ export class SubscriptionResponse {
             "baseName": "createdAt",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "propertyName",
@@ -130,6 +137,12 @@ export enum SubscriptionResponseEventTypeEnum {
     CompanyAssociationChange = 'company.associationChange',
     DealAssociationChange = 'deal.associationChange',
     TicketAssociationChange = 'ticket.associationChange',
-    LineItemAssociationChange = 'line_item.associationChange'
+    LineItemAssociationChange = 'line_item.associationChange',
+    ObjectPropertyChange = 'object.propertyChange',
+    ObjectCreation = 'object.creation',
+    ObjectDeletion = 'object.deletion',
+    ObjectMerge = 'object.merge',
+    ObjectRestore = 'object.restore',
+    ObjectAssociationChange = 'object.associationChange'
 }
 

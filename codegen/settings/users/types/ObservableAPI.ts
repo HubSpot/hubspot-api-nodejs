@@ -129,7 +129,7 @@ export class ObservableUsersApi {
      * @param userId Identifier of user to delete
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public archiveWithHttpInfo(userId: string, idProperty?: string, _options?: Configuration): Observable<HttpInfo<void>> {
+    public archiveWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<HttpInfo<void>> {
         const requestContextPromise = this.requestFactory.archive(userId, idProperty, _options);
 
         // build promise chain
@@ -154,7 +154,7 @@ export class ObservableUsersApi {
      * @param userId Identifier of user to delete
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public archive(userId: string, idProperty?: string, _options?: Configuration): Observable<void> {
+    public archive(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<void> {
         return this.archiveWithHttpInfo(userId, idProperty, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -197,7 +197,7 @@ export class ObservableUsersApi {
      * @param userId Identifier of user to retrieve
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public getByIdWithHttpInfo(userId: string, idProperty?: string, _options?: Configuration): Observable<HttpInfo<PublicUser>> {
+    public getByIdWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<HttpInfo<PublicUser>> {
         const requestContextPromise = this.requestFactory.getById(userId, idProperty, _options);
 
         // build promise chain
@@ -222,7 +222,7 @@ export class ObservableUsersApi {
      * @param userId Identifier of user to retrieve
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public getById(userId: string, idProperty?: string, _options?: Configuration): Observable<PublicUser> {
+    public getById(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<PublicUser> {
         return this.getByIdWithHttpInfo(userId, idProperty, _options).pipe(map((apiResponse: HttpInfo<PublicUser>) => apiResponse.data));
     }
 
@@ -268,7 +268,7 @@ export class ObservableUsersApi {
      * @param publicUserUpdate 
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public replaceWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: string, _options?: Configuration): Observable<HttpInfo<PublicUser>> {
+    public replaceWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<HttpInfo<PublicUser>> {
         const requestContextPromise = this.requestFactory.replace(userId, publicUserUpdate, idProperty, _options);
 
         // build promise chain
@@ -294,7 +294,7 @@ export class ObservableUsersApi {
      * @param publicUserUpdate 
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: string, _options?: Configuration): Observable<PublicUser> {
+    public replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Observable<PublicUser> {
         return this.replaceWithHttpInfo(userId, publicUserUpdate, idProperty, _options).pipe(map((apiResponse: HttpInfo<PublicUser>) => apiResponse.data));
     }
 

@@ -22,7 +22,7 @@ export class SettingsResponse {
     'createdAt': Date;
     'throttling': ThrottlingSettings;
     /**
-    * A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
+    * A publicly available URL for HubSpot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
     */
     'targetUrl': string;
     /**

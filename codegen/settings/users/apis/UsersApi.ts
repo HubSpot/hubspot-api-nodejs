@@ -24,7 +24,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param userId Identifier of user to delete
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public async archive(userId: string, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async archive(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userId' is not null or undefined
@@ -44,7 +44,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (idProperty !== undefined) {
-            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "'USER_ID' | 'EMAIL'", ""));
         }
 
 
@@ -117,7 +117,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param userId Identifier of user to retrieve
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public async getById(userId: string, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getById(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userId' is not null or undefined
@@ -137,7 +137,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (idProperty !== undefined) {
-            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "'USER_ID' | 'EMAIL'", ""));
         }
 
 
@@ -207,7 +207,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
      * @param publicUserUpdate 
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public async replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
+    public async replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'userId' is not null or undefined
@@ -233,7 +233,7 @@ export class UsersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (idProperty !== undefined) {
-            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "string", ""));
+            requestContext.setQueryParam("idProperty", ObjectSerializer.serialize(idProperty, "'USER_ID' | 'EMAIL'", ""));
         }
 
 
