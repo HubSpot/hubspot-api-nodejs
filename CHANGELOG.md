@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.0...HEAD)
 
+## [12.0.1] - 2024-09-23
+
+## Fixes
+
+- Fixed build errors.
+
 ## [12.0.0] - 2024-09-23
 
 ## CMS
