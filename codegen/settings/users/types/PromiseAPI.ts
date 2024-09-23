@@ -101,7 +101,7 @@ export class PromiseUsersApi {
      * @param userId Identifier of user to delete
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public archiveWithHttpInfo(userId: string, idProperty?: string, _options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<HttpInfo<void>> {
         const result = this.api.archiveWithHttpInfo(userId, idProperty, _options);
         return result.toPromise();
     }
@@ -112,7 +112,7 @@ export class PromiseUsersApi {
      * @param userId Identifier of user to delete
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public archive(userId: string, idProperty?: string, _options?: Configuration): Promise<void> {
+    public archive(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<void> {
         const result = this.api.archive(userId, idProperty, _options);
         return result.toPromise();
     }
@@ -143,7 +143,7 @@ export class PromiseUsersApi {
      * @param userId Identifier of user to retrieve
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public getByIdWithHttpInfo(userId: string, idProperty?: string, _options?: Configuration): Promise<HttpInfo<PublicUser>> {
+    public getByIdWithHttpInfo(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<HttpInfo<PublicUser>> {
         const result = this.api.getByIdWithHttpInfo(userId, idProperty, _options);
         return result.toPromise();
     }
@@ -154,7 +154,7 @@ export class PromiseUsersApi {
      * @param userId Identifier of user to retrieve
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public getById(userId: string, idProperty?: string, _options?: Configuration): Promise<PublicUser> {
+    public getById(userId: string, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<PublicUser> {
         const result = this.api.getById(userId, idProperty, _options);
         return result.toPromise();
     }
@@ -188,7 +188,7 @@ export class PromiseUsersApi {
      * @param publicUserUpdate 
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public replaceWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: string, _options?: Configuration): Promise<HttpInfo<PublicUser>> {
+    public replaceWithHttpInfo(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<HttpInfo<PublicUser>> {
         const result = this.api.replaceWithHttpInfo(userId, publicUserUpdate, idProperty, _options);
         return result.toPromise();
     }
@@ -200,7 +200,7 @@ export class PromiseUsersApi {
      * @param publicUserUpdate 
      * @param idProperty The name of a property with unique user values. Valid values are &#x60;USER_ID&#x60;(default) or &#x60;EMAIL&#x60;
      */
-    public replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: string, _options?: Configuration): Promise<PublicUser> {
+    public replace(userId: string, publicUserUpdate: PublicUserUpdate, idProperty?: 'USER_ID' | 'EMAIL', _options?: Configuration): Promise<PublicUser> {
         const result = this.api.replace(userId, publicUserUpdate, idProperty, _options);
         return result.toPromise();
     }

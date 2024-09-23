@@ -14,6 +14,7 @@ import { BatchResponsePublicAssociationMultiWithLabelWithErrors } from '../model
 import { BatchResponsePublicDefaultAssociation } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
+import { ReportCreationResponse } from '../models/ReportCreationResponse';
 
 import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicApi";
 export class ObservableBasicApi {
@@ -358,7 +359,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
      * @param fromObjectType 
      * @param toObjectType 
@@ -384,7 +385,7 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. 
+     * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
      * @param fromObjectType 
      * @param toObjectType 
@@ -392,6 +393,57 @@ export class ObservableBatchApi {
      */
     public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Observable<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
         return this.getPageWithHttpInfo(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options).pipe(map((apiResponse: HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>) => apiResponse.data));
+    }
+
+}
+
+import { ReportApiRequestFactory, ReportApiResponseProcessor} from "../apis/ReportApi";
+export class ObservableReportApi {
+    private requestFactory: ReportApiRequestFactory;
+    private responseProcessor: ReportApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: ReportApiRequestFactory,
+        responseProcessor?: ReportApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new ReportApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new ReportApiResponseProcessor();
+    }
+
+    /**
+     * Requests a report of all objects in the portal which have a high usage of associations
+     * Report
+     * @param userId 
+     */
+    public requestWithHttpInfo(userId: number, _options?: Configuration): Observable<HttpInfo<ReportCreationResponse>> {
+        const requestContextPromise = this.requestFactory.request(userId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.requestWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Requests a report of all objects in the portal which have a high usage of associations
+     * Report
+     * @param userId 
+     */
+    public request(userId: number, _options?: Configuration): Observable<ReportCreationResponse> {
+        return this.requestWithHttpInfo(userId, _options).pipe(map((apiResponse: HttpInfo<ReportCreationResponse>) => apiResponse.data));
     }
 
 }

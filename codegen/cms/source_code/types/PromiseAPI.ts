@@ -46,7 +46,7 @@ export class PromiseContentApi {
      * Create a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public createWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
         const result = this.api.createWithHttpInfo(environment, path, file, _options);
@@ -58,7 +58,7 @@ export class PromiseContentApi {
      * Create a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public create(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
         const result = this.api.create(environment, path, file, _options);
@@ -70,7 +70,7 @@ export class PromiseContentApi {
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public createOrUpdateWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
         const result = this.api.createOrUpdateWithHttpInfo(environment, path, file, _options);
@@ -82,7 +82,7 @@ export class PromiseContentApi {
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file The file to upload.
+     * @param file 
      */
     public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
         const result = this.api.createOrUpdate(environment, path, file, _options);
@@ -131,22 +131,42 @@ export class PromiseExtractApi {
     }
 
     /**
-     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
-     * Extracts a zip file
-     * @param path The file system location of the zip file.
+     * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
+     * Extract a zip file
+     * @param fileExtractRequest 
      */
-    public extractByPathWithHttpInfo(path: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.extractByPathWithHttpInfo(path, _options);
+    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+        const result = this.api.doAsyncWithHttpInfo(fileExtractRequest, _options);
         return result.toPromise();
     }
 
     /**
-     * Extracts a zip file in the file system. The zip file will be extracted in-place and not be deleted automatically.
-     * Extracts a zip file
-     * @param path The file system location of the zip file.
+     * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
+     * Extract a zip file
+     * @param fileExtractRequest 
      */
-    public extractByPath(path: string, _options?: Configuration): Promise<void> {
-        const result = this.api.extractByPath(path, _options);
+    public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<TaskLocator> {
+        const result = this.api.doAsync(fileExtractRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the status of an extraction by the `taskId` returned from the initial `extract/async` request.
+     * Get extraction status
+     * @param taskId The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
+     */
+    public getAsyncStatusWithHttpInfo(taskId: number, _options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+        const result = this.api.getAsyncStatusWithHttpInfo(taskId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get the status of an extraction by the `taskId` returned from the initial `extract/async` request.
+     * Get extraction status
+     * @param taskId The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
+     */
+    public getAsyncStatus(taskId: number, _options?: Configuration): Promise<ActionResponse> {
+        const result = this.api.getAsyncStatus(taskId, _options);
         return result.toPromise();
     }
 
@@ -198,57 +218,6 @@ export class PromiseMetadataApi {
 
 
 
-import { ObservableSourceCodeExtractApi } from './ObservableAPI';
-
-import { SourceCodeExtractApiRequestFactory, SourceCodeExtractApiResponseProcessor} from "../apis/SourceCodeExtractApi";
-export class PromiseSourceCodeExtractApi {
-    private api: ObservableSourceCodeExtractApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: SourceCodeExtractApiRequestFactory,
-        responseProcessor?: SourceCodeExtractApiResponseProcessor
-    ) {
-        this.api = new ObservableSourceCodeExtractApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * @param fileExtractRequest 
-     */
-    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<HttpInfo<TaskLocator>> {
-        const result = this.api.doAsyncWithHttpInfo(fileExtractRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param fileExtractRequest 
-     */
-    public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<TaskLocator> {
-        const result = this.api.doAsync(fileExtractRequest, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param taskId 
-     */
-    public getAsyncStatusWithHttpInfo(taskId: number, _options?: Configuration): Promise<HttpInfo<ActionResponse>> {
-        const result = this.api.getAsyncStatusWithHttpInfo(taskId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * @param taskId 
-     */
-    public getAsyncStatus(taskId: number, _options?: Configuration): Promise<ActionResponse> {
-        const result = this.api.getAsyncStatus(taskId, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
 import { ObservableValidationApi } from './ObservableAPI';
 
 import { ValidationApiRequestFactory, ValidationApiResponseProcessor} from "../apis/ValidationApi";
@@ -267,7 +236,7 @@ export class PromiseValidationApi {
      * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
      * Validate the contents of a file
      * @param path The file system location of the file.
-     * @param file The file to validate.
+     * @param file 
      */
     public doValidateWithHttpInfo(path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<void>> {
         const result = this.api.doValidateWithHttpInfo(path, file, _options);
@@ -278,7 +247,7 @@ export class PromiseValidationApi {
      * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
      * Validate the contents of a file
      * @param path The file system location of the file.
-     * @param file The file to validate.
+     * @param file 
      */
     public doValidate(path: string, file?: HttpFile, _options?: Configuration): Promise<void> {
         const result = this.api.doValidate(path, file, _options);

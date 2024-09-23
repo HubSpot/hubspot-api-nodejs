@@ -10,6 +10,7 @@ export * from '../models/BatchResponsePublicAssociationMultiWithLabel';
 export * from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 export * from '../models/BatchResponsePublicDefaultAssociation';
 export * from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
+export * from '../models/DateTime';
 export * from '../models/ErrorDetail';
 export * from '../models/ForwardPaging';
 export * from '../models/LabelsBetweenObjectPair';
@@ -25,6 +26,7 @@ export * from '../models/PublicDefaultAssociation';
 export * from '../models/PublicDefaultAssociationMultiPost';
 export * from '../models/PublicFetchAssociationsBatchRequest';
 export * from '../models/PublicObjectId';
+export * from '../models/ReportCreationResponse';
 export * from '../models/StandardError';
 
 import { AssociationSpec    } from '../models/AssociationSpec';
@@ -39,6 +41,7 @@ import { BatchResponsePublicAssociationMultiWithLabel        } from '../models/B
 import { BatchResponsePublicAssociationMultiWithLabelWithErrors          } from '../models/BatchResponsePublicAssociationMultiWithLabelWithErrors';
 import { BatchResponsePublicDefaultAssociation          } from '../models/BatchResponsePublicDefaultAssociation';
 import { CollectionResponseMultiAssociatedObjectWithLabelForwardPaging } from '../models/CollectionResponseMultiAssociatedObjectWithLabelForwardPaging';
+import { DateTime } from '../models/DateTime';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { LabelsBetweenObjectPair } from '../models/LabelsBetweenObjectPair';
@@ -54,6 +57,7 @@ import { PublicDefaultAssociation } from '../models/PublicDefaultAssociation';
 import { PublicDefaultAssociationMultiPost } from '../models/PublicDefaultAssociationMultiPost';
 import { PublicFetchAssociationsBatchRequest } from '../models/PublicFetchAssociationsBatchRequest';
 import { PublicObjectId } from '../models/PublicObjectId';
+import { ReportCreationResponse } from '../models/ReportCreationResponse';
 import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
@@ -91,6 +95,7 @@ let typeMap: {[index: string]: any} = {
     "BatchResponsePublicAssociationMultiWithLabelWithErrors": BatchResponsePublicAssociationMultiWithLabelWithErrors,
     "BatchResponsePublicDefaultAssociation": BatchResponsePublicDefaultAssociation,
     "CollectionResponseMultiAssociatedObjectWithLabelForwardPaging": CollectionResponseMultiAssociatedObjectWithLabelForwardPaging,
+    "DateTime": DateTime,
     "ErrorDetail": ErrorDetail,
     "ForwardPaging": ForwardPaging,
     "LabelsBetweenObjectPair": LabelsBetweenObjectPair,
@@ -106,6 +111,7 @@ let typeMap: {[index: string]: any} = {
     "PublicDefaultAssociationMultiPost": PublicDefaultAssociationMultiPost,
     "PublicFetchAssociationsBatchRequest": PublicFetchAssociationsBatchRequest,
     "PublicObjectId": PublicObjectId,
+    "ReportCreationResponse": ReportCreationResponse,
     "StandardError": StandardError,
 }
 

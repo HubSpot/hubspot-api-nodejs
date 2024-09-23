@@ -1,5 +1,5 @@
 /**
- * Settings User Provisioning
+ * User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3

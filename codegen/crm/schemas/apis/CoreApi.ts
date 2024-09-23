@@ -38,7 +38,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas/{objectType}'
+        const localVarPath = '/crm-object-schemas/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
 
         // Make Request Context
@@ -88,7 +88,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas/{objectType}/associations/{associationIdentifier}'
+        const localVarPath = '/crm-object-schemas/v3/schemas/{objectType}/associations/{associationIdentifier}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)))
             .replace('{' + 'associationIdentifier' + '}', encodeURIComponent(String(associationIdentifier)));
 
@@ -127,7 +127,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas';
+        const localVarPath = '/crm-object-schemas/v3/schemas';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -182,7 +182,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas/{objectType}/associations'
+        const localVarPath = '/crm-object-schemas/v3/schemas/{objectType}/associations'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
 
         // Make Request Context
@@ -226,7 +226,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas';
+        const localVarPath = '/crm-object-schemas/v3/schemas';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -268,7 +268,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas/{objectType}'
+        const localVarPath = '/crm-object-schemas/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
 
         // Make Request Context
@@ -313,7 +313,7 @@ export class CoreApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/schemas/{objectType}'
+        const localVarPath = '/crm-object-schemas/v3/schemas/{objectType}'
             .replace('{' + 'objectType' + '}', encodeURIComponent(String(objectType)));
 
         // Make Request Context

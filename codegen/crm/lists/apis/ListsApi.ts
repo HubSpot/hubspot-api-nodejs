@@ -73,7 +73,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
+     * @param listSearchRequest 
      */
     public async doSearch(listSearchRequest: ListSearchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -124,7 +124,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * @param listIds The **ILS IDs** of the lists to fetch.
      * @param includeFilters A flag indicating whether or not the response object list definitions should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
      */
-    public async getAll(listIds?: Array<number>, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(listIds?: Array<string>, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -138,7 +138,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (listIds !== undefined) {
-            requestContext.setQueryParam("listIds", ObjectSerializer.serialize(listIds, "Array<number>", "int32"));
+            requestContext.setQueryParam("listIds", ObjectSerializer.serialize(listIds, "Array<string>", ""));
         }
 
         // Query Params
@@ -168,7 +168,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * @param listId The **ILS ID** of the list to fetch.
      * @param includeFilters A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
      */
-    public async getById(listId: number, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getById(listId: string, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'listId' is not null or undefined
@@ -265,7 +265,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * Delete a List
      * @param listId The **ILS ID** of the list to delete.
      */
-    public async remove(listId: number, _options?: Configuration): Promise<RequestContext> {
+    public async remove(listId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'listId' is not null or undefined
@@ -303,7 +303,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * Restore a List
      * @param listId The **ILS ID** of the list to restore.
      */
-    public async restore(listId: number, _options?: Configuration): Promise<RequestContext> {
+    public async restore(listId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'listId' is not null or undefined
@@ -343,7 +343,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * @param listFilterUpdateRequest 
      * @param enrollObjectsInWorkflows A flag indicating whether or not the memberships added to the list as a result of the filter change should be enrolled in workflows that are relevant to this list.
      */
-    public async updateListFilters(listId: number, listFilterUpdateRequest: ListFilterUpdateRequest, enrollObjectsInWorkflows?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async updateListFilters(listId: string, listFilterUpdateRequest: ListFilterUpdateRequest, enrollObjectsInWorkflows?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'listId' is not null or undefined
@@ -406,7 +406,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
      * @param listName The name to update the list to.
      * @param includeFilters A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
      */
-    public async updateName(listId: number, listName?: string, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async updateName(listId: string, listName?: string, includeFilters?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'listId' is not null or undefined

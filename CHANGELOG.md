@@ -5,7 +5,121 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/11.2.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.0...HEAD)
+
+## [12.0.0] - 2024-09-23
+
+## CMS
+
+- Changed type from `string` to laguages enum in `cms/blogs/blog_posts/models/AttachToLangPrimaryRequestVNext::language`.
+- Added parameter `campaignName` to `cms/blogs/blog_posts/models/ContentLanguageVariation`.
+- Added parameter `breakpointStyles` to `cms/blogs/blog_posts/models/Styles`.
+- Added parameter `name` to `cms.hubdb.rowsApi.cloneDraftTableRow()`.
+- Added parameter `archived` to `cms.hubdb.rowsApi.getDraftTableRowById()` and `cms.hubdb.rowsApi.getTableRow()`.
+- Added parameters `offset` and `archived` to `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
+- Changed the response object type from  `CollectionResponseWithTotalHubDbTableRowV3ForwardPaging` to `UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3` for `cms.hubdb.rowsApi.getTableRows()` and `cms.hubdb.rowsApi.readDraftTableRows()`.
+- Changed parameter `batchInputString: BatchInputString` to `batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest` in `cms.hubdb.rowsApi.cloneDraftTableRow()`.
+- Added parameter `contentType` before `archived` parameter to `cms.hubdb.tablesApi.getAllTables()`.
+- Changed parameters from `tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.getDraftTableDetailsById()` and `cms.hubdb.tablesApi.getTableDetails()`.
+- Changed parameters from `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean` to `tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean` of `cms.hubdb.tablesApi.updateDraftTable()`.
+- Added parameters `createdByUserId`, `updatedBy`, `updatedByUserId`, `createdAt`, `createdBy` and `updatedAt` to `cms/hubdb/models/Column` and `cms/hubdb/models/Option`.
+- Added the parameter `isHubspotDefined` to `cms/hubdb/models/HubDbTableCloneRequest`.
+- Removed `cms.source_code.ExtractApi.extractByPath()` method.
+- Added `doAsync()` and `getAsyncStatus()` methods to `cms.source_code.ExtractApi`.
+- Removed `cms.source_code.sourceCodeExtractApi`.
+
+## CRM
+
+- Added `crm.associassociations.v4.reportApi`.
+- Added parameter `idProperty` to `crm.companies.basicApi.getById()`, `crm.companies.basicApi.update()`, `crm.deals.basicApi.getById()`, `crm.deals.basicApi.update()`.
+- Added method `upsert` to `crm.companies.batchApi`, `crm.contacts.batchApi`, `crm.deals.batchApi`, `crm.line_items.batchApi`, `crm.objects.batchApi`, `crm.objects.calls.batchApi`, `crm.objects.communications.batchApi`, `crm.objects.emails.batchApi`, `crm.objects.meetings.batchApi`, `crm.objects.notes.batchApi`, `crm.objects.postal_mail.batchApi`, `crm.objects.tasks.batchApi`, `crm.objects.taxes.batchApi`, `crm.products.batchApi`, `crm.quotes.batchApi`, `crm.tickets.batchApi`
+- Removed `crm.companies.GDPRApi`, `crm.deals.GDPRApi`, `crm.line_items.GDPRApi`, `crm.objects.GDPRApi`, `crm.objects.calls.GDPRApi`, `crm.objects.communications.GDPRApi`, `crm.objects.emails.GDPRApi`, `crm.objects.feedback_submissions.GDPRApi`, `crm.objects.goals.GDPRApi`, `crm.objects.meetings.GDPRApi`, `crm.objects.notes.GDPRApi`, `crm.objects.postal_mail.GDPRApi`, `crm.objects.tasks.GDPRApi`, `crm.objects.taxes.GDPRApi`, `crm.products.GDPRApi`, `crm.quotes.GDPRApi`, `crm.tickets.GDPRApi`
+- Removed `crm.line_items.publicObjectApi`, `crm.objects.publicObjectApi`, `crm.objects.calls.publicObjectApi`, `crm.objects.communications.publicObjectApi`, `crm.objects.emails.publicObjectApi`, `crm.objects.feedback_submissions.publicObjectApi`, `crm.objects.goals.publicObjectApi`, `crm.objects.meetings.publicObjectApi`, `crm.objects.notes.publicObjectApi`, `crm.objects.postal_mail.publicObjectApi`, `crm.objects.tasks.publicObjectApi`, `crm.objects.taxes.publicObjectApi`, `crm.products.publicObjectApi`, `crm.quotes.publicObjectApi`
+- Renamed `publicObjectApi` to `mergeApi` in `crm.companies`, `crm.contacts`, `crm.deals` and `crm.tickets`.
+- Made `associationCategory` and `associationTypeId` parameters nullable in `crm/companies/models/AssociationSpec`, `crm/contacts/models/AssociationSpec`, `crm/deals/models/AssociationSpec`, `crm/tickets/models/AssociationSpec`.
+- Made `types` and `to` parameters nullable in `crm/companies/models/PublicAssociationsForObject`, `crm/contacts/models/PublicAssociationsForObject`, `crm/deals/models/PublicAssociationsForObject`, `crm/tickets/models/PublicAssociationsForObject`.
+- Made `id` parameter nullable in `crm/companies/models/PublicObjectId`, `crm/contacts/models/PublicObjectId`, `crm/deals/models/PublicObjectId` and `crm/tickets/models/PublicObjectId`.
+- Made `limit`, `after`, `sorts`, `properties` and `filterGroups` parameters nullable in `crm/companies/models/PublicObjectSearchRequest`, `crm/contacts/models/PublicObjectSearchRequest`, `crm/deals/models/PublicObjectSearchRequest`, `crm/line_items/models/PublicObjectSearchRequest`, `crm/objects/models/PublicObjectSearchRequest`, `crm/objects/calls/models/PublicObjectSearchRequest`, `crm/objects/communications/models/PublicObjectSearchRequest`, `crm/objects/emails/models/PublicObjectSearchRequest`, `crm/objects/feedback_submissions/models/PublicObjectSearchRequest`, `crm/objects/goals/models/PublicObjectSearchRequest`, `crm/objects/leads/models/PublicObjectSearchRequest`, `crm/objects/postal_mail/models/PublicObjectSearchRequest`, `crm/objects/tasks/models/PublicObjectSearchRequest`, `crm/objects/taxes/models/PublicObjectSearchRequest`, `crm/products/models/PublicObjectSearchRequest`, `crm/quotes/models/PublicObjectSearchRequest` and `crm/tickets/models/PublicObjectSearchRequest`.
+- Added parameter `objectWriteTraceId` to `crm/companies/models/SimplePublicObjectBatchInput`, `crm/companies/models/SimplePublicObjectInput`, `crm/companies/models/SimplePublicObjectInputForCreate`, `crm/contacts/models/SimplePublicObjectBatchInput`, `crm/contacts/models/SimplePublicObjectInput`, `crm/contacts/models/SimplePublicObjectInputForCreate`, `crm/deals/models/SimplePublicObjectBatchInput`, `crm/deals/models/SimplePublicObjectInput`, `crm/deals/models/SimplePublicObjectInputForCreate`, `crm/line_items/models/SimplePublicObjectBatchInput`, `crm/line_items/models/SimplePublicObjectInput`, `crm/line_items/models/SimplePublicObjectInputForCreate`, `crm/objects/models/SimplePublicObjectBatchInput`, `crm/objects/models/SimplePublicObjectInput`, `crm/objects/models/SimplePublicObjectInputForCreate`, `crm/objects/calls/models/SimplePublicObjectBatchInput`, `crm/objects/calls/models/SimplePublicObjectInput`, `crm/objects/calls/models/SimplePublicObjectInputForCreate`,`crm/objects/communications/models/SimplePublicObjectBatchInput`, `crm/objects/communications/models/SimplePublicObjectInput`, `crm/objects/communications/models/SimplePublicObjectInputForCreate`, `crm/objects/emails/models/SimplePublicObjectBatchInput`, `crm/objects/emails/models/SimplePublicObjectInput`, `crm/objects/emails/models/SimplePublicObjectInputForCreate`, `crm/objects/leads/models/SimplePublicObjectBatchInput`, `crm/objects/leads/models/SimplePublicObjectInput`, `crm/objects/leads/models/SimplePublicObjectInputForCreate`, `crm/objects/leads/models/SimplePublicObjectBatchInputUpsert`, `crm/objects/meetings/models/SimplePublicObjectBatchInput`, `crm/objects/meetings/models/SimplePublicObjectInput`, `crm/objects/meetings/models/SimplePublicObjectInputForCreate`, `crm/objects/notes/models/SimplePublicObjectBatchInput`, `crm/objects/notes/models/SimplePublicObjectInput`, `crm/objects/notes/models/SimplePublicObjectInputForCreate`, `crm/objects/postal_mail/models/SimplePublicObjectBatchInput`, `crm/objects/postal_mail/models/SimplePublicObjectInput`, `crm/objects/postal_mail/models/SimplePublicObjectInputForCreate`, `crm/objects/tasks/models/SimplePublicObjectBatchInput`, `crm/objects/tasks/models/SimplePublicObjectInput`, `crm/objects/tasks/models/SimplePublicObjectInputForCreate`, `crm/objects/taxes/models/SimplePublicObjectBatchInput`, `crm/objects/taxes/models/SimplePublicObjectInput`, `crm/objects/taxes/models/SimplePublicObjectInputForCreate`, `crm/products/models/SimplePublicObjectBatchInput`, `crm/products/models/SimplePublicObjectInput`, `crm/products/models/SimplePublicObjectInputForCreate`, `crm/quotes/models/SimplePublicObjectBatchInput`, `crm/quotes/models/SimplePublicObjectInput`, `crm/quotes/models/SimplePublicObjectInputForCreate`, `crm/tickets/models/SimplePublicObjectBatchInput`, `crm/tickets/models/SimplePublicObjectInput` and `crm/tickets/models/SimplePublicObjectInputForCreate`.
+- Made `associations` parameter nullable in `crm/companies/models/SimplePublicObjectInputForCreate`, `crm/contacts/models/SimplePublicObjectInputForCreate`, `crm/deals/models/SimplePublicObjectInputForCreate` and  `crm/tickets/models/SimplePublicObjectInputForCreate`.
+- Removed `crm.extensions.accounting` API client.
+- Added method `markAsReady` to `crm.extensions.calling.recordingSettingsApi`.
+- Added parameter `supportsInboundCalling` to `crm/extensions/calling/models/SettingsPatchRequest`, `crm/extensions/calling/models/SettingsRequest` and `crm/extensions/calling/models/SettingsResponse`.
+- Added parameters `userIdIncludingInactive` and `type` to `crm/owners/models/PublicOwner`.
+- Removed `archive`, `create` and `update` methods from `crm.objects.feedback_submissions.basicApi`, `crm.objects.feedback_submissions.batchApi`, `crm.objects.goals.basicApi` and `crm.objects.goals.batchApi`.
+- Changed response object type `BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors` to `BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject` of `crm.objects.leads.rowsApi.upsert()`.
+- Removed `crm.schemas.PublicObjectSchemasApi`.
+- Added parameters `createdByUserId` and `updatedByUserId` to `crm/schemas/models/ObjectSchema`.
+- Added parameter `clearDescription` to `crm/schemas/models/ObjectTypeDefinitionPatch`.
+
+## CRM Lists
+
+- Added `crm.lists.foldersApi`.
+- Changed `listIds` type from `Array<number>` to `Array<string>` in `crm.lists.listsApi.getAll()`.
+- Changed `listId` type from `number` to `string` in `crm.lists.listsApi.getById()`, `crm.lists.listsApi.remove()`, `crm.lists.listsApi.restore()`, `crm.lists.listsApi.updateListFilters()` and `crm.lists.listsApi.updateName()`.
+- Added `crm.lists.mappingApi`.
+- Changed `listId` type from `number` to `string` and `requestBody` type from `Array<number>` to `Array<string>` in `crm.lists.membershipsApi.add()` and `crm.lists.membershipsApi.remove()`.
+- Changed `listIds` and `sourceListId` types from `number` to `string` in `crm.lists.membershipsApi.addAllFromList()`.
+- Changed `listId` type from `number` to `string` in `crm.lists.membershipsApi.addAndRemove()`, `crm.lists.membershipsApi.getPage()` and `crm.lists.membershipsApi.removeAll()`.
+- Added `crm.lists.membershipsApi.getLists()` and `crm.lists.membershipsApi.getPageOrderedByAddedToListDate()`.
+- Changed response object type `CollectionResponseLong` to `ApiCollectionResponseJoinTimeAndRecordId` of `crm.lists.membershipsApi.getPage()`.
+- Added parameter `customProperties` to `crm/lists/models/ListCreateRequest`.
+- Added parameters `listIds`, `processingTypes` and `sort` to `crm/lists/models/ListSearchRequest`.
+- Made `offset` and `additionalProperties` parameters nullable in `crm/lists/models/ListSearchRequest`.
+- Changed `recordIdsToRemove` and `recordIdsToAdd` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipChangeRequest`.
+- Changed `recordIdsRemoved`, `recordsIdsAdded` and `recordIdsMissing` type from `Array<number>` to `Array<string>` in `crm/lists/models/MembershipsUpdateResponse`.
+- Changed `listId` type from `number` to `string` in `crm/lists/models/PublicAssociationInListFilter`, `crm/lists/models/PublicInListFilter`, `crm/lists/models/PublicObjectListSearchResult`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicPropertyAssociationInListFilter`.
+- Changed `coalescingRefineBy` type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicAssociationInListFilter`, `crm/lists/models/PublicNumAssociationsFilter`, `crm/lists/models/PublicObjectList` and `crm/lists/models/PublicPropertyAssociationInListFilter`.
+- Changed `businessUnitId` type from `number` to `string` and `subscriptionIds` from `Array<number>` to `Array<string>` in `crm/lists/models/PublicCommunicationSubscriptionFilter` and `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`.
+- Changed `coalescingRefineBy` and `pruningRefineBy` parameters type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicCtaAnalyticsFilter`, `crm/lists/models/PublicEventAnalyticsFilter`, `crm/lists/models/PublicFormSubmissionFilter`, `crm/lists/models/PublicFormSubmissionOnPageFilter`, `crm/lists/models/PublicPageViewAnalyticsFilter`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicUnifiedEventsFilter`.
+- Changed `pruningRefineBy` type from `PublicEventAnalyticsFilterCoalescingRefineBy` to `PublicFormSubmissionFilterCoalescingRefineBy` in `crm/lists/models/PublicEmailEventFilter`.
+- Changed `subscriptionIds` type from `Array<number>` to `Array<string>` in `crm/lists/models/PublicEmailSubscriptionFilter`.
+- Changed `operation` type from `PublicPropertyFilterOperation` to `PublicSurveyMonkeyValueFilterValueComparison` in `crm/lists/models/PublicEventFilterMetadata` and `crm/lists/models/PublicPropertyFilter`.
+- Changed `valueComparison` type from `PublicPropertyFilterOperation` to `PublicSurveyMonkeyValueFilterValueComparison` in `crm/lists/models/PublicSurveyMonkeyValueFilter`.
+- Added parameter `size` to `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner` and `crm/lists/models/PublicObjectList`.
+- Changed `createdById` and `updatedById` type from `number` to `string` in `crm/lists/models/PublicObjectList` and `crm/lists/models/PublicObjectListSearchResult`.
+- Added parameter `coalescingRefineBy` to `crm/lists/models/PublicPropertyAssociationFilterBranchFilterBranchesInner` and `crm/lists/models/PublicUnifiedEventsFilterBranch`.
+- Changed `emailId` and `appId` type from `number` to `string` in `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`.
+- Renamed  from `crm/lists/models/PublicPropertyFilterOperation` to `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison`.
+- Changed `fiscalYearStart` type from `PublicPropertyFilterOperationFiscalYearStartEnum` to `PublicSurveyMonkeyValueFilterValueComparisonFiscalYearStartEnum` in `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison`.
+
+## Marketing
+
+- Renamed method `create` to `createByContactIds` in `marketing.events.attendanceSubscriberStateChangesApi`.
+- Renamed method `createByEmail` to `createByContactEmails` in `marketing.events.attendanceSubscriberStateChangesApi`.
+- Renamed method `archiveBatch` to `batchArchive` and moved from`marketing.events.batchApi` to `marketing.events.basicApi`.
+- Renamed method `doUpsert` to `batchUpsert` and moved from`marketing.events.batchApi` to `marketing.events.basicApi`.
+- Renamed method `doCancel` to `cancel` in `marketing.events.basicApi`.
+- Renamed method `getById` to `getDetails` in `marketing.events.basicApi`.
+- Renamed method `replace` to `upsert` in `marketing.events.basicApi`.
+- Renamed method `create` to `update` in `marketing.events.settingsApi`.
+- Renamed method `doEmailUpsertById` to `upsertByContactEmail` in `marketing.events.subscriberStateChangesApi`.
+- Renamed method `doUpsertById` to `upsertByContactId` in `marketing.events.subscriberStateChangesApi`.
+- Added new method `complete` to `marketing.events.basicApi`.
+- Moved method `doSearch` from `marketing.events.searchApi` to `marketing.events.basicApi`.
+- Added `marketing.events.ParticipantStateApi`.
+- Added parameter `eventCompleted` to `marketing/events/models/MarketingEventPublicDefaultResponse`, `marketing/events/models/MarketingEventPublicReadResponse` and `marketing/events/models/MarketingEventUpdateRequestParams`.
+- Added parameter `importStatus` to `marketing/events/models/MarketingEventUpdateRequestParams`.
+- Added parameters `dataSensitivity`, `unit` and `isEncrypted` to `marketing/events/models/PropertyValue`.
+- Removed `marketing.events.batchApi`, `marketing.events.marketingEventsExternalApi` and `marketing.events.searchApi`.
+- Changed `legalConsentOptions` type from `any` to `HubSpotFormDefinitionAllOfLegalConsentOptions` in `marketing/forms/models/CollectionResponseFormDefinitionBaseForwardPagingResultsInner`, `marketing/forms/models/FormDefinitionBase`, `marketing/forms/models/FormDefinitionCreateRequestBase` and `marketing/forms/models/HubSpotFormDefinition`.
+- Changed `legalConsentOptions` type from `any` to `HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions` in `marketing/forms/models/HubSpotFormDefinitionCreateRequest`.
+- Changed `legalConsentOptions` type from `HubSpotFormDefinitionPatchRequestLegalConsentOptions` to `HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions` in `marketing/forms/models/HubSpotFormDefinitionPatchRequest`.
+- Renamed `marketing.transactional.publicSmtpTokensApi` to `marketing.transactional.publicSMTPTokensApi`.
+
+## Events
+
+- Changed parameters order from `objectType?: string, eventType?: string, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, indexTableName?: string, indexSpecificMetadata?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>` to `objectType?: string, eventType?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>` in `events.eventsApi.getPage()`.
+- Added new method `getTypes` to `marketing.events.basicApi`.
+- Renamed `marketing.events.send.behavioralEventsTrackingApi` to `marketing.events.send.customEventDataApi`.
+
+## OAuth, Settings Users
+
+- Removed parameters `scopeToScopeGroupPks`, `trialScopes` and `trialScopeToScopeGroupPks` in `oauth/models/AccessTokenInfoResponse`.
+- Changed `idProperty` type from `string` to `'USER_ID' | 'EMAIL'` in `settings.users.usersApi.archive`, `settings.users.usersApi.getById` and `settings.users.usersApi.replace`.
+- Added nullable parameters `firstName` and `lastName` to `settings/users/models/PublicUser`, `settings/users/models/PublicUserUpdate` and `settings/users/models/UserProvisionRequest`.
+- Added nullable parameter `objectTypeId` to `webhooks/models/SubscriptionCreateRequest` and `webhooks/models/SubscriptionResponse`.
+- Removed parameter `period` from `webhooks/models/ThrottlingSettings`.
 
 ## [11.2.0] - 2024-08-14
 
@@ -769,7 +883,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/11.2.0...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -831,3 +945,4 @@ export enum Enum {
 [11.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.0.0
 [11.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.1.0
 [11.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.2.0
+[12.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.0

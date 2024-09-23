@@ -15,29 +15,29 @@ import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
 import { NumberFieldValidation } from '../models/NumberFieldValidation';
 
 export class DependentFieldDependentField {
-    'fieldType': DependentFieldDependentFieldFieldTypeEnum;
     'objectTypeId': string;
-    'name': string;
-    'label': string;
-    'description'?: string;
-    'required': boolean;
     'hidden': boolean;
-    'dependentFields': Array<DependentField>;
-    /**
-    * The prompt text showing when the field isn\'t filled in.
-    */
-    'placeholder'?: string;
     /**
     * The value filled in by default. This value will be submitted unless the customer modifies it.
     */
     'defaultValue'?: string;
+    'name': string;
+    'description'?: string;
+    'dependentFields': Array<DependentField>;
+    'label': string;
+    /**
+    * The prompt text showing when the field isn\'t filled in.
+    */
+    'placeholder'?: string;
+    'fieldType': DependentFieldDependentFieldFieldTypeEnum;
+    'required': boolean;
     'validation': NumberFieldValidation;
     /**
     * Whether to display a country code drop down next to the phone field.
     */
     'useCountryCodeSelect': boolean;
-    'defaultValues': Array<string>;
     'options': Array<EnumeratedFieldOption>;
+    'defaultValues': Array<string>;
     /**
     * Whether to allow the upload of multiple files.
     */
@@ -47,14 +47,20 @@ export class DependentFieldDependentField {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "DependentFieldDependentFieldFieldTypeEnum",
+            "name": "objectTypeId",
+            "baseName": "objectTypeId",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
+            "name": "hidden",
+            "baseName": "hidden",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "defaultValue",
+            "baseName": "defaultValue",
             "type": "string",
             "format": ""
         },
@@ -65,27 +71,9 @@ export class DependentFieldDependentField {
             "format": ""
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "description",
             "baseName": "description",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
             "format": ""
         },
         {
@@ -95,15 +83,27 @@ export class DependentFieldDependentField {
             "format": ""
         },
         {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "placeholder",
             "baseName": "placeholder",
             "type": "string",
             "format": ""
         },
         {
-            "name": "defaultValue",
-            "baseName": "defaultValue",
-            "type": "string",
+            "name": "fieldType",
+            "baseName": "fieldType",
+            "type": "DependentFieldDependentFieldFieldTypeEnum",
+            "format": ""
+        },
+        {
+            "name": "required",
+            "baseName": "required",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -119,15 +119,15 @@ export class DependentFieldDependentField {
             "format": ""
         },
         {
-            "name": "defaultValues",
-            "baseName": "defaultValues",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "options",
             "baseName": "options",
             "type": "Array<EnumeratedFieldOption>",
+            "format": ""
+        },
+        {
+            "name": "defaultValues",
+            "baseName": "defaultValues",
+            "type": "Array<string>",
             "format": ""
         },
         {

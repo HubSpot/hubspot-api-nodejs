@@ -3,40 +3,40 @@ import { Configuration} from '../configuration'
 
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
 
-import { ObservableBehavioralEventsTrackingApi } from "./ObservableAPI";
-import { BehavioralEventsTrackingApiRequestFactory, BehavioralEventsTrackingApiResponseProcessor} from "../apis/BehavioralEventsTrackingApi";
+import { ObservableCustomEventDataApi } from "./ObservableAPI";
+import { CustomEventDataApiRequestFactory, CustomEventDataApiResponseProcessor} from "../apis/CustomEventDataApi";
 
-export interface BehavioralEventsTrackingApiSendRequest {
+export interface CustomEventDataApiSendRequest {
     /**
      * 
      * @type BehavioralEventHttpCompletionRequest
-     * @memberof BehavioralEventsTrackingApisend
+     * @memberof CustomEventDataApisend
      */
     behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest
 }
 
-export class ObjectBehavioralEventsTrackingApi {
-    private api: ObservableBehavioralEventsTrackingApi
+export class ObjectCustomEventDataApi {
+    private api: ObservableCustomEventDataApi
 
-    public constructor(configuration: Configuration, requestFactory?: BehavioralEventsTrackingApiRequestFactory, responseProcessor?: BehavioralEventsTrackingApiResponseProcessor) {
-        this.api = new ObservableBehavioralEventsTrackingApi(configuration, requestFactory, responseProcessor);
+    public constructor(configuration: Configuration, requestFactory?: CustomEventDataApiRequestFactory, responseProcessor?: CustomEventDataApiResponseProcessor) {
+        this.api = new ObservableCustomEventDataApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param param the request object
      */
-    public sendWithHttpInfo(param: BehavioralEventsTrackingApiSendRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public sendWithHttpInfo(param: CustomEventDataApiSendRequest, options?: Configuration): Promise<HttpInfo<void>> {
         return this.api.sendWithHttpInfo(param.behavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param param the request object
      */
-    public send(param: BehavioralEventsTrackingApiSendRequest, options?: Configuration): Promise<void> {
+    public send(param: CustomEventDataApiSendRequest, options?: Configuration): Promise<void> {
         return this.api.send(param.behavioralEventHttpCompletionRequest,  options).toPromise();
     }
 

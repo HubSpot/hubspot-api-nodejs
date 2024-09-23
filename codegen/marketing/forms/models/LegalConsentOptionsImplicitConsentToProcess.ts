@@ -13,19 +13,34 @@
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 
 export class LegalConsentOptionsImplicitConsentToProcess {
-    'type': LegalConsentOptionsImplicitConsentToProcessTypeEnum;
-    'communicationConsentText'?: string;
+    /**
+    * 
+    */
     'communicationsCheckboxes': Array<LegalConsentCheckbox>;
+    /**
+    * 
+    */
+    'communicationConsentText'?: string;
+    /**
+    * 
+    */
+    'type': LegalConsentOptionsImplicitConsentToProcessTypeEnum;
+    /**
+    * 
+    */
     'privacyText': string;
+    /**
+    * 
+    */
     'consentToProcessText'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "LegalConsentOptionsImplicitConsentToProcessTypeEnum",
+            "name": "communicationsCheckboxes",
+            "baseName": "communicationsCheckboxes",
+            "type": "Array<LegalConsentCheckbox>",
             "format": ""
         },
         {
@@ -35,9 +50,9 @@ export class LegalConsentOptionsImplicitConsentToProcess {
             "format": ""
         },
         {
-            "name": "communicationsCheckboxes",
-            "baseName": "communicationsCheckboxes",
-            "type": "Array<LegalConsentCheckbox>",
+            "name": "type",
+            "baseName": "type",
+            "type": "LegalConsentOptionsImplicitConsentToProcessTypeEnum",
             "format": ""
         },
         {

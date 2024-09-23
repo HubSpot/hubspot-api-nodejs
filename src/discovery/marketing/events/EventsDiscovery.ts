@@ -1,12 +1,10 @@
 import {
   AttendanceSubscriberStateChangesApi,
   BasicApi,
-  BatchApi,
   createConfiguration,
-  MarketingEventsExternalApi,
+  ParticipantStateApi,
   RequestContext,
   ResponseContext,
-  SearchApi,
   ServerConfiguration,
   SettingsApi,
   SubscriberStateChangesApi,
@@ -19,9 +17,7 @@ import ApiDecoratorService from '../../../services/ApiDecoratorService'
 export default class EventsDiscovery {
   public attendanceSubscriberStateChangesApi: AttendanceSubscriberStateChangesApi
   public basicApi: BasicApi
-  public batchApi: BatchApi
-  public marketingEventsExternalApi: MarketingEventsExternalApi
-  public searchApi: SearchApi
+  public participantStateApi: ParticipantStateApi
   public settingsApi: SettingsApi
   public subscriberStateChangesApi: SubscriberStateChangesApi
 
@@ -41,11 +37,9 @@ export default class EventsDiscovery {
         new AttendanceSubscriberStateChangesApi(configuration),
       )
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
-    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.marketingEventsExternalApi = ApiDecoratorService.getInstance().apply<MarketingEventsExternalApi>(
-      new MarketingEventsExternalApi(configuration),
+    this.participantStateApi = ApiDecoratorService.getInstance().apply<ParticipantStateApi>(
+      new ParticipantStateApi(configuration),
     )
-    this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
     this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
     this.subscriberStateChangesApi = ApiDecoratorService.getInstance().apply<SubscriberStateChangesApi>(
       new SubscriberStateChangesApi(configuration),

@@ -17,23 +17,61 @@ import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Create or update the current settings for the application.
-     * Update the application settings
-     * @param appId The id of the application to update the settings for.
-     * @param eventDetailSettingsUrl The new application settings
+     * Retrieve the current settings for the application.
+     * Retrieve the application settings
+     * @param appId The id of the application to retrieve the settings for.
      */
-    public async create(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: Configuration): Promise<RequestContext> {
+    public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'appId' is not null or undefined
         if (appId === null || appId === undefined) {
-            throw new RequiredError("SettingsApi", "create", "appId");
+            throw new RequiredError("SettingsApi", "getAll", "appId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/marketing/v3/marketing-events/{appId}/settings'
+            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["developer_hapikey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Create or update the current settings for the application.
+     * Update the application settings
+     * @param appId The id of the application to update the settings for.
+     * @param eventDetailSettingsUrl 
+     */
+    public async update(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'appId' is not null or undefined
+        if (appId === null || appId === undefined) {
+            throw new RequiredError("SettingsApi", "update", "appId");
         }
 
 
         // verify required parameter 'eventDetailSettingsUrl' is not null or undefined
         if (eventDetailSettingsUrl === null || eventDetailSettingsUrl === undefined) {
-            throw new RequiredError("SettingsApi", "create", "eventDetailSettingsUrl");
+            throw new RequiredError("SettingsApi", "update", "eventDetailSettingsUrl");
         }
 
 
@@ -72,44 +110,6 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
         return requestContext;
     }
 
-    /**
-     * Retrieve the current settings for the application.
-     * Retrieve the application settings
-     * @param appId The id of the application to retrieve the settings for.
-     */
-    public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'appId' is not null or undefined
-        if (appId === null || appId === undefined) {
-            throw new RequiredError("SettingsApi", "getAll", "appId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/{appId}/settings'
-            .replace('{' + 'appId' + '}', encodeURIComponent(String(appId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["developer_hapikey"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
 }
 
 export class SettingsApiResponseProcessor {
@@ -118,10 +118,10 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to create
+     * @params response Response returned by the server for a request to getAll
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<EventDetailSettings >> {
+     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<EventDetailSettings >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: EventDetailSettings = ObjectSerializer.deserialize(
@@ -154,10 +154,10 @@ export class SettingsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getAll
+     * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getAllWithHttpInfo(response: ResponseContext): Promise<HttpInfo<EventDetailSettings >> {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<EventDetailSettings >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: EventDetailSettings = ObjectSerializer.deserialize(

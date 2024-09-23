@@ -16,6 +16,7 @@ export class SimplePublicObjectBatchInput {
     * The name of a property whose values are unique for this object
     */
     'idProperty'?: string;
+    'objectWriteTraceId'?: string;
     /**
     * The id to be updated. This can be the object id, or the unique property value of the idProperty property
     */
@@ -28,6 +29,12 @@ export class SimplePublicObjectBatchInput {
         {
             "name": "idProperty",
             "baseName": "idProperty",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
             "type": "string",
             "format": ""
         },

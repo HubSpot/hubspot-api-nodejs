@@ -12,8 +12,8 @@
 
 
 export class AssociationSpec {
-    'associationCategory': AssociationSpecAssociationCategoryEnum;
-    'associationTypeId': number;
+    'associationCategory'?: AssociationSpecAssociationCategoryEnum;
+    'associationTypeId'?: number;
 
     static readonly discriminator: string | undefined = undefined;
 

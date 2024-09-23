@@ -25,7 +25,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Delete the webhook settings for the specified app. Event subscriptions will not be deleted, but will be paused until another webhook is created.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      */
     public clearWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
         const result = this.api.clearWithHttpInfo(appId, _options);
@@ -33,7 +35,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Delete the webhook settings for the specified app. Event subscriptions will not be deleted, but will be paused until another webhook is created.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      */
     public clear(appId: number, _options?: Configuration): Promise<void> {
         const result = this.api.clear(appId, _options);
@@ -41,7 +45,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Update webhook settings for the specified app.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      * @param settingsChangeRequest 
      */
     public configureWithHttpInfo(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
@@ -50,7 +56,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Update webhook settings for the specified app.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      * @param settingsChangeRequest 
      */
     public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
@@ -59,7 +67,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Retrieve the webhook settings for the specified app, including the webhook’s target URL, throttle configuration, and create/update date.
+     * Read webhook settings
+     * @param appId The ID of the app.
      */
     public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
         const result = this.api.getAllWithHttpInfo(appId, _options);
@@ -67,7 +77,9 @@ export class PromiseSettingsApi {
     }
 
     /**
-     * @param appId 
+     * Retrieve the webhook settings for the specified app, including the webhook’s target URL, throttle configuration, and create/update date.
+     * Read webhook settings
+     * @param appId The ID of the app.
      */
     public getAll(appId: number, _options?: Configuration): Promise<SettingsResponse> {
         const result = this.api.getAll(appId, _options);
@@ -94,8 +106,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Delete an existing event subscription by ID.
+     * Delete event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public archiveWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
         const result = this.api.archiveWithHttpInfo(subscriptionId, appId, _options);
@@ -103,8 +117,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Delete an existing event subscription by ID.
+     * Delete event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<void> {
         const result = this.api.archive(subscriptionId, appId, _options);
@@ -112,7 +128,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Create new event subscription for the specified app.
+     * Create an event subscription
+     * @param appId The ID of the app.
      * @param subscriptionCreateRequest 
      */
     public createWithHttpInfo(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
@@ -121,7 +139,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Create new event subscription for the specified app.
+     * Create an event subscription
+     * @param appId The ID of the app.
      * @param subscriptionCreateRequest 
      */
     public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
@@ -130,7 +150,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Retrieve event subscriptions for the specified app.
+     * Read event subscriptions
+     * @param appId The ID of the app.
      */
     public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<SubscriptionListResponse>> {
         const result = this.api.getAllWithHttpInfo(appId, _options);
@@ -138,7 +160,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Retrieve event subscriptions for the specified app.
+     * Read event subscriptions
+     * @param appId The ID of the app.
      */
     public getAll(appId: number, _options?: Configuration): Promise<SubscriptionListResponse> {
         const result = this.api.getAll(appId, _options);
@@ -146,8 +170,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Retrieve a specific event subscription by ID.
+     * Read an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public getByIdWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
         const result = this.api.getByIdWithHttpInfo(subscriptionId, appId, _options);
@@ -155,8 +181,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Retrieve a specific event subscription by ID.
+     * Read an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      */
     public getById(subscriptionId: number, appId: number, _options?: Configuration): Promise<SubscriptionResponse> {
         const result = this.api.getById(subscriptionId, appId, _options);
@@ -164,8 +192,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Update an existing event subscription by ID.
+     * Update an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      * @param subscriptionPatchRequest 
      */
     public updateWithHttpInfo(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
@@ -174,8 +204,10 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param subscriptionId 
-     * @param appId 
+     * Update an existing event subscription by ID.
+     * Update an event subscription
+     * @param subscriptionId The ID of the event subscription.
+     * @param appId The ID of the app.
      * @param subscriptionPatchRequest 
      */
     public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
@@ -184,7 +216,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Batch create event subscriptions for the specified app.
+     * Batch create event subscriptions
+     * @param appId The ID of the app.
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
     public updateBatchWithHttpInfo(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
@@ -193,7 +227,9 @@ export class PromiseSubscriptionsApi {
     }
 
     /**
-     * @param appId 
+     * Batch create event subscriptions for the specified app.
+     * Batch create event subscriptions
+     * @param appId The ID of the app.
      * @param batchInputSubscriptionBatchUpdateRequest 
      */
     public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {

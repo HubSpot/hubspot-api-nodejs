@@ -2,15 +2,16 @@ import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
-import { PublicGdprDeleteInput } from '../models/PublicGdprDeleteInput';
-import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
 import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
@@ -230,7 +231,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of taxes
+     * Update a batch of taxes by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
@@ -239,7 +240,7 @@ export class PromiseBatchApi {
     }
 
     /**
-     * Update a batch of taxes
+     * Update a batch of taxes by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
@@ -247,79 +248,23 @@ export class PromiseBatchApi {
         return result.toPromise();
     }
 
-
-}
-
-
-
-import { ObservableGDPRApi } from './ObservableAPI';
-
-import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
-export class PromiseGDPRApi {
-    private api: ObservableGDPRApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: GDPRApiRequestFactory,
-        responseProcessor?: GDPRApiResponseProcessor
-    ) {
-        this.api = new ObservableGDPRApi(configuration, requestFactory, responseProcessor);
-    }
-
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of taxes by unique property values
+     * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
-    public purgeWithHttpInfo(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.purgeWithHttpInfo(publicGdprDeleteInput, _options);
+    public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
+        const result = this.api.upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert, _options);
         return result.toPromise();
     }
 
     /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
+     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
+     * Create or update a batch of taxes by unique property values
+     * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
-    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Promise<void> {
-        const result = this.api.purge(publicGdprDeleteInput, _options);
-        return result.toPromise();
-    }
-
-
-}
-
-
-
-import { ObservablePublicObjectApi } from './ObservableAPI';
-
-import { PublicObjectApiRequestFactory, PublicObjectApiResponseProcessor} from "../apis/PublicObjectApi";
-export class PromisePublicObjectApi {
-    private api: ObservablePublicObjectApi
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: PublicObjectApiRequestFactory,
-        responseProcessor?: PublicObjectApiResponseProcessor
-    ) {
-        this.api = new ObservablePublicObjectApi(configuration, requestFactory, responseProcessor);
-    }
-
-    /**
-     * Merge two taxes with same type
-     * @param publicMergeInput 
-     */
-    public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<HttpInfo<SimplePublicObject>> {
-        const result = this.api.mergeWithHttpInfo(publicMergeInput, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Merge two taxes with same type
-     * @param publicMergeInput 
-     */
-    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Promise<SimplePublicObject> {
-        const result = this.api.merge(publicMergeInput, _options);
+    public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
+        const result = this.api.upsert(batchInputSimplePublicObjectBatchInputUpsert, _options);
         return result.toPromise();
     }
 

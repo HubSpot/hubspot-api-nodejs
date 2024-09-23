@@ -60,10 +60,10 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Clone an existing HubDB table. The `newName` and `newLabel` of the new table can be sent as JSON in the `body` parameter. This will create the cloned table as a `draft`.
+     * Clone an existing HubDB table. The `newName` and `newLabel` of the new table can be sent as JSON in the request body. This will create the cloned table as a draft.
      * Clone a table
      * @param tableIdOrName The ID or name of the table to clone.
-     * @param hubDbTableCloneRequest JSON object with the properties newName and newLabel. You can set copyRows to false to clone the table with copying rows and default is true.
+     * @param hubDbTableCloneRequest 
      */
     public async cloneDraftTable(tableIdOrName: string, hubDbTableCloneRequest: HubDbTableCloneRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -118,7 +118,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
      * Create a new table
-     * @param hubDbTableV3Request The JSON schema for the table being created.
+     * @param hubDbTableV3Request 
      */
     public async createTable(hubDbTableV3Request: HubDbTableV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -164,7 +164,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Exports the `draft` version of a table to CSV / EXCEL format.
+     * Exports the draft version of a table to CSV / EXCEL format.
      * Export a draft table
      * @param tableIdOrName The ID or name of the table to export.
      * @param format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -209,7 +209,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Exports the `published` version of a table to CSV / EXCEL format.
+     * Exports the published version of a table in a specified format.
      * Export a published version of a table
      * @param tableIdOrName The ID or name of the table to export.
      * @param format The file format to export. Possible values include &#x60;CSV&#x60;, &#x60;XLSX&#x60;, and &#x60;XLS&#x60;.
@@ -265,10 +265,12 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAt Only return tables last updated at exactly the specified time.
      * @param updatedAfter Only return tables last updated after the specified time.
      * @param updatedBefore Only return tables last updated before the specified time.
+     * @param contentType 
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -333,6 +335,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
+        if (contentType !== undefined) {
+            requestContext.setQueryParam("contentType", ObjectSerializer.serialize(contentType, "string", ""));
+        }
+
+        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
@@ -354,7 +361,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the details for the `published` version of each table defined in an account, including column definitions.
+     * Returns the details for the published version of each table defined in an account, including column definitions.
      * Get all published tables
      * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
      * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
@@ -365,10 +372,12 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAt Only return tables last updated at exactly the specified time.
      * @param updatedAfter Only return tables last updated after the specified time.
      * @param updatedBefore Only return tables last updated before the specified time.
+     * @param contentType 
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      */
-    public async getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -433,6 +442,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
+        if (contentType !== undefined) {
+            requestContext.setQueryParam("contentType", ObjectSerializer.serialize(contentType, "string", ""));
+        }
+
+        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
@@ -454,19 +468,21 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get the details for the `draft` version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
+     * Get the details for the draft version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param isGetLocalizedSchema 
      * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public async getDraftTableDetailsById(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getDraftTableDetailsById(tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new RequiredError("TablesApi", "getDraftTableDetailsById", "tableIdOrName");
         }
+
 
 
 
@@ -480,13 +496,18 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (includeForeignIds !== undefined) {
-            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
         }
 
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (includeForeignIds !== undefined) {
+            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
 
@@ -506,19 +527,21 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the details for the `published` version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
-     * Get details for a published table
+     * Returns the details for the published version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access. To do so, you\'ll need to include the HubSpot account ID in a `portalId` query parameter.
+     * Get details of a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param isGetLocalizedSchema 
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public async getTableDetails(tableIdOrName: string, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getTableDetails(tableIdOrName: string, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
         if (tableIdOrName === null || tableIdOrName === undefined) {
             throw new RequiredError("TablesApi", "getTableDetails", "tableIdOrName");
         }
+
 
 
 
@@ -532,13 +555,18 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (includeForeignIds !== undefined) {
-            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
         }
 
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (includeForeignIds !== undefined) {
+            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
 
@@ -558,11 +586,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the `draft` version of the table. Use `/publish` endpoint to push these changes to `published` version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
-     * @param config Configuration for the import in JSON format as described above.
-     * @param file The source CSV file to be imported.
+     * @param config 
+     * @param file 
      */
     public async importDraftTable(tableIdOrName: string, config?: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -676,7 +704,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Replaces the data in the `draft` version of the table with values from the `published` version. Any unpublished changes in the `draft` will be lost after this call is made.
+     * Replaces the data in the draft version of the table with values from the published version. Any unpublished changes in the draft will be lost after this call is made.
      * Reset a draft table
      * @param tableIdOrName The ID or name of the table to reset.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the response.
@@ -766,14 +794,15 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the `draft` verion of the table. Use `publish` endpoint to push all the changes to the `published` version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
+     * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the draft verion of the table. Use the `/publish` endpoint to push all the changes to the published version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
-     * @param hubDbTableV3Request The JSON schema for the table being updated.
-     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
+     * @param hubDbTableV3Request 
+     * @param isGetLocalizedSchema 
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
-    public async updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, includeForeignIds?: boolean, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async updateDraftTable(tableIdOrName: string, hubDbTableV3Request: HubDbTableV3Request, isGetLocalizedSchema?: boolean, archived?: boolean, includeForeignIds?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -790,6 +819,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
 
 
 
+
         // Path Params
         const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/draft'
             .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)));
@@ -799,13 +829,18 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (includeForeignIds !== undefined) {
-            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
         }
 
         // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
+        }
+
+        // Query Params
+        if (includeForeignIds !== undefined) {
+            requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
 

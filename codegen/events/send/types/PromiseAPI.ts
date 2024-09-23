@@ -2,23 +2,23 @@ import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
-import { ObservableBehavioralEventsTrackingApi } from './ObservableAPI';
+import { ObservableCustomEventDataApi } from './ObservableAPI';
 
-import { BehavioralEventsTrackingApiRequestFactory, BehavioralEventsTrackingApiResponseProcessor} from "../apis/BehavioralEventsTrackingApi";
-export class PromiseBehavioralEventsTrackingApi {
-    private api: ObservableBehavioralEventsTrackingApi
+import { CustomEventDataApiRequestFactory, CustomEventDataApiResponseProcessor} from "../apis/CustomEventDataApi";
+export class PromiseCustomEventDataApi {
+    private api: ObservableCustomEventDataApi
 
     public constructor(
         configuration: Configuration,
-        requestFactory?: BehavioralEventsTrackingApiRequestFactory,
-        responseProcessor?: BehavioralEventsTrackingApiResponseProcessor
+        requestFactory?: CustomEventDataApiRequestFactory,
+        responseProcessor?: CustomEventDataApiResponseProcessor
     ) {
-        this.api = new ObservableBehavioralEventsTrackingApi(configuration, requestFactory, responseProcessor);
+        this.api = new ObservableCustomEventDataApi(configuration, requestFactory, responseProcessor);
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public sendWithHttpInfo(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<HttpInfo<void>> {
@@ -27,8 +27,8 @@ export class PromiseBehavioralEventsTrackingApi {
     }
 
     /**
-     * Endpoint to send an instance of a behavioral event
-     * Sends Custom Behavioral Event
+     * Endpoint to send an instance of a custom event.
+     * Send custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<void> {

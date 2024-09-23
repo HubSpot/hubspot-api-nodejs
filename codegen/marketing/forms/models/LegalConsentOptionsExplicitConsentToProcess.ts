@@ -13,29 +13,38 @@
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 
 export class LegalConsentOptionsExplicitConsentToProcess {
-    'type': LegalConsentOptionsExplicitConsentToProcessTypeEnum;
-    'communicationConsentText'?: string;
+    /**
+    * 
+    */
     'communicationsCheckboxes': Array<LegalConsentCheckbox>;
-    'consentToProcessText'?: string;
+    /**
+    * 
+    */
+    'communicationConsentText'?: string;
+    /**
+    * 
+    */
     'consentToProcessCheckboxLabel'?: string;
+    /**
+    * 
+    */
     'consentToProcessFooterText'?: string;
+    /**
+    * 
+    */
+    'type': LegalConsentOptionsExplicitConsentToProcessTypeEnum;
+    /**
+    * 
+    */
     'privacyText': string;
+    /**
+    * 
+    */
+    'consentToProcessText'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "communicationConsentText",
-            "baseName": "communicationConsentText",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "communicationsCheckboxes",
             "baseName": "communicationsCheckboxes",
@@ -43,8 +52,8 @@ export class LegalConsentOptionsExplicitConsentToProcess {
             "format": ""
         },
         {
-            "name": "consentToProcessText",
-            "baseName": "consentToProcessText",
+            "name": "communicationConsentText",
+            "baseName": "communicationConsentText",
             "type": "string",
             "format": ""
         },
@@ -61,8 +70,20 @@ export class LegalConsentOptionsExplicitConsentToProcess {
             "format": ""
         },
         {
+            "name": "type",
+            "baseName": "type",
+            "type": "LegalConsentOptionsExplicitConsentToProcessTypeEnum",
+            "format": ""
+        },
+        {
             "name": "privacyText",
             "baseName": "privacyText",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "consentToProcessText",
+            "baseName": "consentToProcessText",
             "type": "string",
             "format": ""
         }    ];

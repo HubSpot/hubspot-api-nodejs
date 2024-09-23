@@ -11,7 +11,7 @@ import { ErrorDetail } from '../models/ErrorDetail';
 import { ForwardPaging } from '../models/ForwardPaging';
 import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
-import { PublicOwner } from '../models/PublicOwner';
+import { PublicOwner             } from '../models/PublicOwner';
 import { PublicTeam } from '../models/PublicTeam';
 
 /* tslint:disable:no-unused-variable */
@@ -27,6 +27,7 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "PublicOwnerTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {

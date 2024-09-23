@@ -1,5 +1,5 @@
 /**
- * Crm Owners
+ * CRM Crm Owners
  * HubSpot uses **owners** to assign CRM objects to specific people in your organization. The endpoints described here are used to get a list of the owners that are available for an account. To assign an owner to an object, set the hubspot_owner_id property using the appropriate CRM object update or create a request.  If teams are available for your HubSpot tier, these endpoints will also indicate which team(s) an owner can access, as well as which team is the owner\'s primary team.
  *
  * OpenAPI spec version: v3
@@ -19,6 +19,8 @@ export class PublicOwner {
     'archived': boolean;
     'teams'?: Array<PublicTeam>;
     'id': string;
+    'userIdIncludingInactive'?: number;
+    'type': PublicOwnerTypeEnum;
     'userId'?: number;
     'email'?: string;
     'updatedAt': Date;
@@ -63,6 +65,18 @@ export class PublicOwner {
             "format": ""
         },
         {
+            "name": "userIdIncludingInactive",
+            "baseName": "userIdIncludingInactive",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "PublicOwnerTypeEnum",
+            "format": ""
+        },
+        {
             "name": "userId",
             "baseName": "userId",
             "type": "number",
@@ -87,5 +101,11 @@ export class PublicOwner {
 
     public constructor() {
     }
+}
+
+
+export enum PublicOwnerTypeEnum {
+    Person = 'PERSON',
+    Queue = 'QUEUE'
 }
 

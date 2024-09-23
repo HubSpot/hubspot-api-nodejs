@@ -17,7 +17,9 @@ import { SettingsResponse } from '../models/SettingsResponse';
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * @param appId 
+     * Delete the webhook settings for the specified app. Event subscriptions will not be deleted, but will be paused until another webhook is created.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      */
     public async clear(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -53,7 +55,9 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Update webhook settings for the specified app.
+     * Delete webhook settings
+     * @param appId The ID of the app.
      * @param settingsChangeRequest 
      */
     public async configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<RequestContext> {
@@ -107,7 +111,9 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * @param appId 
+     * Retrieve the webhook settings for the specified app, including the webhook’s target URL, throttle configuration, and create/update date.
+     * Read webhook settings
+     * @param appId The ID of the app.
      */
     public async getAll(appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

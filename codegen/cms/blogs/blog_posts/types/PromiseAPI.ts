@@ -452,7 +452,7 @@ export class PromiseBlogPostsApi {
     }
 
     /**
-     * Set a Blog Post as the primary language of a multi-language group.
+     * Set the primary language of a multi-language group to the language of the provided post (specified as an id in the request body)
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
@@ -462,7 +462,7 @@ export class PromiseBlogPostsApi {
     }
 
     /**
-     * Set a Blog Post as the primary language of a multi-language group.
+     * Set the primary language of a multi-language group to the language of the provided post (specified as an id in the request body)
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */

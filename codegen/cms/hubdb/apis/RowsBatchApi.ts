@@ -8,6 +8,7 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { BatchInputHubDbTableRowBatchCloneRequest } from '../models/BatchInputHubDbTableRowBatchCloneRequest';
 import { BatchInputHubDbTableRowV3BatchUpdateRequest } from '../models/BatchInputHubDbTableRowV3BatchUpdateRequest';
 import { BatchInputHubDbTableRowV3Request } from '../models/BatchInputHubDbTableRowV3Request';
 import { BatchInputString } from '../models/BatchInputString';
@@ -20,12 +21,12 @@ import { BatchResponseHubDbTableRowV3WithErrors } from '../models/BatchResponseH
 export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Clones rows in the `draft` version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
+     * Clones rows in the draft version of the specified table, given a set of row ids. Maximum of 100 row ids per call.
      * Clone rows in batch
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputString The JSON array of row ids
+     * @param batchInputHubDbTableRowBatchCloneRequest 
      */
-    public async cloneDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
+    public async cloneDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowBatchCloneRequest: BatchInputHubDbTableRowBatchCloneRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'tableIdOrName' is not null or undefined
@@ -34,9 +35,9 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
-        // verify required parameter 'batchInputString' is not null or undefined
-        if (batchInputString === null || batchInputString === undefined) {
-            throw new RequiredError("RowsBatchApi", "cloneDraftTableRows", "batchInputString");
+        // verify required parameter 'batchInputHubDbTableRowBatchCloneRequest' is not null or undefined
+        if (batchInputHubDbTableRowBatchCloneRequest === null || batchInputHubDbTableRowBatchCloneRequest === undefined) {
+            throw new RequiredError("RowsBatchApi", "cloneDraftTableRows", "batchInputHubDbTableRowBatchCloneRequest");
         }
 
 
@@ -55,7 +56,7 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputString, "BatchInputString", ""),
+            ObjectSerializer.serialize(batchInputHubDbTableRowBatchCloneRequest, "BatchInputHubDbTableRowBatchCloneRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -76,10 +77,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Creates rows in the `draft` version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
+     * Creates rows in the draft version of the specified table, given an array of row objects. Maximum of 100 row object per call. See the overview section for more details with an example.
      * Create rows in batch
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3Request JSON array of row objects
+     * @param batchInputHubDbTableRowV3Request 
      */
     public async createDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3Request: BatchInputHubDbTableRowV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -132,10 +133,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Permanently deletes rows from the `draft` version of the table, given a set of row ids. Maximum of 100 row ids per call.
+     * Permanently deletes rows from the draft version of the table, given a set of row IDs. Maximum of 100 row IDs per call.
      * Permanently deletes rows
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputString JSON array of row ids.
+     * @param batchInputString 
      */
     public async purgeDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -188,10 +189,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns rows in the `draft` version of the specified table, given a set of row ids.
+     * Returns rows in the draft version of the specified table, given a set of row IDs.
      * Get a set of rows from draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputString JSON array of row ids.
+     * @param batchInputString 
      */
     public async readDraftTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -244,10 +245,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns rows in the `published` version of the specified table, given a set of row ids. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
+     * Returns rows in the published version of the specified table, given a set of row IDs. **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access.
      * Get a set of rows
      * @param tableIdOrName The ID or name of the table to query.
-     * @param batchInputString The JSON array of row ids
+     * @param batchInputString 
      */
     public async readTableRows(tableIdOrName: string, batchInputString: BatchInputString, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -300,10 +301,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Replaces multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+     * Replaces multiple rows as a batch in the draft version of the table, with a maximum of 100 rows per call. See the endpoint `PUT /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Replace rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest 
      */
     public async replaceDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -356,10 +357,10 @@ export class RowsBatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates multiple rows as a batch in the `draft` version of the table, with a maximum of 100 rows per call. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
+     * Updates multiple rows as a batch in the draft version of the table, with a maximum of 100 rows per call. See the endpoint `PATCH /tables/{tableIdOrName}/rows/{rowId}/draft` for details on updating a single row.
      * Update rows in batch in draft table
      * @param tableIdOrName The ID or name of the table
-     * @param batchInputHubDbTableRowV3BatchUpdateRequest JSON array of row objects.
+     * @param batchInputHubDbTableRowV3BatchUpdateRequest 
      */
     public async updateDraftTableRows(tableIdOrName: string, batchInputHubDbTableRowV3BatchUpdateRequest: BatchInputHubDbTableRowV3BatchUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

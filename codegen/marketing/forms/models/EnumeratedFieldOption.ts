@@ -13,6 +13,14 @@
 
 export class EnumeratedFieldOption {
     /**
+    * The order the choices will be displayed in.
+    */
+    'displayOrder': number;
+    /**
+    * 
+    */
+    'description'?: string;
+    /**
     * The visible label for this choice.
     */
     'label': string;
@@ -20,15 +28,22 @@ export class EnumeratedFieldOption {
     * The value which will be submitted if this choice is selected.
     */
     'value': string;
-    'description'?: string;
-    /**
-    * The order the choices will be displayed in.
-    */
-    'displayOrder': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "displayOrder",
+            "baseName": "displayOrder",
+            "type": "number",
+            "format": "int32"
+        },
+        {
+            "name": "description",
+            "baseName": "description",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "label",
             "baseName": "label",
@@ -40,18 +55,6 @@ export class EnumeratedFieldOption {
             "baseName": "value",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "displayOrder",
-            "baseName": "displayOrder",
-            "type": "number",
-            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {

@@ -13,6 +13,7 @@
 
 export class SimplePublicObjectBatchInput {
     'idProperty'?: string;
+    'objectWriteTraceId'?: string;
     'id': string;
     'properties': { [key: string]: string; };
 
@@ -22,6 +23,12 @@ export class SimplePublicObjectBatchInput {
         {
             "name": "idProperty",
             "baseName": "idProperty",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
             "type": "string",
             "format": ""
         },

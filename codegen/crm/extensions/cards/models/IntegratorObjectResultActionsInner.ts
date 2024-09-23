@@ -13,12 +13,12 @@
 import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
 
 export class IntegratorObjectResultActionsInner {
-    'type': IntegratorObjectResultActionsInnerTypeEnum;
+    'propertyNamesIncluded': Array<string>;
     'confirmation'?: ActionConfirmationBody;
+    'label'?: string;
+    'type': IntegratorObjectResultActionsInnerTypeEnum;
     'httpMethod': IntegratorObjectResultActionsInnerHttpMethodEnum;
     'url': string;
-    'label'?: string;
-    'propertyNamesIncluded': Array<string>;
     'width': number;
     'height': number;
 
@@ -26,15 +26,27 @@ export class IntegratorObjectResultActionsInner {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "type",
-            "baseName": "type",
-            "type": "IntegratorObjectResultActionsInnerTypeEnum",
+            "name": "propertyNamesIncluded",
+            "baseName": "propertyNamesIncluded",
+            "type": "Array<string>",
             "format": ""
         },
         {
             "name": "confirmation",
             "baseName": "confirmation",
             "type": "ActionConfirmationBody",
+            "format": ""
+        },
+        {
+            "name": "label",
+            "baseName": "label",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
+            "type": "IntegratorObjectResultActionsInnerTypeEnum",
             "format": ""
         },
         {
@@ -47,18 +59,6 @@ export class IntegratorObjectResultActionsInner {
             "name": "url",
             "baseName": "url",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
             "format": ""
         },
         {

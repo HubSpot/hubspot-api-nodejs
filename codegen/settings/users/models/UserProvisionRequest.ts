@@ -1,5 +1,5 @@
 /**
- * Settings User Provisioning
+ * User Provisioning
  * Add, manage, and remove users from your account
  *
  * OpenAPI spec version: v3
@@ -15,6 +15,8 @@
 * A user creation request
 */
 export class UserProvisionRequest {
+    'firstName'?: string;
+    'lastName'?: string;
     /**
     * The user\'s primary team
     */
@@ -39,6 +41,18 @@ export class UserProvisionRequest {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "firstName",
+            "baseName": "firstName",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "lastName",
+            "baseName": "lastName",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "primaryTeamId",
             "baseName": "primaryTeamId",

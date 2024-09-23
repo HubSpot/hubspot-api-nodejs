@@ -1,6 +1,7 @@
 import { HttpInfo } from '../http/http';
 import { Configuration} from '../configuration'
 
+import { MarkRecordingAsReadyRequest } from '../models/MarkRecordingAsReadyRequest';
 import { RecordingSettingsPatchRequest } from '../models/RecordingSettingsPatchRequest';
 import { RecordingSettingsRequest } from '../models/RecordingSettingsRequest';
 import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
@@ -13,16 +14,25 @@ import { RecordingSettingsApiRequestFactory, RecordingSettingsApiResponseProcess
 
 export interface RecordingSettingsApiGetUrlFormatRequest {
     /**
-     * 
+     * The ID of the app.
      * @type number
      * @memberof RecordingSettingsApigetUrlFormat
      */
     appId: number
 }
 
-export interface RecordingSettingsApiRegisterUrlFormatRequest {
+export interface RecordingSettingsApiMarkAsReadyRequest {
     /**
      * 
+     * @type MarkRecordingAsReadyRequest
+     * @memberof RecordingSettingsApimarkAsReady
+     */
+    markRecordingAsReadyRequest: MarkRecordingAsReadyRequest
+}
+
+export interface RecordingSettingsApiRegisterUrlFormatRequest {
+    /**
+     * The ID of the app.
      * @type number
      * @memberof RecordingSettingsApiregisterUrlFormat
      */
@@ -37,7 +47,7 @@ export interface RecordingSettingsApiRegisterUrlFormatRequest {
 
 export interface RecordingSettingsApiUpdateUrlFormatRequest {
     /**
-     * 
+     * The ID of the app.
      * @type number
      * @memberof RecordingSettingsApiupdateUrlFormat
      */
@@ -58,6 +68,8 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Retrieve the recording endpoint configured for a calling extension app.
+     * Read calling app recording settings
      * @param param the request object
      */
     public getUrlFormatWithHttpInfo(param: RecordingSettingsApiGetUrlFormatRequest, options?: Configuration): Promise<HttpInfo<RecordingSettingsResponse>> {
@@ -65,6 +77,8 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Retrieve the recording endpoint configured for a calling extension app.
+     * Read calling app recording settings
      * @param param the request object
      */
     public getUrlFormat(param: RecordingSettingsApiGetUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
@@ -72,6 +86,26 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
+     * Mark recording as ready for transcription
+     * @param param the request object
+     */
+    public markAsReadyWithHttpInfo(param: RecordingSettingsApiMarkAsReadyRequest, options?: Configuration): Promise<HttpInfo<void>> {
+        return this.api.markAsReadyWithHttpInfo(param.markRecordingAsReadyRequest,  options).toPromise();
+    }
+
+    /**
+     * Mark a call recording as ready for transcription, specifying the call by its ID (`engagementid`).
+     * Mark recording as ready for transcription
+     * @param param the request object
+     */
+    public markAsReady(param: RecordingSettingsApiMarkAsReadyRequest, options?: Configuration): Promise<void> {
+        return this.api.markAsReady(param.markRecordingAsReadyRequest,  options).toPromise();
+    }
+
+    /**
+     * Configure a calling extension app with an external URL that HubSpot will use to retrieve call recordings.
+     * Register calling app for recording
      * @param param the request object
      */
     public registerUrlFormatWithHttpInfo(param: RecordingSettingsApiRegisterUrlFormatRequest, options?: Configuration): Promise<HttpInfo<RecordingSettingsResponse>> {
@@ -79,6 +113,8 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Configure a calling extension app with an external URL that HubSpot will use to retrieve call recordings.
+     * Register calling app for recording
      * @param param the request object
      */
     public registerUrlFormat(param: RecordingSettingsApiRegisterUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
@@ -86,6 +122,8 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Update the URL that HubSpot will use to retrieve call recordings for a calling extension app.
+     * Update calling app\'s recording settings
      * @param param the request object
      */
     public updateUrlFormatWithHttpInfo(param: RecordingSettingsApiUpdateUrlFormatRequest, options?: Configuration): Promise<HttpInfo<RecordingSettingsResponse>> {
@@ -93,6 +131,8 @@ export class ObjectRecordingSettingsApi {
     }
 
     /**
+     * Update the URL that HubSpot will use to retrieve call recordings for a calling extension app.
+     * Update calling app\'s recording settings
      * @param param the request object
      */
     public updateUrlFormat(param: RecordingSettingsApiUpdateUrlFormatRequest, options?: Configuration): Promise<RecordingSettingsResponse> {
@@ -106,7 +146,7 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 
 export interface SettingsApiArchiveRequest {
     /**
-     * The ID of the target app.
+     * The ID of the app.
      * @type number
      * @memberof SettingsApiarchive
      */
@@ -115,13 +155,13 @@ export interface SettingsApiArchiveRequest {
 
 export interface SettingsApiCreateRequest {
     /**
-     * The ID of the target app.
+     * The ID of the app.
      * @type number
      * @memberof SettingsApicreate
      */
     appId: number
     /**
-     * Settings state to create with.
+     * 
      * @type SettingsRequest
      * @memberof SettingsApicreate
      */
@@ -130,7 +170,7 @@ export interface SettingsApiCreateRequest {
 
 export interface SettingsApiGetByIdRequest {
     /**
-     * The ID of the target app.
+     * The ID of the app.
      * @type number
      * @memberof SettingsApigetById
      */
@@ -139,13 +179,13 @@ export interface SettingsApiGetByIdRequest {
 
 export interface SettingsApiUpdateRequest {
     /**
-     * The ID of the target app.
+     * The ID of the app.
      * @type number
      * @memberof SettingsApiupdate
      */
     appId: number
     /**
-     * Updated details for the settings.
+     * 
      * @type SettingsPatchRequest
      * @memberof SettingsApiupdate
      */

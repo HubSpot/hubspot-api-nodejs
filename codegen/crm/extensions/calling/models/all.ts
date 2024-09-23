@@ -1,4 +1,5 @@
 export * from '../models/ErrorDetail'
+export * from '../models/MarkRecordingAsReadyRequest'
 export * from '../models/ModelError'
 export * from '../models/RecordingSettingsPatchRequest'
 export * from '../models/RecordingSettingsRequest'

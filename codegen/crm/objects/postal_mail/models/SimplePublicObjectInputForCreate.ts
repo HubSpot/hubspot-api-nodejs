@@ -14,6 +14,7 @@ import { PublicAssociationsForObject } from '../models/PublicAssociationsForObje
 
 export class SimplePublicObjectInputForCreate {
     'associations': Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
@@ -23,6 +24,12 @@ export class SimplePublicObjectInputForCreate {
             "name": "associations",
             "baseName": "associations",
             "type": "Array<PublicAssociationsForObject>",
+            "format": ""
+        },
+        {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
             "format": ""
         },
         {

@@ -20,7 +20,7 @@ export class ValidationApiRequestFactory extends BaseAPIRequestFactory {
      * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
      * Validate the contents of a file
      * @param path The file system location of the file.
-     * @param file The file to validate.
+     * @param file 
      */
     public async doValidate(path: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
