@@ -3,21 +3,13 @@ import { IRequestContext } from '../services/IRequestContext'
 import IConfiguration from './IConfiguration'
 import { VERSION } from './version'
 
-type MiddlewarePreBase<RequestContextType extends IRequestContext, ObservableRequestContextType> = (
-  context: RequestContextType,
-) => ObservableRequestContextType
-type MiddlewarePostBase<ResponseContextType, ObservableResponseContextType> = (
-  context: ResponseContextType,
-) => ObservableResponseContextType
-export default interface IMiddlewareConfiguration<
-  RequestContextType extends IRequestContext,
-  ResponseContextType,
-  ObservableRequestContextType,
-  ObservableResponseContextType,
-> extends IConfiguration {
+type MiddlewarePreBase<RequestContextType extends IRequestContext> = (context: RequestContextType) => RequestContextType
+type MiddlewarePostBase<ResponseContextType> = (context: ResponseContextType) => ResponseContextType
+export default interface IMiddlewareConfiguration<RequestContextType extends IRequestContext, ResponseContextType>
+  extends IConfiguration {
   middleware?: Array<{
-    pre: MiddlewarePreBase<RequestContextType, ObservableRequestContextType> | undefined
-    post: MiddlewarePostBase<ResponseContextType, ObservableResponseContextType> | undefined
+    pre: MiddlewarePreBase<RequestContextType> | undefined
+    post: MiddlewarePostBase<ResponseContextType> | undefined
   }>
 }
 
@@ -29,12 +21,7 @@ export class ApiClientConfigurator {
     ObservableResponseContextType,
     ServerConfiguration,
   >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     serverConfigurationClass: new (
       url: string,
       variableConfiguration: { [key: string]: string },
@@ -61,18 +48,8 @@ export class ApiClientConfigurator {
     return `hubspot-api-client-nodejs; ${VERSION}`
   }
 
-  protected static getAuthMethods<
-    RequestContextType extends IRequestContext,
-    ResponseContextType,
-    ObservableRequestContextType,
-    ObservableResponseContextType,
-  >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+  protected static getAuthMethods<RequestContextType extends IRequestContext, ResponseContextType>(
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
   ) {
     let authMethods = {}
 
@@ -104,19 +81,8 @@ export class ApiClientConfigurator {
     return authMethods
   }
 
-  protected static getBaseServer<
-    ServerConfiguration,
-    RequestContextType extends IRequestContext,
-    ResponseContextType,
-    ObservableRequestContextType,
-    ObservableResponseContextType,
-  >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+  protected static getBaseServer<ServerConfiguration, RequestContextType extends IRequestContext, ResponseContextType>(
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     serverConfigurationClass: new (
       url: string,
       variableConfiguration: { [key: string]: string },
@@ -134,12 +100,7 @@ export class ApiClientConfigurator {
     ObservableRequestContextType,
     ObservableResponseContextType,
   >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
@@ -183,34 +144,34 @@ export class ApiClientConfigurator {
     ObservableRequestContextType,
     ObservableResponseContextType,
   >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
+    // if (m.pre && typeof m.pre === 'function') {
+    //   middleware.pre = (context) => {
+    //         return new observableRequestContextParam(Promise.resolve(m.pre(context)));
+    //     };
+    // }
+    // if (m.post && typeof m.post === 'function') {
+    //   middleware.post = (context) => {
+    //         return new observableResponseContextParam(Promise.resolve(m.post(context)));
+    //     };
+    // }
+    // if (middleware.pre || middleware.post) custom.push(middleware);
     return (
       config.middleware
         ?.filter((m) => m.pre || m.post)
         .map((m) => ({
           pre: (context: RequestContextType): ObservableRequestContextType => {
-            if (m.pre) {
-              const result = m.pre(context)
-              return result instanceof observableRequestContextParam
-                ? result
-                : new observableRequestContextParam(Promise.resolve(context))
+            if (m.pre && typeof m.pre === 'function') {
+              return new observableRequestContextParam(Promise.resolve(m.pre(context)))
             }
             return new observableRequestContextParam(Promise.resolve(context))
           },
           post: (context: ResponseContextType): ObservableResponseContextType => {
-            if (m.post) {
-              const result = m.post(context)
-              return result instanceof observableResponseContextParam
-                ? result
-                : new observableResponseContextParam(Promise.resolve(context))
+            if (m.post && typeof m.post === 'function') {
+              return new observableResponseContextParam(Promise.resolve(m.post(context)))
             }
             return new observableResponseContextParam(Promise.resolve(context))
           },
@@ -224,12 +185,7 @@ export class ApiClientConfigurator {
     ObservableRequestContextType,
     ObservableResponseContextType,
   >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
@@ -256,12 +212,7 @@ export class ApiClientConfigurator {
     ObservableRequestContextType,
     ObservableResponseContextType,
   >(
-    config: IMiddlewareConfiguration<
-      RequestContextType,
-      ResponseContextType,
-      ObservableRequestContextType,
-      ObservableResponseContextType
-    >,
+    config: IMiddlewareConfiguration<RequestContextType, ResponseContextType>,
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
