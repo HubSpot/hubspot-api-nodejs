@@ -148,17 +148,6 @@ export class ApiClientConfigurator {
     observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
     observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
   ) {
-    // if (m.pre && typeof m.pre === 'function') {
-    //   middleware.pre = (context) => {
-    //         return new observableRequestContextParam(Promise.resolve(m.pre(context)));
-    //     };
-    // }
-    // if (m.post && typeof m.post === 'function') {
-    //   middleware.post = (context) => {
-    //         return new observableResponseContextParam(Promise.resolve(m.post(context)));
-    //     };
-    // }
-    // if (middleware.pre || middleware.post) custom.push(middleware);
     return (
       config.middleware
         ?.filter((m) => m.pre || m.post)
