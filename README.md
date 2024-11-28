@@ -243,7 +243,7 @@ const response = await  hubspotClient.crm.imports.coreApi.create(file, JSON.stri
 console.log(response)
 ```
 
-### {EXAMPLE} Search Contacts
+### CRM Search
 
 Only 3 `FilterGroups` with max 3 `Filters` are supported.
 
@@ -260,6 +260,8 @@ In TS `sorts` it's possible to set as:
 2. < direction > - use `["-createdate"]` to sort in desc and sorts: `["createdate"]` in asc order.
 
 `after` for initial search should be set as 0
+
+### {EXAMPLE} Search CRM Contacts
 
 Example for JS:
 
