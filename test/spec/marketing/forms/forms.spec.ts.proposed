@@ -1,0 +1,659 @@
+import { Client } from '../../../../index';
+import { RequiredError } from '../../../../api'; // Adjust the import path as needed
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
+describe('FormsApi - archive method', () => {
+    let client: any;
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should throw RequiredError if ARCHIVE_FORM_ID is null', async (done) => {
+        const formId = null; // Simulating null value
+        try {
+            await client.archive(formId as unknown as string);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.archive.');
+        }
+        done();
+    });
+
+    it('should throw RequiredError if ARCHIVE_FORM_ID is undefined', async (done) => {
+        const formId = undefined; // Simulating undefined value
+        try {
+            await client.archive(formId as unknown as string);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.archive.');
+        }
+        done();
+    });
+
+    it('should send a DELETE request to the correct endpoint with ARCHIVE_FORM_ID', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        const formId = process.env.ARCHIVE_FORM_ID;
+        if (!formId) {
+            fail('ARCHIVE_FORM_ID is not defined in the environment variables');
+        }
+
+        client['configuration'] = mockConfiguration;
+
+        const requestContext = await client.archive(formId as string);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            `/marketing/v3/forms/${formId}`,
+            'DELETE'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Accept',
+            'application/json, */*;q=0.8'
+        );
+
+        expect(
+            mockConfiguration.authMethods.oauth2.applySecurityAuthentication
+        ).toHaveBeenCalledWith(requestContext);
+
+        done();
+    });
+});
+
+describe('FormsApi - create method', () => {
+    let client: any;
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should throw RequiredError if formDefinitionCreateRequestBase is null', async (done) => {
+        const formDefinitionCreateRequestBase = null; // Simulating null value
+        try {
+            await client.create(formDefinitionCreateRequestBase as unknown as any);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe(
+                'Required parameter formDefinitionCreateRequestBase was null or undefined when calling FormsApi.create.'
+            );
+        }
+        done();
+    });
+
+    it('should throw RequiredError if formDefinitionCreateRequestBase is undefined', async (done) => {
+        const formDefinitionCreateRequestBase = undefined; // Simulating undefined value
+        try {
+            await client.create(formDefinitionCreateRequestBase as unknown as any);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe(
+                'Required parameter formDefinitionCreateRequestBase was null or undefined when calling FormsApi.create.'
+            );
+        }
+        done();
+    });
+
+    it('should send a POST request to the correct endpoint with valid formDefinitionCreateRequestBase', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setBody: jasmine.createSpy('setBody'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        const formDefinitionCreateRequestBase = JSON.parse(process.env.FORM_DEFINITION_CREATE_REQUEST || '{}');
+        if (!formDefinitionCreateRequestBase || Object.keys(formDefinitionCreateRequestBase).length === 0) {
+            fail('FORM_DEFINITION_CREATE_REQUEST is not defined or invalid in the environment variables');
+        }
+
+        client['configuration'] = mockConfiguration;
+
+        const requestContext = await client.create(formDefinitionCreateRequestBase);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            '/marketing/v3/forms/',
+            'POST'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Accept',
+            'application/json, */*;q=0.8'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Content-Type',
+            'application/json'
+        );
+
+        expect(requestContext.setBody).toHaveBeenCalledWith(
+            JSON.stringify(formDefinitionCreateRequestBase)
+        );
+
+        expect(
+            mockConfiguration.authMethods.oauth2.applySecurityAuthentication
+        ).toHaveBeenCalledWith(requestContext);
+
+        done();
+    });
+});
+
+describe('FormsApi - getById method', () => {
+    let client: any;
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should throw RequiredError if formId is null', async (done) => {
+        const formId = null; // Simulating null value
+        try {
+            await client.getById(formId as unknown as string);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.getById.');
+        }
+        done();
+    });
+
+    it('should throw RequiredError if formId is undefined', async (done) => {
+        const formId = undefined; // Simulating undefined value
+        try {
+            await client.getById(formId as unknown as string);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.getById.');
+        }
+        done();
+    });
+
+    it('should send a GET request to the correct endpoint with GET_FORM_BY_ID', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setQueryParam: jasmine.createSpy('setQueryParam'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        const formId = process.env.GET_FORM_BY_ID;
+        if (!formId) {
+            fail('GET_FORM_BY_ID is not defined in the environment variables');
+        }
+
+        const archived = true; // Simulate querying for archived forms
+
+        client['configuration'] = mockConfiguration;
+
+        const requestContext = await client.getById(formId, archived);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            `/marketing/v3/forms/${formId}`,
+            'GET'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Accept',
+            'application/json, */*;q=0.8'
+        );
+
+        expect(requestContext.setQueryParam).toHaveBeenCalledWith(
+            'archived',
+            'true'
+        );
+
+        expect(
+            mockConfiguration.authMethods.oauth2.applySecurityAuthentication
+        ).toHaveBeenCalledWith(requestContext);
+
+        done();
+    });
+});
+
+describe('FormsApi - getPage method', () => {
+    let client: any;
+
+    const mockFirstPageResponse = {
+        paging: {
+            next: {
+                after: 'mockCursorToken', // Simulated cursor token from the first response
+            },
+        },
+        results: [
+            {
+                id: '123',
+                name: 'First Page Form',
+            },
+        ],
+    };
+
+    const mockSecondPageResponse = {
+        paging: {
+            next: {
+                after: 'secondMockCursorToken', // Simulated cursor token for the next page
+            },
+        },
+        results: [
+            {
+                id: '456',
+                name: 'Second Page Form',
+            },
+        ],
+    };
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should handle pagination by dynamically using the after token from the response', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setQueryParam: jasmine.createSpy('setQueryParam'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        client['configuration'] = mockConfiguration;
+
+        // Mock the getPage method to simulate responses
+        spyOn(client, 'getPage').and.callFake((after) => {
+            if (!after) {
+                return Promise.resolve(mockFirstPageResponse); // First page
+            }
+            if (after === 'mockCursorToken') {
+                return Promise.resolve(mockSecondPageResponse); // Second page
+            }
+            return Promise.resolve({ paging: {}, results: [] }); // No more pages
+        });
+
+        const archived = process.env.ARCHIVED === 'true'; // Parse as boolean
+        const formTypes = JSON.parse(process.env.FORM_TYPES || '[]'); // Parse JSON string
+        const limit = 20; // Default limit for the API
+
+        // Fetch the first page
+        const firstPageResponse = await client.getPage(undefined, limit, archived, formTypes);
+
+        expect(client.getPage).toHaveBeenCalledWith(undefined, limit, archived, formTypes);
+
+        const firstPageAfter = firstPageResponse.paging?.next?.after;
+        expect(firstPageAfter).toBe('mockCursorToken');
+
+        // Fetch the second page using the after token from the first response
+        const secondPageResponse = await client.getPage(firstPageAfter, limit, archived, formTypes);
+
+        expect(client.getPage).toHaveBeenCalledWith('mockCursorToken', limit, archived, formTypes);
+
+        const secondPageAfter = secondPageResponse.paging?.next?.after;
+        expect(secondPageAfter).toBe('secondMockCursorToken');
+
+        done();
+    });
+
+    it('should send a GET request with default parameters when no after token is provided', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setQueryParam: jasmine.createSpy('setQueryParam'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        client['configuration'] = mockConfiguration;
+
+        const archived = process.env.ARCHIVED === 'true'; // Parse as boolean
+        const formTypes = JSON.parse(process.env.FORM_TYPES || '[]'); // Parse JSON string
+        const limit = 20; // Default limit for the API
+
+        await client.getPage(undefined, limit, archived, formTypes);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            '/marketing/v3/forms/',
+            'GET'
+        );
+
+        expect(mockConfiguration.baseServer.makeRequestContext().setQueryParam).toHaveBeenCalledWith('limit', '20');
+        expect(mockConfiguration.baseServer.makeRequestContext().setQueryParam).toHaveBeenCalledWith(
+            'archived',
+            archived.toString()
+        );
+        expect(mockConfiguration.baseServer.makeRequestContext().setQueryParam).toHaveBeenCalledWith(
+            'formTypes',
+            JSON.stringify(formTypes)
+        );
+
+        done();
+    });
+});
+
+describe('FormsApi - replace method', () => {
+    let client: any;
+
+    const mockHubSpotFormDefinition = {
+        id: process.env.REPLACE_FORM_ID,
+        formType: 'REGULAR',
+        name: 'Updated Form',
+        configuration: {
+            createNewContactForNewEmail: true,
+            editable: true,
+        },
+        displayOptions: {
+            submitButtonText: 'Submit',
+        },
+        fieldGroups: [],
+    };
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should throw RequiredError if formId is null', async (done) => {
+        const formId = null; // Simulate null value
+        try {
+            await client.replace(formId as unknown as string, mockHubSpotFormDefinition);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.replace.');
+        }
+        done();
+    });
+
+    it('should throw RequiredError if hubSpotFormDefinition is null', async (done) => {
+        const formId = process.env.REPLACE_FORM_ID;
+        if (!formId) {
+            fail('REPLACE_FORM_ID is not defined in the environment variables');
+        }
+        const hubSpotFormDefinition = null; // Simulate null value
+        try {
+            await client.replace(formId, hubSpotFormDefinition as unknown as any);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe(
+                'Required parameter hubSpotFormDefinition was null or undefined when calling FormsApi.replace.'
+            );
+        }
+        done();
+    });
+
+    it('should send a PUT request to update the form definition', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setBody: jasmine.createSpy('setBody'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        const formId = process.env.REPLACE_FORM_ID;
+        if (!formId) {
+            fail('REPLACE_FORM_ID is not defined in the environment variables');
+        }
+
+        client['configuration'] = mockConfiguration;
+
+        const requestContext = await client.replace(formId, mockHubSpotFormDefinition);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            `/marketing/v3/forms/${formId}`,
+            'PUT'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Accept',
+            'application/json, */*;q=0.8'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Content-Type',
+            'application/json'
+        );
+
+        expect(requestContext.setBody).toHaveBeenCalledWith(
+            JSON.stringify(mockHubSpotFormDefinition)
+        );
+
+        expect(
+            mockConfiguration.authMethods.oauth2.applySecurityAuthentication
+        ).toHaveBeenCalledWith(requestContext);
+
+        done();
+    });
+});
+
+describe('FormsApi - update method', () => {
+    let client: any;
+
+    const mockHubSpotFormDefinitionPatchRequest = {
+        name: 'Partially Updated Form',
+        configuration: {
+            editable: false,
+        },
+    };
+
+    beforeEach(() => {
+        client = new Client().marketing.forms;
+    });
+
+    it('should throw RequiredError if formId is null', async (done) => {
+        const formId = null; // Simulate null value
+        try {
+            await client.update(formId as unknown as string, mockHubSpotFormDefinitionPatchRequest);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe('Required parameter formId was null or undefined when calling FormsApi.update.');
+        }
+        done();
+    });
+
+    it('should throw RequiredError if hubSpotFormDefinitionPatchRequest is null', async (done) => {
+        const formId = process.env.UPDATE_PARTIAL_FORM_ID;
+        if (!formId) {
+            fail('UPDATE_PARTIAL_FORM_ID is not defined in the environment variables');
+        }
+        const hubSpotFormDefinitionPatchRequest = null; // Simulate null value
+        try {
+            await client.update(formId, hubSpotFormDefinitionPatchRequest as unknown as any);
+            fail('Expected a RequiredError to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(RequiredError);
+            expect(error.message).toBe(
+                'Required parameter hubSpotFormDefinitionPatchRequest was null or undefined when calling FormsApi.update.'
+            );
+        }
+        done();
+    });
+
+    it('should send a PATCH request to partially update the form definition', async (done) => {
+        const mockConfiguration = {
+            baseServer: {
+                makeRequestContext: jasmine.createSpy('makeRequestContext').and.returnValue({
+                    setHeaderParam: jasmine.createSpy('setHeaderParam'),
+                    setBody: jasmine.createSpy('setBody'),
+                }),
+            },
+            authMethods: {
+                oauth2: {
+                    applySecurityAuthentication: jasmine.createSpy('applySecurityAuthentication'),
+                },
+            },
+        };
+
+        const formId = process.env.UPDATE_PARTIAL_FORM_ID;
+        if (!formId) {
+            fail('UPDATE_PARTIAL_FORM_ID is not defined in the environment variables');
+        }
+
+        client['configuration'] = mockConfiguration;
+
+        const requestContext = await client.update(formId, mockHubSpotFormDefinitionPatchRequest);
+
+        expect(mockConfiguration.baseServer.makeRequestContext).toHaveBeenCalledWith(
+            `/marketing/v3/forms/${formId}`,
+            'PATCH'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Accept',
+            'application/json, */*;q=0.8'
+        );
+
+        expect(requestContext.setHeaderParam).toHaveBeenCalledWith(
+            'Content-Type',
+            'application/json'
+        );
+
+        expect(requestContext.setBody).toHaveBeenCalledWith(
+            JSON.stringify(mockHubSpotFormDefinitionPatchRequest)
+        );
+
+        expect(
+            mockConfiguration.authMethods.oauth2.applySecurityAuthentication
+        ).toHaveBeenCalledWith(requestContext);
+
+        done();
+    });
+});
+
+describe('FormsApiResponseProcessor - archiveWithHttpInfo method', () => {
+    let responseProcessor: FormsApiResponseProcessor;
+
+    beforeEach(() => {
+        responseProcessor = new FormsApiResponseProcessor();
+    });
+
+    it('should return an HttpInfo object for a 204 No Content response', async (done) => {
+        const mockResponse = {
+            httpStatusCode: 204,
+            headers: { 'content-type': 'application/json' },
+            body: null,
+        };
+
+        const result = await responseProcessor.archiveWithHttpInfo(mockResponse);
+
+        expect(result.statusCode).toBe(204);
+        expect(result.headers).toEqual(mockResponse.headers);
+        expect(result.body).toBe(mockResponse.body);
+        expect(result.parsedBody).toBeUndefined(); // Expect parsedBody to be undefined for a 204 response
+
+        done();
+    });
+
+    it('should throw an ApiException for a response code of 0', async (done) => {
+        const mockResponse = {
+            httpStatusCode: 0,
+            headers: { 'content-type': 'application/json' },
+            body: {
+                text: async () => JSON.stringify({ message: 'Network error occurred' }),
+            },
+        };
+
+        try {
+            await responseProcessor.archiveWithHttpInfo(mockResponse);
+            fail('Expected an ApiException to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(ApiException);
+            expect(error.message).toBe('An error occurred.');
+            expect(error.statusCode).toBe(0);
+            expect(error.body).toEqual({ message: 'Network error occurred' });
+            expect(error.headers).toEqual(mockResponse.headers);
+        }
+
+        done();
+    });
+
+    it('should return an HttpInfo object for a 2xx success response', async (done) => {
+        const mockResponse = {
+            httpStatusCode: 200,
+            headers: { 'content-type': 'application/json' },
+            body: {
+                text: async () => JSON.stringify({}),
+            },
+        };
+
+        const result = await responseProcessor.archiveWithHttpInfo(mockResponse);
+
+        expect(result.statusCode).toBe(200);
+        expect(result.headers).toEqual(mockResponse.headers);
+        expect(result.body).toBe(mockResponse.body);
+        expect(result.parsedBody).toBeUndefined(); // Expect parsedBody to be void for 2xx responses with no body
+
+        done();
+    });
+
+    it('should throw an ApiException for non-2xx status codes outside 204', async (done) => {
+        const mockResponse = {
+            httpStatusCode: 400,
+            headers: { 'content-type': 'application/json' },
+            body: {
+                text: async () => JSON.stringify({ error: 'Bad Request' }),
+            },
+        };
+
+        try {
+            await responseProcessor.archiveWithHttpInfo(mockResponse);
+            fail('Expected an ApiException to be thrown');
+        } catch (error) {
+            expect(error).toBeInstanceOf(ApiException);
+            expect(error.message).toBe('Unknown API Status Code!');
+            expect(error.statusCode).toBe(400);
+            expect(error.body).toEqual({ error: 'Bad Request' });
+            expect(error.headers).toEqual(mockResponse.headers);
+        }
+
+        done();
+    });
+});
