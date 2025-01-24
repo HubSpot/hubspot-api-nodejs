@@ -173,7 +173,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
      */
      public async recordByContactEmailsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSubscriberEmailResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
+        if (isCodeInRange("20X", response.httpStatusCode)) {
             const body: BatchResponseSubscriberEmailResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberEmailResponse", ""
@@ -209,7 +209,7 @@ export class AttendanceSubscriberStateChangesApiResponseProcessor {
      */
      public async recordByContactIdsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSubscriberVidResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
+        if (isCodeInRange("20X", response.httpStatusCode)) {
             const body: BatchResponseSubscriberVidResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSubscriberVidResponse", ""
