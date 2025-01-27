@@ -112,7 +112,48 @@ export class ApiClientConfigurator {
       )
     }
 
+    if (config.middleware) {
+      middleware.push(
+        ...this.getCustomMiddleware<
+          RequestContextType,
+          ResponseContextType,
+          ObservableRequestContextType,
+          ObservableResponseContextType
+        >(config, observableRequestContextParam, observableResponseContextParam),
+      )
+    }
+
     return middleware
+  }
+
+  protected static getCustomMiddleware<
+    RequestContextType extends IRequestContext,
+    ResponseContextType,
+    ObservableRequestContextType,
+    ObservableResponseContextType,
+  >(
+    config: IConfiguration,
+    observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
+    observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
+  ) {
+    return (
+      config.middleware
+        ?.filter((m) => m.pre || m.post)
+        .map((m) => ({
+          pre: (context: RequestContextType): ObservableRequestContextType => {
+            if (m.pre && typeof m.pre === 'function') {
+              return new observableRequestContextParam(Promise.resolve(m.pre(context) as RequestContextType))
+            }
+            return new observableRequestContextParam(Promise.resolve(context))
+          },
+          post: (context: ResponseContextType): ObservableResponseContextType => {
+            if (m.post && typeof m.post === 'function') {
+              return new observableResponseContextParam(Promise.resolve(m.post(context) as ResponseContextType))
+            }
+            return new observableResponseContextParam(Promise.resolve(context))
+          },
+        })) ?? []
+    )
   }
 
   protected static getHeaderMiddleware<
