@@ -12,8 +12,4 @@ export default interface IConfiguration {
   limiterOptions?: Bottleneck.ConstructorOptions
   limiterJobOptions?: Bottleneck.JobOptions
   httpAgent?: http.Agent | https.Agent
-  middleware?: Array<{
-    pre(ctx: unknown): unknown
-    post(ctx: unknown): unknown
-  }>
 }
