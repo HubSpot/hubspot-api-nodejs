@@ -9,7 +9,7 @@
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "prettier:check": "prettier --check \"{,**/}*.{js,ts}\"",
     "prettier:write": "prettier --write \"{,**/}*.{js,ts}\"",
-    "lint": "tslint -p tsconfig.json && npm run prettier:check",
+    "lint": "eslint \"{,**/}*.ts\" && npm run prettier:check",
     "prepare": "npm run build && npm run version:set",
     "version:set": "replace '@VERSION@' $npm_package_version ./lib/src/configuration/version.*"
   },
@@ -26,17 +26,18 @@
     "url-parse": "^1.4.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "@types/jasmine": "^3.6.2",
     "@types/lodash.get": "^4.4.7",
     "@types/lodash.merge": "^4.6.7",
     "@types/node": "^12.12.21",
     "@types/url-parse": "1.4.4",
-    "eslint": "^6.5.1",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^6.4.0",
     "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-prefer-arrow": "^1.1.6",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
@@ -46,7 +47,8 @@
     "ts-node": "^10.8.1",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.7.3"
+    "typescript": "^4.9.5",
+    "typescript-eslint": "^8.23.0"
   },
   "files": [
     "lib/**/*"
