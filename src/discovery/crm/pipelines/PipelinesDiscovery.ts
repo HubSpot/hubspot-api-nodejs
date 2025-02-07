@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   PipelineAuditsApi,
   PipelinesApi,
