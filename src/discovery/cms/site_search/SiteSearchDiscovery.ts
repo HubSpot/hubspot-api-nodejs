@@ -1,5 +1,4 @@
 import {
-  Configuration,
   createConfiguration,
   PublicApi,
   RequestContext,

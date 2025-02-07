@@ -1,4 +1,3 @@
-import { BigIntStats } from 'fs'
 import { BatchApi, CoreApi, GroupsApi } from '../../../../codegen/crm/properties/index'
 import { Client } from '../../../../index'
 
