@@ -1,4 +1,4 @@
-import { AccessTokensApi, RefreshTokensApi, TokensApi  } from '../../../codegen/oauth/index'
+import { AccessTokensApi, RefreshTokensApi, TokensApi } from '../../../codegen/oauth/index'
 import { Client } from '../../../index'
 
 describe('api client', () => {
