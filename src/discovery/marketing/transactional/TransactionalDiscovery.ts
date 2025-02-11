@@ -22,7 +22,7 @@ export default class TransactionalDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 
