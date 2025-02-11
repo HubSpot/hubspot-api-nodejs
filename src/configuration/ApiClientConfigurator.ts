@@ -171,7 +171,7 @@ export class ApiClientConfigurator {
     return {
       pre(context: RequestContextType): ObservableRequestContextType {
         for (const key in headers) {
-          if (headers.hasOwnProperty(key)) {
+          if (Object.prototype.hasOwnProperty.call(headers, key)) {
             context.setHeaderParam(key, headers[key])
           }
         }

@@ -214,7 +214,7 @@ export class Client {
   }
 
   protected getDecorators(): IDecorator[] {
-    const decorators = new Array()
+    const decorators = new Array<IDecorator>()
 
     if (this.config.limiterOptions) {
       decorators.push(new LimiterDecorator(this.config.limiterOptions, this.config.limiterJobOptions))
