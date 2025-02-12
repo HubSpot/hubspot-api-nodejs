@@ -15,7 +15,8 @@ export default tseslint.config(
   tseslint.configs.recommended,
   {
     rules: {
-      "@typescript-eslint/no-require-imports": "off"
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     }
   }
 );

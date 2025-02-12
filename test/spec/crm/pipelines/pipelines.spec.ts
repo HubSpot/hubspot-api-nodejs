@@ -1,4 +1,9 @@
-import { PipelineAuditsApi, PipelineStageAuditsApi, PipelineStagesApi, PipelinesApi } from '../../../../codegen/crm/pipelines/index'
+import {
+  PipelineAuditsApi,
+  PipelineStageAuditsApi,
+  PipelineStagesApi,
+  PipelinesApi,
+} from '../../../../codegen/crm/pipelines/index'
 import { Client } from '../../../../index'
 
 describe('api client', () => {
