@@ -1,5 +1,5 @@
-import { Client } from '../../../index'
 import AssociationsDiscovery from '../../../src/discovery/crm/associations/AssociationsDiscovery'
+import { Client } from '../../../index'
 import CompaniesDiscovery from '../../../src/discovery/crm/companies/CompaniesDiscovery'
 import ContactsDiscovery from '../../../src/discovery/crm/contacts/ContactsDiscovery'
 import DealsDiscovery from '../../../src/discovery/crm/deals/DealsDiscovery'

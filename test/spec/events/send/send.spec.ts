@@ -1,5 +1,5 @@
-import { CustomEventDataApi } from '../../../../codegen/events/send/index'
 import { Client } from '../../../../index'
+import { CustomEventDataApi } from '../../../../codegen/events/send/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

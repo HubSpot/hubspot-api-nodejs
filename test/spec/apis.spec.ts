@@ -1,5 +1,5 @@
-import { Client } from '../../index'
 import AutomationDiscovery from '../../src/discovery/automation/AutomationDiscovery'
+import { Client } from '../../index'
 import CmsDiscovery from '../../src/discovery/cms/CmsDiscovery'
 import CommunicationPreferencesDiscovery from '../../src/discovery/communicationPreferences/CommunicationPreferencesDiscovery'
 import ConversationsDiscovery from '../../src/discovery/conversations/ConversationsDiscovery'

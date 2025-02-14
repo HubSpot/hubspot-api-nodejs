@@ -36,12 +36,7 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "sort-imports": [
-        "error",
-        {
-          allowSeparatedGroups: false,
-        },
-      ]
+      "sort-imports": "error"
     }
   }
 );

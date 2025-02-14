@@ -1,5 +1,5 @@
-import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { Client } from '../../../../../index'
+import { SettingsApi } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

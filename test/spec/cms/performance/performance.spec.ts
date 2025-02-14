@@ -1,5 +1,5 @@
-import { PublicPerformanceApi } from '../../../../codegen/cms/performance/index'
 import { Client } from '../../../../index'
+import { PublicPerformanceApi } from '../../../../codegen/cms/performance/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

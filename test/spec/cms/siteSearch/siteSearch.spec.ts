@@ -1,5 +1,5 @@
-import { PublicApi } from '../../../../codegen/cms/site_search/index'
 import { Client } from '../../../../index'
+import { PublicApi } from '../../../../codegen/cms/site_search/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

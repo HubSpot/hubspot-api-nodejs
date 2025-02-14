@@ -1,5 +1,5 @@
-import { EventsApi } from '../../../codegen/events/index'
 import { Client } from '../../../index'
+import { EventsApi } from '../../../codegen/events/index'
 import SendDiscovery from '../../../src/discovery/events/send/SendDiscovery'
 
 describe('api client', () => {

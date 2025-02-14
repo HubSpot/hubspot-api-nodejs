@@ -1,5 +1,5 @@
-import { GenerateApi } from '../../../../codegen/conversations/visitor_identification/index'
 import { Client } from '../../../../index'
+import { GenerateApi } from '../../../../codegen/conversations/visitor_identification/index'
 
 describe('api client', () => {
   it('is discoverable', () => {
