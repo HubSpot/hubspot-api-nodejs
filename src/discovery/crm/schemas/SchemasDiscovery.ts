@@ -1,9 +1,9 @@
 import {
   CoreApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/schemas/index'
 import { Observable } from '../../../../codegen/crm/schemas/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

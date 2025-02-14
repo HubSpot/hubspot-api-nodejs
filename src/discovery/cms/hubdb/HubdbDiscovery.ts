@@ -1,11 +1,11 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   RowsApi,
   RowsBatchApi,
   ServerConfiguration,
   TablesApi,
+  createConfiguration,
 } from '../../../../codegen/cms/hubdb/index'
 import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

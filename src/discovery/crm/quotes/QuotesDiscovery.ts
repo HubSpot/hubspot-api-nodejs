@@ -2,12 +2,12 @@ import {
   BasicApi,
   BatchApi,
   Configuration,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   SearchApi,
   ServerConfiguration,
   SimplePublicObjectWithAssociations,
+  createConfiguration,
 } from '../../../../codegen/crm/quotes/index'
 import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

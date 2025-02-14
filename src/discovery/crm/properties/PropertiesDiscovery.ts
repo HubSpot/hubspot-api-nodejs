@@ -1,11 +1,11 @@
 import {
   BatchApi,
   CoreApi,
-  createConfiguration,
   GroupsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/properties/index'
 import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

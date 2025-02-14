@@ -1,9 +1,9 @@
 import {
-  createConfiguration,
   GenerateApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/conversations/visitor_identification/index'
 import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

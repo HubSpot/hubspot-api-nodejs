@@ -1,13 +1,13 @@
 import {
   AttendanceSubscriberStateChangesApi,
   BasicApi,
-  createConfiguration,
   ParticipantStateApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
   SubscriberStateChangesApi,
+  createConfiguration,
 } from '../../../../codegen/marketing/events/index'
 import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

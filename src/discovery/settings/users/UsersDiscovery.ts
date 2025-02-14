@@ -1,11 +1,11 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   RolesApi,
   ServerConfiguration,
   TeamsApi,
   UsersApi,
+  createConfiguration,
 } from '../../../../codegen/settings/users/index'
 import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

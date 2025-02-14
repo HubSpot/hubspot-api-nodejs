@@ -2,7 +2,6 @@ import {
   BasicApi,
   BatchApi,
   Configuration,
-  createConfiguration,
   GDPRApi,
   MergeApi,
   RequestContext,
@@ -10,6 +9,7 @@ import {
   SearchApi,
   ServerConfiguration,
   SimplePublicObjectWithAssociations,
+  createConfiguration,
 } from '../../../../codegen/crm/contacts/index'
 import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

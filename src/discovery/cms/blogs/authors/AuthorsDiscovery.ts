@@ -1,9 +1,9 @@
 import {
   BlogAuthorsApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../../codegen/cms/blogs/authors/index'
 import { Observable } from '../../../../../codegen/cms/blogs/authors/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'

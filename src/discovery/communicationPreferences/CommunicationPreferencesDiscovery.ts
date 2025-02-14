@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   DefinitionApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   StatusApi,
+  createConfiguration,
 } from '../../../codegen/communication_preferences/index'
 import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'

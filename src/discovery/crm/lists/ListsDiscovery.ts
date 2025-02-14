@@ -1,5 +1,4 @@
 import {
-  createConfiguration,
   FoldersApi,
   ListsApi,
   MappingApi,
@@ -7,6 +6,7 @@ import {
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/lists/index'
 import { Observable } from '../../../../codegen/crm/lists/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

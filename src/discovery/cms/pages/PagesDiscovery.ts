@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   LandingPagesApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SitePagesApi,
+  createConfiguration,
 } from '../../../../codegen/cms/pages/index'
 import { Observable } from '../../../../codegen/cms/pages/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

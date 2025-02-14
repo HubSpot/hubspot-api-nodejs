@@ -1,9 +1,9 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/extensions/videoconferencing/index'
 import { Observable } from '../../../../../codegen/crm/extensions/videoconferencing/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'

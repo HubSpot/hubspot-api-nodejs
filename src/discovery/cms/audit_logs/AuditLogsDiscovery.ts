@@ -1,9 +1,9 @@
 import {
   AuditLogsApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/audit_logs/index'
 import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

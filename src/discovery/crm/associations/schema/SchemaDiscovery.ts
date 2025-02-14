@@ -1,9 +1,9 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   TypesApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/associations/schema/index'
 import { Observable } from '../../../../../codegen/crm/associations/schema/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'

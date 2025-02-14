@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   FilesApi,
   FoldersApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../codegen/files/index'
 import { Observable } from '../../../codegen/files/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'

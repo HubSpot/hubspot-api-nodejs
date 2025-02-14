@@ -1,9 +1,9 @@
 import {
-  createConfiguration,
   PublicPerformanceApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/performance/index'
 import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

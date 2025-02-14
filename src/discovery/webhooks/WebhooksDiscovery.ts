@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
   SubscriptionsApi,
+  createConfiguration,
 } from '../../../codegen/webhooks/index'
 import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'

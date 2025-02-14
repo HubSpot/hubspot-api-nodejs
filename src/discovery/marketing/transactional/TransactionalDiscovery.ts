@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   PublicSMTPTokensApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SingleSendApi,
+  createConfiguration,
 } from '../../../../codegen/marketing/transactional/index'
 import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

@@ -1,12 +1,12 @@
 import {
-  createConfiguration,
   PipelineAuditsApi,
-  PipelinesApi,
   PipelineStageAuditsApi,
   PipelineStagesApi,
+  PipelinesApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/pipelines/index'
 import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

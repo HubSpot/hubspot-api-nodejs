@@ -1,9 +1,9 @@
 import {
-  createConfiguration,
   FormsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/marketing/forms/index'
 import { Observable } from '../../../../codegen/marketing/forms/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'

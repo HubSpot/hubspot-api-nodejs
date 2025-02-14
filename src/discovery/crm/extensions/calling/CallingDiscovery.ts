@@ -1,10 +1,10 @@
 import {
-  createConfiguration,
   RecordingSettingsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/extensions/calling/index'
 import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'

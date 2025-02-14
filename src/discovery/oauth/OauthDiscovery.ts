@@ -1,12 +1,12 @@
 import * as qs from 'querystring'
 import {
   AccessTokensApi,
-  createConfiguration,
   RefreshTokensApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   TokensApi,
+  createConfiguration,
 } from '../../../codegen/oauth/index'
 import { Observable } from '../../../codegen/oauth/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
