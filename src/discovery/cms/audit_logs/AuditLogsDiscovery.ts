@@ -5,10 +5,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/cms/audit_logs/index'
-import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/audit_logs/rxjsStub'
 
 export default class AuditLogsDiscovery {
   public auditLogsApi: AuditLogsApi

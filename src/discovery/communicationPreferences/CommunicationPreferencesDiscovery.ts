@@ -6,10 +6,10 @@ import {
   StatusApi,
   createConfiguration,
 } from '../../../codegen/communication_preferences/index'
-import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/communication_preferences/rxjsStub'
 
 export default class CommunicationPreferencesDiscovery {
   public definitionApi: DefinitionApi

@@ -9,10 +9,10 @@ import {
   SimplePublicObjectWithAssociations,
   createConfiguration,
 } from '../../../../codegen/crm/quotes/index'
-import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
 import { getAll } from '../../../services/getAll'
 
 export default class QuotesDiscovery {

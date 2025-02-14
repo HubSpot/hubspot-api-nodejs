@@ -6,10 +6,10 @@ import {
   SubscriptionsApi,
   createConfiguration,
 } from '../../../codegen/webhooks/index'
-import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/webhooks/rxjsStub'
 
 export default class WebhooksDiscovery {
   public settingsApi: SettingsApi

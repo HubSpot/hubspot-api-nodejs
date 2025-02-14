@@ -8,10 +8,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/crm/lists/index'
-import { Observable } from '../../../../codegen/crm/lists/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/lists/rxjsStub'
 
 export default class ListsDiscovery {
   public foldersApi: FoldersApi

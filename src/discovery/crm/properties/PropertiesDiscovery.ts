@@ -7,10 +7,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/crm/properties/index'
-import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/properties/rxjsStub'
 
 export default class PropertiesDiscovery {
   public batchApi: BatchApi

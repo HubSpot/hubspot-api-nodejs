@@ -9,10 +9,10 @@ import {
   SubscriberStateChangesApi,
   createConfiguration,
 } from '../../../../codegen/marketing/events/index'
-import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 
 export default class EventsDiscovery {
   public attendanceSubscriberStateChangesApi: AttendanceSubscriberStateChangesApi

@@ -7,10 +7,10 @@ import {
   TablesApi,
   createConfiguration,
 } from '../../../../codegen/cms/hubdb/index'
-import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 
 export default class HubdbDiscovery {
   public rowsApi: RowsApi

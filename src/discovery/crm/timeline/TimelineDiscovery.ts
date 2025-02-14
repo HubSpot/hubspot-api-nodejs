@@ -7,10 +7,10 @@ import {
   TokensApi,
   createConfiguration,
 } from '../../../../codegen/crm/timeline/index'
-import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/timeline/rxjsStub'
 
 export default class TimelineDiscovery {
   public eventsApi: EventsApi

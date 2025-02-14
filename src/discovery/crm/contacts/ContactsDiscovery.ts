@@ -11,10 +11,10 @@ import {
   SimplePublicObjectWithAssociations,
   createConfiguration,
 } from '../../../../codegen/crm/contacts/index'
-import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/contacts/rxjsStub'
 import { getAll } from '../../../services/getAll'
 
 export default class ContactsDiscovery {

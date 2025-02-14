@@ -5,10 +5,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../../../codegen/crm/associations/v4/schema/index'
-import { Observable } from '../../../../../../codegen/crm/associations/v4/schema/rxjsStub'
 import { ApiClientConfigurator } from '../../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../../codegen/crm/associations/v4/schema/rxjsStub'
 
 export default class SchemaDiscovery {
   public definitionsApi: DefinitionsApi

@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/postal_mail/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/postal_mail/index'
-import { Observable } from '../../../../../codegen/crm/objects/postal_mail/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/postal_mail/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/postal_mail/configuration'
 
 export default class PostalMailDiscovery {
   public basicApi: BasicApi

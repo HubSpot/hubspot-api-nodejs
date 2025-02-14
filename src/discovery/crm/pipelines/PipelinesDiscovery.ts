@@ -8,10 +8,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/crm/pipelines/index'
-import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 
 export default class PipelinesDiscovery {
   public pipelineAuditsApi: PipelineAuditsApi

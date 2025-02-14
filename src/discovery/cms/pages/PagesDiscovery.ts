@@ -6,10 +6,10 @@ import {
   SitePagesApi,
   createConfiguration,
 } from '../../../../codegen/cms/pages/index'
-import { Observable } from '../../../../codegen/cms/pages/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/pages/rxjsStub'
 
 export default class PagesDiscovery {
   public landingPagesApi: LandingPagesApi

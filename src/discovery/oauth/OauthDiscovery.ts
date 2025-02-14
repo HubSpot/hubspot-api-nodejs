@@ -8,10 +8,10 @@ import {
   TokensApi,
   createConfiguration,
 } from '../../../codegen/oauth/index'
-import { Observable } from '../../../codegen/oauth/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/oauth/rxjsStub'
 
 export default class OauthDiscovery {
   public accessTokensApi: AccessTokensApi

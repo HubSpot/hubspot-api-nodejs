@@ -1,5 +1,5 @@
-import BaseDiscovery from '../BaseDiscovery'
 import type AssociationsDiscovery from './associations/AssociationsDiscovery'
+import BaseDiscovery from '../BaseDiscovery'
 import type CompaniesDiscovery from './companies/CompaniesDiscovery'
 import type ContactsDiscovery from './contacts/ContactsDiscovery'
 import type DealsDiscovery from './deals/DealsDiscovery'

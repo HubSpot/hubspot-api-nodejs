@@ -6,10 +6,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/crm/imports/index'
-import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/imports/rxjsStub'
 
 export default class ImportsDiscovery {
   public coreApi: CoreApi

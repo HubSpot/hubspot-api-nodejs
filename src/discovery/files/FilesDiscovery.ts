@@ -6,10 +6,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../codegen/files/index'
-import { Observable } from '../../../codegen/files/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/files/rxjsStub'
 
 export default class FilesDiscovery {
   public filesApi: FilesApi

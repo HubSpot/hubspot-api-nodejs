@@ -8,10 +8,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/automation/actions/index'
-import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/automation/actions/rxjsStub'
 
 export default class ActionsDiscovery {
   public callbacksApi: CallbacksApi

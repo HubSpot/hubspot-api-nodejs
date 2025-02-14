@@ -10,10 +10,10 @@ import {
   SimplePublicObjectWithAssociations,
   createConfiguration,
 } from '../../../../codegen/crm/tickets/index'
-import { Observable } from '../../../../codegen/crm/tickets/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/tickets/rxjsStub'
 import { getAll } from '../../../services/getAll'
 
 export default class TicketsDiscovery {

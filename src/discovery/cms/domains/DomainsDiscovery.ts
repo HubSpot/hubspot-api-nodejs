@@ -5,10 +5,10 @@ import {
   ServerConfiguration,
   createConfiguration,
 } from '../../../../codegen/cms/domains/index'
-import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 
 export default class DomainsDiscovery {
   public domainsApi: DomainsApi

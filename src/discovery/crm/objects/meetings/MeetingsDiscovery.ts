@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/meetings/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/meetings/index'
-import { Observable } from '../../../../../codegen/crm/objects/meetings/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/meetings/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/meetings/configuration'
 
 export default class MeetingsDiscovery {
   public basicApi: BasicApi
