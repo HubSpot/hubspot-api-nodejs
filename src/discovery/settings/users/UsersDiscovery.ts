@@ -1,16 +1,16 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   RolesApi,
   ServerConfiguration,
   TeamsApi,
   UsersApi,
+  createConfiguration,
 } from '../../../../codegen/settings/users/index'
-import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/settings/users/rxjsStub'
 
 export default class UsersDiscovery {
   public rolesApi: RolesApi

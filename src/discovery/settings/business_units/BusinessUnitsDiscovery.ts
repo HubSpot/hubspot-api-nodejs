@@ -1,14 +1,14 @@
 import {
   BusinessUnitApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/settings/business_units/index'
-import { Observable } from '../../../../codegen/settings/business_units/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/settings/business_units/rxjsStub'
 
 export default class BusinessUnitsDiscovery {
   public businessUnitApi: BusinessUnitApi

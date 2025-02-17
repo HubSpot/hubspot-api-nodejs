@@ -1,14 +1,14 @@
 import {
-  createConfiguration,
   CustomEventDataApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/events/send/index'
-import { Observable } from '../../../../codegen/events/send/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/events/send/rxjsStub'
 
 export default class EventsDiscovery {
   public customEventDataApi: CustomEventDataApi

@@ -1,15 +1,15 @@
 import {
   CardsApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   SampleResponseApi,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../../codegen/crm/extensions/cards/index'
-import { Observable } from '../../../../../codegen/crm/extensions/cards/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/extensions/cards/rxjsStub'
 
 export default class CardsDiscovery {
   public cardsApi: CardsApi

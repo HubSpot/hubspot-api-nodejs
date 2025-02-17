@@ -1,5 +1,5 @@
-import BaseDiscovery from '../../BaseDiscovery'
 import type AuthorsDiscovery from './authors/AuthorsDiscovery'
+import BaseDiscovery from '../../BaseDiscovery'
 import type BlogPostsDiscovery from './blog_posts/BlogPostsDiscovery'
 import type TagsDiscovery from './tags/TagsDiscovery'
 

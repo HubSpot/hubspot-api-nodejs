@@ -1,7 +1,7 @@
+import AssociationsDiscovery from '../../../../src/discovery/crm/associations/v4/AssociationsDiscovery'
 import { BatchApi } from '../../../../codegen/crm/associations/index'
 import { Client } from '../../../../index'
 import SchemaDiscovery from '../../../../src/discovery/crm/associations/schema/SchemaDiscovery'
-import AssociationsDiscovery from '../../../../src/discovery/crm/associations/v4/AssociationsDiscovery'
 
 describe('api client', () => {
   it('is discoverable', () => {

@@ -1,14 +1,14 @@
 import {
   BlogPostsApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../../codegen/cms/blogs/blog_posts/index'
-import { Observable } from '../../../../../codegen/cms/blogs/blog_posts/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/cms/blogs/blog_posts/rxjsStub'
 
 export default class BlogPostsDiscovery {
   public blogPostsApi: BlogPostsApi

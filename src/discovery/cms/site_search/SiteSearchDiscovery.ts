@@ -1,14 +1,14 @@
 import {
-  createConfiguration,
   PublicApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/site_search/index'
-import { Observable } from '../../../../codegen/cms/site_search/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/site_search/rxjsStub'
 
 export default class SiteSearchDiscovery {
   public publicApi: PublicApi

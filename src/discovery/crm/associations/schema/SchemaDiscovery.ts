@@ -1,15 +1,15 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   TypesApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/associations/schema/index'
-import { Observable } from '../../../../../codegen/crm/associations/schema/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
 import BaseDiscovery from '../../../BaseDiscovery'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/associations/schema/rxjsStub'
 
 export default class SchemaDiscovery extends BaseDiscovery {
   public typesApi: TypesApi

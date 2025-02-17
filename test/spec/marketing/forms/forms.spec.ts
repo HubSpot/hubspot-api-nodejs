@@ -1,5 +1,5 @@
-import { FormsApi } from '../../../../codegen/marketing/forms/index'
 import { Client } from '../../../../index'
+import { FormsApi } from '../../../../codegen/marketing/forms/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

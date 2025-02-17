@@ -1,17 +1,17 @@
 import {
   ContentApi,
-  createConfiguration,
   ExtractApi,
   MetadataApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   ValidationApi,
+  createConfiguration,
 } from '../../../../codegen/cms/source_code/index'
-import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/source_code/rxjsStub'
 
 export default class SourceCodeDiscovery {
   public contentApi: ContentApi

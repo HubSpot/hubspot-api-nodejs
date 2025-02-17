@@ -1,7 +1,7 @@
-import merge from 'lodash.merge'
-import { IRequestContext } from '../services/IRequestContext'
 import IConfiguration from './IConfiguration'
+import { IRequestContext } from '../services/IRequestContext'
 import { VERSION } from './version'
+import merge from 'lodash.merge'
 
 export class ApiClientConfigurator {
   public static getParams<

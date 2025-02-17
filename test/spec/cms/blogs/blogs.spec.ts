@@ -1,6 +1,6 @@
-import { Client } from '../../../../index'
 import AuthorsDiscovery from '../../../../src/discovery/cms/blogs/authors/AuthorsDiscovery'
 import BlogPostsDiscovery from '../../../../src/discovery/cms/blogs/blog_posts/BlogPostsDiscovery'
+import { Client } from '../../../../index'
 import TagsDiscovery from '../../../../src/discovery/cms/blogs/tags/TagsDiscovery'
 
 describe('api client', () => {

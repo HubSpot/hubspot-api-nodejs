@@ -1,15 +1,15 @@
 import {
-  createConfiguration,
   RecordingSettingsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/extensions/calling/index'
-import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsStub'
 
 export default class CallingDiscovery {
   public settingsApi: SettingsApi

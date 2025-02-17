@@ -1,6 +1,6 @@
-import { Client } from '../../../index'
 import AuditLogsDiscovery from '../../../src/discovery/cms/audit_logs/AuditLogsDiscovery'
 import BlogsDiscovery from '../../../src/discovery/cms/blogs/BlogsDiscovery'
+import { Client } from '../../../index'
 import DomainsDiscovery from '../../../src/discovery/cms/domains/DomainsDiscovery'
 import HubdbDiscovery from '../../../src/discovery/cms/hubdb/HubdbDiscovery'
 import PagesDiscovery from '../../../src/discovery/cms/pages/PagesDiscovery'

@@ -1,5 +1,5 @@
-import { CoreApi } from '../../../../codegen/crm/imports/index'
 import { Client } from '../../../../index'
+import { CoreApi } from '../../../../codegen/crm/imports/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

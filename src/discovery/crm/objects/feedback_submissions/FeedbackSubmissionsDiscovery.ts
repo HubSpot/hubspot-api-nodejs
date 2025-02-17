@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/feedback_submissions/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/feedback_submissions/index'
-import { Observable } from '../../../../../codegen/crm/objects/feedback_submissions/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/feedback_submissions/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/feedback_submissions/configuration'
 
 export default class FeedbackSubmissionsDiscovery {
   public basicApi: BasicApi

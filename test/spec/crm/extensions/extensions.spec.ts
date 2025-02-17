@@ -1,6 +1,6 @@
-import { Client } from '../../../../index'
 import CallingDiscovery from '../../../../src/discovery/crm/extensions/calling/CallingDiscovery'
 import CardsDiscovery from '../../../../src/discovery/crm/extensions/cards/CardsDiscovery'
+import { Client } from '../../../../index'
 import VideoconferencingDiscovery from '../../../../src/discovery/crm/extensions/videoconferencing/VideoconferencingDiscovery'
 
 describe('api client', () => {

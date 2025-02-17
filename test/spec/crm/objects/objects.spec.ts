@@ -1,6 +1,6 @@
 import { BasicApi, BatchApi, SearchApi } from '../../../../codegen/crm/objects/index'
-import { Client } from '../../../../index'
 import CallsDiscovery from '../../../../src/discovery/crm/objects/calls/CallsDiscovery'
+import { Client } from '../../../../index'
 import CommunicationsDiscovery from '../../../../src/discovery/crm/objects/communications/CommunicationsDiscovery'
 import EmailsDiscovery from '../../../../src/discovery/crm/objects/emails/EmailsDiscovery'
 import FeedbackSubmissionsDiscovery from '../../../../src/discovery/crm/objects/feedback_submissions/FeedbackSubmissionsDiscovery'

@@ -1,15 +1,13 @@
 import {
   BasicApi,
   BatchApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   SearchApi,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/objects/index'
-import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import BaseDiscovery from '../../BaseDiscovery'
 import type CallsDiscovery from './calls/CallsDiscovery'
@@ -17,9 +15,11 @@ import type CommunicationsDiscovery from './communications/CommunicationsDiscove
 import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import type GoalsDiscovery from './goals/GoalsDiscovery'
+import IConfiguration from '../../../configuration/IConfiguration'
 import type LeadsDiscovery from './leads/LeadsDiscovery'
 import type MeetingsDiscovery from './meetings/MeetingsDiscovery'
 import type NotesDiscovery from './notes/NotesDiscovery'
+import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import type PostalMailDiscovery from './postal_mail/PostalMailDiscovery'
 import type TasksDiscovery from './tasks/TasksDiscovery'
 import type TaxesDiscovery from './taxes/TaxesDiscovery'

@@ -1,5 +1,5 @@
-import { DefinitionsApi } from '../../../../../../codegen/crm/associations/v4/schema/index'
 import { Client } from '../../../../../../index'
+import { DefinitionsApi } from '../../../../../../codegen/crm/associations/v4/schema/index'
 
 describe('api client', () => {
   it('is discoverable', () => {

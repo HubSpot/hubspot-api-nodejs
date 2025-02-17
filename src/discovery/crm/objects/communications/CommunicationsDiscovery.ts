@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/communications/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/communications/index'
-import { Observable } from '../../../../../codegen/crm/objects/communications/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/communications/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/communications/configuration'
 
 export default class CommunicationsDiscovery {
   public basicApi: BasicApi

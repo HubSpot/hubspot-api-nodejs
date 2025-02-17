@@ -1,14 +1,14 @@
 import {
-  createConfiguration,
   PublicPerformanceApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/performance/index'
-import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/performance/rxjsStub'
 
 export default class PerformanceDiscovery {
   public publicPerformanceApi: PublicPerformanceApi
