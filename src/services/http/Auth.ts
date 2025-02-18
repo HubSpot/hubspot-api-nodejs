@@ -1,7 +1,7 @@
-import { AuthTypes } from './AuthTypes'
-import IConfiguration from '../../configuration/IConfiguration'
-import { IHttpOptions } from './IHttpOptions'
 import get from 'lodash.get'
+import IConfiguration from '../../configuration/IConfiguration'
+import { AuthTypes } from './AuthTypes'
+import { IHttpOptions } from './IHttpOptions'
 
 export class Auth {
   public static chooseAuth(opts: IHttpOptions = {}, config: IConfiguration = {}): string | undefined {

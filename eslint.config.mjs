@@ -38,7 +38,11 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "sort-imports": "error"
+      "import/order": ["error", {
+        "groups": [
+          "builtin", "external", "internal", "parent","sibling", "index", "type"
+        ],
+      }],
     }
   }
 );

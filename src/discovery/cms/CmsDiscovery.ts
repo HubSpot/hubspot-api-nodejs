@@ -1,5 +1,5 @@
-import type AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import BaseDiscovery from '../BaseDiscovery'
+import type AuditLogsDiscovery from './audit_logs/AuditLogsDiscovery'
 import type BlogsDiscovery from './blogs/BlogsDiscovery'
 import type DomainsDiscovery from './domains/DomainsDiscovery'
 import type HubdbDiscovery from './hubdb/HubdbDiscovery'

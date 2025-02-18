@@ -1,5 +1,5 @@
-import { Request } from './Request'
 import fetch from 'node-fetch'
+import { Request } from './Request'
 
 export class HttpClient {
   public static async send(request: Request) {
