@@ -1,6 +1,6 @@
-import IDecorator from './IDecorator'
-import { StatusCodes } from '../http/StatusCodes'
 import get from 'lodash.get'
+import { StatusCodes } from '../http/StatusCodes'
+import IDecorator from './IDecorator'
 
 export default class RetryDecorator implements IDecorator {
   public readonly tenSecondlyRolling = 'TEN_SECONDLY_ROLLING'
