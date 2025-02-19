@@ -4,6 +4,9 @@
   "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
@@ -33,10 +36,11 @@
     "@types/node": "^12.12.21",
     "@types/url-parse": "1.4.4",
     "@typescript-eslint/parser": "^8.24.0",
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-promise": "^7.2.1",
