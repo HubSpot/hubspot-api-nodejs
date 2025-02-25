@@ -1,4 +1,3 @@
-import get from 'lodash.get'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
@@ -54,9 +53,8 @@ export class Request {
 
     if (authType && authType in AuthTypes) {
       const type = authType as keyof typeof AuthTypes
-
-      const method: keyof typeof AuthMethods = AuthTypes[type]
-      const value = get(this.config, authType)
+      const method: string = AuthTypes[type]
+      const value: string = this.config[type] ?? ""
       if (method === AuthMethods.hapikey) {
         this.url.searchParams.set('hapikey', value)
       }

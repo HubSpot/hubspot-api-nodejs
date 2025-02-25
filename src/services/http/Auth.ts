@@ -1,4 +1,3 @@
-import get from 'lodash.get'
 import IConfiguration from '../../configuration/IConfiguration'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
@@ -12,7 +11,7 @@ export class Auth {
       }
     } else {
       for (const key in AuthTypes) {
-        if (get(config, key)) {
+        if (config[key as keyof typeof AuthTypes]) {
           type = key
         }
       }
