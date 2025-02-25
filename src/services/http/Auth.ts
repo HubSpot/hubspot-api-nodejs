@@ -7,7 +7,7 @@ export class Auth {
   public static chooseAuth(opts: IHttpOptions = {}, config: IConfiguration = {}): string | undefined {
     let type
     if (opts.authType) {
-      if (opts.authType !== 'none' && get(config, opts.authType)) {
+      if (opts.authType !== 'none' && opts.authType in config) {
         type = opts.authType
       }
     } else {

@@ -52,8 +52,10 @@ export class Request {
   protected applyAuth() {
     const authType = Auth.chooseAuth(this.opts, this.config)
 
-    if (authType) {
-      const method = get(AuthTypes, authType)
+    if (authType && authType in AuthTypes) {
+      const type = authType as keyof typeof AuthTypes
+
+      const method: keyof typeof AuthMethods = AuthTypes[type]
       const value = get(this.config, authType)
       if (method === AuthMethods.hapikey) {
         this.url.searchParams.set('hapikey', value)
@@ -65,7 +67,7 @@ export class Request {
   }
 
   protected initHeaders() {
-    if (get(this.opts, 'defaultJson', true)) {
+    if (this.opts?.defaultJson ?? true) {
       this.headers = { 'Content-Type': 'application/json' }
     }
 
@@ -91,7 +93,7 @@ export class Request {
   protected setBody() {
     if (this.opts.body) {
       this.body = this.opts.body
-      if (get(this.headers, 'Content-Type') === 'application/json' && get(this.opts, 'defaultJson', true)) {
+      if (this.opts?.defaultJson ?? true) {
         this.body = JSON.stringify(this.body)
       }
     }
