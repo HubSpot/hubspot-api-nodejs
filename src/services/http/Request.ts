@@ -1,7 +1,6 @@
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
-import { AuthMethods } from './AuthMethods'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
 
@@ -53,12 +52,11 @@ export class Request {
 
     if (authType && authType in AuthTypes) {
       const type = authType as keyof typeof AuthTypes
-      const method: string = AuthTypes[type]
-      const value: string = this.config[type] ?? ""
-      if (method === AuthMethods.hapikey) {
+      const value: string = this.config[type] ?? ''
+      if (AuthTypes[type] <= AuthTypes.developerApiKey) {
         this.url.searchParams.set('hapikey', value)
       }
-      if (method === AuthMethods.accessToken) {
+      if (AuthTypes[type] === AuthTypes.accessToken) {
         this.headers = Object.assign(this.headers, { Authorization: `Bearer ${value}` })
       }
     }
