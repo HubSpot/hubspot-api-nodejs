@@ -2,13 +2,12 @@ import { StatusCodes } from '../http/StatusCodes'
 import IDecorator from './IDecorator'
 
 interface ApiError extends Error {
-  code: number;
+  code: number
   body?: ApiBody
-
 }
 interface ApiBody {
-  policyName?: string;
-  message?: string;
+  policyName?: string
+  message?: string
 }
 
 export default class RetryDecorator implements IDecorator {
@@ -43,7 +42,7 @@ export default class RetryDecorator implements IDecorator {
           if (index === numberOfRetries) {
             break
           }
-          const error = caughtError as ApiError;
+          const error = caughtError as ApiError
           const statusCode: number = error?.code ?? 0
           if (statusCode >= StatusCodes.MinServerError && statusCode <= StatusCodes.MaxServerError) {
             await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.INTERNAL_SERVER_ERROR)
@@ -51,7 +50,7 @@ export default class RetryDecorator implements IDecorator {
           }
 
           if (statusCode === StatusCodes.TooManyRequests) {
-            const policyName =  error?.body?.policyName
+            const policyName = error?.body?.policyName
             if (policyName === this.tenSecondlyRolling) {
               await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.TOO_MANY_REQUESTS)
               continue
