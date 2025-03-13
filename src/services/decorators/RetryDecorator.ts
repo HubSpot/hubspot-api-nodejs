@@ -1,6 +1,15 @@
-import get from 'lodash.get'
 import { StatusCodes } from '../http/StatusCodes'
 import IDecorator from './IDecorator'
+
+interface ApiError extends Error {
+  policyName?: string;
+}
+class ApiException<ApiError> extends Error {
+  public constructor(public code: number, message: string, public body: ApiError, public headers: { [key: string]: string; }) {
+      super("HTTP-Code: " + code + "\nMessage: " + message + "\nBody: " + JSON.stringify(body) + "\nHeaders: " +
+      JSON.stringify(headers))
+  }
+}
 
 export default class RetryDecorator implements IDecorator {
   public readonly tenSecondlyRolling = 'TEN_SECONDLY_ROLLING'
@@ -28,28 +37,27 @@ export default class RetryDecorator implements IDecorator {
           resultSuccess = await method(...args)
           resultRejected = null
           break
-        } catch (e) {
-          resultRejected = e
+        } catch (error) {
+          resultRejected = error
 
-          if (index === numberOfRetries) {
+          if (index === numberOfRetries || !(error instanceof ApiException)) {
             break
           }
-
-          const statusCode: number = get(e, 'code', 0)
-
+          const statusCode: number = error?.code ?? 0
+          console.log('statusCode ' + statusCode)
           if (statusCode >= StatusCodes.MinServerError && statusCode <= StatusCodes.MaxServerError) {
             await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.INTERNAL_SERVER_ERROR)
             continue
           }
 
           if (statusCode === StatusCodes.TooManyRequests) {
-            const policyName = get(e, 'body.policyName')
+            const policyName =  error?.body?.policyName
             if (policyName === this.tenSecondlyRolling) {
               await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.TOO_MANY_REQUESTS)
               continue
             }
 
-            const message = get(e, 'body.message')
+            const message = error?.body?.message
 
             if (message === this.secondlyLimitMessage) {
               await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.TOO_MANY_SEARCH_REQUESTS)
