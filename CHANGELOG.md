@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
 
+## [13.0.0-beta.1] - 2025-03-13
+
+### Updates
+
+- Migrate from `loadash.get` to native code.
+
 ## [13.0.0-beta.0] - 2025-02-24
 
 ### Updates
@@ -962,3 +968,4 @@ export enum Enum {
 [12.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.0
 [12.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.1
 [13.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.0
+[13.0.0-beta.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.1
