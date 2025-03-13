@@ -2,13 +2,13 @@ import { StatusCodes } from '../http/StatusCodes'
 import IDecorator from './IDecorator'
 
 interface ApiError extends Error {
-  policyName?: string;
+  code: number;
+  body?: ApiBody
+
 }
-class ApiException<ApiError> extends Error {
-  public constructor(public code: number, message: string, public body: ApiError, public headers: { [key: string]: string; }) {
-      super("HTTP-Code: " + code + "\nMessage: " + message + "\nBody: " + JSON.stringify(body) + "\nHeaders: " +
-      JSON.stringify(headers))
-  }
+interface ApiBody {
+  policyName?: string;
+  message?: string;
 }
 
 export default class RetryDecorator implements IDecorator {
@@ -37,14 +37,14 @@ export default class RetryDecorator implements IDecorator {
           resultSuccess = await method(...args)
           resultRejected = null
           break
-        } catch (error) {
-          resultRejected = error
+        } catch (caughtError) {
+          resultRejected = caughtError
 
-          if (index === numberOfRetries || !(error instanceof ApiException)) {
+          if (index === numberOfRetries) {
             break
           }
+          const error = caughtError as ApiError;
           const statusCode: number = error?.code ?? 0
-          console.log('statusCode ' + statusCode)
           if (statusCode >= StatusCodes.MinServerError && statusCode <= StatusCodes.MaxServerError) {
             await this._waitAfterRequestFailure(statusCode, index, this.retryTimeout.INTERNAL_SERVER_ERROR)
             continue
