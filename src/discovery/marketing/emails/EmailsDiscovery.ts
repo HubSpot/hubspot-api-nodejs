@@ -26,10 +26,9 @@ export default class EmailsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.marketingEmailsApi =
-      ApiDecoratorService.getInstance().apply<MarketingEmailsApi>(
-        new MarketingEmailsApi(configuration),
-      )
+    this.marketingEmailsApi = ApiDecoratorService.getInstance().apply<MarketingEmailsApi>(
+      new MarketingEmailsApi(configuration),
+    )
     this.statisticsApi = ApiDecoratorService.getInstance().apply<StatisticsApi>(new StatisticsApi(configuration))
   }
 }
