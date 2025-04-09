@@ -1,7 +1,4 @@
-import {
-  MarketingEmailsApi,
-  StatisticsApi
-} from '../../../../codegen/marketing/emails/index'
+import { MarketingEmailsApi, StatisticsApi } from '../../../../codegen/marketing/emails/index'
 import { Client } from '../../../../index'
 
 describe('api client', () => {
