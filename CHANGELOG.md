@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
 
+## [13.0.0-beta.2] - 2025-04-09
+
+### Updates
+
+- Added `crm.commerce.invoices` api client.
+- Added `crm.exports` api client.
+- Added `crm.objects.dealSplits` Api client.
+- Added `marketing.emails` api client.
+
 ## [13.0.0-beta.1] - 2025-03-13
 
 ### Updates
@@ -969,3 +978,4 @@ export enum Enum {
 [12.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.1
 [13.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.0
 [13.0.0-beta.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.1
+[13.0.0-beta.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.2
