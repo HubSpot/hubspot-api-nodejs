@@ -1,5 +1,6 @@
 import BaseDiscovery from '../BaseDiscovery'
 import type AssociationsDiscovery from './associations/AssociationsDiscovery'
+import type CommerceDiscovery from './commerce/CommerceDiscovery'
 import type CompaniesDiscovery from './companies/CompaniesDiscovery'
 import type ContactsDiscovery from './contacts/ContactsDiscovery'
 import type DealsDiscovery from './deals/DealsDiscovery'
@@ -19,6 +20,7 @@ import type TimelineDiscovery from './timeline/TimelineDiscovery'
 
 export default class CrmDiscovery extends BaseDiscovery {
   protected _associations: AssociationsDiscovery | undefined
+  protected _commerce: CommerceDiscovery | undefined
   protected _companies: CompaniesDiscovery | undefined
   protected _contacts: ContactsDiscovery | undefined
   protected _deals: DealsDiscovery | undefined
@@ -47,6 +49,19 @@ export default class CrmDiscovery extends BaseDiscovery {
     }
 
     return this._associations
+  }
+
+  /**
+   * Getter
+   * @returns CommerceDiscovery
+   */
+  get commerce() {
+    if (!this._commerce) {
+      const requiredClass = require('./commerce/CommerceDiscovery')
+      this._commerce = new requiredClass.default(this.config) as CommerceDiscovery
+    }
+
+    return this._commerce
   }
 
   /**
