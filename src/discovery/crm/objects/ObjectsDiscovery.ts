@@ -14,6 +14,7 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/objects/rxjsStub'
 import type CallsDiscovery from './calls/CallsDiscovery'
 import type CommunicationsDiscovery from './communications/CommunicationsDiscovery'
+import type DealSplitsDiscovery from './deal_splits/DealSplitsDiscovery'
 import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type FeedbackSubmissionsDiscovery from './feedback_submissions/FeedbackSubmissionsDiscovery'
 import type GoalsDiscovery from './goals/GoalsDiscovery'
@@ -30,6 +31,7 @@ export default class ObjectsDiscovery extends BaseDiscovery {
   public searchApi: SearchApi
   protected _communications: CommunicationsDiscovery | undefined
   protected _calls: CallsDiscovery | undefined
+  protected _dealSplits: DealSplitsDiscovery | undefined
   protected _emails: EmailsDiscovery | undefined
   protected _feedbackSubmissions: FeedbackSubmissionsDiscovery | undefined
   protected _goals: GoalsDiscovery | undefined
@@ -81,6 +83,19 @@ export default class ObjectsDiscovery extends BaseDiscovery {
     }
 
     return this._calls
+  }
+
+  /**
+   * Getter
+   * @returns DealSplitsDiscovery
+   */
+  get dealSplits() {
+    if (!this._dealSplits) {
+      const requiredClass = require('./deal_splits/DealSplitsDiscovery')
+      this._dealSplits = new requiredClass.default(this.config) as DealSplitsDiscovery
+    }
+
+    return this._dealSplits
   }
 
   /**
