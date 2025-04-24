@@ -10,6 +10,9 @@ import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigura
 import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 
+/**
+ * @deprecated
+ */
 export default class PerformanceDiscovery {
   public publicPerformanceApi: PublicPerformanceApi
 

@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.1.0...HEAD)
+
+## [12.1.0] - 2025-04-24
+
+## Updates
+
+- Marked `cms.performance` API client deprecated.
 
 ## [12.0.1] - 2024-09-23
 
@@ -889,7 +895,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/12.1.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -953,3 +959,4 @@ export enum Enum {
 [11.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/11.2.0
 [12.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.0
 [12.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.0.1
+[12.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/12.1.0
