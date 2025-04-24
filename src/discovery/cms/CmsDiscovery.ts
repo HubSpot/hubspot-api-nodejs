@@ -87,6 +87,7 @@ export default class CmsDiscovery extends BaseDiscovery {
 
   /**
    * Getter
+   * @deprecated
    * @returns PerformanceDiscovery
    */
   get performance() {
