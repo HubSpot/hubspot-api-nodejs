@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
 
+## [13.0.0-beta.3] - 2025-03-30
+
+### CMS
+
+- Removed `cms.perfomance` API client.
+
 ## [13.0.0-beta.2] - 2025-04-09
 
 ### Updates
