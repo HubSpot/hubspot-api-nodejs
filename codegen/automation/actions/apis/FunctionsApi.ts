@@ -70,7 +70,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -79,10 +79,11 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Delete a function within a given definition.
      * Delete a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
     public async archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -123,7 +124,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -132,11 +133,12 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * Update a function for a given definition by ID.
+     * Update a function for a definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
      * @param body 
      */
     public async createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
@@ -202,7 +204,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -211,10 +213,11 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Add a function for a given definition.
      * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      * @param body 
      */
     public async createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<RequestContext> {
@@ -273,7 +276,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -282,10 +285,10 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get all functions by a type for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * Retrieve functions by a type for a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
     public async getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -326,7 +329,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -335,11 +338,12 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get a function for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * Retrieve a specific function from a given definition.
+     * Retrieve a function from a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
      */
     public async getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -387,7 +391,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -396,9 +400,10 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get all functions for a given definition
-     * @param definitionId 
-     * @param appId 
+     * Retrieve all functions included in a definition.
+     * Retrieve functions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
      */
     public async getPage(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -432,7 +437,7 @@ export class FunctionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

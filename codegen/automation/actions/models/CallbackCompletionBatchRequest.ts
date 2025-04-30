@@ -17,6 +17,8 @@ export class CallbackCompletionBatchRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "outputFields",
@@ -38,4 +40,3 @@ export class CallbackCompletionBatchRequest {
     public constructor() {
     }
 }
-
