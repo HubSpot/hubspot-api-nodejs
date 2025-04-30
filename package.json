@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/jasmine": "^3.6.2",
+    "@types/jasmine": "^5.1.7",
     "@types/lodash.merge": "^4.6.7",
     "@types/node": "^12.12.21",
     "@types/url-parse": "1.4.4",
@@ -42,7 +42,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-promise": "^7.2.1",
-    "jasmine": "^3.6.3",
+    "jasmine": "^5.7.0",
     "prettier": "^3.5.1",
     "replace": "^1.2.0",
     "ts-node": "^10.8.1",
