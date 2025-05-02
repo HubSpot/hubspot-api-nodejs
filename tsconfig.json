@@ -14,7 +14,11 @@
     "sourceMap": true,
     "outDir": "./lib",
     "noLib": false,
-    "lib": [ "es6" ],
+    "lib": [
+      "es6"
+      ,"ES2017.Object"
+      ,"ES2021.String"
+    ],
   },
   "exclude": [
     "lib",
