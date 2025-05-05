@@ -17,10 +17,11 @@ import { PublicActionRevision } from '../models/PublicActionRevision';
 export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Gets a revision for a given definition by revision id
-     * @param definitionId 
-     * @param revisionId 
-     * @param appId 
+     * Retrieve a specific revision of a definition by revision ID.
+     * Retrieve a specific revision of a definition
+     * @param definitionId The ID of the definition.
+     * @param revisionId The ID of the revision.
+     * @param appId The ID of the app.
      */
     public async getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -61,7 +62,7 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -70,9 +71,10 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get all revisions for a given definition
-     * @param definitionId 
-     * @param appId 
+     * Retrieve the versions of a definition by ID.
+     * Retrieve revisions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
@@ -120,7 +122,7 @@ export class RevisionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

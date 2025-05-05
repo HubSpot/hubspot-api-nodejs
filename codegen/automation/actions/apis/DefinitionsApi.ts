@@ -19,9 +19,10 @@ import { PublicActionDefinitionPatch } from '../models/PublicActionDefinitionPat
 export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive an extension definition
-     * @param definitionId 
-     * @param appId 
+     * Delete an action definition by ID.
+     * Delete an action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
      */
     public async archive(definitionId: string, appId: number, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -55,7 +56,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -64,8 +65,9 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create a new extension definition
-     * @param appId 
+     * Create a new custom workflow action.
+     * Create a new custom action definition
+     * @param appId The ID of the app.
      * @param publicActionDefinitionEgg 
      */
     public async create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<RequestContext> {
@@ -110,7 +112,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -119,9 +121,10 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get extension definition by Id
-     * @param definitionId 
-     * @param appId 
+     * Retrieve a custom workflow action definition by ID.
+     * Retrieve a custom action definition
+     * @param definitionId The ID of the custom action.
+     * @param appId The ID of the app.
      * @param archived Whether to return only results that have been archived.
      */
     public async getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
@@ -162,7 +165,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -171,8 +174,9 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get paged extension definitions
-     * @param appId 
+     * Retrieve custom workflow action definitions by app ID.
+     * Retrieve custom action definitions
+     * @param appId The ID of the app.
      * @param limit The maximum number of results to display per page.
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param archived Whether to return only results that have been archived.
@@ -220,7 +224,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -229,9 +233,10 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Patch an existing extension definition
-     * @param definitionId 
-     * @param appId 
+     * Update an existing action definition by ID.
+     * Update an existing action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
      * @param publicActionDefinitionPatch 
      */
     public async update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<RequestContext> {
@@ -283,7 +288,7 @@ export class DefinitionsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

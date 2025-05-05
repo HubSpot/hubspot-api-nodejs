@@ -17,8 +17,9 @@ import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
 export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Completes a single callback
-     * @param callbackId 
+     * Complete a specific blocked action execution by ID.
+     * Completes a callback
+     * @param callbackId The ID of the action execution.
      * @param callbackCompletionRequest 
      */
     public async complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -63,7 +64,7 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -72,7 +73,8 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Completes a batch of callbacks
+     * Complete a batch of blocked action executions.
+     * Complete a batch of callbacks
      * @param batchInputCallbackCompletionBatchRequest 
      */
     public async completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<RequestContext> {
@@ -110,7 +112,7 @@ export class CallbacksApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
