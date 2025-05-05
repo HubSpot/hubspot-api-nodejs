@@ -1,5 +1,5 @@
 /**
- * CMS Cms Content Audit
+ * Cms Content Audit
  * Use this endpoint to query audit logs of CMS changes that occurred on your HubSpot account.
  *
  * OpenAPI spec version: v3
@@ -18,6 +18,8 @@ export class Paging {
     'prev'?: PreviousPage;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -40,4 +42,3 @@ export class Paging {
     public constructor() {
     }
 }
-
