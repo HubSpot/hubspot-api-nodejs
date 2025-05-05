@@ -1,5 +1,6 @@
 import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
+import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
@@ -35,21 +36,50 @@ export class ObservableBlogAuthorsApi {
      * Delete the Blog Author object identified by the id in the path.
      * Delete a Blog Author
      * @param objectId The Blog Author id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archive(objectId, archived, _options);
+    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive(objectId, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
@@ -60,9 +90,9 @@ export class ObservableBlogAuthorsApi {
      * Delete the Blog Author object identified by the id in the path.
      * Delete a Blog Author
      * @param objectId The Blog Author id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archive(objectId: string, archived?: boolean, _options?: Configuration): Observable<void> {
+    public archive(objectId: string, archived?: boolean, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(objectId, archived, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -71,19 +101,48 @@ export class ObservableBlogAuthorsApi {
      * Delete a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
      */
-    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archiveBatch(batchInputString, _options);
+    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archiveBatch(batchInputString, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveBatchWithHttpInfo(rsp)));
@@ -95,7 +154,7 @@ export class ObservableBlogAuthorsApi {
      * Delete a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
      */
-    public archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Observable<void> {
+    public archiveBatch(batchInputString: BatchInputString, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveBatchWithHttpInfo(batchInputString, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -104,19 +163,48 @@ export class ObservableBlogAuthorsApi {
      * Attach a Blog Author to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.attachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.attachToLangGroup(attachToLangPrimaryRequestVNext, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.attachToLangGroupWithHttpInfo(rsp)));
@@ -128,7 +216,7 @@ export class ObservableBlogAuthorsApi {
      * Attach a Blog Author to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Observable<void> {
+    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: ConfigurationOptions): Observable<void> {
         return this.attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -137,19 +225,48 @@ export class ObservableBlogAuthorsApi {
      * Create a new Blog Author
      * @param blogAuthor The JSON representation of a new Blog Author.
      */
-    public createWithHttpInfo(blogAuthor: BlogAuthor, _options?: Configuration): Observable<HttpInfo<BlogAuthor>> {
-        const requestContextPromise = this.requestFactory.create(blogAuthor, _options);
+    public createWithHttpInfo(blogAuthor: BlogAuthor, _options?: ConfigurationOptions): Observable<HttpInfo<BlogAuthor>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(blogAuthor, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -161,7 +278,7 @@ export class ObservableBlogAuthorsApi {
      * Create a new Blog Author
      * @param blogAuthor The JSON representation of a new Blog Author.
      */
-    public create(blogAuthor: BlogAuthor, _options?: Configuration): Observable<BlogAuthor> {
+    public create(blogAuthor: BlogAuthor, _options?: ConfigurationOptions): Observable<BlogAuthor> {
         return this.createWithHttpInfo(blogAuthor, _options).pipe(map((apiResponse: HttpInfo<BlogAuthor>) => apiResponse.data));
     }
 
@@ -170,19 +287,48 @@ export class ObservableBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param batchInputBlogAuthor The JSON array of new Blog Authors to create.
      */
-    public createBatchWithHttpInfo(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: Configuration): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
-        const requestContextPromise = this.requestFactory.createBatch(batchInputBlogAuthor, _options);
+    public createBatchWithHttpInfo(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.createBatch(batchInputBlogAuthor, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createBatchWithHttpInfo(rsp)));
@@ -194,7 +340,7 @@ export class ObservableBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param batchInputBlogAuthor The JSON array of new Blog Authors to create.
      */
-    public createBatch(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public createBatch(batchInputBlogAuthor: BatchInputBlogAuthor, _options?: ConfigurationOptions): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.createBatchWithHttpInfo(batchInputBlogAuthor, _options).pipe(map((apiResponse: HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>) => apiResponse.data));
     }
 
@@ -203,19 +349,48 @@ export class ObservableBlogAuthorsApi {
      * Create a new language variation
      * @param blogAuthorCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariationWithHttpInfo(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: Configuration): Observable<HttpInfo<BlogAuthor>> {
-        const requestContextPromise = this.requestFactory.createLangVariation(blogAuthorCloneRequestVNext, _options);
+    public createLangVariationWithHttpInfo(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<BlogAuthor>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.createLangVariation(blogAuthorCloneRequestVNext, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createLangVariationWithHttpInfo(rsp)));
@@ -227,7 +402,7 @@ export class ObservableBlogAuthorsApi {
      * Create a new language variation
      * @param blogAuthorCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariation(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: Configuration): Observable<BlogAuthor> {
+    public createLangVariation(blogAuthorCloneRequestVNext: BlogAuthorCloneRequestVNext, _options?: ConfigurationOptions): Observable<BlogAuthor> {
         return this.createLangVariationWithHttpInfo(blogAuthorCloneRequestVNext, _options).pipe(map((apiResponse: HttpInfo<BlogAuthor>) => apiResponse.data));
     }
 
@@ -236,19 +411,48 @@ export class ObservableBlogAuthorsApi {
      * Detach a Blog Author from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.detachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.detachFromLangGroup(detachFromLangGroupRequestVNext, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detachFromLangGroupWithHttpInfo(rsp)));
@@ -260,7 +464,7 @@ export class ObservableBlogAuthorsApi {
      * Detach a Blog Author from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Observable<void> {
+    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: ConfigurationOptions): Observable<void> {
         return this.detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -268,22 +472,51 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author object identified by the id in the path.
      * Retrieve a Blog Author
      * @param objectId The Blog Author id.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Observable<HttpInfo<BlogAuthor>> {
-        const requestContextPromise = this.requestFactory.getById(objectId, archived, property, _options);
+    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<HttpInfo<BlogAuthor>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(objectId, archived, property, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
@@ -294,41 +527,70 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author object identified by the id in the path.
      * Retrieve a Blog Author
      * @param objectId The Blog Author id.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Observable<BlogAuthor> {
+    public getById(objectId: string, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<BlogAuthor> {
         return this.getByIdWithHttpInfo(objectId, archived, property, _options).pipe(map((apiResponse: HttpInfo<BlogAuthor>) => apiResponse.data));
     }
 
     /**
      * Get the list of blog authors. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Blog Authors
-     * @param createdAt Only return Blog Authors created at exactly the specified time.
-     * @param createdAfter Only return Blog Authors created after the specified time.
-     * @param createdBefore Only return Blog Authors created before the specified time.
-     * @param updatedAt Only return Blog Authors last updated at exactly the specified time.
-     * @param updatedAfter Only return Blog Authors last updated after the specified time.
-     * @param updatedBefore Only return Blog Authors last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Blog Authors created at exactly the specified time.
+     * @param [createdAfter] Only return Blog Authors created after the specified time.
+     * @param [createdBefore] Only return Blog Authors created before the specified time.
+     * @param [updatedAt] Only return Blog Authors last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Blog Authors last updated after the specified time.
+     * @param [updatedBefore] Only return Blog Authors last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Observable<HttpInfo<CollectionResponseWithTotalBlogAuthorForwardPaging>> {
-        const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalBlogAuthorForwardPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
@@ -338,19 +600,19 @@ export class ObservableBlogAuthorsApi {
     /**
      * Get the list of blog authors. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Blog Authors
-     * @param createdAt Only return Blog Authors created at exactly the specified time.
-     * @param createdAfter Only return Blog Authors created after the specified time.
-     * @param createdBefore Only return Blog Authors created before the specified time.
-     * @param updatedAt Only return Blog Authors last updated at exactly the specified time.
-     * @param updatedAfter Only return Blog Authors last updated after the specified time.
-     * @param updatedBefore Only return Blog Authors last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Blog Authors created at exactly the specified time.
+     * @param [createdAfter] Only return Blog Authors created after the specified time.
+     * @param [createdBefore] Only return Blog Authors created before the specified time.
+     * @param [updatedAt] Only return Blog Authors last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Blog Authors last updated after the specified time.
+     * @param [updatedBefore] Only return Blog Authors last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Observable<CollectionResponseWithTotalBlogAuthorForwardPaging> {
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalBlogAuthorForwardPaging> {
         return this.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalBlogAuthorForwardPaging>) => apiResponse.data));
     }
 
@@ -358,21 +620,50 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author objects identified in the request body.
      * Retrieve a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
-        const requestContextPromise = this.requestFactory.readBatch(batchInputString, archived, _options);
+    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.readBatch(batchInputString, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readBatchWithHttpInfo(rsp)));
@@ -383,9 +674,9 @@ export class ObservableBlogAuthorsApi {
      * Retrieve the Blog Author objects identified in the request body.
      * Retrieve a batch of Blog Authors
      * @param batchInputString The JSON array of Blog Author ids.
-     * @param archived Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: ConfigurationOptions): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.readBatchWithHttpInfo(batchInputString, archived, _options).pipe(map((apiResponse: HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>) => apiResponse.data));
     }
 
@@ -394,19 +685,48 @@ export class ObservableBlogAuthorsApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.setLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.setLangPrimary(setNewLanguagePrimaryRequestVNext, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.setLangPrimaryWithHttpInfo(rsp)));
@@ -418,7 +738,7 @@ export class ObservableBlogAuthorsApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Observable<void> {
+    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: ConfigurationOptions): Observable<void> {
         return this.setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -427,21 +747,50 @@ export class ObservableBlogAuthorsApi {
      * Update a Blog Author
      * @param objectId The Blog Author id.
      * @param blogAuthor The JSON representation of the updated Blog Author.
-     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public updateWithHttpInfo(objectId: string, blogAuthor: BlogAuthor, archived?: boolean, _options?: Configuration): Observable<HttpInfo<BlogAuthor>> {
-        const requestContextPromise = this.requestFactory.update(objectId, blogAuthor, archived, _options);
+    public updateWithHttpInfo(objectId: string, blogAuthor: BlogAuthor, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BlogAuthor>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(objectId, blogAuthor, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
@@ -453,9 +802,9 @@ export class ObservableBlogAuthorsApi {
      * Update a Blog Author
      * @param objectId The Blog Author id.
      * @param blogAuthor The JSON representation of the updated Blog Author.
-     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public update(objectId: string, blogAuthor: BlogAuthor, archived?: boolean, _options?: Configuration): Observable<BlogAuthor> {
+    public update(objectId: string, blogAuthor: BlogAuthor, archived?: boolean, _options?: ConfigurationOptions): Observable<BlogAuthor> {
         return this.updateWithHttpInfo(objectId, blogAuthor, archived, _options).pipe(map((apiResponse: HttpInfo<BlogAuthor>) => apiResponse.data));
     }
 
@@ -463,21 +812,50 @@ export class ObservableBlogAuthorsApi {
      * Update the Blog Author objects identified in the request body.
      * Update a batch of Blog Authors
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Authors.
-     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
-        const requestContextPromise = this.requestFactory.updateBatch(batchInputJsonNode, archived, _options);
+    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.updateBatch(batchInputJsonNode, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateBatchWithHttpInfo(rsp)));
@@ -488,9 +866,9 @@ export class ObservableBlogAuthorsApi {
      * Update the Blog Author objects identified in the request body.
      * Update a batch of Blog Authors
      * @param batchInputJsonNode A JSON array of the JSON representations of the updated Blog Authors.
-     * @param archived Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
      */
-    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: ConfigurationOptions): Observable<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.updateBatchWithHttpInfo(batchInputJsonNode, archived, _options).pipe(map((apiResponse: HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>) => apiResponse.data));
     }
 
@@ -499,19 +877,48 @@ export class ObservableBlogAuthorsApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.updateLangs(updateLanguagesRequestVNext, _options);
+    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.updateLangs(updateLanguagesRequestVNext, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateLangsWithHttpInfo(rsp)));
@@ -523,7 +930,7 @@ export class ObservableBlogAuthorsApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Observable<void> {
+    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: ConfigurationOptions): Observable<void> {
         return this.updateLangsWithHttpInfo(updateLanguagesRequestVNext, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 

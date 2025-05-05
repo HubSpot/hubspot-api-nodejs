@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogAuthor } from '../models/BatchInputBlogAuthor';
@@ -20,12 +20,14 @@ import { BlogAuthorsApiRequestFactory, BlogAuthorsApiResponseProcessor} from "..
 export interface BlogAuthorsApiArchiveRequest {
     /**
      * The Blog Author id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApiarchive
      */
@@ -89,18 +91,21 @@ export interface BlogAuthorsApiDetachFromLangGroupRequest {
 export interface BlogAuthorsApiGetByIdRequest {
     /**
      * The Blog Author id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApigetById
      */
     objectId: string
     /**
      * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApigetById
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApigetById
      */
@@ -110,66 +115,77 @@ export interface BlogAuthorsApiGetByIdRequest {
 export interface BlogAuthorsApiGetPageRequest {
     /**
      * Only return Blog Authors created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     createdAt?: Date
     /**
      * Only return Blog Authors created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Blog Authors created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Blog Authors last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Blog Authors last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Blog Authors last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogAuthorsApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof BlogAuthorsApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof BlogAuthorsApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApigetPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApigetPage
      */
@@ -185,6 +201,7 @@ export interface BlogAuthorsApiReadBatchRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApireadBatch
      */
@@ -203,6 +220,7 @@ export interface BlogAuthorsApiSetLangPrimaryRequest {
 export interface BlogAuthorsApiUpdateRequest {
     /**
      * The Blog Author id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogAuthorsApiupdate
      */
@@ -215,6 +233,7 @@ export interface BlogAuthorsApiUpdateRequest {
     blogAuthor: BlogAuthor
     /**
      * Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApiupdate
      */
@@ -230,6 +249,7 @@ export interface BlogAuthorsApiUpdateBatchRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update deleted Blog Authors. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogAuthorsApiupdateBatch
      */
@@ -257,7 +277,7 @@ export class ObjectBlogAuthorsApi {
      * Delete a Blog Author
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BlogAuthorsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BlogAuthorsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -266,7 +286,7 @@ export class ObjectBlogAuthorsApi {
      * Delete a Blog Author
      * @param param the request object
      */
-    public archive(param: BlogAuthorsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BlogAuthorsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -275,7 +295,7 @@ export class ObjectBlogAuthorsApi {
      * Delete a batch of Blog Authors
      * @param param the request object
      */
-    public archiveBatchWithHttpInfo(param: BlogAuthorsApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveBatchWithHttpInfo(param: BlogAuthorsApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -284,7 +304,7 @@ export class ObjectBlogAuthorsApi {
      * Delete a batch of Blog Authors
      * @param param the request object
      */
-    public archiveBatch(param: BlogAuthorsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: BlogAuthorsApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -293,7 +313,7 @@ export class ObjectBlogAuthorsApi {
      * Attach a Blog Author to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroupWithHttpInfo(param: BlogAuthorsApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public attachToLangGroupWithHttpInfo(param: BlogAuthorsApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -302,7 +322,7 @@ export class ObjectBlogAuthorsApi {
      * Attach a Blog Author to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroup(param: BlogAuthorsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+    public attachToLangGroup(param: BlogAuthorsApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -311,7 +331,7 @@ export class ObjectBlogAuthorsApi {
      * Create a new Blog Author
      * @param param the request object
      */
-    public createWithHttpInfo(param: BlogAuthorsApiCreateRequest, options?: Configuration): Promise<HttpInfo<BlogAuthor>> {
+    public createWithHttpInfo(param: BlogAuthorsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogAuthor>> {
         return this.api.createWithHttpInfo(param.blogAuthor,  options).toPromise();
     }
 
@@ -320,7 +340,7 @@ export class ObjectBlogAuthorsApi {
      * Create a new Blog Author
      * @param param the request object
      */
-    public create(param: BlogAuthorsApiCreateRequest, options?: Configuration): Promise<BlogAuthor> {
+    public create(param: BlogAuthorsApiCreateRequest, options?: ConfigurationOptions): Promise<BlogAuthor> {
         return this.api.create(param.blogAuthor,  options).toPromise();
     }
 
@@ -329,7 +349,7 @@ export class ObjectBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param param the request object
      */
-    public createBatchWithHttpInfo(param: BlogAuthorsApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    public createBatchWithHttpInfo(param: BlogAuthorsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
         return this.api.createBatchWithHttpInfo(param.batchInputBlogAuthor,  options).toPromise();
     }
 
@@ -338,7 +358,7 @@ export class ObjectBlogAuthorsApi {
      * Create a batch of Blog Authors
      * @param param the request object
      */
-    public createBatch(param: BlogAuthorsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public createBatch(param: BlogAuthorsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.createBatch(param.batchInputBlogAuthor,  options).toPromise();
     }
 
@@ -347,7 +367,7 @@ export class ObjectBlogAuthorsApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariationWithHttpInfo(param: BlogAuthorsApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<BlogAuthor>> {
+    public createLangVariationWithHttpInfo(param: BlogAuthorsApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogAuthor>> {
         return this.api.createLangVariationWithHttpInfo(param.blogAuthorCloneRequestVNext,  options).toPromise();
     }
 
@@ -356,7 +376,7 @@ export class ObjectBlogAuthorsApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariation(param: BlogAuthorsApiCreateLangVariationRequest, options?: Configuration): Promise<BlogAuthor> {
+    public createLangVariation(param: BlogAuthorsApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<BlogAuthor> {
         return this.api.createLangVariation(param.blogAuthorCloneRequestVNext,  options).toPromise();
     }
 
@@ -365,7 +385,7 @@ export class ObjectBlogAuthorsApi {
      * Detach a Blog Author from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroupWithHttpInfo(param: BlogAuthorsApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public detachFromLangGroupWithHttpInfo(param: BlogAuthorsApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -374,7 +394,7 @@ export class ObjectBlogAuthorsApi {
      * Detach a Blog Author from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroup(param: BlogAuthorsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+    public detachFromLangGroup(param: BlogAuthorsApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -383,7 +403,7 @@ export class ObjectBlogAuthorsApi {
      * Retrieve a Blog Author
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: BlogAuthorsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<BlogAuthor>> {
+    public getByIdWithHttpInfo(param: BlogAuthorsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogAuthor>> {
         return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -392,7 +412,7 @@ export class ObjectBlogAuthorsApi {
      * Retrieve a Blog Author
      * @param param the request object
      */
-    public getById(param: BlogAuthorsApiGetByIdRequest, options?: Configuration): Promise<BlogAuthor> {
+    public getById(param: BlogAuthorsApiGetByIdRequest, options?: ConfigurationOptions): Promise<BlogAuthor> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -401,7 +421,7 @@ export class ObjectBlogAuthorsApi {
      * Get all Blog Authors
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: BlogAuthorsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalBlogAuthorForwardPaging>> {
+    public getPageWithHttpInfo(param: BlogAuthorsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalBlogAuthorForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -410,7 +430,7 @@ export class ObjectBlogAuthorsApi {
      * Get all Blog Authors
      * @param param the request object
      */
-    public getPage(param: BlogAuthorsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
+    public getPage(param: BlogAuthorsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalBlogAuthorForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -419,7 +439,7 @@ export class ObjectBlogAuthorsApi {
      * Retrieve a batch of Blog Authors
      * @param param the request object
      */
-    public readBatchWithHttpInfo(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    public readBatchWithHttpInfo(param: BlogAuthorsApiReadBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
         return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -428,7 +448,7 @@ export class ObjectBlogAuthorsApi {
      * Retrieve a batch of Blog Authors
      * @param param the request object
      */
-    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public readBatch(param: BlogAuthorsApiReadBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -437,7 +457,7 @@ export class ObjectBlogAuthorsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimaryWithHttpInfo(param: BlogAuthorsApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public setLangPrimaryWithHttpInfo(param: BlogAuthorsApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -446,7 +466,7 @@ export class ObjectBlogAuthorsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimary(param: BlogAuthorsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+    public setLangPrimary(param: BlogAuthorsApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -455,7 +475,7 @@ export class ObjectBlogAuthorsApi {
      * Update a Blog Author
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BlogAuthorsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BlogAuthor>> {
+    public updateWithHttpInfo(param: BlogAuthorsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogAuthor>> {
         return this.api.updateWithHttpInfo(param.objectId, param.blogAuthor, param.archived,  options).toPromise();
     }
 
@@ -464,7 +484,7 @@ export class ObjectBlogAuthorsApi {
      * Update a Blog Author
      * @param param the request object
      */
-    public update(param: BlogAuthorsApiUpdateRequest, options?: Configuration): Promise<BlogAuthor> {
+    public update(param: BlogAuthorsApiUpdateRequest, options?: ConfigurationOptions): Promise<BlogAuthor> {
         return this.api.update(param.objectId, param.blogAuthor, param.archived,  options).toPromise();
     }
 
@@ -473,7 +493,7 @@ export class ObjectBlogAuthorsApi {
      * Update a batch of Blog Authors
      * @param param the request object
      */
-    public updateBatchWithHttpInfo(param: BlogAuthorsApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
+    public updateBatchWithHttpInfo(param: BlogAuthorsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors>> {
         return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -482,7 +502,7 @@ export class ObjectBlogAuthorsApi {
      * Update a batch of Blog Authors
      * @param param the request object
      */
-    public updateBatch(param: BlogAuthorsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
+    public updateBatch(param: BlogAuthorsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogAuthor | BatchResponseBlogAuthorWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -491,7 +511,7 @@ export class ObjectBlogAuthorsApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangsWithHttpInfo(param: BlogAuthorsApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateLangsWithHttpInfo(param: BlogAuthorsApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -500,7 +520,7 @@ export class ObjectBlogAuthorsApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangs(param: BlogAuthorsApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+    public updateLangs(param: BlogAuthorsApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
