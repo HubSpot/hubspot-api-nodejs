@@ -17,6 +17,8 @@ export class PublicActionFunctionIdentifier {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "functionType",
@@ -38,7 +40,6 @@ export class PublicActionFunctionIdentifier {
     public constructor() {
     }
 }
-
 
 export enum PublicActionFunctionIdentifierFunctionTypeEnum {
     PreActionExecution = 'PRE_ACTION_EXECUTION',

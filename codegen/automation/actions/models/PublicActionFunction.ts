@@ -18,6 +18,8 @@ export class PublicActionFunction {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "functionSource",
@@ -45,7 +47,6 @@ export class PublicActionFunction {
     public constructor() {
     }
 }
-
 
 export enum PublicActionFunctionFunctionTypeEnum {
     PreActionExecution = 'PRE_ACTION_EXECUTION',
