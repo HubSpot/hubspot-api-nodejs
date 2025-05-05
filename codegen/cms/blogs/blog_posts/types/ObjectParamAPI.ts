@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputBlogPost } from '../models/BatchInputBlogPost';
@@ -24,12 +24,14 @@ import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicA
 export interface BasicApiArchiveRequest {
     /**
      * The ID of the blog post to delete.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been deleted.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BasicApiarchive
      */
@@ -57,18 +59,21 @@ export interface BasicApiCreateRequest {
 export interface BasicApiGetByIdRequest {
     /**
      * The ID of the blog post to retrieve.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetById
      */
     objectId: string
     /**
      * Specifies whether to return deleted blog posts. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BasicApigetById
      */
     archived?: boolean
     /**
      * Specific properties to return.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetById
      */
@@ -78,6 +83,7 @@ export interface BasicApiGetByIdRequest {
 export interface BasicApiGetDraftByIdRequest {
     /**
      * The ID of the blog post to retrieve the draft of.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetDraftById
      */
@@ -87,66 +93,77 @@ export interface BasicApiGetDraftByIdRequest {
 export interface BasicApiGetPageRequest {
     /**
      * Only return blog posts created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     createdAt?: Date
     /**
      * Only return blog posts created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     createdAfter?: Date
     /**
      * Only return blog posts created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     createdBefore?: Date
     /**
      * Only return blog posts last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     updatedAt?: Date
     /**
      * Only return blog posts last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return blog posts last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BasicApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;createdAt&#x60; (default), &#x60;name&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof BasicApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 20.
+     * Defaults to: undefined
      * @type number
      * @memberof BasicApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted blog posts. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BasicApigetPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
@@ -156,12 +173,14 @@ export interface BasicApiGetPageRequest {
 export interface BasicApiGetPreviousVersionRequest {
     /**
      * The ID of the blog post.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPreviousVersion
      */
     objectId: string
     /**
      * The ID of the version to retrieve.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPreviousVersion
      */
@@ -171,24 +190,28 @@ export interface BasicApiGetPreviousVersionRequest {
 export interface BasicApiGetPreviousVersionsRequest {
     /**
      * The ID of the blog post to retrieve previous versions of.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPreviousVersions
      */
     objectId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPreviousVersions
      */
     after?: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPreviousVersions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof BasicApigetPreviousVersions
      */
@@ -198,6 +221,7 @@ export interface BasicApiGetPreviousVersionsRequest {
 export interface BasicApiPushLiveRequest {
     /**
      * The ID of the post to publish.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApipushLive
      */
@@ -207,6 +231,7 @@ export interface BasicApiPushLiveRequest {
 export interface BasicApiResetDraftRequest {
     /**
      * The ID of the blog post to reset.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiresetDraft
      */
@@ -216,12 +241,14 @@ export interface BasicApiResetDraftRequest {
 export interface BasicApiRestorePreviousVersionRequest {
     /**
      * The ID of the blog post.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApirestorePreviousVersion
      */
     objectId: string
     /**
      * The ID of the version to restore the blog post to.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApirestorePreviousVersion
      */
@@ -231,12 +258,14 @@ export interface BasicApiRestorePreviousVersionRequest {
 export interface BasicApiRestorePreviousVersionToDraftRequest {
     /**
      * The ID of the blog post.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApirestorePreviousVersionToDraft
      */
     objectId: string
     /**
      * The ID of the version to restore the blog post to.
+     * Defaults to: undefined
      * @type number
      * @memberof BasicApirestorePreviousVersionToDraft
      */
@@ -255,6 +284,7 @@ export interface BasicApiScheduleRequest {
 export interface BasicApiUpdateRequest {
     /**
      * The ID of the blog post to update.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
      */
@@ -267,6 +297,7 @@ export interface BasicApiUpdateRequest {
     blogPost: BlogPost
     /**
      * Specifies whether to update deleted blog posts. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BasicApiupdate
      */
@@ -276,6 +307,7 @@ export interface BasicApiUpdateRequest {
 export interface BasicApiUpdateDraftRequest {
     /**
      * The ID of the blog post to update the draft of.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdateDraft
      */
@@ -300,7 +332,7 @@ export class ObjectBasicApi {
      * Delete a blog post
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -309,7 +341,7 @@ export class ObjectBasicApi {
      * Delete a blog post
      * @param param the request object
      */
-    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -318,7 +350,7 @@ export class ObjectBasicApi {
      * Clone a blog post
      * @param param the request object
      */
-    public cloneWithHttpInfo(param: BasicApiCloneRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public cloneWithHttpInfo(param: BasicApiCloneRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -327,7 +359,7 @@ export class ObjectBasicApi {
      * Clone a blog post
      * @param param the request object
      */
-    public clone(param: BasicApiCloneRequest, options?: Configuration): Promise<BlogPost> {
+    public clone(param: BasicApiCloneRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.clone(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -336,7 +368,7 @@ export class ObjectBasicApi {
      * Create a new post
      * @param param the request object
      */
-    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.createWithHttpInfo(param.blogPost,  options).toPromise();
     }
 
@@ -345,7 +377,7 @@ export class ObjectBasicApi {
      * Create a new post
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<BlogPost> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.create(param.blogPost,  options).toPromise();
     }
 
@@ -354,7 +386,7 @@ export class ObjectBasicApi {
      * Retrieve a blog post
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public getByIdWithHttpInfo(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -363,7 +395,7 @@ export class ObjectBasicApi {
      * Retrieve a blog post
      * @param param the request object
      */
-    public getById(param: BasicApiGetByIdRequest, options?: Configuration): Promise<BlogPost> {
+    public getById(param: BasicApiGetByIdRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -372,7 +404,7 @@ export class ObjectBasicApi {
      * Retrieve the full draft version of the Blog Post
      * @param param the request object
      */
-    public getDraftByIdWithHttpInfo(param: BasicApiGetDraftByIdRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public getDraftByIdWithHttpInfo(param: BasicApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.getDraftByIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -381,7 +413,7 @@ export class ObjectBasicApi {
      * Retrieve the full draft version of the Blog Post
      * @param param the request object
      */
-    public getDraftById(param: BasicApiGetDraftByIdRequest, options?: Configuration): Promise<BlogPost> {
+    public getDraftById(param: BasicApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.getDraftById(param.objectId,  options).toPromise();
     }
 
@@ -390,7 +422,7 @@ export class ObjectBasicApi {
      * Get all posts
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalBlogPostForwardPaging>> {
+    public getPageWithHttpInfo(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalBlogPostForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -399,7 +431,7 @@ export class ObjectBasicApi {
      * Get all posts
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
+    public getPage(param: BasicApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalBlogPostForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -408,7 +440,7 @@ export class ObjectBasicApi {
      * Retrieve a previous version of a blog post
      * @param param the request object
      */
-    public getPreviousVersionWithHttpInfo(param: BasicApiGetPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionBlogPost>> {
+    public getPreviousVersionWithHttpInfo(param: BasicApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionBlogPost>> {
         return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -417,7 +449,7 @@ export class ObjectBasicApi {
      * Retrieve a previous version of a blog post
      * @param param the request object
      */
-    public getPreviousVersion(param: BasicApiGetPreviousVersionRequest, options?: Configuration): Promise<VersionBlogPost> {
+    public getPreviousVersion(param: BasicApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<VersionBlogPost> {
         return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -426,7 +458,7 @@ export class ObjectBasicApi {
      * Retrieves all previous versions of a post
      * @param param the request object
      */
-    public getPreviousVersionsWithHttpInfo(param: BasicApiGetPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionBlogPost>> {
+    public getPreviousVersionsWithHttpInfo(param: BasicApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionBlogPost>> {
         return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -435,7 +467,7 @@ export class ObjectBasicApi {
      * Retrieves all previous versions of a post
      * @param param the request object
      */
-    public getPreviousVersions(param: BasicApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionBlogPost> {
+    public getPreviousVersions(param: BasicApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionBlogPost> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -444,7 +476,7 @@ export class ObjectBasicApi {
      * Publish blog post draft
      * @param param the request object
      */
-    public pushLiveWithHttpInfo(param: BasicApiPushLiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public pushLiveWithHttpInfo(param: BasicApiPushLiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.pushLiveWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -453,7 +485,7 @@ export class ObjectBasicApi {
      * Publish blog post draft
      * @param param the request object
      */
-    public pushLive(param: BasicApiPushLiveRequest, options?: Configuration): Promise<void> {
+    public pushLive(param: BasicApiPushLiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.pushLive(param.objectId,  options).toPromise();
     }
 
@@ -462,7 +494,7 @@ export class ObjectBasicApi {
      * Reset post draft to the live version
      * @param param the request object
      */
-    public resetDraftWithHttpInfo(param: BasicApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public resetDraftWithHttpInfo(param: BasicApiResetDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.resetDraftWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -471,7 +503,7 @@ export class ObjectBasicApi {
      * Reset post draft to the live version
      * @param param the request object
      */
-    public resetDraft(param: BasicApiResetDraftRequest, options?: Configuration): Promise<void> {
+    public resetDraft(param: BasicApiResetDraftRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
     }
 
@@ -480,7 +512,7 @@ export class ObjectBasicApi {
      * Restore a previous version
      * @param param the request object
      */
-    public restorePreviousVersionWithHttpInfo(param: BasicApiRestorePreviousVersionRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public restorePreviousVersionWithHttpInfo(param: BasicApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -489,7 +521,7 @@ export class ObjectBasicApi {
      * Restore a previous version
      * @param param the request object
      */
-    public restorePreviousVersion(param: BasicApiRestorePreviousVersionRequest, options?: Configuration): Promise<BlogPost> {
+    public restorePreviousVersion(param: BasicApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -498,7 +530,7 @@ export class ObjectBasicApi {
      * Restore a draft to a previous version
      * @param param the request object
      */
-    public restorePreviousVersionToDraftWithHttpInfo(param: BasicApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public restorePreviousVersionToDraftWithHttpInfo(param: BasicApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -507,7 +539,7 @@ export class ObjectBasicApi {
      * Restore a draft to a previous version
      * @param param the request object
      */
-    public restorePreviousVersionToDraft(param: BasicApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<BlogPost> {
+    public restorePreviousVersionToDraft(param: BasicApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -516,7 +548,7 @@ export class ObjectBasicApi {
      * Schedule a post to be published
      * @param param the request object
      */
-    public scheduleWithHttpInfo(param: BasicApiScheduleRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public scheduleWithHttpInfo(param: BasicApiScheduleRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.scheduleWithHttpInfo(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -525,7 +557,7 @@ export class ObjectBasicApi {
      * Schedule a post to be published
      * @param param the request object
      */
-    public schedule(param: BasicApiScheduleRequest, options?: Configuration): Promise<void> {
+    public schedule(param: BasicApiScheduleRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.schedule(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -534,7 +566,7 @@ export class ObjectBasicApi {
      * Update a post
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.updateWithHttpInfo(param.objectId, param.blogPost, param.archived,  options).toPromise();
     }
 
@@ -543,7 +575,7 @@ export class ObjectBasicApi {
      * Update a post
      * @param param the request object
      */
-    public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<BlogPost> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.update(param.objectId, param.blogPost, param.archived,  options).toPromise();
     }
 
@@ -552,7 +584,7 @@ export class ObjectBasicApi {
      * Update the draft of a post
      * @param param the request object
      */
-    public updateDraftWithHttpInfo(param: BasicApiUpdateDraftRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public updateDraftWithHttpInfo(param: BasicApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.updateDraftWithHttpInfo(param.objectId, param.blogPost,  options).toPromise();
     }
 
@@ -561,7 +593,7 @@ export class ObjectBasicApi {
      * Update the draft of a post
      * @param param the request object
      */
-    public updateDraft(param: BasicApiUpdateDraftRequest, options?: Configuration): Promise<BlogPost> {
+    public updateDraft(param: BasicApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.updateDraft(param.objectId, param.blogPost,  options).toPromise();
     }
 
@@ -597,6 +629,7 @@ export interface BatchApiReadRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted blog posts Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BatchApiread
      */
@@ -612,6 +645,7 @@ export interface BatchApiUpdateRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update deleted Blog Posts. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BatchApiupdate
      */
@@ -630,7 +664,7 @@ export class ObjectBatchApi {
      * Delete a batch of blog posts
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -639,7 +673,7 @@ export class ObjectBatchApi {
      * Delete a batch of blog posts
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.batchInputString,  options).toPromise();
     }
 
@@ -648,7 +682,7 @@ export class ObjectBatchApi {
      * Create a batch of blog posts
      * @param param the request object
      */
-    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
         return this.api.createWithHttpInfo(param.batchInputBlogPost,  options).toPromise();
     }
 
@@ -657,7 +691,7 @@ export class ObjectBatchApi {
      * Create a batch of blog posts
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
+    public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.create(param.batchInputBlogPost,  options).toPromise();
     }
 
@@ -666,7 +700,7 @@ export class ObjectBatchApi {
      * Retrieve a batch of Blog Posts
      * @param param the request object
      */
-    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
         return this.api.readWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -675,7 +709,7 @@ export class ObjectBatchApi {
      * Retrieve a batch of Blog Posts
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
+    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.read(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -684,7 +718,7 @@ export class ObjectBatchApi {
      * Update a batch of Blog Posts
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
+    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseBlogPostWithErrors | BatchResponseBlogPost>> {
         return this.api.updateWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -693,7 +727,7 @@ export class ObjectBatchApi {
      * Update a batch of Blog Posts
      * @param param the request object
      */
-    public update(param: BatchApiUpdateRequest, options?: Configuration): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
+    public update(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponseBlogPostWithErrors | BatchResponseBlogPost> {
         return this.api.update(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -759,7 +793,7 @@ export class ObjectMultiLanguageApi {
      * Attach post to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroupWithHttpInfo(param: MultiLanguageApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public attachToLangGroupWithHttpInfo(param: MultiLanguageApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -768,7 +802,7 @@ export class ObjectMultiLanguageApi {
      * Attach post to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroup(param: MultiLanguageApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+    public attachToLangGroup(param: MultiLanguageApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -777,7 +811,7 @@ export class ObjectMultiLanguageApi {
      * Create a language variation
      * @param param the request object
      */
-    public createLangVariationWithHttpInfo(param: MultiLanguageApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<BlogPost>> {
+    public createLangVariationWithHttpInfo(param: MultiLanguageApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<BlogPost>> {
         return this.api.createLangVariationWithHttpInfo(param.blogPostLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -786,7 +820,7 @@ export class ObjectMultiLanguageApi {
      * Create a language variation
      * @param param the request object
      */
-    public createLangVariation(param: MultiLanguageApiCreateLangVariationRequest, options?: Configuration): Promise<BlogPost> {
+    public createLangVariation(param: MultiLanguageApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<BlogPost> {
         return this.api.createLangVariation(param.blogPostLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -795,7 +829,7 @@ export class ObjectMultiLanguageApi {
      * Detach post from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroupWithHttpInfo(param: MultiLanguageApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public detachFromLangGroupWithHttpInfo(param: MultiLanguageApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -804,7 +838,7 @@ export class ObjectMultiLanguageApi {
      * Detach post from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroup(param: MultiLanguageApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+    public detachFromLangGroup(param: MultiLanguageApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -813,7 +847,7 @@ export class ObjectMultiLanguageApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimaryWithHttpInfo(param: MultiLanguageApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public setLangPrimaryWithHttpInfo(param: MultiLanguageApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -822,7 +856,7 @@ export class ObjectMultiLanguageApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimary(param: MultiLanguageApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+    public setLangPrimary(param: MultiLanguageApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -831,7 +865,7 @@ export class ObjectMultiLanguageApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangsWithHttpInfo(param: MultiLanguageApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateLangsWithHttpInfo(param: MultiLanguageApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -840,7 +874,7 @@ export class ObjectMultiLanguageApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangs(param: MultiLanguageApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+    public updateLangs(param: MultiLanguageApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
