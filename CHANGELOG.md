@@ -7,11 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
 
-## [13.0.0-beta.3] - 2025-03-30
+## [13.0.0-beta.3] - 2025-05-05
 
-### CMS
+### Updates
 
 - Removed `cms.perfomance` API client.
+- Updated `@types/node` to latest version.
+- Removed `url-parse`.
+- Updated tsconfig.
 
 ## [13.0.0-beta.2] - 2025-04-09
 
@@ -985,3 +988,4 @@ export enum Enum {
 [13.0.0-beta.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.0
 [13.0.0-beta.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.1
 [13.0.0-beta.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.2
+[13.0.0-beta.3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.3
