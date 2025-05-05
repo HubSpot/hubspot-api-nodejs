@@ -1,5 +1,5 @@
 import { HttpFile, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ActionResponse } from '../models/ActionResponse';
 import { AssetFileMetadata } from '../models/AssetFileMetadata';
@@ -12,12 +12,14 @@ import { ContentApiRequestFactory, ContentApiResponseProcessor} from "../apis/Co
 export interface ContentApiArchiveRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApiarchive
      */
     environment: string
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApiarchive
      */
@@ -27,18 +29,21 @@ export interface ContentApiArchiveRequest {
 export interface ContentApiCreateRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApicreate
      */
     environment: string
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApicreate
      */
     path: string
     /**
      * 
+     * Defaults to: undefined
      * @type HttpFile
      * @memberof ContentApicreate
      */
@@ -48,18 +53,21 @@ export interface ContentApiCreateRequest {
 export interface ContentApiCreateOrUpdateRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApicreateOrUpdate
      */
     environment: string
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApicreateOrUpdate
      */
     path: string
     /**
      * 
+     * Defaults to: undefined
      * @type HttpFile
      * @memberof ContentApicreateOrUpdate
      */
@@ -69,12 +77,14 @@ export interface ContentApiCreateOrUpdateRequest {
 export interface ContentApiDownloadRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApidownload
      */
     environment: string
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof ContentApidownload
      */
@@ -93,7 +103,7 @@ export class ObjectContentApi {
      * Delete a file
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: ContentApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: ContentApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.environment, param.path,  options).toPromise();
     }
 
@@ -102,7 +112,7 @@ export class ObjectContentApi {
      * Delete a file
      * @param param the request object
      */
-    public archive(param: ContentApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: ContentApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.environment, param.path,  options).toPromise();
     }
 
@@ -111,7 +121,7 @@ export class ObjectContentApi {
      * Create a file
      * @param param the request object
      */
-    public createWithHttpInfo(param: ContentApiCreateRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+    public createWithHttpInfo(param: ContentApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.createWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -120,7 +130,7 @@ export class ObjectContentApi {
      * Create a file
      * @param param the request object
      */
-    public create(param: ContentApiCreateRequest, options?: Configuration): Promise<AssetFileMetadata> {
+    public create(param: ContentApiCreateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.create(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -129,7 +139,7 @@ export class ObjectContentApi {
      * Create or update a file
      * @param param the request object
      */
-    public createOrUpdateWithHttpInfo(param: ContentApiCreateOrUpdateRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+    public createOrUpdateWithHttpInfo(param: ContentApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.createOrUpdateWithHttpInfo(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -138,7 +148,7 @@ export class ObjectContentApi {
      * Create or update a file
      * @param param the request object
      */
-    public createOrUpdate(param: ContentApiCreateOrUpdateRequest, options?: Configuration): Promise<AssetFileMetadata> {
+    public createOrUpdate(param: ContentApiCreateOrUpdateRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.createOrUpdate(param.environment, param.path, param.file,  options).toPromise();
     }
 
@@ -147,7 +157,7 @@ export class ObjectContentApi {
      * Download a file
      * @param param the request object
      */
-    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.downloadWithHttpInfo(param.environment, param.path,  options).toPromise();
     }
 
@@ -156,7 +166,7 @@ export class ObjectContentApi {
      * Download a file
      * @param param the request object
      */
-    public download(param: ContentApiDownloadRequest, options?: Configuration): Promise<void> {
+    public download(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.download(param.environment, param.path,  options).toPromise();
     }
 
@@ -177,6 +187,7 @@ export interface ExtractApiDoAsyncRequest {
 export interface ExtractApiGetAsyncStatusRequest {
     /**
      * The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
+     * Defaults to: undefined
      * @type number
      * @memberof ExtractApigetAsyncStatus
      */
@@ -195,7 +206,7 @@ export class ObjectExtractApi {
      * Extract a zip file
      * @param param the request object
      */
-    public doAsyncWithHttpInfo(param: ExtractApiDoAsyncRequest, options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+    public doAsyncWithHttpInfo(param: ExtractApiDoAsyncRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
         return this.api.doAsyncWithHttpInfo(param.fileExtractRequest,  options).toPromise();
     }
 
@@ -204,7 +215,7 @@ export class ObjectExtractApi {
      * Extract a zip file
      * @param param the request object
      */
-    public doAsync(param: ExtractApiDoAsyncRequest, options?: Configuration): Promise<TaskLocator> {
+    public doAsync(param: ExtractApiDoAsyncRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
         return this.api.doAsync(param.fileExtractRequest,  options).toPromise();
     }
 
@@ -213,7 +224,7 @@ export class ObjectExtractApi {
      * Get extraction status
      * @param param the request object
      */
-    public getAsyncStatusWithHttpInfo(param: ExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<HttpInfo<ActionResponse>> {
+    public getAsyncStatusWithHttpInfo(param: ExtractApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
         return this.api.getAsyncStatusWithHttpInfo(param.taskId,  options).toPromise();
     }
 
@@ -222,7 +233,7 @@ export class ObjectExtractApi {
      * Get extraction status
      * @param param the request object
      */
-    public getAsyncStatus(param: ExtractApiGetAsyncStatusRequest, options?: Configuration): Promise<ActionResponse> {
+    public getAsyncStatus(param: ExtractApiGetAsyncStatusRequest, options?: ConfigurationOptions): Promise<ActionResponse> {
         return this.api.getAsyncStatus(param.taskId,  options).toPromise();
     }
 
@@ -234,18 +245,21 @@ import { MetadataApiRequestFactory, MetadataApiResponseProcessor} from "../apis/
 export interface MetadataApiGetRequest {
     /**
      * The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
+     * Defaults to: undefined
      * @type string
      * @memberof MetadataApiget
      */
     environment: string
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof MetadataApiget
      */
     path: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof MetadataApiget
      */
@@ -264,7 +278,7 @@ export class ObjectMetadataApi {
      * Get the metadata for a file
      * @param param the request object
      */
-    public getWithHttpInfo(param: MetadataApiGetRequest, options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
+    public getWithHttpInfo(param: MetadataApiGetRequest, options?: ConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
         return this.api.getWithHttpInfo(param.environment, param.path, param.properties,  options).toPromise();
     }
 
@@ -273,7 +287,7 @@ export class ObjectMetadataApi {
      * Get the metadata for a file
      * @param param the request object
      */
-    public get(param: MetadataApiGetRequest, options?: Configuration): Promise<AssetFileMetadata> {
+    public get(param: MetadataApiGetRequest, options?: ConfigurationOptions): Promise<AssetFileMetadata> {
         return this.api.get(param.environment, param.path, param.properties,  options).toPromise();
     }
 
@@ -285,12 +299,14 @@ import { ValidationApiRequestFactory, ValidationApiResponseProcessor} from "../a
 export interface ValidationApiDoValidateRequest {
     /**
      * The file system location of the file.
+     * Defaults to: undefined
      * @type string
      * @memberof ValidationApidoValidate
      */
     path: string
     /**
      * 
+     * Defaults to: undefined
      * @type HttpFile
      * @memberof ValidationApidoValidate
      */
@@ -309,7 +325,7 @@ export class ObjectValidationApi {
      * Validate the contents of a file
      * @param param the request object
      */
-    public doValidateWithHttpInfo(param: ValidationApiDoValidateRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public doValidateWithHttpInfo(param: ValidationApiDoValidateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.doValidateWithHttpInfo(param.path, param.file,  options).toPromise();
     }
 
@@ -318,7 +334,7 @@ export class ObjectValidationApi {
      * Validate the contents of a file
      * @param param the request object
      */
-    public doValidate(param: ValidationApiDoValidateRequest, options?: Configuration): Promise<void> {
+    public doValidate(param: ValidationApiDoValidateRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.doValidate(param.path, param.file,  options).toPromise();
     }
 
