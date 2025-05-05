@@ -1,5 +1,7 @@
 import {
-  BlogPostsApi,
+  BasicApi,
+  BatchApi,
+  MultiLanguageApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +13,9 @@ import IConfiguration from '../../../../configuration/IConfiguration'
 import { Observable } from '../../../../../codegen/cms/blogs/blog_posts/rxjsStub'
 
 export default class BlogPostsDiscovery {
-  public blogPostsApi: BlogPostsApi
+  public basicApi: BasicApi
+  public batchApi: BatchApi
+  public multiLanguageApi: MultiLanguageApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,6 +28,10 @@ export default class BlogPostsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.blogPostsApi = ApiDecoratorService.getInstance().apply<BlogPostsApi>(new BlogPostsApi(configuration))
+    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
+    this.multiLanguageApi = ApiDecoratorService.getInstance().apply<MultiLanguageApi>(
+      new MultiLanguageApi(configuration),
+    )
   }
 }
