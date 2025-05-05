@@ -13,23 +13,19 @@
 
 export class PublicConditionalSingleFieldDependency {
     'dependencyType': PublicConditionalSingleFieldDependencyDependencyTypeEnum;
-    'dependentFieldNames': Array<string>;
     'controllingFieldName': string;
     'controllingFieldValue': string;
+    'dependentFieldNames': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "dependencyType",
             "baseName": "dependencyType",
             "type": "PublicConditionalSingleFieldDependencyDependencyTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "dependentFieldNames",
-            "baseName": "dependentFieldNames",
-            "type": "Array<string>",
             "format": ""
         },
         {
@@ -43,6 +39,12 @@ export class PublicConditionalSingleFieldDependency {
             "baseName": "controllingFieldValue",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "dependentFieldNames",
+            "baseName": "dependentFieldNames",
+            "type": "Array<string>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -52,7 +54,6 @@ export class PublicConditionalSingleFieldDependency {
     public constructor() {
     }
 }
-
 
 export enum PublicConditionalSingleFieldDependencyDependencyTypeEnum {
     ConditionalSingleField = 'CONDITIONAL_SINGLE_FIELD'

@@ -10,51 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicConditionalSingleFieldDependency } from '../models/PublicConditionalSingleFieldDependency';
+import { PublicSingleFieldDependency } from '../models/PublicSingleFieldDependency';
 
-export class PublicActionDefinitionInputFieldDependenciesInner {
-    'dependencyType': PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum;
-    'dependentFieldNames': Array<string>;
-    'controllingFieldName': string;
-    'controllingFieldValue': string;
+/**
+ * @type PublicActionDefinitionInputFieldDependenciesInner
+ * Type
+ * @export
+ */
+export type PublicActionDefinitionInputFieldDependenciesInner = PublicConditionalSingleFieldDependency | PublicSingleFieldDependency;
 
+/**
+* @type PublicActionDefinitionInputFieldDependenciesInnerClass
+* @export
+*/
+export class PublicActionDefinitionInputFieldDependenciesInnerClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "dependencyType",
-            "baseName": "dependencyType",
-            "type": "PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "dependentFieldNames",
-            "baseName": "dependentFieldNames",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "controllingFieldName",
-            "baseName": "controllingFieldName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "controllingFieldValue",
-            "baseName": "controllingFieldValue",
-            "type": "string",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return PublicActionDefinitionInputFieldDependenciesInner.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
-}
-
-
-export enum PublicActionDefinitionInputFieldDependenciesInnerDependencyTypeEnum {
-    ConditionalSingleField = 'CONDITIONAL_SINGLE_FIELD'
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
