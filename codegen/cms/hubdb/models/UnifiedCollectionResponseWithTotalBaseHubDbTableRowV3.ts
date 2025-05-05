@@ -10,54 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { HubDbTableRowV3 } from '../models/HubDbTableRowV3';
-import { Paging } from '../models/Paging';
+import { RandomAccessCollectionResponseWithTotalHubDbTableRowV3 } from '../models/RandomAccessCollectionResponseWithTotalHubDbTableRowV3';
+import { StreamingCollectionResponseWithTotalHubDbTableRowV3 } from '../models/StreamingCollectionResponseWithTotalHubDbTableRowV3';
 
-export class UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3 {
-    'total': number;
-    'paging'?: Paging;
-    'type': UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3TypeEnum;
-    'results': Array<HubDbTableRowV3>;
+/**
+ * @type UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3
+ * Type
+ * @export
+ */
+export type UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3 = RandomAccessCollectionResponseWithTotalHubDbTableRowV3 | StreamingCollectionResponseWithTotalHubDbTableRowV3;
 
+/**
+* @type UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3Class
+* @export
+*/
+export class UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3Class {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "Paging",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3TypeEnum",
-            "format": ""
-        },
-        {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<HubDbTableRowV3>",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
-}
-
-
-export enum UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3TypeEnum {
-    RandomAccess = 'RANDOM_ACCESS',
-    Streaming = 'STREAMING'
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 

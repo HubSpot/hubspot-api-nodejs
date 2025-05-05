@@ -17,6 +17,8 @@ export class BatchInputHubDbTableRowV3BatchUpdateRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "inputs",
@@ -32,4 +34,3 @@ export class BatchInputHubDbTableRowV3BatchUpdateRequest {
     public constructor() {
     }
 }
-

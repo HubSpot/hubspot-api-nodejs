@@ -14,27 +14,27 @@ import { ErrorDetail } from '../models/ErrorDetail';
 
 export class StandardError {
     /**
-    * 
+    * Identifies the subcategory of the error, providing more specific context within the main category.
     */
     'subCategory'?: any;
     /**
-    * 
+    * An object containing context-specific information pertinent to the error.
     */
     'context': { [key: string]: Array<string>; };
     /**
-    * 
+    * An object containing links related to the error, such as documentation URLs or support contact pages.
     */
     'links': { [key: string]: string; };
     /**
-    * 
+    * The unique ID of the error instance.
     */
     'id'?: string;
     /**
-    * 
+    * Specifies the main category of the error, determining the broad area of issue.
     */
     'category': string;
     /**
-    * 
+    * A detailed message describing the error. 
     */
     'message': string;
     /**
@@ -42,11 +42,13 @@ export class StandardError {
     */
     'errors': Array<ErrorDetail>;
     /**
-    * 
+    * The HTTP status code associated with the error. 
     */
     'status': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -105,4 +107,3 @@ export class StandardError {
     public constructor() {
     }
 }
-
