@@ -43,6 +43,8 @@ export class BatchResponseTag {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -88,7 +90,6 @@ export class BatchResponseTag {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseTagStatusEnum {
     Pending = 'PENDING',
