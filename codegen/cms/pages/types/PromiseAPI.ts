@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
 import { AbTestEndRequestVNext } from '../models/AbTestEndRequestVNext';
@@ -45,10 +46,22 @@ export class PromiseLandingPagesApi {
      * Delete the Landing Page object identified by the id in the path.
      * Delete a Landing Page
      * @param objectId The Landing Page id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectId, archived, _options);
+    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -56,10 +69,22 @@ export class PromiseLandingPagesApi {
      * Delete the Landing Page object identified by the id in the path.
      * Delete a Landing Page
      * @param objectId The Landing Page id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archive(objectId: string, archived?: boolean, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectId, archived, _options);
+    public archive(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -68,8 +93,20 @@ export class PromiseLandingPagesApi {
      * Delete a batch of Landing Pages
      * @param batchInputString The JSON array of Landing Page ids.
      */
-    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveBatchWithHttpInfo(batchInputString, _options);
+    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveBatchWithHttpInfo(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -78,8 +115,20 @@ export class PromiseLandingPagesApi {
      * Delete a batch of Landing Pages
      * @param batchInputString The JSON array of Landing Page ids.
      */
-    public archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveBatch(batchInputString, _options);
+    public archiveBatch(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveBatch(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -87,10 +136,22 @@ export class PromiseLandingPagesApi {
      * Delete the Folder object identified by the id in the path.
      * Delete a Folder
      * @param objectId The Folder id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveFolderWithHttpInfo(objectId: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveFolderWithHttpInfo(objectId, archived, _options);
+    public archiveFolderWithHttpInfo(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveFolderWithHttpInfo(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -98,10 +159,22 @@ export class PromiseLandingPagesApi {
      * Delete the Folder object identified by the id in the path.
      * Delete a Folder
      * @param objectId The Folder id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveFolder(objectId: string, archived?: boolean, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveFolder(objectId, archived, _options);
+    public archiveFolder(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveFolder(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -110,8 +183,20 @@ export class PromiseLandingPagesApi {
      * Delete a batch of Folders
      * @param batchInputString The JSON array of Folder ids.
      */
-    public archiveFoldersWithHttpInfo(batchInputString: BatchInputString, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveFoldersWithHttpInfo(batchInputString, _options);
+    public archiveFoldersWithHttpInfo(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveFoldersWithHttpInfo(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -120,8 +205,20 @@ export class PromiseLandingPagesApi {
      * Delete a batch of Folders
      * @param batchInputString The JSON array of Folder ids.
      */
-    public archiveFolders(batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveFolders(batchInputString, _options);
+    public archiveFolders(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveFolders(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -130,8 +227,20 @@ export class PromiseLandingPagesApi {
      * Attach a landing page to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext, _options);
+    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -140,8 +249,20 @@ export class PromiseLandingPagesApi {
      * Attach a landing page to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -150,8 +271,20 @@ export class PromiseLandingPagesApi {
      * Clone a Landing Page
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
-    public cloneWithHttpInfo(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.cloneWithHttpInfo(contentCloneRequestVNext, _options);
+    public cloneWithHttpInfo(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cloneWithHttpInfo(contentCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -160,8 +293,20 @@ export class PromiseLandingPagesApi {
      * Clone a Landing Page
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
-    public clone(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.clone(contentCloneRequestVNext, _options);
+    public clone(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.clone(contentCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -170,8 +315,20 @@ export class PromiseLandingPagesApi {
      * Create a new Landing Page
      * @param page The JSON representation of a new Landing Page.
      */
-    public createWithHttpInfo(page: Page, _options?: Configuration): Promise<HttpInfo<void | Page>> {
-        const result = this.api.createWithHttpInfo(page, _options);
+    public createWithHttpInfo(page: Page, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void | Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(page, observableOptions);
         return result.toPromise();
     }
 
@@ -180,8 +337,20 @@ export class PromiseLandingPagesApi {
      * Create a new Landing Page
      * @param page The JSON representation of a new Landing Page.
      */
-    public create(page: Page, _options?: Configuration): Promise<void | Page> {
-        const result = this.api.create(page, _options);
+    public create(page: Page, _options?: PromiseConfigurationOptions): Promise<void | Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(page, observableOptions);
         return result.toPromise();
     }
 
@@ -190,8 +359,20 @@ export class PromiseLandingPagesApi {
      * Create a new A/B test variation
      * @param abTestCreateRequestVNext The JSON representation of the AbTestCreateRequest object.
      */
-    public createABTestVariationWithHttpInfo(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.createABTestVariationWithHttpInfo(abTestCreateRequestVNext, _options);
+    public createABTestVariationWithHttpInfo(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createABTestVariationWithHttpInfo(abTestCreateRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -200,8 +381,20 @@ export class PromiseLandingPagesApi {
      * Create a new A/B test variation
      * @param abTestCreateRequestVNext The JSON representation of the AbTestCreateRequest object.
      */
-    public createABTestVariation(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.createABTestVariation(abTestCreateRequestVNext, _options);
+    public createABTestVariation(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createABTestVariation(abTestCreateRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -210,8 +403,20 @@ export class PromiseLandingPagesApi {
      * Create a batch of Landing Pages
      * @param batchInputPage The JSON array of new Landing Pages to create.
      */
-    public createBatchWithHttpInfo(batchInputPage: BatchInputPage, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.createBatchWithHttpInfo(batchInputPage, _options);
+    public createBatchWithHttpInfo(batchInputPage: BatchInputPage, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatchWithHttpInfo(batchInputPage, observableOptions);
         return result.toPromise();
     }
 
@@ -220,8 +425,20 @@ export class PromiseLandingPagesApi {
      * Create a batch of Landing Pages
      * @param batchInputPage The JSON array of new Landing Pages to create.
      */
-    public createBatch(batchInputPage: BatchInputPage, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.createBatch(batchInputPage, _options);
+    public createBatch(batchInputPage: BatchInputPage, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatch(batchInputPage, observableOptions);
         return result.toPromise();
     }
 
@@ -230,8 +447,20 @@ export class PromiseLandingPagesApi {
      * Create a new Folder
      * @param contentFolder The JSON representation of a new Folder.
      */
-    public createFolderWithHttpInfo(contentFolder: ContentFolder, _options?: Configuration): Promise<HttpInfo<ContentFolder>> {
-        const result = this.api.createFolderWithHttpInfo(contentFolder, _options);
+    public createFolderWithHttpInfo(contentFolder: ContentFolder, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createFolderWithHttpInfo(contentFolder, observableOptions);
         return result.toPromise();
     }
 
@@ -240,8 +469,20 @@ export class PromiseLandingPagesApi {
      * Create a new Folder
      * @param contentFolder The JSON representation of a new Folder.
      */
-    public createFolder(contentFolder: ContentFolder, _options?: Configuration): Promise<ContentFolder> {
-        const result = this.api.createFolder(contentFolder, _options);
+    public createFolder(contentFolder: ContentFolder, _options?: PromiseConfigurationOptions): Promise<ContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createFolder(contentFolder, observableOptions);
         return result.toPromise();
     }
 
@@ -250,8 +491,20 @@ export class PromiseLandingPagesApi {
      * Create a batch of Folders
      * @param batchInputContentFolder The JSON array of new Folders to create.
      */
-    public createFoldersWithHttpInfo(batchInputContentFolder: BatchInputContentFolder, _options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
-        const result = this.api.createFoldersWithHttpInfo(batchInputContentFolder, _options);
+    public createFoldersWithHttpInfo(batchInputContentFolder: BatchInputContentFolder, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createFoldersWithHttpInfo(batchInputContentFolder, observableOptions);
         return result.toPromise();
     }
 
@@ -260,8 +513,20 @@ export class PromiseLandingPagesApi {
      * Create a batch of Folders
      * @param batchInputContentFolder The JSON array of new Folders to create.
      */
-    public createFolders(batchInputContentFolder: BatchInputContentFolder, _options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
-        const result = this.api.createFolders(batchInputContentFolder, _options);
+    public createFolders(batchInputContentFolder: BatchInputContentFolder, _options?: PromiseConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createFolders(batchInputContentFolder, observableOptions);
         return result.toPromise();
     }
 
@@ -270,8 +535,20 @@ export class PromiseLandingPagesApi {
      * Create a new language variation
      * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext, _options);
+    public createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -280,8 +557,20 @@ export class PromiseLandingPagesApi {
      * Create a new language variation
      * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.createLangVariation(contentLanguageCloneRequestVNext, _options);
+    public createLangVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createLangVariation(contentLanguageCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -290,8 +579,20 @@ export class PromiseLandingPagesApi {
      * Detach a landing page from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext, _options);
+    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -300,8 +601,20 @@ export class PromiseLandingPagesApi {
      * Detach a landing page from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -310,8 +623,20 @@ export class PromiseLandingPagesApi {
      * End an active A/B test
      * @param abTestEndRequestVNext The JSON representation of the AbTestEndRequest object.
      */
-    public endActiveABTestWithHttpInfo(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.endActiveABTestWithHttpInfo(abTestEndRequestVNext, _options);
+    public endActiveABTestWithHttpInfo(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.endActiveABTestWithHttpInfo(abTestEndRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -320,8 +645,20 @@ export class PromiseLandingPagesApi {
      * End an active A/B test
      * @param abTestEndRequestVNext The JSON representation of the AbTestEndRequest object.
      */
-    public endActiveABTest(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.endActiveABTest(abTestEndRequestVNext, _options);
+    public endActiveABTest(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.endActiveABTest(abTestEndRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -329,11 +666,23 @@ export class PromiseLandingPagesApi {
      * Retrieve the Landing Page object identified by the id in the path.
      * Retrieve a Landing Page
      * @param objectId The Landing Page id.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.getByIdWithHttpInfo(objectId, archived, property, _options);
+    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -341,11 +690,23 @@ export class PromiseLandingPagesApi {
      * Retrieve the Landing Page object identified by the id in the path.
      * Retrieve a Landing Page
      * @param objectId The Landing Page id.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.getById(objectId, archived, property, _options);
+    public getById(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -354,8 +715,20 @@ export class PromiseLandingPagesApi {
      * Retrieve the full draft version of the Landing Page
      * @param objectId The Landing Page id.
      */
-    public getDraftByIdWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.getDraftByIdWithHttpInfo(objectId, _options);
+    public getDraftByIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDraftByIdWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -364,8 +737,20 @@ export class PromiseLandingPagesApi {
      * Retrieve the full draft version of the Landing Page
      * @param objectId The Landing Page id.
      */
-    public getDraftById(objectId: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.getDraftById(objectId, _options);
+    public getDraftById(objectId: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDraftById(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -373,11 +758,23 @@ export class PromiseLandingPagesApi {
      * Retrieve the Folder object identified by the id in the path.
      * Retrieve a Folder
      * @param objectId The Folder id.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getFolderByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<ContentFolder>> {
-        const result = this.api.getFolderByIdWithHttpInfo(objectId, archived, property, _options);
+    public getFolderByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderByIdWithHttpInfo(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -385,11 +782,23 @@ export class PromiseLandingPagesApi {
      * Retrieve the Folder object identified by the id in the path.
      * Retrieve a Folder
      * @param objectId The Folder id.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getFolderById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<ContentFolder> {
-        const result = this.api.getFolderById(objectId, archived, property, _options);
+    public getFolderById(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<ContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderById(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -399,8 +808,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Folder id.
      * @param revisionId The Folder version id.
      */
-    public getFolderPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<VersionContentFolder>> {
-        const result = this.api.getFolderPreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public getFolderPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<VersionContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderPreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -410,8 +831,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Folder id.
      * @param revisionId The Folder version id.
      */
-    public getFolderPreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<VersionContentFolder> {
-        const result = this.api.getFolderPreviousVersion(objectId, revisionId, _options);
+    public getFolderPreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<VersionContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderPreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -419,12 +852,24 @@ export class PromiseLandingPagesApi {
      * Retrieves all the previous versions of a Folder.
      * Retrieves all the previous versions of a Folder
      * @param objectId The Folder id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getFolderPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionContentFolder>> {
-        const result = this.api.getFolderPreviousVersionsWithHttpInfo(objectId, after, before, limit, _options);
+    public getFolderPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderPreviousVersionsWithHttpInfo(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -432,92 +877,152 @@ export class PromiseLandingPagesApi {
      * Retrieves all the previous versions of a Folder.
      * Retrieves all the previous versions of a Folder
      * @param objectId The Folder id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getFolderPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseWithTotalVersionContentFolder> {
-        const result = this.api.getFolderPreviousVersions(objectId, after, before, limit, _options);
+    public getFolderPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalVersionContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFolderPreviousVersions(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of Landing Page Folders. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Landing Page Folders
-     * @param createdAt Only return Folders created at exactly the specified time.
-     * @param createdAfter Only return Folders created after the specified time.
-     * @param createdBefore Only return Folders created before the specified time.
-     * @param updatedAt Only return Folders last updated at exactly the specified time.
-     * @param updatedAfter Only return Folders last updated after the specified time.
-     * @param updatedBefore Only return Folders last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Folders created at exactly the specified time.
+     * @param [createdAfter] Only return Folders created after the specified time.
+     * @param [createdBefore] Only return Folders created before the specified time.
+     * @param [updatedAt] Only return Folders last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Folders last updated after the specified time.
+     * @param [updatedBefore] Only return Folders last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getFoldersPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalContentFolderForwardPaging>> {
-        const result = this.api.getFoldersPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getFoldersPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalContentFolderForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFoldersPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of Landing Page Folders. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Landing Page Folders
-     * @param createdAt Only return Folders created at exactly the specified time.
-     * @param createdAfter Only return Folders created after the specified time.
-     * @param createdBefore Only return Folders created before the specified time.
-     * @param updatedAt Only return Folders last updated at exactly the specified time.
-     * @param updatedAfter Only return Folders last updated after the specified time.
-     * @param updatedBefore Only return Folders last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Folders created at exactly the specified time.
+     * @param [createdAfter] Only return Folders created after the specified time.
+     * @param [createdBefore] Only return Folders created before the specified time.
+     * @param [updatedAt] Only return Folders last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Folders last updated after the specified time.
+     * @param [updatedBefore] Only return Folders last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getFoldersPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<CollectionResponseWithTotalContentFolderForwardPaging> {
-        const result = this.api.getFoldersPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getFoldersPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalContentFolderForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getFoldersPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of landing pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Landing Pages
-     * @param createdAt Only return Landing Pages created at exactly the specified time.
-     * @param createdAfter Only return Landing Pages created after the specified time.
-     * @param createdBefore Only return Landing Pages created before the specified time.
-     * @param updatedAt Only return Landing Pages last updated at exactly the specified time.
-     * @param updatedAfter Only return Landing Pages last updated after the specified time.
-     * @param updatedBefore Only return Landing Pages last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Landing Pages created at exactly the specified time.
+     * @param [createdAfter] Only return Landing Pages created after the specified time.
+     * @param [createdBefore] Only return Landing Pages created before the specified time.
+     * @param [updatedAt] Only return Landing Pages last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Landing Pages last updated after the specified time.
+     * @param [updatedBefore] Only return Landing Pages last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
-        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of landing pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Landing Pages
-     * @param createdAt Only return Landing Pages created at exactly the specified time.
-     * @param createdAfter Only return Landing Pages created after the specified time.
-     * @param createdBefore Only return Landing Pages created before the specified time.
-     * @param updatedAt Only return Landing Pages last updated at exactly the specified time.
-     * @param updatedAfter Only return Landing Pages last updated after the specified time.
-     * @param updatedBefore Only return Landing Pages last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Landing Pages created at exactly the specified time.
+     * @param [createdAfter] Only return Landing Pages created after the specified time.
+     * @param [createdBefore] Only return Landing Pages created before the specified time.
+     * @param [updatedAt] Only return Landing Pages last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Landing Pages last updated after the specified time.
+     * @param [updatedBefore] Only return Landing Pages last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPageForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -527,8 +1032,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id.
      */
-    public getPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<VersionPage>> {
-        const result = this.api.getPreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public getPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<VersionPage>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -538,8 +1055,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id.
      */
-    public getPreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<VersionPage> {
-        const result = this.api.getPreviousVersion(objectId, revisionId, _options);
+    public getPreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<VersionPage> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -547,12 +1076,24 @@ export class PromiseLandingPagesApi {
      * Retrieves all the previous versions of a Landing Page.
      * Retrieves all the previous versions of a Landing Page
      * @param objectId The Landing Page id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
-        const result = this.api.getPreviousVersionsWithHttpInfo(objectId, after, before, limit, _options);
+    public getPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersionsWithHttpInfo(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -560,12 +1101,24 @@ export class PromiseLandingPagesApi {
      * Retrieves all the previous versions of a Landing Page.
      * Retrieves all the previous versions of a Landing Page
      * @param objectId The Landing Page id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
-        const result = this.api.getPreviousVersions(objectId, after, before, limit, _options);
+    public getPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalVersionPage> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersions(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -574,8 +1127,20 @@ export class PromiseLandingPagesApi {
      * Push Landing Page draft edits live
      * @param objectId The id of the Landing Page for which it\&#39;s draft will be pushed live.
      */
-    public pushLiveWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.pushLiveWithHttpInfo(objectId, _options);
+    public pushLiveWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.pushLiveWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -584,8 +1149,20 @@ export class PromiseLandingPagesApi {
      * Push Landing Page draft edits live
      * @param objectId The id of the Landing Page for which it\&#39;s draft will be pushed live.
      */
-    public pushLive(objectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.pushLive(objectId, _options);
+    public pushLive(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.pushLive(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -593,10 +1170,22 @@ export class PromiseLandingPagesApi {
      * Retrieve the Landing Page objects identified in the request body.
      * Retrieve a batch of Landing Pages
      * @param batchInputString The JSON array of Landing Page ids.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.readBatchWithHttpInfo(batchInputString, archived, _options);
+    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readBatchWithHttpInfo(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -604,10 +1193,22 @@ export class PromiseLandingPagesApi {
      * Retrieve the Landing Page objects identified in the request body.
      * Retrieve a batch of Landing Pages
      * @param batchInputString The JSON array of Landing Page ids.
-     * @param archived Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.readBatch(batchInputString, archived, _options);
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readBatch(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -615,10 +1216,22 @@ export class PromiseLandingPagesApi {
      * Update the Folder objects identified in the request body.
      * Retrieve a batch of Folders
      * @param batchInputString The JSON array of Folder ids.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
      */
-    public readFoldersWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
-        const result = this.api.readFoldersWithHttpInfo(batchInputString, archived, _options);
+    public readFoldersWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readFoldersWithHttpInfo(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -626,10 +1239,22 @@ export class PromiseLandingPagesApi {
      * Update the Folder objects identified in the request body.
      * Retrieve a batch of Folders
      * @param batchInputString The JSON array of Folder ids.
-     * @param archived Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
      */
-    public readFolders(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
-        const result = this.api.readFolders(batchInputString, archived, _options);
+    public readFolders(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readFolders(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -638,8 +1263,20 @@ export class PromiseLandingPagesApi {
      * Rerun a previous A/B test
      * @param abTestRerunRequestVNext The JSON representation of the AbTestRerunRequest object.
      */
-    public rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext, _options);
+    public rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -648,8 +1285,20 @@ export class PromiseLandingPagesApi {
      * Rerun a previous A/B test
      * @param abTestRerunRequestVNext The JSON representation of the AbTestRerunRequest object.
      */
-    public rerunPreviousABTest(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.rerunPreviousABTest(abTestRerunRequestVNext, _options);
+    public rerunPreviousABTest(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.rerunPreviousABTest(abTestRerunRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -658,8 +1307,20 @@ export class PromiseLandingPagesApi {
      * Reset the Landing Page draft to the live version
      * @param objectId The id of the Landing Page for which it\&#39;s draft will be reset.
      */
-    public resetDraftWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.resetDraftWithHttpInfo(objectId, _options);
+    public resetDraftWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.resetDraftWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -668,8 +1329,20 @@ export class PromiseLandingPagesApi {
      * Reset the Landing Page draft to the live version
      * @param objectId The id of the Landing Page for which it\&#39;s draft will be reset.
      */
-    public resetDraft(objectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.resetDraft(objectId, _options);
+    public resetDraft(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.resetDraft(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -679,8 +1352,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Folder id.
      * @param revisionId The Folder version id to restore.
      */
-    public restoreFolderPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<ContentFolder>> {
-        const result = this.api.restoreFolderPreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public restoreFolderPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restoreFolderPreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -690,8 +1375,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Folder id.
      * @param revisionId The Folder version id to restore.
      */
-    public restoreFolderPreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<ContentFolder> {
-        const result = this.api.restoreFolderPreviousVersion(objectId, revisionId, _options);
+    public restoreFolderPreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<ContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restoreFolderPreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -701,8 +1398,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id to restore.
      */
-    public restorePreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.restorePreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public restorePreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -712,8 +1421,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id to restore.
      */
-    public restorePreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.restorePreviousVersion(objectId, revisionId, _options);
+    public restorePreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -723,8 +1444,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id to restore.
      */
-    public restorePreviousVersionToDraftWithHttpInfo(objectId: string, revisionId: number, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.restorePreviousVersionToDraftWithHttpInfo(objectId, revisionId, _options);
+    public restorePreviousVersionToDraftWithHttpInfo(objectId: string, revisionId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionToDraftWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -734,8 +1467,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param revisionId The Landing Page version id to restore.
      */
-    public restorePreviousVersionToDraft(objectId: string, revisionId: number, _options?: Configuration): Promise<Page> {
-        const result = this.api.restorePreviousVersionToDraft(objectId, revisionId, _options);
+    public restorePreviousVersionToDraft(objectId: string, revisionId: number, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionToDraft(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -744,8 +1489,20 @@ export class PromiseLandingPagesApi {
      * Schedule a Landing Page to be Published
      * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
-    public scheduleWithHttpInfo(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.scheduleWithHttpInfo(contentScheduleRequestVNext, _options);
+    public scheduleWithHttpInfo(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.scheduleWithHttpInfo(contentScheduleRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -754,8 +1511,20 @@ export class PromiseLandingPagesApi {
      * Schedule a Landing Page to be Published
      * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
-    public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.schedule(contentScheduleRequestVNext, _options);
+    public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.schedule(contentScheduleRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -764,8 +1533,20 @@ export class PromiseLandingPagesApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext, _options);
+    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -774,8 +1555,20 @@ export class PromiseLandingPagesApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -784,10 +1577,22 @@ export class PromiseLandingPagesApi {
      * Update a Landing Page
      * @param objectId The Landing Page id.
      * @param page The JSON representation of the updated Landing Page.
-     * @param archived Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateWithHttpInfo(objectId: string, page: Page, archived?: boolean, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.updateWithHttpInfo(objectId, page, archived, _options);
+    public updateWithHttpInfo(objectId: string, page: Page, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(objectId, page, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -796,10 +1601,22 @@ export class PromiseLandingPagesApi {
      * Update a Landing Page
      * @param objectId The Landing Page id.
      * @param page The JSON representation of the updated Landing Page.
-     * @param archived Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public update(objectId: string, page: Page, archived?: boolean, _options?: Configuration): Promise<Page> {
-        const result = this.api.update(objectId, page, archived, _options);
+    public update(objectId: string, page: Page, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(objectId, page, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -807,10 +1624,22 @@ export class PromiseLandingPagesApi {
      * Update the Landing Page objects identified in the request body.
      * Update a batch of Landing Pages
      * @param batchInputJsonNode The JSON representation of the updated Landing Pages.
-     * @param archived Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.updateBatchWithHttpInfo(batchInputJsonNode, archived, _options);
+    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatchWithHttpInfo(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -818,10 +1647,22 @@ export class PromiseLandingPagesApi {
      * Update the Landing Page objects identified in the request body.
      * Update a batch of Landing Pages
      * @param batchInputJsonNode The JSON representation of the updated Landing Pages.
-     * @param archived Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.updateBatch(batchInputJsonNode, archived, _options);
+    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatch(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -831,8 +1672,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param page The JSON representation of the updated Landing Page to be applied to the draft.
      */
-    public updateDraftWithHttpInfo(objectId: string, page: Page, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.updateDraftWithHttpInfo(objectId, page, _options);
+    public updateDraftWithHttpInfo(objectId: string, page: Page, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateDraftWithHttpInfo(objectId, page, observableOptions);
         return result.toPromise();
     }
 
@@ -842,8 +1695,20 @@ export class PromiseLandingPagesApi {
      * @param objectId The Landing Page id.
      * @param page The JSON representation of the updated Landing Page to be applied to the draft.
      */
-    public updateDraft(objectId: string, page: Page, _options?: Configuration): Promise<Page> {
-        const result = this.api.updateDraft(objectId, page, _options);
+    public updateDraft(objectId: string, page: Page, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateDraft(objectId, page, observableOptions);
         return result.toPromise();
     }
 
@@ -852,10 +1717,22 @@ export class PromiseLandingPagesApi {
      * Update a Folder
      * @param objectId The Folder id.
      * @param contentFolder The JSON representation of the updated Folder.
-     * @param archived Specifies whether to update deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Folders. Defaults to &#x60;false&#x60;.
      */
-    public updateFolderWithHttpInfo(objectId: string, contentFolder: ContentFolder, archived?: boolean, _options?: Configuration): Promise<HttpInfo<ContentFolder>> {
-        const result = this.api.updateFolderWithHttpInfo(objectId, contentFolder, archived, _options);
+    public updateFolderWithHttpInfo(objectId: string, contentFolder: ContentFolder, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateFolderWithHttpInfo(objectId, contentFolder, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -864,32 +1741,68 @@ export class PromiseLandingPagesApi {
      * Update a Folder
      * @param objectId The Folder id.
      * @param contentFolder The JSON representation of the updated Folder.
-     * @param archived Specifies whether to update deleted Folders. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Folders. Defaults to &#x60;false&#x60;.
      */
-    public updateFolder(objectId: string, contentFolder: ContentFolder, archived?: boolean, _options?: Configuration): Promise<ContentFolder> {
-        const result = this.api.updateFolder(objectId, contentFolder, archived, _options);
+    public updateFolder(objectId: string, contentFolder: ContentFolder, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<ContentFolder> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateFolder(objectId, contentFolder, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update the Folder objects identified in the request body.
      * Update a batch of Folders
-     * @param batchInputJsonNode 
-     * @param archived Whether to return only results that have been archived.
+     * @param batchInputJsonNode
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public updateFoldersWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
-        const result = this.api.updateFoldersWithHttpInfo(batchInputJsonNode, archived, _options);
+    public updateFoldersWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateFoldersWithHttpInfo(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update the Folder objects identified in the request body.
      * Update a batch of Folders
-     * @param batchInputJsonNode 
-     * @param archived Whether to return only results that have been archived.
+     * @param batchInputJsonNode
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public updateFolders(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
-        const result = this.api.updateFolders(batchInputJsonNode, archived, _options);
+    public updateFolders(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateFolders(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -898,8 +1811,20 @@ export class PromiseLandingPagesApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.updateLangsWithHttpInfo(updateLanguagesRequestVNext, _options);
+    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateLangsWithHttpInfo(updateLanguagesRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -908,8 +1833,20 @@ export class PromiseLandingPagesApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.updateLangs(updateLanguagesRequestVNext, _options);
+    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateLangs(updateLanguagesRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -936,10 +1873,22 @@ export class PromiseSitePagesApi {
      * Delete the Site Page object identified by the id in the path.
      * Delete a Site Page
      * @param objectId The Site Page id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectId, archived, _options);
+    public archiveWithHttpInfo(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -947,10 +1896,22 @@ export class PromiseSitePagesApi {
      * Delete the Site Page object identified by the id in the path.
      * Delete a Site Page
      * @param objectId The Site Page id.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archive(objectId: string, archived?: boolean, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectId, archived, _options);
+    public archive(objectId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectId, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -959,8 +1920,20 @@ export class PromiseSitePagesApi {
      * Delete a batch of Site Pages
      * @param batchInputString The JSON array of Site Page ids.
      */
-    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveBatchWithHttpInfo(batchInputString, _options);
+    public archiveBatchWithHttpInfo(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveBatchWithHttpInfo(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -969,8 +1942,20 @@ export class PromiseSitePagesApi {
      * Delete a batch of Site Pages
      * @param batchInputString The JSON array of Site Page ids.
      */
-    public archiveBatch(batchInputString: BatchInputString, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveBatch(batchInputString, _options);
+    public archiveBatch(batchInputString: BatchInputString, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveBatch(batchInputString, observableOptions);
         return result.toPromise();
     }
 
@@ -979,8 +1964,20 @@ export class PromiseSitePagesApi {
      * Attach a site page to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext, _options);
+    public attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.attachToLangGroupWithHttpInfo(attachToLangPrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -989,8 +1986,20 @@ export class PromiseSitePagesApi {
      * Attach a site page to a multi-language group
      * @param attachToLangPrimaryRequestVNext The JSON representation of the AttachToLangPrimaryRequest object.
      */
-    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, _options);
+    public attachToLangGroup(attachToLangPrimaryRequestVNext: AttachToLangPrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.attachToLangGroup(attachToLangPrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -999,8 +2008,20 @@ export class PromiseSitePagesApi {
      * Clone a Site Page
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
-    public cloneWithHttpInfo(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.cloneWithHttpInfo(contentCloneRequestVNext, _options);
+    public cloneWithHttpInfo(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cloneWithHttpInfo(contentCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1009,8 +2030,20 @@ export class PromiseSitePagesApi {
      * Clone a Site Page
      * @param contentCloneRequestVNext The JSON representation of the ContentCloneRequest object.
      */
-    public clone(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.clone(contentCloneRequestVNext, _options);
+    public clone(contentCloneRequestVNext: ContentCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.clone(contentCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1019,8 +2052,20 @@ export class PromiseSitePagesApi {
      * Create a new Site Page
      * @param page The JSON representation of a new Site Page.
      */
-    public createWithHttpInfo(page: Page, _options?: Configuration): Promise<HttpInfo<void | Page>> {
-        const result = this.api.createWithHttpInfo(page, _options);
+    public createWithHttpInfo(page: Page, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void | Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(page, observableOptions);
         return result.toPromise();
     }
 
@@ -1029,8 +2074,20 @@ export class PromiseSitePagesApi {
      * Create a new Site Page
      * @param page The JSON representation of a new Site Page.
      */
-    public create(page: Page, _options?: Configuration): Promise<void | Page> {
-        const result = this.api.create(page, _options);
+    public create(page: Page, _options?: PromiseConfigurationOptions): Promise<void | Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(page, observableOptions);
         return result.toPromise();
     }
 
@@ -1039,8 +2096,20 @@ export class PromiseSitePagesApi {
      * Create a new A/B test variation
      * @param abTestCreateRequestVNext The JSON representation of the AbTestCreateRequest object.
      */
-    public createABTestVariationWithHttpInfo(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.createABTestVariationWithHttpInfo(abTestCreateRequestVNext, _options);
+    public createABTestVariationWithHttpInfo(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createABTestVariationWithHttpInfo(abTestCreateRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1049,8 +2118,20 @@ export class PromiseSitePagesApi {
      * Create a new A/B test variation
      * @param abTestCreateRequestVNext The JSON representation of the AbTestCreateRequest object.
      */
-    public createABTestVariation(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.createABTestVariation(abTestCreateRequestVNext, _options);
+    public createABTestVariation(abTestCreateRequestVNext: AbTestCreateRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createABTestVariation(abTestCreateRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1059,8 +2140,20 @@ export class PromiseSitePagesApi {
      * Create a batch of Site Pages
      * @param batchInputPage The JSON array of new Site Pages to create.
      */
-    public createBatchWithHttpInfo(batchInputPage: BatchInputPage, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.createBatchWithHttpInfo(batchInputPage, _options);
+    public createBatchWithHttpInfo(batchInputPage: BatchInputPage, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatchWithHttpInfo(batchInputPage, observableOptions);
         return result.toPromise();
     }
 
@@ -1069,8 +2162,20 @@ export class PromiseSitePagesApi {
      * Create a batch of Site Pages
      * @param batchInputPage The JSON array of new Site Pages to create.
      */
-    public createBatch(batchInputPage: BatchInputPage, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.createBatch(batchInputPage, _options);
+    public createBatch(batchInputPage: BatchInputPage, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatch(batchInputPage, observableOptions);
         return result.toPromise();
     }
 
@@ -1079,8 +2184,20 @@ export class PromiseSitePagesApi {
      * Create a new language variation
      * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext, _options);
+    public createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createLangVariationWithHttpInfo(contentLanguageCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1089,8 +2206,20 @@ export class PromiseSitePagesApi {
      * Create a new language variation
      * @param contentLanguageCloneRequestVNext The JSON representation of the ContentLanguageCloneRequest object.
      */
-    public createLangVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: Configuration): Promise<Page> {
-        const result = this.api.createLangVariation(contentLanguageCloneRequestVNext, _options);
+    public createLangVariation(contentLanguageCloneRequestVNext: ContentLanguageCloneRequestVNext, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createLangVariation(contentLanguageCloneRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1099,8 +2228,20 @@ export class PromiseSitePagesApi {
      * Detach a site page from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext, _options);
+    public detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.detachFromLangGroupWithHttpInfo(detachFromLangGroupRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1109,8 +2250,20 @@ export class PromiseSitePagesApi {
      * Detach a site page from a multi-language group
      * @param detachFromLangGroupRequestVNext The JSON representation of the DetachFromLangGroupRequest object.
      */
-    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, _options);
+    public detachFromLangGroup(detachFromLangGroupRequestVNext: DetachFromLangGroupRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.detachFromLangGroup(detachFromLangGroupRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1119,8 +2272,20 @@ export class PromiseSitePagesApi {
      * End an active A/B test
      * @param abTestEndRequestVNext The JSON representation of the AbTestEndRequest object.
      */
-    public endActiveABTestWithHttpInfo(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.endActiveABTestWithHttpInfo(abTestEndRequestVNext, _options);
+    public endActiveABTestWithHttpInfo(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.endActiveABTestWithHttpInfo(abTestEndRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1129,8 +2294,20 @@ export class PromiseSitePagesApi {
      * End an active A/B test
      * @param abTestEndRequestVNext The JSON representation of the AbTestEndRequest object.
      */
-    public endActiveABTest(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.endActiveABTest(abTestEndRequestVNext, _options);
+    public endActiveABTest(abTestEndRequestVNext: AbTestEndRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.endActiveABTest(abTestEndRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1138,11 +2315,23 @@ export class PromiseSitePagesApi {
      * Retrieve the Site Page object identified by the id in the path.
      * Retrieve a Site Page
      * @param objectId The Site Page id.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.getByIdWithHttpInfo(objectId, archived, property, _options);
+    public getByIdWithHttpInfo(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -1150,11 +2339,23 @@ export class PromiseSitePagesApi {
      * Retrieve the Site Page object identified by the id in the path.
      * Retrieve a Site Page
      * @param objectId The Site Page id.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getById(objectId: string, archived?: boolean, property?: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.getById(objectId, archived, property, _options);
+    public getById(objectId: string, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(objectId, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -1163,8 +2364,20 @@ export class PromiseSitePagesApi {
      * Retrieve the full draft version of the Site Page
      * @param objectId The Site Page id.
      */
-    public getDraftByIdWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.getDraftByIdWithHttpInfo(objectId, _options);
+    public getDraftByIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDraftByIdWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -1173,48 +2386,84 @@ export class PromiseSitePagesApi {
      * Retrieve the full draft version of the Site Page
      * @param objectId The Site Page id.
      */
-    public getDraftById(objectId: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.getDraftById(objectId, _options);
+    public getDraftById(objectId: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDraftById(objectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of site pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Site Pages
-     * @param createdAt Only return Site Pages created at exactly the specified time.
-     * @param createdAfter Only return Site Pages created after the specified time.
-     * @param createdBefore Only return Site Pages created before the specified time.
-     * @param updatedAt Only return Site Pages last updated at exactly the specified time.
-     * @param updatedAfter Only return Site Pages last updated after the specified time.
-     * @param updatedBefore Only return Site Pages last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Site Pages created at exactly the specified time.
+     * @param [createdAfter] Only return Site Pages created after the specified time.
+     * @param [createdBefore] Only return Site Pages created before the specified time.
+     * @param [updatedAt] Only return Site Pages last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Site Pages last updated after the specified time.
+     * @param [updatedBefore] Only return Site Pages last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
-        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getPageWithHttpInfo(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Get the list of site pages. Supports paging and filtering. This method would be useful for an integration that examined these models and used an external service to suggest edits. 
      * Get all Site Pages
-     * @param createdAt Only return Site Pages created at exactly the specified time.
-     * @param createdAfter Only return Site Pages created after the specified time.
-     * @param createdBefore Only return Site Pages created before the specified time.
-     * @param updatedAt Only return Site Pages last updated at exactly the specified time.
-     * @param updatedAfter Only return Site Pages last updated after the specified time.
-     * @param updatedBefore Only return Site Pages last updated before the specified time.
-     * @param sort Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to return. Default is 100.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
-     * @param property 
+     * @param [createdAt] Only return Site Pages created at exactly the specified time.
+     * @param [createdAfter] Only return Site Pages created after the specified time.
+     * @param [createdBefore] Only return Site Pages created before the specified time.
+     * @param [updatedAt] Only return Site Pages last updated at exactly the specified time.
+     * @param [updatedAfter] Only return Site Pages last updated after the specified time.
+     * @param [updatedBefore] Only return Site Pages last updated before the specified time.
+     * @param [sort] Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to return. Default is 100.
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [property]
      */
-    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
-        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, _options);
+    public getPage(createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, sort?: Array<string>, after?: string, limit?: number, archived?: boolean, property?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPageForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, sort, after, limit, archived, property, observableOptions);
         return result.toPromise();
     }
 
@@ -1224,8 +2473,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id.
      */
-    public getPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<VersionPage>> {
-        const result = this.api.getPreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public getPreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<VersionPage>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1235,8 +2496,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id.
      */
-    public getPreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<VersionPage> {
-        const result = this.api.getPreviousVersion(objectId, revisionId, _options);
+    public getPreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<VersionPage> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1244,12 +2517,24 @@ export class PromiseSitePagesApi {
      * Retrieves all the previous versions of a Site Page.
      * Retrieves all the previous versions of a Site Page
      * @param objectId The Site Page id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
-        const result = this.api.getPreviousVersionsWithHttpInfo(objectId, after, before, limit, _options);
+    public getPreviousVersionsWithHttpInfo(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersionsWithHttpInfo(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -1257,12 +2542,24 @@ export class PromiseSitePagesApi {
      * Retrieves all the previous versions of a Site Page.
      * Retrieves all the previous versions of a Site Page
      * @param objectId The Site Page id.
-     * @param after The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to return. Default is 100.
+     * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to return. Default is 100.
      */
-    public getPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
-        const result = this.api.getPreviousVersions(objectId, after, before, limit, _options);
+    public getPreviousVersions(objectId: string, after?: string, before?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalVersionPage> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPreviousVersions(objectId, after, before, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -1271,8 +2568,20 @@ export class PromiseSitePagesApi {
      * Push Site Page draft edits live
      * @param objectId The id of the Site Page for which it\&#39;s draft will be pushed live.
      */
-    public pushLiveWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.pushLiveWithHttpInfo(objectId, _options);
+    public pushLiveWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.pushLiveWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -1281,8 +2590,20 @@ export class PromiseSitePagesApi {
      * Push Site Page draft edits live
      * @param objectId The id of the Site Page for which it\&#39;s draft will be pushed live.
      */
-    public pushLive(objectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.pushLive(objectId, _options);
+    public pushLive(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.pushLive(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -1290,10 +2611,22 @@ export class PromiseSitePagesApi {
      * Retrieve the Site Page objects identified in the request body.
      * Retrieve a batch of Site Pages
      * @param batchInputString The JSON array of Site Page ids.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.readBatchWithHttpInfo(batchInputString, archived, _options);
+    public readBatchWithHttpInfo(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readBatchWithHttpInfo(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1301,10 +2634,22 @@ export class PromiseSitePagesApi {
      * Retrieve the Site Page objects identified in the request body.
      * Retrieve a batch of Site Pages
      * @param batchInputString The JSON array of Site Page ids.
-     * @param archived Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.readBatch(batchInputString, archived, _options);
+    public readBatch(batchInputString: BatchInputString, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readBatch(batchInputString, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1313,8 +2658,20 @@ export class PromiseSitePagesApi {
      * Rerun a previous A/B test
      * @param abTestRerunRequestVNext The JSON representation of the AbTestRerunRequest object.
      */
-    public rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext, _options);
+    public rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.rerunPreviousABTestWithHttpInfo(abTestRerunRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1323,8 +2680,20 @@ export class PromiseSitePagesApi {
      * Rerun a previous A/B test
      * @param abTestRerunRequestVNext The JSON representation of the AbTestRerunRequest object.
      */
-    public rerunPreviousABTest(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.rerunPreviousABTest(abTestRerunRequestVNext, _options);
+    public rerunPreviousABTest(abTestRerunRequestVNext: AbTestRerunRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.rerunPreviousABTest(abTestRerunRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1333,8 +2702,20 @@ export class PromiseSitePagesApi {
      * Reset the Site Page draft to the live version
      * @param objectId The id of the Site Page for which it\&#39;s draft will be reset.
      */
-    public resetDraftWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.resetDraftWithHttpInfo(objectId, _options);
+    public resetDraftWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.resetDraftWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -1343,8 +2724,20 @@ export class PromiseSitePagesApi {
      * Reset the Site Page draft to the live version
      * @param objectId The id of the Site Page for which it\&#39;s draft will be reset.
      */
-    public resetDraft(objectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.resetDraft(objectId, _options);
+    public resetDraft(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.resetDraft(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -1354,8 +2747,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id to restore.
      */
-    public restorePreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.restorePreviousVersionWithHttpInfo(objectId, revisionId, _options);
+    public restorePreviousVersionWithHttpInfo(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1365,8 +2770,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id to restore.
      */
-    public restorePreviousVersion(objectId: string, revisionId: string, _options?: Configuration): Promise<Page> {
-        const result = this.api.restorePreviousVersion(objectId, revisionId, _options);
+    public restorePreviousVersion(objectId: string, revisionId: string, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersion(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1376,8 +2793,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id to restore.
      */
-    public restorePreviousVersionToDraftWithHttpInfo(objectId: string, revisionId: number, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.restorePreviousVersionToDraftWithHttpInfo(objectId, revisionId, _options);
+    public restorePreviousVersionToDraftWithHttpInfo(objectId: string, revisionId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionToDraftWithHttpInfo(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1387,8 +2816,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param revisionId The Site Page version id to restore.
      */
-    public restorePreviousVersionToDraft(objectId: string, revisionId: number, _options?: Configuration): Promise<Page> {
-        const result = this.api.restorePreviousVersionToDraft(objectId, revisionId, _options);
+    public restorePreviousVersionToDraft(objectId: string, revisionId: number, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.restorePreviousVersionToDraft(objectId, revisionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1397,8 +2838,20 @@ export class PromiseSitePagesApi {
      * Schedule a Site Page to be Published
      * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
-    public scheduleWithHttpInfo(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.scheduleWithHttpInfo(contentScheduleRequestVNext, _options);
+    public scheduleWithHttpInfo(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.scheduleWithHttpInfo(contentScheduleRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1407,8 +2860,20 @@ export class PromiseSitePagesApi {
      * Schedule a Site Page to be Published
      * @param contentScheduleRequestVNext The JSON representation of the ContentScheduleRequestVNext object.
      */
-    public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.schedule(contentScheduleRequestVNext, _options);
+    public schedule(contentScheduleRequestVNext: ContentScheduleRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.schedule(contentScheduleRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1417,8 +2882,20 @@ export class PromiseSitePagesApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext, _options);
+    public setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.setLangPrimaryWithHttpInfo(setNewLanguagePrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1427,8 +2904,20 @@ export class PromiseSitePagesApi {
      * Set a new primary language
      * @param setNewLanguagePrimaryRequestVNext The JSON representation of the SetNewLanguagePrimaryRequest object.
      */
-    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, _options);
+    public setLangPrimary(setNewLanguagePrimaryRequestVNext: SetNewLanguagePrimaryRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.setLangPrimary(setNewLanguagePrimaryRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1437,10 +2926,22 @@ export class PromiseSitePagesApi {
      * Update a Site Page
      * @param objectId The Site Page id.
      * @param page The JSON representation of the updated Site Page.
-     * @param archived Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateWithHttpInfo(objectId: string, page: Page, archived?: boolean, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.updateWithHttpInfo(objectId, page, archived, _options);
+    public updateWithHttpInfo(objectId: string, page: Page, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(objectId, page, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1449,10 +2950,22 @@ export class PromiseSitePagesApi {
      * Update a Site Page
      * @param objectId The Site Page id.
      * @param page The JSON representation of the updated Site Page.
-     * @param archived Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public update(objectId: string, page: Page, archived?: boolean, _options?: Configuration): Promise<Page> {
-        const result = this.api.update(objectId, page, archived, _options);
+    public update(objectId: string, page: Page, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(objectId, page, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1460,10 +2973,22 @@ export class PromiseSitePagesApi {
      * Update the Site Page objects identified in the request body.
      * Update a batch of Site Pages
      * @param batchInputJsonNode The JSON representation of the updated Site Pages.
-     * @param archived Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
-        const result = this.api.updateBatchWithHttpInfo(batchInputJsonNode, archived, _options);
+    public updateBatchWithHttpInfo(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatchWithHttpInfo(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1471,10 +2996,22 @@ export class PromiseSitePagesApi {
      * Update the Site Page objects identified in the request body.
      * Update a batch of Site Pages
      * @param batchInputJsonNode The JSON representation of the updated Site Pages.
-     * @param archived Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * @param [archived] Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
      */
-    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
-        const result = this.api.updateBatch(batchInputJsonNode, archived, _options);
+    public updateBatch(batchInputJsonNode: BatchInputJsonNode, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatch(batchInputJsonNode, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -1484,8 +3021,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param page The JSON representation of the updated Site Page to be applied to the draft.
      */
-    public updateDraftWithHttpInfo(objectId: string, page: Page, _options?: Configuration): Promise<HttpInfo<Page>> {
-        const result = this.api.updateDraftWithHttpInfo(objectId, page, _options);
+    public updateDraftWithHttpInfo(objectId: string, page: Page, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Page>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateDraftWithHttpInfo(objectId, page, observableOptions);
         return result.toPromise();
     }
 
@@ -1495,8 +3044,20 @@ export class PromiseSitePagesApi {
      * @param objectId The Site Page id.
      * @param page The JSON representation of the updated Site Page to be applied to the draft.
      */
-    public updateDraft(objectId: string, page: Page, _options?: Configuration): Promise<Page> {
-        const result = this.api.updateDraft(objectId, page, _options);
+    public updateDraft(objectId: string, page: Page, _options?: PromiseConfigurationOptions): Promise<Page> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateDraft(objectId, page, observableOptions);
         return result.toPromise();
     }
 
@@ -1505,8 +3066,20 @@ export class PromiseSitePagesApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.updateLangsWithHttpInfo(updateLanguagesRequestVNext, _options);
+    public updateLangsWithHttpInfo(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateLangsWithHttpInfo(updateLanguagesRequestVNext, observableOptions);
         return result.toPromise();
     }
 
@@ -1515,8 +3088,20 @@ export class PromiseSitePagesApi {
      * Update languages of multi-language group
      * @param updateLanguagesRequestVNext The JSON representation of the UpdateLanguagesRequest object.
      */
-    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: Configuration): Promise<void> {
-        const result = this.api.updateLangs(updateLanguagesRequestVNext, _options);
+    public updateLangs(updateLanguagesRequestVNext: UpdateLanguagesRequestVNext, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateLangs(updateLanguagesRequestVNext, observableOptions);
         return result.toPromise();
     }
 

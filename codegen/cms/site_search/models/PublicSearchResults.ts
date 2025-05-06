@@ -1,5 +1,5 @@
 /**
- * CMS Site Search
+ * Site Search
  * Use these endpoints for searching content on your HubSpot hosted CMS website(s).
  *
  * OpenAPI spec version: v3
@@ -21,6 +21,8 @@ export class PublicSearchResults {
     'results': Array<ContentSearchResult>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -67,4 +69,3 @@ export class PublicSearchResults {
     public constructor() {
     }
 }
-

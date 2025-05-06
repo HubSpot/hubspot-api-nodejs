@@ -1,5 +1,6 @@
 import { HttpFile, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { ActionResponse } from '../models/ActionResponse';
 import { AssetFileMetadata } from '../models/AssetFileMetadata';
@@ -25,8 +26,20 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public archiveWithHttpInfo(environment: string, path: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(environment, path, _options);
+    public archiveWithHttpInfo(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(environment, path, observableOptions);
         return result.toPromise();
     }
 
@@ -36,8 +49,20 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public archive(environment: string, path: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(environment, path, _options);
+    public archive(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(environment, path, observableOptions);
         return result.toPromise();
     }
 
@@ -46,10 +71,22 @@ export class PromiseContentApi {
      * Create a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public createWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
-        const result = this.api.createWithHttpInfo(environment, path, file, _options);
+    public createWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(environment, path, file, observableOptions);
         return result.toPromise();
     }
 
@@ -58,10 +95,22 @@ export class PromiseContentApi {
      * Create a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public create(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.create(environment, path, file, _options);
+    public create(environment: string, path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<AssetFileMetadata> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(environment, path, file, observableOptions);
         return result.toPromise();
     }
 
@@ -70,10 +119,22 @@ export class PromiseContentApi {
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public createOrUpdateWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
-        const result = this.api.createOrUpdateWithHttpInfo(environment, path, file, _options);
+    public createOrUpdateWithHttpInfo(environment: string, path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrUpdateWithHttpInfo(environment, path, file, observableOptions);
         return result.toPromise();
     }
 
@@ -82,10 +143,22 @@ export class PromiseContentApi {
      * Create or update a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.createOrUpdate(environment, path, file, _options);
+    public createOrUpdate(environment: string, path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<AssetFileMetadata> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrUpdate(environment, path, file, observableOptions);
         return result.toPromise();
     }
 
@@ -95,8 +168,20 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public downloadWithHttpInfo(environment: string, path: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.downloadWithHttpInfo(environment, path, _options);
+    public downloadWithHttpInfo(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.downloadWithHttpInfo(environment, path, observableOptions);
         return result.toPromise();
     }
 
@@ -106,8 +191,20 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public download(environment: string, path: string, _options?: Configuration): Promise<void> {
-        const result = this.api.download(environment, path, _options);
+    public download(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.download(environment, path, observableOptions);
         return result.toPromise();
     }
 
@@ -133,20 +230,44 @@ export class PromiseExtractApi {
     /**
      * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
      * Extract a zip file
-     * @param fileExtractRequest 
+     * @param fileExtractRequest
      */
-    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<HttpInfo<TaskLocator>> {
-        const result = this.api.doAsyncWithHttpInfo(fileExtractRequest, _options);
+    public doAsyncWithHttpInfo(fileExtractRequest: FileExtractRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doAsyncWithHttpInfo(fileExtractRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Extract a zip file in the developer file system. Extraction status can be checked with the `/extract/async/tasks/taskId/status` endpoint below.
      * Extract a zip file
-     * @param fileExtractRequest 
+     * @param fileExtractRequest
      */
-    public doAsync(fileExtractRequest: FileExtractRequest, _options?: Configuration): Promise<TaskLocator> {
-        const result = this.api.doAsync(fileExtractRequest, _options);
+    public doAsync(fileExtractRequest: FileExtractRequest, _options?: PromiseConfigurationOptions): Promise<TaskLocator> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doAsync(fileExtractRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -155,8 +276,20 @@ export class PromiseExtractApi {
      * Get extraction status
      * @param taskId The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
      */
-    public getAsyncStatusWithHttpInfo(taskId: number, _options?: Configuration): Promise<HttpInfo<ActionResponse>> {
-        const result = this.api.getAsyncStatusWithHttpInfo(taskId, _options);
+    public getAsyncStatusWithHttpInfo(taskId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ActionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAsyncStatusWithHttpInfo(taskId, observableOptions);
         return result.toPromise();
     }
 
@@ -165,8 +298,20 @@ export class PromiseExtractApi {
      * Get extraction status
      * @param taskId The extraction task ID returned by the initial &#x60;extract/async&#x60; request.
      */
-    public getAsyncStatus(taskId: number, _options?: Configuration): Promise<ActionResponse> {
-        const result = this.api.getAsyncStatus(taskId, _options);
+    public getAsyncStatus(taskId: number, _options?: PromiseConfigurationOptions): Promise<ActionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAsyncStatus(taskId, observableOptions);
         return result.toPromise();
     }
 
@@ -194,10 +339,22 @@ export class PromiseMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param properties 
+     * @param [properties]
      */
-    public getWithHttpInfo(environment: string, path: string, properties?: string, _options?: Configuration): Promise<HttpInfo<AssetFileMetadata>> {
-        const result = this.api.getWithHttpInfo(environment, path, properties, _options);
+    public getWithHttpInfo(environment: string, path: string, properties?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AssetFileMetadata>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getWithHttpInfo(environment, path, properties, observableOptions);
         return result.toPromise();
     }
 
@@ -206,10 +363,22 @@ export class PromiseMetadataApi {
      * Get the metadata for a file
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
-     * @param properties 
+     * @param [properties]
      */
-    public get(environment: string, path: string, properties?: string, _options?: Configuration): Promise<AssetFileMetadata> {
-        const result = this.api.get(environment, path, properties, _options);
+    public get(environment: string, path: string, properties?: string, _options?: PromiseConfigurationOptions): Promise<AssetFileMetadata> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.get(environment, path, properties, observableOptions);
         return result.toPromise();
     }
 
@@ -236,10 +405,22 @@ export class PromiseValidationApi {
      * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
      * Validate the contents of a file
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public doValidateWithHttpInfo(path: string, file?: HttpFile, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.doValidateWithHttpInfo(path, file, _options);
+    public doValidateWithHttpInfo(path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doValidateWithHttpInfo(path, file, observableOptions);
         return result.toPromise();
     }
 
@@ -247,10 +428,22 @@ export class PromiseValidationApi {
      * Validates the file contents passed to the endpoint given a specified path and environment. Accepts multipart/form-data content type.
      * Validate the contents of a file
      * @param path The file system location of the file.
-     * @param file 
+     * @param [file]
      */
-    public doValidate(path: string, file?: HttpFile, _options?: Configuration): Promise<void> {
-        const result = this.api.doValidate(path, file, _options);
+    public doValidate(path: string, file?: HttpFile, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doValidate(path, file, observableOptions);
         return result.toPromise();
     }
 
