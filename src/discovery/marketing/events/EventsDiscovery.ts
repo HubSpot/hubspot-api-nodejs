@@ -1,7 +1,11 @@
 import {
-  AttendanceSubscriberStateChangesApi,
+  AddEventAttendeesApi,
   BasicApi,
-  ParticipantStateApi,
+  BatchApi,
+  ChangePropertyApi,
+  IdentifiersApi,
+  ListAssociationsApi,
+  RetrieveParticipantStateApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -15,9 +19,13 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/marketing/events/rxjsStub'
 
 export default class EventsDiscovery {
-  public attendanceSubscriberStateChangesApi: AttendanceSubscriberStateChangesApi
+  public addEventAttendeesApi: AddEventAttendeesApi
   public basicApi: BasicApi
-  public participantStateApi: ParticipantStateApi
+  public batchApi: BatchApi
+  public changePropertyApi: ChangePropertyApi
+  public identifiersApi: IdentifiersApi
+  public listAssociationsApi: ListAssociationsApi
+  public retrieveParticipantStateApi: RetrieveParticipantStateApi
   public settingsApi: SettingsApi
   public subscriberStateChangesApi: SubscriberStateChangesApi
 
@@ -32,13 +40,20 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.attendanceSubscriberStateChangesApi =
-      ApiDecoratorService.getInstance().apply<AttendanceSubscriberStateChangesApi>(
-        new AttendanceSubscriberStateChangesApi(configuration),
-      )
+    this.addEventAttendeesApi = ApiDecoratorService.getInstance().apply<AddEventAttendeesApi>(
+      new AddEventAttendeesApi(configuration),
+    )
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
-    this.participantStateApi = ApiDecoratorService.getInstance().apply<ParticipantStateApi>(
-      new ParticipantStateApi(configuration),
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
+    this.changePropertyApi = ApiDecoratorService.getInstance().apply<ChangePropertyApi>(
+      new ChangePropertyApi(configuration),
+    )
+    this.identifiersApi = ApiDecoratorService.getInstance().apply<IdentifiersApi>(new IdentifiersApi(configuration))
+    this.listAssociationsApi = ApiDecoratorService.getInstance().apply<ListAssociationsApi>(
+      new ListAssociationsApi(configuration),
+    )
+    this.retrieveParticipantStateApi = ApiDecoratorService.getInstance().apply<RetrieveParticipantStateApi>(
+      new RetrieveParticipantStateApi(configuration),
     )
     this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
     this.subscriberStateChangesApi = ApiDecoratorService.getInstance().apply<SubscriberStateChangesApi>(
