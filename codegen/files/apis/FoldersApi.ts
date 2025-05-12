@@ -13,6 +13,7 @@ import { Folder } from '../models/Folder';
 import { FolderActionResponse } from '../models/FolderActionResponse';
 import { FolderInput } from '../models/FolderInput';
 import { FolderUpdateInput } from '../models/FolderUpdateInput';
+import { FolderUpdateInputWithId } from '../models/FolderUpdateInputWithId';
 import { FolderUpdateTaskLocator } from '../models/FolderUpdateTaskLocator';
 
 /**
@@ -22,7 +23,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Delete folder by ID.
-     * Delete folder.
+     * Delete folder by ID
      * @param folderId ID of folder to delete.
      */
     public async archive(folderId: string, _options?: Configuration): Promise<RequestContext> {
@@ -50,7 +51,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -59,8 +60,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Delete folder by path.
-     * Delete folder.
+     * Delete a folder, identified by its path.
+     * Delete folder by path
      * @param folderPath Path of folder to delete
      */
     public async archiveByPath(folderPath: string, _options?: Configuration): Promise<RequestContext> {
@@ -88,7 +89,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -98,8 +99,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Check status of folder update. Folder updates happen asynchronously.
-     * Check folder update status.
-     * @param taskId TaskId of folder update
+     * Check folder update status
+     * @param taskId The ID of the folder update task.
      */
     public async checkUpdateStatus(taskId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -126,7 +127,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -136,7 +137,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Creates a folder.
-     * Create folder.
+     * Create folder
      * @param folderInput Folder creation options
      */
     public async create(folderInput: FolderInput, _options?: Configuration): Promise<RequestContext> {
@@ -174,7 +175,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -186,23 +187,27 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
      * Search for folders. Does not contain hidden or archived folders.
      * Search folders
      * @param properties Properties that should be included in the returned folders.
-     * @param after The maximum offset of items for a given search is 10000. Narrow your search down if you are reaching this limit.
+     * @param after Offset search results by this value. The default offset is 0 and the maximum offset of items for a given search is 10,000. Narrow your search down if you are reaching this limit.
      * @param before 
-     * @param limit Limit of results to return. Max limit is 100.
+     * @param limit Number of items to return. Default limit is 10, maximum limit is 100.
      * @param sort Sort results by given property. For example -name sorts by name field descending, name sorts by name field ascending.
-     * @param id Search folder by given ID.
-     * @param createdAt Search for folders with the given creation timestamp.
-     * @param createdAtLte 
-     * @param createdAtGte 
-     * @param updatedAt Search for folder at given update timestamp.
-     * @param updatedAtLte 
-     * @param updatedAtGte 
+     * @param ids 
+     * @param idLte 
+     * @param idGte 
+     * @param createdAt Search folders by exact time of creation. Time must be epoch time in milliseconds.
+     * @param createdAtLte Search folders by less than or equal to time of creation. Can be used with createdAtGte to create a range.
+     * @param createdAtGte Search folders by greater than or equal to time of creation. Can be used with createdAtLte to create a range.
+     * @param updatedAt Search folders by exact time of latest updated. Time must be epoch time in milliseconds.
+     * @param updatedAtLte Search folders by less than or equal to time of latest update. Can be used with updatedAtGte to create a range.
+     * @param updatedAtGte Search folders by greater than or equal to time of latest update. Can be used with updatedAtLte to create a range.
      * @param name Search for folders containing the specified name.
-     * @param path Search for folders by path.
-     * @param parentFolderId Search for folders with the given parent folderId.
+     * @param path Search folders by path.
+     * @param parentFolderIds Search folders with the given parent folderId.
      */
-    public async doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, id?: string, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderId?: number, _options?: Configuration): Promise<RequestContext> {
+    public async doSearch(properties?: Array<string>, after?: string, before?: string, limit?: number, sort?: Array<string>, ids?: Array<number>, idLte?: number, idGte?: number, createdAt?: Date, createdAtLte?: Date, createdAtGte?: Date, updatedAt?: Date, updatedAtLte?: Date, updatedAtGte?: Date, name?: string, path?: string, parentFolderIds?: Array<number>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+
 
 
 
@@ -228,7 +233,10 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
         // Query Params
@@ -248,12 +256,28 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (sort !== undefined) {
-            requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(sort, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("sort", serializedParam);
+            }
         }
 
         // Query Params
-        if (id !== undefined) {
-            requestContext.setQueryParam("id", ObjectSerializer.serialize(id, "string", ""));
+        if (ids !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(ids, "Array<number>", "int64");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("ids", serializedParam);
+            }
+        }
+
+        // Query Params
+        if (idLte !== undefined) {
+            requestContext.setQueryParam("idLte", ObjectSerializer.serialize(idLte, "number", "int64"));
+        }
+
+        // Query Params
+        if (idGte !== undefined) {
+            requestContext.setQueryParam("idGte", ObjectSerializer.serialize(idGte, "number", "int64"));
         }
 
         // Query Params
@@ -297,8 +321,11 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
         }
 
         // Query Params
-        if (parentFolderId !== undefined) {
-            requestContext.setQueryParam("parentFolderId", ObjectSerializer.serialize(parentFolderId, "number", "int64"));
+        if (parentFolderIds !== undefined) {
+            const serializedParams = ObjectSerializer.serialize(parentFolderIds, "Array<number>", "int64");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("parentFolderIds", serializedParam);
+            }
         }
 
 
@@ -309,7 +336,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -318,8 +345,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get folder by ID
-     * Get folder
+     * Retrieve a folder by its ID.
+     * Retrieve folder by ID
      * @param folderId ID of desired folder
      * @param properties Properties to set on returned folder.
      */
@@ -343,7 +370,10 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
 
@@ -354,7 +384,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -363,8 +393,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get folder by path.
-     * Get folder.
+     * Retrieve a folder, identified by its path.
+     * Retrieve folder by path
      * @param folderPath Path of desired folder.
      * @param properties Properties to set on returned folder.
      */
@@ -388,7 +418,10 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
 
@@ -399,7 +432,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -408,12 +441,19 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update properties of folder by given ID. This action happens asynchronously and will update all of the folder\'s children as well.
-     * Update folder properties
-     * @param folderUpdateInput Properties to change in the folder
+     * Update a folder\'s properties, identified by folder ID.
+     * Update folder properties by folder ID
+     * @param folderId ID of folder to update
+     * @param folderUpdateInput 
      */
-    public async updateProperties(folderUpdateInput: FolderUpdateInput, _options?: Configuration): Promise<RequestContext> {
+    public async updateProperties(folderId: string, folderUpdateInput: FolderUpdateInput, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'folderId' is not null or undefined
+        if (folderId === null || folderId === undefined) {
+            throw new RequiredError("FoldersApi", "updateProperties", "folderId");
+        }
+
 
         // verify required parameter 'folderUpdateInput' is not null or undefined
         if (folderUpdateInput === null || folderUpdateInput === undefined) {
@@ -422,10 +462,11 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/files/v3/folders/update/async';
+        const localVarPath = '/files/v3/folders/{folderId}'
+            .replace('{' + 'folderId' + '}', encodeURIComponent(String(folderId)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 
@@ -447,7 +488,55 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Update properties of folder by given ID. This action happens asynchronously and will update all of the folder\'s children as well.
+     * Update folder properties
+     * @param folderUpdateInputWithId 
+     */
+    public async updatePropertiesRecursively(folderUpdateInputWithId: FolderUpdateInputWithId, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'folderUpdateInputWithId' is not null or undefined
+        if (folderUpdateInputWithId === null || folderUpdateInputWithId === undefined) {
+            throw new RequiredError("FoldersApi", "updatePropertiesRecursively", "folderUpdateInputWithId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/files/v3/folders/update/async';
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(folderUpdateInputWithId, "FolderUpdateInputWithId", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -710,7 +799,43 @@ export class FoldersApiResponseProcessor {
      * @params response Response returned by the server for a request to updateProperties
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updatePropertiesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FolderUpdateTaskLocator >> {
+     public async updatePropertiesWithHttpInfo(response: ResponseContext): Promise<HttpInfo<Folder >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: Folder = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Folder", ""
+            ) as Folder;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: Folder = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Folder", ""
+            ) as Folder;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updatePropertiesRecursively
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updatePropertiesRecursivelyWithHttpInfo(response: ResponseContext): Promise<HttpInfo<FolderUpdateTaskLocator >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("202", response.httpStatusCode)) {
             const body: FolderUpdateTaskLocator = ObjectSerializer.deserialize(
