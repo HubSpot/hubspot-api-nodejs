@@ -50,6 +50,7 @@ export class MarketingEventDefaultResponse {
     * The end date and time of the marketing event.
     */
     'endDateTime'?: Date;
+    'objectId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -113,6 +114,12 @@ export class MarketingEventDefaultResponse {
             "baseName": "endDateTime",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {

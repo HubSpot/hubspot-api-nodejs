@@ -12,44 +12,17 @@
 
 import { PropertyValue } from '../models/PropertyValue';
 
-export class MarketingEventUpdateRequestParams {
-    /**
-    * The start date and time of the marketing event.
-    */
+export class MarketingEventPublicUpdateRequestFullV2 {
     'startDateTime'?: Date;
-    /**
-    * A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account\'s definition of the MarketingEvent Object. If they don\'t they will be filtered out and not set. In order to do this you\'ll need to create a new PropertyGroup on the HubSpot account\'s MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
-    */
-    'customProperties'?: Array<PropertyValue>;
-    /**
-    * Indicates if the marketing event has been cancelled. Defaults to `false`
-    */
+    'customProperties': Array<PropertyValue>;
     'eventCancelled'?: boolean;
-    /**
-    * The name of the organizer of the marketing event.
-    */
     'eventOrganizer'?: string;
-    /**
-    * A URL in the external event application where the marketing event can be managed.
-    */
     'eventUrl'?: string;
-    /**
-    * The description of the marketing event.
-    */
     'eventDescription'?: string;
-    /**
-    * The name of the marketing event.
-    */
     'eventName'?: string;
-    /**
-    * Describes what type of event this is.  For example: `WEBINAR`, `CONFERENCE`, `WORKSHOP`
-    */
     'eventType'?: string;
-    'eventCompleted'?: boolean;
-    /**
-    * The end date and time of the marketing event.
-    */
     'endDateTime'?: Date;
+    'objectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -103,20 +76,20 @@ export class MarketingEventUpdateRequestParams {
             "format": ""
         },
         {
-            "name": "eventCompleted",
-            "baseName": "eventCompleted",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "endDateTime",
             "baseName": "endDateTime",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return MarketingEventUpdateRequestParams.attributeTypeMap;
+        return MarketingEventPublicUpdateRequestFullV2.attributeTypeMap;
     }
 
     public constructor() {

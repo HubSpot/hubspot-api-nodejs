@@ -19,7 +19,7 @@ export class MarketingEventEmailSubscriber {
     */
     'email': string;
     /**
-    * The date and time at which the contact subscribed to the event.
+    * Timestamp in milliseconds at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
 

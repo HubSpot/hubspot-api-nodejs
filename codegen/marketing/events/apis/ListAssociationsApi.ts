@@ -8,56 +8,50 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { AttendanceCounters } from '../models/AttendanceCounters';
-import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
+import { CollectionResponseWithTotalPublicListNoPaging } from '../models/CollectionResponseWithTotalPublicListNoPaging';
 
 /**
  * no description
  */
-export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
+export class ListAssociationsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Read Contact\'s participations by identifier - email or internal id.
-     * Read participations breakdown by Contact identifier
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * Associates a list with a marketing event by external account id, external event id, and ILS list id
+     * Associate a list with a marketing event
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
+     * @param externalEventId The id of the marketing event in the external event application.
+     * @param listId The ILS ID of the list.
      */
-    public async getParticipationsBreakdownByContactId(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<RequestContext> {
+    public async associateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'contactIdentifier' is not null or undefined
-        if (contactIdentifier === null || contactIdentifier === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByContactId", "contactIdentifier");
+        // verify required parameter 'externalAccountId' is not null or undefined
+        if (externalAccountId === null || externalAccountId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "associateByExternalAccountAndEventIds", "externalAccountId");
         }
 
 
+        // verify required parameter 'externalEventId' is not null or undefined
+        if (externalEventId === null || externalEventId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "associateByExternalAccountAndEventIds", "externalEventId");
+        }
 
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "associateByExternalAccountAndEventIds", "listId");
+        }
 
 
         // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/participations/contacts/{contactIdentifier}/breakdown'
-            .replace('{' + 'contactIdentifier' + '}', encodeURIComponent(String(contactIdentifier)));
+        const localVarPath = '/marketing/v3/marketing-events/associations/{externalAccountId}/{externalEventId}/lists/{listId}'
+            .replace('{' + 'externalAccountId' + '}', encodeURIComponent(String(externalAccountId)))
+            .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)))
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (state !== undefined) {
-            requestContext.setQueryParam("state", ObjectSerializer.serialize(state, "string", ""));
-        }
-
-        // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
-
-        // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
 
 
         let authMethod: SecurityAuthentication | undefined;
@@ -76,36 +70,174 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read Marketing event\'s participations breakdown with optional filters by externalAccountId and externalEventId pair.
-     * Read participations breakdown by Marketing Event external identifier
+     * Associates a list with a marketing event by marketing event id and ILS list id
+     * Associate a list with a marketing event
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
+     * @param listId The ILS ID of the list.
+     */
+    public async associateByMarketingEventId(marketingEventId: string, listId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'marketingEventId' is not null or undefined
+        if (marketingEventId === null || marketingEventId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "associateByMarketingEventId", "marketingEventId");
+        }
+
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "associateByMarketingEventId", "listId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/marketing/v3/marketing-events/associations/{marketingEventId}/lists/{listId}'
+            .replace('{' + 'marketingEventId' + '}', encodeURIComponent(String(marketingEventId)))
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Disassociates a list from a marketing event by external account id, external event id, and ILS list id
+     * Disassociate a list from a marketing event
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param listId The ILS ID of the list.
      */
-    public async getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<RequestContext> {
+    public async disassociateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'externalAccountId' is not null or undefined
         if (externalAccountId === null || externalAccountId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalAccountId");
+            throw new RequiredError("ListAssociationsApi", "disassociateByExternalAccountAndEventIds", "externalAccountId");
         }
 
 
         // verify required parameter 'externalEventId' is not null or undefined
         if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalEventId");
+            throw new RequiredError("ListAssociationsApi", "disassociateByExternalAccountAndEventIds", "externalEventId");
         }
 
 
-
-
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "disassociateByExternalAccountAndEventIds", "listId");
+        }
 
 
         // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}/breakdown'
+        const localVarPath = '/marketing/v3/marketing-events/associations/{externalAccountId}/{externalEventId}/lists/{listId}'
+            .replace('{' + 'externalAccountId' + '}', encodeURIComponent(String(externalAccountId)))
+            .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)))
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Disassociates a list from a marketing event by marketing event id and ILS list id
+     * Disassociate a list from a marketing event
+     * @param marketingEventId The internal id of the marketing event in HubSpot.
+     * @param listId The ILS ID of the list.
+     */
+    public async disassociateByMarketingEventId(marketingEventId: string, listId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'marketingEventId' is not null or undefined
+        if (marketingEventId === null || marketingEventId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "disassociateByMarketingEventId", "marketingEventId");
+        }
+
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "disassociateByMarketingEventId", "listId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/marketing/v3/marketing-events/associations/{marketingEventId}/lists/{listId}'
+            .replace('{' + 'marketingEventId' + '}', encodeURIComponent(String(marketingEventId)))
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Gets lists associated with a marketing event by external account id and external event id
+     * Get lists associated with a marketing event
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param externalEventId The id of the marketing event in the external event application.
+     */
+    public async getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'externalAccountId' is not null or undefined
+        if (externalAccountId === null || externalAccountId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "getAllByExternalAccountAndEventIds", "externalAccountId");
+        }
+
+
+        // verify required parameter 'externalEventId' is not null or undefined
+        if (externalEventId === null || externalEventId === undefined) {
+            throw new RequiredError("ListAssociationsApi", "getAllByExternalAccountAndEventIds", "externalEventId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/marketing/v3/marketing-events/associations/{externalAccountId}/{externalEventId}/lists'
             .replace('{' + 'externalAccountId' + '}', encodeURIComponent(String(externalAccountId)))
             .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)));
 
@@ -113,26 +245,6 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
-        // Query Params
-        if (contactIdentifier !== undefined) {
-            requestContext.setQueryParam("contactIdentifier", ObjectSerializer.serialize(contactIdentifier, "string", ""));
-        }
-
-        // Query Params
-        if (state !== undefined) {
-            requestContext.setQueryParam("state", ObjectSerializer.serialize(state, "string", ""));
-        }
-
-        // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
-
-        // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -150,133 +262,21 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
-     * Read participations breakdown by Marketing Event internal identifier
+     * Gets lists associated with a marketing event by marketing event id
+     * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
      */
-    public async getParticipationsBreakdownByMarketingEventId(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<RequestContext> {
+    public async getAllByMarketingEventId(marketingEventId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'marketingEventId' is not null or undefined
         if (marketingEventId === null || marketingEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByMarketingEventId", "marketingEventId");
-        }
-
-
-
-
-
-
-        // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/participations/{marketingEventId}/breakdown'
-            .replace('{' + 'marketingEventId' + '}', encodeURIComponent(String(marketingEventId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-        // Query Params
-        if (contactIdentifier !== undefined) {
-            requestContext.setQueryParam("contactIdentifier", ObjectSerializer.serialize(contactIdentifier, "string", ""));
-        }
-
-        // Query Params
-        if (state !== undefined) {
-            requestContext.setQueryParam("state", ObjectSerializer.serialize(state, "string", ""));
-        }
-
-        // Query Params
-        if (limit !== undefined) {
-            requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
-        }
-
-        // Query Params
-        if (after !== undefined) {
-            requestContext.setQueryParam("after", ObjectSerializer.serialize(after, "string", ""));
-        }
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Read Marketing event\'s participations counters by externalAccountId and externalEventId pair.
-     * Read participations counters by Marketing Event external identifier
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
-     * @param externalEventId The id of the marketing event in the external event application.
-     */
-    public async getParticipationsCountersByEventExternalId(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'externalAccountId' is not null or undefined
-        if (externalAccountId === null || externalAccountId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalAccountId");
-        }
-
-
-        // verify required parameter 'externalEventId' is not null or undefined
-        if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalEventId");
+            throw new RequiredError("ListAssociationsApi", "getAllByMarketingEventId", "marketingEventId");
         }
 
 
         // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/participations/{externalAccountId}/{externalEventId}'
-            .replace('{' + 'externalAccountId' + '}', encodeURIComponent(String(externalAccountId)))
-            .replace('{' + 'externalEventId' + '}', encodeURIComponent(String(externalEventId)));
-
-        // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
-        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
-
-
-        let authMethod: SecurityAuthentication | undefined;
-        // Apply auth methods
-        authMethod = _config.authMethods["oauth2"]
-        if (authMethod?.applySecurityAuthentication) {
-            await authMethod?.applySecurityAuthentication(requestContext);
-        }
-        
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
-        if (defaultAuth?.applySecurityAuthentication) {
-            await defaultAuth?.applySecurityAuthentication(requestContext);
-        }
-
-        return requestContext;
-    }
-
-    /**
-     * Read Marketing event\'s participations counters by internal identifier marketingEventId.
-     * Read participations counters by Marketing Event internal identifier
-     * @param marketingEventId The internal id of the marketing event in HubSpot.
-     */
-    public async getParticipationsCountersByMarketingEventId(marketingEventId: number, _options?: Configuration): Promise<RequestContext> {
-        let _config = _options || this.configuration;
-
-        // verify required parameter 'marketingEventId' is not null or undefined
-        if (marketingEventId === null || marketingEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByMarketingEventId", "marketingEventId");
-        }
-
-
-        // Path Params
-        const localVarPath = '/marketing/v3/marketing-events/participations/{marketingEventId}'
+        const localVarPath = '/marketing/v3/marketing-events/associations/{marketingEventId}/lists'
             .replace('{' + 'marketingEventId' + '}', encodeURIComponent(String(marketingEventId)));
 
         // Make Request Context
@@ -301,23 +301,19 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class ParticipantStateApiResponseProcessor {
+export class ListAssociationsApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getParticipationsBreakdownByContactId
+     * @params response Response returned by the server for a request to associateByExternalAccountAndEventIds
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getParticipationsBreakdownByContactIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging >> {
+     public async associateByExternalAccountAndEventIdsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -329,10 +325,10 @@ export class ParticipantStateApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
+            const body: void = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -343,17 +339,13 @@ export class ParticipantStateApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getParticipationsBreakdownByExternalEventId
+     * @params response Response returned by the server for a request to associateByMarketingEventId
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getParticipationsBreakdownByExternalEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging >> {
+     public async associateByMarketingEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -365,10 +357,10 @@ export class ParticipantStateApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
+            const body: void = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -379,17 +371,13 @@ export class ParticipantStateApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getParticipationsBreakdownByMarketingEventId
+     * @params response Response returned by the server for a request to disassociateByExternalAccountAndEventIds
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getParticipationsBreakdownByMarketingEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging >> {
+     public async disassociateByExternalAccountAndEventIdsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -401,10 +389,10 @@ export class ParticipantStateApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: CollectionResponseWithTotalParticipationBreakdownForwardPaging = ObjectSerializer.deserialize(
+            const body: void = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "CollectionResponseWithTotalParticipationBreakdownForwardPaging", ""
-            ) as CollectionResponseWithTotalParticipationBreakdownForwardPaging;
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -415,17 +403,13 @@ export class ParticipantStateApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getParticipationsCountersByEventExternalId
+     * @params response Response returned by the server for a request to disassociateByMarketingEventId
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getParticipationsCountersByEventExternalIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<AttendanceCounters >> {
+     public async disassociateByMarketingEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AttendanceCounters = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "AttendanceCounters", ""
-            ) as AttendanceCounters;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
@@ -437,10 +421,10 @@ export class ParticipantStateApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AttendanceCounters = ObjectSerializer.deserialize(
+            const body: void = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AttendanceCounters", ""
-            ) as AttendanceCounters;
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -451,16 +435,16 @@ export class ParticipantStateApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to getParticipationsCountersByMarketingEventId
+     * @params response Response returned by the server for a request to getAllByExternalAccountAndEventIds
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async getParticipationsCountersByMarketingEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<AttendanceCounters >> {
+     public async getAllByExternalAccountAndEventIdsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: AttendanceCounters = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalPublicListNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AttendanceCounters", ""
-            ) as AttendanceCounters;
+                "CollectionResponseWithTotalPublicListNoPaging", ""
+            ) as CollectionResponseWithTotalPublicListNoPaging;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -473,10 +457,46 @@ export class ParticipantStateApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: AttendanceCounters = ObjectSerializer.deserialize(
+            const body: CollectionResponseWithTotalPublicListNoPaging = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "AttendanceCounters", ""
-            ) as AttendanceCounters;
+                "CollectionResponseWithTotalPublicListNoPaging", ""
+            ) as CollectionResponseWithTotalPublicListNoPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to getAllByMarketingEventId
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getAllByMarketingEventIdWithHttpInfo(response: ResponseContext): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: CollectionResponseWithTotalPublicListNoPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseWithTotalPublicListNoPaging", ""
+            ) as CollectionResponseWithTotalPublicListNoPaging;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: CollectionResponseWithTotalPublicListNoPaging = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "CollectionResponseWithTotalPublicListNoPaging", ""
+            ) as CollectionResponseWithTotalPublicListNoPaging;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

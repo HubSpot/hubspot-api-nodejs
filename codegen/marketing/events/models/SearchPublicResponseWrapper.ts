@@ -11,38 +11,42 @@
  */
 
 
-export class MarketingEventSubscriber {
-    'vid'?: number;
-    'properties'?: { [key: string]: string; };
-    /**
-    * Timestamp in milliseconds at which the contact subscribed to the event.
-    */
-    'interactionDateTime': number;
+export class SearchPublicResponseWrapper {
+    'externalAccountId': string;
+    'externalEventId': string;
+    'appId': number;
+    'objectId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "vid",
-            "baseName": "vid",
+            "name": "externalAccountId",
+            "baseName": "externalAccountId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "externalEventId",
+            "baseName": "externalEventId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "appId",
+            "baseName": "appId",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "properties",
-            "baseName": "properties",
-            "type": "{ [key: string]: string; }",
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
             "format": ""
-        },
-        {
-            "name": "interactionDateTime",
-            "baseName": "interactionDateTime",
-            "type": "number",
-            "format": "int64"
         }    ];
 
     static getAttributeTypeMap() {
-        return MarketingEventSubscriber.attributeTypeMap;
+        return SearchPublicResponseWrapper.attributeTypeMap;
     }
 
     public constructor() {

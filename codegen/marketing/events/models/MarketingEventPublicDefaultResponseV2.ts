@@ -10,58 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { PropertyValue } from '../models/PropertyValue';
+import { AppInfo } from '../models/AppInfo';
+import { CrmPropertyWrapper } from '../models/CrmPropertyWrapper';
 
-export class MarketingEventPublicDefaultResponse {
-    /**
-    * The name of the organizer of the marketing event.
-    */
-    'eventOrganizer': string;
-    /**
-    * A URL in the external event application where the marketing event can be managed.
-    */
+export class MarketingEventPublicDefaultResponseV2 {
+    'eventOrganizer'?: string;
     'eventUrl'?: string;
-    /**
-    * The type of the marketing event.
-    */
+    'appInfo'?: AppInfo;
     'eventType'?: string;
     'eventCompleted'?: boolean;
-    /**
-    * The end date and time of the marketing event.
-    */
     'endDateTime'?: Date;
-    /**
-    * 
-    */
     'createdAt': Date;
-    /**
-    * The start date and time of the marketing event.
-    */
     'startDateTime'?: Date;
-    /**
-    * A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account\'s definition of the MarketingEvent Object. If they don\'t they will be filtered out and not set. In order to do this you\'ll need to create a new PropertyGroup on the HubSpot account\'s MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts. 
-    */
-    'customProperties'?: Array<PropertyValue>;
-    /**
-    * Indicates if the marketing event has been cancelled.
-    */
+    'customProperties': Array<CrmPropertyWrapper>;
     'eventCancelled'?: boolean;
-    /**
-    * The description of the marketing event.
-    */
     'eventDescription'?: string;
-    /**
-    * The name of the marketing event.
-    */
     'eventName': string;
-    /**
-    * 
-    */
-    'id': string;
-    'objectId'?: string;
-    /**
-    * 
-    */
+    'objectId': string;
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
@@ -77,6 +42,12 @@ export class MarketingEventPublicDefaultResponse {
             "name": "eventUrl",
             "baseName": "eventUrl",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "appInfo",
+            "baseName": "appInfo",
+            "type": "AppInfo",
             "format": ""
         },
         {
@@ -112,7 +83,7 @@ export class MarketingEventPublicDefaultResponse {
         {
             "name": "customProperties",
             "baseName": "customProperties",
-            "type": "Array<PropertyValue>",
+            "type": "Array<CrmPropertyWrapper>",
             "format": ""
         },
         {
@@ -134,12 +105,6 @@ export class MarketingEventPublicDefaultResponse {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "objectId",
             "baseName": "objectId",
             "type": "string",
@@ -153,7 +118,7 @@ export class MarketingEventPublicDefaultResponse {
         }    ];
 
     static getAttributeTypeMap() {
-        return MarketingEventPublicDefaultResponse.attributeTypeMap;
+        return MarketingEventPublicDefaultResponseV2.attributeTypeMap;
     }
 
     public constructor() {

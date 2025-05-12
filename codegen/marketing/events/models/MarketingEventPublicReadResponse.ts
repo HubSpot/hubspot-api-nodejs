@@ -78,6 +78,7 @@ export class MarketingEventPublicReadResponse {
     * 
     */
     'id': string;
+    'objectId'?: string;
     /**
     * 
     */
@@ -185,6 +186,12 @@ export class MarketingEventPublicReadResponse {
         {
             "name": "id",
             "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "objectId",
+            "baseName": "objectId",
             "type": "string",
             "format": ""
         },

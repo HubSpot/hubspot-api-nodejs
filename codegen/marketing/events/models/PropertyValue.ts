@@ -276,7 +276,8 @@ export enum PropertyValueSourceEnum {
     AutomationJourney = 'AUTOMATION_JOURNEY',
     Microapps = 'MICROAPPS',
     Intent = 'INTENT',
-    ProspectingAgent = 'PROSPECTING_AGENT'
+    ProspectingAgent = 'PROSPECTING_AGENT',
+    CentralExchangeRates = 'CENTRAL_EXCHANGE_RATES'
 }
 export enum PropertyValueDataSensitivityEnum {
     None = 'none',
