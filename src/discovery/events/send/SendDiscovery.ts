@@ -1,5 +1,6 @@
 import {
-  CustomEventDataApi,
+  BasicApi,
+  BatchApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
@@ -11,7 +12,8 @@ import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/events/send/rxjsStub'
 
 export default class EventsDiscovery {
-  public customEventDataApi: CustomEventDataApi
+  public basicApi: BasicApi
+  public batchApi: BatchApi
 
   constructor(config: IConfiguration) {
     const configuration = createConfiguration(
@@ -24,8 +26,7 @@ export default class EventsDiscovery {
       >(config, ServerConfiguration, Observable, Observable),
     )
 
-    this.customEventDataApi = ApiDecoratorService.getInstance().apply<CustomEventDataApi>(
-      new CustomEventDataApi(configuration),
-    )
+    this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
+    this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
   }
 }
