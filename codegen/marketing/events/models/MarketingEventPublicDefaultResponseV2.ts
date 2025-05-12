@@ -31,6 +31,8 @@ export class MarketingEventPublicDefaultResponseV2 {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "eventOrganizer",
@@ -124,4 +126,3 @@ export class MarketingEventPublicDefaultResponseV2 {
     public constructor() {
     }
 }
-

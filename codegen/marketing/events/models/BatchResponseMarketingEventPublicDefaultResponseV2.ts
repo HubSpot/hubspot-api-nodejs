@@ -22,6 +22,8 @@ export class BatchResponseMarketingEventPublicDefaultResponseV2 {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -67,7 +69,6 @@ export class BatchResponseMarketingEventPublicDefaultResponseV2 {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseMarketingEventPublicDefaultResponseV2StatusEnum {
     Pending = 'PENDING',

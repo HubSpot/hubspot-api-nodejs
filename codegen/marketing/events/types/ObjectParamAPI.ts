@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AttendanceCounters } from '../models/AttendanceCounters';
 import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
@@ -36,12 +36,14 @@ import { AddEventAttendeesApiRequestFactory, AddEventAttendeesApiResponseProcess
 export interface AddEventAttendeesApiRecordByContactEmailsRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactEmails
      */
     externalEventId: string
     /**
      * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactEmails
      */
@@ -54,6 +56,7 @@ export interface AddEventAttendeesApiRecordByContactEmailsRequest {
     batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactEmails
      */
@@ -63,12 +66,14 @@ export interface AddEventAttendeesApiRecordByContactEmailsRequest {
 export interface AddEventAttendeesApiRecordByContactIdRequest {
     /**
      * The internal id of the marketing event in HubSpot
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactId
      */
     objectId: string
     /**
      * The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactId
      */
@@ -84,12 +89,14 @@ export interface AddEventAttendeesApiRecordByContactIdRequest {
 export interface AddEventAttendeesApiRecordByContactIdsRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactIds
      */
     externalEventId: string
     /**
      * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactIds
      */
@@ -102,6 +109,7 @@ export interface AddEventAttendeesApiRecordByContactIdsRequest {
     batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByContactIds
      */
@@ -111,12 +119,14 @@ export interface AddEventAttendeesApiRecordByContactIdsRequest {
 export interface AddEventAttendeesApiRecordByEmailRequest {
     /**
      * The internal ID of the marketing event in HubSpot
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByEmail
      */
     objectId: string
     /**
      * The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
+     * Defaults to: undefined
      * @type string
      * @memberof AddEventAttendeesApirecordByEmail
      */
@@ -141,7 +151,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event External Ids
      * @param param the request object
      */
-    public recordByContactEmailsWithHttpInfo(param: AddEventAttendeesApiRecordByContactEmailsRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+    public recordByContactEmailsWithHttpInfo(param: AddEventAttendeesApiRecordByContactEmailsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
         return this.api.recordByContactEmailsWithHttpInfo(param.externalEventId, param.subscriberState, param.batchInputMarketingEventEmailSubscriber, param.externalAccountId,  options).toPromise();
     }
 
@@ -150,7 +160,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event External Ids
      * @param param the request object
      */
-    public recordByContactEmails(param: AddEventAttendeesApiRecordByContactEmailsRequest, options?: Configuration): Promise<BatchResponseSubscriberEmailResponse> {
+    public recordByContactEmails(param: AddEventAttendeesApiRecordByContactEmailsRequest, options?: ConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
         return this.api.recordByContactEmails(param.externalEventId, param.subscriberState, param.batchInputMarketingEventEmailSubscriber, param.externalAccountId,  options).toPromise();
     }
 
@@ -159,7 +169,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event Object Id
      * @param param the request object
      */
-    public recordByContactIdWithHttpInfo(param: AddEventAttendeesApiRecordByContactIdRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+    public recordByContactIdWithHttpInfo(param: AddEventAttendeesApiRecordByContactIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
         return this.api.recordByContactIdWithHttpInfo(param.objectId, param.subscriberState, param.batchInputMarketingEventSubscriber,  options).toPromise();
     }
 
@@ -168,7 +178,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event Object Id
      * @param param the request object
      */
-    public recordByContactId(param: AddEventAttendeesApiRecordByContactIdRequest, options?: Configuration): Promise<BatchResponseSubscriberVidResponse> {
+    public recordByContactId(param: AddEventAttendeesApiRecordByContactIdRequest, options?: ConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
         return this.api.recordByContactId(param.objectId, param.subscriberState, param.batchInputMarketingEventSubscriber,  options).toPromise();
     }
 
@@ -177,7 +187,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event External Ids
      * @param param the request object
      */
-    public recordByContactIdsWithHttpInfo(param: AddEventAttendeesApiRecordByContactIdsRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+    public recordByContactIdsWithHttpInfo(param: AddEventAttendeesApiRecordByContactIdsRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
         return this.api.recordByContactIdsWithHttpInfo(param.externalEventId, param.subscriberState, param.batchInputMarketingEventSubscriber, param.externalAccountId,  options).toPromise();
     }
 
@@ -186,7 +196,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event External Ids
      * @param param the request object
      */
-    public recordByContactIds(param: AddEventAttendeesApiRecordByContactIdsRequest, options?: Configuration): Promise<BatchResponseSubscriberVidResponse> {
+    public recordByContactIds(param: AddEventAttendeesApiRecordByContactIdsRequest, options?: ConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
         return this.api.recordByContactIds(param.externalEventId, param.subscriberState, param.batchInputMarketingEventSubscriber, param.externalAccountId,  options).toPromise();
     }
 
@@ -195,7 +205,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event Object Id
      * @param param the request object
      */
-    public recordByEmailWithHttpInfo(param: AddEventAttendeesApiRecordByEmailRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+    public recordByEmailWithHttpInfo(param: AddEventAttendeesApiRecordByEmailRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
         return this.api.recordByEmailWithHttpInfo(param.objectId, param.subscriberState, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
     }
 
@@ -204,7 +214,7 @@ export class ObjectAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event Object Id
      * @param param the request object
      */
-    public recordByEmail(param: AddEventAttendeesApiRecordByEmailRequest, options?: Configuration): Promise<BatchResponseSubscriberEmailResponse> {
+    public recordByEmail(param: AddEventAttendeesApiRecordByEmailRequest, options?: ConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
         return this.api.recordByEmail(param.objectId, param.subscriberState, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
     }
 
@@ -216,12 +226,14 @@ import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicA
 export interface BasicApiArchiveRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
     externalEventId: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
@@ -231,6 +243,7 @@ export interface BasicApiArchiveRequest {
 export interface BasicApiArchiveByObjectIdRequest {
     /**
      * The internal ID of the marketing event in HubSpot
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchiveByObjectId
      */
@@ -249,12 +262,14 @@ export interface BasicApiCreateRequest {
 export interface BasicApiGetAllRequest {
     /**
      * The cursor indicating the position of the last retrieved item.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetAll
      */
     after?: string
     /**
      * The limit for response size. The default value is 10, the max number is 100
+     * Defaults to: 10
      * @type number
      * @memberof BasicApigetAll
      */
@@ -264,6 +279,7 @@ export interface BasicApiGetAllRequest {
 export interface BasicApiGetByObjectIdRequest {
     /**
      * The internal ID of the marketing event in HubSpot
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetByObjectId
      */
@@ -273,12 +289,14 @@ export interface BasicApiGetByObjectIdRequest {
 export interface BasicApiGetDetailsRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetDetails
      */
     externalEventId: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetDetails
      */
@@ -288,12 +306,14 @@ export interface BasicApiGetDetailsRequest {
 export interface BasicApiUpdateRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
      */
     externalEventId: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
      */
@@ -309,6 +329,7 @@ export interface BasicApiUpdateRequest {
 export interface BasicApiUpdateByObjectIdRequest {
     /**
      * The internal ID of the marketing event in HubSpot
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdateByObjectId
      */
@@ -324,6 +345,7 @@ export interface BasicApiUpdateByObjectIdRequest {
 export interface BasicApiUpsertRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiupsert
      */
@@ -348,7 +370,7 @@ export class ObjectBasicApi {
      * Delete Marketing Event by External Ids
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -357,7 +379,7 @@ export class ObjectBasicApi {
      * Delete Marketing Event by External Ids
      * @param param the request object
      */
-    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -366,7 +388,7 @@ export class ObjectBasicApi {
      * Delete Marketing Event by objectId
      * @param param the request object
      */
-    public archiveByObjectIdWithHttpInfo(param: BasicApiArchiveByObjectIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveByObjectIdWithHttpInfo(param: BasicApiArchiveByObjectIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveByObjectIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -375,7 +397,7 @@ export class ObjectBasicApi {
      * Delete Marketing Event by objectId
      * @param param the request object
      */
-    public archiveByObjectId(param: BasicApiArchiveByObjectIdRequest, options?: Configuration): Promise<void> {
+    public archiveByObjectId(param: BasicApiArchiveByObjectIdRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveByObjectId(param.objectId,  options).toPromise();
     }
 
@@ -384,7 +406,7 @@ export class ObjectBasicApi {
      * Create a marketing event
      * @param param the request object
      */
-    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
         return this.api.createWithHttpInfo(param.marketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -393,7 +415,7 @@ export class ObjectBasicApi {
      * Create a marketing event
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<MarketingEventDefaultResponse> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<MarketingEventDefaultResponse> {
         return this.api.create(param.marketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -402,7 +424,7 @@ export class ObjectBasicApi {
      * Get all marketing event
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: BasicApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
+    public getAllWithHttpInfo(param: BasicApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
         return this.api.getAllWithHttpInfo(param.after, param.limit,  options).toPromise();
     }
 
@@ -411,7 +433,7 @@ export class ObjectBasicApi {
      * Get all marketing event
      * @param param the request object
      */
-    public getAll(param: BasicApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
+    public getAll(param: BasicApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
         return this.api.getAll(param.after, param.limit,  options).toPromise();
     }
 
@@ -420,7 +442,7 @@ export class ObjectBasicApi {
      * Get Marketing Event by objectId
      * @param param the request object
      */
-    public getByObjectIdWithHttpInfo(param: BasicApiGetByObjectIdRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicReadResponseV2>> {
+    public getByObjectIdWithHttpInfo(param: BasicApiGetByObjectIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventPublicReadResponseV2>> {
         return this.api.getByObjectIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -429,7 +451,7 @@ export class ObjectBasicApi {
      * Get Marketing Event by objectId
      * @param param the request object
      */
-    public getByObjectId(param: BasicApiGetByObjectIdRequest, options?: Configuration): Promise<MarketingEventPublicReadResponseV2> {
+    public getByObjectId(param: BasicApiGetByObjectIdRequest, options?: ConfigurationOptions): Promise<MarketingEventPublicReadResponseV2> {
         return this.api.getByObjectId(param.objectId,  options).toPromise();
     }
 
@@ -438,7 +460,7 @@ export class ObjectBasicApi {
      * Get Marketing Event by External IDs
      * @param param the request object
      */
-    public getDetailsWithHttpInfo(param: BasicApiGetDetailsRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicReadResponse>> {
+    public getDetailsWithHttpInfo(param: BasicApiGetDetailsRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventPublicReadResponse>> {
         return this.api.getDetailsWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -447,7 +469,7 @@ export class ObjectBasicApi {
      * Get Marketing Event by External IDs
      * @param param the request object
      */
-    public getDetails(param: BasicApiGetDetailsRequest, options?: Configuration): Promise<MarketingEventPublicReadResponse> {
+    public getDetails(param: BasicApiGetDetailsRequest, options?: ConfigurationOptions): Promise<MarketingEventPublicReadResponse> {
         return this.api.getDetails(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -456,7 +478,7 @@ export class ObjectBasicApi {
      * Update Marketing Event by External IDs
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+    public updateWithHttpInfo(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
         return this.api.updateWithHttpInfo(param.externalEventId, param.externalAccountId, param.marketingEventUpdateRequestParams,  options).toPromise();
     }
 
@@ -465,7 +487,7 @@ export class ObjectBasicApi {
      * Update Marketing Event by External IDs
      * @param param the request object
      */
-    public update(param: BasicApiUpdateRequest, options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
+    public update(param: BasicApiUpdateRequest, options?: ConfigurationOptions): Promise<MarketingEventPublicDefaultResponse> {
         return this.api.update(param.externalEventId, param.externalAccountId, param.marketingEventUpdateRequestParams,  options).toPromise();
     }
 
@@ -474,7 +496,7 @@ export class ObjectBasicApi {
      * Update Marketing Event by objectId
      * @param param the request object
      */
-    public updateByObjectIdWithHttpInfo(param: BasicApiUpdateByObjectIdRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
+    public updateByObjectIdWithHttpInfo(param: BasicApiUpdateByObjectIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
         return this.api.updateByObjectIdWithHttpInfo(param.objectId, param.marketingEventPublicUpdateRequestV2,  options).toPromise();
     }
 
@@ -483,7 +505,7 @@ export class ObjectBasicApi {
      * Update Marketing Event by objectId
      * @param param the request object
      */
-    public updateByObjectId(param: BasicApiUpdateByObjectIdRequest, options?: Configuration): Promise<MarketingEventPublicDefaultResponseV2> {
+    public updateByObjectId(param: BasicApiUpdateByObjectIdRequest, options?: ConfigurationOptions): Promise<MarketingEventPublicDefaultResponseV2> {
         return this.api.updateByObjectId(param.objectId, param.marketingEventPublicUpdateRequestV2,  options).toPromise();
     }
 
@@ -492,7 +514,7 @@ export class ObjectBasicApi {
      * Create or update a marketing event
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BasicApiUpsertRequest, options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+    public upsertWithHttpInfo(param: BasicApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
         return this.api.upsertWithHttpInfo(param.externalEventId, param.marketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -501,7 +523,7 @@ export class ObjectBasicApi {
      * Create or update a marketing event
      * @param param the request object
      */
-    public upsert(param: BasicApiUpsertRequest, options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
+    public upsert(param: BasicApiUpsertRequest, options?: ConfigurationOptions): Promise<MarketingEventPublicDefaultResponse> {
         return this.api.upsert(param.externalEventId, param.marketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -558,7 +580,7 @@ export class ObjectBatchApi {
      * Delete Multiple Marketing Events by External Ids
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.batchInputMarketingEventExternalUniqueIdentifier,  options).toPromise();
     }
 
@@ -567,7 +589,7 @@ export class ObjectBatchApi {
      * Delete Multiple Marketing Events by External Ids
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.batchInputMarketingEventExternalUniqueIdentifier,  options).toPromise();
     }
 
@@ -576,7 +598,7 @@ export class ObjectBatchApi {
      * Delete Multiple Marketing Events by ObjectId
      * @param param the request object
      */
-    public archiveByObjectIdWithHttpInfo(param: BatchApiArchiveByObjectIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveByObjectIdWithHttpInfo(param: BatchApiArchiveByObjectIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveByObjectIdWithHttpInfo(param.batchInputMarketingEventPublicObjectIdDeleteRequest,  options).toPromise();
     }
 
@@ -585,7 +607,7 @@ export class ObjectBatchApi {
      * Delete Multiple Marketing Events by ObjectId
      * @param param the request object
      */
-    public archiveByObjectId(param: BatchApiArchiveByObjectIdRequest, options?: Configuration): Promise<void> {
+    public archiveByObjectId(param: BatchApiArchiveByObjectIdRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveByObjectId(param.batchInputMarketingEventPublicObjectIdDeleteRequest,  options).toPromise();
     }
 
@@ -594,7 +616,7 @@ export class ObjectBatchApi {
      * Update Multiple Marketing Events by ObjectId
      * @param param the request object
      */
-    public updateByObjectIdWithHttpInfo(param: BatchApiUpdateByObjectIdRequest, options?: Configuration): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2>> {
+    public updateByObjectIdWithHttpInfo(param: BatchApiUpdateByObjectIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2>> {
         return this.api.updateByObjectIdWithHttpInfo(param.batchInputMarketingEventPublicUpdateRequestFullV2,  options).toPromise();
     }
 
@@ -603,7 +625,7 @@ export class ObjectBatchApi {
      * Update Multiple Marketing Events by ObjectId
      * @param param the request object
      */
-    public updateByObjectId(param: BatchApiUpdateByObjectIdRequest, options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2> {
+    public updateByObjectId(param: BatchApiUpdateByObjectIdRequest, options?: ConfigurationOptions): Promise<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2> {
         return this.api.updateByObjectId(param.batchInputMarketingEventPublicUpdateRequestFullV2,  options).toPromise();
     }
 
@@ -612,7 +634,7 @@ export class ObjectBatchApi {
      * Create or Update Multiple Marketing Events
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
+    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
         return this.api.upsertWithHttpInfo(param.batchInputMarketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -621,7 +643,7 @@ export class ObjectBatchApi {
      * Create or Update Multiple Marketing Events
      * @param param the request object
      */
-    public upsert(param: BatchApiUpsertRequest, options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
+    public upsert(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
         return this.api.upsert(param.batchInputMarketingEventCreateRequestParams,  options).toPromise();
     }
 
@@ -633,12 +655,14 @@ import { ChangePropertyApiRequestFactory, ChangePropertyApiResponseProcessor} fr
 export interface ChangePropertyApiCancelRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof ChangePropertyApicancel
      */
     externalEventId: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof ChangePropertyApicancel
      */
@@ -648,12 +672,14 @@ export interface ChangePropertyApiCancelRequest {
 export interface ChangePropertyApiCompleteRequest {
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ChangePropertyApicomplete
      */
     externalEventId: string
     /**
      * The accountId that is associated with this marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ChangePropertyApicomplete
      */
@@ -678,7 +704,7 @@ export class ObjectChangePropertyApi {
      * Mark a marketing event as cancelled
      * @param param the request object
      */
-    public cancelWithHttpInfo(param: ChangePropertyApiCancelRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+    public cancelWithHttpInfo(param: ChangePropertyApiCancelRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
         return this.api.cancelWithHttpInfo(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -687,7 +713,7 @@ export class ObjectChangePropertyApi {
      * Mark a marketing event as cancelled
      * @param param the request object
      */
-    public cancel(param: ChangePropertyApiCancelRequest, options?: Configuration): Promise<MarketingEventDefaultResponse> {
+    public cancel(param: ChangePropertyApiCancelRequest, options?: ConfigurationOptions): Promise<MarketingEventDefaultResponse> {
         return this.api.cancel(param.externalEventId, param.externalAccountId,  options).toPromise();
     }
 
@@ -696,7 +722,7 @@ export class ObjectChangePropertyApi {
      * Mark a marketing event as completed
      * @param param the request object
      */
-    public completeWithHttpInfo(param: ChangePropertyApiCompleteRequest, options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+    public completeWithHttpInfo(param: ChangePropertyApiCompleteRequest, options?: ConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
         return this.api.completeWithHttpInfo(param.externalEventId, param.externalAccountId, param.marketingEventCompleteRequestParams,  options).toPromise();
     }
 
@@ -705,7 +731,7 @@ export class ObjectChangePropertyApi {
      * Mark a marketing event as completed
      * @param param the request object
      */
-    public complete(param: ChangePropertyApiCompleteRequest, options?: Configuration): Promise<MarketingEventDefaultResponse> {
+    public complete(param: ChangePropertyApiCompleteRequest, options?: ConfigurationOptions): Promise<MarketingEventDefaultResponse> {
         return this.api.complete(param.externalEventId, param.externalAccountId, param.marketingEventCompleteRequestParams,  options).toPromise();
     }
 
@@ -717,6 +743,7 @@ import { IdentifiersApiRequestFactory, IdentifiersApiResponseProcessor} from "..
 export interface IdentifiersApiDoSearchRequest {
     /**
      * The id of the marketing event in the external event application (externalEventId)
+     * Defaults to: undefined
      * @type string
      * @memberof IdentifiersApidoSearch
      */
@@ -726,6 +753,7 @@ export interface IdentifiersApiDoSearchRequest {
 export interface IdentifiersApiSearchPortalEventsRequest {
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof IdentifiersApisearchPortalEvents
      */
@@ -744,7 +772,7 @@ export class ObjectIdentifiersApi {
      * Find App-Specific Marketing Events by External Event Id
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: IdentifiersApiDoSearchRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseSearchPublicResponseWrapperNoPaging>> {
+    public doSearchWithHttpInfo(param: IdentifiersApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseSearchPublicResponseWrapperNoPaging>> {
         return this.api.doSearchWithHttpInfo(param.q,  options).toPromise();
     }
 
@@ -753,7 +781,7 @@ export class ObjectIdentifiersApi {
      * Find App-Specific Marketing Events by External Event Id
      * @param param the request object
      */
-    public doSearch(param: IdentifiersApiDoSearchRequest, options?: Configuration): Promise<CollectionResponseSearchPublicResponseWrapperNoPaging> {
+    public doSearch(param: IdentifiersApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseSearchPublicResponseWrapperNoPaging> {
         return this.api.doSearch(param.q,  options).toPromise();
     }
 
@@ -762,7 +790,7 @@ export class ObjectIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param param the request object
      */
-    public searchPortalEventsWithHttpInfo(param: IdentifiersApiSearchPortalEventsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
+    public searchPortalEventsWithHttpInfo(param: IdentifiersApiSearchPortalEventsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
         return this.api.searchPortalEventsWithHttpInfo(param.externalEventId,  options).toPromise();
     }
 
@@ -771,7 +799,7 @@ export class ObjectIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param param the request object
      */
-    public searchPortalEvents(param: IdentifiersApiSearchPortalEventsRequest, options?: Configuration): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
+    public searchPortalEvents(param: IdentifiersApiSearchPortalEventsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
         return this.api.searchPortalEvents(param.externalEventId,  options).toPromise();
     }
 
@@ -783,18 +811,21 @@ import { ListAssociationsApiRequestFactory, ListAssociationsApiResponseProcessor
 export interface ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest {
     /**
      * The accountId that is associated with this marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApiassociateByExternalAccountAndEventIds
      */
     externalAccountId: string
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApiassociateByExternalAccountAndEventIds
      */
     externalEventId: string
     /**
      * The ILS ID of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApiassociateByExternalAccountAndEventIds
      */
@@ -804,12 +835,14 @@ export interface ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest
 export interface ListAssociationsApiAssociateByMarketingEventIdRequest {
     /**
      * The internal id of the marketing event in HubSpot.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApiassociateByMarketingEventId
      */
     marketingEventId: string
     /**
      * The ILS ID of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApiassociateByMarketingEventId
      */
@@ -819,18 +852,21 @@ export interface ListAssociationsApiAssociateByMarketingEventIdRequest {
 export interface ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequest {
     /**
      * The accountId that is associated with this marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApidisassociateByExternalAccountAndEventIds
      */
     externalAccountId: string
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApidisassociateByExternalAccountAndEventIds
      */
     externalEventId: string
     /**
      * The ILS ID of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApidisassociateByExternalAccountAndEventIds
      */
@@ -840,12 +876,14 @@ export interface ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequ
 export interface ListAssociationsApiDisassociateByMarketingEventIdRequest {
     /**
      * The internal id of the marketing event in HubSpot.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApidisassociateByMarketingEventId
      */
     marketingEventId: string
     /**
      * The ILS ID of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApidisassociateByMarketingEventId
      */
@@ -855,12 +893,14 @@ export interface ListAssociationsApiDisassociateByMarketingEventIdRequest {
 export interface ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest {
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApigetAllByExternalAccountAndEventIds
      */
     externalAccountId: string
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApigetAllByExternalAccountAndEventIds
      */
@@ -870,6 +910,7 @@ export interface ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest {
 export interface ListAssociationsApiGetAllByMarketingEventIdRequest {
     /**
      * The internal id of the marketing event in HubSpot.
+     * Defaults to: undefined
      * @type string
      * @memberof ListAssociationsApigetAllByMarketingEventId
      */
@@ -888,7 +929,7 @@ export class ObjectListAssociationsApi {
      * Associate a list with a marketing event
      * @param param the request object
      */
-    public associateByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public associateByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.associateByExternalAccountAndEventIdsWithHttpInfo(param.externalAccountId, param.externalEventId, param.listId,  options).toPromise();
     }
 
@@ -897,7 +938,7 @@ export class ObjectListAssociationsApi {
      * Associate a list with a marketing event
      * @param param the request object
      */
-    public associateByExternalAccountAndEventIds(param: ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<void> {
+    public associateByExternalAccountAndEventIds(param: ListAssociationsApiAssociateByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.associateByExternalAccountAndEventIds(param.externalAccountId, param.externalEventId, param.listId,  options).toPromise();
     }
 
@@ -906,7 +947,7 @@ export class ObjectListAssociationsApi {
      * Associate a list with a marketing event
      * @param param the request object
      */
-    public associateByMarketingEventIdWithHttpInfo(param: ListAssociationsApiAssociateByMarketingEventIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public associateByMarketingEventIdWithHttpInfo(param: ListAssociationsApiAssociateByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.associateByMarketingEventIdWithHttpInfo(param.marketingEventId, param.listId,  options).toPromise();
     }
 
@@ -915,7 +956,7 @@ export class ObjectListAssociationsApi {
      * Associate a list with a marketing event
      * @param param the request object
      */
-    public associateByMarketingEventId(param: ListAssociationsApiAssociateByMarketingEventIdRequest, options?: Configuration): Promise<void> {
+    public associateByMarketingEventId(param: ListAssociationsApiAssociateByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.associateByMarketingEventId(param.marketingEventId, param.listId,  options).toPromise();
     }
 
@@ -924,7 +965,7 @@ export class ObjectListAssociationsApi {
      * Disassociate a list from a marketing event
      * @param param the request object
      */
-    public disassociateByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public disassociateByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.disassociateByExternalAccountAndEventIdsWithHttpInfo(param.externalAccountId, param.externalEventId, param.listId,  options).toPromise();
     }
 
@@ -933,7 +974,7 @@ export class ObjectListAssociationsApi {
      * Disassociate a list from a marketing event
      * @param param the request object
      */
-    public disassociateByExternalAccountAndEventIds(param: ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<void> {
+    public disassociateByExternalAccountAndEventIds(param: ListAssociationsApiDisassociateByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.disassociateByExternalAccountAndEventIds(param.externalAccountId, param.externalEventId, param.listId,  options).toPromise();
     }
 
@@ -942,7 +983,7 @@ export class ObjectListAssociationsApi {
      * Disassociate a list from a marketing event
      * @param param the request object
      */
-    public disassociateByMarketingEventIdWithHttpInfo(param: ListAssociationsApiDisassociateByMarketingEventIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public disassociateByMarketingEventIdWithHttpInfo(param: ListAssociationsApiDisassociateByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.disassociateByMarketingEventIdWithHttpInfo(param.marketingEventId, param.listId,  options).toPromise();
     }
 
@@ -951,7 +992,7 @@ export class ObjectListAssociationsApi {
      * Disassociate a list from a marketing event
      * @param param the request object
      */
-    public disassociateByMarketingEventId(param: ListAssociationsApiDisassociateByMarketingEventIdRequest, options?: Configuration): Promise<void> {
+    public disassociateByMarketingEventId(param: ListAssociationsApiDisassociateByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.disassociateByMarketingEventId(param.marketingEventId, param.listId,  options).toPromise();
     }
 
@@ -960,7 +1001,7 @@ export class ObjectListAssociationsApi {
      * Get lists associated with a marketing event
      * @param param the request object
      */
-    public getAllByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByExternalAccountAndEventIdsWithHttpInfo(param: ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
         return this.api.getAllByExternalAccountAndEventIdsWithHttpInfo(param.externalAccountId, param.externalEventId,  options).toPromise();
     }
 
@@ -969,7 +1010,7 @@ export class ObjectListAssociationsApi {
      * Get lists associated with a marketing event
      * @param param the request object
      */
-    public getAllByExternalAccountAndEventIds(param: ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest, options?: Configuration): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+    public getAllByExternalAccountAndEventIds(param: ListAssociationsApiGetAllByExternalAccountAndEventIdsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
         return this.api.getAllByExternalAccountAndEventIds(param.externalAccountId, param.externalEventId,  options).toPromise();
     }
 
@@ -978,7 +1019,7 @@ export class ObjectListAssociationsApi {
      * Get lists associated with a marketing event
      * @param param the request object
      */
-    public getAllByMarketingEventIdWithHttpInfo(param: ListAssociationsApiGetAllByMarketingEventIdRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+    public getAllByMarketingEventIdWithHttpInfo(param: ListAssociationsApiGetAllByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
         return this.api.getAllByMarketingEventIdWithHttpInfo(param.marketingEventId,  options).toPromise();
     }
 
@@ -987,7 +1028,7 @@ export class ObjectListAssociationsApi {
      * Get lists associated with a marketing event
      * @param param the request object
      */
-    public getAllByMarketingEventId(param: ListAssociationsApiGetAllByMarketingEventIdRequest, options?: Configuration): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+    public getAllByMarketingEventId(param: ListAssociationsApiGetAllByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
         return this.api.getAllByMarketingEventId(param.marketingEventId,  options).toPromise();
     }
 
@@ -999,24 +1040,28 @@ import { RetrieveParticipantStateApiRequestFactory, RetrieveParticipantStateApiR
 export interface RetrieveParticipantStateApiGetParticipationsBreakdownByContactIdRequest {
     /**
      * The identifier of the Contact. It may be email or internal id.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByContactId
      */
     contactIdentifier: string
     /**
      * The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByContactId
      */
     state?: string
     /**
      * The limit for response size. The default value is 10, the max number is 100
+     * Defaults to: 10
      * @type number
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByContactId
      */
     limit?: number
     /**
      * The cursor indicating the position of the last retrieved item.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByContactId
      */
@@ -1026,36 +1071,42 @@ export interface RetrieveParticipantStateApiGetParticipationsBreakdownByContactI
 export interface RetrieveParticipantStateApiGetParticipationsBreakdownByExternalEventIdRequest {
     /**
      * The accountId that is associated with this marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
     externalAccountId: string
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
     externalEventId: string
     /**
      * The identifier of the Contact. It may be email or internal id.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
     contactIdentifier?: string
     /**
      * The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
     state?: string
     /**
      * The limit for response size. The default value is 10, the max number is 100
+     * Defaults to: 10
      * @type number
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
     limit?: number
     /**
      * The cursor indicating the position of the last retrieved item.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByExternalEventId
      */
@@ -1065,30 +1116,35 @@ export interface RetrieveParticipantStateApiGetParticipationsBreakdownByExternal
 export interface RetrieveParticipantStateApiGetParticipationsBreakdownByMarketingEventIdRequest {
     /**
      * The internal id of the marketing event in HubSpot.
+     * Defaults to: undefined
      * @type number
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByMarketingEventId
      */
     marketingEventId: number
     /**
      * The identifier of the Contact. It may be email or internal id.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByMarketingEventId
      */
     contactIdentifier?: string
     /**
      * The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByMarketingEventId
      */
     state?: string
     /**
      * The limit for response size. The default value is 10, the max number is 100
+     * Defaults to: 10
      * @type number
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByMarketingEventId
      */
     limit?: number
     /**
      * The cursor indicating the position of the last retrieved item.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsBreakdownByMarketingEventId
      */
@@ -1098,12 +1154,14 @@ export interface RetrieveParticipantStateApiGetParticipationsBreakdownByMarketin
 export interface RetrieveParticipantStateApiGetParticipationsCountersByEventExternalIdRequest {
     /**
      * The accountId that is associated with this marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsCountersByEventExternalId
      */
     externalAccountId: string
     /**
      * The id of the marketing event in the external event application.
+     * Defaults to: undefined
      * @type string
      * @memberof RetrieveParticipantStateApigetParticipationsCountersByEventExternalId
      */
@@ -1113,6 +1171,7 @@ export interface RetrieveParticipantStateApiGetParticipationsCountersByEventExte
 export interface RetrieveParticipantStateApiGetParticipationsCountersByMarketingEventIdRequest {
     /**
      * The internal id of the marketing event in HubSpot.
+     * Defaults to: undefined
      * @type number
      * @memberof RetrieveParticipantStateApigetParticipationsCountersByMarketingEventId
      */
@@ -1131,7 +1190,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Contact identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByContactIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByContactIdRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByContactIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByContactIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
         return this.api.getParticipationsBreakdownByContactIdWithHttpInfo(param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1140,7 +1199,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Contact identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByContactId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByContactIdRequest, options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByContactId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByContactIdRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
         return this.api.getParticipationsBreakdownByContactId(param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1149,7 +1208,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByExternalEventIdRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByExternalEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
         return this.api.getParticipationsBreakdownByExternalEventIdWithHttpInfo(param.externalAccountId, param.externalEventId, param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1158,7 +1217,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByExternalEventId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByExternalEventIdRequest, options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByExternalEventId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByExternalEventIdRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
         return this.api.getParticipationsBreakdownByExternalEventId(param.externalAccountId, param.externalEventId, param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1167,7 +1226,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event internal identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByMarketingEventIdRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsBreakdownByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
         return this.api.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(param.marketingEventId, param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1176,7 +1235,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event internal identifier
      * @param param the request object
      */
-    public getParticipationsBreakdownByMarketingEventId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByMarketingEventIdRequest, options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+    public getParticipationsBreakdownByMarketingEventId(param: RetrieveParticipantStateApiGetParticipationsBreakdownByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
         return this.api.getParticipationsBreakdownByMarketingEventId(param.marketingEventId, param.contactIdentifier, param.state, param.limit, param.after,  options).toPromise();
     }
 
@@ -1185,7 +1244,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event external identifier
      * @param param the request object
      */
-    public getParticipationsCountersByEventExternalIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsCountersByEventExternalIdRequest, options?: Configuration): Promise<HttpInfo<AttendanceCounters>> {
+    public getParticipationsCountersByEventExternalIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsCountersByEventExternalIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<AttendanceCounters>> {
         return this.api.getParticipationsCountersByEventExternalIdWithHttpInfo(param.externalAccountId, param.externalEventId,  options).toPromise();
     }
 
@@ -1194,7 +1253,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event external identifier
      * @param param the request object
      */
-    public getParticipationsCountersByEventExternalId(param: RetrieveParticipantStateApiGetParticipationsCountersByEventExternalIdRequest, options?: Configuration): Promise<AttendanceCounters> {
+    public getParticipationsCountersByEventExternalId(param: RetrieveParticipantStateApiGetParticipationsCountersByEventExternalIdRequest, options?: ConfigurationOptions): Promise<AttendanceCounters> {
         return this.api.getParticipationsCountersByEventExternalId(param.externalAccountId, param.externalEventId,  options).toPromise();
     }
 
@@ -1203,7 +1262,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event internal identifier
      * @param param the request object
      */
-    public getParticipationsCountersByMarketingEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsCountersByMarketingEventIdRequest, options?: Configuration): Promise<HttpInfo<AttendanceCounters>> {
+    public getParticipationsCountersByMarketingEventIdWithHttpInfo(param: RetrieveParticipantStateApiGetParticipationsCountersByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<AttendanceCounters>> {
         return this.api.getParticipationsCountersByMarketingEventIdWithHttpInfo(param.marketingEventId,  options).toPromise();
     }
 
@@ -1212,7 +1271,7 @@ export class ObjectRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event internal identifier
      * @param param the request object
      */
-    public getParticipationsCountersByMarketingEventId(param: RetrieveParticipantStateApiGetParticipationsCountersByMarketingEventIdRequest, options?: Configuration): Promise<AttendanceCounters> {
+    public getParticipationsCountersByMarketingEventId(param: RetrieveParticipantStateApiGetParticipationsCountersByMarketingEventIdRequest, options?: ConfigurationOptions): Promise<AttendanceCounters> {
         return this.api.getParticipationsCountersByMarketingEventId(param.marketingEventId,  options).toPromise();
     }
 
@@ -1224,6 +1283,7 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 export interface SettingsApiGetAllRequest {
     /**
      * The id of the application to retrieve the settings for.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApigetAll
      */
@@ -1233,6 +1293,7 @@ export interface SettingsApiGetAllRequest {
 export interface SettingsApiUpdateRequest {
     /**
      * The id of the application to update the settings for.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApiupdate
      */
@@ -1257,7 +1318,7 @@ export class ObjectSettingsApi {
      * Retrieve the application settings
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
+    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<EventDetailSettings>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -1266,7 +1327,7 @@ export class ObjectSettingsApi {
      * Retrieve the application settings
      * @param param the request object
      */
-    public getAll(param: SettingsApiGetAllRequest, options?: Configuration): Promise<EventDetailSettings> {
+    public getAll(param: SettingsApiGetAllRequest, options?: ConfigurationOptions): Promise<EventDetailSettings> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -1275,7 +1336,7 @@ export class ObjectSettingsApi {
      * Update the application settings
      * @param param the request object
      */
-    public updateWithHttpInfo(param: SettingsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
+    public updateWithHttpInfo(param: SettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<EventDetailSettings>> {
         return this.api.updateWithHttpInfo(param.appId, param.eventDetailSettingsUrl,  options).toPromise();
     }
 
@@ -1284,7 +1345,7 @@ export class ObjectSettingsApi {
      * Update the application settings
      * @param param the request object
      */
-    public update(param: SettingsApiUpdateRequest, options?: Configuration): Promise<EventDetailSettings> {
+    public update(param: SettingsApiUpdateRequest, options?: ConfigurationOptions): Promise<EventDetailSettings> {
         return this.api.update(param.appId, param.eventDetailSettingsUrl,  options).toPromise();
     }
 
@@ -1296,18 +1357,21 @@ import { SubscriberStateChangesApiRequestFactory, SubscriberStateChangesApiRespo
 export interface SubscriberStateChangesApiUpsertByContactEmailRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactEmail
      */
     externalEventId: string
     /**
      * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactEmail
      */
     subscriberState: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactEmail
      */
@@ -1323,18 +1387,21 @@ export interface SubscriberStateChangesApiUpsertByContactEmailRequest {
 export interface SubscriberStateChangesApiUpsertByContactIdRequest {
     /**
      * The id of the marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactId
      */
     externalEventId: string
     /**
      * The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactId
      */
     subscriberState: string
     /**
      * The accountId that is associated with this marketing event in the external event application
+     * Defaults to: undefined
      * @type string
      * @memberof SubscriberStateChangesApiupsertByContactId
      */
@@ -1359,7 +1426,7 @@ export class ObjectSubscriberStateChangesApi {
      * Record a subscriber state by contact email
      * @param param the request object
      */
-    public upsertByContactEmailWithHttpInfo(param: SubscriberStateChangesApiUpsertByContactEmailRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public upsertByContactEmailWithHttpInfo(param: SubscriberStateChangesApiUpsertByContactEmailRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.upsertByContactEmailWithHttpInfo(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
     }
 
@@ -1368,7 +1435,7 @@ export class ObjectSubscriberStateChangesApi {
      * Record a subscriber state by contact email
      * @param param the request object
      */
-    public upsertByContactEmail(param: SubscriberStateChangesApiUpsertByContactEmailRequest, options?: Configuration): Promise<void> {
+    public upsertByContactEmail(param: SubscriberStateChangesApiUpsertByContactEmailRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.upsertByContactEmail(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventEmailSubscriber,  options).toPromise();
     }
 
@@ -1377,7 +1444,7 @@ export class ObjectSubscriberStateChangesApi {
      * Record a subscriber state by contact ID
      * @param param the request object
      */
-    public upsertByContactIdWithHttpInfo(param: SubscriberStateChangesApiUpsertByContactIdRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public upsertByContactIdWithHttpInfo(param: SubscriberStateChangesApiUpsertByContactIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.upsertByContactIdWithHttpInfo(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventSubscriber,  options).toPromise();
     }
 
@@ -1386,7 +1453,7 @@ export class ObjectSubscriberStateChangesApi {
      * Record a subscriber state by contact ID
      * @param param the request object
      */
-    public upsertByContactId(param: SubscriberStateChangesApiUpsertByContactIdRequest, options?: Configuration): Promise<void> {
+    public upsertByContactId(param: SubscriberStateChangesApiUpsertByContactIdRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.upsertByContactId(param.externalEventId, param.subscriberState, param.externalAccountId, param.batchInputMarketingEventSubscriber,  options).toPromise();
     }
 

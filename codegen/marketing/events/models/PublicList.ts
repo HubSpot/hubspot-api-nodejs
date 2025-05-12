@@ -28,6 +28,8 @@ export class PublicList {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "processingType",
@@ -115,4 +117,3 @@ export class PublicList {
     public constructor() {
     }
 }
-

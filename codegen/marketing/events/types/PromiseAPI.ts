@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { AttendanceCounters } from '../models/AttendanceCounters';
 import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
@@ -48,11 +49,23 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event External Ids
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber 
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
      */
-    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-        const result = this.api.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _options);
+    public recordByContactEmailsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactEmailsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -61,11 +74,23 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event External Ids
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventEmailSubscriber 
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param batchInputMarketingEventEmailSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
      */
-    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: Configuration): Promise<BatchResponseSubscriberEmailResponse> {
-        const result = this.api.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, _options);
+    public recordByContactEmails(externalEventId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactEmails(externalEventId, subscriberState, batchInputMarketingEventEmailSubscriber, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -74,10 +99,22 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event Object Id
      * @param objectId The internal id of the marketing event in HubSpot
      * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber 
+     * @param batchInputMarketingEventSubscriber
      */
-    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
-        const result = this.api.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, _options);
+    public recordByContactIdWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIdWithHttpInfo(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -86,10 +123,22 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event Object Id
      * @param objectId The internal id of the marketing event in HubSpot
      * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventSubscriber 
+     * @param batchInputMarketingEventSubscriber
      */
-    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<BatchResponseSubscriberVidResponse> {
-        const result = this.api.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, _options);
+    public recordByContactId(objectId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactId(objectId, subscriberState, batchInputMarketingEventSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -98,11 +147,23 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event External Ids
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber 
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
      */
-    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
-        const result = this.api.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _options);
+    public recordByContactIdsWithHttpInfo(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberVidResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIdsWithHttpInfo(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -111,11 +172,23 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by ContactId with Marketing Event External Ids
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param batchInputMarketingEventSubscriber 
-     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
+     * @param batchInputMarketingEventSubscriber
+     * @param [externalAccountId] The accountId that is associated with this marketing event in the external event application
      */
-    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: Configuration): Promise<BatchResponseSubscriberVidResponse> {
-        const result = this.api.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, _options);
+    public recordByContactIds(externalEventId: string, subscriberState: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, externalAccountId?: string, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberVidResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByContactIds(externalEventId, subscriberState, batchInputMarketingEventSubscriber, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -124,10 +197,22 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event Object Id
      * @param objectId The internal ID of the marketing event in HubSpot
      * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber 
+     * @param batchInputMarketingEventEmailSubscriber
      */
-    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
-        const result = this.api.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _options);
+    public recordByEmailWithHttpInfo(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriberEmailResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByEmailWithHttpInfo(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -136,10 +221,22 @@ export class PromiseAddEventAttendeesApi {
      * Record Participants by Email with Marketing Event Object Id
      * @param objectId The internal ID of the marketing event in HubSpot
      * @param subscriberState The attendance state value. It may be \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;
-     * @param batchInputMarketingEventEmailSubscriber 
+     * @param batchInputMarketingEventEmailSubscriber
      */
-    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<BatchResponseSubscriberEmailResponse> {
-        const result = this.api.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, _options);
+    public recordByEmail(objectId: string, subscriberState: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriberEmailResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.recordByEmail(objectId, subscriberState, batchInputMarketingEventEmailSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -168,8 +265,20 @@ export class PromiseBasicApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public archiveWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(externalEventId, externalAccountId, _options);
+    public archiveWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -179,8 +288,20 @@ export class PromiseBasicApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public archive(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(externalEventId, externalAccountId, _options);
+    public archive(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -189,8 +310,20 @@ export class PromiseBasicApi {
      * Delete Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
      */
-    public archiveByObjectIdWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveByObjectIdWithHttpInfo(objectId, _options);
+    public archiveByObjectIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByObjectIdWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -199,50 +332,110 @@ export class PromiseBasicApi {
      * Delete Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
      */
-    public archiveByObjectId(objectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveByObjectId(objectId, _options);
+    public archiveByObjectId(objectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByObjectId(objectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Creates a new marketing event in HubSpot
      * Create a marketing event
-     * @param marketingEventCreateRequestParams 
+     * @param marketingEventCreateRequestParams
      */
-    public createWithHttpInfo(marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
-        const result = this.api.createWithHttpInfo(marketingEventCreateRequestParams, _options);
+    public createWithHttpInfo(marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(marketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Creates a new marketing event in HubSpot
      * Create a marketing event
-     * @param marketingEventCreateRequestParams 
+     * @param marketingEventCreateRequestParams
      */
-    public create(marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: Configuration): Promise<MarketingEventDefaultResponse> {
-        const result = this.api.create(marketingEventCreateRequestParams, _options);
+    public create(marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<MarketingEventDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(marketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
      * Get all marketing event
-     * @param after The cursor indicating the position of the last retrieved item.
-     * @param limit The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      */
-    public getAllWithHttpInfo(after?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
-        const result = this.api.getAllWithHttpInfo(after, limit, _options);
+    public getAllWithHttpInfo(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(after, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Returns all Marketing Events available on the portal, along with their properties, regardless of whether they were created manually or through the application.  The marketing events returned by this endpoint are sorted by objectId.
      * Get all marketing event
-     * @param after The cursor indicating the position of the last retrieved item.
-     * @param limit The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
      */
-    public getAll(after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
-        const result = this.api.getAll(after, limit, _options);
+    public getAll(after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(after, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -251,8 +444,20 @@ export class PromiseBasicApi {
      * Get Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
      */
-    public getByObjectIdWithHttpInfo(objectId: string, _options?: Configuration): Promise<HttpInfo<MarketingEventPublicReadResponseV2>> {
-        const result = this.api.getByObjectIdWithHttpInfo(objectId, _options);
+    public getByObjectIdWithHttpInfo(objectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicReadResponseV2>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByObjectIdWithHttpInfo(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -261,8 +466,20 @@ export class PromiseBasicApi {
      * Get Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
      */
-    public getByObjectId(objectId: string, _options?: Configuration): Promise<MarketingEventPublicReadResponseV2> {
-        const result = this.api.getByObjectId(objectId, _options);
+    public getByObjectId(objectId: string, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicReadResponseV2> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByObjectId(objectId, observableOptions);
         return result.toPromise();
     }
 
@@ -272,8 +489,20 @@ export class PromiseBasicApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public getDetailsWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<HttpInfo<MarketingEventPublicReadResponse>> {
-        const result = this.api.getDetailsWithHttpInfo(externalEventId, externalAccountId, _options);
+    public getDetailsWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicReadResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDetailsWithHttpInfo(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -283,8 +512,20 @@ export class PromiseBasicApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public getDetails(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<MarketingEventPublicReadResponse> {
-        const result = this.api.getDetails(externalEventId, externalAccountId, _options);
+    public getDetails(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicReadResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDetails(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -293,10 +534,22 @@ export class PromiseBasicApi {
      * Update Marketing Event by External IDs
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param marketingEventUpdateRequestParams 
+     * @param marketingEventUpdateRequestParams
      */
-    public updateWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
-        const result = this.api.updateWithHttpInfo(externalEventId, externalAccountId, marketingEventUpdateRequestParams, _options);
+    public updateWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(externalEventId, externalAccountId, marketingEventUpdateRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -305,10 +558,22 @@ export class PromiseBasicApi {
      * Update Marketing Event by External IDs
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param marketingEventUpdateRequestParams 
+     * @param marketingEventUpdateRequestParams
      */
-    public update(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
-        const result = this.api.update(externalEventId, externalAccountId, marketingEventUpdateRequestParams, _options);
+    public update(externalEventId: string, externalAccountId: string, marketingEventUpdateRequestParams: MarketingEventUpdateRequestParams, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(externalEventId, externalAccountId, marketingEventUpdateRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -316,10 +581,22 @@ export class PromiseBasicApi {
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
-     * @param marketingEventPublicUpdateRequestV2 
+     * @param marketingEventPublicUpdateRequestV2
      */
-    public updateByObjectIdWithHttpInfo(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
-        const result = this.api.updateByObjectIdWithHttpInfo(objectId, marketingEventPublicUpdateRequestV2, _options);
+    public updateByObjectIdWithHttpInfo(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponseV2>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateByObjectIdWithHttpInfo(objectId, marketingEventPublicUpdateRequestV2, observableOptions);
         return result.toPromise();
     }
 
@@ -327,10 +604,22 @@ export class PromiseBasicApi {
      * Updates the details of an existing Marketing Event identified by its objectId, if it exists.
      * Update Marketing Event by objectId
      * @param objectId The internal ID of the marketing event in HubSpot
-     * @param marketingEventPublicUpdateRequestV2 
+     * @param marketingEventPublicUpdateRequestV2
      */
-    public updateByObjectId(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: Configuration): Promise<MarketingEventPublicDefaultResponseV2> {
-        const result = this.api.updateByObjectId(objectId, marketingEventPublicUpdateRequestV2, _options);
+    public updateByObjectId(objectId: string, marketingEventPublicUpdateRequestV2: MarketingEventPublicUpdateRequestV2, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicDefaultResponseV2> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateByObjectId(objectId, marketingEventPublicUpdateRequestV2, observableOptions);
         return result.toPromise();
     }
 
@@ -338,10 +627,22 @@ export class PromiseBasicApi {
      * Upserts a marketing event If there is an existing marketing event with the specified ID, it will be updated; otherwise a new event will be created.
      * Create or update a marketing event
      * @param externalEventId The id of the marketing event in the external event application
-     * @param marketingEventCreateRequestParams 
+     * @param marketingEventCreateRequestParams
      */
-    public upsertWithHttpInfo(externalEventId: string, marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: Configuration): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
-        const result = this.api.upsertWithHttpInfo(externalEventId, marketingEventCreateRequestParams, _options);
+    public upsertWithHttpInfo(externalEventId: string, marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventPublicDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertWithHttpInfo(externalEventId, marketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -349,10 +650,22 @@ export class PromiseBasicApi {
      * Upserts a marketing event If there is an existing marketing event with the specified ID, it will be updated; otherwise a new event will be created.
      * Create or update a marketing event
      * @param externalEventId The id of the marketing event in the external event application
-     * @param marketingEventCreateRequestParams 
+     * @param marketingEventCreateRequestParams
      */
-    public upsert(externalEventId: string, marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: Configuration): Promise<MarketingEventPublicDefaultResponse> {
-        const result = this.api.upsert(externalEventId, marketingEventCreateRequestParams, _options);
+    public upsert(externalEventId: string, marketingEventCreateRequestParams: MarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<MarketingEventPublicDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsert(externalEventId, marketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -378,80 +691,176 @@ export class PromiseBatchApi {
     /**
      * Deletes multiple Marketing Events based on externalAccountId, externalEventId, and appId.  Only Marketing Events created by the same apps will be deleted; events from other apps cannot be removed by this endpoint. 
      * Delete Multiple Marketing Events by External Ids
-     * @param batchInputMarketingEventExternalUniqueIdentifier 
+     * @param batchInputMarketingEventExternalUniqueIdentifier
      */
-    public archiveWithHttpInfo(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(batchInputMarketingEventExternalUniqueIdentifier, _options);
+    public archiveWithHttpInfo(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(batchInputMarketingEventExternalUniqueIdentifier, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Deletes multiple Marketing Events based on externalAccountId, externalEventId, and appId.  Only Marketing Events created by the same apps will be deleted; events from other apps cannot be removed by this endpoint. 
      * Delete Multiple Marketing Events by External Ids
-     * @param batchInputMarketingEventExternalUniqueIdentifier 
+     * @param batchInputMarketingEventExternalUniqueIdentifier
      */
-    public archive(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(batchInputMarketingEventExternalUniqueIdentifier, _options);
+    public archive(batchInputMarketingEventExternalUniqueIdentifier: BatchInputMarketingEventExternalUniqueIdentifier, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(batchInputMarketingEventExternalUniqueIdentifier, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Deletes multiple Marketing Events from the portal based on their objectId, if they exist.  Responses: 204: Returned if all specified Marketing Events were successfully deleted. 207: Returned if some objectIds did not correspond to any existing Marketing Events.
      * Delete Multiple Marketing Events by ObjectId
-     * @param batchInputMarketingEventPublicObjectIdDeleteRequest 
+     * @param batchInputMarketingEventPublicObjectIdDeleteRequest
      */
-    public archiveByObjectIdWithHttpInfo(batchInputMarketingEventPublicObjectIdDeleteRequest: BatchInputMarketingEventPublicObjectIdDeleteRequest, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveByObjectIdWithHttpInfo(batchInputMarketingEventPublicObjectIdDeleteRequest, _options);
+    public archiveByObjectIdWithHttpInfo(batchInputMarketingEventPublicObjectIdDeleteRequest: BatchInputMarketingEventPublicObjectIdDeleteRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByObjectIdWithHttpInfo(batchInputMarketingEventPublicObjectIdDeleteRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Deletes multiple Marketing Events from the portal based on their objectId, if they exist.  Responses: 204: Returned if all specified Marketing Events were successfully deleted. 207: Returned if some objectIds did not correspond to any existing Marketing Events.
      * Delete Multiple Marketing Events by ObjectId
-     * @param batchInputMarketingEventPublicObjectIdDeleteRequest 
+     * @param batchInputMarketingEventPublicObjectIdDeleteRequest
      */
-    public archiveByObjectId(batchInputMarketingEventPublicObjectIdDeleteRequest: BatchInputMarketingEventPublicObjectIdDeleteRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveByObjectId(batchInputMarketingEventPublicObjectIdDeleteRequest, _options);
+    public archiveByObjectId(batchInputMarketingEventPublicObjectIdDeleteRequest: BatchInputMarketingEventPublicObjectIdDeleteRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByObjectId(batchInputMarketingEventPublicObjectIdDeleteRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Updates multiple Marketing Events on the portal based on their objectId, if they exist.
      * Update Multiple Marketing Events by ObjectId
-     * @param batchInputMarketingEventPublicUpdateRequestFullV2 
+     * @param batchInputMarketingEventPublicUpdateRequestFullV2
      */
-    public updateByObjectIdWithHttpInfo(batchInputMarketingEventPublicUpdateRequestFullV2: BatchInputMarketingEventPublicUpdateRequestFullV2, _options?: Configuration): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2>> {
-        const result = this.api.updateByObjectIdWithHttpInfo(batchInputMarketingEventPublicUpdateRequestFullV2, _options);
+    public updateByObjectIdWithHttpInfo(batchInputMarketingEventPublicUpdateRequestFullV2: BatchInputMarketingEventPublicUpdateRequestFullV2, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateByObjectIdWithHttpInfo(batchInputMarketingEventPublicUpdateRequestFullV2, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Updates multiple Marketing Events on the portal based on their objectId, if they exist.
      * Update Multiple Marketing Events by ObjectId
-     * @param batchInputMarketingEventPublicUpdateRequestFullV2 
+     * @param batchInputMarketingEventPublicUpdateRequestFullV2
      */
-    public updateByObjectId(batchInputMarketingEventPublicUpdateRequestFullV2: BatchInputMarketingEventPublicUpdateRequestFullV2, _options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2> {
-        const result = this.api.updateByObjectId(batchInputMarketingEventPublicUpdateRequestFullV2, _options);
+    public updateByObjectId(batchInputMarketingEventPublicUpdateRequestFullV2: BatchInputMarketingEventPublicUpdateRequestFullV2, _options?: PromiseConfigurationOptions): Promise<BatchResponseMarketingEventPublicDefaultResponseV2WithErrors | BatchResponseMarketingEventPublicDefaultResponseV2> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateByObjectId(batchInputMarketingEventPublicUpdateRequestFullV2, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Upserts multiple Marketing Events. If a Marketing Event with the specified ID already exists, it will be updated; otherwise, a new event will be created.  Only Marketing Events originally created by the same app can be updated.
      * Create or Update Multiple Marketing Events
-     * @param batchInputMarketingEventCreateRequestParams 
+     * @param batchInputMarketingEventCreateRequestParams
      */
-    public upsertWithHttpInfo(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: Configuration): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
-        const result = this.api.upsertWithHttpInfo(batchInputMarketingEventCreateRequestParams, _options);
+    public upsertWithHttpInfo(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseMarketingEventPublicDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertWithHttpInfo(batchInputMarketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Upserts multiple Marketing Events. If a Marketing Event with the specified ID already exists, it will be updated; otherwise, a new event will be created.  Only Marketing Events originally created by the same app can be updated.
      * Create or Update Multiple Marketing Events
-     * @param batchInputMarketingEventCreateRequestParams 
+     * @param batchInputMarketingEventCreateRequestParams
      */
-    public upsert(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: Configuration): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
-        const result = this.api.upsert(batchInputMarketingEventCreateRequestParams, _options);
+    public upsert(batchInputMarketingEventCreateRequestParams: BatchInputMarketingEventCreateRequestParams, _options?: PromiseConfigurationOptions): Promise<BatchResponseMarketingEventPublicDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsert(batchInputMarketingEventCreateRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -480,8 +889,20 @@ export class PromiseChangePropertyApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public cancelWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
-        const result = this.api.cancelWithHttpInfo(externalEventId, externalAccountId, _options);
+    public cancelWithHttpInfo(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cancelWithHttpInfo(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -491,8 +912,20 @@ export class PromiseChangePropertyApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      */
-    public cancel(externalEventId: string, externalAccountId: string, _options?: Configuration): Promise<MarketingEventDefaultResponse> {
-        const result = this.api.cancel(externalEventId, externalAccountId, _options);
+    public cancel(externalEventId: string, externalAccountId: string, _options?: PromiseConfigurationOptions): Promise<MarketingEventDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cancel(externalEventId, externalAccountId, observableOptions);
         return result.toPromise();
     }
 
@@ -501,10 +934,22 @@ export class PromiseChangePropertyApi {
      * Mark a marketing event as completed
      * @param externalEventId The id of the marketing event in the external event application.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
-     * @param marketingEventCompleteRequestParams 
+     * @param marketingEventCompleteRequestParams
      */
-    public completeWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventCompleteRequestParams: MarketingEventCompleteRequestParams, _options?: Configuration): Promise<HttpInfo<MarketingEventDefaultResponse>> {
-        const result = this.api.completeWithHttpInfo(externalEventId, externalAccountId, marketingEventCompleteRequestParams, _options);
+    public completeWithHttpInfo(externalEventId: string, externalAccountId: string, marketingEventCompleteRequestParams: MarketingEventCompleteRequestParams, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MarketingEventDefaultResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.completeWithHttpInfo(externalEventId, externalAccountId, marketingEventCompleteRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -513,10 +958,22 @@ export class PromiseChangePropertyApi {
      * Mark a marketing event as completed
      * @param externalEventId The id of the marketing event in the external event application.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
-     * @param marketingEventCompleteRequestParams 
+     * @param marketingEventCompleteRequestParams
      */
-    public complete(externalEventId: string, externalAccountId: string, marketingEventCompleteRequestParams: MarketingEventCompleteRequestParams, _options?: Configuration): Promise<MarketingEventDefaultResponse> {
-        const result = this.api.complete(externalEventId, externalAccountId, marketingEventCompleteRequestParams, _options);
+    public complete(externalEventId: string, externalAccountId: string, marketingEventCompleteRequestParams: MarketingEventCompleteRequestParams, _options?: PromiseConfigurationOptions): Promise<MarketingEventDefaultResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.complete(externalEventId, externalAccountId, marketingEventCompleteRequestParams, observableOptions);
         return result.toPromise();
     }
 
@@ -544,8 +1001,20 @@ export class PromiseIdentifiersApi {
      * Find App-Specific Marketing Events by External Event Id
      * @param q The id of the marketing event in the external event application (externalEventId)
      */
-    public doSearchWithHttpInfo(q: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseSearchPublicResponseWrapperNoPaging>> {
-        const result = this.api.doSearchWithHttpInfo(q, _options);
+    public doSearchWithHttpInfo(q: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSearchPublicResponseWrapperNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doSearchWithHttpInfo(q, observableOptions);
         return result.toPromise();
     }
 
@@ -554,8 +1023,20 @@ export class PromiseIdentifiersApi {
      * Find App-Specific Marketing Events by External Event Id
      * @param q The id of the marketing event in the external event application (externalEventId)
      */
-    public doSearch(q: string, _options?: Configuration): Promise<CollectionResponseSearchPublicResponseWrapperNoPaging> {
-        const result = this.api.doSearch(q, _options);
+    public doSearch(q: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSearchPublicResponseWrapperNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.doSearch(q, observableOptions);
         return result.toPromise();
     }
 
@@ -564,8 +1045,20 @@ export class PromiseIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
-        const result = this.api.searchPortalEventsWithHttpInfo(externalEventId, _options);
+    public searchPortalEventsWithHttpInfo(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.searchPortalEventsWithHttpInfo(externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -574,8 +1067,20 @@ export class PromiseIdentifiersApi {
      * Find Marketing Events by External Event Id
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public searchPortalEvents(externalEventId: string, _options?: Configuration): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
-        const result = this.api.searchPortalEvents(externalEventId, _options);
+    public searchPortalEvents(externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.searchPortalEvents(externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -605,8 +1110,20 @@ export class PromiseListAssociationsApi {
      * @param externalEventId The id of the marketing event in the external event application.
      * @param listId The ILS ID of the list.
      */
-    public associateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.associateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, listId, _options);
+    public associateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.associateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -617,8 +1134,20 @@ export class PromiseListAssociationsApi {
      * @param externalEventId The id of the marketing event in the external event application.
      * @param listId The ILS ID of the list.
      */
-    public associateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.associateByExternalAccountAndEventIds(externalAccountId, externalEventId, listId, _options);
+    public associateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.associateByExternalAccountAndEventIds(externalAccountId, externalEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -628,8 +1157,20 @@ export class PromiseListAssociationsApi {
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
      */
-    public associateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.associateByMarketingEventIdWithHttpInfo(marketingEventId, listId, _options);
+    public associateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.associateByMarketingEventIdWithHttpInfo(marketingEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -639,8 +1180,20 @@ export class PromiseListAssociationsApi {
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
      */
-    public associateByMarketingEventId(marketingEventId: string, listId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.associateByMarketingEventId(marketingEventId, listId, _options);
+    public associateByMarketingEventId(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.associateByMarketingEventId(marketingEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -651,8 +1204,20 @@ export class PromiseListAssociationsApi {
      * @param externalEventId The id of the marketing event in the external event application.
      * @param listId The ILS ID of the list.
      */
-    public disassociateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.disassociateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, listId, _options);
+    public disassociateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.disassociateByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -663,8 +1228,20 @@ export class PromiseListAssociationsApi {
      * @param externalEventId The id of the marketing event in the external event application.
      * @param listId The ILS ID of the list.
      */
-    public disassociateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.disassociateByExternalAccountAndEventIds(externalAccountId, externalEventId, listId, _options);
+    public disassociateByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.disassociateByExternalAccountAndEventIds(externalAccountId, externalEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -674,8 +1251,20 @@ export class PromiseListAssociationsApi {
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
      */
-    public disassociateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.disassociateByMarketingEventIdWithHttpInfo(marketingEventId, listId, _options);
+    public disassociateByMarketingEventIdWithHttpInfo(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.disassociateByMarketingEventIdWithHttpInfo(marketingEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -685,8 +1274,20 @@ export class PromiseListAssociationsApi {
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      * @param listId The ILS ID of the list.
      */
-    public disassociateByMarketingEventId(marketingEventId: string, listId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.disassociateByMarketingEventId(marketingEventId, listId, _options);
+    public disassociateByMarketingEventId(marketingEventId: string, listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.disassociateByMarketingEventId(marketingEventId, listId, observableOptions);
         return result.toPromise();
     }
 
@@ -696,8 +1297,20 @@ export class PromiseListAssociationsApi {
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
-        const result = this.api.getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, _options);
+    public getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllByExternalAccountAndEventIdsWithHttpInfo(externalAccountId, externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -707,8 +1320,20 @@ export class PromiseListAssociationsApi {
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<CollectionResponseWithTotalPublicListNoPaging> {
-        const result = this.api.getAllByExternalAccountAndEventIds(externalAccountId, externalEventId, _options);
+    public getAllByExternalAccountAndEventIds(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllByExternalAccountAndEventIds(externalAccountId, externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -717,8 +1342,20 @@ export class PromiseListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
-        const result = this.api.getAllByMarketingEventIdWithHttpInfo(marketingEventId, _options);
+    public getAllByMarketingEventIdWithHttpInfo(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicListNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllByMarketingEventIdWithHttpInfo(marketingEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -727,8 +1364,20 @@ export class PromiseListAssociationsApi {
      * Get lists associated with a marketing event
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getAllByMarketingEventId(marketingEventId: string, _options?: Configuration): Promise<CollectionResponseWithTotalPublicListNoPaging> {
-        const result = this.api.getAllByMarketingEventId(marketingEventId, _options);
+    public getAllByMarketingEventId(marketingEventId: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalPublicListNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllByMarketingEventId(marketingEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -755,12 +1404,24 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
-        const result = this.api.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByContactIdWithHttpInfo(contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -768,12 +1429,24 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Contact\'s participations by identifier - email or internal id.
      * Read participations breakdown by Contact identifier
      * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByContactId(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        const result = this.api.getParticipationsBreakdownByContactId(contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByContactId(contactIdentifier: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByContactId(contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -782,13 +1455,25 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
-        const result = this.api.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByExternalEventIdWithHttpInfo(externalAccountId, externalEventId, contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -797,13 +1482,25 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations breakdown by Marketing Event external identifier
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        const result = this.api.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByExternalEventId(externalAccountId: string, externalEventId: string, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByExternalEventId(externalAccountId, externalEventId, contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -811,13 +1508,25 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
-        const result = this.api.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalParticipationBreakdownForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByMarketingEventIdWithHttpInfo(marketingEventId, contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -825,13 +1534,25 @@ export class PromiseRetrieveParticipantStateApi {
      * Read Marketing event\'s participations breakdown with optional filters by internal identifier marketingEventId.
      * Read participations breakdown by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
-     * @param contactIdentifier The identifier of the Contact. It may be email or internal id.
-     * @param state The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
-     * @param limit The limit for response size. The default value is 10, the max number is 100
-     * @param after The cursor indicating the position of the last retrieved item.
+     * @param [contactIdentifier] The identifier of the Contact. It may be email or internal id.
+     * @param [state] The participation state value. It may be REGISTERED, CANCELLED, ATTENDED, NO_SHOW
+     * @param [limit] The limit for response size. The default value is 10, the max number is 100
+     * @param [after] The cursor indicating the position of the last retrieved item.
      */
-    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
-        const result = this.api.getParticipationsBreakdownByMarketingEventId(marketingEventId, contactIdentifier, state, limit, after, _options);
+    public getParticipationsBreakdownByMarketingEventId(marketingEventId: number, contactIdentifier?: string, state?: string, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalParticipationBreakdownForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsBreakdownByMarketingEventId(marketingEventId, contactIdentifier, state, limit, after, observableOptions);
         return result.toPromise();
     }
 
@@ -841,8 +1562,20 @@ export class PromiseRetrieveParticipantStateApi {
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getParticipationsCountersByEventExternalIdWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<HttpInfo<AttendanceCounters>> {
-        const result = this.api.getParticipationsCountersByEventExternalIdWithHttpInfo(externalAccountId, externalEventId, _options);
+    public getParticipationsCountersByEventExternalIdWithHttpInfo(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AttendanceCounters>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsCountersByEventExternalIdWithHttpInfo(externalAccountId, externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -852,8 +1585,20 @@ export class PromiseRetrieveParticipantStateApi {
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application.
      * @param externalEventId The id of the marketing event in the external event application.
      */
-    public getParticipationsCountersByEventExternalId(externalAccountId: string, externalEventId: string, _options?: Configuration): Promise<AttendanceCounters> {
-        const result = this.api.getParticipationsCountersByEventExternalId(externalAccountId, externalEventId, _options);
+    public getParticipationsCountersByEventExternalId(externalAccountId: string, externalEventId: string, _options?: PromiseConfigurationOptions): Promise<AttendanceCounters> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsCountersByEventExternalId(externalAccountId, externalEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -862,8 +1607,20 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getParticipationsCountersByMarketingEventIdWithHttpInfo(marketingEventId: number, _options?: Configuration): Promise<HttpInfo<AttendanceCounters>> {
-        const result = this.api.getParticipationsCountersByMarketingEventIdWithHttpInfo(marketingEventId, _options);
+    public getParticipationsCountersByMarketingEventIdWithHttpInfo(marketingEventId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AttendanceCounters>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsCountersByMarketingEventIdWithHttpInfo(marketingEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -872,8 +1629,20 @@ export class PromiseRetrieveParticipantStateApi {
      * Read participations counters by Marketing Event internal identifier
      * @param marketingEventId The internal id of the marketing event in HubSpot.
      */
-    public getParticipationsCountersByMarketingEventId(marketingEventId: number, _options?: Configuration): Promise<AttendanceCounters> {
-        const result = this.api.getParticipationsCountersByMarketingEventId(marketingEventId, _options);
+    public getParticipationsCountersByMarketingEventId(marketingEventId: number, _options?: PromiseConfigurationOptions): Promise<AttendanceCounters> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getParticipationsCountersByMarketingEventId(marketingEventId, observableOptions);
         return result.toPromise();
     }
 
@@ -901,8 +1670,20 @@ export class PromiseSettingsApi {
      * Retrieve the application settings
      * @param appId The id of the application to retrieve the settings for.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
-        const result = this.api.getAllWithHttpInfo(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<EventDetailSettings>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -911,8 +1692,20 @@ export class PromiseSettingsApi {
      * Retrieve the application settings
      * @param appId The id of the application to retrieve the settings for.
      */
-    public getAll(appId: number, _options?: Configuration): Promise<EventDetailSettings> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, _options?: PromiseConfigurationOptions): Promise<EventDetailSettings> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -920,10 +1713,22 @@ export class PromiseSettingsApi {
      * Create or update the current settings for the application.
      * Update the application settings
      * @param appId The id of the application to update the settings for.
-     * @param eventDetailSettingsUrl 
+     * @param eventDetailSettingsUrl
      */
-    public updateWithHttpInfo(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: Configuration): Promise<HttpInfo<EventDetailSettings>> {
-        const result = this.api.updateWithHttpInfo(appId, eventDetailSettingsUrl, _options);
+    public updateWithHttpInfo(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: PromiseConfigurationOptions): Promise<HttpInfo<EventDetailSettings>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(appId, eventDetailSettingsUrl, observableOptions);
         return result.toPromise();
     }
 
@@ -931,10 +1736,22 @@ export class PromiseSettingsApi {
      * Create or update the current settings for the application.
      * Update the application settings
      * @param appId The id of the application to update the settings for.
-     * @param eventDetailSettingsUrl 
+     * @param eventDetailSettingsUrl
      */
-    public update(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: Configuration): Promise<EventDetailSettings> {
-        const result = this.api.update(appId, eventDetailSettingsUrl, _options);
+    public update(appId: number, eventDetailSettingsUrl: EventDetailSettingsUrl, _options?: PromiseConfigurationOptions): Promise<EventDetailSettings> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(appId, eventDetailSettingsUrl, observableOptions);
         return result.toPromise();
     }
 
@@ -963,10 +1780,22 @@ export class PromiseSubscriberStateChangesApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param batchInputMarketingEventEmailSubscriber 
+     * @param batchInputMarketingEventEmailSubscriber
      */
-    public upsertByContactEmailWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.upsertByContactEmailWithHttpInfo(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventEmailSubscriber, _options);
+    public upsertByContactEmailWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertByContactEmailWithHttpInfo(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventEmailSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -976,10 +1805,22 @@ export class PromiseSubscriberStateChangesApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param batchInputMarketingEventEmailSubscriber 
+     * @param batchInputMarketingEventEmailSubscriber
      */
-    public upsertByContactEmail(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<void> {
-        const result = this.api.upsertByContactEmail(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventEmailSubscriber, _options);
+    public upsertByContactEmail(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertByContactEmail(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventEmailSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -989,10 +1830,22 @@ export class PromiseSubscriberStateChangesApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param batchInputMarketingEventSubscriber 
+     * @param batchInputMarketingEventSubscriber
      */
-    public upsertByContactIdWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.upsertByContactIdWithHttpInfo(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventSubscriber, _options);
+    public upsertByContactIdWithHttpInfo(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertByContactIdWithHttpInfo(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventSubscriber, observableOptions);
         return result.toPromise();
     }
 
@@ -1002,10 +1855,22 @@ export class PromiseSubscriberStateChangesApi {
      * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
      * @param externalAccountId The accountId that is associated with this marketing event in the external event application
-     * @param batchInputMarketingEventSubscriber 
+     * @param batchInputMarketingEventSubscriber
      */
-    public upsertByContactId(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<void> {
-        const result = this.api.upsertByContactId(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventSubscriber, _options);
+    public upsertByContactId(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.upsertByContactId(externalEventId, subscriberState, externalAccountId, batchInputMarketingEventSubscriber, observableOptions);
         return result.toPromise();
     }
 
