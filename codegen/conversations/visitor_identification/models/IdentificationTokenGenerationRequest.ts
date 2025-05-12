@@ -1,5 +1,5 @@
 /**
- * Visitor Identification
+ * Conversations Visitor Identification
  * The Visitor Identification API allows you to pass identification information to the HubSpot chat widget for otherwise unknown visitors that were verified by your own authentication system.
  *
  * OpenAPI spec version: v3
@@ -30,6 +30,8 @@ export class IdentificationTokenGenerationRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "firstName",
@@ -57,4 +59,3 @@ export class IdentificationTokenGenerationRequest {
     public constructor() {
     }
 }
-
