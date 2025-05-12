@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { PublicSubscriptionStatus } from '../models/PublicSubscriptionStatus';
 import { PublicSubscriptionStatusesResponse } from '../models/PublicSubscriptionStatusesResponse';
@@ -24,7 +24,7 @@ export class ObjectDefinitionApi {
      * Get subscription definitions
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: DefinitionApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<SubscriptionDefinitionsResponse>> {
+    public getPageWithHttpInfo(param: DefinitionApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<SubscriptionDefinitionsResponse>> {
         return this.api.getPageWithHttpInfo( options).toPromise();
     }
 
@@ -33,7 +33,7 @@ export class ObjectDefinitionApi {
      * Get subscription definitions
      * @param param the request object
      */
-    public getPage(param: DefinitionApiGetPageRequest = {}, options?: Configuration): Promise<SubscriptionDefinitionsResponse> {
+    public getPage(param: DefinitionApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<SubscriptionDefinitionsResponse> {
         return this.api.getPage( options).toPromise();
     }
 
@@ -45,6 +45,7 @@ import { StatusApiRequestFactory, StatusApiResponseProcessor} from "../apis/Stat
 export interface StatusApiGetEmailStatusRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof StatusApigetEmailStatus
      */
@@ -81,7 +82,7 @@ export class ObjectStatusApi {
      * Get subscription statuses for a contact
      * @param param the request object
      */
-    public getEmailStatusWithHttpInfo(param: StatusApiGetEmailStatusRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatusesResponse>> {
+    public getEmailStatusWithHttpInfo(param: StatusApiGetEmailStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatusesResponse>> {
         return this.api.getEmailStatusWithHttpInfo(param.emailAddress,  options).toPromise();
     }
 
@@ -90,7 +91,7 @@ export class ObjectStatusApi {
      * Get subscription statuses for a contact
      * @param param the request object
      */
-    public getEmailStatus(param: StatusApiGetEmailStatusRequest, options?: Configuration): Promise<PublicSubscriptionStatusesResponse> {
+    public getEmailStatus(param: StatusApiGetEmailStatusRequest, options?: ConfigurationOptions): Promise<PublicSubscriptionStatusesResponse> {
         return this.api.getEmailStatus(param.emailAddress,  options).toPromise();
     }
 
@@ -99,7 +100,7 @@ export class ObjectStatusApi {
      * Subscribe a contact
      * @param param the request object
      */
-    public subscribeWithHttpInfo(param: StatusApiSubscribeRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatus>> {
+    public subscribeWithHttpInfo(param: StatusApiSubscribeRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatus>> {
         return this.api.subscribeWithHttpInfo(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
     }
 
@@ -108,7 +109,7 @@ export class ObjectStatusApi {
      * Subscribe a contact
      * @param param the request object
      */
-    public subscribe(param: StatusApiSubscribeRequest, options?: Configuration): Promise<PublicSubscriptionStatus> {
+    public subscribe(param: StatusApiSubscribeRequest, options?: ConfigurationOptions): Promise<PublicSubscriptionStatus> {
         return this.api.subscribe(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
     }
 
@@ -117,7 +118,7 @@ export class ObjectStatusApi {
      * Unsubscribe a contact
      * @param param the request object
      */
-    public unsubscribeWithHttpInfo(param: StatusApiUnsubscribeRequest, options?: Configuration): Promise<HttpInfo<PublicSubscriptionStatus>> {
+    public unsubscribeWithHttpInfo(param: StatusApiUnsubscribeRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicSubscriptionStatus>> {
         return this.api.unsubscribeWithHttpInfo(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
     }
 
@@ -126,7 +127,7 @@ export class ObjectStatusApi {
      * Unsubscribe a contact
      * @param param the request object
      */
-    public unsubscribe(param: StatusApiUnsubscribeRequest, options?: Configuration): Promise<PublicSubscriptionStatus> {
+    public unsubscribe(param: StatusApiUnsubscribeRequest, options?: ConfigurationOptions): Promise<PublicSubscriptionStatus> {
         return this.api.unsubscribe(param.publicUpdateSubscriptionStatusRequest,  options).toPromise();
     }
 
