@@ -46,6 +46,8 @@ export class PublicEmailTestingDetails {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "abSamplingDefault",
@@ -97,7 +99,6 @@ export class PublicEmailTestingDetails {
     public constructor() {
     }
 }
-
 
 export enum PublicEmailTestingDetailsAbSamplingDefaultEnum {
     Master = 'master',

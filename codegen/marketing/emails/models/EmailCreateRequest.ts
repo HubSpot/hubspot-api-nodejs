@@ -75,6 +75,8 @@ export class EmailCreateRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "feedbackSurveyId",
@@ -204,7 +206,6 @@ export class EmailCreateRequest {
     public constructor() {
     }
 }
-
 
 export enum EmailCreateRequestLanguageEnum {
     Af = 'af',
@@ -374,6 +375,7 @@ export enum EmailCreateRequestLanguageEnum {
     EnDm = 'en-dm',
     EnEe = 'en-ee',
     EnEr = 'en-er',
+    EnEs = 'en-es',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
@@ -441,6 +443,7 @@ export enum EmailCreateRequestLanguageEnum {
     EnSz = 'en-sz',
     EnTc = 'en-tc',
     EnTk = 'en-tk',
+    EnTn = 'en-tn',
     EnTo = 'en-to',
     EnTt = 'en-tt',
     EnTv = 'en-tv',
@@ -593,6 +596,7 @@ export enum EmailCreateRequestLanguageEnum {
     HaNe = 'ha-ne',
     HaNg = 'ha-ng',
     He = 'he',
+    HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
     Hr = 'hr',
@@ -619,7 +623,6 @@ export enum EmailCreateRequestLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
-    HeIl = 'he-il',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',
@@ -1093,9 +1096,17 @@ export enum EmailCreateRequestSubcategoryEnum {
     KbListing = 'kb_listing',
     KbSearchResults = 'kb_search_results',
     KbSupportForm = 'kb_support_form',
+    Kb404Page = 'kb_404_page',
     CaseStudy = 'case_study',
     CaseStudyListing = 'case_study_listing',
     CaseStudyInstanceLayout = 'case_study_instance_layout',
+    ScpStaticPage = 'scp_static_page',
+    ScpInstanceLayoutPage = 'scp_instance_layout_page',
+    PodcastInstanceLayout = 'podcast_instance_layout',
+    PodcastListing = 'podcast_listing',
+    BlogArticleInstanceLayout = 'blog_article_instance_layout',
+    BlogArticleListing = 'blog_article_listing',
+    BlogAuthorDetail = 'blog_author_detail',
     Unknown = 'UNKNOWN'
 }
 

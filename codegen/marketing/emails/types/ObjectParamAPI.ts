@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
 import { AggregateEmailStatistics } from '../models/AggregateEmailStatistics';
@@ -18,12 +18,14 @@ import { MarketingEmailsApiRequestFactory, MarketingEmailsApiResponseProcessor} 
 export interface MarketingEmailsApiArchiveRequest {
     /**
      * The ID of the marketing email to delete.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApiarchive
      */
     emailId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApiarchive
      */
@@ -60,6 +62,7 @@ export interface MarketingEmailsApiCreateAbTestVariationRequest {
 export interface MarketingEmailsApiGetAbTestVariationRequest {
     /**
      * The ID of an A/B marketing email.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetAbTestVariation
      */
@@ -69,36 +72,42 @@ export interface MarketingEmailsApiGetAbTestVariationRequest {
 export interface MarketingEmailsApiGetByIdRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetById
      */
     emailId: string
     /**
      * Include statistics with email
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetById
      */
     includeStats?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetById
      */
     marketingCampaignNames?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetById
      */
     workflowNames?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof MarketingEmailsApigetById
      */
     includedProperties?: Array<string>
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetById
      */
@@ -108,6 +117,7 @@ export interface MarketingEmailsApiGetByIdRequest {
 export interface MarketingEmailsApiGetDraftRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetDraft
      */
@@ -117,96 +127,119 @@ export interface MarketingEmailsApiGetDraftRequest {
 export interface MarketingEmailsApiGetPageRequest {
     /**
      * Only return emails created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     createdAt?: Date
     /**
      * Only return emails created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     createdAfter?: Date
     /**
      * Only return emails created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     createdBefore?: Date
     /**
      * Only return emails last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     updatedAt?: Date
     /**
      * Only return emails last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return emails last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof MarketingEmailsApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof MarketingEmailsApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof MarketingEmailsApigetPage
      */
     limit?: number
     /**
      * Include statistics with emails.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetPage
      */
     includeStats?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetPage
      */
     marketingCampaignNames?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetPage
      */
     workflowNames?: boolean
     /**
      * Email types to be filtered by. Multiple types can be included. All emails will be returned if not present.
+     * Defaults to: undefined
      * @type &#39;AB_EMAIL&#39; | &#39;BATCH_EMAIL&#39; | &#39;LOCALTIME_EMAIL&#39; | &#39;AUTOMATED_AB_EMAIL&#39; | &#39;BLOG_EMAIL&#39; | &#39;BLOG_EMAIL_CHILD&#39; | &#39;RSS_EMAIL&#39; | &#39;RSS_EMAIL_CHILD&#39; | &#39;RESUBSCRIBE_EMAIL&#39; | &#39;OPTIN_EMAIL&#39; | &#39;OPTIN_FOLLOWUP_EMAIL&#39; | &#39;AUTOMATED_EMAIL&#39; | &#39;FEEDBACK_CES_EMAIL&#39; | &#39;FEEDBACK_CUSTOM_EMAIL&#39; | &#39;FEEDBACK_CUSTOM_SURVEY_EMAIL&#39; | &#39;FEEDBACK_NPS_EMAIL&#39; | &#39;FOLLOWUP_EMAIL&#39; | &#39;LEADFLOW_EMAIL&#39; | &#39;SINGLE_SEND_API&#39; | &#39;MARKETING_SINGLE_SEND_API&#39; | &#39;SMTP_TOKEN&#39; | &#39;TICKET_EMAIL&#39; | &#39;MEMBERSHIP_REGISTRATION_EMAIL&#39; | &#39;MEMBERSHIP_PASSWORD_SAVED_EMAIL&#39; | &#39;MEMBERSHIP_PASSWORD_RESET_EMAIL&#39; | &#39;MEMBERSHIP_EMAIL_VERIFICATION_EMAIL&#39; | &#39;MEMBERSHIP_PASSWORDLESS_AUTH_EMAIL&#39; | &#39;MEMBERSHIP_REGISTRATION_FOLLOW_UP_EMAIL&#39; | &#39;MEMBERSHIP_OTP_LOGIN_EMAIL&#39; | &#39;MEMBERSHIP_FOLLOW_UP_EMAIL&#39; | &#39;MEMBERSHIP_VERIFICATION_EMAIL&#39;
      * @memberof MarketingEmailsApigetPage
      */
     type?: 'AB_EMAIL' | 'BATCH_EMAIL' | 'LOCALTIME_EMAIL' | 'AUTOMATED_AB_EMAIL' | 'BLOG_EMAIL' | 'BLOG_EMAIL_CHILD' | 'RSS_EMAIL' | 'RSS_EMAIL_CHILD' | 'RESUBSCRIBE_EMAIL' | 'OPTIN_EMAIL' | 'OPTIN_FOLLOWUP_EMAIL' | 'AUTOMATED_EMAIL' | 'FEEDBACK_CES_EMAIL' | 'FEEDBACK_CUSTOM_EMAIL' | 'FEEDBACK_CUSTOM_SURVEY_EMAIL' | 'FEEDBACK_NPS_EMAIL' | 'FOLLOWUP_EMAIL' | 'LEADFLOW_EMAIL' | 'SINGLE_SEND_API' | 'MARKETING_SINGLE_SEND_API' | 'SMTP_TOKEN' | 'TICKET_EMAIL' | 'MEMBERSHIP_REGISTRATION_EMAIL' | 'MEMBERSHIP_PASSWORD_SAVED_EMAIL' | 'MEMBERSHIP_PASSWORD_RESET_EMAIL' | 'MEMBERSHIP_EMAIL_VERIFICATION_EMAIL' | 'MEMBERSHIP_PASSWORDLESS_AUTH_EMAIL' | 'MEMBERSHIP_REGISTRATION_FOLLOW_UP_EMAIL' | 'MEMBERSHIP_OTP_LOGIN_EMAIL' | 'MEMBERSHIP_FOLLOW_UP_EMAIL' | 'MEMBERSHIP_VERIFICATION_EMAIL'
     /**
      * Filter by published/draft emails. All emails will be returned if not present.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetPage
      */
     isPublished?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof MarketingEmailsApigetPage
      */
     includedProperties?: Array<string>
     /**
+     * Filter by campaign GUID. All emails will be returned if not present.
+     * Defaults to: undefined
+     * @type string
+     * @memberof MarketingEmailsApigetPage
+     */
+    campaign?: string
+    /**
      * Specifies whether to return archived emails. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApigetPage
      */
@@ -216,12 +249,14 @@ export interface MarketingEmailsApiGetPageRequest {
 export interface MarketingEmailsApiGetRevisionByIdRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetRevisionById
      */
     emailId: string
     /**
      * The ID of a revision.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetRevisionById
      */
@@ -231,24 +266,28 @@ export interface MarketingEmailsApiGetRevisionByIdRequest {
 export interface MarketingEmailsApiGetRevisionsRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetRevisions
      */
     emailId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetRevisions
      */
     after?: string
     /**
      * The cursor token value to get the previous set of results. You can get this from the &#x60;paging.prev.before&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApigetRevisions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof MarketingEmailsApigetRevisions
      */
@@ -258,6 +297,7 @@ export interface MarketingEmailsApiGetRevisionsRequest {
 export interface MarketingEmailsApiPublishOrSendRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApipublishOrSend
      */
@@ -267,6 +307,7 @@ export interface MarketingEmailsApiPublishOrSendRequest {
 export interface MarketingEmailsApiResetDraftRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApiresetDraft
      */
@@ -276,12 +317,14 @@ export interface MarketingEmailsApiResetDraftRequest {
 export interface MarketingEmailsApiRestoreDraftRevisionRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApirestoreDraftRevision
      */
     emailId: string
     /**
      * The ID of a revision.
+     * Defaults to: undefined
      * @type number
      * @memberof MarketingEmailsApirestoreDraftRevision
      */
@@ -291,12 +334,14 @@ export interface MarketingEmailsApiRestoreDraftRevisionRequest {
 export interface MarketingEmailsApiRestoreRevisionRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApirestoreRevision
      */
     emailId: string
     /**
      * The ID of a revision.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApirestoreRevision
      */
@@ -306,6 +351,7 @@ export interface MarketingEmailsApiRestoreRevisionRequest {
 export interface MarketingEmailsApiUnpublishOrCancelRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApiunpublishOrCancel
      */
@@ -315,6 +361,7 @@ export interface MarketingEmailsApiUnpublishOrCancelRequest {
 export interface MarketingEmailsApiUpdateRequest {
     /**
      * The ID of the marketing email that should get updated
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApiupdate
      */
@@ -327,6 +374,7 @@ export interface MarketingEmailsApiUpdateRequest {
     emailUpdateRequest: EmailUpdateRequest
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof MarketingEmailsApiupdate
      */
@@ -336,6 +384,7 @@ export interface MarketingEmailsApiUpdateRequest {
 export interface MarketingEmailsApiUpsertDraftRequest {
     /**
      * The marketing email ID.
+     * Defaults to: undefined
      * @type string
      * @memberof MarketingEmailsApiupsertDraft
      */
@@ -359,7 +408,7 @@ export class ObjectMarketingEmailsApi {
      * Delete a marketing email.
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: MarketingEmailsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: MarketingEmailsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.emailId, param.archived,  options).toPromise();
     }
 
@@ -367,7 +416,7 @@ export class ObjectMarketingEmailsApi {
      * Delete a marketing email.
      * @param param the request object
      */
-    public archive(param: MarketingEmailsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: MarketingEmailsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.emailId, param.archived,  options).toPromise();
     }
 
@@ -376,7 +425,7 @@ export class ObjectMarketingEmailsApi {
      * Clone a marketing email.
      * @param param the request object
      */
-    public cloneWithHttpInfo(param: MarketingEmailsApiCloneRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public cloneWithHttpInfo(param: MarketingEmailsApiCloneRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -385,7 +434,7 @@ export class ObjectMarketingEmailsApi {
      * Clone a marketing email.
      * @param param the request object
      */
-    public clone(param: MarketingEmailsApiCloneRequest, options?: Configuration): Promise<PublicEmail> {
+    public clone(param: MarketingEmailsApiCloneRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.clone(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -394,7 +443,7 @@ export class ObjectMarketingEmailsApi {
      * Create a new marketing email.
      * @param param the request object
      */
-    public createWithHttpInfo(param: MarketingEmailsApiCreateRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public createWithHttpInfo(param: MarketingEmailsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.createWithHttpInfo(param.emailCreateRequest,  options).toPromise();
     }
 
@@ -403,7 +452,7 @@ export class ObjectMarketingEmailsApi {
      * Create a new marketing email.
      * @param param the request object
      */
-    public create(param: MarketingEmailsApiCreateRequest, options?: Configuration): Promise<PublicEmail> {
+    public create(param: MarketingEmailsApiCreateRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.create(param.emailCreateRequest,  options).toPromise();
     }
 
@@ -412,7 +461,7 @@ export class ObjectMarketingEmailsApi {
      * Create an A/B test variation of a marketing email.
      * @param param the request object
      */
-    public createAbTestVariationWithHttpInfo(param: MarketingEmailsApiCreateAbTestVariationRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public createAbTestVariationWithHttpInfo(param: MarketingEmailsApiCreateAbTestVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.createAbTestVariationWithHttpInfo(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -421,7 +470,7 @@ export class ObjectMarketingEmailsApi {
      * Create an A/B test variation of a marketing email.
      * @param param the request object
      */
-    public createAbTestVariation(param: MarketingEmailsApiCreateAbTestVariationRequest, options?: Configuration): Promise<PublicEmail> {
+    public createAbTestVariation(param: MarketingEmailsApiCreateAbTestVariationRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.createAbTestVariation(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -430,7 +479,7 @@ export class ObjectMarketingEmailsApi {
      * Get the variation of a an A/B marketing email
      * @param param the request object
      */
-    public getAbTestVariationWithHttpInfo(param: MarketingEmailsApiGetAbTestVariationRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public getAbTestVariationWithHttpInfo(param: MarketingEmailsApiGetAbTestVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.getAbTestVariationWithHttpInfo(param.emailId,  options).toPromise();
     }
 
@@ -439,7 +488,7 @@ export class ObjectMarketingEmailsApi {
      * Get the variation of a an A/B marketing email
      * @param param the request object
      */
-    public getAbTestVariation(param: MarketingEmailsApiGetAbTestVariationRequest, options?: Configuration): Promise<PublicEmail> {
+    public getAbTestVariation(param: MarketingEmailsApiGetAbTestVariationRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.getAbTestVariation(param.emailId,  options).toPromise();
     }
 
@@ -448,7 +497,7 @@ export class ObjectMarketingEmailsApi {
      * Get the details of a specified marketing email.
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: MarketingEmailsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public getByIdWithHttpInfo(param: MarketingEmailsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.getByIdWithHttpInfo(param.emailId, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.includedProperties, param.archived,  options).toPromise();
     }
 
@@ -457,7 +506,7 @@ export class ObjectMarketingEmailsApi {
      * Get the details of a specified marketing email.
      * @param param the request object
      */
-    public getById(param: MarketingEmailsApiGetByIdRequest, options?: Configuration): Promise<PublicEmail> {
+    public getById(param: MarketingEmailsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.getById(param.emailId, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.includedProperties, param.archived,  options).toPromise();
     }
 
@@ -466,7 +515,7 @@ export class ObjectMarketingEmailsApi {
      * Get draft version of a marketing email
      * @param param the request object
      */
-    public getDraftWithHttpInfo(param: MarketingEmailsApiGetDraftRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public getDraftWithHttpInfo(param: MarketingEmailsApiGetDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.getDraftWithHttpInfo(param.emailId,  options).toPromise();
     }
 
@@ -475,7 +524,7 @@ export class ObjectMarketingEmailsApi {
      * Get draft version of a marketing email
      * @param param the request object
      */
-    public getDraft(param: MarketingEmailsApiGetDraftRequest, options?: Configuration): Promise<PublicEmail> {
+    public getDraft(param: MarketingEmailsApiGetDraftRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.getDraft(param.emailId,  options).toPromise();
     }
 
@@ -484,8 +533,8 @@ export class ObjectMarketingEmailsApi {
      * Get all marketing emails for a HubSpot account.
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: MarketingEmailsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPublicEmailForwardPaging>> {
-        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.type, param.isPublished, param.includedProperties, param.archived,  options).toPromise();
+    public getPageWithHttpInfo(param: MarketingEmailsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPublicEmailForwardPaging>> {
+        return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.type, param.isPublished, param.includedProperties, param.campaign, param.archived,  options).toPromise();
     }
 
     /**
@@ -493,8 +542,8 @@ export class ObjectMarketingEmailsApi {
      * Get all marketing emails for a HubSpot account.
      * @param param the request object
      */
-    public getPage(param: MarketingEmailsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalPublicEmailForwardPaging> {
-        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.type, param.isPublished, param.includedProperties, param.archived,  options).toPromise();
+    public getPage(param: MarketingEmailsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalPublicEmailForwardPaging> {
+        return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.includeStats, param.marketingCampaignNames, param.workflowNames, param.type, param.isPublished, param.includedProperties, param.campaign, param.archived,  options).toPromise();
     }
 
     /**
@@ -502,7 +551,7 @@ export class ObjectMarketingEmailsApi {
      * Get a revision of a marketing email.
      * @param param the request object
      */
-    public getRevisionByIdWithHttpInfo(param: MarketingEmailsApiGetRevisionByIdRequest, options?: Configuration): Promise<HttpInfo<VersionPublicEmail>> {
+    public getRevisionByIdWithHttpInfo(param: MarketingEmailsApiGetRevisionByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionPublicEmail>> {
         return this.api.getRevisionByIdWithHttpInfo(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -511,7 +560,7 @@ export class ObjectMarketingEmailsApi {
      * Get a revision of a marketing email.
      * @param param the request object
      */
-    public getRevisionById(param: MarketingEmailsApiGetRevisionByIdRequest, options?: Configuration): Promise<VersionPublicEmail> {
+    public getRevisionById(param: MarketingEmailsApiGetRevisionByIdRequest, options?: ConfigurationOptions): Promise<VersionPublicEmail> {
         return this.api.getRevisionById(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -520,7 +569,7 @@ export class ObjectMarketingEmailsApi {
      * Get revisions of a marketing email
      * @param param the request object
      */
-    public getRevisionsWithHttpInfo(param: MarketingEmailsApiGetRevisionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPublicEmail>> {
+    public getRevisionsWithHttpInfo(param: MarketingEmailsApiGetRevisionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionPublicEmail>> {
         return this.api.getRevisionsWithHttpInfo(param.emailId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -529,7 +578,7 @@ export class ObjectMarketingEmailsApi {
      * Get revisions of a marketing email
      * @param param the request object
      */
-    public getRevisions(param: MarketingEmailsApiGetRevisionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionPublicEmail> {
+    public getRevisions(param: MarketingEmailsApiGetRevisionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionPublicEmail> {
         return this.api.getRevisions(param.emailId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -538,7 +587,7 @@ export class ObjectMarketingEmailsApi {
      * Publish or send a marketing email.
      * @param param the request object
      */
-    public publishOrSendWithHttpInfo(param: MarketingEmailsApiPublishOrSendRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public publishOrSendWithHttpInfo(param: MarketingEmailsApiPublishOrSendRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.publishOrSendWithHttpInfo(param.emailId,  options).toPromise();
     }
 
@@ -547,7 +596,7 @@ export class ObjectMarketingEmailsApi {
      * Publish or send a marketing email.
      * @param param the request object
      */
-    public publishOrSend(param: MarketingEmailsApiPublishOrSendRequest, options?: Configuration): Promise<void> {
+    public publishOrSend(param: MarketingEmailsApiPublishOrSendRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.publishOrSend(param.emailId,  options).toPromise();
     }
 
@@ -556,7 +605,7 @@ export class ObjectMarketingEmailsApi {
      * Reset Draft
      * @param param the request object
      */
-    public resetDraftWithHttpInfo(param: MarketingEmailsApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public resetDraftWithHttpInfo(param: MarketingEmailsApiResetDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.resetDraftWithHttpInfo(param.emailId,  options).toPromise();
     }
 
@@ -565,7 +614,7 @@ export class ObjectMarketingEmailsApi {
      * Reset Draft
      * @param param the request object
      */
-    public resetDraft(param: MarketingEmailsApiResetDraftRequest, options?: Configuration): Promise<void> {
+    public resetDraft(param: MarketingEmailsApiResetDraftRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetDraft(param.emailId,  options).toPromise();
     }
 
@@ -574,7 +623,7 @@ export class ObjectMarketingEmailsApi {
      * Restore a revision of a marketing email to DRAFT state
      * @param param the request object
      */
-    public restoreDraftRevisionWithHttpInfo(param: MarketingEmailsApiRestoreDraftRevisionRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public restoreDraftRevisionWithHttpInfo(param: MarketingEmailsApiRestoreDraftRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.restoreDraftRevisionWithHttpInfo(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -583,7 +632,7 @@ export class ObjectMarketingEmailsApi {
      * Restore a revision of a marketing email to DRAFT state
      * @param param the request object
      */
-    public restoreDraftRevision(param: MarketingEmailsApiRestoreDraftRevisionRequest, options?: Configuration): Promise<PublicEmail> {
+    public restoreDraftRevision(param: MarketingEmailsApiRestoreDraftRevisionRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.restoreDraftRevision(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -592,7 +641,7 @@ export class ObjectMarketingEmailsApi {
      * Restore a revision of a marketing email
      * @param param the request object
      */
-    public restoreRevisionWithHttpInfo(param: MarketingEmailsApiRestoreRevisionRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public restoreRevisionWithHttpInfo(param: MarketingEmailsApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.restoreRevisionWithHttpInfo(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -601,7 +650,7 @@ export class ObjectMarketingEmailsApi {
      * Restore a revision of a marketing email
      * @param param the request object
      */
-    public restoreRevision(param: MarketingEmailsApiRestoreRevisionRequest, options?: Configuration): Promise<void> {
+    public restoreRevision(param: MarketingEmailsApiRestoreRevisionRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.restoreRevision(param.emailId, param.revisionId,  options).toPromise();
     }
 
@@ -610,7 +659,7 @@ export class ObjectMarketingEmailsApi {
      * Unpublish or cancel a marketing email.
      * @param param the request object
      */
-    public unpublishOrCancelWithHttpInfo(param: MarketingEmailsApiUnpublishOrCancelRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public unpublishOrCancelWithHttpInfo(param: MarketingEmailsApiUnpublishOrCancelRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.unpublishOrCancelWithHttpInfo(param.emailId,  options).toPromise();
     }
 
@@ -619,7 +668,7 @@ export class ObjectMarketingEmailsApi {
      * Unpublish or cancel a marketing email.
      * @param param the request object
      */
-    public unpublishOrCancel(param: MarketingEmailsApiUnpublishOrCancelRequest, options?: Configuration): Promise<void> {
+    public unpublishOrCancel(param: MarketingEmailsApiUnpublishOrCancelRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.unpublishOrCancel(param.emailId,  options).toPromise();
     }
 
@@ -628,7 +677,7 @@ export class ObjectMarketingEmailsApi {
      * Update a marketing email.
      * @param param the request object
      */
-    public updateWithHttpInfo(param: MarketingEmailsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public updateWithHttpInfo(param: MarketingEmailsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.updateWithHttpInfo(param.emailId, param.emailUpdateRequest, param.archived,  options).toPromise();
     }
 
@@ -637,7 +686,7 @@ export class ObjectMarketingEmailsApi {
      * Update a marketing email.
      * @param param the request object
      */
-    public update(param: MarketingEmailsApiUpdateRequest, options?: Configuration): Promise<PublicEmail> {
+    public update(param: MarketingEmailsApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.update(param.emailId, param.emailUpdateRequest, param.archived,  options).toPromise();
     }
 
@@ -646,7 +695,7 @@ export class ObjectMarketingEmailsApi {
      * Create or update draft version
      * @param param the request object
      */
-    public upsertDraftWithHttpInfo(param: MarketingEmailsApiUpsertDraftRequest, options?: Configuration): Promise<HttpInfo<PublicEmail>> {
+    public upsertDraftWithHttpInfo(param: MarketingEmailsApiUpsertDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicEmail>> {
         return this.api.upsertDraftWithHttpInfo(param.emailId, param.emailUpdateRequest,  options).toPromise();
     }
 
@@ -655,7 +704,7 @@ export class ObjectMarketingEmailsApi {
      * Create or update draft version
      * @param param the request object
      */
-    public upsertDraft(param: MarketingEmailsApiUpsertDraftRequest, options?: Configuration): Promise<PublicEmail> {
+    public upsertDraft(param: MarketingEmailsApiUpsertDraftRequest, options?: ConfigurationOptions): Promise<PublicEmail> {
         return this.api.upsertDraft(param.emailId, param.emailUpdateRequest,  options).toPromise();
     }
 
@@ -667,24 +716,28 @@ import { StatisticsApiRequestFactory, StatisticsApiResponseProcessor} from "../a
 export interface StatisticsApiGetEmailsListRequest {
     /**
      * The start timestamp of the time span, in ISO8601 representation.
+     * Defaults to: undefined
      * @type string
      * @memberof StatisticsApigetEmailsList
      */
     startTimestamp?: string
     /**
      * The end timestamp of the time span, in ISO8601 representation.
+     * Defaults to: undefined
      * @type string
      * @memberof StatisticsApigetEmailsList
      */
     endTimestamp?: string
     /**
      * Filter by email IDs. Only include statistics of emails with these IDs.
+     * Defaults to: undefined
      * @type Array&lt;number&gt;
      * @memberof StatisticsApigetEmailsList
      */
     emailIds?: Array<number>
     /**
      * Specifies which email properties should be returned. All properties will be returned by default.
+     * Defaults to: undefined
      * @type string
      * @memberof StatisticsApigetEmailsList
      */
@@ -694,24 +747,28 @@ export interface StatisticsApiGetEmailsListRequest {
 export interface StatisticsApiGetHistogramRequest {
     /**
      * The interval to aggregate statistics for.
+     * Defaults to: undefined
      * @type &#39;YEAR&#39; | &#39;QUARTER&#39; | &#39;MONTH&#39; | &#39;WEEK&#39; | &#39;DAY&#39; | &#39;HOUR&#39; | &#39;QUARTER_HOUR&#39; | &#39;MINUTE&#39; | &#39;SECOND&#39;
      * @memberof StatisticsApigetHistogram
      */
     interval?: 'YEAR' | 'QUARTER' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | 'QUARTER_HOUR' | 'MINUTE' | 'SECOND'
     /**
      * The start timestamp of the time span, in ISO8601 representation.
+     * Defaults to: undefined
      * @type string
      * @memberof StatisticsApigetHistogram
      */
     startTimestamp?: string
     /**
      * The end timestamp of the time span, in ISO8601 representation.
+     * Defaults to: undefined
      * @type string
      * @memberof StatisticsApigetHistogram
      */
     endTimestamp?: string
     /**
      * Filter by email IDs. Only include statistics of emails with these IDs.
+     * Defaults to: undefined
      * @type Array&lt;number&gt;
      * @memberof StatisticsApigetHistogram
      */
@@ -730,7 +787,7 @@ export class ObjectStatisticsApi {
      * Get aggregated statistics.
      * @param param the request object
      */
-    public getEmailsListWithHttpInfo(param: StatisticsApiGetEmailsListRequest = {}, options?: Configuration): Promise<HttpInfo<AggregateEmailStatistics>> {
+    public getEmailsListWithHttpInfo(param: StatisticsApiGetEmailsListRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<AggregateEmailStatistics>> {
         return this.api.getEmailsListWithHttpInfo(param.startTimestamp, param.endTimestamp, param.emailIds, param.property,  options).toPromise();
     }
 
@@ -739,7 +796,7 @@ export class ObjectStatisticsApi {
      * Get aggregated statistics.
      * @param param the request object
      */
-    public getEmailsList(param: StatisticsApiGetEmailsListRequest = {}, options?: Configuration): Promise<AggregateEmailStatistics> {
+    public getEmailsList(param: StatisticsApiGetEmailsListRequest = {}, options?: ConfigurationOptions): Promise<AggregateEmailStatistics> {
         return this.api.getEmailsList(param.startTimestamp, param.endTimestamp, param.emailIds, param.property,  options).toPromise();
     }
 
@@ -748,7 +805,7 @@ export class ObjectStatisticsApi {
      * Get aggregated statistic intervals.
      * @param param the request object
      */
-    public getHistogramWithHttpInfo(param: StatisticsApiGetHistogramRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalEmailStatisticIntervalNoPaging>> {
+    public getHistogramWithHttpInfo(param: StatisticsApiGetHistogramRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalEmailStatisticIntervalNoPaging>> {
         return this.api.getHistogramWithHttpInfo(param.interval, param.startTimestamp, param.endTimestamp, param.emailIds,  options).toPromise();
     }
 
@@ -757,7 +814,7 @@ export class ObjectStatisticsApi {
      * Get aggregated statistic intervals.
      * @param param the request object
      */
-    public getHistogram(param: StatisticsApiGetHistogramRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalEmailStatisticIntervalNoPaging> {
+    public getHistogram(param: StatisticsApiGetHistogramRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalEmailStatisticIntervalNoPaging> {
         return this.api.getHistogram(param.interval, param.startTimestamp, param.endTimestamp, param.emailIds,  options).toPromise();
     }
 
