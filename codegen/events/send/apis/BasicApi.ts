@@ -13,11 +13,11 @@ import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventH
 /**
  * no description
  */
-export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
+export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Endpoint to send an instance of a custom event.
-     * Send custom event completion
+     * Send data for a single event completion.
+     * Send a custom event completion
      * @param behavioralEventHttpCompletionRequest 
      */
     public async send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
@@ -25,7 +25,7 @@ export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'behavioralEventHttpCompletionRequest' is not null or undefined
         if (behavioralEventHttpCompletionRequest === null || behavioralEventHttpCompletionRequest === undefined) {
-            throw new RequiredError("CustomEventDataApi", "send", "behavioralEventHttpCompletionRequest");
+            throw new RequiredError("BasicApi", "send", "behavioralEventHttpCompletionRequest");
         }
 
 
@@ -55,7 +55,7 @@ export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -65,7 +65,7 @@ export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class CustomEventDataApiResponseProcessor {
+export class BasicApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
