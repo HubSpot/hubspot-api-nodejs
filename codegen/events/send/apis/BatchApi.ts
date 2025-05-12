@@ -8,29 +8,29 @@ import { isCodeInRange} from '../util';
 import {SecurityAuthentication} from '../auth/auth';
 
 
-import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
+import { BatchedBehavioralEventHttpCompletionRequest } from '../models/BatchedBehavioralEventHttpCompletionRequest';
 
 /**
  * no description
  */
-export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
+export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Endpoint to send an instance of a custom event.
-     * Send custom event completion
-     * @param behavioralEventHttpCompletionRequest 
+     * Send multiple event completions at once.
+     * Send a batch of event completions
+     * @param batchedBehavioralEventHttpCompletionRequest 
      */
-    public async send(behavioralEventHttpCompletionRequest: BehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async send(batchedBehavioralEventHttpCompletionRequest: BatchedBehavioralEventHttpCompletionRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'behavioralEventHttpCompletionRequest' is not null or undefined
-        if (behavioralEventHttpCompletionRequest === null || behavioralEventHttpCompletionRequest === undefined) {
-            throw new RequiredError("CustomEventDataApi", "send", "behavioralEventHttpCompletionRequest");
+        // verify required parameter 'batchedBehavioralEventHttpCompletionRequest' is not null or undefined
+        if (batchedBehavioralEventHttpCompletionRequest === null || batchedBehavioralEventHttpCompletionRequest === undefined) {
+            throw new RequiredError("BatchApi", "send", "batchedBehavioralEventHttpCompletionRequest");
         }
 
 
         // Path Params
-        const localVarPath = '/events/v3/send';
+        const localVarPath = '/events/v3/send/batch';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -43,7 +43,7 @@ export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(behavioralEventHttpCompletionRequest, "BehavioralEventHttpCompletionRequest", ""),
+            ObjectSerializer.serialize(batchedBehavioralEventHttpCompletionRequest, "BatchedBehavioralEventHttpCompletionRequest", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -65,7 +65,7 @@ export class CustomEventDataApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class CustomEventDataApiResponseProcessor {
+export class BatchApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

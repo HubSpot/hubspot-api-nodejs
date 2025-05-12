@@ -1,7 +1,9 @@
+export * from '../models/BatchedBehavioralEventHttpCompletionRequest';
 export * from '../models/BehavioralEventHttpCompletionRequest';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
 
+import { BatchedBehavioralEventHttpCompletionRequest } from '../models/BatchedBehavioralEventHttpCompletionRequest';
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
@@ -22,6 +24,7 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "BatchedBehavioralEventHttpCompletionRequest": BatchedBehavioralEventHttpCompletionRequest,
     "BehavioralEventHttpCompletionRequest": BehavioralEventHttpCompletionRequest,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
