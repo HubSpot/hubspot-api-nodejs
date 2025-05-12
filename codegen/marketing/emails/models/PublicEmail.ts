@@ -75,6 +75,7 @@ export class PublicEmail {
     * The date and time of the last update to the email, in ISO8601 representation.
     */
     'updatedAt'?: Date;
+    'clonedFrom'?: string;
     'rssData'?: PublicRssEmailDetails;
     /**
     * The date and time the email was published at, in ISO8601 representation.
@@ -117,6 +118,8 @@ export class PublicEmail {
     'sendOnPublish': boolean;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -234,6 +237,12 @@ export class PublicEmail {
             "format": "date-time"
         },
         {
+            "name": "clonedFrom",
+            "baseName": "clonedFrom",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "rssData",
             "baseName": "rssData",
             "type": "PublicRssEmailDetails",
@@ -337,7 +346,6 @@ export class PublicEmail {
     public constructor() {
     }
 }
-
 
 export enum PublicEmailLanguageEnum {
     Af = 'af',
@@ -507,6 +515,7 @@ export enum PublicEmailLanguageEnum {
     EnDm = 'en-dm',
     EnEe = 'en-ee',
     EnEr = 'en-er',
+    EnEs = 'en-es',
     EnFi = 'en-fi',
     EnFj = 'en-fj',
     EnFk = 'en-fk',
@@ -574,6 +583,7 @@ export enum PublicEmailLanguageEnum {
     EnSz = 'en-sz',
     EnTc = 'en-tc',
     EnTk = 'en-tk',
+    EnTn = 'en-tn',
     EnTo = 'en-to',
     EnTt = 'en-tt',
     EnTv = 'en-tv',
@@ -726,6 +736,7 @@ export enum PublicEmailLanguageEnum {
     HaNe = 'ha-ne',
     HaNg = 'ha-ng',
     He = 'he',
+    HeIl = 'he-il',
     Hi = 'hi',
     HiIn = 'hi-in',
     Hr = 'hr',
@@ -752,7 +763,6 @@ export enum PublicEmailLanguageEnum {
     ItIt = 'it-it',
     ItSm = 'it-sm',
     ItVa = 'it-va',
-    HeIl = 'he-il',
     Ja = 'ja',
     JaJp = 'ja-jp',
     Jgo = 'jgo',

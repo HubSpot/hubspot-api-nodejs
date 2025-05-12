@@ -10,26 +10,34 @@
  * Do not edit the class manually.
  */
 
-import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
+import { PublicList } from '../models/PublicList';
 
-export class CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging {
-    'results': Array<MarketingEventExternalUniqueIdentifier>;
+export class CollectionResponseWithTotalPublicListNoPaging {
+    'total': number;
+    'results': Array<PublicList>;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<MarketingEventExternalUniqueIdentifier>",
+            "type": "Array<PublicList>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging.attributeTypeMap;
+        return CollectionResponseWithTotalPublicListNoPaging.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
-

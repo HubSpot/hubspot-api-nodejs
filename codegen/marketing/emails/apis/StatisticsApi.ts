@@ -50,7 +50,10 @@ export class StatisticsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (emailIds !== undefined) {
-            requestContext.setQueryParam("emailIds", ObjectSerializer.serialize(emailIds, "Array<number>", "int64"));
+            const serializedParams = ObjectSerializer.serialize(emailIds, "Array<number>", "int64");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("emailIds", serializedParam);
+            }
         }
 
         // Query Params
@@ -66,7 +69,7 @@ export class StatisticsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -113,7 +116,10 @@ export class StatisticsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (emailIds !== undefined) {
-            requestContext.setQueryParam("emailIds", ObjectSerializer.serialize(emailIds, "Array<number>", "int64"));
+            const serializedParams = ObjectSerializer.serialize(emailIds, "Array<number>", "int64");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("emailIds", serializedParam);
+            }
         }
 
 
@@ -124,7 +130,7 @@ export class StatisticsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

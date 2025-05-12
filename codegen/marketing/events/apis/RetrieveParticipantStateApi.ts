@@ -14,7 +14,7 @@ import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '
 /**
  * no description
  */
-export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
+export class RetrieveParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Read Contact\'s participations by identifier - email or internal id.
@@ -29,7 +29,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'contactIdentifier' is not null or undefined
         if (contactIdentifier === null || contactIdentifier === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByContactId", "contactIdentifier");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsBreakdownByContactId", "contactIdentifier");
         }
 
 
@@ -67,7 +67,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -90,13 +90,13 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'externalAccountId' is not null or undefined
         if (externalAccountId === null || externalAccountId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalAccountId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalAccountId");
         }
 
 
         // verify required parameter 'externalEventId' is not null or undefined
         if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalEventId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsBreakdownByExternalEventId", "externalEventId");
         }
 
 
@@ -141,7 +141,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -163,7 +163,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'marketingEventId' is not null or undefined
         if (marketingEventId === null || marketingEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsBreakdownByMarketingEventId", "marketingEventId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsBreakdownByMarketingEventId", "marketingEventId");
         }
 
 
@@ -207,7 +207,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -226,13 +226,13 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'externalAccountId' is not null or undefined
         if (externalAccountId === null || externalAccountId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalAccountId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalAccountId");
         }
 
 
         // verify required parameter 'externalEventId' is not null or undefined
         if (externalEventId === null || externalEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalEventId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsCountersByEventExternalId", "externalEventId");
         }
 
 
@@ -253,7 +253,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -271,7 +271,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
         // verify required parameter 'marketingEventId' is not null or undefined
         if (marketingEventId === null || marketingEventId === undefined) {
-            throw new RequiredError("ParticipantStateApi", "getParticipationsCountersByMarketingEventId", "marketingEventId");
+            throw new RequiredError("RetrieveParticipantStateApi", "getParticipationsCountersByMarketingEventId", "marketingEventId");
         }
 
 
@@ -291,7 +291,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -301,7 +301,7 @@ export class ParticipantStateApiRequestFactory extends BaseAPIRequestFactory {
 
 }
 
-export class ParticipantStateApiResponseProcessor {
+export class RetrieveParticipantStateApiResponseProcessor {
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content

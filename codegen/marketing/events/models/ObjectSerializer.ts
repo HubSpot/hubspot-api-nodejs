@@ -1,14 +1,23 @@
+export * from '../models/AppInfo';
 export * from '../models/AttendanceCounters';
 export * from '../models/BatchInputMarketingEventCreateRequestParams';
 export * from '../models/BatchInputMarketingEventEmailSubscriber';
 export * from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
+export * from '../models/BatchInputMarketingEventPublicObjectIdDeleteRequest';
+export * from '../models/BatchInputMarketingEventPublicUpdateRequestFullV2';
 export * from '../models/BatchInputMarketingEventSubscriber';
 export * from '../models/BatchResponseMarketingEventPublicDefaultResponse';
+export * from '../models/BatchResponseMarketingEventPublicDefaultResponseV2';
+export * from '../models/BatchResponseMarketingEventPublicDefaultResponseV2WithErrors';
 export * from '../models/BatchResponseSubscriberEmailResponse';
 export * from '../models/BatchResponseSubscriberVidResponse';
-export * from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+export * from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
+export * from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
+export * from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
 export * from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
+export * from '../models/CollectionResponseWithTotalPublicListNoPaging';
 export * from '../models/ContactAssociation';
+export * from '../models/CrmPropertyWrapper';
 export * from '../models/ErrorDetail';
 export * from '../models/EventDetailSettings';
 export * from '../models/EventDetailSettingsUrl';
@@ -19,8 +28,14 @@ export * from '../models/MarketingEventCreateRequestParams';
 export * from '../models/MarketingEventDefaultResponse';
 export * from '../models/MarketingEventEmailSubscriber';
 export * from '../models/MarketingEventExternalUniqueIdentifier';
+export * from '../models/MarketingEventIdentifiersResponse';
 export * from '../models/MarketingEventPublicDefaultResponse';
+export * from '../models/MarketingEventPublicDefaultResponseV2';
+export * from '../models/MarketingEventPublicObjectIdDeleteRequest';
 export * from '../models/MarketingEventPublicReadResponse';
+export * from '../models/MarketingEventPublicReadResponseV2';
+export * from '../models/MarketingEventPublicUpdateRequestFullV2';
+export * from '../models/MarketingEventPublicUpdateRequestV2';
 export * from '../models/MarketingEventSubscriber';
 export * from '../models/MarketingEventUpdateRequestParams';
 export * from '../models/ModelError';
@@ -29,21 +44,32 @@ export * from '../models/ParticipationAssociations';
 export * from '../models/ParticipationBreakdown';
 export * from '../models/ParticipationProperties';
 export * from '../models/PropertyValue';
+export * from '../models/PublicList';
+export * from '../models/SearchPublicResponseWrapper';
 export * from '../models/StandardError';
 export * from '../models/SubscriberEmailResponse';
 export * from '../models/SubscriberVidResponse';
 
+import { AppInfo } from '../models/AppInfo';
 import { AttendanceCounters } from '../models/AttendanceCounters';
 import { BatchInputMarketingEventCreateRequestParams } from '../models/BatchInputMarketingEventCreateRequestParams';
 import { BatchInputMarketingEventEmailSubscriber } from '../models/BatchInputMarketingEventEmailSubscriber';
 import { BatchInputMarketingEventExternalUniqueIdentifier } from '../models/BatchInputMarketingEventExternalUniqueIdentifier';
+import { BatchInputMarketingEventPublicObjectIdDeleteRequest } from '../models/BatchInputMarketingEventPublicObjectIdDeleteRequest';
+import { BatchInputMarketingEventPublicUpdateRequestFullV2 } from '../models/BatchInputMarketingEventPublicUpdateRequestFullV2';
 import { BatchInputMarketingEventSubscriber } from '../models/BatchInputMarketingEventSubscriber';
 import { BatchResponseMarketingEventPublicDefaultResponse          } from '../models/BatchResponseMarketingEventPublicDefaultResponse';
+import { BatchResponseMarketingEventPublicDefaultResponseV2        } from '../models/BatchResponseMarketingEventPublicDefaultResponseV2';
+import { BatchResponseMarketingEventPublicDefaultResponseV2WithErrors          } from '../models/BatchResponseMarketingEventPublicDefaultResponseV2WithErrors';
 import { BatchResponseSubscriberEmailResponse          } from '../models/BatchResponseSubscriberEmailResponse';
 import { BatchResponseSubscriberVidResponse          } from '../models/BatchResponseSubscriberVidResponse';
-import { CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging } from '../models/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging';
+import { CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging } from '../models/CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging';
+import { CollectionResponseSearchPublicResponseWrapperNoPaging } from '../models/CollectionResponseSearchPublicResponseWrapperNoPaging';
+import { CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging } from '../models/CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging';
 import { CollectionResponseWithTotalParticipationBreakdownForwardPaging } from '../models/CollectionResponseWithTotalParticipationBreakdownForwardPaging';
+import { CollectionResponseWithTotalPublicListNoPaging } from '../models/CollectionResponseWithTotalPublicListNoPaging';
 import { ContactAssociation } from '../models/ContactAssociation';
+import { CrmPropertyWrapper } from '../models/CrmPropertyWrapper';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { EventDetailSettings } from '../models/EventDetailSettings';
 import { EventDetailSettingsUrl } from '../models/EventDetailSettingsUrl';
@@ -54,8 +80,14 @@ import { MarketingEventCreateRequestParams } from '../models/MarketingEventCreat
 import { MarketingEventDefaultResponse } from '../models/MarketingEventDefaultResponse';
 import { MarketingEventEmailSubscriber } from '../models/MarketingEventEmailSubscriber';
 import { MarketingEventExternalUniqueIdentifier } from '../models/MarketingEventExternalUniqueIdentifier';
+import { MarketingEventIdentifiersResponse } from '../models/MarketingEventIdentifiersResponse';
 import { MarketingEventPublicDefaultResponse } from '../models/MarketingEventPublicDefaultResponse';
+import { MarketingEventPublicDefaultResponseV2 } from '../models/MarketingEventPublicDefaultResponseV2';
+import { MarketingEventPublicObjectIdDeleteRequest } from '../models/MarketingEventPublicObjectIdDeleteRequest';
 import { MarketingEventPublicReadResponse } from '../models/MarketingEventPublicReadResponse';
+import { MarketingEventPublicReadResponseV2 } from '../models/MarketingEventPublicReadResponseV2';
+import { MarketingEventPublicUpdateRequestFullV2 } from '../models/MarketingEventPublicUpdateRequestFullV2';
+import { MarketingEventPublicUpdateRequestV2 } from '../models/MarketingEventPublicUpdateRequestV2';
 import { MarketingEventSubscriber } from '../models/MarketingEventSubscriber';
 import { MarketingEventUpdateRequestParams } from '../models/MarketingEventUpdateRequestParams';
 import { ModelError } from '../models/ModelError';
@@ -64,6 +96,8 @@ import { ParticipationAssociations } from '../models/ParticipationAssociations';
 import { ParticipationBreakdown } from '../models/ParticipationBreakdown';
 import { ParticipationProperties      } from '../models/ParticipationProperties';
 import { PropertyValue                } from '../models/PropertyValue';
+import { PublicList } from '../models/PublicList';
+import { SearchPublicResponseWrapper } from '../models/SearchPublicResponseWrapper';
 import { StandardError } from '../models/StandardError';
 import { SubscriberEmailResponse } from '../models/SubscriberEmailResponse';
 import { SubscriberVidResponse } from '../models/SubscriberVidResponse';
@@ -82,6 +116,8 @@ let primitives = [
 
 let enumsMap: Set<string> = new Set<string>([
     "BatchResponseMarketingEventPublicDefaultResponseStatusEnum",
+    "BatchResponseMarketingEventPublicDefaultResponseV2StatusEnum",
+    "BatchResponseMarketingEventPublicDefaultResponseV2WithErrorsStatusEnum",
     "BatchResponseSubscriberEmailResponseStatusEnum",
     "BatchResponseSubscriberVidResponseStatusEnum",
     "ParticipationPropertiesAttendanceStateEnum",
@@ -90,17 +126,26 @@ let enumsMap: Set<string> = new Set<string>([
 ]);
 
 let typeMap: {[index: string]: any} = {
+    "AppInfo": AppInfo,
     "AttendanceCounters": AttendanceCounters,
     "BatchInputMarketingEventCreateRequestParams": BatchInputMarketingEventCreateRequestParams,
     "BatchInputMarketingEventEmailSubscriber": BatchInputMarketingEventEmailSubscriber,
     "BatchInputMarketingEventExternalUniqueIdentifier": BatchInputMarketingEventExternalUniqueIdentifier,
+    "BatchInputMarketingEventPublicObjectIdDeleteRequest": BatchInputMarketingEventPublicObjectIdDeleteRequest,
+    "BatchInputMarketingEventPublicUpdateRequestFullV2": BatchInputMarketingEventPublicUpdateRequestFullV2,
     "BatchInputMarketingEventSubscriber": BatchInputMarketingEventSubscriber,
     "BatchResponseMarketingEventPublicDefaultResponse": BatchResponseMarketingEventPublicDefaultResponse,
+    "BatchResponseMarketingEventPublicDefaultResponseV2": BatchResponseMarketingEventPublicDefaultResponseV2,
+    "BatchResponseMarketingEventPublicDefaultResponseV2WithErrors": BatchResponseMarketingEventPublicDefaultResponseV2WithErrors,
     "BatchResponseSubscriberEmailResponse": BatchResponseSubscriberEmailResponse,
     "BatchResponseSubscriberVidResponse": BatchResponseSubscriberVidResponse,
-    "CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging": CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging,
+    "CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging": CollectionResponseMarketingEventPublicReadResponseV2ForwardPaging,
+    "CollectionResponseSearchPublicResponseWrapperNoPaging": CollectionResponseSearchPublicResponseWrapperNoPaging,
+    "CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging": CollectionResponseWithTotalMarketingEventIdentifiersResponseNoPaging,
     "CollectionResponseWithTotalParticipationBreakdownForwardPaging": CollectionResponseWithTotalParticipationBreakdownForwardPaging,
+    "CollectionResponseWithTotalPublicListNoPaging": CollectionResponseWithTotalPublicListNoPaging,
     "ContactAssociation": ContactAssociation,
+    "CrmPropertyWrapper": CrmPropertyWrapper,
     "ErrorDetail": ErrorDetail,
     "EventDetailSettings": EventDetailSettings,
     "EventDetailSettingsUrl": EventDetailSettingsUrl,
@@ -111,8 +156,14 @@ let typeMap: {[index: string]: any} = {
     "MarketingEventDefaultResponse": MarketingEventDefaultResponse,
     "MarketingEventEmailSubscriber": MarketingEventEmailSubscriber,
     "MarketingEventExternalUniqueIdentifier": MarketingEventExternalUniqueIdentifier,
+    "MarketingEventIdentifiersResponse": MarketingEventIdentifiersResponse,
     "MarketingEventPublicDefaultResponse": MarketingEventPublicDefaultResponse,
+    "MarketingEventPublicDefaultResponseV2": MarketingEventPublicDefaultResponseV2,
+    "MarketingEventPublicObjectIdDeleteRequest": MarketingEventPublicObjectIdDeleteRequest,
     "MarketingEventPublicReadResponse": MarketingEventPublicReadResponse,
+    "MarketingEventPublicReadResponseV2": MarketingEventPublicReadResponseV2,
+    "MarketingEventPublicUpdateRequestFullV2": MarketingEventPublicUpdateRequestFullV2,
+    "MarketingEventPublicUpdateRequestV2": MarketingEventPublicUpdateRequestV2,
     "MarketingEventSubscriber": MarketingEventSubscriber,
     "MarketingEventUpdateRequestParams": MarketingEventUpdateRequestParams,
     "ModelError": ModelError,
@@ -121,6 +172,8 @@ let typeMap: {[index: string]: any} = {
     "ParticipationBreakdown": ParticipationBreakdown,
     "ParticipationProperties": ParticipationProperties,
     "PropertyValue": PropertyValue,
+    "PublicList": PublicList,
+    "SearchPublicResponseWrapper": SearchPublicResponseWrapper,
     "StandardError": StandardError,
     "SubscriberEmailResponse": SubscriberEmailResponse,
     "SubscriberVidResponse": SubscriberVidResponse,
@@ -142,7 +195,7 @@ type MimeTypeDescriptor = {
  * the payload.
  */
 const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
-    const [type, subtype] = mimeType.split('/');
+    const [type = '', subtype = ''] = mimeType.split('/');
     return {
         type,
         subtype,
@@ -178,6 +231,13 @@ const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
     isFormUrlencodedMimeType,
 ];
 
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
+
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
@@ -202,8 +262,11 @@ export class ObjectSerializer {
             } else {
                 if (data[discriminatorProperty]) {
                     var discriminatorType = data[discriminatorProperty];
-                    if(typeMap[discriminatorType]){
-                        return discriminatorType; // use the type given in the discriminator
+                    let mapping = typeMap[expectedType].mapping;
+                    if (mapping != undefined && mapping[discriminatorType]) {
+                        return mapping[discriminatorType]; // use the type given in the discriminator
+                    } else if(typeMap[discriminatorType]) {
+                        return discriminatorType;
                     } else {
                         return expectedType; // discriminator did not map to a type
                     }
@@ -214,17 +277,33 @@ export class ObjectSerializer {
         }
     }
 
-    public static serialize(data: any, type: string, format: string) {
+    public static serialize(data: any, type: string, format: string): any {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -259,19 +338,35 @@ export class ObjectSerializer {
         }
     }
 
-    public static deserialize(data: any, type: string, format: string) {
+    public static deserialize(data: any, type: string, format: string): any {
         // polymorphism may change the actual type.
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -307,7 +402,7 @@ export class ObjectSerializer {
         if (mediaType === undefined) {
             return undefined;
         }
-        return mediaType.split(";")[0].trim().toLowerCase();
+        return (mediaType.split(";")[0] ?? '').trim().toLowerCase();
     }
 
     /**
@@ -322,7 +417,7 @@ export class ObjectSerializer {
             return "application/json";
         }
 
-        const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
+        const normalMediaTypes = mediaTypes.map(ObjectSerializer.normalizeMediaType);
 
         for (const predicate of supportedMimeTypePredicatesWithPriority) {
             for (const mediaType of normalMediaTypes) {

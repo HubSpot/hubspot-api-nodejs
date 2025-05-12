@@ -48,6 +48,8 @@ export class PublicEmailContent {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "smartFields",
@@ -105,4 +107,3 @@ export class PublicEmailContent {
     public constructor() {
     }
 }
-

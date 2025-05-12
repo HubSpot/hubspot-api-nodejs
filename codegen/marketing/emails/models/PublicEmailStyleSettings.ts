@@ -48,6 +48,8 @@ export class PublicEmailStyleSettings {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "emailBodyPadding",
@@ -143,7 +145,7 @@ export class PublicEmailStyleSettings {
             "name": "bodyBorderWidth",
             "baseName": "bodyBorderWidth",
             "type": "number",
-            "format": "int32"
+            "format": ""
         },
         {
             "name": "linksFont",
@@ -185,13 +187,13 @@ export class PublicEmailStyleSettings {
             "name": "primaryFontSize",
             "baseName": "primaryFontSize",
             "type": "number",
-            "format": "int32"
+            "format": ""
         },
         {
             "name": "secondaryFontSize",
             "baseName": "secondaryFontSize",
             "type": "number",
-            "format": "int32"
+            "format": ""
         },
         {
             "name": "primaryFontColor",
@@ -237,4 +239,3 @@ export class PublicEmailStyleSettings {
     public constructor() {
     }
 }
-

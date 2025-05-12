@@ -34,6 +34,7 @@ export class PublicWebversionDetails {
     */
     'metaDescription'?: string;
     'pageExpiryEnabled'?: boolean;
+    'enabled'?: boolean;
     /**
     * 
     */
@@ -45,6 +46,8 @@ export class PublicWebversionDetails {
     'expiresAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -90,6 +93,12 @@ export class PublicWebversionDetails {
             "format": ""
         },
         {
+            "name": "enabled",
+            "baseName": "enabled",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "slug",
             "baseName": "slug",
             "type": "string",
@@ -115,4 +124,3 @@ export class PublicWebversionDetails {
     public constructor() {
     }
 }
-

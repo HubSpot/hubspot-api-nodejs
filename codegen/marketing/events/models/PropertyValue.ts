@@ -66,6 +66,8 @@ export class PropertyValue {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "sourceId",
@@ -184,7 +186,6 @@ export class PropertyValue {
     }
 }
 
-
 export enum PropertyValueSourceEnum {
     Unknown = 'UNKNOWN',
     Import = 'IMPORT',
@@ -276,7 +277,8 @@ export enum PropertyValueSourceEnum {
     AutomationJourney = 'AUTOMATION_JOURNEY',
     Microapps = 'MICROAPPS',
     Intent = 'INTENT',
-    ProspectingAgent = 'PROSPECTING_AGENT'
+    ProspectingAgent = 'PROSPECTING_AGENT',
+    CentralExchangeRates = 'CENTRAL_EXCHANGE_RATES'
 }
 export enum PropertyValueDataSensitivityEnum {
     None = 'none',
