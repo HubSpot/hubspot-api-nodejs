@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -40,6 +40,7 @@ export class ImportFromUrlInput {
     * If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file\'s name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
     */
     'overwrite'?: boolean;
+    'expiresAt'?: Date;
     /**
     * URL to download the new file from.
     */
@@ -50,6 +51,8 @@ export class ImportFromUrlInput {
     'folderId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -95,6 +98,12 @@ export class ImportFromUrlInput {
             "format": ""
         },
         {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
+        },
+        {
             "name": "url",
             "baseName": "url",
             "type": "string",
@@ -115,14 +124,15 @@ export class ImportFromUrlInput {
     }
 }
 
-
 export enum ImportFromUrlInputAccessEnum {
     PublicIndexable = 'PUBLIC_INDEXABLE',
     PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE'
+    Private = 'PRIVATE',
+    HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Sensitive = 'SENSITIVE'
 }
 export enum ImportFromUrlInputDuplicateValidationScopeEnum {
     EntirePortal = 'ENTIRE_PORTAL',

@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -27,6 +27,8 @@ export class ModelFile {
     * ID of the folder the file is in.
     */
     'parentFolderId'?: string;
+    'sourceGroup'?: string;
+    'fileMd5'?: string;
     /**
     * Encoding of the file.
     */
@@ -53,13 +55,13 @@ export class ModelFile {
     */
     'archivedAt'?: Date;
     /**
-    * If the file is deleted.
-    */
-    'archived': boolean;
-    /**
     * Path of the file in the file manager.
     */
     'path'?: string;
+    /**
+    * If the file is deleted.
+    */
+    'archived': boolean;
     /**
     * Size of the file in bytes.
     */
@@ -91,6 +93,8 @@ export class ModelFile {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "extension",
@@ -107,6 +111,18 @@ export class ModelFile {
         {
             "name": "parentFolderId",
             "baseName": "parentFolderId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sourceGroup",
+            "baseName": "sourceGroup",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fileMd5",
+            "baseName": "fileMd5",
             "type": "string",
             "format": ""
         },
@@ -153,15 +169,15 @@ export class ModelFile {
             "format": "date-time"
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "path",
             "baseName": "path",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -215,13 +231,14 @@ export class ModelFile {
     }
 }
 
-
 export enum ModelFileAccessEnum {
     PublicIndexable = 'PUBLIC_INDEXABLE',
     PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE'
+    Private = 'PRIVATE',
+    HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Sensitive = 'SENSITIVE'
 }
 

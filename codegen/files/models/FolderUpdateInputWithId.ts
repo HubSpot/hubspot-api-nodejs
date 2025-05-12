@@ -10,12 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { NextPage } from '../models/NextPage';
-import { PreviousPage } from '../models/PreviousPage';
 
-export class Paging {
-    'next'?: NextPage;
-    'prev'?: PreviousPage;
+export class FolderUpdateInputWithId {
+    'parentFolderId'?: number;
+    'name'?: string;
+    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,20 +22,26 @@ export class Paging {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "next",
-            "baseName": "next",
-            "type": "NextPage",
+            "name": "parentFolderId",
+            "baseName": "parentFolderId",
+            "type": "number",
+            "format": "int64"
+        },
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "prev",
-            "baseName": "prev",
-            "type": "PreviousPage",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return Paging.attributeTypeMap;
+        return FolderUpdateInputWithId.attributeTypeMap;
     }
 
     public constructor() {
