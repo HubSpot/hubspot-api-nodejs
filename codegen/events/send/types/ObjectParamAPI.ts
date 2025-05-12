@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchedBehavioralEventHttpCompletionRequest } from '../models/BatchedBehavioralEventHttpCompletionRequest';
 import { BehavioralEventHttpCompletionRequest } from '../models/BehavioralEventHttpCompletionRequest';
@@ -28,7 +28,7 @@ export class ObjectBasicApi {
      * Send a custom event completion
      * @param param the request object
      */
-    public sendWithHttpInfo(param: BasicApiSendRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public sendWithHttpInfo(param: BasicApiSendRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.sendWithHttpInfo(param.behavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
@@ -37,7 +37,7 @@ export class ObjectBasicApi {
      * Send a custom event completion
      * @param param the request object
      */
-    public send(param: BasicApiSendRequest, options?: Configuration): Promise<void> {
+    public send(param: BasicApiSendRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.send(param.behavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
@@ -67,7 +67,7 @@ export class ObjectBatchApi {
      * Send a batch of event completions
      * @param param the request object
      */
-    public sendWithHttpInfo(param: BatchApiSendRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public sendWithHttpInfo(param: BatchApiSendRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.sendWithHttpInfo(param.batchedBehavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
@@ -76,7 +76,7 @@ export class ObjectBatchApi {
      * Send a batch of event completions
      * @param param the request object
      */
-    public send(param: BatchApiSendRequest, options?: Configuration): Promise<void> {
+    public send(param: BatchApiSendRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.send(param.batchedBehavioralEventHttpCompletionRequest,  options).toPromise();
     }
 
