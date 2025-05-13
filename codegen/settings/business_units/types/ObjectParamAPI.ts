@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CollectionResponsePublicBusinessUnitNoPaging } from '../models/CollectionResponsePublicBusinessUnitNoPaging';
 
@@ -9,18 +9,21 @@ import { BusinessUnitApiRequestFactory, BusinessUnitApiResponseProcessor} from "
 export interface BusinessUnitApiGetByUserIDRequest {
     /**
      * Identifier of user to retrieve.
+     * Defaults to: undefined
      * @type string
      * @memberof BusinessUnitApigetByUserID
      */
     userId: string
     /**
      * The names of properties to optionally include in the response body. The only valid value is &#x60;logoMetadata&#x60;.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof BusinessUnitApigetByUserID
      */
     properties?: Array<string>
     /**
      * The names of Business Units to retrieve. If empty or not provided, then all associated Business Units will be returned.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof BusinessUnitApigetByUserID
      */
@@ -39,7 +42,7 @@ export class ObjectBusinessUnitApi {
      * Get Business Units for a user
      * @param param the request object
      */
-    public getByUserIDWithHttpInfo(param: BusinessUnitApiGetByUserIDRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
+    public getByUserIDWithHttpInfo(param: BusinessUnitApiGetByUserIDRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicBusinessUnitNoPaging>> {
         return this.api.getByUserIDWithHttpInfo(param.userId, param.properties, param.name,  options).toPromise();
     }
 
@@ -48,7 +51,7 @@ export class ObjectBusinessUnitApi {
      * Get Business Units for a user
      * @param param the request object
      */
-    public getByUserID(param: BusinessUnitApiGetByUserIDRequest, options?: Configuration): Promise<CollectionResponsePublicBusinessUnitNoPaging> {
+    public getByUserID(param: BusinessUnitApiGetByUserIDRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicBusinessUnitNoPaging> {
         return this.api.getByUserID(param.userId, param.properties, param.name,  options).toPromise();
     }
 

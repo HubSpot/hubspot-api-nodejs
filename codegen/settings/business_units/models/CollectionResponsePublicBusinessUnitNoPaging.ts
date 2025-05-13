@@ -23,6 +23,8 @@ export class CollectionResponsePublicBusinessUnitNoPaging {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
@@ -38,4 +40,3 @@ export class CollectionResponsePublicBusinessUnitNoPaging {
     public constructor() {
     }
 }
-
