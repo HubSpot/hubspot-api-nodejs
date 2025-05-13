@@ -64,6 +64,8 @@ export class DropdownField {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "objectTypeId",
@@ -139,7 +141,6 @@ export class DropdownField {
     public constructor() {
     }
 }
-
 
 export enum DropdownFieldFieldTypeEnum {
     Dropdown = 'dropdown'

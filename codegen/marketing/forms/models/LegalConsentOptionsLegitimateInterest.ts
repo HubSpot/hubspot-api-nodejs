@@ -31,6 +31,8 @@ export class LegalConsentOptionsLegitimateInterest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "subscriptionTypeIds",
@@ -64,7 +66,6 @@ export class LegalConsentOptionsLegitimateInterest {
     public constructor() {
     }
 }
-
 
 export enum LegalConsentOptionsLegitimateInterestLawfulBasisEnum {
     Lead = 'lead',
