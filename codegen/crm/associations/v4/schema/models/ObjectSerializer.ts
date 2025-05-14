@@ -1,16 +1,44 @@
 export * from '../models/AssociationSpecWithLabel';
+export * from '../models/BatchInputPublicAssociationDefinitionConfigurationCreateRequest';
+export * from '../models/BatchInputPublicAssociationDefinitionConfigurationUpdateRequest';
+export * from '../models/BatchInputPublicAssociationSpec';
+export * from '../models/BatchResponsePublicAssociationDefinitionConfigurationUpdateResult';
+export * from '../models/BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors';
+export * from '../models/BatchResponsePublicAssociationDefinitionUserConfiguration';
+export * from '../models/BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors';
 export * from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+export * from '../models/CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging';
 export * from '../models/ErrorDetail';
 export * from '../models/ModelError';
+export * from '../models/PublicAssociationDefinitionConfigurationCreateRequest';
+export * from '../models/PublicAssociationDefinitionConfigurationUpdateRequest';
+export * from '../models/PublicAssociationDefinitionConfigurationUpdateResult';
 export * from '../models/PublicAssociationDefinitionCreateRequest';
 export * from '../models/PublicAssociationDefinitionUpdateRequest';
+export * from '../models/PublicAssociationDefinitionUserConfiguration';
+export * from '../models/PublicAssociationSpec';
+export * from '../models/StandardError';
 
 import { AssociationSpecWithLabel     } from '../models/AssociationSpecWithLabel';
+import { BatchInputPublicAssociationDefinitionConfigurationCreateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationCreateRequest';
+import { BatchInputPublicAssociationDefinitionConfigurationUpdateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationUpdateRequest';
+import { BatchInputPublicAssociationSpec } from '../models/BatchInputPublicAssociationSpec';
+import { BatchResponsePublicAssociationDefinitionConfigurationUpdateResult        } from '../models/BatchResponsePublicAssociationDefinitionConfigurationUpdateResult';
+import { BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors          } from '../models/BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors';
+import { BatchResponsePublicAssociationDefinitionUserConfiguration        } from '../models/BatchResponsePublicAssociationDefinitionUserConfiguration';
+import { BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors          } from '../models/BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors';
 import { CollectionResponseAssociationSpecWithLabelNoPaging } from '../models/CollectionResponseAssociationSpecWithLabelNoPaging';
+import { CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { ModelError } from '../models/ModelError';
+import { PublicAssociationDefinitionConfigurationCreateRequest     } from '../models/PublicAssociationDefinitionConfigurationCreateRequest';
+import { PublicAssociationDefinitionConfigurationUpdateRequest     } from '../models/PublicAssociationDefinitionConfigurationUpdateRequest';
+import { PublicAssociationDefinitionConfigurationUpdateResult     } from '../models/PublicAssociationDefinitionConfigurationUpdateResult';
 import { PublicAssociationDefinitionCreateRequest } from '../models/PublicAssociationDefinitionCreateRequest';
 import { PublicAssociationDefinitionUpdateRequest } from '../models/PublicAssociationDefinitionUpdateRequest';
+import { PublicAssociationDefinitionUserConfiguration      } from '../models/PublicAssociationDefinitionUserConfiguration';
+import { PublicAssociationSpec } from '../models/PublicAssociationSpec';
+import { StandardError } from '../models/StandardError';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -26,15 +54,37 @@ let primitives = [
 
 let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecWithLabelCategoryEnum",
+    "BatchResponsePublicAssociationDefinitionConfigurationUpdateResultStatusEnum",
+    "BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrorsStatusEnum",
+    "BatchResponsePublicAssociationDefinitionUserConfigurationStatusEnum",
+    "BatchResponsePublicAssociationDefinitionUserConfigurationWithErrorsStatusEnum",
+    "PublicAssociationDefinitionConfigurationCreateRequestCategoryEnum",
+    "PublicAssociationDefinitionConfigurationUpdateRequestCategoryEnum",
+    "PublicAssociationDefinitionConfigurationUpdateResultCategoryEnum",
+    "PublicAssociationDefinitionUserConfigurationCategoryEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "AssociationSpecWithLabel": AssociationSpecWithLabel,
+    "BatchInputPublicAssociationDefinitionConfigurationCreateRequest": BatchInputPublicAssociationDefinitionConfigurationCreateRequest,
+    "BatchInputPublicAssociationDefinitionConfigurationUpdateRequest": BatchInputPublicAssociationDefinitionConfigurationUpdateRequest,
+    "BatchInputPublicAssociationSpec": BatchInputPublicAssociationSpec,
+    "BatchResponsePublicAssociationDefinitionConfigurationUpdateResult": BatchResponsePublicAssociationDefinitionConfigurationUpdateResult,
+    "BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors": BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors,
+    "BatchResponsePublicAssociationDefinitionUserConfiguration": BatchResponsePublicAssociationDefinitionUserConfiguration,
+    "BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors": BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors,
     "CollectionResponseAssociationSpecWithLabelNoPaging": CollectionResponseAssociationSpecWithLabelNoPaging,
+    "CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging": CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging,
     "ErrorDetail": ErrorDetail,
     "ModelError": ModelError,
+    "PublicAssociationDefinitionConfigurationCreateRequest": PublicAssociationDefinitionConfigurationCreateRequest,
+    "PublicAssociationDefinitionConfigurationUpdateRequest": PublicAssociationDefinitionConfigurationUpdateRequest,
+    "PublicAssociationDefinitionConfigurationUpdateResult": PublicAssociationDefinitionConfigurationUpdateResult,
     "PublicAssociationDefinitionCreateRequest": PublicAssociationDefinitionCreateRequest,
     "PublicAssociationDefinitionUpdateRequest": PublicAssociationDefinitionUpdateRequest,
+    "PublicAssociationDefinitionUserConfiguration": PublicAssociationDefinitionUserConfiguration,
+    "PublicAssociationSpec": PublicAssociationSpec,
+    "StandardError": StandardError,
 }
 
 type MimeTypeDescriptor = {
@@ -53,7 +103,7 @@ type MimeTypeDescriptor = {
  * the payload.
  */
 const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
-    const [type, subtype] = mimeType.split('/');
+    const [type = '', subtype = ''] = mimeType.split('/');
     return {
         type,
         subtype,
@@ -89,6 +139,13 @@ const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
     isFormUrlencodedMimeType,
 ];
 
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
+
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
@@ -113,8 +170,11 @@ export class ObjectSerializer {
             } else {
                 if (data[discriminatorProperty]) {
                     var discriminatorType = data[discriminatorProperty];
-                    if(typeMap[discriminatorType]){
-                        return discriminatorType; // use the type given in the discriminator
+                    let mapping = typeMap[expectedType].mapping;
+                    if (mapping != undefined && mapping[discriminatorType]) {
+                        return mapping[discriminatorType]; // use the type given in the discriminator
+                    } else if(typeMap[discriminatorType]) {
+                        return discriminatorType;
                     } else {
                         return expectedType; // discriminator did not map to a type
                     }
@@ -125,17 +185,33 @@ export class ObjectSerializer {
         }
     }
 
-    public static serialize(data: any, type: string, format: string) {
+    public static serialize(data: any, type: string, format: string): any {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -170,19 +246,35 @@ export class ObjectSerializer {
         }
     }
 
-    public static deserialize(data: any, type: string, format: string) {
+    public static deserialize(data: any, type: string, format: string): any {
         // polymorphism may change the actual type.
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -218,7 +310,7 @@ export class ObjectSerializer {
         if (mediaType === undefined) {
             return undefined;
         }
-        return mediaType.split(";")[0].trim().toLowerCase();
+        return (mediaType.split(";")[0] ?? '').trim().toLowerCase();
     }
 
     /**
@@ -233,7 +325,7 @@ export class ObjectSerializer {
             return "application/json";
         }
 
-        const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
+        const normalMediaTypes = mediaTypes.map(ObjectSerializer.normalizeMediaType);
 
         for (const predicate of supportedMimeTypePredicatesWithPriority) {
             for (const mediaType of normalMediaTypes) {

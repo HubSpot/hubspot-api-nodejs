@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
@@ -21,24 +21,28 @@ import { BasicApiRequestFactory, BasicApiResponseProcessor} from "../apis/BasicA
 export interface BasicApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
     objectId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
     toObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApiarchive
      */
@@ -48,24 +52,28 @@ export interface BasicApiArchiveRequest {
 export interface BasicApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreate
      */
     objectId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreate
      */
     toObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreate
      */
@@ -81,24 +89,28 @@ export interface BasicApiCreateRequest {
 export interface BasicApiCreateDefaultRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreateDefault
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreateDefault
      */
     fromObjectId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreateDefault
      */
     toObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApicreateDefault
      */
@@ -108,30 +120,35 @@ export interface BasicApiCreateDefaultRequest {
 export interface BasicApiGetPageRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     objectId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     toObjectType: string
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof BasicApigetPage
      */
     after?: string
     /**
      * The maximum number of results to display per page.
+     * Defaults to: 500
      * @type number
      * @memberof BasicApigetPage
      */
@@ -150,7 +167,7 @@ export class ObjectBasicApi {
      * Delete
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
@@ -159,7 +176,7 @@ export class ObjectBasicApi {
      * Delete
      * @param param the request object
      */
-    public archive(param: BasicApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BasicApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.objectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
@@ -168,7 +185,7 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public createWithHttpInfo(param: BasicApiCreateRequest, options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair>> {
+    public createWithHttpInfo(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<LabelsBetweenObjectPair>> {
         return this.api.createWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 
@@ -177,7 +194,7 @@ export class ObjectBasicApi {
      * Create
      * @param param the request object
      */
-    public create(param: BasicApiCreateRequest, options?: Configuration): Promise<LabelsBetweenObjectPair> {
+    public create(param: BasicApiCreateRequest, options?: ConfigurationOptions): Promise<LabelsBetweenObjectPair> {
         return this.api.create(param.objectType, param.objectId, param.toObjectType, param.toObjectId, param.associationSpec,  options).toPromise();
     }
 
@@ -186,7 +203,7 @@ export class ObjectBasicApi {
      * Create Default
      * @param param the request object
      */
-    public createDefaultWithHttpInfo(param: BasicApiCreateDefaultRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+    public createDefaultWithHttpInfo(param: BasicApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         return this.api.createDefaultWithHttpInfo(param.fromObjectType, param.fromObjectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
@@ -195,7 +212,7 @@ export class ObjectBasicApi {
      * Create Default
      * @param param the request object
      */
-    public createDefault(param: BasicApiCreateDefaultRequest, options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
+    public createDefault(param: BasicApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
         return this.api.createDefault(param.fromObjectType, param.fromObjectId, param.toObjectType, param.toObjectId,  options).toPromise();
     }
 
@@ -204,7 +221,7 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: BasicApiGetPageRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+    public getPageWithHttpInfo(param: BasicApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.objectType, param.objectId, param.toObjectType, param.after, param.limit,  options).toPromise();
     }
 
@@ -213,7 +230,7 @@ export class ObjectBasicApi {
      * List
      * @param param the request object
      */
-    public getPage(param: BasicApiGetPageRequest, options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+    public getPage(param: BasicApiGetPageRequest, options?: ConfigurationOptions): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
         return this.api.getPage(param.objectType, param.objectId, param.toObjectType, param.after, param.limit,  options).toPromise();
     }
 
@@ -225,12 +242,14 @@ import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchA
 export interface BatchApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiarchive
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiarchive
      */
@@ -246,12 +265,14 @@ export interface BatchApiArchiveRequest {
 export interface BatchApiArchiveLabelsRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiarchiveLabels
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiarchiveLabels
      */
@@ -267,12 +288,14 @@ export interface BatchApiArchiveLabelsRequest {
 export interface BatchApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApicreate
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApicreate
      */
@@ -288,12 +311,14 @@ export interface BatchApiCreateRequest {
 export interface BatchApiCreateDefaultRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApicreateDefault
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApicreateDefault
      */
@@ -309,12 +334,14 @@ export interface BatchApiCreateDefaultRequest {
 export interface BatchApiGetPageRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApigetPage
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApigetPage
      */
@@ -339,7 +366,7 @@ export class ObjectBatchApi {
      * Delete
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiArchive,  options).toPromise();
     }
 
@@ -348,7 +375,7 @@ export class ObjectBatchApi {
      * Delete
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiArchive,  options).toPromise();
     }
 
@@ -357,7 +384,7 @@ export class ObjectBatchApi {
      * Delete Specific Labels
      * @param param the request object
      */
-    public archiveLabelsWithHttpInfo(param: BatchApiArchiveLabelsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveLabelsWithHttpInfo(param: BatchApiArchiveLabelsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveLabelsWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
@@ -366,7 +393,7 @@ export class ObjectBatchApi {
      * Delete Specific Labels
      * @param param the request object
      */
-    public archiveLabels(param: BatchApiArchiveLabelsRequest, options?: Configuration): Promise<void> {
+    public archiveLabels(param: BatchApiArchiveLabelsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveLabels(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
@@ -375,7 +402,7 @@ export class ObjectBatchApi {
      * Create
      * @param param the request object
      */
-    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
         return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
@@ -384,7 +411,7 @@ export class ObjectBatchApi {
      * Create
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
+    public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationMultiPost,  options).toPromise();
     }
 
@@ -393,7 +420,7 @@ export class ObjectBatchApi {
      *  Create Default Associations
      * @param param the request object
      */
-    public createDefaultWithHttpInfo(param: BatchApiCreateDefaultRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+    public createDefaultWithHttpInfo(param: BatchApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
         return this.api.createDefaultWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicDefaultAssociationMultiPost,  options).toPromise();
     }
 
@@ -402,7 +429,7 @@ export class ObjectBatchApi {
      *  Create Default Associations
      * @param param the request object
      */
-    public createDefault(param: BatchApiCreateDefaultRequest, options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
+    public createDefault(param: BatchApiCreateDefaultRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
         return this.api.createDefault(param.fromObjectType, param.toObjectType, param.batchInputPublicDefaultAssociationMultiPost,  options).toPromise();
     }
 
@@ -411,7 +438,7 @@ export class ObjectBatchApi {
      * Read
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: BatchApiGetPageRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
+    public getPageWithHttpInfo(param: BatchApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
         return this.api.getPageWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicFetchAssociationsBatchRequest,  options).toPromise();
     }
 
@@ -420,7 +447,7 @@ export class ObjectBatchApi {
      * Read
      * @param param the request object
      */
-    public getPage(param: BatchApiGetPageRequest, options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
+    public getPage(param: BatchApiGetPageRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
         return this.api.getPage(param.fromObjectType, param.toObjectType, param.batchInputPublicFetchAssociationsBatchRequest,  options).toPromise();
     }
 
@@ -432,6 +459,7 @@ import { ReportApiRequestFactory, ReportApiResponseProcessor} from "../apis/Repo
 export interface ReportApiRequestRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type number
      * @memberof ReportApirequest
      */
@@ -450,7 +478,7 @@ export class ObjectReportApi {
      * Report
      * @param param the request object
      */
-    public requestWithHttpInfo(param: ReportApiRequestRequest, options?: Configuration): Promise<HttpInfo<ReportCreationResponse>> {
+    public requestWithHttpInfo(param: ReportApiRequestRequest, options?: ConfigurationOptions): Promise<HttpInfo<ReportCreationResponse>> {
         return this.api.requestWithHttpInfo(param.userId,  options).toPromise();
     }
 
@@ -459,7 +487,7 @@ export class ObjectReportApi {
      * Report
      * @param param the request object
      */
-    public request(param: ReportApiRequestRequest, options?: Configuration): Promise<ReportCreationResponse> {
+    public request(param: ReportApiRequestRequest, options?: ConfigurationOptions): Promise<ReportCreationResponse> {
         return this.api.request(param.userId,  options).toPromise();
     }
 
