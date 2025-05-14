@@ -18,6 +18,8 @@ export class PublicAssociationDefinitionConfigurationUpdateResult {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "userEnforcedMaxToObjectIds",
@@ -45,7 +47,6 @@ export class PublicAssociationDefinitionConfigurationUpdateResult {
     public constructor() {
     }
 }
-
 
 export enum PublicAssociationDefinitionConfigurationUpdateResultCategoryEnum {
     HubspotDefined = 'HUBSPOT_DEFINED',

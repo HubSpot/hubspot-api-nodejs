@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchInputPublicAssociationDefinitionConfigurationCreateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationCreateRequest';
 import { BatchInputPublicAssociationDefinitionConfigurationUpdateRequest } from '../models/BatchInputPublicAssociationDefinitionConfigurationUpdateRequest';
@@ -19,12 +19,14 @@ import { DefinitionConfigurationsApiRequestFactory, DefinitionConfigurationsApiR
 export interface DefinitionConfigurationsApiBatchCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchCreate
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchCreate
      */
@@ -40,12 +42,14 @@ export interface DefinitionConfigurationsApiBatchCreateRequest {
 export interface DefinitionConfigurationsApiBatchRemoveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchRemove
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchRemove
      */
@@ -61,12 +65,14 @@ export interface DefinitionConfigurationsApiBatchRemoveRequest {
 export interface DefinitionConfigurationsApiBatchUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchUpdate
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApibatchUpdate
      */
@@ -85,12 +91,14 @@ export interface DefinitionConfigurationsApiGetAllRequest {
 export interface DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApigetAllBetweenTwoObjectTypes
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionConfigurationsApigetAllBetweenTwoObjectTypes
      */
@@ -109,7 +117,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Create
      * @param param the request object
      */
-    public batchCreateWithHttpInfo(param: DefinitionConfigurationsApiBatchCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration>> {
+    public batchCreateWithHttpInfo(param: DefinitionConfigurationsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration>> {
         return this.api.batchCreateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
     }
 
@@ -118,7 +126,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Create
      * @param param the request object
      */
-    public batchCreate(param: DefinitionConfigurationsApiBatchCreateRequest, options?: Configuration): Promise<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration> {
+    public batchCreate(param: DefinitionConfigurationsApiBatchCreateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionUserConfigurationWithErrors | BatchResponsePublicAssociationDefinitionUserConfiguration> {
         return this.api.batchCreate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationCreateRequest,  options).toPromise();
     }
 
@@ -127,7 +135,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Delete
      * @param param the request object
      */
-    public batchRemoveWithHttpInfo(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public batchRemoveWithHttpInfo(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.batchRemoveWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
     }
 
@@ -136,7 +144,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Delete
      * @param param the request object
      */
-    public batchRemove(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: Configuration): Promise<void> {
+    public batchRemove(param: DefinitionConfigurationsApiBatchRemoveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.batchRemove(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationSpec,  options).toPromise();
     }
 
@@ -145,7 +153,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Update
      * @param param the request object
      */
-    public batchUpdateWithHttpInfo(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors>> {
+    public batchUpdateWithHttpInfo(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors>> {
         return this.api.batchUpdateWithHttpInfo(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
     }
 
@@ -154,7 +162,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Update
      * @param param the request object
      */
-    public batchUpdate(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: Configuration): Promise<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors> {
+    public batchUpdate(param: DefinitionConfigurationsApiBatchUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponsePublicAssociationDefinitionConfigurationUpdateResult | BatchResponsePublicAssociationDefinitionConfigurationUpdateResultWithErrors> {
         return this.api.batchUpdate(param.fromObjectType, param.toObjectType, param.batchInputPublicAssociationDefinitionConfigurationUpdateRequest,  options).toPromise();
     }
 
@@ -163,7 +171,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Read All
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
+    public getAllWithHttpInfo(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
         return this.api.getAllWithHttpInfo( options).toPromise();
     }
 
@@ -172,7 +180,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Read All
      * @param param the request object
      */
-    public getAll(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
+    public getAll(param: DefinitionConfigurationsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
         return this.api.getAll( options).toPromise();
     }
 
@@ -181,7 +189,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Read
      * @param param the request object
      */
-    public getAllBetweenTwoObjectTypesWithHttpInfo(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
+    public getAllBetweenTwoObjectTypesWithHttpInfo(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging>> {
         return this.api.getAllBetweenTwoObjectTypesWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
@@ -190,7 +198,7 @@ export class ObjectDefinitionConfigurationsApi {
      * Read
      * @param param the request object
      */
-    public getAllBetweenTwoObjectTypes(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
+    public getAllBetweenTwoObjectTypes(param: DefinitionConfigurationsApiGetAllBetweenTwoObjectTypesRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging> {
         return this.api.getAllBetweenTwoObjectTypes(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
@@ -202,12 +210,14 @@ import { DefinitionsApiRequestFactory, DefinitionsApiResponseProcessor} from "..
 export interface DefinitionsApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApicreate
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApicreate
      */
@@ -223,12 +233,14 @@ export interface DefinitionsApiCreateRequest {
 export interface DefinitionsApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApigetAll
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApigetAll
      */
@@ -238,18 +250,21 @@ export interface DefinitionsApiGetAllRequest {
 export interface DefinitionsApiRemoveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApiremove
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApiremove
      */
     toObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type number
      * @memberof DefinitionsApiremove
      */
@@ -259,12 +274,14 @@ export interface DefinitionsApiRemoveRequest {
 export interface DefinitionsApiUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApiupdate
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof DefinitionsApiupdate
      */
@@ -289,7 +306,7 @@ export class ObjectDefinitionsApi {
      * Create
      * @param param the request object
      */
-    public createWithHttpInfo(param: DefinitionsApiCreateRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
+    public createWithHttpInfo(param: DefinitionsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
         return this.api.createWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest,  options).toPromise();
     }
 
@@ -298,7 +315,7 @@ export class ObjectDefinitionsApi {
      * Create
      * @param param the request object
      */
-    public create(param: DefinitionsApiCreateRequest, options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+    public create(param: DefinitionsApiCreateRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
         return this.api.create(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionCreateRequest,  options).toPromise();
     }
 
@@ -307,7 +324,7 @@ export class ObjectDefinitionsApi {
      * Read
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: DefinitionsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
+    public getAllWithHttpInfo(param: DefinitionsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseAssociationSpecWithLabelNoPaging>> {
         return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
@@ -316,7 +333,7 @@ export class ObjectDefinitionsApi {
      * Read
      * @param param the request object
      */
-    public getAll(param: DefinitionsApiGetAllRequest, options?: Configuration): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
+    public getAll(param: DefinitionsApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponseAssociationSpecWithLabelNoPaging> {
         return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
@@ -325,7 +342,7 @@ export class ObjectDefinitionsApi {
      * Delete
      * @param param the request object
      */
-    public removeWithHttpInfo(param: DefinitionsApiRemoveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public removeWithHttpInfo(param: DefinitionsApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.removeWithHttpInfo(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
     }
 
@@ -334,7 +351,7 @@ export class ObjectDefinitionsApi {
      * Delete
      * @param param the request object
      */
-    public remove(param: DefinitionsApiRemoveRequest, options?: Configuration): Promise<void> {
+    public remove(param: DefinitionsApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.remove(param.fromObjectType, param.toObjectType, param.associationTypeId,  options).toPromise();
     }
 
@@ -343,7 +360,7 @@ export class ObjectDefinitionsApi {
      * Update
      * @param param the request object
      */
-    public updateWithHttpInfo(param: DefinitionsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateWithHttpInfo(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateWithHttpInfo(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest,  options).toPromise();
     }
 
@@ -352,7 +369,7 @@ export class ObjectDefinitionsApi {
      * Update
      * @param param the request object
      */
-    public update(param: DefinitionsApiUpdateRequest, options?: Configuration): Promise<void> {
+    public update(param: DefinitionsApiUpdateRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.update(param.fromObjectType, param.toObjectType, param.publicAssociationDefinitionUpdateRequest,  options).toPromise();
     }
 
