@@ -10,143 +10,45 @@
  * Do not edit the class manually.
  */
 
-import { DependentField } from '../models/DependentField';
-import { EnumeratedFieldOption } from '../models/EnumeratedFieldOption';
-import { NumberFieldValidation } from '../models/NumberFieldValidation';
+import { DatepickerField } from '../models/DatepickerField';
+import { DropdownField } from '../models/DropdownField';
+import { EmailField } from '../models/EmailField';
+import { FileField } from '../models/FileField';
+import { MobilePhoneField } from '../models/MobilePhoneField';
+import { MultiLineTextField } from '../models/MultiLineTextField';
+import { MultipleCheckboxesField } from '../models/MultipleCheckboxesField';
+import { NumberField } from '../models/NumberField';
+import { PaymentLinkRadioField } from '../models/PaymentLinkRadioField';
+import { PhoneField } from '../models/PhoneField';
+import { RadioField } from '../models/RadioField';
+import { SingleCheckboxField } from '../models/SingleCheckboxField';
+import { SingleLineTextField } from '../models/SingleLineTextField';
 
-export class DependentFieldDependentField {
-    'objectTypeId': string;
-    'hidden': boolean;
-    /**
-    * The value filled in by default. This value will be submitted unless the customer modifies it.
-    */
-    'defaultValue'?: string;
-    'name': string;
-    'description'?: string;
-    'dependentFields': Array<DependentField>;
-    'label': string;
-    /**
-    * The prompt text showing when the field isn\'t filled in.
-    */
-    'placeholder'?: string;
-    'fieldType': DependentFieldDependentFieldFieldTypeEnum;
-    'required': boolean;
-    'validation': NumberFieldValidation;
-    /**
-    * Whether to display a country code drop down next to the phone field.
-    */
-    'useCountryCodeSelect': boolean;
-    'options': Array<EnumeratedFieldOption>;
-    'defaultValues': Array<string>;
-    /**
-    * Whether to allow the upload of multiple files.
-    */
-    'allowMultipleFiles': boolean;
+/**
+ * @type DependentFieldDependentField
+ * Type
+ * @export
+ */
+export type DependentFieldDependentField = DatepickerField | DropdownField | EmailField | FileField | MobilePhoneField | MultiLineTextField | MultipleCheckboxesField | NumberField | PaymentLinkRadioField | PhoneField | RadioField | SingleCheckboxField | SingleLineTextField;
 
+/**
+* @type DependentFieldDependentFieldClass
+* @export
+*/
+export class DependentFieldDependentFieldClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "hidden",
-            "baseName": "hidden",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "defaultValue",
-            "baseName": "defaultValue",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "description",
-            "baseName": "description",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "dependentFields",
-            "baseName": "dependentFields",
-            "type": "Array<DependentField>",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "placeholder",
-            "baseName": "placeholder",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "fieldType",
-            "baseName": "fieldType",
-            "type": "DependentFieldDependentFieldFieldTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "required",
-            "baseName": "required",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "validation",
-            "baseName": "validation",
-            "type": "NumberFieldValidation",
-            "format": ""
-        },
-        {
-            "name": "useCountryCodeSelect",
-            "baseName": "useCountryCodeSelect",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "options",
-            "baseName": "options",
-            "type": "Array<EnumeratedFieldOption>",
-            "format": ""
-        },
-        {
-            "name": "defaultValues",
-            "baseName": "defaultValues",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "allowMultipleFiles",
-            "baseName": "allowMultipleFiles",
-            "type": "boolean",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return DependentFieldDependentField.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
 
-export enum DependentFieldDependentFieldFieldTypeEnum {
-    PaymentLinkRadio = 'payment_link_radio'
-}
+
+
+
+
+
+
+
+
+
 

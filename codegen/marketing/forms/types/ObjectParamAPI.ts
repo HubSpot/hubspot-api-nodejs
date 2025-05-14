@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CollectionResponseFormDefinitionBaseForwardPaging } from '../models/CollectionResponseFormDefinitionBaseForwardPaging';
 import { FormDefinitionBase } from '../models/FormDefinitionBase';
@@ -13,6 +13,7 @@ import { FormsApiRequestFactory, FormsApiResponseProcessor} from "../apis/FormsA
 export interface FormsApiArchiveRequest {
     /**
      * The ID of the form to archive.
+     * Defaults to: undefined
      * @type string
      * @memberof FormsApiarchive
      */
@@ -31,12 +32,14 @@ export interface FormsApiCreateRequest {
 export interface FormsApiGetByIdRequest {
     /**
      * The unique identifier of the form
+     * Defaults to: undefined
      * @type string
      * @memberof FormsApigetById
      */
     formId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof FormsApigetById
      */
@@ -46,24 +49,28 @@ export interface FormsApiGetByIdRequest {
 export interface FormsApiGetPageRequest {
     /**
      * The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof FormsApigetPage
      */
     after?: string
     /**
      * The maximum number of results to display per page.
+     * Defaults to: undefined
      * @type number
      * @memberof FormsApigetPage
      */
     limit?: number
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof FormsApigetPage
      */
     archived?: boolean
     /**
      * The form types to be included in the results.
+     * Defaults to: undefined
      * @type Array&lt;&#39;hubspot&#39; | &#39;captured&#39; | &#39;flow&#39; | &#39;blog_comment&#39; | &#39;all&#39;&gt;
      * @memberof FormsApigetPage
      */
@@ -73,6 +80,7 @@ export interface FormsApiGetPageRequest {
 export interface FormsApiReplaceRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FormsApireplace
      */
@@ -88,6 +96,7 @@ export interface FormsApiReplaceRequest {
 export interface FormsApiUpdateRequest {
     /**
      * The ID of the form to update.
+     * Defaults to: undefined
      * @type string
      * @memberof FormsApiupdate
      */
@@ -112,7 +121,7 @@ export class ObjectFormsApi {
      * Archive a form definition
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: FormsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: FormsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.formId,  options).toPromise();
     }
 
@@ -121,7 +130,7 @@ export class ObjectFormsApi {
      * Archive a form definition
      * @param param the request object
      */
-    public archive(param: FormsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: FormsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.formId,  options).toPromise();
     }
 
@@ -130,7 +139,7 @@ export class ObjectFormsApi {
      * Create a form
      * @param param the request object
      */
-    public createWithHttpInfo(param: FormsApiCreateRequest, options?: Configuration): Promise<HttpInfo<FormDefinitionBase>> {
+    public createWithHttpInfo(param: FormsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.createWithHttpInfo(param.formDefinitionCreateRequestBase,  options).toPromise();
     }
 
@@ -139,7 +148,7 @@ export class ObjectFormsApi {
      * Create a form
      * @param param the request object
      */
-    public create(param: FormsApiCreateRequest, options?: Configuration): Promise<FormDefinitionBase> {
+    public create(param: FormsApiCreateRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.create(param.formDefinitionCreateRequestBase,  options).toPromise();
     }
 
@@ -148,7 +157,7 @@ export class ObjectFormsApi {
      * Get a form definition
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: FormsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<FormDefinitionBase>> {
+    public getByIdWithHttpInfo(param: FormsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.getByIdWithHttpInfo(param.formId, param.archived,  options).toPromise();
     }
 
@@ -157,7 +166,7 @@ export class ObjectFormsApi {
      * Get a form definition
      * @param param the request object
      */
-    public getById(param: FormsApiGetByIdRequest, options?: Configuration): Promise<FormDefinitionBase> {
+    public getById(param: FormsApiGetByIdRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.getById(param.formId, param.archived,  options).toPromise();
     }
 
@@ -166,7 +175,7 @@ export class ObjectFormsApi {
      * Get a list of forms
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: FormsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
+    public getPageWithHttpInfo(param: FormsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseFormDefinitionBaseForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.after, param.limit, param.archived, param.formTypes,  options).toPromise();
     }
 
@@ -175,7 +184,7 @@ export class ObjectFormsApi {
      * Get a list of forms
      * @param param the request object
      */
-    public getPage(param: FormsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseFormDefinitionBaseForwardPaging> {
+    public getPage(param: FormsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseFormDefinitionBaseForwardPaging> {
         return this.api.getPage(param.after, param.limit, param.archived, param.formTypes,  options).toPromise();
     }
 
@@ -184,7 +193,7 @@ export class ObjectFormsApi {
      * Update a form definition
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: FormsApiReplaceRequest, options?: Configuration): Promise<HttpInfo<FormDefinitionBase>> {
+    public replaceWithHttpInfo(param: FormsApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.replaceWithHttpInfo(param.formId, param.hubSpotFormDefinition,  options).toPromise();
     }
 
@@ -193,7 +202,7 @@ export class ObjectFormsApi {
      * Update a form definition
      * @param param the request object
      */
-    public replace(param: FormsApiReplaceRequest, options?: Configuration): Promise<FormDefinitionBase> {
+    public replace(param: FormsApiReplaceRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.replace(param.formId, param.hubSpotFormDefinition,  options).toPromise();
     }
 
@@ -202,7 +211,7 @@ export class ObjectFormsApi {
      * Partially update a form definition
      * @param param the request object
      */
-    public updateWithHttpInfo(param: FormsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<FormDefinitionBase>> {
+    public updateWithHttpInfo(param: FormsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<FormDefinitionBase>> {
         return this.api.updateWithHttpInfo(param.formId, param.hubSpotFormDefinitionPatchRequest,  options).toPromise();
     }
 
@@ -211,7 +220,7 @@ export class ObjectFormsApi {
      * Partially update a form definition
      * @param param the request object
      */
-    public update(param: FormsApiUpdateRequest, options?: Configuration): Promise<FormDefinitionBase> {
+    public update(param: FormsApiUpdateRequest, options?: ConfigurationOptions): Promise<FormDefinitionBase> {
         return this.api.update(param.formId, param.hubSpotFormDefinitionPatchRequest,  options).toPromise();
     }
 

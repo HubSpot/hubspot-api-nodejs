@@ -10,122 +10,27 @@
  * Do not edit the class manually.
  */
 
-import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
+import { LegalConsentOptionsExplicitConsentToProcess } from '../models/LegalConsentOptionsExplicitConsentToProcess';
+import { LegalConsentOptionsImplicitConsentToProcess } from '../models/LegalConsentOptionsImplicitConsentToProcess';
+import { LegalConsentOptionsLegitimateInterest } from '../models/LegalConsentOptionsLegitimateInterest';
+import { LegalConsentOptionsNone } from '../models/LegalConsentOptionsNone';
 
-export class HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions {
-    /**
-    * 
-    */
-    'type': HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum;
-    /**
-    * 
-    */
-    'subscriptionTypeIds': Array<number>;
-    /**
-    * 
-    */
-    'lawfulBasis': HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum;
-    /**
-    * 
-    */
-    'privacyText': string;
-    /**
-    * 
-    */
-    'communicationsCheckboxes': Array<LegalConsentCheckbox>;
-    /**
-    * 
-    */
-    'communicationConsentText'?: string;
-    /**
-    * 
-    */
-    'consentToProcessCheckboxLabel'?: string;
-    /**
-    * 
-    */
-    'consentToProcessFooterText'?: string;
-    /**
-    * 
-    */
-    'consentToProcessText'?: string;
+/**
+ * @type HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions
+ * Type
+ * @export
+ */
+export type HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions = LegalConsentOptionsExplicitConsentToProcess | LegalConsentOptionsImplicitConsentToProcess | LegalConsentOptionsLegitimateInterest | LegalConsentOptionsNone;
 
+/**
+* @type HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsClass
+* @export
+*/
+export class HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "subscriptionTypeIds",
-            "baseName": "subscriptionTypeIds",
-            "type": "Array<number>",
-            "format": "int64"
-        },
-        {
-            "name": "lawfulBasis",
-            "baseName": "lawfulBasis",
-            "type": "HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum",
-            "format": ""
-        },
-        {
-            "name": "privacyText",
-            "baseName": "privacyText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "communicationsCheckboxes",
-            "baseName": "communicationsCheckboxes",
-            "type": "Array<LegalConsentCheckbox>",
-            "format": ""
-        },
-        {
-            "name": "communicationConsentText",
-            "baseName": "communicationConsentText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "consentToProcessCheckboxLabel",
-            "baseName": "consentToProcessCheckboxLabel",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "consentToProcessFooterText",
-            "baseName": "consentToProcessFooterText",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "consentToProcessText",
-            "baseName": "consentToProcessText",
-            "type": "string",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptions.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
 
-export enum HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsTypeEnum {
-    None = 'none',
-    LegitimateInterest = 'legitimate_interest',
-    ExplicitConsentToProcess = 'explicit_consent_to_process',
-    ImplicitConsentToProcess = 'implicit_consent_to_process'
-}
-export enum HubSpotFormDefinitionCreateRequestAllOfLegalConsentOptionsLawfulBasisEnum {
-    Lead = 'lead',
-    Client = 'client',
-    Other = 'other'
-}
 

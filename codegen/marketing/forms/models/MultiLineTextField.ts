@@ -59,6 +59,8 @@ export class MultiLineTextField {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "objectTypeId",
@@ -128,7 +130,6 @@ export class MultiLineTextField {
     public constructor() {
     }
 }
-
 
 export enum MultiLineTextFieldFieldTypeEnum {
     MultiLineText = 'multi_line_text'

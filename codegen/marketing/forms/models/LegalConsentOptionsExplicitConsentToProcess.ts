@@ -44,6 +44,8 @@ export class LegalConsentOptionsExplicitConsentToProcess {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "communicationsCheckboxes",
@@ -95,7 +97,6 @@ export class LegalConsentOptionsExplicitConsentToProcess {
     public constructor() {
     }
 }
-
 
 export enum LegalConsentOptionsExplicitConsentToProcessTypeEnum {
     ExplicitConsentToProcess = 'explicit_consent_to_process'
