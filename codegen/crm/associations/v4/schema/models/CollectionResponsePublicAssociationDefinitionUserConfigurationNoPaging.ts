@@ -10,36 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicAssociationDefinitionUserConfiguration } from '../models/PublicAssociationDefinitionUserConfiguration';
 
-export class PublicAssociationDefinitionUpdateRequest {
-    'inverseLabel'?: string;
-    'associationTypeId': number;
-    'label': string;
+export class CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging {
+    'results': Array<PublicAssociationDefinitionUserConfiguration>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inverseLabel",
-            "baseName": "inverseLabel",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "associationTypeId",
-            "baseName": "associationTypeId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<PublicAssociationDefinitionUserConfiguration>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicAssociationDefinitionUpdateRequest.attributeTypeMap;
+        return CollectionResponsePublicAssociationDefinitionUserConfigurationNoPaging.attributeTypeMap;
     }
 
     public constructor() {

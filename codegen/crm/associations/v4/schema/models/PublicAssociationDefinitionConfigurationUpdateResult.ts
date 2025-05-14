@@ -11,14 +11,20 @@
  */
 
 
-export class AssociationSpecWithLabel {
+export class PublicAssociationDefinitionConfigurationUpdateResult {
+    'userEnforcedMaxToObjectIds'?: number;
     'typeId': number;
-    'label'?: string;
-    'category': AssociationSpecWithLabelCategoryEnum;
+    'category': PublicAssociationDefinitionConfigurationUpdateResultCategoryEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "userEnforcedMaxToObjectIds",
+            "baseName": "userEnforcedMaxToObjectIds",
+            "type": "number",
+            "format": "int32"
+        },
         {
             "name": "typeId",
             "baseName": "typeId",
@@ -26,20 +32,14 @@ export class AssociationSpecWithLabel {
             "format": "int32"
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "category",
             "baseName": "category",
-            "type": "AssociationSpecWithLabelCategoryEnum",
+            "type": "PublicAssociationDefinitionConfigurationUpdateResultCategoryEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return AssociationSpecWithLabel.attributeTypeMap;
+        return PublicAssociationDefinitionConfigurationUpdateResult.attributeTypeMap;
     }
 
     public constructor() {
@@ -47,7 +47,7 @@ export class AssociationSpecWithLabel {
 }
 
 
-export enum AssociationSpecWithLabelCategoryEnum {
+export enum PublicAssociationDefinitionConfigurationUpdateResultCategoryEnum {
     HubspotDefined = 'HUBSPOT_DEFINED',
     UserDefined = 'USER_DEFINED',
     IntegratorDefined = 'INTEGRATOR_DEFINED'

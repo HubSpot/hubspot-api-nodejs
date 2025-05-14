@@ -10,36 +10,23 @@
  * Do not edit the class manually.
  */
 
+import { PublicAssociationDefinitionConfigurationCreateRequest } from '../models/PublicAssociationDefinitionConfigurationCreateRequest';
 
-export class PublicAssociationDefinitionUpdateRequest {
-    'inverseLabel'?: string;
-    'associationTypeId': number;
-    'label': string;
+export class BatchInputPublicAssociationDefinitionConfigurationCreateRequest {
+    'inputs': Array<PublicAssociationDefinitionConfigurationCreateRequest>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "inverseLabel",
-            "baseName": "inverseLabel",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "associationTypeId",
-            "baseName": "associationTypeId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "inputs",
+            "baseName": "inputs",
+            "type": "Array<PublicAssociationDefinitionConfigurationCreateRequest>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicAssociationDefinitionUpdateRequest.attributeTypeMap;
+        return BatchInputPublicAssociationDefinitionConfigurationCreateRequest.attributeTypeMap;
     }
 
     public constructor() {

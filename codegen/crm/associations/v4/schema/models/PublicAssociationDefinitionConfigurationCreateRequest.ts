@@ -11,10 +11,10 @@
  */
 
 
-export class AssociationSpecWithLabel {
+export class PublicAssociationDefinitionConfigurationCreateRequest {
     'typeId': number;
-    'label'?: string;
-    'category': AssociationSpecWithLabelCategoryEnum;
+    'category': PublicAssociationDefinitionConfigurationCreateRequestCategoryEnum;
+    'maxToObjectIds': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,20 +26,20 @@ export class AssociationSpecWithLabel {
             "format": "int32"
         },
         {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
+            "name": "category",
+            "baseName": "category",
+            "type": "PublicAssociationDefinitionConfigurationCreateRequestCategoryEnum",
             "format": ""
         },
         {
-            "name": "category",
-            "baseName": "category",
-            "type": "AssociationSpecWithLabelCategoryEnum",
-            "format": ""
+            "name": "maxToObjectIds",
+            "baseName": "maxToObjectIds",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return AssociationSpecWithLabel.attributeTypeMap;
+        return PublicAssociationDefinitionConfigurationCreateRequest.attributeTypeMap;
     }
 
     public constructor() {
@@ -47,7 +47,7 @@ export class AssociationSpecWithLabel {
 }
 
 
-export enum AssociationSpecWithLabelCategoryEnum {
+export enum PublicAssociationDefinitionConfigurationCreateRequestCategoryEnum {
     HubspotDefined = 'HUBSPOT_DEFINED',
     UserDefined = 'USER_DEFINED',
     IntegratorDefined = 'INTEGRATOR_DEFINED'

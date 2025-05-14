@@ -12,35 +12,15 @@
 
 import { ErrorDetail } from '../models/ErrorDetail';
 
-export class ModelError {
-    /**
-    * A specific category that contains more specific detail about the error
-    */
-    'subCategory'?: string;
-    /**
-    * Context about the error condition
-    */
-    'context'?: { [key: string]: Array<string>; };
-    /**
-    * A unique identifier for the request. Include this value with any error reports or support tickets
-    */
-    'correlationId': string;
-    /**
-    * A map of link names to associated URIs containing documentation about the error or recommended remediation steps
-    */
-    'links'?: { [key: string]: string; };
-    /**
-    * A human readable message describing the error along with remediation steps where appropriate
-    */
-    'message': string;
-    /**
-    * The error category
-    */
+export class StandardError {
+    'subCategory'?: any;
+    'context': { [key: string]: Array<string>; };
+    'links': { [key: string]: string; };
+    'id'?: string;
     'category': string;
-    /**
-    * further information about the error
-    */
-    'errors'?: Array<ErrorDetail>;
+    'message': string;
+    'errors': Array<ErrorDetail>;
+    'status': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -48,7 +28,7 @@ export class ModelError {
         {
             "name": "subCategory",
             "baseName": "subCategory",
-            "type": "string",
+            "type": "any",
             "format": ""
         },
         {
@@ -58,20 +38,14 @@ export class ModelError {
             "format": ""
         },
         {
-            "name": "correlationId",
-            "baseName": "correlationId",
-            "type": "string",
-            "format": "uuid"
-        },
-        {
             "name": "links",
             "baseName": "links",
             "type": "{ [key: string]: string; }",
             "format": ""
         },
         {
-            "name": "message",
-            "baseName": "message",
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -82,14 +56,26 @@ export class ModelError {
             "format": ""
         },
         {
+            "name": "message",
+            "baseName": "message",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "errors",
             "baseName": "errors",
             "type": "Array<ErrorDetail>",
             "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ModelError.attributeTypeMap;
+        return StandardError.attributeTypeMap;
     }
 
     public constructor() {
