@@ -10,16 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class BatchReadInputSimplePublicObjectId {
-    'propertiesWithHistory': Array<string>;
-    /**
-    * When using a custom unique value property to retrieve records, the name of the property. Do not include this parameter if retrieving by record ID.
-    */
-    'idProperty'?: string;
-    'inputs': Array<SimplePublicObjectId>;
-    'properties': Array<string>;
+export class SimplePublicObjectBatchInputForCreate {
+    'associations'?: Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,32 +23,26 @@ export class BatchReadInputSimplePublicObjectId {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "propertiesWithHistory",
-            "baseName": "propertiesWithHistory",
-            "type": "Array<string>",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<PublicAssociationsForObject>",
             "format": ""
         },
         {
-            "name": "idProperty",
-            "baseName": "idProperty",
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
             "type": "string",
-            "format": ""
-        },
-        {
-            "name": "inputs",
-            "baseName": "inputs",
-            "type": "Array<SimplePublicObjectId>",
             "format": ""
         },
         {
             "name": "properties",
             "baseName": "properties",
-            "type": "Array<string>",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return BatchReadInputSimplePublicObjectId.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {

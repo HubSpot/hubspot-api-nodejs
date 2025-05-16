@@ -18,10 +18,13 @@ export class SimplePublicObject {
     'archivedAt'?: Date;
     'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'id': string;
+    'objectWriteTraceId'?: string;
     'properties': { [key: string]: string | null; };
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -55,6 +58,12 @@ export class SimplePublicObject {
             "format": ""
         },
         {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string | null; }",
@@ -74,4 +83,3 @@ export class SimplePublicObject {
     public constructor() {
     }
 }
-
