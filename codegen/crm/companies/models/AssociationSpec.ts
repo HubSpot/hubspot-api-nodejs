@@ -12,10 +12,18 @@
 
 
 export class AssociationSpec {
-    'associationCategory'?: AssociationSpecAssociationCategoryEnum;
-    'associationTypeId'?: number;
+    /**
+    * For [labeled associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#associate-records-with-a-label), the category of the association.
+    */
+    'associationCategory': AssociationSpecAssociationCategoryEnum;
+    /**
+    * The [association type ID](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values) (e.g., `4` for contact-to-company associations).
+    */
+    'associationTypeId': number;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -38,7 +46,6 @@ export class AssociationSpec {
     public constructor() {
     }
 }
-
 
 export enum AssociationSpecAssociationCategoryEnum {
     HubspotDefined = 'HUBSPOT_DEFINED',
