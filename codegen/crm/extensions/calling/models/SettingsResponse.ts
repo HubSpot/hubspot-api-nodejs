@@ -17,11 +17,15 @@ export class SettingsResponse {
     */
     'createdAt': Date;
     /**
-    * When true, you are indicating that your service is compatible with engagement v2 service and can be used with custom objects.
+    * When true, users will be able to click to dial from custom objects.
     */
     'supportsCustomObjects': boolean;
     /**
-    * When true, your service will appear as an option under the *Call* action in contact records of connected accounts.
+    * When false, this indicates that your calling app does not use the anchored calling remote within the HubSpot app. 
+    */
+    'usesRemote': boolean;
+    /**
+    * When true, this indicates that your calling app is ready for production. Users will be able to select your calling app as their provider and can then click to dial within HubSpot.
     */
     'isReady': boolean;
     /**
@@ -32,6 +36,13 @@ export class SettingsResponse {
     * The target width of the iframe that will contain your phone/calling UI.
     */
     'width': number;
+    /**
+    * When false, this indicates that your calling app does not require the use of the separate calling window to hold the call connection. 
+    */
+    'usesCallingWindow': boolean;
+    /**
+    * When true, this indicates that your calling app supports inbound calling within HubSpot. 
+    */
     'supportsInboundCalling': boolean;
     /**
     * The URL to your phone/calling UI, built with the [Calling SDK](#).
@@ -48,6 +59,8 @@ export class SettingsResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "createdAt",
@@ -58,6 +71,12 @@ export class SettingsResponse {
         {
             "name": "supportsCustomObjects",
             "baseName": "supportsCustomObjects",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "usesRemote",
+            "baseName": "usesRemote",
             "type": "boolean",
             "format": ""
         },
@@ -78,6 +97,12 @@ export class SettingsResponse {
             "baseName": "width",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "usesCallingWindow",
+            "baseName": "usesCallingWindow",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "supportsInboundCalling",
@@ -111,4 +136,3 @@ export class SettingsResponse {
     public constructor() {
     }
 }
-

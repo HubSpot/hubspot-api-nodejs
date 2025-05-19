@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CardCreateRequest } from '../models/CardCreateRequest';
 import { CardPatchRequest } from '../models/CardPatchRequest';
@@ -13,12 +13,14 @@ import { CardsApiRequestFactory, CardsApiResponseProcessor} from "../apis/CardsA
 export interface CardsApiArchiveRequest {
     /**
      * The ID of the card to delete.
+     * Defaults to: undefined
      * @type string
      * @memberof CardsApiarchive
      */
     cardId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof CardsApiarchive
      */
@@ -28,6 +30,7 @@ export interface CardsApiArchiveRequest {
 export interface CardsApiCreateRequest {
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof CardsApicreate
      */
@@ -43,6 +46,7 @@ export interface CardsApiCreateRequest {
 export interface CardsApiGetAllRequest {
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof CardsApigetAll
      */
@@ -52,12 +56,14 @@ export interface CardsApiGetAllRequest {
 export interface CardsApiGetByIdRequest {
     /**
      * The ID of the target card.
+     * Defaults to: undefined
      * @type string
      * @memberof CardsApigetById
      */
     cardId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof CardsApigetById
      */
@@ -67,12 +73,14 @@ export interface CardsApiGetByIdRequest {
 export interface CardsApiUpdateRequest {
     /**
      * The ID of the card to update.
+     * Defaults to: undefined
      * @type string
      * @memberof CardsApiupdate
      */
     cardId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof CardsApiupdate
      */
@@ -97,7 +105,7 @@ export class ObjectCardsApi {
      * Delete a card
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: CardsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: CardsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.cardId, param.appId,  options).toPromise();
     }
 
@@ -106,7 +114,7 @@ export class ObjectCardsApi {
      * Delete a card
      * @param param the request object
      */
-    public archive(param: CardsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: CardsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.cardId, param.appId,  options).toPromise();
     }
 
@@ -115,7 +123,7 @@ export class ObjectCardsApi {
      * Create a new card
      * @param param the request object
      */
-    public createWithHttpInfo(param: CardsApiCreateRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+    public createWithHttpInfo(param: CardsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
         return this.api.createWithHttpInfo(param.appId, param.cardCreateRequest,  options).toPromise();
     }
 
@@ -124,7 +132,7 @@ export class ObjectCardsApi {
      * Create a new card
      * @param param the request object
      */
-    public create(param: CardsApiCreateRequest, options?: Configuration): Promise<PublicCardResponse> {
+    public create(param: CardsApiCreateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
         return this.api.create(param.appId, param.cardCreateRequest,  options).toPromise();
     }
 
@@ -133,7 +141,7 @@ export class ObjectCardsApi {
      * Get all cards
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: CardsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<PublicCardListResponse>> {
+    public getAllWithHttpInfo(param: CardsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardListResponse>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -142,7 +150,7 @@ export class ObjectCardsApi {
      * Get all cards
      * @param param the request object
      */
-    public getAll(param: CardsApiGetAllRequest, options?: Configuration): Promise<PublicCardListResponse> {
+    public getAll(param: CardsApiGetAllRequest, options?: ConfigurationOptions): Promise<PublicCardListResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -151,7 +159,7 @@ export class ObjectCardsApi {
      * Get a card.
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: CardsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+    public getByIdWithHttpInfo(param: CardsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
         return this.api.getByIdWithHttpInfo(param.cardId, param.appId,  options).toPromise();
     }
 
@@ -160,7 +168,7 @@ export class ObjectCardsApi {
      * Get a card.
      * @param param the request object
      */
-    public getById(param: CardsApiGetByIdRequest, options?: Configuration): Promise<PublicCardResponse> {
+    public getById(param: CardsApiGetByIdRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
         return this.api.getById(param.cardId, param.appId,  options).toPromise();
     }
 
@@ -169,7 +177,7 @@ export class ObjectCardsApi {
      * Update a card
      * @param param the request object
      */
-    public updateWithHttpInfo(param: CardsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
+    public updateWithHttpInfo(param: CardsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
         return this.api.updateWithHttpInfo(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
     }
 
@@ -178,7 +186,7 @@ export class ObjectCardsApi {
      * Update a card
      * @param param the request object
      */
-    public update(param: CardsApiUpdateRequest, options?: Configuration): Promise<PublicCardResponse> {
+    public update(param: CardsApiUpdateRequest, options?: ConfigurationOptions): Promise<PublicCardResponse> {
         return this.api.update(param.cardId, param.appId, param.cardPatchRequest,  options).toPromise();
     }
 
@@ -202,7 +210,7 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponseWithHttpInfo(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: Configuration): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
+    public getCardsSampleResponseWithHttpInfo(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
         return this.api.getCardsSampleResponseWithHttpInfo( options).toPromise();
     }
 
@@ -211,7 +219,7 @@ export class ObjectSampleResponseApi {
      * Get sample card detail response
      * @param param the request object
      */
-    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: Configuration): Promise<IntegratorCardPayloadResponse> {
+    public getCardsSampleResponse(param: SampleResponseApiGetCardsSampleResponseRequest = {}, options?: ConfigurationOptions): Promise<IntegratorCardPayloadResponse> {
         return this.api.getCardsSampleResponse( options).toPromise();
     }
 

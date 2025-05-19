@@ -1,5 +1,6 @@
 import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
+import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { CardCreateRequest } from '../models/CardCreateRequest';
@@ -30,19 +31,48 @@ export class ObservableCardsApi {
      * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
      */
-    public archiveWithHttpInfo(cardId: string, appId: number, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archive(cardId, appId, _options);
+    public archiveWithHttpInfo(cardId: string, appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive(cardId, appId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
@@ -55,7 +85,7 @@ export class ObservableCardsApi {
      * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
      */
-    public archive(cardId: string, appId: number, _options?: Configuration): Observable<void> {
+    public archive(cardId: string, appId: number, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(cardId, appId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -65,19 +95,48 @@ export class ObservableCardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public createWithHttpInfo(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Observable<HttpInfo<PublicCardResponse>> {
-        const requestContextPromise = this.requestFactory.create(appId, cardCreateRequest, _options);
+    public createWithHttpInfo(appId: number, cardCreateRequest: CardCreateRequest, _options?: ConfigurationOptions): Observable<HttpInfo<PublicCardResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(appId, cardCreateRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -90,7 +149,7 @@ export class ObservableCardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Observable<PublicCardResponse> {
+    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: ConfigurationOptions): Observable<PublicCardResponse> {
         return this.createWithHttpInfo(appId, cardCreateRequest, _options).pipe(map((apiResponse: HttpInfo<PublicCardResponse>) => apiResponse.data));
     }
 
@@ -99,19 +158,48 @@ export class ObservableCardsApi {
      * Get all cards
      * @param appId The ID of the target app.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Observable<HttpInfo<PublicCardListResponse>> {
-        const requestContextPromise = this.requestFactory.getAll(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<PublicCardListResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getAll(appId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
@@ -123,7 +211,7 @@ export class ObservableCardsApi {
      * Get all cards
      * @param appId The ID of the target app.
      */
-    public getAll(appId: number, _options?: Configuration): Observable<PublicCardListResponse> {
+    public getAll(appId: number, _options?: ConfigurationOptions): Observable<PublicCardListResponse> {
         return this.getAllWithHttpInfo(appId, _options).pipe(map((apiResponse: HttpInfo<PublicCardListResponse>) => apiResponse.data));
     }
 
@@ -133,19 +221,48 @@ export class ObservableCardsApi {
      * @param cardId The ID of the target card.
      * @param appId The ID of the target app.
      */
-    public getByIdWithHttpInfo(cardId: string, appId: number, _options?: Configuration): Observable<HttpInfo<PublicCardResponse>> {
-        const requestContextPromise = this.requestFactory.getById(cardId, appId, _options);
+    public getByIdWithHttpInfo(cardId: string, appId: number, _options?: ConfigurationOptions): Observable<HttpInfo<PublicCardResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(cardId, appId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
@@ -158,7 +275,7 @@ export class ObservableCardsApi {
      * @param cardId The ID of the target card.
      * @param appId The ID of the target app.
      */
-    public getById(cardId: string, appId: number, _options?: Configuration): Observable<PublicCardResponse> {
+    public getById(cardId: string, appId: number, _options?: ConfigurationOptions): Observable<PublicCardResponse> {
         return this.getByIdWithHttpInfo(cardId, appId, _options).pipe(map((apiResponse: HttpInfo<PublicCardResponse>) => apiResponse.data));
     }
 
@@ -169,19 +286,48 @@ export class ObservableCardsApi {
      * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public updateWithHttpInfo(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Observable<HttpInfo<PublicCardResponse>> {
-        const requestContextPromise = this.requestFactory.update(cardId, appId, cardPatchRequest, _options);
+    public updateWithHttpInfo(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<PublicCardResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(cardId, appId, cardPatchRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
@@ -195,7 +341,7 @@ export class ObservableCardsApi {
      * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Observable<PublicCardResponse> {
+    public update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: ConfigurationOptions): Observable<PublicCardResponse> {
         return this.updateWithHttpInfo(cardId, appId, cardPatchRequest, _options).pipe(map((apiResponse: HttpInfo<PublicCardResponse>) => apiResponse.data));
     }
 
@@ -221,19 +367,48 @@ export class ObservableSampleResponseApi {
      * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
      * Get sample card detail response
      */
-    public getCardsSampleResponseWithHttpInfo(_options?: Configuration): Observable<HttpInfo<IntegratorCardPayloadResponse>> {
-        const requestContextPromise = this.requestFactory.getCardsSampleResponse(_options);
+    public getCardsSampleResponseWithHttpInfo(_options?: ConfigurationOptions): Observable<HttpInfo<IntegratorCardPayloadResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getCardsSampleResponse(_config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getCardsSampleResponseWithHttpInfo(rsp)));
@@ -244,7 +419,7 @@ export class ObservableSampleResponseApi {
      * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
      * Get sample card detail response
      */
-    public getCardsSampleResponse(_options?: Configuration): Observable<IntegratorCardPayloadResponse> {
+    public getCardsSampleResponse(_options?: ConfigurationOptions): Observable<IntegratorCardPayloadResponse> {
         return this.getCardsSampleResponseWithHttpInfo(_options).pipe(map((apiResponse: HttpInfo<IntegratorCardPayloadResponse>) => apiResponse.data));
     }
 

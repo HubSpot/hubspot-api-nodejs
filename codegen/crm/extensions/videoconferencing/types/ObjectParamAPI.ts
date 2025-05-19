@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ExternalSettings } from '../models/ExternalSettings';
 
@@ -9,6 +9,7 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 export interface SettingsApiArchiveRequest {
     /**
      * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApiarchive
      */
@@ -18,6 +19,7 @@ export interface SettingsApiArchiveRequest {
 export interface SettingsApiGetByIdRequest {
     /**
      * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApigetById
      */
@@ -27,6 +29,7 @@ export interface SettingsApiGetByIdRequest {
 export interface SettingsApiReplaceRequest {
     /**
      * The ID of the video conference application. This is the identifier of the application created in your HubSpot developer portal.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApireplace
      */
@@ -51,7 +54,7 @@ export class ObjectSettingsApi {
      * Delete settings
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: SettingsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -60,7 +63,7 @@ export class ObjectSettingsApi {
      * Delete settings
      * @param param the request object
      */
-    public archive(param: SettingsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: SettingsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.appId,  options).toPromise();
     }
 
@@ -69,7 +72,7 @@ export class ObjectSettingsApi {
      * Get settings
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: SettingsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<ExternalSettings>> {
+    public getByIdWithHttpInfo(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
         return this.api.getByIdWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -78,7 +81,7 @@ export class ObjectSettingsApi {
      * Get settings
      * @param param the request object
      */
-    public getById(param: SettingsApiGetByIdRequest, options?: Configuration): Promise<ExternalSettings> {
+    public getById(param: SettingsApiGetByIdRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
         return this.api.getById(param.appId,  options).toPromise();
     }
 
@@ -87,7 +90,7 @@ export class ObjectSettingsApi {
      * Update settings
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: SettingsApiReplaceRequest, options?: Configuration): Promise<HttpInfo<ExternalSettings>> {
+    public replaceWithHttpInfo(param: SettingsApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<ExternalSettings>> {
         return this.api.replaceWithHttpInfo(param.appId, param.externalSettings,  options).toPromise();
     }
 
@@ -96,7 +99,7 @@ export class ObjectSettingsApi {
      * Update settings
      * @param param the request object
      */
-    public replace(param: SettingsApiReplaceRequest, options?: Configuration): Promise<ExternalSettings> {
+    public replace(param: SettingsApiReplaceRequest, options?: ConfigurationOptions): Promise<ExternalSettings> {
         return this.api.replace(param.appId, param.externalSettings,  options).toPromise();
     }
 
