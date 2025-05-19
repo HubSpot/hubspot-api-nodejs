@@ -18,7 +18,7 @@ import { SettingsResponse } from '../models/SettingsResponse';
 export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Deletes this calling extension. This will remove your service as an option for all connected accounts.
+     * Delete a calling extension. This will remove your service as an option for all connected accounts.
      * Delete calling settings
      * @param appId The ID of the app.
      */
@@ -47,7 +47,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -56,7 +56,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Used to set the menu label, target iframe URL, and dimensions for your calling extension.
+     * Set the menu label, target iframe URL, and dimensions for your calling extension.
      * Configure a calling extension
      * @param appId The ID of the app.
      * @param settingsRequest 
@@ -103,7 +103,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -112,8 +112,8 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Returns the calling extension settings configured for your app.
-     * Get calling settings
+     * Retrieve the settings configured for the app.
+     * Retrieve settings
      * @param appId The ID of the app.
      */
     public async getById(appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -141,7 +141,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -150,7 +150,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Updates existing calling extension settings.
+     * Update existing calling extension settings.
      * Update settings
      * @param appId The ID of the app.
      * @param settingsPatchRequest 
@@ -197,7 +197,7 @@ export class SettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

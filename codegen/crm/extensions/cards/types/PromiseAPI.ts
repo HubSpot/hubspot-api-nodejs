@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { CardCreateRequest } from '../models/CardCreateRequest';
 import { CardPatchRequest } from '../models/CardPatchRequest';
@@ -26,8 +27,20 @@ export class PromiseCardsApi {
      * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
      */
-    public archiveWithHttpInfo(cardId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(cardId, appId, _options);
+    public archiveWithHttpInfo(cardId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(cardId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -37,8 +50,20 @@ export class PromiseCardsApi {
      * @param cardId The ID of the card to delete.
      * @param appId The ID of the target app.
      */
-    public archive(cardId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(cardId, appId, _options);
+    public archive(cardId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(cardId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -48,8 +73,20 @@ export class PromiseCardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public createWithHttpInfo(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
-        const result = this.api.createWithHttpInfo(appId, cardCreateRequest, _options);
+    public createWithHttpInfo(appId: number, cardCreateRequest: CardCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(appId, cardCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -59,8 +96,20 @@ export class PromiseCardsApi {
      * @param appId The ID of the target app.
      * @param cardCreateRequest The new card definition.
      */
-    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: Configuration): Promise<PublicCardResponse> {
-        const result = this.api.create(appId, cardCreateRequest, _options);
+    public create(appId: number, cardCreateRequest: CardCreateRequest, _options?: PromiseConfigurationOptions): Promise<PublicCardResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(appId, cardCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -69,8 +118,20 @@ export class PromiseCardsApi {
      * Get all cards
      * @param appId The ID of the target app.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<PublicCardListResponse>> {
-        const result = this.api.getAllWithHttpInfo(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicCardListResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -79,8 +140,20 @@ export class PromiseCardsApi {
      * Get all cards
      * @param appId The ID of the target app.
      */
-    public getAll(appId: number, _options?: Configuration): Promise<PublicCardListResponse> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, _options?: PromiseConfigurationOptions): Promise<PublicCardListResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -90,8 +163,20 @@ export class PromiseCardsApi {
      * @param cardId The ID of the target card.
      * @param appId The ID of the target app.
      */
-    public getByIdWithHttpInfo(cardId: string, appId: number, _options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
-        const result = this.api.getByIdWithHttpInfo(cardId, appId, _options);
+    public getByIdWithHttpInfo(cardId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(cardId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -101,8 +186,20 @@ export class PromiseCardsApi {
      * @param cardId The ID of the target card.
      * @param appId The ID of the target app.
      */
-    public getById(cardId: string, appId: number, _options?: Configuration): Promise<PublicCardResponse> {
-        const result = this.api.getById(cardId, appId, _options);
+    public getById(cardId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<PublicCardResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(cardId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -113,8 +210,20 @@ export class PromiseCardsApi {
      * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public updateWithHttpInfo(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<HttpInfo<PublicCardResponse>> {
-        const result = this.api.updateWithHttpInfo(cardId, appId, cardPatchRequest, _options);
+    public updateWithHttpInfo(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicCardResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(cardId, appId, cardPatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -125,8 +234,20 @@ export class PromiseCardsApi {
      * @param appId The ID of the target app.
      * @param cardPatchRequest Card definition fields to be updated.
      */
-    public update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: Configuration): Promise<PublicCardResponse> {
-        const result = this.api.update(cardId, appId, cardPatchRequest, _options);
+    public update(cardId: string, appId: number, cardPatchRequest: CardPatchRequest, _options?: PromiseConfigurationOptions): Promise<PublicCardResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(cardId, appId, cardPatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -153,8 +274,20 @@ export class PromiseSampleResponseApi {
      * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
      * Get sample card detail response
      */
-    public getCardsSampleResponseWithHttpInfo(_options?: Configuration): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
-        const result = this.api.getCardsSampleResponseWithHttpInfo(_options);
+    public getCardsSampleResponseWithHttpInfo(_options?: PromiseConfigurationOptions): Promise<HttpInfo<IntegratorCardPayloadResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getCardsSampleResponseWithHttpInfo(observableOptions);
         return result.toPromise();
     }
 
@@ -162,8 +295,20 @@ export class PromiseSampleResponseApi {
      * Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
      * Get sample card detail response
      */
-    public getCardsSampleResponse(_options?: Configuration): Promise<IntegratorCardPayloadResponse> {
-        const result = this.api.getCardsSampleResponse(_options);
+    public getCardsSampleResponse(_options?: PromiseConfigurationOptions): Promise<IntegratorCardPayloadResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getCardsSampleResponse(observableOptions);
         return result.toPromise();
     }
 

@@ -11,8 +11,15 @@
  */
 
 
-export class RecordingSettingsRequest {
-    'urlToRetrieveAuthedRecording': string;
+export class ChannelConnectionSettingsRequest {
+    /**
+    * If true, this app will be considered to support channel connection
+    */
+    'isReady': boolean;
+    /**
+    * The URL to fetch phone numbers available for channel connection
+    */
+    'url': string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -20,14 +27,20 @@ export class RecordingSettingsRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "urlToRetrieveAuthedRecording",
-            "baseName": "urlToRetrieveAuthedRecording",
+            "name": "isReady",
+            "baseName": "isReady",
+            "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "url",
+            "baseName": "url",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return RecordingSettingsRequest.attributeTypeMap;
+        return ChannelConnectionSettingsRequest.attributeTypeMap;
     }
 
     public constructor() {
