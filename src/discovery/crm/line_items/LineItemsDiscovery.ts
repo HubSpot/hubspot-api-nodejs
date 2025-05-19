@@ -1,7 +1,7 @@
 import {
   BasicApi,
   BatchApi,
-  Configuration,
+  PromiseConfigurationOptions,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -44,7 +44,7 @@ export default class LineItemsDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
       this.basicApi,
       limit,
       after,
