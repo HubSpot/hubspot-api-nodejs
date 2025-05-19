@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class PreviousPage {
-    'before': string;
-    'link'?: string;
+export class SimplePublicObjectBatchInputForCreate {
+    'associations'?: Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -21,20 +23,26 @@ export class PreviousPage {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "before",
-            "baseName": "before",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<PublicAssociationsForObject>",
+            "format": ""
+        },
+        {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
             "type": "string",
             "format": ""
         },
         {
-            "name": "link",
-            "baseName": "link",
-            "type": "string",
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PreviousPage.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {

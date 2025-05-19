@@ -19,10 +19,13 @@ export class SimplePublicUpsertObject {
     '_new': boolean;
     'propertiesWithHistory'?: { [key: string]: Array<ValueWithTimestamp>; };
     'id': string;
+    'objectWriteTraceId'?: string;
     'properties': { [key: string]: string; };
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -62,6 +65,12 @@ export class SimplePublicUpsertObject {
             "format": ""
         },
         {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }",
@@ -81,4 +90,3 @@ export class SimplePublicUpsertObject {
     public constructor() {
     }
 }
-
