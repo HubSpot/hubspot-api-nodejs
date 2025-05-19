@@ -1,11 +1,12 @@
 import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
+import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
 import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -38,23 +39,52 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Move an Object identified by `{contactId}` to the recycling bin.
-     * Archive
-     * @param contactId 
+     * Delete a contact by ID. Deleted contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
+     * Archive a contact
+     * @param contactId The ID of the contact to delete.
      */
-    public archiveWithHttpInfo(contactId: string, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archive(contactId, _options);
+    public archiveWithHttpInfo(contactId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive(contactId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
@@ -62,32 +92,61 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Move an Object identified by `{contactId}` to the recycling bin.
-     * Archive
-     * @param contactId 
+     * Delete a contact by ID. Deleted contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
+     * Archive a contact
+     * @param contactId The ID of the contact to delete.
      */
-    public archive(contactId: string, _options?: Configuration): Observable<void> {
+    public archive(contactId: string, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(contactId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
-     * Create a contact with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard contacts is provided.
-     * Create
-     * @param simplePublicObjectInputForCreate 
+     * Create a single contact. Include a `properties` object to define [property values](https://developers.hubspot.com/docs/guides/api/crm/properties) for the contact, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+     * Create a contact
+     * @param simplePublicObjectInputForCreate
      */
-    public createWithHttpInfo(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Observable<HttpInfo<SimplePublicObject>> {
-        const requestContextPromise = this.requestFactory.create(simplePublicObjectInputForCreate, _options);
+    public createWithHttpInfo(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: ConfigurationOptions): Observable<HttpInfo<SimplePublicObject>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(simplePublicObjectInputForCreate, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -95,37 +154,66 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Create a contact with the given properties and return a copy of the object, including the ID. Documentation and examples for creating standard contacts is provided.
-     * Create
-     * @param simplePublicObjectInputForCreate 
+     * Create a single contact. Include a `properties` object to define [property values](https://developers.hubspot.com/docs/guides/api/crm/properties) for the contact, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
+     * Create a contact
+     * @param simplePublicObjectInputForCreate
      */
-    public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: Configuration): Observable<SimplePublicObject> {
+    public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: ConfigurationOptions): Observable<SimplePublicObject> {
         return this.createWithHttpInfo(simplePublicObjectInputForCreate, _options).pipe(map((apiResponse: HttpInfo<SimplePublicObject>) => apiResponse.data));
     }
 
     /**
-     * Read an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID.  Control what is returned via the `properties` query param.
-     * Read
-     * @param contactId 
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * Retrieve a contact by its ID (`contactId`) or by a unique property (`idProperty`). You can specify what is returned using the `properties` query parameter.
+     * Retrieve a contact
+     * @param contactId The ID of the contact to retrieve.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
-    public getByIdWithHttpInfo(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Observable<HttpInfo<SimplePublicObjectWithAssociations>> {
-        const requestContextPromise = this.requestFactory.getById(contactId, properties, propertiesWithHistory, associations, archived, idProperty, _options);
+    public getByIdWithHttpInfo(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: ConfigurationOptions): Observable<HttpInfo<SimplePublicObjectWithAssociations>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(contactId, properties, propertiesWithHistory, associations, archived, idProperty, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
@@ -133,42 +221,71 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Read an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID.  Control what is returned via the `properties` query param.
-     * Read
-     * @param contactId 
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object type
+     * Retrieve a contact by its ID (`contactId`) or by a unique property (`idProperty`). You can specify what is returned using the `properties` query parameter.
+     * Retrieve a contact
+     * @param contactId The ID of the contact to retrieve.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
-    public getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Observable<SimplePublicObjectWithAssociations> {
+    public getById(contactId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: ConfigurationOptions): Observable<SimplePublicObjectWithAssociations> {
         return this.getByIdWithHttpInfo(contactId, properties, propertiesWithHistory, associations, archived, idProperty, _options).pipe(map((apiResponse: HttpInfo<SimplePublicObjectWithAssociations>) => apiResponse.data));
     }
 
     /**
-     * Read a page of contacts. Control what is returned via the `properties` query param.
-     * List
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve all contacts, using query parameters to specify the information that gets returned.
+     * Retrieve contacts
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPageWithHttpInfo(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Observable<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
-        const requestContextPromise = this.requestFactory.getPage(limit, after, properties, propertiesWithHistory, associations, archived, _options);
+    public getPageWithHttpInfo(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getPage(limit, after, properties, propertiesWithHistory, associations, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
@@ -176,39 +293,192 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Read a page of contacts. Control what is returned via the `properties` query param.
-     * List
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-     * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
-     * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve all contacts, using query parameters to specify the information that gets returned.
+     * Retrieve contacts
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [properties] A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+     * @param [propertiesWithHistory] A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored. Usage of this parameter will reduce the maximum number of objects that can be read by a single request.
+     * @param [associations] A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: Configuration): Observable<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
+    public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: ConfigurationOptions): Observable<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
         return this.getPageWithHttpInfo(limit, after, properties, propertiesWithHistory, associations, archived, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>) => apiResponse.data));
     }
 
     /**
-     * Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties result in an error. Properties values can be cleared by passing an empty string.
-     * Update
-     * @param contactId 
-     * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
+     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
+     * Merge two contacts
+     * @param publicMergeInput
      */
-    public updateWithHttpInfo(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Observable<HttpInfo<SimplePublicObject>> {
-        const requestContextPromise = this.requestFactory.update(contactId, simplePublicObjectInput, idProperty, _options);
+    public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: ConfigurationOptions): Observable<HttpInfo<SimplePublicObject>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.merge(publicMergeInput, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.mergeWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Merge two contact records. Learn more about [merging records](https://knowledge.hubspot.com/records/merge-records). 
+     * Merge two contacts
+     * @param publicMergeInput
+     */
+    public merge(publicMergeInput: PublicMergeInput, _options?: ConfigurationOptions): Observable<SimplePublicObject> {
+        return this.mergeWithHttpInfo(publicMergeInput, _options).pipe(map((apiResponse: HttpInfo<SimplePublicObject>) => apiResponse.data));
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
+     * Permanently delete a contact (GDPR-compliant)
+     * @param publicGdprDeleteInput
+     */
+    public purgeWithHttpInfo(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.purge(publicGdprDeleteInput, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purgeWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Permanently delete a contact and all associated content to follow GDPR. Use optional property `idProperty` set to `email` to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future. Learn more about [permanently deleting contacts](https://knowledge.hubspot.com/privacy-and-consent/how-do-i-perform-a-gdpr-delete-in-hubspot).
+     * Permanently delete a contact (GDPR-compliant)
+     * @param publicGdprDeleteInput
+     */
+    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: ConfigurationOptions): Observable<void> {
+        return this.purgeWithHttpInfo(publicGdprDeleteInput, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Update a contact by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update a contact
+     * @param contactId The ID of the contact to update.
+     * @param simplePublicObjectInput
+     * @param [idProperty] The name of a property whose values are unique for this object type
+     */
+    public updateWithHttpInfo(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: ConfigurationOptions): Observable<HttpInfo<SimplePublicObject>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(contactId, simplePublicObjectInput, idProperty, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
@@ -216,13 +486,13 @@ export class ObservableBasicApi {
     }
 
     /**
-     * Perform a partial update of an Object identified by `{contactId}`. `{contactId}` refers to the internal object ID. Provided property values will be overwritten. Read-only and non-existent properties result in an error. Properties values can be cleared by passing an empty string.
-     * Update
-     * @param contactId 
-     * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object type
+     * Update a contact by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update a contact
+     * @param contactId The ID of the contact to update.
+     * @param simplePublicObjectInput
+     * @param [idProperty] The name of a property whose values are unique for this object type
      */
-    public update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Observable<SimplePublicObject> {
+    public update(contactId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: ConfigurationOptions): Observable<SimplePublicObject> {
         return this.updateWithHttpInfo(contactId, simplePublicObjectInput, idProperty, _options).pipe(map((apiResponse: HttpInfo<SimplePublicObject>) => apiResponse.data));
     }
 
@@ -245,22 +515,52 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Archive a batch of contacts by ID
-     * @param batchInputSimplePublicObjectId 
+     * Archive a batch of contacts by ID. Archived contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
+     * Archive a batch of contacts
+     * @param batchInputSimplePublicObjectId
      */
-    public archiveWithHttpInfo(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archive(batchInputSimplePublicObjectId, _options);
+    public archiveWithHttpInfo(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive(batchInputSimplePublicObjectId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
@@ -268,30 +568,61 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Archive a batch of contacts by ID
-     * @param batchInputSimplePublicObjectId 
+     * Archive a batch of contacts by ID. Archived contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
+     * Archive a batch of contacts
+     * @param batchInputSimplePublicObjectId
      */
-    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Observable<void> {
+    public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(batchInputSimplePublicObjectId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
+     * Create a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
      * Create a batch of contacts
-     * @param batchInputSimplePublicObjectInputForCreate 
+     * @param batchInputSimplePublicObjectBatchInputForCreate
      */
-    public createWithHttpInfo(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
-        const requestContextPromise = this.requestFactory.create(batchInputSimplePublicObjectInputForCreate, _options);
+    public createWithHttpInfo(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(batchInputSimplePublicObjectBatchInputForCreate, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -299,31 +630,62 @@ export class ObservableBatchApi {
     }
 
     /**
+     * Create a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
      * Create a batch of contacts
-     * @param batchInputSimplePublicObjectInputForCreate 
+     * @param batchInputSimplePublicObjectBatchInputForCreate
      */
-    public create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
-        return this.createWithHttpInfo(batchInputSimplePublicObjectInputForCreate, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>) => apiResponse.data));
+    public create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: ConfigurationOptions): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+        return this.createWithHttpInfo(batchInputSimplePublicObjectBatchInputForCreate, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>) => apiResponse.data));
     }
 
     /**
-     * Read a batch of contacts by internal ID, or unique property values
-     * @param batchReadInputSimplePublicObjectId 
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). 
+     * Retrieve a batch of contacts
+     * @param batchReadInputSimplePublicObjectId
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public readWithHttpInfo(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
-        const requestContextPromise = this.requestFactory.read(batchReadInputSimplePublicObjectId, archived, _options);
+    public readWithHttpInfo(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.read(batchReadInputSimplePublicObjectId, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.readWithHttpInfo(rsp)));
@@ -331,31 +693,62 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Read a batch of contacts by internal ID, or unique property values
-     * @param batchReadInputSimplePublicObjectId 
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). 
+     * Retrieve a batch of contacts
+     * @param batchReadInputSimplePublicObjectId
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: ConfigurationOptions): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.readWithHttpInfo(batchReadInputSimplePublicObjectId, archived, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>) => apiResponse.data));
     }
 
     /**
-     * Update a batch of contacts by internal ID, or unique property values
-     * @param batchInputSimplePublicObjectBatchInput 
+     * Update a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update a batch of contacts
+     * @param batchInputSimplePublicObjectBatchInput
      */
-    public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
-        const requestContextPromise = this.requestFactory.update(batchInputSimplePublicObjectBatchInput, _options);
+    public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(batchInputSimplePublicObjectBatchInput, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
@@ -363,31 +756,61 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Update a batch of contacts by internal ID, or unique property values
-     * @param batchInputSimplePublicObjectBatchInput 
+     * Update a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update a batch of contacts
+     * @param batchInputSimplePublicObjectBatchInput
      */
-    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: ConfigurationOptions): Observable<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
         return this.updateWithHttpInfo(batchInputSimplePublicObjectBatchInput, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>) => apiResponse.data));
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of contacts by unique property values
-     * @param batchInputSimplePublicObjectBatchInputUpsert 
+     * Upsert a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record.
+     * Create or update a batch of contacts
+     * @param batchInputSimplePublicObjectBatchInputUpsert
      */
-    public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Observable<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
-        const requestContextPromise = this.requestFactory.upsert(batchInputSimplePublicObjectBatchInputUpsert, _options);
+    public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: ConfigurationOptions): Observable<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.upsert(batchInputSimplePublicObjectBatchInputUpsert, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.upsertWithHttpInfo(rsp)));
@@ -395,112 +818,12 @@ export class ObservableBatchApi {
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of contacts by unique property values
-     * @param batchInputSimplePublicObjectBatchInputUpsert 
+     * Upsert a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record.
+     * Create or update a batch of contacts
+     * @param batchInputSimplePublicObjectBatchInputUpsert
      */
-    public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Observable<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
+    public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: ConfigurationOptions): Observable<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
         return this.upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert, _options).pipe(map((apiResponse: HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>) => apiResponse.data));
-    }
-
-}
-
-import { GDPRApiRequestFactory, GDPRApiResponseProcessor} from "../apis/GDPRApi";
-export class ObservableGDPRApi {
-    private requestFactory: GDPRApiRequestFactory;
-    private responseProcessor: GDPRApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: GDPRApiRequestFactory,
-        responseProcessor?: GDPRApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new GDPRApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new GDPRApiResponseProcessor();
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
-     */
-    public purgeWithHttpInfo(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.purge(publicGdprDeleteInput, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.purgeWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Permanently delete a contact and all associated content to follow GDPR. Use optional property \'idProperty\' set to \'email\' to identify contact by email address. If email address is not found, the email address will be added to a blocklist and prevent it from being used in the future.
-     * GDPR DELETE
-     * @param publicGdprDeleteInput 
-     */
-    public purge(publicGdprDeleteInput: PublicGdprDeleteInput, _options?: Configuration): Observable<void> {
-        return this.purgeWithHttpInfo(publicGdprDeleteInput, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
-    }
-
-}
-
-import { MergeApiRequestFactory, MergeApiResponseProcessor} from "../apis/MergeApi";
-export class ObservableMergeApi {
-    private requestFactory: MergeApiRequestFactory;
-    private responseProcessor: MergeApiResponseProcessor;
-    private configuration: Configuration;
-
-    public constructor(
-        configuration: Configuration,
-        requestFactory?: MergeApiRequestFactory,
-        responseProcessor?: MergeApiResponseProcessor
-    ) {
-        this.configuration = configuration;
-        this.requestFactory = requestFactory || new MergeApiRequestFactory(configuration);
-        this.responseProcessor = responseProcessor || new MergeApiResponseProcessor();
-    }
-
-    /**
-     * Merge two contacts with same type
-     * @param publicMergeInput 
-     */
-    public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<HttpInfo<SimplePublicObject>> {
-        const requestContextPromise = this.requestFactory.merge(publicMergeInput, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.mergeWithHttpInfo(rsp)));
-            }));
-    }
-
-    /**
-     * Merge two contacts with same type
-     * @param publicMergeInput 
-     */
-    public merge(publicMergeInput: PublicMergeInput, _options?: Configuration): Observable<SimplePublicObject> {
-        return this.mergeWithHttpInfo(publicMergeInput, _options).pipe(map((apiResponse: HttpInfo<SimplePublicObject>) => apiResponse.data));
     }
 
 }
@@ -522,21 +845,52 @@ export class ObservableSearchApi {
     }
 
     /**
-     * @param publicObjectSearchRequest 
+     * Search for contacts by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
+     * Search for contacts
+     * @param publicObjectSearchRequest
      */
-    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Observable<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
-        const requestContextPromise = this.requestFactory.doSearch(publicObjectSearchRequest, _options);
+    public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.doSearch(publicObjectSearchRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.doSearchWithHttpInfo(rsp)));
@@ -544,9 +898,11 @@ export class ObservableSearchApi {
     }
 
     /**
-     * @param publicObjectSearchRequest 
+     * Search for contacts by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
+     * Search for contacts
+     * @param publicObjectSearchRequest
      */
-    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Observable<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: ConfigurationOptions): Observable<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
         return this.doSearchWithHttpInfo(publicObjectSearchRequest, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>) => apiResponse.data));
     }
 

@@ -9,9 +9,9 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
 import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -24,7 +24,8 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Archive a batch of contacts by ID
+     * Archive a batch of contacts by ID. Archived contacts can be restored within 90 days of deletion. Learn more about the [data impacted by contact deletions](https://knowledge.hubspot.com/privacy-and-consent/understand-restorable-and-permanent-contact-deletions) and how to [restore archived records](https://knowledge.hubspot.com/records/restore-deleted-records).
+     * Archive a batch of contacts
      * @param batchInputSimplePublicObjectId 
      */
     public async archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: Configuration): Promise<RequestContext> {
@@ -62,7 +63,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -71,15 +72,16 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record, along with an `associations` array to define [associations](https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4) with other CRM records.
      * Create a batch of contacts
-     * @param batchInputSimplePublicObjectInputForCreate 
+     * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
-    public async create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
+    public async create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'batchInputSimplePublicObjectInputForCreate' is not null or undefined
-        if (batchInputSimplePublicObjectInputForCreate === null || batchInputSimplePublicObjectInputForCreate === undefined) {
-            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectInputForCreate");
+        // verify required parameter 'batchInputSimplePublicObjectBatchInputForCreate' is not null or undefined
+        if (batchInputSimplePublicObjectBatchInputForCreate === null || batchInputSimplePublicObjectBatchInputForCreate === undefined) {
+            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectBatchInputForCreate");
         }
 
 
@@ -97,7 +99,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputSimplePublicObjectInputForCreate, "BatchInputSimplePublicObjectInputForCreate", ""),
+            ObjectSerializer.serialize(batchInputSimplePublicObjectBatchInputForCreate, "BatchInputSimplePublicObjectBatchInputForCreate", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -109,7 +111,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -118,7 +120,8 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Read a batch of contacts by internal ID, or unique property values
+     * Retrieve a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). 
+     * Retrieve a batch of contacts
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
      */
@@ -163,7 +166,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -172,7 +175,8 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update a batch of contacts by internal ID, or unique property values
+     * Update a batch of contacts by ID (`contactId`) or unique property value (`idProperty`). Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
+     * Update a batch of contacts
      * @param batchInputSimplePublicObjectBatchInput 
      */
     public async update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: Configuration): Promise<RequestContext> {
@@ -210,7 +214,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -219,8 +223,8 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Create or update records identified by a unique property value as specified by the `idProperty` query param. `idProperty` query param refers to a property whose values are unique for the object.
-     * Create or update a batch of contacts by unique property values
+     * Upsert a batch of contacts. The `inputs` array can contain a `properties` object to define property values for each record.
+     * Create or update a batch of contacts
      * @param batchInputSimplePublicObjectBatchInputUpsert 
      */
     public async upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: Configuration): Promise<RequestContext> {
@@ -258,7 +262,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
