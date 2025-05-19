@@ -1,8 +1,7 @@
 import {
   BasicApi,
   BatchApi,
-  Configuration,
-  MergeApi,
+  PromiseConfigurationOptions,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -19,7 +18,6 @@ import { getAll } from '../../../services/getAll'
 export default class DealsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public mergeApi: MergeApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -35,7 +33,6 @@ export default class DealsDiscovery {
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.mergeApi = ApiDecoratorService.getInstance().apply<MergeApi>(new MergeApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 
@@ -47,7 +44,7 @@ export default class DealsDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
       this.basicApi,
       limit,
       after,

@@ -1,9 +1,7 @@
 import {
   BasicApi,
   BatchApi,
-  Configuration,
-  GDPRApi,
-  MergeApi,
+  PromiseConfigurationOptions,
   RequestContext,
   ResponseContext,
   SearchApi,
@@ -20,8 +18,6 @@ import { getAll } from '../../../services/getAll'
 export default class ContactsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public gdprApi: GDPRApi
-  public mergeApi: MergeApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -37,8 +33,6 @@ export default class ContactsDiscovery {
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.gdprApi = ApiDecoratorService.getInstance().apply<GDPRApi>(new GDPRApi(configuration))
-    this.mergeApi = ApiDecoratorService.getInstance().apply<MergeApi>(new MergeApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 
@@ -50,7 +44,7 @@ export default class ContactsDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
       this.basicApi,
       limit,
       after,
