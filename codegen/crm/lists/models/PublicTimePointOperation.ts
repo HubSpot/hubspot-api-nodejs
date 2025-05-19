@@ -23,6 +23,8 @@ export class PublicTimePointOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "endpointBehavior",
@@ -74,7 +76,6 @@ export class PublicTimePointOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicTimePointOperationOperationTypeEnum {
     TimePoint = 'TIME_POINT'

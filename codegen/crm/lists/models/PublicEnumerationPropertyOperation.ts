@@ -19,6 +19,8 @@ export class PublicEnumerationPropertyOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "includeObjectsWithNoValueSet",
@@ -52,7 +54,6 @@ export class PublicEnumerationPropertyOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicEnumerationPropertyOperationOperationTypeEnum {
     Enumeration = 'ENUMERATION'

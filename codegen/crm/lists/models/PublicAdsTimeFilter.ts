@@ -18,6 +18,8 @@ export class PublicAdsTimeFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "pruningRefineBy",
@@ -39,7 +41,6 @@ export class PublicAdsTimeFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicAdsTimeFilterFilterTypeEnum {
     AdsTime = 'ADS_TIME'

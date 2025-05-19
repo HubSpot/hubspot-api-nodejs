@@ -19,6 +19,8 @@ export class PublicRollingPropertyUpdatedOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "includeObjectsWithNoValueSet",
@@ -52,7 +54,6 @@ export class PublicRollingPropertyUpdatedOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicRollingPropertyUpdatedOperationOperationTypeEnum {
     RollingPropertyUpdated = 'ROLLING_PROPERTY_UPDATED'

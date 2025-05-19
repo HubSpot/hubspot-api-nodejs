@@ -21,6 +21,8 @@ export class PublicAndFilterBranch {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "filterBranchType",
@@ -54,7 +56,6 @@ export class PublicAndFilterBranch {
     public constructor() {
     }
 }
-
 
 export enum PublicAndFilterBranchFilterBranchTypeEnum {
     And = 'AND'

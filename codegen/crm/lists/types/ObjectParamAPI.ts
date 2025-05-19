@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ApiCollectionResponseJoinTimeAndRecordId } from '../models/ApiCollectionResponseJoinTimeAndRecordId';
 import { ApiCollectionResponseRecordListMembershipNoPaging } from '../models/ApiCollectionResponseRecordListMembershipNoPaging';
@@ -35,6 +35,7 @@ export interface FoldersApiCreateRequest {
 export interface FoldersApiGetAllRequest {
     /**
      * The Id of the folder to retrieve.
+     * Defaults to: &#39;0&#39;
      * @type string
      * @memberof FoldersApigetAll
      */
@@ -44,12 +45,14 @@ export interface FoldersApiGetAllRequest {
 export interface FoldersApiMoveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FoldersApimove
      */
     folderId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FoldersApimove
      */
@@ -68,6 +71,7 @@ export interface FoldersApiMoveListRequest {
 export interface FoldersApiRemoveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FoldersApiremove
      */
@@ -77,12 +81,14 @@ export interface FoldersApiRemoveRequest {
 export interface FoldersApiRenameRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FoldersApirename
      */
     folderId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof FoldersApirename
      */
@@ -101,7 +107,7 @@ export class ObjectFoldersApi {
      * Creates a folder
      * @param param the request object
      */
-    public createWithHttpInfo(param: FoldersApiCreateRequest, options?: Configuration): Promise<HttpInfo<ListFolderCreateResponse>> {
+    public createWithHttpInfo(param: FoldersApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListFolderCreateResponse>> {
         return this.api.createWithHttpInfo(param.listFolderCreateRequest,  options).toPromise();
     }
 
@@ -110,7 +116,7 @@ export class ObjectFoldersApi {
      * Creates a folder
      * @param param the request object
      */
-    public create(param: FoldersApiCreateRequest, options?: Configuration): Promise<ListFolderCreateResponse> {
+    public create(param: FoldersApiCreateRequest, options?: ConfigurationOptions): Promise<ListFolderCreateResponse> {
         return this.api.create(param.listFolderCreateRequest,  options).toPromise();
     }
 
@@ -119,7 +125,7 @@ export class ObjectFoldersApi {
      * Retrieves a folder.
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: FoldersApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+    public getAllWithHttpInfo(param: FoldersApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<ListFolderFetchResponse>> {
         return this.api.getAllWithHttpInfo(param.folderId,  options).toPromise();
     }
 
@@ -128,7 +134,7 @@ export class ObjectFoldersApi {
      * Retrieves a folder.
      * @param param the request object
      */
-    public getAll(param: FoldersApiGetAllRequest = {}, options?: Configuration): Promise<ListFolderFetchResponse> {
+    public getAll(param: FoldersApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<ListFolderFetchResponse> {
         return this.api.getAll(param.folderId,  options).toPromise();
     }
 
@@ -137,7 +143,7 @@ export class ObjectFoldersApi {
      * Moves a folder
      * @param param the request object
      */
-    public moveWithHttpInfo(param: FoldersApiMoveRequest, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+    public moveWithHttpInfo(param: FoldersApiMoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListFolderFetchResponse>> {
         return this.api.moveWithHttpInfo(param.folderId, param.newParentFolderId,  options).toPromise();
     }
 
@@ -146,7 +152,7 @@ export class ObjectFoldersApi {
      * Moves a folder
      * @param param the request object
      */
-    public move(param: FoldersApiMoveRequest, options?: Configuration): Promise<ListFolderFetchResponse> {
+    public move(param: FoldersApiMoveRequest, options?: ConfigurationOptions): Promise<ListFolderFetchResponse> {
         return this.api.move(param.folderId, param.newParentFolderId,  options).toPromise();
     }
 
@@ -155,7 +161,7 @@ export class ObjectFoldersApi {
      * Moves a list to a given folder
      * @param param the request object
      */
-    public moveListWithHttpInfo(param: FoldersApiMoveListRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public moveListWithHttpInfo(param: FoldersApiMoveListRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.moveListWithHttpInfo(param.listMoveRequest,  options).toPromise();
     }
 
@@ -164,7 +170,7 @@ export class ObjectFoldersApi {
      * Moves a list to a given folder
      * @param param the request object
      */
-    public moveList(param: FoldersApiMoveListRequest, options?: Configuration): Promise<void> {
+    public moveList(param: FoldersApiMoveListRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.moveList(param.listMoveRequest,  options).toPromise();
     }
 
@@ -173,7 +179,7 @@ export class ObjectFoldersApi {
      * Deletes a folder
      * @param param the request object
      */
-    public removeWithHttpInfo(param: FoldersApiRemoveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public removeWithHttpInfo(param: FoldersApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.removeWithHttpInfo(param.folderId,  options).toPromise();
     }
 
@@ -182,7 +188,7 @@ export class ObjectFoldersApi {
      * Deletes a folder
      * @param param the request object
      */
-    public remove(param: FoldersApiRemoveRequest, options?: Configuration): Promise<void> {
+    public remove(param: FoldersApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.remove(param.folderId,  options).toPromise();
     }
 
@@ -191,7 +197,7 @@ export class ObjectFoldersApi {
      * Rename a folder
      * @param param the request object
      */
-    public renameWithHttpInfo(param: FoldersApiRenameRequest, options?: Configuration): Promise<HttpInfo<ListFolderFetchResponse>> {
+    public renameWithHttpInfo(param: FoldersApiRenameRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListFolderFetchResponse>> {
         return this.api.renameWithHttpInfo(param.folderId, param.newFolderName,  options).toPromise();
     }
 
@@ -200,7 +206,7 @@ export class ObjectFoldersApi {
      * Rename a folder
      * @param param the request object
      */
-    public rename(param: FoldersApiRenameRequest, options?: Configuration): Promise<ListFolderFetchResponse> {
+    public rename(param: FoldersApiRenameRequest, options?: ConfigurationOptions): Promise<ListFolderFetchResponse> {
         return this.api.rename(param.folderId, param.newFolderName,  options).toPromise();
     }
 
@@ -230,12 +236,14 @@ export interface ListsApiDoSearchRequest {
 export interface ListsApiGetAllRequest {
     /**
      * The **ILS IDs** of the lists to fetch.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof ListsApigetAll
      */
     listIds?: Array<string>
     /**
      * A flag indicating whether or not the response object list definitions should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
+     * Defaults to: false
      * @type boolean
      * @memberof ListsApigetAll
      */
@@ -245,12 +253,14 @@ export interface ListsApiGetAllRequest {
 export interface ListsApiGetByIdRequest {
     /**
      * The **ILS ID** of the list to fetch.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApigetById
      */
     listId: string
     /**
      * A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
+     * Defaults to: false
      * @type boolean
      * @memberof ListsApigetById
      */
@@ -260,18 +270,21 @@ export interface ListsApiGetByIdRequest {
 export interface ListsApiGetByNameRequest {
     /**
      * The name of the list to fetch. This is **not** case sensitive.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApigetByName
      */
     listName: string
     /**
      * The object type ID of the object types stored by the list to fetch. For example, &#x60;0-1&#x60; for a &#x60;CONTACT&#x60; list.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApigetByName
      */
     objectTypeId: string
     /**
      * A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
+     * Defaults to: false
      * @type boolean
      * @memberof ListsApigetByName
      */
@@ -281,6 +294,7 @@ export interface ListsApiGetByNameRequest {
 export interface ListsApiRemoveRequest {
     /**
      * The **ILS ID** of the list to delete.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApiremove
      */
@@ -290,6 +304,7 @@ export interface ListsApiRemoveRequest {
 export interface ListsApiRestoreRequest {
     /**
      * The **ILS ID** of the list to restore.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApirestore
      */
@@ -299,6 +314,7 @@ export interface ListsApiRestoreRequest {
 export interface ListsApiUpdateListFiltersRequest {
     /**
      * The **ILS ID** of the list to update.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApiupdateListFilters
      */
@@ -311,6 +327,7 @@ export interface ListsApiUpdateListFiltersRequest {
     listFilterUpdateRequest: ListFilterUpdateRequest
     /**
      * A flag indicating whether or not the memberships added to the list as a result of the filter change should be enrolled in workflows that are relevant to this list.
+     * Defaults to: false
      * @type boolean
      * @memberof ListsApiupdateListFilters
      */
@@ -320,18 +337,21 @@ export interface ListsApiUpdateListFiltersRequest {
 export interface ListsApiUpdateNameRequest {
     /**
      * The **ILS ID** of the list to update.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApiupdateName
      */
     listId: string
     /**
      * The name to update the list to.
+     * Defaults to: undefined
      * @type string
      * @memberof ListsApiupdateName
      */
     listName?: string
     /**
      * A flag indicating whether or not the response object list definition should include a filter branch definition. By default, object list definitions will not have their filter branch definitions included in the response.
+     * Defaults to: false
      * @type boolean
      * @memberof ListsApiupdateName
      */
@@ -350,7 +370,7 @@ export class ObjectListsApi {
      * Create List
      * @param param the request object
      */
-    public createWithHttpInfo(param: ListsApiCreateRequest, options?: Configuration): Promise<HttpInfo<ListCreateResponse>> {
+    public createWithHttpInfo(param: ListsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListCreateResponse>> {
         return this.api.createWithHttpInfo(param.listCreateRequest,  options).toPromise();
     }
 
@@ -359,7 +379,7 @@ export class ObjectListsApi {
      * Create List
      * @param param the request object
      */
-    public create(param: ListsApiCreateRequest, options?: Configuration): Promise<ListCreateResponse> {
+    public create(param: ListsApiCreateRequest, options?: ConfigurationOptions): Promise<ListCreateResponse> {
         return this.api.create(param.listCreateRequest,  options).toPromise();
     }
 
@@ -368,7 +388,7 @@ export class ObjectListsApi {
      * Search Lists
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: ListsApiDoSearchRequest, options?: Configuration): Promise<HttpInfo<ListSearchResponse>> {
+    public doSearchWithHttpInfo(param: ListsApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListSearchResponse>> {
         return this.api.doSearchWithHttpInfo(param.listSearchRequest,  options).toPromise();
     }
 
@@ -377,7 +397,7 @@ export class ObjectListsApi {
      * Search Lists
      * @param param the request object
      */
-    public doSearch(param: ListsApiDoSearchRequest, options?: Configuration): Promise<ListSearchResponse> {
+    public doSearch(param: ListsApiDoSearchRequest, options?: ConfigurationOptions): Promise<ListSearchResponse> {
         return this.api.doSearch(param.listSearchRequest,  options).toPromise();
     }
 
@@ -386,7 +406,7 @@ export class ObjectListsApi {
      * Fetch Multiple Lists
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: ListsApiGetAllRequest = {}, options?: Configuration): Promise<HttpInfo<ListsByIdResponse>> {
+    public getAllWithHttpInfo(param: ListsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<ListsByIdResponse>> {
         return this.api.getAllWithHttpInfo(param.listIds, param.includeFilters,  options).toPromise();
     }
 
@@ -395,7 +415,7 @@ export class ObjectListsApi {
      * Fetch Multiple Lists
      * @param param the request object
      */
-    public getAll(param: ListsApiGetAllRequest = {}, options?: Configuration): Promise<ListsByIdResponse> {
+    public getAll(param: ListsApiGetAllRequest = {}, options?: ConfigurationOptions): Promise<ListsByIdResponse> {
         return this.api.getAll(param.listIds, param.includeFilters,  options).toPromise();
     }
 
@@ -404,7 +424,7 @@ export class ObjectListsApi {
      * Fetch List by ID
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: ListsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<ListFetchResponse>> {
+    public getByIdWithHttpInfo(param: ListsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListFetchResponse>> {
         return this.api.getByIdWithHttpInfo(param.listId, param.includeFilters,  options).toPromise();
     }
 
@@ -413,7 +433,7 @@ export class ObjectListsApi {
      * Fetch List by ID
      * @param param the request object
      */
-    public getById(param: ListsApiGetByIdRequest, options?: Configuration): Promise<ListFetchResponse> {
+    public getById(param: ListsApiGetByIdRequest, options?: ConfigurationOptions): Promise<ListFetchResponse> {
         return this.api.getById(param.listId, param.includeFilters,  options).toPromise();
     }
 
@@ -422,7 +442,7 @@ export class ObjectListsApi {
      * Fetch List by Name
      * @param param the request object
      */
-    public getByNameWithHttpInfo(param: ListsApiGetByNameRequest, options?: Configuration): Promise<HttpInfo<ListFetchResponse>> {
+    public getByNameWithHttpInfo(param: ListsApiGetByNameRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListFetchResponse>> {
         return this.api.getByNameWithHttpInfo(param.listName, param.objectTypeId, param.includeFilters,  options).toPromise();
     }
 
@@ -431,7 +451,7 @@ export class ObjectListsApi {
      * Fetch List by Name
      * @param param the request object
      */
-    public getByName(param: ListsApiGetByNameRequest, options?: Configuration): Promise<ListFetchResponse> {
+    public getByName(param: ListsApiGetByNameRequest, options?: ConfigurationOptions): Promise<ListFetchResponse> {
         return this.api.getByName(param.listName, param.objectTypeId, param.includeFilters,  options).toPromise();
     }
 
@@ -440,7 +460,7 @@ export class ObjectListsApi {
      * Delete a List
      * @param param the request object
      */
-    public removeWithHttpInfo(param: ListsApiRemoveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public removeWithHttpInfo(param: ListsApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.removeWithHttpInfo(param.listId,  options).toPromise();
     }
 
@@ -449,7 +469,7 @@ export class ObjectListsApi {
      * Delete a List
      * @param param the request object
      */
-    public remove(param: ListsApiRemoveRequest, options?: Configuration): Promise<void> {
+    public remove(param: ListsApiRemoveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.remove(param.listId,  options).toPromise();
     }
 
@@ -458,7 +478,7 @@ export class ObjectListsApi {
      * Restore a List
      * @param param the request object
      */
-    public restoreWithHttpInfo(param: ListsApiRestoreRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public restoreWithHttpInfo(param: ListsApiRestoreRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.restoreWithHttpInfo(param.listId,  options).toPromise();
     }
 
@@ -467,7 +487,7 @@ export class ObjectListsApi {
      * Restore a List
      * @param param the request object
      */
-    public restore(param: ListsApiRestoreRequest, options?: Configuration): Promise<void> {
+    public restore(param: ListsApiRestoreRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.restore(param.listId,  options).toPromise();
     }
 
@@ -476,7 +496,7 @@ export class ObjectListsApi {
      * Update List Filter Definition
      * @param param the request object
      */
-    public updateListFiltersWithHttpInfo(param: ListsApiUpdateListFiltersRequest, options?: Configuration): Promise<HttpInfo<ListUpdateResponse>> {
+    public updateListFiltersWithHttpInfo(param: ListsApiUpdateListFiltersRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListUpdateResponse>> {
         return this.api.updateListFiltersWithHttpInfo(param.listId, param.listFilterUpdateRequest, param.enrollObjectsInWorkflows,  options).toPromise();
     }
 
@@ -485,7 +505,7 @@ export class ObjectListsApi {
      * Update List Filter Definition
      * @param param the request object
      */
-    public updateListFilters(param: ListsApiUpdateListFiltersRequest, options?: Configuration): Promise<ListUpdateResponse> {
+    public updateListFilters(param: ListsApiUpdateListFiltersRequest, options?: ConfigurationOptions): Promise<ListUpdateResponse> {
         return this.api.updateListFilters(param.listId, param.listFilterUpdateRequest, param.enrollObjectsInWorkflows,  options).toPromise();
     }
 
@@ -494,7 +514,7 @@ export class ObjectListsApi {
      * Update List Name
      * @param param the request object
      */
-    public updateNameWithHttpInfo(param: ListsApiUpdateNameRequest, options?: Configuration): Promise<HttpInfo<ListUpdateResponse>> {
+    public updateNameWithHttpInfo(param: ListsApiUpdateNameRequest, options?: ConfigurationOptions): Promise<HttpInfo<ListUpdateResponse>> {
         return this.api.updateNameWithHttpInfo(param.listId, param.listName, param.includeFilters,  options).toPromise();
     }
 
@@ -503,7 +523,7 @@ export class ObjectListsApi {
      * Update List Name
      * @param param the request object
      */
-    public updateName(param: ListsApiUpdateNameRequest, options?: Configuration): Promise<ListUpdateResponse> {
+    public updateName(param: ListsApiUpdateNameRequest, options?: ConfigurationOptions): Promise<ListUpdateResponse> {
         return this.api.updateName(param.listId, param.listName, param.includeFilters,  options).toPromise();
     }
 
@@ -515,6 +535,7 @@ import { MappingApiRequestFactory, MappingApiResponseProcessor} from "../apis/Ma
 export interface MappingApiTranslateLegacyListIdToListIdRequest {
     /**
      * The legacy list id from lists v1 API.
+     * Defaults to: undefined
      * @type string
      * @memberof MappingApitranslateLegacyListIdToListId
      */
@@ -542,7 +563,7 @@ export class ObjectMappingApi {
      * Translate Legacy List Id to Modern List Id
      * @param param the request object
      */
-    public translateLegacyListIdToListIdWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: Configuration): Promise<HttpInfo<PublicMigrationMapping>> {
+    public translateLegacyListIdToListIdWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<PublicMigrationMapping>> {
         return this.api.translateLegacyListIdToListIdWithHttpInfo(param.legacyListId,  options).toPromise();
     }
 
@@ -551,7 +572,7 @@ export class ObjectMappingApi {
      * Translate Legacy List Id to Modern List Id
      * @param param the request object
      */
-    public translateLegacyListIdToListId(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: Configuration): Promise<PublicMigrationMapping> {
+    public translateLegacyListIdToListId(param: MappingApiTranslateLegacyListIdToListIdRequest = {}, options?: ConfigurationOptions): Promise<PublicMigrationMapping> {
         return this.api.translateLegacyListIdToListId(param.legacyListId,  options).toPromise();
     }
 
@@ -560,7 +581,7 @@ export class ObjectMappingApi {
      * Translate Legacy List Id to Modern List Id in Batch
      * @param param the request object
      */
-    public translateLegacyListIdToListIdBatchWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: Configuration): Promise<HttpInfo<PublicBatchMigrationMapping>> {
+    public translateLegacyListIdToListIdBatchWithHttpInfo(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicBatchMigrationMapping>> {
         return this.api.translateLegacyListIdToListIdBatchWithHttpInfo(param.requestBody,  options).toPromise();
     }
 
@@ -569,7 +590,7 @@ export class ObjectMappingApi {
      * Translate Legacy List Id to Modern List Id in Batch
      * @param param the request object
      */
-    public translateLegacyListIdToListIdBatch(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: Configuration): Promise<PublicBatchMigrationMapping> {
+    public translateLegacyListIdToListIdBatch(param: MappingApiTranslateLegacyListIdToListIdBatchRequest, options?: ConfigurationOptions): Promise<PublicBatchMigrationMapping> {
         return this.api.translateLegacyListIdToListIdBatch(param.requestBody,  options).toPromise();
     }
 
@@ -581,6 +602,7 @@ import { MembershipsApiRequestFactory, MembershipsApiResponseProcessor} from "..
 export interface MembershipsApiAddRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiadd
      */
@@ -596,12 +618,14 @@ export interface MembershipsApiAddRequest {
 export interface MembershipsApiAddAllFromListRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; *destination list*, which the *source list* records are added to.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiaddAllFromList
      */
     listId: string
     /**
      * The **ILS ID** of the *source list* to grab the records from, which are then added to the *destination list*.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiaddAllFromList
      */
@@ -611,6 +635,7 @@ export interface MembershipsApiAddAllFromListRequest {
 export interface MembershipsApiAddAndRemoveRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiaddAndRemove
      */
@@ -626,12 +651,14 @@ export interface MembershipsApiAddAndRemoveRequest {
 export interface MembershipsApiGetListsRequest {
     /**
      * Object type id of the record
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetLists
      */
     objectTypeId: string
     /**
      * Id of the record
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetLists
      */
@@ -641,24 +668,28 @@ export interface MembershipsApiGetListsRequest {
 export interface MembershipsApiGetPageRequest {
     /**
      * The **ILS ID** of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPage
      */
     listId: string
     /**
      * The paging offset token for the page that comes &#x60;after&#x60; the previously requested records.  If provided, then the records in the response will be the records following the offset, sorted in *ascending* order. Takes precedence over the &#x60;before&#x60; offset.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPage
      */
     after?: string
     /**
      * The paging offset token for the page that comes &#x60;before&#x60; the previously requested records.  If provided, then the records in the response will be the records preceding the offset, sorted in *descending* order.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPage
      */
     before?: string
     /**
      * The number of records to return in the response. The maximum &#x60;limit&#x60; is 250.
+     * Defaults to: 100
      * @type number
      * @memberof MembershipsApigetPage
      */
@@ -668,24 +699,28 @@ export interface MembershipsApiGetPageRequest {
 export interface MembershipsApiGetPageOrderedByAddedToListDateRequest {
     /**
      * The **ILS ID** of the list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPageOrderedByAddedToListDate
      */
     listId: string
     /**
      * The paging offset token for the page that comes &#x60;after&#x60; the previously requested records.  If provided, then the records in the response will be the records following the offset, sorted in *ascending* order. Takes precedence over the &#x60;before&#x60; offset.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPageOrderedByAddedToListDate
      */
     after?: string
     /**
      * The paging offset token for the page that comes &#x60;before&#x60; the previously requested records.  If provided, then the records in the response will be the records preceding the offset, sorted in *descending* order.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApigetPageOrderedByAddedToListDate
      */
     before?: string
     /**
      * The number of records to return in the response. The maximum &#x60;limit&#x60; is 250.
+     * Defaults to: 100
      * @type number
      * @memberof MembershipsApigetPageOrderedByAddedToListDate
      */
@@ -695,6 +730,7 @@ export interface MembershipsApiGetPageOrderedByAddedToListDateRequest {
 export interface MembershipsApiRemoveRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiremove
      */
@@ -710,6 +746,7 @@ export interface MembershipsApiRemoveRequest {
 export interface MembershipsApiRemoveAllRequest {
     /**
      * The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
+     * Defaults to: undefined
      * @type string
      * @memberof MembershipsApiremoveAll
      */
@@ -728,7 +765,7 @@ export class ObjectMembershipsApi {
      * Add Records to a List
      * @param param the request object
      */
-    public addWithHttpInfo(param: MembershipsApiAddRequest, options?: Configuration): Promise<HttpInfo<MembershipsUpdateResponse>> {
+    public addWithHttpInfo(param: MembershipsApiAddRequest, options?: ConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         return this.api.addWithHttpInfo(param.listId, param.requestBody,  options).toPromise();
     }
 
@@ -737,7 +774,7 @@ export class ObjectMembershipsApi {
      * Add Records to a List
      * @param param the request object
      */
-    public add(param: MembershipsApiAddRequest, options?: Configuration): Promise<MembershipsUpdateResponse> {
+    public add(param: MembershipsApiAddRequest, options?: ConfigurationOptions): Promise<MembershipsUpdateResponse> {
         return this.api.add(param.listId, param.requestBody,  options).toPromise();
     }
 
@@ -746,7 +783,7 @@ export class ObjectMembershipsApi {
      * Add All Records from a Source List to a Destination List
      * @param param the request object
      */
-    public addAllFromListWithHttpInfo(param: MembershipsApiAddAllFromListRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public addAllFromListWithHttpInfo(param: MembershipsApiAddAllFromListRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.addAllFromListWithHttpInfo(param.listId, param.sourceListId,  options).toPromise();
     }
 
@@ -755,7 +792,7 @@ export class ObjectMembershipsApi {
      * Add All Records from a Source List to a Destination List
      * @param param the request object
      */
-    public addAllFromList(param: MembershipsApiAddAllFromListRequest, options?: Configuration): Promise<void> {
+    public addAllFromList(param: MembershipsApiAddAllFromListRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.addAllFromList(param.listId, param.sourceListId,  options).toPromise();
     }
 
@@ -764,7 +801,7 @@ export class ObjectMembershipsApi {
      * Add and/or Remove Records from a List
      * @param param the request object
      */
-    public addAndRemoveWithHttpInfo(param: MembershipsApiAddAndRemoveRequest, options?: Configuration): Promise<HttpInfo<MembershipsUpdateResponse>> {
+    public addAndRemoveWithHttpInfo(param: MembershipsApiAddAndRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         return this.api.addAndRemoveWithHttpInfo(param.listId, param.membershipChangeRequest,  options).toPromise();
     }
 
@@ -773,7 +810,7 @@ export class ObjectMembershipsApi {
      * Add and/or Remove Records from a List
      * @param param the request object
      */
-    public addAndRemove(param: MembershipsApiAddAndRemoveRequest, options?: Configuration): Promise<MembershipsUpdateResponse> {
+    public addAndRemove(param: MembershipsApiAddAndRemoveRequest, options?: ConfigurationOptions): Promise<MembershipsUpdateResponse> {
         return this.api.addAndRemove(param.listId, param.membershipChangeRequest,  options).toPromise();
     }
 
@@ -782,7 +819,7 @@ export class ObjectMembershipsApi {
      * Get lists record is member of
      * @param param the request object
      */
-    public getListsWithHttpInfo(param: MembershipsApiGetListsRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseRecordListMembershipNoPaging>> {
+    public getListsWithHttpInfo(param: MembershipsApiGetListsRequest, options?: ConfigurationOptions): Promise<HttpInfo<ApiCollectionResponseRecordListMembershipNoPaging>> {
         return this.api.getListsWithHttpInfo(param.objectTypeId, param.recordId,  options).toPromise();
     }
 
@@ -791,7 +828,7 @@ export class ObjectMembershipsApi {
      * Get lists record is member of
      * @param param the request object
      */
-    public getLists(param: MembershipsApiGetListsRequest, options?: Configuration): Promise<ApiCollectionResponseRecordListMembershipNoPaging> {
+    public getLists(param: MembershipsApiGetListsRequest, options?: ConfigurationOptions): Promise<ApiCollectionResponseRecordListMembershipNoPaging> {
         return this.api.getLists(param.objectTypeId, param.recordId,  options).toPromise();
     }
 
@@ -800,7 +837,7 @@ export class ObjectMembershipsApi {
      * Fetch List Memberships Ordered by ID
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
+    public getPageWithHttpInfo(param: MembershipsApiGetPageRequest, options?: ConfigurationOptions): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
         return this.api.getPageWithHttpInfo(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -809,7 +846,7 @@ export class ObjectMembershipsApi {
      * Fetch List Memberships Ordered by ID
      * @param param the request object
      */
-    public getPage(param: MembershipsApiGetPageRequest, options?: Configuration): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
+    public getPage(param: MembershipsApiGetPageRequest, options?: ConfigurationOptions): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
         return this.api.getPage(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -818,7 +855,7 @@ export class ObjectMembershipsApi {
      * Fetch List Memberships Ordered by Added to List Date
      * @param param the request object
      */
-    public getPageOrderedByAddedToListDateWithHttpInfo(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: Configuration): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
+    public getPageOrderedByAddedToListDateWithHttpInfo(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: ConfigurationOptions): Promise<HttpInfo<ApiCollectionResponseJoinTimeAndRecordId>> {
         return this.api.getPageOrderedByAddedToListDateWithHttpInfo(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -827,7 +864,7 @@ export class ObjectMembershipsApi {
      * Fetch List Memberships Ordered by Added to List Date
      * @param param the request object
      */
-    public getPageOrderedByAddedToListDate(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: Configuration): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
+    public getPageOrderedByAddedToListDate(param: MembershipsApiGetPageOrderedByAddedToListDateRequest, options?: ConfigurationOptions): Promise<ApiCollectionResponseJoinTimeAndRecordId> {
         return this.api.getPageOrderedByAddedToListDate(param.listId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -836,7 +873,7 @@ export class ObjectMembershipsApi {
      * Remove Records from a List
      * @param param the request object
      */
-    public removeWithHttpInfo(param: MembershipsApiRemoveRequest, options?: Configuration): Promise<HttpInfo<MembershipsUpdateResponse>> {
+    public removeWithHttpInfo(param: MembershipsApiRemoveRequest, options?: ConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         return this.api.removeWithHttpInfo(param.listId, param.requestBody,  options).toPromise();
     }
 
@@ -845,7 +882,7 @@ export class ObjectMembershipsApi {
      * Remove Records from a List
      * @param param the request object
      */
-    public remove(param: MembershipsApiRemoveRequest, options?: Configuration): Promise<MembershipsUpdateResponse> {
+    public remove(param: MembershipsApiRemoveRequest, options?: ConfigurationOptions): Promise<MembershipsUpdateResponse> {
         return this.api.remove(param.listId, param.requestBody,  options).toPromise();
     }
 
@@ -854,7 +891,7 @@ export class ObjectMembershipsApi {
      * Delete All Records from a List
      * @param param the request object
      */
-    public removeAllWithHttpInfo(param: MembershipsApiRemoveAllRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public removeAllWithHttpInfo(param: MembershipsApiRemoveAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.removeAllWithHttpInfo(param.listId,  options).toPromise();
     }
 
@@ -863,7 +900,7 @@ export class ObjectMembershipsApi {
      * Delete All Records from a List
      * @param param the request object
      */
-    public removeAll(param: MembershipsApiRemoveAllRequest, options?: Configuration): Promise<void> {
+    public removeAll(param: MembershipsApiRemoveAllRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.removeAll(param.listId,  options).toPromise();
     }
 

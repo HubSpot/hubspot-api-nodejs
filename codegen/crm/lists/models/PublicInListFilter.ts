@@ -20,6 +20,8 @@ export class PublicInListFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "listId",
@@ -53,7 +55,6 @@ export class PublicInListFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicInListFilterFilterTypeEnum {
     InList = 'IN_LIST'

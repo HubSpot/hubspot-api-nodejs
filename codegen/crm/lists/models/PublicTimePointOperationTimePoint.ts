@@ -10,123 +10,25 @@
  * Do not edit the class manually.
  */
 
-import { PublicIndexOffset } from '../models/PublicIndexOffset';
-import { PublicIndexedTimePointIndexReference } from '../models/PublicIndexedTimePointIndexReference';
+import { PublicDatePoint } from '../models/PublicDatePoint';
+import { PublicIndexedTimePoint } from '../models/PublicIndexedTimePoint';
+import { PublicPropertyReferencedTime } from '../models/PublicPropertyReferencedTime';
 
-export class PublicTimePointOperationTimePoint {
-    'month': number;
-    'hour'?: number;
-    'year': number;
-    'timezoneSource'?: string;
-    'millisecond'?: number;
-    'timeType': PublicTimePointOperationTimePointTimeTypeEnum;
-    'zoneId': string;
-    'day': number;
-    'minute'?: number;
-    'second'?: number;
-    'offset'?: PublicIndexOffset;
-    'indexReference': PublicIndexedTimePointIndexReference;
-    'property': string;
-    'referenceType': string;
+/**
+ * @type PublicTimePointOperationTimePoint
+ * Type
+ * @export
+ */
+export type PublicTimePointOperationTimePoint = PublicDatePoint | PublicIndexedTimePoint | PublicPropertyReferencedTime;
 
+/**
+* @type PublicTimePointOperationTimePointClass
+* @export
+*/
+export class PublicTimePointOperationTimePointClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "month",
-            "baseName": "month",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "hour",
-            "baseName": "hour",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "year",
-            "baseName": "year",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "timezoneSource",
-            "baseName": "timezoneSource",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "millisecond",
-            "baseName": "millisecond",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "timeType",
-            "baseName": "timeType",
-            "type": "PublicTimePointOperationTimePointTimeTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "zoneId",
-            "baseName": "zoneId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "minute",
-            "baseName": "minute",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "second",
-            "baseName": "second",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "offset",
-            "baseName": "offset",
-            "type": "PublicIndexOffset",
-            "format": ""
-        },
-        {
-            "name": "indexReference",
-            "baseName": "indexReference",
-            "type": "PublicIndexedTimePointIndexReference",
-            "format": ""
-        },
-        {
-            "name": "property",
-            "baseName": "property",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "string",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return PublicTimePointOperationTimePoint.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
-
-export enum PublicTimePointOperationTimePointTimeTypeEnum {
-    PropertyReferenced = 'PROPERTY_REFERENCED'
-}
 

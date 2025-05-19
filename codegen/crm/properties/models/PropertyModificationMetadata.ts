@@ -19,6 +19,8 @@ export class PropertyModificationMetadata {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "readOnlyOptions",
@@ -52,4 +54,3 @@ export class PropertyModificationMetadata {
     public constructor() {
     }
 }
-

@@ -19,6 +19,8 @@ export class PublicAbsoluteRangedTimestampRefineBy {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "rangeType",
@@ -52,7 +54,6 @@ export class PublicAbsoluteRangedTimestampRefineBy {
     public constructor() {
     }
 }
-
 
 export enum PublicAbsoluteRangedTimestampRefineByTypeEnum {
     AbsoluteRanged = 'ABSOLUTE_RANGED'

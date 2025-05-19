@@ -18,6 +18,8 @@ export class PublicPrivacyAnalyticsFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "privacyName",
@@ -45,7 +47,6 @@ export class PublicPrivacyAnalyticsFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicPrivacyAnalyticsFilterFilterTypeEnum {
     Privacy = 'PRIVACY'

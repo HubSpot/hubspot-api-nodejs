@@ -21,6 +21,8 @@ export class PublicNotAnyFilterBranch {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "filterBranchType",
@@ -54,7 +56,6 @@ export class PublicNotAnyFilterBranch {
     public constructor() {
     }
 }
-
 
 export enum PublicNotAnyFilterBranchFilterBranchTypeEnum {
     NotAny = 'NOT_ANY'

@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
@@ -31,66 +32,138 @@ export class PromiseBatchApi {
     /**
      * Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
      * Archive a batch of properties
-     * @param objectType 
-     * @param batchInputPropertyName 
+     * @param objectType
+     * @param batchInputPropertyName
      */
-    public archiveWithHttpInfo(objectType: string, batchInputPropertyName: BatchInputPropertyName, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectType, batchInputPropertyName, _options);
+    public archiveWithHttpInfo(objectType: string, batchInputPropertyName: BatchInputPropertyName, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectType, batchInputPropertyName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Archive a provided list of properties. This method will return a 204 No Content response on success regardless of the initial state of the property (e.g. active, already archived, non-existent).
      * Archive a batch of properties
-     * @param objectType 
-     * @param batchInputPropertyName 
+     * @param objectType
+     * @param batchInputPropertyName
      */
-    public archive(objectType: string, batchInputPropertyName: BatchInputPropertyName, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, batchInputPropertyName, _options);
+    public archive(objectType: string, batchInputPropertyName: BatchInputPropertyName, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectType, batchInputPropertyName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create a batch of properties using the same rules as when creating an individual property.
      * Create a batch of properties
-     * @param objectType 
-     * @param batchInputPropertyCreate 
+     * @param objectType
+     * @param batchInputPropertyCreate
      */
-    public createWithHttpInfo(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
-        const result = this.api.createWithHttpInfo(objectType, batchInputPropertyCreate, _options);
+    public createWithHttpInfo(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(objectType, batchInputPropertyCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create a batch of properties using the same rules as when creating an individual property.
      * Create a batch of properties
-     * @param objectType 
-     * @param batchInputPropertyCreate 
+     * @param objectType
+     * @param batchInputPropertyCreate
      */
-    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
-        const result = this.api.create(objectType, batchInputPropertyCreate, _options);
+    public create(objectType: string, batchInputPropertyCreate: BatchInputPropertyCreate, _options?: PromiseConfigurationOptions): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(objectType, batchInputPropertyCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a provided list of properties.
      * Read a batch of properties
-     * @param objectType 
-     * @param batchReadInputPropertyName 
+     * @param objectType
+     * @param batchReadInputPropertyName
      */
-    public readWithHttpInfo(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
-        const result = this.api.readWithHttpInfo(objectType, batchReadInputPropertyName, _options);
+    public readWithHttpInfo(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.readWithHttpInfo(objectType, batchReadInputPropertyName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a provided list of properties.
      * Read a batch of properties
-     * @param objectType 
-     * @param batchReadInputPropertyName 
+     * @param objectType
+     * @param batchReadInputPropertyName
      */
-    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
-        const result = this.api.read(objectType, batchReadInputPropertyName, _options);
+    public read(objectType: string, batchReadInputPropertyName: BatchReadInputPropertyName, _options?: PromiseConfigurationOptions): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.read(objectType, batchReadInputPropertyName, observableOptions);
         return result.toPromise();
     }
 
@@ -116,118 +189,238 @@ export class PromiseCoreApi {
     /**
      * Move a property identified by {propertyName} to the recycling bin.
      * Archive a property
-     * @param objectType 
-     * @param propertyName 
+     * @param objectType
+     * @param propertyName
      */
-    public archiveWithHttpInfo(objectType: string, propertyName: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectType, propertyName, _options);
+    public archiveWithHttpInfo(objectType: string, propertyName: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectType, propertyName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Move a property identified by {propertyName} to the recycling bin.
      * Archive a property
-     * @param objectType 
-     * @param propertyName 
+     * @param objectType
+     * @param propertyName
      */
-    public archive(objectType: string, propertyName: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, propertyName, _options);
+    public archive(objectType: string, propertyName: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectType, propertyName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create and return a copy of a new property for the specified object type.
      * Create a property
-     * @param objectType 
-     * @param propertyCreate 
+     * @param objectType
+     * @param propertyCreate
      */
-    public createWithHttpInfo(objectType: string, propertyCreate: PropertyCreate, _options?: Configuration): Promise<HttpInfo<Property>> {
-        const result = this.api.createWithHttpInfo(objectType, propertyCreate, _options);
+    public createWithHttpInfo(objectType: string, propertyCreate: PropertyCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Property>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(objectType, propertyCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create and return a copy of a new property for the specified object type.
      * Create a property
-     * @param objectType 
-     * @param propertyCreate 
+     * @param objectType
+     * @param propertyCreate
      */
-    public create(objectType: string, propertyCreate: PropertyCreate, _options?: Configuration): Promise<Property> {
-        const result = this.api.create(objectType, propertyCreate, _options);
+    public create(objectType: string, propertyCreate: PropertyCreate, _options?: PromiseConfigurationOptions): Promise<Property> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(objectType, propertyCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read all existing properties for the specified object type and HubSpot account.
      * Read all properties
-     * @param objectType 
-     * @param archived Whether to return only results that have been archived.
-     * @param properties 
+     * @param objectType
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [properties]
      */
-    public getAllWithHttpInfo(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyNoPaging>> {
-        const result = this.api.getAllWithHttpInfo(objectType, archived, properties, _options);
+    public getAllWithHttpInfo(objectType: string, archived?: boolean, properties?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePropertyNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(objectType, archived, properties, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read all existing properties for the specified object type and HubSpot account.
      * Read all properties
-     * @param objectType 
-     * @param archived Whether to return only results that have been archived.
-     * @param properties 
+     * @param objectType
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [properties]
      */
-    public getAll(objectType: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<CollectionResponsePropertyNoPaging> {
-        const result = this.api.getAll(objectType, archived, properties, _options);
+    public getAll(objectType: string, archived?: boolean, properties?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePropertyNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(objectType, archived, properties, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a property identified by {propertyName}.
      * Read a property
-     * @param objectType 
-     * @param propertyName 
-     * @param archived Whether to return only results that have been archived.
-     * @param properties 
+     * @param objectType
+     * @param propertyName
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [properties]
      */
-    public getByNameWithHttpInfo(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<HttpInfo<Property>> {
-        const result = this.api.getByNameWithHttpInfo(objectType, propertyName, archived, properties, _options);
+    public getByNameWithHttpInfo(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Property>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByNameWithHttpInfo(objectType, propertyName, archived, properties, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a property identified by {propertyName}.
      * Read a property
-     * @param objectType 
-     * @param propertyName 
-     * @param archived Whether to return only results that have been archived.
-     * @param properties 
+     * @param objectType
+     * @param propertyName
+     * @param [archived] Whether to return only results that have been archived.
+     * @param [properties]
      */
-    public getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: Configuration): Promise<Property> {
-        const result = this.api.getByName(objectType, propertyName, archived, properties, _options);
+    public getByName(objectType: string, propertyName: string, archived?: boolean, properties?: string, _options?: PromiseConfigurationOptions): Promise<Property> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByName(objectType, propertyName, archived, properties, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
      * Update a property
-     * @param objectType 
-     * @param propertyName 
-     * @param propertyUpdate 
+     * @param objectType
+     * @param propertyName
+     * @param propertyUpdate
      */
-    public updateWithHttpInfo(objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, _options?: Configuration): Promise<HttpInfo<Property>> {
-        const result = this.api.updateWithHttpInfo(objectType, propertyName, propertyUpdate, _options);
+    public updateWithHttpInfo(objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<Property>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(objectType, propertyName, propertyUpdate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Perform a partial update of a property identified by {propertyName}. Provided fields will be overwritten.
      * Update a property
-     * @param objectType 
-     * @param propertyName 
-     * @param propertyUpdate 
+     * @param objectType
+     * @param propertyName
+     * @param propertyUpdate
      */
-    public update(objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, _options?: Configuration): Promise<Property> {
-        const result = this.api.update(objectType, propertyName, propertyUpdate, _options);
+    public update(objectType: string, propertyName: string, propertyUpdate: PropertyUpdate, _options?: PromiseConfigurationOptions): Promise<Property> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(objectType, propertyName, propertyUpdate, observableOptions);
         return result.toPromise();
     }
 
@@ -253,110 +446,230 @@ export class PromiseGroupsApi {
     /**
      * Move a property group identified by {groupName} to the recycling bin.
      * Archive a property group
-     * @param objectType 
-     * @param groupName 
+     * @param objectType
+     * @param groupName
      */
-    public archiveWithHttpInfo(objectType: string, groupName: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectType, groupName, _options);
+    public archiveWithHttpInfo(objectType: string, groupName: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectType, groupName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Move a property group identified by {groupName} to the recycling bin.
      * Archive a property group
-     * @param objectType 
-     * @param groupName 
+     * @param objectType
+     * @param groupName
      */
-    public archive(objectType: string, groupName: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, groupName, _options);
+    public archive(objectType: string, groupName: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectType, groupName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create and return a copy of a new property group.
      * Create a property group
-     * @param objectType 
-     * @param propertyGroupCreate 
+     * @param objectType
+     * @param propertyGroupCreate
      */
-    public createWithHttpInfo(objectType: string, propertyGroupCreate: PropertyGroupCreate, _options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
-        const result = this.api.createWithHttpInfo(objectType, propertyGroupCreate, _options);
+    public createWithHttpInfo(objectType: string, propertyGroupCreate: PropertyGroupCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(objectType, propertyGroupCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create and return a copy of a new property group.
      * Create a property group
-     * @param objectType 
-     * @param propertyGroupCreate 
+     * @param objectType
+     * @param propertyGroupCreate
      */
-    public create(objectType: string, propertyGroupCreate: PropertyGroupCreate, _options?: Configuration): Promise<PropertyGroup> {
-        const result = this.api.create(objectType, propertyGroupCreate, _options);
+    public create(objectType: string, propertyGroupCreate: PropertyGroupCreate, _options?: PromiseConfigurationOptions): Promise<PropertyGroup> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(objectType, propertyGroupCreate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read all existing property groups for the specified object type and HubSpot account.
      * Read all property groups
-     * @param objectType 
+     * @param objectType
      */
-    public getAllWithHttpInfo(objectType: string, _options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyGroupNoPaging>> {
-        const result = this.api.getAllWithHttpInfo(objectType, _options);
+    public getAllWithHttpInfo(objectType: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePropertyGroupNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(objectType, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read all existing property groups for the specified object type and HubSpot account.
      * Read all property groups
-     * @param objectType 
+     * @param objectType
      */
-    public getAll(objectType: string, _options?: Configuration): Promise<CollectionResponsePropertyGroupNoPaging> {
-        const result = this.api.getAll(objectType, _options);
+    public getAll(objectType: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePropertyGroupNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(objectType, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a property group identified by {groupName}.
      * Read a property group
-     * @param objectType 
-     * @param groupName 
+     * @param objectType
+     * @param groupName
      */
-    public getByNameWithHttpInfo(objectType: string, groupName: string, _options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
-        const result = this.api.getByNameWithHttpInfo(objectType, groupName, _options);
+    public getByNameWithHttpInfo(objectType: string, groupName: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByNameWithHttpInfo(objectType, groupName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Read a property group identified by {groupName}.
      * Read a property group
-     * @param objectType 
-     * @param groupName 
+     * @param objectType
+     * @param groupName
      */
-    public getByName(objectType: string, groupName: string, _options?: Configuration): Promise<PropertyGroup> {
-        const result = this.api.getByName(objectType, groupName, _options);
+    public getByName(objectType: string, groupName: string, _options?: PromiseConfigurationOptions): Promise<PropertyGroup> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByName(objectType, groupName, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
      * Update a property group
-     * @param objectType 
-     * @param groupName 
-     * @param propertyGroupUpdate 
+     * @param objectType
+     * @param groupName
+     * @param propertyGroupUpdate
      */
-    public updateWithHttpInfo(objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, _options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
-        const result = this.api.updateWithHttpInfo(objectType, groupName, propertyGroupUpdate, _options);
+    public updateWithHttpInfo(objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(objectType, groupName, propertyGroupUpdate, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Perform a partial update of a property group identified by {groupName}. Provided fields will be overwritten.
      * Update a property group
-     * @param objectType 
-     * @param groupName 
-     * @param propertyGroupUpdate 
+     * @param objectType
+     * @param groupName
+     * @param propertyGroupUpdate
      */
-    public update(objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, _options?: Configuration): Promise<PropertyGroup> {
-        const result = this.api.update(objectType, groupName, propertyGroupUpdate, _options);
+    public update(objectType: string, groupName: string, propertyGroupUpdate: PropertyGroupUpdate, _options?: PromiseConfigurationOptions): Promise<PropertyGroup> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(objectType, groupName, propertyGroupUpdate, observableOptions);
         return result.toPromise();
     }
 

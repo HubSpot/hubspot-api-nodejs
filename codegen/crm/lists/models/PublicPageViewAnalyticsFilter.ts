@@ -22,6 +22,8 @@ export class PublicPageViewAnalyticsFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "coalescingRefineBy",
@@ -67,7 +69,6 @@ export class PublicPageViewAnalyticsFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicPageViewAnalyticsFilterFilterTypeEnum {
     PageView = 'PAGE_VIEW'

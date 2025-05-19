@@ -21,6 +21,8 @@ export class PublicFormSubmissionFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "formId",
@@ -60,7 +62,6 @@ export class PublicFormSubmissionFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicFormSubmissionFilterFilterTypeEnum {
     FormSubmission = 'FORM_SUBMISSION'
