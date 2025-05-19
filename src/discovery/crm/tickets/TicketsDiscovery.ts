@@ -18,7 +18,6 @@ import { getAll } from '../../../services/getAll'
 export default class TicketsDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public mergeApi: MergeApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
