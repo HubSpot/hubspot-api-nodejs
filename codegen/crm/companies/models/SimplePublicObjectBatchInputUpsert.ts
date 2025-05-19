@@ -12,12 +12,26 @@
 
 
 export class SimplePublicObjectBatchInputUpsert {
+    /**
+    * The name of a property whose values are unique for this object
+    */
     'idProperty'?: string;
+    /**
+    * In each input object, set this field to a unique ID value to enable more granular debugging for error responses. Learn more about [multi-status errors](https://developers.hubspot.com/docs/reference/api/other-resources/error-handling#multi-status-errors).
+    */
     'objectWriteTraceId'?: string;
+    /**
+    * The ID of the company to update.
+    */
     'id': string;
+    /**
+    * The company property values to set.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -52,4 +66,3 @@ export class SimplePublicObjectBatchInputUpsert {
     public constructor() {
     }
 }
-
