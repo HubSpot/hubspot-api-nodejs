@@ -40,6 +40,8 @@ export class BatchResponseTimelineEventResponse {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -85,7 +87,6 @@ export class BatchResponseTimelineEventResponse {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseTimelineEventResponseStatusEnum {
     Pending = 'PENDING',
