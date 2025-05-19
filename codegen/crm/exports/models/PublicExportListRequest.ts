@@ -25,6 +25,8 @@ export class PublicExportListRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "exportType",
@@ -94,7 +96,6 @@ export class PublicExportListRequest {
     public constructor() {
     }
 }
-
 
 export enum PublicExportListRequestExportTypeEnum {
     List = 'LIST'
