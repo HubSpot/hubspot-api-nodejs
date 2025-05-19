@@ -11,9 +11,6 @@
  */
 
 
-/**
-* A summary detailing which list contains the imported objects.
-*/
 export class PublicObjectListRecord {
     /**
     * The ID of the list containing the imported objects.
@@ -25,6 +22,8 @@ export class PublicObjectListRecord {
     'objectType': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -47,4 +46,3 @@ export class PublicObjectListRecord {
     public constructor() {
     }
 }
-
