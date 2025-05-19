@@ -1,5 +1,6 @@
 import { ResponseContext, RequestContext, HttpFile, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
+import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { ActionResponse } from '../models/ActionResponse';
@@ -26,21 +27,50 @@ export class ObservableCoreApi {
     /**
      * This allows a developer to cancel an active import.
      * Cancel an active import
-     * @param importId 
+     * @param importId
      */
-    public cancelWithHttpInfo(importId: number, _options?: Configuration): Observable<HttpInfo<ActionResponse>> {
-        const requestContextPromise = this.requestFactory.cancel(importId, _options);
+    public cancelWithHttpInfo(importId: number, _options?: ConfigurationOptions): Observable<HttpInfo<ActionResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.cancel(importId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.cancelWithHttpInfo(rsp)));
@@ -50,31 +80,60 @@ export class ObservableCoreApi {
     /**
      * This allows a developer to cancel an active import.
      * Cancel an active import
-     * @param importId 
+     * @param importId
      */
-    public cancel(importId: number, _options?: Configuration): Observable<ActionResponse> {
+    public cancel(importId: number, _options?: ConfigurationOptions): Observable<ActionResponse> {
         return this.cancelWithHttpInfo(importId, _options).pipe(map((apiResponse: HttpInfo<ActionResponse>) => apiResponse.data));
     }
 
     /**
      * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
      * Start a new import
-     * @param files A list of files containing the data to import
-     * @param importRequest JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See the overview tab for more on the required format.
+     * @param [files]
+     * @param [importRequest]
      */
-    public createWithHttpInfo(files?: HttpFile, importRequest?: string, _options?: Configuration): Observable<HttpInfo<PublicImportResponse>> {
-        const requestContextPromise = this.requestFactory.create(files, importRequest, _options);
+    public createWithHttpInfo(files?: HttpFile, importRequest?: string, _options?: ConfigurationOptions): Observable<HttpInfo<PublicImportResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(files, importRequest, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -84,31 +143,60 @@ export class ObservableCoreApi {
     /**
      * Begins importing data from the specified file resources. This uploads the corresponding file and uses the import request object to convert rows in the files to objects.
      * Start a new import
-     * @param files A list of files containing the data to import
-     * @param importRequest JSON formatted metadata about the import. This includes a name for the import and the column mappings for each file. See the overview tab for more on the required format.
+     * @param [files]
+     * @param [importRequest]
      */
-    public create(files?: HttpFile, importRequest?: string, _options?: Configuration): Observable<PublicImportResponse> {
+    public create(files?: HttpFile, importRequest?: string, _options?: ConfigurationOptions): Observable<PublicImportResponse> {
         return this.createWithHttpInfo(files, importRequest, _options).pipe(map((apiResponse: HttpInfo<PublicImportResponse>) => apiResponse.data));
     }
 
     /**
      * A complete summary of an import record, including any updates.
      * Get the information on any import
-     * @param importId 
+     * @param importId
      */
-    public getByIdWithHttpInfo(importId: number, _options?: Configuration): Observable<HttpInfo<PublicImportResponse>> {
-        const requestContextPromise = this.requestFactory.getById(importId, _options);
+    public getByIdWithHttpInfo(importId: number, _options?: ConfigurationOptions): Observable<HttpInfo<PublicImportResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(importId, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
@@ -118,32 +206,61 @@ export class ObservableCoreApi {
     /**
      * A complete summary of an import record, including any updates.
      * Get the information on any import
-     * @param importId 
+     * @param importId
      */
-    public getById(importId: number, _options?: Configuration): Observable<PublicImportResponse> {
+    public getById(importId: number, _options?: ConfigurationOptions): Observable<PublicImportResponse> {
         return this.getByIdWithHttpInfo(importId, _options).pipe(map((apiResponse: HttpInfo<PublicImportResponse>) => apiResponse.data));
     }
 
     /**
      * Returns a paged list of active imports for this account.
      * Get active imports
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getPageWithHttpInfo(after?: string, before?: string, limit?: number, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicImportResponse>> {
-        const requestContextPromise = this.requestFactory.getPage(after, before, limit, _options);
+    public getPageWithHttpInfo(after?: string, before?: string, limit?: number, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicImportResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getPage(after, before, limit, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getPageWithHttpInfo(rsp)));
@@ -153,11 +270,11 @@ export class ObservableCoreApi {
     /**
      * Returns a paged list of active imports for this account.
      * Get active imports
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param before 
-     * @param limit The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [before]
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getPage(after?: string, before?: string, limit?: number, _options?: Configuration): Observable<CollectionResponsePublicImportResponse> {
+    public getPage(after?: string, before?: string, limit?: number, _options?: ConfigurationOptions): Observable<CollectionResponsePublicImportResponse> {
         return this.getPageWithHttpInfo(after, before, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicImportResponse>) => apiResponse.data));
     }
 
@@ -180,23 +297,54 @@ export class ObservablePublicImportsApi {
     }
 
     /**
-     * @param importId 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param importId
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [includeErrorMessage] Set to True to receive a message explaining the error.
+     * @param [includeRowData] Set to True to receive the data values for the errored row.
      */
-    public getErrorsWithHttpInfo(importId: number, after?: string, limit?: number, _options?: Configuration): Observable<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
-        const requestContextPromise = this.requestFactory.getErrors(importId, after, limit, _options);
+    public getErrorsWithHttpInfo(importId: number, after?: string, limit?: number, includeErrorMessage?: boolean, includeRowData?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponsePublicImportErrorForwardPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getErrors(importId, after, limit, includeErrorMessage, includeRowData, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getErrorsWithHttpInfo(rsp)));
@@ -204,12 +352,14 @@ export class ObservablePublicImportsApi {
     }
 
     /**
-     * @param importId 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param importId
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [includeErrorMessage] Set to True to receive a message explaining the error.
+     * @param [includeRowData] Set to True to receive the data values for the errored row.
      */
-    public getErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Observable<CollectionResponsePublicImportErrorForwardPaging> {
-        return this.getErrorsWithHttpInfo(importId, after, limit, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicImportErrorForwardPaging>) => apiResponse.data));
+    public getErrors(importId: number, after?: string, limit?: number, includeErrorMessage?: boolean, includeRowData?: boolean, _options?: ConfigurationOptions): Observable<CollectionResponsePublicImportErrorForwardPaging> {
+        return this.getErrorsWithHttpInfo(importId, after, limit, includeErrorMessage, includeRowData, _options).pipe(map((apiResponse: HttpInfo<CollectionResponsePublicImportErrorForwardPaging>) => apiResponse.data));
     }
 
 }

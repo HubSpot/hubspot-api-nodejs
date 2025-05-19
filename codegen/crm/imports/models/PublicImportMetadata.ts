@@ -12,9 +12,6 @@
 
 import { PublicObjectListRecord } from '../models/PublicObjectListRecord';
 
-/**
-* An object detailing a summary of the import record outputs
-*/
 export class PublicImportMetadata {
     /**
     * Summarized outcomes of each row a developer attempted to import into HubSpot.
@@ -30,6 +27,8 @@ export class PublicImportMetadata {
     'objectLists': Array<PublicObjectListRecord>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -58,4 +57,3 @@ export class PublicImportMetadata {
     public constructor() {
     }
 }
-

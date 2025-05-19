@@ -13,17 +13,26 @@
 
 export class ImportRowCore {
     'rowData': Array<string>;
+    'containsEncryptedProperties': boolean;
     'lineNumber': number;
     'pageName'?: string;
     'fileId': number;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "rowData",
             "baseName": "rowData",
             "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "containsEncryptedProperties",
+            "baseName": "containsEncryptedProperties",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -52,4 +61,3 @@ export class ImportRowCore {
     public constructor() {
     }
 }
-

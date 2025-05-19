@@ -17,6 +17,8 @@ export class ImportTemplate {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "templateType",
@@ -38,7 +40,6 @@ export class ImportTemplate {
     public constructor() {
     }
 }
-
 
 export enum ImportTemplateTemplateTypeEnum {
     AdminDefined = 'admin_defined',

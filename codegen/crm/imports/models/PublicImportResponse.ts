@@ -13,9 +13,6 @@
 import { ImportTemplate } from '../models/ImportTemplate';
 import { PublicImportMetadata } from '../models/PublicImportMetadata';
 
-/**
-* A current summary of the import, whether complete or not.
-*/
 export class PublicImportResponse {
     'importTemplate'?: ImportTemplate;
     'createdAt': Date;
@@ -32,9 +29,12 @@ export class PublicImportResponse {
     * Whether or not the import is a list of people disqualified from receiving emails.
     */
     'optOutImport': boolean;
+    'mappedObjectTypeIds': Array<string>;
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -92,6 +92,12 @@ export class PublicImportResponse {
             "format": ""
         },
         {
+            "name": "mappedObjectTypeIds",
+            "baseName": "mappedObjectTypeIds",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
@@ -105,7 +111,6 @@ export class PublicImportResponse {
     public constructor() {
     }
 }
-
 
 export enum PublicImportResponseImportSourceEnum {
     Api = 'API',
