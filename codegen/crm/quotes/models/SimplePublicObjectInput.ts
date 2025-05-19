@@ -12,18 +12,13 @@
 
 
 export class SimplePublicObjectInput {
-    'objectWriteTraceId'?: string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "objectWriteTraceId",
-            "baseName": "objectWriteTraceId",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "properties",
             "baseName": "properties",
@@ -38,4 +33,3 @@ export class SimplePublicObjectInput {
     public constructor() {
     }
 }
-

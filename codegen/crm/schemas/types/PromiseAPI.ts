@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { AssociationDefinition } from '../models/AssociationDefinition';
 import { AssociationDefinitionEgg } from '../models/AssociationDefinitionEgg';
@@ -26,10 +27,22 @@ export class PromiseCoreApi {
      * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
      * Delete a schema
      * @param objectType Fully qualified name or object type ID of your schema.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveWithHttpInfo(objectType: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectType, archived, _options);
+    public archiveWithHttpInfo(objectType: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectType, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -37,10 +50,22 @@ export class PromiseCoreApi {
      * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
      * Delete a schema
      * @param objectType Fully qualified name or object type ID of your schema.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archive(objectType: string, archived?: boolean, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, archived, _options);
+    public archive(objectType: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectType, archived, observableOptions);
         return result.toPromise();
     }
 
@@ -50,8 +75,20 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationIdentifier Unique ID of the association to remove.
      */
-    public archiveAssociationWithHttpInfo(objectType: string, associationIdentifier: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveAssociationWithHttpInfo(objectType, associationIdentifier, _options);
+    public archiveAssociationWithHttpInfo(objectType: string, associationIdentifier: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveAssociationWithHttpInfo(objectType, associationIdentifier, observableOptions);
         return result.toPromise();
     }
 
@@ -61,8 +98,20 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationIdentifier Unique ID of the association to remove.
      */
-    public archiveAssociation(objectType: string, associationIdentifier: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveAssociation(objectType, associationIdentifier, _options);
+    public archiveAssociation(objectType: string, associationIdentifier: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveAssociation(objectType, associationIdentifier, observableOptions);
         return result.toPromise();
     }
 
@@ -71,8 +120,20 @@ export class PromiseCoreApi {
      * Create a new schema
      * @param objectSchemaEgg Object schema definition, including properties and associations.
      */
-    public createWithHttpInfo(objectSchemaEgg: ObjectSchemaEgg, _options?: Configuration): Promise<HttpInfo<ObjectSchema>> {
-        const result = this.api.createWithHttpInfo(objectSchemaEgg, _options);
+    public createWithHttpInfo(objectSchemaEgg: ObjectSchemaEgg, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(objectSchemaEgg, observableOptions);
         return result.toPromise();
     }
 
@@ -81,8 +142,20 @@ export class PromiseCoreApi {
      * Create a new schema
      * @param objectSchemaEgg Object schema definition, including properties and associations.
      */
-    public create(objectSchemaEgg: ObjectSchemaEgg, _options?: Configuration): Promise<ObjectSchema> {
-        const result = this.api.create(objectSchemaEgg, _options);
+    public create(objectSchemaEgg: ObjectSchemaEgg, _options?: PromiseConfigurationOptions): Promise<ObjectSchema> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(objectSchemaEgg, observableOptions);
         return result.toPromise();
     }
 
@@ -92,8 +165,20 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationDefinitionEgg Attributes that define the association.
      */
-    public createAssociationWithHttpInfo(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: Configuration): Promise<HttpInfo<AssociationDefinition>> {
-        const result = this.api.createAssociationWithHttpInfo(objectType, associationDefinitionEgg, _options);
+    public createAssociationWithHttpInfo(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: PromiseConfigurationOptions): Promise<HttpInfo<AssociationDefinition>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createAssociationWithHttpInfo(objectType, associationDefinitionEgg, observableOptions);
         return result.toPromise();
     }
 
@@ -103,28 +188,64 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationDefinitionEgg Attributes that define the association.
      */
-    public createAssociation(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: Configuration): Promise<AssociationDefinition> {
-        const result = this.api.createAssociation(objectType, associationDefinitionEgg, _options);
+    public createAssociation(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: PromiseConfigurationOptions): Promise<AssociationDefinition> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createAssociation(objectType, associationDefinitionEgg, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Returns all object schemas that have been defined for your account.
      * Get all schemas
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getAllWithHttpInfo(archived?: boolean, _options?: Configuration): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
-        const result = this.api.getAllWithHttpInfo(archived, _options);
+    public getAllWithHttpInfo(archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(archived, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Returns all object schemas that have been defined for your account.
      * Get all schemas
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getAll(archived?: boolean, _options?: Configuration): Promise<CollectionResponseObjectSchemaNoPaging> {
-        const result = this.api.getAll(archived, _options);
+    public getAll(archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseObjectSchemaNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(archived, observableOptions);
         return result.toPromise();
     }
 
@@ -133,8 +254,20 @@ export class PromiseCoreApi {
      * Get an existing schema
      * @param objectType Fully qualified name or object type ID of your schema.
      */
-    public getByIdWithHttpInfo(objectType: string, _options?: Configuration): Promise<HttpInfo<ObjectSchema>> {
-        const result = this.api.getByIdWithHttpInfo(objectType, _options);
+    public getByIdWithHttpInfo(objectType: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ObjectSchema>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(objectType, observableOptions);
         return result.toPromise();
     }
 
@@ -143,8 +276,20 @@ export class PromiseCoreApi {
      * Get an existing schema
      * @param objectType Fully qualified name or object type ID of your schema.
      */
-    public getById(objectType: string, _options?: Configuration): Promise<ObjectSchema> {
-        const result = this.api.getById(objectType, _options);
+    public getById(objectType: string, _options?: PromiseConfigurationOptions): Promise<ObjectSchema> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(objectType, observableOptions);
         return result.toPromise();
     }
 
@@ -154,8 +299,20 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param objectTypeDefinitionPatch Attributes to update in your schema.
      */
-    public updateWithHttpInfo(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: Configuration): Promise<HttpInfo<ObjectTypeDefinition>> {
-        const result = this.api.updateWithHttpInfo(objectType, objectTypeDefinitionPatch, _options);
+    public updateWithHttpInfo(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ObjectTypeDefinition>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(objectType, objectTypeDefinitionPatch, observableOptions);
         return result.toPromise();
     }
 
@@ -165,8 +322,20 @@ export class PromiseCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param objectTypeDefinitionPatch Attributes to update in your schema.
      */
-    public update(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: Configuration): Promise<ObjectTypeDefinition> {
-        const result = this.api.update(objectType, objectTypeDefinitionPatch, _options);
+    public update(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: PromiseConfigurationOptions): Promise<ObjectTypeDefinition> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(objectType, objectTypeDefinitionPatch, observableOptions);
         return result.toPromise();
     }
 

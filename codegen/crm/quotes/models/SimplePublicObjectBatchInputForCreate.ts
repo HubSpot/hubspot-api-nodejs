@@ -10,14 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class SimplePublicObjectBatchInputUpsert {
-    /**
-    * The name of a property whose values are unique for this object
-    */
-    'idProperty'?: string;
+export class SimplePublicObjectBatchInputForCreate {
+    'associations'?: Array<PublicAssociationsForObject>;
     'objectWriteTraceId'?: string;
-    'id': string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
@@ -26,20 +23,14 @@ export class SimplePublicObjectBatchInputUpsert {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "idProperty",
-            "baseName": "idProperty",
-            "type": "string",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<PublicAssociationsForObject>",
             "format": ""
         },
         {
             "name": "objectWriteTraceId",
             "baseName": "objectWriteTraceId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
             "type": "string",
             "format": ""
         },
@@ -51,7 +42,7 @@ export class SimplePublicObjectBatchInputUpsert {
         }    ];
 
     static getAttributeTypeMap() {
-        return SimplePublicObjectBatchInputUpsert.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {
