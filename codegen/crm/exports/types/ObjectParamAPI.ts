@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { ActionResponseWithSingleResultURI } from '../models/ActionResponseWithSingleResultURI';
 import { PublicExportRequest } from '../models/PublicExportRequest';
@@ -11,6 +11,7 @@ import { PublicExportsApiRequestFactory, PublicExportsApiResponseProcessor} from
 export interface PublicExportsApiGetStatusRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type number
      * @memberof PublicExportsApigetStatus
      */
@@ -38,7 +39,7 @@ export class ObjectPublicExportsApi {
      * Get the status of the export including the URL to download the file
      * @param param the request object
      */
-    public getStatusWithHttpInfo(param: PublicExportsApiGetStatusRequest, options?: Configuration): Promise<HttpInfo<ActionResponseWithSingleResultURI>> {
+    public getStatusWithHttpInfo(param: PublicExportsApiGetStatusRequest, options?: ConfigurationOptions): Promise<HttpInfo<ActionResponseWithSingleResultURI>> {
         return this.api.getStatusWithHttpInfo(param.taskId,  options).toPromise();
     }
 
@@ -47,7 +48,7 @@ export class ObjectPublicExportsApi {
      * Get the status of the export including the URL to download the file
      * @param param the request object
      */
-    public getStatus(param: PublicExportsApiGetStatusRequest, options?: Configuration): Promise<ActionResponseWithSingleResultURI> {
+    public getStatus(param: PublicExportsApiGetStatusRequest, options?: ConfigurationOptions): Promise<ActionResponseWithSingleResultURI> {
         return this.api.getStatus(param.taskId,  options).toPromise();
     }
 
@@ -56,7 +57,7 @@ export class ObjectPublicExportsApi {
      * Start an export
      * @param param the request object
      */
-    public startWithHttpInfo(param: PublicExportsApiStartRequest, options?: Configuration): Promise<HttpInfo<TaskLocator>> {
+    public startWithHttpInfo(param: PublicExportsApiStartRequest, options?: ConfigurationOptions): Promise<HttpInfo<TaskLocator>> {
         return this.api.startWithHttpInfo(param.publicExportRequest,  options).toPromise();
     }
 
@@ -65,7 +66,7 @@ export class ObjectPublicExportsApi {
      * Start an export
      * @param param the request object
      */
-    public start(param: PublicExportsApiStartRequest, options?: Configuration): Promise<TaskLocator> {
+    public start(param: PublicExportsApiStartRequest, options?: ConfigurationOptions): Promise<TaskLocator> {
         return this.api.start(param.publicExportRequest,  options).toPromise();
     }
 
