@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { AssociatedId } from '../models/AssociatedId';
-import { Paging } from '../models/Paging';
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class CollectionResponseAssociatedId {
-    'paging'?: Paging;
-    'results': Array<AssociatedId>;
+export class SimplePublicObjectBatchInputForCreate {
+    'associations'?: Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,20 +23,26 @@ export class CollectionResponseAssociatedId {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "Paging",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<PublicAssociationsForObject>",
             "format": ""
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<AssociatedId>",
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseAssociatedId.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {
