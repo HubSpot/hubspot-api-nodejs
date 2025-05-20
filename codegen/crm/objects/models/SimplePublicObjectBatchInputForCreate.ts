@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { ForwardPaging } from '../models/ForwardPaging';
-import { SimplePublicObject } from '../models/SimplePublicObject';
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
-    'total': number;
-    'paging'?: ForwardPaging;
-    'results': Array<SimplePublicObject>;
+export class SimplePublicObjectBatchInputForCreate {
+    'associations'?: Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
+    'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,26 +23,26 @@ export class CollectionResponseWithTotalSimplePublicObjectForwardPaging {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "total",
-            "baseName": "total",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "paging",
-            "baseName": "paging",
-            "type": "ForwardPaging",
+            "name": "associations",
+            "baseName": "associations",
+            "type": "Array<PublicAssociationsForObject>",
             "format": ""
         },
         {
-            "name": "results",
-            "baseName": "results",
-            "type": "Array<SimplePublicObject>",
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "properties",
+            "baseName": "properties",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return CollectionResponseWithTotalSimplePublicObjectForwardPaging.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {
