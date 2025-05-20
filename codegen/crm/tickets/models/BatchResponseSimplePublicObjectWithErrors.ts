@@ -25,6 +25,8 @@ export class BatchResponseSimplePublicObjectWithErrors {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -82,7 +84,6 @@ export class BatchResponseSimplePublicObjectWithErrors {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseSimplePublicObjectWithErrorsStatusEnum {
     Pending = 'PENDING',
