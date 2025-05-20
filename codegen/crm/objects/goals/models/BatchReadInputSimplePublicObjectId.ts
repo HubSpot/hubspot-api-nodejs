@@ -15,13 +15,15 @@ import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
 export class BatchReadInputSimplePublicObjectId {
     'propertiesWithHistory': Array<string>;
     /**
-    * The name of a property whose values are unique for this object
+    * When using a custom unique value property to retrieve records, the name of the property. Do not include this parameter if retrieving by record ID.
     */
     'idProperty'?: string;
     'inputs': Array<SimplePublicObjectId>;
     'properties': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -56,4 +58,3 @@ export class BatchReadInputSimplePublicObjectId {
     public constructor() {
     }
 }
-

@@ -9,9 +9,9 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
 import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
-import { BatchInputSimplePublicObjectInputForCreate } from '../models/BatchInputSimplePublicObjectInputForCreate';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
@@ -62,7 +62,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -72,14 +72,14 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Create a batch of meetings
-     * @param batchInputSimplePublicObjectInputForCreate 
+     * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
-    public async create(batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate, _options?: Configuration): Promise<RequestContext> {
+    public async create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
-        // verify required parameter 'batchInputSimplePublicObjectInputForCreate' is not null or undefined
-        if (batchInputSimplePublicObjectInputForCreate === null || batchInputSimplePublicObjectInputForCreate === undefined) {
-            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectInputForCreate");
+        // verify required parameter 'batchInputSimplePublicObjectBatchInputForCreate' is not null or undefined
+        if (batchInputSimplePublicObjectBatchInputForCreate === null || batchInputSimplePublicObjectBatchInputForCreate === undefined) {
+            throw new RequiredError("BatchApi", "create", "batchInputSimplePublicObjectBatchInputForCreate");
         }
 
 
@@ -97,7 +97,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
         ]);
         requestContext.setHeaderParam("Content-Type", contentType);
         const serializedBody = ObjectSerializer.stringify(
-            ObjectSerializer.serialize(batchInputSimplePublicObjectInputForCreate, "BatchInputSimplePublicObjectInputForCreate", ""),
+            ObjectSerializer.serialize(batchInputSimplePublicObjectBatchInputForCreate, "BatchInputSimplePublicObjectBatchInputForCreate", ""),
             contentType
         );
         requestContext.setBody(serializedBody);
@@ -109,7 +109,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -118,6 +118,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
      * Read a batch of meetings by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -163,7 +164,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -210,7 +211,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -258,7 +259,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
