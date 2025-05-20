@@ -5,7 +5,118 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.0.0...HEAD)
+
+## [13.0.0] - 2025-05-20
+
+### CMS
+
+- Moved methods `archive`, `callClone`, `create`, `getById`, `pushLive`, `resetDraft`, `schedule`, `update` and `updateDraft` from `cms.blogs.blogPostsApi` to `cms.blogs.basicApi`.
+- Moved and renamed methods `archiveBatch` => `archive`, `createBatch` => `create`, `readBatch` => `read` and `updateBatch` => `update` from `cms.blogs.blogPostsApi` to `cms.blogs.batchApi`.
+- Moved methods `attachToLangGroup`, `createLangVariation`, `detachFromLangGroup`, `setLangPrimary` and `updateLangs` from `cms.blogs.blogPostsApi` to `cms.blogs.multiLanguageApi`.
+
+### Events
+
+- Renamed `events.send.customEventDataApi` to `events.send.basicApi`.
+- Added `events.send.batchApi` API.
+
+### Files
+
+- Renamed method `archiveGDPR()` to `_delete()` in `files.filesApi`.
+- Changed incomining parameters list in `files.filesApi.doSearch`.
+- Changed incomining parameters list in `files.foldersApi.doSearch`.
+- Renamed method `updateProperties()` to `updatePropertiesRecursively()` in `files.foldersApi`.
+- Added new method `updateProperties()` to `files.foldersApi`.
+- Added property `clearExpires` to `files/models/FileUpdateInput`.
+- Changed property type from `expiresAt:number` to `expiresAt:Date` in `files/models/FileUpdateInput`.
+- Added property `expiresAt` to `files/models/ImportFromUrlInput`.
+- Added properties `sourceGroup` and `fileMd5` to `files/models/ModelFile`.
+- Removed property `id` from `files/models/FolderUpdateInput`.
+
+### Marketing
+
+- Added parameter `campaign` after `archived` parameter to `marketing.emails.marketingEmailsApi.getPage()`.
+- Added property `clonedFrom` to `marketing/emails/models/PublicEmail`.
+- Added property `enabled` to `marketing/emails/models/PublicWebversionDetails`.
+- Renamed `marketing.events.attendanceSubscriberStateChangesApi` to `marketing.events.addEventAttendeesApi`.
+- Added new methods `recordByContactId()` and `recordByEmail()` to `marketing.events.addEventAttendeesApi`.
+- Added `marketing.events.batchApi` API.
+- Moved and renamed methods `batchArchive` => `archive` and `batchUpsert` => `upsert` from `marketing.events.basicApi` to `marketing.events.batchApi`.
+- Added new methods `archiveByObjectId()`, `getAll()`, `getByObjectId()` and `updateByObjectId()` to `marketing.events.basicApi`.
+- Moved methods `cancel` and `complete` from `marketing.events.basicApi` to `marketing.events.changePropertyApi`.
+- Added `marketing.events.identifiersApi` API.
+- Moved method `doSearch()` from `marketing.events.basicApi` to `marketing.events.identifiersApi`.
+- Added `marketing.events.listAssociationsApi` API.
+- Renamed `marketing.events.participantStateApi` to `marketing.events.retrieveParticipantStateApi`.
+- Changed the response object type from `CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging` to `CollectionResponseSearchPublicResponseWrapperNoPaging` for `marketing.events.identifiersApi.doSearch()`.
+- Added new property `object_id` to `marketing/events/models/MarketingEventDefaultResponse`, `marketing/events/models/MarketingEventPublicDefaultResponse` and `marketing/events/models/MarketingEventPublicReadResponse`.
+- Removed properties `importStatus` and `attendanceStateCalculationTimestamp` from `marketing/events/models/MarketingEventUpdateRequestParams`.
+
+### CRM Associations
+
+- Added `crm.associations.v4.schema.definitionConfigurationsApi` API.
+- Renamed method `crm.associations.v4.schema.definitionsApi.archive()` to `crm.associations.v4.schema.definitionsApi.remove()`.
+
+### CRM
+
+- Added `crm.extensions.calling.channelConnectionSettingsApi` API.
+- Added properties `usesRemote` and `usesCallingWindow` to `crm/extensions/calling/models/SettingsPatchRequest`, `crm/extensions/calling/models/SettingsRequest` and `crm/extensions/calling/models/SettingsResponse`.
+- Made `supportsInboundCalling` property required in `crm/extensions/calling/models/SettingsRequest`.
+- Added options `includeErrorMessage` and `includeRowData` to `crm.imports.publicImportsApi.getErrors()`.
+- Added property `containsEncryptedProperties` to `crm/imports/models/ImportRowCore`.
+- Added properties `invalidPropertyValue`, `errorMessage` and `invalidValueToDisplay` to `crm/imports/models/PublicImportError`.
+- Added property `mappedObjectTypeIds` to `crm/imports/models/PublicImportResponse`.
+- Made `metadata` property nullable in `crm/pipelines/models/PipelineStage`, `crm/pipelines/models/PipelineStageInput` and `crm/pipelines/models/PipelineStagePatchInput`.
+
+
+### CRM objects
+
+- Moved method `merge()` from `crm.companies.mergeApi` to `crm.companies.basicApi`.
+- Removed `crm.companies.mergeApi` API.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.companies.batchApi.create()`.
+- Made `associationCategory` and `associationTypeId` properties required in `crm/companies/models/AssociationSpec`, `crm/crmcontacts/models/AssociationSpec`, `crm/deals/models/AssociationSpec` and `crm/tickets/models/AssociationSpec`.
+- Made `types` and `to` properties required in `crm/companies/models/PublicAssociationsForObject`, `crm/contacts/models/PublicAssociationsForObject`, `crm/deals/models/PublicAssociationsForObject` and `crm/tickets/models/PublicAssociationsForObject`.
+- Made `id` property required in `crm/companies/models/PublicObjectId`, `crm/contacts/models/PublicObjectId`, `crm/deals/models/PublicObjectId` and `crm/tickets/models/PublicObjectId`.
+- Added property `object_write_trace_id` to `crm/companies/models/SimplePublicObject`, `crm/companies/models/SimplePublicObjectWithAssociations`, `crm/companies/models/SimplePublicUpsertObject`, `crm/contacts/models/SimplePublicObject`, `crm/contacts/models/SimplePublicObjectWithAssociations`, `crm/contacts/models/SimplePublicUpsertObject`,`crm/deals/models/SimplePublicObject`, `crm/deals/models/SimplePublicObjectWithAssociations`, `crm/deals/models/SimplePublicUpsertObject`, `crm/line_items/models/SimplePublicObject`, `crm/line_items/models/SimplePublicObjectWithAssociations`, `crm/line_items/models/SimplePublicUpsertObject`, `crm/quotes/models/SimplePublicObject`, `crm/quotes/models/SimplePublicObjectWithAssociations`, `crm/quotes/models/SimplePublicUpsertObject`, `crm/objects/models/SimplePublicObject`, `crm/objects/models/SimplePublicObjectWithAssociations`, `crm/objects/models/SimplePublicUpsertObject`, `crm/objects/calls/models/SimplePublicObject`, `crm/objects/calls/models/SimplePublicObjectWithAssociations`, `crm/objects/calls/models/SimplePublicUpsertObject`, `crm/objects/communications/models/SimplePublicObject`, `crm/objects/communications/models/SimplePublicObjectWithAssociations`, `crm/objects/communications/models/SimplePublicUpsertObject`, `crm/objects/emails/models/SimplePublicObject`, `crm/objects/emails/models/SimplePublicObjectWithAssociations`, `crm/objects/emails/models/SimplePublicUpsertObject`,
+`crm/objects/feedback_submissions/models/SimplePublicObject`, `crm/objects/feedback_submissions/models/SimplePublicObjectWithAssociations`,
+`crm/objects/leads/models/SimplePublicObject`, `crm/objects/leads/models/SimplePublicObjectWithAssociations`, `crm/objects/leads/models/SimplePublicUpsertObject`,
+`crm/objects/goals/models/SimplePublicObject`, `crm/objects/goals/models/SimplePublicObjectWithAssociations`,
+`crm/objects/meetings/models/SimplePublicObject`, `crm/objects/meetings/models/SimplePublicObjectWithAssociations`, `crm/objects/meetings/models/SimplePublicUpsertObject`,
+`crm/objects/notes/models/SimplePublicObject`, `crm/objects/notes/models/SimplePublicObjectWithAssociations`, `crm/objects/notes/models/SimplePublicUpsertObject`,
+`crm/objects/postal_mail/models/SimplePublicObject`, `crm/objects/postal_mail/models/SimplePublicObjectWithAssociations`, `crm/objects/postal_mail/models/SimplePublicUpsertObject`,
+`crm/objects/tasks/models/SimplePublicObject`, `crm/objects/tasks/models/SimplePublicObjectWithAssociations`, `crm/objects/tasks/models/SimplePublicUpsertObject`,
+`crm/objects/taxes/models/SimplePublicObject`, `crm/objects/taxes/models/SimplePublicObjectWithAssociations`, `crm/objects/taxes/models/SimplePublicUpsertObject`,
+`crm/products/models/SimplePublicObject`, `crm/products/models/SimplePublicObjectWithAssociations`, `crm/products/models/SimplePublicUpsertObject`,
+`crm/tickets/models/SimplePublicObject`, `crm/tickets/models/SimplePublicObjectWithAssociations` and `crm/tickets/models/SimplePublicUpsertObject`.
+- Removed property `object_write_trace_id` from `crm/companies/models/SimplePublicObjectInput`, `crm/companies/models/SimplePublicObjectInputForCreate`, `crm/contacts/models/SimplePublicObjectInput`, `crm/contacts/models/SimplePublicObjectInputForCreate`, `crm/deals/models/SimplePublicObjectInput`, `crm/deals/models/SimplePublicObjectInputForCreate`, `crm/line_items/models/SimplePublicObjectInput`, `crm/line_items/models/SimplePublicObjectInputForCreate`, `crm/quotes/models/SimplePublicObjectInput`, `crm/quotes/models/SimplePublicObjectInputForCreate`, `crm/objects/models/SimplePublicObjectInput`, `crm/objects/models/SimplePublicObjectInputForCreate`, `crm/objects/calls/models/SimplePublicObjectInput`, `crm/objects/calls/models/SimplePublicObjectInputForCreate`, `crm/objects/communications/models/SimplePublicObjectInput`, `crm/objects/communications/models/SimplePublicObjectInputForCreate`, `crm/objects/emails/models/SimplePublicObjectInput`, `crm/objects/emails/models/SimplePublicObjectInputForCreate`, `crm/objects/leads/models/SimplePublicObjectInput`, `crm/objects/leads/models/SimplePublicObjectInputForCreate`, `crm/objects/meetings/models/SimplePublicObjectInput`, `crm/objects/meetings/models/SimplePublicObjectInputForCreate`, `crm/objects/notes/models/SimplePublicObjectInput`, `crm/objects/notes/models/SimplePublicObjectInputForCreate`, `crm/objects/postal_mail/models/SimplePublicObjectInput`, `crm/objects/postal_mail/models/SimplePublicObjectInputForCreate`, `crm/objects/tasks/models/SimplePublicObjectInput`, `crm/objects/tasks/models/SimplePublicObjectInputForCreate`, `crm/objects/taxes/models/SimplePublicObjectInput`, `crm/objects/taxes/models/SimplePublicObjectInputForCreate`, `crm/products/models/SimplePublicObjectInput`, `crm/products/models/SimplePublicObjectInputForCreate`, `crm/tickets/models/SimplePublicObjectInput` and `crm/tickets/models/SimplePublicObjectInputForCreate`.
+- Moved method `merge()` from `crm.contacts.mergeApi` to `crm.contacts.basicApi`.
+- Removed `crm.contacts.mergeApi` API.
+- Moved method `purge()` from `crm.contacts.GDPRApi` to `crm.contacts.basicApi`.
+- Removed `crm.contacts.GDPRApi` API.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.contacts.batchApi.create()`.
+- Moved method `merge()` from `crm.deals.mergeApi` to `crm.deals.basicApi`.
+- Removed `crm.deals.mergeApi` API.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.deals.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.lineItems.batchApi.create()`.
+- Made `associations` property nullable in `crm/line_items/models/SimplePublicObjectInputForCreate`, `crm/quotes/models/SimplePublicObjectInputForCreate`, `crm/objects/models/SimplePublicObjectInputForCreate`, `crm/objects/calls/models/SimplePublicObjectInputForCreate`, `crm/objects/communications/models/SimplePublicObjectInputForCreate`, `crm/objects/emails/models/SimplePublicObjectInputForCreate`, `crm/objects/leads/models/SimplePublicObjectInputForCreate`, `crm/objects/meetings/models/SimplePublicObjectInputForCreate`, `crm/objects/meetings/models/SimplePublicObjectInputForCreate`, `crm/objects/notes/models/SimplePublicObjectInputForCreate`, `crm/objects/postal_mail/models/SimplePublicObjectInputForCreate`, `crm/objects/tasks/models/SimplePublicObjectInputForCreate` and `crm/objects/taxes/models/SimplePublicObjectInputForCreate`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.quotes.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.calls.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.communications.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.emails.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.leads.batchApi.create()`.
+- Added methods `archive()`, `create()` and `update()` to `crm.objects.goals.basicApi`.
+- Added methods `archive()`, `create()`, `upsert()` and `update()` to `crm.objects.goals.batchApi`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.meetings.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.notes.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.postalMail.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.tasks.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.objects.taxes.batchApi.create()`.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.products.batchApi.create()`.
+- Made `properties` property required in `crm/products/models/SimplePublicObjectInputForCreate`.
+- Moved method `merge()` from `crm.tickets.mergeApi` to `crm.tickets.basicApi`.
+- Removed `crm.tickets.mergeApi` API.
+- Changed option type `batchInputSimplePublicObjectInputForCreate: BatchInputSimplePublicObjectInputForCreate` to `batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate` in `crm.tickets.batchApi.create()`.
 
 ## [13.0.0-beta.3] - 2025-05-05
 
@@ -921,7 +1032,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/12.0.1...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/13.0.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -989,3 +1100,4 @@ export enum Enum {
 [13.0.0-beta.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.1
 [13.0.0-beta.2]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.2
 [13.0.0-beta.3]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0-beta.3
+[13.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0
