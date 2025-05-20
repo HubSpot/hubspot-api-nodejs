@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
@@ -32,8 +33,20 @@ export class PromiseEventsApi {
      * Create a single event
      * @param timelineEvent The timeline event definition.
      */
-    public createWithHttpInfo(timelineEvent: TimelineEvent, _options?: Configuration): Promise<HttpInfo<TimelineEventResponse>> {
-        const result = this.api.createWithHttpInfo(timelineEvent, _options);
+    public createWithHttpInfo(timelineEvent: TimelineEvent, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(timelineEvent, observableOptions);
         return result.toPromise();
     }
 
@@ -42,8 +55,20 @@ export class PromiseEventsApi {
      * Create a single event
      * @param timelineEvent The timeline event definition.
      */
-    public create(timelineEvent: TimelineEvent, _options?: Configuration): Promise<TimelineEventResponse> {
-        const result = this.api.create(timelineEvent, _options);
+    public create(timelineEvent: TimelineEvent, _options?: PromiseConfigurationOptions): Promise<TimelineEventResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(timelineEvent, observableOptions);
         return result.toPromise();
     }
 
@@ -52,8 +77,20 @@ export class PromiseEventsApi {
      * Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
-    public createBatchWithHttpInfo(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
-        const result = this.api.createBatchWithHttpInfo(batchInputTimelineEvent, _options);
+    public createBatchWithHttpInfo(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatchWithHttpInfo(batchInputTimelineEvent, observableOptions);
         return result.toPromise();
     }
 
@@ -62,8 +99,20 @@ export class PromiseEventsApi {
      * Creates multiple events
      * @param batchInputTimelineEvent The timeline event definition.
      */
-    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: Configuration): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
-        const result = this.api.createBatch(batchInputTimelineEvent, _options);
+    public createBatch(batchInputTimelineEvent: BatchInputTimelineEvent, _options?: PromiseConfigurationOptions): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createBatch(batchInputTimelineEvent, observableOptions);
         return result.toPromise();
     }
 
@@ -73,8 +122,20 @@ export class PromiseEventsApi {
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
      */
-    public getByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: Configuration): Promise<HttpInfo<TimelineEventResponse>> {
-        const result = this.api.getByIdWithHttpInfo(eventTemplateId, eventId, _options);
+    public getByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(eventTemplateId, eventId, observableOptions);
         return result.toPromise();
     }
 
@@ -84,8 +145,20 @@ export class PromiseEventsApi {
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
      */
-    public getById(eventTemplateId: string, eventId: string, _options?: Configuration): Promise<TimelineEventResponse> {
-        const result = this.api.getById(eventTemplateId, eventId, _options);
+    public getById(eventTemplateId: string, eventId: string, _options?: PromiseConfigurationOptions): Promise<TimelineEventResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(eventTemplateId, eventId, observableOptions);
         return result.toPromise();
     }
 
@@ -95,8 +168,20 @@ export class PromiseEventsApi {
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
      */
-    public getDetailByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: Configuration): Promise<HttpInfo<EventDetail>> {
-        const result = this.api.getDetailByIdWithHttpInfo(eventTemplateId, eventId, _options);
+    public getDetailByIdWithHttpInfo(eventTemplateId: string, eventId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<EventDetail>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDetailByIdWithHttpInfo(eventTemplateId, eventId, observableOptions);
         return result.toPromise();
     }
 
@@ -106,8 +191,20 @@ export class PromiseEventsApi {
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
      */
-    public getDetailById(eventTemplateId: string, eventId: string, _options?: Configuration): Promise<EventDetail> {
-        const result = this.api.getDetailById(eventTemplateId, eventId, _options);
+    public getDetailById(eventTemplateId: string, eventId: string, _options?: PromiseConfigurationOptions): Promise<EventDetail> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getDetailById(eventTemplateId, eventId, observableOptions);
         return result.toPromise();
     }
 
@@ -116,10 +213,22 @@ export class PromiseEventsApi {
      * Renders the header or detail as HTML
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
-     * @param detail Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
+     * @param [detail] Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
      */
-    public getRenderByIdWithHttpInfo(eventTemplateId: string, eventId: string, detail?: boolean, _options?: Configuration): Promise<HttpInfo<string>> {
-        const result = this.api.getRenderByIdWithHttpInfo(eventTemplateId, eventId, detail, _options);
+    public getRenderByIdWithHttpInfo(eventTemplateId: string, eventId: string, detail?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<string>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getRenderByIdWithHttpInfo(eventTemplateId, eventId, detail, observableOptions);
         return result.toPromise();
     }
 
@@ -128,10 +237,22 @@ export class PromiseEventsApi {
      * Renders the header or detail as HTML
      * @param eventTemplateId The event template ID.
      * @param eventId The event ID.
-     * @param detail Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
+     * @param [detail] Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
      */
-    public getRenderById(eventTemplateId: string, eventId: string, detail?: boolean, _options?: Configuration): Promise<string> {
-        const result = this.api.getRenderById(eventTemplateId, eventId, detail, _options);
+    public getRenderById(eventTemplateId: string, eventId: string, detail?: boolean, _options?: PromiseConfigurationOptions): Promise<string> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getRenderById(eventTemplateId, eventId, detail, observableOptions);
         return result.toPromise();
     }
 
@@ -160,8 +281,20 @@ export class PromiseTemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public archiveWithHttpInfo(eventTemplateId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(eventTemplateId, appId, _options);
+    public archiveWithHttpInfo(eventTemplateId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(eventTemplateId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -171,8 +304,20 @@ export class PromiseTemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public archive(eventTemplateId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(eventTemplateId, appId, _options);
+    public archive(eventTemplateId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(eventTemplateId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -182,8 +327,20 @@ export class PromiseTemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateCreateRequest The new event template definition.
      */
-    public createWithHttpInfo(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
-        const result = this.api.createWithHttpInfo(appId, timelineEventTemplateCreateRequest, _options);
+    public createWithHttpInfo(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(appId, timelineEventTemplateCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -193,8 +350,20 @@ export class PromiseTemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateCreateRequest The new event template definition.
      */
-    public create(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: Configuration): Promise<TimelineEventTemplate> {
-        const result = this.api.create(appId, timelineEventTemplateCreateRequest, _options);
+    public create(appId: number, timelineEventTemplateCreateRequest: TimelineEventTemplateCreateRequest, _options?: PromiseConfigurationOptions): Promise<TimelineEventTemplate> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(appId, timelineEventTemplateCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -203,8 +372,20 @@ export class PromiseTemplatesApi {
      * List all event templates for your app
      * @param appId The ID of the target app.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
-        const result = this.api.getAllWithHttpInfo(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -213,8 +394,20 @@ export class PromiseTemplatesApi {
      * List all event templates for your app
      * @param appId The ID of the target app.
      */
-    public getAll(appId: number, _options?: Configuration): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -224,8 +417,20 @@ export class PromiseTemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public getByIdWithHttpInfo(eventTemplateId: string, appId: number, _options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
-        const result = this.api.getByIdWithHttpInfo(eventTemplateId, appId, _options);
+    public getByIdWithHttpInfo(eventTemplateId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(eventTemplateId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -235,8 +440,20 @@ export class PromiseTemplatesApi {
      * @param eventTemplateId The event template ID.
      * @param appId The ID of the target app.
      */
-    public getById(eventTemplateId: string, appId: number, _options?: Configuration): Promise<TimelineEventTemplate> {
-        const result = this.api.getById(eventTemplateId, appId, _options);
+    public getById(eventTemplateId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<TimelineEventTemplate> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(eventTemplateId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -247,8 +464,20 @@ export class PromiseTemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateUpdateRequest The updated event template definition.
      */
-    public updateWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
-        const result = this.api.updateWithHttpInfo(eventTemplateId, appId, timelineEventTemplateUpdateRequest, _options);
+    public updateWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(eventTemplateId, appId, timelineEventTemplateUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -259,8 +488,20 @@ export class PromiseTemplatesApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateUpdateRequest The updated event template definition.
      */
-    public update(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: Configuration): Promise<TimelineEventTemplate> {
-        const result = this.api.update(eventTemplateId, appId, timelineEventTemplateUpdateRequest, _options);
+    public update(eventTemplateId: string, appId: number, timelineEventTemplateUpdateRequest: TimelineEventTemplateUpdateRequest, _options?: PromiseConfigurationOptions): Promise<TimelineEventTemplate> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(eventTemplateId, appId, timelineEventTemplateUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -290,8 +531,20 @@ export class PromiseTokensApi {
      * @param tokenName The token name.
      * @param appId The ID of the target app.
      */
-    public archiveWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(eventTemplateId, tokenName, appId, _options);
+    public archiveWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(eventTemplateId, tokenName, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -302,8 +555,20 @@ export class PromiseTokensApi {
      * @param tokenName The token name.
      * @param appId The ID of the target app.
      */
-    public archive(eventTemplateId: string, tokenName: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(eventTemplateId, tokenName, appId, _options);
+    public archive(eventTemplateId: string, tokenName: string, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(eventTemplateId, tokenName, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -314,8 +579,20 @@ export class PromiseTokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateToken The new token definition.
      */
-    public createWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: Configuration): Promise<HttpInfo<TimelineEventTemplateToken>> {
-        const result = this.api.createWithHttpInfo(eventTemplateId, appId, timelineEventTemplateToken, _options);
+    public createWithHttpInfo(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(eventTemplateId, appId, timelineEventTemplateToken, observableOptions);
         return result.toPromise();
     }
 
@@ -326,8 +603,20 @@ export class PromiseTokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateToken The new token definition.
      */
-    public create(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: Configuration): Promise<TimelineEventTemplateToken> {
-        const result = this.api.create(eventTemplateId, appId, timelineEventTemplateToken, _options);
+    public create(eventTemplateId: string, appId: number, timelineEventTemplateToken: TimelineEventTemplateToken, _options?: PromiseConfigurationOptions): Promise<TimelineEventTemplateToken> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(eventTemplateId, appId, timelineEventTemplateToken, observableOptions);
         return result.toPromise();
     }
 
@@ -339,8 +628,20 @@ export class PromiseTokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
      */
-    public updateWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: Configuration): Promise<HttpInfo<TimelineEventTemplateToken>> {
-        const result = this.api.updateWithHttpInfo(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, _options);
+    public updateWithHttpInfo(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -352,8 +653,20 @@ export class PromiseTokensApi {
      * @param appId The ID of the target app.
      * @param timelineEventTemplateTokenUpdateRequest The updated token definition.
      */
-    public update(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: Configuration): Promise<TimelineEventTemplateToken> {
-        const result = this.api.update(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, _options);
+    public update(eventTemplateId: string, tokenName: string, appId: number, timelineEventTemplateTokenUpdateRequest: TimelineEventTemplateTokenUpdateRequest, _options?: PromiseConfigurationOptions): Promise<TimelineEventTemplateToken> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(eventTemplateId, tokenName, appId, timelineEventTemplateTokenUpdateRequest, observableOptions);
         return result.toPromise();
     }
 

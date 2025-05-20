@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchInputTimelineEvent } from '../models/BatchInputTimelineEvent';
 import { BatchResponseTimelineEventResponse } from '../models/BatchResponseTimelineEventResponse';
@@ -38,12 +38,14 @@ export interface EventsApiCreateBatchRequest {
 export interface EventsApiGetByIdRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetById
      */
     eventTemplateId: string
     /**
      * The event ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetById
      */
@@ -53,12 +55,14 @@ export interface EventsApiGetByIdRequest {
 export interface EventsApiGetDetailByIdRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetDetailById
      */
     eventTemplateId: string
     /**
      * The event ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetDetailById
      */
@@ -68,18 +72,21 @@ export interface EventsApiGetDetailByIdRequest {
 export interface EventsApiGetRenderByIdRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetRenderById
      */
     eventTemplateId: string
     /**
      * The event ID.
+     * Defaults to: undefined
      * @type string
      * @memberof EventsApigetRenderById
      */
     eventId: string
     /**
      * Set to \&#39;true\&#39;, we want to render the &#x60;detailTemplate&#x60; instead of the &#x60;headerTemplate&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof EventsApigetRenderById
      */
@@ -98,7 +105,7 @@ export class ObjectEventsApi {
      * Create a single event
      * @param param the request object
      */
-    public createWithHttpInfo(param: EventsApiCreateRequest, options?: Configuration): Promise<HttpInfo<TimelineEventResponse>> {
+    public createWithHttpInfo(param: EventsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
         return this.api.createWithHttpInfo(param.timelineEvent,  options).toPromise();
     }
 
@@ -107,7 +114,7 @@ export class ObjectEventsApi {
      * Create a single event
      * @param param the request object
      */
-    public create(param: EventsApiCreateRequest, options?: Configuration): Promise<TimelineEventResponse> {
+    public create(param: EventsApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
         return this.api.create(param.timelineEvent,  options).toPromise();
     }
 
@@ -116,7 +123,7 @@ export class ObjectEventsApi {
      * Creates multiple events
      * @param param the request object
      */
-    public createBatchWithHttpInfo(param: EventsApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
+    public createBatchWithHttpInfo(param: EventsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors>> {
         return this.api.createBatchWithHttpInfo(param.batchInputTimelineEvent,  options).toPromise();
     }
 
@@ -125,7 +132,7 @@ export class ObjectEventsApi {
      * Creates multiple events
      * @param param the request object
      */
-    public createBatch(param: EventsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
+    public createBatch(param: EventsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTimelineEventResponse | void | BatchResponseTimelineEventResponseWithErrors> {
         return this.api.createBatch(param.batchInputTimelineEvent,  options).toPromise();
     }
 
@@ -134,7 +141,7 @@ export class ObjectEventsApi {
      * Gets the event
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: EventsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<TimelineEventResponse>> {
+    public getByIdWithHttpInfo(param: EventsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventResponse>> {
         return this.api.getByIdWithHttpInfo(param.eventTemplateId, param.eventId,  options).toPromise();
     }
 
@@ -143,7 +150,7 @@ export class ObjectEventsApi {
      * Gets the event
      * @param param the request object
      */
-    public getById(param: EventsApiGetByIdRequest, options?: Configuration): Promise<TimelineEventResponse> {
+    public getById(param: EventsApiGetByIdRequest, options?: ConfigurationOptions): Promise<TimelineEventResponse> {
         return this.api.getById(param.eventTemplateId, param.eventId,  options).toPromise();
     }
 
@@ -152,7 +159,7 @@ export class ObjectEventsApi {
      * Gets the detailTemplate as rendered
      * @param param the request object
      */
-    public getDetailByIdWithHttpInfo(param: EventsApiGetDetailByIdRequest, options?: Configuration): Promise<HttpInfo<EventDetail>> {
+    public getDetailByIdWithHttpInfo(param: EventsApiGetDetailByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<EventDetail>> {
         return this.api.getDetailByIdWithHttpInfo(param.eventTemplateId, param.eventId,  options).toPromise();
     }
 
@@ -161,7 +168,7 @@ export class ObjectEventsApi {
      * Gets the detailTemplate as rendered
      * @param param the request object
      */
-    public getDetailById(param: EventsApiGetDetailByIdRequest, options?: Configuration): Promise<EventDetail> {
+    public getDetailById(param: EventsApiGetDetailByIdRequest, options?: ConfigurationOptions): Promise<EventDetail> {
         return this.api.getDetailById(param.eventTemplateId, param.eventId,  options).toPromise();
     }
 
@@ -170,7 +177,7 @@ export class ObjectEventsApi {
      * Renders the header or detail as HTML
      * @param param the request object
      */
-    public getRenderByIdWithHttpInfo(param: EventsApiGetRenderByIdRequest, options?: Configuration): Promise<HttpInfo<string>> {
+    public getRenderByIdWithHttpInfo(param: EventsApiGetRenderByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<string>> {
         return this.api.getRenderByIdWithHttpInfo(param.eventTemplateId, param.eventId, param.detail,  options).toPromise();
     }
 
@@ -179,7 +186,7 @@ export class ObjectEventsApi {
      * Renders the header or detail as HTML
      * @param param the request object
      */
-    public getRenderById(param: EventsApiGetRenderByIdRequest, options?: Configuration): Promise<string> {
+    public getRenderById(param: EventsApiGetRenderByIdRequest, options?: ConfigurationOptions): Promise<string> {
         return this.api.getRenderById(param.eventTemplateId, param.eventId, param.detail,  options).toPromise();
     }
 
@@ -191,12 +198,14 @@ import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../api
 export interface TemplatesApiArchiveRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TemplatesApiarchive
      */
     eventTemplateId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TemplatesApiarchive
      */
@@ -206,6 +215,7 @@ export interface TemplatesApiArchiveRequest {
 export interface TemplatesApiCreateRequest {
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TemplatesApicreate
      */
@@ -221,6 +231,7 @@ export interface TemplatesApiCreateRequest {
 export interface TemplatesApiGetAllRequest {
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TemplatesApigetAll
      */
@@ -230,12 +241,14 @@ export interface TemplatesApiGetAllRequest {
 export interface TemplatesApiGetByIdRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TemplatesApigetById
      */
     eventTemplateId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TemplatesApigetById
      */
@@ -245,12 +258,14 @@ export interface TemplatesApiGetByIdRequest {
 export interface TemplatesApiUpdateRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TemplatesApiupdate
      */
     eventTemplateId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TemplatesApiupdate
      */
@@ -275,7 +290,7 @@ export class ObjectTemplatesApi {
      * Deletes an event template for the app
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: TemplatesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: TemplatesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.eventTemplateId, param.appId,  options).toPromise();
     }
 
@@ -284,7 +299,7 @@ export class ObjectTemplatesApi {
      * Deletes an event template for the app
      * @param param the request object
      */
-    public archive(param: TemplatesApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: TemplatesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.eventTemplateId, param.appId,  options).toPromise();
     }
 
@@ -293,7 +308,7 @@ export class ObjectTemplatesApi {
      * Create an event template for your app
      * @param param the request object
      */
-    public createWithHttpInfo(param: TemplatesApiCreateRequest, options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
+    public createWithHttpInfo(param: TemplatesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
         return this.api.createWithHttpInfo(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
     }
 
@@ -302,7 +317,7 @@ export class ObjectTemplatesApi {
      * Create an event template for your app
      * @param param the request object
      */
-    public create(param: TemplatesApiCreateRequest, options?: Configuration): Promise<TimelineEventTemplate> {
+    public create(param: TemplatesApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
         return this.api.create(param.appId, param.timelineEventTemplateCreateRequest,  options).toPromise();
     }
 
@@ -311,7 +326,7 @@ export class ObjectTemplatesApi {
      * List all event templates for your app
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: TemplatesApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
+    public getAllWithHttpInfo(param: TemplatesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseTimelineEventTemplateNoPaging>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -320,7 +335,7 @@ export class ObjectTemplatesApi {
      * List all event templates for your app
      * @param param the request object
      */
-    public getAll(param: TemplatesApiGetAllRequest, options?: Configuration): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
+    public getAll(param: TemplatesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponseTimelineEventTemplateNoPaging> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -329,7 +344,7 @@ export class ObjectTemplatesApi {
      * Gets a specific event template for your app
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: TemplatesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
+    public getByIdWithHttpInfo(param: TemplatesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
         return this.api.getByIdWithHttpInfo(param.eventTemplateId, param.appId,  options).toPromise();
     }
 
@@ -338,7 +353,7 @@ export class ObjectTemplatesApi {
      * Gets a specific event template for your app
      * @param param the request object
      */
-    public getById(param: TemplatesApiGetByIdRequest, options?: Configuration): Promise<TimelineEventTemplate> {
+    public getById(param: TemplatesApiGetByIdRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
         return this.api.getById(param.eventTemplateId, param.appId,  options).toPromise();
     }
 
@@ -347,7 +362,7 @@ export class ObjectTemplatesApi {
      * Update an existing event template
      * @param param the request object
      */
-    public updateWithHttpInfo(param: TemplatesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<TimelineEventTemplate>> {
+    public updateWithHttpInfo(param: TemplatesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplate>> {
         return this.api.updateWithHttpInfo(param.eventTemplateId, param.appId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
     }
 
@@ -356,7 +371,7 @@ export class ObjectTemplatesApi {
      * Update an existing event template
      * @param param the request object
      */
-    public update(param: TemplatesApiUpdateRequest, options?: Configuration): Promise<TimelineEventTemplate> {
+    public update(param: TemplatesApiUpdateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplate> {
         return this.api.update(param.eventTemplateId, param.appId, param.timelineEventTemplateUpdateRequest,  options).toPromise();
     }
 
@@ -368,18 +383,21 @@ import { TokensApiRequestFactory, TokensApiResponseProcessor} from "../apis/Toke
 export interface TokensApiArchiveRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TokensApiarchive
      */
     eventTemplateId: string
     /**
      * The token name.
+     * Defaults to: undefined
      * @type string
      * @memberof TokensApiarchive
      */
     tokenName: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TokensApiarchive
      */
@@ -389,12 +407,14 @@ export interface TokensApiArchiveRequest {
 export interface TokensApiCreateRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TokensApicreate
      */
     eventTemplateId: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TokensApicreate
      */
@@ -410,18 +430,21 @@ export interface TokensApiCreateRequest {
 export interface TokensApiUpdateRequest {
     /**
      * The event template ID.
+     * Defaults to: undefined
      * @type string
      * @memberof TokensApiupdate
      */
     eventTemplateId: string
     /**
      * The token name.
+     * Defaults to: undefined
      * @type string
      * @memberof TokensApiupdate
      */
     tokenName: string
     /**
      * The ID of the target app.
+     * Defaults to: undefined
      * @type number
      * @memberof TokensApiupdate
      */
@@ -446,7 +469,7 @@ export class ObjectTokensApi {
      * Removes a token from the event template
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: TokensApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: TokensApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.eventTemplateId, param.tokenName, param.appId,  options).toPromise();
     }
 
@@ -455,7 +478,7 @@ export class ObjectTokensApi {
      * Removes a token from the event template
      * @param param the request object
      */
-    public archive(param: TokensApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: TokensApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.eventTemplateId, param.tokenName, param.appId,  options).toPromise();
     }
 
@@ -464,7 +487,7 @@ export class ObjectTokensApi {
      * Adds a token to an existing event template
      * @param param the request object
      */
-    public createWithHttpInfo(param: TokensApiCreateRequest, options?: Configuration): Promise<HttpInfo<TimelineEventTemplateToken>> {
+    public createWithHttpInfo(param: TokensApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
         return this.api.createWithHttpInfo(param.eventTemplateId, param.appId, param.timelineEventTemplateToken,  options).toPromise();
     }
 
@@ -473,7 +496,7 @@ export class ObjectTokensApi {
      * Adds a token to an existing event template
      * @param param the request object
      */
-    public create(param: TokensApiCreateRequest, options?: Configuration): Promise<TimelineEventTemplateToken> {
+    public create(param: TokensApiCreateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
         return this.api.create(param.eventTemplateId, param.appId, param.timelineEventTemplateToken,  options).toPromise();
     }
 
@@ -482,7 +505,7 @@ export class ObjectTokensApi {
      * Updates an existing token on an event template
      * @param param the request object
      */
-    public updateWithHttpInfo(param: TokensApiUpdateRequest, options?: Configuration): Promise<HttpInfo<TimelineEventTemplateToken>> {
+    public updateWithHttpInfo(param: TokensApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<TimelineEventTemplateToken>> {
         return this.api.updateWithHttpInfo(param.eventTemplateId, param.tokenName, param.appId, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
     }
 
@@ -491,7 +514,7 @@ export class ObjectTokensApi {
      * Updates an existing token on an event template
      * @param param the request object
      */
-    public update(param: TokensApiUpdateRequest, options?: Configuration): Promise<TimelineEventTemplateToken> {
+    public update(param: TokensApiUpdateRequest, options?: ConfigurationOptions): Promise<TimelineEventTemplateToken> {
         return this.api.update(param.eventTemplateId, param.tokenName, param.appId, param.timelineEventTemplateTokenUpdateRequest,  options).toPromise();
     }
 
