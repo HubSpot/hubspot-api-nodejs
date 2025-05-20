@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CollectionResponsePipelineNoPaging } from '../models/CollectionResponsePipelineNoPaging';
 import { CollectionResponsePipelineStageNoPaging } from '../models/CollectionResponsePipelineStageNoPaging';
@@ -17,12 +17,14 @@ import { PipelineAuditsApiRequestFactory, PipelineAuditsApiResponseProcessor} fr
 export interface PipelineAuditsApiGetAuditRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineAuditsApigetAudit
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineAuditsApigetAudit
      */
@@ -41,7 +43,7 @@ export class ObjectPipelineAuditsApi {
      * Return an audit of all changes to the pipeline
      * @param param the request object
      */
-    public getAuditWithHttpInfo(param: PipelineAuditsApiGetAuditRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
+    public getAuditWithHttpInfo(param: PipelineAuditsApiGetAuditRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
         return this.api.getAuditWithHttpInfo(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -50,7 +52,7 @@ export class ObjectPipelineAuditsApi {
      * Return an audit of all changes to the pipeline
      * @param param the request object
      */
-    public getAudit(param: PipelineAuditsApiGetAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+    public getAudit(param: PipelineAuditsApiGetAuditRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAuditInfoNoPaging> {
         return this.api.getAudit(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -62,12 +64,14 @@ import { PipelineStageAuditsApiRequestFactory, PipelineStageAuditsApiResponsePro
 export interface PipelineStageAuditsApiGetAuditRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStageAuditsApigetAudit
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStageAuditsApigetAudit
      */
@@ -86,7 +90,7 @@ export class ObjectPipelineStageAuditsApi {
      * Return an audit of all changes to the pipeline stage
      * @param param the request object
      */
-    public getAuditWithHttpInfo(param: PipelineStageAuditsApiGetAuditRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
+    public getAuditWithHttpInfo(param: PipelineStageAuditsApiGetAuditRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAuditInfoNoPaging>> {
         return this.api.getAuditWithHttpInfo(param.objectType, param.stageId,  options).toPromise();
     }
 
@@ -95,7 +99,7 @@ export class ObjectPipelineStageAuditsApi {
      * Return an audit of all changes to the pipeline stage
      * @param param the request object
      */
-    public getAudit(param: PipelineStageAuditsApiGetAuditRequest, options?: Configuration): Promise<CollectionResponsePublicAuditInfoNoPaging> {
+    public getAudit(param: PipelineStageAuditsApiGetAuditRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAuditInfoNoPaging> {
         return this.api.getAudit(param.objectType, param.stageId,  options).toPromise();
     }
 
@@ -107,18 +111,21 @@ import { PipelineStagesApiRequestFactory, PipelineStagesApiResponseProcessor} fr
 export interface PipelineStagesApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiarchive
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiarchive
      */
     pipelineId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiarchive
      */
@@ -128,12 +135,14 @@ export interface PipelineStagesApiArchiveRequest {
 export interface PipelineStagesApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApicreate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApicreate
      */
@@ -149,12 +158,14 @@ export interface PipelineStagesApiCreateRequest {
 export interface PipelineStagesApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApigetAll
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApigetAll
      */
@@ -164,18 +175,21 @@ export interface PipelineStagesApiGetAllRequest {
 export interface PipelineStagesApiGetByIdRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApigetById
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApigetById
      */
     pipelineId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApigetById
      */
@@ -185,18 +199,21 @@ export interface PipelineStagesApiGetByIdRequest {
 export interface PipelineStagesApiReplaceRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApireplace
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApireplace
      */
     pipelineId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApireplace
      */
@@ -212,18 +229,21 @@ export interface PipelineStagesApiReplaceRequest {
 export interface PipelineStagesApiUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiupdate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiupdate
      */
     pipelineId: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelineStagesApiupdate
      */
@@ -248,7 +268,7 @@ export class ObjectPipelineStagesApi {
      * Delete a pipeline stage
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: PipelineStagesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: PipelineStagesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.pipelineId, param.stageId,  options).toPromise();
     }
 
@@ -257,7 +277,7 @@ export class ObjectPipelineStagesApi {
      * Delete a pipeline stage
      * @param param the request object
      */
-    public archive(param: PipelineStagesApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: PipelineStagesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.pipelineId, param.stageId,  options).toPromise();
     }
 
@@ -266,7 +286,7 @@ export class ObjectPipelineStagesApi {
      * Create a pipeline stage
      * @param param the request object
      */
-    public createWithHttpInfo(param: PipelineStagesApiCreateRequest, options?: Configuration): Promise<HttpInfo<PipelineStage>> {
+    public createWithHttpInfo(param: PipelineStagesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PipelineStage>> {
         return this.api.createWithHttpInfo(param.objectType, param.pipelineId, param.pipelineStageInput,  options).toPromise();
     }
 
@@ -275,7 +295,7 @@ export class ObjectPipelineStagesApi {
      * Create a pipeline stage
      * @param param the request object
      */
-    public create(param: PipelineStagesApiCreateRequest, options?: Configuration): Promise<PipelineStage> {
+    public create(param: PipelineStagesApiCreateRequest, options?: ConfigurationOptions): Promise<PipelineStage> {
         return this.api.create(param.objectType, param.pipelineId, param.pipelineStageInput,  options).toPromise();
     }
 
@@ -284,7 +304,7 @@ export class ObjectPipelineStagesApi {
      * Return all stages of a pipeline
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: PipelineStagesApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePipelineStageNoPaging>> {
+    public getAllWithHttpInfo(param: PipelineStagesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePipelineStageNoPaging>> {
         return this.api.getAllWithHttpInfo(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -293,7 +313,7 @@ export class ObjectPipelineStagesApi {
      * Return all stages of a pipeline
      * @param param the request object
      */
-    public getAll(param: PipelineStagesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineStageNoPaging> {
+    public getAll(param: PipelineStagesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePipelineStageNoPaging> {
         return this.api.getAll(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -302,7 +322,7 @@ export class ObjectPipelineStagesApi {
      * Return a pipeline stage by ID
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: PipelineStagesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<PipelineStage>> {
+    public getByIdWithHttpInfo(param: PipelineStagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<PipelineStage>> {
         return this.api.getByIdWithHttpInfo(param.objectType, param.pipelineId, param.stageId,  options).toPromise();
     }
 
@@ -311,7 +331,7 @@ export class ObjectPipelineStagesApi {
      * Return a pipeline stage by ID
      * @param param the request object
      */
-    public getById(param: PipelineStagesApiGetByIdRequest, options?: Configuration): Promise<PipelineStage> {
+    public getById(param: PipelineStagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<PipelineStage> {
         return this.api.getById(param.objectType, param.pipelineId, param.stageId,  options).toPromise();
     }
 
@@ -320,7 +340,7 @@ export class ObjectPipelineStagesApi {
      * Replace a pipeline stage
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: PipelineStagesApiReplaceRequest, options?: Configuration): Promise<HttpInfo<PipelineStage>> {
+    public replaceWithHttpInfo(param: PipelineStagesApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<PipelineStage>> {
         return this.api.replaceWithHttpInfo(param.objectType, param.pipelineId, param.stageId, param.pipelineStageInput,  options).toPromise();
     }
 
@@ -329,7 +349,7 @@ export class ObjectPipelineStagesApi {
      * Replace a pipeline stage
      * @param param the request object
      */
-    public replace(param: PipelineStagesApiReplaceRequest, options?: Configuration): Promise<PipelineStage> {
+    public replace(param: PipelineStagesApiReplaceRequest, options?: ConfigurationOptions): Promise<PipelineStage> {
         return this.api.replace(param.objectType, param.pipelineId, param.stageId, param.pipelineStageInput,  options).toPromise();
     }
 
@@ -338,7 +358,7 @@ export class ObjectPipelineStagesApi {
      * Update a pipeline stage
      * @param param the request object
      */
-    public updateWithHttpInfo(param: PipelineStagesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PipelineStage>> {
+    public updateWithHttpInfo(param: PipelineStagesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PipelineStage>> {
         return this.api.updateWithHttpInfo(param.objectType, param.pipelineId, param.stageId, param.pipelineStagePatchInput,  options).toPromise();
     }
 
@@ -347,7 +367,7 @@ export class ObjectPipelineStagesApi {
      * Update a pipeline stage
      * @param param the request object
      */
-    public update(param: PipelineStagesApiUpdateRequest, options?: Configuration): Promise<PipelineStage> {
+    public update(param: PipelineStagesApiUpdateRequest, options?: ConfigurationOptions): Promise<PipelineStage> {
         return this.api.update(param.objectType, param.pipelineId, param.stageId, param.pipelineStagePatchInput,  options).toPromise();
     }
 
@@ -359,24 +379,28 @@ import { PipelinesApiRequestFactory, PipelinesApiResponseProcessor} from "../api
 export interface PipelinesApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApiarchive
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApiarchive
      */
     pipelineId: string
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApiarchive
      */
     validateReferencesBeforeDelete?: boolean
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApiarchive
      */
@@ -386,6 +410,7 @@ export interface PipelinesApiArchiveRequest {
 export interface PipelinesApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApicreate
      */
@@ -401,6 +426,7 @@ export interface PipelinesApiCreateRequest {
 export interface PipelinesApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApigetAll
      */
@@ -410,12 +436,14 @@ export interface PipelinesApiGetAllRequest {
 export interface PipelinesApiGetByIdRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApigetById
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApigetById
      */
@@ -425,12 +453,14 @@ export interface PipelinesApiGetByIdRequest {
 export interface PipelinesApiReplaceRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApireplace
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApireplace
      */
@@ -443,12 +473,14 @@ export interface PipelinesApiReplaceRequest {
     pipelineInput: PipelineInput
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApireplace
      */
     validateReferencesBeforeDelete?: boolean
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApireplace
      */
@@ -458,12 +490,14 @@ export interface PipelinesApiReplaceRequest {
 export interface PipelinesApiUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApiupdate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof PipelinesApiupdate
      */
@@ -476,12 +510,14 @@ export interface PipelinesApiUpdateRequest {
     pipelinePatchInput: PipelinePatchInput
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApiupdate
      */
     validateReferencesBeforeDelete?: boolean
     /**
      * 
+     * Defaults to: false
      * @type boolean
      * @memberof PipelinesApiupdate
      */
@@ -500,7 +536,7 @@ export class ObjectPipelinesApi {
      * Delete a pipeline
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: PipelinesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: PipelinesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.pipelineId, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
@@ -509,7 +545,7 @@ export class ObjectPipelinesApi {
      * Delete a pipeline
      * @param param the request object
      */
-    public archive(param: PipelinesApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: PipelinesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.pipelineId, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
@@ -518,7 +554,7 @@ export class ObjectPipelinesApi {
      * Create a pipeline
      * @param param the request object
      */
-    public createWithHttpInfo(param: PipelinesApiCreateRequest, options?: Configuration): Promise<HttpInfo<Pipeline>> {
+    public createWithHttpInfo(param: PipelinesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Pipeline>> {
         return this.api.createWithHttpInfo(param.objectType, param.pipelineInput,  options).toPromise();
     }
 
@@ -527,7 +563,7 @@ export class ObjectPipelinesApi {
      * Create a pipeline
      * @param param the request object
      */
-    public create(param: PipelinesApiCreateRequest, options?: Configuration): Promise<Pipeline> {
+    public create(param: PipelinesApiCreateRequest, options?: ConfigurationOptions): Promise<Pipeline> {
         return this.api.create(param.objectType, param.pipelineInput,  options).toPromise();
     }
 
@@ -536,7 +572,7 @@ export class ObjectPipelinesApi {
      * Retrieve all pipelines
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: PipelinesApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePipelineNoPaging>> {
+    public getAllWithHttpInfo(param: PipelinesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePipelineNoPaging>> {
         return this.api.getAllWithHttpInfo(param.objectType,  options).toPromise();
     }
 
@@ -545,7 +581,7 @@ export class ObjectPipelinesApi {
      * Retrieve all pipelines
      * @param param the request object
      */
-    public getAll(param: PipelinesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePipelineNoPaging> {
+    public getAll(param: PipelinesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePipelineNoPaging> {
         return this.api.getAll(param.objectType,  options).toPromise();
     }
 
@@ -554,7 +590,7 @@ export class ObjectPipelinesApi {
      * Return a pipeline by ID
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: PipelinesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Pipeline>> {
+    public getByIdWithHttpInfo(param: PipelinesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Pipeline>> {
         return this.api.getByIdWithHttpInfo(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -563,7 +599,7 @@ export class ObjectPipelinesApi {
      * Return a pipeline by ID
      * @param param the request object
      */
-    public getById(param: PipelinesApiGetByIdRequest, options?: Configuration): Promise<Pipeline> {
+    public getById(param: PipelinesApiGetByIdRequest, options?: ConfigurationOptions): Promise<Pipeline> {
         return this.api.getById(param.objectType, param.pipelineId,  options).toPromise();
     }
 
@@ -572,7 +608,7 @@ export class ObjectPipelinesApi {
      * Replace a pipeline
      * @param param the request object
      */
-    public replaceWithHttpInfo(param: PipelinesApiReplaceRequest, options?: Configuration): Promise<HttpInfo<Pipeline>> {
+    public replaceWithHttpInfo(param: PipelinesApiReplaceRequest, options?: ConfigurationOptions): Promise<HttpInfo<Pipeline>> {
         return this.api.replaceWithHttpInfo(param.objectType, param.pipelineId, param.pipelineInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
@@ -581,7 +617,7 @@ export class ObjectPipelinesApi {
      * Replace a pipeline
      * @param param the request object
      */
-    public replace(param: PipelinesApiReplaceRequest, options?: Configuration): Promise<Pipeline> {
+    public replace(param: PipelinesApiReplaceRequest, options?: ConfigurationOptions): Promise<Pipeline> {
         return this.api.replace(param.objectType, param.pipelineId, param.pipelineInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
@@ -590,7 +626,7 @@ export class ObjectPipelinesApi {
      * Update a pipeline
      * @param param the request object
      */
-    public updateWithHttpInfo(param: PipelinesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Pipeline>> {
+    public updateWithHttpInfo(param: PipelinesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Pipeline>> {
         return this.api.updateWithHttpInfo(param.objectType, param.pipelineId, param.pipelinePatchInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 
@@ -599,7 +635,7 @@ export class ObjectPipelinesApi {
      * Update a pipeline
      * @param param the request object
      */
-    public update(param: PipelinesApiUpdateRequest, options?: Configuration): Promise<Pipeline> {
+    public update(param: PipelinesApiUpdateRequest, options?: ConfigurationOptions): Promise<Pipeline> {
         return this.api.update(param.objectType, param.pipelineId, param.pipelinePatchInput, param.validateReferencesBeforeDelete, param.validateDealStageUsagesBeforeDelete,  options).toPromise();
     }
 

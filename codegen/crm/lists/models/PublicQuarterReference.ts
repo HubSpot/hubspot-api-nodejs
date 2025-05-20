@@ -22,6 +22,8 @@ export class PublicQuarterReference {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "hour",
@@ -73,7 +75,6 @@ export class PublicQuarterReference {
     public constructor() {
     }
 }
-
 
 export enum PublicQuarterReferenceReferenceTypeEnum {
     Quarter = 'QUARTER'

@@ -23,6 +23,8 @@ export class PublicEmailEventFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "clickUrl",
@@ -74,7 +76,6 @@ export class PublicEmailEventFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicEmailEventFilterFilterTypeEnum {
     EmailEvent = 'EMAIL_EVENT'

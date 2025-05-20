@@ -20,6 +20,8 @@ export class PublicComparativePropertyUpdatedOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "includeObjectsWithNoValueSet",
@@ -59,7 +61,6 @@ export class PublicComparativePropertyUpdatedOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicComparativePropertyUpdatedOperationOperationTypeEnum {
     ComparativePropertyUpdated = 'COMPARATIVE_PROPERTY_UPDATED'

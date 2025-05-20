@@ -20,6 +20,8 @@ export class PublicRelativeRangedTimestampRefineBy {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "upperBoundOffset",
@@ -53,7 +55,6 @@ export class PublicRelativeRangedTimestampRefineBy {
     public constructor() {
     }
 }
-
 
 export enum PublicRelativeRangedTimestampRefineByTypeEnum {
     RelativeRanged = 'RELATIVE_RANGED'

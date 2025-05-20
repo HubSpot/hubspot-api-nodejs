@@ -10,88 +10,35 @@
  * Do not edit the class manually.
  */
 
+import { PublicFiscalQuarterReference } from '../models/PublicFiscalQuarterReference';
+import { PublicFiscalYearReference } from '../models/PublicFiscalYearReference';
+import { PublicMonthReference } from '../models/PublicMonthReference';
+import { PublicNowReference } from '../models/PublicNowReference';
+import { PublicQuarterReference } from '../models/PublicQuarterReference';
+import { PublicTodayReference } from '../models/PublicTodayReference';
+import { PublicWeekReference } from '../models/PublicWeekReference';
+import { PublicYearReference } from '../models/PublicYearReference';
 
-export class PublicIndexedTimePointIndexReference {
-    'hour'?: number;
-    'millisecond'?: number;
-    'referenceType': PublicIndexedTimePointIndexReferenceReferenceTypeEnum;
-    'minute'?: number;
-    'second'?: number;
-    'dayOfWeek': PublicIndexedTimePointIndexReferenceDayOfWeekEnum;
-    'month': number;
-    'day': number;
+/**
+ * @type PublicIndexedTimePointIndexReference
+ * Type
+ * @export
+ */
+export type PublicIndexedTimePointIndexReference = PublicFiscalQuarterReference | PublicFiscalYearReference | PublicMonthReference | PublicNowReference | PublicQuarterReference | PublicTodayReference | PublicWeekReference | PublicYearReference;
 
+/**
+* @type PublicIndexedTimePointIndexReferenceClass
+* @export
+*/
+export class PublicIndexedTimePointIndexReferenceClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "hour",
-            "baseName": "hour",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "millisecond",
-            "baseName": "millisecond",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicIndexedTimePointIndexReferenceReferenceTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "minute",
-            "baseName": "minute",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "second",
-            "baseName": "second",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "dayOfWeek",
-            "baseName": "dayOfWeek",
-            "type": "PublicIndexedTimePointIndexReferenceDayOfWeekEnum",
-            "format": ""
-        },
-        {
-            "name": "month",
-            "baseName": "month",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "number",
-            "format": "int32"
-        }    ];
-
-    static getAttributeTypeMap() {
-        return PublicIndexedTimePointIndexReference.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
 
-export enum PublicIndexedTimePointIndexReferenceReferenceTypeEnum {
-    Month = 'MONTH'
-}
-export enum PublicIndexedTimePointIndexReferenceDayOfWeekEnum {
-    Monday = 'MONDAY',
-    Tuesday = 'TUESDAY',
-    Wednesday = 'WEDNESDAY',
-    Thursday = 'THURSDAY',
-    Friday = 'FRIDAY',
-    Saturday = 'SATURDAY',
-    Sunday = 'SUNDAY'
-}
+
+
+
+
 

@@ -20,6 +20,8 @@ export class PublicPropertyReferencedTime {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "timezoneSource",
@@ -59,7 +61,6 @@ export class PublicPropertyReferencedTime {
     public constructor() {
     }
 }
-
 
 export enum PublicPropertyReferencedTimeTimeTypeEnum {
     PropertyReferenced = 'PROPERTY_REFERENCED'

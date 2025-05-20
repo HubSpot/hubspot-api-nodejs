@@ -21,6 +21,8 @@ export class PublicCommunicationSubscriptionFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "subscriptionType",
@@ -66,7 +68,6 @@ export class PublicCommunicationSubscriptionFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicCommunicationSubscriptionFilterFilterTypeEnum {
     CommunicationSubscription = 'COMMUNICATION_SUBSCRIPTION'
