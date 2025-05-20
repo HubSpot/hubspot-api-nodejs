@@ -22,7 +22,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Move an Object identified by `{callId}` to the recycling bin.
      * Archive
-     * @param callId 
+     * @param callId The ID of the call.
      */
     public async archive(callId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -49,7 +49,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -97,7 +97,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -108,7 +108,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Read an Object identified by `{callId}`. `{callId}` refers to the internal object ID by default, or optionally any unique property value as specified by the `idProperty` query param.  Control what is returned via the `properties` query param.
      * Read
-     * @param callId 
+     * @param callId The ID of the call.
      * @param properties A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
@@ -139,17 +139,26 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
         // Query Params
         if (propertiesWithHistory !== undefined) {
-            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
+            }
         }
 
         // Query Params
         if (associations !== undefined) {
-            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
         }
 
         // Query Params
@@ -170,7 +179,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -216,17 +225,26 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
         // Query Params
         if (propertiesWithHistory !== undefined) {
-            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
+            }
         }
 
         // Query Params
         if (associations !== undefined) {
-            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
         }
 
         // Query Params
@@ -242,7 +260,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -253,7 +271,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Perform a partial update of an Object identified by `{callId}`or optionally a unique property value as specified by the `idProperty` query param. `{callId}` refers to the internal object ID by default, and the `idProperty` query param refers to a property whose values are unique for the object. Provided property values will be overwritten. Read-only and non-existent properties will result in an error. Properties values can be cleared by passing an empty string.
      * Update
-     * @param callId 
+     * @param callId The ID of the call.
      * @param simplePublicObjectInput 
      * @param idProperty The name of a property whose values are unique for this object
      */
@@ -305,7 +323,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

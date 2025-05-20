@@ -12,8 +12,9 @@
 
 import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
 
-export class SimplePublicObjectInputForCreate {
+export class SimplePublicObjectBatchInputForCreate {
     'associations'?: Array<PublicAssociationsForObject>;
+    'objectWriteTraceId'?: string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
@@ -28,6 +29,12 @@ export class SimplePublicObjectInputForCreate {
             "format": ""
         },
         {
+            "name": "objectWriteTraceId",
+            "baseName": "objectWriteTraceId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "properties",
             "baseName": "properties",
             "type": "{ [key: string]: string; }",
@@ -35,7 +42,7 @@ export class SimplePublicObjectInputForCreate {
         }    ];
 
     static getAttributeTypeMap() {
-        return SimplePublicObjectInputForCreate.attributeTypeMap;
+        return SimplePublicObjectBatchInputForCreate.attributeTypeMap;
     }
 
     public constructor() {
