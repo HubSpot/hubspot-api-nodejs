@@ -22,6 +22,8 @@ export class BatchResponseDealToDealSplits {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -67,7 +69,6 @@ export class BatchResponseDealToDealSplits {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseDealToDealSplitsStatusEnum {
     Pending = 'PENDING',

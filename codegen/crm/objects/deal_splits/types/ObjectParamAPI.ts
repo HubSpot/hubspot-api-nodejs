@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchInputPublicObjectId } from '../models/BatchInputPublicObjectId';
 import { BatchResponseDealToDealSplits } from '../models/BatchResponseDealToDealSplits';
@@ -38,7 +38,7 @@ export class ObjectBatchApi {
      * Read a batch of deal split objects by their associated deal object internal ID
      * @param param the request object
      */
-    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
         return this.api.readWithHttpInfo(param.batchInputPublicObjectId,  options).toPromise();
     }
 
@@ -46,7 +46,7 @@ export class ObjectBatchApi {
      * Read a batch of deal split objects by their associated deal object internal ID
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
         return this.api.read(param.batchInputPublicObjectId,  options).toPromise();
     }
 
@@ -54,7 +54,7 @@ export class ObjectBatchApi {
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: Configuration): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
+    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors>> {
         return this.api.upsertWithHttpInfo(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
     }
 
@@ -62,7 +62,7 @@ export class ObjectBatchApi {
      * Create or replace deal splits for deals with the provided IDs. Deal split percentages for each deal must sum up to 1.0 (100%) and may have up to 8 decimal places
      * @param param the request object
      */
-    public upsert(param: BatchApiUpsertRequest, options?: Configuration): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
+    public upsert(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseDealToDealSplits | BatchResponseDealToDealSplitsWithErrors> {
         return this.api.upsert(param.publicDealSplitsBatchCreateRequest,  options).toPromise();
     }
 
