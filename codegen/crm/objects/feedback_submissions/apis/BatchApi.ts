@@ -18,6 +18,7 @@ import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchRespon
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Retrieve records by record ID or include the `idProperty` parameter to retrieve records by a custom unique value property. 
      * Read a batch of feedback submissions by internal ID, or unique property values
      * @param batchReadInputSimplePublicObjectId 
      * @param archived Whether to return only results that have been archived.
@@ -63,7 +64,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
