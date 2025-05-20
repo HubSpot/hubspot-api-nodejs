@@ -1,15 +1,15 @@
 import {
-  createConfiguration,
   PublicSMTPTokensApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SingleSendApi,
+  createConfiguration,
 } from '../../../../codegen/marketing/transactional/index'
-import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/marketing/transactional/rxjsStub'
 
 export default class TransactionalDiscovery {
   public publicSMTPTokensApi: PublicSMTPTokensApi
@@ -22,7 +22,7 @@ export default class TransactionalDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchInputPropertyCreate } from '../models/BatchInputPropertyCreate';
 import { BatchInputPropertyName } from '../models/BatchInputPropertyName';
@@ -21,6 +21,7 @@ import { BatchApiRequestFactory, BatchApiResponseProcessor} from "../apis/BatchA
 export interface BatchApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiarchive
      */
@@ -36,6 +37,7 @@ export interface BatchApiArchiveRequest {
 export interface BatchApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApicreate
      */
@@ -51,6 +53,7 @@ export interface BatchApiCreateRequest {
 export interface BatchApiReadRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BatchApiread
      */
@@ -75,7 +78,7 @@ export class ObjectBatchApi {
      * Archive a batch of properties
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.batchInputPropertyName,  options).toPromise();
     }
 
@@ -84,7 +87,7 @@ export class ObjectBatchApi {
      * Archive a batch of properties
      * @param param the request object
      */
-    public archive(param: BatchApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BatchApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.batchInputPropertyName,  options).toPromise();
     }
 
@@ -93,7 +96,7 @@ export class ObjectBatchApi {
      * Create a batch of properties
      * @param param the request object
      */
-    public createWithHttpInfo(param: BatchApiCreateRequest, options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
         return this.api.createWithHttpInfo(param.objectType, param.batchInputPropertyCreate,  options).toPromise();
     }
 
@@ -102,7 +105,7 @@ export class ObjectBatchApi {
      * Create a batch of properties
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+    public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         return this.api.create(param.objectType, param.batchInputPropertyCreate,  options).toPromise();
     }
 
@@ -111,7 +114,7 @@ export class ObjectBatchApi {
      * Read a batch of properties
      * @param param the request object
      */
-    public readWithHttpInfo(param: BatchApiReadRequest, options?: Configuration): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseProperty | BatchResponsePropertyWithErrors>> {
         return this.api.readWithHttpInfo(param.objectType, param.batchReadInputPropertyName,  options).toPromise();
     }
 
@@ -120,7 +123,7 @@ export class ObjectBatchApi {
      * Read a batch of properties
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: Configuration): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
+    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseProperty | BatchResponsePropertyWithErrors> {
         return this.api.read(param.objectType, param.batchReadInputPropertyName,  options).toPromise();
     }
 
@@ -132,12 +135,14 @@ import { CoreApiRequestFactory, CoreApiResponseProcessor} from "../apis/CoreApi"
 export interface CoreApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApiarchive
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApiarchive
      */
@@ -147,6 +152,7 @@ export interface CoreApiArchiveRequest {
 export interface CoreApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApicreate
      */
@@ -162,18 +168,21 @@ export interface CoreApiCreateRequest {
 export interface CoreApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApigetAll
      */
     objectType: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: false
      * @type boolean
      * @memberof CoreApigetAll
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApigetAll
      */
@@ -183,24 +192,28 @@ export interface CoreApiGetAllRequest {
 export interface CoreApiGetByNameRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApigetByName
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApigetByName
      */
     propertyName: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: false
      * @type boolean
      * @memberof CoreApigetByName
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApigetByName
      */
@@ -210,12 +223,14 @@ export interface CoreApiGetByNameRequest {
 export interface CoreApiUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApiupdate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof CoreApiupdate
      */
@@ -240,7 +255,7 @@ export class ObjectCoreApi {
      * Archive a property
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: CoreApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: CoreApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.propertyName,  options).toPromise();
     }
 
@@ -249,7 +264,7 @@ export class ObjectCoreApi {
      * Archive a property
      * @param param the request object
      */
-    public archive(param: CoreApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: CoreApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.propertyName,  options).toPromise();
     }
 
@@ -258,7 +273,7 @@ export class ObjectCoreApi {
      * Create a property
      * @param param the request object
      */
-    public createWithHttpInfo(param: CoreApiCreateRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+    public createWithHttpInfo(param: CoreApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Property>> {
         return this.api.createWithHttpInfo(param.objectType, param.propertyCreate,  options).toPromise();
     }
 
@@ -267,7 +282,7 @@ export class ObjectCoreApi {
      * Create a property
      * @param param the request object
      */
-    public create(param: CoreApiCreateRequest, options?: Configuration): Promise<Property> {
+    public create(param: CoreApiCreateRequest, options?: ConfigurationOptions): Promise<Property> {
         return this.api.create(param.objectType, param.propertyCreate,  options).toPromise();
     }
 
@@ -276,7 +291,7 @@ export class ObjectCoreApi {
      * Read all properties
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: CoreApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyNoPaging>> {
+    public getAllWithHttpInfo(param: CoreApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePropertyNoPaging>> {
         return this.api.getAllWithHttpInfo(param.objectType, param.archived, param.properties,  options).toPromise();
     }
 
@@ -285,7 +300,7 @@ export class ObjectCoreApi {
      * Read all properties
      * @param param the request object
      */
-    public getAll(param: CoreApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyNoPaging> {
+    public getAll(param: CoreApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePropertyNoPaging> {
         return this.api.getAll(param.objectType, param.archived, param.properties,  options).toPromise();
     }
 
@@ -294,7 +309,7 @@ export class ObjectCoreApi {
      * Read a property
      * @param param the request object
      */
-    public getByNameWithHttpInfo(param: CoreApiGetByNameRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+    public getByNameWithHttpInfo(param: CoreApiGetByNameRequest, options?: ConfigurationOptions): Promise<HttpInfo<Property>> {
         return this.api.getByNameWithHttpInfo(param.objectType, param.propertyName, param.archived, param.properties,  options).toPromise();
     }
 
@@ -303,7 +318,7 @@ export class ObjectCoreApi {
      * Read a property
      * @param param the request object
      */
-    public getByName(param: CoreApiGetByNameRequest, options?: Configuration): Promise<Property> {
+    public getByName(param: CoreApiGetByNameRequest, options?: ConfigurationOptions): Promise<Property> {
         return this.api.getByName(param.objectType, param.propertyName, param.archived, param.properties,  options).toPromise();
     }
 
@@ -312,7 +327,7 @@ export class ObjectCoreApi {
      * Update a property
      * @param param the request object
      */
-    public updateWithHttpInfo(param: CoreApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Property>> {
+    public updateWithHttpInfo(param: CoreApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Property>> {
         return this.api.updateWithHttpInfo(param.objectType, param.propertyName, param.propertyUpdate,  options).toPromise();
     }
 
@@ -321,7 +336,7 @@ export class ObjectCoreApi {
      * Update a property
      * @param param the request object
      */
-    public update(param: CoreApiUpdateRequest, options?: Configuration): Promise<Property> {
+    public update(param: CoreApiUpdateRequest, options?: ConfigurationOptions): Promise<Property> {
         return this.api.update(param.objectType, param.propertyName, param.propertyUpdate,  options).toPromise();
     }
 
@@ -333,12 +348,14 @@ import { GroupsApiRequestFactory, GroupsApiResponseProcessor} from "../apis/Grou
 export interface GroupsApiArchiveRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApiarchive
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApiarchive
      */
@@ -348,6 +365,7 @@ export interface GroupsApiArchiveRequest {
 export interface GroupsApiCreateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApicreate
      */
@@ -363,6 +381,7 @@ export interface GroupsApiCreateRequest {
 export interface GroupsApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApigetAll
      */
@@ -372,12 +391,14 @@ export interface GroupsApiGetAllRequest {
 export interface GroupsApiGetByNameRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApigetByName
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApigetByName
      */
@@ -387,12 +408,14 @@ export interface GroupsApiGetByNameRequest {
 export interface GroupsApiUpdateRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApiupdate
      */
     objectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof GroupsApiupdate
      */
@@ -417,7 +440,7 @@ export class ObjectGroupsApi {
      * Archive a property group
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: GroupsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: GroupsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectType, param.groupName,  options).toPromise();
     }
 
@@ -426,7 +449,7 @@ export class ObjectGroupsApi {
      * Archive a property group
      * @param param the request object
      */
-    public archive(param: GroupsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: GroupsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectType, param.groupName,  options).toPromise();
     }
 
@@ -435,7 +458,7 @@ export class ObjectGroupsApi {
      * Create a property group
      * @param param the request object
      */
-    public createWithHttpInfo(param: GroupsApiCreateRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+    public createWithHttpInfo(param: GroupsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
         return this.api.createWithHttpInfo(param.objectType, param.propertyGroupCreate,  options).toPromise();
     }
 
@@ -444,7 +467,7 @@ export class ObjectGroupsApi {
      * Create a property group
      * @param param the request object
      */
-    public create(param: GroupsApiCreateRequest, options?: Configuration): Promise<PropertyGroup> {
+    public create(param: GroupsApiCreateRequest, options?: ConfigurationOptions): Promise<PropertyGroup> {
         return this.api.create(param.objectType, param.propertyGroupCreate,  options).toPromise();
     }
 
@@ -453,7 +476,7 @@ export class ObjectGroupsApi {
      * Read all property groups
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: GroupsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePropertyGroupNoPaging>> {
+    public getAllWithHttpInfo(param: GroupsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePropertyGroupNoPaging>> {
         return this.api.getAllWithHttpInfo(param.objectType,  options).toPromise();
     }
 
@@ -462,7 +485,7 @@ export class ObjectGroupsApi {
      * Read all property groups
      * @param param the request object
      */
-    public getAll(param: GroupsApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePropertyGroupNoPaging> {
+    public getAll(param: GroupsApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePropertyGroupNoPaging> {
         return this.api.getAll(param.objectType,  options).toPromise();
     }
 
@@ -471,7 +494,7 @@ export class ObjectGroupsApi {
      * Read a property group
      * @param param the request object
      */
-    public getByNameWithHttpInfo(param: GroupsApiGetByNameRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+    public getByNameWithHttpInfo(param: GroupsApiGetByNameRequest, options?: ConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
         return this.api.getByNameWithHttpInfo(param.objectType, param.groupName,  options).toPromise();
     }
 
@@ -480,7 +503,7 @@ export class ObjectGroupsApi {
      * Read a property group
      * @param param the request object
      */
-    public getByName(param: GroupsApiGetByNameRequest, options?: Configuration): Promise<PropertyGroup> {
+    public getByName(param: GroupsApiGetByNameRequest, options?: ConfigurationOptions): Promise<PropertyGroup> {
         return this.api.getByName(param.objectType, param.groupName,  options).toPromise();
     }
 
@@ -489,7 +512,7 @@ export class ObjectGroupsApi {
      * Update a property group
      * @param param the request object
      */
-    public updateWithHttpInfo(param: GroupsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<PropertyGroup>> {
+    public updateWithHttpInfo(param: GroupsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<PropertyGroup>> {
         return this.api.updateWithHttpInfo(param.objectType, param.groupName, param.propertyGroupUpdate,  options).toPromise();
     }
 
@@ -498,7 +521,7 @@ export class ObjectGroupsApi {
      * Update a property group
      * @param param the request object
      */
-    public update(param: GroupsApiUpdateRequest, options?: Configuration): Promise<PropertyGroup> {
+    public update(param: GroupsApiUpdateRequest, options?: ConfigurationOptions): Promise<PropertyGroup> {
         return this.api.update(param.objectType, param.groupName, param.propertyGroupUpdate,  options).toPromise();
     }
 

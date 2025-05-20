@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -31,13 +31,16 @@ export class FileUpdateInput {
     * Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
     */
     'parentFolderPath'?: string;
+    'clearExpires'?: boolean;
     /**
     * Mark whether the file should be used in new content or not.
     */
     'isUsableInContent'?: boolean;
-    'expiresAt'?: number;
+    'expiresAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -65,6 +68,12 @@ export class FileUpdateInput {
             "format": ""
         },
         {
+            "name": "clearExpires",
+            "baseName": "clearExpires",
+            "type": "boolean",
+            "format": ""
+        },
+        {
             "name": "isUsableInContent",
             "baseName": "isUsableInContent",
             "type": "boolean",
@@ -73,8 +82,8 @@ export class FileUpdateInput {
         {
             "name": "expiresAt",
             "baseName": "expiresAt",
-            "type": "number",
-            "format": "int64"
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -85,13 +94,14 @@ export class FileUpdateInput {
     }
 }
 
-
 export enum FileUpdateInputAccessEnum {
     PublicIndexable = 'PUBLIC_INDEXABLE',
     PublicNotIndexable = 'PUBLIC_NOT_INDEXABLE',
     HiddenIndexable = 'HIDDEN_INDEXABLE',
     HiddenNotIndexable = 'HIDDEN_NOT_INDEXABLE',
     HiddenPrivate = 'HIDDEN_PRIVATE',
-    Private = 'PRIVATE'
+    Private = 'PRIVATE',
+    HiddenSensitive = 'HIDDEN_SENSITIVE',
+    Sensitive = 'SENSITIVE'
 }
 

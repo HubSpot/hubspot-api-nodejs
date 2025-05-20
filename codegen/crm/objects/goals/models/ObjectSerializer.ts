@@ -1,7 +1,14 @@
 export * from '../models/AssociatedId';
+export * from '../models/AssociationSpec';
+export * from '../models/BatchInputSimplePublicObjectBatchInput';
+export * from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
+export * from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
+export * from '../models/BatchInputSimplePublicObjectId';
 export * from '../models/BatchReadInputSimplePublicObjectId';
 export * from '../models/BatchResponseSimplePublicObject';
 export * from '../models/BatchResponseSimplePublicObjectWithErrors';
+export * from '../models/BatchResponseSimplePublicUpsertObject';
+export * from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
@@ -13,17 +20,32 @@ export * from '../models/ModelError';
 export * from '../models/NextPage';
 export * from '../models/Paging';
 export * from '../models/PreviousPage';
+export * from '../models/PublicAssociationsForObject';
+export * from '../models/PublicObjectId';
 export * from '../models/PublicObjectSearchRequest';
 export * from '../models/SimplePublicObject';
+export * from '../models/SimplePublicObjectBatchInput';
+export * from '../models/SimplePublicObjectBatchInputForCreate';
+export * from '../models/SimplePublicObjectBatchInputUpsert';
 export * from '../models/SimplePublicObjectId';
+export * from '../models/SimplePublicObjectInput';
+export * from '../models/SimplePublicObjectInputForCreate';
 export * from '../models/SimplePublicObjectWithAssociations';
+export * from '../models/SimplePublicUpsertObject';
 export * from '../models/StandardError';
 export * from '../models/ValueWithTimestamp';
 
 import { AssociatedId } from '../models/AssociatedId';
+import { AssociationSpec    } from '../models/AssociationSpec';
+import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
+import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
+import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
+import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
 import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
+import { BatchResponseSimplePublicUpsertObject        } from '../models/BatchResponseSimplePublicUpsertObject';
+import { BatchResponseSimplePublicUpsertObjectWithErrors          } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
 import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
@@ -35,10 +57,18 @@ import { ModelError } from '../models/ModelError';
 import { NextPage } from '../models/NextPage';
 import { Paging } from '../models/Paging';
 import { PreviousPage } from '../models/PreviousPage';
+import { PublicAssociationsForObject } from '../models/PublicAssociationsForObject';
+import { PublicObjectId } from '../models/PublicObjectId';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
+import { SimplePublicObjectBatchInput } from '../models/SimplePublicObjectBatchInput';
+import { SimplePublicObjectBatchInputForCreate } from '../models/SimplePublicObjectBatchInputForCreate';
+import { SimplePublicObjectBatchInputUpsert } from '../models/SimplePublicObjectBatchInputUpsert';
 import { SimplePublicObjectId } from '../models/SimplePublicObjectId';
+import { SimplePublicObjectInput } from '../models/SimplePublicObjectInput';
+import { SimplePublicObjectInputForCreate } from '../models/SimplePublicObjectInputForCreate';
 import { SimplePublicObjectWithAssociations } from '../models/SimplePublicObjectWithAssociations';
+import { SimplePublicUpsertObject } from '../models/SimplePublicUpsertObject';
 import { StandardError } from '../models/StandardError';
 import { ValueWithTimestamp } from '../models/ValueWithTimestamp';
 
@@ -55,16 +85,26 @@ let primitives = [
                  ];
 
 let enumsMap: Set<string> = new Set<string>([
+    "AssociationSpecAssociationCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
     "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
+    "BatchResponseSimplePublicUpsertObjectStatusEnum",
+    "BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum",
     "FilterOperatorEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
     "AssociatedId": AssociatedId,
+    "AssociationSpec": AssociationSpec,
+    "BatchInputSimplePublicObjectBatchInput": BatchInputSimplePublicObjectBatchInput,
+    "BatchInputSimplePublicObjectBatchInputForCreate": BatchInputSimplePublicObjectBatchInputForCreate,
+    "BatchInputSimplePublicObjectBatchInputUpsert": BatchInputSimplePublicObjectBatchInputUpsert,
+    "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
     "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
     "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
+    "BatchResponseSimplePublicUpsertObject": BatchResponseSimplePublicUpsertObject,
+    "BatchResponseSimplePublicUpsertObjectWithErrors": BatchResponseSimplePublicUpsertObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
     "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
@@ -76,10 +116,18 @@ let typeMap: {[index: string]: any} = {
     "NextPage": NextPage,
     "Paging": Paging,
     "PreviousPage": PreviousPage,
+    "PublicAssociationsForObject": PublicAssociationsForObject,
+    "PublicObjectId": PublicObjectId,
     "PublicObjectSearchRequest": PublicObjectSearchRequest,
     "SimplePublicObject": SimplePublicObject,
+    "SimplePublicObjectBatchInput": SimplePublicObjectBatchInput,
+    "SimplePublicObjectBatchInputForCreate": SimplePublicObjectBatchInputForCreate,
+    "SimplePublicObjectBatchInputUpsert": SimplePublicObjectBatchInputUpsert,
     "SimplePublicObjectId": SimplePublicObjectId,
+    "SimplePublicObjectInput": SimplePublicObjectInput,
+    "SimplePublicObjectInputForCreate": SimplePublicObjectInputForCreate,
     "SimplePublicObjectWithAssociations": SimplePublicObjectWithAssociations,
+    "SimplePublicUpsertObject": SimplePublicUpsertObject,
     "StandardError": StandardError,
     "ValueWithTimestamp": ValueWithTimestamp,
 }
@@ -100,7 +148,7 @@ type MimeTypeDescriptor = {
  * the payload.
  */
 const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
-    const [type, subtype] = mimeType.split('/');
+    const [type = '', subtype = ''] = mimeType.split('/');
     return {
         type,
         subtype,
@@ -136,6 +184,13 @@ const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
     isFormUrlencodedMimeType,
 ];
 
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
+
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
@@ -160,8 +215,11 @@ export class ObjectSerializer {
             } else {
                 if (data[discriminatorProperty]) {
                     var discriminatorType = data[discriminatorProperty];
-                    if(typeMap[discriminatorType]){
-                        return discriminatorType; // use the type given in the discriminator
+                    let mapping = typeMap[expectedType].mapping;
+                    if (mapping != undefined && mapping[discriminatorType]) {
+                        return mapping[discriminatorType]; // use the type given in the discriminator
+                    } else if(typeMap[discriminatorType]) {
+                        return discriminatorType;
                     } else {
                         return expectedType; // discriminator did not map to a type
                     }
@@ -172,17 +230,33 @@ export class ObjectSerializer {
         }
     }
 
-    public static serialize(data: any, type: string, format: string) {
+    public static serialize(data: any, type: string, format: string): any {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -217,19 +291,35 @@ export class ObjectSerializer {
         }
     }
 
-    public static deserialize(data: any, type: string, format: string) {
+    public static deserialize(data: any, type: string, format: string): any {
         // polymorphism may change the actual type.
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -265,7 +355,7 @@ export class ObjectSerializer {
         if (mediaType === undefined) {
             return undefined;
         }
-        return mediaType.split(";")[0].trim().toLowerCase();
+        return (mediaType.split(";")[0] ?? '').trim().toLowerCase();
     }
 
     /**
@@ -280,7 +370,7 @@ export class ObjectSerializer {
             return "application/json";
         }
 
-        const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
+        const normalMediaTypes = mediaTypes.map(ObjectSerializer.normalizeMediaType);
 
         for (const predicate of supportedMimeTypePredicatesWithPriority) {
             for (const mediaType of normalMediaTypes) {

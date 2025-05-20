@@ -17,6 +17,8 @@ import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 export class SearchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Search for calls by filtering on properties, searching through associations, and sorting results. Learn more about [CRM search](https://developers.hubspot.com/docs/guides/api/crm/search#make-a-search-request).
+     * Search for calls
      * @param publicObjectSearchRequest 
      */
     public async doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: Configuration): Promise<RequestContext> {
@@ -54,7 +56,7 @@ export class SearchApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { AssociationSpec } from '../models/AssociationSpec';
 import { BatchInputPublicAssociationMultiArchive } from '../models/BatchInputPublicAssociationMultiArchive';
@@ -31,108 +32,204 @@ export class PromiseBasicApi {
     /**
      * deletes all associations between two records.
      * Delete
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param toObjectId
      */
-    public archiveWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, _options);
+    public archiveWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(objectType, objectId, toObjectType, toObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * deletes all associations between two records.
      * Delete
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param toObjectId
      */
-    public archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(objectType, objectId, toObjectType, toObjectId, _options);
+    public archive(objectType: string, objectId: string, toObjectType: string, toObjectId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(objectType, objectId, toObjectType, toObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Set association labels between two records.
      * Create
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationSpec 
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param toObjectId
+     * @param associationSpec
      */
-    public createWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<HttpInfo<LabelsBetweenObjectPair>> {
-        const result = this.api.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
+    public createWithHttpInfo(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<LabelsBetweenObjectPair>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(objectType, objectId, toObjectType, toObjectId, associationSpec, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Set association labels between two records.
      * Create
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param toObjectId 
-     * @param associationSpec 
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param toObjectId
+     * @param associationSpec
      */
-    public create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: Configuration): Promise<LabelsBetweenObjectPair> {
-        const result = this.api.create(objectType, objectId, toObjectType, toObjectId, associationSpec, _options);
+    public create(objectType: string, objectId: string, toObjectType: string, toObjectId: string, associationSpec: Array<AssociationSpec>, _options?: PromiseConfigurationOptions): Promise<LabelsBetweenObjectPair> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(objectType, objectId, toObjectType, toObjectId, associationSpec, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create the default (most generic) association type between two object types
      * Create Default
-     * @param fromObjectType 
-     * @param fromObjectId 
-     * @param toObjectType 
-     * @param toObjectId 
+     * @param fromObjectType
+     * @param fromObjectId
+     * @param toObjectType
+     * @param toObjectId
      */
-    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
-        const result = this.api.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
+    public createDefaultWithHttpInfo(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createDefaultWithHttpInfo(fromObjectType, fromObjectId, toObjectType, toObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create the default (most generic) association type between two object types
      * Create Default
-     * @param fromObjectType 
-     * @param fromObjectId 
-     * @param toObjectType 
-     * @param toObjectId 
+     * @param fromObjectType
+     * @param fromObjectId
+     * @param toObjectType
+     * @param toObjectId
      */
-    public createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
-        const result = this.api.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, _options);
+    public createDefault(fromObjectType: string, fromObjectId: string, toObjectType: string, toObjectId: string, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createDefault(fromObjectType, fromObjectId, toObjectType, toObjectId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * List all associations of an object by object type. Limit 500 per call.
      * List
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getPageWithHttpInfo(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
-        const result = this.api.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, _options);
+    public getPageWithHttpInfo(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(objectType, objectId, toObjectType, after, limit, observableOptions);
         return result.toPromise();
     }
 
     /**
      * List all associations of an object by object type. Limit 500 per call.
      * List
-     * @param objectType 
-     * @param objectId 
-     * @param toObjectType 
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param limit The maximum number of results to display per page.
+     * @param objectType
+     * @param objectId
+     * @param toObjectType
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [limit] The maximum number of results to display per page.
      */
-    public getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: Configuration): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
-        const result = this.api.getPage(objectType, objectId, toObjectType, after, limit, _options);
+    public getPage(objectType: string, objectId: string, toObjectType: string, after?: string, limit?: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponseMultiAssociatedObjectWithLabelForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(objectType, objectId, toObjectType, after, limit, observableOptions);
         return result.toPromise();
     }
 
@@ -158,120 +255,240 @@ export class PromiseBatchApi {
     /**
      * Batch delete associations for objects
      * Delete
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiArchive 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiArchive
      */
-    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
+    public archiveWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch delete associations for objects
      * Delete
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiArchive 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiArchive
      */
-    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, _options);
+    public archive(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiArchive: BatchInputPublicAssociationMultiArchive, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(fromObjectType, toObjectType, batchInputPublicAssociationMultiArchive, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiPost
      */
-    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+    public archiveLabelsWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveLabelsWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch delete specific association labels for objects. Deleting an unlabeled association will also delete all labeled associations between those two objects
      * Delete Specific Labels
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiPost
      */
-    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+    public archiveLabels(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveLabels(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch create associations for objects
      * Create
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiPost
      */
-    public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
-        const result = this.api.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+    public createWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch create associations for objects
      * Create
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicAssociationMultiPost
      */
-    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: Configuration): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
-        const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, _options);
+    public create(fromObjectType: string, toObjectType: string, batchInputPublicAssociationMultiPost: BatchInputPublicAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<BatchResponseLabelsBetweenObjectPairWithErrors | BatchResponseLabelsBetweenObjectPair> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(fromObjectType, toObjectType, batchInputPublicAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicDefaultAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicDefaultAssociationMultiPost
      */
-    public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
-        const result = this.api.createDefaultWithHttpInfo(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options);
+    public createDefaultWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicDefaultAssociation>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createDefaultWithHttpInfo(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Create the default (most generic) association type between two object types
      *  Create Default Associations
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicDefaultAssociationMultiPost 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicDefaultAssociationMultiPost
      */
-    public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: Configuration): Promise<BatchResponsePublicDefaultAssociation> {
-        const result = this.api.createDefault(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, _options);
+    public createDefault(fromObjectType: string, toObjectType: string, batchInputPublicDefaultAssociationMultiPost: BatchInputPublicDefaultAssociationMultiPost, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicDefaultAssociation> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createDefault(fromObjectType, toObjectType, batchInputPublicDefaultAssociationMultiPost, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicFetchAssociationsBatchRequest 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicFetchAssociationsBatchRequest
      */
-    public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
-        const result = this.api.getPageWithHttpInfo(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options);
+    public getPageWithHttpInfo(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Batch read associations for objects to specific object type. The \'after\' field in a returned paging object  can be added alongside the \'id\' to retrieve the next page of associations from that objectId. The \'link\' field is deprecated and should be ignored. Note: The \'paging\' field will only be present if there are more pages and absent otherwise.
      * Read
-     * @param fromObjectType 
-     * @param toObjectType 
-     * @param batchInputPublicFetchAssociationsBatchRequest 
+     * @param fromObjectType
+     * @param toObjectType
+     * @param batchInputPublicFetchAssociationsBatchRequest
      */
-    public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: Configuration): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
-        const result = this.api.getPage(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, _options);
+    public getPage(fromObjectType: string, toObjectType: string, batchInputPublicFetchAssociationsBatchRequest: BatchInputPublicFetchAssociationsBatchRequest, _options?: PromiseConfigurationOptions): Promise<BatchResponsePublicAssociationMultiWithLabel | BatchResponsePublicAssociationMultiWithLabelWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(fromObjectType, toObjectType, batchInputPublicFetchAssociationsBatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -299,8 +516,20 @@ export class PromiseReportApi {
      * Report
      * @param userId 
      */
-    public requestWithHttpInfo(userId: number, _options?: Configuration): Promise<HttpInfo<ReportCreationResponse>> {
-        const result = this.api.requestWithHttpInfo(userId, _options);
+    public requestWithHttpInfo(userId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ReportCreationResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.requestWithHttpInfo(userId, observableOptions);
         return result.toPromise();
     }
 
@@ -309,8 +538,20 @@ export class PromiseReportApi {
      * Report
      * @param userId 
      */
-    public request(userId: number, _options?: Configuration): Promise<ReportCreationResponse> {
-        const result = this.api.request(userId, _options);
+    public request(userId: number, _options?: PromiseConfigurationOptions): Promise<ReportCreationResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.request(userId, observableOptions);
         return result.toPromise();
     }
 

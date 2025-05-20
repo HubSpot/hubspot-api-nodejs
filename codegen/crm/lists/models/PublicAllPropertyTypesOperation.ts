@@ -18,6 +18,8 @@ export class PublicAllPropertyTypesOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "includeObjectsWithNoValueSet",
@@ -45,7 +47,6 @@ export class PublicAllPropertyTypesOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicAllPropertyTypesOperationOperationTypeEnum {
     AllProperty = 'ALL_PROPERTY'

@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { CollectionResponsePublicAssociationDefinitionNoPaging } from '../models/CollectionResponsePublicAssociationDefinitionNoPaging';
 
@@ -9,12 +9,14 @@ import { TypesApiRequestFactory, TypesApiResponseProcessor} from "../apis/TypesA
 export interface TypesApiGetAllRequest {
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof TypesApigetAll
      */
     fromObjectType: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof TypesApigetAll
      */
@@ -33,7 +35,7 @@ export class ObjectTypesApi {
      * List association types
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: TypesApiGetAllRequest, options?: Configuration): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
+    public getAllWithHttpInfo(param: TypesApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicAssociationDefinitionNoPaging>> {
         return this.api.getAllWithHttpInfo(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 
@@ -42,7 +44,7 @@ export class ObjectTypesApi {
      * List association types
      * @param param the request object
      */
-    public getAll(param: TypesApiGetAllRequest, options?: Configuration): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
+    public getAll(param: TypesApiGetAllRequest, options?: ConfigurationOptions): Promise<CollectionResponsePublicAssociationDefinitionNoPaging> {
         return this.api.getAll(param.fromObjectType, param.toObjectType,  options).toPromise();
     }
 

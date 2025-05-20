@@ -1,18 +1,17 @@
 import {
-  Configuration,
-  createConfiguration,
   PipelineAuditsApi,
-  PipelinesApi,
   PipelineStageAuditsApi,
   PipelineStagesApi,
+  PipelinesApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/pipelines/index'
-import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/pipelines/rxjsStub'
 
 export default class PipelinesDiscovery {
   public pipelineAuditsApi: PipelineAuditsApi
@@ -27,7 +26,7 @@ export default class PipelinesDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

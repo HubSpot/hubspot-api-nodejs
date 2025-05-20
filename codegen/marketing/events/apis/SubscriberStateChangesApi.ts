@@ -19,9 +19,9 @@ export class SubscriberStateChangesApiRequestFactory extends BaseAPIRequestFacto
     /**
      * Record a subscriber state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created. The contactProperties field is used only when creating a new contact. These properties will not update existing contacts. 
      * Record a subscriber state by contact email
-     * @param externalEventId The ID of the marketing event
+     * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param externalAccountId The account ID associated with the marketing event
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      * @param batchInputMarketingEventEmailSubscriber 
      */
     public async upsertByContactEmail(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventEmailSubscriber: BatchInputMarketingEventEmailSubscriber, _options?: Configuration): Promise<RequestContext> {
@@ -84,7 +84,7 @@ export class SubscriberStateChangesApiRequestFactory extends BaseAPIRequestFacto
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -95,9 +95,9 @@ export class SubscriberStateChangesApiRequestFactory extends BaseAPIRequestFacto
     /**
      * Record a subscriber state between multiple HubSpot contacts and a marketing event, using HubSpot contact IDs. Note that the contact must already exist in HubSpot; a contact will not be created.
      * Record a subscriber state by contact ID
-     * @param externalEventId The ID of the marketing event
+     * @param externalEventId The id of the marketing event in the external event application
      * @param subscriberState The new subscriber state for the HubSpot contacts and the specified marketing event. For example: \&#39;register\&#39;, \&#39;attend\&#39; or \&#39;cancel\&#39;.
-     * @param externalAccountId The account ID associated with the marketing event
+     * @param externalAccountId The accountId that is associated with this marketing event in the external event application
      * @param batchInputMarketingEventSubscriber 
      */
     public async upsertByContactId(externalEventId: string, subscriberState: string, externalAccountId: string, batchInputMarketingEventSubscriber: BatchInputMarketingEventSubscriber, _options?: Configuration): Promise<RequestContext> {
@@ -160,7 +160,7 @@ export class SubscriberStateChangesApiRequestFactory extends BaseAPIRequestFacto
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

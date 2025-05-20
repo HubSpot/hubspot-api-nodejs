@@ -20,6 +20,8 @@ export class PublicNumAssociationsFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "coalescingRefineBy",
@@ -53,7 +55,6 @@ export class PublicNumAssociationsFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicNumAssociationsFilterFilterTypeEnum {
     NumAssociations = 'NUM_ASSOCIATIONS'

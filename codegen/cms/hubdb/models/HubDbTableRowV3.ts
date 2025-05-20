@@ -44,6 +44,8 @@ export class HubDbTableRowV3 {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "path",
@@ -101,4 +103,3 @@ export class HubDbTableRowV3 {
     public constructor() {
     }
 }
-

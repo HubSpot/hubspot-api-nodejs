@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/taxes/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/taxes/index'
-import { Observable } from '../../../../../codegen/crm/objects/taxes/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/taxes/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/taxes/configuration'
 
 export default class TaxesDiscovery {
   public basicApi: BasicApi
@@ -24,7 +24,7 @@ export default class TaxesDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

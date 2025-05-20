@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { IdentificationTokenGenerationRequest } from '../models/IdentificationTokenGenerationRequest';
 import { IdentificationTokenResponse } from '../models/IdentificationTokenResponse';
@@ -28,7 +28,7 @@ export class ObjectGenerateApi {
      * Generate a token
      * @param param the request object
      */
-    public generateTokenWithHttpInfo(param: GenerateApiGenerateTokenRequest, options?: Configuration): Promise<HttpInfo<IdentificationTokenResponse>> {
+    public generateTokenWithHttpInfo(param: GenerateApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<HttpInfo<IdentificationTokenResponse>> {
         return this.api.generateTokenWithHttpInfo(param.identificationTokenGenerationRequest,  options).toPromise();
     }
 
@@ -37,7 +37,7 @@ export class ObjectGenerateApi {
      * Generate a token
      * @param param the request object
      */
-    public generateToken(param: GenerateApiGenerateTokenRequest, options?: Configuration): Promise<IdentificationTokenResponse> {
+    public generateToken(param: GenerateApiGenerateTokenRequest, options?: ConfigurationOptions): Promise<IdentificationTokenResponse> {
         return this.api.generateToken(param.identificationTokenGenerationRequest,  options).toPromise();
     }
 

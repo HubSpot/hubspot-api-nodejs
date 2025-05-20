@@ -1,15 +1,14 @@
 import {
-  Configuration,
-  createConfiguration,
   DomainsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/domains/index'
-import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/domains/rxjsStub'
 
 export default class DomainsDiscovery {
   public domainsApi: DomainsApi
@@ -21,7 +20,7 @@ export default class DomainsDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

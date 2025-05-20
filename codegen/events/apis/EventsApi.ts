@@ -17,20 +17,20 @@ import { VisibleExternalEventTypeNames } from '../models/VisibleExternalEventTyp
 export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * This endpoint allows you to query for event instances using filter criteria. 
-     * Event Instance Query
-     * @param objectType The CRM Object type name to filter event instances on. Optionally, you can also provide an objectId in another param to filter to a specific CRM Object instance.
-     * @param eventType The event type name. A list of available event type names can be obtained from another API call.
+     * Retrieve instances of event completion data. For example, retrieve all event completions associated with a specific contact.
+     * Retrieve event data
+     * @param objectType The type of CRM object to filter event instances on (e.g., &#x60;contact&#x60;). To retrieve event data for a specific CRM record, include the additional &#x60;objectId&#x60; query parameter (below). 
+     * @param eventType The event type name. You can retrieve available event types using the [event types endpoint](#get-%2Fevents%2Fv3%2Fevents%2Fevent-types).
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param before 
      * @param limit The maximum number of results to display per page.
-     * @param sort Sort direction based on the timestamp of the event instance, ASCENDING or DESCENDING.
-     * @param occurredAfter 
-     * @param occurredBefore 
-     * @param objectId The ID of the CRM Object to filter event instances on. If filtering on objectId, you must also provide an objectType.
-     * @param objectPropertyPropname 
-     * @param propertyPropname 
-     * @param id ID of an event instance. IDs are 1:1 with event instances. If you. provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
+     * @param sort Sort direction based on the timestamp of the event instance, &#x60;ASCENDING&#x60; or &#x60;DESCENDING&#x60;.
+     * @param occurredAfter Filter for event data that occurred after a specific datetime.
+     * @param occurredBefore Filter for event data that occurred before a specific datetime.
+     * @param objectId The ID of the CRM Object to filter event instances on. When including this parameter, you must also include the &#x60;objectType&#x60; parameter.
+     * @param objectPropertyPropname Instead of retrieving event data for a specific object by its ID, you can specify a unique identifier property. For contacts, you can use the &#x60;email&#x60; property. (e.g., &#x60;objectProperty.email&#x3D;name@domain.com&#x60;).
+     * @param propertyPropname Filter for event completions that contain a specific value for an event property (e.g., &#x60;property.hs_city&#x3D;portland&#x60;). For properties values with spaces, replaces spaces with &#x60;%20&#x60; or &#x60;+&#x60; (e.g., &#x60;property.hs_city&#x3D;new+york&#x60;).
+     * @param id ID of an event instance. IDs are 1:1 with event instances. If you provide this filter and additional filters, the other filters must match the values on the event instance to yield results.
      */
     public async getPage(objectType?: string, eventType?: string, after?: string, before?: string, limit?: number, sort?: Array<string>, occurredAfter?: Date, occurredBefore?: Date, objectId?: number, objectPropertyPropname?: any, propertyPropname?: any, id?: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -81,7 +81,10 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (sort !== undefined) {
-            requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(sort, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("sort", serializedParam);
+            }
         }
 
         // Query Params
@@ -101,17 +104,26 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (objectPropertyPropname !== undefined) {
-            requestContext.setQueryParam("objectProperty.{propname}", ObjectSerializer.serialize(objectPropertyPropname, "any", ""));
+            const serializedParams = ObjectSerializer.serialize(objectPropertyPropname, "any", "");
+            for (const key of Object.keys(serializedParams)) {
+                requestContext.setQueryParam(key, serializedParams[key]);
+            }
         }
 
         // Query Params
         if (propertyPropname !== undefined) {
-            requestContext.setQueryParam("property.{propname}", ObjectSerializer.serialize(propertyPropname, "any", ""));
+            const serializedParams = ObjectSerializer.serialize(propertyPropname, "any", "");
+            for (const key of Object.keys(serializedParams)) {
+                requestContext.setQueryParam(key, serializedParams[key]);
+            }
         }
 
         // Query Params
         if (id !== undefined) {
-            requestContext.setQueryParam("id", ObjectSerializer.serialize(id, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(id, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("id", serializedParam);
+            }
         }
 
 
@@ -122,7 +134,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -131,7 +143,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * This endpoint returns a list of event type names which are visible to you. You may use these event type names to query the API for specific event instances of a desired type.
+     * This endpoint returns a list of event type names which are visible to you. You may use these event type names to query the API for specific event instances of a desired type.  Note: the `get_types` method is only supported in the Python SDK version `12.0.0-beta.1` or later. 
      * Event Types
      */
     public async getTypes(_options?: Configuration): Promise<RequestContext> {
@@ -152,7 +164,7 @@ export class EventsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

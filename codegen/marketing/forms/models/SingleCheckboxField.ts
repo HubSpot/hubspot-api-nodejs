@@ -55,6 +55,8 @@ export class SingleCheckboxField {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "objectTypeId",
@@ -118,7 +120,6 @@ export class SingleCheckboxField {
     public constructor() {
     }
 }
-
 
 export enum SingleCheckboxFieldFieldTypeEnum {
     SingleCheckbox = 'single_checkbox'

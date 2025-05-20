@@ -1,15 +1,15 @@
 import {
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
   SubscriptionsApi,
+  createConfiguration,
 } from '../../../codegen/webhooks/index'
-import { Observable } from '../../../codegen/webhooks/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/webhooks/rxjsStub'
 
 export default class WebhooksDiscovery {
   public settingsApi: SettingsApi
@@ -22,7 +22,7 @@ export default class WebhooksDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

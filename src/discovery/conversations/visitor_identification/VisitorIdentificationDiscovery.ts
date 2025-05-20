@@ -1,14 +1,14 @@
 import {
-  createConfiguration,
   GenerateApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/conversations/visitor_identification/index'
-import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/conversations/visitor_identification/rxjsStub'
 
 export default class VisitorIdentificationDiscovery {
   public generateApi: GenerateApi
@@ -20,7 +20,7 @@ export default class VisitorIdentificationDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

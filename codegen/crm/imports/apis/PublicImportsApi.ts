@@ -19,14 +19,18 @@ export class PublicImportsApiRequestFactory extends BaseAPIRequestFactory {
      * @param importId 
      * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param limit The maximum number of results to display per page.
+     * @param includeErrorMessage Set to True to receive a message explaining the error.
+     * @param includeRowData Set to True to receive the data values for the errored row.
      */
-    public async getErrors(importId: number, after?: string, limit?: number, _options?: Configuration): Promise<RequestContext> {
+    public async getErrors(importId: number, after?: string, limit?: number, includeErrorMessage?: boolean, includeRowData?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'importId' is not null or undefined
         if (importId === null || importId === undefined) {
             throw new RequiredError("PublicImportsApi", "getErrors", "importId");
         }
+
+
 
 
 
@@ -49,6 +53,16 @@ export class PublicImportsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("limit", ObjectSerializer.serialize(limit, "number", "int32"));
         }
 
+        // Query Params
+        if (includeErrorMessage !== undefined) {
+            requestContext.setQueryParam("includeErrorMessage", ObjectSerializer.serialize(includeErrorMessage, "boolean", ""));
+        }
+
+        // Query Params
+        if (includeRowData !== undefined) {
+            requestContext.setQueryParam("includeRowData", ObjectSerializer.serialize(includeRowData, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -57,7 +71,7 @@ export class PublicImportsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

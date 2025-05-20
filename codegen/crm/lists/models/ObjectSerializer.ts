@@ -154,13 +154,13 @@ import { PublicEventFilterMetadata } from '../models/PublicEventFilterMetadata';
 import { PublicFiscalQuarterReference         } from '../models/PublicFiscalQuarterReference';
 import { PublicFiscalYearReference         } from '../models/PublicFiscalYearReference';
 import { PublicFormSubmissionFilter      } from '../models/PublicFormSubmissionFilter';
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
+import { PublicFormSubmissionFilterCoalescingRefineByClass } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
 import { PublicFormSubmissionOnPageFilter      } from '../models/PublicFormSubmissionOnPageFilter';
 import { PublicInListFilter      } from '../models/PublicInListFilter';
 import { PublicInListFilterMetadata } from '../models/PublicInListFilterMetadata';
 import { PublicIndexOffset } from '../models/PublicIndexOffset';
 import { PublicIndexedTimePoint       } from '../models/PublicIndexedTimePoint';
-import { PublicIndexedTimePointIndexReference       } from '../models/PublicIndexedTimePointIndexReference';
+import { PublicIndexedTimePointIndexReferenceClass } from '../models/PublicIndexedTimePointIndexReference';
 import { PublicIntegrationEventFilter     } from '../models/PublicIntegrationEventFilter';
 import { PublicListFolder } from '../models/PublicListFolder';
 import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
@@ -178,8 +178,8 @@ import { PublicOrFilterBranch      } from '../models/PublicOrFilterBranch';
 import { PublicPageViewAnalyticsFilter        } from '../models/PublicPageViewAnalyticsFilter';
 import { PublicPrivacyAnalyticsFilter     } from '../models/PublicPrivacyAnalyticsFilter';
 import { PublicPropertyAssociationFilterBranch         } from '../models/PublicPropertyAssociationFilterBranch';
-import { PublicPropertyAssociationFilterBranchFilterBranchesInner             } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
-import { PublicPropertyAssociationFilterBranchFiltersInner                                               } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
+import { PublicPropertyAssociationFilterBranchFilterBranchesInnerClass } from '../models/PublicPropertyAssociationFilterBranchFilterBranchesInner';
+import { PublicPropertyAssociationFilterBranchFiltersInnerClass } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
 import { PublicPropertyAssociationInListFilter        } from '../models/PublicPropertyAssociationInListFilter';
 import { PublicPropertyFilter     } from '../models/PublicPropertyFilter';
 import { PublicPropertyReferencedTime       } from '../models/PublicPropertyReferencedTime';
@@ -196,10 +196,10 @@ import { PublicSetOccurrencesRefineBy    } from '../models/PublicSetOccurrencesR
 import { PublicStringPropertyOperation      } from '../models/PublicStringPropertyOperation';
 import { PublicSurveyMonkeyFilter     } from '../models/PublicSurveyMonkeyFilter';
 import { PublicSurveyMonkeyValueFilter         } from '../models/PublicSurveyMonkeyValueFilter';
-import { PublicSurveyMonkeyValueFilterValueComparison                             } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
+import { PublicSurveyMonkeyValueFilterValueComparisonClass } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
 import { PublicTimeOffset } from '../models/PublicTimeOffset';
 import { PublicTimePointOperation         } from '../models/PublicTimePointOperation';
-import { PublicTimePointOperationTimePoint                } from '../models/PublicTimePointOperationTimePoint';
+import { PublicTimePointOperationTimePointClass } from '../models/PublicTimePointOperationTimePoint';
 import { PublicTodayReference       } from '../models/PublicTodayReference';
 import { PublicUnifiedEventsFilter       } from '../models/PublicUnifiedEventsFilter';
 import { PublicUnifiedEventsFilterBranch   } from '../models/PublicUnifiedEventsFilterBranch';
@@ -353,13 +353,13 @@ let typeMap: {[index: string]: any} = {
     "PublicFiscalQuarterReference": PublicFiscalQuarterReference,
     "PublicFiscalYearReference": PublicFiscalYearReference,
     "PublicFormSubmissionFilter": PublicFormSubmissionFilter,
-    "PublicFormSubmissionFilterCoalescingRefineBy": PublicFormSubmissionFilterCoalescingRefineBy,
+    "PublicFormSubmissionFilterCoalescingRefineBy": PublicFormSubmissionFilterCoalescingRefineByClass,
     "PublicFormSubmissionOnPageFilter": PublicFormSubmissionOnPageFilter,
     "PublicInListFilter": PublicInListFilter,
     "PublicInListFilterMetadata": PublicInListFilterMetadata,
     "PublicIndexOffset": PublicIndexOffset,
     "PublicIndexedTimePoint": PublicIndexedTimePoint,
-    "PublicIndexedTimePointIndexReference": PublicIndexedTimePointIndexReference,
+    "PublicIndexedTimePointIndexReference": PublicIndexedTimePointIndexReferenceClass,
     "PublicIntegrationEventFilter": PublicIntegrationEventFilter,
     "PublicListFolder": PublicListFolder,
     "PublicMigrationMapping": PublicMigrationMapping,
@@ -377,8 +377,8 @@ let typeMap: {[index: string]: any} = {
     "PublicPageViewAnalyticsFilter": PublicPageViewAnalyticsFilter,
     "PublicPrivacyAnalyticsFilter": PublicPrivacyAnalyticsFilter,
     "PublicPropertyAssociationFilterBranch": PublicPropertyAssociationFilterBranch,
-    "PublicPropertyAssociationFilterBranchFilterBranchesInner": PublicPropertyAssociationFilterBranchFilterBranchesInner,
-    "PublicPropertyAssociationFilterBranchFiltersInner": PublicPropertyAssociationFilterBranchFiltersInner,
+    "PublicPropertyAssociationFilterBranchFilterBranchesInner": PublicPropertyAssociationFilterBranchFilterBranchesInnerClass,
+    "PublicPropertyAssociationFilterBranchFiltersInner": PublicPropertyAssociationFilterBranchFiltersInnerClass,
     "PublicPropertyAssociationInListFilter": PublicPropertyAssociationInListFilter,
     "PublicPropertyFilter": PublicPropertyFilter,
     "PublicPropertyReferencedTime": PublicPropertyReferencedTime,
@@ -395,10 +395,10 @@ let typeMap: {[index: string]: any} = {
     "PublicStringPropertyOperation": PublicStringPropertyOperation,
     "PublicSurveyMonkeyFilter": PublicSurveyMonkeyFilter,
     "PublicSurveyMonkeyValueFilter": PublicSurveyMonkeyValueFilter,
-    "PublicSurveyMonkeyValueFilterValueComparison": PublicSurveyMonkeyValueFilterValueComparison,
+    "PublicSurveyMonkeyValueFilterValueComparison": PublicSurveyMonkeyValueFilterValueComparisonClass,
     "PublicTimeOffset": PublicTimeOffset,
     "PublicTimePointOperation": PublicTimePointOperation,
-    "PublicTimePointOperationTimePoint": PublicTimePointOperationTimePoint,
+    "PublicTimePointOperationTimePoint": PublicTimePointOperationTimePointClass,
     "PublicTodayReference": PublicTodayReference,
     "PublicUnifiedEventsFilter": PublicUnifiedEventsFilter,
     "PublicUnifiedEventsFilterBranch": PublicUnifiedEventsFilterBranch,
@@ -424,7 +424,7 @@ type MimeTypeDescriptor = {
  * the payload.
  */
 const parseMimeType = (mimeType: string): MimeTypeDescriptor => {
-    const [type, subtype] = mimeType.split('/');
+    const [type = '', subtype = ''] = mimeType.split('/');
     return {
         type,
         subtype,
@@ -460,6 +460,13 @@ const supportedMimeTypePredicatesWithPriority: MimeTypePredicate[] = [
     isFormUrlencodedMimeType,
 ];
 
+const nullableSuffix = " | null";
+const optionalSuffix = " | undefined";
+const arrayPrefix = "Array<";
+const arraySuffix = ">";
+const mapPrefix = "{ [key: string]: ";
+const mapSuffix = "; }";
+
 export class ObjectSerializer {
     public static findCorrectType(data: any, expectedType: string) {
         if (data == undefined) {
@@ -484,8 +491,11 @@ export class ObjectSerializer {
             } else {
                 if (data[discriminatorProperty]) {
                     var discriminatorType = data[discriminatorProperty];
-                    if(typeMap[discriminatorType]){
-                        return discriminatorType; // use the type given in the discriminator
+                    let mapping = typeMap[expectedType].mapping;
+                    if (mapping != undefined && mapping[discriminatorType]) {
+                        return mapping[discriminatorType]; // use the type given in the discriminator
+                    } else if(typeMap[discriminatorType]) {
+                        return discriminatorType;
                     } else {
                         return expectedType; // discriminator did not map to a type
                     }
@@ -496,17 +506,33 @@ export class ObjectSerializer {
         }
     }
 
-    public static serialize(data: any, type: string, format: string) {
+    public static serialize(data: any, type: string, format: string): any {
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.serialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.serialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.serialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -541,19 +567,35 @@ export class ObjectSerializer {
         }
     }
 
-    public static deserialize(data: any, type: string, format: string) {
+    public static deserialize(data: any, type: string, format: string): any {
         // polymorphism may change the actual type.
         type = ObjectSerializer.findCorrectType(data, type);
         if (data == undefined) {
             return data;
         } else if (primitives.indexOf(type.toLowerCase()) !== -1) {
             return data;
-        } else if (type.lastIndexOf("Array<", 0) === 0) { // string.startsWith pre es6
-            let subType: string = type.replace("Array<", ""); // Array<Type> => Type>
-            subType = subType.substring(0, subType.length - 1); // Type> => Type
+        } else if (type.endsWith(nullableSuffix)) {
+            let subType: string = type.slice(0, -nullableSuffix.length); // Type | null => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.endsWith(optionalSuffix)) {
+            let subType: string = type.slice(0, -optionalSuffix.length); // Type | undefined => Type
+            return ObjectSerializer.deserialize(data, subType, format);
+        } else if (type.startsWith(arrayPrefix)) {
+            let subType: string = type.slice(arrayPrefix.length, -arraySuffix.length); // Array<Type> => Type
             let transformedData: any[] = [];
             for (let date of data) {
                 transformedData.push(ObjectSerializer.deserialize(date, subType, format));
+            }
+            return transformedData;
+        } else if (type.startsWith(mapPrefix)) {
+            let subType: string = type.slice(mapPrefix.length, -mapSuffix.length); // { [key: string]: Type; } => Type
+            let transformedData: { [key: string]: any } = {};
+            for (let key in data) {
+                transformedData[key] = ObjectSerializer.deserialize(
+                    data[key],
+                    subType,
+                    format,
+                );
             }
             return transformedData;
         } else if (type === "Date") {
@@ -589,7 +631,7 @@ export class ObjectSerializer {
         if (mediaType === undefined) {
             return undefined;
         }
-        return mediaType.split(";")[0].trim().toLowerCase();
+        return (mediaType.split(";")[0] ?? '').trim().toLowerCase();
     }
 
     /**
@@ -604,7 +646,7 @@ export class ObjectSerializer {
             return "application/json";
         }
 
-        const normalMediaTypes = mediaTypes.map(this.normalizeMediaType);
+        const normalMediaTypes = mediaTypes.map(ObjectSerializer.normalizeMediaType);
 
         for (const predicate of supportedMimeTypePredicatesWithPriority) {
             for (const mediaType of normalMediaTypes) {

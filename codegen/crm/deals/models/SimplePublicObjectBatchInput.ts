@@ -12,12 +12,20 @@
 
 
 export class SimplePublicObjectBatchInput {
+    /**
+    * The name of a property whose values are unique for this object
+    */
     'idProperty'?: string;
     'objectWriteTraceId'?: string;
+    /**
+    * The id to be updated. This can be the object id, or the unique property value of the idProperty property
+    */
     'id': string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -52,4 +60,3 @@ export class SimplePublicObjectBatchInput {
     public constructor() {
     }
 }
-

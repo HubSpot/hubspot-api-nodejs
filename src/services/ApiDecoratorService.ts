@@ -14,7 +14,7 @@ export default class ApiDecoratorService {
   protected decorators: IDecorator[]
 
   protected constructor() {
-    this.decorators = new Array()
+    this.decorators = new Array<IDecorator>()
   }
 
   public setDecorators(decorators: IDecorator[]) {

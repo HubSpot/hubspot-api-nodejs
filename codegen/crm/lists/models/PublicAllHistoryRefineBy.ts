@@ -16,6 +16,8 @@ export class PublicAllHistoryRefineBy {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "type",
@@ -31,7 +33,6 @@ export class PublicAllHistoryRefineBy {
     public constructor() {
     }
 }
-
 
 export enum PublicAllHistoryRefineByTypeEnum {
     AllHistory = 'ALL_HISTORY'

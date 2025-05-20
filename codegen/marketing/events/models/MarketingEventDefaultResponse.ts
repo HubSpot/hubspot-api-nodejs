@@ -50,8 +50,11 @@ export class MarketingEventDefaultResponse {
     * The end date and time of the marketing event.
     */
     'endDateTime'?: Date;
+    'objectId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -113,6 +116,12 @@ export class MarketingEventDefaultResponse {
             "baseName": "endDateTime",
             "type": "Date",
             "format": "date-time"
+        },
+        {
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -122,4 +131,3 @@ export class MarketingEventDefaultResponse {
     public constructor() {
     }
 }
-

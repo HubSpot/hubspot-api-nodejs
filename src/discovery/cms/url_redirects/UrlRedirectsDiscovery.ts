@@ -1,14 +1,14 @@
 import {
-  createConfiguration,
   RedirectsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/cms/url_redirects/index'
-import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/url_redirects/rxjsStub'
 
 export default class UrlRedirectsDiscovery {
   public redirectsApi: RedirectsApi
@@ -20,7 +20,7 @@ export default class UrlRedirectsDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

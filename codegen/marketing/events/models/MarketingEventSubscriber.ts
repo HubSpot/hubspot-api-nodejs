@@ -15,11 +15,13 @@ export class MarketingEventSubscriber {
     'vid'?: number;
     'properties'?: { [key: string]: string; };
     /**
-    * The date and time at which the contact subscribed to the event.
+    * Timestamp in milliseconds at which the contact subscribed to the event.
     */
     'interactionDateTime': number;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -48,4 +50,3 @@ export class MarketingEventSubscriber {
     public constructor() {
     }
 }
-

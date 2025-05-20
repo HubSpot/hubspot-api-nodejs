@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from '../models/BatchResponseSubscriptionResponse';
@@ -17,6 +17,7 @@ import { SettingsApiRequestFactory, SettingsApiResponseProcessor} from "../apis/
 export interface SettingsApiClearRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApiclear
      */
@@ -26,6 +27,7 @@ export interface SettingsApiClearRequest {
 export interface SettingsApiConfigureRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApiconfigure
      */
@@ -41,6 +43,7 @@ export interface SettingsApiConfigureRequest {
 export interface SettingsApiGetAllRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SettingsApigetAll
      */
@@ -59,7 +62,7 @@ export class ObjectSettingsApi {
      * Delete webhook settings
      * @param param the request object
      */
-    public clearWithHttpInfo(param: SettingsApiClearRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public clearWithHttpInfo(param: SettingsApiClearRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.clearWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -68,25 +71,25 @@ export class ObjectSettingsApi {
      * Delete webhook settings
      * @param param the request object
      */
-    public clear(param: SettingsApiClearRequest, options?: Configuration): Promise<void> {
+    public clear(param: SettingsApiClearRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.clear(param.appId,  options).toPromise();
     }
 
     /**
      * Update webhook settings for the specified app.
-     * Delete webhook settings
+     * Update webhook settings
      * @param param the request object
      */
-    public configureWithHttpInfo(param: SettingsApiConfigureRequest, options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
+    public configureWithHttpInfo(param: SettingsApiConfigureRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
         return this.api.configureWithHttpInfo(param.appId, param.settingsChangeRequest,  options).toPromise();
     }
 
     /**
      * Update webhook settings for the specified app.
-     * Delete webhook settings
+     * Update webhook settings
      * @param param the request object
      */
-    public configure(param: SettingsApiConfigureRequest, options?: Configuration): Promise<SettingsResponse> {
+    public configure(param: SettingsApiConfigureRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
         return this.api.configure(param.appId, param.settingsChangeRequest,  options).toPromise();
     }
 
@@ -95,7 +98,7 @@ export class ObjectSettingsApi {
      * Read webhook settings
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
+    public getAllWithHttpInfo(param: SettingsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -104,7 +107,7 @@ export class ObjectSettingsApi {
      * Read webhook settings
      * @param param the request object
      */
-    public getAll(param: SettingsApiGetAllRequest, options?: Configuration): Promise<SettingsResponse> {
+    public getAll(param: SettingsApiGetAllRequest, options?: ConfigurationOptions): Promise<SettingsResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -116,12 +119,14 @@ import { SubscriptionsApiRequestFactory, SubscriptionsApiResponseProcessor} from
 export interface SubscriptionsApiArchiveRequest {
     /**
      * The ID of the event subscription.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApiarchive
      */
     subscriptionId: number
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApiarchive
      */
@@ -131,6 +136,7 @@ export interface SubscriptionsApiArchiveRequest {
 export interface SubscriptionsApiCreateRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApicreate
      */
@@ -146,6 +152,7 @@ export interface SubscriptionsApiCreateRequest {
 export interface SubscriptionsApiGetAllRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApigetAll
      */
@@ -155,12 +162,14 @@ export interface SubscriptionsApiGetAllRequest {
 export interface SubscriptionsApiGetByIdRequest {
     /**
      * The ID of the event subscription.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApigetById
      */
     subscriptionId: number
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApigetById
      */
@@ -170,12 +179,14 @@ export interface SubscriptionsApiGetByIdRequest {
 export interface SubscriptionsApiUpdateRequest {
     /**
      * The ID of the event subscription.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApiupdate
      */
     subscriptionId: number
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApiupdate
      */
@@ -191,6 +202,7 @@ export interface SubscriptionsApiUpdateRequest {
 export interface SubscriptionsApiUpdateBatchRequest {
     /**
      * The ID of the app.
+     * Defaults to: undefined
      * @type number
      * @memberof SubscriptionsApiupdateBatch
      */
@@ -215,7 +227,7 @@ export class ObjectSubscriptionsApi {
      * Delete event subscription
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: SubscriptionsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.subscriptionId, param.appId,  options).toPromise();
     }
 
@@ -224,7 +236,7 @@ export class ObjectSubscriptionsApi {
      * Delete event subscription
      * @param param the request object
      */
-    public archive(param: SubscriptionsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: SubscriptionsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.subscriptionId, param.appId,  options).toPromise();
     }
 
@@ -233,7 +245,7 @@ export class ObjectSubscriptionsApi {
      * Create an event subscription
      * @param param the request object
      */
-    public createWithHttpInfo(param: SubscriptionsApiCreateRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+    public createWithHttpInfo(param: SubscriptionsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
         return this.api.createWithHttpInfo(param.appId, param.subscriptionCreateRequest,  options).toPromise();
     }
 
@@ -242,7 +254,7 @@ export class ObjectSubscriptionsApi {
      * Create an event subscription
      * @param param the request object
      */
-    public create(param: SubscriptionsApiCreateRequest, options?: Configuration): Promise<SubscriptionResponse> {
+    public create(param: SubscriptionsApiCreateRequest, options?: ConfigurationOptions): Promise<SubscriptionResponse> {
         return this.api.create(param.appId, param.subscriptionCreateRequest,  options).toPromise();
     }
 
@@ -251,7 +263,7 @@ export class ObjectSubscriptionsApi {
      * Read event subscriptions
      * @param param the request object
      */
-    public getAllWithHttpInfo(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<HttpInfo<SubscriptionListResponse>> {
+    public getAllWithHttpInfo(param: SubscriptionsApiGetAllRequest, options?: ConfigurationOptions): Promise<HttpInfo<SubscriptionListResponse>> {
         return this.api.getAllWithHttpInfo(param.appId,  options).toPromise();
     }
 
@@ -260,7 +272,7 @@ export class ObjectSubscriptionsApi {
      * Read event subscriptions
      * @param param the request object
      */
-    public getAll(param: SubscriptionsApiGetAllRequest, options?: Configuration): Promise<SubscriptionListResponse> {
+    public getAll(param: SubscriptionsApiGetAllRequest, options?: ConfigurationOptions): Promise<SubscriptionListResponse> {
         return this.api.getAll(param.appId,  options).toPromise();
     }
 
@@ -269,7 +281,7 @@ export class ObjectSubscriptionsApi {
      * Read an event subscription
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: SubscriptionsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+    public getByIdWithHttpInfo(param: SubscriptionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
         return this.api.getByIdWithHttpInfo(param.subscriptionId, param.appId,  options).toPromise();
     }
 
@@ -278,7 +290,7 @@ export class ObjectSubscriptionsApi {
      * Read an event subscription
      * @param param the request object
      */
-    public getById(param: SubscriptionsApiGetByIdRequest, options?: Configuration): Promise<SubscriptionResponse> {
+    public getById(param: SubscriptionsApiGetByIdRequest, options?: ConfigurationOptions): Promise<SubscriptionResponse> {
         return this.api.getById(param.subscriptionId, param.appId,  options).toPromise();
     }
 
@@ -287,7 +299,7 @@ export class ObjectSubscriptionsApi {
      * Update an event subscription
      * @param param the request object
      */
-    public updateWithHttpInfo(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
+    public updateWithHttpInfo(param: SubscriptionsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
         return this.api.updateWithHttpInfo(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
     }
 
@@ -296,7 +308,7 @@ export class ObjectSubscriptionsApi {
      * Update an event subscription
      * @param param the request object
      */
-    public update(param: SubscriptionsApiUpdateRequest, options?: Configuration): Promise<SubscriptionResponse> {
+    public update(param: SubscriptionsApiUpdateRequest, options?: ConfigurationOptions): Promise<SubscriptionResponse> {
         return this.api.update(param.subscriptionId, param.appId, param.subscriptionPatchRequest,  options).toPromise();
     }
 
@@ -305,7 +317,7 @@ export class ObjectSubscriptionsApi {
      * Batch create event subscriptions
      * @param param the request object
      */
-    public updateBatchWithHttpInfo(param: SubscriptionsApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
+    public updateBatchWithHttpInfo(param: SubscriptionsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
         return this.api.updateBatchWithHttpInfo(param.appId, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
     }
 
@@ -314,7 +326,7 @@ export class ObjectSubscriptionsApi {
      * Batch create event subscriptions
      * @param param the request object
      */
-    public updateBatch(param: SubscriptionsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+    public updateBatch(param: SubscriptionsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
         return this.api.updateBatch(param.appId, param.batchInputSubscriptionBatchUpdateRequest,  options).toPromise();
     }
 

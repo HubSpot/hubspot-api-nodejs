@@ -1,5 +1,5 @@
-import { Client } from '../../../index'
 import BusinessUnitsDiscovery from '../../../src/discovery/settings/business_units/BusinessUnitsDiscovery'
+import { Client } from '../../../index'
 import UsersDiscovery from '../../../src/discovery/settings/users/UsersDiscovery'
 
 describe('api client', () => {

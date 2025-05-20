@@ -14,22 +14,20 @@ import { PublicAssociationsForObject } from '../models/PublicAssociationsForObje
 
 export class SimplePublicObjectInputForCreate {
     'associations'?: Array<PublicAssociationsForObject>;
-    'objectWriteTraceId'?: string;
+    /**
+    * The company property values to set.
+    */
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "associations",
             "baseName": "associations",
             "type": "Array<PublicAssociationsForObject>",
-            "format": ""
-        },
-        {
-            "name": "objectWriteTraceId",
-            "baseName": "objectWriteTraceId",
-            "type": "string",
             "format": ""
         },
         {
@@ -46,4 +44,3 @@ export class SimplePublicObjectInputForCreate {
     public constructor() {
     }
 }
-

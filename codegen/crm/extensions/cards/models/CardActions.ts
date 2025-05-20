@@ -22,6 +22,8 @@ export class CardActions {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "baseUrls",
@@ -37,4 +39,3 @@ export class CardActions {
     public constructor() {
     }
 }
-

@@ -1,15 +1,14 @@
 import {
-  Configuration,
   CoreApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/schemas/index'
-import { Observable } from '../../../../codegen/crm/schemas/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/schemas/rxjsStub'
 
 export default class SchemasDiscovery {
   public coreApi: CoreApi
@@ -21,7 +20,7 @@ export default class SchemasDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

@@ -78,12 +78,15 @@ export class MarketingEventPublicReadResponse {
     * 
     */
     'id': string;
+    'objectId'?: string;
     /**
     * 
     */
     'updatedAt': Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -189,6 +192,12 @@ export class MarketingEventPublicReadResponse {
             "format": ""
         },
         {
+            "name": "objectId",
+            "baseName": "objectId",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "updatedAt",
             "baseName": "updatedAt",
             "type": "Date",
@@ -202,4 +211,3 @@ export class MarketingEventPublicReadResponse {
     public constructor() {
     }
 }
-

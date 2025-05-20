@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -36,19 +36,21 @@ export class SignedUrl {
     */
     'type': string;
     /**
-    * Timestamp of when the URL will no longer grant access to the file.
-    */
-    'expiresAt': Date;
-    /**
     * Signed URL with access to the specified file. Anyone with this URL will be able to access the file until it expires.
     */
     'url': string;
+    /**
+    * Timestamp of when the URL will no longer grant access to the file.
+    */
+    'expiresAt': Date;
     /**
     * For image and video files. The height of the file.
     */
     'height'?: number;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -61,7 +63,7 @@ export class SignedUrl {
             "name": "size",
             "baseName": "size",
             "type": "number",
-            "format": "int32"
+            "format": "int64"
         },
         {
             "name": "name",
@@ -82,16 +84,16 @@ export class SignedUrl {
             "format": ""
         },
         {
-            "name": "expiresAt",
-            "baseName": "expiresAt",
-            "type": "Date",
-            "format": "date-time"
-        },
-        {
             "name": "url",
             "baseName": "url",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "expiresAt",
+            "baseName": "expiresAt",
+            "type": "Date",
+            "format": "date-time"
         },
         {
             "name": "height",
@@ -107,4 +109,3 @@ export class SignedUrl {
     public constructor() {
     }
 }
-

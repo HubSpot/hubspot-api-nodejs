@@ -1,17 +1,16 @@
 import {
-  Configuration,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   RowsApi,
   RowsBatchApi,
   ServerConfiguration,
   TablesApi,
+  createConfiguration,
 } from '../../../../codegen/cms/hubdb/index'
-import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/cms/hubdb/rxjsStub'
 
 export default class HubdbDiscovery {
   public rowsApi: RowsApi
@@ -25,7 +24,7 @@ export default class HubdbDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

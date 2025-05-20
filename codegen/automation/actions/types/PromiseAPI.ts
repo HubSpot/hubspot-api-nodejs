@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { BatchInputCallbackCompletionBatchRequest } from '../models/BatchInputCallbackCompletionBatchRequest';
 import { CallbackCompletionRequest } from '../models/CallbackCompletionRequest';
@@ -27,40 +28,92 @@ export class PromiseCallbacksApi {
     }
 
     /**
-     * Completes a single callback
-     * @param callbackId 
-     * @param callbackCompletionRequest 
+     * Complete a specific blocked action execution by ID.
+     * Completes a callback
+     * @param callbackId The ID of the action execution.
+     * @param callbackCompletionRequest
      */
-    public completeWithHttpInfo(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.completeWithHttpInfo(callbackId, callbackCompletionRequest, _options);
+    public completeWithHttpInfo(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.completeWithHttpInfo(callbackId, callbackCompletionRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Completes a single callback
-     * @param callbackId 
-     * @param callbackCompletionRequest 
+     * Complete a specific blocked action execution by ID.
+     * Completes a callback
+     * @param callbackId The ID of the action execution.
+     * @param callbackCompletionRequest
      */
-    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.complete(callbackId, callbackCompletionRequest, _options);
+    public complete(callbackId: string, callbackCompletionRequest: CallbackCompletionRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.complete(callbackId, callbackCompletionRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Completes a batch of callbacks
-     * @param batchInputCallbackCompletionBatchRequest 
+     * Complete a batch of blocked action executions.
+     * Complete a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest
      */
-    public completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest, _options);
+    public completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.completeBatchWithHttpInfo(batchInputCallbackCompletionBatchRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Completes a batch of callbacks
-     * @param batchInputCallbackCompletionBatchRequest 
+     * Complete a batch of blocked action executions.
+     * Complete a batch of callbacks
+     * @param batchInputCallbackCompletionBatchRequest
      */
-    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, _options);
+    public completeBatch(batchInputCallbackCompletionBatchRequest: BatchInputCallbackCompletionBatchRequest, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.completeBatch(batchInputCallbackCompletionBatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -84,110 +137,240 @@ export class PromiseDefinitionsApi {
     }
 
     /**
-     * Archive an extension definition
-     * @param definitionId 
-     * @param appId 
+     * Delete an action definition by ID.
+     * Delete an action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
      */
-    public archiveWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(definitionId, appId, _options);
+    public archiveWithHttpInfo(definitionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(definitionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Archive an extension definition
-     * @param definitionId 
-     * @param appId 
+     * Delete an action definition by ID.
+     * Delete an action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
      */
-    public archive(definitionId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(definitionId, appId, _options);
+    public archive(definitionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(definitionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Create a new extension definition
-     * @param appId 
-     * @param publicActionDefinitionEgg 
+     * Create a new custom workflow action.
+     * Create a new custom action definition
+     * @param appId The ID of the app.
+     * @param publicActionDefinitionEgg
      */
-    public createWithHttpInfo(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
-        const result = this.api.createWithHttpInfo(appId, publicActionDefinitionEgg, _options);
+    public createWithHttpInfo(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionDefinition>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(appId, publicActionDefinitionEgg, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Create a new extension definition
-     * @param appId 
-     * @param publicActionDefinitionEgg 
+     * Create a new custom workflow action.
+     * Create a new custom action definition
+     * @param appId The ID of the app.
+     * @param publicActionDefinitionEgg
      */
-    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.create(appId, publicActionDefinitionEgg, _options);
+    public create(appId: number, publicActionDefinitionEgg: PublicActionDefinitionEgg, _options?: PromiseConfigurationOptions): Promise<PublicActionDefinition> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(appId, publicActionDefinitionEgg, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get extension definition by Id
-     * @param definitionId 
-     * @param appId 
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve a custom workflow action definition by ID.
+     * Retrieve a custom action definition
+     * @param definitionId The ID of the custom action.
+     * @param appId The ID of the app.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getByIdWithHttpInfo(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
-        const result = this.api.getByIdWithHttpInfo(definitionId, appId, archived, _options);
+    public getByIdWithHttpInfo(definitionId: string, appId: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionDefinition>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(definitionId, appId, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get extension definition by Id
-     * @param definitionId 
-     * @param appId 
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve a custom workflow action definition by ID.
+     * Retrieve a custom action definition
+     * @param definitionId The ID of the custom action.
+     * @param appId The ID of the app.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getById(definitionId: string, appId: number, archived?: boolean, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.getById(definitionId, appId, archived, _options);
+    public getById(definitionId: string, appId: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<PublicActionDefinition> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(definitionId, appId, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get paged extension definitions
-     * @param appId 
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve custom workflow action definitions by app ID.
+     * Retrieve custom action definitions
+     * @param appId The ID of the app.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPageWithHttpInfo(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>> {
-        const result = this.api.getPageWithHttpInfo(appId, limit, after, archived, _options);
+    public getPageWithHttpInfo(appId: number, limit?: number, after?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionDefinitionForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(appId, limit, after, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get paged extension definitions
-     * @param appId 
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
-     * @param archived Whether to return only results that have been archived.
+     * Retrieve custom workflow action definitions by app ID.
+     * Retrieve custom action definitions
+     * @param appId The ID of the app.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: Configuration): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
-        const result = this.api.getPage(appId, limit, after, archived, _options);
+    public getPage(appId: number, limit?: number, after?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicActionDefinitionForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(appId, limit, after, archived, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Patch an existing extension definition
-     * @param definitionId 
-     * @param appId 
-     * @param publicActionDefinitionPatch 
+     * Update an existing action definition by ID.
+     * Update an existing action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
+     * @param publicActionDefinitionPatch
      */
-    public updateWithHttpInfo(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<HttpInfo<PublicActionDefinition>> {
-        const result = this.api.updateWithHttpInfo(definitionId, appId, publicActionDefinitionPatch, _options);
+    public updateWithHttpInfo(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionDefinition>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(definitionId, appId, publicActionDefinitionPatch, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Patch an existing extension definition
-     * @param definitionId 
-     * @param appId 
-     * @param publicActionDefinitionPatch 
+     * Update an existing action definition by ID.
+     * Update an existing action definition
+     * @param definitionId The ID of the custom action definition.
+     * @param appId The ID of the app.
+     * @param publicActionDefinitionPatch
      */
-    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: Configuration): Promise<PublicActionDefinition> {
-        const result = this.api.update(definitionId, appId, publicActionDefinitionPatch, _options);
+    public update(definitionId: string, appId: number, publicActionDefinitionPatch: PublicActionDefinitionPatch, _options?: PromiseConfigurationOptions): Promise<PublicActionDefinition> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(definitionId, appId, publicActionDefinitionPatch, observableOptions);
         return result.toPromise();
     }
 
@@ -212,163 +395,341 @@ export class PromiseFunctionsApi {
 
     /**
      * Archive a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * @param definitionId
+     * @param functionType
+     * @param functionId
+     * @param appId
      */
-    public archiveWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(definitionId, functionType, functionId, appId, _options);
+    public archiveWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(definitionId, functionType, functionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Archive a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * @param definitionId
+     * @param functionType
+     * @param functionId
+     * @param appId
      */
-    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(definitionId, functionType, functionId, appId, _options);
+    public archive(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(definitionId, functionType, functionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
+     * Delete a function within a given definition.
      * Delete a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
-    public archiveByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options);
+    public archiveByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByFunctionTypeWithHttpInfo(definitionId, functionType, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
+     * Delete a function within a given definition.
      * Delete a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
-    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archiveByFunctionType(definitionId, functionType, appId, _options);
+    public archiveByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveByFunctionType(definitionId, functionType, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
+     * Update a function for a given definition by ID.
+     * Update a function for a definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
+     * @param body
+     */
+    public createOrReplaceWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrReplaceWithHttpInfo(definitionId, functionType, functionId, appId, body, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Update a function for a given definition by ID.
+     * Update a function for a definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
+     * @param body
+     */
+    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: PromiseConfigurationOptions): Promise<PublicActionFunctionIdentifier> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrReplace(definitionId, functionType, functionId, appId, body, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Add a function for a given definition.
      * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
-     * @param body 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
+     * @param body
      */
-    public createOrReplaceWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
-        const result = this.api.createOrReplaceWithHttpInfo(definitionId, functionType, functionId, appId, body, _options);
+    public createOrReplaceByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrReplaceByFunctionTypeWithHttpInfo(definitionId, functionType, appId, body, observableOptions);
         return result.toPromise();
     }
 
     /**
+     * Add a function for a given definition.
      * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
-     * @param body 
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
+     * @param body
      */
-    public createOrReplace(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        const result = this.api.createOrReplace(definitionId, functionType, functionId, appId, body, _options);
+    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: PromiseConfigurationOptions): Promise<PublicActionFunctionIdentifier> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createOrReplaceByFunctionType(definitionId, functionType, appId, body, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
-     * @param body 
+     * Retrieve functions by a type for a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
-    public createOrReplaceByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<HttpInfo<PublicActionFunctionIdentifier>> {
-        const result = this.api.createOrReplaceByFunctionTypeWithHttpInfo(definitionId, functionType, appId, body, _options);
+    public getByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionFunction>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByFunctionTypeWithHttpInfo(definitionId, functionType, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Insert a function for a definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
-     * @param body 
+     * Retrieve functions by a type for a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param appId The ID of the app.
      */
-    public createOrReplaceByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, body: string, _options?: Configuration): Promise<PublicActionFunctionIdentifier> {
-        const result = this.api.createOrReplaceByFunctionType(definitionId, functionType, appId, body, _options);
+    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: PromiseConfigurationOptions): Promise<PublicActionFunction> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByFunctionType(definitionId, functionType, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get all functions by a type for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * Retrieve a specific function from a given definition.
+     * Retrieve a function from a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
      */
-    public getByFunctionTypeWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionFunction>> {
-        const result = this.api.getByFunctionTypeWithHttpInfo(definitionId, functionType, appId, _options);
+    public getByIdWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionFunction>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(definitionId, functionType, functionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get all functions by a type for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param appId 
+     * Retrieve a specific function from a given definition.
+     * Retrieve a function from a given definition
+     * @param definitionId The ID of the definition.
+     * @param functionType The type of function. Can be &#x60;PRE_ACTION_EXECUTION&#x60;, &#x60;PRE_FETCH_OPTIONS&#x60;, &#x60;POST_FETCH_OPTIONS&#x60;, &#x60;POST_ACTION_EXECUTION&#x60;.
+     * @param functionId The ID of the function.
+     * @param appId The ID of the app.
      */
-    public getByFunctionType(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', appId: number, _options?: Configuration): Promise<PublicActionFunction> {
-        const result = this.api.getByFunctionType(definitionId, functionType, appId, _options);
+    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<PublicActionFunction> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(definitionId, functionType, functionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get a function for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * Retrieve all functions included in a definition.
+     * Retrieve functions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
      */
-    public getByIdWithHttpInfo(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionFunction>> {
-        const result = this.api.getByIdWithHttpInfo(definitionId, functionType, functionId, appId, _options);
+    public getPageWithHttpInfo(definitionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(definitionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get a function for a given definition
-     * @param definitionId 
-     * @param functionType 
-     * @param functionId 
-     * @param appId 
+     * Retrieve all functions included in a definition.
+     * Retrieve functions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
      */
-    public getById(definitionId: string, functionType: 'PRE_ACTION_EXECUTION' | 'PRE_FETCH_OPTIONS' | 'POST_FETCH_OPTIONS' | 'POST_ACTION_EXECUTION', functionId: string, appId: number, _options?: Configuration): Promise<PublicActionFunction> {
-        const result = this.api.getById(definitionId, functionType, functionId, appId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Get all functions for a given definition
-     * @param definitionId 
-     * @param appId 
-     */
-    public getPageWithHttpInfo(definitionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionFunctionIdentifierNoPaging>> {
-        const result = this.api.getPageWithHttpInfo(definitionId, appId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Get all functions for a given definition
-     * @param definitionId 
-     * @param appId 
-     */
-    public getPage(definitionId: string, appId: number, _options?: Configuration): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
-        const result = this.api.getPage(definitionId, appId, _options);
+    public getPage(definitionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicActionFunctionIdentifierNoPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(definitionId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -392,48 +753,100 @@ export class PromiseRevisionsApi {
     }
 
     /**
-     * Gets a revision for a given definition by revision id
-     * @param definitionId 
-     * @param revisionId 
-     * @param appId 
+     * Retrieve a specific revision of a definition by revision ID.
+     * Retrieve a specific revision of a definition
+     * @param definitionId The ID of the definition.
+     * @param revisionId The ID of the revision.
+     * @param appId The ID of the app.
      */
-    public getByIdWithHttpInfo(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<HttpInfo<PublicActionRevision>> {
-        const result = this.api.getByIdWithHttpInfo(definitionId, revisionId, appId, _options);
+    public getByIdWithHttpInfo(definitionId: string, revisionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicActionRevision>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(definitionId, revisionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Gets a revision for a given definition by revision id
-     * @param definitionId 
-     * @param revisionId 
-     * @param appId 
+     * Retrieve a specific revision of a definition by revision ID.
+     * Retrieve a specific revision of a definition
+     * @param definitionId The ID of the definition.
+     * @param revisionId The ID of the revision.
+     * @param appId The ID of the app.
      */
-    public getById(definitionId: string, revisionId: string, appId: number, _options?: Configuration): Promise<PublicActionRevision> {
-        const result = this.api.getById(definitionId, revisionId, appId, _options);
+    public getById(definitionId: string, revisionId: string, appId: number, _options?: PromiseConfigurationOptions): Promise<PublicActionRevision> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(definitionId, revisionId, appId, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get all revisions for a given definition
-     * @param definitionId 
-     * @param appId 
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Retrieve the versions of a definition by ID.
+     * Retrieve revisions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getPageWithHttpInfo(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>> {
-        const result = this.api.getPageWithHttpInfo(definitionId, appId, limit, after, _options);
+    public getPageWithHttpInfo(definitionId: string, appId: number, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponsePublicActionRevisionForwardPaging>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPageWithHttpInfo(definitionId, appId, limit, after, observableOptions);
         return result.toPromise();
     }
 
     /**
-     * Get all revisions for a given definition
-     * @param definitionId 
-     * @param appId 
-     * @param limit The maximum number of results to display per page.
-     * @param after The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Retrieve the versions of a definition by ID.
+     * Retrieve revisions for a given definition
+     * @param definitionId The ID of the definition.
+     * @param appId The ID of the app.
+     * @param [limit] The maximum number of results to display per page.
+     * @param [after] The paging cursor token of the last successfully read resource will be returned as the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      */
-    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: Configuration): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
-        const result = this.api.getPage(definitionId, appId, limit, after, _options);
+    public getPage(definitionId: string, appId: number, limit?: number, after?: string, _options?: PromiseConfigurationOptions): Promise<CollectionResponsePublicActionRevisionForwardPaging> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getPage(definitionId, appId, limit, after, observableOptions);
         return result.toPromise();
     }
 

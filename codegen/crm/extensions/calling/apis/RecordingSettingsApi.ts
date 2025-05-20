@@ -19,8 +19,8 @@ import { RecordingSettingsResponse } from '../models/RecordingSettingsResponse';
 export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Retrieve the recording endpoint configured for a calling extension app.
-     * Read calling app recording settings
+     * Retrieve the URL that is registered for [call recording](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
+     * Retrieve recording settings
      * @param appId The ID of the app.
      */
     public async getUrlFormat(appId: number, _options?: Configuration): Promise<RequestContext> {
@@ -48,7 +48,7 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -96,7 +96,7 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -105,8 +105,8 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Configure a calling extension app with an external URL that HubSpot will use to retrieve call recordings.
-     * Register calling app for recording
+     * Register an external URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
+     * Enable the app for call recording
      * @param appId The ID of the app.
      * @param recordingSettingsRequest 
      */
@@ -152,7 +152,7 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -161,8 +161,8 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Update the URL that HubSpot will use to retrieve call recordings for a calling extension app.
-     * Update calling app\'s recording settings
+     * Update the URL that HubSpot will use to retrieve [call recordings](https://developers.hubspot.com/docs/guides/apps/extensions/calling-extensions/recordings-and-transcriptions#register-your-app-s-endpoint-with-hubspot-using-the-calling-settings-api).
+     * Update recording settings
      * @param appId The ID of the app.
      * @param recordingSettingsPatchRequest 
      */
@@ -208,7 +208,7 @@ export class RecordingSettingsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

@@ -1,8 +1,6 @@
-import get from 'lodash.get'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
 import IConfiguration from '../../configuration/IConfiguration'
 import { Auth } from './Auth'
-import { AuthMethods } from './AuthMethods'
 import { AuthTypes } from './AuthTypes'
 import { IHttpOptions } from './IHttpOptions'
 
@@ -52,20 +50,20 @@ export class Request {
   protected applyAuth() {
     const authType = Auth.chooseAuth(this.opts, this.config)
 
-    if (authType) {
-      const method = get(AuthTypes, authType)
-      const value = get(this.config, authType)
-      if (method === AuthMethods.hapikey) {
+    if (authType && authType in AuthTypes) {
+      const type = authType as keyof typeof AuthTypes
+      const value: string = this.config[type] ?? ''
+      if (AuthTypes[type] <= AuthTypes.developerApiKey) {
         this.url.searchParams.set('hapikey', value)
       }
-      if (method === AuthMethods.accessToken) {
+      if (AuthTypes[type] === AuthTypes.accessToken) {
         this.headers = Object.assign(this.headers, { Authorization: `Bearer ${value}` })
       }
     }
   }
 
   protected initHeaders() {
-    if (get(this.opts, 'defaultJson', true)) {
+    if (this.opts?.defaultJson ?? true) {
       this.headers = { 'Content-Type': 'application/json' }
     }
 
@@ -91,7 +89,7 @@ export class Request {
   protected setBody() {
     if (this.opts.body) {
       this.body = this.opts.body
-      if (get(this.headers, 'Content-Type') === 'application/json' && get(this.opts, 'defaultJson', true)) {
+      if (this.opts?.defaultJson ?? true) {
         this.body = JSON.stringify(this.body)
       }
     }

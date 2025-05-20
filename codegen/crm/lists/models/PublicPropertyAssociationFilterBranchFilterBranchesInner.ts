@@ -10,102 +10,35 @@
  * Do not edit the class manually.
  */
 
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
-import { PublicPropertyAssociationFilterBranchFiltersInner } from '../models/PublicPropertyAssociationFilterBranchFiltersInner';
+import { PublicAndFilterBranch } from '../models/PublicAndFilterBranch';
+import { PublicAssociationFilterBranch } from '../models/PublicAssociationFilterBranch';
+import { PublicNotAllFilterBranch } from '../models/PublicNotAllFilterBranch';
+import { PublicNotAnyFilterBranch } from '../models/PublicNotAnyFilterBranch';
+import { PublicOrFilterBranch } from '../models/PublicOrFilterBranch';
+import { PublicPropertyAssociationFilterBranch } from '../models/PublicPropertyAssociationFilterBranch';
+import { PublicRestrictedFilterBranch } from '../models/PublicRestrictedFilterBranch';
+import { PublicUnifiedEventsFilterBranch } from '../models/PublicUnifiedEventsFilterBranch';
 
-export class PublicPropertyAssociationFilterBranchFilterBranchesInner {
-    'filterBranchType': PublicPropertyAssociationFilterBranchFilterBranchesInnerFilterBranchTypeEnum;
-    'filterBranches': Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>;
-    'filterBranchOperator': string;
-    'filters': Array<PublicPropertyAssociationFilterBranchFiltersInner>;
-    'eventTypeId': string;
-    'coalescingRefineBy'?: PublicFormSubmissionFilterCoalescingRefineBy;
-    'operator': string;
-    'objectTypeId': string;
-    'propertyWithObjectId': string;
-    'associationTypeId': number;
-    'associationCategory': string;
+/**
+ * @type PublicPropertyAssociationFilterBranchFilterBranchesInner
+ * Type
+ * @export
+ */
+export type PublicPropertyAssociationFilterBranchFilterBranchesInner = PublicAndFilterBranch | PublicAssociationFilterBranch | PublicNotAllFilterBranch | PublicNotAnyFilterBranch | PublicOrFilterBranch | PublicPropertyAssociationFilterBranch | PublicRestrictedFilterBranch | PublicUnifiedEventsFilterBranch;
 
+/**
+* @type PublicPropertyAssociationFilterBranchFilterBranchesInnerClass
+* @export
+*/
+export class PublicPropertyAssociationFilterBranchFilterBranchesInnerClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "filterBranchType",
-            "baseName": "filterBranchType",
-            "type": "PublicPropertyAssociationFilterBranchFilterBranchesInnerFilterBranchTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "filterBranches",
-            "baseName": "filterBranches",
-            "type": "Array<PublicPropertyAssociationFilterBranchFilterBranchesInner>",
-            "format": ""
-        },
-        {
-            "name": "filterBranchOperator",
-            "baseName": "filterBranchOperator",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "filters",
-            "baseName": "filters",
-            "type": "Array<PublicPropertyAssociationFilterBranchFiltersInner>",
-            "format": ""
-        },
-        {
-            "name": "eventTypeId",
-            "baseName": "eventTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "coalescingRefineBy",
-            "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "objectTypeId",
-            "baseName": "objectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "propertyWithObjectId",
-            "baseName": "propertyWithObjectId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "associationTypeId",
-            "baseName": "associationTypeId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "associationCategory",
-            "baseName": "associationCategory",
-            "type": "string",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return PublicPropertyAssociationFilterBranchFilterBranchesInner.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
 
-export enum PublicPropertyAssociationFilterBranchFilterBranchesInnerFilterBranchTypeEnum {
-    Association = 'ASSOCIATION'
-}
+
+
+
+
 

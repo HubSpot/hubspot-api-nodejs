@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -23,12 +23,10 @@ export class FolderUpdateInput {
     * New name. If specified the folder\'s name and fullPath will change. All children of the folder will be updated accordingly.
     */
     'name'?: string;
-    /**
-    * ID of the folder to change.
-    */
-    'id': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -42,12 +40,6 @@ export class FolderUpdateInput {
             "baseName": "name",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -57,4 +49,3 @@ export class FolderUpdateInput {
     public constructor() {
     }
 }
-

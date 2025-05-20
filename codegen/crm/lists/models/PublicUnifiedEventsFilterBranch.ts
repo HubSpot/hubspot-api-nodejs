@@ -25,6 +25,8 @@ export class PublicUnifiedEventsFilterBranch {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "filterBranchType",
@@ -77,12 +79,11 @@ export class PublicUnifiedEventsFilterBranch {
     }
 }
 
-
 export enum PublicUnifiedEventsFilterBranchFilterBranchTypeEnum {
     UnifiedEvents = 'UNIFIED_EVENTS'
 }
 export enum PublicUnifiedEventsFilterBranchOperatorEnum {
-    Completed = 'HAS_COMPLETED',
-    NotCompleted = 'HAS_NOT_COMPLETED'
+    HasCompleted = 'HAS_COMPLETED',
+    HasNotCompleted = 'HAS_NOT_COMPLETED'
 }
 

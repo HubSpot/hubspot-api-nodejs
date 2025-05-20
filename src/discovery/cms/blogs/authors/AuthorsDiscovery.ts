@@ -1,14 +1,14 @@
 import {
   BlogAuthorsApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../../codegen/cms/blogs/authors/index'
-import { Observable } from '../../../../../codegen/cms/blogs/authors/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/cms/blogs/authors/rxjsStub'
 
 export default class AuthorsDiscovery {
   public blogAuthorsApi: BlogAuthorsApi
@@ -20,7 +20,7 @@ export default class AuthorsDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

@@ -47,22 +47,34 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (userId !== undefined) {
-            requestContext.setQueryParam("userId", ObjectSerializer.serialize(userId, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(userId, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("userId", serializedParam);
+            }
         }
 
         // Query Params
         if (eventType !== undefined) {
-            requestContext.setQueryParam("eventType", ObjectSerializer.serialize(eventType, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(eventType, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("eventType", serializedParam);
+            }
         }
 
         // Query Params
         if (objectType !== undefined) {
-            requestContext.setQueryParam("objectType", ObjectSerializer.serialize(objectType, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(objectType, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("objectType", serializedParam);
+            }
         }
 
         // Query Params
         if (objectId !== undefined) {
-            requestContext.setQueryParam("objectId", ObjectSerializer.serialize(objectId, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(objectId, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("objectId", serializedParam);
+            }
         }
 
         // Query Params
@@ -82,7 +94,10 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (sort !== undefined) {
-            requestContext.setQueryParam("sort", ObjectSerializer.serialize(sort, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(sort, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("sort", serializedParam);
+            }
         }
 
 
@@ -93,7 +108,7 @@ export class AuditLogsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }

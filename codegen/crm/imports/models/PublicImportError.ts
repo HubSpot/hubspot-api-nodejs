@@ -11,19 +11,25 @@
  */
 
 import { ImportRowCore } from '../models/ImportRowCore';
+import { PropertyValue } from '../models/PropertyValue';
 
 export class PublicImportError {
     'createdAt': number;
     'extraContext'?: string;
     'objectTypeId'?: string;
     'errorType': PublicImportErrorErrorTypeEnum;
+    'invalidPropertyValue'?: PropertyValue;
+    'errorMessage'?: string;
     'knownColumnNumber'?: number;
+    'invalidValueToDisplay'?: string;
     'id': string;
     'sourceData': ImportRowCore;
     'objectType'?: PublicImportErrorObjectTypeEnum;
     'invalidValue'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -51,10 +57,28 @@ export class PublicImportError {
             "format": ""
         },
         {
+            "name": "invalidPropertyValue",
+            "baseName": "invalidPropertyValue",
+            "type": "PropertyValue",
+            "format": ""
+        },
+        {
+            "name": "errorMessage",
+            "baseName": "errorMessage",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "knownColumnNumber",
             "baseName": "knownColumnNumber",
             "type": "number",
             "format": "int32"
+        },
+        {
+            "name": "invalidValueToDisplay",
+            "baseName": "invalidValueToDisplay",
+            "type": "string",
+            "format": ""
         },
         {
             "name": "id",
@@ -89,7 +113,6 @@ export class PublicImportError {
     }
 }
 
-
 export enum PublicImportErrorErrorTypeEnum {
     IncorrectNumberOfColumns = 'INCORRECT_NUMBER_OF_COLUMNS',
     InvalidObjectId = 'INVALID_OBJECT_ID',
@@ -111,6 +134,7 @@ export enum PublicImportErrorErrorTypeEnum {
     AmbiguousEnumerationOption = 'AMBIGUOUS_ENUMERATION_OPTION',
     FailedValidation = 'FAILED_VALIDATION',
     FailedToCreateAssociation = 'FAILED_TO_CREATE_ASSOCIATION',
+    AssociationLimitExceeded = 'ASSOCIATION_LIMIT_EXCEEDED',
     FileNotFound = 'FILE_NOT_FOUND',
     InvalidColumnConfiguration = 'INVALID_COLUMN_CONFIGURATION',
     InvalidFileType = 'INVALID_FILE_TYPE',
@@ -124,6 +148,7 @@ export enum PublicImportErrorErrorTypeEnum {
     PortalWideCustomObjectLimitExceeded = 'PORTAL_WIDE_CUSTOM_OBJECT_LIMIT_EXCEEDED',
     InvalidAlternateId = 'INVALID_ALTERNATE_ID',
     InvalidEmail = 'INVALID_EMAIL',
+    SecondaryEmailWriteFailure = 'SECONDARY_EMAIL_WRITE_FAILURE',
     InvalidDomain = 'INVALID_DOMAIN',
     DuplicateRowContent = 'DUPLICATE_ROW_CONTENT',
     InvalidNumberSize = 'INVALID_NUMBER_SIZE',
@@ -134,7 +159,6 @@ export enum PublicImportErrorErrorTypeEnum {
     DuplicateAlternateId = 'DUPLICATE_ALTERNATE_ID',
     DuplicateObjectId = 'DUPLICATE_OBJECT_ID',
     DuplicateUniquePropertyValue = 'DUPLICATE_UNIQUE_PROPERTY_VALUE',
-    BlankValueProvided = 'BLANK_VALUE_PROVIDED',
     UnknownAssociationRecordId = 'UNKNOWN_ASSOCIATION_RECORD_ID',
     InvalidRecordId = 'INVALID_RECORD_ID',
     DuplicateRecordId = 'DUPLICATE_RECORD_ID',
@@ -143,10 +167,16 @@ export enum PublicImportErrorErrorTypeEnum {
     UpdateOnlyImport = 'UPDATE_ONLY_IMPORT',
     ColumnTooLarge = 'COLUMN_TOO_LARGE',
     RowDataTooLarge = 'ROW_DATA_TOO_LARGE',
+    MissingEventTimestamp = 'MISSING_EVENT_TIMESTAMP',
     InvalidEventTimestamp = 'INVALID_EVENT_TIMESTAMP',
     InvalidEvent = 'INVALID_EVENT',
     DuplicateEvent = 'DUPLICATE_EVENT',
-    MissingEventDefinition = 'MISSING_EVENT_DEFINITION'
+    MissingEventDefinition = 'MISSING_EVENT_DEFINITION',
+    InvalidAssociationKey = 'INVALID_ASSOCIATION_KEY',
+    AssociationRecordNotFound = 'ASSOCIATION_RECORD_NOT_FOUND',
+    MissingObjectDefinition = 'MISSING_OBJECT_DEFINITION',
+    AssociationLabelNotFound = 'ASSOCIATION_LABEL_NOT_FOUND',
+    ManyErrorsInRow = 'MANY_ERRORS_IN_ROW'
 }
 export enum PublicImportErrorObjectTypeEnum {
     Contact = 'CONTACT',
@@ -294,6 +324,21 @@ export enum PublicImportErrorObjectTypeEnum {
     AllPages = 'ALL_PAGES',
     AiForecast = 'AI_FORECAST',
     CrmPipelinesDummyType = 'CRM_PIPELINES_DUMMY_TYPE',
+    KnowledgeArticle = 'KNOWLEDGE_ARTICLE',
+    PropertyInfo = 'PROPERTY_INFO',
+    DataPrivacyConsent = 'DATA_PRIVACY_CONSENT',
+    GoalTemplate = 'GOAL_TEMPLATE',
+    ScoreConfiguration = 'SCORE_CONFIGURATION',
+    Audience = 'AUDIENCE',
+    PartnerClientRevenue = 'PARTNER_CLIENT_REVENUE',
+    AutomationJourney = 'AUTOMATION_JOURNEY',
+    ComboEventConfiguration = 'COMBO_EVENT_CONFIGURATION',
+    CrmObjectsDummyType = 'CRM_OBJECTS_DUMMY_TYPE',
+    CaseStudy = 'CASE_STUDY',
+    Service = 'SERVICE',
+    PodcastEpisode = 'PODCAST_EPISODE',
+    PartnerService = 'PARTNER_SERVICE',
+    ProspectingAgentContactAssignment = 'PROSPECTING_AGENT_CONTACT_ASSIGNMENT',
     Unknown = 'UNKNOWN'
 }
 

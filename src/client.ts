@@ -1,4 +1,11 @@
+import ApiDecoratorService from './services/ApiDecoratorService'
+import { HttpClient } from './services/http/HttpClient'
 import IConfiguration from './configuration/IConfiguration'
+import IDecorator from './services/decorators/IDecorator'
+import { IHttpOptions } from './services/http/IHttpOptions'
+import LimiterDecorator from './services/decorators/LimiterDecorator'
+import { Request } from './services/http/Request'
+import RetryDecorator from './services/decorators/RetryDecorator'
 import type AutomationDiscovery from './discovery/automation/AutomationDiscovery'
 import type CmsDiscovery from './discovery/cms/CmsDiscovery'
 import type CommunicationPreferencesDiscovery from './discovery/communicationPreferences/CommunicationPreferencesDiscovery'
@@ -10,13 +17,6 @@ import type MarketingDiscovery from './discovery/marketing/MarketingDiscovery'
 import type OauthDiscovery from './discovery/oauth/OauthDiscovery'
 import type SettingsDiscovery from './discovery/settings/SettingsDiscovery'
 import type WebhooksDiscovery from './discovery/webhooks/WebhooksDiscovery'
-import ApiDecoratorService from './services/ApiDecoratorService'
-import IDecorator from './services/decorators/IDecorator'
-import LimiterDecorator from './services/decorators/LimiterDecorator'
-import RetryDecorator from './services/decorators/RetryDecorator'
-import { HttpClient } from './services/http/HttpClient'
-import { IHttpOptions } from './services/http/IHttpOptions'
-import { Request } from './services/http/Request'
 
 export class Client {
   public config: IConfiguration
@@ -214,7 +214,7 @@ export class Client {
   }
 
   protected getDecorators(): IDecorator[] {
-    const decorators = new Array()
+    const decorators = new Array<IDecorator>()
 
     if (this.config.limiterOptions) {
       decorators.push(new LimiterDecorator(this.config.limiterOptions, this.config.limiterJobOptions))

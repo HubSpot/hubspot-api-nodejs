@@ -22,7 +22,7 @@ export class BlogPost {
     */
     'publishDate': Date;
     /**
-    * The explicitly defined ISO 639 language code of the Blog Post. If null, the Blog Post will default to the language of the ParentBlog.
+    * The explicitly defined ISO 639 language code of the post. If null, the post will default to the language of the parent blog.
     */
     'language': BlogPostLanguageEnum;
     /**
@@ -42,7 +42,7 @@ export class BlogPost {
     */
     'password': string;
     /**
-    * The html title of this Blog Post.
+    * The HTML title of the post.
     */
     'htmlTitle': string;
     /**
@@ -51,19 +51,19 @@ export class BlogPost {
     'publishImmediately': boolean;
     'translations': { [key: string]: ContentLanguageVariation; };
     /**
-    * The unique ID of the Blog Post.
+    * The unique ID of the blog post.
     */
     'id': string;
     /**
-    * An ENUM descibing the current state of this Blog Post.
+    * An enumeration describing the current publish state of the post.
     */
     'state': string;
     /**
-    * The path of the this blog post. This field is appended to the domain to construct the url of this post.
+    * The URL slug of the blog post. This field is appended to the domain to construct the url of this post.
     */
     'slug': string;
     /**
-    * The ID of the user that created this Blog Post.
+    * The ID of the user that created the post.
     */
     'createdById': string;
     /**
@@ -85,11 +85,11 @@ export class BlogPost {
     */
     'mabExperimentId': string;
     /**
-    * The ID of the user that updated this Blog Post.
+    * The ID of the user that updated the post.
     */
     'updatedById': string;
     /**
-    * ID of the primary blog post this object was translated from.
+    * ID of the primary blog post that this post was translated from.
     */
     'translatedFromId': string;
     /**
@@ -110,23 +110,23 @@ export class BlogPost {
     */
     'featuredImage': string;
     /**
-    * The name of the user that updated this Blog Post.
+    * The name of the blog author associated with the post.
     */
     'authorName': string;
     /**
-    * The domain this Blog Post will resolve to. If null, the Blog Post will default to the domain of the ParentBlog.
+    * The domain that the post lives on. If null, the post will default to the domain of the parent blog.
     */
     'domain': string;
     /**
-    * The internal name of the Blog Post.
+    * The internal name of the post.
     */
     'name': string;
     /**
-    * The ID of the HubDB table this Blog Post references, if applicable
+    * For dynamic HubDB pages,  the ID of the HubDB table this post references.
     */
     'dynamicPageHubDbTableId': string;
     /**
-    * The GUID of the marketing campaign this Blog Post is a part of.
+    * The GUID of the marketing campaign the post is associated with.
     */
     'campaign': string;
     'dynamicPageDataSourceId': string;
@@ -148,7 +148,7 @@ export class BlogPost {
     */
     'footerHtml': string;
     /**
-    * List of IDs for the tags associated with this Blog Post.
+    * The IDs of the tags associated with this post.
     */
     'tagIds': Array<number>;
     /**
@@ -172,7 +172,7 @@ export class BlogPost {
     */
     'abStatus': BlogPostAbStatusEnum;
     /**
-    * Boolean to determine if this post should use a featuredImage.
+    * Boolean to determine if this post should use a featured image.
     */
     'useFeaturedImage': boolean;
     /**
@@ -184,11 +184,11 @@ export class BlogPost {
     */
     'featuredImageAltText': string;
     /**
-    * The ID of the Blog Author associated with this Blog Post.
+    * The ID of the blog author associated with this post.
     */
     'blogAuthorId': string;
     /**
-    * The ID of the parent Blog this Blog Post is associated with.
+    * The ID of the post\'s parent blog.
     */
     'contentGroupId': string;
     /**
@@ -236,7 +236,7 @@ export class BlogPost {
     */
     'currentState': BlogPostCurrentStateEnum;
     /**
-    * ID of the type of object this is. 
+    * ID of the object type.
     */
     'categoryId': number;
     /**
@@ -245,6 +245,8 @@ export class BlogPost {
     'linkRelCanonicalUrl': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -621,7 +623,6 @@ export class BlogPost {
     public constructor() {
     }
 }
-
 
 export enum BlogPostLanguageEnum {
     Af = 'af',

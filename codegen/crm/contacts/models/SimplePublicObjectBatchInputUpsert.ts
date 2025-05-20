@@ -12,12 +12,17 @@
 
 
 export class SimplePublicObjectBatchInputUpsert {
+    /**
+    * The name of a property whose values are unique for this object
+    */
     'idProperty'?: string;
     'objectWriteTraceId'?: string;
     'id': string;
     'properties': { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -52,4 +57,3 @@ export class SimplePublicObjectBatchInputUpsert {
     public constructor() {
     }
 }
-

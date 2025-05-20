@@ -1,8 +1,10 @@
-import { Client } from '../../../index'
 import AssociationsDiscovery from '../../../src/discovery/crm/associations/AssociationsDiscovery'
+import { Client } from '../../../index'
+import CommerceDiscovery from '../../../src/discovery/crm/commerce/CommerceDiscovery'
 import CompaniesDiscovery from '../../../src/discovery/crm/companies/CompaniesDiscovery'
 import ContactsDiscovery from '../../../src/discovery/crm/contacts/ContactsDiscovery'
 import DealsDiscovery from '../../../src/discovery/crm/deals/DealsDiscovery'
+import ExportsDiscovery from '../../../src/discovery/crm/exports/ExportsDiscovery'
 import ExtensionsDiscovery from '../../../src/discovery/crm/extensions/ExtensionsDiscovery'
 import ImportsDiscovery from '../../../src/discovery/crm/imports/ImportsDiscovery'
 import LineItemsDiscovery from '../../../src/discovery/crm/line_items/LineItemsDiscovery'
@@ -21,9 +23,11 @@ describe('api client', () => {
   it('is discoverable', () => {
     const client = new Client().crm
     expect(AssociationsDiscovery.name).toBe(client.associations.constructor.name)
+    expect(CommerceDiscovery.name).toBe(client.commerce.constructor.name)
     expect(CompaniesDiscovery.name).toBe(client.companies.constructor.name)
     expect(ContactsDiscovery.name).toBe(client.contacts.constructor.name)
     expect(DealsDiscovery.name).toBe(client.deals.constructor.name)
+    expect(ExportsDiscovery.name).toBe(client.exports.constructor.name)
     expect(ExtensionsDiscovery.name).toBe(client.extensions.constructor.name)
     expect(ImportsDiscovery.name).toBe(client.imports.constructor.name)
     expect(LineItemsDiscovery.name).toBe(client.lineItems.constructor.name)

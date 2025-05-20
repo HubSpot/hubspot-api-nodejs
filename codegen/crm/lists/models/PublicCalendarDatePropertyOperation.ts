@@ -22,6 +22,8 @@ export class PublicCalendarDatePropertyOperation {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "useFiscalYear",
@@ -73,7 +75,6 @@ export class PublicCalendarDatePropertyOperation {
     public constructor() {
     }
 }
-
 
 export enum PublicCalendarDatePropertyOperationFiscalYearStartEnum {
     January = 'JANUARY',

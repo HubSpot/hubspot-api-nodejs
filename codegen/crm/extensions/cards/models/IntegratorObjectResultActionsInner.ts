@@ -10,92 +10,23 @@
  * Do not edit the class manually.
  */
 
-import { ActionConfirmationBody } from '../models/ActionConfirmationBody';
+import { ActionHookActionBody } from '../models/ActionHookActionBody';
+import { IFrameActionBody } from '../models/IFrameActionBody';
 
-export class IntegratorObjectResultActionsInner {
-    'propertyNamesIncluded': Array<string>;
-    'confirmation'?: ActionConfirmationBody;
-    'label'?: string;
-    'type': IntegratorObjectResultActionsInnerTypeEnum;
-    'httpMethod': IntegratorObjectResultActionsInnerHttpMethodEnum;
-    'url': string;
-    'width': number;
-    'height': number;
+/**
+ * @type IntegratorObjectResultActionsInner
+ * Type
+ * @export
+ */
+export type IntegratorObjectResultActionsInner = ActionHookActionBody | IFrameActionBody;
 
+/**
+* @type IntegratorObjectResultActionsInnerClass
+* @export
+*/
+export class IntegratorObjectResultActionsInnerClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "propertyNamesIncluded",
-            "baseName": "propertyNamesIncluded",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "confirmation",
-            "baseName": "confirmation",
-            "type": "ActionConfirmationBody",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "IntegratorObjectResultActionsInnerTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "httpMethod",
-            "baseName": "httpMethod",
-            "type": "IntegratorObjectResultActionsInnerHttpMethodEnum",
-            "format": ""
-        },
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "width",
-            "baseName": "width",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "height",
-            "baseName": "height",
-            "type": "number",
-            "format": "int32"
-        }    ];
-
-    static getAttributeTypeMap() {
-        return IntegratorObjectResultActionsInner.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
-}
-
-
-export enum IntegratorObjectResultActionsInnerTypeEnum {
-    ActionHook = 'ACTION_HOOK',
-    Iframe = 'IFRAME'
-}
-export enum IntegratorObjectResultActionsInnerHttpMethodEnum {
-    Connect = 'CONNECT',
-    Delete = 'DELETE',
-    Get = 'GET',
-    Head = 'HEAD',
-    Options = 'OPTIONS',
-    Patch = 'PATCH',
-    Post = 'POST',
-    Put = 'PUT',
-    Trace = 'TRACE'
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 

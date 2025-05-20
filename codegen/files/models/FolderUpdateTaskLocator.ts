@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -26,6 +26,8 @@ export class FolderUpdateTaskLocator {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "links",
@@ -47,4 +49,3 @@ export class FolderUpdateTaskLocator {
     public constructor() {
     }
 }
-

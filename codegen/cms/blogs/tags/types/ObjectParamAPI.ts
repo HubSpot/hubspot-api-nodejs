@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AttachToLangPrimaryRequestVNext } from '../models/AttachToLangPrimaryRequestVNext';
 import { BatchInputJsonNode } from '../models/BatchInputJsonNode';
@@ -20,12 +20,14 @@ import { BlogTagsApiRequestFactory, BlogTagsApiResponseProcessor} from "../apis/
 export interface BlogTagsApiArchiveRequest {
     /**
      * The Blog Tag id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApiarchive
      */
@@ -89,18 +91,21 @@ export interface BlogTagsApiDetachFromLangGroupRequest {
 export interface BlogTagsApiGetByIdRequest {
     /**
      * The Blog Tag id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApigetById
      */
     objectId: string
     /**
      * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApigetById
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApigetById
      */
@@ -110,66 +115,77 @@ export interface BlogTagsApiGetByIdRequest {
 export interface BlogTagsApiGetPageRequest {
     /**
      * Only return Blog Tags created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     createdAt?: Date
     /**
      * Only return Blog Tags created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Blog Tags created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Blog Tags last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Blog Tags last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Blog Tags last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof BlogTagsApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof BlogTagsApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof BlogTagsApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApigetPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApigetPage
      */
@@ -185,6 +201,7 @@ export interface BlogTagsApiReadBatchRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApireadBatch
      */
@@ -203,6 +220,7 @@ export interface BlogTagsApiSetLangPrimaryRequest {
 export interface BlogTagsApiUpdateRequest {
     /**
      * The Blog Tag id.
+     * Defaults to: undefined
      * @type string
      * @memberof BlogTagsApiupdate
      */
@@ -215,6 +233,7 @@ export interface BlogTagsApiUpdateRequest {
     tag: Tag
     /**
      * Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApiupdate
      */
@@ -230,6 +249,7 @@ export interface BlogTagsApiUpdateBatchRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update deleted Blog Tags. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof BlogTagsApiupdateBatch
      */
@@ -257,7 +277,7 @@ export class ObjectBlogTagsApi {
      * Delete a Blog Tag
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: BlogTagsApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: BlogTagsApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -266,7 +286,7 @@ export class ObjectBlogTagsApi {
      * Delete a Blog Tag
      * @param param the request object
      */
-    public archive(param: BlogTagsApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: BlogTagsApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -275,7 +295,7 @@ export class ObjectBlogTagsApi {
      * Delete a batch of Blog Tags
      * @param param the request object
      */
-    public archiveBatchWithHttpInfo(param: BlogTagsApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveBatchWithHttpInfo(param: BlogTagsApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -284,7 +304,7 @@ export class ObjectBlogTagsApi {
      * Delete a batch of Blog Tags
      * @param param the request object
      */
-    public archiveBatch(param: BlogTagsApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: BlogTagsApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -293,7 +313,7 @@ export class ObjectBlogTagsApi {
      * Attach a Blog Tag to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroupWithHttpInfo(param: BlogTagsApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public attachToLangGroupWithHttpInfo(param: BlogTagsApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -302,7 +322,7 @@ export class ObjectBlogTagsApi {
      * Attach a Blog Tag to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroup(param: BlogTagsApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+    public attachToLangGroup(param: BlogTagsApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -311,7 +331,7 @@ export class ObjectBlogTagsApi {
      * Create a new Blog Tag
      * @param param the request object
      */
-    public createWithHttpInfo(param: BlogTagsApiCreateRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+    public createWithHttpInfo(param: BlogTagsApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Tag>> {
         return this.api.createWithHttpInfo(param.tag,  options).toPromise();
     }
 
@@ -320,7 +340,7 @@ export class ObjectBlogTagsApi {
      * Create a new Blog Tag
      * @param param the request object
      */
-    public create(param: BlogTagsApiCreateRequest, options?: Configuration): Promise<Tag> {
+    public create(param: BlogTagsApiCreateRequest, options?: ConfigurationOptions): Promise<Tag> {
         return this.api.create(param.tag,  options).toPromise();
     }
 
@@ -329,7 +349,7 @@ export class ObjectBlogTagsApi {
      * Create a batch of Blog Tags
      * @param param the request object
      */
-    public createBatchWithHttpInfo(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+    public createBatchWithHttpInfo(param: BlogTagsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
         return this.api.createBatchWithHttpInfo(param.batchInputTag,  options).toPromise();
     }
 
@@ -338,7 +358,7 @@ export class ObjectBlogTagsApi {
      * Create a batch of Blog Tags
      * @param param the request object
      */
-    public createBatch(param: BlogTagsApiCreateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
+    public createBatch(param: BlogTagsApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.createBatch(param.batchInputTag,  options).toPromise();
     }
 
@@ -347,7 +367,7 @@ export class ObjectBlogTagsApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariationWithHttpInfo(param: BlogTagsApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+    public createLangVariationWithHttpInfo(param: BlogTagsApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<Tag>> {
         return this.api.createLangVariationWithHttpInfo(param.tagCloneRequestVNext,  options).toPromise();
     }
 
@@ -356,7 +376,7 @@ export class ObjectBlogTagsApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariation(param: BlogTagsApiCreateLangVariationRequest, options?: Configuration): Promise<Tag> {
+    public createLangVariation(param: BlogTagsApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<Tag> {
         return this.api.createLangVariation(param.tagCloneRequestVNext,  options).toPromise();
     }
 
@@ -365,7 +385,7 @@ export class ObjectBlogTagsApi {
      * Detach a Blog Tag from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroupWithHttpInfo(param: BlogTagsApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public detachFromLangGroupWithHttpInfo(param: BlogTagsApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -374,7 +394,7 @@ export class ObjectBlogTagsApi {
      * Detach a Blog Tag from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroup(param: BlogTagsApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+    public detachFromLangGroup(param: BlogTagsApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -383,7 +403,7 @@ export class ObjectBlogTagsApi {
      * Retrieve a Blog Tag
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: BlogTagsApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+    public getByIdWithHttpInfo(param: BlogTagsApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Tag>> {
         return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -392,7 +412,7 @@ export class ObjectBlogTagsApi {
      * Retrieve a Blog Tag
      * @param param the request object
      */
-    public getById(param: BlogTagsApiGetByIdRequest, options?: Configuration): Promise<Tag> {
+    public getById(param: BlogTagsApiGetByIdRequest, options?: ConfigurationOptions): Promise<Tag> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -401,7 +421,7 @@ export class ObjectBlogTagsApi {
      * Get all Blog Tags
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalTagForwardPaging>> {
+    public getPageWithHttpInfo(param: BlogTagsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalTagForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -410,7 +430,7 @@ export class ObjectBlogTagsApi {
      * Get all Blog Tags
      * @param param the request object
      */
-    public getPage(param: BlogTagsApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalTagForwardPaging> {
+    public getPage(param: BlogTagsApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalTagForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -419,7 +439,7 @@ export class ObjectBlogTagsApi {
      * Retrieve a batch of Blog Tags
      * @param param the request object
      */
-    public readBatchWithHttpInfo(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+    public readBatchWithHttpInfo(param: BlogTagsApiReadBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
         return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -428,7 +448,7 @@ export class ObjectBlogTagsApi {
      * Retrieve a batch of Blog Tags
      * @param param the request object
      */
-    public readBatch(param: BlogTagsApiReadBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
+    public readBatch(param: BlogTagsApiReadBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -437,7 +457,7 @@ export class ObjectBlogTagsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimaryWithHttpInfo(param: BlogTagsApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public setLangPrimaryWithHttpInfo(param: BlogTagsApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -446,7 +466,7 @@ export class ObjectBlogTagsApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimary(param: BlogTagsApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+    public setLangPrimary(param: BlogTagsApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -455,7 +475,7 @@ export class ObjectBlogTagsApi {
      * Update a Blog Tag
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BlogTagsApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Tag>> {
+    public updateWithHttpInfo(param: BlogTagsApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Tag>> {
         return this.api.updateWithHttpInfo(param.objectId, param.tag, param.archived,  options).toPromise();
     }
 
@@ -464,7 +484,7 @@ export class ObjectBlogTagsApi {
      * Update a Blog Tag
      * @param param the request object
      */
-    public update(param: BlogTagsApiUpdateRequest, options?: Configuration): Promise<Tag> {
+    public update(param: BlogTagsApiUpdateRequest, options?: ConfigurationOptions): Promise<Tag> {
         return this.api.update(param.objectId, param.tag, param.archived,  options).toPromise();
     }
 
@@ -473,7 +493,7 @@ export class ObjectBlogTagsApi {
      * Update a batch of Blog Tags
      * @param param the request object
      */
-    public updateBatchWithHttpInfo(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
+    public updateBatchWithHttpInfo(param: BlogTagsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseTag | BatchResponseTagWithErrors>> {
         return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -482,7 +502,7 @@ export class ObjectBlogTagsApi {
      * Update a batch of Blog Tags
      * @param param the request object
      */
-    public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
+    public updateBatch(param: BlogTagsApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponseTag | BatchResponseTagWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -491,7 +511,7 @@ export class ObjectBlogTagsApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangsWithHttpInfo(param: BlogTagsApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateLangsWithHttpInfo(param: BlogTagsApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -500,7 +520,7 @@ export class ObjectBlogTagsApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangs(param: BlogTagsApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+    public updateLangs(param: BlogTagsApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 

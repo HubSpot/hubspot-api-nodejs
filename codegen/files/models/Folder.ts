@@ -1,5 +1,5 @@
 /**
- * Files Files
+ * Files
  * Upload and manage files.
  *
  * OpenAPI spec version: v3
@@ -21,13 +21,13 @@ export class Folder {
     */
     'archivedAt'?: Date;
     /**
-    * Marks whether the folder is deleted or not.
-    */
-    'archived': boolean;
-    /**
     * Path of the folder in the file manager.
     */
     'path'?: string;
+    /**
+    * Marks whether the folder is deleted or not.
+    */
+    'archived': boolean;
     /**
     * ID of the parent folder.
     */
@@ -47,6 +47,8 @@ export class Folder {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "createdAt",
@@ -61,15 +63,15 @@ export class Folder {
             "format": "date-time"
         },
         {
-            "name": "archived",
-            "baseName": "archived",
-            "type": "boolean",
-            "format": ""
-        },
-        {
             "name": "path",
             "baseName": "path",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "archived",
+            "baseName": "archived",
+            "type": "boolean",
             "format": ""
         },
         {
@@ -104,4 +106,3 @@ export class Folder {
     public constructor() {
     }
 }
-

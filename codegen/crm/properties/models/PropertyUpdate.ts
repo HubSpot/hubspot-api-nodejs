@@ -56,6 +56,8 @@ export class PropertyUpdate {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "groupName",
@@ -125,7 +127,6 @@ export class PropertyUpdate {
     public constructor() {
     }
 }
-
 
 export enum PropertyUpdateTypeEnum {
     String = 'string',

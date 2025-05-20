@@ -1,5 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
 
 import { AbTestCreateRequestVNext } from '../models/AbTestCreateRequestVNext';
 import { AbTestEndRequestVNext } from '../models/AbTestEndRequestVNext';
@@ -34,12 +34,14 @@ import { LandingPagesApiRequestFactory, LandingPagesApiResponseProcessor} from "
 export interface LandingPagesApiArchiveRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiarchive
      */
@@ -58,12 +60,14 @@ export interface LandingPagesApiArchiveBatchRequest {
 export interface LandingPagesApiArchiveFolderRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiarchiveFolder
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiarchiveFolder
      */
@@ -172,18 +176,21 @@ export interface LandingPagesApiEndActiveABTestRequest {
 export interface LandingPagesApiGetByIdRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetById
      */
     objectId: string
     /**
      * Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApigetById
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetById
      */
@@ -193,6 +200,7 @@ export interface LandingPagesApiGetByIdRequest {
 export interface LandingPagesApiGetDraftByIdRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetDraftById
      */
@@ -202,18 +210,21 @@ export interface LandingPagesApiGetDraftByIdRequest {
 export interface LandingPagesApiGetFolderByIdRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderById
      */
     objectId: string
     /**
      * Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApigetFolderById
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderById
      */
@@ -223,12 +234,14 @@ export interface LandingPagesApiGetFolderByIdRequest {
 export interface LandingPagesApiGetFolderPreviousVersionRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderPreviousVersion
      */
     objectId: string
     /**
      * The Folder version id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderPreviousVersion
      */
@@ -238,24 +251,28 @@ export interface LandingPagesApiGetFolderPreviousVersionRequest {
 export interface LandingPagesApiGetFolderPreviousVersionsRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderPreviousVersions
      */
     objectId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderPreviousVersions
      */
     after?: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFolderPreviousVersions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof LandingPagesApigetFolderPreviousVersions
      */
@@ -265,66 +282,77 @@ export interface LandingPagesApiGetFolderPreviousVersionsRequest {
 export interface LandingPagesApiGetFoldersPageRequest {
     /**
      * Only return Folders created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     createdAt?: Date
     /**
      * Only return Folders created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     createdAfter?: Date
     /**
      * Only return Folders created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     createdBefore?: Date
     /**
      * Only return Folders last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     updatedAt?: Date
     /**
      * Only return Folders last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     updatedAfter?: Date
     /**
      * Only return Folders last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetFoldersPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof LandingPagesApigetFoldersPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFoldersPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof LandingPagesApigetFoldersPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApigetFoldersPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetFoldersPage
      */
@@ -334,66 +362,77 @@ export interface LandingPagesApiGetFoldersPageRequest {
 export interface LandingPagesApiGetPageRequest {
     /**
      * Only return Landing Pages created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     createdAt?: Date
     /**
      * Only return Landing Pages created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Landing Pages created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Landing Pages last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Landing Pages last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Landing Pages last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof LandingPagesApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof LandingPagesApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof LandingPagesApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApigetPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPage
      */
@@ -403,12 +442,14 @@ export interface LandingPagesApiGetPageRequest {
 export interface LandingPagesApiGetPreviousVersionRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPreviousVersion
      */
     objectId: string
     /**
      * The Landing Page version id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPreviousVersion
      */
@@ -418,24 +459,28 @@ export interface LandingPagesApiGetPreviousVersionRequest {
 export interface LandingPagesApiGetPreviousVersionsRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPreviousVersions
      */
     objectId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPreviousVersions
      */
     after?: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApigetPreviousVersions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof LandingPagesApigetPreviousVersions
      */
@@ -445,6 +490,7 @@ export interface LandingPagesApiGetPreviousVersionsRequest {
 export interface LandingPagesApiPushLiveRequest {
     /**
      * The id of the Landing Page for which it\&#39;s draft will be pushed live.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApipushLive
      */
@@ -460,6 +506,7 @@ export interface LandingPagesApiReadBatchRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApireadBatch
      */
@@ -475,6 +522,7 @@ export interface LandingPagesApiReadFoldersRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted Folders. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApireadFolders
      */
@@ -493,6 +541,7 @@ export interface LandingPagesApiRerunPreviousABTestRequest {
 export interface LandingPagesApiResetDraftRequest {
     /**
      * The id of the Landing Page for which it\&#39;s draft will be reset.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiresetDraft
      */
@@ -502,12 +551,14 @@ export interface LandingPagesApiResetDraftRequest {
 export interface LandingPagesApiRestoreFolderPreviousVersionRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApirestoreFolderPreviousVersion
      */
     objectId: string
     /**
      * The Folder version id to restore.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApirestoreFolderPreviousVersion
      */
@@ -517,12 +568,14 @@ export interface LandingPagesApiRestoreFolderPreviousVersionRequest {
 export interface LandingPagesApiRestorePreviousVersionRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApirestorePreviousVersion
      */
     objectId: string
     /**
      * The Landing Page version id to restore.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApirestorePreviousVersion
      */
@@ -532,12 +585,14 @@ export interface LandingPagesApiRestorePreviousVersionRequest {
 export interface LandingPagesApiRestorePreviousVersionToDraftRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApirestorePreviousVersionToDraft
      */
     objectId: string
     /**
      * The Landing Page version id to restore.
+     * Defaults to: undefined
      * @type number
      * @memberof LandingPagesApirestorePreviousVersionToDraft
      */
@@ -565,6 +620,7 @@ export interface LandingPagesApiSetLangPrimaryRequest {
 export interface LandingPagesApiUpdateRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiupdate
      */
@@ -577,6 +633,7 @@ export interface LandingPagesApiUpdateRequest {
     page: Page
     /**
      * Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiupdate
      */
@@ -592,6 +649,7 @@ export interface LandingPagesApiUpdateBatchRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update deleted Landing Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiupdateBatch
      */
@@ -601,6 +659,7 @@ export interface LandingPagesApiUpdateBatchRequest {
 export interface LandingPagesApiUpdateDraftRequest {
     /**
      * The Landing Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiupdateDraft
      */
@@ -616,6 +675,7 @@ export interface LandingPagesApiUpdateDraftRequest {
 export interface LandingPagesApiUpdateFolderRequest {
     /**
      * The Folder id.
+     * Defaults to: undefined
      * @type string
      * @memberof LandingPagesApiupdateFolder
      */
@@ -628,6 +688,7 @@ export interface LandingPagesApiUpdateFolderRequest {
     contentFolder: ContentFolder
     /**
      * Specifies whether to update deleted Folders. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiupdateFolder
      */
@@ -643,6 +704,7 @@ export interface LandingPagesApiUpdateFoldersRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof LandingPagesApiupdateFolders
      */
@@ -670,7 +732,7 @@ export class ObjectLandingPagesApi {
      * Delete a Landing Page
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: LandingPagesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: LandingPagesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -679,7 +741,7 @@ export class ObjectLandingPagesApi {
      * Delete a Landing Page
      * @param param the request object
      */
-    public archive(param: LandingPagesApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: LandingPagesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -688,7 +750,7 @@ export class ObjectLandingPagesApi {
      * Delete a batch of Landing Pages
      * @param param the request object
      */
-    public archiveBatchWithHttpInfo(param: LandingPagesApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveBatchWithHttpInfo(param: LandingPagesApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -697,7 +759,7 @@ export class ObjectLandingPagesApi {
      * Delete a batch of Landing Pages
      * @param param the request object
      */
-    public archiveBatch(param: LandingPagesApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: LandingPagesApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -706,7 +768,7 @@ export class ObjectLandingPagesApi {
      * Delete a Folder
      * @param param the request object
      */
-    public archiveFolderWithHttpInfo(param: LandingPagesApiArchiveFolderRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveFolderWithHttpInfo(param: LandingPagesApiArchiveFolderRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveFolderWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -715,7 +777,7 @@ export class ObjectLandingPagesApi {
      * Delete a Folder
      * @param param the request object
      */
-    public archiveFolder(param: LandingPagesApiArchiveFolderRequest, options?: Configuration): Promise<void> {
+    public archiveFolder(param: LandingPagesApiArchiveFolderRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveFolder(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -724,7 +786,7 @@ export class ObjectLandingPagesApi {
      * Delete a batch of Folders
      * @param param the request object
      */
-    public archiveFoldersWithHttpInfo(param: LandingPagesApiArchiveFoldersRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveFoldersWithHttpInfo(param: LandingPagesApiArchiveFoldersRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveFoldersWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -733,7 +795,7 @@ export class ObjectLandingPagesApi {
      * Delete a batch of Folders
      * @param param the request object
      */
-    public archiveFolders(param: LandingPagesApiArchiveFoldersRequest, options?: Configuration): Promise<void> {
+    public archiveFolders(param: LandingPagesApiArchiveFoldersRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveFolders(param.batchInputString,  options).toPromise();
     }
 
@@ -742,7 +804,7 @@ export class ObjectLandingPagesApi {
      * Attach a landing page to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroupWithHttpInfo(param: LandingPagesApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public attachToLangGroupWithHttpInfo(param: LandingPagesApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -751,7 +813,7 @@ export class ObjectLandingPagesApi {
      * Attach a landing page to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroup(param: LandingPagesApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+    public attachToLangGroup(param: LandingPagesApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -760,7 +822,7 @@ export class ObjectLandingPagesApi {
      * Clone a Landing Page
      * @param param the request object
      */
-    public cloneWithHttpInfo(param: LandingPagesApiCloneRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public cloneWithHttpInfo(param: LandingPagesApiCloneRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -769,7 +831,7 @@ export class ObjectLandingPagesApi {
      * Clone a Landing Page
      * @param param the request object
      */
-    public clone(param: LandingPagesApiCloneRequest, options?: Configuration): Promise<Page> {
+    public clone(param: LandingPagesApiCloneRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.clone(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -778,7 +840,7 @@ export class ObjectLandingPagesApi {
      * Create a new Landing Page
      * @param param the request object
      */
-    public createWithHttpInfo(param: LandingPagesApiCreateRequest, options?: Configuration): Promise<HttpInfo<void | Page>> {
+    public createWithHttpInfo(param: LandingPagesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void | Page>> {
         return this.api.createWithHttpInfo(param.page,  options).toPromise();
     }
 
@@ -787,7 +849,7 @@ export class ObjectLandingPagesApi {
      * Create a new Landing Page
      * @param param the request object
      */
-    public create(param: LandingPagesApiCreateRequest, options?: Configuration): Promise<void | Page> {
+    public create(param: LandingPagesApiCreateRequest, options?: ConfigurationOptions): Promise<void | Page> {
         return this.api.create(param.page,  options).toPromise();
     }
 
@@ -796,7 +858,7 @@ export class ObjectLandingPagesApi {
      * Create a new A/B test variation
      * @param param the request object
      */
-    public createABTestVariationWithHttpInfo(param: LandingPagesApiCreateABTestVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public createABTestVariationWithHttpInfo(param: LandingPagesApiCreateABTestVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.createABTestVariationWithHttpInfo(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -805,7 +867,7 @@ export class ObjectLandingPagesApi {
      * Create a new A/B test variation
      * @param param the request object
      */
-    public createABTestVariation(param: LandingPagesApiCreateABTestVariationRequest, options?: Configuration): Promise<Page> {
+    public createABTestVariation(param: LandingPagesApiCreateABTestVariationRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.createABTestVariation(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -814,7 +876,7 @@ export class ObjectLandingPagesApi {
      * Create a batch of Landing Pages
      * @param param the request object
      */
-    public createBatchWithHttpInfo(param: LandingPagesApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public createBatchWithHttpInfo(param: LandingPagesApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.createBatchWithHttpInfo(param.batchInputPage,  options).toPromise();
     }
 
@@ -823,7 +885,7 @@ export class ObjectLandingPagesApi {
      * Create a batch of Landing Pages
      * @param param the request object
      */
-    public createBatch(param: LandingPagesApiCreateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public createBatch(param: LandingPagesApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.createBatch(param.batchInputPage,  options).toPromise();
     }
 
@@ -832,7 +894,7 @@ export class ObjectLandingPagesApi {
      * Create a new Folder
      * @param param the request object
      */
-    public createFolderWithHttpInfo(param: LandingPagesApiCreateFolderRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+    public createFolderWithHttpInfo(param: LandingPagesApiCreateFolderRequest, options?: ConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
         return this.api.createFolderWithHttpInfo(param.contentFolder,  options).toPromise();
     }
 
@@ -841,7 +903,7 @@ export class ObjectLandingPagesApi {
      * Create a new Folder
      * @param param the request object
      */
-    public createFolder(param: LandingPagesApiCreateFolderRequest, options?: Configuration): Promise<ContentFolder> {
+    public createFolder(param: LandingPagesApiCreateFolderRequest, options?: ConfigurationOptions): Promise<ContentFolder> {
         return this.api.createFolder(param.contentFolder,  options).toPromise();
     }
 
@@ -850,7 +912,7 @@ export class ObjectLandingPagesApi {
      * Create a batch of Folders
      * @param param the request object
      */
-    public createFoldersWithHttpInfo(param: LandingPagesApiCreateFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+    public createFoldersWithHttpInfo(param: LandingPagesApiCreateFoldersRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
         return this.api.createFoldersWithHttpInfo(param.batchInputContentFolder,  options).toPromise();
     }
 
@@ -859,7 +921,7 @@ export class ObjectLandingPagesApi {
      * Create a batch of Folders
      * @param param the request object
      */
-    public createFolders(param: LandingPagesApiCreateFoldersRequest, options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+    public createFolders(param: LandingPagesApiCreateFoldersRequest, options?: ConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
         return this.api.createFolders(param.batchInputContentFolder,  options).toPromise();
     }
 
@@ -868,7 +930,7 @@ export class ObjectLandingPagesApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariationWithHttpInfo(param: LandingPagesApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public createLangVariationWithHttpInfo(param: LandingPagesApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.createLangVariationWithHttpInfo(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -877,7 +939,7 @@ export class ObjectLandingPagesApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariation(param: LandingPagesApiCreateLangVariationRequest, options?: Configuration): Promise<Page> {
+    public createLangVariation(param: LandingPagesApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.createLangVariation(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -886,7 +948,7 @@ export class ObjectLandingPagesApi {
      * Detach a landing page from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroupWithHttpInfo(param: LandingPagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public detachFromLangGroupWithHttpInfo(param: LandingPagesApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -895,7 +957,7 @@ export class ObjectLandingPagesApi {
      * Detach a landing page from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroup(param: LandingPagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+    public detachFromLangGroup(param: LandingPagesApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -904,7 +966,7 @@ export class ObjectLandingPagesApi {
      * End an active A/B test
      * @param param the request object
      */
-    public endActiveABTestWithHttpInfo(param: LandingPagesApiEndActiveABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public endActiveABTestWithHttpInfo(param: LandingPagesApiEndActiveABTestRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.endActiveABTestWithHttpInfo(param.abTestEndRequestVNext,  options).toPromise();
     }
 
@@ -913,7 +975,7 @@ export class ObjectLandingPagesApi {
      * End an active A/B test
      * @param param the request object
      */
-    public endActiveABTest(param: LandingPagesApiEndActiveABTestRequest, options?: Configuration): Promise<void> {
+    public endActiveABTest(param: LandingPagesApiEndActiveABTestRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.endActiveABTest(param.abTestEndRequestVNext,  options).toPromise();
     }
 
@@ -922,7 +984,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a Landing Page
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: LandingPagesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public getByIdWithHttpInfo(param: LandingPagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -931,7 +993,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a Landing Page
      * @param param the request object
      */
-    public getById(param: LandingPagesApiGetByIdRequest, options?: Configuration): Promise<Page> {
+    public getById(param: LandingPagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -940,7 +1002,7 @@ export class ObjectLandingPagesApi {
      * Retrieve the full draft version of the Landing Page
      * @param param the request object
      */
-    public getDraftByIdWithHttpInfo(param: LandingPagesApiGetDraftByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public getDraftByIdWithHttpInfo(param: LandingPagesApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.getDraftByIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -949,7 +1011,7 @@ export class ObjectLandingPagesApi {
      * Retrieve the full draft version of the Landing Page
      * @param param the request object
      */
-    public getDraftById(param: LandingPagesApiGetDraftByIdRequest, options?: Configuration): Promise<Page> {
+    public getDraftById(param: LandingPagesApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.getDraftById(param.objectId,  options).toPromise();
     }
 
@@ -958,7 +1020,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a Folder
      * @param param the request object
      */
-    public getFolderByIdWithHttpInfo(param: LandingPagesApiGetFolderByIdRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+    public getFolderByIdWithHttpInfo(param: LandingPagesApiGetFolderByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
         return this.api.getFolderByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -967,7 +1029,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a Folder
      * @param param the request object
      */
-    public getFolderById(param: LandingPagesApiGetFolderByIdRequest, options?: Configuration): Promise<ContentFolder> {
+    public getFolderById(param: LandingPagesApiGetFolderByIdRequest, options?: ConfigurationOptions): Promise<ContentFolder> {
         return this.api.getFolderById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -976,7 +1038,7 @@ export class ObjectLandingPagesApi {
      * Retrieves a previous version of a Folder
      * @param param the request object
      */
-    public getFolderPreviousVersionWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionContentFolder>> {
+    public getFolderPreviousVersionWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionContentFolder>> {
         return this.api.getFolderPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -985,7 +1047,7 @@ export class ObjectLandingPagesApi {
      * Retrieves a previous version of a Folder
      * @param param the request object
      */
-    public getFolderPreviousVersion(param: LandingPagesApiGetFolderPreviousVersionRequest, options?: Configuration): Promise<VersionContentFolder> {
+    public getFolderPreviousVersion(param: LandingPagesApiGetFolderPreviousVersionRequest, options?: ConfigurationOptions): Promise<VersionContentFolder> {
         return this.api.getFolderPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -994,7 +1056,7 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Folder
      * @param param the request object
      */
-    public getFolderPreviousVersionsWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionContentFolder>> {
+    public getFolderPreviousVersionsWithHttpInfo(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionContentFolder>> {
         return this.api.getFolderPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -1003,7 +1065,7 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Folder
      * @param param the request object
      */
-    public getFolderPreviousVersions(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionContentFolder> {
+    public getFolderPreviousVersions(param: LandingPagesApiGetFolderPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionContentFolder> {
         return this.api.getFolderPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -1012,7 +1074,7 @@ export class ObjectLandingPagesApi {
      * Get all Landing Page Folders
      * @param param the request object
      */
-    public getFoldersPageWithHttpInfo(param: LandingPagesApiGetFoldersPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalContentFolderForwardPaging>> {
+    public getFoldersPageWithHttpInfo(param: LandingPagesApiGetFoldersPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalContentFolderForwardPaging>> {
         return this.api.getFoldersPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -1021,7 +1083,7 @@ export class ObjectLandingPagesApi {
      * Get all Landing Page Folders
      * @param param the request object
      */
-    public getFoldersPage(param: LandingPagesApiGetFoldersPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalContentFolderForwardPaging> {
+    public getFoldersPage(param: LandingPagesApiGetFoldersPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalContentFolderForwardPaging> {
         return this.api.getFoldersPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -1030,7 +1092,7 @@ export class ObjectLandingPagesApi {
      * Get all Landing Pages
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: LandingPagesApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+    public getPageWithHttpInfo(param: LandingPagesApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -1039,7 +1101,7 @@ export class ObjectLandingPagesApi {
      * Get all Landing Pages
      * @param param the request object
      */
-    public getPage(param: LandingPagesApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
+    public getPage(param: LandingPagesApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalPageForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -1048,7 +1110,7 @@ export class ObjectLandingPagesApi {
      * Retrieves a previous version of a Landing Page
      * @param param the request object
      */
-    public getPreviousVersionWithHttpInfo(param: LandingPagesApiGetPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionPage>> {
+    public getPreviousVersionWithHttpInfo(param: LandingPagesApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionPage>> {
         return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1057,7 +1119,7 @@ export class ObjectLandingPagesApi {
      * Retrieves a previous version of a Landing Page
      * @param param the request object
      */
-    public getPreviousVersion(param: LandingPagesApiGetPreviousVersionRequest, options?: Configuration): Promise<VersionPage> {
+    public getPreviousVersion(param: LandingPagesApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<VersionPage> {
         return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1066,7 +1128,7 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Landing Page
      * @param param the request object
      */
-    public getPreviousVersionsWithHttpInfo(param: LandingPagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+    public getPreviousVersionsWithHttpInfo(param: LandingPagesApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
         return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -1075,7 +1137,7 @@ export class ObjectLandingPagesApi {
      * Retrieves all the previous versions of a Landing Page
      * @param param the request object
      */
-    public getPreviousVersions(param: LandingPagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
+    public getPreviousVersions(param: LandingPagesApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionPage> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -1084,7 +1146,7 @@ export class ObjectLandingPagesApi {
      * Push Landing Page draft edits live
      * @param param the request object
      */
-    public pushLiveWithHttpInfo(param: LandingPagesApiPushLiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public pushLiveWithHttpInfo(param: LandingPagesApiPushLiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.pushLiveWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -1093,7 +1155,7 @@ export class ObjectLandingPagesApi {
      * Push Landing Page draft edits live
      * @param param the request object
      */
-    public pushLive(param: LandingPagesApiPushLiveRequest, options?: Configuration): Promise<void> {
+    public pushLive(param: LandingPagesApiPushLiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.pushLive(param.objectId,  options).toPromise();
     }
 
@@ -1102,7 +1164,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a batch of Landing Pages
      * @param param the request object
      */
-    public readBatchWithHttpInfo(param: LandingPagesApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public readBatchWithHttpInfo(param: LandingPagesApiReadBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -1111,7 +1173,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a batch of Landing Pages
      * @param param the request object
      */
-    public readBatch(param: LandingPagesApiReadBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public readBatch(param: LandingPagesApiReadBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -1120,7 +1182,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a batch of Folders
      * @param param the request object
      */
-    public readFoldersWithHttpInfo(param: LandingPagesApiReadFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+    public readFoldersWithHttpInfo(param: LandingPagesApiReadFoldersRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
         return this.api.readFoldersWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -1129,7 +1191,7 @@ export class ObjectLandingPagesApi {
      * Retrieve a batch of Folders
      * @param param the request object
      */
-    public readFolders(param: LandingPagesApiReadFoldersRequest, options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+    public readFolders(param: LandingPagesApiReadFoldersRequest, options?: ConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
         return this.api.readFolders(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -1138,7 +1200,7 @@ export class ObjectLandingPagesApi {
      * Rerun a previous A/B test
      * @param param the request object
      */
-    public rerunPreviousABTestWithHttpInfo(param: LandingPagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public rerunPreviousABTestWithHttpInfo(param: LandingPagesApiRerunPreviousABTestRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.rerunPreviousABTestWithHttpInfo(param.abTestRerunRequestVNext,  options).toPromise();
     }
 
@@ -1147,7 +1209,7 @@ export class ObjectLandingPagesApi {
      * Rerun a previous A/B test
      * @param param the request object
      */
-    public rerunPreviousABTest(param: LandingPagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<void> {
+    public rerunPreviousABTest(param: LandingPagesApiRerunPreviousABTestRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.rerunPreviousABTest(param.abTestRerunRequestVNext,  options).toPromise();
     }
 
@@ -1156,7 +1218,7 @@ export class ObjectLandingPagesApi {
      * Reset the Landing Page draft to the live version
      * @param param the request object
      */
-    public resetDraftWithHttpInfo(param: LandingPagesApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public resetDraftWithHttpInfo(param: LandingPagesApiResetDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.resetDraftWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -1165,7 +1227,7 @@ export class ObjectLandingPagesApi {
      * Reset the Landing Page draft to the live version
      * @param param the request object
      */
-    public resetDraft(param: LandingPagesApiResetDraftRequest, options?: Configuration): Promise<void> {
+    public resetDraft(param: LandingPagesApiResetDraftRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
     }
 
@@ -1174,7 +1236,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Folder
      * @param param the request object
      */
-    public restoreFolderPreviousVersionWithHttpInfo(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+    public restoreFolderPreviousVersionWithHttpInfo(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
         return this.api.restoreFolderPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1183,7 +1245,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Folder
      * @param param the request object
      */
-    public restoreFolderPreviousVersion(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: Configuration): Promise<ContentFolder> {
+    public restoreFolderPreviousVersion(param: LandingPagesApiRestoreFolderPreviousVersionRequest, options?: ConfigurationOptions): Promise<ContentFolder> {
         return this.api.restoreFolderPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1192,7 +1254,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Landing Page
      * @param param the request object
      */
-    public restorePreviousVersionWithHttpInfo(param: LandingPagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public restorePreviousVersionWithHttpInfo(param: LandingPagesApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1201,7 +1263,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Landing Page
      * @param param the request object
      */
-    public restorePreviousVersion(param: LandingPagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<Page> {
+    public restorePreviousVersion(param: LandingPagesApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1210,7 +1272,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Landing Page, to the draft version of the Landing Page
      * @param param the request object
      */
-    public restorePreviousVersionToDraftWithHttpInfo(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public restorePreviousVersionToDraftWithHttpInfo(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1219,7 +1281,7 @@ export class ObjectLandingPagesApi {
      * Restore a previous version of a Landing Page, to the draft version of the Landing Page
      * @param param the request object
      */
-    public restorePreviousVersionToDraft(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<Page> {
+    public restorePreviousVersionToDraft(param: LandingPagesApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -1228,7 +1290,7 @@ export class ObjectLandingPagesApi {
      * Schedule a Landing Page to be Published
      * @param param the request object
      */
-    public scheduleWithHttpInfo(param: LandingPagesApiScheduleRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public scheduleWithHttpInfo(param: LandingPagesApiScheduleRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.scheduleWithHttpInfo(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -1237,7 +1299,7 @@ export class ObjectLandingPagesApi {
      * Schedule a Landing Page to be Published
      * @param param the request object
      */
-    public schedule(param: LandingPagesApiScheduleRequest, options?: Configuration): Promise<void> {
+    public schedule(param: LandingPagesApiScheduleRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.schedule(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -1246,7 +1308,7 @@ export class ObjectLandingPagesApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimaryWithHttpInfo(param: LandingPagesApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public setLangPrimaryWithHttpInfo(param: LandingPagesApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -1255,7 +1317,7 @@ export class ObjectLandingPagesApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimary(param: LandingPagesApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+    public setLangPrimary(param: LandingPagesApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -1264,7 +1326,7 @@ export class ObjectLandingPagesApi {
      * Update a Landing Page
      * @param param the request object
      */
-    public updateWithHttpInfo(param: LandingPagesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public updateWithHttpInfo(param: LandingPagesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.updateWithHttpInfo(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
@@ -1273,7 +1335,7 @@ export class ObjectLandingPagesApi {
      * Update a Landing Page
      * @param param the request object
      */
-    public update(param: LandingPagesApiUpdateRequest, options?: Configuration): Promise<Page> {
+    public update(param: LandingPagesApiUpdateRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.update(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
@@ -1282,7 +1344,7 @@ export class ObjectLandingPagesApi {
      * Update a batch of Landing Pages
      * @param param the request object
      */
-    public updateBatchWithHttpInfo(param: LandingPagesApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public updateBatchWithHttpInfo(param: LandingPagesApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -1291,7 +1353,7 @@ export class ObjectLandingPagesApi {
      * Update a batch of Landing Pages
      * @param param the request object
      */
-    public updateBatch(param: LandingPagesApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public updateBatch(param: LandingPagesApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -1300,7 +1362,7 @@ export class ObjectLandingPagesApi {
      * Update a Landing Page draft
      * @param param the request object
      */
-    public updateDraftWithHttpInfo(param: LandingPagesApiUpdateDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public updateDraftWithHttpInfo(param: LandingPagesApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.updateDraftWithHttpInfo(param.objectId, param.page,  options).toPromise();
     }
 
@@ -1309,7 +1371,7 @@ export class ObjectLandingPagesApi {
      * Update a Landing Page draft
      * @param param the request object
      */
-    public updateDraft(param: LandingPagesApiUpdateDraftRequest, options?: Configuration): Promise<Page> {
+    public updateDraft(param: LandingPagesApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.updateDraft(param.objectId, param.page,  options).toPromise();
     }
 
@@ -1318,7 +1380,7 @@ export class ObjectLandingPagesApi {
      * Update a Folder
      * @param param the request object
      */
-    public updateFolderWithHttpInfo(param: LandingPagesApiUpdateFolderRequest, options?: Configuration): Promise<HttpInfo<ContentFolder>> {
+    public updateFolderWithHttpInfo(param: LandingPagesApiUpdateFolderRequest, options?: ConfigurationOptions): Promise<HttpInfo<ContentFolder>> {
         return this.api.updateFolderWithHttpInfo(param.objectId, param.contentFolder, param.archived,  options).toPromise();
     }
 
@@ -1327,7 +1389,7 @@ export class ObjectLandingPagesApi {
      * Update a Folder
      * @param param the request object
      */
-    public updateFolder(param: LandingPagesApiUpdateFolderRequest, options?: Configuration): Promise<ContentFolder> {
+    public updateFolder(param: LandingPagesApiUpdateFolderRequest, options?: ConfigurationOptions): Promise<ContentFolder> {
         return this.api.updateFolder(param.objectId, param.contentFolder, param.archived,  options).toPromise();
     }
 
@@ -1336,7 +1398,7 @@ export class ObjectLandingPagesApi {
      * Update a batch of Folders
      * @param param the request object
      */
-    public updateFoldersWithHttpInfo(param: LandingPagesApiUpdateFoldersRequest, options?: Configuration): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
+    public updateFoldersWithHttpInfo(param: LandingPagesApiUpdateFoldersRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseContentFolder | BatchResponseContentFolderWithErrors>> {
         return this.api.updateFoldersWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -1345,7 +1407,7 @@ export class ObjectLandingPagesApi {
      * Update a batch of Folders
      * @param param the request object
      */
-    public updateFolders(param: LandingPagesApiUpdateFoldersRequest, options?: Configuration): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
+    public updateFolders(param: LandingPagesApiUpdateFoldersRequest, options?: ConfigurationOptions): Promise<BatchResponseContentFolder | BatchResponseContentFolderWithErrors> {
         return this.api.updateFolders(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -1354,7 +1416,7 @@ export class ObjectLandingPagesApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangsWithHttpInfo(param: LandingPagesApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateLangsWithHttpInfo(param: LandingPagesApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -1363,7 +1425,7 @@ export class ObjectLandingPagesApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangs(param: LandingPagesApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+    public updateLangs(param: LandingPagesApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -1375,12 +1437,14 @@ import { SitePagesApiRequestFactory, SitePagesApiResponseProcessor} from "../api
 export interface SitePagesApiArchiveRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApiarchive
      */
     objectId: string
     /**
      * Whether to return only results that have been archived.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApiarchive
      */
@@ -1471,18 +1535,21 @@ export interface SitePagesApiEndActiveABTestRequest {
 export interface SitePagesApiGetByIdRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetById
      */
     objectId: string
     /**
      * Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApigetById
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetById
      */
@@ -1492,6 +1559,7 @@ export interface SitePagesApiGetByIdRequest {
 export interface SitePagesApiGetDraftByIdRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetDraftById
      */
@@ -1501,66 +1569,77 @@ export interface SitePagesApiGetDraftByIdRequest {
 export interface SitePagesApiGetPageRequest {
     /**
      * Only return Site Pages created at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     createdAt?: Date
     /**
      * Only return Site Pages created after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     createdAfter?: Date
     /**
      * Only return Site Pages created before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     createdBefore?: Date
     /**
      * Only return Site Pages last updated at exactly the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     updatedAt?: Date
     /**
      * Only return Site Pages last updated after the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     updatedAfter?: Date
     /**
      * Only return Site Pages last updated before the specified time.
+     * Defaults to: undefined
      * @type Date
      * @memberof SitePagesApigetPage
      */
     updatedBefore?: Date
     /**
      * Specifies which fields to use for sorting results. Valid fields are &#x60;name&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;, &#x60;createdBy&#x60;, &#x60;updatedBy&#x60;. &#x60;createdAt&#x60; will be used by default.
+     * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof SitePagesApigetPage
      */
     sort?: Array<string>
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPage
      */
     after?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof SitePagesApigetPage
      */
     limit?: number
     /**
      * Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApigetPage
      */
     archived?: boolean
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPage
      */
@@ -1570,12 +1649,14 @@ export interface SitePagesApiGetPageRequest {
 export interface SitePagesApiGetPreviousVersionRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPreviousVersion
      */
     objectId: string
     /**
      * The Site Page version id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPreviousVersion
      */
@@ -1585,24 +1666,28 @@ export interface SitePagesApiGetPreviousVersionRequest {
 export interface SitePagesApiGetPreviousVersionsRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPreviousVersions
      */
     objectId: string
     /**
      * The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPreviousVersions
      */
     after?: string
     /**
      * 
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApigetPreviousVersions
      */
     before?: string
     /**
      * The maximum number of results to return. Default is 100.
+     * Defaults to: undefined
      * @type number
      * @memberof SitePagesApigetPreviousVersions
      */
@@ -1612,6 +1697,7 @@ export interface SitePagesApiGetPreviousVersionsRequest {
 export interface SitePagesApiPushLiveRequest {
     /**
      * The id of the Site Page for which it\&#39;s draft will be pushed live.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApipushLive
      */
@@ -1627,6 +1713,7 @@ export interface SitePagesApiReadBatchRequest {
     batchInputString: BatchInputString
     /**
      * Specifies whether to return deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApireadBatch
      */
@@ -1645,6 +1732,7 @@ export interface SitePagesApiRerunPreviousABTestRequest {
 export interface SitePagesApiResetDraftRequest {
     /**
      * The id of the Site Page for which it\&#39;s draft will be reset.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApiresetDraft
      */
@@ -1654,12 +1742,14 @@ export interface SitePagesApiResetDraftRequest {
 export interface SitePagesApiRestorePreviousVersionRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApirestorePreviousVersion
      */
     objectId: string
     /**
      * The Site Page version id to restore.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApirestorePreviousVersion
      */
@@ -1669,12 +1759,14 @@ export interface SitePagesApiRestorePreviousVersionRequest {
 export interface SitePagesApiRestorePreviousVersionToDraftRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApirestorePreviousVersionToDraft
      */
     objectId: string
     /**
      * The Site Page version id to restore.
+     * Defaults to: undefined
      * @type number
      * @memberof SitePagesApirestorePreviousVersionToDraft
      */
@@ -1702,6 +1794,7 @@ export interface SitePagesApiSetLangPrimaryRequest {
 export interface SitePagesApiUpdateRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApiupdate
      */
@@ -1714,6 +1807,7 @@ export interface SitePagesApiUpdateRequest {
     page: Page
     /**
      * Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApiupdate
      */
@@ -1729,6 +1823,7 @@ export interface SitePagesApiUpdateBatchRequest {
     batchInputJsonNode: BatchInputJsonNode
     /**
      * Specifies whether to update deleted Site Pages. Defaults to &#x60;false&#x60;.
+     * Defaults to: undefined
      * @type boolean
      * @memberof SitePagesApiupdateBatch
      */
@@ -1738,6 +1833,7 @@ export interface SitePagesApiUpdateBatchRequest {
 export interface SitePagesApiUpdateDraftRequest {
     /**
      * The Site Page id.
+     * Defaults to: undefined
      * @type string
      * @memberof SitePagesApiupdateDraft
      */
@@ -1771,7 +1867,7 @@ export class ObjectSitePagesApi {
      * Delete a Site Page
      * @param param the request object
      */
-    public archiveWithHttpInfo(param: SitePagesApiArchiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveWithHttpInfo(param: SitePagesApiArchiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveWithHttpInfo(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -1780,7 +1876,7 @@ export class ObjectSitePagesApi {
      * Delete a Site Page
      * @param param the request object
      */
-    public archive(param: SitePagesApiArchiveRequest, options?: Configuration): Promise<void> {
+    public archive(param: SitePagesApiArchiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archive(param.objectId, param.archived,  options).toPromise();
     }
 
@@ -1789,7 +1885,7 @@ export class ObjectSitePagesApi {
      * Delete a batch of Site Pages
      * @param param the request object
      */
-    public archiveBatchWithHttpInfo(param: SitePagesApiArchiveBatchRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public archiveBatchWithHttpInfo(param: SitePagesApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.archiveBatchWithHttpInfo(param.batchInputString,  options).toPromise();
     }
 
@@ -1798,7 +1894,7 @@ export class ObjectSitePagesApi {
      * Delete a batch of Site Pages
      * @param param the request object
      */
-    public archiveBatch(param: SitePagesApiArchiveBatchRequest, options?: Configuration): Promise<void> {
+    public archiveBatch(param: SitePagesApiArchiveBatchRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.archiveBatch(param.batchInputString,  options).toPromise();
     }
 
@@ -1807,7 +1903,7 @@ export class ObjectSitePagesApi {
      * Attach a site page to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroupWithHttpInfo(param: SitePagesApiAttachToLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public attachToLangGroupWithHttpInfo(param: SitePagesApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.attachToLangGroupWithHttpInfo(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -1816,7 +1912,7 @@ export class ObjectSitePagesApi {
      * Attach a site page to a multi-language group
      * @param param the request object
      */
-    public attachToLangGroup(param: SitePagesApiAttachToLangGroupRequest, options?: Configuration): Promise<void> {
+    public attachToLangGroup(param: SitePagesApiAttachToLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.attachToLangGroup(param.attachToLangPrimaryRequestVNext,  options).toPromise();
     }
 
@@ -1825,7 +1921,7 @@ export class ObjectSitePagesApi {
      * Clone a Site Page
      * @param param the request object
      */
-    public cloneWithHttpInfo(param: SitePagesApiCloneRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public cloneWithHttpInfo(param: SitePagesApiCloneRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.cloneWithHttpInfo(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -1834,7 +1930,7 @@ export class ObjectSitePagesApi {
      * Clone a Site Page
      * @param param the request object
      */
-    public clone(param: SitePagesApiCloneRequest, options?: Configuration): Promise<Page> {
+    public clone(param: SitePagesApiCloneRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.clone(param.contentCloneRequestVNext,  options).toPromise();
     }
 
@@ -1843,7 +1939,7 @@ export class ObjectSitePagesApi {
      * Create a new Site Page
      * @param param the request object
      */
-    public createWithHttpInfo(param: SitePagesApiCreateRequest, options?: Configuration): Promise<HttpInfo<void | Page>> {
+    public createWithHttpInfo(param: SitePagesApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<void | Page>> {
         return this.api.createWithHttpInfo(param.page,  options).toPromise();
     }
 
@@ -1852,7 +1948,7 @@ export class ObjectSitePagesApi {
      * Create a new Site Page
      * @param param the request object
      */
-    public create(param: SitePagesApiCreateRequest, options?: Configuration): Promise<void | Page> {
+    public create(param: SitePagesApiCreateRequest, options?: ConfigurationOptions): Promise<void | Page> {
         return this.api.create(param.page,  options).toPromise();
     }
 
@@ -1861,7 +1957,7 @@ export class ObjectSitePagesApi {
      * Create a new A/B test variation
      * @param param the request object
      */
-    public createABTestVariationWithHttpInfo(param: SitePagesApiCreateABTestVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public createABTestVariationWithHttpInfo(param: SitePagesApiCreateABTestVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.createABTestVariationWithHttpInfo(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -1870,7 +1966,7 @@ export class ObjectSitePagesApi {
      * Create a new A/B test variation
      * @param param the request object
      */
-    public createABTestVariation(param: SitePagesApiCreateABTestVariationRequest, options?: Configuration): Promise<Page> {
+    public createABTestVariation(param: SitePagesApiCreateABTestVariationRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.createABTestVariation(param.abTestCreateRequestVNext,  options).toPromise();
     }
 
@@ -1879,7 +1975,7 @@ export class ObjectSitePagesApi {
      * Create a batch of Site Pages
      * @param param the request object
      */
-    public createBatchWithHttpInfo(param: SitePagesApiCreateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public createBatchWithHttpInfo(param: SitePagesApiCreateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.createBatchWithHttpInfo(param.batchInputPage,  options).toPromise();
     }
 
@@ -1888,7 +1984,7 @@ export class ObjectSitePagesApi {
      * Create a batch of Site Pages
      * @param param the request object
      */
-    public createBatch(param: SitePagesApiCreateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public createBatch(param: SitePagesApiCreateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.createBatch(param.batchInputPage,  options).toPromise();
     }
 
@@ -1897,7 +1993,7 @@ export class ObjectSitePagesApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariationWithHttpInfo(param: SitePagesApiCreateLangVariationRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public createLangVariationWithHttpInfo(param: SitePagesApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.createLangVariationWithHttpInfo(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -1906,7 +2002,7 @@ export class ObjectSitePagesApi {
      * Create a new language variation
      * @param param the request object
      */
-    public createLangVariation(param: SitePagesApiCreateLangVariationRequest, options?: Configuration): Promise<Page> {
+    public createLangVariation(param: SitePagesApiCreateLangVariationRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.createLangVariation(param.contentLanguageCloneRequestVNext,  options).toPromise();
     }
 
@@ -1915,7 +2011,7 @@ export class ObjectSitePagesApi {
      * Detach a site page from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroupWithHttpInfo(param: SitePagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public detachFromLangGroupWithHttpInfo(param: SitePagesApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.detachFromLangGroupWithHttpInfo(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -1924,7 +2020,7 @@ export class ObjectSitePagesApi {
      * Detach a site page from a multi-language group
      * @param param the request object
      */
-    public detachFromLangGroup(param: SitePagesApiDetachFromLangGroupRequest, options?: Configuration): Promise<void> {
+    public detachFromLangGroup(param: SitePagesApiDetachFromLangGroupRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.detachFromLangGroup(param.detachFromLangGroupRequestVNext,  options).toPromise();
     }
 
@@ -1933,7 +2029,7 @@ export class ObjectSitePagesApi {
      * End an active A/B test
      * @param param the request object
      */
-    public endActiveABTestWithHttpInfo(param: SitePagesApiEndActiveABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public endActiveABTestWithHttpInfo(param: SitePagesApiEndActiveABTestRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.endActiveABTestWithHttpInfo(param.abTestEndRequestVNext,  options).toPromise();
     }
 
@@ -1942,7 +2038,7 @@ export class ObjectSitePagesApi {
      * End an active A/B test
      * @param param the request object
      */
-    public endActiveABTest(param: SitePagesApiEndActiveABTestRequest, options?: Configuration): Promise<void> {
+    public endActiveABTest(param: SitePagesApiEndActiveABTestRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.endActiveABTest(param.abTestEndRequestVNext,  options).toPromise();
     }
 
@@ -1951,7 +2047,7 @@ export class ObjectSitePagesApi {
      * Retrieve a Site Page
      * @param param the request object
      */
-    public getByIdWithHttpInfo(param: SitePagesApiGetByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public getByIdWithHttpInfo(param: SitePagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.getByIdWithHttpInfo(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -1960,7 +2056,7 @@ export class ObjectSitePagesApi {
      * Retrieve a Site Page
      * @param param the request object
      */
-    public getById(param: SitePagesApiGetByIdRequest, options?: Configuration): Promise<Page> {
+    public getById(param: SitePagesApiGetByIdRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.getById(param.objectId, param.archived, param.property,  options).toPromise();
     }
 
@@ -1969,7 +2065,7 @@ export class ObjectSitePagesApi {
      * Retrieve the full draft version of the Site Page
      * @param param the request object
      */
-    public getDraftByIdWithHttpInfo(param: SitePagesApiGetDraftByIdRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public getDraftByIdWithHttpInfo(param: SitePagesApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.getDraftByIdWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -1978,7 +2074,7 @@ export class ObjectSitePagesApi {
      * Retrieve the full draft version of the Site Page
      * @param param the request object
      */
-    public getDraftById(param: SitePagesApiGetDraftByIdRequest, options?: Configuration): Promise<Page> {
+    public getDraftById(param: SitePagesApiGetDraftByIdRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.getDraftById(param.objectId,  options).toPromise();
     }
 
@@ -1987,7 +2083,7 @@ export class ObjectSitePagesApi {
      * Get all Site Pages
      * @param param the request object
      */
-    public getPageWithHttpInfo(param: SitePagesApiGetPageRequest = {}, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
+    public getPageWithHttpInfo(param: SitePagesApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalPageForwardPaging>> {
         return this.api.getPageWithHttpInfo(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -1996,7 +2092,7 @@ export class ObjectSitePagesApi {
      * Get all Site Pages
      * @param param the request object
      */
-    public getPage(param: SitePagesApiGetPageRequest = {}, options?: Configuration): Promise<CollectionResponseWithTotalPageForwardPaging> {
+    public getPage(param: SitePagesApiGetPageRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalPageForwardPaging> {
         return this.api.getPage(param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.sort, param.after, param.limit, param.archived, param.property,  options).toPromise();
     }
 
@@ -2005,7 +2101,7 @@ export class ObjectSitePagesApi {
      * Retrieves a previous version of a Site Page
      * @param param the request object
      */
-    public getPreviousVersionWithHttpInfo(param: SitePagesApiGetPreviousVersionRequest, options?: Configuration): Promise<HttpInfo<VersionPage>> {
+    public getPreviousVersionWithHttpInfo(param: SitePagesApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<VersionPage>> {
         return this.api.getPreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2014,7 +2110,7 @@ export class ObjectSitePagesApi {
      * Retrieves a previous version of a Site Page
      * @param param the request object
      */
-    public getPreviousVersion(param: SitePagesApiGetPreviousVersionRequest, options?: Configuration): Promise<VersionPage> {
+    public getPreviousVersion(param: SitePagesApiGetPreviousVersionRequest, options?: ConfigurationOptions): Promise<VersionPage> {
         return this.api.getPreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2023,7 +2119,7 @@ export class ObjectSitePagesApi {
      * Retrieves all the previous versions of a Site Page
      * @param param the request object
      */
-    public getPreviousVersionsWithHttpInfo(param: SitePagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
+    public getPreviousVersionsWithHttpInfo(param: SitePagesApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalVersionPage>> {
         return this.api.getPreviousVersionsWithHttpInfo(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -2032,7 +2128,7 @@ export class ObjectSitePagesApi {
      * Retrieves all the previous versions of a Site Page
      * @param param the request object
      */
-    public getPreviousVersions(param: SitePagesApiGetPreviousVersionsRequest, options?: Configuration): Promise<CollectionResponseWithTotalVersionPage> {
+    public getPreviousVersions(param: SitePagesApiGetPreviousVersionsRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalVersionPage> {
         return this.api.getPreviousVersions(param.objectId, param.after, param.before, param.limit,  options).toPromise();
     }
 
@@ -2041,7 +2137,7 @@ export class ObjectSitePagesApi {
      * Push Site Page draft edits live
      * @param param the request object
      */
-    public pushLiveWithHttpInfo(param: SitePagesApiPushLiveRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public pushLiveWithHttpInfo(param: SitePagesApiPushLiveRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.pushLiveWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -2050,7 +2146,7 @@ export class ObjectSitePagesApi {
      * Push Site Page draft edits live
      * @param param the request object
      */
-    public pushLive(param: SitePagesApiPushLiveRequest, options?: Configuration): Promise<void> {
+    public pushLive(param: SitePagesApiPushLiveRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.pushLive(param.objectId,  options).toPromise();
     }
 
@@ -2059,7 +2155,7 @@ export class ObjectSitePagesApi {
      * Retrieve a batch of Site Pages
      * @param param the request object
      */
-    public readBatchWithHttpInfo(param: SitePagesApiReadBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public readBatchWithHttpInfo(param: SitePagesApiReadBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.readBatchWithHttpInfo(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -2068,7 +2164,7 @@ export class ObjectSitePagesApi {
      * Retrieve a batch of Site Pages
      * @param param the request object
      */
-    public readBatch(param: SitePagesApiReadBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public readBatch(param: SitePagesApiReadBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.readBatch(param.batchInputString, param.archived,  options).toPromise();
     }
 
@@ -2077,7 +2173,7 @@ export class ObjectSitePagesApi {
      * Rerun a previous A/B test
      * @param param the request object
      */
-    public rerunPreviousABTestWithHttpInfo(param: SitePagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public rerunPreviousABTestWithHttpInfo(param: SitePagesApiRerunPreviousABTestRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.rerunPreviousABTestWithHttpInfo(param.abTestRerunRequestVNext,  options).toPromise();
     }
 
@@ -2086,7 +2182,7 @@ export class ObjectSitePagesApi {
      * Rerun a previous A/B test
      * @param param the request object
      */
-    public rerunPreviousABTest(param: SitePagesApiRerunPreviousABTestRequest, options?: Configuration): Promise<void> {
+    public rerunPreviousABTest(param: SitePagesApiRerunPreviousABTestRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.rerunPreviousABTest(param.abTestRerunRequestVNext,  options).toPromise();
     }
 
@@ -2095,7 +2191,7 @@ export class ObjectSitePagesApi {
      * Reset the Site Page draft to the live version
      * @param param the request object
      */
-    public resetDraftWithHttpInfo(param: SitePagesApiResetDraftRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public resetDraftWithHttpInfo(param: SitePagesApiResetDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.resetDraftWithHttpInfo(param.objectId,  options).toPromise();
     }
 
@@ -2104,7 +2200,7 @@ export class ObjectSitePagesApi {
      * Reset the Site Page draft to the live version
      * @param param the request object
      */
-    public resetDraft(param: SitePagesApiResetDraftRequest, options?: Configuration): Promise<void> {
+    public resetDraft(param: SitePagesApiResetDraftRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.resetDraft(param.objectId,  options).toPromise();
     }
 
@@ -2113,7 +2209,7 @@ export class ObjectSitePagesApi {
      * Restore a previous version of a Site Page
      * @param param the request object
      */
-    public restorePreviousVersionWithHttpInfo(param: SitePagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public restorePreviousVersionWithHttpInfo(param: SitePagesApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.restorePreviousVersionWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2122,7 +2218,7 @@ export class ObjectSitePagesApi {
      * Restore a previous version of a Site Page
      * @param param the request object
      */
-    public restorePreviousVersion(param: SitePagesApiRestorePreviousVersionRequest, options?: Configuration): Promise<Page> {
+    public restorePreviousVersion(param: SitePagesApiRestorePreviousVersionRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.restorePreviousVersion(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2131,7 +2227,7 @@ export class ObjectSitePagesApi {
      * Restore a previous version of a Site Page, to the draft version of the Site Page
      * @param param the request object
      */
-    public restorePreviousVersionToDraftWithHttpInfo(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public restorePreviousVersionToDraftWithHttpInfo(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.restorePreviousVersionToDraftWithHttpInfo(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2140,7 +2236,7 @@ export class ObjectSitePagesApi {
      * Restore a previous version of a Site Page, to the draft version of the Site Page
      * @param param the request object
      */
-    public restorePreviousVersionToDraft(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: Configuration): Promise<Page> {
+    public restorePreviousVersionToDraft(param: SitePagesApiRestorePreviousVersionToDraftRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.restorePreviousVersionToDraft(param.objectId, param.revisionId,  options).toPromise();
     }
 
@@ -2149,7 +2245,7 @@ export class ObjectSitePagesApi {
      * Schedule a Site Page to be Published
      * @param param the request object
      */
-    public scheduleWithHttpInfo(param: SitePagesApiScheduleRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public scheduleWithHttpInfo(param: SitePagesApiScheduleRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.scheduleWithHttpInfo(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -2158,7 +2254,7 @@ export class ObjectSitePagesApi {
      * Schedule a Site Page to be Published
      * @param param the request object
      */
-    public schedule(param: SitePagesApiScheduleRequest, options?: Configuration): Promise<void> {
+    public schedule(param: SitePagesApiScheduleRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.schedule(param.contentScheduleRequestVNext,  options).toPromise();
     }
 
@@ -2167,7 +2263,7 @@ export class ObjectSitePagesApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimaryWithHttpInfo(param: SitePagesApiSetLangPrimaryRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public setLangPrimaryWithHttpInfo(param: SitePagesApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.setLangPrimaryWithHttpInfo(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -2176,7 +2272,7 @@ export class ObjectSitePagesApi {
      * Set a new primary language
      * @param param the request object
      */
-    public setLangPrimary(param: SitePagesApiSetLangPrimaryRequest, options?: Configuration): Promise<void> {
+    public setLangPrimary(param: SitePagesApiSetLangPrimaryRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.setLangPrimary(param.setNewLanguagePrimaryRequestVNext,  options).toPromise();
     }
 
@@ -2185,7 +2281,7 @@ export class ObjectSitePagesApi {
      * Update a Site Page
      * @param param the request object
      */
-    public updateWithHttpInfo(param: SitePagesApiUpdateRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public updateWithHttpInfo(param: SitePagesApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.updateWithHttpInfo(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
@@ -2194,7 +2290,7 @@ export class ObjectSitePagesApi {
      * Update a Site Page
      * @param param the request object
      */
-    public update(param: SitePagesApiUpdateRequest, options?: Configuration): Promise<Page> {
+    public update(param: SitePagesApiUpdateRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.update(param.objectId, param.page, param.archived,  options).toPromise();
     }
 
@@ -2203,7 +2299,7 @@ export class ObjectSitePagesApi {
      * Update a batch of Site Pages
      * @param param the request object
      */
-    public updateBatchWithHttpInfo(param: SitePagesApiUpdateBatchRequest, options?: Configuration): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
+    public updateBatchWithHttpInfo(param: SitePagesApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponsePage | BatchResponsePageWithErrors>> {
         return this.api.updateBatchWithHttpInfo(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -2212,7 +2308,7 @@ export class ObjectSitePagesApi {
      * Update a batch of Site Pages
      * @param param the request object
      */
-    public updateBatch(param: SitePagesApiUpdateBatchRequest, options?: Configuration): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
+    public updateBatch(param: SitePagesApiUpdateBatchRequest, options?: ConfigurationOptions): Promise<BatchResponsePage | BatchResponsePageWithErrors> {
         return this.api.updateBatch(param.batchInputJsonNode, param.archived,  options).toPromise();
     }
 
@@ -2221,7 +2317,7 @@ export class ObjectSitePagesApi {
      * Update a Site Page draft
      * @param param the request object
      */
-    public updateDraftWithHttpInfo(param: SitePagesApiUpdateDraftRequest, options?: Configuration): Promise<HttpInfo<Page>> {
+    public updateDraftWithHttpInfo(param: SitePagesApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<HttpInfo<Page>> {
         return this.api.updateDraftWithHttpInfo(param.objectId, param.page,  options).toPromise();
     }
 
@@ -2230,7 +2326,7 @@ export class ObjectSitePagesApi {
      * Update a Site Page draft
      * @param param the request object
      */
-    public updateDraft(param: SitePagesApiUpdateDraftRequest, options?: Configuration): Promise<Page> {
+    public updateDraft(param: SitePagesApiUpdateDraftRequest, options?: ConfigurationOptions): Promise<Page> {
         return this.api.updateDraft(param.objectId, param.page,  options).toPromise();
     }
 
@@ -2239,7 +2335,7 @@ export class ObjectSitePagesApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangsWithHttpInfo(param: SitePagesApiUpdateLangsRequest, options?: Configuration): Promise<HttpInfo<void>> {
+    public updateLangsWithHttpInfo(param: SitePagesApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
         return this.api.updateLangsWithHttpInfo(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 
@@ -2248,7 +2344,7 @@ export class ObjectSitePagesApi {
      * Update languages of multi-language group
      * @param param the request object
      */
-    public updateLangs(param: SitePagesApiUpdateLangsRequest, options?: Configuration): Promise<void> {
+    public updateLangs(param: SitePagesApiUpdateLangsRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.updateLangs(param.updateLanguagesRequestVNext,  options).toPromise();
     }
 

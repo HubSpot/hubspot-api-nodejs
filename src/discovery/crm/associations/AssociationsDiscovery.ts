@@ -1,17 +1,17 @@
 import {
   BatchApi,
-  createConfiguration,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../../codegen/crm/associations/index'
-import { Observable } from '../../../../codegen/crm/associations/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import BaseDiscovery from '../../BaseDiscovery'
-import type SchemaDiscovery from './schema/SchemaDiscovery'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/associations/rxjsStub'
 import type AssociationsV4Discovery from './v4/AssociationsDiscovery'
+import type SchemaDiscovery from './schema/SchemaDiscovery'
 
 export default class AssociationsDiscovery extends BaseDiscovery {
   public batchApi: BatchApi
@@ -26,7 +26,7 @@ export default class AssociationsDiscovery extends BaseDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

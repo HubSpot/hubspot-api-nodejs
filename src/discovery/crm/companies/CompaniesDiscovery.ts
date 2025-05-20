@@ -1,25 +1,23 @@
 import {
   BasicApi,
   BatchApi,
-  Configuration,
-  createConfiguration,
-  MergeApi,
+  PromiseConfigurationOptions,
   RequestContext,
   ResponseContext,
   SearchApi,
   ServerConfiguration,
   SimplePublicObjectWithAssociations,
+  createConfiguration,
 } from '../../../../codegen/crm/companies/index'
-import { Observable } from '../../../../codegen/crm/companies/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/companies/rxjsStub'
 import { getAll } from '../../../services/getAll'
 
 export default class CompaniesDiscovery {
   public basicApi: BasicApi
   public batchApi: BatchApi
-  public mergeApi: MergeApi
   public searchApi: SearchApi
 
   constructor(config: IConfiguration) {
@@ -29,13 +27,12 @@ export default class CompaniesDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 
     this.basicApi = ApiDecoratorService.getInstance().apply<BasicApi>(new BasicApi(configuration))
     this.batchApi = ApiDecoratorService.getInstance().apply<BatchApi>(new BatchApi(configuration))
-    this.mergeApi = ApiDecoratorService.getInstance().apply<MergeApi>(new MergeApi(configuration))
     this.searchApi = ApiDecoratorService.getInstance().apply<SearchApi>(new SearchApi(configuration))
   }
 
@@ -47,7 +44,7 @@ export default class CompaniesDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
       this.basicApi,
       limit,
       after,

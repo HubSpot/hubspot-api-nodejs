@@ -17,6 +17,8 @@ export class PublicCampaignInfluencedFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "campaignId",
@@ -38,7 +40,6 @@ export class PublicCampaignInfluencedFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicCampaignInfluencedFilterFilterTypeEnum {
     CampaignInfluenced = 'CAMPAIGN_INFLUENCED'

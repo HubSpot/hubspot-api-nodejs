@@ -1,4 +1,3 @@
-import { createConfiguration } from '../../../../../codegen/crm/objects/calls/configuration'
 import {
   BasicApi,
   BatchApi,
@@ -7,10 +6,11 @@ import {
   SearchApi,
   ServerConfiguration,
 } from '../../../../../codegen/crm/objects/calls/index'
-import { Observable } from '../../../../../codegen/crm/objects/calls/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/objects/calls/rxjsStub'
+import { createConfiguration } from '../../../../../codegen/crm/objects/calls/configuration'
 
 export default class CallsDiscovery {
   public basicApi: BasicApi
@@ -24,7 +24,7 @@ export default class CallsDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

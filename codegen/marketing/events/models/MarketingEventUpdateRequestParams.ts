@@ -13,7 +13,6 @@
 import { PropertyValue } from '../models/PropertyValue';
 
 export class MarketingEventUpdateRequestParams {
-    'importStatus'?: string;
     /**
     * The start date and time of the marketing event.
     */
@@ -51,17 +50,12 @@ export class MarketingEventUpdateRequestParams {
     * The end date and time of the marketing event.
     */
     'endDateTime'?: Date;
-    'attendanceStateCalculationTimestamp'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "importStatus",
-            "baseName": "importStatus",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "startDateTime",
             "baseName": "startDateTime",
@@ -121,12 +115,6 @@ export class MarketingEventUpdateRequestParams {
             "baseName": "endDateTime",
             "type": "Date",
             "format": "date-time"
-        },
-        {
-            "name": "attendanceStateCalculationTimestamp",
-            "baseName": "attendanceStateCalculationTimestamp",
-            "type": "Date",
-            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
@@ -136,4 +124,3 @@ export class MarketingEventUpdateRequestParams {
     public constructor() {
     }
 }
-

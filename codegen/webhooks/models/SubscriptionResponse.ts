@@ -19,6 +19,9 @@ export class SubscriptionResponse {
     * When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
     */
     'createdAt': Date;
+    /**
+    * The identifier of the object type associated with the subscription.
+    */
     'objectTypeId'?: string;
     /**
     * The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
@@ -42,6 +45,8 @@ export class SubscriptionResponse {
     'updatedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -94,7 +99,6 @@ export class SubscriptionResponse {
     public constructor() {
     }
 }
-
 
 export enum SubscriptionResponseEventTypeEnum {
     ContactPropertyChange = 'contact.propertyChange',

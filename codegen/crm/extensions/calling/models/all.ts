@@ -1,3 +1,6 @@
+export * from '../models/ChannelConnectionSettingsPatchRequest'
+export * from '../models/ChannelConnectionSettingsRequest'
+export * from '../models/ChannelConnectionSettingsResponse'
 export * from '../models/ErrorDetail'
 export * from '../models/MarkRecordingAsReadyRequest'
 export * from '../models/ModelError'

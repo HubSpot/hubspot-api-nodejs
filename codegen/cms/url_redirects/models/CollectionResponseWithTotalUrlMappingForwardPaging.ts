@@ -1,5 +1,5 @@
 /**
- * CMS Url Redirects
+ * Url Redirects
  * URL redirect operations
  *
  * OpenAPI spec version: v3
@@ -19,6 +19,8 @@ export class CollectionResponseWithTotalUrlMappingForwardPaging {
     'results': Array<UrlMapping>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -47,4 +49,3 @@ export class CollectionResponseWithTotalUrlMappingForwardPaging {
     public constructor() {
     }
 }
-

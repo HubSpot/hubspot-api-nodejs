@@ -1,5 +1,6 @@
 import { HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
+import { PromiseMiddlewareWrapper } from '../middleware';
 
 import { BatchInputSubscriptionBatchUpdateRequest } from '../models/BatchInputSubscriptionBatchUpdateRequest';
 import { BatchResponseSubscriptionResponse } from '../models/BatchResponseSubscriptionResponse';
@@ -29,8 +30,20 @@ export class PromiseSettingsApi {
      * Delete webhook settings
      * @param appId The ID of the app.
      */
-    public clearWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.clearWithHttpInfo(appId, _options);
+    public clearWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.clearWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -39,30 +52,66 @@ export class PromiseSettingsApi {
      * Delete webhook settings
      * @param appId The ID of the app.
      */
-    public clear(appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.clear(appId, _options);
+    public clear(appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.clear(appId, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update webhook settings for the specified app.
-     * Delete webhook settings
+     * Update webhook settings
      * @param appId The ID of the app.
-     * @param settingsChangeRequest 
+     * @param settingsChangeRequest
      */
-    public configureWithHttpInfo(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
-        const result = this.api.configureWithHttpInfo(appId, settingsChangeRequest, _options);
+    public configureWithHttpInfo(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.configureWithHttpInfo(appId, settingsChangeRequest, observableOptions);
         return result.toPromise();
     }
 
     /**
      * Update webhook settings for the specified app.
-     * Delete webhook settings
+     * Update webhook settings
      * @param appId The ID of the app.
-     * @param settingsChangeRequest 
+     * @param settingsChangeRequest
      */
-    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.configure(appId, settingsChangeRequest, _options);
+    public configure(appId: number, settingsChangeRequest: SettingsChangeRequest, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.configure(appId, settingsChangeRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -71,8 +120,20 @@ export class PromiseSettingsApi {
      * Read webhook settings
      * @param appId The ID of the app.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<SettingsResponse>> {
-        const result = this.api.getAllWithHttpInfo(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SettingsResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -81,8 +142,20 @@ export class PromiseSettingsApi {
      * Read webhook settings
      * @param appId The ID of the app.
      */
-    public getAll(appId: number, _options?: Configuration): Promise<SettingsResponse> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, _options?: PromiseConfigurationOptions): Promise<SettingsResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -111,8 +184,20 @@ export class PromiseSubscriptionsApi {
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
      */
-    public archiveWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Promise<HttpInfo<void>> {
-        const result = this.api.archiveWithHttpInfo(subscriptionId, appId, _options);
+    public archiveWithHttpInfo(subscriptionId: number, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archiveWithHttpInfo(subscriptionId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -122,8 +207,20 @@ export class PromiseSubscriptionsApi {
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
      */
-    public archive(subscriptionId: number, appId: number, _options?: Configuration): Promise<void> {
-        const result = this.api.archive(subscriptionId, appId, _options);
+    public archive(subscriptionId: number, appId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.archive(subscriptionId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -131,10 +228,22 @@ export class PromiseSubscriptionsApi {
      * Create new event subscription for the specified app.
      * Create an event subscription
      * @param appId The ID of the app.
-     * @param subscriptionCreateRequest 
+     * @param subscriptionCreateRequest
      */
-    public createWithHttpInfo(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
-        const result = this.api.createWithHttpInfo(appId, subscriptionCreateRequest, _options);
+    public createWithHttpInfo(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.createWithHttpInfo(appId, subscriptionCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -142,10 +251,22 @@ export class PromiseSubscriptionsApi {
      * Create new event subscription for the specified app.
      * Create an event subscription
      * @param appId The ID of the app.
-     * @param subscriptionCreateRequest 
+     * @param subscriptionCreateRequest
      */
-    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.create(appId, subscriptionCreateRequest, _options);
+    public create(appId: number, subscriptionCreateRequest: SubscriptionCreateRequest, _options?: PromiseConfigurationOptions): Promise<SubscriptionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.create(appId, subscriptionCreateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -154,8 +275,20 @@ export class PromiseSubscriptionsApi {
      * Read event subscriptions
      * @param appId The ID of the app.
      */
-    public getAllWithHttpInfo(appId: number, _options?: Configuration): Promise<HttpInfo<SubscriptionListResponse>> {
-        const result = this.api.getAllWithHttpInfo(appId, _options);
+    public getAllWithHttpInfo(appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionListResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAllWithHttpInfo(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -164,8 +297,20 @@ export class PromiseSubscriptionsApi {
      * Read event subscriptions
      * @param appId The ID of the app.
      */
-    public getAll(appId: number, _options?: Configuration): Promise<SubscriptionListResponse> {
-        const result = this.api.getAll(appId, _options);
+    public getAll(appId: number, _options?: PromiseConfigurationOptions): Promise<SubscriptionListResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getAll(appId, observableOptions);
         return result.toPromise();
     }
 
@@ -175,8 +320,20 @@ export class PromiseSubscriptionsApi {
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
      */
-    public getByIdWithHttpInfo(subscriptionId: number, appId: number, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
-        const result = this.api.getByIdWithHttpInfo(subscriptionId, appId, _options);
+    public getByIdWithHttpInfo(subscriptionId: number, appId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getByIdWithHttpInfo(subscriptionId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -186,8 +343,20 @@ export class PromiseSubscriptionsApi {
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
      */
-    public getById(subscriptionId: number, appId: number, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.getById(subscriptionId, appId, _options);
+    public getById(subscriptionId: number, appId: number, _options?: PromiseConfigurationOptions): Promise<SubscriptionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getById(subscriptionId, appId, observableOptions);
         return result.toPromise();
     }
 
@@ -196,10 +365,22 @@ export class PromiseSubscriptionsApi {
      * Update an event subscription
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
-     * @param subscriptionPatchRequest 
+     * @param subscriptionPatchRequest
      */
-    public updateWithHttpInfo(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<HttpInfo<SubscriptionResponse>> {
-        const result = this.api.updateWithHttpInfo(subscriptionId, appId, subscriptionPatchRequest, _options);
+    public updateWithHttpInfo(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SubscriptionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateWithHttpInfo(subscriptionId, appId, subscriptionPatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -208,10 +389,22 @@ export class PromiseSubscriptionsApi {
      * Update an event subscription
      * @param subscriptionId The ID of the event subscription.
      * @param appId The ID of the app.
-     * @param subscriptionPatchRequest 
+     * @param subscriptionPatchRequest
      */
-    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: Configuration): Promise<SubscriptionResponse> {
-        const result = this.api.update(subscriptionId, appId, subscriptionPatchRequest, _options);
+    public update(subscriptionId: number, appId: number, subscriptionPatchRequest: SubscriptionPatchRequest, _options?: PromiseConfigurationOptions): Promise<SubscriptionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.update(subscriptionId, appId, subscriptionPatchRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -219,10 +412,22 @@ export class PromiseSubscriptionsApi {
      * Batch create event subscriptions for the specified app.
      * Batch create event subscriptions
      * @param appId The ID of the app.
-     * @param batchInputSubscriptionBatchUpdateRequest 
+     * @param batchInputSubscriptionBatchUpdateRequest
      */
-    public updateBatchWithHttpInfo(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
-        const result = this.api.updateBatchWithHttpInfo(appId, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatchWithHttpInfo(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatchWithHttpInfo(appId, batchInputSubscriptionBatchUpdateRequest, observableOptions);
         return result.toPromise();
     }
 
@@ -230,10 +435,22 @@ export class PromiseSubscriptionsApi {
      * Batch create event subscriptions for the specified app.
      * Batch create event subscriptions
      * @param appId The ID of the app.
-     * @param batchInputSubscriptionBatchUpdateRequest 
+     * @param batchInputSubscriptionBatchUpdateRequest
      */
-    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: Configuration): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
-        const result = this.api.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, _options);
+    public updateBatch(appId: number, batchInputSubscriptionBatchUpdateRequest: BatchInputSubscriptionBatchUpdateRequest, _options?: PromiseConfigurationOptions): Promise<BatchResponseSubscriptionResponse | BatchResponseSubscriptionResponseWithErrors> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.updateBatch(appId, batchInputSubscriptionBatchUpdateRequest, observableOptions);
         return result.toPromise();
     }
 

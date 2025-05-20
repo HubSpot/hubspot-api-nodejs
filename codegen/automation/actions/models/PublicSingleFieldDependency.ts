@@ -13,10 +13,12 @@
 
 export class PublicSingleFieldDependency {
     'dependencyType': PublicSingleFieldDependencyDependencyTypeEnum;
-    'dependentFieldNames': Array<string>;
     'controllingFieldName': string;
+    'dependentFieldNames': Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -26,15 +28,15 @@ export class PublicSingleFieldDependency {
             "format": ""
         },
         {
-            "name": "dependentFieldNames",
-            "baseName": "dependentFieldNames",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
             "name": "controllingFieldName",
             "baseName": "controllingFieldName",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dependentFieldNames",
+            "baseName": "dependentFieldNames",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
@@ -45,7 +47,6 @@ export class PublicSingleFieldDependency {
     public constructor() {
     }
 }
-
 
 export enum PublicSingleFieldDependencyDependencyTypeEnum {
     SingleField = 'SINGLE_FIELD'

@@ -1,5 +1,6 @@
 import { ResponseContext, RequestContext, HttpInfo } from '../http/http';
-import { Configuration} from '../configuration'
+import { Configuration, ConfigurationOptions } from '../configuration'
+import type { Middleware } from '../middleware';
 import { Observable, of, from } from '../rxjsStub';
 import {mergeMap, map} from  '../rxjsStub';
 import { AssociationDefinition } from '../models/AssociationDefinition';
@@ -30,21 +31,50 @@ export class ObservableCoreApi {
      * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
      * Delete a schema
      * @param objectType Fully qualified name or object type ID of your schema.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archiveWithHttpInfo(objectType: string, archived?: boolean, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archive(objectType, archived, _options);
+    public archiveWithHttpInfo(objectType: string, archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archive(objectType, archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveWithHttpInfo(rsp)));
@@ -55,9 +85,9 @@ export class ObservableCoreApi {
      * Deletes a schema. Any existing records of this schema must be deleted **first**. Otherwise this call will fail.
      * Delete a schema
      * @param objectType Fully qualified name or object type ID of your schema.
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public archive(objectType: string, archived?: boolean, _options?: Configuration): Observable<void> {
+    public archive(objectType: string, archived?: boolean, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveWithHttpInfo(objectType, archived, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -67,19 +97,48 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationIdentifier Unique ID of the association to remove.
      */
-    public archiveAssociationWithHttpInfo(objectType: string, associationIdentifier: string, _options?: Configuration): Observable<HttpInfo<void>> {
-        const requestContextPromise = this.requestFactory.archiveAssociation(objectType, associationIdentifier, _options);
+    public archiveAssociationWithHttpInfo(objectType: string, associationIdentifier: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.archiveAssociation(objectType, associationIdentifier, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.archiveAssociationWithHttpInfo(rsp)));
@@ -92,7 +151,7 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationIdentifier Unique ID of the association to remove.
      */
-    public archiveAssociation(objectType: string, associationIdentifier: string, _options?: Configuration): Observable<void> {
+    public archiveAssociation(objectType: string, associationIdentifier: string, _options?: ConfigurationOptions): Observable<void> {
         return this.archiveAssociationWithHttpInfo(objectType, associationIdentifier, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
@@ -101,19 +160,48 @@ export class ObservableCoreApi {
      * Create a new schema
      * @param objectSchemaEgg Object schema definition, including properties and associations.
      */
-    public createWithHttpInfo(objectSchemaEgg: ObjectSchemaEgg, _options?: Configuration): Observable<HttpInfo<ObjectSchema>> {
-        const requestContextPromise = this.requestFactory.create(objectSchemaEgg, _options);
+    public createWithHttpInfo(objectSchemaEgg: ObjectSchemaEgg, _options?: ConfigurationOptions): Observable<HttpInfo<ObjectSchema>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.create(objectSchemaEgg, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWithHttpInfo(rsp)));
@@ -125,7 +213,7 @@ export class ObservableCoreApi {
      * Create a new schema
      * @param objectSchemaEgg Object schema definition, including properties and associations.
      */
-    public create(objectSchemaEgg: ObjectSchemaEgg, _options?: Configuration): Observable<ObjectSchema> {
+    public create(objectSchemaEgg: ObjectSchemaEgg, _options?: ConfigurationOptions): Observable<ObjectSchema> {
         return this.createWithHttpInfo(objectSchemaEgg, _options).pipe(map((apiResponse: HttpInfo<ObjectSchema>) => apiResponse.data));
     }
 
@@ -135,19 +223,48 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationDefinitionEgg Attributes that define the association.
      */
-    public createAssociationWithHttpInfo(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: Configuration): Observable<HttpInfo<AssociationDefinition>> {
-        const requestContextPromise = this.requestFactory.createAssociation(objectType, associationDefinitionEgg, _options);
+    public createAssociationWithHttpInfo(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: ConfigurationOptions): Observable<HttpInfo<AssociationDefinition>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.createAssociation(objectType, associationDefinitionEgg, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createAssociationWithHttpInfo(rsp)));
@@ -160,28 +277,57 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param associationDefinitionEgg Attributes that define the association.
      */
-    public createAssociation(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: Configuration): Observable<AssociationDefinition> {
+    public createAssociation(objectType: string, associationDefinitionEgg: AssociationDefinitionEgg, _options?: ConfigurationOptions): Observable<AssociationDefinition> {
         return this.createAssociationWithHttpInfo(objectType, associationDefinitionEgg, _options).pipe(map((apiResponse: HttpInfo<AssociationDefinition>) => apiResponse.data));
     }
 
     /**
      * Returns all object schemas that have been defined for your account.
      * Get all schemas
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getAllWithHttpInfo(archived?: boolean, _options?: Configuration): Observable<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
-        const requestContextPromise = this.requestFactory.getAll(archived, _options);
+    public getAllWithHttpInfo(archived?: boolean, _options?: ConfigurationOptions): Observable<HttpInfo<CollectionResponseObjectSchemaNoPaging>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getAll(archived, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getAllWithHttpInfo(rsp)));
@@ -191,9 +337,9 @@ export class ObservableCoreApi {
     /**
      * Returns all object schemas that have been defined for your account.
      * Get all schemas
-     * @param archived Whether to return only results that have been archived.
+     * @param [archived] Whether to return only results that have been archived.
      */
-    public getAll(archived?: boolean, _options?: Configuration): Observable<CollectionResponseObjectSchemaNoPaging> {
+    public getAll(archived?: boolean, _options?: ConfigurationOptions): Observable<CollectionResponseObjectSchemaNoPaging> {
         return this.getAllWithHttpInfo(archived, _options).pipe(map((apiResponse: HttpInfo<CollectionResponseObjectSchemaNoPaging>) => apiResponse.data));
     }
 
@@ -202,19 +348,48 @@ export class ObservableCoreApi {
      * Get an existing schema
      * @param objectType Fully qualified name or object type ID of your schema.
      */
-    public getByIdWithHttpInfo(objectType: string, _options?: Configuration): Observable<HttpInfo<ObjectSchema>> {
-        const requestContextPromise = this.requestFactory.getById(objectType, _options);
+    public getByIdWithHttpInfo(objectType: string, _options?: ConfigurationOptions): Observable<HttpInfo<ObjectSchema>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getById(objectType, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getByIdWithHttpInfo(rsp)));
@@ -226,7 +401,7 @@ export class ObservableCoreApi {
      * Get an existing schema
      * @param objectType Fully qualified name or object type ID of your schema.
      */
-    public getById(objectType: string, _options?: Configuration): Observable<ObjectSchema> {
+    public getById(objectType: string, _options?: ConfigurationOptions): Observable<ObjectSchema> {
         return this.getByIdWithHttpInfo(objectType, _options).pipe(map((apiResponse: HttpInfo<ObjectSchema>) => apiResponse.data));
     }
 
@@ -236,19 +411,48 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param objectTypeDefinitionPatch Attributes to update in your schema.
      */
-    public updateWithHttpInfo(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: Configuration): Observable<HttpInfo<ObjectTypeDefinition>> {
-        const requestContextPromise = this.requestFactory.update(objectType, objectTypeDefinitionPatch, _options);
+    public updateWithHttpInfo(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: ConfigurationOptions): Observable<HttpInfo<ObjectTypeDefinition>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
 
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.update(objectType, objectTypeDefinitionPatch, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
+        for (const middleware of allMiddleware) {
             middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
         }
 
         return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
             pipe(mergeMap((response: ResponseContext) => {
                 let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
+                for (const middleware of allMiddleware.reverse()) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWithHttpInfo(rsp)));
@@ -261,7 +465,7 @@ export class ObservableCoreApi {
      * @param objectType Fully qualified name or object type ID of your schema.
      * @param objectTypeDefinitionPatch Attributes to update in your schema.
      */
-    public update(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: Configuration): Observable<ObjectTypeDefinition> {
+    public update(objectType: string, objectTypeDefinitionPatch: ObjectTypeDefinitionPatch, _options?: ConfigurationOptions): Observable<ObjectTypeDefinition> {
         return this.updateWithHttpInfo(objectType, objectTypeDefinitionPatch, _options).pipe(map((apiResponse: HttpInfo<ObjectTypeDefinition>) => apiResponse.data));
     }
 

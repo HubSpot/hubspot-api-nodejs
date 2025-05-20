@@ -22,6 +22,8 @@ export class PublicPropertyAssociationInListFilter {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "listId",
@@ -67,7 +69,6 @@ export class PublicPropertyAssociationInListFilter {
     public constructor() {
     }
 }
-
 
 export enum PublicPropertyAssociationInListFilterFilterTypeEnum {
     PropertyAssociation = 'PROPERTY_ASSOCIATION'

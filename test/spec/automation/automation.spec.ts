@@ -1,5 +1,5 @@
-import { Client } from '../../../index'
 import ActionsDiscovery from '../../../src/discovery/automation/actions/ActionsDiscovery'
+import { Client } from '../../../index'
 
 describe('api client', () => {
   it('is discoverable', () => {

@@ -1,15 +1,15 @@
 import {
-  createConfiguration,
   EventsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
+  createConfiguration,
 } from '../../../codegen/events/index'
-import { Observable } from '../../../codegen/events/rxjsStub'
 import { ApiClientConfigurator } from '../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../configuration/IConfiguration'
 import ApiDecoratorService from '../../services/ApiDecoratorService'
 import BaseDiscovery from '../BaseDiscovery'
+import IConfiguration from '../../configuration/IConfiguration'
+import { Observable } from '../../../codegen/events/rxjsStub'
 import type SendDiscovery from './send/SendDiscovery'
 
 export default class EventsDiscovery extends BaseDiscovery {
@@ -24,7 +24,7 @@ export default class EventsDiscovery extends BaseDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 

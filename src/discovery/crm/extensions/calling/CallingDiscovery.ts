@@ -1,17 +1,19 @@
 import {
-  createConfiguration,
+  ChannelConnectionSettingsApi,
   RecordingSettingsApi,
   RequestContext,
   ResponseContext,
   ServerConfiguration,
   SettingsApi,
+  createConfiguration,
 } from '../../../../../codegen/crm/extensions/calling/index'
-import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsStub'
 import { ApiClientConfigurator } from '../../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../../services/ApiDecoratorService'
+import IConfiguration from '../../../../configuration/IConfiguration'
+import { Observable } from '../../../../../codegen/crm/extensions/calling/rxjsStub'
 
 export default class CallingDiscovery {
+  public channelConnectionSettingsApi: ChannelConnectionSettingsApi
   public settingsApi: SettingsApi
   public recordingSettingsApi: RecordingSettingsApi
 
@@ -22,10 +24,13 @@ export default class CallingDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 
+    this.channelConnectionSettingsApi = ApiDecoratorService.getInstance().apply<ChannelConnectionSettingsApi>(
+      new ChannelConnectionSettingsApi(configuration),
+    )
     this.settingsApi = ApiDecoratorService.getInstance().apply<SettingsApi>(new SettingsApi(configuration))
     this.recordingSettingsApi = ApiDecoratorService.getInstance().apply<RecordingSettingsApi>(
       new RecordingSettingsApi(configuration),

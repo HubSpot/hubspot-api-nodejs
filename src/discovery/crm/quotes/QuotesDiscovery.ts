@@ -1,18 +1,18 @@
 import {
   BasicApi,
   BatchApi,
-  Configuration,
-  createConfiguration,
+  PromiseConfigurationOptions,
   RequestContext,
   ResponseContext,
   SearchApi,
   ServerConfiguration,
   SimplePublicObjectWithAssociations,
+  createConfiguration,
 } from '../../../../codegen/crm/quotes/index'
-import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
 import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
-import IConfiguration from '../../../configuration/IConfiguration'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
+import IConfiguration from '../../../configuration/IConfiguration'
+import { Observable } from '../../../../codegen/crm/quotes/rxjsStub'
 import { getAll } from '../../../services/getAll'
 
 export default class QuotesDiscovery {
@@ -27,7 +27,7 @@ export default class QuotesDiscovery {
         ResponseContext,
         Observable<RequestContext>,
         Observable<ResponseContext>,
-        ServerConfiguration<{}>
+        ServerConfiguration<Record<string, string>>
       >(config, ServerConfiguration, Observable, Observable),
     )
 
@@ -44,7 +44,7 @@ export default class QuotesDiscovery {
     associations?: string[],
     archived?: boolean,
   ): Promise<SimplePublicObjectWithAssociations[]> {
-    return await getAll<SimplePublicObjectWithAssociations, Configuration>(
+    return await getAll<SimplePublicObjectWithAssociations, PromiseConfigurationOptions>(
       this.basicApi,
       limit,
       after,

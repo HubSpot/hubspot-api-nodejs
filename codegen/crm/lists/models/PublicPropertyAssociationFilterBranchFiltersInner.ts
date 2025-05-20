@@ -10,342 +10,65 @@
  * Do not edit the class manually.
  */
 
-import { PublicEventFilterMetadata } from '../models/PublicEventFilterMetadata';
-import { PublicFormSubmissionFilterCoalescingRefineBy } from '../models/PublicFormSubmissionFilterCoalescingRefineBy';
-import { PublicInListFilterMetadata } from '../models/PublicInListFilterMetadata';
-import { PublicSurveyMonkeyValueFilterValueComparison } from '../models/PublicSurveyMonkeyValueFilterValueComparison';
+import { PublicAdsSearchFilter } from '../models/PublicAdsSearchFilter';
+import { PublicAdsTimeFilter } from '../models/PublicAdsTimeFilter';
+import { PublicAssociationInListFilter } from '../models/PublicAssociationInListFilter';
+import { PublicCampaignInfluencedFilter } from '../models/PublicCampaignInfluencedFilter';
+import { PublicCommunicationSubscriptionFilter } from '../models/PublicCommunicationSubscriptionFilter';
+import { PublicConstantFilter } from '../models/PublicConstantFilter';
+import { PublicCtaAnalyticsFilter } from '../models/PublicCtaAnalyticsFilter';
+import { PublicEmailEventFilter } from '../models/PublicEmailEventFilter';
+import { PublicEmailSubscriptionFilter } from '../models/PublicEmailSubscriptionFilter';
+import { PublicEventAnalyticsFilter } from '../models/PublicEventAnalyticsFilter';
+import { PublicFormSubmissionFilter } from '../models/PublicFormSubmissionFilter';
+import { PublicFormSubmissionOnPageFilter } from '../models/PublicFormSubmissionOnPageFilter';
+import { PublicInListFilter } from '../models/PublicInListFilter';
+import { PublicIntegrationEventFilter } from '../models/PublicIntegrationEventFilter';
+import { PublicNumAssociationsFilter } from '../models/PublicNumAssociationsFilter';
+import { PublicPageViewAnalyticsFilter } from '../models/PublicPageViewAnalyticsFilter';
+import { PublicPrivacyAnalyticsFilter } from '../models/PublicPrivacyAnalyticsFilter';
+import { PublicPropertyAssociationInListFilter } from '../models/PublicPropertyAssociationInListFilter';
+import { PublicPropertyFilter } from '../models/PublicPropertyFilter';
+import { PublicSurveyMonkeyFilter } from '../models/PublicSurveyMonkeyFilter';
+import { PublicSurveyMonkeyValueFilter } from '../models/PublicSurveyMonkeyValueFilter';
+import { PublicUnifiedEventsFilter } from '../models/PublicUnifiedEventsFilter';
+import { PublicWebinarFilter } from '../models/PublicWebinarFilter';
 
-export class PublicPropertyAssociationFilterBranchFiltersInner {
-    'property': string;
-    'filterType': PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum;
-    'operation': PublicSurveyMonkeyValueFilterValueComparison;
-    'listId': string;
-    'coalescingRefineBy': PublicFormSubmissionFilterCoalescingRefineBy;
-    'toObjectType'?: string;
-    'associationTypeId': number;
-    'associationCategory': string;
-    'toObjectTypeId'?: string;
-    'operator': string;
-    'enableTracking'?: boolean;
-    'pruningRefineBy': PublicFormSubmissionFilterCoalescingRefineBy;
-    'pageUrl': string;
-    'ctaName': string;
-    'eventId': string;
-    'formId'?: string;
-    'pageId': string;
-    'eventTypeId': string;
-    'filterLines': Array<PublicEventFilterMetadata>;
-    'subscriptionType': string;
-    'subscriptionIds': Array<string>;
-    'acceptedStatuses': Array<string>;
-    'channel': string;
-    'acceptedOptStates': Array<string>;
-    'businessUnitId'?: string;
-    'campaignId': string;
-    'surveyId': string;
-    'valueComparison': PublicSurveyMonkeyValueFilterValueComparison;
-    'surveyQuestion': string;
-    'surveyAnswerRowId'?: string;
-    'surveyAnswerColId'?: string;
-    'webinarId'?: string;
-    'clickUrl'?: string;
-    'level': string;
-    'appId': string;
-    'emailId': string;
-    'privacyName': string;
-    'searchTerms': Array<string>;
-    'entityType': string;
-    'adNetwork': string;
-    'searchTermType': string;
-    'metadata'?: PublicInListFilterMetadata;
-    'propertyWithObjectId': string;
-    'shouldAccept': boolean;
-    'source'?: string;
+/**
+ * @type PublicPropertyAssociationFilterBranchFiltersInner
+ * Type
+ * @export
+ */
+export type PublicPropertyAssociationFilterBranchFiltersInner = PublicAdsSearchFilter | PublicAdsTimeFilter | PublicAssociationInListFilter | PublicCampaignInfluencedFilter | PublicCommunicationSubscriptionFilter | PublicConstantFilter | PublicCtaAnalyticsFilter | PublicEmailEventFilter | PublicEmailSubscriptionFilter | PublicEventAnalyticsFilter | PublicFormSubmissionFilter | PublicFormSubmissionOnPageFilter | PublicInListFilter | PublicIntegrationEventFilter | PublicNumAssociationsFilter | PublicPageViewAnalyticsFilter | PublicPrivacyAnalyticsFilter | PublicPropertyAssociationInListFilter | PublicPropertyFilter | PublicSurveyMonkeyFilter | PublicSurveyMonkeyValueFilter | PublicUnifiedEventsFilter | PublicWebinarFilter;
 
+/**
+* @type PublicPropertyAssociationFilterBranchFiltersInnerClass
+* @export
+*/
+export class PublicPropertyAssociationFilterBranchFiltersInnerClass {
     static readonly discriminator: string | undefined = undefined;
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "property",
-            "baseName": "property",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "filterType",
-            "baseName": "filterType",
-            "type": "PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum",
-            "format": ""
-        },
-        {
-            "name": "operation",
-            "baseName": "operation",
-            "type": "PublicSurveyMonkeyValueFilterValueComparison",
-            "format": ""
-        },
-        {
-            "name": "listId",
-            "baseName": "listId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "coalescingRefineBy",
-            "baseName": "coalescingRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "toObjectType",
-            "baseName": "toObjectType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "associationTypeId",
-            "baseName": "associationTypeId",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "associationCategory",
-            "baseName": "associationCategory",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "toObjectTypeId",
-            "baseName": "toObjectTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "operator",
-            "baseName": "operator",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "enableTracking",
-            "baseName": "enableTracking",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "pruningRefineBy",
-            "baseName": "pruningRefineBy",
-            "type": "PublicFormSubmissionFilterCoalescingRefineBy",
-            "format": ""
-        },
-        {
-            "name": "pageUrl",
-            "baseName": "pageUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "ctaName",
-            "baseName": "ctaName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventId",
-            "baseName": "eventId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "formId",
-            "baseName": "formId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "pageId",
-            "baseName": "pageId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "eventTypeId",
-            "baseName": "eventTypeId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "filterLines",
-            "baseName": "filterLines",
-            "type": "Array<PublicEventFilterMetadata>",
-            "format": ""
-        },
-        {
-            "name": "subscriptionType",
-            "baseName": "subscriptionType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "subscriptionIds",
-            "baseName": "subscriptionIds",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "acceptedStatuses",
-            "baseName": "acceptedStatuses",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "channel",
-            "baseName": "channel",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "acceptedOptStates",
-            "baseName": "acceptedOptStates",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "businessUnitId",
-            "baseName": "businessUnitId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "campaignId",
-            "baseName": "campaignId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "surveyId",
-            "baseName": "surveyId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "valueComparison",
-            "baseName": "valueComparison",
-            "type": "PublicSurveyMonkeyValueFilterValueComparison",
-            "format": ""
-        },
-        {
-            "name": "surveyQuestion",
-            "baseName": "surveyQuestion",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "surveyAnswerRowId",
-            "baseName": "surveyAnswerRowId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "surveyAnswerColId",
-            "baseName": "surveyAnswerColId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "webinarId",
-            "baseName": "webinarId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "clickUrl",
-            "baseName": "clickUrl",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "level",
-            "baseName": "level",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "appId",
-            "baseName": "appId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "emailId",
-            "baseName": "emailId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "privacyName",
-            "baseName": "privacyName",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "searchTerms",
-            "baseName": "searchTerms",
-            "type": "Array<string>",
-            "format": ""
-        },
-        {
-            "name": "entityType",
-            "baseName": "entityType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "adNetwork",
-            "baseName": "adNetwork",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "searchTermType",
-            "baseName": "searchTermType",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "metadata",
-            "baseName": "metadata",
-            "type": "PublicInListFilterMetadata",
-            "format": ""
-        },
-        {
-            "name": "propertyWithObjectId",
-            "baseName": "propertyWithObjectId",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "shouldAccept",
-            "baseName": "shouldAccept",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "source",
-            "baseName": "source",
-            "type": "string",
-            "format": ""
-        }    ];
-
-    static getAttributeTypeMap() {
-        return PublicPropertyAssociationFilterBranchFiltersInner.attributeTypeMap;
-    }
-
-    public constructor() {
-    }
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 }
 
 
-export enum PublicPropertyAssociationFilterBranchFiltersInnerFilterTypeEnum {
-    Constant = 'CONSTANT'
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

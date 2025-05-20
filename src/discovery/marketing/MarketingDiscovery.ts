@@ -1,12 +1,27 @@
 import BaseDiscovery from '../BaseDiscovery'
+import type EmailsDiscovery from './emails/EmailsDiscovery'
 import type EventsDiscovery from './events/EventsDiscovery'
 import type FormsDiscovery from './forms/FormsDiscovery'
 import type TransactionalDiscovery from './transactional/TransactionalDiscovery'
 
 export default class MarketingDiscovery extends BaseDiscovery {
+  protected _emails: EmailsDiscovery | undefined
   protected _events: EventsDiscovery | undefined
   protected _forms: FormsDiscovery | undefined
   protected _transactional: TransactionalDiscovery | undefined
+
+  /**
+   * Getter
+   * @returns EmailsDiscovery
+   */
+  get emails() {
+    if (!this._emails) {
+      const requiredClass = require('./emails/EmailsDiscovery')
+      this._emails = new requiredClass.default(this.config) as EmailsDiscovery
+    }
+
+    return this._emails
+  }
 
   /**
    * Getter

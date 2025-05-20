@@ -49,6 +49,8 @@ export class BatchResponseHubDbTableRowV3WithErrors {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "completedAt",
@@ -106,7 +108,6 @@ export class BatchResponseHubDbTableRowV3WithErrors {
     public constructor() {
     }
 }
-
 
 export enum BatchResponseHubDbTableRowV3WithErrorsStatusEnum {
     Pending = 'PENDING',

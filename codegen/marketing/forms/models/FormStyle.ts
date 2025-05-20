@@ -66,6 +66,8 @@ export class FormStyle {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "labelTextSize",
@@ -147,7 +149,6 @@ export class FormStyle {
     public constructor() {
     }
 }
-
 
 export enum FormStyleSubmitAlignmentEnum {
     Left = 'left',
