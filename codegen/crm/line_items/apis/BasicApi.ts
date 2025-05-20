@@ -49,7 +49,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -97,7 +97,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -139,17 +139,26 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
         // Query Params
         if (propertiesWithHistory !== undefined) {
-            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
+            }
         }
 
         // Query Params
         if (associations !== undefined) {
-            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
         }
 
         // Query Params
@@ -170,7 +179,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -216,17 +225,26 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (properties !== undefined) {
-            requestContext.setQueryParam("properties", ObjectSerializer.serialize(properties, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(properties, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("properties", serializedParam);
+            }
         }
 
         // Query Params
         if (propertiesWithHistory !== undefined) {
-            requestContext.setQueryParam("propertiesWithHistory", ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(propertiesWithHistory, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("propertiesWithHistory", serializedParam);
+            }
         }
 
         // Query Params
         if (associations !== undefined) {
-            requestContext.setQueryParam("associations", ObjectSerializer.serialize(associations, "Array<string>", ""));
+            const serializedParams = ObjectSerializer.serialize(associations, "Array<string>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("associations", serializedParam);
+            }
         }
 
         // Query Params
@@ -242,7 +260,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -305,7 +323,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
