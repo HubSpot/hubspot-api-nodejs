@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm install typedoc
+        run: npm install typedoc@0.26.11
 
       - name: Generate docs
         run: npx typedoc $(find ./codegen/ -name 'index.ts')
