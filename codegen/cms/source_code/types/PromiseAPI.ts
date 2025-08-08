@@ -168,7 +168,7 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public downloadWithHttpInfo(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+    public downloadWithHttpInfo(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<HttpFile>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -191,7 +191,7 @@ export class PromiseContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public download(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<void> {
+    public download(environment: string, path: string, _options?: PromiseConfigurationOptions): Promise<HttpFile> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {

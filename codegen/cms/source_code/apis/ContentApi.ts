@@ -374,19 +374,33 @@ export class ContentApiResponseProcessor {
      * @params response Response returned by the server for a request to download
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async downloadWithHttpInfo(response: ResponseContext): Promise<HttpInfo< void>> {
+     public async downloadWithHttpInfo(response: ResponseContext): Promise<HttpInfo<HttpFile >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "Insufficient permissions to access the file", undefined, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            throw new ApiException<undefined>(response.httpStatusCode, "File not found at the specified path", undefined, response.headers);
+        }
         if (isCodeInRange("0", response.httpStatusCode)) {
             const body: Error = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "Error", ""
+                "Error", "binary"
             ) as Error;
             throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+            const body: HttpFile = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "HttpFile", "binary"
+            ) as HttpFile;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
         throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
