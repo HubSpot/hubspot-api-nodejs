@@ -157,7 +157,7 @@ export class ObjectContentApi {
      * Download a file
      * @param param the request object
      */
-    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+    public downloadWithHttpInfo(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpInfo<HttpFile>> {
         return this.api.downloadWithHttpInfo(param.environment, param.path,  options).toPromise();
     }
 
@@ -166,7 +166,7 @@ export class ObjectContentApi {
      * Download a file
      * @param param the request object
      */
-    public download(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<void> {
+    public download(param: ContentApiDownloadRequest, options?: ConfigurationOptions): Promise<HttpFile> {
         return this.api.download(param.environment, param.path,  options).toPromise();
     }
 

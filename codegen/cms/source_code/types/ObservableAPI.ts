@@ -226,7 +226,7 @@ export class ObservableContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public downloadWithHttpInfo(environment: string, path: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    public downloadWithHttpInfo(environment: string, path: string, _options?: ConfigurationOptions): Observable<HttpInfo<HttpFile>> {
     let _config = this.configuration;
     let allMiddleware: Middleware[] = [];
     if (_options && _options.middleware){
@@ -280,8 +280,8 @@ export class ObservableContentApi {
      * @param environment The environment of the file (\&quot;draft\&quot; or \&quot;published\&quot;).
      * @param path The file system location of the file.
      */
-    public download(environment: string, path: string, _options?: ConfigurationOptions): Observable<void> {
-        return this.downloadWithHttpInfo(environment, path, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    public download(environment: string, path: string, _options?: ConfigurationOptions): Observable<HttpFile> {
+        return this.downloadWithHttpInfo(environment, path, _options).pipe(map((apiResponse: HttpInfo<HttpFile>) => apiResponse.data));
     }
 
 }
