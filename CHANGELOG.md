@@ -1056,7 +1056,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/13.1.0...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/13.2.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -1128,3 +1128,4 @@ export enum Enum {
 [13.0.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.0
 [13.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.0.1
 [13.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.1.0
+[13.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.2.0
