@@ -15,53 +15,17 @@
 * Styling options for the form
 */
 export class FormStyle {
-    /**
-    * 
-    */
     'labelTextSize': string;
-    /**
-    * 
-    */
     'legalConsentTextColor': string;
-    /**
-    * 
-    */
     'fontFamily': string;
-    /**
-    * 
-    */
     'legalConsentTextSize': string;
-    /**
-    * 
-    */
     'backgroundWidth': string;
-    /**
-    * 
-    */
     'helpTextSize': string;
-    /**
-    * 
-    */
     'submitFontColor': string;
-    /**
-    * 
-    */
     'labelTextColor': string;
-    /**
-    * 
-    */
     'submitAlignment': FormStyleSubmitAlignmentEnum;
-    /**
-    * 
-    */
     'submitSize': string;
-    /**
-    * 
-    */
     'helpTextColor': string;
-    /**
-    * 
-    */
     'submitColor': string;
 
     static readonly discriminator: string | undefined = undefined;

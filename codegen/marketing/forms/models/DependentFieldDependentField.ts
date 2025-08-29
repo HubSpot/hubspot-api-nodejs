@@ -36,9 +36,23 @@ export type DependentFieldDependentField = DatepickerField | DropdownField | Ema
 * @export
 */
 export class DependentFieldDependentFieldClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "fieldType";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "datepicker": "DatepickerField",
+        "dropdown": "DropdownField",
+        "email": "EmailField",
+        "file": "FileField",
+        "mobile_phone": "MobilePhoneField",
+        "multi_line_text": "MultiLineTextField",
+        "multiple_checkboxes": "MultipleCheckboxesField",
+        "number": "NumberField",
+        "payment_link_radio": "PaymentLinkRadioField",
+        "phone": "PhoneField",
+        "radio": "RadioField",
+        "single_checkbox": "SingleCheckboxField",
+        "single_line_text": "SingleLineTextField",
+    };
 }
 
 

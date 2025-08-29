@@ -12,21 +12,9 @@
 
 
 export class LegalConsentOptionsLegitimateInterest {
-    /**
-    * 
-    */
     'subscriptionTypeIds': Array<number>;
-    /**
-    * 
-    */
     'lawfulBasis': LegalConsentOptionsLegitimateInterestLawfulBasisEnum;
-    /**
-    * 
-    */
     'type': LegalConsentOptionsLegitimateInterestTypeEnum;
-    /**
-    * 
-    */
     'privacyText': string;
 
     static readonly discriminator: string | undefined = undefined;

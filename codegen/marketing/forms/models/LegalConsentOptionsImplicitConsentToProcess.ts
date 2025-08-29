@@ -13,25 +13,10 @@
 import { LegalConsentCheckbox } from '../models/LegalConsentCheckbox';
 
 export class LegalConsentOptionsImplicitConsentToProcess {
-    /**
-    * 
-    */
     'communicationsCheckboxes': Array<LegalConsentCheckbox>;
-    /**
-    * 
-    */
     'communicationConsentText'?: string;
-    /**
-    * 
-    */
     'type': LegalConsentOptionsImplicitConsentToProcessTypeEnum;
-    /**
-    * 
-    */
     'privacyText': string;
-    /**
-    * 
-    */
     'consentToProcessText'?: string;
 
     static readonly discriminator: string | undefined = undefined;

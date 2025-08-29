@@ -20,9 +20,6 @@ export class FormDisplayOptions {
     * Whether the form will render as raw HTML as opposed to inside an iFrame.
     */
     'renderRawHtml': boolean;
-    /**
-    * 
-    */
     'cssClass'?: string;
     /**
     * The theme used for styling the input fields. This will not apply if the form is added to a HubSpot CMS page.

@@ -24,7 +24,9 @@ export type CollectionResponseFormDefinitionBaseForwardPagingResultsInner = HubS
 * @export
 */
 export class CollectionResponseFormDefinitionBaseForwardPagingResultsInnerClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "formType";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "hubspot": "HubSpotFormDefinition",
+    };
 }

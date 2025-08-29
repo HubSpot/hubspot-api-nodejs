@@ -16,9 +16,6 @@ export class EnumeratedFieldOption {
     * The order the choices will be displayed in.
     */
     'displayOrder': number;
-    /**
-    * 
-    */
     'description'?: string;
     /**
     * The visible label for this choice.

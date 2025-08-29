@@ -12,9 +12,6 @@
 
 
 export class LegalConsentOptionsNone {
-    /**
-    * 
-    */
     'type': LegalConsentOptionsNoneTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;

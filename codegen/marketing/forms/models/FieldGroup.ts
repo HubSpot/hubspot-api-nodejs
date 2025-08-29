@@ -16,9 +16,6 @@ import { DependentFieldDependentField } from '../models/DependentFieldDependentF
 * A collection of up to three form fields usually displayed in a row.
 */
 export class FieldGroup {
-    /**
-    * 
-    */
     'groupType': FieldGroupGroupTypeEnum;
     /**
     * The type of rich text included. The default value is text.

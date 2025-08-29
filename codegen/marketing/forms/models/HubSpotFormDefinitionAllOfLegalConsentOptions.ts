@@ -27,9 +27,14 @@ export type HubSpotFormDefinitionAllOfLegalConsentOptions = LegalConsentOptionsE
 * @export
 */
 export class HubSpotFormDefinitionAllOfLegalConsentOptionsClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "type";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "explicit_consent_to_process": "LegalConsentOptionsExplicitConsentToProcess",
+        "implicit_consent_to_process": "LegalConsentOptionsImplicitConsentToProcess",
+        "legitimate_interest": "LegalConsentOptionsLegitimateInterest",
+        "none": "LegalConsentOptionsNone",
+    };
 }
 
 

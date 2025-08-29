@@ -15,25 +15,10 @@
 * A condition based on customer input
 */
 export class DependentFieldFilter {
-    /**
-    * 
-    */
     'rangeStart': string;
-    /**
-    * 
-    */
     'values': Array<string>;
-    /**
-    * 
-    */
     'value': string;
-    /**
-    * 
-    */
     'operator': DependentFieldFilterOperatorEnum;
-    /**
-    * 
-    */
     'rangeEnd': string;
 
     static readonly discriminator: string | undefined = undefined;

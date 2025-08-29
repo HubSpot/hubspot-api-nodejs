@@ -15,13 +15,7 @@
 * Describes how a phone number should be validated.
 */
 export class PhoneFieldValidation {
-    /**
-    * 
-    */
     'minAllowedDigits': number;
-    /**
-    * 
-    */
     'maxAllowedDigits': number;
 
     static readonly discriminator: string | undefined = undefined;

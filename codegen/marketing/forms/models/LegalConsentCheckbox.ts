@@ -12,9 +12,6 @@
 
 
 export class LegalConsentCheckbox {
-    /**
-    * 
-    */
     'subscriptionTypeId': number;
     /**
     * The main label for the form field.
