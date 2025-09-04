@@ -33,7 +33,7 @@ import { Client } from "@hubspot/api-client";
 const hubspotClient = new Client({ accessToken: YOUR_ACCESS_TOKEN });
 ```
 
-You'll need to create a [private app](https://developers.hubspot.com/docs/api/private-apps) to get your access token or you can obtain [OAuth2 access token](https://developers.hubspot.com/docs/api/working-with-oauth).
+You'll need to create a [private app](https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview) to get your access token or you can obtain [OAuth2 access token](https://developers.hubspot.com/docs/api-reference/auth-oauth-v1/guide).
 
 You can provide developer API key. There is no need to create separate client instances for using endpoints with API key and Developer API key support.
 
