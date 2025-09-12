@@ -11,13 +11,34 @@
  */
 
 
+/**
+* A HubSpot property option
+*/
 export class Option {
+    /**
+    * Whether the option is displayed in HubSpot\'s UI.
+    */
     'hidden': boolean;
+    /**
+    * The position of the item relative to others in the list.
+    */
     'displayOrder': number;
     'doubleData': number;
+    /**
+    * A description of the option.
+    */
     'description': string;
+    /**
+    * Whether the option is read-only.
+    */
     'readOnly': boolean;
+    /**
+    * A user-friendly label that identifies the option.
+    */
     'label': string;
+    /**
+    * The actual value of the option.
+    */
     'value': string;
 
     static readonly discriminator: string | undefined = undefined;

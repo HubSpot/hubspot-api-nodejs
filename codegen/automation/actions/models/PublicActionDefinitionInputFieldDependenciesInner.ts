@@ -25,8 +25,11 @@ export type PublicActionDefinitionInputFieldDependenciesInner = PublicConditiona
 * @export
 */
 export class PublicActionDefinitionInputFieldDependenciesInnerClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "dependencyType";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "CONDITIONAL_SINGLE_FIELD": "PublicConditionalSingleFieldDependency",
+        "SINGLE_FIELD": "PublicSingleFieldDependency",
+    };
 }
 
