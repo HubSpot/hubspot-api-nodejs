@@ -11,8 +11,17 @@
  */
 
 
+/**
+* Specifies the paging information needed to retrieve the next set of results in a paginated API response
+*/
 export class NextPage {
+    /**
+    * A URL that can be used to retrieve the next page results.
+    */
     'link'?: string;
+    /**
+    * A paging cursor token for retrieving subsequent pages.
+    */
     'after': string;
 
     static readonly discriminator: string | undefined = undefined;
