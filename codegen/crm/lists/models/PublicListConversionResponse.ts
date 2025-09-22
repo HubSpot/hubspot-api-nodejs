@@ -10,16 +10,12 @@
  * Do not edit the class manually.
  */
 
+import { PublicListConversionResponseRequestedConversionTime } from '../models/PublicListConversionResponseRequestedConversionTime';
 
-export class ListMoveRequest {
-    /**
-    * The Id of the list to move.
-    */
+export class PublicListConversionResponse {
     'listId': string;
-    /**
-    * The Id of folder to move the list to, the root folder is Id 0.
-    */
-    'newFolderId': string;
+    'requestedConversionTime'?: PublicListConversionResponseRequestedConversionTime;
+    'convertedAt'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -33,14 +29,20 @@ export class ListMoveRequest {
             "format": ""
         },
         {
-            "name": "newFolderId",
-            "baseName": "newFolderId",
-            "type": "string",
+            "name": "requestedConversionTime",
+            "baseName": "requestedConversionTime",
+            "type": "PublicListConversionResponseRequestedConversionTime",
             "format": ""
+        },
+        {
+            "name": "convertedAt",
+            "baseName": "convertedAt",
+            "type": "Date",
+            "format": "date-time"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListMoveRequest.attributeTypeMap;
+        return PublicListConversionResponse.attributeTypeMap;
     }
 
     public constructor() {

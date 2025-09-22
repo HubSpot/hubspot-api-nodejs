@@ -22,7 +22,7 @@ export class MembershipsApiRequestFactory extends BaseAPIRequestFactory {
      * Add the records provided to the list. Records that do not exist or that are already members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add Records to a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody 
+     * @param requestBody The IDs of the records to add to the list.
      */
     public async add(listId: string, requestBody: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -124,7 +124,7 @@ export class MembershipsApiRequestFactory extends BaseAPIRequestFactory {
      * Add and/or remove records that have already been created in the system to and/or from a list.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add and/or Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param membershipChangeRequest 
+     * @param membershipChangeRequest The IDs of the records to add and/or remove from the list.
      */
     public async addAndRemove(listId: string, membershipChangeRequest: MembershipChangeRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -344,7 +344,7 @@ export class MembershipsApiRequestFactory extends BaseAPIRequestFactory {
      * Remove the records provided from the list. Records that do not exist or that are not members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody 
+     * @param requestBody The IDs of the records to remove from the list.
      */
     public async remove(listId: string, requestBody: Array<string>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

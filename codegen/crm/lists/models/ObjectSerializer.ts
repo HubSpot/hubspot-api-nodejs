@@ -57,7 +57,14 @@ export * from '../models/PublicIndexOffset';
 export * from '../models/PublicIndexedTimePoint';
 export * from '../models/PublicIndexedTimePointIndexReference';
 export * from '../models/PublicIntegrationEventFilter';
+export * from '../models/PublicListConversionDate';
+export * from '../models/PublicListConversionInactivity';
+export * from '../models/PublicListConversionResponse';
+export * from '../models/PublicListConversionResponseRequestedConversionTime';
+export * from '../models/PublicListConversionTime';
 export * from '../models/PublicListFolder';
+export * from '../models/PublicListPermissions';
+export * from '../models/PublicMembershipSettings';
 export * from '../models/PublicMigrationMapping';
 export * from '../models/PublicMonthReference';
 export * from '../models/PublicMultiStringPropertyOperation';
@@ -162,7 +169,14 @@ import { PublicIndexOffset } from '../models/PublicIndexOffset';
 import { PublicIndexedTimePoint       } from '../models/PublicIndexedTimePoint';
 import { PublicIndexedTimePointIndexReferenceClass } from '../models/PublicIndexedTimePointIndexReference';
 import { PublicIntegrationEventFilter     } from '../models/PublicIntegrationEventFilter';
+import { PublicListConversionDate      } from '../models/PublicListConversionDate';
+import { PublicListConversionInactivity    } from '../models/PublicListConversionInactivity';
+import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
+import { PublicListConversionResponseRequestedConversionTimeClass } from '../models/PublicListConversionResponseRequestedConversionTime';
+import { PublicListConversionTimeClass } from '../models/PublicListConversionTime';
 import { PublicListFolder } from '../models/PublicListFolder';
+import { PublicListPermissions } from '../models/PublicListPermissions';
+import { PublicMembershipSettings } from '../models/PublicMembershipSettings';
 import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
 import { PublicMonthReference        } from '../models/PublicMonthReference';
 import { PublicMultiStringPropertyOperation      } from '../models/PublicMultiStringPropertyOperation';
@@ -258,6 +272,13 @@ let enumsMap: Set<string> = new Set<string>([
     "PublicIndexedTimePointIndexReferenceReferenceTypeEnum",
     "PublicIndexedTimePointIndexReferenceDayOfWeekEnum",
     "PublicIntegrationEventFilterFilterTypeEnum",
+    "PublicListConversionDateConversionTypeEnum",
+    "PublicListConversionInactivityConversionTypeEnum",
+    "PublicListConversionInactivityTimeUnitEnum",
+    "PublicListConversionResponseRequestedConversionTimeConversionTypeEnum",
+    "PublicListConversionResponseRequestedConversionTimeTimeUnitEnum",
+    "PublicListConversionTimeConversionTypeEnum",
+    "PublicListConversionTimeTimeUnitEnum",
     "PublicMonthReferenceReferenceTypeEnum",
     "PublicMultiStringPropertyOperationOperationTypeEnum",
     "PublicNotAllFilterBranchFilterBranchTypeEnum",
@@ -361,7 +382,14 @@ let typeMap: {[index: string]: any} = {
     "PublicIndexedTimePoint": PublicIndexedTimePoint,
     "PublicIndexedTimePointIndexReference": PublicIndexedTimePointIndexReferenceClass,
     "PublicIntegrationEventFilter": PublicIntegrationEventFilter,
+    "PublicListConversionDate": PublicListConversionDate,
+    "PublicListConversionInactivity": PublicListConversionInactivity,
+    "PublicListConversionResponse": PublicListConversionResponse,
+    "PublicListConversionResponseRequestedConversionTime": PublicListConversionResponseRequestedConversionTimeClass,
+    "PublicListConversionTime": PublicListConversionTimeClass,
     "PublicListFolder": PublicListFolder,
+    "PublicListPermissions": PublicListPermissions,
+    "PublicMembershipSettings": PublicMembershipSettings,
     "PublicMigrationMapping": PublicMigrationMapping,
     "PublicMonthReference": PublicMonthReference,
     "PublicMultiStringPropertyOperation": PublicMultiStringPropertyOperation,
