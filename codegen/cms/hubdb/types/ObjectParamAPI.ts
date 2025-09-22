@@ -206,7 +206,7 @@ export interface RowsApiReadDraftTableRowsRequest {
      */
     limit?: number
     /**
-     * Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
+     * Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times.
      * Defaults to: undefined
      * @type Array&lt;string&gt;
      * @memberof RowsApireadDraftTableRows
@@ -354,7 +354,7 @@ export class ObjectRowsApi {
     }
 
     /**
-     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param param the request object
      */
@@ -363,7 +363,7 @@ export class ObjectRowsApi {
     }
 
     /**
-     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param param the request object
      */
@@ -390,7 +390,7 @@ export class ObjectRowsApi {
     }
 
     /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options.
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param param the request object
      */
@@ -399,7 +399,7 @@ export class ObjectRowsApi {
     }
 
     /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options.
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param param the request object
      */
@@ -845,6 +845,13 @@ export interface TablesApiGetAllDraftTablesRequest {
      * @memberof TablesApigetAllDraftTables
      */
     archived?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetAllDraftTables
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiGetAllTablesRequest {
@@ -925,6 +932,13 @@ export interface TablesApiGetAllTablesRequest {
      * @memberof TablesApigetAllTables
      */
     archived?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetAllTables
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiGetDraftTableDetailsByIdRequest {
@@ -935,13 +949,6 @@ export interface TablesApiGetDraftTableDetailsByIdRequest {
      * @memberof TablesApigetDraftTableDetailsById
      */
     tableIdOrName: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApigetDraftTableDetailsById
-     */
-    isGetLocalizedSchema?: boolean
     /**
      * Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * Defaults to: undefined
@@ -956,6 +963,13 @@ export interface TablesApiGetDraftTableDetailsByIdRequest {
      * @memberof TablesApigetDraftTableDetailsById
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetDraftTableDetailsById
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiGetTableDetailsRequest {
@@ -966,13 +980,6 @@ export interface TablesApiGetTableDetailsRequest {
      * @memberof TablesApigetTableDetails
      */
     tableIdOrName: string
-    /**
-     * 
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApigetTableDetails
-     */
-    isGetLocalizedSchema?: boolean
     /**
      * Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * Defaults to: undefined
@@ -987,6 +994,13 @@ export interface TablesApiGetTableDetailsRequest {
      * @memberof TablesApigetTableDetails
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApigetTableDetails
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export interface TablesApiImportDraftTableRequest {
@@ -1028,6 +1042,23 @@ export interface TablesApiPublishDraftTableRequest {
      * @memberof TablesApipublishDraftTable
      */
     includeForeignIds?: boolean
+}
+
+export interface TablesApiRemoveTableVersionRequest {
+    /**
+     * 
+     * Defaults to: undefined
+     * @type string
+     * @memberof TablesApiremoveTableVersion
+     */
+    tableIdOrName: string
+    /**
+     * 
+     * Defaults to: undefined
+     * @type number
+     * @memberof TablesApiremoveTableVersion
+     */
+    versionId: number
 }
 
 export interface TablesApiResetDraftTableRequest {
@@ -1079,13 +1110,6 @@ export interface TablesApiUpdateDraftTableRequest {
      */
     hubDbTableV3Request: HubDbTableV3Request
     /**
-     * 
-     * Defaults to: undefined
-     * @type boolean
-     * @memberof TablesApiupdateDraftTable
-     */
-    isGetLocalizedSchema?: boolean
-    /**
      * Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * Defaults to: undefined
      * @type boolean
@@ -1099,6 +1123,13 @@ export interface TablesApiUpdateDraftTableRequest {
      * @memberof TablesApiupdateDraftTable
      */
     includeForeignIds?: boolean
+    /**
+     * 
+     * Defaults to: undefined
+     * @type boolean
+     * @memberof TablesApiupdateDraftTable
+     */
+    isGetLocalizedSchema?: boolean
 }
 
 export class ObjectTablesApi {
@@ -1204,7 +1235,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getAllDraftTablesWithHttpInfo(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
-        return this.api.getAllDraftTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived,  options).toPromise();
+        return this.api.getAllDraftTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1213,7 +1244,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getAllDraftTables(param: TablesApiGetAllDraftTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        return this.api.getAllDraftTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived,  options).toPromise();
+        return this.api.getAllDraftTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1222,7 +1253,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getAllTablesWithHttpInfo(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
-        return this.api.getAllTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived,  options).toPromise();
+        return this.api.getAllTablesWithHttpInfo(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1231,7 +1262,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getAllTables(param: TablesApiGetAllTablesRequest = {}, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
-        return this.api.getAllTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived,  options).toPromise();
+        return this.api.getAllTables(param.sort, param.after, param.limit, param.createdAt, param.createdAfter, param.createdBefore, param.updatedAt, param.updatedAfter, param.updatedBefore, param.contentType, param.archived, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1240,7 +1271,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsByIdWithHttpInfo(param: TablesApiGetDraftTableDetailsByIdRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.getDraftTableDetailsByIdWithHttpInfo(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getDraftTableDetailsByIdWithHttpInfo(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1249,7 +1280,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getDraftTableDetailsById(param: TablesApiGetDraftTableDetailsByIdRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getDraftTableDetailsById(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1258,7 +1289,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetailsWithHttpInfo(param: TablesApiGetTableDetailsRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.getTableDetailsWithHttpInfo(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getTableDetailsWithHttpInfo(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1267,11 +1298,11 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public getTableDetails(param: TablesApiGetTableDetailsRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.getTableDetails(param.tableIdOrName, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.getTableDetails(param.tableIdOrName, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#import-rows-from-csv) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param param the request object
      */
@@ -1280,7 +1311,7 @@ export class ObjectTablesApi {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#import-rows-from-csv) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param param the request object
      */
@@ -1304,6 +1335,24 @@ export class ObjectTablesApi {
      */
     public publishDraftTable(param: TablesApiPublishDraftTableRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
         return this.api.publishDraftTable(param.tableIdOrName, param.includeForeignIds,  options).toPromise();
+    }
+
+    /**
+     * Delete a specific version of a table
+     * Delete a table version
+     * @param param the request object
+     */
+    public removeTableVersionWithHttpInfo(param: TablesApiRemoveTableVersionRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.removeTableVersionWithHttpInfo(param.tableIdOrName, param.versionId,  options).toPromise();
+    }
+
+    /**
+     * Delete a specific version of a table
+     * Delete a table version
+     * @param param the request object
+     */
+    public removeTableVersion(param: TablesApiRemoveTableVersionRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.removeTableVersion(param.tableIdOrName, param.versionId,  options).toPromise();
     }
 
     /**
@@ -1348,7 +1397,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTableWithHttpInfo(param: TablesApiUpdateDraftTableRequest, options?: ConfigurationOptions): Promise<HttpInfo<HubDbTableV3>> {
-        return this.api.updateDraftTableWithHttpInfo(param.tableIdOrName, param.hubDbTableV3Request, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.updateDraftTableWithHttpInfo(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
     /**
@@ -1357,7 +1406,7 @@ export class ObjectTablesApi {
      * @param param the request object
      */
     public updateDraftTable(param: TablesApiUpdateDraftTableRequest, options?: ConfigurationOptions): Promise<HubDbTableV3> {
-        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.isGetLocalizedSchema, param.archived, param.includeForeignIds,  options).toPromise();
+        return this.api.updateDraftTable(param.tableIdOrName, param.hubDbTableV3Request, param.archived, param.includeForeignIds, param.isGetLocalizedSchema,  options).toPromise();
     }
 
 }
