@@ -35,7 +35,7 @@ export class PromiseRowsApi {
      * Clone a row
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [name] 
+     * @param [name]
      */
     public cloneDraftTableRowWithHttpInfo(tableIdOrName: string, rowId: string, name?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -59,7 +59,7 @@ export class PromiseRowsApi {
      * Clone a row
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [name] 
+     * @param [name]
      */
     public cloneDraftTableRow(tableIdOrName: string, rowId: string, name?: string, _options?: PromiseConfigurationOptions): Promise<HubDbTableRowV3> {
         let observableOptions: undefined | ConfigurationOptions
@@ -129,7 +129,7 @@ export class PromiseRowsApi {
      * Get a row from the draft table
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [archived] 
+     * @param [archived]
      */
     public getDraftTableRowByIdWithHttpInfo(tableIdOrName: string, rowId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -153,7 +153,7 @@ export class PromiseRowsApi {
      * Get a row from the draft table
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [archived] 
+     * @param [archived]
      */
     public getDraftTableRowById(tableIdOrName: string, rowId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HubDbTableRowV3> {
         let observableOptions: undefined | ConfigurationOptions
@@ -177,7 +177,7 @@ export class PromiseRowsApi {
      * Get a table row
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [archived] 
+     * @param [archived]
      */
     public getTableRowWithHttpInfo(tableIdOrName: string, rowId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<HubDbTableRowV3>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -201,7 +201,7 @@ export class PromiseRowsApi {
      * Get a table row
      * @param tableIdOrName The ID or name of the table
      * @param rowId The ID of the row
-     * @param [archived] 
+     * @param [archived]
      */
     public getTableRow(tableIdOrName: string, rowId: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HubDbTableRowV3> {
         let observableOptions: undefined | ConfigurationOptions
@@ -221,15 +221,15 @@ export class PromiseRowsApi {
     }
 
     /**
-     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param tableIdOrName The ID or name of the table to query.
      * @param [sort] Specifies the column names to sort the results by. See the above description for more details.
      * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [limit] The maximum number of results to return. Default is &#x60;1000&#x60;.
      * @param [properties] Specify the column names to get results containing only the required columns instead of all column details.
-     * @param [offset] 
-     * @param [archived] 
+     * @param [offset]
+     * @param [archived]
      */
     public getTableRowsWithHttpInfo(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -249,15 +249,15 @@ export class PromiseRowsApi {
     }
 
     /**
-     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
+     * Returns a set of rows in the published version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options. **Note:** This endpoint can be accessed without any authentication, if the table is set to be allowed for public access.
      * Get rows for a table
      * @param tableIdOrName The ID or name of the table to query.
      * @param [sort] Specifies the column names to sort the results by. See the above description for more details.
      * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [limit] The maximum number of results to return. Default is &#x60;1000&#x60;.
      * @param [properties] Specify the column names to get results containing only the required columns instead of all column details.
-     * @param [offset] 
-     * @param [archived] 
+     * @param [offset]
+     * @param [archived]
      */
     public getTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3> {
         let observableOptions: undefined | ConfigurationOptions
@@ -323,15 +323,15 @@ export class PromiseRowsApi {
     }
 
     /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options.
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param tableIdOrName The ID or name of the table to query.
      * @param [sort] Specifies the column names to sort the results by.
      * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [limit] The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * @param [properties] Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-     * @param [offset] 
-     * @param [archived] 
+     * @param [properties] Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times.
+     * @param [offset]
+     * @param [archived]
      */
     public readDraftTableRowsWithHttpInfo(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -351,15 +351,15 @@ export class PromiseRowsApi {
     }
 
     /**
-     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#filter-returned-rows) for detailed filtering and sorting options.
+     * Returns rows in the draft version of the specified table. Row results can be filtered and sorted. Filtering and sorting options will be sent as query parameters to the API request. For example, by adding the query parameters `column1__gt=5&sort=-column1`, API returns the rows with values for column `column1` greater than 5 and in the descending order of `column1` values. Refer to the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#filtering-and-sorting-table-rows) for detailed filtering and sorting options.
      * Get rows from draft table
      * @param tableIdOrName The ID or name of the table to query.
      * @param [sort] Specifies the column names to sort the results by.
      * @param [after] The cursor token value to get the next set of results. You can get this from the &#x60;paging.next.after&#x60; JSON property of a paged response containing more results.
      * @param [limit] The maximum number of results to return. Default is &#x60;1000&#x60;.
-     * @param [properties] Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times. 
-     * @param [offset] 
-     * @param [archived] 
+     * @param [properties] Specify the column names to get results containing only the required columns instead of all column details. If you want to include multiple columns in the result, use this query param as many times.
+     * @param [offset]
+     * @param [archived]
      */
     public readDraftTableRows(tableIdOrName: string, sort?: Array<string>, after?: string, limit?: number, properties?: Array<string>, offset?: number, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3> {
         let observableOptions: undefined | ConfigurationOptions
@@ -1072,10 +1072,11 @@ export class PromiseTablesApi {
      * @param [updatedAt] Only return tables last updated at exactly the specified time.
      * @param [updatedAfter] Only return tables last updated after the specified time.
      * @param [updatedBefore] Only return tables last updated before the specified time.
-     * @param [contentType] 
+     * @param [contentType]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param [isGetLocalizedSchema]
      */
-    public getAllDraftTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
+    public getAllDraftTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1088,7 +1089,7 @@ export class PromiseTablesApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getAllDraftTablesWithHttpInfo(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, observableOptions);
+        const result = this.api.getAllDraftTablesWithHttpInfo(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, isGetLocalizedSchema, observableOptions);
         return result.toPromise();
     }
 
@@ -1104,10 +1105,11 @@ export class PromiseTablesApi {
      * @param [updatedAt] Only return tables last updated at exactly the specified time.
      * @param [updatedAfter] Only return tables last updated after the specified time.
      * @param [updatedBefore] Only return tables last updated before the specified time.
-     * @param [contentType] 
+     * @param [contentType]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param [isGetLocalizedSchema]
      */
-    public getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+    public getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1120,7 +1122,7 @@ export class PromiseTablesApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getAllDraftTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, observableOptions);
+        const result = this.api.getAllDraftTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, isGetLocalizedSchema, observableOptions);
         return result.toPromise();
     }
 
@@ -1136,10 +1138,11 @@ export class PromiseTablesApi {
      * @param [updatedAt] Only return tables last updated at exactly the specified time.
      * @param [updatedAfter] Only return tables last updated after the specified time.
      * @param [updatedBefore] Only return tables last updated before the specified time.
-     * @param [contentType] 
+     * @param [contentType]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param [isGetLocalizedSchema]
      */
-    public getAllTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
+    public getAllTablesWithHttpInfo(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalHubDbTableV3ForwardPaging>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1152,7 +1155,7 @@ export class PromiseTablesApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getAllTablesWithHttpInfo(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, observableOptions);
+        const result = this.api.getAllTablesWithHttpInfo(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, isGetLocalizedSchema, observableOptions);
         return result.toPromise();
     }
 
@@ -1168,10 +1171,11 @@ export class PromiseTablesApi {
      * @param [updatedAt] Only return tables last updated at exactly the specified time.
      * @param [updatedAfter] Only return tables last updated after the specified time.
      * @param [updatedBefore] Only return tables last updated before the specified time.
-     * @param [contentType] 
+     * @param [contentType]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param [isGetLocalizedSchema]
      */
-    public getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
+    public getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalHubDbTableV3ForwardPaging> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -1184,7 +1188,7 @@ export class PromiseTablesApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.getAllTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, observableOptions);
+        const result = this.api.getAllTables(sort, after, limit, createdAt, createdAfter, createdBefore, updatedAt, updatedAfter, updatedBefore, contentType, archived, isGetLocalizedSchema, observableOptions);
         return result.toPromise();
     }
 
@@ -1192,7 +1196,7 @@ export class PromiseTablesApi {
      * Get the details for the draft version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -1217,7 +1221,7 @@ export class PromiseTablesApi {
      * Get the details for the draft version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -1242,7 +1246,7 @@ export class PromiseTablesApi {
      * Returns the details for the published version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access. To do so, you\'ll need to include the HubSpot account ID in a `portalId` query parameter.
      * Get details of a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -1267,7 +1271,7 @@ export class PromiseTablesApi {
      * Returns the details for the published version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access. To do so, you\'ll need to include the HubSpot account ID in a `portalId` query parameter.
      * Get details of a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -1289,7 +1293,7 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#import-rows-from-csv) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
      * @param [config]
@@ -1313,7 +1317,7 @@ export class PromiseTablesApi {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#import-rows-from-csv) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
      * @param [config]
@@ -1379,6 +1383,52 @@ export class PromiseTablesApi {
 	    }
 	}
         const result = this.api.publishDraftTable(tableIdOrName, includeForeignIds, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a specific version of a table
+     * Delete a table version
+     * @param tableIdOrName
+     * @param versionId
+     */
+    public removeTableVersionWithHttpInfo(tableIdOrName: string, versionId: number, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.removeTableVersionWithHttpInfo(tableIdOrName, versionId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete a specific version of a table
+     * Delete a table version
+     * @param tableIdOrName
+     * @param versionId
+     */
+    public removeTableVersion(tableIdOrName: string, versionId: number, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.removeTableVersion(tableIdOrName, versionId, observableOptions);
         return result.toPromise();
     }
 
@@ -1479,7 +1529,7 @@ export class PromiseTablesApi {
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
      * @param hubDbTableV3Request
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -1505,7 +1555,7 @@ export class PromiseTablesApi {
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
      * @param hubDbTableV3Request
-     * @param [isGetLocalizedSchema] 
+     * @param [isGetLocalizedSchema]
      * @param [archived] Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param [includeForeignIds] Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
