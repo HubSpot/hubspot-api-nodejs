@@ -50,7 +50,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -63,7 +63,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * Clone an existing HubDB table. The `newName` and `newLabel` of the new table can be sent as JSON in the request body. This will create the cloned table as a draft.
      * Clone a table
      * @param tableIdOrName The ID or name of the table to clone.
-     * @param hubDbTableCloneRequest 
+     * @param hubDbTableCloneRequest
      */
     public async cloneDraftTable(tableIdOrName: string, hubDbTableCloneRequest: HubDbTableCloneRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -106,7 +106,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -118,7 +118,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Creates a new draft HubDB table given a JSON schema. The table name and label should be unique for each account.
      * Create a new table
-     * @param hubDbTableV3Request 
+     * @param hubDbTableV3Request
      */
     public async createTable(hubDbTableV3Request: HubDbTableV3Request, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -154,7 +154,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -199,7 +199,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -244,7 +244,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -265,11 +265,13 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAt Only return tables last updated at exactly the specified time.
      * @param updatedAfter Only return tables last updated after the specified time.
      * @param updatedBefore Only return tables last updated before the specified time.
-     * @param contentType 
+     * @param contentType
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param isGetLocalizedSchema
      */
-    public async getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAllDraftTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -347,6 +349,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
+        // Query Params
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -354,7 +361,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -375,11 +382,13 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * @param updatedAt Only return tables last updated at exactly the specified time.
      * @param updatedAfter Only return tables last updated after the specified time.
      * @param updatedBefore Only return tables last updated before the specified time.
-     * @param contentType 
+     * @param contentType
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
+     * @param isGetLocalizedSchema
      */
-    public async getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, _options?: Configuration): Promise<RequestContext> {
+    public async getAllTables(sort?: Array<string>, after?: string, limit?: number, createdAt?: Date, createdAfter?: Date, createdBefore?: Date, updatedAt?: Date, updatedAfter?: Date, updatedBefore?: Date, contentType?: string, archived?: boolean, isGetLocalizedSchema?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -457,6 +466,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
 
+        // Query Params
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -464,7 +478,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -477,7 +491,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * Get the details for the draft version of a specific HubDB table. This will include the definitions for the columns in the table and the number of rows in the table.
      * Get details for a draft table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param isGetLocalizedSchema 
+     * @param isGetLocalizedSchema
      * @param archived Set this to &#x60;true&#x60; to return an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -502,11 +516,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (isGetLocalizedSchema !== undefined) {
-            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
-        }
-
-        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
@@ -516,6 +525,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
+        // Query Params
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -523,7 +537,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -536,7 +550,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * Returns the details for the published version of the specified table. This will include the definitions for the columns in the table and the number of rows in the table.  **Note:** This endpoint can be accessed without any authentication if the table is set to be allowed for public access. To do so, you\'ll need to include the HubSpot account ID in a `portalId` query parameter.
      * Get details of a published table
      * @param tableIdOrName The ID or name of the table to return.
-     * @param isGetLocalizedSchema 
+     * @param isGetLocalizedSchema
      * @param archived Set this to &#x60;true&#x60; to return details for an archived table. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -561,11 +575,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (isGetLocalizedSchema !== undefined) {
-            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
-        }
-
-        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
@@ -575,6 +584,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
         }
 
+        // Query Params
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -582,7 +596,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -592,11 +606,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api-reference/cms-hubdb-v3/guide#import-rows-from-csv) to check the details and format of the JSON-formatted options for the import.
+     * Import the contents of a CSV file into an existing HubDB table. The data will always be imported into the draft version of the table. Use the `/publish` endpoint to push these changes to the published version. This endpoint takes a multi-part POST request. The first part will be a set of JSON-formatted options for the import and you can specify this with the name as `config`.  The second part will be the CSV file you want to import and you can specify this with the name as `file`. Refer the [overview section](https://developers.hubspot.com/docs/api/cms/hubdb#importing-tables) to check the details and format of the JSON-formatted options for the import.
      * Import data into draft table
      * @param tableIdOrName The ID of the destination table where data will be imported.
-     * @param config 
-     * @param file 
+     * @param config
+     * @param file
      */
     public async importDraftTable(tableIdOrName: string, config?: string, file?: HttpFile, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -655,7 +669,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -700,7 +714,53 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Delete a specific version of a table
+     * Delete a table version
+     * @param tableIdOrName
+     * @param versionId
+     */
+    public async removeTableVersion(tableIdOrName: string, versionId: number, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'tableIdOrName' is not null or undefined
+        if (tableIdOrName === null || tableIdOrName === undefined) {
+            throw new RequiredError("TablesApi", "removeTableVersion", "tableIdOrName");
+        }
+
+
+        // verify required parameter 'versionId' is not null or undefined
+        if (versionId === null || versionId === undefined) {
+            throw new RequiredError("TablesApi", "removeTableVersion", "versionId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/cms/v3/hubdb/tables/{tableIdOrName}/versions/{versionId}'
+            .replace('{' + 'tableIdOrName' + '}', encodeURIComponent(String(tableIdOrName)))
+            .replace('{' + 'versionId' + '}', encodeURIComponent(String(versionId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -745,7 +805,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -790,7 +850,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -803,8 +863,8 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
      * Update an existing HubDB table. You can use this endpoint to add or remove columns to the table as well as restore an archived table. Tables updated using the endpoint will only modify the draft verion of the table. Use the `/publish` endpoint to push all the changes to the published version. To restore a table, include the query parameter `archived=true` and `\"archived\": false` in the json body. **Note:** You need to include all the columns in the input when you are adding/removing/updating a column. If you do not include an already existing column in the request, it will be deleted.
      * Update an existing table
      * @param tableIdOrName The ID or name of the table to update.
-     * @param hubDbTableV3Request 
-     * @param isGetLocalizedSchema 
+     * @param hubDbTableV3Request
+     * @param isGetLocalizedSchema
      * @param archived Specifies whether to return archived tables. Defaults to &#x60;false&#x60;.
      * @param includeForeignIds Set this to &#x60;true&#x60; to populate foreign ID values in the result.
      */
@@ -835,11 +895,6 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
         // Query Params
-        if (isGetLocalizedSchema !== undefined) {
-            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
-        }
-
-        // Query Params
         if (archived !== undefined) {
             requestContext.setQueryParam("archived", ObjectSerializer.serialize(archived, "boolean", ""));
         }
@@ -847,6 +902,11 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (includeForeignIds !== undefined) {
             requestContext.setQueryParam("includeForeignIds", ObjectSerializer.serialize(includeForeignIds, "boolean", ""));
+        }
+
+        // Query Params
+        if (isGetLocalizedSchema !== undefined) {
+            requestContext.setQueryParam("isGetLocalizedSchema", ObjectSerializer.serialize(isGetLocalizedSchema, "boolean", ""));
         }
 
 
@@ -867,7 +927,7 @@ export class TablesApiRequestFactory extends BaseAPIRequestFactory {
         if (authMethod?.applySecurityAuthentication) {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
-        
+
         const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
@@ -1260,6 +1320,38 @@ export class TablesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "HubDbTableV3", ""
             ) as HubDbTableV3;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to removeTableVersion
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async removeTableVersionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

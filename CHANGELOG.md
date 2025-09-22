@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.3.0...HEAD)
 
+## [13.4.0] - 2025-09-22
+
+## Updates
+
+- Added `isGetLocalizedSchema` after `archived` parameters to `cms.hubdb.tablesApi.getAllDraftTables()` and `cms.hubdb.tablesApi.getAllTables()`.
+- Added new method `cms.hubdb.tablesApi.removeTableVersion()`
+- Added property `maxNumberOfCharacters` and `maxNumberOfOptions` to `cms/hubdb/models/FileUpdateInput`.
+- Added `discriminator` and `mapping` to `cms/hubdb/models/UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3`.
+
 ## [13.3.0] - 2025-09-18
 
 ## Updates
