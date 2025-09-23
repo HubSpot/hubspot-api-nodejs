@@ -18,6 +18,8 @@ import { ListsByIdResponse } from '../models/ListsByIdResponse';
 import { MembershipChangeRequest } from '../models/MembershipChangeRequest';
 import { MembershipsUpdateResponse } from '../models/MembershipsUpdateResponse';
 import { PublicBatchMigrationMapping } from '../models/PublicBatchMigrationMapping';
+import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
+import { PublicListConversionTime } from '../models/PublicListConversionTime';
 import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
 
 import { ObservableFoldersApi } from "./ObservableAPI";
@@ -44,14 +46,14 @@ export interface FoldersApiGetAllRequest {
 
 export interface FoldersApiMoveRequest {
     /**
-     * 
+     * The ID of the folder to move
      * Defaults to: undefined
      * @type string
      * @memberof FoldersApimove
      */
     folderId: string
     /**
-     * 
+     * The ID for the target parent folder.
      * Defaults to: undefined
      * @type string
      * @memberof FoldersApimove
@@ -70,7 +72,7 @@ export interface FoldersApiMoveListRequest {
 
 export interface FoldersApiRemoveRequest {
     /**
-     * 
+     * The ID of the folder to delete
      * Defaults to: undefined
      * @type string
      * @memberof FoldersApiremove
@@ -80,14 +82,14 @@ export interface FoldersApiRemoveRequest {
 
 export interface FoldersApiRenameRequest {
     /**
-     * 
+     * The ID of the folder to rename
      * Defaults to: undefined
      * @type string
      * @memberof FoldersApirename
      */
     folderId: string
     /**
-     * 
+     * The new name of the folder.
      * Defaults to: undefined
      * @type string
      * @memberof FoldersApirename
@@ -215,6 +217,16 @@ export class ObjectFoldersApi {
 import { ObservableListsApi } from "./ObservableAPI";
 import { ListsApiRequestFactory, ListsApiResponseProcessor} from "../apis/ListsApi";
 
+export interface ListsApiCancelConversionRequest {
+    /**
+     * The ID of the list that you want to cancel the conversion for.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ListsApicancelConversion
+     */
+    listId: string
+}
+
 export interface ListsApiCreateRequest {
     /**
      * 
@@ -226,7 +238,7 @@ export interface ListsApiCreateRequest {
 
 export interface ListsApiDoSearchRequest {
     /**
-     * 
+     * The IDs of the records to add and/or remove from the list.
      * @type ListSearchRequest
      * @memberof ListsApidoSearch
      */
@@ -291,6 +303,16 @@ export interface ListsApiGetByNameRequest {
     includeFilters?: boolean
 }
 
+export interface ListsApiGetConversionDetailsRequest {
+    /**
+     * The ID of the list to schedule the conversion for.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ListsApigetConversionDetails
+     */
+    listId: string
+}
+
 export interface ListsApiRemoveRequest {
     /**
      * The **ILS ID** of the list to delete.
@@ -309,6 +331,22 @@ export interface ListsApiRestoreRequest {
      * @memberof ListsApirestore
      */
     listId: string
+}
+
+export interface ListsApiScheduleOrUpdateConversionRequest {
+    /**
+     * The ID of the list to schedule the conversion for.
+     * Defaults to: undefined
+     * @type string
+     * @memberof ListsApischeduleOrUpdateConversion
+     */
+    listId: string
+    /**
+     * 
+     * @type PublicListConversionTime
+     * @memberof ListsApischeduleOrUpdateConversion
+     */
+    publicListConversionTime: PublicListConversionTime
 }
 
 export interface ListsApiUpdateListFiltersRequest {
@@ -363,6 +401,24 @@ export class ObjectListsApi {
 
     public constructor(configuration: Configuration, requestFactory?: ListsApiRequestFactory, responseProcessor?: ListsApiResponseProcessor) {
         this.api = new ObservableListsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param param the request object
+     */
+    public cancelConversionWithHttpInfo(param: ListsApiCancelConversionRequest, options?: ConfigurationOptions): Promise<HttpInfo<void>> {
+        return this.api.cancelConversionWithHttpInfo(param.listId,  options).toPromise();
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param param the request object
+     */
+    public cancelConversion(param: ListsApiCancelConversionRequest, options?: ConfigurationOptions): Promise<void> {
+        return this.api.cancelConversion(param.listId,  options).toPromise();
     }
 
     /**
@@ -456,6 +512,24 @@ export class ObjectListsApi {
     }
 
     /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param param the request object
+     */
+    public getConversionDetailsWithHttpInfo(param: ListsApiGetConversionDetailsRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicListConversionResponse>> {
+        return this.api.getConversionDetailsWithHttpInfo(param.listId,  options).toPromise();
+    }
+
+    /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param param the request object
+     */
+    public getConversionDetails(param: ListsApiGetConversionDetailsRequest, options?: ConfigurationOptions): Promise<PublicListConversionResponse> {
+        return this.api.getConversionDetails(param.listId,  options).toPromise();
+    }
+
+    /**
      * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
      * Delete a List
      * @param param the request object
@@ -489,6 +563,24 @@ export class ObjectListsApi {
      */
     public restore(param: ListsApiRestoreRequest, options?: ConfigurationOptions): Promise<void> {
         return this.api.restore(param.listId,  options).toPromise();
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param param the request object
+     */
+    public scheduleOrUpdateConversionWithHttpInfo(param: ListsApiScheduleOrUpdateConversionRequest, options?: ConfigurationOptions): Promise<HttpInfo<PublicListConversionResponse>> {
+        return this.api.scheduleOrUpdateConversionWithHttpInfo(param.listId, param.publicListConversionTime,  options).toPromise();
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param param the request object
+     */
+    public scheduleOrUpdateConversion(param: ListsApiScheduleOrUpdateConversionRequest, options?: ConfigurationOptions): Promise<PublicListConversionResponse> {
+        return this.api.scheduleOrUpdateConversion(param.listId, param.publicListConversionTime,  options).toPromise();
     }
 
     /**
@@ -608,7 +700,7 @@ export interface MembershipsApiAddRequest {
      */
     listId: string
     /**
-     * 
+     * The IDs of the records to add to the list.
      * @type Array&lt;string&gt;
      * @memberof MembershipsApiadd
      */
@@ -641,7 +733,7 @@ export interface MembershipsApiAddAndRemoveRequest {
      */
     listId: string
     /**
-     * 
+     * The IDs of the records to add and/or remove from the list.
      * @type MembershipChangeRequest
      * @memberof MembershipsApiaddAndRemove
      */
@@ -736,7 +828,7 @@ export interface MembershipsApiRemoveRequest {
      */
     listId: string
     /**
-     * 
+     * The IDs of the records to remove from the list.
      * @type Array&lt;string&gt;
      * @memberof MembershipsApiremove
      */

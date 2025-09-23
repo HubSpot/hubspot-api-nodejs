@@ -11,15 +11,9 @@
  */
 
 
-export class ListMoveRequest {
-    /**
-    * The Id of the list to move.
-    */
-    'listId': string;
-    /**
-    * The Id of folder to move the list to, the root folder is Id 0.
-    */
-    'newFolderId': string;
+export class PublicMembershipSettings {
+    'membershipTeamId'?: number;
+    'includeUnassigned'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,20 +21,20 @@ export class ListMoveRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "listId",
-            "baseName": "listId",
-            "type": "string",
-            "format": ""
+            "name": "membershipTeamId",
+            "baseName": "membershipTeamId",
+            "type": "number",
+            "format": "int32"
         },
         {
-            "name": "newFolderId",
-            "baseName": "newFolderId",
-            "type": "string",
+            "name": "includeUnassigned",
+            "baseName": "includeUnassigned",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return ListMoveRequest.attributeTypeMap;
+        return PublicMembershipSettings.attributeTypeMap;
     }
 
     public constructor() {

@@ -16,11 +16,51 @@ import { ListSearchRequest } from '../models/ListSearchRequest';
 import { ListSearchResponse } from '../models/ListSearchResponse';
 import { ListUpdateResponse } from '../models/ListUpdateResponse';
 import { ListsByIdResponse } from '../models/ListsByIdResponse';
+import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
+import { PublicListConversionTime } from '../models/PublicListConversionTime';
 
 /**
  * no description
  */
 export class ListsApiRequestFactory extends BaseAPIRequestFactory {
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param listId The ID of the list that you want to cancel the conversion for.
+     */
+    public async cancelConversion(listId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListsApi", "cancelConversion", "listId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/lists/{listId}/schedule-conversion'
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
 
     /**
      * Create a new list with the provided object list definition.
@@ -73,7 +113,7 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest 
+     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
      */
     public async doSearch(listSearchRequest: ListSearchRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -264,6 +304,44 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param listId The ID of the list to schedule the conversion for.
+     */
+    public async getConversionDetails(listId: string, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListsApi", "getConversionDetails", "listId");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/lists/{listId}/schedule-conversion'
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
      * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
      * Delete a List
      * @param listId The **ILS ID** of the list to delete.
@@ -323,6 +401,62 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param listId The ID of the list to schedule the conversion for.
+     * @param publicListConversionTime 
+     */
+    public async scheduleOrUpdateConversion(listId: string, publicListConversionTime: PublicListConversionTime, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'listId' is not null or undefined
+        if (listId === null || listId === undefined) {
+            throw new RequiredError("ListsApi", "scheduleOrUpdateConversion", "listId");
+        }
+
+
+        // verify required parameter 'publicListConversionTime' is not null or undefined
+        if (publicListConversionTime === null || publicListConversionTime === undefined) {
+            throw new RequiredError("ListsApi", "scheduleOrUpdateConversion", "publicListConversionTime");
+        }
+
+
+        // Path Params
+        const localVarPath = '/crm/v3/lists/{listId}/schedule-conversion'
+            .replace('{' + 'listId' + '}', encodeURIComponent(String(listId)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PUT);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(publicListConversionTime, "PublicListConversionTime", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -457,6 +591,38 @@ export class ListsApiRequestFactory extends BaseAPIRequestFactory {
 }
 
 export class ListsApiResponseProcessor {
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to cancelConversion
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async cancelConversionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
 
     /**
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
@@ -642,6 +808,42 @@ export class ListsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
+     * @params response Response returned by the server for a request to getConversionDetails
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async getConversionDetailsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicListConversionResponse >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: PublicListConversionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PublicListConversionResponse", ""
+            ) as PublicListConversionResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: PublicListConversionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PublicListConversionResponse", ""
+            ) as PublicListConversionResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
      * @params response Response returned by the server for a request to remove
      * @throws ApiException if the response code was not in [200, 299]
      */
@@ -696,6 +898,42 @@ export class ListsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to scheduleOrUpdateConversion
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async scheduleOrUpdateConversionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<PublicListConversionResponse >> {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("200", response.httpStatusCode)) {
+            const body: PublicListConversionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PublicListConversionResponse", ""
+            ) as PublicListConversionResponse;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
+        }
+        if (isCodeInRange("0", response.httpStatusCode)) {
+            const body: Error = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "Error", ""
+            ) as Error;
+            throw new ApiException<Error>(response.httpStatusCode, "An error occurred.", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: PublicListConversionResponse = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "PublicListConversionResponse", ""
+            ) as PublicListConversionResponse;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

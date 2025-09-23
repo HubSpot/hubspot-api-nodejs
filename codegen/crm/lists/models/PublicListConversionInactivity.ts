@@ -11,10 +11,10 @@
  */
 
 
-export class PublicTimeOffset {
-    'amount': number;
-    'offsetDirection': string;
-    'timeUnit': string;
+export class PublicListConversionInactivity {
+    'offset': number;
+    'conversionType': PublicListConversionInactivityConversionTypeEnum;
+    'timeUnit': PublicListConversionInactivityTimeUnitEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -22,28 +22,38 @@ export class PublicTimeOffset {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "amount",
-            "baseName": "amount",
+            "name": "offset",
+            "baseName": "offset",
             "type": "number",
-            "format": "int64"
+            "format": "int32"
         },
         {
-            "name": "offsetDirection",
-            "baseName": "offsetDirection",
-            "type": "string",
+            "name": "conversionType",
+            "baseName": "conversionType",
+            "type": "PublicListConversionInactivityConversionTypeEnum",
             "format": ""
         },
         {
             "name": "timeUnit",
             "baseName": "timeUnit",
-            "type": "string",
+            "type": "PublicListConversionInactivityTimeUnitEnum",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicTimeOffset.attributeTypeMap;
+        return PublicListConversionInactivity.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+export enum PublicListConversionInactivityConversionTypeEnum {
+    Inactivity = 'INACTIVITY'
+}
+export enum PublicListConversionInactivityTimeUnitEnum {
+    Day = 'DAY',
+    Week = 'WEEK',
+    Month = 'MONTH'
+}
+

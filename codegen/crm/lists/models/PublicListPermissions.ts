@@ -11,15 +11,9 @@
  */
 
 
-export class ListMoveRequest {
-    /**
-    * The Id of the list to move.
-    */
-    'listId': string;
-    /**
-    * The Id of folder to move the list to, the root folder is Id 0.
-    */
-    'newFolderId': string;
+export class PublicListPermissions {
+    'teamsWithEditAccess': Array<number>;
+    'usersWithEditAccess': Array<number>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -27,20 +21,20 @@ export class ListMoveRequest {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "listId",
-            "baseName": "listId",
-            "type": "string",
-            "format": ""
+            "name": "teamsWithEditAccess",
+            "baseName": "teamsWithEditAccess",
+            "type": "Array<number>",
+            "format": "int32"
         },
         {
-            "name": "newFolderId",
-            "baseName": "newFolderId",
-            "type": "string",
-            "format": ""
+            "name": "usersWithEditAccess",
+            "baseName": "usersWithEditAccess",
+            "type": "Array<number>",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return ListMoveRequest.attributeTypeMap;
+        return PublicListPermissions.attributeTypeMap;
     }
 
     public constructor() {

@@ -20,6 +20,8 @@ import { ListsByIdResponse } from '../models/ListsByIdResponse';
 import { MembershipChangeRequest } from '../models/MembershipChangeRequest';
 import { MembershipsUpdateResponse } from '../models/MembershipsUpdateResponse';
 import { PublicBatchMigrationMapping } from '../models/PublicBatchMigrationMapping';
+import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
+import { PublicListConversionTime } from '../models/PublicListConversionTime';
 import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
 
 import { FoldersApiRequestFactory, FoldersApiResponseProcessor} from "../apis/FoldersApi";
@@ -165,8 +167,8 @@ export class ObservableFoldersApi {
     /**
      * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
      * Moves a folder
-     * @param folderId 
-     * @param newParentFolderId 
+     * @param folderId The ID of the folder to move
+     * @param newParentFolderId The ID for the target parent folder.
      */
     public moveWithHttpInfo(folderId: string, newParentFolderId: string, _options?: ConfigurationOptions): Observable<HttpInfo<ListFolderFetchResponse>> {
     let _config = this.configuration;
@@ -219,8 +221,8 @@ export class ObservableFoldersApi {
     /**
      * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
      * Moves a folder
-     * @param folderId 
-     * @param newParentFolderId 
+     * @param folderId The ID of the folder to move
+     * @param newParentFolderId The ID for the target parent folder.
      */
     public move(folderId: string, newParentFolderId: string, _options?: ConfigurationOptions): Observable<ListFolderFetchResponse> {
         return this.moveWithHttpInfo(folderId, newParentFolderId, _options).pipe(map((apiResponse: HttpInfo<ListFolderFetchResponse>) => apiResponse.data));
@@ -291,7 +293,7 @@ export class ObservableFoldersApi {
     /**
      * Deletes the folder with the given Id.
      * Deletes a folder
-     * @param folderId 
+     * @param folderId The ID of the folder to delete
      */
     public removeWithHttpInfo(folderId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
     let _config = this.configuration;
@@ -344,7 +346,7 @@ export class ObservableFoldersApi {
     /**
      * Deletes the folder with the given Id.
      * Deletes a folder
-     * @param folderId 
+     * @param folderId The ID of the folder to delete
      */
     public remove(folderId: string, _options?: ConfigurationOptions): Observable<void> {
         return this.removeWithHttpInfo(folderId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
@@ -353,8 +355,8 @@ export class ObservableFoldersApi {
     /**
      * Renames the given folderId with a new name.
      * Rename a folder
-     * @param folderId 
-     * @param [newFolderName] 
+     * @param folderId The ID of the folder to rename
+     * @param [newFolderName] The new name of the folder.
      */
     public renameWithHttpInfo(folderId: string, newFolderName?: string, _options?: ConfigurationOptions): Observable<HttpInfo<ListFolderFetchResponse>> {
     let _config = this.configuration;
@@ -407,8 +409,8 @@ export class ObservableFoldersApi {
     /**
      * Renames the given folderId with a new name.
      * Rename a folder
-     * @param folderId 
-     * @param [newFolderName] 
+     * @param folderId The ID of the folder to rename
+     * @param [newFolderName] The new name of the folder.
      */
     public rename(folderId: string, newFolderName?: string, _options?: ConfigurationOptions): Observable<ListFolderFetchResponse> {
         return this.renameWithHttpInfo(folderId, newFolderName, _options).pipe(map((apiResponse: HttpInfo<ListFolderFetchResponse>) => apiResponse.data));
@@ -430,6 +432,68 @@ export class ObservableListsApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new ListsApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new ListsApiResponseProcessor();
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param listId The ID of the list that you want to cancel the conversion for.
+     */
+    public cancelConversionWithHttpInfo(listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<void>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.cancelConversion(listId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.cancelConversionWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param listId The ID of the list that you want to cancel the conversion for.
+     */
+    public cancelConversion(listId: string, _options?: ConfigurationOptions): Observable<void> {
+        return this.cancelConversionWithHttpInfo(listId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
     }
 
     /**
@@ -497,7 +561,7 @@ export class ObservableListsApi {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest
+     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
      */
     public doSearchWithHttpInfo(listSearchRequest: ListSearchRequest, _options?: ConfigurationOptions): Observable<HttpInfo<ListSearchResponse>> {
     let _config = this.configuration;
@@ -550,7 +614,7 @@ export class ObservableListsApi {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest
+     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
      */
     public doSearch(listSearchRequest: ListSearchRequest, _options?: ConfigurationOptions): Observable<ListSearchResponse> {
         return this.doSearchWithHttpInfo(listSearchRequest, _options).pipe(map((apiResponse: HttpInfo<ListSearchResponse>) => apiResponse.data));
@@ -751,6 +815,68 @@ export class ObservableListsApi {
     }
 
     /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param listId The ID of the list to schedule the conversion for.
+     */
+    public getConversionDetailsWithHttpInfo(listId: string, _options?: ConfigurationOptions): Observable<HttpInfo<PublicListConversionResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.getConversionDetails(listId, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.getConversionDetailsWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param listId The ID of the list to schedule the conversion for.
+     */
+    public getConversionDetails(listId: string, _options?: ConfigurationOptions): Observable<PublicListConversionResponse> {
+        return this.getConversionDetailsWithHttpInfo(listId, _options).pipe(map((apiResponse: HttpInfo<PublicListConversionResponse>) => apiResponse.data));
+    }
+
+    /**
      * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
      * Delete a List
      * @param listId The **ILS ID** of the list to delete.
@@ -872,6 +998,70 @@ export class ObservableListsApi {
      */
     public restore(listId: string, _options?: ConfigurationOptions): Observable<void> {
         return this.restoreWithHttpInfo(listId, _options).pipe(map((apiResponse: HttpInfo<void>) => apiResponse.data));
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param listId The ID of the list to schedule the conversion for.
+     * @param publicListConversionTime
+     */
+    public scheduleOrUpdateConversionWithHttpInfo(listId: string, publicListConversionTime: PublicListConversionTime, _options?: ConfigurationOptions): Observable<HttpInfo<PublicListConversionResponse>> {
+    let _config = this.configuration;
+    let allMiddleware: Middleware[] = [];
+    if (_options && _options.middleware){
+      const middlewareMergeStrategy = _options.middlewareMergeStrategy || 'replace' // default to replace behavior
+      // call-time middleware provided
+      const calltimeMiddleware: Middleware[] = _options.middleware;
+
+      switch(middlewareMergeStrategy){
+      case 'append':
+        allMiddleware = this.configuration.middleware.concat(calltimeMiddleware);
+        break;
+      case 'prepend':
+        allMiddleware = calltimeMiddleware.concat(this.configuration.middleware)
+        break;
+      case 'replace':
+        allMiddleware = calltimeMiddleware
+        break;
+      default: 
+        throw new Error(`unrecognized middleware merge strategy '${middlewareMergeStrategy}'`)
+      }
+	}
+	if (_options){
+    _config = {
+      baseServer: _options.baseServer || this.configuration.baseServer,
+      httpApi: _options.httpApi || this.configuration.httpApi,
+      authMethods: _options.authMethods || this.configuration.authMethods,
+      middleware: allMiddleware || this.configuration.middleware
+		};
+	}
+
+        const requestContextPromise = this.requestFactory.scheduleOrUpdateConversion(listId, publicListConversionTime, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of allMiddleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of allMiddleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.scheduleOrUpdateConversionWithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param listId The ID of the list to schedule the conversion for.
+     * @param publicListConversionTime
+     */
+    public scheduleOrUpdateConversion(listId: string, publicListConversionTime: PublicListConversionTime, _options?: ConfigurationOptions): Observable<PublicListConversionResponse> {
+        return this.scheduleOrUpdateConversionWithHttpInfo(listId, publicListConversionTime, _options).pipe(map((apiResponse: HttpInfo<PublicListConversionResponse>) => apiResponse.data));
     }
 
     /**
@@ -1170,7 +1360,7 @@ export class ObservableMembershipsApi {
      * Add the records provided to the list. Records that do not exist or that are already members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add Records to a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to add to the list.
      */
     public addWithHttpInfo(listId: string, requestBody: Array<string>, _options?: ConfigurationOptions): Observable<HttpInfo<MembershipsUpdateResponse>> {
     let _config = this.configuration;
@@ -1224,7 +1414,7 @@ export class ObservableMembershipsApi {
      * Add the records provided to the list. Records that do not exist or that are already members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add Records to a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to add to the list.
      */
     public add(listId: string, requestBody: Array<string>, _options?: ConfigurationOptions): Observable<MembershipsUpdateResponse> {
         return this.addWithHttpInfo(listId, requestBody, _options).pipe(map((apiResponse: HttpInfo<MembershipsUpdateResponse>) => apiResponse.data));
@@ -1298,7 +1488,7 @@ export class ObservableMembershipsApi {
      * Add and/or remove records that have already been created in the system to and/or from a list.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add and/or Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param membershipChangeRequest
+     * @param membershipChangeRequest The IDs of the records to add and/or remove from the list.
      */
     public addAndRemoveWithHttpInfo(listId: string, membershipChangeRequest: MembershipChangeRequest, _options?: ConfigurationOptions): Observable<HttpInfo<MembershipsUpdateResponse>> {
     let _config = this.configuration;
@@ -1352,7 +1542,7 @@ export class ObservableMembershipsApi {
      * Add and/or remove records that have already been created in the system to and/or from a list.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add and/or Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param membershipChangeRequest
+     * @param membershipChangeRequest The IDs of the records to add and/or remove from the list.
      */
     public addAndRemove(listId: string, membershipChangeRequest: MembershipChangeRequest, _options?: ConfigurationOptions): Observable<MembershipsUpdateResponse> {
         return this.addAndRemoveWithHttpInfo(listId, membershipChangeRequest, _options).pipe(map((apiResponse: HttpInfo<MembershipsUpdateResponse>) => apiResponse.data));
@@ -1562,7 +1752,7 @@ export class ObservableMembershipsApi {
      * Remove the records provided from the list. Records that do not exist or that are not members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to remove from the list.
      */
     public removeWithHttpInfo(listId: string, requestBody: Array<string>, _options?: ConfigurationOptions): Observable<HttpInfo<MembershipsUpdateResponse>> {
     let _config = this.configuration;
@@ -1616,7 +1806,7 @@ export class ObservableMembershipsApi {
      * Remove the records provided from the list. Records that do not exist or that are not members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to remove from the list.
      */
     public remove(listId: string, requestBody: Array<string>, _options?: ConfigurationOptions): Observable<MembershipsUpdateResponse> {
         return this.removeWithHttpInfo(listId, requestBody, _options).pipe(map((apiResponse: HttpInfo<MembershipsUpdateResponse>) => apiResponse.data));

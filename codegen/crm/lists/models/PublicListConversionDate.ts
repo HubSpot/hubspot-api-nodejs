@@ -11,12 +11,11 @@
  */
 
 
-export class PublicTodayReference {
-    'hour'?: number;
-    'millisecond'?: number;
-    'referenceType': PublicTodayReferenceReferenceTypeEnum;
-    'minute'?: number;
-    'second'?: number;
+export class PublicListConversionDate {
+    'month': number;
+    'year': number;
+    'conversionType': PublicListConversionDateConversionTypeEnum;
+    'day': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -24,45 +23,39 @@ export class PublicTodayReference {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "hour",
-            "baseName": "hour",
+            "name": "month",
+            "baseName": "month",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "millisecond",
-            "baseName": "millisecond",
+            "name": "year",
+            "baseName": "year",
             "type": "number",
             "format": "int32"
         },
         {
-            "name": "referenceType",
-            "baseName": "referenceType",
-            "type": "PublicTodayReferenceReferenceTypeEnum",
+            "name": "conversionType",
+            "baseName": "conversionType",
+            "type": "PublicListConversionDateConversionTypeEnum",
             "format": ""
         },
         {
-            "name": "minute",
-            "baseName": "minute",
-            "type": "number",
-            "format": "int32"
-        },
-        {
-            "name": "second",
-            "baseName": "second",
+            "name": "day",
+            "baseName": "day",
             "type": "number",
             "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicTodayReference.attributeTypeMap;
+        return PublicListConversionDate.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
 
-export enum PublicTodayReferenceReferenceTypeEnum {
-    Today = 'TODAY'
+export enum PublicListConversionDateConversionTypeEnum {
+    ConversionDate = 'CONVERSION_DATE'
 }
 

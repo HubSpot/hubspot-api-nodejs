@@ -106,8 +106,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
      * Moves a folder
-     * @param folderId 
-     * @param newParentFolderId 
+     * @param folderId The ID of the folder to move
+     * @param newParentFolderId The ID for the target parent folder.
      */
     public async move(folderId: string, newParentFolderId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -200,7 +200,7 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Deletes the folder with the given Id.
      * Deletes a folder
-     * @param folderId 
+     * @param folderId The ID of the folder to delete
      */
     public async remove(folderId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -238,8 +238,8 @@ export class FoldersApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Renames the given folderId with a new name.
      * Rename a folder
-     * @param folderId 
-     * @param newFolderName 
+     * @param folderId The ID of the folder to rename
+     * @param newFolderName The new name of the folder.
      */
     public async rename(folderId: string, newFolderName?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;

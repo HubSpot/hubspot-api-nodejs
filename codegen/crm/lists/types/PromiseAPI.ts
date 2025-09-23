@@ -19,6 +19,8 @@ import { ListsByIdResponse } from '../models/ListsByIdResponse';
 import { MembershipChangeRequest } from '../models/MembershipChangeRequest';
 import { MembershipsUpdateResponse } from '../models/MembershipsUpdateResponse';
 import { PublicBatchMigrationMapping } from '../models/PublicBatchMigrationMapping';
+import { PublicListConversionResponse } from '../models/PublicListConversionResponse';
+import { PublicListConversionTime } from '../models/PublicListConversionTime';
 import { PublicMigrationMapping } from '../models/PublicMigrationMapping';
 import { ObservableFoldersApi } from './ObservableAPI';
 
@@ -125,8 +127,8 @@ export class PromiseFoldersApi {
     /**
      * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
      * Moves a folder
-     * @param folderId 
-     * @param newParentFolderId 
+     * @param folderId The ID of the folder to move
+     * @param newParentFolderId The ID for the target parent folder.
      */
     public moveWithHttpInfo(folderId: string, newParentFolderId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ListFolderFetchResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -148,8 +150,8 @@ export class PromiseFoldersApi {
     /**
      * This moves the folder from its current location to a new location. It updates the parent of this folder to the new Id given.
      * Moves a folder
-     * @param folderId 
-     * @param newParentFolderId 
+     * @param folderId The ID of the folder to move
+     * @param newParentFolderId The ID for the target parent folder.
      */
     public move(folderId: string, newParentFolderId: string, _options?: PromiseConfigurationOptions): Promise<ListFolderFetchResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -215,7 +217,7 @@ export class PromiseFoldersApi {
     /**
      * Deletes the folder with the given Id.
      * Deletes a folder
-     * @param folderId 
+     * @param folderId The ID of the folder to delete
      */
     public removeWithHttpInfo(folderId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -237,7 +239,7 @@ export class PromiseFoldersApi {
     /**
      * Deletes the folder with the given Id.
      * Deletes a folder
-     * @param folderId 
+     * @param folderId The ID of the folder to delete
      */
     public remove(folderId: string, _options?: PromiseConfigurationOptions): Promise<void> {
         let observableOptions: undefined | ConfigurationOptions
@@ -259,8 +261,8 @@ export class PromiseFoldersApi {
     /**
      * Renames the given folderId with a new name.
      * Rename a folder
-     * @param folderId 
-     * @param [newFolderName] 
+     * @param folderId The ID of the folder to rename
+     * @param [newFolderName] The new name of the folder.
      */
     public renameWithHttpInfo(folderId: string, newFolderName?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ListFolderFetchResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -282,8 +284,8 @@ export class PromiseFoldersApi {
     /**
      * Renames the given folderId with a new name.
      * Rename a folder
-     * @param folderId 
-     * @param [newFolderName] 
+     * @param folderId The ID of the folder to rename
+     * @param [newFolderName] The new name of the folder.
      */
     public rename(folderId: string, newFolderName?: string, _options?: PromiseConfigurationOptions): Promise<ListFolderFetchResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -319,6 +321,50 @@ export class PromiseListsApi {
         responseProcessor?: ListsApiResponseProcessor
     ) {
         this.api = new ObservableListsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param listId The ID of the list that you want to cancel the conversion for.
+     */
+    public cancelConversionWithHttpInfo(listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cancelConversionWithHttpInfo(listId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete an existing scheduled conversion for a list.
+     * Cancel the conversion of a list
+     * @param listId The ID of the list that you want to cancel the conversion for.
+     */
+    public cancelConversion(listId: string, _options?: PromiseConfigurationOptions): Promise<void> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.cancelConversion(listId, observableOptions);
+        return result.toPromise();
     }
 
     /**
@@ -368,7 +414,7 @@ export class PromiseListsApi {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest
+     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
      */
     public doSearchWithHttpInfo(listSearchRequest: ListSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<ListSearchResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -390,7 +436,7 @@ export class PromiseListsApi {
     /**
      * Search lists by list name or page through all lists by providing an empty `query` value.
      * Search Lists
-     * @param listSearchRequest
+     * @param listSearchRequest The IDs of the records to add and/or remove from the list.
      */
     public doSearch(listSearchRequest: ListSearchRequest, _options?: PromiseConfigurationOptions): Promise<ListSearchResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -550,6 +596,50 @@ export class PromiseListsApi {
     }
 
     /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param listId The ID of the list to schedule the conversion for.
+     */
+    public getConversionDetailsWithHttpInfo(listId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicListConversionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getConversionDetailsWithHttpInfo(listId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Retrieve the conversion details for a list. This can be used to check for an upcoming conversion, or to get the details of when a list was already converted.
+     * Retrieve the conversion details for a list
+     * @param listId The ID of the list to schedule the conversion for.
+     */
+    public getConversionDetails(listId: string, _options?: PromiseConfigurationOptions): Promise<PublicListConversionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.getConversionDetails(listId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
      * Delete a list by **ILS list ID**. Lists deleted through this endpoint can be restored up to 90-days following the delete. After 90-days, the list is purged and can no longer be restored.
      * Delete a List
      * @param listId The **ILS ID** of the list to delete.
@@ -634,6 +724,52 @@ export class PromiseListsApi {
 	    }
 	}
         const result = this.api.restore(listId, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param listId The ID of the list to schedule the conversion for.
+     * @param publicListConversionTime
+     */
+    public scheduleOrUpdateConversionWithHttpInfo(listId: string, publicListConversionTime: PublicListConversionTime, _options?: PromiseConfigurationOptions): Promise<HttpInfo<PublicListConversionResponse>> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.scheduleOrUpdateConversionWithHttpInfo(listId, publicListConversionTime, observableOptions);
+        return result.toPromise();
+    }
+
+    /**
+     * Schedule the conversion of an active list into a static list, or update the already scheduled conversion. This can be scheduled for a specific date or based on activity.
+     * Schedule or update the conversion of a list to static
+     * @param listId The ID of the list to schedule the conversion for.
+     * @param publicListConversionTime
+     */
+    public scheduleOrUpdateConversion(listId: string, publicListConversionTime: PublicListConversionTime, _options?: PromiseConfigurationOptions): Promise<PublicListConversionResponse> {
+        let observableOptions: undefined | ConfigurationOptions
+        if (_options){
+	    observableOptions = {
+                baseServer: _options.baseServer,
+                httpApi: _options.httpApi,
+                middleware: _options.middleware?.map(
+                    m => new PromiseMiddlewareWrapper(m)
+		),
+		middlewareMergeStrategy: _options.middlewareMergeStrategy,
+                authMethods: _options.authMethods
+	    }
+	}
+        const result = this.api.scheduleOrUpdateConversion(listId, publicListConversionTime, observableOptions);
         return result.toPromise();
     }
 
@@ -863,7 +999,7 @@ export class PromiseMembershipsApi {
      * Add the records provided to the list. Records that do not exist or that are already members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add Records to a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to add to the list.
      */
     public addWithHttpInfo(listId: string, requestBody: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -886,7 +1022,7 @@ export class PromiseMembershipsApi {
      * Add the records provided to the list. Records that do not exist or that are already members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add Records to a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to add to the list.
      */
     public add(listId: string, requestBody: Array<string>, _options?: PromiseConfigurationOptions): Promise<MembershipsUpdateResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -955,7 +1091,7 @@ export class PromiseMembershipsApi {
      * Add and/or remove records that have already been created in the system to and/or from a list.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add and/or Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param membershipChangeRequest
+     * @param membershipChangeRequest The IDs of the records to add and/or remove from the list.
      */
     public addAndRemoveWithHttpInfo(listId: string, membershipChangeRequest: MembershipChangeRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -978,7 +1114,7 @@ export class PromiseMembershipsApi {
      * Add and/or remove records that have already been created in the system to and/or from a list.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Add and/or Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param membershipChangeRequest
+     * @param membershipChangeRequest The IDs of the records to add and/or remove from the list.
      */
     public addAndRemove(listId: string, membershipChangeRequest: MembershipChangeRequest, _options?: PromiseConfigurationOptions): Promise<MembershipsUpdateResponse> {
         let observableOptions: undefined | ConfigurationOptions
@@ -1147,7 +1283,7 @@ export class PromiseMembershipsApi {
      * Remove the records provided from the list. Records that do not exist or that are not members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to remove from the list.
      */
     public removeWithHttpInfo(listId: string, requestBody: Array<string>, _options?: PromiseConfigurationOptions): Promise<HttpInfo<MembershipsUpdateResponse>> {
         let observableOptions: undefined | ConfigurationOptions
@@ -1170,7 +1306,7 @@ export class PromiseMembershipsApi {
      * Remove the records provided from the list. Records that do not exist or that are not members of the list are ignored.  This endpoint only works for lists that have a `processingType` of `MANUAL` or `SNAPSHOT`.
      * Remove Records from a List
      * @param listId The **ILS ID** of the &#x60;MANUAL&#x60; or &#x60;SNAPSHOT&#x60; list.
-     * @param requestBody
+     * @param requestBody The IDs of the records to remove from the list.
      */
     public remove(listId: string, requestBody: Array<string>, _options?: PromiseConfigurationOptions): Promise<MembershipsUpdateResponse> {
         let observableOptions: undefined | ConfigurationOptions
