@@ -12,13 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Updates
 
 - Added `isGetLocalizedSchema` parameter after `archived` to `cms.hubdb.tablesApi.getAllDraftTables()` and `cms.hubdb.tablesApi.getAllTables()`.
-- Added new method `cms.hubdb.tablesApi.removeTableVersion()`
+- Added new method `cms.hubdb.tablesApi.removeTableVersion()`.
 - Added properties `maxNumberOfCharacters` and `maxNumberOfOptions` to `cms/hubdb/models/FileUpdateInput`.
 - Added `discriminator` and `mapping` to `cms/hubdb/models/UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3`.
 - Added new methods `cancelConversion()`, `getConversionDetails()` and `scheduleOrUpdateConversion()` to `crm.lists.listsApi`.
 - Added properties `membershipSettings` and `listPermissions` to `crm/lists/models/ListCreateRequest` and `crm/lists/models/PublicObjectList`.
 Added `discriminator` and `mapping` to `crm/lists/models/PublicPropertyAssociationFilterBranchFilterBranchesInner`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`, `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison` and `crm/lists/models/PublicTimePointOperationTimePoint`.
-- Added property `isPublicList` to `crm/lists/models/RecordListMembership`
+- Added property `isPublicList` to `crm/lists/models/RecordListMembership`.
+- Added `discriminator` and `mapping` to `crm/extensions/cards/models/IntegratorObjectResultActionsInner`
 
 ## [13.3.0] - 2025-09-18
 

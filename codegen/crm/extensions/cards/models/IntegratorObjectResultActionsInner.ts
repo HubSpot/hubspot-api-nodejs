@@ -25,8 +25,11 @@ export type IntegratorObjectResultActionsInner = ActionHookActionBody | IFrameAc
 * @export
 */
 export class IntegratorObjectResultActionsInnerClass {
-    static readonly discriminator: string | undefined = undefined;
+    static readonly discriminator: string | undefined = "type";
 
-    static readonly mapping: {[index: string]: string} | undefined = undefined;
+    static readonly mapping: {[index: string]: string} | undefined = {
+        "ACTION_HOOK": "ActionHookActionBody",
+        "IFRAME": "IFrameActionBody",
+    };
 }
 
