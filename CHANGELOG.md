@@ -5,16 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.3.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.4.0...HEAD)
 
-## [13.4.0] - 2025-09-22
+## [13.4.0] - 2025-09-23
 
 ## Updates
 
-- Added `isGetLocalizedSchema` after `archived` parameters to `cms.hubdb.tablesApi.getAllDraftTables()` and `cms.hubdb.tablesApi.getAllTables()`.
+- Added `isGetLocalizedSchema` parameter after `archived` to `cms.hubdb.tablesApi.getAllDraftTables()` and `cms.hubdb.tablesApi.getAllTables()`.
 - Added new method `cms.hubdb.tablesApi.removeTableVersion()`
-- Added property `maxNumberOfCharacters` and `maxNumberOfOptions` to `cms/hubdb/models/FileUpdateInput`.
+- Added properties `maxNumberOfCharacters` and `maxNumberOfOptions` to `cms/hubdb/models/FileUpdateInput`.
 - Added `discriminator` and `mapping` to `cms/hubdb/models/UnifiedCollectionResponseWithTotalBaseHubDbTableRowV3`.
+- Added new methods `cancelConversion()`, `getConversionDetails()` and `scheduleOrUpdateConversion()` to `crm.lists.listsApi`.
+- Added properties `membershipSettings` and `listPermissions` to `crm/lists/models/ListCreateRequest` and `crm/lists/models/PublicObjectList`.
+Added `discriminator` and `mapping` to `crm/lists/models/PublicPropertyAssociationFilterBranchFilterBranchesInner`, `crm/lists/models/PublicPropertyAssociationFilterBranchFiltersInner`, `crm/lists/models/PublicSurveyMonkeyValueFilterValueComparison` and `crm/lists/models/PublicTimePointOperationTimePoint`.
+- Added property `isPublicList` to `crm/lists/models/RecordListMembership`
 
 ## [13.3.0] - 2025-09-18
 
@@ -1145,3 +1149,4 @@ export enum Enum {
 [13.1.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.1.0
 [13.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.2.0
 [13.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.3.0
+[13.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.4.0
