@@ -198,8 +198,9 @@ export class PromiseTokensApi {
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
      */
-    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -212,7 +213,7 @@ export class PromiseTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, observableOptions);
+        const result = this.api.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, observableOptions);
         return result.toPromise();
     }
 
@@ -225,8 +226,9 @@ export class PromiseTokensApi {
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
      */
-    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: PromiseConfigurationOptions): Promise<TokenResponseIF> {
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, _options?: PromiseConfigurationOptions): Promise<TokenResponseIF> {
         let observableOptions: undefined | ConfigurationOptions
         if (_options){
 	    observableOptions = {
@@ -239,7 +241,7 @@ export class PromiseTokensApi {
                 authMethods: _options.authMethods
 	    }
 	}
-        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, observableOptions);
+        const result = this.api.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, observableOptions);
         return result.toPromise();
     }
 

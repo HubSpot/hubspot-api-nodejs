@@ -254,8 +254,9 @@ export class ObservableTokensApi {
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
      */
-    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: ConfigurationOptions): Observable<HttpInfo<TokenResponseIF>> {
+    public createWithHttpInfo(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, _options?: ConfigurationOptions): Observable<HttpInfo<TokenResponseIF>> {
     let _config = this.configuration;
     let allMiddleware: Middleware[] = [];
     if (_options && _options.middleware){
@@ -286,7 +287,7 @@ export class ObservableTokensApi {
 		};
 	}
 
-        const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _config);
+        const requestContextPromise = this.requestFactory.create(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, _config);
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
         for (const middleware of allMiddleware) {
@@ -312,9 +313,10 @@ export class ObservableTokensApi {
      * @param [clientId]
      * @param [clientSecret]
      * @param [refreshToken]
+     * @param [codeVerifier]
      */
-    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: ConfigurationOptions): Observable<TokenResponseIF> {
-        return this.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, _options).pipe(map((apiResponse: HttpInfo<TokenResponseIF>) => apiResponse.data));
+    public create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, _options?: ConfigurationOptions): Observable<TokenResponseIF> {
+        return this.createWithHttpInfo(grantType, code, redirectUri, clientId, clientSecret, refreshToken, codeVerifier, _options).pipe(map((apiResponse: HttpInfo<TokenResponseIF>) => apiResponse.data));
     }
 
 }

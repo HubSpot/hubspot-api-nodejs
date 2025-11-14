@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.4.0...HEAD)
 
+
+## [13.5.0] - 2025-11-14
+
+## Updates
+
+- Added optional PKCE (Proof Key for Code Exchange) support for OAuth authorization flows. PKCE currently only supported for MCP (Model Context Protocol) apps.
+- Added optional `codeChallenge` and `codeChallengeMethod` parameters to `oauth.getAuthorizationUrl()`.
+- Added optional `codeVerifier` parameter to `oauth.tokensApi.create()`.
+
+
 ## [13.4.0] - 2025-09-23
 
 ## Updates

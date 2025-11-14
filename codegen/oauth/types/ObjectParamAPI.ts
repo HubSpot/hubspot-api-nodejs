@@ -153,12 +153,19 @@ export interface TokensApiCreateRequest {
      */
     clientSecret?: string
     /**
-     * 
+     *
      * Defaults to: undefined
      * @type string
      * @memberof TokensApicreate
      */
     refreshToken?: string
+    /**
+     *
+     * Defaults to: undefined
+     * @type string
+     * @memberof TokensApicreate
+     */
+    codeVerifier?: string
 }
 
 export class ObjectTokensApi {
@@ -174,7 +181,7 @@ export class ObjectTokensApi {
      * @param param the request object
      */
     public createWithHttpInfo(param: TokensApiCreateRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<TokenResponseIF>> {
-        return this.api.createWithHttpInfo(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
+        return this.api.createWithHttpInfo(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken, param.codeVerifier,  options).toPromise();
     }
 
     /**
@@ -183,7 +190,7 @@ export class ObjectTokensApi {
      * @param param the request object
      */
     public create(param: TokensApiCreateRequest = {}, options?: ConfigurationOptions): Promise<TokenResponseIF> {
-        return this.api.create(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken,  options).toPromise();
+        return this.api.create(param.grantType, param.code, param.redirectUri, param.clientId, param.clientSecret, param.refreshToken, param.codeVerifier,  options).toPromise();
     }
 
 }

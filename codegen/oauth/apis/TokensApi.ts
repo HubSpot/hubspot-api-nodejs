@@ -20,14 +20,15 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * Use a [previously obtained refresh token](#get-oauth-2.0-access-and-refresh-tokens) to generate a new access token.   Access tokens are short lived. You can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds). If you need offline access to HubSpot data, store the refresh token you get when [initiating your OAuth integration](https://developers.hubspot.com/docs/guides/api/app-management/oauth-tokens#initiating-oauth-access) and use it to generate a new access token once the initial one expires.  Note: HubSpot access tokens will fluctuate in size as the information that\'s encoded in them changes over time. It\'s recommended to allow for tokens to be up to 300 characters to account for any potential changes.
      * Refresh an access token
-     * @param grantType 
-     * @param code 
-     * @param redirectUri 
-     * @param clientId 
-     * @param clientSecret 
-     * @param refreshToken 
+     * @param grantType
+     * @param code
+     * @param redirectUri
+     * @param clientId
+     * @param clientSecret
+     * @param refreshToken
+     * @param codeVerifier
      */
-    public async create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, _options?: Configuration): Promise<RequestContext> {
+    public async create(grantType?: string, code?: string, redirectUri?: string, clientId?: string, clientSecret?: string, refreshToken?: string, codeVerifier?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -78,6 +79,10 @@ export class TokensApiRequestFactory extends BaseAPIRequestFactory {
         if (refreshToken !== undefined) {
              // TODO: replace .append with .set
              localVarFormParams.append('refresh_token', refreshToken as any);
+        }
+        if (codeVerifier !== undefined) {
+             // TODO: replace .append with .set
+             localVarFormParams.append('code_verifier', codeVerifier as any);
         }
 
         requestContext.setBody(localVarFormParams);

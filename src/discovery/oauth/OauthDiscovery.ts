@@ -42,6 +42,8 @@ export default class OauthDiscovery {
     scope: string,
     optionalScope?: string,
     state?: string,
+    codeChallenge?: string,
+    codeChallengeMethod?: string,
   ): string {
     const params = {
       client_id: clientId,
@@ -49,6 +51,8 @@ export default class OauthDiscovery {
       scope,
       optional_scope: optionalScope,
       state,
+      code_challenge: codeChallenge,
+      code_challenge_method: codeChallengeMethod,
     }
 
     if (params.optional_scope === undefined) {
@@ -57,6 +61,14 @@ export default class OauthDiscovery {
 
     if (params.state === undefined) {
       delete params.state
+    }
+
+    if (params.code_challenge === undefined) {
+      delete params.code_challenge
+    }
+
+    if (params.code_challenge_method === undefined) {
+      delete params.code_challenge_method
     }
 
     return `https://app.hubspot.com/oauth/authorize?${qs.stringify(params)}`
