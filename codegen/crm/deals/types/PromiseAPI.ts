@@ -1,6 +1,5 @@
 import { HttpInfo } from '../http/http';
-import { Configuration, ConfigurationOptions, PromiseConfigurationOptions } from '../configuration'
-import { PromiseMiddlewareWrapper } from '../middleware';
+import { Configuration, PromiseConfigurationOptions, wrapOptions } from '../configuration'
 
 import { BatchInputSimplePublicObjectBatchInput } from '../models/BatchInputSimplePublicObjectBatchInput';
 import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/BatchInputSimplePublicObjectBatchInputForCreate';
@@ -37,18 +36,7 @@ export class PromiseBasicApi {
      * @param dealId
      */
     public archiveWithHttpInfo(dealId: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.archiveWithHttpInfo(dealId, observableOptions);
         return result.toPromise();
     }
@@ -59,18 +47,7 @@ export class PromiseBasicApi {
      * @param dealId
      */
     public archive(dealId: string, _options?: PromiseConfigurationOptions): Promise<void> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.archive(dealId, observableOptions);
         return result.toPromise();
     }
@@ -81,18 +58,7 @@ export class PromiseBasicApi {
      * @param simplePublicObjectInputForCreate
      */
     public createWithHttpInfo(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.createWithHttpInfo(simplePublicObjectInputForCreate, observableOptions);
         return result.toPromise();
     }
@@ -103,18 +69,7 @@ export class PromiseBasicApi {
      * @param simplePublicObjectInputForCreate
      */
     public create(simplePublicObjectInputForCreate: SimplePublicObjectInputForCreate, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.create(simplePublicObjectInputForCreate, observableOptions);
         return result.toPromise();
     }
@@ -130,18 +85,7 @@ export class PromiseBasicApi {
      * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public getByIdWithHttpInfo(dealId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObjectWithAssociations>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.getByIdWithHttpInfo(dealId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
         return result.toPromise();
     }
@@ -157,18 +101,7 @@ export class PromiseBasicApi {
      * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public getById(dealId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObjectWithAssociations> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.getById(dealId, properties, propertiesWithHistory, associations, archived, idProperty, observableOptions);
         return result.toPromise();
     }
@@ -184,18 +117,7 @@ export class PromiseBasicApi {
      * @param [archived] Whether to return only results that have been archived.
      */
     public getPageWithHttpInfo(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.getPageWithHttpInfo(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
         return result.toPromise();
     }
@@ -211,18 +133,7 @@ export class PromiseBasicApi {
      * @param [archived] Whether to return only results that have been archived.
      */
     public getPage(limit?: number, after?: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<CollectionResponseSimplePublicObjectWithAssociationsForwardPaging> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.getPage(limit, after, properties, propertiesWithHistory, associations, archived, observableOptions);
         return result.toPromise();
     }
@@ -233,18 +144,7 @@ export class PromiseBasicApi {
      * @param publicMergeInput
      */
     public mergeWithHttpInfo(publicMergeInput: PublicMergeInput, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.mergeWithHttpInfo(publicMergeInput, observableOptions);
         return result.toPromise();
     }
@@ -255,18 +155,7 @@ export class PromiseBasicApi {
      * @param publicMergeInput
      */
     public merge(publicMergeInput: PublicMergeInput, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.merge(publicMergeInput, observableOptions);
         return result.toPromise();
     }
@@ -279,18 +168,7 @@ export class PromiseBasicApi {
      * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public updateWithHttpInfo(dealId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<HttpInfo<SimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.updateWithHttpInfo(dealId, simplePublicObjectInput, idProperty, observableOptions);
         return result.toPromise();
     }
@@ -303,18 +181,7 @@ export class PromiseBasicApi {
      * @param [idProperty] The name of a property whose values are unique for this object type
      */
     public update(dealId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: PromiseConfigurationOptions): Promise<SimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.update(dealId, simplePublicObjectInput, idProperty, observableOptions);
         return result.toPromise();
     }
@@ -344,18 +211,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectId
      */
     public archiveWithHttpInfo(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<HttpInfo<void>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.archiveWithHttpInfo(batchInputSimplePublicObjectId, observableOptions);
         return result.toPromise();
     }
@@ -366,18 +222,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectId
      */
     public archive(batchInputSimplePublicObjectId: BatchInputSimplePublicObjectId, _options?: PromiseConfigurationOptions): Promise<void> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.archive(batchInputSimplePublicObjectId, observableOptions);
         return result.toPromise();
     }
@@ -388,18 +233,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public createWithHttpInfo(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.createWithHttpInfo(batchInputSimplePublicObjectBatchInputForCreate, observableOptions);
         return result.toPromise();
     }
@@ -410,18 +244,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInputForCreate
      */
     public create(batchInputSimplePublicObjectBatchInputForCreate: BatchInputSimplePublicObjectBatchInputForCreate, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.create(batchInputSimplePublicObjectBatchInputForCreate, observableOptions);
         return result.toPromise();
     }
@@ -433,18 +256,7 @@ export class PromiseBatchApi {
      * @param [archived] Whether to return only results that have been archived.
      */
     public readWithHttpInfo(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.readWithHttpInfo(batchReadInputSimplePublicObjectId, archived, observableOptions);
         return result.toPromise();
     }
@@ -456,18 +268,7 @@ export class PromiseBatchApi {
      * @param [archived] Whether to return only results that have been archived.
      */
     public read(batchReadInputSimplePublicObjectId: BatchReadInputSimplePublicObjectId, archived?: boolean, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.read(batchReadInputSimplePublicObjectId, archived, observableOptions);
         return result.toPromise();
     }
@@ -478,18 +279,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInput
      */
     public updateWithHttpInfo(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.updateWithHttpInfo(batchInputSimplePublicObjectBatchInput, observableOptions);
         return result.toPromise();
     }
@@ -500,18 +290,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInput
      */
     public update(batchInputSimplePublicObjectBatchInput: BatchInputSimplePublicObjectBatchInput, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.update(batchInputSimplePublicObjectBatchInput, observableOptions);
         return result.toPromise();
     }
@@ -522,18 +301,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicUpsertObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.upsertWithHttpInfo(batchInputSimplePublicObjectBatchInputUpsert, observableOptions);
         return result.toPromise();
     }
@@ -544,18 +312,7 @@ export class PromiseBatchApi {
      * @param batchInputSimplePublicObjectBatchInputUpsert
      */
     public upsert(batchInputSimplePublicObjectBatchInputUpsert: BatchInputSimplePublicObjectBatchInputUpsert, _options?: PromiseConfigurationOptions): Promise<BatchResponseSimplePublicUpsertObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.upsert(batchInputSimplePublicObjectBatchInputUpsert, observableOptions);
         return result.toPromise();
     }
@@ -585,18 +342,7 @@ export class PromiseSearchApi {
      * @param publicObjectSearchRequest
      */
     public doSearchWithHttpInfo(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.doSearchWithHttpInfo(publicObjectSearchRequest, observableOptions);
         return result.toPromise();
     }
@@ -607,18 +353,7 @@ export class PromiseSearchApi {
      * @param publicObjectSearchRequest
      */
     public doSearch(publicObjectSearchRequest: PublicObjectSearchRequest, _options?: PromiseConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
-        let observableOptions: undefined | ConfigurationOptions
-        if (_options){
-	    observableOptions = {
-                baseServer: _options.baseServer,
-                httpApi: _options.httpApi,
-                middleware: _options.middleware?.map(
-                    m => new PromiseMiddlewareWrapper(m)
-		),
-		middlewareMergeStrategy: _options.middlewareMergeStrategy,
-                authMethods: _options.authMethods
-	    }
-	}
+        const observableOptions = wrapOptions(_options);
         const result = this.api.doSearch(publicObjectSearchRequest, observableOptions);
         return result.toPromise();
     }

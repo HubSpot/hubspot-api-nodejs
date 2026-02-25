@@ -19,7 +19,7 @@ export class SimplePublicUpsertObject {
     /**
     * Whether the object is archived.
     */
-    'archived': boolean;
+    'archived'?: boolean;
     /**
     * The timestamp when the object was archived, in ISO 8601 format.
     */
