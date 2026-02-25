@@ -35,7 +35,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context
@@ -73,7 +73,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals';
+        const localVarPath = '/crm/v3/objects/0-3';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -114,7 +114,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * @param propertiesWithHistory A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
      * @param associations A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
      * @param archived Whether to return only results that have been archived.
-     * @param idProperty The name of a property whose values are unique for this object
+     * @param idProperty The name of a property whose values are unique for this object type
      */
     public async getById(dealId: string, properties?: Array<string>, propertiesWithHistory?: Array<string>, associations?: Array<string>, archived?: boolean, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -131,7 +131,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context
@@ -208,7 +208,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals';
+        const localVarPath = '/crm/v3/objects/0-3';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
@@ -270,6 +270,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param publicMergeInput 
      */
@@ -283,7 +284,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/merge';
+        const localVarPath = '/crm/v3/objects/0-3/merge';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -321,7 +322,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
      * Update
      * @param dealId 
      * @param simplePublicObjectInput 
-     * @param idProperty The name of a property whose values are unique for this object
+     * @param idProperty The name of a property whose values are unique for this object type
      */
     public async update(dealId: string, simplePublicObjectInput: SimplePublicObjectInput, idProperty?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -340,7 +341,7 @@ export class BasicApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/{dealId}'
+        const localVarPath = '/crm/v3/objects/0-3/{dealId}'
             .replace('{' + 'dealId' + '}', encodeURIComponent(String(dealId)));
 
         // Make Request Context

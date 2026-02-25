@@ -10,12 +10,19 @@
  * Do not edit the class manually.
  */
 
-import { AssociationSpec } from '../models/AssociationSpec';
-import { PublicObjectId } from '../models/PublicObjectId';
+import { Paging } from '../models/Paging';
+import { SimplePublicObject } from '../models/SimplePublicObject';
 
-export class PublicAssociationsForObject {
-    'to': PublicObjectId;
-    'types': Array<AssociationSpec>;
+/**
+* Represents a list of simple objects returned from an API request, along with the total count of objects available.
+*/
+export class CollectionResponseWithTotalSimplePublicObject {
+    'paging'?: Paging;
+    'results': Array<SimplePublicObject>;
+    /**
+    * The number of available results
+    */
+    'total': number;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,20 +30,26 @@ export class PublicAssociationsForObject {
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "to",
-            "baseName": "to",
-            "type": "PublicObjectId",
+            "name": "paging",
+            "baseName": "paging",
+            "type": "Paging",
             "format": ""
         },
         {
-            "name": "types",
-            "baseName": "types",
-            "type": "Array<AssociationSpec>",
+            "name": "results",
+            "baseName": "results",
+            "type": "Array<SimplePublicObject>",
             "format": ""
+        },
+        {
+            "name": "total",
+            "baseName": "total",
+            "type": "number",
+            "format": "int32"
         }    ];
 
     static getAttributeTypeMap() {
-        return PublicAssociationsForObject.attributeTypeMap;
+        return CollectionResponseWithTotalSimplePublicObject.attributeTypeMap;
     }
 
     public constructor() {
