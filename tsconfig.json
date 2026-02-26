@@ -6,6 +6,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitReturns": true,
