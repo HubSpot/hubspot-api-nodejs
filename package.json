@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "npx tsx node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "prettier:check": "prettier --check \"{,**/}*.{js,ts}\"",
     "prettier:write": "prettier --write \"{,**/}*.{js,ts}\"",
     "lint": "eslint \"{,**/}*.ts\" && npm run prettier:check",
