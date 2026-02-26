@@ -101,17 +101,6 @@ export class ApiClientConfiguratorUndici {
       >(config, observableRequestContextParam, observableResponseContextParam),
     ]
 
-    // if (config.httpAgent) {
-    //   middleware.push(
-    //     this.getHttpAgentMiddleware<
-    //       RequestContextType,
-    //       ResponseContextType,
-    //       ObservableRequestContextType,
-    //       ObservableResponseContextType
-    //     >(config, observableRequestContextParam, observableResponseContextParam),
-    //   )
-    // }
-
     if (config.middleware) {
       middleware.push(
         ...this.getCustomMiddleware<
@@ -182,29 +171,4 @@ export class ApiClientConfiguratorUndici {
       },
     }
   }
-
-  // protected static getHttpAgentMiddleware<
-  //   RequestContextType extends IRequestContext,
-  //   ResponseContextType,
-  //   ObservableRequestContextType,
-  //   ObservableResponseContextType,
-  // >(
-  //   config: IConfiguration,
-  //   observableRequestContextParam: new (promise: Promise<RequestContextType>) => ObservableRequestContextType,
-  //   observableResponseContextParam: new (promise: Promise<ResponseContextType>) => ObservableResponseContextType,
-  // ) {
-  //   const httpAgent = config.httpAgent
-
-  //   return {
-  //     pre(context: RequestContextType): ObservableRequestContextType {
-  //       if (httpAgent) {
-  //         context.setAgent(httpAgent)
-  //       }
-  //       return new observableRequestContextParam(Promise.resolve(context))
-  //     },
-  //     post(context: ResponseContextType): ObservableResponseContextType {
-  //       return new observableResponseContextParam(Promise.resolve(context))
-  //     },
-  //   }
-  // }
 }
