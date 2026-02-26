@@ -1,4 +1,4 @@
-import crypto = require('crypto')
+import * as crypto from 'crypto'
 import { ISignatureOptions } from './ISignatureOptions'
 
 export class Signature {
