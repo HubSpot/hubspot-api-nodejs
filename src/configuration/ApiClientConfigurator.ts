@@ -198,7 +198,7 @@ export class ApiClientConfigurator {
     return {
       pre(context: RequestContextType): ObservableRequestContextType {
         if (httpAgent) {
-          context.setAgent(httpAgent)
+          //context.setAgent(httpAgent)
         }
         return new observableRequestContextParam(Promise.resolve(context))
       },
