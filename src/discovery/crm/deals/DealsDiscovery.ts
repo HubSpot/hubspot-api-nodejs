@@ -9,7 +9,7 @@ import {
   SimplePublicObjectWithAssociations,
   createConfiguration,
 } from '../../../../codegen/crm/deals/index'
-import { ApiClientConfigurator } from '../../../configuration/ApiClientConfigurator'
+import { ApiClientConfiguratorUndici as ApiClientConfigurator } from '../../../configuration/ApiClientConfiguratorUndici'
 import ApiDecoratorService from '../../../services/ApiDecoratorService'
 import IConfiguration from '../../../configuration/IConfiguration'
 import { Observable } from '../../../../codegen/crm/deals/rxjsStub'
