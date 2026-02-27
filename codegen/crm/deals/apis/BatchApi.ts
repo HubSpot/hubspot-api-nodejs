@@ -14,9 +14,7 @@ import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInp
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
-import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 
 /**
  * no description
@@ -24,6 +22,7 @@ import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/Batch
 export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param batchInputSimplePublicObjectId 
      */
@@ -37,7 +36,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/archive';
+        const localVarPath = '/crm/v3/objects/0-3/batch/archive';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -71,6 +70,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param batchInputSimplePublicObjectBatchInputForCreate 
      */
@@ -84,7 +84,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/create';
+        const localVarPath = '/crm/v3/objects/0-3/batch/create';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -134,7 +134,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/read';
+        const localVarPath = '/crm/v3/objects/0-3/batch/read';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -173,6 +173,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param batchInputSimplePublicObjectBatchInput 
      */
@@ -186,7 +187,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/update';
+        const localVarPath = '/crm/v3/objects/0-3/batch/update';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -234,7 +235,7 @@ export class BatchApiRequestFactory extends BaseAPIRequestFactory {
 
 
         // Path Params
-        const localVarPath = '/crm/v3/objects/deals/batch/upsert';
+        const localVarPath = '/crm/v3/objects/0-3/batch/upsert';
 
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
@@ -310,20 +311,13 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to create
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
+     public async createWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
-        if (isCodeInRange("201", response.httpStatusCode)) {
+        if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObjectWithErrors;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -336,10 +330,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
+                "BatchResponseSimplePublicObject", ""
+            ) as BatchResponseSimplePublicObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -353,20 +347,13 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to read
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async readWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
+     public async readWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObjectWithErrors;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -379,10 +366,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
+                "BatchResponseSimplePublicObject", ""
+            ) as BatchResponseSimplePublicObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -396,20 +383,13 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to update
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors >> {
+     public async updateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicObject", ""
             ) as BatchResponseSimplePublicObject;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObjectWithErrors;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -422,10 +402,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors", ""
-            ) as BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors;
+                "BatchResponseSimplePublicObject", ""
+            ) as BatchResponseSimplePublicObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
@@ -439,20 +419,13 @@ export class BatchApiResponseProcessor {
      * @params response Response returned by the server for a request to upsert
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject >> {
+     public async upsertWithHttpInfo(response: ResponseContext): Promise<HttpInfo<BatchResponseSimplePublicUpsertObject >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "BatchResponseSimplePublicUpsertObject", ""
             ) as BatchResponseSimplePublicUpsertObject;
-            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
-        }
-        if (isCodeInRange("207", response.httpStatusCode)) {
-            const body: BatchResponseSimplePublicUpsertObjectWithErrors = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicUpsertObjectWithErrors", ""
-            ) as BatchResponseSimplePublicUpsertObjectWithErrors;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("0", response.httpStatusCode)) {
@@ -465,10 +438,10 @@ export class BatchApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
+            const body: BatchResponseSimplePublicUpsertObject = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject", ""
-            ) as BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject;
+                "BatchResponseSimplePublicUpsertObject", ""
+            ) as BatchResponseSimplePublicUpsertObject;
             return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 

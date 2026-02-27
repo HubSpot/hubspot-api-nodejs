@@ -41,7 +41,6 @@ export class Oauth2Authentication implements SecurityAuthentication {
     }
 }
 
-
 export type AuthMethods = {
     "default"?: SecurityAuthentication,
     "oauth2"?: SecurityAuthentication

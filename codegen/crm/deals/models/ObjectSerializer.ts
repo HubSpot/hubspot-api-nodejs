@@ -6,12 +6,10 @@ export * from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 export * from '../models/BatchInputSimplePublicObjectId';
 export * from '../models/BatchReadInputSimplePublicObjectId';
 export * from '../models/BatchResponseSimplePublicObject';
-export * from '../models/BatchResponseSimplePublicObjectWithErrors';
 export * from '../models/BatchResponseSimplePublicUpsertObject';
-export * from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 export * from '../models/CollectionResponseAssociatedId';
 export * from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-export * from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+export * from '../models/CollectionResponseWithTotalSimplePublicObject';
 export * from '../models/ErrorDetail';
 export * from '../models/Filter';
 export * from '../models/FilterGroup';
@@ -43,13 +41,11 @@ import { BatchInputSimplePublicObjectBatchInputForCreate } from '../models/Batch
 import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInputSimplePublicObjectBatchInputUpsert';
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
-import { BatchResponseSimplePublicObject        } from '../models/BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors          } from '../models/BatchResponseSimplePublicObjectWithErrors';
-import { BatchResponseSimplePublicUpsertObject        } from '../models/BatchResponseSimplePublicUpsertObject';
-import { BatchResponseSimplePublicUpsertObjectWithErrors          } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
+import { BatchResponseSimplePublicObject          } from '../models/BatchResponseSimplePublicObject';
+import { BatchResponseSimplePublicUpsertObject          } from '../models/BatchResponseSimplePublicUpsertObject';
 import { CollectionResponseAssociatedId } from '../models/CollectionResponseAssociatedId';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { ErrorDetail } from '../models/ErrorDetail';
 import { Filter       } from '../models/Filter';
 import { FilterGroup } from '../models/FilterGroup';
@@ -89,9 +85,7 @@ let primitives = [
 let enumsMap: Set<string> = new Set<string>([
     "AssociationSpecAssociationCategoryEnum",
     "BatchResponseSimplePublicObjectStatusEnum",
-    "BatchResponseSimplePublicObjectWithErrorsStatusEnum",
     "BatchResponseSimplePublicUpsertObjectStatusEnum",
-    "BatchResponseSimplePublicUpsertObjectWithErrorsStatusEnum",
     "FilterOperatorEnum",
 ]);
 
@@ -104,12 +98,10 @@ let typeMap: {[index: string]: any} = {
     "BatchInputSimplePublicObjectId": BatchInputSimplePublicObjectId,
     "BatchReadInputSimplePublicObjectId": BatchReadInputSimplePublicObjectId,
     "BatchResponseSimplePublicObject": BatchResponseSimplePublicObject,
-    "BatchResponseSimplePublicObjectWithErrors": BatchResponseSimplePublicObjectWithErrors,
     "BatchResponseSimplePublicUpsertObject": BatchResponseSimplePublicUpsertObject,
-    "BatchResponseSimplePublicUpsertObjectWithErrors": BatchResponseSimplePublicUpsertObjectWithErrors,
     "CollectionResponseAssociatedId": CollectionResponseAssociatedId,
     "CollectionResponseSimplePublicObjectWithAssociationsForwardPaging": CollectionResponseSimplePublicObjectWithAssociationsForwardPaging,
-    "CollectionResponseWithTotalSimplePublicObjectForwardPaging": CollectionResponseWithTotalSimplePublicObjectForwardPaging,
+    "CollectionResponseWithTotalSimplePublicObject": CollectionResponseWithTotalSimplePublicObject,
     "ErrorDetail": ErrorDetail,
     "Filter": Filter,
     "FilterGroup": FilterGroup,
@@ -263,13 +255,16 @@ export class ObjectSerializer {
             }
             return transformedData;
         } else if (type === "Date") {
+            if (!(data instanceof Date)) {
+                return data;
+            }
             if (format == "date") {
                 let month = data.getMonth()+1
-                month = month < 10 ? "0" + month.toString() : month.toString()
+                let monthStr = month < 10 ? "0" + month.toString() : month.toString()
                 let day = data.getDate();
-                day = day < 10 ? "0" + day.toString() : day.toString();
+                let dayStr = day < 10 ? "0" + day.toString() : day.toString();
 
-                return data.getFullYear() + "-" + month + "-" + day;
+                return data.getFullYear() + "-" + monthStr + "-" + dayStr;
             } else {
                 return data.toISOString();
             }

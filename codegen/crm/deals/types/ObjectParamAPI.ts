@@ -7,11 +7,9 @@ import { BatchInputSimplePublicObjectBatchInputUpsert } from '../models/BatchInp
 import { BatchInputSimplePublicObjectId } from '../models/BatchInputSimplePublicObjectId';
 import { BatchReadInputSimplePublicObjectId } from '../models/BatchReadInputSimplePublicObjectId';
 import { BatchResponseSimplePublicObject } from '../models/BatchResponseSimplePublicObject';
-import { BatchResponseSimplePublicObjectWithErrors } from '../models/BatchResponseSimplePublicObjectWithErrors';
 import { BatchResponseSimplePublicUpsertObject } from '../models/BatchResponseSimplePublicUpsertObject';
-import { BatchResponseSimplePublicUpsertObjectWithErrors } from '../models/BatchResponseSimplePublicUpsertObjectWithErrors';
 import { CollectionResponseSimplePublicObjectWithAssociationsForwardPaging } from '../models/CollectionResponseSimplePublicObjectWithAssociationsForwardPaging';
-import { CollectionResponseWithTotalSimplePublicObjectForwardPaging } from '../models/CollectionResponseWithTotalSimplePublicObjectForwardPaging';
+import { CollectionResponseWithTotalSimplePublicObject } from '../models/CollectionResponseWithTotalSimplePublicObject';
 import { PublicMergeInput } from '../models/PublicMergeInput';
 import { PublicObjectSearchRequest } from '../models/PublicObjectSearchRequest';
 import { SimplePublicObject } from '../models/SimplePublicObject';
@@ -78,7 +76,7 @@ export interface BasicApiGetByIdRequest {
      */
     archived?: boolean
     /**
-     * The name of a property whose values are unique for this object
+     * The name of a property whose values are unique for this object type
      * Defaults to: undefined
      * @type string
      * @memberof BasicApigetById
@@ -155,7 +153,7 @@ export interface BasicApiUpdateRequest {
      */
     simplePublicObjectInput: SimplePublicObjectInput
     /**
-     * The name of a property whose values are unique for this object
+     * The name of a property whose values are unique for this object type
      * Defaults to: undefined
      * @type string
      * @memberof BasicApiupdate
@@ -243,6 +241,7 @@ export class ObjectBasicApi {
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param param the request object
      */
@@ -251,6 +250,7 @@ export class ObjectBasicApi {
     }
 
     /**
+     * Combine two deals of the same type into a single deal.
      * Merge two deals with same type
      * @param param the request object
      */
@@ -341,6 +341,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param param the request object
      */
@@ -349,6 +350,7 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Archive multiple deals using their IDs.
      * Archive a batch of deals by ID
      * @param param the request object
      */
@@ -357,18 +359,20 @@ export class ObjectBatchApi {
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param param the request object
      */
-    public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    public createWithHttpInfo(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
         return this.api.createWithHttpInfo(param.batchInputSimplePublicObjectBatchInputForCreate,  options).toPromise();
     }
 
     /**
+     * Create multiple deals in a single request.
      * Create a batch of deals
      * @param param the request object
      */
-    public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public create(param: BatchApiCreateRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
         return this.api.create(param.batchInputSimplePublicObjectBatchInputForCreate,  options).toPromise();
     }
 
@@ -377,7 +381,7 @@ export class ObjectBatchApi {
      * Read a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
-    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    public readWithHttpInfo(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
         return this.api.readWithHttpInfo(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
     }
 
@@ -386,23 +390,25 @@ export class ObjectBatchApi {
      * Read a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
-    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public read(param: BatchApiReadRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
         return this.api.read(param.batchReadInputSimplePublicObjectId, param.archived,  options).toPromise();
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
-    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors>> {
+    public updateWithHttpInfo(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicObject>> {
         return this.api.updateWithHttpInfo(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
     /**
+     * Update multiple deals using their internal IDs or unique property values.
      * Update a batch of deals by internal ID, or unique property values
      * @param param the request object
      */
-    public update(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject | BatchResponseSimplePublicObjectWithErrors> {
+    public update(param: BatchApiUpdateRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicObject> {
         return this.api.update(param.batchInputSimplePublicObjectBatchInput,  options).toPromise();
     }
 
@@ -411,7 +417,7 @@ export class ObjectBatchApi {
      * Create or update a batch of deals by unique property values
      * @param param the request object
      */
-    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject>> {
+    public upsertWithHttpInfo(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<HttpInfo<BatchResponseSimplePublicUpsertObject>> {
         return this.api.upsertWithHttpInfo(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
@@ -420,7 +426,7 @@ export class ObjectBatchApi {
      * Create or update a batch of deals by unique property values
      * @param param the request object
      */
-    public upsert(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject> {
+    public upsert(param: BatchApiUpsertRequest, options?: ConfigurationOptions): Promise<BatchResponseSimplePublicUpsertObject> {
         return this.api.upsert(param.batchInputSimplePublicObjectBatchInputUpsert,  options).toPromise();
     }
 
@@ -446,16 +452,20 @@ export class ObjectSearchApi {
     }
 
     /**
+     * Search for deals using specified criteria and filters.
+     * Search for deals using various filters and criteria to retrieve specific records.
      * @param param the request object
      */
-    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObjectForwardPaging>> {
+    public doSearchWithHttpInfo(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<HttpInfo<CollectionResponseWithTotalSimplePublicObject>> {
         return this.api.doSearchWithHttpInfo(param.publicObjectSearchRequest,  options).toPromise();
     }
 
     /**
+     * Search for deals using specified criteria and filters.
+     * Search for deals using various filters and criteria to retrieve specific records.
      * @param param the request object
      */
-    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObjectForwardPaging> {
+    public doSearch(param: SearchApiDoSearchRequest, options?: ConfigurationOptions): Promise<CollectionResponseWithTotalSimplePublicObject> {
         return this.api.doSearch(param.publicObjectSearchRequest,  options).toPromise();
     }
 
