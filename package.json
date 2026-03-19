@@ -19,7 +19,7 @@
   "author": "HubSpot",
   "license": "ISC",
   "dependencies": {
-    "@types/node-fetch": "^2.5.7",
+    "@types/node-fetch": "^2.6.13",
     "@types/node": "*",
     "bottleneck": "^2.19.5",
     "es6-promise": "^4.2.4",
