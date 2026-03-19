@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.4.0...HEAD)
+## [Unreleased](https://github.com/HubSpot/hubspot-api-nodejs/compare/13.5.0...HEAD)
+
+## [13.5.0] - 2026-03-19
+
+- Update `@types/node-fetch`.
 
 ## [13.4.0] - 2025-09-23
 
@@ -1076,7 +1080,7 @@ export enum Enum {
   25. getSubscriptions => getAll (webhooks.subscriptionsApi)
   26. updateSubscription => update (webhooks.subscriptionsApi)
 
-[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/13.2.0...HEAD
+[Unreleased]: https://github.com/HubSpot/hubspot-api-nodejs/compare/13.5.0...HEAD
 [1.0.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.0.0-beta
 [1.1.0-beta]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/v1.1.0-beta
 [2.0.1]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/2.0.1
@@ -1151,3 +1155,4 @@ export enum Enum {
 [13.2.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.2.0
 [13.3.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.3.0
 [13.4.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.4.0
+[13.5.0]: https://github.com/HubSpot/hubspot-api-nodejs/releases/tag/13.5.0
