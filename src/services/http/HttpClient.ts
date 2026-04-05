@@ -1,8 +1,8 @@
-import fetch from 'node-fetch'
 import { Request } from './Request'
+import { sendFetchRequest } from './Transport'
 
 export class HttpClient {
   public static async send(request: Request) {
-    return await fetch(request.getUrl(), request.getSendData())
+    return await sendFetchRequest(request.getUrl(), request.getSendData())
   }
 }
