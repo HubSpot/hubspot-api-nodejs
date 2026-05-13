@@ -3,6 +3,7 @@ import  FormData from "form-data";
 import { URL, URLSearchParams } from 'url';
 import * as http from 'http';
 import * as https from 'https';
+import type { Readable } from 'stream';
 import { Observable, from } from '../rxjsStub';
 
 export * from './isomorphic-fetch';
@@ -26,7 +27,7 @@ export enum HttpMethod {
  * Represents an HTTP file which will be transferred from or to a server.
  */
 export type HttpFile = {
-    data: Buffer,
+    data: Buffer | Readable,
     name: string
 };
 
