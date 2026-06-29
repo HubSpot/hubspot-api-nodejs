@@ -1,29 +1,21 @@
 import {HttpLibrary, RequestContext, ResponseContext} from './http';
 import { from, Observable } from '../rxjsStub';
-import fetch from "node-fetch";
+import { sendBufferedRequest } from '../../../src/services/http/Transport';
 
 export class IsomorphicFetchHttpLibrary implements HttpLibrary {
 
     public send(request: RequestContext): Observable<ResponseContext> {
-        let method = request.getHttpMethod().toString();
-        let body = request.getBody();
-
-        const resultPromise = fetch(request.getUrl(), {
-            method: method,
-            body: body as any,
+        const resultPromise = sendBufferedRequest(request.getUrl(), {
+            method: request.getHttpMethod().toString(),
+            body: request.getBody(),
             headers: request.getHeaders(),
             agent: request.getAgent(),
-        }).then((resp: any) => {
-            const headers: { [name: string]: string } = {};
-            resp.headers.forEach((value: string, name: string) => {
-              headers[name] = value;
-            });
-
+        }).then((response) => {
             const body = {
-              text: () => resp.text(),
-              binary: () => resp.buffer()
+              text: () => response.text(),
+              binary: () => response.binary()
             };
-            return new ResponseContext(resp.status, headers, body);
+            return new ResponseContext(response.status, response.headers, body);
         });
 
         return from<Promise<ResponseContext>>(resultPromise);
