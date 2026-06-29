@@ -197,11 +197,7 @@ function getHeadersFromNodeResponse(response: http.IncomingMessage): HeaderMap {
   return headers
 }
 
-function createBufferedResponse(
-  status: number,
-  headers: HeaderMap,
-  getBody: () => Promise<Buffer>,
-): IBufferedResponse {
+function createBufferedResponse(status: number, headers: HeaderMap, getBody: () => Promise<Buffer>): IBufferedResponse {
   let bodyPromise: Promise<Buffer> | undefined
 
   const readBody = async () => {
