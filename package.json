@@ -4,7 +4,6 @@
   "description": "NodeJS v3 [HubSpot API](https://developers.hubspot.com/docs/api/overview) SDK(Client) files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "type": "commonjs",
   "engines": {
     "node": ">=22.0.0"
   },
