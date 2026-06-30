@@ -18,7 +18,7 @@ interface ICapturedRequest {
 describe('HTTP transport', () => {
   it('sends apiRequest JSON bodies through native fetch', async () => {
     let capturedRequest: ICapturedRequest | undefined
-    const server = await createServer(async (request, response) => {
+    const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {
       capturedRequest = request
       response.statusCode = 201
       response.setHeader('content-type', 'application/json')
@@ -36,11 +36,12 @@ describe('HTTP transport', () => {
       expect(response.status).toBe(201)
       expect(await response.json()).toEqual({ ok: true })
       expect(capturedRequest).toBeDefined()
-      expect(capturedRequest!.method).toBe('POST')
-      expect(capturedRequest!.url).toBe('/json?foo=bar')
-      expect(capturedRequest!.headers.authorization).toBe('Bearer test-token')
-      expect(String(capturedRequest!.headers['content-type'])).toContain('application/json')
-      expect(capturedRequest!.body.toString()).toBe(JSON.stringify({ hello: 'world' }))
+      const req = capturedRequest as ICapturedRequest
+      expect(req.method).toBe('POST')
+      expect(req.url).toBe('/json?foo=bar')
+      expect(req.headers.authorization).toBe('Bearer test-token')
+      expect(String(req.headers['content-type'])).toContain('application/json')
+      expect(req.body.toString()).toBe(JSON.stringify({ hello: 'world' }))
     } finally {
       await server.close()
     }
@@ -48,7 +49,7 @@ describe('HTTP transport', () => {
 
   it('preserves multipart apiRequest uploads with the form-data package', async () => {
     let capturedRequest: ICapturedRequest | undefined
-    const server = await createServer(async (request, response) => {
+    const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {
       capturedRequest = request
       response.statusCode = 204
       response.end()
@@ -69,11 +70,12 @@ describe('HTTP transport', () => {
 
       expect(response.status).toBe(204)
       expect(capturedRequest).toBeDefined()
-      expect(String(capturedRequest!.headers['content-type'])).toContain('multipart/form-data; boundary=')
-      expect(capturedRequest!.body.toString()).toContain('name="field"')
-      expect(capturedRequest!.body.toString()).toContain('value')
-      expect(capturedRequest!.body.toString()).toContain('filename="hello.txt"')
-      expect(capturedRequest!.body.toString()).toContain('payload')
+      const req = capturedRequest as ICapturedRequest
+      expect(String(req.headers['content-type'])).toContain('multipart/form-data; boundary=')
+      expect(req.body.toString()).toContain('name="field"')
+      expect(req.body.toString()).toContain('value')
+      expect(req.body.toString()).toContain('filename="hello.txt"')
+      expect(req.body.toString()).toContain('payload')
     } finally {
       await server.close()
     }
@@ -81,7 +83,7 @@ describe('HTTP transport', () => {
 
   it('returns generated ResponseContext bodies through native fetch', async () => {
     let capturedRequest: ICapturedRequest | undefined
-    const server = await createServer(async (request, response) => {
+    const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {
       capturedRequest = request
       response.statusCode = 202
       response.setHeader('content-type', 'application/octet-stream')
@@ -97,9 +99,10 @@ describe('HTTP transport', () => {
 
       expect(response.httpStatusCode).toBe(202)
       expect(capturedRequest).toBeDefined()
-      expect(capturedRequest!.method).toBe('POST')
-      expect(capturedRequest!.headers['x-test']).toBe('1')
-      expect(capturedRequest!.body.toString()).toBe('payload')
+      const req = capturedRequest as ICapturedRequest
+      expect(req.method).toBe('POST')
+      expect(req.headers['x-test']).toBe('1')
+      expect(req.body.toString()).toBe('payload')
       expect(await response.body.text()).toBe('generated-response')
       expect((await response.body.binary()).toString()).toBe('generated-response')
     } finally {
@@ -109,7 +112,7 @@ describe('HTTP transport', () => {
 
   it('supports generated multipart uploads when a custom httpAgent is configured', async () => {
     let capturedRequest: ICapturedRequest | undefined
-    const server = await createServer(async (request, response) => {
+    const server = await createServer(async (request: ICapturedRequest, response: http.ServerResponse) => {
       capturedRequest = request
       response.statusCode = 200
       response.end('ok')
@@ -131,13 +134,14 @@ describe('HTTP transport', () => {
 
       expect(response.httpStatusCode).toBe(200)
       expect(capturedRequest).toBeDefined()
-      expect(capturedRequest!.method).toBe('POST')
-      expect(capturedRequest!.url).toBe('/files/v3/files')
-      expect(String(capturedRequest!.headers['content-type'])).toContain('multipart/form-data; boundary=')
-      expect(capturedRequest!.body.toString()).toContain('filename="hello.txt"')
-      expect(capturedRequest!.body.toString()).toContain('name="folderPath"')
-      expect(capturedRequest!.body.toString()).toContain('/folder')
-      expect(capturedRequest!.body.toString()).toContain('payload')
+      const req = capturedRequest as ICapturedRequest
+      expect(req.method).toBe('POST')
+      expect(req.url).toBe('/files/v3/files')
+      expect(String(req.headers['content-type'])).toContain('multipart/form-data; boundary=')
+      expect(req.body.toString()).toContain('filename="hello.txt"')
+      expect(req.body.toString()).toContain('name="folderPath"')
+      expect(req.body.toString()).toContain('/folder')
+      expect(req.body.toString()).toContain('payload')
       expect(await response.body.text()).toBe('ok')
     } finally {
       await server.close()
@@ -148,10 +152,10 @@ describe('HTTP transport', () => {
 async function createServer(
   handler: (request: ICapturedRequest, response: http.ServerResponse) => Promise<void> | void,
 ): Promise<{ baseUrl: string; close(): Promise<void> }> {
-  const server = http.createServer(async (request, response) => {
+  const server = http.createServer(async (request: http.IncomingMessage, response: http.ServerResponse) => {
     const bodyChunks: Buffer[] = []
 
-    request.on('data', (chunk) => {
+    request.on('data', (chunk: Buffer | string) => {
       bodyChunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk))
     })
 
@@ -169,7 +173,7 @@ async function createServer(
   })
 
   await new Promise<void>((resolve) => {
-    server.listen(0, '127.0.0.1', () => resolve())
+    server.listen(0, '127.0.0.1', () => resolve(undefined))
   })
 
   const address = server.address()
@@ -187,7 +191,7 @@ async function createServer(
             return
           }
 
-          resolve()
+          resolve(undefined)
         })
       })
     },

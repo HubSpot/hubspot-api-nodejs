@@ -1,7 +1,7 @@
-import FormData from 'form-data'
 import * as http from 'http'
 import * as https from 'https'
 import { URLSearchParams } from 'url'
+import FormData from 'form-data'
 
 type HeaderMap = Record<string, string>
 type RequestUrl = string | URL
