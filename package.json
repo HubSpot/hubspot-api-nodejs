@@ -64,8 +64,5 @@
   "bugs": {
     "url": "https://github.com/HubSpot/hubspot-api-nodejs/issues"
   },
-  "homepage": "https://github.com/HubSpot/hubspot-api-nodejs#readme",
-  "allowScripts": {
-    "unrs-resolver@1.7.2": true
-  }
+  "homepage": "https://github.com/HubSpot/hubspot-api-nodejs#readme"
 }
