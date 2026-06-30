@@ -1,7 +1,7 @@
-import FormData from 'form-data'
 import * as http from 'http'
 import * as https from 'https'
 import { URLSearchParams } from 'url'
+import FormData from 'form-data'
 
 type HeaderMap = Record<string, string>
 type RequestUrl = string | URL
@@ -197,11 +197,7 @@ function getHeadersFromNodeResponse(response: http.IncomingMessage): HeaderMap {
   return headers
 }
 
-function createBufferedResponse(
-  status: number,
-  headers: HeaderMap,
-  getBody: () => Promise<Buffer>,
-): IBufferedResponse {
+function createBufferedResponse(status: number, headers: HeaderMap, getBody: () => Promise<Buffer>): IBufferedResponse {
   let bodyPromise: Promise<Buffer> | undefined
 
   const readBody = async () => {

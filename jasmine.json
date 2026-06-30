@@ -1,4 +1,5 @@
 {
   "spec_dir": "test",
-  "spec_files": ["**/*[sS]pec.ts"]
+  "spec_files": ["**/*[sS]pec.ts"],
+  "jsLoader": "require"
 }
