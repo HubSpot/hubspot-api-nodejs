@@ -123,10 +123,11 @@ describe('HTTP transport', () => {
         baseServer: new ServerConfiguration(server.baseUrl, {}),
       })
       const requestContext = await new FilesApiRequestFactory(configuration).upload(
+        undefined,
         { data: Buffer.from('payload'), name: 'hello.txt' },
+        'hello.txt',
         undefined,
         '/folder',
-        'hello.txt',
       )
       requestContext.setAgent(new http.Agent({ keepAlive: true }))
 

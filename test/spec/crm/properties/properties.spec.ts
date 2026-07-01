@@ -1,4 +1,4 @@
-import { BatchApi, CoreApi, GroupsApi } from '../../../../codegen/crm/properties/index'
+import { BasicApi, BatchApi, CoreApi } from '../../../../codegen/crm/properties/index'
 import { Client } from '../../../../index'
 
 describe('api client', () => {
@@ -9,6 +9,6 @@ describe('api client', () => {
     expect(Object.prototype.hasOwnProperty.call(client, 'coreApi')).toBeTruthy()
     expect(CoreApi.name).toBe(client.coreApi.constructor.name)
     expect(Object.prototype.hasOwnProperty.call(client, 'groupsApi')).toBeTruthy()
-    expect(GroupsApi.name).toBe(client.groupsApi.constructor.name)
+    expect(BasicApi.name).toBe(client.groupsApi.constructor.name)
   })
 })
